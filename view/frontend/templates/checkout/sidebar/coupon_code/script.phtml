@@ -1,0 +1,10 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('magewireCheckoutSidebarCouponCode', () => ({
+            show: false,
+            toggle() {
+                this.show = !this.show;
+            }
+        }))
+    })
+</script>

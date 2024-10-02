@@ -1,0 +1,16 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Component $magewire */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+?>
+<div>
+    Block "<?= $block->getNameInLayout() ?>": <?= $block->getTemplateFile() ?>
+</div>

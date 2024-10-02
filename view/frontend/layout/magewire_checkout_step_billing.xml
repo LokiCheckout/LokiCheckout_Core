@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="magewire.checkout">
+            <block name="magewire.checkout.billing-step" as="billing-step" template="Yireo_MagewireCheckout::checkout/billing-step.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\BillingStep
+                    </argument>
+                </arguments>
+
+                <!--
+                <block name="magewire.checkout.billing-step.billing-address" as="billing-address" template="Yireo_MagewireCheckout::checkout/billing-address.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress
+                        </argument>
+                    </arguments>
+
+                    <block name="magewire.checkout.billing-step.billing-address.firstname" as="firstname" template="Yireo_MagewireCheckout::checkout/billing-address/firstname.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress\Firstname
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block name="magewire.checkout.billing-step.billing-address.lastname" as="lastname" template="Yireo_MagewireCheckout::checkout/billing-address/lastname.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress\Lastname
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+                -->
+            </block>
+        </referenceBlock>
+    </body>
+</page>

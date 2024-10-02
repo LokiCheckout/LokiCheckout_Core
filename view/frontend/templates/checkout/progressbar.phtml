@@ -1,0 +1,42 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Progressbar;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Progressbar $magewire */
+/** @var CheckoutState $checkoutState */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+$checkoutState = $viewModels->require(CheckoutState::class);
+$stepNavigator = $checkoutState->getStepNavigator();
+?>
+<div class="progressbar">
+    <ul class="flex" role="list">
+        <?php foreach ($stepNavigator->getSteps() as $step): ?>
+            <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>
+            <li class="pr-4 <?= $isActive ? 'active font-bold' : 'inactive' ?>">
+                <?php if (false === $step->isEnabled()): ?>
+                    <span class="text-gray-200">
+                        <?= $step->getLabel() ?>
+                    </span>
+                <?php elseif (false === $step->isAccessable()): ?>
+                    <span>
+                        <?= $step->getLabel() ?>
+                    </span>
+                <?php else: ?>
+                    <a href="<?= $checkoutState->getCheckoutUrl() ?>#<?= $step->getCode() ?>">
+                        <?= $step->getLabel() ?>
+                    </a>
+                <?php endif; ?>
+                <?php if (false === $step->isLast()): ?>
+                <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>

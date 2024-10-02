@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="magewire.checkout">
+            <block name="magewire.checkout.progressbar" as="progressbar" template="Yireo_MagewireCheckout::checkout/progressbar.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\Progressbar
+                    </argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

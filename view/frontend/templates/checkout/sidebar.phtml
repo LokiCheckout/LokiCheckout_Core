@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Progressbar;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Progressbar $magewire */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+?>
+<div>
+    <div class="sidebar bg-gray-100 p-8 mb-8">
+        <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Order Summary') ?></h3>
+        <div class="border-b border-gray-400 my-8">
+            <?= $block->getChildBlock('coupon_code')->toHtml() ?>
+        </div>
+        <div class="border-b border-gray-400 my-8" wire:ignore>
+            <?= $block->getChildBlock('items')->toHtml() ?>
+        </div>
+        <div class="border-b border-gray-400 my-8">
+            <?= $block->getChildBlock('totals')->toHtml() ?>
+        </div>
+        <div class="border-b border-gray-400 my-8" wire:ignore>
+            <?= $block->getChildBlock('order_comment')->setData([])->toHtml() ?>
+        </div>
+    </div>
+
+    <div class="preview bg-gray-100 p-8 my-4">
+        <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Order Preview') ?></h3>
+        <div class="border-b border-gray-400 my-8">
+            <?= $block->getChildBlock('shipping_address')->toHtml() ?>
+        </div>
+    </div>
+</div>

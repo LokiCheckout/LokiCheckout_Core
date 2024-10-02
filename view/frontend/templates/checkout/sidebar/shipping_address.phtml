@@ -1,0 +1,17 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\ShippingAddress;
+use Yireo\MagewireCheckout\ViewModel\PriceFormatter;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var PriceFormatter $priceFormatter */
+/** @var ShippingAddress $magewire */
+?>
+<div>
+    <span class="font-bold"><?= __('Shipping Address') ?></span><br/>
+    <?= $magewire->getHtml() ?>
+</div>

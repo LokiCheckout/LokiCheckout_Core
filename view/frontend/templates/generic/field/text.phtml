@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Generic\FormFieldInterface;
+
+/** @var Template $block */
+/** @var Template $parentBlock */
+/** @var FormFieldInterface $magewire */
+$parentBlock = $block->getParentBlock(); // @todo
+$magewire = $this->getComponent();
+?>
+<input
+    wire:loading.attr="aria-busy"
+    wire:loading.class="disabled"
+    wire:model.lazy="value"
+    <?= $magewire->isRequired() ? 'required' : '' ?>
+    type="<?= $magewire->getInputType() ?>"
+    class="form-input block w-full invalid:border-red-500 valid:border-green-500" />

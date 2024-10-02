@@ -1,0 +1,49 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\CouponCode;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var CouponCode $magewire */
+$quote = $magewire->getCheckoutState()->getQuote();
+$couponCode = $quote->getCouponCode();
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+?>
+<div class="my-4">
+    <div x-data="magewireCheckoutSidebarCouponCode">
+        <?php if (!empty($couponCode)): ?>
+            Coupon code: <span><?= $couponCode ?></span>
+            <button class="btn btn-secondary mt-4"
+                    type="button"
+                    wire:click="removeCouponCode"
+                    wire:loading.attr="disabled">
+                <?= __('Remove coupon code') ?>
+
+            </button>
+        <?php else: ?>
+            <button type="button" @click="toggle" class="text-sm">
+                <?= __('Discount Code') ?>
+                <?= $heroicons->chevronDownHtml('inline w-4 h-4', 32, 32) ?>
+            </button>
+
+            <div x-show="show">
+                <label>
+                    <span class="sr-only"><?php __('Discount Code') ?></span>
+                    <input type="text" wire:model.lazy="couponCode" class="form-input w-full"/>
+                </label>
+                <button class="text-sm mt-4"
+                        type="button"
+                        wire:click="applyCouponCode"
+                        wire:loading.attr="disabled">
+                    <?= __('Apply') ?>
+                </button>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <?= $block->getChildHtml('script') ?>
+</div>

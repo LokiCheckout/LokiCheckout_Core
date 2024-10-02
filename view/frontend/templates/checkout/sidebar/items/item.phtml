@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Magento\Quote\Api\Data\CartItemInterface;
+use Yireo\MagewireCheckout\ViewModel\PriceFormatter;
+use Yireo\MagewireCheckout\ViewModel\ProductImage;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+$priceFormatterViewModel = $viewModels->require(PriceFormatter::class);
+$productImageViewModel = $viewModels->require(ProductImage::class);
+
+/** @var CartItemInterface $item */
+$item = $block->getItem();
+$width = 75;
+$productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
+?>
+<li class="flex">
+    <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="pr-4">
+    <div class="pb-4">
+        <?= $item->getName() ?><br/>
+        <span class="text-sm"><?= __('Price') ?>: <?= $priceFormatterViewModel->format($item->getPrice()) ?></span><br/>
+        <span class="text-sm"><?= __('Quantity') ?>: <?= $item->getQty() ?></span>
+    </div>
+</li>

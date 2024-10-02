@@ -1,0 +1,35 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var Checkout $magewire */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+$currentStep = $checkoutState->getStepNavigator()->getCurrentStep()->getCode();
+?>
+<div class="magewire-checkout container mb-16">
+    <div class="card">
+        <?= $block->getChildBlock('progressbar')->toHtml(); ?>
+    </div>
+
+    <div class="card my-2">
+        <?= $block->getChildBlock('login')->toHtml(); ?>
+    </div>
+
+    <div class="container">
+        <div class="grid grid-cols-3">
+            <div class="col-span-2 p-8">
+                <?= $block->getChildBlock($currentStep.'-step')->toHtml(); ?>
+            </div>
+            <div class="my-2">
+                <?= $block->getChildBlock('sidebar')->toHtml(); ?>
+            </div>
+        </div>
+    </div>
+</div>

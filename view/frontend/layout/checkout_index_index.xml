@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+
+    <update handle="magewire_checkout_sidebar"/>
+    <update handle="magewire_checkout_progressbar"/>
+    <update handle="magewire_checkout_login"/>
+    <update handle="magewire_checkout_step_shipping"/>
+    <!--
+    <update handle="magewire_checkout_step_billing"/>
+    -->
+
+    <body>
+        <referenceBlock name="checkout.root" remove="true"/>
+
+        <referenceContainer name="content">
+            <block name="magewire.checkout" template="Yireo_MagewireCheckout::checkout.phtml" cacheable="false">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+
+        <block name="magewire.checkout.loader" template="Yireo_MagewireCheckout::loader.phtml"/>
+        <block name="magewire.checkout.required" template="Yireo_MagewireCheckout::required.phtml"/>
+    </body>
+</page>

@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="magewire.checkout">
+            <block name="magewire.checkout.shipping-step" as="shipping-step" template="Yireo_MagewireCheckout::checkout/shipping.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep
+                    </argument>
+                </arguments>
+
+                <block
+                    name="magewire.checkout.shipping-step.shipping-address" as="shipping-address"
+                    template="Yireo_MagewireCheckout::checkout/shipping/address.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress
+                        </argument>
+                    </arguments>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.prefix" as="prefix"
+                        ifconfig="customer/address/prefix_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.firstname" as="firstname"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.middlename" as="middlename"
+                        ifconfig="customer/address/middlename_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.lastname" as="lastname"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.suffix" as="suffix"
+                        ifconfig="customer/address/suffix_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.street" as="street"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.postcode" as="postcode"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.city" as="city"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.region" as="region"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.country_id" as="country_id"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.company" as="company"
+                        ifconfig="customer/address/company_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.telephone" as="telephone"
+                        ifconfig="customer/address/telephone_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block
+                        name="magewire.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
+                        ifconfig="customer/address/taxvat_show"
+                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

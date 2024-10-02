@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelRegistry $viewModels */
+/** @var ShippingAddress $magewire */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+?>
+<div>
+    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Address') ?></h3>
+
+    <?php foreach ($block->getChildNames() as $childName): ?>
+        <?= $block->getBlockHtml($childName) ?>
+    <?php endforeach; ?>
+</div>

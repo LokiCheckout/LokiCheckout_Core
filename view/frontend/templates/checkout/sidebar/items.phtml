@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Items;
+
+/** @var Template $block */
+/** @var Items $magewire */
+?>
+<ul role="list">
+    <?php foreach ($magewire->items as $item) : ?>
+        <?= $block->getChildBlock('item')->addData(['item' => $item])->toHtml() ?>
+    <?php endforeach; ?>
+</ul>

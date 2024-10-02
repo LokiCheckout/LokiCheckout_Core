@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Generic\FormFieldInterface;
+
+/** @var Template $block */
+/** @var FormFieldInterface $magewire */
+if (false === $magewire instanceof FormFieldInterface) {
+    echo '<div>skipped</div>';
+    return;
+}
+
+$fieldType = $magewire->getFieldType();
+?>
+<div class="w-full my-8 relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
+    <label for="<?= $magewire->getAttributeCode() ?>" class="label">
+        <?= $magewire->getAttributeLabel() ?>
+        <?= $magewire->isRequired() ? $block->getBlockHtml('magewire.checkout.required') : '' ?>
+    </label>
+    <div class="relative">
+        <?= $block->getLayout()->createBlock(Template::class)
+            ->addData(['component' => $magewire])
+            ->setParentBlock($this)
+            ->setNameInLayout('magewire.checkout.generic.field.'.$fieldType.'.'.$magewire->getAttributeCode())
+            ->setTemplate('Yireo_MagewireCheckout::generic/field/'.$fieldType.'.phtml')
+            ->toHtml() ?>
+        <div wire:loading class="absolute top-0 right-0 bottom-0 p-3">
+            <?= $block->getBlockHtml('magewire.checkout.loader') ?>
+        </div>
+    </div>
+
+    <?php // @todo: Implement component-specific error here ?>
+</div>

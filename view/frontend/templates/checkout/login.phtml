@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\Login;
+
+/** @var Template $block */
+/** @var Login $magewire */
+$customerSession = $magewire->getCheckoutState()->getCustomerSession();
+$isLoggedIn = $customerSession->isLoggedIn();
+?>
+<div>
+    <?php if ($isLoggedIn): ?>
+        You are logged in as <?= $customerSession->getName() ?>
+    <?php else: ?>
+        <a href="/customer/account">Login</a>
+    <?php endif; ?>
+</div>
