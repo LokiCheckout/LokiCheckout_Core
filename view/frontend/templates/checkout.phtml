@@ -21,15 +21,19 @@ $currentStep = $checkoutState->getStepNavigator()->getCurrentStep()->getCode();
     <div class="card my-2">
         <?= $block->getChildBlock('login')->toHtml(); ?>
     </div>
-
-    <div class="container">
-        <div class="grid grid-cols-3">
-            <div class="col-span-2 p-8">
-                <?= $block->getChildBlock($currentStep.'-step')->toHtml(); ?>
+        <div class="grid grid-cols-3 gap-8 my-8">
+            <div class="col-span-2 checkout-step-<?= $currentStep ?>">
+                <?php
+                $stepBlock = $block->getChildBlock($currentStep.'-step');
+                if ($stepBlock) {
+                    echo $stepBlock->toHtml();
+                } else {
+                    echo 'No step block for "'.$currentStep.'"';
+                }
+                ?>
             </div>
             <div class="my-2">
                 <?= $block->getChildBlock('sidebar')->toHtml(); ?>
             </div>
         </div>
-    </div>
 </div>

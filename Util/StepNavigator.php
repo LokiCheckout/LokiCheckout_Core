@@ -2,6 +2,7 @@
 
 namespace Yireo\MagewireCheckout\Util;
 
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\ObjectManagerInterface;
 use Yireo\MagewireCheckout\Exception\UnknownStepException;
 use Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
@@ -13,12 +14,19 @@ class StepNavigator
     private StepInterface|false $currentStep = false;
 
     public function __construct(
-        private ObjectManagerInterface $objectManager
+        private readonly ObjectManagerInterface $objectManager,
+        private readonly CheckoutSession $checkoutSession
     ) {
     }
 
     public function getCurrentStep(): StepInterface
     {
+        if (false === $this->currentStep instanceof StepInterface) {
+            try {
+                $this->setCurrentStepByCode((string)$this->checkoutSession->getCurrentStep());
+            } catch(UnknownStepException $unknownStepException) {}
+        }
+
         if (false === $this->currentStep instanceof StepInterface) {
             $this->currentStep = $this->getFirstStep();
         }
@@ -26,11 +34,23 @@ class StepNavigator
         return $this->currentStep;
     }
 
+    /**
+     * @param string $stepCode
+     * @return void
+     * @throws UnknownStepException
+     */
     public function setCurrentStepByCode(string $stepCode)
     {
         $this->currentStep = $this->createByCode($stepCode);
+        $this->checkoutSession->setCurrentStep($this->currentStep->getCode());
+        //$this->checkoutSession->setStepData();
     }
 
+    /**
+     * @param string $stepCode
+     * @return StepInterface
+     * @throws UnknownStepException
+     */
     public function createByCode(string $stepCode): StepInterface
     {
         foreach ($this->getStepClasses() as $stepClass) {

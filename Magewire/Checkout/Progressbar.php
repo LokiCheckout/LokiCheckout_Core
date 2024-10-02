@@ -6,4 +6,9 @@ use Yireo\MagewireCheckout\Magewire\AbstractComponent;
 
 class Progressbar extends AbstractComponent
 {
+    public function goToStep(string $stepCode)
+    {
+        $this->checkoutState->getStepNavigator()->setCurrentStepByCode($stepCode);
+        $this->emit('quoteSave', $this->checkoutState->getQuote());
+    }
 }

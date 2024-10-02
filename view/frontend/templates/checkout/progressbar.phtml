@@ -29,9 +29,9 @@ $stepNavigator = $checkoutState->getStepNavigator();
                         <?= $step->getLabel() ?>
                     </span>
                 <?php else: ?>
-                    <a href="<?= $checkoutState->getCheckoutUrl() ?>#<?= $step->getCode() ?>">
-                        <?= $step->getLabel() ?>
-                    </a>
+                    <button wire:click="goToStep('<?= $step->getCode() ?>')">
+                        <?= __($step->getLabel()) ?>
+                    </button>
                 <?php endif; ?>
                 <?php if (false === $step->isLast()): ?>
                 <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>

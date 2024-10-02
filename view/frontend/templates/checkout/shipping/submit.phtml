@@ -1,0 +1,15 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\StepButtonInterface;
+
+/** @var Template $block */
+/** @var StepButtonInterface $magewire */
+?>
+<button class="btn mt-4 <?= $magewire->allowAction() ? 'btn-primary' : 'disabled:opacity-75' ?>"
+        type="button"
+        <?= $magewire->allowAction() ? '' : 'disabled="disabled"' ?>
+        wire:click="proceedToNextAction"
+        wire:loading.attr="disabled">
+    <?= __((string)$block->getButtonLabel()) ?>

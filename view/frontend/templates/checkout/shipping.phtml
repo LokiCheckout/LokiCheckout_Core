@@ -13,5 +13,13 @@ use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModels->require(CheckoutState::class);
 ?>
 <div>
-    <?= $block->getChildBlock('shipping-address')->setData([])->toHtml() ?>
+    <div class="mb-8">
+        <?= $block->getChildBlock('shipping-address')->setData([])->toHtml() ?>
+    </div>
+    <div class="mb-8">
+        <?= $block->getChildHtml('shipping-methods') ?>
+    </div>
+    <div class="mb-8 float-right">
+        <?= $block->getChildHtml('submit') ?>
+    </div>
 </div>

@@ -22,8 +22,10 @@
                         ifconfig="customer/address/prefix_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
                             </argument>
+                            <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
                     </block>
 
@@ -31,7 +33,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.firstname" as="firstname"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
                             </argument>
                         </arguments>
                     </block>
@@ -41,7 +44,8 @@
                         ifconfig="customer/address/middlename_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
                             </argument>
                         </arguments>
                     </block>
@@ -50,7 +54,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.lastname" as="lastname"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
                             </argument>
                         </arguments>
                     </block>
@@ -60,7 +65,8 @@
                         ifconfig="customer/address/suffix_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
                             </argument>
                         </arguments>
                     </block>
@@ -69,8 +75,10 @@
                         name="magewire.checkout.shipping-step.shipping-address.street" as="street"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
                             </argument>
+                            <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
                     </block>
 
@@ -78,7 +86,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.postcode" as="postcode"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
                             </argument>
                         </arguments>
                     </block>
@@ -87,7 +96,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.city" as="city"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
                             </argument>
                         </arguments>
                     </block>
@@ -96,7 +106,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.region" as="region"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
                             </argument>
                         </arguments>
                     </block>
@@ -105,7 +116,8 @@
                         name="magewire.checkout.shipping-step.shipping-address.country_id" as="country_id"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
                             </argument>
                         </arguments>
                     </block>
@@ -115,7 +127,8 @@
                         ifconfig="customer/address/company_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
                             </argument>
                         </arguments>
                     </block>
@@ -125,7 +138,8 @@
                         ifconfig="customer/address/telephone_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
                             </argument>
                         </arguments>
                     </block>
@@ -135,10 +149,32 @@
                         ifconfig="customer/address/taxvat_show"
                         template="Yireo_MagewireCheckout::generic/field.phtml">
                         <arguments>
-                            <argument name="magewire" xsi:type="object" shared="false">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
+                            <argument name="magewire" xsi:type="object" shared="false">
+                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
                     </block>
+                </block>
+
+                <block
+                    name="magewire.checkout.shipping-step.shipping-methods" as="shipping-methods"
+                    template="Yireo_MagewireCheckout::checkout/shipping/methods.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingMethods
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="magewire.checkout.shipping-step.submit" as="submit"
+                    template="Yireo_MagewireCheckout::checkout/shipping/submit.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\SubmitButton
+                        </argument>
+                        <argument name="button_label" xsi:type="string">Proceed to review &amp; payments</argument>
+                    </arguments>
                 </block>
             </block>
         </referenceBlock>

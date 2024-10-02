@@ -13,7 +13,7 @@ if (false === $magewire instanceof FormFieldInterface) {
 
 $fieldType = $magewire->getFieldType();
 ?>
-<div class="w-full my-8 relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
+<div class="w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
     <label for="<?= $magewire->getAttributeCode() ?>" class="label">
         <?= $magewire->getAttributeLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('magewire.checkout.required') : '' ?>

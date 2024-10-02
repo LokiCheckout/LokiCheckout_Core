@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+
+/** @var Template $block */
+/** @var ShippingMethods $magewire */
+$methods = $magewire->shippingMethods;
+?>
+<div>
+    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Methods') ?></h3>
+
+    <ul role="list">
+        <?php foreach ($methods as $method): ?>
+        <li><?= $method ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
