@@ -2,13 +2,9 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
-class Suffix extends EavFormFieldComponent
+class Suffix extends ShippingAddressFormFieldComponent
 {
-    public function getAttributeCode(): string
-    {
-        return 'suffix';
-    }
+    const ATTRIBUTE_CODE = 'suffix';
 }

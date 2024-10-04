@@ -2,30 +2,30 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\Step\StepInterface;
+use Yireo\MagewireCheckout\Validator\ValidatorInterface;
 
-class ShippingStep extends AbstractComponent implements StepInterface
+class ShippingStep extends Component implements StepInterface
 {
+    public function __construct(
+        private readonly ValidatorInterface $stepValidator,
+    ) {
+    }
+
     public function getCode(): string
     {
         return 'shipping';
     }
 
-    public function getLabel(): Phrase
+    public function getLabel(): string
     {
-        return __('Shipping');
+        return 'Shipping';
     }
 
     public function isEnabled(): bool
     {
-        foreach ($this->checkoutState->getQuote()->getAllItems() as $quoteItem) {
-            if (false === (bool)$quoteItem->getIsVirtual()) {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 
     public function isAccessable(): bool
@@ -33,13 +33,8 @@ class ShippingStep extends AbstractComponent implements StepInterface
         return true;
     }
 
-    public function isFirst(): bool
+    public function validate(): true|array
     {
-        return $this->checkoutState->getStepNavigator()->isFirstStep($this);
-    }
-
-    public function isLast(): bool
-    {
-        return $this->checkoutState->getStepNavigator()->isLastStep($this);
+        return $this->stepValidator->validate();
     }
 }

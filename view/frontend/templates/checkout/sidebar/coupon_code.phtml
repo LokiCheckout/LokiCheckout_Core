@@ -5,11 +5,15 @@ use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
 use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\CouponCode;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
 /** @var CouponCode $magewire */
-$quote = $magewire->getCheckoutState()->getQuote();
+/** @var ViewModelRegistry $viewModels */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+$quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
@@ -35,7 +39,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                     <span class="sr-only"><?php __('Discount Code') ?></span>
                     <input type="text" wire:model.lazy="couponCode" class="form-input w-full"/>
                 </label>
-                <button class="text-sm mt-4"
+                <button class="btn btn-secondary text-sm mt-4"
                         type="button"
                         wire:click="applyCouponCode"
                         wire:loading.attr="disabled">

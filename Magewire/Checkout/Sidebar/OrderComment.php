@@ -2,11 +2,17 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\Sidebar;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
-class OrderComment extends AbstractComponent
+class OrderComment extends Component
 {
     public string $comment = '';
+
+    public function __construct(
+        private CheckoutState $checkoutState
+    ) {
+    }
 
     public function mount(): void
     {

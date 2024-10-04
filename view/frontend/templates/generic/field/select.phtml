@@ -7,7 +7,12 @@ use Yireo\MagewireCheckout\Magewire\Generic\FormSelectFieldInterface;
 /** @var Template $block */
 /** @var FormSelectFieldInterface $magewire */
 ?>
-<select wire:model="value" class="form-input block w-full">
+<select
+    wire:loading.attr="aria-busy"
+    wire:loading.class="disabled"
+    wire:model="<?= $magewire->getFieldName() ?>"
+    <?= $magewire->isRequired() ? 'required' : '' ?>
+    class="form-input block w-full invalid:border-red-500 valid:border-green-500">
     <?php foreach ($magewire->getOptions() as $optionValue => $optionLabel): ?>
     <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>

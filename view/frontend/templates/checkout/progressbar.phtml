@@ -5,15 +5,17 @@ use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
 use Yireo\MagewireCheckout\Magewire\Checkout\Progressbar;
+use Yireo\MagewireCheckout\Step\StepNavigator;
 use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
+/** @var StepNavigator $stepNavigator */
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 $checkoutState = $viewModels->require(CheckoutState::class);
-$stepNavigator = $checkoutState->getStepNavigator();
+$stepNavigator = $viewModels->require(StepNavigator::class);
 ?>
 <div class="progressbar">
     <ul class="flex" role="list">
@@ -33,10 +35,20 @@ $stepNavigator = $checkoutState->getStepNavigator();
                         <?= __($step->getLabel()) ?>
                     </button>
                 <?php endif; ?>
-                <?php if (false === $step->isLast()): ?>
+                <?php if (false === $stepNavigator->isLastStep($step)): ?>
                 <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>
+
+    <script>
+        document.addEventListener('magewire:load', () => {
+            Livewire.on('stepChange', (stepCode) => {
+                window.location.hash = stepCode;
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            });
+        });
+    </script>
 </div>

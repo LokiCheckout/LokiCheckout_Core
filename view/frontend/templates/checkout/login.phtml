@@ -1,17 +1,22 @@
 <?php
 declare(strict_types=1);
 
+use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
 use Yireo\MagewireCheckout\Magewire\Checkout\Login;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var Login $magewire */
-$customerSession = $magewire->getCheckoutState()->getCustomerSession();
+/** @var ViewModelRegistry $viewModels */
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+$customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 ?>
 <div>
     <?php if ($isLoggedIn): ?>
-        You are logged in as <?= $customerSession->getName() ?>
+        You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>
         <a href="/customer/account">Login</a>
     <?php endif; ?>

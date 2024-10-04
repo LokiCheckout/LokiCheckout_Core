@@ -2,20 +2,10 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magento\Framework\Phrase;
+use Yireo\MagewireCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 
-class Lastname extends AbstractComponent
+class Lastname extends BillingAddressFormFieldComponent
 {
-    public string $lastname = '';
-
-    public function mount(): void
-    {
-        $this->lastname = $this->checkoutState->getQuote()->getBillingAddress()->getLastname();
-    }
-
-    public function updatedLastname(string $lastname): string
-    {
-        $this->checkoutState->getQuote()->getBillingAddress()->setLastname($lastname);
-        return $lastname;
-    }
+    const ATTRIBUTE_CODE = 'lastname';
 }

@@ -2,11 +2,17 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\Sidebar;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
-class CouponCode extends AbstractComponent
+class CouponCode extends Component
 {
     public string $couponCode = '';
+
+    public function __construct(
+        private CheckoutState $checkoutState
+    ) {
+    }
 
     public function applyCouponCode(): void
     {

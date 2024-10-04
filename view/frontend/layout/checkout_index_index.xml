@@ -5,9 +5,7 @@
     <update handle="magewire_checkout_progressbar"/>
     <update handle="magewire_checkout_login"/>
     <update handle="magewire_checkout_step_shipping"/>
-    <!--
     <update handle="magewire_checkout_step_billing"/>
-    -->
 
     <body>
         <referenceBlock name="checkout.root" remove="true"/>

@@ -2,15 +2,20 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\Sidebar;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
-class Items extends AbstractComponent
+class Items extends Component
 {
     public array $items = [];
+
+    public function __construct(
+        private CheckoutState $checkoutState,
+    ) {
+    }
 
     public function mount(): void
     {
         $this->items = $this->checkoutState->getQuote()->getItems();
-        parent::mount();
     }
 }

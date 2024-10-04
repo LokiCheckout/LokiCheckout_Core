@@ -2,12 +2,22 @@
 
 namespace Yireo\MagewireCheckout\Magewire;
 
-class Checkout extends AbstractComponent
-{
-    protected $listeners = ['quoteSave' => 'refresh'];
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\Step\StepNavigator;
 
-    public function getCurrentStep(): string
+class Checkout extends Component
+{
+    protected $listeners = ['stepChange' => 'refresh'];
+
+    public string $currentStep = '';
+
+    public function __construct(
+        private StepNavigator $stepNavigator
+    ){
+    }
+
+    public function boot(): void
     {
-        return $this->checkoutState->getStepNavigator()->getCurrentStep()->getCode();
+        $this->currentStep = $this->stepNavigator->getCurrentStep()->getCode();
     }
 }

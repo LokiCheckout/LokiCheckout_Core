@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);
+
+use Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+
+/** @var BillingAddress $magewire */
+?>
+<div class="mb-4">
+    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Billing Address') ?></h3>
+
+    <address><?= $magewire->getHtml() ?></address>
+</div>

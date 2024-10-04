@@ -2,13 +2,38 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\Step\StepNavigator;
 
-class Progressbar extends AbstractComponent
+class Progressbar extends Component
 {
+    protected $listeners = [
+        'quoteSave' => 'refresh',
+        'stepChange' => 'onStepChange',
+    ];
+
+    public string $currentStepCode = '';
+
+    public function __construct(
+        private StepNavigator $stepNavigator
+    ) {
+    }
+
+    public function boot(): void
+    {
+        $this->currentStepCode = $this->stepNavigator->getCurrentStep()->getCode();
+    }
+
     public function goToStep(string $stepCode)
     {
-        $this->checkoutState->getStepNavigator()->setCurrentStepByCode($stepCode);
-        $this->emit('quoteSave', $this->checkoutState->getQuote());
+        $this->currentStepCode = $stepCode;
+        $this->stepNavigator->setCurrentStepByCode($stepCode);
+        $this->emit('quoteSave');
+        $this->emit('stepChange', $stepCode);
+    }
+
+    public function onStepChange(string $stepCode)
+    {
+        $this->currentStepCode = $stepCode;
     }
 }

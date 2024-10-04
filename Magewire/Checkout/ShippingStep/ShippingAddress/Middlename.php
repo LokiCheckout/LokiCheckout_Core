@@ -2,13 +2,9 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
-class Middlename extends EavFormFieldComponent
+class Middlename extends ShippingAddressFormFieldComponent
 {
-    public function getAttributeCode(): string
-    {
-        return 'middlename';
-    }
+    const ATTRIBUTE_CODE = 'middlename';
 }

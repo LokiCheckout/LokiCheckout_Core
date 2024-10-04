@@ -2,8 +2,8 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
 
-class Sidebar extends AbstractComponent
+class Sidebar extends Component
 {
 }

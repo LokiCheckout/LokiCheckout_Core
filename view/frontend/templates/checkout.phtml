@@ -4,25 +4,29 @@ declare(strict_types=1);
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
 use Yireo\MagewireCheckout\Magewire\Checkout;
+use Yireo\MagewireCheckout\Step\StepNavigator;
 use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
 /** @var Checkout $magewire */
-/** @var CheckoutState $checkoutState */
-$checkoutState = $viewModels->require(CheckoutState::class);
-$currentStep = $checkoutState->getStepNavigator()->getCurrentStep()->getCode();
+$currentStep = $magewire->currentStep;
 ?>
 <div class="magewire-checkout container mb-16">
     <div class="card">
         <?= $block->getChildBlock('progressbar')->toHtml(); ?>
     </div>
 
-    <div class="card my-2">
-        <?= $block->getChildBlock('login')->toHtml(); ?>
-    </div>
-        <div class="grid grid-cols-3 gap-8 my-8">
-            <div class="col-span-2 checkout-step-<?= $currentStep ?>">
+    <div class="grid grid-cols-3 gap-8 my-8">
+        <div class="col-span-2 checkout-step-<?= $currentStep ?>">
+            <div class="relative">
+                <div wire:loading>
+                    <div class="absolute m-auto left-0 right-0 bottom-0 top-0 opacity-60 bg-white z-50"></div>
+                    <div class="absolute z-50 w-full h-screen flex items-center justify-center">
+                        <img src="<?= $block->getViewFileUrl('Yireo_MagewireCheckout::images/loader.svg'); ?>" class="w-16 h-16"/>
+                    </div>
+                </div>
+
                 <?php
                 $stepBlock = $block->getChildBlock($currentStep.'-step');
                 if ($stepBlock) {
@@ -32,8 +36,9 @@ $currentStep = $checkoutState->getStepNavigator()->getCurrentStep()->getCode();
                 }
                 ?>
             </div>
-            <div class="my-2">
-                <?= $block->getChildBlock('sidebar')->toHtml(); ?>
-            </div>
         </div>
+        <div class="my-2">
+            <?= $block->getChildBlock('sidebar')->toHtml(); ?>
+        </div>
+    </div>
 </div>

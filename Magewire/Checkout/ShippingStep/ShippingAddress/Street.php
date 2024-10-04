@@ -2,13 +2,64 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
+use Yireo\MagewireCheckout\Util\Context;
 
-class Street extends EavFormFieldComponent
+class Street extends ShippingAddressFormFieldComponent implements FormTextMultipleFieldInterface
 {
-    public function getAttributeCode(): string
+    const FIELD_NAME = 'values';
+
+    const ATTRIBUTE_CODE = 'street';
+    const FIELD_TYPE = 'text_multiple';
+
+    public array $values = [];
+    private int $counter = 0;
+
+    public function __construct(
+        Context $context,
+        private ScopeConfigInterface $scopeConfig,
+    ) {
+        parent::__construct($context);
+    }
+
+    public function boot(): void
     {
-        return 'street';
+        parent::boot();
+        $this->values = explode("\n", (string)$this->value);
+    }
+
+    public function getFieldName(): string
+    {
+        return 'values.'.$this->counter;
+    }
+
+    public function isRequired(): bool
+    {
+        return true;
+    }
+
+    public function setCounter($counter = 0): void
+    {
+        $this->counter = $counter;
+    }
+
+    public function updated($value, string $name)
+    {
+        $this->context->getCheckoutState()->setShippingAddressValue($this->getAttributeCode(), $value);
+        $this->emit('quoteSave');
+
+        return $value;
+    }
+
+    public function getTextCount(): int
+    {
+        $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
+        if ($streetLines > 1) {
+            return $streetLines;
+        }
+
+        return 1;
     }
 }

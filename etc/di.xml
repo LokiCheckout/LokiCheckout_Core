@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magewirephp\Magewire\Model\ComponentManager">
+        <arguments>
+            <argument name="hydrationPool" xsi:type="array">
+                <item name="Yireo_MagewireCheckout::eavAttributeHydrator" xsi:type="array">
+                    <item name="class" xsi:type="object">Yireo\MagewireCheckout\Magewire\Hydrator\EavAttributeHydrator</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep">
+        <arguments>
+            <argument name="stepValidator" xsi:type="object">Yireo\MagewireCheckout\Validator\VirtualShippingStepValidator</argument>
+        </arguments>
+    </type>
+
+    <virtualType type="Yireo\MagewireCheckout\Validator\StepValidator" name="Yireo\MagewireCheckout\Validator\VirtualShippingStepValidator" >
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
+                <item name="shippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Yireo\MagewireCheckout\Magewire\Checkout\BillingStep">
+        <arguments>
+            <argument name="stepValidator" xsi:type="object">Yireo\MagewireCheckout\Validator\VirtualBillingStepValidator</argument>
+        </arguments>
+    </type>
+
+    <virtualType type="Yireo\MagewireCheckout\Validator\StepValidator" name="Yireo\MagewireCheckout\Validator\VirtualBillingStepValidator" >
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="billingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
+                <item name="paymentMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\PaymentMethodValidationRule</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>

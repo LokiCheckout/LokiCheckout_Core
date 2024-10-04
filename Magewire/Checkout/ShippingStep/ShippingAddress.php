@@ -2,9 +2,9 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep;
 
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
 
-class ShippingAddress  extends AbstractComponent
+class ShippingAddress  extends Component
 {
 
 }

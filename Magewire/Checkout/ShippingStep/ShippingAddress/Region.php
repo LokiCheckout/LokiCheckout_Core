@@ -3,21 +3,24 @@
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Eav\Model\Config;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\MagewireCheckout\Util\Context;
 use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 
-class Region extends EavFormFieldComponent implements FormTextSelectFieldInterface
+class Region extends ShippingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
+    const ATTRIBUTE_CODE = 'region';
+
     protected $listeners = ['quoteSave' => 'refresh'];
 
     public function __construct(
-        Config $eavConfig,
-        CheckoutState $checkoutState,
+        Context $context,
+        private readonly CheckoutState $checkoutState,
         private readonly RegionCollectionFactory $regionCollectionFactory,
     ) {
-        parent::__construct($eavConfig, $checkoutState);
+        parent::__construct($context);
     }
 
     public function boot(): void
@@ -29,11 +32,6 @@ class Region extends EavFormFieldComponent implements FormTextSelectFieldInterfa
         }
 
         $this->value = (string)$this->checkoutState->getQuote()->getShippingAddress()->getRegion();
-    }
-
-    public function getAttributeCode(): string
-    {
-        return 'region';
     }
 
     public function updated($value, string $name)

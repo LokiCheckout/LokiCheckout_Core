@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\StepBackwardButton;
+use Yireo\MagewireCheckout\Magewire\Checkout\StepForwardButton;
+
+/** @var Template $block */
+/** @var StepBackwardButton $magewire */
+if (false === $magewire instanceof StepBackwardButton) {
+    echo '<div>Not a valid button class: '.get_class($magewire).'</div>';
+    return;
+}
+?>
+<button class="btn m-2 <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
+        type="button"
+        <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
+        wire:click="execute"
+        wire:loading.attr="disabled">
+    <?= __((string)$block->getButtonLabel()) ?>

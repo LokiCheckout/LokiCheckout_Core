@@ -2,64 +2,49 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Generic;
 
-use Magento\Eav\Model\Config;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
-use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
-use Magento\Framework\Phrase;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\Util\Context;
 
-/**
- * @todo Move this towards a DI dependency instead
- */
-abstract class EavFormFieldComponent extends AbstractComponent implements FormFieldInterface
+abstract class EavFormFieldComponent extends Component implements FormFieldInterface, EavFormFieldInterface
 {
+    const ATTRIBUTE_CODE = '';
+    const FIELD_NAME = 'value';
+    const FIELD_TYPE = 'text';
+    const TEXT_TYPE = 'text';
+
     public string $value = '';
 
     public function __construct(
-        private Config $eavConfig,
-        CheckoutState $checkoutState
+        protected Context $context,
     ) {
-        parent::__construct($checkoutState);
     }
 
     public function boot(): void
     {
-        $this->value = (string)$this->checkoutState->getQuote()->getShippingAddress()->getData($this->getAttributeCode());
-    }
+        $this->value = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getData($this->getAttributeCode());
 
-    public function updated($value, string $name)
-    {
-        $this->checkoutState->getQuote()->getShippingAddress()->setData($this->getAttributeCode(), $value);
-        $this->checkoutState->getQuote()->save();
-
-        $this->emit('quoteSave', $this->checkoutState->getQuote());
-
-        return $value;
+        $this->error('value', 'fsfs');
     }
 
     public function getFieldType(): string
     {
-        if ($this instanceof FormTextSelectFieldInterface) {
-            return 'text_select';
-        }
-
-        if ($this instanceof FormSelectFieldInterface) {
-            return 'select';
-        }
-
-        return 'text';
+        return $this->context->getFieldTypeLocator()->getFieldTypeFromComponent($this);
     }
 
-    public function getInputType(): string
+    public function getFieldName(): string
     {
-        return 'text';
+        return static::FIELD_NAME;
     }
 
-    public function getAttributeLabel(): Phrase|string
+    public function getTextType(): string
     {
-        return $this->getAttribute()->getFrontendLabel();
+        return static::TEXT_TYPE;
+    }
+
+    public function getAttributeCode(): string
+    {
+        return static::ATTRIBUTE_CODE;
     }
 
     public function getValue(): string
@@ -67,17 +52,32 @@ abstract class EavFormFieldComponent extends AbstractComponent implements FormFi
         return (string)$this->value;
     }
 
+    public function setValue(mixed $value)
+    {
+        $this->value = $value;
+    }
+
     public function isRequired(): bool
     {
         return (bool)$this->getAttribute()->getIsRequired();
     }
 
-    /**
-     * @return AbstractAttribute
-     * @throws LocalizedException
-     */
-    private function getAttribute(): AbstractAttribute
+    public function isValid(): bool
     {
-        return $this->eavConfig->getAttribute('customer_address', $this->getAttributeCode());
+        if (empty($this->value) && $this->isRequired()) {
+            $this->error('value', 'This value is required.');
+        }
+
+        return false === $this->hasErrors();
+    }
+
+    public function getAttributeLabel(): string
+    {
+        return (string)$this->getAttribute()->getFrontendLabel();
+    }
+
+    protected function getAttribute(): AbstractAttribute
+    {
+        return $this->context->getAttribute($this->getAttributeCode());
     }
 }

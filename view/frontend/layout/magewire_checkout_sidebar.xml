@@ -31,14 +31,41 @@
                     </arguments>
                 </block>
 
-                <block name="magewire.checkout.sidebar.shipping_address" as="shipping_address" template="Yireo_MagewireCheckout::checkout/sidebar/shipping_address.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\ShippingAddress
-                        </argument>
-                    </arguments>
-                </block>
+                <container name="magewire.checkout.sidebar.preview" as="preview">
+                    <block name="magewire.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_MagewireCheckout::checkout/sidebar/preview/shipping_address.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">
+                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
+                            </argument>
+                        </arguments>
+                    </block>
 
+                    <block name="magewire.checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_MagewireCheckout::checkout/sidebar/preview/shipping_details.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">
+                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block name="magewire.checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_MagewireCheckout::checkout/sidebar/preview/billing_address.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">
+                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress
+                            </argument>
+                        </arguments>
+                    </block>
+
+                    <block name="magewire.checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_MagewireCheckout::checkout/sidebar/preview/payment_details.phtml">
+                        <arguments>
+                            <argument name="magewire" xsi:type="object">
+                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails
+                            </argument>
+                        </arguments>
+                    </block>
+                </container>
+
+                <!--
                 <block name="magewire.checkout.sidebar.order_comment" as="order_comment" template="Yireo_MagewireCheckout::checkout/sidebar/order_comment.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
@@ -46,6 +73,7 @@
                         </argument>
                     </arguments>
                 </block>
+                -->
             </block>
         </referenceBlock>
     </body>

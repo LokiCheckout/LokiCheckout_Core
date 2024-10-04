@@ -4,13 +4,16 @@ declare(strict_types=1);
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
 use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\OrderComment;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
 use Yireo\MagewireCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
 /** @var PriceFormatter $priceFormatter */
 /** @var OrderComment $magewire */
-$quote = $magewire->getCheckoutState()->getQuote();
+/** @var CheckoutState $checkoutState */
+$checkoutState = $viewModels->require(CheckoutState::class);
+$quote = $checkoutState->getQuote();
 ?>
 <div>
     <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br/>

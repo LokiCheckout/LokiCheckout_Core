@@ -1,0 +1,45 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
+use Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var BillingStep $magewire */
+$useBillingAsShipping = $magewire->useBillingAsShipping;
+?>
+<div>
+    <div class="card mb-8">
+        <label for="use_billing_as_shipping">
+            <input type="checkbox"
+                   wire:model="useBillingAsShipping"
+                   wire:loading.attr="aria-busy"
+                   wire:loading.class="disabled"
+                   id="use_billing_as_shipping"/>
+            <span class="pl-2">
+            <?= __('My billing and shipping address are the same') ?>
+                </span>
+        </label>
+    </div>
+
+    <?php if ($useBillingAsShipping): ?>
+        <div class="mb-8">
+            <?= $block->getChildHtml('billing-view') ?>
+        </div>
+    <?php else: ?>
+        <div class="mb-8">
+            <?= $block->getChildHtml('billing-address') ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="mb-8">
+        <?= $block->getChildHtml('payment-methods') ?>
+    </div>
+    <div class="mb-8 float-right flex">
+        <?= $block->getChildHtml('backward-button') ?>
+        <?= $block->getChildHtml('forward-button') ?>
+    </div>
+</div>

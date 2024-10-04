@@ -2,45 +2,48 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\AbstractComponent;
+use Magewirephp\Magewire\Component;
+use Yireo\MagewireCheckout\Config\Config;
+use Yireo\MagewireCheckout\Step\StepInterface;
+use Yireo\MagewireCheckout\Validator\ValidatorInterface;
 
-class BillingStep extends AbstractComponent implements StepInterface
+class BillingStep extends Component implements StepInterface
 {
+    public bool $useBillingAsShipping = true;
+
+    public function __construct(
+        private readonly Config $config,
+        private readonly ValidatorInterface $stepValidator,
+    ) {
+    }
+
+    public function booted(): void
+    {
+        $this->useBillingAsShipping = $this->config->useSameAsBilling();
+    }
+
     public function getCode(): string
     {
         return 'billing';
     }
 
-    public function getLabel(): Phrase
+    public function getLabel(): string
     {
-        return __('Billing');
+        return 'Billing';
     }
 
     public function isEnabled(): bool
     {
-        foreach ($this->checkoutState->getQuote()->getAllItems() as $quoteItem) {
-            if ($quoteItem->getBasePrice() > 0) {
-                return true;
-            }
-        }
-
-        return false;
+        return true;
     }
 
     public function isAccessable(): bool
     {
-        // @todo: Check if billing step could be access already
         return true;
     }
 
-    public function isFirst(): bool
+    public function validate(): true|array
     {
-        return $this->checkoutState->getStepNavigator()->isFirstStep($this);
-    }
-
-    public function isLast(): bool
-    {
-        return $this->checkoutState->getStepNavigator()->isLastStep($this);
+        return $this->stepValidator->validate();
     }
 }

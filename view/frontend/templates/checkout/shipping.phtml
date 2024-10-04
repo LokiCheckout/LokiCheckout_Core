@@ -19,7 +19,8 @@ $checkoutState = $viewModels->require(CheckoutState::class);
     <div class="mb-8">
         <?= $block->getChildHtml('shipping-methods') ?>
     </div>
-    <div class="mb-8 float-right">
-        <?= $block->getChildHtml('submit') ?>
+    <div class="mb-8 float-right flex">
+        <?= $block->getChildHtml('backward-button') ?>
+        <?= $block->getChildHtml('forward-button') ?>
     </div>
 </div>

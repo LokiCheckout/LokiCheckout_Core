@@ -30,5 +30,11 @@ $fieldType = $magewire->getFieldType();
         </div>
     </div>
 
-    <?php // @todo: Implement component-specific error here ?>
+    <?php if ($magewire->hasErrors()): ?>
+    <ul class="messages">
+       <?php foreach ($magewire->getErrors() as $error): ?>
+       <li class="message error"><?= $error ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
 </div>

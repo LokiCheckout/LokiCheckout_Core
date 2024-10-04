@@ -2,12 +2,14 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
-class Firstname extends EavFormFieldComponent
+class Firstname extends ShippingAddressFormFieldComponent
 {
-    public function getAttributeCode(): string
+    const ATTRIBUTE_CODE = 'firstname';
+
+    public function isRequired(): bool
     {
-        return 'firstname';
+        return true;
     }
 }

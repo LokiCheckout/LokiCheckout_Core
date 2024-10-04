@@ -2,13 +2,14 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
-class City extends EavFormFieldComponent
+class City extends ShippingAddressFormFieldComponent
 {
-    public function getAttributeCode(): string
+    const ATTRIBUTE_CODE = 'city';
+
+    public function isRequired(): bool
     {
-        return 'city';
+        return true;
     }
 }

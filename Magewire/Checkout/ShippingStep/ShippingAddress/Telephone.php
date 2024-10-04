@@ -2,13 +2,9 @@
 
 namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\MagewireCheckout\Magewire\Generic\EavFormFieldComponent;
+use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
-class Telephone extends EavFormFieldComponent
+class Telephone extends ShippingAddressFormFieldComponent
 {
-    public function getAttributeCode(): string
-    {
-        return 'telephone';
-    }
+    const ATTRIBUTE_CODE = 'telephone';
 }
