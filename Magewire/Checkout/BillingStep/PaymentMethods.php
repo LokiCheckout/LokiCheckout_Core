@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
 
 use Magewirephp\Magewire\Component;
 
@@ -15,5 +15,11 @@ class PaymentMethods extends Component
 
     public function updatedValue(string $value)
     {
+        return $value;
+        $quote->setPaymentMethod('checkmo');
+        $quote->setInventoryProcessed(false);
+        $quote->getPayment()->importData(['method' => 'checkmo']);
+        $quote->collectTotals()->save();
+
     }
 }

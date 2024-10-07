@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormSelectFieldInterface;
-use Yireo\MagewireCheckout\Source\Options\CountryOptions;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
+use Yireo\FriggaCheckout\Source\Options\CountryOptions;
+use Yireo\FriggaCheckout\Util\Context;
 
 class CountryId extends ShippingAddressFormFieldComponent implements FormSelectFieldInterface
 {

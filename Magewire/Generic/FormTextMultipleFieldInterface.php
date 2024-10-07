@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Generic;
+namespace Yireo\FriggaCheckout\Magewire\Generic;
 
 interface FormTextMultipleFieldInterface extends FormFieldInterface
 {

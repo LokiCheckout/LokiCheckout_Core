@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Resolver;
+namespace Yireo\FriggaCheckout\Magewire\Resolver;
 
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\Element\AbstractBlock;

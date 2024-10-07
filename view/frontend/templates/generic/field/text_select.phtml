@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
 /** @var Template $block */
 /** @var FormTextSelectFieldInterface $magewire */
@@ -12,8 +12,8 @@ $options = $magewire->getOptions();
 if (count($options) > 0) {
     echo $block->getLayout()->createBlock(Template::class)
         ->addData(['component' => $magewire])
-        ->setNameInLayout('magewire.checkout.generic.field.select.'.$magewire->getAttributeCode())
-        ->setTemplate('Yireo_MagewireCheckout::generic/field/select.phtml')
+        ->setNameInLayout('frigga.checkout.generic.field.select.'.$magewire->getAttributeCode())
+        ->setTemplate('Yireo_FriggaCheckout::generic/field/select.phtml')
         ->toHtml();
 
     return;
@@ -21,6 +21,6 @@ if (count($options) > 0) {
 
 echo $block->getLayout()->createBlock(Template::class)
     ->addData(['component' => $magewire])
-    ->setNameInLayout('magewire.checkout.generic.field.text.'.$magewire->getAttributeCode())
-    ->setTemplate('Yireo_MagewireCheckout::generic/field/text.phtml')
+    ->setNameInLayout('frigga.checkout.generic.field.text.'.$magewire->getAttributeCode())
+    ->setTemplate('Yireo_FriggaCheckout::generic/field/text.phtml')
     ->toHtml();

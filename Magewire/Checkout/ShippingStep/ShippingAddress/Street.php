@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
+use Yireo\FriggaCheckout\Util\Context;
 
 class Street extends ShippingAddressFormFieldComponent implements FormTextMultipleFieldInterface
 {

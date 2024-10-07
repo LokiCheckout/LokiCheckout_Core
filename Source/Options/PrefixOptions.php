@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Source\Options;
+namespace Yireo\FriggaCheckout\Source\Options;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;

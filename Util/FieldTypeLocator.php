@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Util;
+namespace Yireo\FriggaCheckout\Util;
 
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\Magewire\Generic\FormSelectFieldInterface;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
 class FieldTypeLocator
 {

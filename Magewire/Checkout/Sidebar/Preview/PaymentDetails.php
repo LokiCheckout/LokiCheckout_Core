@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview;
 
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class PaymentDetails extends Component
 {

@@ -11,14 +11,14 @@
         <referenceBlock name="checkout.root" remove="true"/>
 
         <referenceContainer name="content">
-            <block name="magewire.checkout" template="Yireo_MagewireCheckout::checkout.phtml" cacheable="false">
+            <block name="frigga.checkout" template="Yireo_FriggaCheckout::checkout.phtml" cacheable="false">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout</argument>
+                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout</argument>
                 </arguments>
             </block>
         </referenceContainer>
 
-        <block name="magewire.checkout.loader" template="Yireo_MagewireCheckout::loader.phtml"/>
-        <block name="magewire.checkout.required" template="Yireo_MagewireCheckout::required.phtml"/>
+        <block name="frigga.checkout.loader" template="Yireo_FriggaCheckout::loader.phtml"/>
+        <block name="frigga.checkout.required" template="Yireo_FriggaCheckout::required.phtml"/>
     </body>
 </page>

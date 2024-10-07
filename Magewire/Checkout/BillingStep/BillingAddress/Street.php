@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\MagewireCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
+use Yireo\FriggaCheckout\Util\Context;
 
 class Street extends BillingAddressFormFieldComponent implements FormTextMultipleFieldInterface
 {

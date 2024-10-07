@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 use Magento\Eav\Model\Config;
-use Yireo\MagewireCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\MagewireCheckout\Util\Context;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\FriggaCheckout\Util\Context;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 
 class Region extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface

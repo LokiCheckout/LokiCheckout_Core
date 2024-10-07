@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\ViewModel;
+namespace Yireo\FriggaCheckout\ViewModel;
 
 use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

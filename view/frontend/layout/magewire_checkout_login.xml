@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="magewire.checkout.sidebar">
-            <block name="magewire.checkout.sidebar.login" as="login" template="Yireo_MagewireCheckout::checkout/login.phtml">
+        <referenceContainer name="frigga.checkout.sidebar">
+            <block name="frigga.checkout.sidebar.login" as="login" template="Yireo_FriggaCheckout::checkout/login.phtml">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\Login
+                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\Login
                     </argument>
                 </arguments>
             </block>

@@ -1,20 +1,22 @@
 {
-  "name": "yireo/module-magewire-checkout",
+  "name": "yireo/module-frigga-checkout",
   "version": "1.0.0",
-  "description": "N/A",
+  "description": "A Magewire-based checkout for Magento 2",
   "type": "magento2-module",
   "require": {
-    "magento/framework": "*"
+    "magento/framework": "^103.0",
+      "magewirephp/magewire": "^1.11",
+      "magewirephp/magewire-requirejs": "^1.1"
   },
   "license": [
-    "Proprietary"
+    "OSL-3.0"
   ],
   "autoload": {
     "files": [
       "registration.php"
     ],
     "psr-4": {
-      "Yireo\\MagewireCheckout\\": ""
+      "Yireo\\FriggaCheckout\\": ""
     }
   }
 }

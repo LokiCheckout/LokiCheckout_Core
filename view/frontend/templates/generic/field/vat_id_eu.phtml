@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Generic\FormFieldInterface;
-use Yireo\MagewireCheckout\ViewModel\VatId;
+use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\FriggaCheckout\ViewModel\VatId;
 
 /** @var Template $block */
 /** @var Template $parentBlock */
@@ -37,5 +37,5 @@ $magewire = $this->getComponent();
     <input id="vat_id" type="hidden" wire:model="value"/>
     <small>Current VAT ID: <?= $magewire->value ?></small>
 
-    <?= $block->getBlockHtml('magewire.checkout.vat_id_eu_script') ?>
+    <?= $block->getBlockHtml('frigga.checkout.vat_id_eu_script') ?>
 </div>

@@ -1,4 +1,4 @@
-# Yireo MagewireCheckout
+# Yireo FriggaCheckout
 
 **A developer-friendly Magento 2 checkout based on Magewire**
 

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Test\Integration;
+namespace Yireo\FriggaCheckout\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
@@ -15,7 +15,7 @@ class ModuleTest extends TestCase
 
     public function testIfModuleIsEnabled()
     {
-        $moduleName = 'Yireo_MagewireCheckout';
+        $moduleName = 'Yireo_FriggaCheckout';
         $this->assertModuleIsRegistered($moduleName);
         $this->assertModuleIsRegisteredForReal($moduleName);
         $this->assertModuleIsEnabled($moduleName);

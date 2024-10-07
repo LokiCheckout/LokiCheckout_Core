@@ -1,191 +1,191 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="magewire.checkout">
-            <block name="magewire.checkout.shipping-step" as="shipping-step" template="Yireo_MagewireCheckout::checkout/shipping.phtml">
+        <referenceBlock name="frigga.checkout">
+            <block name="frigga.checkout.shipping-step" as="shipping-step" template="Yireo_FriggaCheckout::checkout/shipping.phtml">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep
+                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep
                     </argument>
                 </arguments>
 
                 <block
-                    name="magewire.checkout.shipping-step.shipping-address" as="shipping-address"
-                    template="Yireo_MagewireCheckout::checkout/shipping/address.phtml">
+                    name="frigga.checkout.shipping-step.shipping-address" as="shipping-address"
+                    template="Yireo_FriggaCheckout::checkout/shipping/address.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress
+                            Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress
                         </argument>
                     </arguments>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.prefix" as="prefix"
+                        name="frigga.checkout.shipping-step.shipping-address.prefix" as="prefix"
                         ifconfig="customer/address/prefix_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
                             </argument>
                             <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.firstname" as="firstname"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.firstname" as="firstname"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.middlename" as="middlename"
+                        name="frigga.checkout.shipping-step.shipping-address.middlename" as="middlename"
                         ifconfig="customer/address/middlename_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.lastname" as="lastname"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.lastname" as="lastname"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.suffix" as="suffix"
+                        name="frigga.checkout.shipping-step.shipping-address.suffix" as="suffix"
                         ifconfig="customer/address/suffix_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.street" as="street"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.street" as="street"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
                             </argument>
                             <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.postcode" as="postcode"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.postcode" as="postcode"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.city" as="city"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.city" as="city"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.region" as="region"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.region" as="region"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.country_id" as="country_id"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        name="frigga.checkout.shipping-step.shipping-address.country_id" as="country_id"
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.company" as="company"
+                        name="frigga.checkout.shipping-step.shipping-address.company" as="company"
                         ifconfig="customer/address/company_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.telephone" as="telephone"
+                        name="frigga.checkout.shipping-step.shipping-address.telephone" as="telephone"
                         ifconfig="customer/address/telephone_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
                             </argument>
                         </arguments>
                     </block>
 
                     <block
-                        name="magewire.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
+                        name="frigga.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
                         ifconfig="customer/address/taxvat_show"
-                        template="Yireo_MagewireCheckout::generic/field.phtml">
+                        template="Yireo_FriggaCheckout::generic/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
-                                Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
+                                Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
-                        <block name="magewire.checkout.vat_id_eu_script" as="script"
-                               template="Yireo_MagewireCheckout::generic/field/vat_id_eu_script.phtml"
+                        <block name="frigga.checkout.vat_id_eu_script" as="script"
+                               template="Yireo_FriggaCheckout::generic/field/vat_id_eu_script.phtml"
                         />
                     </block>
                 </block>
 
                 <block
-                    name="magewire.checkout.shipping-step.shipping-methods" as="shipping-methods"
-                    template="Yireo_MagewireCheckout::checkout/shipping/methods.phtml">
+                    name="frigga.checkout.shipping-step.shipping-methods" as="shipping-methods"
+                    template="Yireo_FriggaCheckout::checkout/shipping/methods.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingMethods
+                            Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingMethods
                         </argument>
                     </arguments>
                 </block>
 
                 <block
-                    name="magewire.checkout.billing-step.backward-button" as="backward-button"
-                    template="Yireo_MagewireCheckout::checkout/step-backward-button.phtml">
+                    name="frigga.checkout.billing-step.backward-button" as="backward-button"
+                    template="Yireo_FriggaCheckout::checkout/step-backward-button.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\StepBackwardButton
+                            Yireo\FriggaCheckout\Magewire\Checkout\StepBackwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Back to billing</argument>
                     </arguments>
                 </block>
 
                 <block
-                    name="magewire.checkout.shipping-step.forward" as="forward-button"
-                    template="Yireo_MagewireCheckout::checkout/step-forward-button.phtml">
+                    name="frigga.checkout.shipping-step.forward" as="forward-button"
+                    template="Yireo_FriggaCheckout::checkout/step-forward-button.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\StepForwardButton
+                            Yireo\FriggaCheckout\Magewire\Checkout\StepForwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Proceed to review &amp; payments</argument>
                     </arguments>

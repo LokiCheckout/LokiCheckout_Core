@@ -3,16 +3,17 @@ declare(strict_types=1);
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
+/** @var string $blockClass */
 /** @var ViewModelRegistry $viewModels */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
 $checkoutState = $viewModels->require(CheckoutState::class);
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     <div class="mb-8">
         <?= $block->getChildBlock('shipping-address')->setData([])->toHtml() ?>
     </div>

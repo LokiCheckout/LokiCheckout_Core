@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout;
+namespace Yireo\FriggaCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\Step\StepInterface;
-use Yireo\MagewireCheckout\Validator\ValidatorInterface;
+use Yireo\FriggaCheckout\Step\StepInterface;
+use Yireo\FriggaCheckout\Validator\ValidatorInterface;
 
 class ShippingStep extends Component implements StepInterface
 {

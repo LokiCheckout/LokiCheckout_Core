@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
 
 /** @var Template $block */
 /** @var FormFieldInterface $magewire */
@@ -16,17 +16,17 @@ $fieldType = $magewire->getFieldType();
 <div class="w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
     <label for="<?= $magewire->getAttributeCode() ?>" class="label">
         <?= $magewire->getAttributeLabel() ?>
-        <?= $magewire->isRequired() ? $block->getBlockHtml('magewire.checkout.required') : '' ?>
+        <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.required') : '' ?>
     </label>
     <div class="relative">
         <?= $block->getLayout()->createBlock(Template::class)
             ->addData(['component' => $magewire])
             ->setParentBlock($this)
-            ->setNameInLayout('magewire.checkout.generic.field.'.$fieldType.'.'.$magewire->getAttributeCode())
-            ->setTemplate('Yireo_MagewireCheckout::generic/field/'.$fieldType.'.phtml')
+            ->setNameInLayout('frigga.checkout.generic.field.'.$fieldType.'.'.$magewire->getAttributeCode())
+            ->setTemplate('Yireo_FriggaCheckout::generic/field/'.$fieldType.'.phtml')
             ->toHtml() ?>
         <div wire:loading class="absolute top-0 right-0 bottom-0 p-3">
-            <?= $block->getBlockHtml('magewire.checkout.loader') ?>
+            <?= $block->getBlockHtml('frigga.checkout.loader') ?>
         </div>
     </div>
 

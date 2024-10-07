@@ -1,75 +1,75 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="magewire.checkout">
-            <block name="magewire.checkout.sidebar" as="sidebar" template="Yireo_MagewireCheckout::checkout/sidebar.phtml">
+        <referenceBlock name="frigga.checkout">
+            <block name="frigga.checkout.sidebar" as="sidebar" template="Yireo_FriggaCheckout::checkout/sidebar.phtml">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\Sidebar</argument>
+                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\Sidebar</argument>
                 </arguments>
 
-                <block name="magewire.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_MagewireCheckout::checkout/sidebar/coupon_code.phtml">
+                <block name="frigga.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_FriggaCheckout::checkout/sidebar/coupon_code.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\CouponCode</argument>
+                        <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\CouponCode</argument>
                     </arguments>
 
-                    <block name="magewire.checkout.sidebar.coupon_code.script" as="script" template="Yireo_MagewireCheckout::checkout/sidebar/coupon_code/script.phtml"/>
+                    <block name="frigga.checkout.sidebar.coupon_code.script" as="script" template="Yireo_FriggaCheckout::checkout/sidebar/coupon_code/script.phtml"/>
                 </block>
 
-                <block name="magewire.checkout.sidebar.items" as="items" template="Yireo_MagewireCheckout::checkout/sidebar/items.phtml">
+                <block name="frigga.checkout.sidebar.items" as="items" template="Yireo_FriggaCheckout::checkout/sidebar/items.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Items</argument>
+                        <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Items</argument>
                     </arguments>
 
-                    <block name="magewire.checkout.sidebar.items.item" as="item" template="Yireo_MagewireCheckout::checkout/sidebar/items/item.phtml"/>
+                    <block name="frigga.checkout.sidebar.items.item" as="item" template="Yireo_FriggaCheckout::checkout/sidebar/items/item.phtml"/>
                 </block>
 
-                <block name="magewire.checkout.sidebar.totals" as="totals" template="Yireo_MagewireCheckout::checkout/sidebar/totals.phtml">
+                <block name="frigga.checkout.sidebar.totals" as="totals" template="Yireo_FriggaCheckout::checkout/sidebar/totals.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Totals
+                            Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Totals
                         </argument>
                     </arguments>
                 </block>
 
-                <container name="magewire.checkout.sidebar.preview" as="preview">
-                    <block name="magewire.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_MagewireCheckout::checkout/sidebar/preview/shipping_address.phtml">
+                <container name="frigga.checkout.sidebar.preview" as="preview">
+                    <block name="frigga.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_FriggaCheckout::checkout/sidebar/preview/shipping_address.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object">
-                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
+                                Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
                             </argument>
                         </arguments>
                     </block>
 
-                    <block name="magewire.checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_MagewireCheckout::checkout/sidebar/preview/shipping_details.phtml">
+                    <block name="frigga.checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_FriggaCheckout::checkout/sidebar/preview/shipping_details.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object">
-                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails
+                                Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails
                             </argument>
                         </arguments>
                     </block>
 
-                    <block name="magewire.checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_MagewireCheckout::checkout/sidebar/preview/billing_address.phtml">
+                    <block name="frigga.checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_FriggaCheckout::checkout/sidebar/preview/billing_address.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object">
-                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress
+                                Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress
                             </argument>
                         </arguments>
                     </block>
 
-                    <block name="magewire.checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_MagewireCheckout::checkout/sidebar/preview/payment_details.phtml">
+                    <block name="frigga.checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_FriggaCheckout::checkout/sidebar/preview/payment_details.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object">
-                                Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails
+                                Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails
                             </argument>
                         </arguments>
                     </block>
                 </container>
 
                 <!--
-                <block name="magewire.checkout.sidebar.order_comment" as="order_comment" template="Yireo_MagewireCheckout::checkout/sidebar/order_comment.phtml">
+                <block name="frigga.checkout.sidebar.order_comment" as="order_comment" template="Yireo_FriggaCheckout::checkout/sidebar/order_comment.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\OrderComment
+                            Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\OrderComment
                         </argument>
                     </arguments>
                 </block>

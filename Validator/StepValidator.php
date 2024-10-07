@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Validator;
+namespace Yireo\FriggaCheckout\Validator;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Exception\LocalizedException;
@@ -8,7 +8,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validation\ValidationResult;
 use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
 
-class StepValidator  implements ValidatorInterface
+class StepValidator implements ValidatorInterface
 {
     public function __construct(
         protected readonly CheckoutSession $checkoutSession,
@@ -24,6 +24,11 @@ class StepValidator  implements ValidatorInterface
     public function validate(): array|true
     {
         $quote = $this->checkoutSession->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
+        $shippingMethod = $shippingAddress->getShippingMethod();
+        if (empty($shippingMethod)) {
+            return ['No shipping method found.'];
+        }
 
         $errors = [];
         if (empty($this->validationRules)) {

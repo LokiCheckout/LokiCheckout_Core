@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire;
+namespace Yireo\FriggaCheckout\Magewire;
 
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\Step\StepNavigator;
+use Yireo\FriggaCheckout\Step\StepNavigator;
 
 class Checkout extends Component
 {

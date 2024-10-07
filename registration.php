@@ -2,4 +2,4 @@
 
 use Magento\Framework\Component\ComponentRegistrar;
 
-ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Yireo_MagewireCheckout', __DIR__);
+ComponentRegistrar::register(ComponentRegistrar::MODULE, 'Yireo_FriggaCheckout', __DIR__);

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\ViewModel;
+namespace Yireo\FriggaCheckout\ViewModel;
 
 use Magento\Customer\Model\Vat as VatModel;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Util\Context;
 
 class VatId implements ArgumentInterface
 {

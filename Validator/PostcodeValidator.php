@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Validator;
+namespace Yireo\FriggaCheckout\Validator;
 
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 

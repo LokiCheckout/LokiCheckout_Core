@@ -4,8 +4,8 @@ declare(strict_types=1);
 use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Checkout\Sidebar\CouponCode;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\CouponCode;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
@@ -18,7 +18,7 @@ $couponCode = $quote->getCouponCode();
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
 <div class="border-b border-gray-400 my-4">
-    <div x-data="magewireCheckoutSidebarCouponCode">
+    <div x-data="FriggaCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>
             <button class="btn btn-secondary mt-4"

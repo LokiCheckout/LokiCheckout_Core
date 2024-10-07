@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Generic;
+namespace Yireo\FriggaCheckout\Magewire\Generic;
 
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Util\Context;
 
 abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 {

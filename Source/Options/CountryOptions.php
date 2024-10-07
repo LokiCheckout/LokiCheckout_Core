@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Source\Options;
+namespace Yireo\FriggaCheckout\Source\Options;
 
 use Magento\Directory\Helper\Data as DirectoryHelper;
 

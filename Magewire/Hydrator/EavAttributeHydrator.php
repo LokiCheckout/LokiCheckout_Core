@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Hydrator;
+namespace Yireo\FriggaCheckout\Magewire\Hydrator;
 
 use Magewirephp\Magewire\Component;
 use Magewirephp\Magewire\Model\HydratorInterface;

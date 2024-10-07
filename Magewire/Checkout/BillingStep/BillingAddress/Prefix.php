@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\MagewireCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\MagewireCheckout\Source\Options\PrefixOptions;
-use Yireo\MagewireCheckout\Util\Context;
+use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\FriggaCheckout\Source\Options\PrefixOptions;
+use Yireo\FriggaCheckout\Util\Context;
 
 class Prefix extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {

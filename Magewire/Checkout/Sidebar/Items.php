@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\Sidebar;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\Sidebar;
 
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class Items extends Component
 {

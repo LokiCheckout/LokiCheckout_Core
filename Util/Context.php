@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Util;
+namespace Yireo\FriggaCheckout\Util;
 
 use Magento\Eav\Model\Attribute;
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\UrlFactory;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class Context
 {

@@ -3,29 +3,37 @@ declare(strict_types=1);
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
-use Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
+use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var BillingStep $magewire */
-$useBillingAsShipping = $magewire->useBillingAsShipping;
+$enableBillingAsShipping = $magewire->enableBillingAsShipping;
+$billingAsShipping = $magewire->billingAsShipping;
 ?>
 <div>
+    <?php if ($enableBillingAsShipping): ?>
     <div class="card mb-8">
-        <label for="use_billing_as_shipping">
+        <label for="billing_as_shipping">
             <input type="checkbox"
-                   wire:model="useBillingAsShipping"
+                   wire:model="billingAsShipping"
                    wire:loading.attr="aria-busy"
                    wire:loading.class="disabled"
-                   id="use_billing_as_shipping"/>
+                   id="billing_as_shipping"/>
             <span class="pl-2">
             <?= __('My billing and shipping address are the same') ?>
                 </span>
         </label>
+        <code><?= (int)$billingAsShipping ?></code>
+    </div>
+    <?php endif; ?>
+
+    <div class="card mb-8">
+        <button type="button" class="btn btn-secondary" wire:click="copyFromShippingAddress">Copy values from shipping address</button>
     </div>
 
-    <?php if ($useBillingAsShipping): ?>
+    <?php if ($billingAsShipping): ?>
         <div class="mb-8">
             <?= $block->getChildHtml('billing-view') ?>
         </div>

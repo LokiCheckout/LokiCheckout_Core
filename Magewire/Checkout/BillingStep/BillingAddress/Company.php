@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\MagewireCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 
 class Company extends BillingAddressFormFieldComponent
 {

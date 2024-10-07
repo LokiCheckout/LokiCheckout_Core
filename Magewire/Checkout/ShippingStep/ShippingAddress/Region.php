@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Eav\Model\Config;
-use Yireo\MagewireCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\MagewireCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\MagewireCheckout\Util\Context;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\FriggaCheckout\Util\Context;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 
 class Region extends ShippingAddressFormFieldComponent implements FormTextSelectFieldInterface

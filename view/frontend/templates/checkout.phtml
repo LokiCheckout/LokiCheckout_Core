@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Magento\Framework\View\Element\Template;
-use Yireo\MagewireCheckout\Magewire\Checkout;
-use Yireo\MagewireCheckout\Step\StepNavigator;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\Magewire\Checkout;
+use Yireo\FriggaCheckout\Step\StepNavigator;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
@@ -23,7 +23,7 @@ $currentStep = $magewire->currentStep;
                 <div wire:loading>
                     <div class="absolute m-auto left-0 right-0 bottom-0 top-0 opacity-60 bg-white z-50"></div>
                     <div class="absolute z-50 w-full h-screen flex items-center justify-center">
-                        <img src="<?= $block->getViewFileUrl('Yireo_MagewireCheckout::images/loader.svg'); ?>" class="w-16 h-16"/>
+                        <img src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/loader.svg'); ?>" class="w-16 h-16"/>
                     </div>
                 </div>
 

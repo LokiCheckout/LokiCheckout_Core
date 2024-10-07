@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
 
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\MagewireCheckout\ViewModel\CheckoutState;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class BillingAddress  extends Component
 {

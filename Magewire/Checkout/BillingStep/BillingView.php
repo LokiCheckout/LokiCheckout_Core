@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\MagewireCheckout\Magewire\Checkout\BillingStep;
+namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
 
 use Magewirephp\Magewire\Component;
 
