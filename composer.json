@@ -1,6 +1,6 @@
 {
-  "name": "yireo/module-frigga-checkout",
-  "version": "1.0.0",
+  "name": "yireo/magento2-frigga-checkout",
+  "version": "0.0.4",
   "description": "A Magewire-based checkout for Magento 2",
   "type": "magento2-module",
   "require": {
