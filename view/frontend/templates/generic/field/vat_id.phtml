@@ -1,0 +1,30 @@
+<?php
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\View\Element\Template;
+use Yireo\MagewireCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\MagewireCheckout\ViewModel\VatId;
+
+/** @var Template $block */
+/** @var FormFieldInterface $magewire */
+/** @var ViewModelRegistry $viewModels */
+/** @var VatId $vatId */
+$vatId = $viewModels->require(VatId::class);
+$magewire = $this->getComponent();
+
+if ($vatId->isEu()) {
+    echo $block->getLayout()->createBlock(Template::class)
+        ->addData(['component' => $magewire])
+        ->setNameInLayout('magewire.checkout.generic.field.text.'.$magewire->getAttributeCode())
+        ->setTemplate('Yireo_MagewireCheckout::generic/field/vat_id_eu.phtml')
+        ->toHtml();
+
+    return;
+}
+
+echo $block->getLayout()->createBlock(Template::class)
+    ->addData(['component' => $magewire])
+    ->setNameInLayout('magewire.checkout.generic.field.text.'.$magewire->getAttributeCode())
+    ->setTemplate('Yireo_MagewireCheckout::generic/field/text.phtml')
+    ->toHtml();

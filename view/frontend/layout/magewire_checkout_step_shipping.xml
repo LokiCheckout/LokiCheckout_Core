@@ -153,6 +153,9 @@
                                 Yireo\MagewireCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
+                        <block name="magewire.checkout.vat_id_eu_script" as="script"
+                               template="Yireo_MagewireCheckout::generic/field/vat_id_eu_script.phtml"
+                        />
                     </block>
                 </block>
 

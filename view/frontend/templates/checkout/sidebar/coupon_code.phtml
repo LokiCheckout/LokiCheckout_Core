@@ -17,7 +17,7 @@ $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
-<div class="my-4">
+<div class="border-b border-gray-400 my-4">
     <div x-data="magewireCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>

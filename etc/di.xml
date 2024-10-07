@@ -40,4 +40,25 @@
             </argument>
         </arguments>
     </virtualType>
+
+    <!--
+    <type name="Magewirephp\Magewire\Model\ComponentResolver">
+        <arguments>
+            <argument name="resolvers" xsi:type="array">
+                <item name="frigga_resolver" xsi:type="object">Yireo\MagewireCheckout\Magewire\Resolver\FriggaResolver</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Yireo\MagewireCheckout\Magewire\Resolver\FriggaResolver">
+        <arguments>
+            <argument name="componentMapping" xsi:type="array">
+                <item name="content_schedule_block0" xsi:type="array">
+                    <item name="template" xsi:type="string">Yireo_Example::example.phtml</item>
+                    <item name="componentClass" xsi:type="string">Yireo\Example\Magewire\MyExample</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    -->
 </config>

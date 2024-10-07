@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+?>
+    <script>
+        document.addEventListener('magewire:load', () => {
+            const vatIdCountry = document.getElementById('vat_id_country');
+            const vatIdText = document.getElementById('vat_id_text');
+            const vatId = document.getElementById('vat_id');
+
+            if (vatId.value) {
+                vatIdText.value = vatId.value.replace(/^([A-Z]{1,4})/, "");
+            }
+
+            vatIdCountry.addEventListener('input', function () {
+                vatId.value = vatIdCountry.value + vatIdText.value;
+                vatId.dispatchEvent(new Event('input'));
+            });
+
+            vatIdText.addEventListener('input', function () {
+                vatId.value = vatIdCountry.value + vatIdText.value;
+                vatId.dispatchEvent(new Event('input'));
+            });
+
+        });
+    </script>

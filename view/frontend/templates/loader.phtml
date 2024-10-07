@@ -1,1 +1,11 @@
-<img src="<?= $block->getViewFileUrl('Yireo_MagewireCheckout::images/loader.svg'); ?>" class="w-4 h-4"/>
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+?>
+<img alt="<?= __('Loading') ?>"
+     src="<?= $block->getViewFileUrl('Yireo_MagewireCheckout::images/loader.svg'); ?>"
+     width="20"
+     height="20"/>

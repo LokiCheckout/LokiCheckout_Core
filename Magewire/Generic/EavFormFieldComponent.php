@@ -80,4 +80,17 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
     {
         return $this->context->getAttribute($this->getAttributeCode());
     }
+
+    protected function setErrorsFromValidation(true|array $errors): bool
+    {
+        if (true === $errors) {
+            return true;
+        }
+
+        foreach ($errors as $error) {
+            $this->error('value', $error);
+        }
+
+        return false;
+    }
 }

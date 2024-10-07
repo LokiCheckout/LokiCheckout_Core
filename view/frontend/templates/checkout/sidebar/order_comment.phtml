@@ -15,7 +15,7 @@ use Yireo\MagewireCheckout\ViewModel\PriceFormatter;
 $checkoutState = $viewModels->require(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 ?>
-<div>
+<div class="border-b border-gray-400 my-8">
     <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br/>
     <textarea wire:model="comment" class="form-input w-full"></textarea>
 </div>
