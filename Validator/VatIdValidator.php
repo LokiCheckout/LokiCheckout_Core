@@ -2,24 +2,29 @@
 
 namespace Yireo\FriggaCheckout\Validator;
 
+use Magento\Customer\Model\Vat as VatModel;
+
 class VatIdValidator implements ValidatorInterface
 {
     private string $vatId;
     private string $countryId;
 
     public function __construct(
+        private VatModel $vatModel
     ) {
     }
 
     public function setVatId(string $vatId): VatIdValidator
     {
-        $this->vatId = $vatId;
+        // @todo: Test whether this could be hacked?
+        $this->vatId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($vatId));
         return $this;
     }
 
     public function setCountryId(string $countryId): VatIdValidator
     {
-        $this->countryId = $countryId;
+        // @todo: Test whether this could be hacked?
+        $this->countryId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($countryId));
         return $this;
     }
 
@@ -33,10 +38,34 @@ class VatIdValidator implements ValidatorInterface
             return true;
         }
 
-        return true;
-        // @todo: Check for format CC123456789
-        // @todo: Check if VAT ID is valid
+        if (false === $this->vatModel->isCountryInEU($this->countryId)) {
+            return true;
+        }
 
-        return ['Something is still wrong'];
+        $vatCountryId = $this->getCountryIdToVatCountryId($this->countryId);
+        if (!preg_match('/^'.$this->countryId.'/', $this->countryId)) {
+            return ['Your VAT ID does not start with the right country code'];
+        }
+
+        if (strlen($this->vatId) < 10) {
+            return ['Your VAT ID is too short'];
+        }
+
+        // @todo: Check if VAT ID is valid
+        return true;
+    }
+
+    private function getCountryIdToVatCountryId(string $countryId): string
+    {
+        $mapping = [
+            'AT' => 'ATU',
+            'GR' => 'EL',
+        ];
+
+        if (array_key_exists($countryId, $mapping)) {
+            return $mapping[$countryId];
+        }
+
+        return $countryId;
     }
 }
