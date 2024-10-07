@@ -10,7 +10,7 @@ abstract class BillingAddressFormFieldComponent extends EavFormFieldComponent
 {
     public function boot(): void
     {
-        $this->value = (string)$this->context->getCheckoutState()->getQuote()->getBillingAddress()->getData($this->getAttributeCode());
+        $this->value = (string)$this->context->getCheckoutState()->getBillingAddressValue($this->getAttributeCode());
     }
 
     public function updated($value, string $name)

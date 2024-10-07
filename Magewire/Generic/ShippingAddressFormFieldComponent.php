@@ -10,7 +10,7 @@ abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 {
     public function boot(): void
     {
-        $this->value = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getData($this->getAttributeCode());
+        $this->value = (string)$this->context->getCheckoutState()->getShippingAddressValue($this->getAttributeCode());
     }
 
     public function updated($value, string $name)

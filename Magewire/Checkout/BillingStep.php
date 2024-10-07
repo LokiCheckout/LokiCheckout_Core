@@ -49,8 +49,6 @@ class BillingStep extends Component implements StepInterface
         $shippingAddress = $quote->getShippingAddress();
         $billingAddress = $quote->getBillingAddress();
         $billingAddress->addData($shippingAddress->getData());
-        $billingAddress->setData('firstname', 'sdfsd42');
-        $billingAddress->setFirstname('sdfsd42');
         $quote->save();
 
         $this->emit('quoteSave');

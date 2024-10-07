@@ -9,6 +9,7 @@
 
     <body>
         <referenceBlock name="checkout.root" remove="true"/>
+        <referenceBlock name="fallback.module.missing" remove="true"/>
 
         <referenceContainer name="content">
             <block name="frigga.checkout" template="Yireo_FriggaCheckout::checkout.phtml" cacheable="false">

@@ -13,11 +13,11 @@ $paymentMethods = $magewire->paymentMethods;
     <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Payment Methods') ?></h3>
 
     <ul role="list">
-        <?php foreach ($paymentMethods as $paymentMethod): ?>
+        <?php foreach ($paymentMethods as $paymentMethodCode => $paymentMethodTitle): ?>
         <li class="my-4 py-2">
-            <input type="radio" value="<?= $paymentMethod ?>" wire:model="value" id="payment-<?= $paymentMethod ?>">
-            <label for="payment-<?= $paymentMethod ?>" class="ml-4">
-                <?= $paymentMethod ?>
+            <input type="radio" value="<?= $paymentMethodCode ?>" wire:model="value" id="payment-<?= $paymentMethodCode ?>">
+            <label for="payment-<?= $paymentMethodCode ?>" class="ml-4">
+                <?= $paymentMethodTitle ?>
             </label>
         </li>
         <?php endforeach; ?>

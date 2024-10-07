@@ -8,15 +8,15 @@
                     </argument>
                 </arguments>
 
-            <block
-                name="frigga.checkout.billing-step.billing-view" as="billing-view"
-                template="Yireo_FriggaCheckout::checkout/billing/view.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingView
-                    </argument>
-                </arguments>
-            </block>
+                <block
+                    name="frigga.checkout.billing-step.billing-view" as="billing-view"
+                    template="Yireo_FriggaCheckout::checkout/billing/view.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingView
+                        </argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="frigga.checkout.billing-step.billing-address" as="billing-address"
@@ -167,7 +167,7 @@
                 </block>
 
                 <block
-                    name="frigga.checkout.billing-step.payment-methods" as="billing-methods"
+                    name="frigga.checkout.billing-step.payment-methods" as="payment-methods"
                     template="Yireo_FriggaCheckout::checkout/billing/methods.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
