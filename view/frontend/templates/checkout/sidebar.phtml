@@ -10,9 +10,11 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 /** @var ViewModelRegistry $viewModels */
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
+/** @var string $blockClass */
+
 $checkoutState = $viewModels->require(CheckoutState::class);
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     <div class="card my-2">
         <?= $block->getChildHtml('login'); ?>
     </div>

@@ -11,6 +11,8 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 /** @var ViewModelRegistry $viewModels */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
+/** @var string $blockClass */
+
 $checkoutState = $viewModels->require(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">

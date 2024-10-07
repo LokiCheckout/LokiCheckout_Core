@@ -7,12 +7,14 @@ use Yireo\FriggaCheckout\Magewire\Checkout\StepForwardButton;
 
 /** @var Template $block */
 /** @var StepBackwardButton $magewire */
+/** @var string $blockClass */
+
 if (false === $magewire instanceof StepBackwardButton) {
     echo '<div>Not a valid button class: '.get_class($magewire).'</div>';
     return;
 }
 ?>
-<button class="btn m-2 <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
+<button class="<?= $blockClass ?> btn m-2 <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
         type="button"
         <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
         wire:click="execute"

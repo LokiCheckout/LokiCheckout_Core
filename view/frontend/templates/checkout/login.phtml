@@ -10,11 +10,13 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 /** @var Login $magewire */
 /** @var ViewModelRegistry $viewModels */
 /** @var CheckoutState $checkoutState */
+/** @var string $blockClass */
+
 $checkoutState = $viewModels->require(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>

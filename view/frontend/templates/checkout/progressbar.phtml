@@ -13,11 +13,13 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var StepNavigator $stepNavigator */
+/** @var string $blockClass */
+
 $heroicons = $viewModels->require(HeroiconsOutline::class);
 $checkoutState = $viewModels->require(CheckoutState::class);
 $stepNavigator = $viewModels->require(StepNavigator::class);
 ?>
-<div class="progressbar">
+<div class="<?= $blockClass ?>">
     <ul class="flex" role="list">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>

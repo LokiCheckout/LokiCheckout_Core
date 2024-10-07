@@ -10,20 +10,22 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
 /** @var Checkout $magewire */
+/** @var string $blockClass */
+
 $currentStep = $magewire->currentStep;
 ?>
-<div class="magewire-checkout container mb-16">
+<div class="<?= $blockClass ?> container mb-16">
     <div class="card">
         <?= $block->getChildBlock('progressbar')->toHtml(); ?>
     </div>
 
     <div class="grid grid-cols-3 gap-8 my-8">
-        <div class="col-span-2 checkout-step-<?= $currentStep ?>">
+        <div class="col-span-2">
             <div class="relative">
                 <div wire:loading>
                     <div class="absolute m-auto left-0 right-0 bottom-0 top-0 opacity-60 bg-white z-50"></div>
                     <div class="absolute z-50 w-full h-screen flex items-center justify-center">
-                        <img src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/loader.svg'); ?>" class="w-16 h-16"/>
+                        <img src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/loader.svg'); ?>" width="100" height="100"/>
                     </div>
                 </div>
 
@@ -41,4 +43,8 @@ $currentStep = $magewire->currentStep;
             <?= $block->getChildBlock('sidebar')->toHtml(); ?>
         </div>
     </div>
+
+    <script>
+        require(['magewire', function() {}])
+    </script>
 </div>

@@ -9,10 +9,12 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var BillingStep $magewire */
+/** @var string $blockClass */
+
 $enableBillingAsShipping = $magewire->enableBillingAsShipping;
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     <?php if ($enableBillingAsShipping): ?>
     <div class="card mb-8">
         <label for="billing_as_shipping">
