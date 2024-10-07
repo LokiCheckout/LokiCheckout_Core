@@ -30,7 +30,6 @@ class VatId extends ShippingAddressFormFieldComponent
 
     public function isValid(): bool
     {
-        return true;
         if (parent::isValid() === false) {
             return false;
         }

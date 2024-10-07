@@ -18,6 +18,7 @@ class VatIdValidator implements ValidatorInterface
     {
         // @todo: Test whether this could be hacked?
         $this->vatId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($vatId));
+
         return $this;
     }
 
@@ -25,6 +26,7 @@ class VatIdValidator implements ValidatorInterface
     {
         // @todo: Test whether this could be hacked?
         $this->countryId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($countryId));
+
         return $this;
     }
 
@@ -42,17 +44,17 @@ class VatIdValidator implements ValidatorInterface
             return true;
         }
 
+        $vatId = $this->vatId;
         $vatCountryId = $this->getCountryIdToVatCountryId($this->countryId);
         if (!preg_match('/^'.$this->countryId.'/', $this->countryId)) {
             return ['Your VAT ID does not start with the right country code'];
         }
 
-        if (strlen($this->vatId) < 10) {
+        if (strlen($vatId) < 10) {
             return ['Your VAT ID is too short'];
         }
 
-        // @todo: Check if VAT ID is valid
-        return true;
+        return $this->validateOnline($vatCountryId, $vatId);
     }
 
     private function getCountryIdToVatCountryId(string $countryId): string
@@ -67,5 +69,28 @@ class VatIdValidator implements ValidatorInterface
         }
 
         return $countryId;
+    }
+
+    private function validateOnline(string $vatCountryId, string $vatId): true|array
+    {
+        $merchantCountryCode = $this->vatModel->getMerchantCountryCode();
+        $merchantVatNumber = $this->vatModel->getMerchantVatNumber();
+        if (empty($merchantVatNumber) || empty($merchantCountryCode)) {
+            // @todo: Add a setting to throw a warning if this is not configured (or just ignore)
+            return true;
+        }
+
+        $result = $this->vatModel->checkVatNumber(
+            $vatCountryId,
+            $vatId,
+            $merchantCountryCode,
+            $merchantVatNumber
+        );
+
+        if ($result->getIsValid() && $result->getRequestSuccess()) {
+            return true;
+        }
+
+        return [(string)$result->getRequestMessage()];
     }
 }
