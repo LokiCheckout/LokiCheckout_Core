@@ -5,8 +5,7 @@
     "type": "magento2-module",
     "require": {
         "magento/framework": "^103.0",
-        "magewirephp/magewire": "^1.11",
-        "magewirephp/magewire-requirejs": "^1.1"
+        "magewirephp/magewire": "^1.11"
     },
     "require-dev": {
         "yireo/magento2-integration-test-helper": "@dev",
