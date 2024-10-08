@@ -12,6 +12,9 @@
         "yireo/magento2-integration-test-helper": "@dev",
         "yireo/magento2-magewire-test-utils": "@dev"
     },
+    "suggest": {
+        "yireo/magento2-frigga-checkout-luma": "Luma compatibility for Frigga Checkout"
+    },
     "license": [
         "OSL-3.0"
     ],
