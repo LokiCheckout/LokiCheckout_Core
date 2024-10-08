@@ -6,17 +6,39 @@ use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 /** @var Template $block */
 /** @var ShippingAddress $magewire */
+/** @var string $blockClass */
 ?>
-<div>
-    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Address') ?></h3>
+<div class="<?= $blockClass ?>">
+    <h3 class="step-title text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Address') ?></h3>
+    <?php if (count($magewire->shippingAddresses) > 0): ?>
+        <div>
+            <select
+                wire:loading.attr="aria-busy"
+                wire:loading.class="disabled"
+                wire:model="currentShippingAddress"
+                class="form-input block w-full invalid:border-red-500 valid:border-green-500">
+                <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
+                    <option value="<?= $shippingAddressId ?>"><?= $shippingAddresLabel ?></option>
+                <?php endforeach; ?>
+            </select>
 
-    <div class="grid grid-cols-12 gap-8">
-        <?php foreach ($block->getChildNames() as $childName): ?>
-            <?php $childBlock = $block->getLayout()->getBlock($childName) ?>
-            <?php $colSpan = $childBlock->getData('grid-col-span') ?? 6 ?>
-            <div class="col-span-<?= $colSpan ?>">
-                <?= $childBlock->toHtml() ?>
-            </div>
-        <?php endforeach; ?>
-    </div>
+            <button class="btn m-2 btn-primary" type="button" wire:click="addAddress" wire:loading.attr="disabled">
+                <?= __('New Address') ?>
+            </button>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($magewire->newAddress): ?>
+        <h3 class="step-title text-2xl border-b border-gray-400 mb-4"><?= __('New Shipping Address') ?></h3>
+
+        <div class="grid grid-cols-12 gap-8">
+            <?php foreach ($block->getChildNames() as $childName): ?>
+                <?php $childBlock = $block->getLayout()->getBlock($childName) ?>
+                <?php $colSpan = $childBlock->getData('grid-col-span') ?? 6 ?>
+                <div class="col-span-<?= $colSpan ?>">
+                    <?= $childBlock->toHtml() ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
 </div>

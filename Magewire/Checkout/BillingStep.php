@@ -61,7 +61,7 @@ class BillingStep extends Component implements StepInterface
 
     public function getLabel(): string
     {
-        return 'Billing';
+        return 'Review & Payments';
     }
 
     public function isEnabled(): bool

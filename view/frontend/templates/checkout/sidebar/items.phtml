@@ -6,8 +6,9 @@ use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Items;
 
 /** @var Template $block */
 /** @var Items $magewire */
+/** @var string $blockClass */
 ?>
-<div  class="border-b border-gray-400 my-8">
+<div class="<?= $blockClass ?> border-b border-gray-400 my-8">
     <ul role="list">
         <?php foreach ($magewire->items as $item) : ?>
             <?= $block->getChildBlock('item')->addData(['item' => $item])->toHtml() ?>

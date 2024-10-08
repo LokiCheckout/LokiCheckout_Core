@@ -13,8 +13,8 @@ if (false === $magewire instanceof FormFieldInterface) {
 
 $fieldType = $magewire->getFieldType();
 ?>
-<div class="w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
-    <label for="<?= $magewire->getAttributeCode() ?>" class="label">
+<div class="field w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
+    <label for="<?= $magewire->getAttributeCode() ?>">
         <?= $magewire->getAttributeLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.required') : '' ?>
     </label>
@@ -25,7 +25,7 @@ $fieldType = $magewire->getFieldType();
             ->setNameInLayout('frigga.checkout.generic.field.'.$fieldType.'.'.$magewire->getAttributeCode())
             ->setTemplate('Yireo_FriggaCheckout::generic/field/'.$fieldType.'.phtml')
             ->toHtml() ?>
-        <div wire:loading class="absolute top-0 right-0 bottom-0 p-3">
+        <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
             <?= $block->getBlockHtml('frigga.checkout.loader') ?>
         </div>
     </div>

@@ -19,8 +19,8 @@ $currentStep = $magewire->currentStep;
         <?= $block->getChildBlock('progressbar')->toHtml(); ?>
     </div>
 
-    <div class="grid grid-cols-3 gap-8 my-8">
-        <div class="col-span-2">
+    <div class="grid grid-cols-3 gap-8 my-8 opc-wrapper">
+        <div class="col-span-2 opc">
             <div class="relative">
                 <div wire:loading>
                     <div class="overlay absolute m-auto left-0 right-0 bottom-0 top-0 opacity-60 bg-white z-50"></div>
@@ -39,8 +39,8 @@ $currentStep = $magewire->currentStep;
                 ?>
             </div>
         </div>
-        <div class="my-2">
+        <aside class="opc-sidebar my-2">
             <?= $block->getChildBlock('sidebar')->toHtml(); ?>
-        </div>
+        </aside>
     </div>
 </div>

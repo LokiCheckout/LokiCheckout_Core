@@ -20,10 +20,10 @@ $checkoutState = $viewModels->require(CheckoutState::class);
 $stepNavigator = $viewModels->require(StepNavigator::class);
 ?>
 <div class="<?= $blockClass ?>">
-    <ul class="flex" role="list">
+    <ul class="opc-progress-bar flex" role="list">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>
-            <li class="pr-4 <?= $isActive ? 'active font-bold' : 'inactive' ?>">
+            <li class="opc-progress-bar-item pr-4 <?= $isActive ? 'active _active font-bold' : 'inactive' ?>">
                 <?php if (false === $step->isEnabled()): ?>
                     <span class="text-gray-200">
                         <?= $step->getLabel() ?>
@@ -33,12 +33,16 @@ $stepNavigator = $viewModels->require(StepNavigator::class);
                         <?= $step->getLabel() ?>
                     </span>
                 <?php else: ?>
+                    <span>
                     <button wire:click="goToStep('<?= $step->getCode() ?>')">
                         <?= __($step->getLabel()) ?>
                     </button>
+                    </span>
                 <?php endif; ?>
                 <?php if (false === $stepNavigator->isLastStep($step)): ?>
-                <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>
+                    <span class="separator">
+                        <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>
+                    </span>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

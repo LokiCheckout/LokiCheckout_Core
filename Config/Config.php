@@ -2,16 +2,33 @@
 
 namespace Yireo\FriggaCheckout\Config;
 
-// @todo: Add etc/adminhtml/system.xml, etc/config.xml and make this configurable
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Module\Manager as ModuleManager;
+
 class Config
 {
+    public function __construct(
+        private ScopeConfigInterface $scopeConfig,
+        private ModuleManager $moduleManager,
+    ) {
+    }
+
+    public function isEnabled(): bool
+    {
+        if (false === $this->moduleManager->isEnabled('Magewirephp_Magewire')) {
+            return false;
+        }
+
+        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/enable');
+    }
+
     public function enableSameAsBilling(): bool
     {
-        return true;
+        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/enable_same_as_billing');
     }
 
     public function isDebug(): bool
     {
-        return true;
+        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/debug');
     }
 }

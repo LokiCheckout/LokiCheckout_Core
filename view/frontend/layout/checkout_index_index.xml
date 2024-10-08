@@ -1,25 +1,4 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
-
-    <update handle="magewire_checkout_sidebar"/>
-    <update handle="magewire_checkout_progressbar"/>
-    <update handle="magewire_checkout_login"/>
-    <update handle="magewire_checkout_step_shipping"/>
-    <update handle="magewire_checkout_step_billing"/>
-
-    <body>
-        <referenceBlock name="checkout.root" remove="true"/>
-        <referenceBlock name="fallback.module.missing" remove="true"/>
-
-        <referenceContainer name="content">
-            <block name="frigga.checkout" template="Yireo_FriggaCheckout::checkout.phtml" cacheable="false">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout</argument>
-                </arguments>
-            </block>
-        </referenceContainer>
-
-        <block name="frigga.checkout.loader" template="Yireo_FriggaCheckout::loader.phtml"/>
-        <block name="frigga.checkout.required" template="Yireo_FriggaCheckout::required.phtml"/>
-    </body>
+    <update handle="frigga_checkout2" />
 </page>

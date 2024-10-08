@@ -17,7 +17,7 @@ $checkoutState = $viewModels->require(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">
     <div class="mb-8">
-        <?= $block->getChildBlock('shipping-address')->setData([])->toHtml() ?>
+        <?= $block->getChildHtml('shipping-address') ?>
     </div>
     <div class="mb-8">
         <?= $block->getChildHtml('shipping-methods') ?>
