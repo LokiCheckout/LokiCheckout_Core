@@ -12,13 +12,19 @@ class EnableCheckout implements ObserverInterface
 {
     public function __construct(
         private readonly Config $config,
-        private readonly LayoutInterface $layout
+        private readonly LayoutInterface $layout,
     ) {
     }
 
     public function execute(Observer $observer)
     {
         if (false === $this->config->isEnabled()) {
+            return;
+        }
+
+        // @todo: Better check for this?
+        $handles = $this->layout->getUpdate()->getHandles();
+        if (false === in_array('checkout_index_index', $handles)) {
             return;
         }
 
