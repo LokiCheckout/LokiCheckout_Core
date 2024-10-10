@@ -15,9 +15,16 @@ class ModuleTest extends TestCase
 
     public function testIfModuleIsEnabled()
     {
-        $moduleName = 'Yireo_FriggaCheckout';
-        $this->assertModuleIsRegistered($moduleName);
-        $this->assertModuleIsRegisteredForReal($moduleName);
-        $this->assertModuleIsEnabled($moduleName);
+        // @todo: Follow module.xml dependencies instead
+        $requiredModules = [
+            'Yireo_FriggaCheckout',
+            'Magewirephp_Magewire',
+            'Magento_CatalogInventory'
+        ];
+        foreach ($requiredModules as $moduleName) {
+            $this->assertModuleIsRegistered($moduleName);
+            $this->assertModuleIsRegisteredForReal($moduleName);
+            $this->assertModuleIsEnabled($moduleName);
+        }
     }
 }
