@@ -2,6 +2,7 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout;
 
+use Magento\Framework\DataObject\Copy;
 use Magewirephp\Magewire\Component;
 use Yireo\FriggaCheckout\Config\Config;
 use Yireo\FriggaCheckout\Step\StepInterface;
@@ -10,13 +11,16 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class BillingStep extends Component implements StepInterface
 {
+    protected $listeners = ['quoteSave' => 'refresh'];
+
     public bool $enableBillingAsShipping = true;
     public bool $billingAsShipping = true;
 
     public function __construct(
         private readonly Config $config,
         private readonly ValidatorInterface $stepValidator,
-        private readonly CheckoutState $checkoutState
+        private readonly CheckoutState $checkoutState,
+        private readonly Copy $copyService
     ) {
     }
 
@@ -34,9 +38,10 @@ class BillingStep extends Component implements StepInterface
     {
         if ($name === 'billingAsShipping') {
             $value = (bool)$value;
-            $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
+            $quote = $this->checkoutState->getQuote();
+            $billingAddress = $quote->getBillingAddress();
             $billingAddress->setSameAsBilling((int)$value);
-            $this->checkoutState->getQuote()->save();
+            $quote->save();
             $this->emit('quoteSave');
         }
 
@@ -48,7 +53,14 @@ class BillingStep extends Component implements StepInterface
         $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();
         $billingAddress = $quote->getBillingAddress();
-        $billingAddress->addData($shippingAddress->getData());
+
+        $this->copyService->copyFieldsetToTarget(
+            'customer_address',
+            'to_quote_address',
+            $shippingAddress,
+            $billingAddress
+        );
+
         $quote->save();
 
         $this->emit('quoteSave');

@@ -20,7 +20,7 @@ $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
 ?>
 <li class="<?= $blockClass ?> flex">
-    <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="pr-4">
+    <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="image pr-4">
     <div class="pb-4">
         <?= $item->getName() ?><br>
         <span class="text-sm"><?= __('Price') ?>: <?= $priceFormatterViewModel->format($item->getPrice()) ?></span><br>

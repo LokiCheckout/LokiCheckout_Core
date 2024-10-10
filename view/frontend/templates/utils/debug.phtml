@@ -1,0 +1,17 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
+
+/** @var Template $block */
+/** @var string $blockClass */
+/** @var Component|null $component */
+/** @var Template $originalBlock */
+$component = $block->getComponent();
+$originalBlock = $block->getOriginalBlock();
+?>
+<div class="<?= $blockClass ?> text-xs bg-orange-100 m-1 p-1">
+    Component: <?= ($component instanceof Component) ? get_class($component) : 'no' ?><br/>
+    Block: <?= get_class($originalBlock) ?> / <?= $originalBlock->getNameInLayout() ?><br/>
+</div>

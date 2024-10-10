@@ -19,15 +19,15 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
 <div class="<?= $blockClass ?> border-b border-gray-400 my-8">
     <div class="grid grid-cols-2">
-        <div><?= __('Subtotal') ?></div>
-        <div class="text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></div>
-        <div><?= __('Shipping & Handling') ?></div>
-        <div class="text-right"><?= $priceFormatter->format($quote->getShippingAmount()) ?></div>
-        <div><?= __('Tax') ?></div>
-        <div class="text-right"><?= $priceFormatter->format($quote->getTaxAmount()) ?></div>
+        <div class="label"><?= __('Subtotal') ?></div>
+        <div class="value text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></div>
+        <div class="label"><?= __('Shipping & Handling') ?></div>
+        <div class="value text-right"><?= $priceFormatter->format($quote->getShippingAmount()) ?></div>
+        <div class="label"><?= __('Tax') ?></div>
+        <div class="value text-right"><?= $priceFormatter->format($quote->getTaxAmount()) ?></div>
     </div>
     <div class="grid grid-cols-2">
-        <div class="font-bold"><?= __('Grand Total') ?></div>
+        <div class="label font-bold"><?= __('Grand Total') ?></div>
         <div class="text-right font-bold"><?= $priceFormatter->format($quote->getGrandTotal()) ?></div>
     </div>
 </div>

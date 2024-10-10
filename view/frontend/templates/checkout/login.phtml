@@ -16,10 +16,11 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockClass ?> card bg-gray-100 my-2">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>
         <a href="/customer/account">Login</a>
     <?php endif; ?>
+    <?= $block->getChildHtml() ?>
 </div>

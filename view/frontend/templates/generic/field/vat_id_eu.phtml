@@ -14,7 +14,6 @@ use Yireo\FriggaCheckout\ViewModel\VatId;
 /** @var string $blockClass */
 
 $vatId = $viewModelFactory->create(VatId::class);
-$parentBlock = $block->getParentBlock(); // @todo
 $magewire = $this->getComponent();
 ?>
 
@@ -22,10 +21,13 @@ $magewire = $this->getComponent();
     <div class="flex">
         <input
             id="vat_id_country"
-            disabled
+            wire:loading.attr="aria-busy"
+            wire:loading.class="disabled"
             type="text"
+            pattern="[a-zA-Z]*"
+            min="2" max="4"
             value="<?= $vatId->getVatCountryId() ?>"
-            class="block w-16 rounded-l-lg bg-zinc-100 border-r-1">
+            class="block w-16 rounded-l-lg bg-zinc-100 invalid:bg-red-100 invalid:border-red-500 valid:bg-green-100 valid:border-green-500 border-r-1">
 
         <input
             id="vat_id_text"
@@ -33,6 +35,8 @@ $magewire = $this->getComponent();
             wire:loading.class="disabled"
             <?= $magewire->isRequired() ? 'required' : '' ?>
             type="text"
+            pattern="[a-zA-Z0-9]*"
+            min="2" max="20"
             class="block w-full rounded-r-lg border-l-0 invalid:border-red-500 valid:border-green-500">
     </div>
 

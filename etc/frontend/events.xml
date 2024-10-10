@@ -13,4 +13,8 @@
     <event name="view_block_abstract_to_html_before">
         <observer name="Yireo_FriggaCheckout::assignAdditionalBlockVariables" instance="Yireo\FriggaCheckout\Observer\AssignAdditionalBlockVariables"/>
     </event>
+
+    <event name="view_block_abstract_to_html_after">
+        <observer name="Yireo_FriggaCheckout::addDebuggingInfo" instance="Yireo\FriggaCheckout\Observer\AddDebuggingInfo"/>
+    </event>
 </config>

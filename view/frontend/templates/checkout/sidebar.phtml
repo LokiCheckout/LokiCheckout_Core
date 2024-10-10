@@ -15,11 +15,9 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">
-    <div class="card my-2">
-        <?= $block->getChildHtml('login'); ?>
-    </div>
+    <?= $block->getChildHtml('login'); ?>
 
-    <div class="sidebar opc-block-summary bg-gray-100 p-8 mb-8">
+    <div class="frigga-checkout-sidebar-summary card bg-gray-100 p-8 mb-8">
         <h3 class="title text-2xl border-b border-gray-400 mb-4"><?= __('Order Summary') ?></h3>
         <div>
             <?= $block->getChildHtml('coupon_code') ?>

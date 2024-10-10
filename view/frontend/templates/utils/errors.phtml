@@ -1,0 +1,15 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var string $blockClass */
+/** @var string[] $errors */
+$errors = $block->getErrors();
+?>
+<ul class="<?= $blockClass ?>">
+    <?php foreach ($errors as $error): ?>
+        <li class="error text-red-800"><?= $error ?></li>
+    <?php endforeach; ?>
+</ul>

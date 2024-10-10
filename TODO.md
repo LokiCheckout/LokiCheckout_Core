@@ -1,4 +1,7 @@
 # TODO
+- VAT ID field toggling when company is entered or not
+- Add proper `role` attributes
+- Enhance Luma styling
 - Go through all options in Customer Configuration > Name and Address Options
   - customer/address/street_lines
   - customer/address/prefix_options
@@ -18,3 +21,7 @@
 - Integration Tests & Unit Tests & Functional Tests
 - PHPStan
 - PHPCS
+- Fyglja support
+- Help icon with text
+- Dialog
+- Offcanvas

@@ -1,6 +1,7 @@
 module.exports = {
     purge: {
         content: [
+            '../layout/*.xml',
             '../templates/*.phtml',
             '../templates/**/*.phtml',
         ]

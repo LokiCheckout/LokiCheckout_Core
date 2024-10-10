@@ -25,7 +25,8 @@ class VatId extends ShippingAddressFormFieldComponent
 
     public function boot(): void
     {
-        $this->value = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getVatId();
+        $this->value = strtoupper((string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getVatId());
+        $this->isValid();
     }
 
     public function isValid(): bool

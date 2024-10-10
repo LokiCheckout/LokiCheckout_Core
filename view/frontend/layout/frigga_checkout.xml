@@ -19,8 +19,10 @@
             </block>
         </referenceContainer>
 
-        <block name="frigga.checkout.loader" template="Yireo_FriggaCheckout::loader.phtml"/>
-        <block name="frigga.checkout.required" template="Yireo_FriggaCheckout::required.phtml"/>
-        <block name="frigga.checkout.separator" template="Yireo_FriggaCheckout::separator.phtml"/>
+        <block name="frigga.checkout.utils.loader" template="Yireo_FriggaCheckout::utils/loader.phtml"/>
+        <block name="frigga.checkout.utils.required" template="Yireo_FriggaCheckout::utils/required.phtml"/>
+        <block name="frigga.checkout.utils.separator" template="Yireo_FriggaCheckout::utils/separator.phtml"/>
+        <block name="frigga.checkout.utils.debug" template="Yireo_FriggaCheckout::utils/debug.phtml"/>
+        <block name="frigga.checkout.utils.errors" template="Yireo_FriggaCheckout::utils/errors.phtml"/>
     </body>
 </page>

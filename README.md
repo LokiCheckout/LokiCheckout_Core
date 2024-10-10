@@ -14,6 +14,6 @@
 - Change required state of postcode depending on `general/country/optional_zip_countries`
 - Step validation when going forward
 - Navigate steps via progress bar
-- VAT ID template switch when country is ID (@todo: Make it optional)
-- VAT ID field toggling when company is entered or not (@todo: Make it optional)
+- VAT ID template switch when country is within EU
+
 - Per field validation based on Magewire

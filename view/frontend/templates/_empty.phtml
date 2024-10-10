@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Component $magewire */
-/** @var CheckoutState $checkoutState */
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
+/** @var string $blockClass */
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     Block "<?= $block->getNameInLayout() ?>": <?= $block->getTemplateFile() ?>
 </div>

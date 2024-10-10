@@ -20,7 +20,7 @@ $couponCode = $quote->getCouponCode();
     <div x-data="FriggaCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>
-            <button class="btn btn-secondary mt-4"
+            <button class="btn-remove btn btn-secondary mt-4"
                     type="button"
                     wire:click="removeCouponCode"
                     wire:loading.attr="disabled">
@@ -28,7 +28,7 @@ $couponCode = $quote->getCouponCode();
 
             </button>
         <?php else: ?>
-            <button type="button" @click="toggle" class="text-sm">
+            <button class="btn-expand text-sm" type="button" @click="toggle">
                 <?= __('Discount Code') ?>
                 <img alt="<?= __('Expand') ?>"
                      src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/chevron-down.svg'); ?>"
@@ -42,7 +42,7 @@ $couponCode = $quote->getCouponCode();
                     <span class="sr-only"><?php __('Discount Code') ?></span>
                     <input type="text" wire:model.lazy="couponCode" class="form-input w-full">
                 </label>
-                <button class="btn btn-secondary text-sm mt-4"
+                <button class="btn btn-apply btn-secondary text-sm mt-4"
                         type="button"
                         wire:click="applyCouponCode"
                         wire:loading.attr="disabled">

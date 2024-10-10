@@ -10,15 +10,17 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
 
 if (false === $magewire instanceof FormFieldInterface) {
     echo '<div>skipped</div>';
+
     return;
 }
 
 $fieldType = $magewire->getFieldType();
 ?>
-<div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
+<div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired(
+) && 'required' ?> <?= $magewire->getAttributeCode() ?>">
     <label for="<?= $magewire->getAttributeCode() ?>">
         <?= $magewire->getAttributeLabel() ?>
-        <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.required') : '' ?>
+        <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.utils.required') : '' ?>
     </label>
     <div class="relative">
         <?= $block->getLayout()->createBlock(Template::class)
@@ -28,15 +30,11 @@ $fieldType = $magewire->getFieldType();
             ->setTemplate('Yireo_FriggaCheckout::generic/field/'.$fieldType.'.phtml')
             ->toHtml() ?>
         <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
-            <?= $block->getBlockHtml('frigga.checkout.loader') ?>
+            <?= $block->getBlockHtml('frigga.checkout.utils.loader') ?>
         </div>
     </div>
 
     <?php if ($magewire->hasErrors()): ?>
-    <ul class="messages">
-       <?php foreach ($magewire->getErrors() as $error): ?>
-       <li class="message error"><?= $error ?></li>
-        <?php endforeach; ?>
-    </ul>
+        <?= $block->getLayout()->getBlock('frigga.checkout.utils.errors')->setData(['errors' => $magewire->getErrors()])->toHtml() ?>
     <?php endif; ?>
 </div>
