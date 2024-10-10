@@ -1,0 +1,13 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var string $blockClass */
+?>
+<img alt="<?= __('Separator') ?>"
+     src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/chevron-right.svg'); ?>"
+     class="loader <?= $blockClass ?> inline-block"
+     width="15"
+     height="15">

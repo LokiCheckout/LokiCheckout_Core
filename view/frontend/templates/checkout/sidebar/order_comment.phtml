@@ -1,21 +1,23 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\OrderComment;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 use Yireo\FriggaCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
-/** @var ViewModelRegistry $viewModels */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var OrderComment $magewire */
 /** @var CheckoutState $checkoutState */
-$checkoutState = $viewModels->require(CheckoutState::class);
+/** @var string $blockClass */
+
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 ?>
-<div class="border-b border-gray-400 my-8">
-    <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br/>
+<div class="<?= $blockClass ?> border-b border-gray-400 my-8">
+    <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br>
     <textarea wire:model="comment" class="form-input w-full"></textarea>
 </div>

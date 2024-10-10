@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
 use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep;
@@ -22,7 +22,7 @@ $billingAsShipping = $magewire->billingAsShipping;
                    wire:model="billingAsShipping"
                    wire:loading.attr="aria-busy"
                    wire:loading.class="disabled"
-                   id="billing_as_shipping"/>
+                   id="billing_as_shipping">
             <span class="pl-2">
             <?= __('My billing and shipping address are the same') ?>
                 </span>

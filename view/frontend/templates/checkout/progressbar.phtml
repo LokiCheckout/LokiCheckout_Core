@@ -1,23 +1,21 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Yireo\FriggaCheckout\Magewire\Checkout\Progressbar;
 use Yireo\FriggaCheckout\Step\StepNavigator;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var ViewModelRegistry $viewModels */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var StepNavigator $stepNavigator */
 /** @var string $blockClass */
 
-$heroicons = $viewModels->require(HeroiconsOutline::class);
-$checkoutState = $viewModels->require(CheckoutState::class);
-$stepNavigator = $viewModels->require(StepNavigator::class);
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <div class="<?= $blockClass ?>">
     <ul class="opc-progress-bar flex" role="list">
@@ -33,16 +31,12 @@ $stepNavigator = $viewModels->require(StepNavigator::class);
                         <?= $step->getLabel() ?>
                     </span>
                 <?php else: ?>
-                    <span>
                     <button wire:click="goToStep('<?= $step->getCode() ?>')">
                         <?= __($step->getLabel()) ?>
                     </button>
-                    </span>
                 <?php endif; ?>
                 <?php if (false === $stepNavigator->isLastStep($step)): ?>
-                    <span class="separator">
-                        <?= $heroicons->chevronRightHtml('inline w-4 h-4 ml-2', 4, 4) ?>
-                    </span>
+                    <?= $block->getBlockHtml('frigga.checkout.separator') ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

@@ -1,23 +1,22 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
-use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\View\Element\Template;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\CouponCode;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var ViewModelRegistry $viewModels */
 /** @var CouponCode $magewire */
-/** @var ViewModelRegistry $viewModels */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-$checkoutState = $viewModels->require(CheckoutState::class);
+/** @var string $blockClass */
+
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
-$heroicons = $viewModels->require(HeroiconsOutline::class);
 ?>
-<div class="border-b border-gray-400 my-4">
+<div class="<?= $blockClass ?> border-b border-gray-400 my-4">
     <div x-data="FriggaCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>
@@ -31,13 +30,17 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
         <?php else: ?>
             <button type="button" @click="toggle" class="text-sm">
                 <?= __('Discount Code') ?>
-                <?= $heroicons->chevronDownHtml('inline w-4 h-4', 32, 32) ?>
+                <img alt="<?= __('Expand') ?>"
+                     src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/chevron-down.svg'); ?>"
+                     class="loader <?= $blockClass ?> inline-block"
+                     width="15"
+                     height="15">
             </button>
 
             <div x-show="show">
                 <label>
                     <span class="sr-only"><?php __('Discount Code') ?></span>
-                    <input type="text" wire:model.lazy="couponCode" class="form-input w-full"/>
+                    <input type="text" wire:model.lazy="couponCode" class="form-input w-full">
                 </label>
                 <button class="btn btn-secondary text-sm mt-4"
                         type="button"

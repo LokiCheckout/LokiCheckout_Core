@@ -4,8 +4,9 @@ declare(strict_types=1);
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress;
 
 /** @var BillingAddress $magewire */
+/** @var string $blockClass */
 ?>
-<div class="mb-4">
-    <span class="text-xl font-bold"><?= __('Billing Address') ?></span><br/>
+<div class="<?= $blockClass ?> mb-4">
+    <span class="text-xl font-bold"><?= __('Billing Address') ?></span><br>
     <address><?= $magewire->getHtml() ?></address>
 </div>

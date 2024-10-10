@@ -4,8 +4,10 @@ declare(strict_types=1);
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress;
 
 /** @var ShippingAddress $magewire */
+/** @var string $blockClass */
+
 ?>
-<div class="mb-4">
-    <span class="text-xl font-bold"><?= __('Shipping Address') ?></span><br/>
+<div class="<?= $blockClass ?> mb-4">
+    <span class="text-xl font-bold"><?= __('Shipping Address') ?></span><br>
     <address><?= $magewire->getHtml() ?></address>
 </div>

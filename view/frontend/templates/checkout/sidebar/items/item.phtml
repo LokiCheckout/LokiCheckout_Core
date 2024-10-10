@@ -1,27 +1,29 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Yireo\FriggaCheckout\ViewModel\PriceFormatter;
 use Yireo\FriggaCheckout\ViewModel\ProductImage;
 
 /** @var Template $block */
-/** @var ViewModelRegistry $viewModels */
-$priceFormatterViewModel = $viewModels->require(PriceFormatter::class);
-$productImageViewModel = $viewModels->require(ProductImage::class);
+/** @var ViewModelFactory $viewModelFactory */
+$priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
+$productImageViewModel = $viewModelFactory->create(ProductImage::class);
 
 /** @var CartItemInterface $item */
+/** @var string $blockClass */
+
 $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
 ?>
-<li class="flex">
+<li class="<?= $blockClass ?> flex">
     <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="pr-4">
     <div class="pb-4">
-        <?= $item->getName() ?><br/>
-        <span class="text-sm"><?= __('Price') ?>: <?= $priceFormatterViewModel->format($item->getPrice()) ?></span><br/>
+        <?= $item->getName() ?><br>
+        <span class="text-sm"><?= __('Price') ?>: <?= $priceFormatterViewModel->format($item->getPrice()) ?></span><br>
         <span class="text-sm"><?= __('Quantity') ?>: <?= $item->getQty() ?></span>
     </div>
 </li>

@@ -4,8 +4,9 @@ declare(strict_types=1);
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails;
 
 /** @var PaymentDetails $magewire */
+/** @var string $blockClass */
 ?>
-<div class="mb-4">
-    <span class="text-xl font-bold"><?= __('Payment Details') ?></span><br/>
+<div class="<?= $blockClass ?> mb-4">
+    <span class="text-xl font-bold"><?= __('Payment Details') ?></span><br>
     <?= $magewire->getHtml() ?>
 </div>

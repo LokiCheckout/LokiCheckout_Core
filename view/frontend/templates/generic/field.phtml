@@ -6,6 +6,8 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
 
 /** @var Template $block */
 /** @var FormFieldInterface $magewire */
+/** @var string $blockClass */
+
 if (false === $magewire instanceof FormFieldInterface) {
     echo '<div>skipped</div>';
     return;
@@ -13,7 +15,7 @@ if (false === $magewire instanceof FormFieldInterface) {
 
 $fieldType = $magewire->getFieldType();
 ?>
-<div class="field w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
+<div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getAttributeCode() ?>">
     <label for="<?= $magewire->getAttributeCode() ?>">
         <?= $magewire->getAttributeLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.required') : '' ?>

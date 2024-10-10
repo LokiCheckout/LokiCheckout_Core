@@ -16,4 +16,4 @@ $magewire = $this->getComponent();
     wire:model.lazy="<?= $magewire->getFieldName() ?>"
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getTextType() ?>"
-    class="form-input block w-full invalid:border-red-500 valid:border-green-500 mb-4" />
+    class="form-input block w-full invalid:border-red-500 valid:border-green-500 mb-4" >

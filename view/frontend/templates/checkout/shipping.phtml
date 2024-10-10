@@ -1,19 +1,18 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var string $blockClass */
-/** @var ViewModelRegistry $viewModels */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var string $blockClass */
 
-$checkoutState = $viewModels->require(CheckoutState::class);
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">
     <div class="mb-8">

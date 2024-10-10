@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-use Hyva\Theme\Model\ViewModelRegistry;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
 use Yireo\FriggaCheckout\ViewModel\VatId;
 
 /** @var Template $block */
 /** @var FormFieldInterface $magewire */
-/** @var ViewModelRegistry $viewModels */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var VatId $vatId */
-$vatId = $viewModels->require(VatId::class);
+$vatId = $viewModelFactory->create(VatId::class);
 $magewire = $this->getComponent();
 
 if ($vatId->isEu()) {

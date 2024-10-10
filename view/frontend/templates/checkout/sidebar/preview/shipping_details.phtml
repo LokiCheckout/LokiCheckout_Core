@@ -4,8 +4,10 @@ declare(strict_types=1);
 use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails;
 
 /** @var ShippingDetails $magewire */
+/** @var string $blockClass */
+
 ?>
-<div class="mb-4">
-    <span class="text-xl font-bold"><?= __('Shipping Details') ?></span><br/>
+<div class="<?= $blockClass ?> mb-4">
+    <span class="text-xl font-bold"><?= __('Shipping Details') ?></span><br>
     <?= $magewire->getHtml() ?>
 </div>

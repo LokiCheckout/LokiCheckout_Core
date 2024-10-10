@@ -6,8 +6,10 @@ use Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 /** @var Template $block */
 /** @var BillingAddress $magewire */
+/** @var string $blockClass */
+
 ?>
-<div>
+<div class="<?= $blockClass ?>">
     <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Billing Address') ?></h3>
 
     <div class="grid grid-cols-12 gap-8">
