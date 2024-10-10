@@ -9,6 +9,10 @@ use Yireo\FriggaCheckout\Util\Context;
 
 class Prefix extends ShippingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
+    protected $rules = [
+        'value' => 'required|min:6',
+    ];
+
     const ATTRIBUTE_CODE = 'prefix';
 
     public function __construct(

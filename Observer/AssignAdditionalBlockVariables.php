@@ -7,11 +7,13 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Config\Config;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
     public function __construct(
         private readonly Config $config,
+        private readonly ViewModelFactory $viewModelFactory
     ) {
     }
 
@@ -22,11 +24,12 @@ class AssignAdditionalBlockVariables implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^magewire./', (string)$block->getNameInLayout())) {
+        if (false === preg_match('/^frigga./', (string)$block->getNameInLayout())) {
             return;
         }
 
         $blockClass = str_replace('.', '-', (string)$block->getNameInLayout());
+        $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('blockClass', $blockClass);
         $block->assign('debug', $this->config->isDebug());
     }
