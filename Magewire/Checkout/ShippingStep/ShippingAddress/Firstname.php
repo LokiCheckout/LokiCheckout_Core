@@ -8,6 +8,10 @@ class Firstname extends ShippingAddressFormFieldComponent
 {
     const ATTRIBUTE_CODE = 'firstname';
 
+    protected $rules = [
+        'value' => 'required|min:3',
+    ];
+
     public function isRequired(): bool
     {
         return true;

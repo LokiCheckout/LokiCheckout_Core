@@ -2,13 +2,12 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Magento\Eav\Model\Config;
 use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 use Yireo\FriggaCheckout\Util\Context;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
-use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 
 class Region extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
@@ -16,11 +15,12 @@ class Region extends BillingAddressFormFieldComponent implements FormTextSelectF
 
     protected $listeners = ['quoteSave' => 'refresh'];
 
+    use OptionsBehaviour;
+
     public function __construct(
         Validator $validator,
         Context $context,
         private readonly CheckoutState $checkoutState,
-        private readonly RegionCollectionFactory $regionCollectionFactory,
     ) {
         parent::__construct($validator, $context);
     }
@@ -43,28 +43,5 @@ class Region extends BillingAddressFormFieldComponent implements FormTextSelectF
         }
 
         return parent::updated($value, $name);
-    }
-
-    public function getOptions(): array
-    {
-        $countryId = $this->checkoutState->getQuote()->getBillingAddress()->getCountryId();
-        if (empty($countryId)) {
-            return [];
-        }
-
-        $regionCollection = $this->regionCollectionFactory->create();
-        $regionCollection->addFieldToFilter('country_id', ['eq' => $countryId]);
-        $regions = $regionCollection->getItems();
-        if (empty($regions)) {
-            return [];
-        }
-
-        $options = [];
-        foreach ($regions as $region) {
-            /** @var Region $region */
-            $options[$region->getRegionId()] = $region->getName();
-        }
-
-        return $options;
     }
 }

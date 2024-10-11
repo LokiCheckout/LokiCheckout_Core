@@ -62,11 +62,14 @@ abstract class EavFormFieldComponent extends Form implements FormFieldInterface,
 
     public function isValid(): bool
     {
+        if ($this->isRequired() && empty($this->value)) {
+            $this->error('value', (string)__('Value is required'));
+            return false;
+        }
+
         try {
             $this->validate();
         } catch (AcceptableException $e) {
-            $this->dispatchErrorMessage($e->getMessage());
-            return false;
         }
 
         return false === $this->hasErrors();
@@ -87,8 +90,5 @@ abstract class EavFormFieldComponent extends Form implements FormFieldInterface,
 
     protected function beforeValidate()
     {
-        if ($this->isRequired()) {
-            $this->rules['value'] .= '|required';
-        }
     }
 }

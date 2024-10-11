@@ -13,31 +13,34 @@ class FirstnameTest extends FriggaTestCase
 {
     const BLOCK_NAME = 'frigga.checkout.shipping-step.shipping-address.firstname';
 
-    use ProductFixture;
     use CartFixture;
+    use ProductFixture;
 
-    public function testComponentIsPresentOnPage()
+
+    public function testFirstNameComponentWithoutValue()
     {
-        /*
-        $fulltextMock = $this->createMock(\Magento\CatalogSearch\Model\Indexer\Fulltext::class);
-        \Magento\TestFramework\ObjectManager::getInstance()->addSharedInstance($fulltextMock, \Magento\CatalogSearch\Model\Indexer\Fulltext::class);
-        */
-
         $cart = $this->getGuestCart();
-        $product = $this->getProduct();
-        $cart->addProduct($product, 1);
+        $cart->getShippingAddress()->setData('firstname', '');
+        $cart->addProduct($this->getProduct(), 1);
 
-        //$store = $this->storeManager->getStore();
-        //$quote->setStore($store);
-        //$quote->assignCustomer($customer);
+        $this->dispatchToCheckout();
+        $firstnameComponent = $this->getObjectManager()->get(Firstname::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $firstnameComponent);
 
-        //$firstname = $this->getComponentByBlockName('firstname');
-        //$firstname->updated('John', 'value');
+        $this->assertMagewireComponentHasErrors($firstnameComponent);
+        $this->assertMagewireComponentHasError($firstnameComponent, 'Value is required');
+    }
 
-        $this->dispatchToCart();
-        $body = $this->getResponse()->getBody();
-        $this->assertMagewireBlockExistsInHtml(self::BLOCK_NAME, $body);
-        $this->assertMagewireComponentResolves(self::BLOCK_NAME, Firstname::class, ['checkout_index_index']);
+    public function testFirstNameComponentWithValue()
+    {
+        $cart = $this->getGuestCart();
+        $cart->getShippingAddress()->setData('firstname', 'John');
+        $cart->addProduct($this->getProduct(), 1);
 
+        $this->dispatchToCheckout();
+        $firstnameComponent = $this->getObjectManager()->get(Firstname::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $firstnameComponent);
+
+        $this->assertMagewireComponentHasNoErrors($firstnameComponent);
     }
 }

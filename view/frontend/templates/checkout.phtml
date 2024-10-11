@@ -46,7 +46,7 @@ $currentStep = $magewire->currentStep;
 
     <script>
         (function() {
-            document.querySelectorAll('[area-invalid]').forEach(function (element) {
+            document.querySelectorAll('[aria-invalid]').forEach(function (element) {
                 console.log(element);
                 element.setCustomValidity('Field is invalid');
             });

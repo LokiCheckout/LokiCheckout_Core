@@ -25,6 +25,9 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
                             </argument>
+                            <argument name="options" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\PrefixOptions
+                            </argument>
                             <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
                     </block>
@@ -109,6 +112,9 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
                             </argument>
+                            <argument name="options" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\RegionOptions
+                            </argument>
                         </arguments>
                     </block>
 
@@ -118,6 +124,9 @@
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
+                            </argument>
+                            <argument name="options" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\CountryOptions
                             </argument>
                         </arguments>
                     </block>

@@ -1,18 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Source\Options;
+namespace Yireo\FriggaCheckout\ViewModel;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
+use Magewirephp\Magewire\Component;
 
-class PrefixOptions
+class PrefixOptions implements ArgumentInterface, SelectOptionsInterface
 {
     public function __construct(
         private ScopeConfigInterface $scopeConfig,
     ) {
     }
 
-    public function getOptions(): array
+    public function getOptions(Component $component): array
     {
         $prefixOptions = $this->scopeConfig->getValue('customer/address/prefix_options', ScopeInterface::SCOPE_STORE);
         $prefixOptions = explode(',', (string)$prefixOptions);

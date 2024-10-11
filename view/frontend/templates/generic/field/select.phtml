@@ -6,11 +6,15 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
 
 /** @var Template $block */
 /** @var FormSelectFieldInterface $magewire */
+$magewire->setOptions($block->getOptions($magewire));
 ?>
 <select
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model="<?= $magewire->getFieldName() ?>"
+    <?php if (false === $magewire->isValid()): ?>
+        aria-invalid="true"
+    <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     class="form-input block w-full invalid:border-red-500 valid:border-green-500">
     <?php foreach ($magewire->getOptions() as $optionValue => $optionLabel): ?>

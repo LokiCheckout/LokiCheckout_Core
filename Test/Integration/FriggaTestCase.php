@@ -2,34 +2,25 @@
 
 namespace Yireo\FriggaCheckout\Test\Integration;
 
+use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
+use Magento\Quote\Api\Data\CartInterface;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magewirephp\Magewire\Component;
+use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname;
+use Yireo\FriggaCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
-use Magento\Indexer\Model\ResourceModel\Indexer\State as IndexerStateResourceModel;
 
 class FriggaTestCase extends MagewireComponentTestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        //$this->fixtures = $this->_objectManager->get(DataFixtureStorageManager::class)->getStorage();
+    use ProductFixture;
 
-        //$cache = ObjectManager::getInstance()->get(\Magento\Framework\App\Cache::class);
-        //$cache->clean();
-        // select * from indexer_state
-
-        /*
-        $this->_objectManager->addSharedInstance($this->createMock(\Magento\CatalogInventory\Observer\SaveInventoryDataObserver::class), \Magento\CatalogInventory\Observer\SaveInventoryDataObserver::class);
-        */
-
-    }
-
-    public function dispatchToCart()
+    public function dispatchToCheckout()
     {
         $this->dispatch('checkout/index/index');
+
         /** @var Http $response */
         $response = $this->getResponse();
         $this->assertEquals(200, $response->getHttpResponseCode());
@@ -51,5 +42,18 @@ class FriggaTestCase extends MagewireComponentTestCase
     {
         $fixtures = DataFixtureStorageManager::getStorage();
         return $fixtures->get('cart');
+    }
+
+    public function assertMagewireComponentExistsOnPage(string $blockName, Component $component)
+    {
+        $body = $this->getResponse()->getBody();
+        $this->assertMagewireBlockExistsInHtml($blockName, $body);
+        $this->assertMagewireComponentResolves($blockName, $component, ['checkout_index_index']);
+    }
+
+    public function assertMagewireComponentNotExistsOnPage(string $blockName)
+    {
+        $body = $this->getResponse()->getBody();
+        $this->assertStringNotContainsString('wire:id="'.$blockName.'"', $body);
     }
 }

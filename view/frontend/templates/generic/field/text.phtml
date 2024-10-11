@@ -15,7 +15,7 @@ $magewire = $this->getComponent();
     wire:loading.class="disabled"
     wire:model.lazy="<?= $magewire->getFieldName() ?>"
     <?php if (false === $magewire->isValid()): ?>
-        aria-invalid="true" aria-errormessage="<?= $magewire->getFieldName() ?>-error"
+        aria-invalid="true"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getTextType() ?>"
