@@ -15,6 +15,9 @@ abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 
     public function updated($value, string $name)
     {
+        $this->beforeValidate();
+        $this->validate();
+
         if (false === $this->isValid()) {
             return $value;
         }

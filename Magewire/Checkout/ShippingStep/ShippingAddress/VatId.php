@@ -2,6 +2,7 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Util\Context;
 use Yireo\FriggaCheckout\Validator\VatIdValidator;
@@ -13,9 +14,11 @@ class VatId extends ShippingAddressFormFieldComponent
     const ATTRIBUTE_CODE = 'vat_id';
 
     public function __construct(
+        Validator $validator,
+        Context $context,
         private VatIdValidator $vatIdValidator,
-        Context $context)  {
-        parent::__construct($context);
+    ) {
+        parent::__construct($validator, $context);
     }
 
     public function getFieldType(): string
@@ -25,7 +28,9 @@ class VatId extends ShippingAddressFormFieldComponent
 
     public function boot(): void
     {
-        $this->value = strtoupper((string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getVatId());
+        $this->value = strtoupper(
+            (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getVatId()
+        );
         $this->isValid();
     }
 

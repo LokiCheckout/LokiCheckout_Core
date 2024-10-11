@@ -2,6 +2,7 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 use Yireo\FriggaCheckout\Source\Options\PrefixOptions;
@@ -12,10 +13,11 @@ class Prefix extends BillingAddressFormFieldComponent implements FormTextSelectF
     const ATTRIBUTE_CODE = 'prefix';
 
     public function __construct(
+        Validator $validator,
         Context $context,
         private PrefixOptions $prefixOptions,
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function getOptions(): array

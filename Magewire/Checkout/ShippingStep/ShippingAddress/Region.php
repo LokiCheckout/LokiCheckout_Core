@@ -3,6 +3,7 @@
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Eav\Model\Config;
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 use Yireo\FriggaCheckout\Util\Context;
@@ -16,11 +17,12 @@ class Region extends ShippingAddressFormFieldComponent implements FormTextSelect
     protected $listeners = ['quoteSave' => 'refresh'];
 
     public function __construct(
+        Validator $validator,
         Context $context,
         private readonly CheckoutState $checkoutState,
         private readonly RegionCollectionFactory $regionCollectionFactory,
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function boot(): void

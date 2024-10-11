@@ -3,6 +3,7 @@
 namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
 use Yireo\FriggaCheckout\Util\Context;
@@ -18,10 +19,11 @@ class Street extends BillingAddressFormFieldComponent implements FormTextMultipl
     private int $counter = 0;
 
     public function __construct(
+        Validator $validator,
         Context $context,
         private ScopeConfigInterface $scopeConfig,
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function boot(): void

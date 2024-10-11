@@ -3,6 +3,7 @@
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Directory\Helper\Data as DirectoryData;
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Util\Context;
 use Yireo\FriggaCheckout\Validator\PostcodeValidator;
@@ -14,11 +15,12 @@ class Postcode extends ShippingAddressFormFieldComponent
     protected $listeners = ['quoteSave' => 'refresh'];
 
     public function __construct(
+        Validator $validator,
+        Context $context,
         private DirectoryData $directoryData,
         private PostcodeValidator $postcodeValidator,
-        Context $context
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function isRequired(): bool

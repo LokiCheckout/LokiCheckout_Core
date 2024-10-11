@@ -2,6 +2,7 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 use Yireo\FriggaCheckout\Source\Options\PrefixOptions;
@@ -16,10 +17,11 @@ class Prefix extends ShippingAddressFormFieldComponent implements FormTextSelect
     const ATTRIBUTE_CODE = 'prefix';
 
     public function __construct(
+        Validator $validator,
         Context $context,
         private PrefixOptions $prefixOptions,
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function getOptions(): array

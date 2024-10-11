@@ -15,6 +15,8 @@ abstract class BillingAddressFormFieldComponent extends EavFormFieldComponent
 
     public function updated($value, string $name)
     {
+        $this->validate();
+
         if (false === $this->isValid()) {
             return $value;
         }

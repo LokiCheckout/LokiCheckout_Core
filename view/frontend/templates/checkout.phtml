@@ -43,4 +43,13 @@ $currentStep = $magewire->currentStep;
             <?= $block->getChildBlock('sidebar')->toHtml(); ?>
         </aside>
     </div>
+
+    <script>
+        (function() {
+            document.querySelectorAll('[area-invalid]').forEach(function (element) {
+                console.log(element);
+                element.setCustomValidity('Field is invalid');
+            });
+        })();
+    </script>
 </div>

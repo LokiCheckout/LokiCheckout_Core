@@ -2,13 +2,16 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Generic;
 
-use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
-use Magewirephp\Magewire\Component;
+use Magewirephp\Magewire\Component\Form;
+use Magewirephp\Magewire\Exception\AcceptableException;
+use Rakit\Validation\Validator;
+use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\AttributeBehaviour;
 use Yireo\FriggaCheckout\Util\Context;
 
-abstract class EavFormFieldComponent extends Component implements FormFieldInterface, EavFormFieldInterface
+abstract class EavFormFieldComponent extends Form implements FormFieldInterface, EavFormFieldInterface
 {
-    const ATTRIBUTE_CODE = '';
+    use AttributeBehaviour;
+
     const FIELD_NAME = 'value';
     const FIELD_TYPE = 'text';
     const TEXT_TYPE = 'text';
@@ -16,15 +19,15 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
     public string $value = '';
 
     public function __construct(
+        Validator $validator,
         protected Context $context,
     ) {
+        parent::__construct($validator);
     }
 
     public function boot(): void
     {
         $this->value = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getData($this->getAttributeCode());
-
-        $this->error('value', 'fsfs');
     }
 
     public function getFieldType(): string
@@ -40,11 +43,6 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
     public function getTextType(): string
     {
         return static::TEXT_TYPE;
-    }
-
-    public function getAttributeCode(): string
-    {
-        return static::ATTRIBUTE_CODE;
     }
 
     public function getValue(): string
@@ -64,21 +62,14 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
 
     public function isValid(): bool
     {
-        if (empty($this->value) && $this->isRequired()) {
-            $this->error('value', 'This value is required.');
+        try {
+            $this->validate();
+        } catch (AcceptableException $e) {
+            $this->dispatchErrorMessage($e->getMessage());
+            return false;
         }
 
         return false === $this->hasErrors();
-    }
-
-    public function getAttributeLabel(): string
-    {
-        return (string)$this->getAttribute()->getFrontendLabel();
-    }
-
-    protected function getAttribute(): AbstractAttribute
-    {
-        return $this->context->getAttribute($this->getAttributeCode());
     }
 
     protected function setErrorsFromValidation(true|array $errors): bool
@@ -92,5 +83,12 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
         }
 
         return false;
+    }
+
+    protected function beforeValidate()
+    {
+        if ($this->isRequired()) {
+            $this->rules['value'] .= '|required';
+        }
     }
 }

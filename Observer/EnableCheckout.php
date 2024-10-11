@@ -29,5 +29,9 @@ class EnableCheckout implements ObserverInterface
         }
 
         $this->layout->getUpdate()->addHandle('frigga_checkout');
+
+        if (in_array('hyva_checkout_index_index', $handles)) {
+            $this->layout->getUpdate()->addHandle('hyva_frigga_checkout');
+        }
     }
 }

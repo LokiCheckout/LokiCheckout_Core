@@ -2,6 +2,7 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
+use Rakit\Validation\Validator;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
 use Yireo\FriggaCheckout\Source\Options\CountryOptions;
@@ -13,10 +14,11 @@ class CountryId extends ShippingAddressFormFieldComponent implements FormSelectF
     const FIELD_TYPE = 'select';
 
     public function __construct(
+        Validator $validator,
         Context $context,
         private CountryOptions $countryOptions,
     ) {
-        parent::__construct($context);
+        parent::__construct($validator, $context);
     }
 
     public function isRequired(): bool
