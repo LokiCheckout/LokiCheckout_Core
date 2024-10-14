@@ -2,50 +2,35 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Eav\Model\Config;
-use Rakit\Validation\Validator;
+use Override;
 use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\FriggaCheckout\Util\Context;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
-use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
-use Yireo\FriggaCheckout\ViewModel\SelectOptionsInterface;
 
 class Region extends ShippingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
-    const ATTRIBUTE_CODE = 'region';
-
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['shippingStepSave' => 'refresh'];
 
     use OptionsBehaviour;
 
-
-    public function __construct(
-        Validator $validator,
-        Context $context,
-        private readonly CheckoutState $checkoutState,
-    ) {
-        parent::__construct($validator, $context);
-    }
-
+    #[Override]
     public function boot(): void
     {
-        $regionId = (string)$this->checkoutState->getQuote()->getShippingAddress()->getRegionId();
+        $regionId = (string)$this->shippingAddressState->load('region_id');
         if (is_numeric($regionId) && $regionId > 0) {
             $this->value = $regionId;
             return;
         }
 
-        $this->value = (string)$this->checkoutState->getQuote()->getShippingAddress()->getRegion();
+        $this->value = (string)$this->shippingAddressState->load('region');
     }
 
-    public function updated($value, string $name)
+    public function updatedValue($value)
     {
         if (is_numeric($value)) {
-            $this->checkoutState->getQuote()->getShippingAddress()->setData('region_id', $value);
+            $this->shippingAddressState->save('region_id', $value);
         }
 
-        return parent::updated($value, $name);
+        return parent::updatedValue($value);
     }
 }

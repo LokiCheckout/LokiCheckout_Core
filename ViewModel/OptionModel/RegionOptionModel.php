@@ -1,13 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel;
+namespace Yireo\FriggaCheckout\ViewModel\OptionModel;
 
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
-use Magewirephp\Magewire\Component;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magewirephp\Magewire\Component;
 use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region;
+use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
-class RegionOptions implements ArgumentInterface, SelectOptionsInterface
+class RegionOptionModel implements ArgumentInterface, OptionModelInterface
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,

@@ -8,19 +8,12 @@ use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
 class CountryId extends ShippingAddressFormFieldComponent implements FormSelectFieldInterface
 {
-    const ATTRIBUTE_CODE = 'country_id';
-    const FIELD_TYPE = 'select';
-
     use OptionsBehaviour;
 
-    public function isRequired(): bool
+    public function updatedValue($value)
     {
-        return true;
-    }
-    public function updated($value, string $name)
-    {
-        $this->context->getCheckoutState()->getQuote()->getShippingAddress()->setData('region', '');
-        $this->context->getCheckoutState()->getQuote()->getShippingAddress()->setData('region_id', '');
-        return parent::updated($value, $name);
+        $this->shippingAddressState->save('region', '');
+        $this->shippingAddressState->save('region_id', '');
+        return parent::updatedValue($value);
     }
 }

@@ -35,8 +35,8 @@
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress\Prefix
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\PrefixOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\PrefixOptionModel
                             </argument>
                             <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
@@ -122,8 +122,8 @@
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress\Region
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\RegionOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\RegionOptionModel
                             </argument>
                         </arguments>
                     </block>
@@ -135,8 +135,8 @@
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress\CountryId
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\CountryOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\CountryOptionModel
                             </argument>
                         </arguments>
                     </block>

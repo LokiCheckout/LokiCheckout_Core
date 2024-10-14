@@ -7,10 +7,10 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 /** @var Template $block */
 /** @var FormTextSelectFieldInterface $magewire */
 $magewire = $this->getComponent();
-$options = $block->getOptions();
-$magewire->setOptions($options);
+$optionModel = $block->getFieldBlock()->getOptionModel();
+$magewire->setOptionModel($optionModel);
 
-if (count($options->getOptions($magewire)) > 0) {
+if (count($optionModel->getOptions($magewire)) > 0) {
     echo $block->getLayout()->createBlock(Template::class)
         ->addData($block->getData())
         ->addData(['component' => $magewire])

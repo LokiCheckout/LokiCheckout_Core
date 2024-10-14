@@ -10,7 +10,7 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class ShippingDetails extends Component
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['shippingStepSave' => 'refresh'];
 
     public function __construct(
         private readonly CheckoutState $checkoutState,

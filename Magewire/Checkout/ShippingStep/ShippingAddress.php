@@ -10,6 +10,7 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magewirephp\Magewire\Component;
+use Override;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
@@ -48,6 +49,7 @@ class ShippingAddress extends Component
         }
     }
 
+
     public function updated(mixed $value, string $name): mixed
     {
         if (false === $this->customerSession->isLoggedIn()) {
@@ -65,7 +67,7 @@ class ShippingAddress extends Component
         $shippingAddress = $this->customerAddressRepository->getById((int)$value);
         $this->checkoutState->getQuote()->getShippingAddress()->importCustomerAddressData($shippingAddress);
         $this->checkoutState->getQuote()->getShippingAddress()->save();
-        $this->emit('quoteSave');
+        $this->emit('shippingStepSave');
 
         return $value;
     }

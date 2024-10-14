@@ -4,8 +4,8 @@
     <type name="Magewirephp\Magewire\Model\ComponentManager">
         <arguments>
             <argument name="hydrationPool" xsi:type="array">
-                <item name="Yireo_FriggaCheckout::eavAttributeHydrator" xsi:type="array">
-                    <item name="class" xsi:type="object">Yireo\FriggaCheckout\Magewire\Hydrator\EavAttributeHydrator</item>
+                <item name="Yireo_FriggaCheckout::setterInjectionHydrator" xsi:type="array">
+                    <item name="class" xsi:type="object">Yireo\FriggaCheckout\Magewire\Hydrator\SetterInjectionHydrator</item>
                 </item>
             </argument>
         </arguments>

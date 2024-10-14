@@ -2,50 +2,70 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Rakit\Validation\Validator;
+use Override;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Util\Context;
-use Yireo\FriggaCheckout\Validator\VatIdValidator;
+use Yireo\FriggaCheckout\Validator\Component\VatIdValidator;
+use Magento\Customer\Model\Vat as VatModel;
 
 class VatId extends ShippingAddressFormFieldComponent
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
-
-    const ATTRIBUTE_CODE = 'vat_id';
+    protected $listeners = ['shippingStepSave' => 'refresh'];
 
     public function __construct(
-        Validator $validator,
-        Context $context,
+        private VatModel $vatModel,
         private VatIdValidator $vatIdValidator,
     ) {
-        parent::__construct($validator, $context);
     }
 
-    public function getFieldType(): string
+    public function getFieldTemplate(): string
     {
-        return 'vat_id';
+        if ($this->isEu()) {
+            return 'Yireo_FriggaCheckout::generic/field/vat_id_eu.phtml';
+        }
+
+        return 'Yireo_FriggaCheckout::generic/field/text.phtml';
     }
 
+    #[Override]
     public function boot(): void
     {
-        $this->value = strtoupper(
-            (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getVatId()
-        );
-        $this->isValid();
+        parent::boot();
+        $this->value = strtoupper($this->value);
     }
 
-    public function isValid(): bool
+    #[Override]
+    public function validate(): bool
     {
-        if (parent::isValid() === false) {
+        if (parent::validate() === false) {
             return false;
         }
 
-        $countryId = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getCountryId();
+        $countryId = (string)$this->shippingAddressState->load('country_id');
         $errors = $this->vatIdValidator
             ->setVatId($this->getValue())
             ->setCountryId($countryId)
             ->validate();
 
         return $this->setErrorsFromValidation($errors);
+    }
+
+    public function isEu(): bool
+    {
+        // @todo: Billing or shipping?
+        // @todo: Does the shipping address need VAT ID after all?
+        $countryId = $this->getCountryIdFromQuote();
+        return $this->vatModel->isCountryInEU($countryId);
+    }
+
+    public function getVatCountryId(): string
+    {
+        $countryId = $this->getCountryIdFromQuote();
+        // @todo: Greek exception
+        return $countryId;
+    }
+
+    private function getCountryIdFromQuote(): string
+    {
+        return (string)$this->shippingAddressState->load('country_id');
     }
 }

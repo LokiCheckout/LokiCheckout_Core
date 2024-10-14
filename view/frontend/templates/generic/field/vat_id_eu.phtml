@@ -1,20 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
-use Yireo\FriggaCheckout\ViewModel\VatId;
 
 /** @var Template $block */
 /** @var Template $parentBlock */
 /** @var FormFieldInterface $magewire */
-/** @var VatId $vatId */
-/** @var ViewModelFactory $viewModelFactory */
 /** @var string $blockClass */
-
-$vatId = $viewModelFactory->create(VatId::class);
-$magewire = $this->getComponent();
 ?>
 
 <div class="<?= $blockClass ?> mb-4 ">
@@ -23,16 +16,22 @@ $magewire = $this->getComponent();
             id="vat_id_country"
             wire:loading.attr="aria-busy"
             wire:loading.class="disabled"
+            <?php if (false === $magewire->validate()): ?>
+                aria-invalid="true"
+            <?php endif ?>
             type="text"
             pattern="[a-zA-Z]*"
             min="2" max="4"
-            value="<?= $vatId->getVatCountryId() ?>"
+            value="<?= $magewire->getVatCountryId() ?>"
             class="block w-16 rounded-l-lg bg-zinc-100 invalid:bg-red-100 invalid:border-red-500 valid:bg-green-100 valid:border-green-500 border-r-1">
 
         <input
             id="vat_id_text"
             wire:loading.attr="aria-busy"
             wire:loading.class="disabled"
+            <?php if (false === $magewire->validate()): ?>
+                aria-invalid="true"
+            <?php endif ?>
             <?= $magewire->isRequired() ? 'required' : '' ?>
             type="text"
             pattern="[a-zA-Z0-9]*"

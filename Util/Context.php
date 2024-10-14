@@ -9,13 +9,15 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\UrlFactory;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
+/**
+ * @deprecated: Inject individual classes instead
+ */
 class Context
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,
-        private readonly EavConfig $eavConfig,
         private readonly ScopeConfigInterface $scopeConfig,
-        private readonly FieldTypeLocator $fieldTypeLocator,
+        private readonly FieldTemplateLocator $fieldTemplateLocator,
         private readonly UrlFactory $urlFactory,
     ) {
     }
@@ -25,28 +27,18 @@ class Context
         return $this->checkoutState;
     }
 
-    public function getEavConfig(): EavConfig
-    {
-        return $this->eavConfig;
-    }
-
     public function getScopeConfig(): ScopeConfigInterface
     {
         return $this->scopeConfig;
     }
 
-    public function getFieldTypeLocator(): FieldTypeLocator
+    public function getFieldTemplateLocator(): FieldTemplateLocator
     {
-        return $this->fieldTypeLocator;
+        return $this->fieldTemplateLocator;
     }
 
     public function getCheckoutUrl(): string
     {
         return $this->urlFactory->create()->getUrl('checkout/index/index');
-    }
-
-    public function getAttribute(string $attributeCode): ?AbstractAttribute
-    {
-        return $this->eavConfig->getAttribute('customer_address', $attributeCode);
     }
 }

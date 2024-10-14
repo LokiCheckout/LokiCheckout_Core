@@ -4,7 +4,7 @@ namespace Yireo\FriggaCheckout\Test\Integration\Validator;
 
 use Magento\Framework\App\ObjectManager;
 use PHPUnit\Framework\TestCase;
-use Yireo\FriggaCheckout\Validator\PostcodeValidator;
+use Yireo\FriggaCheckout\Validator\Component\PostcodeValidator;
 
 class PostcodeValidatorTest extends TestCase
 {

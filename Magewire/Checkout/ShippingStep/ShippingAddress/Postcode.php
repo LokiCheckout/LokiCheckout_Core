@@ -3,41 +3,37 @@
 namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Directory\Helper\Data as DirectoryData;
-use Rakit\Validation\Validator;
+use Override;
 use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Util\Context;
-use Yireo\FriggaCheckout\Validator\PostcodeValidator;
+use Yireo\FriggaCheckout\Validator\Component\PostcodeValidator;
 
 class Postcode extends ShippingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'postcode';
-
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['shippingStepSave' => 'refresh'];
 
     public function __construct(
-        Validator $validator,
-        Context $context,
         private DirectoryData $directoryData,
         private PostcodeValidator $postcodeValidator,
     ) {
-        parent::__construct($validator, $context);
     }
 
+    #[Override]
     public function isRequired(): bool
     {
         $countries = $this->directoryData->getCountriesWithOptionalZip();
-        $countryId = $this->context->getCheckoutState()->getQuote()->getShippingAddress()->getCountryId();
+        $countryId = $this->shippingAddressState->load('country_id');
 
         return false === in_array($countryId, $countries);
     }
 
-    public function isValid(): bool
+    #[Override]
+    public function validate(): bool
     {
-        if (parent::isValid() === false) {
+        if (parent::validate() === false) {
             return false;
         }
 
-        $countryId = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getCountryId();
+        $countryId = $this->shippingAddressState->load('country_id');
         $errors = $this->postcodeValidator
             ->setCountryId($countryId)
             ->setPostcode($this->getValue())

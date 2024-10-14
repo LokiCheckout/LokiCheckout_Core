@@ -7,7 +7,7 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class PaymentDetails extends Component
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['billingStepSave' => 'refresh'];
 
     public function __construct(
         private readonly CheckoutState $checkoutState

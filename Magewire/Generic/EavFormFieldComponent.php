@@ -2,47 +2,44 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Generic;
 
-use Magewirephp\Magewire\Component\Form;
-use Magewirephp\Magewire\Exception\AcceptableException;
-use Rakit\Validation\Validator;
+use Magewirephp\Magewire\Component;
 use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\AttributeBehaviour;
-use Yireo\FriggaCheckout\Util\Context;
+use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\FieldTemplateLocatorBehaviour;
 
-abstract class EavFormFieldComponent extends Form implements FormFieldInterface, EavFormFieldInterface
+abstract class EavFormFieldComponent extends Component implements FormFieldInterface, EavFormFieldInterface
 {
     use AttributeBehaviour;
-
-    const FIELD_NAME = 'value';
-    const FIELD_TYPE = 'text';
-    const TEXT_TYPE = 'text';
+    use FieldTemplateLocatorBehaviour;
 
     public string $value = '';
 
-    public function __construct(
-        Validator $validator,
-        protected Context $context,
-    ) {
-        parent::__construct($validator);
-    }
-
-    public function boot(): void
-    {
-        $this->value = (string)$this->context->getCheckoutState()->getQuote()->getShippingAddress()->getData($this->getAttributeCode());
-    }
-
-    public function getFieldType(): string
-    {
-        return $this->context->getFieldTypeLocator()->getFieldTypeFromComponent($this);
-    }
-
     public function getFieldName(): string
     {
-        return static::FIELD_NAME;
+        // @doc: You can override a field name in your own Component class
+        // @doc: Field name is based upon non-namespaced classname
+
+        $baseClassname = basename(str_replace('\\', '/', static::class));
+        return strtolower(trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $baseClassname), '_'));
     }
 
-    public function getTextType(): string
+    public function getFieldLabel(): string
     {
-        return static::TEXT_TYPE;
+        $parentBlock = $this->getParent();
+        if ($parentBlock && $parentBlock->getFieldLabel()) {
+            return (string) $parentBlock->getFieldLabel(); // @doc: You can override a field label via XML layout
+        }
+
+        return $this->getAttributeLabel();
+    }
+
+    public function getInputType(): string
+    {
+        return 'text'; // @doc: Example for overriding this to "email"
+    }
+
+    public function getModelName(): string
+    {
+        return 'value';
     }
 
     public function getValue(): string
@@ -55,24 +52,32 @@ abstract class EavFormFieldComponent extends Form implements FormFieldInterface,
         $this->value = $value;
     }
 
+    abstract public function getNameInLayout(): string;
+
     public function isRequired(): bool
     {
         return (bool)$this->getAttribute()->getIsRequired();
     }
 
-    public function isValid(): bool
+    public function validate(): bool
     {
         if ($this->isRequired() && empty($this->value)) {
             $this->error('value', (string)__('Value is required'));
             return false;
         }
 
-        try {
-            $this->validate();
-        } catch (AcceptableException $e) {
-        }
-
         return false === $this->hasErrors();
+    }
+
+    public function isVisible(): bool
+    {
+        return true; // @doc: Example for overriding this
+    }
+
+    public function getJsName()
+    {
+        $name = ucwords($this->getNameInLayout(), '_.');
+        return preg_replace('#[_.]+#', '', $name);
     }
 
     protected function setErrorsFromValidation(true|array $errors): bool
@@ -86,9 +91,5 @@ abstract class EavFormFieldComponent extends Form implements FormFieldInterface,
         }
 
         return false;
-    }
-
-    protected function beforeValidate()
-    {
     }
 }

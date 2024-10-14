@@ -6,5 +6,4 @@ use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 
 class VatId extends BillingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'vat_id';
 }

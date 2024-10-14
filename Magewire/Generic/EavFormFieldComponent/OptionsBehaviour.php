@@ -3,23 +3,23 @@
 namespace Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent;
 
 use RuntimeException;
-use Yireo\FriggaCheckout\ViewModel\SelectOptionsInterface;
+use Yireo\FriggaCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 trait OptionsBehaviour
 {
-    protected ?SelectOptionsInterface $options = null;
+    protected ?OptionModelInterface $optionModel = null;
 
     public function getOptions(): array
     {
-        if (false === $this->options instanceof SelectOptionsInterface) {
+        if (false === $this->optionModel instanceof OptionModelInterface) {
             throw new RuntimeException('No options set for "'.get_class($this).'"');
         }
 
-        return $this->options->getOptions();
+        return $this->optionModel->getOptions($this);
     }
 
-    public function setOptions(SelectOptionsInterface $options): void
+    public function setOptionModel(OptionModelInterface $optionModel): void
     {
-        $this->options = $options;
+        $this->optionModel = $optionModel;
     }
 }

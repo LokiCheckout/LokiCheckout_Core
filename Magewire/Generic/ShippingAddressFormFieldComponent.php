@@ -4,26 +4,46 @@ namespace Yireo\FriggaCheckout\Magewire\Generic;
 
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magewirephp\Magewire\Component;
+use RuntimeException;
 use Yireo\FriggaCheckout\Util\Context;
+use Yireo\FriggaCheckout\ViewModel\State\ShippingAddressState;
 
 abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 {
+    protected ?ShippingAddressState $shippingAddressState = null;
+
     public function boot(): void
     {
-        $this->value = (string)$this->context->getCheckoutState()->getShippingAddressValue($this->getAttributeCode());
-    }
-
-    public function updated($value, string $name)
-    {
-        $this->beforeValidate();
-
-        if (false === $this->isValid()) {
-            return $value;
+        if (false === $this->shippingAddressState instanceof ShippingAddressState) {
+            throw new RuntimeException('ShippingAddressState is not set for class "'.get_class($this).'"');
         }
 
-        $this->context->getCheckoutState()->setShippingAddressValue($this->getAttributeCode(), $value);
-        $this->emit('quoteSave');
+        $this->value = (string)$this->shippingAddressState->load($this->getFieldName());
+    }
+
+    public function updatedValue($value)
+    {
+        $this->validate();
+
+        $this->shippingAddressState->save($this->getFieldName(), $value);
+        $this->emit('shippingStepSave');
 
         return $value;
+    }
+
+    public function getNameInLayout(): string
+    {
+        return 'frigga.checkout.shipping.'.$this->getFieldName();
+    }
+
+    /**
+     * Added via \Yireo\FriggaCheckout\Plugin\SetterInjectionPlugin
+     *
+     * @param ShippingAddressState $shippingAddressState
+     * @return void
+     */
+    public function setShippingAddressState(ShippingAddressState $shippingAddressState)
+    {
+        $this->shippingAddressState = $shippingAddressState;
     }
 }

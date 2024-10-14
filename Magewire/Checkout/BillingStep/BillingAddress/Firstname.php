@@ -6,10 +6,4 @@ use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 
 class Firstname extends BillingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'firstname';
-
-    public function isRequired(): bool
-    {
-        return true;
-    }
 }

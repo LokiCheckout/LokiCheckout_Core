@@ -8,16 +8,13 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
 
 class CountryId extends BillingAddressFormFieldComponent implements FormSelectFieldInterface
 {
-    const ATTRIBUTE_CODE = 'country_id';
-    const FIELD_TYPE = 'select';
-
     use OptionsBehaviour;
 
-    public function updated($value, string $name)
+    public function updatedValue($value)
     {
-        $this->context->getCheckoutState()->getQuote()->getBillingAddress()->setData('region', '');
-        $this->context->getCheckoutState()->getQuote()->getBillingAddress()->setData('region_id', '');
+        $this->billingAddressState->save('region', '');
+        $this->billingAddressState->save('region_id', '');
 
-        return parent::updated($value, $name);
+        return parent::updatedValue($value);
     }
 }

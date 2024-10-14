@@ -4,6 +4,7 @@ namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
 
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
+use Override;
 use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component

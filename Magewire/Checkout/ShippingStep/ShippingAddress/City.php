@@ -6,10 +6,4 @@ use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
 class City extends ShippingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'city';
-
-    public function isRequired(): bool
-    {
-        return true;
-    }
 }

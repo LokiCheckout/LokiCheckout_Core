@@ -8,7 +8,8 @@ use Yireo\FriggaCheckout\Step\StepNavigator;
 class Progressbar extends Component
 {
     protected $listeners = [
-        'quoteSave' => 'refresh',
+        'shippingStepSave' => 'refresh',
+        'billingStepSave' => 'refresh',
         'stepChange' => 'onStepChange',
     ];
 
@@ -28,7 +29,8 @@ class Progressbar extends Component
     {
         $this->currentStepCode = $stepCode;
         $this->stepNavigator->setCurrentStepByCode($stepCode);
-        $this->emit('quoteSave');
+        $this->emit('shippingStepSave'); // @todo: Pick the right event only
+        $this->emit('billingStepSave');
         $this->emit('stepChange', $stepCode);
     }
 

@@ -9,26 +9,28 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
 /** @var string $blockClass */
 
 if (false === $magewire instanceof FormFieldInterface) {
-    echo '<div>skipped</div>';
-
+    echo '<div style="display:none">skipped</div>';
     return;
 }
 
-$fieldType = $magewire->getFieldType();
+if (false === $magewire->isVisible()) {
+    echo '<div style="display:none">not visible</div>';
+    return;
+}
 ?>
 <div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired(
-) && 'required' ?> <?= $magewire->getAttributeCode() ?>">
-    <label for="<?= $magewire->getAttributeCode() ?>">
-        <?= $magewire->getAttributeLabel() ?>
+) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>" x-defer="interact">
+    <label for="<?= $magewire->getFieldName() ?>">
+        <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.utils.required') : '' ?>
     </label>
     <div class="relative">
         <?= $block->getLayout()->createBlock(Template::class)
-            ->addData($block->getData())
+            ->addData(['field_block' => $block])
             ->addData(['component' => $magewire])
             ->setParentBlock($this)
-            ->setNameInLayout('frigga.checkout.generic.field.'.$fieldType.'.'.$magewire->getAttributeCode())
-            ->setTemplate('Yireo_FriggaCheckout::generic/field/'.$fieldType.'.phtml')
+            ->setNameInLayout('frigga.checkout.generic.field.'.$magewire->getFieldName())
+            ->setTemplate($magewire->getFieldTemplate())
             ->toHtml() ?>
         <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
             <?= $block->getBlockHtml('frigga.checkout.utils.loader') ?>
@@ -38,4 +40,14 @@ $fieldType = $magewire->getFieldType();
     <?php if ($magewire->hasErrors()): ?>
         <?= $block->getLayout()->getBlock('frigga.checkout.utils.errors')->setData(['errors' => $magewire->getErrors()])->toHtml() ?>
     <?php endif; ?>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+                validate() {
+                    return true;
+                }
+            }))
+        })
+    </script>
 </div>

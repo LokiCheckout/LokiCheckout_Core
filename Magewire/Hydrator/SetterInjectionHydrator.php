@@ -7,7 +7,7 @@ use Magewirephp\Magewire\Model\HydratorInterface;
 use Magewirephp\Magewire\Model\RequestInterface;
 use Magewirephp\Magewire\Model\ResponseInterface;
 
-class EavAttributeHydrator implements HydratorInterface
+class SetterInjectionHydrator implements HydratorInterface
 {
     public function hydrate(Component $component, RequestInterface $request): void
     {

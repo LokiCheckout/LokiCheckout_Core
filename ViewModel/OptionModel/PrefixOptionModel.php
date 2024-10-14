@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel;
+namespace Yireo\FriggaCheckout\ViewModel\OptionModel;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
 use Magewirephp\Magewire\Component;
 
-class PrefixOptions implements ArgumentInterface, SelectOptionsInterface
+class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
 {
     public function __construct(
         private ScopeConfigInterface $scopeConfig,

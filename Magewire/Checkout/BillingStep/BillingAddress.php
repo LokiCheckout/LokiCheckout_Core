@@ -9,7 +9,7 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class BillingAddress  extends Component
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['billingStepSave' => 'refresh'];
 
     public function __construct(
         private readonly AddressConfig $addressConfig,

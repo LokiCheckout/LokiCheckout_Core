@@ -6,5 +6,4 @@ use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
 
 class Suffix extends ShippingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'suffix';
 }

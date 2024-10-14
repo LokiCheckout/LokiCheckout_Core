@@ -2,46 +2,37 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Rakit\Validation\Validator;
+use Override;
 use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\FriggaCheckout\Util\Context;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class Region extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
-    const ATTRIBUTE_CODE = 'region';
-
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['billingStepSave' => 'refresh'];
 
     use OptionsBehaviour;
 
-    public function __construct(
-        Validator $validator,
-        Context $context,
-        private readonly CheckoutState $checkoutState,
-    ) {
-        parent::__construct($validator, $context);
-    }
+    #[Override]
 
     public function boot(): void
     {
-        $regionId = (string)$this->checkoutState->getQuote()->getBillingAddress()->getRegionId();
+        $regionId = (string)$this->billingAddressState->load('region_id');
         if (is_numeric($regionId) && $regionId > 0) {
             $this->value = $regionId;
             return;
         }
 
-        $this->value = (string)$this->checkoutState->getQuote()->getBillingAddress()->getRegion();
+        $this->value = (string)$regionId = $this->billingAddressState->load('region');
     }
 
-    public function updated($value, string $name)
+
+    public function updatedValue($value)
     {
         if (is_numeric($value)) {
-            $this->checkoutState->getQuote()->getBillingAddress()->setData('region_id', $value);
+            $this->billingAddressState->save('region_id', $value);
         }
 
-        return parent::updated($value, $name);
+        return parent::updatedValue($value);
     }
 }

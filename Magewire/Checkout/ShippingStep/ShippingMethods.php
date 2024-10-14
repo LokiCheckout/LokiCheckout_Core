@@ -39,7 +39,7 @@ class ShippingMethods extends Component
 
         $this->checkoutState->getQuote()->save();
 
-        $this->emit('quoteSave');
+        $this->emit('shippingStepSave');
         return $value;
     }
 }

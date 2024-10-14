@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Validator;
+namespace Yireo\FriggaCheckout\Validator\Component;
 
 use Magento\Customer\Model\Vat as VatModel;
+use Yireo\FriggaCheckout\Validator\ValidatorInterface;
 
 class VatIdValidator implements ValidatorInterface
 {

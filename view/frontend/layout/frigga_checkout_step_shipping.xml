@@ -25,8 +25,8 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\PrefixOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\PrefixOptionModel
                             </argument>
                             <argument name="grid-col-span" xsi:type="number">12</argument>
                         </arguments>
@@ -112,8 +112,8 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\RegionOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\RegionOptionModel
                             </argument>
                         </arguments>
                     </block>
@@ -125,8 +125,8 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
                             </argument>
-                            <argument name="options" xsi:type="object">
-                                Yireo\FriggaCheckout\ViewModel\CountryOptions
+                            <argument name="option_model" xsi:type="object">
+                                Yireo\FriggaCheckout\ViewModel\OptionModel\CountryOptionModel
                             </argument>
                         </arguments>
                     </block>
@@ -162,6 +162,11 @@
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
+                        <block name="frigga.checkout.shipping-step.shipping-address.vat_id.field" as="field"
+                               template="Yireo_FriggaCheckout::generic/field/vat_id.phtml">
+                            <block name="frigga.checkout.shipping-step.shipping-address.vat_id.field.vat_id_eu" as="field"
+                                   template="Yireo_FriggaCheckout::generic/field/vat_id_eu.phtml"/>
+                        </block>
                         <block name="frigga.checkout.vat_id_eu_script" as="script"
                                template="Yireo_FriggaCheckout::generic/field/vat_id_eu_script.phtml"
                         />
@@ -196,7 +201,7 @@
                         <argument name="magewire" xsi:type="object">
                             Yireo\FriggaCheckout\Magewire\Checkout\StepForwardButton
                         </argument>
-                        <argument name="button_label" xsi:type="string">Proceed to review &amp; payments</argument>
+                        <argument name="button_label" xsi:type="string">Proceed to review &amp;amp; payments</argument>
                     </arguments>
                 </block>
             </block>

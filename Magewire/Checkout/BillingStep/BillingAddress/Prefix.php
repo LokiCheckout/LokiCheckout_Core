@@ -8,7 +8,5 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
 class Prefix extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
 {
-    const ATTRIBUTE_CODE = 'prefix';
-
     use OptionsBehaviour;
 }

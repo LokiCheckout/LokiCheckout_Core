@@ -14,7 +14,7 @@ class OrderComment extends Component
     ) {
     }
 
-    public function mount(): void
+    public function boot(): void
     {
         $this->comment = $this->checkoutState->getQuote()->getData('comment');
     }

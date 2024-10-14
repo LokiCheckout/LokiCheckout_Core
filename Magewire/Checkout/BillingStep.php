@@ -11,7 +11,7 @@ use Yireo\FriggaCheckout\ViewModel\CheckoutState;
 
 class BillingStep extends Component implements StepInterface
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['billingStepSave' => 'refresh'];
 
     public bool $enableBillingAsShipping = true;
     public bool $billingAsShipping = true;
@@ -42,7 +42,7 @@ class BillingStep extends Component implements StepInterface
             $billingAddress = $quote->getBillingAddress();
             $billingAddress->setSameAsBilling((int)$value);
             $quote->save();
-            $this->emit('quoteSave');
+            $this->emit('billingStepSave');
         }
 
         return $value;
@@ -63,7 +63,7 @@ class BillingStep extends Component implements StepInterface
 
         $quote->save();
 
-        $this->emit('quoteSave');
+        $this->emit('billingStepSave');
     }
 
     public function getCode(): string

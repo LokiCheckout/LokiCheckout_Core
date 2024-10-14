@@ -6,5 +6,4 @@ use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
 
 class City extends BillingAddressFormFieldComponent
 {
-    const ATTRIBUTE_CODE = 'city';
 }

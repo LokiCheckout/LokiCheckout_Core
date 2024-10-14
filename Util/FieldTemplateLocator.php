@@ -7,22 +7,22 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
 use Yireo\FriggaCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
-class FieldTypeLocator
+class FieldTemplateLocator
 {
-    public function getFieldTypeFromComponent(Component $component): string
+    public function getFieldTemplateFromComponent(Component $component): string
     {
         if ($component instanceof FormTextMultipleFieldInterface) {
-            return 'text_multiple';
+            return 'Yireo_FriggaCheckout::generic/field/text_multiple.phtml';
         }
 
         if ($component instanceof FormTextSelectFieldInterface) {
-            return 'text_select';
+            return 'Yireo_FriggaCheckout::generic/field/text_select.phtml';
         }
 
         if ($component instanceof FormSelectFieldInterface) {
-            return 'select';
+            return 'Yireo_FriggaCheckout::generic/field/select.phtml';
         }
 
-        return 'text';
+        return 'Yireo_FriggaCheckout::generic/field/text.phtml';
     }
 }

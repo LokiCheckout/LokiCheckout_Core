@@ -14,7 +14,7 @@ class Items extends Component
     ) {
     }
 
-    public function mount(): void
+    public function boot(): void
     {
         $this->items = $this->checkoutState->getQuote()->getItems();
     }

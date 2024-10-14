@@ -2,15 +2,18 @@
 
 namespace Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent;
 
+use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
+use Magento\Framework\App\ObjectManager;
 
 trait AttributeBehaviour
 {
-    const ATTRIBUTE_CODE = '';
-
+    /**
+     * @deprecated: Use getFieldName() instead
+     */
     public function getAttributeCode(): string
     {
-        return static::ATTRIBUTE_CODE;
+        return $this->getFieldName();
     }
 
     public function getAttributeLabel(): string
@@ -20,6 +23,17 @@ trait AttributeBehaviour
 
     protected function getAttribute(): AbstractAttribute
     {
-        return $this->context->getAttribute($this->getAttributeCode());
+        $fieldName = $this->getFieldName();
+        if (empty($fieldName)) {
+            throw new \RuntimeException('No field name defined for class "'.get_class($this).'"');
+        }
+
+        $eavConfig = ObjectManager::getInstance()->get(EavConfig::class);
+        $attribute = $eavConfig->getAttribute('customer_address', $this->getFieldName());
+        if ($attribute instanceof AbstractAttribute) {
+            return $attribute;
+        }
+
+        throw new \RuntimeException('Unable to load attribute "'.$fieldName.'"');
     }
 }
