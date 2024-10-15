@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+$component = $block->getComponent();
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $component->getJsName() ?>', () => ({
+            validate() {
+                // @todo: Trigger an event or hook or something to allow customization
+                return true;
+            }
+        }))
+    })
+</script>

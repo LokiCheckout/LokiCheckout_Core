@@ -1,20 +1,29 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
+use Yireo\FriggaCheckout\Factory\ViewModelFactory;
 use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\FriggaCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
-/** @var FormFieldInterface $magewire */
+/** @var Component|FormFieldInterface $magewire */
 /** @var string $blockClass */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 
-if (false === $magewire instanceof FormFieldInterface) {
+if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
     echo '<div style="display:none">skipped</div>';
+
     return;
 }
 
 if (false === $magewire->isVisible()) {
     echo '<div style="display:none">not visible</div>';
+
     return;
 }
 ?>
@@ -25,29 +34,20 @@ if (false === $magewire->isVisible()) {
         <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.utils.required') : '' ?>
     </label>
     <div class="relative">
-        <?= $block->getLayout()->createBlock(Template::class)
-            ->addData(['field_block' => $block])
-            ->addData(['component' => $magewire])
-            ->setParentBlock($this)
-            ->setNameInLayout('frigga.checkout.generic.field.'.$magewire->getFieldName())
-            ->setTemplate($magewire->getFieldTemplate())
-            ->toHtml() ?>
+        <?= $blockRenderer->render($magewire->getFieldTemplate(), $block, $magewire) ?>
         <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
             <?= $block->getBlockHtml('frigga.checkout.utils.loader') ?>
         </div>
     </div>
 
     <?php if ($magewire->hasErrors()): ?>
-        <?= $block->getLayout()->getBlock('frigga.checkout.utils.errors')->setData(['errors' => $magewire->getErrors()])->toHtml() ?>
+        <?= $blockRenderer->get('frigga.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
     <?php endif; ?>
 
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-                validate() {
-                    return true;
-                }
-            }))
-        })
-    </script>
+    <?php $script = $block->getChildBlock('script'); ?>
+    <?php if ($script instanceof AbstractBlock): ?>
+        <?= $script->addData(['component' => $magewire])->toHtml() ?>
+    <?php else: ?>
+        <?= $blockRenderer->render('generic/field/script.phtml', $block, $magewire) ?>
+    <?php endif; ?>
 </div>

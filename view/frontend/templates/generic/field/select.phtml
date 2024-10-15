@@ -6,7 +6,7 @@ use Yireo\FriggaCheckout\Magewire\Generic\FormSelectFieldInterface;
 
 /** @var Template $block */
 /** @var FormSelectFieldInterface $magewire */
-$optionModel = $block->getFieldBlock()->getOptionModel();
+$optionModel = $block->getAncestorBlock()->getOptionModel();
 $magewire->setOptionModel($optionModel);
 ?>
 <select

@@ -7,11 +7,11 @@ use Magewirephp\Magewire\Component;
 /** @var Template $block */
 /** @var string $blockClass */
 /** @var Component|null $component */
-/** @var Template $originalBlock */
+/** @var Template $ancestorBlock */
 $component = $block->getComponent();
-$originalBlock = $block->getOriginalBlock();
+$ancestorBlock = $block->getAncestorBlock();
 ?>
 <div class="<?= $blockClass ?> text-xs bg-orange-100 m-1 p-1">
     Component: <?= ($component instanceof Component) ? get_class($component) : 'no' ?><br/>
-    Block: <?= get_class($originalBlock) ?> / <?= $originalBlock->getNameInLayout() ?><br/>
+    Block: <?= get_class($ancestorBlock) ?> / <?= $ancestorBlock->getNameInLayout() ?><br/>
 </div>

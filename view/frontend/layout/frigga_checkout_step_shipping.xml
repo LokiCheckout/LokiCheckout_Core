@@ -28,7 +28,7 @@
                             <argument name="option_model" xsi:type="object">
                                 Yireo\FriggaCheckout\ViewModel\OptionModel\PrefixOptionModel
                             </argument>
-                            <argument name="grid-col-span" xsi:type="number">12</argument>
+                            <argument name="grid-col-span" xsi:type="number">2</argument>
                         </arguments>
                     </block>
 
@@ -39,6 +39,7 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
                             </argument>
+                            <argument name="grid-col-span" xsi:type="number">5</argument>
                         </arguments>
                     </block>
 
@@ -60,6 +61,7 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
                             </argument>
+                            <argument name="grid-col-span" xsi:type="number">5</argument>
                         </arguments>
                     </block>
 

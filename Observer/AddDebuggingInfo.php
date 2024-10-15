@@ -49,7 +49,7 @@ class AddDebuggingInfo implements ObserverInterface
         }
 
         $html .= $debugBlock->setData([
-            'original_block' => $block,
+            'ancestor_block' => $block,
             'component' => $block->getMagewire()
         ])->toHtml();
 
