@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
-    <update handle="frigga_checkout_sidebar" />
-    <update handle="frigga_checkout_progressbar"/>
-    <update handle="frigga_checkout_login"/>
-    <update handle="frigga_checkout_step_shipping"/>
-    <update handle="frigga_checkout_step_billing"/>
+    <update handle="loki_checkout_sidebar" />
+    <update handle="loki_checkout_progressbar"/>
+    <update handle="loki_checkout_login"/>
+    <update handle="loki_checkout_step_shipping"/>
+    <update handle="loki_checkout_step_billing"/>
 
     <body>
         <!-- @todo: Find an alternative for this -->
@@ -12,17 +12,17 @@
         <referenceBlock name="fallback.module.missing" remove="true"/>
 
         <referenceContainer name="content">
-            <block name="frigga.checkout" template="Yireo_FriggaCheckout::checkout.phtml" cacheable="false">
+            <block name="loki.checkout" template="Yireo_LokiCheckout::checkout.phtml" cacheable="false">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout</argument>
+                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout</argument>
                 </arguments>
             </block>
         </referenceContainer>
 
-        <block name="frigga.checkout.utils.loader" template="Yireo_FriggaCheckout::utils/loader.phtml"/>
-        <block name="frigga.checkout.utils.required" template="Yireo_FriggaCheckout::utils/required.phtml"/>
-        <block name="frigga.checkout.utils.separator" template="Yireo_FriggaCheckout::utils/separator.phtml"/>
-        <block name="frigga.checkout.utils.debug" template="Yireo_FriggaCheckout::utils/debug.phtml"/>
-        <block name="frigga.checkout.utils.errors" template="Yireo_FriggaCheckout::utils/errors.phtml"/>
+        <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
+        <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
+        <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
+        <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
+        <block name="loki.checkout.utils.errors" template="Yireo_LokiCheckout::utils/errors.phtml"/>
     </body>
 </page>

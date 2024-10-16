@@ -4,9 +4,9 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
-use Yireo\FriggaCheckout\Magewire\Generic\FormFieldInterface;
-use Yireo\FriggaCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
@@ -31,17 +31,17 @@ if (false === $magewire->isVisible()) {
 ) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>" x-defer="interact">
     <label for="<?= $magewire->getFieldName() ?>">
         <?= $magewire->getFieldLabel() ?>
-        <?= $magewire->isRequired() ? $block->getBlockHtml('frigga.checkout.utils.required') : '' ?>
+        <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>
     <div class="relative">
         <?= $blockRenderer->render($magewire->getFieldTemplate(), $block, $magewire) ?>
         <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
-            <?= $block->getBlockHtml('frigga.checkout.utils.loader') ?>
+            <?= $block->getBlockHtml('loki.checkout.utils.loader') ?>
         </div>
     </div>
 
     <?php if ($magewire->hasErrors()): ?>
-        <?= $blockRenderer->get('frigga.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
+        <?= $blockRenderer->get('loki.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
     <?php endif; ?>
 
     <?php $script = $block->getChildBlock('script'); ?>

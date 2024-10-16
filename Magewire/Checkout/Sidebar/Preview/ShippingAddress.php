@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\Preview;
+namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
 
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingAddress extends Component
 {

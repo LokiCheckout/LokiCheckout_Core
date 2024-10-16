@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent;
+namespace Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent;
 
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;

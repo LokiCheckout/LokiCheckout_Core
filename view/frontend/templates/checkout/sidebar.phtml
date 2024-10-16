@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
-use Yireo\FriggaCheckout\Magewire\Checkout\Progressbar;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -17,7 +17,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 <div class="<?= $blockClass ?>">
     <?= $block->getChildHtml('login'); ?>
 
-    <div class="frigga-checkout-sidebar-summary card bg-gray-100 p-8 mb-8">
+    <div class="loki-checkout-sidebar-summary card bg-gray-100 p-8 mb-8">
         <h3 class="title text-2xl border-b border-gray-400 mb-4"><?= __('Order Summary') ?></h3>
         <div>
             <?= $block->getChildHtml('coupon_code') ?>
@@ -33,7 +33,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
         </div>
     </div>
 
-    <div class="frigga-checkout-sidebar-preview bg-gray-100 p-8 my-4">
+    <div class="loki-checkout-sidebar-preview bg-gray-100 p-8 my-4">
         <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Order Preview') ?></h3>
         <div class="border-b border-gray-400 my-8">
             <?= $block->getChildHtml('preview') ?>

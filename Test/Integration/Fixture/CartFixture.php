@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Integration\Fixture;
+namespace Yireo\LokiCheckout\Test\Integration\Fixture;
 
 use Magento\Checkout\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;

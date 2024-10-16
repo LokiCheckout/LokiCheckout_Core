@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Exception;
+namespace Yireo\LokiCheckout\Exception;
 
 use RuntimeException;
 

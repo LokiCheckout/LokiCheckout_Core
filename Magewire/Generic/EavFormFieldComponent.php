@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic;
+namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\AttributeBehaviour;
-use Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent\FieldTemplateLocatorBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\AttributeBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\FieldTemplateLocatorBehaviour;
 
 abstract class EavFormFieldComponent extends Component implements FormFieldInterface, EavFormFieldInterface
 {

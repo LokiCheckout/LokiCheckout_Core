@@ -1,19 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Integration\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename;
-use Yireo\FriggaCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\FriggaCheckout\Test\Integration\Fixture\ProductFixture;
-use Yireo\FriggaCheckout\Test\Integration\FriggaTestCase;
+use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename;
+use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
+use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 #[AppArea('frontend')]
-class MiddlenameTest extends FriggaTestCase
+class MiddlenameTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'frigga.checkout.shipping-step.shipping-address.middlename';
+    const BLOCK_NAME = 'loki.checkout.shipping-step.shipping-address.middlename';
 
     use CartFixture;
     use ProductFixture;

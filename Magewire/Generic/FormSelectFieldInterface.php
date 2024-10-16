@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic;
+namespace Yireo\LokiCheckout\Magewire\Generic;
 
-use Yireo\FriggaCheckout\ViewModel\OptionModel\OptionModelInterface;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 interface FormSelectFieldInterface extends FormFieldInterface
 {

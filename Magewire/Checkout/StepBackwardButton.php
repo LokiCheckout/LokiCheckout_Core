@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Exception;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Magewire\Generic\ButtonInterface;
-use Yireo\FriggaCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Magewire\Generic\ButtonInterface;
+use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepBackwardButton extends Component implements ButtonInterface
 {

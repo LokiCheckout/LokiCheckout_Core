@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Step\StepNavigator;
 
 class Progressbar extends Component
 {

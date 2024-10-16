@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep;
+namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
 
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingMethods extends Component
 {

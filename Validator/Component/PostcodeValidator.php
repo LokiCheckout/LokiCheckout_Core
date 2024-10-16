@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Validator\Component;
+namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
-use Yireo\FriggaCheckout\Validator\ValidatorInterface;
+use Yireo\LokiCheckout\Validator\ValidatorInterface;
 
 class PostcodeValidator implements ValidatorInterface
 {

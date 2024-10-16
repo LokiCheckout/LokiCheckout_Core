@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent;
+namespace Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent;
 
 use RuntimeException;
-use Yireo\FriggaCheckout\ViewModel\OptionModel\OptionModelInterface;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 trait OptionsBehaviour
 {

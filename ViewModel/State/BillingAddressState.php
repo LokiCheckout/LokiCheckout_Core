@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel\State;
+namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="frigga.checkout">
-            <block name="frigga.checkout.progressbar" as="progressbar" template="Yireo_FriggaCheckout::checkout/progressbar.phtml">
+        <referenceContainer name="loki.checkout">
+            <block name="loki.checkout.progressbar" as="progressbar" template="Yireo_LokiCheckout::checkout/progressbar.phtml">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\FriggaCheckout\Magewire\Checkout\Progressbar
+                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Progressbar
                     </argument>
                 </arguments>
             </block>

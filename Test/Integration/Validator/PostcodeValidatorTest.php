@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Integration\Validator;
+namespace Yireo\LokiCheckout\Test\Integration\Validator;
 
 use Magento\Framework\App\ObjectManager;
 use PHPUnit\Framework\TestCase;
-use Yireo\FriggaCheckout\Validator\Component\PostcodeValidator;
+use Yireo\LokiCheckout\Validator\Component\PostcodeValidator;
 
 class PostcodeValidatorTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel;
+namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -35,7 +35,7 @@ class CheckoutState implements ArgumentInterface
     }
 
     /**
-     * @deprecated: Use \Yireo\FriggaCheckout\ViewModel\State\ShippingAddressState instead
+     * @deprecated: Use \Yireo\LokiCheckout\ViewModel\State\ShippingAddressState instead
      */
     public function getShippingAddressValue(string $attributeCode)
     {
@@ -43,7 +43,7 @@ class CheckoutState implements ArgumentInterface
     }
 
     /**
- * @deprecated: Use \Yireo\FriggaCheckout\ViewModel\State\BillingAddressState instead
+ * @deprecated: Use \Yireo\LokiCheckout\ViewModel\State\BillingAddressState instead
      */
     public function getBillingAddressValue(string $attributeCode)
     {
@@ -52,7 +52,7 @@ class CheckoutState implements ArgumentInterface
 
 
 /**
- * @deprecated: Use \Yireo\FriggaCheckout\ViewModel\State\ShippingAddressState instead
+ * @deprecated: Use \Yireo\LokiCheckout\ViewModel\State\ShippingAddressState instead
  */
     public function setShippingAddressValue(string $attributeCode, mixed $value): void
     {
@@ -61,7 +61,7 @@ class CheckoutState implements ArgumentInterface
     }
 
     /**
-     * @deprecated: Use \Yireo\FriggaCheckout\ViewModel\State\BillingAddressState instead
+     * @deprecated: Use \Yireo\LokiCheckout\ViewModel\State\BillingAddressState instead
      */
     public function setBillingAddressValue(string $attributeCode, mixed $value): void
     {

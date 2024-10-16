@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Observer;
+namespace Yireo\LokiCheckout\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\LayoutInterface;
-use Yireo\FriggaCheckout\Config\Config;
+use Yireo\LokiCheckout\Config\Config;
 
 class EnableCheckout implements ObserverInterface
 {
@@ -28,10 +28,10 @@ class EnableCheckout implements ObserverInterface
             return;
         }
 
-        $this->layout->getUpdate()->addHandle('frigga_checkout');
+        $this->layout->getUpdate()->addHandle('loki_checkout');
 
         if (in_array('hyva_checkout_index_index', $handles)) {
-            $this->layout->getUpdate()->addHandle('hyva_frigga_checkout');
+            $this->layout->getUpdate()->addHandle('hyva_loki_checkout');
         }
     }
 }

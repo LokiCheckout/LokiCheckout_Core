@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
-use Yireo\FriggaCheckout\Magewire\Checkout\Progressbar;
-use Yireo\FriggaCheckout\Step\StepNavigator;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
+use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -36,7 +36,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                     </button>
                 <?php endif; ?>
                 <?php if (false === $stepNavigator->isLastStep($step)): ?>
-                    <?= $block->getBlockHtml('frigga.checkout.utils.separator') ?>
+                    <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>

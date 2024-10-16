@@ -1,6 +1,6 @@
 <?php
 
-namespace Yireo\FriggaCheckout\ViewModel\OptionModel;
+namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
 use Magewirephp\Magewire\Component;
 

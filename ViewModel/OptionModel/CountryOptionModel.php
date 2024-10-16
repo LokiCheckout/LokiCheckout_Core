@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel\OptionModel;
+namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

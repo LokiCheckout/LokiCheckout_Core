@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
 

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic;
+namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magewirephp\Magewire\Component;
 use RuntimeException;
-use Yireo\FriggaCheckout\Util\Context;
-use Yireo\FriggaCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiCheckout\Util\Context;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 {
@@ -33,11 +33,11 @@ abstract class ShippingAddressFormFieldComponent extends EavFormFieldComponent
 
     public function getNameInLayout(): string
     {
-        return 'frigga.checkout.shipping.'.$this->getFieldName();
+        return 'loki.checkout.shipping.'.$this->getFieldName();
     }
 
     /**
-     * Added via \Yireo\FriggaCheckout\Plugin\SetterInjectionPlugin
+     * Added via \Yireo\LokiCheckout\Plugin\SetterInjectionPlugin
      *
      * @param ShippingAddressState $shippingAddressState
      * @return void

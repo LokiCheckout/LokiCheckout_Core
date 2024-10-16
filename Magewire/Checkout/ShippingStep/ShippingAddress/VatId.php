@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Override;
-use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Validator\Component\VatIdValidator;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Validator\Component\VatIdValidator;
 use Magento\Customer\Model\Vat as VatModel;
 
 class VatId extends ShippingAddressFormFieldComponent
@@ -20,10 +20,10 @@ class VatId extends ShippingAddressFormFieldComponent
     public function getFieldTemplate(): string
     {
         if ($this->isEu()) {
-            return 'Yireo_FriggaCheckout::generic/field/vat_id_eu.phtml';
+            return 'Yireo_LokiCheckout::generic/field/vat_id_eu.phtml';
         }
 
-        return 'Yireo_FriggaCheckout::generic/field/text.phtml';
+        return 'Yireo_LokiCheckout::generic/field/text.phtml';
     }
 
     #[Override]

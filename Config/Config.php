@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Config;
+namespace Yireo\LokiCheckout\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
@@ -19,16 +19,16 @@ class Config
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/enable');
+        return (bool)$this->scopeConfig->getValue('yireo_loki/general/enable');
     }
 
     public function enableSameAsBilling(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/enable_same_as_billing');
+        return (bool)$this->scopeConfig->getValue('yireo_loki/general/enable_same_as_billing');
     }
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_frigga/general/debug');
+        return (bool)$this->scopeConfig->getValue('yireo_loki/general/debug');
     }
 }

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Directory\Helper\Data as DirectoryData;
 use Override;
-use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Validator\Component\PostcodeValidator;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Validator\Component\PostcodeValidator;
 
 class Postcode extends ShippingAddressFormFieldComponent
 {

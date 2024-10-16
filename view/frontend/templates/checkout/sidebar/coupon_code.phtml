@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
-use Yireo\FriggaCheckout\Magewire\Checkout\Sidebar\CouponCode;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var CouponCode $magewire */
@@ -17,7 +17,7 @@ $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
 <div class="<?= $blockClass ?> border-b border-gray-400 my-4">
-    <div x-data="FriggaCheckoutSidebarCouponCode">
+    <div x-data="LokiCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>
             <button class="btn-remove btn btn-secondary mt-4"
@@ -31,7 +31,7 @@ $couponCode = $quote->getCouponCode();
             <button class="btn-expand text-sm" type="button" @click="toggle">
                 <?= __('Discount Code') ?>
                 <img alt="<?= __('Expand') ?>"
-                     src="<?= $block->getViewFileUrl('Yireo_FriggaCheckout::images/chevron-down.svg'); ?>"
+                     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
                      class="loader <?= $blockClass ?> inline-block"
                      width="15"
                      height="15">

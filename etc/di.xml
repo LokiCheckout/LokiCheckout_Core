@@ -4,20 +4,20 @@
     <type name="Magewirephp\Magewire\Model\ComponentManager">
         <arguments>
             <argument name="hydrationPool" xsi:type="array">
-                <item name="Yireo_FriggaCheckout::setterInjectionHydrator" xsi:type="array">
-                    <item name="class" xsi:type="object">Yireo\FriggaCheckout\Magewire\Hydrator\SetterInjectionHydrator</item>
+                <item name="Yireo_LokiCheckout::setterInjectionHydrator" xsi:type="array">
+                    <item name="class" xsi:type="object">Yireo\LokiCheckout\Magewire\Hydrator\SetterInjectionHydrator</item>
                 </item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep">
         <arguments>
-            <argument name="stepValidator" xsi:type="object">Yireo\FriggaCheckout\Validator\VirtualShippingStepValidator</argument>
+            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>
         </arguments>
     </type>
 
-    <virtualType type="Yireo\FriggaCheckout\Validator\StepValidator" name="Yireo\FriggaCheckout\Validator\VirtualShippingStepValidator" >
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator" >
         <arguments>
             <argument name="validationRules" xsi:type="array">
                 <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
@@ -26,13 +26,13 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\FriggaCheckout\Magewire\Checkout\BillingStep">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\BillingStep">
         <arguments>
-            <argument name="stepValidator" xsi:type="object">Yireo\FriggaCheckout\Validator\VirtualBillingStepValidator</argument>
+            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualBillingStepValidator</argument>
         </arguments>
     </type>
 
-    <virtualType type="Yireo\FriggaCheckout\Validator\StepValidator" name="Yireo\FriggaCheckout\Validator\VirtualBillingStepValidator" >
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualBillingStepValidator" >
         <arguments>
             <argument name="validationRules" xsi:type="array">
                 <item name="billingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
@@ -45,12 +45,12 @@
     <type name="Magewirephp\Magewire\Model\ComponentResolver">
         <arguments>
             <argument name="resolvers" xsi:type="array">
-                <item name="frigga_resolver" xsi:type="object">Yireo\FriggaCheckout\Magewire\Resolver\FriggaResolver</item>
+                <item name="loki_resolver" xsi:type="object">Yireo\LokiCheckout\Magewire\Resolver\LokiResolver</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\FriggaCheckout\Magewire\Resolver\FriggaResolver">
+    <type name="Yireo\LokiCheckout\Magewire\Resolver\LokiResolver">
         <arguments>
             <argument name="componentMapping" xsi:type="array">
                 <item name="content_schedule_block0" xsi:type="array">

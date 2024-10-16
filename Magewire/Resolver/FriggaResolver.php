@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Resolver;
+namespace Yireo\LokiCheckout\Magewire\Resolver;
 
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -14,7 +14,7 @@ use Magewirephp\Magewire\Model\RequestInterface as MagewireRequestInterface;
 use Magewirephp\Magewire\Model\Component\Resolver\Layout as LayoutResolver;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class FriggaResolver implements ResolverInterface
+class LokiResolver implements ResolverInterface
 {
     public function __construct(
         private LayoutResolver $layoutResolver,
@@ -26,7 +26,7 @@ class FriggaResolver implements ResolverInterface
 
     public function getName(): string
     {
-        return 'frigga';
+        return 'loki';
     }
 
     public function complies(AbstractBlock $block): bool

@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Unit\Step;
+namespace Yireo\LokiCheckout\Test\Unit\Step;
 
 use Magento\Checkout\Model\Session;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\TestCase;
-use Yireo\FriggaCheckout\Step\StepInterface;
-use Yireo\FriggaCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepNavigatorTest extends TestCase
 {

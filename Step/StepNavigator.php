@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Step;
+namespace Yireo\LokiCheckout\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Exception\UnknownStepException;
+use Yireo\LokiCheckout\Exception\UnknownStepException;
 
 class StepNavigator implements ArgumentInterface
 {
@@ -145,7 +145,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         /** @var Template $checkoutBlock */
-        $checkoutBlock = $this->layout->getBlock('frigga.checkout');
+        $checkoutBlock = $this->layout->getBlock('loki.checkout');
         foreach ($checkoutBlock->getChildNames() as $childName) {
             $childBlock = $this->layout->getBlock($childName);
             if (false === $childBlock instanceof Template) {

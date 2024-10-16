@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magento\Framework\DataObject\Copy;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Config\Config;
-use Yireo\FriggaCheckout\Step\StepInterface;
-use Yireo\FriggaCheckout\Validator\ValidatorInterface;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Validator\ValidatorInterface;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class BillingStep extends Component implements StepInterface
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Integration;
+namespace Yireo\LokiCheckout\Test\Integration;
 
 use PHPUnit\Framework\TestCase;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
@@ -17,7 +17,7 @@ class ModuleTest extends TestCase
     {
         // @todo: Follow module.xml dependencies instead
         $requiredModules = [
-            'Yireo_FriggaCheckout',
+            'Yireo_LokiCheckout',
             'Magewirephp_Magewire',
             'Magento_CatalogInventory'
         ];

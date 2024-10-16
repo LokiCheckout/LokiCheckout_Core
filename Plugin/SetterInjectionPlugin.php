@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Plugin;
+namespace Yireo\LokiCheckout\Plugin;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magewirephp\Magewire\Component;
 use Magewirephp\Magewire\Model\ComponentResolver;
-use Yireo\FriggaCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\FriggaCheckout\Util\FieldTemplateLocator;
-use Yireo\FriggaCheckout\ViewModel\State\BillingAddressState;
-use Yireo\FriggaCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Util\FieldTemplateLocator;
+use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class SetterInjectionPlugin
 {

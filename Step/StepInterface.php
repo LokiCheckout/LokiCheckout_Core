@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Step;
+namespace Yireo\LokiCheckout\Step;
 
 use Exception;
 

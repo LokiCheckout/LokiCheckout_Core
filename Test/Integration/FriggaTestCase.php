@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Test\Integration;
+namespace Yireo\LokiCheckout\Test\Integration;
 
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Framework\App\Response\Http;
@@ -9,11 +9,11 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magewirephp\Magewire\Component;
-use Yireo\FriggaCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname;
-use Yireo\FriggaCheckout\Test\Integration\Fixture\ProductFixture;
+use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname;
+use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
 
-class FriggaTestCase extends MagewireComponentTestCase
+class LokiTestCase extends MagewireComponentTestCase
 {
     use ProductFixture;
 

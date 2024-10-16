@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\ViewModel;
+namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\BlockInterface;
@@ -23,7 +23,7 @@ class BlockRenderer implements ArgumentInterface
     public function render(string $templateName, Template $ancestorBlock, ?Component $component = null): string
     {
         if (false === strstr($templateName, '::')) {
-            $templateName = 'Yireo_FriggaCheckout::' . $templateName;
+            $templateName = 'Yireo_LokiCheckout::' . $templateName;
         }
 
         $block = $this->layout->createBlock(Template::class)

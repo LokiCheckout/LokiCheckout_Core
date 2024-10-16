@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Generic\EavFormFieldComponent;
+namespace Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent;
 
-use Yireo\FriggaCheckout\Util\FieldTemplateLocator;
+use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
 trait FieldTemplateLocatorBehaviour
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Validator;
+namespace Yireo\LokiCheckout\Validator;
 
 interface ValidatorInterface
 {

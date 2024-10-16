@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Magewire\Checkout\BillingStep;
+namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
 
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Override;
-use Yireo\FriggaCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
 {

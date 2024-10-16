@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\FriggaCheckout\Observer;
+namespace Yireo\LokiCheckout\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
-use Yireo\FriggaCheckout\Config\Config;
-use Yireo\FriggaCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
@@ -24,7 +24,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^frigga./', (string)$block->getNameInLayout())) {
+        if (false === preg_match('/^loki./', (string)$block->getNameInLayout())) {
             return;
         }
 
