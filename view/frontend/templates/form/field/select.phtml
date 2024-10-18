@@ -13,11 +13,11 @@ $magewire->setOptionModel($optionModel);
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model="<?= $magewire->getModelName() ?>"
-    <?php if (false === $magewire->validate()): ?>
-        aria-invalid="true"
+    <?php if ($magewire->hasErrors()): ?>
+        aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
-    class="form-input block w-full invalid:border-red-500 valid:border-green-500">
+    class="form-input block w-full data-[invalid=true]:border-red-500">
     <?php foreach ($optionModel->getOptions($magewire) as $optionValue => $optionLabel): ?>
     <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>

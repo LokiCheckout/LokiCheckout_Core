@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent;
+namespace Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 use RuntimeException;
 use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;

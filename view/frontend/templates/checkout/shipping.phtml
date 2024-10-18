@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
@@ -15,6 +16,9 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">
+    <div class="mb-8">
+        <?= $block->getChildHtml('email') ?>
+    </div>
     <div class="mb-8">
         <?= $block->getChildHtml('shipping-address') ?>
     </div>

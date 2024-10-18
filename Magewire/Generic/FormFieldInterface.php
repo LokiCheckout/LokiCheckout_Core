@@ -63,6 +63,13 @@ interface FormFieldInterface
     public function isRequired(): bool;
 
     /**
+     * Determine if this field uses client-side validation
+     *
+     * @return bool
+     */
+    public function hasClientSideValidation(): bool;
+
+    /**
      * Determine if this field its value is valid or not.
      *
      * @return bool

@@ -2,16 +2,21 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var string $blockClass */
 /** @var bool $debug */
 /** @var ShippingMethods $magewire */
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $shippingMethods = $magewire->shippingMethods;
 ?>
 <div class="<?= $blockClass ?>">
-    <h3 class="step-title text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Methods') ?></h3>
+    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
 
     <ul role="list">
         <?php foreach ($shippingMethods as $shippingCode => $shippingMethod): ?>

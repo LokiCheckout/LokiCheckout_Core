@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
+use Yireo\LokiCheckout\Magewire\Checkout\Email;
+use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Email $magewire */
+/** @var string $blockClass */
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+?>
+<div class="<?= $blockClass ?>">
+    <?= $blockRenderer->render('Yireo_LokiCheckout::form/field.phtml', $block, $magewire) ?>
+</div>

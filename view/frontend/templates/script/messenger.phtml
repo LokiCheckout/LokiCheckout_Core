@@ -1,0 +1,14 @@
+<script>
+    window.LokiCheckoutMessenger = {
+        add: function(errorMessage, htmlElement) {
+            if (!htmlElement) {
+                console.error('Error message sent to empty HTML element');
+                return;
+            }
+
+            const errorElement = document.createElement("li");
+            errorElement.textContent = errorMessage;
+            htmlElement.appendChild(errorElement);
+        }
+    }
+</script>

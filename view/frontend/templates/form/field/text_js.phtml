@@ -1,0 +1,50 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
+
+/** @var Template $block */
+/** @var Template $fieldBlock */
+/** @var FormFieldInterface $magewire */
+$fieldBlock = $block->getFieldBlock();
+$magewire = $this->getComponent();
+?>
+<input
+    wire:loading.attr="aria-busy"
+    wire:loading.class="disabled"
+    x-ref="field"
+    x-model="value"
+    @change="validate"
+    <?php if ($magewire->hasErrors()): ?>
+        aria-invalid="true" data-invalid="true"
+    <?php endif ?>
+    <?= $magewire->isRequired() ? 'required' : '' ?>
+    type="<?= $magewire->getInputType() ?>"
+    class="form-input block w-full data-[invalid=true]:border-red-500 mb-4" >
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+            value: '',
+            init() {
+                this.value = Magewire.find(this.$root.getAttribute('wire:id')).get('value');
+            },
+            validate() {
+                const magewire = Magewire.find(this.$root.getAttribute('wire:id'));
+                const isRequired = <?= $magewire->isRequired() ? 'true' : 'false' ?>;
+                if (!this.value && isRequired) {
+                    window.LokiCheckoutMessenger.add('Value is required', this.$refs.errors);
+                    return false;
+                }
+
+                // @todo: Trigger an event or hook or something to allow customization
+                magewire.call('setValue', this.value);
+
+                // @todo: This triggers callMethod($set, ['value', 'Jisse'])?
+                // and not syncInput()
+                return true;
+            }
+        }));
+    });
+</script>

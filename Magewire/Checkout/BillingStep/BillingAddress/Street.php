@@ -3,11 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
 use Yireo\LokiCheckout\Util\Context;
 
-class Street extends BillingAddressFormFieldComponent implements FormTextMultipleFieldInterface
+class Street extends BillingAddressFieldComponent implements FormTextMultipleFieldInterface
 {
     public array $values = [];
     private int $counter = 0;

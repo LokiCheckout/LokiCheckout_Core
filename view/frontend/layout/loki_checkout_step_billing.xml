@@ -30,7 +30,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.prefix" as="prefix"
                         ifconfig="customer/address/prefix_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Prefix
@@ -44,7 +44,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.firstname" as="firstname"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Firstname
@@ -55,7 +55,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.middlename" as="middlename"
                         ifconfig="customer/address/middlename_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Middlename
@@ -65,7 +65,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.lastname" as="lastname"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Lastname
@@ -76,7 +76,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.suffix" as="suffix"
                         ifconfig="customer/address/suffix_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Suffix
@@ -86,7 +86,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.street" as="street"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street
@@ -97,7 +97,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.postcode" as="postcode"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Postcode
@@ -107,7 +107,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.city" as="city"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\City
@@ -117,7 +117,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.region" as="region"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Region
@@ -130,7 +130,7 @@
 
                     <block
                         name="loki.checkout.billing-step.billing-address.country_id" as="country_id"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\CountryId
@@ -144,7 +144,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.company" as="company"
                         ifconfig="customer/address/company_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Company
@@ -155,7 +155,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.telephone" as="telephone"
                         ifconfig="customer/address/telephone_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Telephone
@@ -166,7 +166,7 @@
                     <block
                         name="loki.checkout.billing-step.billing-address.vat_id" as="vat_id"
                         ifconfig="customer/address/taxvat_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" shared="false">
                                 Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\VatId

@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class Items extends Component
 {
-    public array $items = [];
+    public array|null $items = [];
 
     public function __construct(
         private CheckoutState $checkoutState,

@@ -3,76 +3,53 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Customer\Model\Vat as VatModel;
-use Yireo\LokiCheckout\Validator\ValidatorInterface;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
+use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
-class VatIdValidator implements ValidatorInterface
+class VatIdValidator implements AddressFieldValidatorInterface
 {
-    private string $vatId;
-    private string $countryId;
-
     public function __construct(
+        private AddressStateInterface $addressState,
+        private CountryIdVatPrefixMapping $countryIdVatPrefixMapping,
         private VatModel $vatModel
     ) {
     }
-
-    public function setVatId(string $vatId): VatIdValidator
+    public function validate(AddressFieldComponent $component): bool
     {
+        $countryId = $this->addressState->load('country_id');
         // @todo: Test whether this could be hacked?
-        $this->vatId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($vatId));
+        // @todo: Move this to a filter
+        $countryId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($countryId));
 
-        return $this;
-    }
-
-    public function setCountryId(string $countryId): VatIdValidator
-    {
+        $vatId = $component->getValue();
         // @todo: Test whether this could be hacked?
-        $this->countryId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($countryId));
+        // @todo: Move this to a filter
+        $vatId = preg_replace('/[^A-Z0-9]+/', '', strtoupper($vatId));
 
-        return $this;
-    }
-
-    public function validate(): true|array
-    {
-        if (empty($this->vatId)) {
+        if (empty($vatId) || empty($countryId)) {
             return true;
         }
 
-        if (empty($this->countryId)) {
+        if (false === $this->vatModel->isCountryInEU($countryId)) {
             return true;
         }
 
-        if (false === $this->vatModel->isCountryInEU($this->countryId)) {
-            return true;
-        }
-
-        $vatId = $this->vatId;
-        $vatCountryId = $this->getCountryIdToVatCountryId($this->countryId);
-        if (!preg_match('/^'.$this->countryId.'/', $this->countryId)) {
-            return ['Your VAT ID does not start with the right country code'];
+        $vatCountryId = $this->countryIdVatPrefixMapping->convert($countryId);
+        if (!preg_match('/^'.$countryId.'/', $countryId)) {
+            $component->error('value', 'Your VAT ID does not start with the right country code');
+            return false;
         }
 
         if (strlen($vatId) < 10) {
-            return ['Your VAT ID is too short'];
+            $component->error('value', 'Your VAT ID is too short');
+            return false;
         }
 
-        return $this->validateOnline($vatCountryId, $vatId);
+        return $this->validateOnline($component, $vatCountryId, $vatId);
     }
 
-    private function getCountryIdToVatCountryId(string $countryId): string
-    {
-        $mapping = [
-            'AT' => 'ATU',
-            'GR' => 'EL',
-        ];
-
-        if (array_key_exists($countryId, $mapping)) {
-            return $mapping[$countryId];
-        }
-
-        return $countryId;
-    }
-
-    private function validateOnline(string $vatCountryId, string $vatId): true|array
+    private function validateOnline(AddressFieldComponent $component, string $vatCountryId, string $vatId): bool
     {
         $merchantCountryCode = $this->vatModel->getMerchantCountryCode();
         $merchantVatNumber = $this->vatModel->getMerchantVatNumber();
@@ -92,6 +69,8 @@ class VatIdValidator implements ValidatorInterface
             return true;
         }
 
-        return [(string)$result->getRequestMessage()];
+
+        $component->error('value', (string)$result->getRequestMessage());
+        return false;
     }
 }

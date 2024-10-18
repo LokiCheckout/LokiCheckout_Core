@@ -2,70 +2,44 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Override;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\LokiCheckout\Validator\Component\VatIdValidator;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 use Magento\Customer\Model\Vat as VatModel;
+use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
 
-class VatId extends ShippingAddressFormFieldComponent
+class VatId extends ShippingAddressFieldComponent
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
+    protected array $validators = ['vatId'];
+    protected array $filters = ['uppercase'];
 
     public function __construct(
+        private CountryIdVatPrefixMapping $countryIdVatPrefixMapping,
         private VatModel $vatModel,
-        private VatIdValidator $vatIdValidator,
     ) {
     }
 
     public function getFieldTemplate(): string
     {
         if ($this->isEu()) {
-            return 'Yireo_LokiCheckout::generic/field/vat_id_eu.phtml';
+            return 'Yireo_LokiCheckout::form/field/vat_id_eu.phtml';
         }
 
-        return 'Yireo_LokiCheckout::generic/field/text.phtml';
-    }
-
-    #[Override]
-    public function boot(): void
-    {
-        parent::boot();
-        $this->value = strtoupper($this->value);
-    }
-
-    #[Override]
-    public function validate(): bool
-    {
-        if (parent::validate() === false) {
-            return false;
-        }
-
-        $countryId = (string)$this->shippingAddressState->load('country_id');
-        $errors = $this->vatIdValidator
-            ->setVatId($this->getValue())
-            ->setCountryId($countryId)
-            ->validate();
-
-        return $this->setErrorsFromValidation($errors);
+        return 'Yireo_LokiCheckout::form/field/text.phtml';
     }
 
     public function isEu(): bool
     {
-        // @todo: Billing or shipping?
         // @todo: Does the shipping address need VAT ID after all?
-        $countryId = $this->getCountryIdFromQuote();
-        return $this->vatModel->isCountryInEU($countryId);
+        return $this->vatModel->isCountryInEU($this->getCountryIdFromQuote());
     }
 
     public function getVatCountryId(): string
     {
-        $countryId = $this->getCountryIdFromQuote();
-        // @todo: Greek exception
-        return $countryId;
+        return $this->countryIdVatPrefixMapping->convert($this->getCountryIdFromQuote());
     }
 
     private function getCountryIdFromQuote(): string
     {
-        return (string)$this->shippingAddressState->load('country_id');
+        return (string)$this->addressState->load('country_id');
     }
 }

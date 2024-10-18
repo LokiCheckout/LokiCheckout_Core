@@ -3,11 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Override;
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
-class Region extends ShippingAddressFormFieldComponent implements FormTextSelectFieldInterface
+class Region extends ShippingAddressFieldComponent implements FormTextSelectFieldInterface
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
 

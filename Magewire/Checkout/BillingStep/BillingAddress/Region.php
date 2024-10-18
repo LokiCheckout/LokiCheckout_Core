@@ -3,11 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 use Override;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
-class Region extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
+class Region extends BillingAddressFieldComponent implements FormTextSelectFieldInterface
 {
     protected $listeners = ['billingStepSave' => 'refresh'];
 

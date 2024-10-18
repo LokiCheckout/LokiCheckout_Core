@@ -2,15 +2,20 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentMethods $magewire */
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $paymentMethods = $magewire->paymentMethods;
 ?>
 <div>
-    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Payment Methods') ?></h3>
+    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Payment Methods']) ?>
 
     <ul role="list">
         <?php foreach ($paymentMethods as $paymentMethodCode => $paymentMethodTitle): ?>

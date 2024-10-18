@@ -3,17 +3,16 @@
 namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Model\Quote\Address;
 
-class ShippingAddressState implements ArgumentInterface
+class ShippingAddressState implements AddressStateInterface
 {
     public function __construct(
         private CheckoutSession $checkoutSession
     ) {
     }
 
-    public function load(string $attributeCode)
+    public function load(string $attributeCode): mixed
     {
         return $this->getShippingAddress()->getData($attributeCode);
     }

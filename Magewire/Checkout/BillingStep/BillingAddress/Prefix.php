@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
 
-class Prefix extends BillingAddressFormFieldComponent implements FormTextSelectFieldInterface
+class Prefix extends BillingAddressFieldComponent implements FormTextSelectFieldInterface
 {
     use OptionsBehaviour;
 }

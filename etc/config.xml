@@ -5,7 +5,7 @@
             <general>
                 <enable>1</enable>
                 <enable_same_as_billing>1</enable_same_as_billing>
-                <debug>1</debug>
+                <debug>0</debug>
             </general>
         </yireo_loki>
     </default>

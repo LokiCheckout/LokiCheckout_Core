@@ -7,6 +7,7 @@ use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
+use RuntimeException;
 
 class BlockRenderer implements ArgumentInterface
 {
@@ -15,9 +16,25 @@ class BlockRenderer implements ArgumentInterface
     ) {
     }
 
-    public function get(string $blockName): BlockInterface|Template
+    public function get(string $blockName, array $data = []): Template
     {
-        return $this->layout->getBlock($blockName);
+        $block = $this->layout->getBlock($blockName);
+        if (false === $block instanceof Template) {
+            throw new RuntimeException('Unexpected block type');
+        }
+
+        $block->addData($data);
+        return $block;
+    }
+
+    /**
+     * @param string $blockName
+     * @param array $data
+     * @return string
+     */
+    public function html(string $blockName, array $data = []): string
+    {
+        return $this->get($blockName, $data)->toHtml();
     }
 
     public function render(string $templateName, Template $ancestorBlock, ?Component $component = null): string

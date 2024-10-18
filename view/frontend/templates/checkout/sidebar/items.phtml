@@ -7,6 +7,10 @@ use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
 /** @var Template $block */
 /** @var Items $magewire */
 /** @var string $blockClass */
+
+if (empty($magewire->items)) {
+    return '';
+}
 ?>
 <div class="<?= $blockClass ?> border-b border-gray-400 my-8">
     <ul role="list">

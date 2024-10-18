@@ -4,10 +4,10 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Override;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
 
-class Street extends ShippingAddressFormFieldComponent implements FormTextMultipleFieldInterface
+class Street extends ShippingAddressFieldComponent implements FormTextMultipleFieldInterface
 {
     public array $values = [];
     private int $counter = 0;
@@ -26,7 +26,7 @@ class Street extends ShippingAddressFormFieldComponent implements FormTextMultip
 
     public function updatedValues($value)
     {
-        $this->shippingAddressState->save($this->getFieldName(), implode("\n", $value));
+        $this->addressState->save($this->getFieldName(), implode("\n", $value));
         $this->emit('shippingStepSave');
 
         return $value;

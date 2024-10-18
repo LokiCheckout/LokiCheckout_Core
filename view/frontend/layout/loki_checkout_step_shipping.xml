@@ -9,6 +9,16 @@
                 </arguments>
 
                 <block
+                    name="loki.checkout.shipping-step.email" as="email"
+                    template="Yireo_LokiCheckout::checkout/email.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object" >
+                            Yireo\LokiCheckout\Magewire\Checkout\Email
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block
                     name="loki.checkout.shipping-step.shipping-address" as="shipping-address"
                     template="Yireo_LokiCheckout::checkout/shipping/address.phtml">
                     <arguments>
@@ -20,7 +30,7 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.prefix" as="prefix"
                         ifconfig="customer/address/prefix_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
@@ -34,7 +44,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.firstname" as="firstname"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
@@ -46,7 +56,7 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.middlename" as="middlename"
                         ifconfig="customer/address/middlename_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
@@ -56,7 +66,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.lastname" as="lastname"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
@@ -68,7 +78,7 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.suffix" as="suffix"
                         ifconfig="customer/address/suffix_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
@@ -78,7 +88,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.street" as="street"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
@@ -89,7 +99,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.postcode" as="postcode"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
@@ -99,7 +109,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.city" as="city"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
@@ -109,7 +119,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.region" as="region"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
@@ -122,7 +132,7 @@
 
                     <block
                         name="loki.checkout.shipping-step.shipping-address.country_id" as="country_id"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
@@ -136,7 +146,7 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.company" as="company"
                         ifconfig="customer/address/company_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
@@ -147,7 +157,7 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.telephone" as="telephone"
                         ifconfig="customer/address/telephone_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
@@ -158,19 +168,19 @@
                     <block
                         name="loki.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
                         ifconfig="customer/address/taxvat_show"
-                        template="Yireo_LokiCheckout::generic/field.phtml">
+                        template="Yireo_LokiCheckout::form/field.phtml">
                         <arguments>
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
                         <block name="loki.checkout.shipping-step.shipping-address.vat_id.field" as="field"
-                               template="Yireo_LokiCheckout::generic/field/vat_id.phtml">
+                               template="Yireo_LokiCheckout::form/field/vat_id.phtml">
                             <block name="loki.checkout.shipping-step.shipping-address.vat_id.field.vat_id_eu" as="field"
-                                   template="Yireo_LokiCheckout::generic/field/vat_id_eu.phtml"/>
+                                   template="Yireo_LokiCheckout::form/field/vat_id_eu.phtml"/>
                         </block>
                         <block name="loki.checkout.vat_id_eu_script" as="script"
-                               template="Yireo_LokiCheckout::generic/field/vat_id_eu_script.phtml"
+                               template="Yireo_LokiCheckout::form/field/vat_id_eu_script.phtml"
                         />
                     </block>
                 </block>

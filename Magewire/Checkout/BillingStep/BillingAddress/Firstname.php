@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
 
-class Firstname extends BillingAddressFormFieldComponent
+class Firstname extends BillingAddressFieldComponent
 {
 }

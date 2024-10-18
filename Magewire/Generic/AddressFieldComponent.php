@@ -3,15 +3,30 @@
 namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\AttributeBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\FieldTemplateLocatorBehaviour;
+use RuntimeException;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AddressStateBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AttributeBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FieldTemplateLocatorBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FilterBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\ValidateBehaviour;
+use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
-abstract class EavFormFieldComponent extends Component implements FormFieldInterface, EavFormFieldInterface
+abstract class AddressFieldComponent extends Component implements FormFieldInterface, AddressFieldInterface
 {
     use AttributeBehaviour;
+    use FilterBehaviour;
+    use ValidateBehaviour;
     use FieldTemplateLocatorBehaviour;
+    use AddressStateBehaviour;
+
 
     public string $value = '';
+
+    public function booted(): void
+    {
+        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
+    }
+
 
     public function getFieldName(): string
     {
@@ -19,6 +34,7 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
         // @doc: Field name is based upon non-namespaced classname
 
         $baseClassname = basename(str_replace('\\', '/', static::class));
+
         return strtolower(trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $baseClassname), '_'));
     }
 
@@ -26,7 +42,7 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
     {
         $parentBlock = $this->getParent();
         if ($parentBlock && $parentBlock->getFieldLabel()) {
-            return (string) $parentBlock->getFieldLabel(); // @doc: You can override a field label via XML layout
+            return (string)$parentBlock->getFieldLabel(); // @doc: You can override a field label via XML layout
         }
 
         return $this->getAttributeLabel();
@@ -49,8 +65,22 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
 
     public function setValue(mixed $value)
     {
-        $this->value = $value;
+        $this->value = $this->filter((string)$value);
+        $this->validate();
+
+        if (false === $this->hasErrors()) {
+            $this->save($value);
+            $this->emit(static::class.'::afterSetValue');
+        }
     }
+
+    public function updated($value, string $name)
+    {
+        $this->setValue($value);
+        return $value;
+    }
+
+    abstract public function save($value): void;
 
     abstract public function getNameInLayout(): string;
 
@@ -59,14 +89,9 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
         return (bool)$this->getAttribute()->getIsRequired();
     }
 
-    public function validate(): bool
+    public function hasClientSideValidation(): bool
     {
-        if ($this->isRequired() && empty($this->value)) {
-            $this->error('value', (string)__('Value is required'));
-            return false;
-        }
-
-        return false === $this->hasErrors();
+        return (bool)$this->getParent()->getClientSideValidation();
     }
 
     public function isVisible(): bool
@@ -77,6 +102,7 @@ abstract class EavFormFieldComponent extends Component implements FormFieldInter
     public function getJsName()
     {
         $name = ucwords($this->getNameInLayout(), '_.');
+
         return preg_replace('#[_.]+#', '', $name);
     }
 

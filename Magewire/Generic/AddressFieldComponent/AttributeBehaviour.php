@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent;
+namespace Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;

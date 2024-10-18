@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\EavFormFieldComponent\OptionsBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\FormSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 
-class CountryId extends ShippingAddressFormFieldComponent implements FormSelectFieldInterface
+class CountryId extends ShippingAddressFieldComponent implements FormSelectFieldInterface
 {
     use OptionsBehaviour;
 

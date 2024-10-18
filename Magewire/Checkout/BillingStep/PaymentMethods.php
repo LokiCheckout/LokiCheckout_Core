@@ -35,5 +35,6 @@ class PaymentMethods extends Component
         $quote->getPayment()->importData(['method' => $value]);
         $quote->collectTotals()->save();
 
+        return $value;
     }
 }

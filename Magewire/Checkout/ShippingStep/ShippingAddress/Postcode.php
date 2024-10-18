@@ -2,18 +2,18 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Magento\Directory\Helper\Data as DirectoryData;
 use Override;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
-use Yireo\LokiCheckout\Validator\Component\PostcodeValidator;
+use Magento\Directory\Helper\Data as DirectoryData;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 
-class Postcode extends ShippingAddressFormFieldComponent
+class Postcode extends ShippingAddressFieldComponent
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
+    protected array $validators = ['postcode'];
+    protected array $filters = ['uppercase'];
 
     public function __construct(
         private DirectoryData $directoryData,
-        private PostcodeValidator $postcodeValidator,
     ) {
     }
 
@@ -21,24 +21,8 @@ class Postcode extends ShippingAddressFormFieldComponent
     public function isRequired(): bool
     {
         $countries = $this->directoryData->getCountriesWithOptionalZip();
-        $countryId = $this->shippingAddressState->load('country_id');
+        $countryId = $this->addressState->load('country_id');
 
         return false === in_array($countryId, $countries);
-    }
-
-    #[Override]
-    public function validate(): bool
-    {
-        if (parent::validate() === false) {
-            return false;
-        }
-
-        $countryId = $this->shippingAddressState->load('country_id');
-        $errors = $this->postcodeValidator
-            ->setCountryId($countryId)
-            ->setPostcode($this->getValue())
-            ->validate();
-
-        return $this->setErrorsFromValidation($errors);
     }
 }

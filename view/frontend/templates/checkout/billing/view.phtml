@@ -7,7 +7,5 @@ use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 /** @var string $blockClass */
 ?>
 <div class="<?= $blockClass ?> mb-4">
-    <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Billing Address') ?></h3>
-
     <address><?= $magewire->getHtml() ?></address>
 </div>

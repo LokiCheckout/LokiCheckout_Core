@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <update handle="loki_checkout_remove_other" />
     <update handle="loki_checkout_sidebar" />
     <update handle="loki_checkout_progressbar"/>
     <update handle="loki_checkout_login"/>
@@ -7,10 +8,6 @@
     <update handle="loki_checkout_step_billing"/>
 
     <body>
-        <!-- @todo: Find an alternative for this -->
-        <referenceBlock name="checkout.root" remove="true" />
-        <referenceBlock name="fallback.module.missing" remove="true"/>
-
         <referenceContainer name="content">
             <block name="loki.checkout" template="Yireo_LokiCheckout::checkout.phtml" cacheable="false">
                 <arguments>
@@ -19,6 +16,12 @@
             </block>
         </referenceContainer>
 
+        <referenceContainer name="before.body.end">
+            <block name="loki.checkout.script.aria-invalid" template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
+            <block name="loki.checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>
+        </referenceContainer>
+
+        <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>

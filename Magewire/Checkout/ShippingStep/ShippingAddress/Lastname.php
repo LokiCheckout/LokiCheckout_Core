@@ -3,8 +3,8 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\Framework\Phrase;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFormFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 
-class Lastname extends ShippingAddressFormFieldComponent
+class Lastname extends ShippingAddressFieldComponent
 {
 }

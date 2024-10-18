@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
@@ -11,14 +12,15 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var string $blockClass */
-
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div class="<?= $blockClass ?>">
     <?= $block->getChildHtml('login'); ?>
 
     <div class="loki-checkout-sidebar-summary card bg-gray-100 p-8 mb-8">
-        <h3 class="title text-2xl border-b border-gray-400 mb-4"><?= __('Order Summary') ?></h3>
+        <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Summary']) ?>
         <div>
             <?= $block->getChildHtml('coupon_code') ?>
         </div>
@@ -34,7 +36,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
     </div>
 
     <div class="loki-checkout-sidebar-preview bg-gray-100 p-8 my-4">
-        <h3 class="text-2xl border-b border-gray-400 mb-4"><?= __('Order Preview') ?></h3>
+        <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Preview']) ?>
         <div class="border-b border-gray-400 my-8">
             <?= $block->getChildHtml('preview') ?>
         </div>

@@ -5,16 +5,21 @@ use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var BillingStep $magewire */
 /** @var string $blockClass */
-
+/** @var BlockRenderer $blockRenderer */
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $enableBillingAsShipping = $magewire->enableBillingAsShipping;
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
 <div class="<?= $blockClass ?>">
+    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Billing Address']) ?>
+
     <?php if ($enableBillingAsShipping): ?>
     <div class="card mb-8">
         <label for="billing_as_shipping">

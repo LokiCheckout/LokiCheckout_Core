@@ -2,16 +2,23 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingAddress $magewire */
 /** @var string $blockClass */
+/** @var BlockRenderer $blockRenderer */
+
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
 <div class="<?= $blockClass ?>">
-    <h3 class="step-title text-2xl border-b border-gray-400 mb-4"><?= __('Shipping Address') ?></h3>
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <div>
+            <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Select your Shipping Address']) ?>
+
             <select
                 wire:loading.attr="aria-busy"
                 wire:loading.class="disabled"
@@ -29,7 +36,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
     <?php endif; ?>
 
     <?php if ($magewire->newAddress): ?>
-        <h3 class="step-title text-2xl border-b border-gray-400 mb-4"><?= __('New Shipping Address') ?></h3>
+        <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'New Shipping Address']) ?>
 
         <div class="grid grid-cols-12 gap-8">
             <?php foreach ($block->getChildNames() as $childName): ?>

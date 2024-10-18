@@ -28,7 +28,7 @@ if (false === $magewire->isVisible()) {
 }
 ?>
 <div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired(
-) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>" x-defer="interact">
+) && 'required' ?> <?= $magewire->getFieldName() ?>" <?php if ($magewire->hasClientSideValidation()): ?>x-data="<?= $magewire->getJsName() ?>"<?php endif; ?>>
     <label for="<?= $magewire->getFieldName() ?>">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
@@ -40,14 +40,12 @@ if (false === $magewire->isVisible()) {
         </div>
     </div>
 
-    <?php if ($magewire->hasErrors()): ?>
-        <?= $blockRenderer->get('loki.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
-    <?php endif; ?>
+    <?= $blockRenderer->get('loki.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
 
     <?php $script = $block->getChildBlock('script'); ?>
     <?php if ($script instanceof AbstractBlock): ?>
         <?= $script->addData(['component' => $magewire])->toHtml() ?>
     <?php else: ?>
-        <?= $blockRenderer->render('generic/field/script.phtml', $block, $magewire) ?>
+        <?= $blockRenderer->render('form/field/script.phtml', $block, $magewire) ?>
     <?php endif; ?>
 </div>
