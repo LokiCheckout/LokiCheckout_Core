@@ -2,12 +2,13 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
-/** @var string $blockClass */
+/** @var BlockCssClass $blockCss */
 ?>
 <img alt="<?= __('Separator') ?>"
      src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-right.svg'); ?>"
-     class="loader <?= $blockClass ?> inline-block"
+     class="<?= $blockCss('loader inline-block') ?>"
      width="15"
      height="15">

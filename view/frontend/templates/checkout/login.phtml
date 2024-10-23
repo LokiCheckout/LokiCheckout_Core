@@ -10,13 +10,13 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Login $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 ?>
-<div class="<?= $blockClass ?> card bg-gray-100 my-2">
+<div class="<?= $blockCss('card bg-gray-100 my-2') ?>">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>

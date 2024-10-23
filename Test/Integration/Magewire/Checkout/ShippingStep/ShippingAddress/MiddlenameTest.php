@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\ShippingStep\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
-use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Fixture\Config;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
@@ -18,7 +17,7 @@ class MiddlenameTest extends LokiTestCase
     use CartFixture;
     use ProductFixture;
 
-    public function testMiddleNameDisabled()
+    public function testDisabled()
     {
         $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('middlename', '');
@@ -28,33 +27,33 @@ class MiddlenameTest extends LokiTestCase
         $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
-    #[Config('customer/address/middlename_show', 1)]
-    public function testMiddleNameComponentWithoutValue()
+    #[Config('customer/address/middlename_show', 1, 'store', 'default')]
+    public function testComponentWithoutValue()
     {
         $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('middlename', '');
         $cart->addProduct($this->getProduct(), 1);
 
         $this->dispatchToCheckout();
-        $middlenameComponent = $this->getObjectManager()->get(Middlename::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $middlenameComponent);
+        $component = $this->getObjectManager()->get(Middlename::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
-        $this->assertMagewireComponentHasErrors($middlenameComponent);
-        $this->assertMagewireComponentHasError($middlenameComponent, 'Value is required');
+        $component->validate();
+        $this->assertMagewireComponentHasNoErrors($component);
     }
 
-    #[Config('customer/address/middlename_show', 1)]
-    #[Cache('layout', false)]
-    public function testMiddleNameComponentWithValue()
+    #[Config('customer/address/middlename_show', 1, 'store', 'default')]
+    public function testComponentWithValue()
     {
         $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('middlename', 'Doe');
         $cart->addProduct($this->getProduct(), 1);
 
         $this->dispatchToCheckout();
-        $middlenameComponent = $this->getObjectManager()->get(Middlename::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $middlenameComponent);
+        $component = $this->getObjectManager()->get(Middlename::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
-        $this->assertMagewireComponentHasNoErrors($middlenameComponent);
+        $component->validate();
+        $this->assertMagewireComponentHasNoErrors($component);
     }
 }

@@ -65,6 +65,8 @@
     <type name="Yireo\LokiCheckout\Filter\FilterRegistry">
         <arguments>
             <argument name="filters" xsi:type="array">
+                <item name="country_id" xsi:type="object">Yireo\LokiCheckout\Filter\CountryId</item>
+                <item name="vat_id" xsi:type="object">Yireo\LokiCheckout\Filter\VatId</item>
                 <item name="capitalize" xsi:type="object">Yireo\LokiCheckout\Filter\Capitalize</item>
                 <item name="lowercase" xsi:type="object">Yireo\LokiCheckout\Filter\Lowercase</item>
                 <item name="numeric" xsi:type="object">Yireo\LokiCheckout\Filter\Numeric</item>
@@ -77,7 +79,9 @@
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-                <item name="vatId" xsi:type="object">Yireo\LokiCheckout\Validator\Component\VatIdValidator</item>
+                <item name="vat_id" xsi:type="object">Yireo\LokiCheckout\Validator\Component\VatIdValidator</item>
+                <item name="vat_id_online" xsi:type="object">Yireo\LokiCheckout\Validator\Component\VatIdOnlineValidator</item>
+                <item name="email" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailValidator</item>
             </argument>
         </arguments>
     </type>

@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <referenceBlock name="loki.checkout">
-            <block name="loki.checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping.phtml">
+            <block name="loki.checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\ShippingStep
                     </argument>
@@ -15,12 +15,13 @@
                         <argument name="magewire" xsi:type="object" >
                             Yireo\LokiCheckout\Magewire\Checkout\Email
                         </argument>
+                        <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
                     </arguments>
                 </block>
 
                 <block
-                    name="loki.checkout.shipping-step.shipping-address" as="shipping-address"
-                    template="Yireo_LokiCheckout::checkout/shipping/address.phtml">
+                    name="loki.checkout.shipping-step.address-form" as="address-form"
+                    template="Yireo_LokiCheckout::checkout/shipping/address-form.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress
@@ -72,6 +73,7 @@
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
                             </argument>
                             <argument name="grid-col-span" xsi:type="number">5</argument>
+                            <argument name="field_label" xsi:type="string">Surname</argument>
                         </arguments>
                     </block>
 
@@ -104,6 +106,11 @@
                             <argument name="magewire" xsi:type="object" >
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
                             </argument>
+                            <!--
+                            <argument name="validators" xsi:type="array">
+                                <item name="postcode_nl" xsi:type="string">postcode_nl</item>
+                            </argument>
+                            -->
                         </arguments>
                     </block>
 

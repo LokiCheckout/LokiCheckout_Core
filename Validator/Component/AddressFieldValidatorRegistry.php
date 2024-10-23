@@ -19,9 +19,9 @@ class AddressFieldValidatorRegistry
     public function getSelectedValidators(array $selectedValidators = []): array
     {
         $validators = [];
-        foreach ($selectedValidators as $validator) {
-            if (array_key_exists($validator, $this->validators)) {
-                $validators[$validator] = $validator;
+        foreach ($selectedValidators as $validatorName) {
+            if (array_key_exists($validatorName, $this->validators)) {
+                $validators[$validatorName] = $this->validators[$validatorName];
             }
         }
 

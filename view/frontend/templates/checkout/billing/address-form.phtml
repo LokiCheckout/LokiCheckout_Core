@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
+use Yireo\LokiCheckout\Util\BlockCssClass;
+
+/** @var Template $block */
+/** @var BillingAddress $magewire */
+/** @var BlockCssClass $blockCss */
+
+?>
+<div class="<?= $blockCss('grid grid-cols-12 gap-8') ?>">
+    <?php foreach ($block->getChildNames() as $childName): ?>
+        <?php $childBlock = $block->getLayout()->getBlock($childName) ?>
+        <?php $colSpan = $childBlock->getData('grid-col-span') ?? 6 ?>
+        <div class="col-span-<?= $colSpan ?>">
+            <?= $childBlock->toHtml() ?>
+        </div>
+    <?php endforeach; ?>
+</div>

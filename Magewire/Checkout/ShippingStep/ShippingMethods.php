@@ -2,42 +2,60 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
 
-use Magento\Shipping\Model\Config as ShippingConfig;
+use Magento\Quote\Api\Data\ShippingMethodInterface;
+use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingMethods extends Component
 {
-    public array $shippingMethods = [];
+    private array $shippingMethods = [];
+
     public string $value = '';
 
     public function __construct(
-        private readonly ShippingConfig $shippingConfig,
-        private readonly CheckoutState $checkoutState) {
+        private readonly ShippingMethodManagementInterface $shippingMethodManagement,
+        private readonly ShippingAddressState $shippingAddressState,
+    ) {
     }
 
     public function boot()
     {
-        $this->value = (string)$this->checkoutState->getQuote()->getShippingAddress()->getShippingMethod();
+        $shippingAddress = $this->shippingAddressState->getShippingAddress();
+        $quote =  $shippingAddress->getQuote();
 
-        foreach ($this->shippingConfig->getActiveCarriers() as $carrier) {
-            $carrierMethods = $carrier->getAllowedMethods();
-            foreach ($carrierMethods as $carrierCode => $carrierMethod) {
-                $this->shippingMethods[$carrier->getCarrierCode().'_'.$carrierCode] = $carrierMethod;
-            }
+        $this->value = (string)$shippingAddress->getShippingMethod();
+
+        if (empty($this->value)) {
+            // @todo: Load a default shipping method
         }
+
+        $shippingAddress
+            ->setCollectShippingRates(true)
+            ->collectShippingRates();
+
+        $this->shippingMethods = $this->shippingMethodManagement->getList($quote->getId());
+    }
+
+    /**
+     * @return ShippingMethodInterface[]
+     */
+    public function getShippingMethods(): array
+    {
+        return $this->shippingMethods;
     }
 
     public function updatedValue(string $value)
     {
-        $this->checkoutState->getQuote()->collectTotals();
+        $shippingAddress = $this->shippingAddressState->getShippingAddress();
+        $quote =  $shippingAddress->getQuote();
 
-        $this->checkoutState->getQuote()->getShippingAddress()
+        $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates()
             ->setShippingMethod($value);
 
-        $this->checkoutState->getQuote()->save();
+        $quote->save();
 
         $this->emit('shippingStepSave');
         return $value;

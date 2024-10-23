@@ -13,6 +13,7 @@ $magewire->setOptionModel($optionModel);
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model="<?= $magewire->getModelName() ?>"
+    id="<?= $magewire->getElementId() ?>-field"
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>

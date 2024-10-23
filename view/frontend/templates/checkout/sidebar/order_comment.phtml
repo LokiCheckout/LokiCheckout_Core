@@ -12,12 +12,12 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var PriceFormatter $priceFormatter */
 /** @var OrderComment $magewire */
 /** @var CheckoutState $checkoutState */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 ?>
-<div class="<?= $blockClass ?> border-b border-gray-400 my-8">
+<div class="<?= $blockCss('border-b border-gray-400 my-8') ?>">
     <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br>
     <textarea wire:model="comment" class="form-input w-full"></textarea>
 </div>

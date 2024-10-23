@@ -7,63 +7,62 @@ use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Step\StepInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingStep extends Component implements StepInterface
 {
     protected $listeners = ['billingStepSave' => 'refresh'];
 
-    public bool $enableBillingAsShipping = true;
     public bool $billingAsShipping = true;
+    public string $refreshToken = '';
 
     public function __construct(
         private readonly Config $config,
         private readonly ValidatorInterface $stepValidator,
-        private readonly CheckoutState $checkoutState,
+        private readonly BillingAddressState $billingAddressState,
         private readonly Copy $copyService
     ) {
     }
 
     public function boot(): void
     {
-        $this->enableBillingAsShipping = $this->config->enableSameAsBilling();
-        $this->billingAsShipping = (bool)$this->checkoutState->getQuote()->getBillingAddress()->getSameAsBilling();
-
-        if (false === $this->enableBillingAsShipping) {
+        $this->billingAsShipping = (bool)$this->billingAddressState->getBillingAddress()->getSameAsBilling();
+        if (false === $this->enableBillingAsShipping()) {
             $this->billingAsShipping = false;
         }
     }
 
-    public function updated(mixed $value, string $name)
+    public function enableBillingAsShipping(): bool
     {
-        if ($name === 'billingAsShipping') {
-            $value = (bool)$value;
-            $quote = $this->checkoutState->getQuote();
-            $billingAddress = $quote->getBillingAddress();
-            $billingAddress->setSameAsBilling((int)$value);
-            $quote->save();
-            $this->emit('billingStepSave');
-        }
-
-        return $value;
+        return $this->config->enableSameAsBilling();
     }
 
-    public function copyFromShippingAddress(): void
+    public function updatedBillingAsShipping(mixed $billingAsShipping)
     {
-        $quote = $this->checkoutState->getQuote();
+        $billingAsShipping = (bool)$billingAsShipping;
+        $billingAddress = $this->billingAddressState->getBillingAddress();
+        $quote = $billingAddress->getQuote();
         $shippingAddress = $quote->getShippingAddress();
-        $billingAddress = $quote->getBillingAddress();
 
-        $this->copyService->copyFieldsetToTarget(
-            'customer_address',
-            'to_quote_address',
-            $shippingAddress,
-            $billingAddress
-        );
+        $billingAddress->setSameAsBilling((int)$billingAsShipping);
+
+        if (true === $billingAsShipping) {
+            $this->copyService->copyFieldsetToTarget(
+                'customer_address',
+                'to_quote_address',
+                $shippingAddress,
+                $billingAddress
+            );
+
+            if ($shippingAddress->getCustomerAddressId()) {
+                $billingAddress->setCustomerAddressId($shippingAddress->getCustomerAddressId());
+            }
+        }
 
         $quote->save();
-
         $this->emit('billingStepSave');
+
+        return $billingAsShipping;
     }
 
     public function getCode(): string
@@ -73,6 +72,11 @@ class BillingStep extends Component implements StepInterface
 
     public function getLabel(): string
     {
+        $quote = $this->billingAddressState->getBillingAddress()->getQuote();
+        if (false === $quote->getGrandTotal() > 0) {
+            return 'Review'; // @todo: Test for this
+        }
+
         return 'Review & Payments';
     }
 

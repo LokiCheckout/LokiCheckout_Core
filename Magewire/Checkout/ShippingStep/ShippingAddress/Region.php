@@ -16,21 +16,22 @@ class Region extends ShippingAddressFieldComponent implements FormTextSelectFiel
     #[Override]
     public function boot(): void
     {
-        $regionId = (string)$this->shippingAddressState->load('region_id');
+        $regionId = (string)$this->addressState->load('region_id');
         if (is_numeric($regionId) && $regionId > 0) {
             $this->value = $regionId;
             return;
         }
 
-        $this->value = (string)$this->shippingAddressState->load('region');
+        $this->value = (string)$this->addressState->load('region');
     }
 
     public function updatedValue($value)
     {
         if (is_numeric($value)) {
-            $this->shippingAddressState->save('region_id', $value);
+            $this->addressState->save('region_id', $value);
         }
 
-        return parent::updatedValue($value);
+        $this->setValue($value);
+        return $value;
     }
 }

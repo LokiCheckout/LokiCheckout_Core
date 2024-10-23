@@ -1,14 +1,16 @@
 <?php
 declare(strict_types=1);
 
+use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Component $magewire */
-/** @var string $blockClass */
+/** @var BlockCssClass $blockCss */
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     Block "<?= $block->getNameInLayout() ?>": <?= $block->getTemplateFile() ?>
 </div>

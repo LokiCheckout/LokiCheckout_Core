@@ -8,11 +8,11 @@ use Magento\Framework\View\Element\Template;
  */
 
 /** @var Template $block */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var string[] $errors */
 $errors = $block->getErrors();
 ?>
-<ul class="<?= $blockClass ?> error text-red-800" x-ref="errors">
+<ul class="<?= $blockCss('error text-red-800') ?>" x-ref="errors">
     <?php foreach ($errors as $error): ?>
         <li><?= $error ?></li>
     <?php endforeach; ?>

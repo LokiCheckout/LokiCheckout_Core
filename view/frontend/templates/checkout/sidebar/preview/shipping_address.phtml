@@ -4,10 +4,10 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress;
 
 /** @var ShippingAddress $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 ?>
-<div class="<?= $blockClass ?> mb-4">
+<div class="<?= $blockCss('mb-4') ?>">
     <span class="text-xl font-bold"><?= __('Shipping Address') ?></span><br>
     <address><?= $magewire->getHtml() ?></address>
 </div>

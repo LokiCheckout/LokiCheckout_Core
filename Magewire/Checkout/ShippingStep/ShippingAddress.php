@@ -10,7 +10,6 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magewirephp\Magewire\Component;
-use Override;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
@@ -66,6 +65,7 @@ class ShippingAddress extends Component
 
         $shippingAddress = $this->customerAddressRepository->getById((int)$value);
         $this->checkoutState->getQuote()->getShippingAddress()->importCustomerAddressData($shippingAddress);
+        $this->checkoutState->getQuote()->getShippingAddress()->setCustomerAddressId($shippingAddress->getId());
         $this->checkoutState->getQuote()->getShippingAddress()->save();
         $this->emit('shippingStepSave');
 

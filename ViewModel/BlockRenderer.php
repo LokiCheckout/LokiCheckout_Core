@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\ViewModel;
 
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
@@ -16,11 +17,17 @@ class BlockRenderer implements ArgumentInterface
     ) {
     }
 
-    public function get(string $blockName, array $data = []): Template
+    /**
+     * @param string $blockName
+     * @param array $data
+     * @return Template
+     * @throws RuntimeException
+     */
+    public function get(string $blockName, array $data = []): AbstractBlock
     {
         $block = $this->layout->getBlock($blockName);
-        if (false === $block instanceof Template) {
-            throw new RuntimeException('Unexpected block type');
+        if (false === $block instanceof AbstractBlock) {
+            throw new RuntimeException((string)__('Unexpected block type "%s"', $blockName));
         }
 
         $block->addData($data);
@@ -34,10 +41,15 @@ class BlockRenderer implements ArgumentInterface
      */
     public function html(string $blockName, array $data = []): string
     {
-        return $this->get($blockName, $data)->toHtml();
+        try {
+            return (string)$this->get($blockName, $data)?->toHtml();
+        } catch(RuntimeException $e) {
+            return '';
+        }
     }
 
-    public function render(string $templateName, Template $ancestorBlock, ?Component $component = null): string
+
+    public function create(string $templateName, Template $ancestorBlock, ?Component $component = null): Template
     {
         if (false === strstr($templateName, '::')) {
             $templateName = 'Yireo_LokiCheckout::' . $templateName;
@@ -51,6 +63,11 @@ class BlockRenderer implements ArgumentInterface
             $block->setData('component', $component);
         }
 
-        return $block->toHtml();
+        return $block;
+    }
+
+    public function render(string $templateName, Template $ancestorBlock, ?Component $component = null): string
+    {
+        return $this->create($templateName, $ancestorBlock, $component)->toHtml();
     }
 }

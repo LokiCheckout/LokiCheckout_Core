@@ -4,8 +4,8 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
 /** @var BillingAddress $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 ?>
-<div class="<?= $blockClass ?> mb-4">
+<div class="<?= $blockCss('card mb-4') ?>">
     <address><?= $magewire->getHtml() ?></address>
 </div>

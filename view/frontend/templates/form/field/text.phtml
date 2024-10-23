@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
-/** @var FormFieldInterface $magewire */
+/** @var AddressFieldComponent $magewire */
 $fieldBlock = $block->getFieldBlock();
 $magewire = $this->getComponent();
 ?>
@@ -14,8 +14,12 @@ $magewire = $this->getComponent();
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model.lazy="<?= $magewire->getModelName() ?>"
+    id="<?= $magewire->getElementId() ?>-field"
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
+    <?php endif ?>
+    <?php if ($magewire->getPlaceholder()): ?>
+    placeholder="<?= $magewire->getPlaceholder() ?>"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"

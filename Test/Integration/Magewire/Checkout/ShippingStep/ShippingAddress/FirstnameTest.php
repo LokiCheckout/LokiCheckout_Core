@@ -17,30 +17,31 @@ class FirstnameTest extends LokiTestCase
     use ProductFixture;
 
 
-    public function testFirstNameComponentWithoutValue()
+    public function testComponentWithoutValue()
     {
         $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('firstname', '');
         $cart->addProduct($this->getProduct(), 1);
 
         $this->dispatchToCheckout();
-        $firstnameComponent = $this->getObjectManager()->get(Firstname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $firstnameComponent);
+        $component = $this->getObjectManager()->get(Firstname::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
-        $this->assertMagewireComponentHasErrors($firstnameComponent);
-        $this->assertMagewireComponentHasError($firstnameComponent, 'Value is required');
+        $component->validate();
+        $this->assertMagewireComponentHasErrors($component);
+        $this->assertMagewireComponentHasError($component, 'Value is required');
     }
 
-    public function testFirstNameComponentWithValue()
+    public function testComponentWithValue()
     {
         $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('firstname', 'John');
         $cart->addProduct($this->getProduct(), 1);
 
         $this->dispatchToCheckout();
-        $firstnameComponent = $this->getObjectManager()->get(Firstname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $firstnameComponent);
+        $component = $this->getObjectManager()->get(Firstname::class);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
-        $this->assertMagewireComponentHasNoErrors($firstnameComponent);
+        $this->assertMagewireComponentHasNoErrors($component);
     }
 }

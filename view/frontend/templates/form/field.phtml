@@ -10,7 +10,7 @@ use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
@@ -27,7 +27,7 @@ if (false === $magewire->isVisible()) {
     return;
 }
 ?>
-<div class="<?= $blockClass ?> field w-full relative <?= $magewire->isRequired(
+<div id="<?= $magewire->getElementId() ?>" class="<?= $blockCss('') ?> field w-full relative <?= $magewire->isRequired(
 ) && 'required' ?> <?= $magewire->getFieldName() ?>" <?php if ($magewire->hasClientSideValidation()): ?>x-data="<?= $magewire->getJsName() ?>"<?php endif; ?>>
     <label for="<?= $magewire->getFieldName() ?>">
         <?= $magewire->getFieldLabel() ?>

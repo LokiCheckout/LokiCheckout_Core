@@ -2,21 +2,25 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
 
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentDetails extends Component
 {
     protected $listeners = ['billingStepSave' => 'refresh'];
 
     public function __construct(
-        private readonly CheckoutState $checkoutState
+        private readonly CheckoutSession $checkoutSession,
     ) {
     }
 
     public function getHtml(): string
     {
-        $payment = $this->checkoutState->getQuote()->getPayment();
-        return $payment->getIdFieldName();
+        $payment = $this->checkoutSession->getQuote()->getPayment();
+        try {
+            return $payment->getMethodInstance()->getTitle();
+        } catch(\Exception $e) {
+            return '';
+        }
     }
 }

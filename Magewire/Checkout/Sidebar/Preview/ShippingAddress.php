@@ -3,9 +3,8 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
 
 use Magento\Customer\Model\Address\Config as AddressConfig;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingAddress extends Component
 {
@@ -13,20 +12,13 @@ class ShippingAddress extends Component
 
     public function __construct(
         private readonly AddressConfig $addressConfig,
-        private readonly ScopeConfigInterface $scopeConfig,
-        private readonly CheckoutState $checkoutState
+        private readonly ShippingAddressState $shippingAddressState,
     ) {
     }
 
     public function getHtml(): string
     {
-        $address = $this->checkoutState->getQuote()->getShippingAddress();
-
-        if (!$address->getCountryId()) {
-            $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
-            $address->setCountryId($defaultCountryId);
-        }
-
+        $address = $this->shippingAddressState->getShippingAddress();
         $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
 
         return $renderer->renderArray($address);

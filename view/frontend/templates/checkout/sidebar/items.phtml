@@ -6,13 +6,13 @@ use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
 
 /** @var Template $block */
 /** @var Items $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 if (empty($magewire->items)) {
-    return '';
+    return '<div>No items</div>';
 }
 ?>
-<div class="<?= $blockClass ?> border-b border-gray-400 my-8">
+<div class="<?= $blockCss('border-b border-gray-400 my-8') ?>">
     <ul role="list">
         <?php foreach ($magewire->items as $item) : ?>
             <?= $block->getChildBlock('item')->addData(['item' => $item])->toHtml() ?>

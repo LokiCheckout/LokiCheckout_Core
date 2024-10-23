@@ -5,22 +5,11 @@
                 type="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin"/>
     </type>
 
-    <virtualType name="Yireo\LokiCheckout\Validator\Component\VirtualShippingAddressPostcodeFormatValidator" type="Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator">
-        <arguments>
-            <argument name="addressState" xsi:type="object">Yireo\LokiCheckout\ViewModel\State\ShippingAddressState</argument>
-        </arguments>
-    </virtualType>
-
-    <virtualType name="Yireo\LokiCheckout\Validator\Component\VirtualBillingAddressPostcodeFormatValidator" type="Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator">
-        <arguments>
-            <argument name="addressState" xsi:type="object">Yireo\LokiCheckout\ViewModel\State\BillingAddressState</argument>
-        </arguments>
-    </virtualType>
 
     <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">
-                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\VirtualShippingAddressPostcodeFormatValidator</item>
+                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
             </argument>
         </arguments>
     </type>
@@ -28,7 +17,7 @@
     <type name="Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">
-                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\VirtualBillingAddressPostcodeFormatValidator</item>
+                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
             </argument>
         </arguments>
     </type>

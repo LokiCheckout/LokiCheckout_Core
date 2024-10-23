@@ -8,12 +8,14 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
     public function __construct(
         private readonly Config $config,
-        private readonly ViewModelFactory $viewModelFactory
+        private readonly ViewModelFactory $viewModelFactory,
+        private readonly BlockCssClass $blockCssClass
     ) {
     }
 
@@ -32,5 +34,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('blockClass', $blockClass);
         $block->assign('debug', $this->config->isDebug());
+        $block->assign('blockCss', $this->blockCssClass->setBlock($block));
     }
 }

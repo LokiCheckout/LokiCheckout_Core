@@ -9,8 +9,8 @@ use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
 class VatId extends ShippingAddressFieldComponent
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
-    protected array $validators = ['vatId'];
-    protected array $filters = ['uppercase'];
+    protected array $validators = ['vat_id', 'vat_id_online'];
+    protected array $filters = ['vat_id'];
 
     public function __construct(
         private CountryIdVatPrefixMapping $countryIdVatPrefixMapping,

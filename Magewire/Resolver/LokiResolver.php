@@ -56,10 +56,11 @@ class LokiResolver implements ResolverInterface
         $component->name = $blockName;
         $component->id = $blockName;
 
-
-        $block = $this->layout->createBlock(Template::class);
-        $block->setTemplate($this->componentMapping[$blockName]['template']);
-        $block->assign('magewire', $component);
+        $this->layout->getUpdate()->load(['checkout_index_index']);
+        $this->layout->getUpdate()->removeHandle('default'); // @todo: Is this working faster?
+        $this->layout->generateXml();
+        $this->layout->generateElements();
+        $block = $this->layout->getBlock($blockName);
 
         $component->setParent($block);
         $component->setResolver($this);

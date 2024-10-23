@@ -12,10 +12,10 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Email $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <?= $blockRenderer->render('Yireo_LokiCheckout::form/field.phtml', $block, $magewire) ?>
 </div>

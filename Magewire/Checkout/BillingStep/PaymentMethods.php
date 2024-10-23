@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
 
+use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Override;
@@ -9,7 +10,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
 {
-    public array $paymentMethods = [];
+    private array $paymentMethods = [];
     public string $value = '';
 
     public function __construct(
@@ -21,9 +22,16 @@ class PaymentMethods extends Component
     public function boot()
     {
         $cartId = $this->checkoutState->getQuote()->getId();
-        foreach($this->paymentMethodManagement->getList($cartId) as $paymentMethod) {
-            $this->paymentMethods[$paymentMethod->getCode()] = $paymentMethod->getTitle();
-        }
+        $this->value =(string) $this->checkoutState->getQuote()->getPayment()->getMethod();
+        $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
+    }
+
+    /**
+     * @return PaymentMethodInterface[]
+     */
+    public function getPaymentMethods(): array
+    {
+        return $this->paymentMethods;
     }
 
     public function updatedValue(string $value)
@@ -34,6 +42,8 @@ class PaymentMethods extends Component
         $quote->setInventoryProcessed(false);
         $quote->getPayment()->importData(['method' => $value]);
         $quote->collectTotals()->save();
+
+        $this->emit('billingStepSave');
 
         return $value;
     }

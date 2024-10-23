@@ -19,16 +19,16 @@ class Config
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue('yireo_loki/general/enable');
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 
     public function enableSameAsBilling(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki/general/enable_same_as_billing');
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable_same_as_billing');
     }
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki/general/debug');
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
     }
 }

@@ -7,10 +7,10 @@ use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
 /** @var Template $block */
 /** @var Template $parentBlock */
 /** @var FormFieldInterface $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 ?>
 
-<div class="<?= $blockClass ?> mb-4 ">
+<div class="<?= $blockCss('') ?> mb-4 ">
     <div class="flex">
         <input
             id="vat_id_country"
@@ -39,6 +39,6 @@ use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
             class="block w-full rounded-r-lg border-l-0 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500">
     </div>
 
-    <input id="vat_id" type="hidden" wire:model="value">
-    <small>Current VAT ID: <?= $magewire->value ?></small>
+    <input id="vat_id" type="hidden" wire:model="<?= $magewire->getModelName() ?>">
+    <small>Current VAT ID: <?= $magewire->getValue() ?></small>
 </div>

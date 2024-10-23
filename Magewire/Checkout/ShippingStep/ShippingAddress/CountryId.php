@@ -10,10 +10,13 @@ class CountryId extends ShippingAddressFieldComponent implements FormSelectField
 {
     use OptionsBehaviour;
 
+    protected array $filters = ['country_id'];
+
     public function updatedValue($value)
     {
-        $this->shippingAddressState->save('region', '');
-        $this->shippingAddressState->save('region_id', '');
-        return parent::updatedValue($value);
+        $this->addressState->save('region', '');
+        $this->addressState->save('region_id', '');
+        $this->setValue($value);
+        return $value;
     }
 }

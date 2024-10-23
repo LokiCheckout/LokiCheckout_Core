@@ -3,13 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magewirephp\Magewire\Component;
-use RuntimeException;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AddressStateBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AttributeBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\ValidateBehaviour;
-use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
 abstract class AddressFieldComponent extends Component implements FormFieldInterface, AddressFieldInterface
 {
@@ -19,7 +17,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     use FieldTemplateLocatorBehaviour;
     use AddressStateBehaviour;
 
-
+    protected string $elementId = '';
     public string $value = '';
 
     public function booted(): void
@@ -65,7 +63,11 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     public function setValue(mixed $value)
     {
-        $this->value = $this->filter((string)$value);
+        if (is_string($value)) {
+            // @todo: Find a way to filter an array-like value instead
+            $this->value = $this->filter($value);
+        }
+
         $this->validate();
 
         if (false === $this->hasErrors()) {
@@ -74,8 +76,9 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         }
     }
 
-    public function updated($value, string $name)
+    public function updatedValue($value)
     {
+        //sleep(20); // @todo: Remove
         $this->setValue($value);
         return $value;
     }
@@ -94,6 +97,11 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         return (bool)$this->getParent()->getClientSideValidation();
     }
 
+    public function getPlaceholder(): string
+    {
+        return (string)$this->getParent()->getPlaceholder();
+    }
+
     public function isVisible(): bool
     {
         return true; // @doc: Example for overriding this
@@ -104,6 +112,17 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         $name = ucwords($this->getNameInLayout(), '_.');
 
         return preg_replace('#[_.]+#', '', $name);
+    }
+
+    public function getElementId(): string
+    {
+        $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
+        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
+    }
+
+    public function setElementId(string $elementId)
+    {
+        $this->elementId = $elementId;
     }
 
     protected function setErrorsFromValidation(true|array $errors): bool

@@ -10,13 +10,13 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var CouponCode $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div class="<?= $blockClass ?> border-b border-gray-400 my-4">
+<div class="<?= $blockCss('border-b border-gray-400 my-4') ?>">
     <div x-data="LokiCheckoutSidebarCouponCode">
         <?php if (!empty($couponCode)): ?>
             Coupon code: <span><?= $couponCode ?></span>
@@ -32,7 +32,7 @@ $couponCode = $quote->getCouponCode();
                 <?= __('Discount Code') ?>
                 <img alt="<?= __('Expand') ?>"
                      src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
-                     class="loader <?= $blockClass ?> inline-block"
+                     class="loader <?= $blockCss('') ?> inline-block"
                      width="15"
                      height="15">
             </button>

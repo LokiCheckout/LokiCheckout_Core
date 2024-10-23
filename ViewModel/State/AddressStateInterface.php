@@ -2,9 +2,7 @@
 
 namespace Yireo\LokiCheckout\ViewModel\State;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Quote\Model\Quote\Address;
 
 interface AddressStateInterface extends ArgumentInterface
 {

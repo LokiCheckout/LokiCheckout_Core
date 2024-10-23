@@ -3,12 +3,14 @@
 namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address;
 
 class ShippingAddressState implements AddressStateInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession
+        private CheckoutSession $checkoutSession,
+        private ScopeConfigInterface $scopeConfig
     ) {
     }
 
@@ -25,6 +27,12 @@ class ShippingAddressState implements AddressStateInterface
 
     public function getShippingAddress(): Address
     {
-        return $this->checkoutSession->getQuote()->getShippingAddress();
+        $shippingAddress = $this->checkoutSession->getQuote()->getShippingAddress();
+        if (!$shippingAddress->getCountryId()) {
+            $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
+            $shippingAddress->setCountryId($defaultCountryId);
+        }
+
+        return $shippingAddress;
     }
 }

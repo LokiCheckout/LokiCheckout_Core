@@ -9,6 +9,7 @@ use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
 class Postcode extends ShippingAddressFieldComponent
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
+    //protected array $validators = ['postcode', 'postcode_nl'];
     protected array $validators = ['postcode'];
     protected array $filters = ['uppercase'];
 

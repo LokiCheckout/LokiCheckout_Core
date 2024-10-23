@@ -11,16 +11,16 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <div class="mb-8">
         <?= $block->getChildHtml('email') ?>
     </div>
     <div class="mb-8">
-        <?= $block->getChildHtml('shipping-address') ?>
+        <?= $block->getChildHtml('address-form') ?>
     </div>
     <div class="mb-8">
         <?= $block->getChildHtml('shipping-methods') ?>

@@ -5,27 +5,41 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
 use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var bool $debug */
 /** @var ShippingMethods $magewire */
 /** @var BlockRenderer $blockRenderer */
+/** @var PriceFormatter $priceFormatter */
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
-$shippingMethods = $magewire->shippingMethods;
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$shippingMethods = $magewire->getShippingMethods();
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
 
-    <ul role="list">
-        <?php foreach ($shippingMethods as $shippingCode => $shippingMethod): ?>
-            <li class="my-4 py-2">
-                <input type="radio" value="<?= $shippingCode ?>" wire:model="value" id="shipping-<?= $shippingCode ?>">
-                <label for="shipping-<?= $shippingCode ?>" class="ml-4">
-                    <?= $shippingMethod ?>
-                </label>
-            </li>
+    <div role="list">
+        <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
+            <label for="shipping-<?= $code ?>">
+                <div class="flex cursor-pointer">
+                    <div class="p-4">
+                        <input type="radio" value="<?= $code ?>" wire:model="value" id="shipping-<?= $code ?>">
+                    </div>
+                    <div class="p-4 w-auto font-bold">
+                        <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
+                    </div>
+                    <div class="p-4 w-auto">
+                        <?= $shippingMethod->getMethodTitle() ?>
+                    </div>
+                    <div class="p-4">
+                        <?= $shippingMethod->getCarrierTitle() ?>
+                    </div>
+                </div>
+            </label>
         <?php endforeach; ?>
-    </ul>
+    </div>
 </div>

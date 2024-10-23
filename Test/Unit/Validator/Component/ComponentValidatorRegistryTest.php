@@ -3,13 +3,18 @@
 namespace Yireo\LokiCheckout\Test\Unit\Validator\Component;
 
 use PHPUnit\Framework\TestCase;
+use Yireo\LokiCheckout\Filter\FilterInterface;
+use Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorInterface;
 use Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry;
 
-class AddressFieldValidatorRegistryTest extends TestCase
+class ComponentValidatorRegistryTest extends TestCase
 {
     public function testGetSelectedValidators()
     {
-        $validatorRegistry = new AddressFieldValidatorRegistry(['item1' => 'validator1', 'item2' => 'validator2']);
+        $validator1 = $this->createMock(AddressFieldValidatorInterface::class);
+        $validator2 = $this->createMock(AddressFieldValidatorInterface::class);
+
+        $validatorRegistry = new AddressFieldValidatorRegistry(['item1' => $validator1, 'item2' => $validator2]);
         $this->assertCount(2, $validatorRegistry->getSelectedValidators(['item1', 'item2', 'item3']));
     }
 }

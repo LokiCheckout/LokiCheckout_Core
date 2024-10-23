@@ -12,12 +12,12 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var StepNavigator $stepNavigator */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <ul class="flex" role="list">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>

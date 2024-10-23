@@ -11,13 +11,13 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var CheckoutState $checkoutState */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<div class="<?= $blockClass ?> border-b border-gray-400 my-8">
+<div class="<?= $blockCss('border-b border-gray-400 my-8') ?>">
     <div class="grid grid-cols-2">
         <div class="label"><?= __('Subtotal') ?></div>
         <div class="value text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></div>

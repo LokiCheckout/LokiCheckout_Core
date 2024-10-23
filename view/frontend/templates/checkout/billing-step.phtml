@@ -11,13 +11,13 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BillingStep $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
-$enableBillingAsShipping = $magewire->enableBillingAsShipping;
+$enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>
@@ -35,17 +35,13 @@ $billingAsShipping = $magewire->billingAsShipping;
     </div>
     <?php endif; ?>
 
-    <div class="card mb-8">
-        <button type="button" class="btn btn-secondary" wire:click="copyFromShippingAddress">Copy values from shipping address</button>
-    </div>
-
     <?php if ($billingAsShipping): ?>
         <div class="mb-8">
-            <?= $block->getChildHtml('billing-view') ?>
+            <?= $block->getChildHtml('address-view') ?>
         </div>
     <?php else: ?>
         <div class="mb-8">
-            <?= $block->getChildHtml('billing-address') ?>
+            <?= $block->getChildHtml('address-form') ?>
         </div>
     <?php endif; ?>
 

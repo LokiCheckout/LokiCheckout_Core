@@ -13,13 +13,13 @@ $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
 
 /** @var CartItemInterface $item */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 
 $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
 ?>
-<li class="<?= $blockClass ?> flex">
+<li class="<?= $blockCss('flex') ?>">
     <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="image pr-4">
     <div class="pb-4">
         <?= $item->getName() ?><br>

@@ -17,6 +17,7 @@ class StepNavigator implements ArgumentInterface
     public function __construct(
         private readonly LayoutInterface $layout,
         private readonly CheckoutSession $checkoutSession,
+        private readonly FinalStep $finalStep
     ) {
     }
 
@@ -80,7 +81,8 @@ class StepNavigator implements ArgumentInterface
         }
 
         if ($this->isLastStep($currentStep)) {
-            throw new UnknownStepException('To be continued soon ...');
+            $this->finalStep->validate();
+            return $this->finalStep->submit($source);
         }
 
         $nextStep = $this->getNextStep($currentStep);
@@ -192,5 +194,10 @@ class StepNavigator implements ArgumentInterface
         }
 
         throw new UnknownStepException('No previous step to "'.$currentStep->getCode().'"');
+    }
+
+    public function getFinalStep(): FinalStep
+    {
+        return $this->finalStep;
     }
 }

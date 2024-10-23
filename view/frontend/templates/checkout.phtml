@@ -4,17 +4,16 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout;
-use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Checkout $magewire */
-/** @var string $blockClass */
+/** @var BlockCssClass $blockCss */
 
 $currentStep = $magewire->currentStep;
 ?>
-<div class="<?= $blockClass ?> container mb-16">
+<div class="<?= $blockCss('container mb-16') ?>">
     <div class="card">
         <?= $block->getChildBlock('progressbar')->toHtml(); ?>
     </div>
@@ -40,8 +39,7 @@ $currentStep = $magewire->currentStep;
                 ?>
             </div>
         </div>
-        <aside class="my-2">
-            <?= $block->getChildBlock('sidebar')->toHtml(); ?>
-        </aside>
+
+        <?= $block->getChildBlock('sidebar')->toHtml(); ?>
     </div>
 </div>

@@ -9,12 +9,12 @@ use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingAddress $magewire */
-/** @var string $blockClass */
+/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
-<div class="<?= $blockClass ?>">
+<div class="<?= $blockCss('') ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <div>
             <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Select your Shipping Address']) ?>
