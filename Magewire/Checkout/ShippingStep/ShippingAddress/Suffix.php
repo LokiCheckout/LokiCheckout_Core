@@ -2,8 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Suffix as GenericSuffixComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 
-class Suffix extends ShippingAddressFieldComponent
+class Suffix extends GenericSuffixComponent implements ShippingAddressFieldComponentInterface
 {
 }

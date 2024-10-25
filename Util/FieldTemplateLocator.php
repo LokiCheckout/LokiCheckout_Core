@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Generic\FormSelectFieldInterface;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;

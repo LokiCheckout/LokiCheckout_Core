@@ -3,11 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AddressStateBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\AttributeBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FieldTemplateLocatorBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\FilterBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\ValidateBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\AddressStateBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\AttributeBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\FieldTemplateLocatorBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\FilterBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\ValidateBehaviour;
 
 abstract class AddressFieldComponent extends Component implements FormFieldInterface, AddressFieldInterface
 {
@@ -19,6 +19,15 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     protected string $elementId = '';
     public string $value = '';
+
+    public function boot(): void
+    {
+        $this->value = (string)$this->addressState->load($this->getFieldName());
+
+        if (!empty($this->value)) {
+            $this->validate();
+        }
+    }
 
     public function booted(): void
     {
@@ -83,9 +92,23 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         return $value;
     }
 
-    abstract public function save($value): void;
+    public function save($value): void
+    {
+        $this->addressState->save($this->getFieldName(), $value);
 
-    abstract public function getNameInLayout(): string;
+        if ($this instanceof ShippingAddressFieldComponentInterface) {
+            $this->emit('shippingStepSave');
+        }
+
+        if ($this instanceof BillingAddressFieldComponentInterface) {
+            $this->emit('billingStepSave');
+        }
+    }
+
+    public function getNameInLayout(): string
+    {
+        return $this->getParent()->getNameInLayout();
+    }
 
     public function isRequired(): bool
     {
@@ -109,9 +132,9 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     public function getJsName()
     {
-        $name = ucwords($this->getNameInLayout(), '_.');
+        $name = ucwords($this->getNameInLayout(), '_.-');
 
-        return preg_replace('#[_.]+#', '', $name);
+        return preg_replace('#[_.-]+#', '', $name);
     }
 
     public function getElementId(): string

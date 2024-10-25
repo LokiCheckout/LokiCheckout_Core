@@ -2,8 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\VatId as GenericVatIdComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
-class VatId extends BillingAddressFieldComponent
+class VatId extends GenericVatIdComponent implements BillingAddressFieldComponentInterface
 {
 }

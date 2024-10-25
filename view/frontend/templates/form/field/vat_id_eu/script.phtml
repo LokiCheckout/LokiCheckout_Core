@@ -1,0 +1,56 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+$component = $block->getComponent();
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $component->getJsName() ?>', () => {
+            return {
+                vatId: '<?= $component->value ?>',
+                vatIdCountry: '',
+                vatIdNumber: '',
+                rules: {
+                    <?php if($component->isRequired()): ?>
+                    required: {
+                        vatIdCountry: '<?= __('VAT country') ?>',
+                        vatIdNumber: '<?= __('VAT number') ?>'
+                    }
+                    <?php endif; ?>
+                },
+                init: function () {
+                    if (!this.vatId) {
+                        return;
+                    }
+
+                    const found = this.vatId.match(/^([A-Z]{1,4})(.*)$/);
+                    if (found) {
+                        this.vatIdCountry = found[1];
+                        this.vatIdNumber = found[2];
+                    }
+                },
+                submit: function () {
+                    if (false === window.LokiCheckoutValidator.validate(this)) {
+                        return false;
+                    }
+
+                    /*
+                    if (isNaN(currentNumber)) {
+                        this.setError('Second part should be a number');
+                        isValid = false;
+                    }
+                    */
+
+                    const currentCountry = this.$refs.vatIdCountry.value;
+                    const currentNumber = this.$refs.vatIdNumber.value;
+                    this.vatId = currentCountry + currentNumber;
+                    Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.vatId);
+                    return true;
+                },
+            }
+        });
+    });
+</script>

@@ -2,19 +2,10 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\FormSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\CountryId as GenericCountryIdComponent;
 
-class CountryId extends BillingAddressFieldComponent implements FormSelectFieldInterface
+class CountryId extends GenericCountryIdComponent implements FormSelectFieldInterface, BillingAddressFieldComponentInterface
 {
-    use OptionsBehaviour;
-
-    public function updatedValue($value)
-    {
-        $this->billingAddressState->save('region', '');
-        $this->billingAddressState->save('region_id', '');
-
-        return parent::updatedValue($value);
-    }
 }

@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+
+/** @var Template $block */
+/** @var Template $fieldBlock */
+/** @var AddressFieldComponent $magewire */
+$fieldBlock = $block->getFieldBlock();
+$component = $this->getComponent();
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $component->getJsName() ?>', () => ({
+            value: '<?= $component->value ?>',
+            rules: {
+                <?php if($component->isRequired()): ?>
+                required: {value: '<?= __('Value') ?>'}
+                <?php endif; ?>
+            },
+            submit() {
+                if (false === window.LokiCheckoutValidator.validate(this)) {
+                    return false;
+                }
+
+                Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.value);
+                return true;
+            }
+        }));
+    });
+</script>

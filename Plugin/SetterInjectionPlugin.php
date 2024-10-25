@@ -5,8 +5,8 @@ namespace Yireo\LokiCheckout\Plugin;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magewirephp\Magewire\Component;
 use Magewirephp\Magewire\Model\ComponentResolver;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
@@ -32,11 +32,11 @@ class SetterInjectionPlugin
             $component->setFieldTemplateLocator($this->fieldTemplateLocator);
         }
 
-        if ($component instanceof BillingAddressFieldComponent) {
+        if ($component instanceof BillingAddressFieldComponentInterface) {
             $component->setAddressState($this->billingAddressState);
         }
 
-        if ($component instanceof ShippingAddressFieldComponent) {
+        if ($component instanceof ShippingAddressFieldComponentInterface) {
             $component->setAddressState($this->shippingAddressState);
         }
 

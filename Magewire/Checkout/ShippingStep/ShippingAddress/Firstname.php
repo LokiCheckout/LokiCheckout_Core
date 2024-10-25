@@ -2,8 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Firstname as GenericFirstnameComponent;
+use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 
-class Firstname extends ShippingAddressFieldComponent
+class Firstname extends GenericFirstnameComponent implements ShippingAddressFieldComponentInterface
 {
 }

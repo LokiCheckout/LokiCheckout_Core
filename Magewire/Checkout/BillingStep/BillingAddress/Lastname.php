@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Magento\Framework\Phrase;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Lastname as GenericLastnameComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
-class Lastname extends BillingAddressFieldComponent
+class Lastname extends GenericLastnameComponent implements BillingAddressFieldComponentInterface
 {
 }

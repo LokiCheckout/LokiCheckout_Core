@@ -2,8 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\City as GenericCityComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
-class City extends BillingAddressFieldComponent
+class City extends GenericCityComponent implements BillingAddressFieldComponentInterface
 {
 }

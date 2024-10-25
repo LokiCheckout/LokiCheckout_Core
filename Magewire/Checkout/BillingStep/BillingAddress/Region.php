@@ -2,37 +2,10 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Override;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Region as GenericRegionComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
-class Region extends BillingAddressFieldComponent implements FormTextSelectFieldInterface
+class Region extends GenericRegionComponent implements FormTextSelectFieldInterface, BillingAddressFieldComponentInterface
 {
-    protected $listeners = ['billingStepSave' => 'refresh'];
-
-    use OptionsBehaviour;
-
-    #[Override]
-
-    public function boot(): void
-    {
-        $regionId = (string)$this->billingAddressState->load('region_id');
-        if (is_numeric($regionId) && $regionId > 0) {
-            $this->value = $regionId;
-            return;
-        }
-
-        $this->value = (string)$regionId = $this->billingAddressState->load('region');
-    }
-
-
-    public function updatedValue($value)
-    {
-        if (is_numeric($value)) {
-            $this->billingAddressState->save('region_id', $value);
-        }
-
-        return parent::updatedValue($value);
-    }
 }

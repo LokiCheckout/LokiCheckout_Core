@@ -40,7 +40,7 @@ trait ProductFixture
             ]
         ]);
 
-        $productSku = 'simple-product-1';
+        $productSku = 'simple-product-'.rand(1,1000);
         $product = $this->getObjectManager()->create(ProductInterface::class);
 
         if ($productId > 0) {
@@ -60,6 +60,8 @@ trait ProductFixture
 
         $product->setCustomAttribute('tax_class_id', '2');
         $product->getExtensionAttributes()->setWebsiteIds([1]);
+        $product->isObjectNew(true);
+
         $this->getProductRepository()->save($product);
 
         $stockRegistry = $this->getObjectManager()->get(StockRegistryInterface::class);

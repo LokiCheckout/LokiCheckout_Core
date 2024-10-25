@@ -21,7 +21,7 @@ class BlockCssClass
             $css = $default;
         }
 
-        $blockClass = str_replace('.', '-', (string)$this->block->getNameInLayout());
+        $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$this->block->getNameInLayout());
         $css = $blockClass . ' ' . $css;
 
         return trim($css);

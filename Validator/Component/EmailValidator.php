@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Customer\Api\AccountManagementInterface;
-use Yireo\LokiCheckout\Exception\ValidationException;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 class EmailValidator implements AddressFieldValidatorInterface

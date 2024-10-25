@@ -3,17 +3,21 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
 /** @var Template $parentBlock */
 /** @var FormFieldInterface $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
 ?>
 
-<div class="<?= $blockCss('') ?> mb-4 ">
+<div class="<?= $blockCss('mb-4') ?>">
     <div class="flex">
         <input
             id="vat_id_country"
+            x-model="vatIdCountry"
+            x-ref="vatIdCountry"
+            @change="submit"
             wire:loading.attr="aria-busy"
             wire:loading.class="disabled"
             <?php if ($magewire->hasErrors()): ?>
@@ -23,22 +27,28 @@ use Yireo\LokiCheckout\Magewire\Generic\FormFieldInterface;
             pattern="[a-zA-Z]*"
             min="2" max="4"
             value="<?= $magewire->getVatCountryId() ?>"
-            class="block w-16 rounded-l-lg bg-zinc-100 invalid:bg-red-100 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500 border-r-1">
+            class="form-input block w-16 rounded-l-lg !rounded-r-none bg-zinc-100 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500 border-r-1">
 
         <input
             id="vat_id_text"
+            x-model="vatIdNumber"
+            x-ref="vatIdNumber"
+            @change="submit"
             wire:loading.attr="aria-busy"
             wire:loading.class="disabled"
             <?php if ($magewire->hasErrors()): ?>
                 aria-invalid="true"
             <?php endif ?>
+            <?php if ($magewire->getPlaceholder()): ?>
+                placeholder="<?= $magewire->getPlaceholder() ?>"
+            <?php endif ?>
             <?= $magewire->isRequired() ? 'required' : '' ?>
             type="text"
             pattern="[a-zA-Z0-9]*"
             min="2" max="20"
-            class="block w-full rounded-r-lg border-l-0 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500">
+            class="form-input block w-full !rounded-l-none rounded-r-lg border-l-0 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500">
     </div>
 
-    <input id="vat_id" type="hidden" wire:model="<?= $magewire->getModelName() ?>">
+    <input id="vat_id" type="text" wire:model="<?= $magewire->getModelName() ?>">
     <small>Current VAT ID: <?= $magewire->getValue() ?></small>
 </div>

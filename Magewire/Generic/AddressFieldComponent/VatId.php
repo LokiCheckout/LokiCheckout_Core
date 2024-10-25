@@ -1,0 +1,55 @@
+<?php declare(strict_types=1);
+
+namespace Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+use Magento\Customer\Model\Vat as VatModel;
+use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
+
+class VatId extends AddressFieldComponent
+{
+    protected $listeners = ['shippingStepSave' => 'refresh'];
+    protected array $validators = ['vat_id', 'vat_id_online'];
+    protected array $filters = ['vat_id'];
+
+    public function __construct(
+        private CountryIdVatPrefixMapping $countryIdVatPrefixMapping,
+        private VatModel $vatModel,
+    ) {
+    }
+
+    public function getFieldTemplate(): string
+    {
+        if ($this->isEu()) {
+            return 'Yireo_LokiCheckout::form/field/vat_id_eu.phtml';
+        }
+
+        return 'Yireo_LokiCheckout::form/field/text.phtml';
+    }
+
+    public function hasClientSideValidation(): bool
+    {
+        return true;
+    }
+
+    public function isRequired(): bool
+    {
+        return true;
+    }
+
+    public function isEu(): bool
+    {
+        // @todo: Does the shipping address need VAT ID after all?
+        return $this->vatModel->isCountryInEU($this->getCountryIdFromQuote());
+    }
+
+    public function getVatCountryId(): string
+    {
+        return $this->countryIdVatPrefixMapping->convert($this->getCountryIdFromQuote());
+    }
+
+    private function getCountryIdFromQuote(): string
+    {
+        return (string)$this->addressState->load('country_id');
+    }
+}

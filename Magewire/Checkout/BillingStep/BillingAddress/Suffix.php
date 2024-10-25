@@ -2,8 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Suffix as GenericSuffixComponent;
+use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
-class Suffix extends BillingAddressFieldComponent
+class Suffix extends GenericSuffixComponent implements BillingAddressFieldComponentInterface
 {
 }

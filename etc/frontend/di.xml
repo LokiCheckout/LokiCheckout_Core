@@ -5,7 +5,6 @@
                 type="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin"/>
     </type>
 
-
     <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">

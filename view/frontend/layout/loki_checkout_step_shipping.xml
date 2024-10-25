@@ -13,7 +13,7 @@
                     template="Yireo_LokiCheckout::checkout/email.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object" >
-                            Yireo\LokiCheckout\Magewire\Checkout\Email
+                            Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Email
                         </argument>
                         <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
                     </arguments>
@@ -181,13 +181,7 @@
                                 Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
                             </argument>
                         </arguments>
-                        <block name="loki.checkout.shipping-step.shipping-address.vat_id.field" as="field"
-                               template="Yireo_LokiCheckout::form/field/vat_id.phtml">
-                            <block name="loki.checkout.shipping-step.shipping-address.vat_id.field.vat_id_eu" as="field"
-                                   template="Yireo_LokiCheckout::form/field/vat_id_eu.phtml"/>
-                        </block>
-                        <block name="loki.checkout.vat_id_eu_script" as="script"
-                               template="Yireo_LokiCheckout::form/field/vat_id_eu_script.phtml"
+                        <block name="loki.checkout.shipping-step.shipping-address.vat_id.script" as="script" template="Yireo_LokiCheckout::form/field/vat_id_eu/script.phtml"
                         />
                     </block>
                 </block>

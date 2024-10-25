@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 use Magento\Customer\Model\Session as CustomerSession;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
-class Email extends ShippingAddressFieldComponent
+class Email extends AddressFieldComponent
 {
     public string $email = '';
 

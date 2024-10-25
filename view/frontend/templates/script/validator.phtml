@@ -1,0 +1,51 @@
+<script>
+    // @todo: window.LokiCheckoutValidator.rules.custom = function(component, config) { return true; }
+    window.LokiCheckoutValidator = {
+        rules: {
+            required: (component, config) => {
+                isValid = true;
+                for (const [propertyName, propertyLabel] of Object.entries(config)) {
+                    if (component[propertyName] === '') {
+                        const message = '<?= __('%s is required') ?>'.replace('%s', propertyLabel);
+                        window.LokiCheckoutMessenger.error(message, component)
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            }
+        },
+        validate: function (component) {
+            isValid = true;
+
+            for (const [rule, config] of Object.entries(component.rules)) {
+                if (false === this.rules[rule](component, config)) {
+                    isValid = false;
+                }
+            }
+
+            if (false === isValid) {
+                this.setInvalid(component);
+            } else {
+                this.setValid(component);
+            }
+
+            return isValid;
+        },
+        setInvalid: function (component) {
+            Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
+                element.setCustomValidity('Value is invalid');
+                element.setAttribute('data-invalid', true);
+                element.setAttribute('aria-invalid', true);
+            });
+
+        },
+        setValid: function (component) {
+            Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
+                element.setCustomValidity('');
+                element.removeAttribute('data-invalid');
+                element.removeAttribute('aria-invalid');
+            });
+        }
+    }
+</script>

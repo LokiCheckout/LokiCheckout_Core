@@ -16,39 +16,10 @@ $magewire = $this->getComponent();
     id="<?= $magewire->getElementId() ?>-field"
     x-ref="field"
     x-model="value"
-    @change="validate"
+    @change="submit"
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"
     class="form-input block w-full data-[invalid=true]:border-red-500 mb-4" >
-
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            value: '<?= $magewire->value ?>',
-            init() {
-                this.value = Magewire.find(this.$root.getAttribute('wire:id')).get('value');
-            },
-            validate() {
-                const currentValue = this.$refs.field.value;
-                const isRequired = <?= $magewire->isRequired() ? 'true' : 'false' ?>;
-
-                if (!currentValue && isRequired) {
-                    window.LokiCheckoutMessenger.add('Value is required', this.$refs.errors);
-                    this.$refs.field.setCustomValidity('Field is invalid');
-                    this.$refs.field.setAttribute('data-invalid', true);
-                    return false;
-                }
-
-                // @todo: Trigger an event or hook or something to allow customization
-
-                const magewire = Magewire.find(this.$root.getAttribute('wire:id'));
-                magewire.call('setValue', this.value);
-
-                return true;
-            }
-        }));
-    });
-</script>

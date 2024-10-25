@@ -1,14 +1,24 @@
 <script>
     window.LokiCheckoutMessenger = {
-        add: function(errorMessage, htmlElement) {
-            if (!htmlElement) {
+        error: function (message, component) {
+            const errorContainer = component.$refs.errors;
+            if (!errorContainer) {
                 console.error('Error message sent to empty HTML element');
                 return;
             }
 
             const errorElement = document.createElement("li");
-            errorElement.textContent = errorMessage;
-            htmlElement.appendChild(errorElement);
+            errorElement.textContent = message;
+            errorContainer.appendChild(errorElement);
+        },
+        clear: function (component) {
+            const errorContainer = component.$refs.errors;
+            if (!errorContainer) {
+                console.error('Clear attempt on empty HTML element');
+                return;
+            }
+
+            errorContainer.innerHTML = '';
         }
     }
 </script>

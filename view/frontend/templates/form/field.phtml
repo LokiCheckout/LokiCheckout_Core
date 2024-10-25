@@ -46,6 +46,6 @@ if (false === $magewire->isVisible()) {
     <?php if ($script instanceof AbstractBlock): ?>
         <?= $script->addData(['component' => $magewire])->toHtml() ?>
     <?php else: ?>
-        <?= $blockRenderer->render('form/field/script.phtml', $block, $magewire) ?>
+        <?= $blockRenderer->render('form/field/text_js/script.phtml', $block, $magewire) ?>
     <?php endif; ?>
 </div>
