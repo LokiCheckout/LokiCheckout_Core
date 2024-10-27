@@ -8,4 +8,5 @@ use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\CountryId as Gener
 
 class CountryId extends GenericCountryIdComponent implements FormSelectFieldInterface, ShippingAddressFieldComponentInterface
 {
+    protected array $emitTargets = [Region::class, Postcode::class];
 }
