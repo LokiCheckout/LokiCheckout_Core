@@ -29,13 +29,13 @@ if (false === $magewire->isVisible()) {
 ?>
 <div id="<?= $magewire->getElementId() ?>" class="<?= $blockCss('') ?> field w-full relative <?= $magewire->isRequired(
 ) && 'required' ?> <?= $magewire->getFieldName() ?>" <?php if ($magewire->hasClientSideValidation()): ?>x-data="<?= $magewire->getJsName() ?>"<?php endif; ?>>
-    <label for="<?= $magewire->getFieldName() ?>">
+    <label for="<?= $magewire->getFieldName() ?>" class="inline-block mb-1.5">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>
-    <div class="relative">
+    <div class="relative space-y-2">
         <?= $blockRenderer->render($magewire->getFieldTemplate(), $block, $magewire) ?>
-        <div wire:loading class="field-loader absolute top-0 right-0 bottom-0 p-3">
+        <div wire:loading x-cloak class="field-loader absolute inset-y-0 right-0 p-2">
             <?= $block->getBlockHtml('loki.checkout.utils.loader') ?>
         </div>
     </div>

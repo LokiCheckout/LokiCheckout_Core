@@ -25,9 +25,12 @@ use Yireo\LokiCheckout\Util\BlockCssClass;
             <?php endif ?>
             type="text"
             pattern="[a-zA-Z]*"
-            min="2" max="4"
+            min="2"
+            max="4"
             value="<?= $magewire->getVatCountryId() ?>"
-            class="form-input block w-16 rounded-l-lg !rounded-r-none bg-zinc-100 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500 border-r-1">
+            class="form-input w-16 rounded-l-lg !rounded-r-none border-r-1 bg-zinc-100
+                data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500"
+        >
 
         <input
             id="vat_id_text"
@@ -45,8 +48,11 @@ use Yireo\LokiCheckout\Util\BlockCssClass;
             <?= $magewire->isRequired() ? 'required' : '' ?>
             type="text"
             pattern="[a-zA-Z0-9]*"
-            min="2" max="20"
-            class="form-input block w-full !rounded-l-none rounded-r-lg border-l-0 data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500">
+            min="2"
+            max="20"
+            class="form-input w-full !rounded-l-none rounded-r-lg border-l-0
+                data-[invalid=true]:border-red-500 data-[valid=true]:border-green-500"
+        >
     </div>
 
     <input id="vat_id" type="text" wire:model="<?= $magewire->getModelName() ?>">
