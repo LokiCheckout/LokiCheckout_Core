@@ -2,12 +2,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
@@ -17,13 +19,21 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
-<div class="<?= $blockCss('') ?>">
-    <ul class="flex" role="list">
+<nav
+    class="<?= $blockCss('hidden md:block card rounded-lg') ?>"
+    aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
+>
+    <ul class="flex items-center">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>
-            <li class="pr-4 <?= $isActive ? 'active _active font-bold' : 'inactive' ?>">
+            <li
+                class="step flex items-center aria-[current=step]:font-bold"
+                <?php if ($isActive): ?>
+                    aria-current="step"
+                <?php endif; ?>
+            >
                 <?php if (false === $step->isEnabled()): ?>
-                    <span class="text-gray-200">
+                    <span class="opacity-60 cursor-not-allowed">
                         <?= $step->getLabel() ?>
                     </span>
                 <?php elseif (false === $step->isAccessable()): ?>
@@ -36,7 +46,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                     </button>
                 <?php endif; ?>
                 <?php if (false === $stepNavigator->isLastStep($step)): ?>
-                    <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
+                    <span class="inline-flex justify-center items-center px-2" aria-hidden="true">
+                        <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
+                    </span>
                 <?php endif; ?>
             </li>
         <?php endforeach; ?>
@@ -51,4 +63,4 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             });
         });
     </script>
-</div>
+</nav>
