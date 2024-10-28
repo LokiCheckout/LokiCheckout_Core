@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Observer;
 
@@ -16,17 +15,16 @@ class RegisterModuleForHyvaConfig implements ObserverInterface
         $this->componentRegistrar = $componentRegistrar;
     }
 
-    public function execute(Observer $observer)
+    public function execute(Observer $event)
     {
-        $event = $observer->getEvent();
         $config = $event->getData('config');
         $extensions = $config->hasData('extensions') ? $config->getData('extensions') : [];
 
-        $moduleName = implode('_', array_slice(explode('\\', __CLASS__), 0, 2));
+        $path = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, 'Yireo_LokiCheckout');
 
-        $path = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-
+        // Only use the path relative to the Magento base dir
         $extensions[] = ['src' => substr($path, strlen(BP) + 1)];
+
         $config->setData('extensions', $extensions);
     }
 }
