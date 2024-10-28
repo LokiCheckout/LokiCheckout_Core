@@ -21,7 +21,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 <aside class="<?= $blockCss('my-2 order-2') ?>">
     <?= $block->getChildHtml('login'); ?>
 
-    <div class="loki-checkout-sidebar-summary card bg-gray-100 p-8 mb-8">
+    <div class="loki-checkout-sidebar-summary card p-8 mb-8">
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Summary']) ?>
         <div>
             <?= $block->getChildHtml('coupon_code') ?>
@@ -37,7 +37,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
         </div>
     </div>
 
-    <div class="loki-checkout-sidebar-preview bg-gray-100 p-8 my-4">
+    <div class="loki-checkout-sidebar-preview card p-8 my-4">
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Preview']) ?>
         <div class="border-b border-gray-400 my-8">
             <?= $block->getChildHtml('preview') ?>
