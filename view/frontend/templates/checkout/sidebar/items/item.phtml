@@ -19,11 +19,21 @@ $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
 ?>
-<li class="<?= $blockCss('flex') ?>">
-    <img src="<?= $productImageUrl ?>" width="<?= $width ?>" height="<?= $width ?>" class="image pr-4">
-    <div class="pb-4">
-        <?= $item->getName() ?><br>
-        <span class="text-sm"><?= __('Price') ?>: <?= $priceFormatterViewModel->format($item->getPrice()) ?></span><br>
-        <span class="text-sm"><?= __('Quantity') ?>: <?= $item->getQty() ?></span>
+<li class="<?= $blockCss('flex gap-4') ?>">
+    <img
+        src="<?= $productImageUrl ?>"
+        width="<?= $width ?>"
+        height="<?= $width ?>"
+        alt=""
+        class="shrink-0"
+    >
+    <div class="grow">
+        <p><strong><?= $item->getName() ?><br></strong></p>
+        <dl class="text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2">
+            <dt class="font-medium"><?= __('Price') ?>:</dt>
+            <dd><?= $priceFormatterViewModel->format($item->getPrice()) ?></dd>
+            <dt class="font-medium"><?= __('Quantity') ?>:</dt>
+            <dd><?= $item->getQty() ?></dd>
+        </dl>
     </div>
 </li>

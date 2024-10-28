@@ -12,7 +12,7 @@ if (empty($magewire->items)) {
     return '<div>No items</div>';
 }
 ?>
-<div class="<?= $blockCss('border-b border-gray-400 my-8') ?>">
+<div class="<?= $blockCss('') ?>">
     <ul role="list">
         <?php foreach ($magewire->items as $item) : ?>
             <?= $block->getChildBlock('item')->addData(['item' => $item])->toHtml() ?>

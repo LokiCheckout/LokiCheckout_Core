@@ -16,7 +16,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div class="<?= $blockCss('') ?>">
+<div class="<?= $blockCss('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
         <p class="mb-4">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>

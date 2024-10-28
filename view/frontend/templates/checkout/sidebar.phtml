@@ -23,24 +23,20 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 
     <div class="loki-checkout-sidebar-summary card p-8 mb-8">
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Summary']) ?>
-        <div>
+        <div class="space-y-8">
             <?= $block->getChildHtml('coupon_code') ?>
-        </div>
-        <div wire:ignore>
-            <?= $block->getChildHtml('items') ?>
-        </div>
-        <div>
+            <div wire:ignore>
+                <?= $block->getChildHtml('items') ?>
+            </div>
             <?= $block->getChildHtml('totals') ?>
-        </div>
-        <div wire:ignore>
-            <?= $block->getChildHtml('order_comment') ?>
+            <div wire:ignore>
+                <?= $block->getChildHtml('order_comment') ?>
+            </div>
         </div>
     </div>
 
     <div class="loki-checkout-sidebar-preview card p-8 my-4">
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Preview']) ?>
-        <div class="border-b border-gray-400 my-8">
-            <?= $block->getChildHtml('preview') ?>
-        </div>
+        <?= $block->getChildHtml('preview') ?>
     </div>
 </aside>
