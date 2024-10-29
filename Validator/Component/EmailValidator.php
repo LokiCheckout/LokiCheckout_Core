@@ -31,7 +31,8 @@ class EmailValidator implements AddressFieldValidatorInterface
         $parts = explode('@', $email);
         $domain = $parts[1];
         if (false === checkdnsrr($domain)) {
-            $component->error('value', (string)__('Domain "%s" does not seem to be valid', $domain));
+            $message = (string)__('Domain "%s" does not seem to be valid');
+            $component->error('value', sprintf($message, $domain));
             return false;
         }
 
