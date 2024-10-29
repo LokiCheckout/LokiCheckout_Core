@@ -49,10 +49,21 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     {
         $parentBlock = $this->getParent();
         if ($parentBlock && $parentBlock->getFieldLabel()) {
-            return (string)$parentBlock->getFieldLabel(); // @doc: You can override a field label via XML layout
+            return (string)$parentBlock->getFieldLabel();
         }
 
         return $this->getAttributeLabel();
+    }
+
+    public function getListeners(): array
+    {
+        $parentBlock = $this->getParent();
+        if ($parentBlock && $parentBlock->getListeners()) {
+            // @todo: Test whether this is properly working or not
+            $this->listeners = array_merge($this->listeners, (array)$parentBlock->getListeners());
+        }
+
+        return $this->listeners;
     }
 
     public function getInputType(): string
