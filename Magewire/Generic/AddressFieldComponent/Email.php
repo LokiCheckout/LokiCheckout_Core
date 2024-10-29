@@ -9,6 +9,7 @@ class Email extends AddressFieldComponent
 {
     public string $email = '';
 
+    protected array $jsValidators = ['email'];
     protected array $validators = ['email'];
 
     public function __construct(

@@ -1,0 +1,25 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('lock', {
+            lockedComponents: [],
+            lock(component) {
+                this.lockedComponents.push(component);
+
+                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.lock', {detail: {lockedComponent: component}}));
+            },
+            unlock(component) {
+                this.lockedComponents = this.lockedComponents.filter(lockedComponent => lockedComponent != component);
+            },
+            isLocked(component) {
+                //return this.lockedComponents.includes(component);
+                let isLocked = false;
+                this.lockedComponents.forEach(lockedComponent => {
+                    if (lockedComponent.endsWith(component)) {
+                        isLocked = true;
+                    }
+                });
+                return isLocked;
+            }
+        })
+    })
+</script>

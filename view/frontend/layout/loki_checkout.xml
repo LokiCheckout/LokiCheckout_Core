@@ -18,13 +18,13 @@
 
         <referenceContainer name="before.body.end">
             <block name="loki.checkout.script.aria-invalid" template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
+            <block name="loki.checkout.script.lock-store" template="Yireo_LokiCheckout::script/lock-store.phtml"/>
             <block name="loki.checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>
             <block name="loki.checkout.script.validator" template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>
 
         <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
-        <block name="loki.checkout.utils.lock" template="Yireo_LokiCheckout::utils/lock.phtml"/>
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>

@@ -10,7 +10,7 @@
 
                 <block
                     name="loki.checkout.shipping-step.email" as="email"
-                    template="Yireo_LokiCheckout::checkout/email.phtml">
+                    template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object" >
                             Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Email

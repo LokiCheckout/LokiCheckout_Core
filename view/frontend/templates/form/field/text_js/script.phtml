@@ -14,32 +14,33 @@ $component = $this->getComponent();
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $component->getJsName() ?>', () => ({
             value: '<?= $component->value ?>',
-            locked: false,
+            locked: <?= $component->locked ? 'true' : 'false' ?>,
             init() {
                 window.addEventListener('yireo-loki-checkout.lock', (event) => {
                     if ('<?= $magewire->getElementId() ?>'.endsWith('-postcode') &&
                         event.detail.lockedComponent.endsWith('-country-id')
                     ) {
-                        //this.locked = true; // @todo: Find a way to do unlock this again
+                        this.locked = true;
                     }
                 });
+
+                Livewire.hook('element.updated', (element, component) => {
+                    if ('<?= $magewire->getElementById() ?>' === component.el.id) {
+                        this.locked = false;
+                    }
+                })
             },
-            rules: {
-                <?php if($component->isRequired()): ?>
-                required: {value: '<?= __('Value') ?>'}
-                <?php endif; ?>
-            },
+            rules: [
+                <?php foreach($component->getJsValidators() as $jsValidator): ?>
+                '<?= $jsValidator ?>',
+                <?php endforeach; ?>
+            ],
             submit() {
                 if (false === window.LokiCheckoutValidator.validate(this)) {
                     return false;
                 }
 
-                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.lock', {
-                    detail: {
-                        lockedComponent: '<?= $magewire->getElementId() ?>'
-                    }
-                }));
-
+                Alpine.store('lock').lock('<?= $magewire->getElementId() ?>');
                 Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.value);
             }
         }));

@@ -7,6 +7,7 @@ use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\AddressSt
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\AttributeBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\FilterBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\JsValidateBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponentBehaviour\ValidateBehaviour;
 
 abstract class AddressFieldComponent extends Component implements FormFieldInterface, AddressFieldInterface
@@ -14,11 +15,13 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     use AttributeBehaviour;
     use FilterBehaviour;
     use ValidateBehaviour;
+    use JsValidateBehaviour;
     use FieldTemplateLocatorBehaviour;
     use AddressStateBehaviour;
 
     protected string $elementId = '';
     public string $value = '';
+    public bool $locked = false;
 
     public function boot(): void
     {
