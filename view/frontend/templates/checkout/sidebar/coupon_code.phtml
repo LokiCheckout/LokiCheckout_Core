@@ -16,41 +16,45 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div class="<?= $blockCss('border-b border-gray-400 my-4') ?>">
-    <div x-data="LokiCheckoutSidebarCouponCode">
-        <?php if (!empty($couponCode)): ?>
-            Coupon code: <span><?= $couponCode ?></span>
-            <button class="btn-remove btn btn-secondary mt-4"
-                    type="button"
-                    wire:click="removeCouponCode"
-                    wire:loading.attr="disabled">
-                <?= __('Remove coupon code') ?>
+<div class="<?= $blockCss('border-b border-gray-200') ?>">
+    <?php if (!empty($couponCode)): ?>
+        <p class="mb-4">
+            <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
+            <strong><?= $couponCode ?></strong>
+        </p>
+        <button
+            type="button"
+            class="btn btn-secondary"
+            wire:click="removeCouponCode"
+            wire:loading.attr="disabled"
+        ><?= __('Remove coupon code') ?></button>
+    <?php else: ?>
+        <details class="group">
+            <summary class="flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer">
+                <span><?= __('Discount Code') ?></span>
+                <img
+                    alt="<?= __('Expand') ?>"
+                    src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
+                    class="<?= $blockCss('') ?> inline-block group-open:rotate-180 transition-transform"
+                    width="20"
+                    height="20"
+                >
+            </summary>
 
-            </button>
-        <?php else: ?>
-            <button class="btn-expand text-sm" type="button" @click="toggle">
-                <?= __('Discount Code') ?>
-                <img alt="<?= __('Expand') ?>"
-                     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
-                     class="loader <?= $blockCss('') ?> inline-block"
-                     width="15"
-                     height="15">
-            </button>
-
-            <div x-show="show">
-                <label>
+            <div>
+                <label class="block mb-3">
                     <span class="sr-only"><?php __('Discount Code') ?></span>
                     <input type="text" wire:model.lazy="couponCode" class="form-input w-full">
                 </label>
-                <button class="btn btn-apply btn-secondary text-sm mt-4"
-                        type="button"
-                        wire:click="applyCouponCode"
-                        wire:loading.attr="disabled">
-                    <?= __('Apply') ?>
-                </button>
+                <button
+                    type="button"
+                    class="btn btn-secondary w-full justify-center text-center"
+                    wire:click="applyCouponCode"
+                    wire:loading.attr="disabled"
+                ><?= __('Apply') ?></button>
             </div>
-        <?php endif; ?>
-    </div>
+        </details>
+    <?php endif; ?>
 
     <?= $block->getChildHtml('script') ?>
 </div>

@@ -18,7 +18,8 @@ $magewire->setOptionModel($optionModel);
         aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
-    class="form-input block w-full data-[invalid=true]:border-red-500">
+    class="form-select w-full data-[invalid=true]:border-red-500"
+>
     <?php foreach ($optionModel->getOptions($magewire) as $optionValue => $optionLabel): ?>
     <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>

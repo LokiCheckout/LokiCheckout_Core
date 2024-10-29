@@ -13,31 +13,39 @@ use Yireo\LokiCheckout\Util\BlockCssClass;
 
 $currentStep = $magewire->currentStep;
 ?>
-<div class="<?= $blockCss('container mb-16') ?>">
-    <div class="card">
-        <?= $block->getChildBlock('progressbar')->toHtml(); ?>
-    </div>
+<div class="<?= $blockCss('space-y-6') ?>">
+    <?= $block->getChildBlock('progressbar')->toHtml(); ?>
 
-    <div class="grid grid-cols-3 gap-8 my-8">
-        <div class="col-span-2 opc">
-            <div class="relative">
-                <div wire:loading>
-                    <div class="overlay absolute m-auto left-0 right-0 bottom-0 top-0 opacity-60 bg-white z-50"></div>
-                    <div class="loader-container absolute z-50 w-full h-screen flex items-center justify-center">
-                        <img src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>" width="100"
-                             height="100">
-                    </div>
+    <div
+        class="grid grid-cols-1 lg:grid-cols-[var(--checkout-layout)] gap-8"
+        style="--checkout-layout: minmax(0px,2fr) minmax(0px,1fr);"
+    >
+        <div class="opc relative">
+            <div
+                wire:loading
+                x-cloak
+                aria-live="polite"
+                class="loader-container"
+            >
+                <div class="z-30 absolute inset-0 bg-white/60 flex justify-center items-center">
+                    <img
+                        src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
+                        width="100"
+                        height="100"
+                        alt="Loading..."
+                    >
                 </div>
+            </div>
 
-                <?php
+            <?php
                 $stepBlock = $block->getChildBlock($currentStep.'-step');
+
                 if ($stepBlock) {
                     echo $stepBlock->toHtml();
                 } else {
                     echo 'No step block for "'.$currentStep.'"';
                 }
-                ?>
-            </div>
+            ?>
         </div>
 
         <?= $block->getChildBlock('sidebar')->toHtml(); ?>
