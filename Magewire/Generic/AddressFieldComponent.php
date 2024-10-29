@@ -152,6 +152,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     public function hasClientSideValidation(): bool
     {
+        return true; // @todo: Is this going to be the default?
         return (bool)$this->getParent()->getClientSideValidation();
     }
 

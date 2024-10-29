@@ -1,0 +1,16 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\BlockCssClass;
+
+/** @var Template $block */
+/** @var BlockCssClass $blockCss */
+
+// @todo: Convert this into an inline SVG
+?>
+<img alt="<?= __('Loading') ?>"
+     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/lock.svg'); ?>"
+     class="<?= $blockCss('lock fill-zinc-200') ?>"
+     width="20"
+     height="20">

@@ -11,12 +11,13 @@ $fieldBlock = $block->getFieldBlock();
 $magewire = $this->getComponent();
 ?>
 <input
+    id="<?= $magewire->getElementId() ?>-field"
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
-    id="<?= $magewire->getElementId() ?>-field"
     x-ref="field"
     x-model="value"
-    @change="submit"
+    x-on:change="submit"
+    x-bind:disabled="locked"
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>

@@ -24,6 +24,7 @@
 
         <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
+        <block name="loki.checkout.utils.lock" template="Yireo_LokiCheckout::utils/lock.phtml"/>
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
