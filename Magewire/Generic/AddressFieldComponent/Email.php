@@ -35,4 +35,11 @@ class Email extends AddressFieldComponent
     {
         return false === $this->customerSession->isLoggedIn();
     }
+
+    public function beforeSave($value): void
+    {
+        if ($this->addressState->getQuote()->getCustomerIsGuest()) {
+            $this->addressState->getQuote()->setCustomerEmail($value);
+        }
+    }
 }

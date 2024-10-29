@@ -6,4 +6,10 @@ use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
 
 class Lastname extends AddressFieldComponent
 {
+    public function beforeSave($value): void
+    {
+        if ($this->addressState->getQuote()->getCustomerIsGuest()) {
+            $this->addressState->getQuote()->setCustomerLastname($value);
+        }
+    }
 }
