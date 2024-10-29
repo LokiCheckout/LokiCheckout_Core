@@ -6,5 +6,4 @@ use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Company as Generic
 use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 class Company extends GenericCompanyComponent implements ShippingAddressFieldComponentInterface
 {
-    protected array $emitTargets = [VatId::class];
 }

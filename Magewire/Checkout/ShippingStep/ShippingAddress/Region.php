@@ -8,5 +8,7 @@ use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 
 class Region extends GenericRegionComponent implements FormTextSelectFieldInterface, ShippingAddressFieldComponentInterface
 {
-    protected array $emitTargets = [Postcode::class];
+    protected $listeners = [
+        'shippingAddressCountryIdSave' => 'refresh'
+    ];
 }

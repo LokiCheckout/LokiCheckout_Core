@@ -8,4 +8,8 @@ use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
 
 class Region extends GenericRegionComponent implements FormTextSelectFieldInterface, BillingAddressFieldComponentInterface
 {
+
+    protected $listeners = [
+        'billingAddressCountryIdSave' => 'refresh'
+    ];
 }

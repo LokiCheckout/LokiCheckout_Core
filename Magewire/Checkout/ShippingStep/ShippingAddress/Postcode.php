@@ -7,4 +7,8 @@ use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 
 class Postcode extends GenericPostcodeComponent implements ShippingAddressFieldComponentInterface
 {
+    // @todo: Find a way to extend $listeners via DI or via XML layout
+    protected $listeners = [
+        'shippingAddressCountryIdSave' => 'refresh'
+    ];
 }

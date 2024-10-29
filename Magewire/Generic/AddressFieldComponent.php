@@ -31,7 +31,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     public function booted(): void
     {
-        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
+        $this->listeners[static::class . '::afterSetValue'] = 'refresh';
     }
 
 
@@ -72,39 +72,63 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
 
     public function setValue(mixed $value)
     {
-        if (is_string($value)) {
-            // @todo: Find a way to filter an array-like value instead
-            $this->value = $this->filter($value);
-        }
-
+        $value = $this->filterValue($value);
+        $this->value = $value;
         $this->validate();
 
         if (false === $this->hasErrors()) {
             $this->save($value);
-            $this->emit(static::class.'::afterSetValue');
+            $this->emit(static::class . '::afterSetValue');
         }
+    }
+
+    protected function filterValue(mixed $value)
+    {
+        if (is_string($value)) {
+            $value = $this->filter($value);
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $v) {
+                if (is_string($v)) {
+                    $v = $this->filter($v);
+                }
+            }
+        }
+
+        return $value;
     }
 
     public function updatedValue($value)
     {
-        //sleep(20); // @todo: Remove
         $this->setValue($value);
         return $value;
     }
 
+    public function beforeSave($value): void
+    {
+    }
     public function save($value): void
     {
+        $this->beforeSave($value);
         $this->addressState->save($this->getFieldName(), $value);
 
         if ($this instanceof ShippingAddressFieldComponentInterface) {
+            $this->emit('shippingAddress'.$this->snakeToCamel($this->getFieldName()).'Save');
             $this->emit('shippingStepSave');
         }
 
         if ($this instanceof BillingAddressFieldComponentInterface) {
+            $this->emit('billingAddress'.$this->snakeToCamel($this->getFieldName()).'Save');
             $this->emit('billingStepSave');
         }
+
+        $this->afterSave($value);
     }
 
+    public function afterSave($value): void
+    {
+    }
     public function getNameInLayout(): string
     {
         return $this->getParent()->getNameInLayout();
@@ -159,5 +183,10 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         }
 
         return false;
+    }
+
+    protected function snakeToCamel(string $text): string
+    {
+        return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
     }
 }

@@ -7,4 +7,7 @@ use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
 
 class VatId extends GenericVatIdComponent implements ShippingAddressFieldComponentInterface
 {
+    protected $listeners = [
+        'shippingAddressCompanySave' => 'refresh'
+    ];
 }
