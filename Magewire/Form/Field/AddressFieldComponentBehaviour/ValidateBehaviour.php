@@ -34,6 +34,10 @@ trait ValidateBehaviour
 
     public function getValidators(): array
     {
+        if ($this->hasMinLength() || $this->hasMaxLength()) {
+            $this->validators[] = 'length';
+        }
+
         return array_merge($this->validators, (array)$this->getParent()->getValidators());
     }
 }

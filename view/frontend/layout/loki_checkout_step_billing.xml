@@ -187,24 +187,30 @@
 
                 <block
                     name="loki.checkout.billing-step.backward-button" as="backward-button"
-                    template="Yireo_LokiCheckout::checkout/step-backward-button.phtml">
+                    template="Yireo_LokiCheckout::form/button/step-backward-button.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\StepBackwardButton
+                            Yireo\LokiCheckout\Magewire\Form\Button\StepBackwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Back to shipping</argument>
                     </arguments>
+                    <block
+                        name="loki.checkout.billing-step.backward-button.script" as="script"
+                        template="Yireo_LokiCheckout::form/button/step-backward-button/script.phtml"/>
                 </block>
 
                 <block
                     name="loki.checkout.billing-step.forward-button" as="forward-button"
-                    template="Yireo_LokiCheckout::checkout/step-forward-button.phtml">
+                    template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\StepForwardButton
+                            Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Proceed to review &amp; payments</argument>
                     </arguments>
+                    <block
+                        name="loki.checkout.billing-step.forward-button.script" as="script"
+                        template="Yireo_LokiCheckout::form/button/step-forward-button/script.phtml"/>
                 </block>
             </block>
         </referenceBlock>

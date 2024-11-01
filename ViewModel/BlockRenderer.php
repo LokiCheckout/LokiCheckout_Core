@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
@@ -48,6 +47,13 @@ class BlockRenderer implements ArgumentInterface
         }
     }
 
+    public function js(string $blockName, array $data = []): string
+    {
+        $html = $this->html($blockName, $data);
+        $html = str_replace('<script>', '', $html);
+        $html = str_replace('</script>', '', $html);
+        return $html;
+    }
 
     public function create(string $templateName, Template $ancestorBlock, ?Component $component = null): Template
     {
@@ -59,6 +65,12 @@ class BlockRenderer implements ArgumentInterface
             ->setAncestorBlock($ancestorBlock)
             ->setTemplate($templateName);
 
+        $component = $ancestorBlock->getMagewire();
+        if ($component instanceof Component) {
+            $block->setData('component', $component);
+        }
+
+        $component = $ancestorBlock->getComponent();
         if ($component instanceof Component) {
             $block->setData('component', $component);
         }

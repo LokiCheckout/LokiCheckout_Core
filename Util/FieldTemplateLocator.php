@@ -19,17 +19,13 @@ class FieldTemplateLocator
             return 'Yireo_LokiCheckout::form/field/text_select.phtml';
         }
 
-        if ($component instanceof FormSelectFieldInterface && $component->hasClientSideValidation()) {
-            return 'Yireo_LokiCheckout::form/field/select_js.phtml';
-        }
-
         if ($component instanceof FormSelectFieldInterface) {
             return 'Yireo_LokiCheckout::form/field/select.phtml';
         }
 
-        if ($component->hasClientSideValidation()) {
-            return 'Yireo_LokiCheckout::form/field/text_js.phtml';
-        }
+        // @todo: Radiobox
+        // @todo: Checkbox
+        // @todo: Textarea
 
         return 'Yireo_LokiCheckout::form/field/text.phtml';
     }

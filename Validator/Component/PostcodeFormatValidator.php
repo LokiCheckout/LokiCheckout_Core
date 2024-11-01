@@ -38,7 +38,7 @@ class PostcodeFormatValidator implements AddressFieldValidatorInterface
             }
         }
 
-        $component->error($component->getModelName(), 'Invalid postcode format: '.implode(', ', $patterns));
+        $component->error($component->getModelName(), 'Invalid postcode format');
         return false;
     }
 }

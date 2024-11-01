@@ -7,7 +7,24 @@ use Yireo\LokiCheckout\Filter\FilterRegistry;
 
 trait FilterBehaviour
 {
-    protected array $filters = [];
+    protected array $filters = ['trim'];
+
+    protected function filterValue(mixed $value)
+    {
+        if (is_string($value)) {
+            $value = $this->filter($value);
+        }
+
+        if (is_array($value)) {
+            foreach ($value as $v) {
+                if (is_string($v)) {
+                    $v = $this->filter($v);
+                }
+            }
+        }
+
+        return $value;
+    }
 
     protected function filter(string $value): string
     {

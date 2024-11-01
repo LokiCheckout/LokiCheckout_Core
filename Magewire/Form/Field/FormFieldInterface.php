@@ -63,11 +63,11 @@ interface FormFieldInterface
     public function isRequired(): bool;
 
     /**
-     * Determine if this field uses client-side validation
+     * Get a JavaScript name (CamelCase)
      *
-     * @return bool
+     * @return string
      */
-    public function hasClientSideValidation(): bool;
+    public function getJsName(): string;
 
     /**
      * Determine if this field its value is valid or not.

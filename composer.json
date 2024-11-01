@@ -1,29 +1,31 @@
 {
-    "name": "yireo/magento2-loki-checkout",
-    "version": "0.0.4",
-    "description": "A developer-friendly Magewire-based checkout for Magento 2",
-    "type": "magento2-module",
-    "require": {
-        "magento/framework": "^103.0",
-        "symfony/validator": "^7.1",
-        "magewirephp/magewire": "^1.11"
-    },
-    "require-dev": {
-        "yireo/magento2-integration-test-helper": "@dev",
-        "yireo/magento2-magewire-test-utils": "@dev"
-    },
-    "suggest": {
-        "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"
-    },
-    "license": [
-        "OSL-3.0"
+  "name": "yireo/magento2-loki-checkout",
+  "version": "0.0.4",
+  "description": "A developer-friendly Magewire-based checkout for Magento 2",
+  "type": "magento2-module",
+  "require": {
+    "magento/framework": "^103.0",
+    "symfony/validator": "^7.1",
+    "magewirephp/magewire": "^1.11",
+    "yireo/magento2-csp-utilities": "^1.0",
+    "php": "^8.3"
+  },
+  "require-dev": {
+    "yireo/magento2-integration-test-helper": "@dev",
+    "yireo/magento2-magewire-test-utils": "@dev"
+  },
+  "suggest": {
+    "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"
+  },
+  "license": [
+    "OSL-3.0"
+  ],
+  "autoload": {
+    "files": [
+      "registration.php"
     ],
-    "autoload": {
-        "files": [
-            "registration.php"
-        ],
-        "psr-4": {
-            "Yireo\\LokiCheckout\\": ""
-        }
+    "psr-4": {
+      "Yireo\\LokiCheckout\\": ""
     }
+  }
 }

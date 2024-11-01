@@ -8,6 +8,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\Attrib
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\JsValidateBehaviour;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\ParentBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\ValidateBehaviour;
 
 abstract class AddressFieldComponent extends Component implements FormFieldInterface, AddressFieldInterface
@@ -18,6 +19,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     use JsValidateBehaviour;
     use FieldTemplateLocatorBehaviour;
     use AddressStateBehaviour;
+    use ParentBehaviour;
 
     protected string $elementId = '';
     public string $value = '';
@@ -27,7 +29,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     {
         $this->value = (string)$this->addressState->load($this->getFieldName());
 
-        if (!empty($this->value)) {
+        if ($this->request->isPreceding() && !empty($this->value)) {
             $this->validate();
         }
     }
@@ -96,23 +98,6 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         }
     }
 
-    protected function filterValue(mixed $value)
-    {
-        if (is_string($value)) {
-            $value = $this->filter($value);
-        }
-
-        if (is_array($value)) {
-            foreach ($value as $v) {
-                if (is_string($v)) {
-                    $v = $this->filter($v);
-                }
-            }
-        }
-
-        return $value;
-    }
-
     public function updatedValue($value)
     {
         $this->setValue($value);
@@ -122,6 +107,7 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     public function beforeSave($value): void
     {
     }
+
     public function save($value): void
     {
         $this->beforeSave($value);
@@ -143,25 +129,10 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
     public function afterSave($value): void
     {
     }
-    public function getNameInLayout(): string
-    {
-        return $this->getParent()->getNameInLayout();
-    }
 
     public function isRequired(): bool
     {
         return (bool)$this->getAttribute()->getIsRequired();
-    }
-
-    public function hasClientSideValidation(): bool
-    {
-        return true; // @todo: Is this going to be the default?
-        return (bool)$this->getParent()->getClientSideValidation();
-    }
-
-    public function getPlaceholder(): string
-    {
-        return (string)$this->getParent()->getPlaceholder();
     }
 
     public function isVisible(): bool
@@ -169,7 +140,12 @@ abstract class AddressFieldComponent extends Component implements FormFieldInter
         return true; // @doc: Example for overriding this
     }
 
-    public function getJsName()
+    public function getJsValue(): string
+    {
+        return str_replace("\n", '\n', $this->value); // @todo: Is this good enough?
+    }
+
+    public function getJsName(): string
     {
         $name = ucwords($this->getNameInLayout(), '_.-');
 
