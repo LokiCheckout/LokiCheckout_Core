@@ -3,10 +3,11 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
 /** @var Items $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
 
 if (empty($magewire->items)) {
     return '<div>No items</div>';
@@ -15,7 +16,9 @@ if (empty($magewire->items)) {
 <div class="<?= $blockCss('') ?>">
     <ul role="list">
         <?php foreach ($magewire->items as $item) : ?>
-            <?= $block->getChildBlock('item')->addData(['item' => $item])->toHtml() ?>
+            <?= $block->getChildBlock('item')
+                ->addData(['item' => $item, 'component' => $magewire
+                ])->toHtml() ?>
         <?php endforeach; ?>
     </ul>
 </div>
