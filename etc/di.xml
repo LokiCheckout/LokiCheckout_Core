@@ -41,6 +41,14 @@
         </arguments>
     </virtualType>
 
+    <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <item name="loki" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Custom</item>
+            </argument>
+        </arguments>
+    </type>
+
     <!--
     <type name="Magewirephp\Magewire\Model\ComponentResolver">
         <arguments>
@@ -75,7 +83,7 @@
         </arguments>
     </type>
 
-    <type name="\Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry">
+    <type name="Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>

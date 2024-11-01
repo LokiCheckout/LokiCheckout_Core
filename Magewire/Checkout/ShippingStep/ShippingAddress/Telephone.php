@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Telephone as GenericTelephoneComponent;
-use Yireo\LokiCheckout\Magewire\Generic\ShippingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Telephone as GenericTelephoneComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
 
 class Telephone extends GenericTelephoneComponent implements ShippingAddressFieldComponentInterface
 {

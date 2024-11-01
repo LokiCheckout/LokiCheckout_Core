@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Postcode as GenericPostcodeComponent;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Postcode as GenericPostcodeComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
 
 class Postcode extends GenericPostcodeComponent implements BillingAddressFieldComponentInterface
 {

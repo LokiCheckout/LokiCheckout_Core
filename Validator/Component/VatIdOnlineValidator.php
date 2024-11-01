@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Customer\Model\Vat as VatModel;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
 
 class VatIdOnlineValidator implements AddressFieldValidatorInterface

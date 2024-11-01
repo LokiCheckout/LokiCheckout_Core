@@ -2,10 +2,10 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\FormSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 
 class FieldTemplateLocator
 {

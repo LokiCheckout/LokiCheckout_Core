@@ -25,7 +25,7 @@ $ancestorBlock = $block->getAncestorBlock();
         Block: <?= get_class($ancestorBlock) ?><br/>
         Name in layout: <?= $ancestorBlock->getNameInLayout() ?><br/>
         Template file: <?= $ancestorBlock->getTemplateFile() ?><br/>
-        <?php if ($component instanceof \Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent): ?>
+        <?php if ($component instanceof \Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent): ?>
             Validators: <?= implode(', ', $component->getValidators()) ?><br/>
             Filters: <?= implode(', ', $component->getFilters()) ?><br/>
         <?php endif; ?>

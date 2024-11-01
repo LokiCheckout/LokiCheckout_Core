@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Exception;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Generic\ButtonInterface;
+use Yireo\LokiCheckout\Magewire\Form\ButtonInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepForwardButton extends Component implements ButtonInterface
