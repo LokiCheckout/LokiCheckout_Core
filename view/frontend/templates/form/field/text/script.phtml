@@ -36,12 +36,14 @@ $component = $this->getComponent();
                         }
                     });
 
-                    Livewire.hook('element.updated', (element, component) => {
-                        if (this.elementId === component.el.id) {
-                            Alpine.store('lock').unlock(this.elementId);
-                            this.locked = false;
-                            this.updated();
-                        }
+                    document.addEventListener('livewire:init', () => {
+                        Livewire.hook('element.updated', (element, component) => {
+                            if (this.elementId === component.el.id) {
+                                Alpine.store('lock').unlock(this.elementId);
+                                this.locked = false;
+                                this.updated();
+                            }
+                        });
                     });
 
                     this.afterInit();
