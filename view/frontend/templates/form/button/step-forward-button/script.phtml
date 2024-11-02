@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Form\Button\ButtonInterface;
+
+/** @var Template $block */
+/** @var ButtonInterface $magewire */
+$magewire = $block->getComponent();
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+            locked: true,
+            init() {
+                this.locked = Alpine.store('lock').hasLocks();
+                window.addEventListener('yireo-loki-checkout.lock', function() {
+                    this.locked = Alpine.store('lock').hasLocks();
+                });
+
+                window.addEventListener('yireo-loki-checkout.unlock', function() {
+                    this.locked = Alpine.store('lock').hasLocks();
+                });
+            }
+        }));
+    });
+</script>

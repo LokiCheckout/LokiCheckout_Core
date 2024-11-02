@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Street as GenericStreetComponent;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Street as GenericStreetComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
 
 class Street extends GenericStreetComponent implements FormTextMultipleFieldInterface, BillingAddressFieldComponentInterface
 {

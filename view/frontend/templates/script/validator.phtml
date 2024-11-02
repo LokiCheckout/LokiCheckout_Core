@@ -1,10 +1,9 @@
 <script>
-    // @todo: window.LokiCheckoutValidator.rules.custom = function(component, config) { return true; }
     window.LokiCheckoutValidator = {
         rules: {
             required: (component) => {
                 isValid = true;
-                if (component.value === '') {
+                if (component.value === '' || component.value === undefined) {
                     window.LokiCheckoutMessenger.error('<?= __('Value is required') ?>', component);
                     isValid = false;
                 }
@@ -48,9 +47,7 @@
     }
 
     window.LokiCheckoutValidator.rules.email = function (component, config) {
-        const regex = /\S+@\S+\.\S+/;
-        const isValid = regex.test(component.value);
-        if (isValid == false) {
+        if (/\S+@\S+\.\S+/.test(component.value) === false) {
             window.LokiCheckoutMessenger.error('<?= __('Not a valid email') ?>', component);
         }
 

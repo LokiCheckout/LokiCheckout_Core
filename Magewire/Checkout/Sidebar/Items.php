@@ -18,4 +18,9 @@ class Items extends Component
     {
         $this->items = $this->checkoutState->getQuote()->getItems();
     }
+
+    public function removeItem(int $itemId)
+    {
+        $this->checkoutState->getQuote()->removeItem($itemId);
+    }
 }

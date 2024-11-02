@@ -32,6 +32,7 @@ class RegionOptionModel implements ArgumentInterface, OptionModelInterface
         }
 
         $options = [];
+        $options[] = '';
         foreach ($regions as $region) {
             /** @var Region $region */
             $options[$region->getRegionId()] = $region->getName();

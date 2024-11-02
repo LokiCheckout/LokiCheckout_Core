@@ -34,6 +34,7 @@ class ShippingAddress extends Component
     {
         if (false === $this->customerSession->isLoggedIn()) {
             $this->newAddress = true;
+
             return;
         }
 
@@ -63,10 +64,11 @@ class ShippingAddress extends Component
             return $value;
         }
 
-        $shippingAddress = $this->customerAddressRepository->getById((int)$value);
-        $this->checkoutState->getQuote()->getShippingAddress()->importCustomerAddressData($shippingAddress);
-        $this->checkoutState->getQuote()->getShippingAddress()->setCustomerAddressId($shippingAddress->getId());
-        $this->checkoutState->getQuote()->getShippingAddress()->save();
+        $customerShippingAddress = $this->customerAddressRepository->getById((int)$value);
+        $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
+        $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
+        $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
+        $quoteShippingAddress->save();
         $this->emit('shippingStepSave');
 
         return $value;
@@ -93,6 +95,7 @@ class ShippingAddress extends Component
     private function getAddressInline(AddressInterface $address): string
     {
         $addressData = $this->addressMapper->toFlatArray($address);
+
         return $this->addressConfig
             ->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT)
             ->getRenderer()

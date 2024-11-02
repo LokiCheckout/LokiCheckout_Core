@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
@@ -11,15 +11,24 @@ $fieldBlock = $block->getFieldBlock();
 $magewire = $this->getComponent();
 ?>
 <input
+    id="<?= $magewire->getElementId() ?>-field"
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
-    wire:model.lazy="<?= $magewire->getModelName() ?>"
-    id="<?= $magewire->getElementId() ?>-field"
+    x-ref="field"
+    x-model="value"
+    x-on:change="submit"
+    x-bind:disabled="locked"
+    <?php if ($magewire->hasMinLength()): ?>
+    min="<?= $magewire->getMinLength() ?>"
+    <?php endif ?>
+    <?php if ($magewire->hasMaxLength()): ?>
+        max="<?= $magewire->getMaxLength() ?>"
+    <?php endif ?>
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?php if ($magewire->getPlaceholder()): ?>
-    placeholder="<?= $magewire->getPlaceholder() ?>"
+        placeholder="<?= $magewire->getPlaceholder() ?>"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"

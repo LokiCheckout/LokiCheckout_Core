@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 interface AddressFieldValidatorInterface
 {

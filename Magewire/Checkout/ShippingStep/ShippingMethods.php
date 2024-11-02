@@ -23,18 +23,23 @@ class ShippingMethods extends Component
     {
         $shippingAddress = $this->shippingAddressState->getShippingAddress();
         $quote =  $shippingAddress->getQuote();
-
-        $this->value = (string)$shippingAddress->getShippingMethod();
-
-        if (empty($this->value)) {
-            // @todo: Load a default shipping method
-        }
-
         $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates();
 
-        $this->shippingMethods = $this->shippingMethodManagement->getList($quote->getId());
+        foreach ($this->shippingMethodManagement->getList($quote->getId()) as $shippingMethod) {
+            $shippingMethodCode =$shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
+            $this->shippingMethods[$shippingMethodCode] = $shippingMethod;
+        }
+
+        $this->value = (string)$shippingAddress->getShippingMethod();
+        if (false === array_key_exists($this->value, $this->shippingMethods)) {
+            $this->value = '';
+        }
+
+        if (empty($this->value)) {
+            $this->value = array_key_first($this->shippingMethods);
+        }
     }
 
     /**

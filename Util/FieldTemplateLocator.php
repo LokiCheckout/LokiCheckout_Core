@@ -2,10 +2,10 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Generic\FormSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\FormTextMultipleFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 
 class FieldTemplateLocator
 {
@@ -19,17 +19,13 @@ class FieldTemplateLocator
             return 'Yireo_LokiCheckout::form/field/text_select.phtml';
         }
 
-        if ($component instanceof FormSelectFieldInterface && $component->hasClientSideValidation()) {
-            return 'Yireo_LokiCheckout::form/field/select_js.phtml';
-        }
-
         if ($component instanceof FormSelectFieldInterface) {
             return 'Yireo_LokiCheckout::form/field/select.phtml';
         }
 
-        if ($component->hasClientSideValidation()) {
-            return 'Yireo_LokiCheckout::form/field/text_js.phtml';
-        }
+        // @todo: Radiobox
+        // @todo: Checkbox
+        // @todo: Textarea
 
         return 'Yireo_LokiCheckout::form/field/text.phtml';
     }

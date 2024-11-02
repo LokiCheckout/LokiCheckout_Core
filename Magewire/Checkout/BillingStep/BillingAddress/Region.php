@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Generic\FormTextSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\Generic\AddressFieldComponent\Region as GenericRegionComponent;
-use Yireo\LokiCheckout\Magewire\Generic\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Region as GenericRegionComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 
 class Region extends GenericRegionComponent implements FormTextSelectFieldInterface, BillingAddressFieldComponentInterface
 {
