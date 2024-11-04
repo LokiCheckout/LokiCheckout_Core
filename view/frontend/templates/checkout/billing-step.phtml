@@ -4,20 +4,22 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
-use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\BlockRenderer;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BillingStep $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
+
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>
@@ -46,7 +48,7 @@ $billingAsShipping = $magewire->billingAsShipping;
     <?php endif; ?>
 
     <div class="mb-8">
-        <?= $block->getChildHtml('payment-methods') ?>
+        <?= $block->getChildHtml('methods') ?>
     </div>
     <div class="mb-8 float-right flex">
         <?= $block->getChildHtml('backward-button') ?>

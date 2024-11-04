@@ -14,11 +14,16 @@ class BlockCssClass
         return $this;
     }
 
-    public function __invoke(string $default = ''): string
+    public function __invoke(string $css = ''): string
     {
-        $css = (string) $this->block->getData('css');
-        if (empty($css)) {
-            $css = $default;
+        $overrideCss = (string) $this->block->getData('override_css');
+        if (!empty($overrideCss)) {
+            $css = $overrideCss;
+        }
+
+        $additionalCss = (string) $this->block->getData('additional_css');
+        if (!empty($additionalCss)) {
+            $css = $css . ' ' . $additionalCss;
         }
 
         $nameInLayout = $this->block->getNameInLayout();

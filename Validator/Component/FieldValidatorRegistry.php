@@ -4,13 +4,13 @@ namespace Yireo\LokiCheckout\Validator\Component;
 
 use InvalidArgumentException;
 
-class AddressFieldValidatorRegistry
+class FieldValidatorRegistry
 {
     public function __construct(
         private array $validators = []
     ) {
         foreach ($this->validators as $validator) {
-            if (false === $validator instanceof AddressFieldValidatorInterface) {
+            if (false === $validator instanceof FieldValidatorInterface) {
                 throw new InvalidArgumentException('Validator instance is not supported');
             }
         }

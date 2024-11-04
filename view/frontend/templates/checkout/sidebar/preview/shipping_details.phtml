@@ -2,12 +2,16 @@
 declare(strict_types=1);
 
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var ShippingDetails $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+
 
 ?>
-<div class="<?= $blockCss('mb-4') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('mb-4') ?>">
     <span class="text-xl font-bold"><?= __('Shipping Details') ?></span><br>
     <?= $magewire->getHtml() ?>
 </div>

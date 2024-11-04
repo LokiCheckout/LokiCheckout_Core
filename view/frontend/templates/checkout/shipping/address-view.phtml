@@ -2,10 +2,14 @@
 declare(strict_types=1);
 
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var ShippingAddress $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+
 ?>
-<div class="<?= $blockCss('mb-4') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('mb-4') ?>">
     <address><?= $magewire->getHtml() ?></address>
 </div>

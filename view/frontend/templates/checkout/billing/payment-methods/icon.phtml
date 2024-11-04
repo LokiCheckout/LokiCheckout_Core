@@ -3,14 +3,17 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\BlockAttribute;
 use Yireo\LokiCheckout\ViewModel\PaymentMethodIcon;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentMethodIcon $paymentMethodIcon */
+/** @var BlockAttribute $blockAttribute */
+
 $paymentMethodCode = $block->getCode();
 $paymentMethodIcon = $viewModelFactory->create(PaymentMethodIcon::class);
 ?>
-<div class="float-right drop-shadow-2xl">
+<div <?= $blockAttribute() ?> class="float-right drop-shadow-2xl">
     <?= $paymentMethodIcon->getIcon($paymentMethodCode) ?>
 </div>

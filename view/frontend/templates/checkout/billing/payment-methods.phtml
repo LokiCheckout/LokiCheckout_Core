@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
+use Yireo\LokiCheckout\Util\BlockAttribute;
 use Yireo\LokiCheckout\Util\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
@@ -12,11 +13,12 @@ use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 /** @var PaymentMethods $magewire */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Payment Methods']) ?>
     <ul role="list">
         <?php foreach ($paymentMethods as $paymentMethod): ?>
@@ -36,6 +38,7 @@ $paymentMethods = $magewire->getPaymentMethods();
                         $magewire
                     )->setCode($code)->toHtml() ?>
 
+                    <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.form') ?>
                     <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional') ?>
                 </li>
             </label>

@@ -10,7 +10,11 @@ use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\CatalogSearch\Model\Indexer\Fulltext;
+use Magento\CatalogSearch\Model\Indexer\Fulltext\Plugin\Product as FulltextProductPlugin;
+use Magento\Framework\App\Cache;
+use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Yireo\LokiCheckout\Test\Integration\Stub\FulltextProductPluginStub;
 use Yireo\LokiCheckout\Test\Integration\Stub\FulltextStub;
 
 trait ProductFixture
@@ -19,11 +23,19 @@ trait ProductFixture
 
     public function getProduct($productId = 0): ProductInterface
     {
+        $configWriter = $this->getObjectManager()->get(\Magento\Framework\App\Config\Storage\WriterInterface::class);
+        $configWriter->save('cataloginventory/item_options/min_qty', -1);
+        $cache = $this->getObjectManager()->get(Cache::class);
+        $cache->clean(['config']);
+
         try {
             $product = $this->getProductRepository()->getById($productId);
+
         } catch (NoSuchEntityException $e) {
             $product = $this->createProduct($productId);
         }
+
+        $product->setData('salable', true);
 
         /** @var Product $product */
         $this->assertTrue($product->getId() > 0, 'No product ID given');
@@ -34,11 +46,17 @@ trait ProductFixture
 
     public function createProduct($productId = 0): ProductInterface
     {
+        /*
         $this->getObjectManager()->configure([
             'preferences' => [
-                Fulltext::class => FulltextStub::class
+                Fulltext::class => FulltextStub::class,
+                FulltextProductPlugin::class => FulltextProductPluginStub::class
             ]
-        ]);
+        ]);*/
+
+        // Hack: Magento\UrlRewrite\Model\Exception\UrlAlreadyExistsException : URL key for specified store already exists.
+        $resourceConnection = $this->getObjectManager()->get(ResourceConnection::class);
+        $resourceConnection->getConnection()->query('DELETE FROM url_rewrite WHERE entity_type="product"');
 
         $productSku = 'simple-product-'.rand(1,1000);
         $product = $this->getObjectManager()->create(ProductInterface::class);
@@ -61,16 +79,22 @@ trait ProductFixture
         $product->setCustomAttribute('tax_class_id', '2');
         $product->getExtensionAttributes()->setWebsiteIds([1]);
         $product->isObjectNew(true);
+        $product->setIsSuperMode(true);
 
         $this->getProductRepository()->save($product);
 
         $stockRegistry = $this->getObjectManager()->get(StockRegistryInterface::class);
         $stockItem = $stockRegistry->getStockItemBySku($product->getSku());
-        $stockItem->setUseConfigManageStock(1);
+        $stockItem->setUseConfigManageStock(0);
+        $stockItem->setManageStock(1);
         $stockItem->setIsInStock(1);
+        $stockItem->setIsQtyDecimal(0);
         $stockItem->setProductId($product->getId());
         $stockItem->setQty(9999);
-        $stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+        $stockItem->save();
+        //$stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
+
+        $this->getProductRepository()->save($product);
 
         return $this->getProductRepository()->get($productSku);
     }

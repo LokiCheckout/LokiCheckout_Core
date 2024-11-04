@@ -45,6 +45,10 @@ class StepBackwardButton extends Component implements ButtonInterface
 
     public function allow(): bool
     {
+        if ($this->stepNavigator->isFirstStep($this->stepNavigator->getCurrentStep())) {
+            return false;
+        }
+
         return true;
     }
 }

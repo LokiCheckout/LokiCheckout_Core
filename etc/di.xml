@@ -84,7 +84,7 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry">
+    <type name="Yireo\LokiCheckout\Validator\Component\FieldValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="length" xsi:type="object">Yireo\LokiCheckout\Validator\Component\LengthValidator</item>

@@ -55,31 +55,34 @@ class BlockRenderer implements ArgumentInterface
         return $html;
     }
 
-    public function create(string $templateName, Template $ancestorBlock, ?Component $component = null): Template
+    public function create(string $templateName, ?Template $ancestorBlock = null): Template
     {
         if (false === strstr($templateName, '::')) {
             $templateName = 'Yireo_LokiCheckout::' . $templateName;
         }
 
         $block = $this->layout->createBlock(Template::class)
-            ->setAncestorBlock($ancestorBlock)
             ->setTemplate($templateName);
 
-        $component = $ancestorBlock->getMagewire();
-        if ($component instanceof Component) {
-            $block->setData('component', $component);
-        }
+        if ($ancestorBlock instanceof Template) {
+            $block->setAncestorBlock($ancestorBlock);
 
-        $component = $ancestorBlock->getComponent();
-        if ($component instanceof Component) {
-            $block->setData('component', $component);
+            $component = $ancestorBlock->getMagewire();
+            if ($component instanceof Component) {
+                $block->setData('component', $component);
+            }
+
+            $component = $ancestorBlock->getComponent();
+            if ($component instanceof Component) {
+                $block->setData('component', $component);
+            }
         }
 
         return $block;
     }
 
-    public function render(string $templateName, Template $ancestorBlock, ?Component $component = null): string
+    public function render(string $templateName, ?Template $ancestorBlock = null): string
     {
-        return $this->create($templateName, $ancestorBlock, $component)->toHtml();
+        return $this->create($templateName, $ancestorBlock)->toHtml();
     }
 }

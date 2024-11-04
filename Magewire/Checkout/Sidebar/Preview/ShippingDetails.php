@@ -10,7 +10,10 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingDetails extends Component
 {
-    protected $listeners = ['shippingStepSave' => 'refresh'];
+    protected $listeners = [
+        'shippingStepSave' => 'refresh',
+        'quoteSave' => 'refresh',
+    ];
 
     public function __construct(
         private readonly CheckoutState $checkoutState,

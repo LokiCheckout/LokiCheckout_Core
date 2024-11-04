@@ -4,18 +4,20 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <div class="mb-8">
         <?= $block->getChildHtml('email') ?>
     </div>
@@ -23,7 +25,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
         <?= $block->getChildHtml('address-form') ?>
     </div>
     <div class="mb-8">
-        <?= $block->getChildHtml('shipping-methods') ?>
+        <?= $block->getChildHtml('methods') ?>
     </div>
     <div class="mb-8 float-right flex">
         <?= $block->getChildHtml('backward-button') ?>

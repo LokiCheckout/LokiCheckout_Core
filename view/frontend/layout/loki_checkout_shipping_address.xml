@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <block
+            name="loki.checkout.shipping-step.address-form"
+            template="Yireo_LokiCheckout::checkout/shipping/address-form.phtml">
+            <arguments>
+                <argument name="magewire" xsi:type="object">
+                    Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress
+                </argument>
+            </arguments>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.prefix" as="prefix"
+                ifconfig="customer/address/prefix_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Prefix
+                    </argument>
+                    <argument name="option_model" xsi:type="object">
+                        Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">2</argument>
+                    <argument name="min_length" xsi:type="number">2</argument>
+                    <argument name="max_length" xsi:type="number">6</argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.firstname" as="firstname"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">5</argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.middlename" as="middlename"
+                ifconfig="customer/address/middlename_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.lastname" as="lastname"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">5</argument>
+                    <argument name="field_label" xsi:type="string">Surname</argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.suffix" as="suffix"
+                ifconfig="customer/address/suffix_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.street" as="street"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.postcode" as="postcode"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
+                    </argument>
+                    <!--
+                    <argument name="validators" xsi:type="array">
+                        <item name="postcode_nl" xsi:type="string">postcode_nl</item>
+                    </argument>
+                    -->
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.city" as="city"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\City
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.region" as="region"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region
+                    </argument>
+                    <argument name="option_model" xsi:type="object">
+                        Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.country_id" as="country_id"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\CountryId
+                    </argument>
+                    <argument name="option_model" xsi:type="object">
+                        Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.company" as="company"
+                ifconfig="customer/address/company_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Company
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.telephone" as="telephone"
+                ifconfig="customer/address/telephone_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
+                ifconfig="customer/address/taxvat_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId
+                    </argument>
+                </arguments>
+            </block>
+        </block>
+    </body>
+</page>

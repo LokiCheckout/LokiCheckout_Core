@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour;
+namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 

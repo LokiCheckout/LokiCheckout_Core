@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour;
+namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 use Magento\Framework\App\ObjectManager;
-use Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorInterface;
-use Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry;
+use Yireo\LokiCheckout\Validator\Component\FieldValidatorInterface;
+use Yireo\LokiCheckout\Validator\Component\FieldValidatorRegistry;
 
 trait ValidateBehaviour
 {
@@ -18,11 +18,11 @@ trait ValidateBehaviour
             return false;
         }
 
-        $addressFieldValidatorRegistry = ObjectManager::getInstance()->get(AddressFieldValidatorRegistry::class);
+        $addressFieldValidatorRegistry = ObjectManager::getInstance()->get(FieldValidatorRegistry::class);
         $selectedValidators = $addressFieldValidatorRegistry->getSelectedValidators($this->getValidators());
 
         foreach ($selectedValidators as $validator) {
-            if (false === $validator instanceof AddressFieldValidatorInterface) {
+            if (false === $validator instanceof FieldValidatorInterface) {
                 throw new \Error('Wrong validator: '.var_export($validator, true));
             }
 

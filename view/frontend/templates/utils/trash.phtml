@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\BlockCssClass;
+
+/** @var Template $block */
+/** @var BlockCssClass $blockCss */
+?>
+<img alt="<?= __('Trash') ?>"
+     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/trash.svg'); ?>"
+     class="<?= $blockCss('trash') ?>"
+     width="14"
+     height="14">

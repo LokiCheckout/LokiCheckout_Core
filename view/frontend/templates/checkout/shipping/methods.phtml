@@ -4,21 +4,25 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
 /** @var bool $debug */
 /** @var ShippingMethods $magewire */
 /** @var BlockRenderer $blockRenderer */
 /** @var PriceFormatter $priceFormatter */
+/** @var BlockAttribute $blockAttribute */
+
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
 
     <div role="list">

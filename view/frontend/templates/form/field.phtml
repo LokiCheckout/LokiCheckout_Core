@@ -1,18 +1,20 @@
 <?php
 declare(strict_types=1);
 
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
+use Yireo\LokiCheckout\Util\BlockAttribute;
+use Yireo\LokiCheckout\Util\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
+/** @var BlockAttribute $blockAttribute */
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 
 if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
@@ -27,8 +29,7 @@ if (false === $magewire->isVisible()) {
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>" class="<?= $blockCss('address-field field w-full relative') ?> <?= $magewire->isRequired(
-) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
+<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> class="<?= $blockCss('field w-auto relative') ?> <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
     <label for="<?= $magewire->getFieldName() ?>" class="inline-block mb-1.5">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>

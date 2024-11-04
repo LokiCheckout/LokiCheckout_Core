@@ -4,48 +4,38 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout;
+use Yireo\LokiCheckout\Util\BlockAttribute;
 use Yireo\LokiCheckout\Util\BlockCssClass;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Checkout $magewire */
 /** @var BlockCssClass $blockCss */
-
+/** @var BlockAttribute $blockAttribute */
 $currentStep = $magewire->currentStep;
 ?>
-<div class="<?= $blockCss('space-y-6') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('space-y-6') ?>">
     <?= $block->getChildBlock('progressbar')->toHtml(); ?>
 
     <div
         class="grid grid-cols-1 lg:grid-cols-[var(--checkout-layout)] gap-8"
         style="--checkout-layout: minmax(0px,2fr) minmax(0px,1fr);"
     >
-        <div class="opc relative">
+        <div class="relative">
             <div
                 wire:loading
-                x-cloak
                 aria-live="polite"
-                class="loader-container"
-            >
-                <div class="z-30 absolute inset-0 bg-white/60 flex justify-center items-center">
-                    <img
-                        src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
-                        width="100"
-                        height="100"
-                        alt="Loading..."
-                    >
-                </div>
+                class="z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 flex justify-center items-start">
+                <img
+                    src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
+                    style="margin-top:20%"
+                    width="100"
+                    height="100"
+                    alt="Loading..."
+                >
             </div>
 
-            <?php
-                $stepBlock = $block->getChildBlock($currentStep.'-step');
-
-                if ($stepBlock) {
-                    echo $stepBlock->toHtml();
-                } else {
-                    echo 'No step block for "'.$currentStep.'"';
-                }
-            ?>
+            <?= $block->getChildBlock('steps')->toHtml(); ?>
         </div>
 
         <?= $block->getChildBlock('sidebar')->toHtml(); ?>

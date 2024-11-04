@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="loki.checkout.sidebar">
-            <block
-                ifconfig="checkout/options/enable_guest_checkout_login"
-                name="loki.checkout.sidebar.login" as="login"
-                template="Yireo_LokiCheckout::checkout/login.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Login
-                    </argument>
-                </arguments>
-            </block>
-        </referenceContainer>
+        <block
+            ifconfig="checkout/options/enable_guest_checkout_login"
+            name="loki.checkout.login"
+            template="Yireo_LokiCheckout::checkout/login.phtml">
+            <arguments>
+                <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Login
+                </argument>
+            </arguments>
+        </block>
     </body>
 </page>

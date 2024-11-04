@@ -1,80 +1,81 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="loki.checkout">
-            <block name="loki.checkout.sidebar" as="sidebar" template="Yireo_LokiCheckout::checkout/sidebar.phtml">
+        <block name="loki.checkout.sidebar" template="Yireo_LokiCheckout::checkout/sidebar.phtml">
+            <arguments>
+                <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar</argument>
+            </arguments>
+
+            <block name="loki.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml">
                 <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar</argument>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode
+                    </argument>
                 </arguments>
 
-                <block name="loki.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode</argument>
-                    </arguments>
-
-                    <block name="loki.checkout.sidebar.coupon_code.script" as="script" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code/script.phtml"/>
-                </block>
-
-                <block name="loki.checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items</argument>
-                    </arguments>
-
-                    <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
-                </block>
-
-                <block name="loki.checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals
-                        </argument>
-                    </arguments>
-                </block>
-
-                <container name="loki.checkout.sidebar.preview" as="preview">
-                    <block name="loki.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_address.phtml">
-                        <arguments>
-                            <argument name="magewire" xsi:type="object">
-                                Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
-                            </argument>
-                        </arguments>
-                    </block>
-
-                    <block name="loki.checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details.phtml">
-                        <arguments>
-                            <argument name="magewire" xsi:type="object">
-                                Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails
-                            </argument>
-                        </arguments>
-                    </block>
-
-                    <block name="loki.checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/billing_address.phtml">
-                        <arguments>
-                            <argument name="magewire" xsi:type="object">
-                                Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress
-                            </argument>
-                        </arguments>
-                    </block>
-
-                    <block name="loki.checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details.phtml">
-                        <arguments>
-                            <argument name="magewire" xsi:type="object">
-                                Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails
-                            </argument>
-                        </arguments>
-                    </block>
-                </container>
-
-                <!--
-                <block name="loki.checkout.sidebar.order_comment" as="order_comment" template="Yireo_LokiCheckout::checkout/sidebar/order_comment.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\OrderComment
-                        </argument>
-                    </arguments>
-                </block>
-                -->
+                <block name="loki.checkout.sidebar.coupon_code.script" as="script" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code/script.phtml"/>
             </block>
-        </referenceBlock>
+
+            <block name="loki.checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items
+                    </argument>
+                </arguments>
+
+                <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
+            </block>
+
+            <block name="loki.checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals
+                    </argument>
+                </arguments>
+            </block>
+
+            <container name="loki.checkout.sidebar.preview" as="preview">
+                <block name="loki.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_address.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block name="loki.checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block name="loki.checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/billing_address.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block name="loki.checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails
+                        </argument>
+                    </arguments>
+                </block>
+            </container>
+
+            <!--
+            <block name="loki.checkout.sidebar.order_comment" as="order_comment" template="Yireo_LokiCheckout::checkout/sidebar/order_comment.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\OrderComment
+                    </argument>
+                </arguments>
+            </block>
+            -->
+        </block>
     </body>
 </page>

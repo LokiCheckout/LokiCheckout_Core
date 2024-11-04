@@ -3,16 +3,16 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
-class PostcodeFormatValidator implements AddressFieldValidatorInterface
+class PostcodeFormatValidator implements FieldValidatorInterface
 {
     public function __construct(
         private ConfigInterface $postcodeConfig,
     ) {
     }
 
-    public function validate(AddressFieldComponent $component): bool
+    public function validate(FieldComponent $component): bool
     {
         $countryId = $component->getAddressState()->load('country_id');
         $postcode = $component->getValue();

@@ -1,9 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour;
-
-use Magento\Framework\App\ObjectManager;
-use Yireo\LokiCheckout\Filter\FilterRegistry;
+namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 trait ParentBehaviour
 {
