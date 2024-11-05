@@ -2,17 +2,17 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <update handle="loki_checkout_remove_other"/>
 
-    <update handle="loki_checkout_sidebar"/>
-    <update handle="loki_checkout_progressbar"/>
-    <update handle="loki_checkout_login"/>
+    <update handle="loki_checkout_block_sidebar"/>
+    <update handle="loki_checkout_block_progressbar"/>
+    <update handle="loki_checkout_block_login"/>
 
-    <update handle="loki_checkout_shipping_email"/>
-    <update handle="loki_checkout_shipping_address"/>
-    <update handle="loki_checkout_shipping_methods"/>
+    <update handle="loki_checkout_block_shipping_email"/>
+    <update handle="loki_checkout_block_shipping_address"/>
+    <update handle="loki_checkout_block_shipping_methods"/>
 
-    <update handle="loki_checkout_billing_view"/>
-    <update handle="loki_checkout_billing_address"/>
-    <update handle="loki_checkout_payment_methods"/>
+    <update handle="loki_checkout_block_billing_view"/>
+    <update handle="loki_checkout_block_billing_address"/>
+    <update handle="loki_checkout_block_payment_methods"/>
 
     <update handle="loki_checkout_theme_default"/>
 
@@ -35,6 +35,7 @@
 
         <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
+        <block name="loki.checkout.utils.loader-overlay" template="Yireo_LokiCheckout::utils/loader-overlay.phtml"/>
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>

@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
-use Magento\Quote\Api\Data\CartItemInterface;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
-use Yireo\LokiCheckout\Util\BlockAttribute;
-use Yireo\LokiCheckout\Util\BlockCssClass;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 use Yireo\LokiCheckout\ViewModel\ProductImage;
 
@@ -22,7 +21,7 @@ use Yireo\LokiCheckout\ViewModel\ProductImage;
 $component = $block->getComponent();
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+
 $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);

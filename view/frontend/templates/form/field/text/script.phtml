@@ -4,14 +4,14 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
 /** @var AddressFieldComponent $component */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+
 $fieldBlock = $block->getFieldBlock();
 $component = $this->getComponent();
 ?>
@@ -31,6 +31,7 @@ $component = $this->getComponent();
                 },
                 init() {
                     window.addEventListener('yireo-loki-checkout.lock', (event) => {
+                        // @todo: Make this not hard-coded
                         if (this.elementId.endsWith('-postcode') && event.detail.lockedComponent.endsWith('-country-id')) {
                             this.locked = true;
                         }
@@ -68,7 +69,7 @@ $component = $this->getComponent();
                 },
             }
 
-            <?= $blockRenderer->js($component->getNameInLayout().'.additional_script') ?>
+            <?= $blockRenderer->js($component->getNameInLayout().'.additional_script', ['component' => $component]) ?>
 
             return component;
         });

@@ -33,6 +33,8 @@ class StepBackwardButton extends Component implements ButtonInterface
 
     public function execute()
     {
+        $this->clearFlashMessages();
+
         try {
             $this->stepNavigator->setPreviousStep();
         } catch (Exception $e) {

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
-use Yireo\LokiCheckout\Util\BlockAttribute;
-use Yireo\LokiCheckout\Util\BlockCssClass;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
@@ -16,8 +16,6 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
-
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <aside <?= $blockAttribute() ?> class="<?= $blockCss('my-2 order-2') ?>">

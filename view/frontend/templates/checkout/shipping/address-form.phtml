@@ -4,9 +4,9 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
-use Yireo\LokiCheckout\Util\BlockAttribute;
-use Yireo\LokiCheckout\Util\BlockCssClass;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -14,8 +14,6 @@ use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 /** @var BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
-
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>

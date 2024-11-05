@@ -51,11 +51,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return 'text'; // @doc: Example for overriding this to "email"
     }
 
-    public function getModelName(): string
-    {
-        return 'value';
-    }
-
     public function getValue(): string
     {
         return (string)$this->value;

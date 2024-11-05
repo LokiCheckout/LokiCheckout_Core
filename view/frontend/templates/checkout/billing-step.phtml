@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
-use Yireo\LokiCheckout\Util\BlockAttribute;
-use Yireo\LokiCheckout\Util\BlockCssClass;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -14,8 +14,6 @@ use Yireo\LokiCheckout\ViewModel\BlockRenderer;
 /** @var BlockCssClass $blockCss */
 /** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
-
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>

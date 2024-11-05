@@ -9,56 +9,38 @@ use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Type;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
-use Magento\CatalogSearch\Model\Indexer\Fulltext;
-use Magento\CatalogSearch\Model\Indexer\Fulltext\Plugin\Product as FulltextProductPlugin;
-use Magento\Framework\App\Cache;
-use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Yireo\LokiCheckout\Test\Integration\Stub\FulltextProductPluginStub;
-use Yireo\LokiCheckout\Test\Integration\Stub\FulltextStub;
 
 trait ProductFixture
 {
     use GetObjectManager;
 
-    public function getProduct($productId = 0): ProductInterface
+    public function getProduct(string $productType = Type::TYPE_SIMPLE): ProductInterface
     {
-        $configWriter = $this->getObjectManager()->get(\Magento\Framework\App\Config\Storage\WriterInterface::class);
-        $configWriter->save('cataloginventory/item_options/min_qty', -1);
-        $cache = $this->getObjectManager()->get(Cache::class);
-        $cache->clean(['config']);
+        $productId = 1;
+        if ($productType === Type::TYPE_VIRTUAL) {
+            $productId = 2;
+        }
 
         try {
             $product = $this->getProductRepository()->getById($productId);
-
         } catch (NoSuchEntityException $e) {
-            $product = $this->createProduct($productId);
+            $product = $this->createProduct($productId, $productType);
         }
 
         $product->setData('salable', true);
 
         /** @var Product $product */
         $this->assertTrue($product->getId() > 0, 'No product ID given');
+        $this->assertEquals($productType, $product->getTypeId(), 'Wrong product type');
         $this->assertTrue($product->isSalable(), 'Product is not salable');
 
         return $product;
     }
 
-    public function createProduct($productId = 0): ProductInterface
+    public function createProduct($productId = 1, string $productType = Type::TYPE_SIMPLE): ProductInterface
     {
-        /*
-        $this->getObjectManager()->configure([
-            'preferences' => [
-                Fulltext::class => FulltextStub::class,
-                FulltextProductPlugin::class => FulltextProductPluginStub::class
-            ]
-        ]);*/
-
-        // Hack: Magento\UrlRewrite\Model\Exception\UrlAlreadyExistsException : URL key for specified store already exists.
-        $resourceConnection = $this->getObjectManager()->get(ResourceConnection::class);
-        $resourceConnection->getConnection()->query('DELETE FROM url_rewrite WHERE entity_type="product"');
-
-        $productSku = 'simple-product-'.rand(1,1000);
+        $productSku = $productType.'-product-'.$productId;
         $product = $this->getObjectManager()->create(ProductInterface::class);
 
         if ($productId > 0) {
@@ -66,9 +48,9 @@ trait ProductFixture
         }
 
         $product->addData([
-            'type_id' => Type::TYPE_SIMPLE,
+            'type_id' => $productType,
             'attribute_set_id' => 4,
-            'name' => 'Simple Product 1',
+            'name' => ucfirst($productType).' Product '.$productId,
             'sku' => $productSku,
             'price' => 10,
             'weight' => 1,
@@ -78,13 +60,11 @@ trait ProductFixture
 
         $product->setCustomAttribute('tax_class_id', '2');
         $product->getExtensionAttributes()->setWebsiteIds([1]);
-        $product->isObjectNew(true);
-        $product->setIsSuperMode(true);
 
         $this->getProductRepository()->save($product);
 
         $stockRegistry = $this->getObjectManager()->get(StockRegistryInterface::class);
-        $stockItem = $stockRegistry->getStockItemBySku($product->getSku());
+        $stockItem = $stockRegistry->getStockItemBySku($product->getSku(), 1);
         $stockItem->setUseConfigManageStock(0);
         $stockItem->setManageStock(1);
         $stockItem->setIsInStock(1);
@@ -92,9 +72,8 @@ trait ProductFixture
         $stockItem->setProductId($product->getId());
         $stockItem->setQty(9999);
         $stockItem->save();
-        //$stockRegistry->updateStockItemBySku($product->getSku(), $stockItem);
 
-        $this->getProductRepository()->save($product);
+        $this->getProductRepository()->save($product); // @todo: Is this needed?
 
         return $this->getProductRepository()->get($productSku);
     }

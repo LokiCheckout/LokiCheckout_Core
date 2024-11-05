@@ -34,6 +34,8 @@ class StepForwardButton extends Component implements ButtonInterface
 
     public function execute()
     {
+        $this->clearFlashMessages();
+
         try {
             $result = $this->stepNavigator->setNextStep($this);
         } catch (Exception $e) {

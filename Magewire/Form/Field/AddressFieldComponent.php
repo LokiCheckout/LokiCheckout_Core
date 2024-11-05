@@ -16,7 +16,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     public function boot(): void
     {
-        $this->value = (string)$this->addressState->load($this->getFieldName());
+        $this->value = trim((string)$this->addressState->load($this->getFieldName()));
 
         if ($this->request->isPreceding() && !empty($this->value)) {
             $this->validate();
@@ -65,6 +65,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
     public function save($value): void
     {
         $this->beforeSave($value);
+
         $this->addressState->save($this->getFieldName(), $value);
 
         if ($this instanceof ShippingAddressFieldComponentInterface) {

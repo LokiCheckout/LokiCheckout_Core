@@ -16,14 +16,12 @@ class EmailTest extends LokiTestCase
     use CartFixture;
     use ProductFixture;
 
-
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('email', '');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['email' => '']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Email::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
@@ -34,11 +32,10 @@ class EmailTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart();
+        $cart = $this->getGuestCart($this->getProduct());
         $cart->getShippingAddress()->setData('email', 'john@example.com');
-        $cart->addProduct($this->getProduct(), 1);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Email::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 

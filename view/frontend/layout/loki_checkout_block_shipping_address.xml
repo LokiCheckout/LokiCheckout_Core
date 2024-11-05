@@ -22,7 +22,6 @@
                         Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                     </argument>
                     <argument name="grid-col-span" xsi:type="number">2</argument>
-                    <argument name="min_length" xsi:type="number">2</argument>
                     <argument name="max_length" xsi:type="number">6</argument>
                 </arguments>
             </block>
@@ -81,6 +80,12 @@
                     </argument>
                     <argument name="grid-col-span" xsi:type="number">12</argument>
                 </arguments>
+
+                <block
+                    name="loki.checkout.shipping-step.shipping-address.street.additional_script"
+                    as="additional_script"
+                    template="Yireo_LokiCheckout::form/field/street/additional_script.phtml"
+                />
             </block>
 
             <block

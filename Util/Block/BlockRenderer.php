@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel;
+namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
@@ -9,7 +9,7 @@ use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
 use RuntimeException;
 
-class BlockRenderer implements ArgumentInterface
+class BlockRenderer
 {
     public function __construct(
         private LayoutInterface $layout
@@ -30,6 +30,7 @@ class BlockRenderer implements ArgumentInterface
         }
 
         $block->addData($data);
+
         return $block;
     }
 
@@ -42,7 +43,7 @@ class BlockRenderer implements ArgumentInterface
     {
         try {
             return (string)$this->get($blockName, $data)?->toHtml();
-        } catch(RuntimeException $e) {
+        } catch (RuntimeException $e) {
             return '';
         }
     }
@@ -52,27 +53,28 @@ class BlockRenderer implements ArgumentInterface
         $html = $this->html($blockName, $data);
         $html = str_replace('<script>', '', $html);
         $html = str_replace('</script>', '', $html);
+
         return $html;
     }
 
-    public function create(string $templateName, ?Template $ancestorBlock = null): Template
+    public function create(string $templateName, ?AbstractBlock $parentBlock = null): Template
     {
         if (false === strstr($templateName, '::')) {
-            $templateName = 'Yireo_LokiCheckout::' . $templateName;
+            $templateName = 'Yireo_LokiCheckout::'.$templateName;
         }
 
         $block = $this->layout->createBlock(Template::class)
             ->setTemplate($templateName);
 
-        if ($ancestorBlock instanceof Template) {
-            $block->setAncestorBlock($ancestorBlock);
+        $block->setAncestorBlock($parentBlock);
 
-            $component = $ancestorBlock->getMagewire();
+        if ($parentBlock instanceof AbstractBlock) {
+            $component = $parentBlock->getData('magewire');
             if ($component instanceof Component) {
                 $block->setData('component', $component);
             }
 
-            $component = $ancestorBlock->getComponent();
+            $component = $parentBlock->getData('component');
             if ($component instanceof Component) {
                 $block->setData('component', $component);
             }
@@ -81,8 +83,8 @@ class BlockRenderer implements ArgumentInterface
         return $block;
     }
 
-    public function render(string $templateName, ?Template $ancestorBlock = null): string
+    public function render(string $templateName, ?AbstractBlock $parentBlock = null): string
     {
-        return $this->create($templateName, $ancestorBlock)->toHtml();
+        return $this->create($templateName, $parentBlock)->toHtml();
     }
 }

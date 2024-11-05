@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+
+/** @var Template $block */
+/** @var ShippingMethods $magewire */
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+            value: '<?= $magewire->value ?>',
+            init() {
+                this.$watch('value', () => {
+                    Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.value);
+
+                    window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
+                        detail: { method: this.value}
+                    }));
+                });
+            }
+        }));
+    });
+</script>

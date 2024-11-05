@@ -1,0 +1,47 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
+
+/** @var Template $block */
+/** @var Component|FormTextMultipleFieldInterface $component */
+$component = $block->getComponent();
+if (false === $component instanceof FormTextMultipleFieldInterface) {
+    return;
+}
+
+$textCount = $component->getCount();
+?>
+<script>
+    <?php for ($i = 1; $i <= $textCount; $i++): ?>
+    component.value<?= $i ?> = '';
+    <?php endfor; ?>
+
+    component.afterInit = function () {
+        if (!this.value) {
+            return;
+        }
+
+        const lines = this.value.trim().split("\n");
+        if (!lines) {
+            return;
+        }
+
+        <?php for ($i = 1; $i <= $textCount; $i++): ?>
+        component.value<?= $i ?> = lines[<?= $i - 1 ?>] || '';
+        <?php endfor; ?>
+    }
+
+    component.beforeSubmit = function () {
+        let value = '';
+        <?php for ($i = 1; $i <= $textCount; $i++): ?>
+        if (this.$refs.field<?= $i ?>) {
+            value = value + "\n" + this.$refs.field<?= $i ?>.value;
+        }
+        <?php endfor; ?>
+
+        this.value = value.trim();
+    }
+</script>

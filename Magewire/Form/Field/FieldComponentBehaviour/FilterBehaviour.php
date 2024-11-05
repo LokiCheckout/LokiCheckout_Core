@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\Filter\FilterRegistry;
 
 trait FilterBehaviour
 {
-    protected array $filters = ['trim'];
+    protected array $filters = [];
 
     protected function filterValue(mixed $value)
     {
@@ -40,6 +40,6 @@ trait FilterBehaviour
 
     public function getFilters(): array
     {
-        return array_merge($this->filters, (array)$this->getParent()->getFilters());
+        return array_merge(['filters'], $this->filters, (array)$this->getParent()->getFilters());
     }
 }

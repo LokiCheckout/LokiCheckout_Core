@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+
+/** @var Template $block */
+/** @var BlockCssClass $blockCss */
+?>
+<div
+    wire:loading.flex
+    aria-live="polite"
+    class="z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 flex justify-center items-center">
+    <img
+        src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
+        width="50"
+        height="50"
+        alt="Loading..."
+    >
+</div>

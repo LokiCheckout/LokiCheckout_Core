@@ -34,17 +34,24 @@ class PaymentMethods extends Component
         return $this->paymentMethods;
     }
 
-    public function updatedValue(string $value)
+    public function setValue(string $value)
     {
         // @todo: Verify that this is a correct payment
         $quote = $this->checkoutState->getQuote();
         $quote->setPaymentMethod($value);
         $quote->setInventoryProcessed(false);
         $quote->getPayment()->importData(['method' => $value]);
-        $quote->collectTotals()->save();
+        $this->checkoutState->saveQuote($quote);
 
         $this->emit('billingStepSave');
 
         return $value;
+    }
+
+    public function getJsName(): string
+    {
+        $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
+
+        return preg_replace('#[_.-]+#', '', $name);
     }
 }

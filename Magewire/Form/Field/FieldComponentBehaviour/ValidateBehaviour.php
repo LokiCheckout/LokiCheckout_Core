@@ -13,7 +13,7 @@ trait ValidateBehaviour
     public function validate(): bool
     {
         if ($this->isRequired() && empty($this->value)) {
-            $this->error($this->getModelName(), (string)__('Value is required'));
+            $this->error('value', (string)__('Value is required'));
 
             return false;
         }

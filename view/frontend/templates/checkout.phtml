@@ -1,17 +1,19 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout;
-use Yireo\LokiCheckout\Util\BlockAttribute;
-use Yireo\LokiCheckout\Util\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Checkout $magewire */
 /** @var BlockCssClass $blockCss */
 /** @var BlockAttribute $blockAttribute */
+/** @var BlockRenderer $blockRenderer */
 $currentStep = $magewire->currentStep;
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('space-y-6') ?>">
@@ -22,20 +24,8 @@ $currentStep = $magewire->currentStep;
         style="--checkout-layout: minmax(0px,2fr) minmax(0px,1fr);"
     >
         <div class="relative">
-            <div
-                wire:loading
-                aria-live="polite"
-                class="z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 flex justify-center items-start">
-                <img
-                    src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
-                    style="margin-top:20%"
-                    width="100"
-                    height="100"
-                    alt="Loading..."
-                >
-            </div>
-
-            <?= $block->getChildBlock('steps')->toHtml(); ?>
+            <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+            <?= $block->getChildHtml('steps'); ?>
         </div>
 
         <?= $block->getChildBlock('sidebar')->toHtml(); ?>

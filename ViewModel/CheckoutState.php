@@ -24,6 +24,7 @@ class CheckoutState implements ArgumentInterface
 
     public function saveQuote(Quote $quote)
     {
+        $quote->collectTotals();
         $this->cartRepository->save($quote);
     }
 

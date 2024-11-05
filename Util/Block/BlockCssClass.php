@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util;
+namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 

@@ -36,8 +36,7 @@ class Items extends Component
             return;
         }
 
-        $quote->collectTotals();
-        $quote->save();
+        $this->checkoutState->saveQuote($quote);
 
         $this->items = $this->getItems();
         $this->emit('quoteSave');
@@ -49,8 +48,7 @@ class Items extends Component
     {
         $quote = $this->checkoutState->getQuote();
         $quote->removeItem((int)$itemId);
-        $quote->collectTotals();
-        $quote->save();
+        $this->checkoutState->saveQuote($quote);
 
         $this->items = $this->getItems();
         $this->emit('quoteSave');

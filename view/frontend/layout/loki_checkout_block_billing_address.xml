@@ -76,6 +76,12 @@
                     </argument>
                     <argument name="grid-col-span" xsi:type="number">12</argument>
                 </arguments>
+
+                <block
+                    name="loki.checkout.billing-step.billing-address.street.additional_script"
+                    as="additional_script"
+                    template="Yireo_LokiCheckout::form/field/street/additional_script.phtml"
+                />
             </block>
 
             <block

@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
+
+/** @var Template $block */
+/** @var PaymentMethods $magewire */
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+            value: '<?= $magewire->value ?>',
+            <?php foreach($magewire->getPaymentMethods() as $paymentMethod): ?>
+            show_<?= $paymentMethod->getCode() ?>: false,
+            <?php endforeach; ?>
+            init() {
+                <?php if ($magewire->value) : ?>
+                this.$refs['<?= $magewire->value ?>'].style.display = 'block';
+                <?php endif; ?>
+
+                this.$watch('value', () => {
+                    this.$refs[this.value].style.display = 'block';
+
+                    Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.value);
+
+                    window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
+                        detail: { method: this.value}
+                    }));
+                });
+            }
+        }));
+    });
+</script>

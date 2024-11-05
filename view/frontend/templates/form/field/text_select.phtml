@@ -5,20 +5,20 @@ use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormTextSelectFieldInterface $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $magewire->setOptionModel($optionModel);
 
 if (count($optionModel->getOptions($magewire)) > 0) {
     $block->setOptionModel($optionModel);
-    echo $blockRenderer->render('form/field/select.phtml', $block, $magewire);
+    echo $blockRenderer->render('form/field/select.phtml', $block);
     return;
 }
 
-echo $blockRenderer->render('form/field/text.phtml', $block, $magewire);
+echo $blockRenderer->render('form/field/text.phtml', $block);
