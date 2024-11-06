@@ -31,7 +31,7 @@ $shippingMethods = $magewire->getShippingMethods();
             <label for="shipping-<?= $code ?>">
                 <div class="flex cursor-pointer">
                     <div class="p-4">
-                        <input type="radio" value="<?= $code ?>" x-model="value" id="shipping-<?= $code ?>">
+                        <input type="radio" value="<?= $code ?>" x-model="value" id="shipping-<?= $code ?>" <?= $magewire->value === $code ? 'checked="true"' : '' ?>>
                     </div>
                     <div class="p-4 w-auto font-bold">
                         <?= $priceFormatter->format($shippingMethod->getAmount()) ?>

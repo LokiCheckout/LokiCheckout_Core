@@ -24,6 +24,11 @@ class StepBackwardButton extends Component implements ButtonInterface
         return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
     }
 
+    public function getStep(): string
+    {
+        return $this->stepNavigator->getCurrentStep()->getCode();
+    }
+
     public function getJsName(): string
     {
         $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
@@ -31,10 +36,8 @@ class StepBackwardButton extends Component implements ButtonInterface
         return preg_replace('#[_.-]+#', '', $name);
     }
 
-    public function execute()
+    public function submit()
     {
-        $this->clearFlashMessages();
-
         try {
             $this->stepNavigator->setPreviousStep();
         } catch (Exception $e) {
@@ -42,10 +45,16 @@ class StepBackwardButton extends Component implements ButtonInterface
             return;
         }
 
-        $this->emit('stepChange', $this->stepNavigator->getCurrentStep()->getCode());
+        $this->emit('stepChange', $this->getStep());
     }
 
     public function allow(): bool
+    {
+        // @todo: Allow checking upon validation rules
+        return true;
+    }
+
+    public function isVisible(): bool
     {
         if ($this->stepNavigator->isFirstStep($this->stepNavigator->getCurrentStep())) {
             return false;

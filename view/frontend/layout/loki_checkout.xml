@@ -26,16 +26,31 @@
             </block>
         </referenceContainer>
 
+        <referenceContainer name="after.body.start">
+            <block name="loki.checkout.script.component-extender" template="Yireo_LokiCheckout::script/component-extender.phtml"/>
+        </referenceContainer>
+
         <referenceContainer name="before.body.end">
             <block name="loki.checkout.script.aria-invalid" template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
-            <block name="loki.checkout.script.lock-store" template="Yireo_LokiCheckout::script/lock-store.phtml"/>
+            <block name="loki.checkout.script.step-store" template="Yireo_LokiCheckout::script/step-store.phtml"/>
             <block name="loki.checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>
+            <block name="loki.checkout.script.magic-component" template="Yireo_LokiCheckout::script/magic-component.phtml"/>
             <block name="loki.checkout.script.validator" template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>
 
         <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
-        <block name="loki.checkout.utils.loader-overlay" template="Yireo_LokiCheckout::utils/loader-overlay.phtml"/>
+        <block name="loki.checkout.utils.loader-small" template="Yireo_LokiCheckout::utils/loader-small.phtml">
+            <arguments>
+                <argument name="size" xsi:type="number">20</argument>
+            </arguments>
+        </block>
+        <block name="loki.checkout.utils.loader-overlay" template="Yireo_LokiCheckout::utils/loader-overlay.phtml">
+            <arguments>
+                <argument name="size" xsi:type="number">50</argument>
+            </arguments>
+        </block>
+
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>

@@ -18,12 +18,19 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     use ParentBehaviour;
 
     protected string $elementId = '';
+
     public string $value = '';
-    public bool $locked = false;
+    public bool $valid = true;
 
     public function booted(): void
     {
         $this->listeners[static::class . '::afterSetValue'] = 'refresh';
+    }
+
+    // @todo: Why does this not allow a listener to the trait method validate() directly?
+    public function validateComponent(): bool
+    {
+        return $this->valid = $this->validate();
     }
 
     protected function filter(string $value): string
@@ -53,14 +60,14 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function getValue(): string
     {
-        return (string)$this->value;
+        return $this->value;
     }
 
     public function setValue(mixed $value)
     {
         $value = $this->filterValue($value);
         $this->value = $value;
-        $this->validate();
+        $this->valid = $this->validate();
 
         if (false === $this->hasErrors()) {
             $this->save($value);
@@ -119,6 +126,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
             $this->error('value', $error);
         }
 
+        $this->valid = false;
         return false;
     }
 

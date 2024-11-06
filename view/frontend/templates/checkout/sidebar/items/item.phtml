@@ -66,10 +66,10 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
             itemId: <?= $item['id'] ?>,
             qty: <?= $item['qty'] ?>,
             updateItemQty() {
-                Magewire.find('<?= $component->getId() ?>').updateItemQty(this.itemId, this.qty);
+                this.$component.updateItemQty(this.itemId, this.qty);
             },
             removeItem() {
-                Magewire.find('<?= $component->getId() ?>').removeItem(this.itemId);
+                this.$component.removeItem(this.itemId);
             }
         }))
     });

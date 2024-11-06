@@ -1,0 +1,44 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('step', {
+            components: [],
+            add(component) {
+                this.components[component.name] = component;
+            },
+            hasInvalidComponents(step) {
+                let hasInvalid = false;
+                Object.keys(this.components).forEach(componentName => {
+                    component = this.components[componentName];
+                    if (component.valid === false && component.step === step) {
+                        hasInvalid = true;
+                    }
+                });
+
+                return hasInvalid;
+            },
+            lock(component) {
+                this.components[component.name].locked = true;
+                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
+            },
+            unlock(component) {
+                this.components[component.name].locked = false;
+                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
+            },
+            isLocked(component) {
+                return this.components[component.name].locked;
+            },
+            hasLockedComponents(step) {
+                let hasLocked = false;
+                Object.keys(this.components).forEach(componentName => {
+                    component = this.components[componentName];
+                    if (component.locked === true && component.step === step) {
+                        hasLocked = true;
+                    }
+                });
+
+                return hasLocked;
+            }
+        })
+    });
+</script>
+

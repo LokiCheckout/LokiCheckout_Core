@@ -18,60 +18,46 @@ $component = $this->getComponent();
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $component->getJsName() ?>', () => {
-            let component = {
+            return LokiCheckoutFieldComponentExtender.extend({
+                name: '<?= $component->getJsName() ?>',
                 elementId: '<?= $component->getElementId() ?>',
+                step: '<?= $component->getStep() ?>',
                 value: '<?= $component->getJsValue() ?>',
-                locked: <?= $component->locked ? 'true' : 'false' ?>,
+                valid: <?= $component->valid ? 'true': 'false' ?>,
                 rules: [
                     <?php foreach($component->getJsValidators() as $jsValidator): ?>
                     '<?= $jsValidator ?>',
                     <?php endforeach; ?>
                 ],
-                beforeInit() {
-                },
                 init() {
-                    window.addEventListener('yireo-loki-checkout.lock', (event) => {
-                        // @todo: Make this not hard-coded
-                        if (this.elementId.endsWith('-postcode') && event.detail.lockedComponent.endsWith('-country-id')) {
-                            this.locked = true;
-                        }
-                    });
+                    this.beforeInit();
+                    Alpine.store('step').add(this);
 
-                    document.addEventListener('livewire:init', () => {
+                    // @todo: With livewire:init this does not work in Hyva
+                    //document.addEventListener('livewire:init', () => {
                         Livewire.hook('element.updated', (element, component) => {
-                            if (this.elementId === component.el.id) {
-                                Alpine.store('lock').unlock(this.elementId);
-                                this.locked = false;
+                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                                this.valid = this.$component.valid;
                                 this.updated();
+                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
                             }
                         });
-                    });
+                    //});
 
                     this.afterInit();
                 },
-                afterInit() {
-                },
-                updated() {
-                },
-                beforeSubmit() {
-                },
                 submit() {
                     this.beforeSubmit();
+
+                    // @doc: When client-side validation fails, the value is not submitted to the server
                     if (false === window.LokiCheckoutValidator.validate(this)) {
                         return false;
                     }
 
-                    Alpine.store('lock').lock(this.elementId);
-                    Magewire.find(this.$root.getAttribute('wire:id')).call('setValue', this.value);
+                    this.$component.call('setValue', this.value);
                     this.afterSubmit();
                 },
-                afterSubmit() {
-                },
-            }
-
-            <?= $blockRenderer->js($component->getNameInLayout().'.additional_script', ['component' => $component]) ?>
-
-            return component;
+            });
         });
     });
 </script>

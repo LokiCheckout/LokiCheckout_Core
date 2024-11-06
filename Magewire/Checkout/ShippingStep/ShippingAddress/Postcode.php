@@ -8,6 +8,6 @@ use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterfac
 class Postcode extends GenericPostcodeComponent implements ShippingAddressFieldComponentInterface
 {
     protected $listeners = [
-        'shippingAddressCountryIdSave' => 'refresh'
+        'shippingAddressCountryIdSave' => 'validateComponent'
     ];
 }

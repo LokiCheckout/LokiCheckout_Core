@@ -26,10 +26,13 @@ trait ValidateBehaviour
                 throw new \Error('Wrong validator: '.var_export($validator, true));
             }
 
-            $validator->validate($this);
+            $rt = $validator->validate($this);
+            if ($rt === false) {
+                return false;
+            }
         }
 
-        return false === $this->hasErrors();
+        return true;
     }
 
     public function getValidators(): array

@@ -17,12 +17,11 @@ $magewire = $this->getComponent();
     x-ref="field"
     x-model="value"
     x-on:change="submit"
-    x-bind:disabled="locked"
     <?php if ($magewire->hasMinLength()): ?>
-    min="<?= $magewire->getMinLength() ?>"
+        minlength="<?= $magewire->getMinLength() ?>"
     <?php endif ?>
     <?php if ($magewire->hasMaxLength()): ?>
-        max="<?= $magewire->getMaxLength() ?>"
+        maxlength="<?= $magewire->getMaxLength() ?>"
     <?php endif ?>
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"

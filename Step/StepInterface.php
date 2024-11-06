@@ -2,8 +2,6 @@
 
 namespace Yireo\LokiCheckout\Step;
 
-use Exception;
-
 interface StepInterface
 {
     public function getCode(): string;

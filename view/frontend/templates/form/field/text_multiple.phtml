@@ -23,7 +23,6 @@ $textCount = $magewire->getCount();
         x-ref="field<?= $i ?>"
         x-model="value<?= $i ?>"
         x-on:change="submit"
-        x-bind:disabled="locked"
         <?php if ($magewire->hasMinLength()): ?>
             min="<?= $magewire->getMinLength() ?>"
         <?php endif ?>

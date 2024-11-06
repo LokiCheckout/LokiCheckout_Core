@@ -17,12 +17,22 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>" x-data="LokiCheckoutSteps">
     <?php foreach ($block->getChildNames() as $childName) : ?>
         <?php $stepBlock = $block->getLayout()->getBlock($childName); ?>
         <?php $step = $stepBlock->getMagewire(); ?>
-        <div style="display:<?= $stepNavigator->isCurrentStep($step) ? 'block' : 'none' ?>">
+        <div x-show="<?= $step->getCode() ?>" x-transition>
             <?= $block->getLayout()->getBlock($childName)->toHtml() ?>
         </div>
     <?php endforeach; ?>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('LokiCheckoutSteps', () => ({
+                <?php foreach ($stepNavigator->getSteps() as $step): ?>
+                <?= $step->getCode() ?>: <?= $stepNavigator->isCurrentStep($step) ? 'true': 'false' ?>,
+                <?php endforeach; ?>
+            }));
+        });
+    </script>
 </div>

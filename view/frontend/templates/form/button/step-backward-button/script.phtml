@@ -13,14 +13,6 @@ $magewire = $block->getComponent();
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
             locked: true,
             init() {
-                this.locked = Alpine.store('lock').hasLocks();
-                window.addEventListener('yireo-loki-checkout.lock', function() {
-                    this.locked = Alpine.store('lock').hasLocks();
-                });
-
-                window.addEventListener('yireo-loki-checkout.unlock', function() {
-                    this.locked = Alpine.store('lock').hasLocks();
-                });
             }
         }));
     });

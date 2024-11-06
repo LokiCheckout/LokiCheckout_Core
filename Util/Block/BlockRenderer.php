@@ -29,7 +29,9 @@ class BlockRenderer
             throw new RuntimeException((string)__('Unexpected block type "%s"', $blockName));
         }
 
-        $block->addData($data);
+        if (!empty($data)) {
+            $block->addData($data);
+        }
 
         return $block;
     }
@@ -46,15 +48,6 @@ class BlockRenderer
         } catch (RuntimeException $e) {
             return '';
         }
-    }
-
-    public function js(string $blockName, array $data = []): string
-    {
-        $html = $this->html($blockName, $data);
-        $html = str_replace('<script>', '', $html);
-        $html = str_replace('</script>', '', $html);
-
-        return $html;
     }
 
     public function create(string $templateName, ?AbstractBlock $parentBlock = null): Template

@@ -17,18 +17,19 @@ if (false === $magewire instanceof StepForwardButton) {
     return;
 }
 
-if (false === $magewire->allow()) {
+if (false === $magewire->isVisible()) {
     echo '<div></div>';
 
     return;
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> x-data="<?= $magewire->getJsName() ?>">
-    <button class="<?= $blockCss('btn m-2') ?> <?= $magewire->allow() ? 'btn-primary' : 'disabled:opacity-75' ?>"
+    <button class="<?= $blockCss('btn m-2') ?>"
             type="button"
-            x-bind:disabled="locked"
+            :disabled="!valid"
+            :class="valid ? 'btn-primary' : 'disabled:opacity-75'"
         <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
-            wire:click="execute"
+            x-on:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>

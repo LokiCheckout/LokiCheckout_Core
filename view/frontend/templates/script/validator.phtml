@@ -36,6 +36,8 @@
                 element.setAttribute('aria-invalid', true);
             });
 
+            component.valid = false;
+            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
         },
         setValid: function (component) {
             Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
@@ -43,10 +45,13 @@
                 element.removeAttribute('data-invalid');
                 element.removeAttribute('aria-invalid');
             });
+
+            component.valid = true;
+            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
         }
     }
 
-    window.LokiCheckoutValidator.rules.email = function (component, config) {
+    window.LokiCheckoutValidator.rules.email = function (component) {
         if (/\S+@\S+\.\S+/.test(component.value) === false) {
             window.LokiCheckoutMessenger.error('<?= __('Not a valid email') ?>', component);
         }

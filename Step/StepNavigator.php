@@ -142,7 +142,7 @@ class StepNavigator implements ArgumentInterface
     }
 
     /**
-     * @return StepInterface|Component[]
+     * @return StepInterface[]|Component[]
      */
     public function getSteps(): array
     {

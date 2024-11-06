@@ -12,22 +12,21 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     protected string $elementId = '';
     public string $value = '';
-    public bool $locked = false;
+    public bool $valid = true;
 
     public function boot(): void
     {
         $this->value = trim((string)$this->addressState->load($this->getFieldName()));
 
         if ($this->request->isPreceding() && !empty($this->value)) {
-            $this->validate();
+            $this->valid = $this->validate();
         }
     }
 
     public function booted(): void
     {
-        $this->listeners[static::class . '::afterSetValue'] = 'refresh';
+        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
     }
-
 
     public function getFieldName(): string
     {
@@ -56,6 +55,20 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         }
 
         return $this->getFieldName();
+    }
+
+
+    public function getStep(): string
+    {
+        if ($this instanceof ShippingAddressFieldComponentInterface) {
+            return 'shipping';
+        }
+
+        if ($this instanceof BillingAddressFieldComponentInterface) {
+            return 'billing';
+        }
+
+        return 'unknown';
     }
 
     public function beforeSave($value): void

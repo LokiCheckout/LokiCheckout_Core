@@ -7,4 +7,5 @@ interface AddressFieldInterface extends FormFieldInterface
 {
     public function getAttributeCode(): string;
     public function getAttributeLabel(): string;
+    public function getStep(): string;
 }

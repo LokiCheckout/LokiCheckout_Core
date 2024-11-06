@@ -11,16 +11,29 @@ $magewire = $block->getComponent();
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            locked: true,
+            valid: <?= $magewire->allow() ? 'true' : 'false' ?>,
             init() {
-                this.locked = Alpine.store('lock').hasLocks();
-                window.addEventListener('yireo-loki-checkout.lock', function() {
-                    this.locked = Alpine.store('lock').hasLocks();
+                this.update();
+
+                window.addEventListener('yireo-loki-checkout.step-change', () => {
+                    this.update();
+                });
+            },
+            update() {
+                this.valid = !Alpine.store('step').hasInvalidComponents('<?= $magewire->getStep() ?>');
+            },
+            submit() {
+                window.dispatchEvent(new CustomEvent('clear-messages'));
+
+                Alpine.store('step').components.forEach((component) => {
+                    window.LokiCheckoutValidator.validate(component);
                 });
 
-                window.addEventListener('yireo-loki-checkout.unlock', function() {
-                    this.locked = Alpine.store('lock').hasLocks();
-                });
+                this.update();
+
+                if (this.valid) {
+                    this.$component.call('submit');
+                }
             }
         }));
     });

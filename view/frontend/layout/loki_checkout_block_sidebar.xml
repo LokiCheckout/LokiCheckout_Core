@@ -34,6 +34,14 @@
             </block>
 
             <container name="loki.checkout.sidebar.preview" as="preview">
+                <block name="loki.checkout.sidebar.preview.email" as="email" template="Yireo_LokiCheckout::checkout/sidebar/preview/email.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\Email
+                        </argument>
+                    </arguments>
+                </block>
+
                 <block name="loki.checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_address.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
