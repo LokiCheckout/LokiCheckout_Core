@@ -20,6 +20,7 @@ $component = $this->getComponent();
         Alpine.data('<?= $component->getJsName() ?>', () => {
             return LokiCheckoutFieldComponentExtender.extend({
                 name: '<?= $component->getJsName() ?>',
+                wireId: '<?= $component->id ?>',
                 elementId: '<?= $component->getElementId() ?>',
                 step: '<?= $component->getStep() ?>',
                 value: '<?= $component->getJsValue() ?>',
@@ -31,13 +32,14 @@ $component = $this->getComponent();
                 ],
                 init() {
                     this.beforeInit();
+
                     Alpine.store('step').add(this);
 
                     // @todo: With livewire:init this does not work in Hyva
                     //document.addEventListener('livewire:init', () => {
                         Livewire.hook('element.updated', (element, component) => {
                             if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                                this.valid = this.$component.valid;
+                                this.valid = this.$component(this).valid;
                                 this.updated();
                                 window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
                             }
@@ -54,7 +56,7 @@ $component = $this->getComponent();
                         return false;
                     }
 
-                    this.$component.call('setValue', this.value);
+                    this.$component(this).call('setValue', this.value);
                     this.afterSubmit();
                 },
             });

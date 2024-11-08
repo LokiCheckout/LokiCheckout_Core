@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
                 this.$watch('value', () => {
                     this.$refs[this.value].style.display = 'block';
 
-                    this.$component.call('setValue', this.value);
+                    this.$component(this).call('setValue', this.value);
 
                     window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
                         detail: { method: this.value}

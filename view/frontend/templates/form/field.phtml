@@ -29,7 +29,7 @@ if (false === $magewire->isVisible()) {
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> class="<?= $blockCss('field w-auto relative') ?> <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
-    <label for="<?= $magewire->getFieldName() ?>" class="inline-block mb-1.5">
+    <label for="<?= $magewire->getElementId() ?>-field" class="inline-block mb-1.5">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>

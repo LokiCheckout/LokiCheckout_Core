@@ -26,8 +26,7 @@ $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('flex gap-4 my-8') ?>"
-                              x-data="LokiCheckoutSidebarItems<?= $item['id'] ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('flex gap-4 my-8') ?>" x-data="LokiCheckoutSidebarItems<?= $item['id'] ?>">
     <img
         src="<?= $productImageUrl ?>"
         width="<?= $width ?>"
@@ -48,7 +47,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
 
         <div class="actions">
             <div>
-                <input type="number" x-model="qty" min="0" max="1000000"/>
+                <input aria-label="<?= __('Change quantity') ?>" title="<?= __('Quantity') ?>" type="number" x-model="qty" min="0" max="1000000"/>
                 <button class="m-2" title="Update item quantity" @click="updateItemQty">
                     <?= $blockRenderer->render('Yireo_LokiCheckout::utils/save.phtml') ?>
                 </button>
@@ -66,10 +65,10 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
             itemId: <?= $item['id'] ?>,
             qty: <?= $item['qty'] ?>,
             updateItemQty() {
-                this.$component.updateItemQty(this.itemId, this.qty);
+                this.$component(this).updateItemQty(this.itemId, this.qty);
             },
             removeItem() {
-                this.$component.removeItem(this.itemId);
+                this.$component(this).removeItem(this.itemId);
             }
         }))
     });

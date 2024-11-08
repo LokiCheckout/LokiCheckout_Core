@@ -25,7 +25,7 @@ $shippingMethods = $magewire->getShippingMethods();
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
 
-    <div role="list">
+    <div>
         <?php foreach ($shippingMethods as $shippingMethod): ?>
             <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
             <label for="shipping-<?= $code ?>">

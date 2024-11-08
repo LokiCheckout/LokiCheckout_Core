@@ -16,6 +16,6 @@ class Email extends Component
 
     public function getHtml(): string
     {
-        return $this->shippingAddressState->getShippingAddress()->getEmail();
+        return (string)$this->shippingAddressState->getShippingAddress()->getEmail();
     }
 }

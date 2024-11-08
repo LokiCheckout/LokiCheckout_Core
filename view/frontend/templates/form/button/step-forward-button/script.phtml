@@ -32,7 +32,7 @@ $magewire = $block->getComponent();
                 this.update();
 
                 if (this.valid) {
-                    this.$component.call('submit');
+                    this.$component(this).call('submit');
                 }
             }
         }));

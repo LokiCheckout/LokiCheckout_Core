@@ -18,6 +18,7 @@ $textCount = $magewire->getCount();
 <?php for ($i = 1; $i <= $textCount; $i++) : ?>
     <input
         id="<?= $magewire->getElementId() ?>-field-<?= $i ?>"
+        aria-label="<?= $magewire->getFieldLabel() ?>"
         wire:loading.attr="aria-busy"
         wire:loading.class="disabled"
         x-ref="field<?= $i ?>"
