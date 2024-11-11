@@ -68,19 +68,74 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.street" as="street"
+                name="loki.checkout.billing-step.billing-address.street0" as="street0"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street
+                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street0
                     </argument>
                     <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="field_label" xsi:type="string">Street</argument>
                 </arguments>
 
                 <block
-                    name="loki.checkout.billing-step.billing-address.street.additional_script"
+                    name="loki.checkout.billing-step.billing-address.street0.additional_script"
                     as="additional_script"
-                    template="Yireo_LokiCheckout::form/field/street/additional_script.phtml"
+                    template="Yireo_LokiCheckout::form/field/street0/additional_script.phtml"
+                />
+            </block>
+
+            <block
+                name="loki.checkout.billing-step.billing-address.street1" as="street1"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street1
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="field_label" xsi:type="string">-</argument>
+                </arguments>
+
+                <block
+                    name="loki.checkout.billing-step.billing-address.street1.additional_script"
+                    as="additional_script"
+                    template="Yireo_LokiCheckout::form/field/street1/additional_script.phtml"
+                />
+            </block>
+
+            <block
+                name="loki.checkout.billing-step.billing-address.street2" as="street2"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street2
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="field_label" xsi:type="string">-</argument>
+                </arguments>
+
+                <block
+                    name="loki.checkout.billing-step.billing-address.street2.additional_script"
+                    as="additional_script"
+                    template="Yireo_LokiCheckout::form/field/street2/additional_script.phtml"
+                />
+            </block>
+
+            <block
+                name="loki.checkout.billing-step.billing-address.street3" as="street3"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Street3
+                    </argument>
+                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="field_label" xsi:type="string">-</argument>
+                </arguments>
+
+                <block
+                    name="loki.checkout.billing-step.billing-address.street3.additional_script"
+                    as="additional_script"
+                    template="Yireo_LokiCheckout::form/field/street3/additional_script.phtml"
                 />
             </block>
 

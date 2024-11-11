@@ -34,6 +34,10 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         if ($parentBlock) {
             $fieldLabel = (string)$parentBlock->getFieldLabel();
             if (!empty($fieldLabel)) {
+                if ($fieldLabel === '-') {
+                    return '';
+                }
+
                 return $fieldLabel;
             }
         }

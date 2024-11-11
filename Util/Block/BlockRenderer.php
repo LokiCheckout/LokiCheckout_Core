@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Util\Block;
 
+use InvalidArgumentException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
@@ -26,7 +27,7 @@ class BlockRenderer
     {
         $block = $this->layout->getBlock($blockName);
         if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('Unexpected block type "%s"', $blockName));
+            throw new RuntimeException((string)__('Unexpected block type "%1"', $blockName));
         }
 
         if (!empty($data)) {
@@ -45,8 +46,8 @@ class BlockRenderer
     {
         try {
             return (string)$this->get($blockName, $data)?->toHtml();
-        } catch (RuntimeException $e) {
-            return '';
+        } catch (RuntimeException|InvalidArgumentException $e) {
+            return '<!-- '.$e->getMessage().' -->'; // @todo: Only report this in debug mode
         }
     }
 
