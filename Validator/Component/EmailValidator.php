@@ -3,18 +3,18 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Customer\Api\AccountManagementInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
-class EmailValidator implements AddressFieldValidatorInterface
+class EmailValidator implements FieldValidatorInterface
 {
     public function __construct(
         private AccountManagementInterface $accountManagement,
     ) {
     }
 
-    public function validate(AddressFieldComponent $component): bool
+    public function validate(FieldComponent $component): bool
     {
-        $email = $component->getValue();
+        $email = trim($component->getValue());
 
         if (empty($email)) {
             $component->error('value', 'This value is required');

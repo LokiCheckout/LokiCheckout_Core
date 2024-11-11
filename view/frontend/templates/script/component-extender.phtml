@@ -1,0 +1,26 @@
+<script>
+    const LokiCheckoutFieldComponentExtender = {
+        extenders: [],
+        addExtender(extender) {
+            this.extenders.push(extender);
+        },
+        extend(component) {
+            component.beforeInit = function () {
+            };
+            component.afterInit = function () {
+            };
+            component.updated = function () {
+            };
+            component.beforeSubmit = function () {
+            };
+            component.afterSubmit = function () {
+            };
+
+            this.extenders.forEach((extender) => {
+                component = extender(component);
+            })
+            return component;
+        }
+    };
+</script>
+

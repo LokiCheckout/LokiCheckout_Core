@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use Magento\Framework\View\Element\Template;
 use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
 use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
@@ -14,12 +16,14 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Progressbar $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var StepNavigator $stepNavigator */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <nav
+    <?= $blockAttribute() ?>
     class="<?= $blockCss('hidden md:block card rounded-lg') ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >

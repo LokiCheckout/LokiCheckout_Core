@@ -22,13 +22,13 @@ class ShippingMethods extends Component
     public function boot()
     {
         $shippingAddress = $this->shippingAddressState->getShippingAddress();
-        $quote =  $shippingAddress->getQuote();
+        $quote = $shippingAddress->getQuote();
         $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates();
 
         foreach ($this->shippingMethodManagement->getList($quote->getId()) as $shippingMethod) {
-            $shippingMethodCode =$shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
+            $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
             $this->shippingMethods[$shippingMethodCode] = $shippingMethod;
         }
 
@@ -38,7 +38,11 @@ class ShippingMethods extends Component
         }
 
         if (empty($this->value)) {
-            $this->value = array_key_first($this->shippingMethods);
+            // @todo: Make this optional
+            $firstShippingMethod = (string)array_key_first($this->shippingMethods);
+            $this->value = $firstShippingMethod;
+            $this->shippingAddressState->getShippingAddress()->setShippingMethod($firstShippingMethod);
+            $quote->save();
         }
     }
 
@@ -50,10 +54,10 @@ class ShippingMethods extends Component
         return $this->shippingMethods;
     }
 
-    public function updatedValue(string $value)
+    public function setValue(string $value)
     {
         $shippingAddress = $this->shippingAddressState->getShippingAddress();
-        $quote =  $shippingAddress->getQuote();
+        $quote = $shippingAddress->getQuote();
 
         $shippingAddress
             ->setCollectShippingRates(true)
@@ -63,6 +67,14 @@ class ShippingMethods extends Component
         $quote->save();
 
         $this->emit('shippingStepSave');
+
         return $value;
+    }
+
+    public function getJsName(): string
+    {
+        $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
+
+        return preg_replace('#[_.-]+#', '', $name);
     }
 }

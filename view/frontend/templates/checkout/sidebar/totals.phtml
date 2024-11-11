@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
@@ -11,18 +12,19 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var CheckoutState $checkoutState */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
-$quote = $checkoutState->getQuote();
+$quote = $checkoutState->getQuote()->collectTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
     <dl class="grid grid-cols-2 gap-y-1 ">
         <dt class="font-medium"><?= __('Subtotal') ?></dt>
         <dd class="text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></dd>
-        <dt class="font-medium"><?= __('Shipping & Handling') ?></dd>
-        <dd class="text-right"><?= $priceFormatter->format($quote->getShippingAmount()) ?></dt>
+        <dt class="font-medium"><?= __('Shipping & Handling') ?></dt>
+        <dd class="text-right"><?= $priceFormatter->format($quote->getShippingAmount()) ?></dd>
         <dt class="font-medium"><?= __('Tax') ?></dt>
         <dd class="text-right"><?= $priceFormatter->format($quote->getTaxAmount()) ?></dd>
         <div class="font-bold text-lg grid grid-cols-2 gap-x-2 col-span-full">

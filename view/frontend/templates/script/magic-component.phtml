@@ -1,0 +1,24 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.magic('component', (element, component) => {
+            let wireId = element.getAttribute('wire:id');
+
+            // @todo: Find a way to do this recursively
+            if (!wireId) {
+               wireId = element.parentElement.getAttribute('wire:id');
+            }
+
+            if (!wireId) {
+                wireId = element.parentElement.parentElement.getAttribute('wire:id');
+            }
+
+            if (!wireId) {
+                console.error('Could not locate wire ID of element', element, component);
+                return;
+            }
+
+            return Magewire.find(wireId);
+        })
+    });
+</script>
+

@@ -27,25 +27,11 @@ interface FormFieldInterface
     public function getFieldTemplate(): string;
 
     /**
-     * Name of the public Magewire property representing this fields value. Typically, this is `value`.
-     *
-     * @return string
-     */
-    public function getModelName(): string;
-
-    /**
      * In case the field is a text input, this represents the text type (aka `type="email"). By default, this is `text.
      *
      * @return string
      */
     public function getInputType(): string;
-
-    /**
-     * This returns the value of the Magewire property (identified by `getModelName()`)
-     *
-     * @return string
-     */
-    public function getValue(): string;
 
     /**
      * @todo: Why is this needed?

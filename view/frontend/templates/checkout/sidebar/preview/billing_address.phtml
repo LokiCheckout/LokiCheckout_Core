@@ -2,11 +2,17 @@
 declare(strict_types=1);
 
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var BillingAddress $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+/** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $blockCss('mb-4') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('mb-4 relative') ?>">
+    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
     <span class="text-xl font-bold"><?= __('Billing Address') ?></span><br>
     <address><?= $magewire->getHtml() ?></address>
     <?php if ($magewire->isSameAsShipping()): ?>

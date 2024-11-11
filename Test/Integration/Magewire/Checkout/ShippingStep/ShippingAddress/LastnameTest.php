@@ -19,11 +19,10 @@ class LastnameTest extends LokiTestCase
 
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('lastname', '');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['lastname' => '']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Lastname::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
@@ -34,11 +33,10 @@ class LastnameTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('lastname', 'Doe');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['lastname' => 'Doe']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Lastname::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 

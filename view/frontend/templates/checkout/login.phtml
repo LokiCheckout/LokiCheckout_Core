@@ -1,22 +1,25 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Login;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var Login $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 ?>
-<div class="<?= $blockCss('card bg-gray-100 my-2') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('card bg-gray-100 my-2') ?>">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>

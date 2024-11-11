@@ -107,6 +107,10 @@ class StepNavigator implements ArgumentInterface
         throw new UnknownStepException('Unknown step code "'.$stepCode.'"');
     }
 
+    public function isCurrentStep(StepInterface $step): bool
+    {
+        return $step->getCode() === $this->getCurrentStep()->getCode();
+    }
 
     public function isFirstStep(StepInterface $step): bool
     {
@@ -138,7 +142,7 @@ class StepNavigator implements ArgumentInterface
     }
 
     /**
-     * @return StepInterface[]
+     * @return StepInterface[]|Component[]
      */
     public function getSteps(): array
     {
@@ -146,9 +150,9 @@ class StepNavigator implements ArgumentInterface
             return $this->steps;
         }
 
-        /** @var Template $checkoutBlock */
-        $checkoutBlock = $this->layout->getBlock('loki.checkout');
-        foreach ($checkoutBlock->getChildNames() as $childName) {
+        /** @var Template $stepsBlock */
+        $stepsBlock = $this->layout->getBlock('loki.checkout.steps');
+        foreach ($stepsBlock->getChildNames() as $childName) {
             $childBlock = $this->layout->getBlock($childName);
             if (false === $childBlock instanceof Template) {
                 continue;

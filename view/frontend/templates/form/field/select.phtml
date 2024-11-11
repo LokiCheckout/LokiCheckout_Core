@@ -16,7 +16,6 @@ $magewire->setOptionModel($optionModel);
     x-ref="field"
     x-model="value"
     x-on:change="submit"
-    x-bind:disabled="locked"
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>

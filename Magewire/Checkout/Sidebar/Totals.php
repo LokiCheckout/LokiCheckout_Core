@@ -6,4 +6,7 @@ use Magewirephp\Magewire\Component;
 
 class Totals extends Component
 {
+    protected $listeners = [
+        'quoteSave' => 'refresh'
+    ];
 }

@@ -25,6 +25,11 @@ class StepForwardButton extends Component implements ButtonInterface
         return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
     }
 
+    public function getStep(): string
+    {
+        return $this->stepNavigator->getCurrentStep()->getCode();
+    }
+
     public function getJsName(): string
     {
         $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
@@ -32,8 +37,11 @@ class StepForwardButton extends Component implements ButtonInterface
         return preg_replace('#[_.-]+#', '', $name);
     }
 
-    public function execute()
+    public function submit()
     {
+        $this->clearFlashMessages();
+        $this->emit('stepValidate', $this->getStep());
+
         try {
             $result = $this->stepNavigator->setNextStep($this);
         } catch (Exception $e) {
@@ -42,11 +50,16 @@ class StepForwardButton extends Component implements ButtonInterface
         }
 
         if (true === $result) {
-            $this->emit('stepChange', $this->stepNavigator->getCurrentStep()->getCode());
+            $this->emit('stepChange', $this->getStep());
         }
     }
 
     public function allow(): bool
+    {
+        return true;
+    }
+
+    public function isVisible(): bool
     {
         return true;
     }

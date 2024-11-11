@@ -7,7 +7,10 @@ use Magewirephp\Magewire\Component;
 
 class PaymentDetails extends Component
 {
-    protected $listeners = ['billingStepSave' => 'refresh'];
+    protected $listeners = [
+        'billingStepSave' => 'refresh',
+        'quoteSave' => 'refresh',
+    ];
 
     public function __construct(
         private readonly CheckoutSession $checkoutSession,

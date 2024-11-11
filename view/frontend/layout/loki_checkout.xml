@@ -1,11 +1,20 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
-    <update handle="loki_checkout_remove_other" />
-    <update handle="loki_checkout_sidebar" />
-    <update handle="loki_checkout_progressbar"/>
-    <update handle="loki_checkout_login"/>
-    <update handle="loki_checkout_step_shipping"/>
-    <update handle="loki_checkout_step_billing"/>
+    <update handle="loki_checkout_remove_other"/>
+
+    <update handle="loki_checkout_block_sidebar"/>
+    <update handle="loki_checkout_block_progressbar"/>
+    <update handle="loki_checkout_block_login"/>
+
+    <update handle="loki_checkout_block_shipping_email"/>
+    <update handle="loki_checkout_block_shipping_address"/>
+    <update handle="loki_checkout_block_shipping_methods"/>
+
+    <update handle="loki_checkout_block_billing_view"/>
+    <update handle="loki_checkout_block_billing_address"/>
+    <update handle="loki_checkout_block_payment_methods"/>
+
+    <update handle="loki_checkout_theme_default"/>
 
     <body>
         <referenceContainer name="content">
@@ -13,18 +22,35 @@
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout</argument>
                 </arguments>
+                <block name="loki.checkout.steps" as="steps" template="Yireo_LokiCheckout::checkout/steps.phtml"/>
             </block>
+        </referenceContainer>
+
+        <referenceContainer name="after.body.start">
+            <block name="loki.checkout.script.component-extender" template="Yireo_LokiCheckout::script/component-extender.phtml"/>
         </referenceContainer>
 
         <referenceContainer name="before.body.end">
             <block name="loki.checkout.script.aria-invalid" template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
-            <block name="loki.checkout.script.lock-store" template="Yireo_LokiCheckout::script/lock-store.phtml"/>
+            <block name="loki.checkout.script.step-store" template="Yireo_LokiCheckout::script/step-store.phtml"/>
             <block name="loki.checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>
+            <block name="loki.checkout.script.magic-component" template="Yireo_LokiCheckout::script/magic-component.phtml"/>
             <block name="loki.checkout.script.validator" template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>
 
         <block name="loki.checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
         <block name="loki.checkout.utils.loader" template="Yireo_LokiCheckout::utils/loader.phtml"/>
+        <block name="loki.checkout.utils.loader-small" template="Yireo_LokiCheckout::utils/loader-small.phtml">
+            <arguments>
+                <argument name="size" xsi:type="number">20</argument>
+            </arguments>
+        </block>
+        <block name="loki.checkout.utils.loader-overlay" template="Yireo_LokiCheckout::utils/loader-overlay.phtml">
+            <arguments>
+                <argument name="size" xsi:type="number">50</argument>
+            </arguments>
+        </block>
+
         <block name="loki.checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki.checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki.checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>

@@ -5,19 +5,38 @@ use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormTextMultipleFieldInterface $magewire */
 /** @var ViewModelFactory $viewModelFactory */
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
-$magewire = $this->getComponent();
-$textCount = $magewire->getTextCount();
 
-$i = 0;
-while ($i < $textCount) {
-    $magewire->setCounter($i);
-    $magewire->setElementId($magewire->getNameInLayout().'-'.$i);
-    echo $blockRenderer->render('form/field/text.phtml', $block, $magewire);
-    $i++;
-}
+$magewire = $this->getComponent();
+$textCount = $magewire->getCount();
+?>
+
+<?php for ($i = 1; $i <= $textCount; $i++) : ?>
+    <input
+        id="<?= $magewire->getElementId() ?>-field-<?= $i ?>"
+        wire:loading.attr="aria-busy"
+        wire:loading.class="disabled"
+        x-ref="field<?= $i ?>"
+        x-model="value<?= $i ?>"
+        x-on:change="submit"
+        <?php if ($magewire->hasMinLength()): ?>
+            min="<?= $magewire->getMinLength() ?>"
+        <?php endif ?>
+        <?php if ($magewire->hasMaxLength()): ?>
+            max="<?= $magewire->getMaxLength() ?>"
+        <?php endif ?>
+        <?php if ($magewire->hasErrors()): ?>
+            aria-invalid="true" data-invalid="true"
+        <?php endif ?>
+        <?php if ($magewire->getPlaceholder() && $i === 1): ?>
+            placeholder="<?= $magewire->getPlaceholder() ?>"
+        <?php endif ?>
+        <?= $magewire->isRequired() ? 'required' : '' ?>
+        type="<?= $magewire->getInputType() ?>"
+        class="form-input w-full data-[invalid=true]:border-red-500"
+    >
+<?php endfor; ?>

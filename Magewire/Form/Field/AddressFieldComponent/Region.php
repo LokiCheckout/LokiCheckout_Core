@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Override;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 
 class Region extends AddressFieldComponent implements FormTextSelectFieldInterface

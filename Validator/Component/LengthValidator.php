@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
-class LengthValidator implements AddressFieldValidatorInterface
+class LengthValidator implements FieldValidatorInterface
 {
-    public function validate(AddressFieldComponent $component): bool
+    public function validate(FieldComponent $component): bool
     {
         $value = $component->getValue();
         if (false === is_string($value)) {

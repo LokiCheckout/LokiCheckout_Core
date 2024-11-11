@@ -15,9 +15,11 @@ class Custom implements QuoteValidationRuleInterface
 
     public function validate(Quote $quote): array
     {
+        $validationErrors = [];
+
         if ($quote->isVirtual()) {
             $validationErrors[] = __(
-                'Supporting virtual quotes is still in progress'
+                '@todo: Supporting virtual quotes is still in progress'
             );
         }
 

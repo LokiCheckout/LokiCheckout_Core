@@ -1,0 +1,51 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\ViewModel\PriceFormatter;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var BlockCssClass $blockCss */
+/** @var bool $debug */
+/** @var ShippingMethods $magewire */
+/** @var BlockRenderer $blockRenderer */
+/** @var PriceFormatter $priceFormatter */
+/** @var BlockAttribute $blockAttribute */
+
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$shippingMethods = $magewire->getShippingMethods();
+?>
+<div <?= $blockAttribute() ?> class="<?= $blockCss('relative w-full') ?>" x-data="<?= $magewire->getJsName() ?>">
+    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
+
+    <div role="list">
+        <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
+            <label for="shipping-<?= $code ?>">
+                <div class="flex cursor-pointer">
+                    <div class="p-4">
+                        <input type="radio" value="<?= $code ?>" x-model="value" id="shipping-<?= $code ?>" <?= $magewire->value === $code ? 'checked="true"' : '' ?>>
+                    </div>
+                    <div class="p-4 w-auto font-bold">
+                        <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
+                    </div>
+                    <div class="p-4 w-auto">
+                        <?= $shippingMethod->getMethodTitle() ?>
+                    </div>
+                    <div class="p-4">
+                        <?= $shippingMethod->getCarrierTitle() ?>
+                    </div>
+                </div>
+            </label>
+        <?php endforeach; ?>
+    </div>
+
+    <?= $block->getChildHtml('script') ?>
+</div>

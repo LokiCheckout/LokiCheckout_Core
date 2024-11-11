@@ -3,22 +3,31 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
-use Yireo\LokiCheckout\Util\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Items $magewire */
 /** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+/** @var BlockRenderer $blockRenderer */
 
 if (empty($magewire->items)) {
     return '<div>No items</div>';
 }
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('relative') ?>">
+    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+
     <ul role="list">
-        <?php foreach ($magewire->items as $item) : ?>
-            <?= $block->getChildBlock('item')
-                ->addData(['item' => $item, 'component' => $magewire
+        <?php foreach ($magewire->getItems() as $item) : ?>
+            <li>
+                <?= $block->getChildBlock('item')->addData([
+                    'item' => $item,
+                    'component' => $magewire,
                 ])->toHtml() ?>
+            </li>
         <?php endforeach; ?>
     </ul>
 </div>

@@ -1,30 +1,33 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Magento\Framework\View\Element\Template;
-use Magento\Quote\Api\Data\CartItemInterface;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
-use Yireo\LokiCheckout\Util\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 use Yireo\LokiCheckout\ViewModel\ProductImage;
 
 /** @var Template $block */
 /** @var Items $component */
-$component = $block->getComponent();
-
 /** @var ViewModelFactory $viewModelFactory */
+/** @var BlockRenderer $blockRenderer */
+/** @var array $item */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+
+$component = $block->getComponent();
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
 
-/** @var CartItemInterface $item */
-/** @var BlockCssClass $blockCss */
-
 $item = $block->getItem();
 $width = 75;
-$productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
+$productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
 ?>
-<li class="<?= $blockCss('flex gap-4') ?>" x-data="LokiCheckoutSidebarItems<?= $item->getId() ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('flex gap-4 my-8') ?>"
+                              x-data="LokiCheckoutSidebarItems<?= $item['id'] ?>">
     <img
         src="<?= $productImageUrl ?>"
         width="<?= $width ?>"
@@ -32,35 +35,41 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
         alt=""
         class="shrink-0"
     >
-    <div class="grow">
-        <p><strong><?= $item->getName() ?><br></strong></p>
-        <dl class="text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2">
-            <dt class="font-medium"><?= __('Price') ?>:</dt>
-            <dd><?= $priceFormatterViewModel->format($item->getPrice()) ?></dd>
-            <dt class="font-medium"><?= __('Quantity') ?>:</dt>
-            <dd><?= $item->getQty() ?></dd>
-        </dl>
-    </div>
-
-    <div class="actions">
-        <div>
-            <input type="number" x-model="qty" min="0" max="4" />
-            <button class="btn m-2 btn-secondary" @click="updateItemQty">Update</button>
+    <div>
+        <div class="grow">
+            <p><strong><?= $item['name'] ?><br></strong></p>
+            <dl class="text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2">
+                <dt class="font-medium"><?= __('Price') ?>:</dt>
+                <dd><?= $priceFormatterViewModel->format($item['price']) ?></dd>
+                <dt class="font-medium"><?= __('Quantity') ?>:</dt>
+                <dd><?= $item['qty'] ?></dd>
+            </dl>
         </div>
-        <div><button class="btn m-2 btn-secondary" @click="removeItem">Remove</button></div>
+
+        <div class="actions">
+            <div>
+                <input type="number" x-model="qty" min="0" max="1000000"/>
+                <button class="m-2" title="Update item quantity" @click="updateItemQty">
+                    <?= $blockRenderer->render('Yireo_LokiCheckout::utils/save.phtml') ?>
+                </button>
+                <button class="m-2" title="Remove item" @click="removeItem">
+                    <?= $blockRenderer->render('Yireo_LokiCheckout::utils/trash.phtml') ?>
+                </button>
+            </div>
+        </div>
     </div>
-</li>
+</div>
 
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('LokiCheckoutSidebarItems<?= $item->getId() ?>', () => ({
-            itemId: <?= $item->getId() ?>,
-            qty: <?= $item->getQty() ?>,
+        Alpine.data('LokiCheckoutSidebarItems<?= $item['id'] ?>', () => ({
+            itemId: <?= $item['id'] ?>,
+            qty: <?= $item['qty'] ?>,
             updateItemQty() {
-                Magewire.find('<?= $component->getId() ?>').call('updateItemQty', [this.itemId, this.qty]);
+                this.$component.updateItemQty(this.itemId, this.qty);
             },
             removeItem() {
-                Magewire.find('<?= $component->getId() ?>').call('removeItem', [this.itemId]);
+                this.$component.removeItem(this.itemId);
             }
         }))
     });

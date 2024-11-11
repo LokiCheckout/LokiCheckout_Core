@@ -3,21 +3,29 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Button\StepBackwardButton;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 
 /** @var Template $block */
 /** @var StepBackwardButton $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 if (false === $magewire instanceof StepBackwardButton) {
     echo '<div>Not a valid button class: '.get_class($magewire).'</div>';
+
+    return;
+}
+
+if (false === $magewire->isVisible()) {
+    echo '<div></div>';
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>" x-data="<?= $magewire->getJsName() ?>">
+<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> x-data="<?= $magewire->getJsName() ?>">
     <button class="<?= $blockCss('btn m-2') ?> <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
             type="button"
         <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
-            x-bind:disabled="locked"
             wire:click="execute"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>

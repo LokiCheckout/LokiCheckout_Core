@@ -20,6 +20,7 @@
     <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator" >
         <arguments>
             <argument name="validationRules" xsi:type="array">
+                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
                 <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
                 <item name="shippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
             </argument>
@@ -84,12 +85,13 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Validator\Component\AddressFieldValidatorRegistry">
+    <type name="Yireo\LokiCheckout\Validator\Component\FieldValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="length" xsi:type="object">Yireo\LokiCheckout\Validator\Component\LengthValidator</item>
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
                 <item name="email" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailValidator</item>
+                <item name="prefix" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PrefixValidator</item>
             </argument>
         </arguments>
     </type>

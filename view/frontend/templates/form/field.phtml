@@ -1,19 +1,20 @@
 <?php
 declare(strict_types=1);
 
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
-/** @var \Yireo\LokiCheckout\Util\BlockCssClass $blockCss */
+/** @var BlockCssClass $blockCss */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+/** @var BlockAttribute $blockAttribute */
 
 if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
     echo '<div style="display:none">skipped</div>';
@@ -27,24 +28,20 @@ if (false === $magewire->isVisible()) {
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>" class="<?= $blockCss('address-field field w-full relative') ?> <?= $magewire->isRequired(
-) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
+<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> class="<?= $blockCss('field w-auto relative') ?> <?= $magewire->isRequired() && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
     <label for="<?= $magewire->getFieldName() ?>" class="inline-block mb-1.5">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>
     <div class="relative space-y-2">
-        <?= $blockRenderer->render($magewire->getFieldTemplate(), $block, $magewire) ?>
+        <?= $blockRenderer->render($magewire->getFieldTemplate(), $block) ?>
 
         <div wire:loading x-cloak class="field-loader absolute inset-y-0 right-0 pt-1 pr-2">
-            <?= $block->getBlockHtml('loki.checkout.utils.loader') ?>
-        </div>
-
-        <div x-show="locked" class="field-locked absolute inset-y-0 right-0 pt-1 pr-2">
-            <?= $block->getBlockHtml('loki.checkout.utils.loader') ?>
+            <?= $blockRenderer->html('loki.checkout.utils.loader-small') ?>
         </div>
     </div>
 
     <?= $blockRenderer->get('loki.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
-    <?= $blockRenderer->render('form/field/text/script.phtml', $block, $magewire) ?>
+    <?= $blockRenderer->render('form/field/text/script.phtml', $block) ?>
+    <?= $blockRenderer->html($magewire->getNameInLayout().'.additional_script', ['component' => $magewire]) ?>
 </div>

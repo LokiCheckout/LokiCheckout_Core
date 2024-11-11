@@ -2,13 +2,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Util\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 
 /** @var Template $block */
 /** @var BlockCssClass $blockCss */
+$size = (int)$block->getSize();
 ?>
 <img alt="<?= __('Loading') ?>"
      src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"
      class="<?= $blockCss('loader') ?>"
-     width="20"
-     height="20">
+     width="<?= $size ?>"
+     height="<?= $size ?>">

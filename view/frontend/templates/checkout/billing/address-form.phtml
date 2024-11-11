@@ -3,14 +3,16 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
-use Yireo\LokiCheckout\Util\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 
 /** @var Template $block */
 /** @var BillingAddress $magewire */
 /** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
 
 ?>
-<div class="<?= $blockCss('grid grid-cols-12 gap-8') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('grid grid-cols-12 gap-8') ?>">
     <?php foreach ($block->getChildNames() as $childName): ?>
         <?php $childBlock = $block->getLayout()->getBlock($childName) ?>
         <?php $colSpan = $childBlock->getData('grid-col-span') ?? 6 ?>

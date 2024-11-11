@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Fixture;
 
+use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Quote\Api\CartManagementInterface;
@@ -14,13 +15,8 @@ trait CartFixture
 {
     use GetObjectManager;
 
-    public function getGuestCart(): CartInterface
+    public function getGuestCart(?ProductInterface $product = null): CartInterface
     {
-        static $cart = null;
-        if ($cart instanceof CartInterface) {
-            return $cart;
-        }
-
         $guestCartManagement = $this->getObjectManager()->get(GuestCartManagementInterface::class);
         $maskedQuoteIdToQuoteId = $this->getObjectManager()->get(MaskedQuoteIdToQuoteId::class);
         $cartRepository = $this->getObjectManager()->get(CartRepositoryInterface::class);
@@ -31,7 +27,15 @@ trait CartFixture
         $checkoutSession = $this->getObjectManager()->get(Session::class);
         $checkoutSession->setQuoteId($cartId);
 
-        return $cartRepository->get($cartId);
+        $cart = $cartRepository->get($cartId);
+
+        if ($product) {
+            $cart->addProduct($product, 1);
+            $cart->setItemsQty(1);
+            $cart->setItemsCount(1);
+        }
+
+        return $cart;
     }
 
     public function getCustomerCart(int $customerId): CartInterface

@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var BlockCssClass $blockCss */
+/** @var BlockAttribute $blockAttribute */
+/** @var BlockRenderer $blockRenderer */
+/** @var StepNavigator $stepNavigator */
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
+$currentStep = $stepNavigator->getCurrentStep();
+?>
+<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>" x-data="LokiCheckoutSteps">
+    <?php foreach ($block->getChildNames() as $childName) : ?>
+        <?php $stepBlock = $block->getLayout()->getBlock($childName); ?>
+        <?php $step = $stepBlock->getMagewire(); ?>
+        <div x-show="<?= $step->getCode() ?>" x-transition>
+            <?= $block->getLayout()->getBlock($childName)->toHtml() ?>
+        </div>
+    <?php endforeach; ?>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('LokiCheckoutSteps', () => ({
+                <?php foreach ($stepNavigator->getSteps() as $step): ?>
+                <?= $step->getCode() ?>: <?= $stepNavigator->isCurrentStep($step) ? 'true': 'false' ?>,
+                <?php endforeach; ?>
+            }));
+        });
+    </script>
+</div>

@@ -4,41 +4,47 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
-use Yireo\LokiCheckout\Util\BlockCssClass;
-use Yireo\LokiCheckout\ViewModel\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentMethods $magewire */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockCssClass $blockCss */
-
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+/** @var BlockAttribute $blockAttribute */
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
-<div class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss('relative') ?>" x-data="<?= $magewire->getJsName() ?>">
+    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Payment Methods']) ?>
     <ul role="list">
         <?php foreach ($paymentMethods as $paymentMethod): ?>
             <?php $code = $paymentMethod->getCode(); ?>
+            <?php $current = $paymentMethod->getCode() === $magewire->value; ?>
             <label for="payment-<?= $code ?>">
                 <li class="cursor-pointer relative my-4 py-2">
                     <input
                         type="radio"
+                        x-model="value"
                         value="<?= $code ?>"
-                        wire:model="value"
                         id="payment-<?= $code ?>">
+
                     <span class="ml-4"><?= $paymentMethod->getTitle() ?></span>
 
-                    <?= $blockRenderer->create(
-                        'checkout/billing/payment-methods/icon.phtml',
-                        $block,
-                        $magewire
-                    )->setCode($code)->toHtml() ?>
+                    <?= $blockRenderer->create('checkout/billing/payment-methods/icon.phtml', $block)
+                        ->setCode($code)
+                        ->toHtml() ?>
 
-                    <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional') ?>
+                    <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
+                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.form') ?>
+                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional') ?>
+                    </div>
                 </li>
             </label>
         <?php endforeach; ?>
     </ul>
+
+    <?= $block->getChildHtml('script') ?>
 </div>

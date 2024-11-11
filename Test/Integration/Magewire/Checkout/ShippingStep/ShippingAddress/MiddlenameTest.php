@@ -19,22 +19,20 @@ class MiddlenameTest extends LokiTestCase
 
     public function testDisabled()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('middlename', '');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['middlename' => '']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('middlename', '');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['middlename' => '']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Middlename::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
@@ -45,11 +43,10 @@ class MiddlenameTest extends LokiTestCase
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->setData('middlename', 'Doe');
-        $cart->addProduct($this->getProduct(), 1);
+        $cart = $this->getGuestCart($this->getProduct());
+        $cart->getShippingAddress()->addData(['middlename' => 'van']);
+        $this->dispatchToCheckout($cart);
 
-        $this->dispatchToCheckout();
         $component = $this->getObjectManager()->get(Middlename::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
