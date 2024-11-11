@@ -1,0 +1,15 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Other\Newsletter;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Newsletter $magewire */
+?>
+<div>
+    <input type="checkbox" wire:model="signup"/>
+    <label><?= __('Sign up for our newsletter') ?></label>
+</div>

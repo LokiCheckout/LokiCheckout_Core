@@ -16,14 +16,19 @@ use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
             <?php endforeach; ?>
             init() {
                 <?php if ($magewire->value) : ?>
-                this.$refs['<?= $magewire->value ?>'].style.display = 'block';
+                if (this.$refs['<?= $magewire->value ?>']) {
+                    this.$refs['<?= $magewire->value ?>'].style.display = 'block';
+                }
                 <?php endif; ?>
 
                 this.$watch('value', () => {
+                    const $ref =this.$refs[this.value];
+                    if ($ref) {
+                        $ref.style.display = 'block';
+                    }
+
                     this.$refs[this.value].style.display = 'block';
-
                     this.$component(this).call('setValue', this.value);
-
                     window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
                         detail: { method: this.value}
                     }));

@@ -6,7 +6,9 @@
     <update handle="loki_checkout_block_progressbar"/>
     <update handle="loki_checkout_block_login"/>
 
-    <update handle="loki_checkout_block_shipping_email"/>
+    <update handle="loki_checkout_block_customer"/>
+    <update handle="loki_checkout_block_other"/>
+
     <update handle="loki_checkout_block_shipping_address"/>
     <update handle="loki_checkout_block_shipping_methods"/>
 

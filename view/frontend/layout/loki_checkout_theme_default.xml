@@ -12,7 +12,7 @@
                     name="loki.checkout.shipping-step.backward-button" as="backward-button"
                     template="Yireo_LokiCheckout::form/button/step-backward-button.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
+                        <argument name="magewire" xsi:type="object" shared="false">
                             Yireo\LokiCheckout\Magewire\Form\Button\StepBackwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Back to billing</argument>
@@ -26,7 +26,7 @@
                     name="loki.checkout.shipping-step.forward-button" as="forward-button"
                     template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
+                        <argument name="magewire" xsi:type="object" shared="false">
                             Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Proceed to review &amp;amp; payments</argument>
@@ -47,7 +47,7 @@
                     name="loki.checkout.billing-step.backward-button" as="backward-button"
                     template="Yireo_LokiCheckout::form/button/step-backward-button.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
+                        <argument name="magewire" xsi:type="object" shared="false">
                             Yireo\LokiCheckout\Magewire\Form\Button\StepBackwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Back to shipping</argument>
@@ -61,7 +61,7 @@
                     name="loki.checkout.billing-step.forward-button" as="forward-button"
                     template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
+                        <argument name="magewire" xsi:type="object" shared="false">
                             Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton
                         </argument>
                         <argument name="button_label" xsi:type="string">Proceed to review &amp; payments</argument>
@@ -73,11 +73,17 @@
             </block>
         </referenceBlock>
 
-        <move element="loki.checkout.login" destination="loki.checkout.sidebar" as="login"/>
+        <move element="loki.checkout.login" destination="loki.checkout.sidebar.begin" as="begin"/>
+        <move element="loki.checkout.other.agreements" destination="loki.checkout.sidebar.end"/>
+        <move element="loki.checkout.other.newsletter" destination="loki.checkout.sidebar.end"/>
+
         <move element="loki.checkout.progressbar" destination="loki.checkout" as="progressbar" />
         <move element="loki.checkout.sidebar" destination="loki.checkout" as="sidebar"/>
 
-        <move element="loki.checkout.shipping-step.email" destination="loki.checkout.shipping-step" as="email"/>
+        <move element="loki.checkout.customer.email" destination="loki.checkout.shipping-step" as="email"/>
+        <move element="loki.checkout.customer.dob" destination="loki.checkout.shipping-step.address-form" as="dob"/>
+        <move element="loki.checkout.customer.gender" destination="loki.checkout.shipping-step.address-form" as="gender"/>
+
         <move element="loki.checkout.shipping-step.address-form" destination="loki.checkout.shipping-step" as="address-form"/>
         <move element="loki.checkout.shipping-step.shipping-methods" destination="loki.checkout.shipping-step" as="methods"/>
 

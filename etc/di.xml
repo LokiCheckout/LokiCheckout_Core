@@ -92,6 +92,16 @@
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
                 <item name="email" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailValidator</item>
                 <item name="prefix" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PrefixValidator</item>
+                <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
+                <item name="dob" xsi:type="object">Yireo\LokiCheckout\Validator\Component\DobValidator</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Yireo\HyvaThemeAutoRegistration\Observer\RegisterModuleForHyvaConfig">
+        <arguments>
+            <argument name="modulePrefixes" xsi:type="array">
+                <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
             </argument>
         </arguments>
     </type>

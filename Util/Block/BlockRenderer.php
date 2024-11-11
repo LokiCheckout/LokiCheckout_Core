@@ -50,6 +50,11 @@ class BlockRenderer
         }
     }
 
+    /**
+     * @param string $templateName
+     * @param AbstractBlock|null $parentBlock
+     * @return Template
+     */
     public function create(string $templateName, ?AbstractBlock $parentBlock = null): Template
     {
         if (false === strstr($templateName, '::')) {

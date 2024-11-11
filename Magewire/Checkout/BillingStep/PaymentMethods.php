@@ -10,6 +10,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
 {
+    /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
     public string $value = '';
 
@@ -22,8 +23,18 @@ class PaymentMethods extends Component
     public function boot()
     {
         $cartId = $this->checkoutState->getQuote()->getId();
-        $this->value =(string) $this->checkoutState->getQuote()->getPayment()->getMethod();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
+        $this->value = (string) $this->checkoutState->getQuote()->getPayment()->getMethod();
+
+        if (empty($this->value)) {
+            $this->value = $this->getDefaultPayment();
+        }
+    }
+
+    public function getDefaultPayment(): string
+    {
+        $firstPaymentMethod = array_shift($this->paymentMethods);
+        return (string)$firstPaymentMethod->getCode();
     }
 
     /**
@@ -37,6 +48,8 @@ class PaymentMethods extends Component
     public function setValue(string $value)
     {
         // @todo: Verify that this is a correct payment
+        $this->value = $value;
+
         $quote = $this->checkoutState->getQuote();
         $quote->setPaymentMethod($value);
         $quote->setInventoryProcessed(false);
@@ -44,6 +57,7 @@ class PaymentMethods extends Component
         $this->checkoutState->saveQuote($quote);
 
         $this->emit('billingStepSave');
+        $this->emit('paymentMethodChange', $value);
 
         return $value;
     }

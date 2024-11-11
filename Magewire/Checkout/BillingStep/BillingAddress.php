@@ -4,8 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
 
 use Magewirephp\Magewire\Component;
 
-class BillingAddress  extends Component
+class BillingAddress extends Component
 {
     protected $listeners = ['billingStepSave' => 'refresh'];
-
 }

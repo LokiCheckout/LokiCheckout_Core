@@ -28,17 +28,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->listeners[static::class.'::afterSetValue'] = 'refresh';
     }
 
-    public function getFieldName(): string
-    {
-        // @doc: You can override a field name in your own Component class
-        // @doc: Field name is based upon non-namespaced classname
-        $className = static::class;
-        $className = str_replace('\Interceptor', '', $className);
-        $baseClassname = basename(str_replace('\\', '/', $className));
-
-        return strtolower(trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $baseClassname), '_'));
-    }
-
     public function getFieldLabel(): string
     {
         $parentBlock = $this->getParent();
