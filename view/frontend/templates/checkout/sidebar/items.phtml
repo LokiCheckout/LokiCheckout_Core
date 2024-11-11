@@ -16,6 +16,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 if (empty($magewire->items)) {
     return '<div>No items</div>';
 }
+
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('relative') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
@@ -23,7 +24,7 @@ if (empty($magewire->items)) {
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
             <li>
-                <?= $block->getChildBlock('item')->addData([
+                <?= $block->getChildBlock('item')->setData([
                     'item' => $item,
                     'component' => $magewire,
                 ])->toHtml() ?>

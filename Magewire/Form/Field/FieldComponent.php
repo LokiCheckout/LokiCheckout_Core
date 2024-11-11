@@ -38,7 +38,16 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return $value;
     }
 
-    abstract public function getFieldName(): string;
+    public function getFieldName(): string
+    {
+        // @doc: You can override a field name in your own Component class
+        // @doc: Field name is based upon non-namespaced classname
+        $className = static::class;
+        $className = str_replace('\Interceptor', '', $className);
+        $baseClassname = basename(str_replace('\\', '/', $className));
+
+        return strtolower(trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $baseClassname), '_'));
+    }
 
     abstract public function getFieldLabel(): string;
 

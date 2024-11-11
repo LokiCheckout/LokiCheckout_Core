@@ -3,11 +3,13 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magento\Framework\DataObject\Copy;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Step\StepInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class BillingStep extends Component implements StepInterface
 {
@@ -20,7 +22,9 @@ class BillingStep extends Component implements StepInterface
         private readonly Config $config,
         private readonly ValidatorInterface $stepValidator,
         private readonly BillingAddressState $billingAddressState,
-        private readonly Copy $copyService
+        private readonly ShippingAddressState $shippingAddressState,
+        private readonly Copy $copyService,
+        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -29,6 +33,10 @@ class BillingStep extends Component implements StepInterface
         $this->billingAsShipping = (bool)$this->billingAddressState->getBillingAddress()->getSameAsBilling();
         if (false === $this->enableBillingAsShipping()) {
             $this->billingAsShipping = false;
+        }
+
+        if ($this->billingAsShipping) {
+            $this->copyShippingToBilling();
         }
     }
 
@@ -42,27 +50,35 @@ class BillingStep extends Component implements StepInterface
         $billingAsShipping = (bool)$billingAsShipping;
         $billingAddress = $this->billingAddressState->getBillingAddress();
         $quote = $billingAddress->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
 
         $billingAddress->setSameAsBilling((int)$billingAsShipping);
-
-        if (true === $billingAsShipping) {
-            $this->copyService->copyFieldsetToTarget(
-                'customer_address',
-                'to_quote_address',
-                $shippingAddress,
-                $billingAddress
-            );
-
-            if ($shippingAddress->getCustomerAddressId()) {
-                $billingAddress->setCustomerAddressId($shippingAddress->getCustomerAddressId());
-            }
+        if ($billingAsShipping) {
+            $this->copyShippingToBilling();
         }
 
-        $quote->save();
+        $this->cartRepository->save($this->billingAddressState->getQuote());
         $this->emit('billingStepSave');
 
         return $billingAsShipping;
+    }
+
+    private function copyShippingToBilling()
+    {
+        $billingAddress = $this->billingAddressState->getBillingAddress();
+        $shippingAddress = $this->shippingAddressState->getShippingAddress();
+
+        $this->copyService->copyFieldsetToTarget(
+            'customer_address',
+            'to_quote_address',
+            $shippingAddress,
+            $billingAddress
+        );
+
+        if ($shippingAddress->getCustomerAddressId()) {
+            $billingAddress->setCustomerAddressId($shippingAddress->getCustomerAddressId());
+        }
+
+        $this->cartRepository->save($this->billingAddressState->getQuote());
     }
 
     public function getCode(): string

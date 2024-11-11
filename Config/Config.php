@@ -13,6 +13,13 @@ class Config
     ) {
     }
 
+    public function isLokiCheckout(): bool
+    {
+        // @todo: Find a better way to do this
+        // @todo: Implement this method everywhere
+        return true;
+    }
+
     public function isEnabled(): bool
     {
         if (false === $this->moduleManager->isEnabled('Magewirephp_Magewire')) {

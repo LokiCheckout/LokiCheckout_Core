@@ -29,9 +29,19 @@ $currentStep = $stepNavigator->getCurrentStep();
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('LokiCheckoutSteps', () => ({
+                currentStep: '<?= $currentStep->getCode() ?>',
                 <?php foreach ($stepNavigator->getSteps() as $step): ?>
-                <?= $step->getCode() ?>: <?= $stepNavigator->isCurrentStep($step) ? 'true': 'false' ?>,
+                <?= $step->getCode() ?>: <?= $stepNavigator->isCurrentStep($step) ? 'true' : 'false' ?>,
                 <?php endforeach; ?>
+                init() {
+                    this.currentStep = Alpine.store('step').currentStep;
+                    Livewire.on('stepChange', (stepCode) => {
+                        this.currentStep = stepCode;
+                        <?php foreach ($stepNavigator->getSteps() as $step): ?>
+                        this.<?= $step->getCode() ?> = '<?= $step->getCode() ?>' === stepCode;
+                        <?php endforeach; ?>
+                    });
+                }
             }));
         });
     </script>

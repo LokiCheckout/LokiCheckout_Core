@@ -6,10 +6,6 @@
         <observer name="Yireo_LokiCheckout::enableCheckout" instance="Yireo\LokiCheckout\Observer\EnableCheckout"/>
     </event>
 
-    <event name="hyva_config_generate_before">
-        <observer name="Yireo_LokiCheckout::registerModuleForHyvaConfig" instance="Yireo\LokiCheckout\Observer\RegisterModuleForHyvaConfig"/>
-    </event>
-
     <event name="view_block_abstract_to_html_before">
         <observer name="Yireo_LokiCheckout::assignAdditionalBlockVariables" instance="Yireo\LokiCheckout\Observer\AssignAdditionalBlockVariables"/>
     </event>

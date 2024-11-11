@@ -33,4 +33,24 @@ trait ParentBehaviour
     {
         return (int)$this->getParent()->getMaxLength();
     }
+
+    public function hasMin(): bool
+    {
+        return !empty($this->getParent()->getMin());
+    }
+
+    public function getMin(): string
+    {
+        return (string)$this->getParent()->getMin();
+    }
+
+    public function hasMax(): bool
+    {
+        return !empty($this->getParent()->getMax());
+    }
+
+    public function getMax(): string
+    {
+        return (string)$this->getParent()->getMax();
+    }
 }

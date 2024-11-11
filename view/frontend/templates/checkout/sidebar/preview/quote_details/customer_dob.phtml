@@ -1,0 +1,17 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\ViewModel\QuoteDetails;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var QuoteDetails $quoteDetails */
+$quoteDetails = $viewModelFactory->create(QuoteDetails::class);
+?>
+<div>
+    <span><?= __('Date of birth') ?></span>:
+    <?= $quoteDetails->getDob() ?>
+</div>
+

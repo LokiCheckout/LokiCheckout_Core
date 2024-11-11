@@ -17,7 +17,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
                         detail: { method: this.value}
                     }));
 
-                    this.$component.call('setValue', this.value);
+                    this.$component(this).call('setValue', this.value);
                 });
             }
         }));

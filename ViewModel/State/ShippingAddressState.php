@@ -11,7 +11,7 @@ class ShippingAddressState implements AddressStateInterface
 {
     public function __construct(
         private CheckoutSession $checkoutSession,
-        private ScopeConfigInterface $scopeConfig
+        private ScopeConfigInterface $scopeConfig,
     ) {
     }
 
@@ -22,8 +22,10 @@ class ShippingAddressState implements AddressStateInterface
 
     public function save(string $attributeCode, string $value)
     {
-        $this->getShippingAddress()->setData($attributeCode, $value);
-        $this->checkoutSession->getQuote()->save();
+        $address = $this->getShippingAddress();
+        $address->setData($attributeCode, $value);
+        $address->getResource()->save($address);
+        //$this->checkoutSession->getQuote()->save();
     }
 
     public function getQuote(): Quote

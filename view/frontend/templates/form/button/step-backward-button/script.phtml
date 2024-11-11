@@ -11,6 +11,7 @@ $magewire = $block->getComponent();
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+            wireId: '<?= $magewire->id ?>',
             locked: true,
             init() {
             }

@@ -162,6 +162,17 @@
             </block>
 
             <block
+                name="loki.checkout.shipping-step.shipping-address.fax" as="fax"
+                ifconfig="customer/address/fax_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Fax
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
                 name="loki.checkout.shipping-step.shipping-address.vat_id" as="vat_id"
                 ifconfig="customer/address/taxvat_show"
                 template="Yireo_LokiCheckout::form/field.phtml">

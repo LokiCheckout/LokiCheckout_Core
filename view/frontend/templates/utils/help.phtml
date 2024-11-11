@@ -1,0 +1,39 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+
+/** @var Template $block */
+/** @var BlockCssClass $blockCss */
+$size = (int)$block->getSize();
+if (!$size) {
+    $size = 20;
+}
+
+$text = $block->getAncestorBlock()->getHelpText();
+?>
+<div class="relative" x-data="YireoLokiCheckoutUtilsHelp">
+    <button type="button" @click="toggle">
+        <img alt="<?= __('Show help') ?>"
+             src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/help.svg'); ?>"
+             class="<?= $blockCss('help m-2') ?>"
+             width="<?= $size ?>"
+             height="<?= $size ?>">
+    </button>
+
+    <div x-show="show" class="absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white">
+        <?= $text ?>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('YireoLokiCheckoutUtilsHelp', () => ({
+                show: false,
+                toggle() {
+                    this.show = !this.show;
+                }
+            }));
+        });
+    </script>
+</div>

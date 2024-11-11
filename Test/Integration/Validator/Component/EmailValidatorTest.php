@@ -10,7 +10,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Email;
+use Yireo\LokiCheckout\Magewire\Checkout\Quote\Email;
 use Yireo\LokiCheckout\Validator\Component\EmailValidator;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;

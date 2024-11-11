@@ -153,6 +153,17 @@
             </block>
 
             <block
+                name="loki.checkout.shipping-step.billing-address.fax" as="fax"
+                ifconfig="customer/address/fax_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Fax
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
                 name="loki.checkout.billing-step.billing-address.vat_id" as="vat_id"
                 ifconfig="customer/address/taxvat_show"
                 template="Yireo_LokiCheckout::form/field.phtml">

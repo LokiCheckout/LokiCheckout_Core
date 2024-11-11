@@ -23,6 +23,12 @@ $magewire = $this->getComponent();
     <?php if ($magewire->hasMaxLength()): ?>
         maxlength="<?= $magewire->getMaxLength() ?>"
     <?php endif ?>
+    <?php if ($magewire->hasMin()): ?>
+        min="<?= $magewire->getMin() ?>"
+    <?php endif ?>
+    <?php if ($magewire->hasMax()): ?>
+        max="<?= $magewire->getMax() ?>"
+    <?php endif ?>
     <?php if ($magewire->hasErrors()): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>

@@ -6,10 +6,10 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Checkout\Model\Type\Onepage;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
-use Magento\Framework\Exception\PaymentException;
-use Magento\Framework\UrlFactory;
-use Magento\Quote\Model\QuoteManagement;
+use Magento\Payment\Helper\Data as PaymentHelper;
+use Magento\Sales\Api\OrderRepositoryInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Step\FinalStep\RedirectUrl;
 use Yireo\LokiCheckout\Validator\QuoteValidator;
 
 class FinalStep
@@ -17,9 +17,11 @@ class FinalStep
     public function __construct(
         private QuoteValidator $quoteValidator,
         private CheckoutSession $checkoutSession,
+        private RedirectUrl $redirectUrl,
         private Onepage $onepage,
         private EventManager $eventManager,
-        private UrlFactory $urlFactory
+        private OrderRepositoryInterface $orderRepository,
+        private PaymentHelper $paymentHelper
     ) {
     }
 
@@ -58,22 +60,19 @@ class FinalStep
         $this->onepage->setQuote($quote); // @todo: Is this needed?
         $this->onepage->saveOrder();
 
-        $this->dispatchSaveOrderEvent();
-        $source->redirect($this->getRedirectUrl());
-
-        return true;
-    }
-
-    private function getRedirectUrl(): string
-    {
-        $redirectUrl = (string)$this->checkoutSession->getRedirectUrl();
-        if (!empty($redirectUrl)) {
-            return $redirectUrl;
+        try {
+            $order = $this->orderRepository->get($this->checkoutSession->getLastOrderId());
+        } catch(\Exception $e) {
+            $order = null;
         }
 
-        $url = $this->urlFactory->create();
+        $paymentCode = $order->getPayment()->getMethod();
+        $paymentMethod = $this->paymentHelper->getMethodInstance($paymentCode);
 
-        return $url->getUrl('checkout/onepage/success');
+        $this->dispatchSaveOrderEvent();
+        $source->redirect($this->redirectUrl->get($paymentMethod, $order));
+
+        return true;
     }
 
     private function dispatchSaveOrderEvent()

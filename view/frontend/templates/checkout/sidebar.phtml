@@ -19,7 +19,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <aside <?= $blockAttribute() ?> class="<?= $blockCss('my-2 order-2') ?>">
-    <?= $block->getChildHtml('login'); ?>
+    <?= $block->getChildHtml('begin'); ?>
 
     <div class="loki-checkout-sidebar-summary card p-8 mb-8">
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Summary']) ?>
@@ -39,4 +39,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
         <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Order Preview']) ?>
         <?= $block->getChildHtml('preview') ?>
     </div>
+
+    END
+    <?= $block->getChildHtml('end'); ?>
 </aside>
