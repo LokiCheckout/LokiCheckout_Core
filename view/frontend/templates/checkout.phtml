@@ -24,7 +24,7 @@ $currentStep = $magewire->currentStep;
         style="--checkout-layout: minmax(0px,2fr) minmax(0px,1fr);"
     >
         <div class="relative">
-            <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+            <?= $blockRenderer->html('loki.checkout.utils.loader-overlay', $block) ?>
             <?= $block->getChildHtml('steps'); ?>
         </div>
 

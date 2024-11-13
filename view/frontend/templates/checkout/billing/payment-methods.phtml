@@ -18,7 +18,7 @@ $paymentMethods = $magewire->getPaymentMethods();
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('relative') ?>" x-data="<?= $magewire->getJsName() ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Payment Methods']) ?>
+    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
     <ul>
         <?php foreach ($paymentMethods as $paymentMethod): ?>
             <?php $code = $paymentMethod->getCode(); ?>
@@ -33,14 +33,12 @@ $paymentMethods = $magewire->getPaymentMethods();
 
                     <span class="ml-4"><?= $paymentMethod->getTitle() ?></span>
 
-                    <?= $blockRenderer->create('checkout/billing/payment-methods/icon.phtml', $block)
-                        ->setCode($code)
-                        ->toHtml() ?>
+                    <?= $blockRenderer->html('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
 
                     <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
-                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.form',
+                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.form', $block,
                             ['method' => $code]) ?>
-                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional', ['method' => $code]) ?>
+                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional', $block, ['method' => $code]) ?>
                     </div>
                 </li>
             </label>

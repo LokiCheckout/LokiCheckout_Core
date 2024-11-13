@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var Component|FormFieldInterface $magewire */
+/** @var BlockCssClass $blockCss */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var BlockRenderer $blockRenderer */
+/** @var BlockAttribute $blockAttribute */
+
+if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
+    echo '<div style="display:none">skipped</div>';
+
+    return;
+}
+
+if (false === $magewire->isVisible()) {
+    echo '<div style="display:none">not visible</div>';
+
+    return;
+}
+?>
+<fieldset id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?>
+     class="<?= $blockCss('field w-auto relative') ?>">
+    <?= $block->getChildHtml() ?>
+</fieldset>

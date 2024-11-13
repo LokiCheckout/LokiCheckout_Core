@@ -7,6 +7,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\BlockCssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -14,11 +15,13 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockCssClass $blockCss */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
+/** @var SortedChildBlocks $sortedChildBlocks */
+$sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $blockCss() ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <div>
-            <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Select your Shipping Address']) ?>
+            <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
 
             <select
                 wire:loading.attr="aria-busy"
@@ -37,15 +40,11 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
     <?php endif; ?>
 
     <?php if ($magewire->newAddress): ?>
-        <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'New Shipping Address']) ?>
+        <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'New Shipping Address']) ?>
 
         <div class="grid grid-cols-12 gap-8">
-            <?php foreach ($block->getChildNames() as $childName): ?>
-                <?php $childBlock = $block->getLayout()->getBlock($childName) ?>
-                <?php $colSpan = $childBlock->getData('grid-col-span') ?? 6 ?>
-                <div class="col-span-<?= $colSpan ?>">
-                    <?= $childBlock->toHtml() ?>
-                </div>
+            <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>
+                <?= $childBlock->toHtml() ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

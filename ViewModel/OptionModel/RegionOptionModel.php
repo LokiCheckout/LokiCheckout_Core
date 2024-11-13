@@ -6,20 +6,19 @@ use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionColl
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 class RegionOptionModel implements ArgumentInterface, OptionModelInterface
 {
     public function __construct(
-        private readonly CheckoutState $checkoutState,
         private readonly RegionCollectionFactory $regionCollectionFactory,
     ) {
     }
 
     public function getOptions(Component $component): array
     {
-        // @todo: Switch between shipping and billing
-        $countryId = $this->checkoutState->getQuote()->getShippingAddress()->getCountryId();
+        /** @var AddressFieldComponent $component */
+        $countryId = $component->getAddressState()->load('country_id');
         if (empty($countryId)) {
             return [];
         }

@@ -4,6 +4,11 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 trait ParentBehaviour
 {
+    public function isDisabled(): bool
+    {
+        return (bool)$this->getParent()->getDisabled();
+    }
+
     public function getNameInLayout(): string
     {
         return $this->getParent()->getNameInLayout();

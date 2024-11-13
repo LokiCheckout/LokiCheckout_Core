@@ -17,6 +17,9 @@ $magewire = $this->getComponent();
     x-ref="field"
     x-model="value"
     x-on:change="submit"
+    <?php if ($magewire->isDisabled()): ?>
+        disabled="disabled"
+    <?php endif ?>
     <?php if ($magewire->hasMinLength()): ?>
         minlength="<?= $magewire->getMinLength() ?>"
     <?php endif ?>

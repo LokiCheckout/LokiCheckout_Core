@@ -21,7 +21,11 @@
                     <argument name="option_model" xsi:type="object">
                         Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">2</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-2</item>
+                        </item>
+                    </argument>
                     <argument name="max_length" xsi:type="number">6</argument>
                 </arguments>
             </block>
@@ -33,7 +37,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Firstname
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">5</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-5</item>
+                        </item>
+                    </argument>
                 </arguments>
             </block>
 
@@ -55,7 +63,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Lastname
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">5</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-5</item>
+                        </item>
+                    </argument>
                     <argument name="field_label" xsi:type="string">Surname</argument>
                 </arguments>
             </block>
@@ -68,6 +80,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Suffix
                     </argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-2</item>
+                        </item>
+                    </argument>
                 </arguments>
             </block>
 
@@ -78,7 +95,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street0
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-12</item>
+                        </item>
+                    </argument>
                     <argument name="field_label" xsi:type="string">Street</argument>
                 </arguments>
 
@@ -96,7 +117,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street1
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-12</item>
+                        </item>
+                    </argument>
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
@@ -114,7 +139,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street2
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-12</item>
+                        </item>
+                    </argument>
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
@@ -132,7 +161,11 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Street3
                     </argument>
-                    <argument name="grid-col-span" xsi:type="number">12</argument>
+                    <argument name="css_classes" xsi:type="array">
+                        <item name="block" xsi:type="array">
+                            <item name="col-span" xsi:type="string">col-span-12</item>
+                        </item>
+                    </argument>
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
@@ -150,11 +183,6 @@
                     <argument name="magewire" xsi:type="object">
                         Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode
                     </argument>
-                    <!--
-                    <argument name="validators" xsi:type="array">
-                        <item name="postcode_nl" xsi:type="string">postcode_nl</item>
-                    </argument>
-                    -->
                 </arguments>
             </block>
 

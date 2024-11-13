@@ -16,11 +16,15 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     public function boot(): void
     {
-        $this->value = trim((string)$this->addressState->load($this->getFieldName()));
-
+        $this->loadValue();
         if ($this->request->isPreceding() && !empty($this->value)) {
             $this->valid = $this->validate();
         }
+    }
+
+    protected function loadValue(): void
+    {
+        $this->value = trim((string)$this->addressState->load($this->getFieldName()));
     }
 
     public function booted(): void
@@ -64,15 +68,19 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return 'unknown';
     }
 
-    public function beforeSave($value): void
+    protected function beforeSave($value): void
     {
+    }
+
+    protected function saveValue($value)
+    {
+        $this->addressState->save($this->getFieldName(), $value);
     }
 
     public function save($value): void
     {
         $this->beforeSave($value);
-
-        $this->addressState->save($this->getFieldName(), $value);
+        $this->saveValue($value);
 
         if ($this instanceof ShippingAddressFieldComponentInterface) {
             $this->emit('shippingAddress'.$this->snakeToCamel($this->getFieldName()).'Save');
@@ -87,7 +95,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->afterSave($value);
     }
 
-    public function afterSave($value): void
+    protected function afterSave($value): void
     {
     }
 

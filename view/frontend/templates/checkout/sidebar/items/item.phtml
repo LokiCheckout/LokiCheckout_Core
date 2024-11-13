@@ -49,10 +49,10 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
             <div>
                 <input aria-label="<?= __('Change quantity') ?>" title="<?= __('Quantity') ?>" type="number" x-model="qty" min="0" max="1000000"/>
                 <button class="m-2" title="Update item quantity" @click="updateItemQty">
-                    <?= $blockRenderer->render('Yireo_LokiCheckout::utils/save.phtml') ?>
+                    <?= $blockRenderer->html('Yireo_LokiCheckout::utils/save.phtml') ?>
                 </button>
                 <button class="m-2" title="Remove item" @click="removeItem">
-                    <?= $blockRenderer->render('Yireo_LokiCheckout::utils/trash.phtml') ?>
+                    <?= $blockRenderer->html('Yireo_LokiCheckout::utils/trash.phtml') ?>
                 </button>
             </div>
         </div>

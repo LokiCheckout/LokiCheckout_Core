@@ -22,8 +22,8 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('relative w-full') ?>" x-data="<?= $magewire->getJsName() ?>">
-    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Shipping Methods']) ?>
+    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay', $block) ?>
+    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
     <div>
         <?php foreach ($shippingMethods as $shippingMethod): ?>

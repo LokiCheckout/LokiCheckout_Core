@@ -18,7 +18,7 @@ $enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
 <div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
-    <?= $blockRenderer->html('loki.checkout.generic.title', ['title' => 'Billing Address']) ?>
+    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>
     <div class="card mb-8">

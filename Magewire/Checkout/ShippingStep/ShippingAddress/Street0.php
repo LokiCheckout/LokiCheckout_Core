@@ -7,4 +7,5 @@ use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterfac
 
 class Street0 extends GenericStreetComponent implements ShippingAddressFieldComponentInterface
 {
+
 }

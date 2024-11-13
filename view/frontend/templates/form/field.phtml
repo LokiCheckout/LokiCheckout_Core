@@ -31,25 +31,25 @@ if (false === $magewire->isVisible()) {
 <div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?>
      class="<?= $blockCss('field w-auto relative') ?> <?= $magewire->isRequired(
      ) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
-    <label for="<?= $magewire->getElementId() ?>-field" class="inline-block mb-1.5">
+    <label for="<?= $magewire->getElementId() ?>-field" class="<?= $blockCss('inline-block mb-1.5', 'label') ?>">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>
-    <div class="relative space-y-2 flex">
-        <?= $blockRenderer->render($magewire->getFieldTemplate(), $block) ?>
+    <div class="<?= $blockCss('relative space-y-2 flex', 'field') ?>">
+        <?= $blockRenderer->html($magewire->getFieldTemplate(), $block) ?>
 
-        <div wire:loading x-cloak class="field-loader absolute inset-y-0 right-0 pt-1 pr-2">
+        <div wire:loading x-cloak class="<?= $blockCss('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki.checkout.utils.loader-small') ?>
         </div>
 
         <?php if ($block->getHelpText()): ?>
             <div x-cloak class="field-help">
-                <?= $blockRenderer->render('utils/help.phtml', $block) ?>
+                <?= $blockRenderer->html('utils/help.phtml', $block) ?>
             </div>
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->get('loki.checkout.utils.errors')->setErrors($magewire->getErrors())->toHtml() ?>
-    <?= $blockRenderer->render('form/field/text/script.phtml', $block) ?>
-    <?= $blockRenderer->html($magewire->getNameInLayout().'.additional_script', ['component' => $magewire]) ?>
+    <?= $blockRenderer->html('loki.checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->html('form/field/text/script.phtml', $block) ?>
+    <?= $blockRenderer->html($magewire->getNameInLayout().'.additional_script', $block, ['component' => $magewire]) ?>
 </div>

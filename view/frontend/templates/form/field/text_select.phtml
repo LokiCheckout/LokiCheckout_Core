@@ -17,8 +17,8 @@ $magewire->setOptionModel($optionModel);
 
 if (count($optionModel->getOptions($magewire)) > 0) {
     $block->setOptionModel($optionModel);
-    echo $blockRenderer->render('form/field/select.phtml', $block);
+    echo $blockRenderer->html('form/field/select.phtml', $block);
     return;
 }
 
-echo $blockRenderer->render('form/field/text.phtml', $block);
+echo $blockRenderer->html('form/field/text.phtml', $block);
