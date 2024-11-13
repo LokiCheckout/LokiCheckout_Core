@@ -14,27 +14,27 @@ class CssClass
         return $this;
     }
 
-    public function __invoke(string $defaultCss = '', string $node = 'block'): string
+    public function __invoke(string $defaultCss = '', string $scope = 'block'): string
     {
         $cssClasses = $this->getDefaultCssClasses();
         if ($defaultCss) {
-            $cssClasses[$node]['inline'] = $defaultCss;
+            $cssClasses[$scope]['inline'] = $defaultCss;
         }
 
         // @todo: Document how to overload this in XML layout
         $cssClasses = array_merge($cssClasses, (array)$this->block->getData('css_classes'));
-        if (!isset($cssClasses[$node])) {
-            $cssClasses[$node] = [];
+        if (!isset($cssClasses[$scope])) {
+            $cssClasses[$scope] = [];
         }
 
-        if ($node === 'block') {
+        if ($scope === 'block') {
             $nameInLayout = $this->block->getNameInLayout();
             $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
-            $cssClasses[$node]['blockClass'] = $blockClass;
+            $cssClasses[$scope]['blockClass'] = $blockClass;
         }
 
         $css = '';
-        foreach ($cssClasses[$node] as $cssClassValue) {
+        foreach ($cssClasses[$scope] as $cssClassValue) {
             $css .= ' ' . $cssClassValue;
         }
 
