@@ -5,19 +5,19 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('') ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('') ?>">
     <div class="mb-8">
         <?= $block->getChildHtml('email') ?>
     </div>

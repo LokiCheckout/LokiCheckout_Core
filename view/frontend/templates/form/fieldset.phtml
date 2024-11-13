@@ -6,12 +6,12 @@ use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
@@ -29,6 +29,6 @@ if (false === $magewire->isVisible()) {
 }
 ?>
 <fieldset id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?>
-     class="<?= $blockCss('field w-auto relative') ?>">
+     class="<?= $css('field w-auto relative') ?>">
     <?= $block->getChildHtml() ?>
 </fieldset>

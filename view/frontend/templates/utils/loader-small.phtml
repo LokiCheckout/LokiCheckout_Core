@@ -2,11 +2,11 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 $size = (int)$block->getSize();
 if (empty($size)) {

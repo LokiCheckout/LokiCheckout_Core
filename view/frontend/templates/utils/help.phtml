@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 $size = (int)$block->getSize();
 if (!$size) {
     $size = 20;
@@ -17,7 +17,7 @@ $text = $block->getAncestorBlock()->getHelpText();
     <button type="button" @click="toggle">
         <img alt="<?= __('Show help') ?>"
              src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/help.svg'); ?>"
-             class="<?= $blockCss('help m-2') ?>"
+             class="<?= $css('help m-2') ?>"
              width="<?= $size ?>"
              height="<?= $size ?>">
     </button>

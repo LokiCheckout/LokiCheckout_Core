@@ -5,21 +5,21 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var CouponCode $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('border-b border-gray-200') ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
         <p class="mb-4">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
@@ -38,7 +38,7 @@ $couponCode = $quote->getCouponCode();
                 <img
                     alt="<?= __('Expand') ?>"
                     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
-                    class="<?= $blockCss('') ?> inline-block group-open:rotate-180 transition-transform"
+                    class="<?= $css('') ?> inline-block group-open:rotate-180 transition-transform"
                     width="20"
                     height="20"
                 >

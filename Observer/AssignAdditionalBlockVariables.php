@@ -9,7 +9,7 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
@@ -17,7 +17,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
     public function __construct(
         private readonly Config $config,
         private readonly ViewModelFactory $viewModelFactory,
-        private readonly BlockCssClass $blockCssClass,
+        private readonly CssClass $cssClass,
         private readonly BlockAttribute $blockAttribute,
         private readonly BlockRenderer $blockRenderer
     ) {
@@ -39,7 +39,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
 
         $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('debug', $this->config->isDebug()); // @todo: Is this relevant
-        $block->assign('blockCss', $this->blockCssClass->setBlock($block));
+        $block->assign('css', $this->cssClass->setBlock($block));
         $block->assign('blockAttribute', $this->blockAttribute->setBlock($block));
         $block->assign('blockRenderer', $this->blockRenderer);
     }

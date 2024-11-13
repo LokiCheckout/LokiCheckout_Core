@@ -5,13 +5,13 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var bool $debug */
 /** @var ShippingMethods $magewire */
 /** @var BlockRenderer $blockRenderer */
@@ -21,7 +21,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('relative w-full') ?>" x-data="<?= $magewire->getJsName() ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('relative w-full') ?>" x-data="<?= $magewire->getJsName() ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 

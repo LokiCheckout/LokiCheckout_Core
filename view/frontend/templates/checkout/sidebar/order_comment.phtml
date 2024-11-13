@@ -5,7 +5,7 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\OrderComment;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
@@ -14,13 +14,13 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var PriceFormatter $priceFormatter */
 /** @var OrderComment $magewire */
 /** @var CheckoutState $checkoutState */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss('border-b border-gray-400 my-8') ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('border-b border-gray-400 my-8') ?>">
     <span><?= __('Order Comment') ?> (<?= __('optional') ?></span><br>
     <textarea wire:model="comment" class="form-input w-full"></textarea>
 </div>

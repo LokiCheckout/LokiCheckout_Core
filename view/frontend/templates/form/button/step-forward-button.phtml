@@ -4,11 +4,11 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var StepForwardButton $magewire */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockAttribute $blockAttribute */
 
 if (false === $magewire instanceof StepForwardButton) {
@@ -24,7 +24,7 @@ if (false === $magewire instanceof StepForwardButton) {
 }*/
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> x-data="<?= $magewire->getJsName() ?>">
-    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $blockCss('btn m-2') ?>"
+    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $css('btn m-2') ?>"
             type="button"
             :disabled="!valid"
             :class="valid ? 'btn-primary' : 'disabled:opacity-75'"

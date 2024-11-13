@@ -5,20 +5,20 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingAddress $magewire */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
 /** @var SortedChildBlocks $sortedChildBlocks */
 $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $blockCss() ?>">
+<div <?= $blockAttribute() ?> class="<?= $css() ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <div>
             <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>

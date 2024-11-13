@@ -6,12 +6,12 @@ use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
 use Yireo\LokiCheckout\Util\Block\BlockAttribute;
-use Yireo\LokiCheckout\Util\Block\BlockCssClass;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Component|FormFieldInterface $magewire */
-/** @var BlockCssClass $blockCss */
+/** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 /** @var BlockAttribute $blockAttribute */
@@ -29,16 +29,16 @@ if (false === $magewire->isVisible()) {
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?>
-     class="<?= $blockCss('field w-auto relative') ?> <?= $magewire->isRequired(
+     class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
      ) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
-    <label for="<?= $magewire->getElementId() ?>-field" class="<?= $blockCss('inline-block mb-1.5', 'label') ?>">
+    <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
         <?= $magewire->getFieldLabel() ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki.checkout.utils.required') : '' ?>
     </label>
-    <div class="<?= $blockCss('relative space-y-2 flex', 'field') ?>">
+    <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
         <?= $blockRenderer->html($magewire->getFieldTemplate(), $block) ?>
 
-        <div wire:loading x-cloak class="<?= $blockCss('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
+        <div wire:loading x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki.checkout.utils.loader-small') ?>
         </div>
 
