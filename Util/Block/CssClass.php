@@ -21,7 +21,6 @@ class CssClass
             $cssClasses[$scope]['inline'] = $defaultCss;
         }
 
-        // @todo: Document how to overload this in XML layout
         $cssClasses = array_merge($cssClasses, (array)$this->block->getData('css_classes'));
         if (!isset($cssClasses[$scope])) {
             $cssClasses[$scope] = [];
@@ -32,6 +31,8 @@ class CssClass
             $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
             $cssClasses[$scope]['blockClass'] = $blockClass;
         }
+
+        // @todo $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
 
         $css = '';
         foreach ($cssClasses[$scope] as $cssClassValue) {
