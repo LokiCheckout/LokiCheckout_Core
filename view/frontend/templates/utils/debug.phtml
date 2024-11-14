@@ -11,7 +11,7 @@ use Magewirephp\Magewire\Component;
 $component = $block->getComponent();
 $ancestorBlock = $block->getAncestorBlock();
 ?>
-<div x-data="{open:false}" class="float-right">
+<div x-data="{open:false}" class="<?= $css('float-right') ?>">
     <button @click="open = ! open">
         <svg class="svg-icon"
              style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;"

@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 /** @var SortedChildBlocks $sortedChildBlocks */
 $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('grid grid-cols-12 gap-8') ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('grid grid-cols-12 gap-8 mb-8') ?>">
     <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>
         <?= $childBlock->toHtml() ?>
     <?php endforeach; ?>

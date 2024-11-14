@@ -37,7 +37,7 @@ class BlockRenderer
 
         $block->setAncestorBlock($parentBlock);
 
-        if ($parentBlock instanceof AbstractBlock) {
+        if ($parentBlock instanceof AbstractBlock && false === $block->getData('magewire') instanceof Component) {
             $component = $parentBlock->getData('magewire');
             if ($component instanceof Component) {
                 $block->setData('component', $component);

@@ -40,4 +40,5 @@ class PurchaseOrder extends FieldComponent
     {
         return $this->checkoutState->getQuote()->getPayment()->getMethod() === 'purchaseorder';
     }
+
 }

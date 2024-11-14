@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var CssClass $css */
+?>
+<div class="<?= $css('card mb-8') ?>">
+    <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">
+        <input type="checkbox"
+               wire:model="billingAsShipping"
+               wire:loading.attr="aria-busy"
+               wire:loading.class="disabled"
+               id="billing_as_shipping">
+        <span class="<?= $css('pl-2', 'span') ?>">
+            <?= __('My billing and shipping address are the same') ?>
+                </span>
+    </label>
+</div>

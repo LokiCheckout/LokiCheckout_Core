@@ -36,9 +36,16 @@ $paymentMethods = $magewire->getPaymentMethods();
                     <?= $blockRenderer->html('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
 
                     <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
-                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.form', $block,
-                            ['method' => $code]) ?>
-                        <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.'.$code.'.additional', $block, ['method' => $code]) ?>
+                        <?= $blockRenderer->html(
+                            'loki.checkout.billing-step.payment-methods.'.$code.'.form',
+                            $block,
+                            ['method' => $code]
+                        ) ?>
+                        <?= $blockRenderer->html(
+                            'loki.checkout.billing-step.payment-methods.'.$code.'.additional',
+                            $block,
+                            ['method' => $code])
+                        ?>
                     </div>
                 </li>
             </label>

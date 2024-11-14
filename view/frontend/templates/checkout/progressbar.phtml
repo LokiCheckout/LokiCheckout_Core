@@ -29,32 +29,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 >
     <ul class="flex items-center">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
-            <?php $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode(); ?>
-            <li
-                class="step flex items-center aria-[current=step]:font-bold"
-                <?php if ($isActive): ?>
-                    aria-current="step"
-                <?php endif; ?>
-            >
-                <?php if (false === $step->isEnabled()): ?>
-                    <span class="opacity-60 cursor-not-allowed">
-                        <?= $step->getLabel() ?>
-                    </span>
-                <?php elseif (false === $step->isAccessable()): ?>
-                    <span>
-                        <?= $step->getLabel() ?>
-                    </span>
-                <?php else: ?>
-                    <button wire:click="goToStep('<?= $step->getCode() ?>')">
-                        <?= __($step->getLabel()) ?>
-                    </button>
-                <?php endif; ?>
-                <?php if (false === $stepNavigator->isLastStep($step)): ?>
-                    <span class="inline-flex justify-center items-center px-2" aria-hidden="true">
-                        <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
-                    </span>
-                <?php endif; ?>
-            </li>
+            <?= $block->getChildBlock('step')->addData(['step' => $step])->toHtml() ?>
         <?php endforeach; ?>
     </ul>
 

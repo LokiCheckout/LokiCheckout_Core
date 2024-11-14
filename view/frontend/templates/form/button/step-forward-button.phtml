@@ -23,8 +23,8 @@ if (false === $magewire instanceof StepForwardButton) {
     return;
 }*/
 ?>
-<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> x-data="<?= $magewire->getJsName() ?>">
-    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $css('btn m-2') ?>"
+<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
+    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $css('btn m-2', 'button') ?>"
             type="button"
             :disabled="!valid"
             :class="valid ? 'btn-primary' : 'disabled:opacity-75'"

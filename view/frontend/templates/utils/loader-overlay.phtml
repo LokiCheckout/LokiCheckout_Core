@@ -16,6 +16,6 @@ if (empty($size)) {
 <div
     wire:loading.flex
     aria-live="polite"
-    class="z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 flex justify-center items-center">
+    class="<?= $css('z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 flex justify-center items-center') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader', $block, ['size' => $size]) ?>
 </div>

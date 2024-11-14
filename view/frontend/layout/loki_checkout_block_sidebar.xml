@@ -6,36 +6,36 @@
                 <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar</argument>
             </arguments>
 
-            <container name="loki.checkout.sidebar.begin" as="begin" />
+            <block name="loki.checkout.sidebar.summary" as="summary" template="Yireo_LokiCheckout::checkout/sidebar/summary.phtml">
+                <block name="loki.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode
+                        </argument>
+                    </arguments>
 
-            <block name="loki.checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode
-                    </argument>
-                </arguments>
+                    <block name="loki.checkout.sidebar.coupon_code.script" as="script" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code/script.phtml"/>
+                </block>
 
-                <block name="loki.checkout.sidebar.coupon_code.script" as="script" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code/script.phtml"/>
+                <block name="loki.checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items
+                        </argument>
+                    </arguments>
+
+                    <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
+                </block>
+
+                <block name="loki.checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals
+                        </argument>
+                    </arguments>
+                </block>
             </block>
 
-            <block name="loki.checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items
-                    </argument>
-                </arguments>
-
-                <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
-            </block>
-
-            <block name="loki.checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals
-                    </argument>
-                </arguments>
-            </block>
-
-            <container name="loki.checkout.sidebar.preview" as="preview">
+            <block name="loki.checkout.sidebar.preview" as="preview" template="Yireo_LokiCheckout::checkout/sidebar/preview.phtml">
                 <block name="loki.checkout.sidebar.preview.quote_details" as="quote_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">
@@ -79,7 +79,7 @@
                         </argument>
                     </arguments>
                 </block>
-            </container>
+            </block>
 
             <!--
             <block name="loki.checkout.sidebar.order_comment" as="order_comment" template="Yireo_LokiCheckout::checkout/sidebar/order_comment.phtml">
@@ -90,8 +90,6 @@
                 </arguments>
             </block>
             -->
-
-            <container name="loki.checkout.sidebar.end" as="end" htmlTag="div" htmlClass="loki-checkout-sidebar-end card p-8 my-4"/>
         </block>
     </body>
 </page>

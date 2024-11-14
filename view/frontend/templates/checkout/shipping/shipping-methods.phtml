@@ -21,7 +21,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('relative w-full') ?>" x-data="<?= $magewire->getJsName() ?>">
+<div <?= $blockAttribute() ?> class="<?= $css('relative w-full mb-8') ?>" x-data="<?= $magewire->getJsName() ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 

@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
 /** @var AddressFieldComponent $magewire */
+/** @var CssClass $css */
 $fieldBlock = $block->getFieldBlock();
 $magewire = $this->getComponent();
 ?>
@@ -40,5 +42,5 @@ $magewire = $this->getComponent();
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"
-    class="form-input w-full data-[invalid=true]:border-red-500"
+    class="<?= $css('form-input w-full data-[invalid=true]:border-red-500') ?>"
 >

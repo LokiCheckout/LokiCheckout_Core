@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+/** @var BlockAttribute $blockAttribute */
+?>
+<div <?= $blockAttribute() ?> class="<?= $css('loki-checkout-sidebar-summary card p-8 mb-8') ?>">
+    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Order Summary']) ?>
+    <div class="<?= $css('space-y-8', 'inner') ?>">
+        <?= $block->getChildHtml() ?>
+    </div>
+</div>

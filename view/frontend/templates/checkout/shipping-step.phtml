@@ -18,16 +18,14 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div <?= $blockAttribute() ?> class="<?= $css('') ?>">
-    <div class="mb-8">
+    <div class="<?= $css('mb-8', 'email') ?>">
         <?= $block->getChildHtml('email') ?>
     </div>
-    <div class="mb-8">
-        <?= $block->getChildHtml('address-form') ?>
-    </div>
-    <div class="mb-8">
-        <?= $block->getChildHtml('methods') ?>
-    </div>
-    <div class="mb-8 float-right flex">
+
+    <?= $block->getChildHtml('address-form') ?>
+    <?= $block->getChildHtml('shipping-methods') ?>
+
+    <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
         <?= $block->getChildHtml('backward-button') ?>
         <?= $block->getChildHtml('forward-button') ?>
     </div>

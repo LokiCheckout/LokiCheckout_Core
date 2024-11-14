@@ -21,34 +21,18 @@ $billingAsShipping = $magewire->billingAsShipping;
     <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>
-    <div class="card mb-8">
-        <label for="billing_as_shipping">
-            <input type="checkbox"
-                   wire:model="billingAsShipping"
-                   wire:loading.attr="aria-busy"
-                   wire:loading.class="disabled"
-                   id="billing_as_shipping">
-            <span class="pl-2">
-            <?= __('My billing and shipping address are the same') ?>
-                </span>
-        </label>
-    </div>
+        <?= $blockRenderer->html('loki.checkout.billing-step.billing-as-shipping') ?>
     <?php endif; ?>
 
     <?php if ($billingAsShipping): ?>
-        <div class="mb-8">
-            <?= $block->getChildHtml('address-view') ?>
-        </div>
+        <?= $block->getChildHtml('address-view') ?>
     <?php else: ?>
-        <div class="mb-8">
-            <?= $block->getChildHtml('address-form') ?>
-        </div>
+        <?= $block->getChildHtml('address-form') ?>
     <?php endif; ?>
 
-    <div class="mb-8">
-        <?= $block->getChildHtml('methods') ?>
-    </div>
-    <div class="mb-8 float-right flex">
+    <?= $block->getChildHtml('payment-methods') ?>
+
+    <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
         <?= $block->getChildHtml('backward-button') ?>
         <?= $block->getChildHtml('forward-button') ?>
     </div>

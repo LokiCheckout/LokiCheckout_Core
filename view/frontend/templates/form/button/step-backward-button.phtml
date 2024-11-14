@@ -17,11 +17,11 @@ if (false === $magewire instanceof StepBackwardButton) {
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> x-data="<?= $magewire->getJsName() ?>">
-    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $css('btn m-2') ?> <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
+<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?> <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
+    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="<?= $css('btn m-2', 'button') ?> <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
             type="button"
         <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
-            wire:click="execute"
+            wire:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>

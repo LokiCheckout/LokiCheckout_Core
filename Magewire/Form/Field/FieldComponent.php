@@ -102,6 +102,12 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return true; // @doc: Example for overriding this
     }
 
+
+    public function isDisabled(): bool
+    {
+        return false;
+    }
+
     public function getJsValue(): string
     {
         return str_replace("\n", '\n', $this->value); // @todo: Is this good enough?

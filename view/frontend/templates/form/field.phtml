@@ -43,9 +43,7 @@ if (false === $magewire->isVisible()) {
         </div>
 
         <?php if ($block->getHelpText()): ?>
-            <div x-cloak class="field-help">
-                <?= $blockRenderer->html('utils/help.phtml', $block) ?>
-            </div>
+            <?= $blockRenderer->html('utils/help.phtml', $block) ?>
         <?php endif; ?>
     </div>
 

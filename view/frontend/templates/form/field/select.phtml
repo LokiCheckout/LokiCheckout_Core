@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormSelectFieldInterface;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var FormSelectFieldInterface $magewire */
+/** @var CssClass $css */
+
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $magewire->setOptionModel($optionModel);
 ?>
@@ -20,7 +23,7 @@ $magewire->setOptionModel($optionModel);
         aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
-    class="form-select w-full data-[invalid=true]:border-red-500"
+    class="<?= $css('form-select w-full data-[invalid=true]:border-red-500') ?>"
 >
     <?php foreach ($optionModel->getOptions($magewire) as $optionValue => $optionLabel): ?>
     <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>

@@ -1,0 +1,48 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
+use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Util\Block\BlockAttribute;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Progressbar $magewire */
+/** @var StepNavigator $stepNavigator */
+/** @var CssClass $css */
+/** @var BlockAttribute $blockAttribute */
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
+
+$step = $block->getStep();
+$isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
+?>
+<li
+    class="<?= $css('step flex items-center aria-[current=step]:font-bold') ?>"
+    <?php if ($isActive): ?>
+        aria-current="step"
+    <?php endif; ?>
+>
+    <?php if (false === $step->isEnabled()): ?>
+        <span class="<?= $css('opacity-60 cursor-not-allowed', 'disabled') ?>">
+             <?= $step->getLabel() ?>
+        </span>
+    <?php elseif (false === $step->isAccessable()): ?>
+        <span class="<?= $css('', 'enabled') ?>">
+             <?= $step->getLabel() ?>
+        </span>
+    <?php else: ?>
+        <button wire:click="goToStep('<?= $step->getCode() ?>')">
+            <?= __($step->getLabel()) ?>
+        </button>
+    <?php endif; ?>
+    <?php if (false === $stepNavigator->isLastStep($step)): ?>
+        <span class="<?= $css('inline-flex justify-center items-center px-2', 'separator') ?>" aria-hidden="true">
+             <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
+        </span>
+    <?php endif; ?>
+</li>

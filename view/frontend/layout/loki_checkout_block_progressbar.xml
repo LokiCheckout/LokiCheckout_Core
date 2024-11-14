@@ -6,6 +6,7 @@
                 <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Progressbar
                 </argument>
             </arguments>
+            <block name="loki.checkout.progressbar.step" as="step" template="Yireo_LokiCheckout::checkout/progressbar/step.phtml"/>
         </block>
     </body>
 </page>

@@ -8,7 +8,7 @@ class CssClass
 {
     private ?Template $block = null;
 
-    public function setBlock(Template $block): BlockCssClass
+    public function setBlock(Template $block): CssClass
     {
         $this->block = $block;
         return $this;

@@ -13,16 +13,16 @@ if (!$size) {
 
 $text = $block->getAncestorBlock()->getHelpText();
 ?>
-<div class="relative" x-data="YireoLokiCheckoutUtilsHelp">
+<div class="<?= $css('relative') ?>" x-data="YireoLokiCheckoutUtilsHelp" x-cloak>
     <button type="button" @click="toggle">
         <img alt="<?= __('Show help') ?>"
              src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/help.svg'); ?>"
-             class="<?= $css('help m-2') ?>"
+             class="<?= $css('help m-2', 'image') ?>"
              width="<?= $size ?>"
              height="<?= $size ?>">
     </button>
 
-    <div x-show="show" class="absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white">
+    <div x-show="show" class="<?= $css('absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white', 'popup') ?>">
         <?= $text ?>
     </div>
 
