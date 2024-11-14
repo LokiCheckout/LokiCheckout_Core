@@ -103,11 +103,13 @@
                     <argument name="field_label" xsi:type="string">Street</argument>
                 </arguments>
 
+                <!--
                 <block
                     name="loki.checkout.shipping-step.shipping-address.street0.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street0/additional_script.phtml"
                 />
+                -->
             </block>
 
             <block
@@ -125,11 +127,13 @@
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
+                <!--
                 <block
                     name="loki.checkout.shipping-step.shipping-address.street1.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street1/additional_script.phtml"
                 />
+                -->
             </block>
 
             <block
@@ -147,11 +151,13 @@
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
+                <!--
                 <block
                     name="loki.checkout.shipping-step.shipping-address.street2.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street2/additional_script.phtml"
                 />
+                -->
             </block>
 
             <block
@@ -169,11 +175,13 @@
                     <argument name="field_label" xsi:type="string">-</argument>
                 </arguments>
 
+                <!--
                 <block
                     name="loki.checkout.shipping-step.shipping-address.street3.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street3/additional_script.phtml"
                 />
+                -->
             </block>
 
             <block
