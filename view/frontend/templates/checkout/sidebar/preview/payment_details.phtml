@@ -14,6 +14,6 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 <div <?= $blockAttribute() ?> class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
 
-    <span class="text-xl font-bold"><?= __('Payment Details') ?></span><br>
+    <span class="text-xl font-bold"><?= __('Payment Method') ?></span><br>
     <?= $magewire->getHtml() ?>
 </div>

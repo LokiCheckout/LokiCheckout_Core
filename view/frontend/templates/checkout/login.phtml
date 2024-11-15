@@ -23,7 +23,7 @@ $isLoggedIn = $customerSession->isLoggedIn();
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
     <?php else: ?>
-        <a href="/customer/account">Login</a>
+        <a href="/customer/account"><?= __('Sign In') ?></a>
     <?php endif; ?>
     <?= $block->getChildHtml() ?>
 </div>

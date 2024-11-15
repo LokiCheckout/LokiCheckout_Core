@@ -27,7 +27,7 @@
                 <argument name="magewire" xsi:type="object" shared="false">
                     Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton
                 </argument>
-                <argument name="button_label" xsi:type="string">Proceed to review &amp;amp; payments</argument>
+                <argument name="button_label" xsi:type="string">Proceed to Review &amp;amp; Payments</argument>
             </arguments>
             <block
                 name="loki.checkout.shipping-step.forward-button.script" as="script"

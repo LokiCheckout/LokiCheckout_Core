@@ -40,7 +40,7 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
     <?php endif; ?>
 
     <?php if ($magewire->newAddress): ?>
-        <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'New Shipping Address']) ?>
+        <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
 
         <div class="grid grid-cols-12 gap-8">
             <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>

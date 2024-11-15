@@ -11,4 +11,9 @@ class Prefix extends AddressFieldComponent implements FormTextSelectFieldInterfa
     use OptionsBehaviour;
 
     protected array $validators = ['prefix'];
+
+    public function getFieldLabel(): string
+    {
+        return 'Prefix';
+    }
 }
