@@ -52,5 +52,5 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php endforeach; ?>
     </ul>
 
-    <?= $block->getChildHtml('script') ?>
+    <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.script', $block) ?>
 </div>
