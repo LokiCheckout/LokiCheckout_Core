@@ -80,16 +80,6 @@
                     </arguments>
                 </block>
             </block>
-
-            <!--
-            <block name="loki.checkout.sidebar.order_comment" as="order_comment" template="Yireo_LokiCheckout::checkout/sidebar/order_comment.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\Sidebar\OrderComment
-                    </argument>
-                </arguments>
-            </block>
-            -->
         </block>
     </body>
 </page>
