@@ -3,10 +3,19 @@
 namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\CssClassParser\CssClassParserInterface;
 
 class CssClass
 {
     private ?Template $block = null;
+
+    /**
+     * @param CssClassParserInterface[] $cssClassParsers
+     */
+    public function __construct(
+        private array $cssClassParsers = []
+    ) {
+    }
 
     public function setBlock(Template $block): CssClass
     {
@@ -32,7 +41,7 @@ class CssClass
             $cssClasses[$scope]['blockClass'] = $blockClass;
         }
 
-        // @todo $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
+        $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
 
         $css = '';
         foreach ($cssClasses[$scope] as $cssClassValue) {
@@ -55,5 +64,14 @@ class CssClass
         }
 
         return (array)$defaultBlock->getData('css_classes');
+    }
+
+    private function parse(array $cssClasses): array
+    {
+        foreach ($this->cssClassParsers as $cssClassParser) {
+            $cssClasses = $cssClassParser->parse($cssClasses);
+        }
+
+        return $cssClasses;
     }
 }
