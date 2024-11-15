@@ -3,6 +3,13 @@
   "version": "0.0.4",
   "description": "A developer-friendly Magewire-based checkout for Magento 2",
   "type": "magento2-module",
+  "homepage": "https://loki-checkout.com/",
+  "authors": [
+    {
+      "name": "Jisse Reitsma (Yireo)",
+      "email": "jisse@yireo.com"
+    }
+  ],
   "require": {
     "magento/framework": "^103.0",
     "symfony/validator": "^7.1",
