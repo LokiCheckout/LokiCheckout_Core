@@ -51,7 +51,6 @@ $component = $this->getComponent();
                 submit() {
                     this.beforeSubmit();
 
-                    // @doc: When client-side validation fails, the value is not submitted to the server
                     if (false === window.LokiCheckoutValidator.validate(this)) {
                         return false;
                     }

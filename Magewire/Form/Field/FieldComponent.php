@@ -40,8 +40,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function getFieldName(): string
     {
-        // @doc: You can override a field name in your own Component class
-        // @doc: Field name is based upon non-namespaced classname
         $className = static::class;
         $className = str_replace('\Interceptor', '', $className);
         $baseClassname = basename(str_replace('\\', '/', $className));
@@ -64,7 +62,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function getInputType(): string
     {
-        return 'text'; // @doc: Example for overriding this to "email"
+        return 'text';
     }
 
     public function getValue(): string
@@ -99,7 +97,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function isVisible(): bool
     {
-        return true; // @doc: Example for overriding this
+        return true;
     }
 
 

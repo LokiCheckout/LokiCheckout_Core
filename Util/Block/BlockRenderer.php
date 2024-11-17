@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use InvalidArgumentException;
 use Magento\Framework\View\Element\AbstractBlock;
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
@@ -23,7 +22,7 @@ class BlockRenderer
      * @return Template
      * @throws RuntimeException
      */
-    public function get(string $blockIdentifier, ?AbstractBlock $parentBlock = null, array $data = []): AbstractBlock
+    public function get(string $blockIdentifier, ?AbstractBlock $ancestorBlock = null, array $data = []): AbstractBlock
     {
         if (str_ends_with($blockIdentifier, '.phtml')) {
             $block = $this->getBlockFromTemplate($blockIdentifier);
@@ -35,15 +34,15 @@ class BlockRenderer
             throw new RuntimeException((string)__('Unexpected block type "%1"', $blockIdentifier));
         }
 
-        $block->setAncestorBlock($parentBlock);
+        $block->setAncestorBlock($ancestorBlock);
 
-        if ($parentBlock instanceof AbstractBlock && false === $block->getData('magewire') instanceof Component) {
-            $component = $parentBlock->getData('magewire');
+        if ($ancestorBlock instanceof AbstractBlock && false === $block->getData('magewire') instanceof Component) {
+            $component = $ancestorBlock->getData('magewire');
             if ($component instanceof Component) {
                 $block->setData('component', $component);
             }
 
-            $component = $parentBlock->getData('component');
+            $component = $ancestorBlock->getData('component');
             if ($component instanceof Component) {
                 $block->setData('component', $component);
             }
