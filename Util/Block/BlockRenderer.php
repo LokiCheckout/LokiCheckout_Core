@@ -16,9 +16,33 @@ class BlockRenderer
     ) {
     }
 
+    public function getChild(string $blockAlias, AbstractBlock $parentBlock, array $data = []): AbstractBlock
+    {
+        $block = $parentBlock->getChildBlock($blockAlias);
+
+        if (false === $block instanceof AbstractBlock) {
+            throw new RuntimeException((string)__('Unexpected block type "%1"', $blockAlias));
+        }
+
+        $block->setAncestorBlock($parentBlock);
+        $block->addData($data);
+
+        return $block;
+    }
+
+    public function getChildHtml(string $blockAlias, AbstractBlock $parentBlock, array $data = [])
+    {
+        try {
+            return (string)$this->getChild($blockAlias, $parentBlock, $data)?->toHtml();
+        } catch (RuntimeException|InvalidArgumentException $e) {
+            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
+        }
+    }
+
     /**
      * @param string $blockName
-     * @param array $data
+     * @param array  $data
+     *
      * @return Template
      * @throws RuntimeException
      */
@@ -57,7 +81,8 @@ class BlockRenderer
 
     /**
      * @param string $blockName
-     * @param array $data
+     * @param array  $data
+     *
      * @return string
      */
     public function html(string $blockName, ?AbstractBlock $parentBlock = null, array $data = []): string
@@ -65,18 +90,19 @@ class BlockRenderer
         try {
             return (string)$this->get($blockName, $parentBlock, $data)?->toHtml();
         } catch (RuntimeException|InvalidArgumentException $e) {
-            return '<!-- '.$e->getMessage().' -->'; // @todo: Only report this in debug mode
+            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
         }
     }
 
     /**
      * @param string $templateName
+     *
      * @return Template
      */
     private function getBlockFromTemplate(string $templateName): Template
     {
         if (false === strstr($templateName, '::')) {
-            $templateName = 'Yireo_LokiCheckout::'.$templateName;
+            $templateName = 'Yireo_LokiCheckout::' . $templateName;
         }
 
         return $this->layout->createBlock(Template::class)->setTemplate($templateName);
