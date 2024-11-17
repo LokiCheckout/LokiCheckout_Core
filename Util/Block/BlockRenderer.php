@@ -11,6 +11,8 @@ use RuntimeException;
 
 class BlockRenderer
 {
+    private array $counters = [];
+
     public function __construct(
         private LayoutInterface $layout
     ) {
@@ -21,11 +23,27 @@ class BlockRenderer
         $block = $parentBlock->getChildBlock($blockAlias);
 
         if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('Unexpected block type "%1"', $blockAlias));
+            throw new RuntimeException((string)__('No block alias "%1"', $blockAlias));
         }
 
         $block->setAncestorBlock($parentBlock);
         $block->addData($data);
+
+        $nameInLayout = $block->getNameInLayout();
+        if (preg_match('/\.(\d)$/', $nameInLayout, $match)) {
+            $nameInLayout = preg_replace('\.\d$', '', $nameInLayout);
+            $increment = $match[1];
+        } else {
+            $increment = 0;
+        }
+
+        if (isset($this->counters[$nameInLayout])) {
+            $increment++;
+            $block->setNameInLayout($nameInLayout.'.'.$increment);
+            $this->counters[$nameInLayout] = 0;
+        } else {
+            $this->counters[$nameInLayout] = 0;
+        }
 
         return $block;
     }

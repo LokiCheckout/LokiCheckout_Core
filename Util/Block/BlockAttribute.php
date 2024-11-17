@@ -4,6 +4,9 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 
+/**
+ * @deprecated This is done via an observer instead
+ */
 class BlockAttribute
 {
     private ?AbstractBlock $block = null;
