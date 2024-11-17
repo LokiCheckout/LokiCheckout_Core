@@ -113,6 +113,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function getJsName(): string
     {
+        // @todo: Use CamelCaseConvertor instead or even getParentBlock()->getJsId()
         $name = ucwords($this->getNameInLayout(), '_.-');
 
         return preg_replace('#[_.-]+#', '', $name);

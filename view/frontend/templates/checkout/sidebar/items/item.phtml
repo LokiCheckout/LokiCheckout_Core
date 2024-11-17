@@ -43,8 +43,8 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
             </dl>
         </div>
 
-        <?= $block->getChildHtml('actions') ?>
+        <?= $blockRenderer->getChildHtml('actions', $block, ['item' => $item]) ?>
     </div>
 
-    <?= $block->getChildHtml('additional') ?>
+    <?= $blockRenderer->getChildHtml('additional', $block, ['item' => $item]) ?>
 </div>

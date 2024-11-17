@@ -15,7 +15,7 @@ class Items extends Component
     public array|null $items = [];
 
     public function __construct(
-        private CheckoutState $checkoutState,
+        protected CheckoutState $checkoutState,
     ) {
     }
 

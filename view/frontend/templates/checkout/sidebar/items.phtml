@@ -24,10 +24,10 @@ if (empty($magewire->items)) {
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
             <li>
-                <?= $block->getChildBlock('item')->setData([
+                <?= $blockRenderer->getChildHtml('item', $block, [
                     'item' => $item,
                     'component' => $magewire,
-                ])->toHtml() ?>
+                ]) ?>
             </li>
         <?php endforeach; ?>
     </ul>
