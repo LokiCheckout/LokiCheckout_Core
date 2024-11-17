@@ -24,4 +24,13 @@ class Postcode extends AddressFieldComponent
 
         return false === in_array($countryId, $countries);
     }
+
+    public function getFieldLabel(): string
+    {
+        if ($this->addressState->load('country_id') === 'US') {
+            return (string)__('Zipcode');
+        }
+
+        return parent::getFieldLabel();
+    }
 }
