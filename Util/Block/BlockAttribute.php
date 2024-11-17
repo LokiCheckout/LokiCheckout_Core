@@ -23,6 +23,8 @@ class BlockAttribute
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
+            $attributeValue = str_replace('{id}', $this->block->getJsId(), $attributeValue);
+
             $htmlAttribute .= ' '.$attributeName.'="'.$attributeValue.'"';
         }
 

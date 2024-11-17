@@ -23,7 +23,10 @@
                         </argument>
                     </arguments>
 
-                    <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
+                    <block name="loki.checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml">
+                        <container name="loki.checkout.sidebar.items.item.actions" as="actions"/>
+                        <container name="loki.checkout.sidebar.items.item.additional" as="additional"/>
+                    </block>
                 </block>
 
                 <block name="loki.checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
