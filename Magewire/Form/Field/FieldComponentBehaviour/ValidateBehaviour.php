@@ -41,6 +41,6 @@ trait ValidateBehaviour
             $this->validators[] = 'length';
         }
 
-        return array_merge($this->validators, (array)$this->getParent()->getValidators());
+        return array_merge($this->validators, array_values((array)$this->getParent()->getValidators()));
     }
 }
