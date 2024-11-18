@@ -17,10 +17,7 @@ $currentStep = $magewire->currentStep;
 <div  class="<?= $css('space-y-6') ?>">
     <?= $block->getChildBlock('progressbar')->toHtml(); ?>
 
-    <div
-        class="<?= $css('grid grid-cols-1 lg:grid-cols-[var(--checkout-layout)] gap-8', 'grid') ?>"
-        style="--checkout-layout: minmax(0px,2fr) minmax(0px,1fr);"
-    >
+    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-[minmax(0px,2fr)_minmax(0px,1fr)] gap-8', 'grid') ?>">
         <div class="<?= $css('relative', 'grid-steps') ?>">
             <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
             <?= $block->getChildHtml('steps'); ?>
