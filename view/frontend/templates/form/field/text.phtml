@@ -42,5 +42,5 @@ $magewire = $this->getComponent();
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"
-    class="<?= $css('form-input w-full data-[invalid=true]:border-red-500') ?>"
+    class="<?= $css('form-input w-full data-[invalid=true]:border-red-500', 'input') ?>"
 >

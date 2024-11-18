@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Test\Unit\Step;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\TestCase;
+use Yireo\LokiCheckout\Step\FinalStep;
 use Yireo\LokiCheckout\Step\StepInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
@@ -73,6 +74,7 @@ class StepNavigatorTest extends TestCase
         return new StepNavigator(
             $this->createMock(LayoutInterface::class),
             $this->createMock(Session::class),
+            $this->createMock(FinalStep::class),
         );
     }
 

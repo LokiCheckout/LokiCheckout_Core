@@ -26,14 +26,17 @@ class CssClass
     public function __invoke(string $defaultCss = '', string $scope = 'block'): string
     {
         $cssClasses = $this->getDefaultCssClasses();
-        if ($defaultCss) {
-            $cssClasses[$scope]['inline'] = $defaultCss;
-        }
-
-        $cssClasses = array_merge($cssClasses, (array)$this->block->getData('css_classes'));
         if (!isset($cssClasses[$scope])) {
             $cssClasses[$scope] = [];
         }
+
+        $defaultCss = trim($defaultCss);
+        if (!empty($defaultCss)) {
+            $cssClasses[$scope]['inline'] = $defaultCss;
+        }
+
+        $blockCssClasses = (array)$this->block->getData('css_classes');
+        $cssClasses = array_merge_recursive($cssClasses, $blockCssClasses);
 
         if ($scope === 'block') {
             $nameInLayout = $this->block->getNameInLayout();
@@ -45,6 +48,10 @@ class CssClass
 
         $css = '';
         foreach ($cssClasses[$scope] as $cssClassValue) {
+            if (!is_string($cssClassValue)) {
+                $cssClassValue = array_pop($cssClassValue);
+            }
+
             $css .= ' ' . $cssClassValue;
         }
 
@@ -53,7 +60,7 @@ class CssClass
 
     private function getDefaultCssClasses(): array
     {
-        $templateId = preg_replace('/^(.*)::/', '', $this->block->getTemplate());
+        $templateId = preg_replace('/^(.*)::/', '', (string)$this->block->getTemplate());
         $templateId = preg_replace('/\.phtml/', '', $templateId);
         $templateId = str_replace('/', '.', $templateId);
 

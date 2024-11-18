@@ -24,7 +24,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function booted(): void
     {
-        $this->listeners[static::class . '::afterSetValue'] = 'refresh';
+        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
     }
 
     // @todo: Why does this not allow a listener to the trait method validate() directly?
@@ -48,6 +48,13 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     }
 
     abstract public function getFieldLabel(): string;
+
+    public function getFieldData(): array
+    {
+        return [
+            'css_classes' => $this->getParent()->getCssClasses(),
+        ];
+    }
 
     public function getListeners(): array
     {
@@ -78,13 +85,14 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
         if (false === $this->hasErrors()) {
             $this->save($value);
-            $this->emit(static::class . '::afterSetValue');
+            $this->emit(static::class.'::afterSetValue');
         }
     }
 
     public function updatedValue($value)
     {
         $this->setValue($value);
+
         return $value;
     }
 
@@ -122,6 +130,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function getElementId(): string
     {
         $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
+
         return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
     }
 
@@ -141,6 +150,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         }
 
         $this->valid = false;
+
         return false;
     }
 
