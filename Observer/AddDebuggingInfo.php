@@ -11,7 +11,7 @@ use Yireo\LokiCheckout\Factory\ViewModelFactory;
 
 class AddDebuggingInfo implements ObserverInterface
 {
-    const DEBUG_BLOCK = 'loki.checkout.utils.debug';
+    const DEBUG_BLOCK = 'loki-checkout.utils.debug';
 
     public function __construct(
         private readonly Config $config,
@@ -25,7 +25,7 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^loki.checkout/', (string)$block->getNameInLayout()) > 0) {
+        if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
             return;
         }
 

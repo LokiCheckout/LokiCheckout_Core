@@ -10,7 +10,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div  class="<?= $css('loki-checkout-sidebar-summary card p-8 mb-8') ?>">
-    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Order Summary']) ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Order Summary']) ?>
     <div class="<?= $css('space-y-8', 'inner') ?>">
         <?= $block->getChildHtml() ?>
     </div>

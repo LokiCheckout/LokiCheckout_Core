@@ -3,7 +3,7 @@
     <body>
         <block
             ifconfig="checkout/options/enable_guest_checkout_login"
-            name="loki.checkout.login"
+            name="loki-checkout.login"
             template="Yireo_LokiCheckout::checkout/login.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Login

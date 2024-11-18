@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki.checkout.customer.email" as="customer_email"
+            name="loki-checkout.customer.email" as="customer_email"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object" >
@@ -13,7 +13,7 @@
         </block>
 
         <block
-            name="loki.checkout.customer.gender" as="customer_gender"
+            name="loki-checkout.customer.gender" as="customer_gender"
             ifconfig="customer/address/gender_show"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
@@ -27,7 +27,7 @@
         </block>
 
         <block
-            name="loki.checkout.customer.dob" as="customer_dob"
+            name="loki-checkout.customer.dob" as="customer_dob"
             ifconfig="customer/address/dob_show"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>

@@ -16,10 +16,10 @@ $enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
 <div  class="<?= $css('') ?>">
-    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>
-        <?= $blockRenderer->html('loki.checkout.billing-step.billing-as-shipping') ?>
+        <?= $blockRenderer->html('loki-checkout.billing-step.billing-as-shipping') ?>
     <?php endif; ?>
 
     <?php if ($billingAsShipping): ?>

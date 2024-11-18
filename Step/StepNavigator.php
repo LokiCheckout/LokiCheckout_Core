@@ -151,7 +151,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         /** @var Template $stepsBlock */
-        $stepsBlock = $this->layout->getBlock('loki.checkout.steps');
+        $stepsBlock = $this->layout->getBlock('loki-checkout.steps');
         foreach ($stepsBlock->getChildNames() as $childName) {
             $childBlock = $this->layout->getBlock($childName);
             if (false === $childBlock instanceof Template) {

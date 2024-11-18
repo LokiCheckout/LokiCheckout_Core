@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki.checkout.billing-step.address-form"
+            name="loki-checkout.billing-step.address-form"
             template="Yireo_LokiCheckout::checkout/billing/address-form.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object">
@@ -11,7 +11,7 @@
             </arguments>
 
             <block
-                name="loki.checkout.billing-step.billing-address.prefix" as="prefix"
+                name="loki-checkout.billing-step.billing-address.prefix" as="prefix"
                 ifconfig="customer/address/prefix_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -30,7 +30,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.firstname" as="firstname"
+                name="loki-checkout.billing-step.billing-address.firstname" as="firstname"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -45,7 +45,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.middlename" as="middlename"
+                name="loki-checkout.billing-step.billing-address.middlename" as="middlename"
                 ifconfig="customer/address/middlename_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -61,7 +61,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.lastname" as="lastname"
+                name="loki-checkout.billing-step.billing-address.lastname" as="lastname"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -76,7 +76,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.suffix" as="suffix"
+                name="loki-checkout.billing-step.billing-address.suffix" as="suffix"
                 ifconfig="customer/address/suffix_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -92,7 +92,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.street0" as="street0"
+                name="loki-checkout.billing-step.billing-address.street0" as="street0"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -108,7 +108,7 @@
 
                 <!--
                 <block
-                    name="loki.checkout.billing-step.billing-address.street0.additional_script"
+                    name="loki-checkout.billing-step.billing-address.street0.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street0/additional_script.phtml"
                 />
@@ -116,7 +116,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.street1" as="street1"
+                name="loki-checkout.billing-step.billing-address.street1" as="street1"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -132,7 +132,7 @@
 
                 <!--
                 <block
-                    name="loki.checkout.billing-step.billing-address.street1.additional_script"
+                    name="loki-checkout.billing-step.billing-address.street1.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street1/additional_script.phtml"
                 />
@@ -140,7 +140,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.street2" as="street2"
+                name="loki-checkout.billing-step.billing-address.street2" as="street2"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -156,7 +156,7 @@
 
                 <!--
                 <block
-                    name="loki.checkout.billing-step.billing-address.street2.additional_script"
+                    name="loki-checkout.billing-step.billing-address.street2.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street2/additional_script.phtml"
                 />
@@ -164,7 +164,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.street3" as="street3"
+                name="loki-checkout.billing-step.billing-address.street3" as="street3"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -180,7 +180,7 @@
 
                 <!--
                 <block
-                    name="loki.checkout.billing-step.billing-address.street3.additional_script"
+                    name="loki-checkout.billing-step.billing-address.street3.additional_script"
                     as="additional_script"
                     template="Yireo_LokiCheckout::form/field/street3/additional_script.phtml"
                 />
@@ -188,7 +188,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.postcode" as="postcode"
+                name="loki-checkout.billing-step.billing-address.postcode" as="postcode"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -198,7 +198,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.city" as="city"
+                name="loki-checkout.billing-step.billing-address.city" as="city"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -208,7 +208,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.region" as="region"
+                name="loki-checkout.billing-step.billing-address.region" as="region"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -221,7 +221,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.country_id" as="country_id"
+                name="loki-checkout.billing-step.billing-address.country_id" as="country_id"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">
@@ -234,7 +234,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.company" as="company"
+                name="loki-checkout.billing-step.billing-address.company" as="company"
                 ifconfig="customer/address/company_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -245,7 +245,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.telephone" as="telephone"
+                name="loki-checkout.billing-step.billing-address.telephone" as="telephone"
                 ifconfig="customer/address/telephone_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -256,7 +256,7 @@
             </block>
 
             <block
-                name="loki.checkout.shipping-step.billing-address.fax" as="fax"
+                name="loki-checkout.shipping-step.billing-address.fax" as="fax"
                 ifconfig="customer/address/fax_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>
@@ -267,7 +267,7 @@
             </block>
 
             <block
-                name="loki.checkout.billing-step.billing-address.vat_id" as="vat_id"
+                name="loki-checkout.billing-step.billing-address.vat_id" as="vat_id"
                 ifconfig="customer/address/taxvat_show"
                 template="Yireo_LokiCheckout::form/field.phtml">
                 <arguments>

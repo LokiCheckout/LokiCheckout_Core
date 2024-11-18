@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki.checkout.other.agreements" as="agreements"
+            name="loki-checkout.other.agreements" as="agreements"
             ifconfig="checkout/options/enable_agreements"
             template="Yireo_LokiCheckout::checkout/other/agreements.phtml">
             <arguments>
@@ -13,7 +13,7 @@
         </block>
 
                 <block
-            name="loki.checkout.other.newsletter" as="newsletter"
+            name="loki-checkout.other.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
             template="Yireo_LokiCheckout::checkout/other/newsletter.phtml">
             <arguments>

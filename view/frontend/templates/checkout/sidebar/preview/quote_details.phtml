@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div  class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="text-xl font-bold"><?= __('Details') ?></span><br>
     <?= $block->getChildHtml() ?>
 </div>

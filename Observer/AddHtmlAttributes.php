@@ -23,7 +23,7 @@ class AddHtmlAttributes implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^loki.checkout/', (string)$block->getNameInLayout()) > 0) {
+        if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
             return;
         }
 

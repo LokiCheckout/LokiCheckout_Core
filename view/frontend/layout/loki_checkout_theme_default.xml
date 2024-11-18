@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="loki.checkout.steps">
-            <block name="loki.checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
+        <referenceBlock name="loki-checkout.steps">
+            <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\ShippingStep
                     </argument>
                 </arguments>
             </block>
 
-            <block name="loki.checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::checkout/billing-step.phtml">
+            <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::checkout/billing-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\BillingStep
                     </argument>
@@ -17,28 +17,28 @@
             </block>
         </referenceBlock>
 
-        <move element="loki.checkout.login" destination="loki.checkout.sidebar" as="login" before="-"/>
-        <move element="loki.checkout.other.agreements" destination="loki.checkout.sidebar" as="agreements"/>
-        <move element="loki.checkout.other.newsletter" destination="loki.checkout.sidebar" as="newsletter"/>
+        <move element="loki-checkout.login" destination="loki-checkout.sidebar" as="login" before="-"/>
+        <move element="loki-checkout.other.agreements" destination="loki-checkout.sidebar" as="agreements"/>
+        <move element="loki-checkout.other.newsletter" destination="loki-checkout.sidebar" as="newsletter"/>
 
-        <move element="loki.checkout.progressbar" destination="loki.checkout" as="progressbar" />
-        <move element="loki.checkout.sidebar" destination="loki.checkout" as="sidebar"/>
+        <move element="loki-checkout.progressbar" destination="loki-checkout" as="progressbar" />
+        <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
 
-        <move element="loki.checkout.customer.email" destination="loki.checkout.shipping-step" as="email"/>
-        <move element="loki.checkout.customer.dob" destination="loki.checkout.shipping-step.address-form" as="dob"/>
-        <move element="loki.checkout.customer.gender" destination="loki.checkout.shipping-step.address-form" as="gender"/>
+        <move element="loki-checkout.customer.email" destination="loki-checkout.shipping-step" as="email"/>
+        <move element="loki-checkout.customer.dob" destination="loki-checkout.shipping-step.address-form" as="dob"/>
+        <move element="loki-checkout.customer.gender" destination="loki-checkout.shipping-step.address-form" as="gender"/>
 
-        <move element="loki.checkout.shipping-step.shipping-as-billing" destination="loki.checkout.shipping-step" as="shipping-as-billing"/>
-        <move element="loki.checkout.shipping-step.backward-button" destination="loki.checkout.shipping-step" as="backward-button"/>
-        <move element="loki.checkout.shipping-step.forward-button" destination="loki.checkout.shipping-step" as="forward-button"/>
-        <move element="loki.checkout.shipping-step.address-form" destination="loki.checkout.shipping-step" as="address-form"/>
-        <move element="loki.checkout.shipping-step.shipping-methods" destination="loki.checkout.shipping-step" as="shipping-methods"/>
+        <move element="loki-checkout.shipping-step.shipping-as-billing" destination="loki-checkout.shipping-step" as="shipping-as-billing"/>
+        <move element="loki-checkout.shipping-step.backward-button" destination="loki-checkout.shipping-step" as="backward-button"/>
+        <move element="loki-checkout.shipping-step.forward-button" destination="loki-checkout.shipping-step" as="forward-button"/>
+        <move element="loki-checkout.shipping-step.address-form" destination="loki-checkout.shipping-step" as="address-form"/>
+        <move element="loki-checkout.shipping-step.shipping-methods" destination="loki-checkout.shipping-step" as="shipping-methods"/>
 
-        <move element="loki.checkout.billing-step.billing-as-shipping" destination="loki.checkout.billing-step" as="billing-as-shipping"/>
-        <move element="loki.checkout.billing-step.backward-button" destination="loki.checkout.billing-step" as="backward-button"/>
-        <move element="loki.checkout.billing-step.forward-button" destination="loki.checkout.billing-step" as="forward-button"/>
-        <move element="loki.checkout.billing-step.address-view" destination="loki.checkout.billing-step" as="address-view"/>
-        <move element="loki.checkout.billing-step.address-form" destination="loki.checkout.billing-step" as="address-form"/>
-        <move element="loki.checkout.billing-step.payment-methods" destination="loki.checkout.billing-step" as="payment-methods"/>
+        <move element="loki-checkout.billing-step.billing-as-shipping" destination="loki-checkout.billing-step" as="billing-as-shipping"/>
+        <move element="loki-checkout.billing-step.backward-button" destination="loki-checkout.billing-step" as="backward-button"/>
+        <move element="loki-checkout.billing-step.forward-button" destination="loki-checkout.billing-step" as="forward-button"/>
+        <move element="loki-checkout.billing-step.address-view" destination="loki-checkout.billing-step" as="address-view"/>
+        <move element="loki-checkout.billing-step.address-form" destination="loki-checkout.billing-step" as="address-form"/>
+        <move element="loki-checkout.billing-step.payment-methods" destination="loki-checkout.billing-step" as="payment-methods"/>
     </body>
 </page>

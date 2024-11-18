@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 #[AppArea('frontend')]
 class PrefixTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki.checkout.shipping-step.shipping-address.prefix';
+    const BLOCK_NAME = 'loki-checkout.shipping-step.shipping-address.prefix';
 
     use CartFixture;
     use ProductFixture;

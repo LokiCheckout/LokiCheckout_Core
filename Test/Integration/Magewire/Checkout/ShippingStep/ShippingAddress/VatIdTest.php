@@ -13,7 +13,7 @@ use Magento\TestFramework\Fixture\Config;
 class VatIdTest extends LokiTestCase
 {
 
-    const BLOCK_NAME = 'loki.checkout.shipping-step.shipping-address.vat_id';
+    const BLOCK_NAME = 'loki-checkout.shipping-step.shipping-address.vat_id';
 
     use CartFixture;
     use ProductFixture;

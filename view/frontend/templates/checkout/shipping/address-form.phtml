@@ -19,7 +19,7 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 <div  class="<?= $css('mb-8') ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <div>
-            <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
+            <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
 
             <select
                 wire:loading.attr="aria-busy"
@@ -38,7 +38,7 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
     <?php endif; ?>
 
     <?php if ($magewire->newAddress): ?>
-        <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
+        <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
 
         <div class="grid grid-cols-12 gap-8">
             <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>

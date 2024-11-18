@@ -11,7 +11,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 #[AppArea('frontend')]
 class FirstnameTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki.checkout.shipping-step.shipping-address.firstname';
+    const BLOCK_NAME = 'loki-checkout.shipping-step.shipping-address.firstname';
 
     use CartFixture;
     use ProductFixture;

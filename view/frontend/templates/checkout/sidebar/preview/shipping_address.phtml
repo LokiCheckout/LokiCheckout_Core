@@ -11,7 +11,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 ?>
 <div  class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
 
     <span class="text-xl font-bold"><?= __('Shipping Address') ?></span><br>
     <address><?= $magewire->getHtml() ?></address>

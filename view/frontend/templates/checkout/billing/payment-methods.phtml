@@ -15,8 +15,8 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
 <div  class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>">
-    <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
     <ul>
         <?php foreach ($paymentMethods as $paymentMethod): ?>
             <?php $code = $paymentMethod->getCode(); ?>
@@ -36,12 +36,12 @@ $paymentMethods = $magewire->getPaymentMethods();
 
                     <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
                         <?= $blockRenderer->html(
-                            'loki.checkout.billing-step.payment-methods.'.$code.'.form',
+                            'loki-checkout.billing-step.payment-methods.'.$code.'.form',
                             $block,
                             ['method' => $code]
                         ) ?>
                         <?= $blockRenderer->html(
-                            'loki.checkout.billing-step.payment-methods.'.$code.'.additional',
+                            'loki-checkout.billing-step.payment-methods.'.$code.'.additional',
                             $block,
                             ['method' => $code])
                         ?>
@@ -51,5 +51,5 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php endforeach; ?>
     </ul>
 
-    <?= $blockRenderer->html('loki.checkout.billing-step.payment-methods.script', $block) ?>
+    <?= $blockRenderer->html('loki-checkout.billing-step.payment-methods.script', $block) ?>
 </div>

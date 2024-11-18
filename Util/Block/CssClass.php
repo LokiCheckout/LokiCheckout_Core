@@ -57,7 +57,7 @@ class CssClass
         $templateId = preg_replace('/\.phtml/', '', $templateId);
         $templateId = str_replace('/', '.', $templateId);
 
-        $defaultBlockName = 'loki.checkout.defaults.'.$templateId;
+        $defaultBlockName = 'loki-checkout.defaults.'.$templateId;
         $defaultBlock = $this->block->getLayout()->getBlock($defaultBlockName);
         if (empty($defaultBlock)) {
             return [];

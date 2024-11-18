@@ -2,12 +2,12 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki.checkout.shipping-step.shipping-as-billing"
+            name="loki-checkout.shipping-step.shipping-as-billing"
             template="Yireo_LokiCheckout::checkout/shipping/shipping-as-billing.phtml"
         />
 
         <block
-            name="loki.checkout.shipping-step.backward-button"
+            name="loki-checkout.shipping-step.backward-button"
             template="Yireo_LokiCheckout::form/button/step-backward-button.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object" shared="false">
@@ -16,12 +16,12 @@
                 <argument name="button_label" xsi:type="string">Back to billing</argument>
             </arguments>
             <block
-                name="loki.checkout.shipping-step.backward-button.script" as="script"
+                name="loki-checkout.shipping-step.backward-button.script" as="script"
                 template="Yireo_LokiCheckout::form/button/step-backward-button/script.phtml"/>
         </block>
 
         <block
-            name="loki.checkout.shipping-step.forward-button"
+            name="loki-checkout.shipping-step.forward-button"
             template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object" shared="false">
@@ -30,7 +30,7 @@
                 <argument name="button_label" xsi:type="string">Proceed to Review &amp;amp; Payments</argument>
             </arguments>
             <block
-                name="loki.checkout.shipping-step.forward-button.script" as="script"
+                name="loki-checkout.shipping-step.forward-button.script" as="script"
                 template="Yireo_LokiCheckout::form/button/step-forward-button/script.phtml"/>
         </block>
     </body>

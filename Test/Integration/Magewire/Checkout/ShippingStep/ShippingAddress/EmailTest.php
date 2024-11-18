@@ -11,7 +11,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 #[AppArea('frontend')]
 class EmailTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki.checkout.shipping-step.email';
+    const BLOCK_NAME = 'loki-checkout.shipping-step.email';
 
     use CartFixture;
     use ProductFixture;

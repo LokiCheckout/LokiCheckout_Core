@@ -40,7 +40,7 @@ $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
     <?php endif; ?>
     <?php if (false === $stepNavigator->isLastStep($step)): ?>
         <span class="<?= $css('inline-flex justify-center items-center px-2', 'separator') ?>" aria-hidden="true">
-             <?= $block->getBlockHtml('loki.checkout.utils.separator') ?>
+             <?= $block->getBlockHtml('loki-checkout.utils.separator') ?>
         </span>
     <?php endif; ?>
 </li>
