@@ -28,11 +28,6 @@ abstract class QuoteFieldComponent extends FieldComponent
         }
     }
 
-    public function booted(): void
-    {
-        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
-    }
-
     public function getFieldLabel(): string
     {
         $parentBlock = $this->getParent();

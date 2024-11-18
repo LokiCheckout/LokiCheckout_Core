@@ -27,11 +27,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->value = trim((string)$this->addressState->load($this->getFieldName()));
     }
 
-    public function booted(): void
-    {
-        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
-    }
-
     public function getFieldLabel(): string
     {
         $parentBlock = $this->getParent();
