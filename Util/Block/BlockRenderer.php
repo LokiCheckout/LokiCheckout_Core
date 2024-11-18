@@ -21,7 +21,6 @@ class BlockRenderer
     public function getChild(string $blockAlias, AbstractBlock $parentBlock, array $data = []): AbstractBlock
     {
         $block = $parentBlock->getChildBlock($blockAlias);
-
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block alias "%1"', $blockAlias));
         }
@@ -31,7 +30,7 @@ class BlockRenderer
 
         $nameInLayout = $block->getNameInLayout();
         if (preg_match('/\.(\d)$/', $nameInLayout, $match)) {
-            $nameInLayout = preg_replace('\.\d$', '', $nameInLayout);
+            $nameInLayout = preg_replace('/\.\d$/', '', $nameInLayout);
             $increment = $match[1];
         } else {
             $increment = 0;

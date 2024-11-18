@@ -22,6 +22,11 @@ class Items extends Component
     public function boot(): void
     {
         $this->items = $this->getItems();
+
+        if (empty($this->items)) {
+            $this->dispatchErrorMessage(__('No items in the cart'));
+            $this->redirect('checkout/cart');
+        }
     }
 
     public function getItems(): array

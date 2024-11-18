@@ -12,7 +12,8 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 
 if (empty($magewire->items)) {
-    return '<div>No items</div>';
+    echo '<div>No items</div>';
+    return;
 }
 
 ?>
@@ -21,10 +22,9 @@ if (empty($magewire->items)) {
 
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
-            <li>
+            <li wire:ignore>
                 <?= $blockRenderer->getChildHtml('item', $block, [
                     'item' => $item,
-                    'component' => $magewire,
                 ]) ?>
             </li>
         <?php endforeach; ?>

@@ -13,7 +13,6 @@ use Yireo\LokiCheckout\ViewModel\ProductImage;
 /** @var BlockRenderer $blockRenderer */
 /** @var array $item */
 /** @var CssClass $css */
-
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
 
@@ -42,6 +41,4 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
 
         <?= $blockRenderer->getChildHtml('actions', $block, ['item' => $item]) ?>
     </div>
-
-    <?= $blockRenderer->getChildHtml('additional', $block, ['item' => $item]) ?>
 </div>
