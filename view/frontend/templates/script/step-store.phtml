@@ -17,6 +17,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             add(component) {
                 this.components[component.name] = component;
             },
+            get(componentName) {
+                return this.components[componentName];
+            },
             hasInvalidComponents(step) {
                 let hasInvalid = false;
                 Object.keys(this.components).forEach(componentName => {
