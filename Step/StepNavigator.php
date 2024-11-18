@@ -125,6 +125,9 @@ class StepNavigator implements ArgumentInterface
     public function getFirstStep(): StepInterface
     {
         $steps = $this->getSteps();
+        if (empty($steps)) {
+            throw new \RuntimeException('No steps defined');
+        }
 
         return array_shift($steps);
     }
@@ -132,6 +135,9 @@ class StepNavigator implements ArgumentInterface
     public function getLastStep(): StepInterface
     {
         $steps = $this->getSteps();
+        if (empty($steps)) {
+            throw new \RuntimeException('No steps defined');
+        }
 
         return array_pop($steps);
     }
