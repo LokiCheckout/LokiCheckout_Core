@@ -22,6 +22,8 @@
 
     <body>
         <referenceContainer name="content">
+            <block template="Yireo_LokiCheckout::test.phtml" after="-"/>
+
             <block name="loki-checkout" template="Yireo_LokiCheckout::checkout.phtml" cacheable="false">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout</argument>
