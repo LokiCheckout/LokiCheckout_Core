@@ -3,17 +3,15 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\QuoteDetails;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var QuoteDetails $magewire */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('mb-4 relative') ?>">
+<div  class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
     <span class="text-xl font-bold"><?= __('Details') ?></span><br>
     <?= $block->getChildHtml() ?>

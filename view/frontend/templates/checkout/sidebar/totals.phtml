@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
@@ -13,13 +12,12 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var PriceFormatter $priceFormatter */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote()->collectTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('') ?>">
+<div  class="<?= $css('') ?>">
     <dl class="grid grid-cols-2 gap-y-1 ">
         <dt class="font-medium"><?= __('Subtotal') ?></dt>
         <dd class="text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></dd>

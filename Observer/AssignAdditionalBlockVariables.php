@@ -8,7 +8,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\CamelCaseConvertor;
@@ -19,7 +18,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         private readonly Config $config,
         private readonly ViewModelFactory $viewModelFactory,
         private readonly CssClass $cssClass,
-        private readonly BlockAttribute $blockAttribute,
         private readonly BlockRenderer $blockRenderer,
         private readonly CamelCaseConvertor $camelCaseConvertor
     ) {
@@ -42,7 +40,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('debug', $this->config->isDebug()); // @todo: Is this relevant
         $block->assign('css', $this->cssClass->setBlock($block));
-        $block->assign('blockAttribute', $this->blockAttribute->setBlock($block));
         $block->assign('blockRenderer', $this->blockRenderer);
 
         $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());

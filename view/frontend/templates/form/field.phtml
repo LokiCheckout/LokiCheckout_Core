@@ -5,7 +5,6 @@ use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
@@ -14,7 +13,6 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-/** @var BlockAttribute $blockAttribute */
 
 if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
     echo '<div style="display:none">skipped</div>';
@@ -28,7 +26,7 @@ if (false === $magewire->isVisible()) {
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>" <?= $blockAttribute() ?>
+<div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
      ) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">

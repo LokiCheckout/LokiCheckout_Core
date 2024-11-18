@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
@@ -12,12 +11,11 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BillingStep $magewire */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
 $enableBillingAsShipping = $magewire->enableBillingAsShipping();
 $billingAsShipping = $magewire->billingAsShipping;
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('') ?>">
+<div  class="<?= $css('') ?>">
     <?= $blockRenderer->html('loki.checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?php if ($enableBillingAsShipping): ?>

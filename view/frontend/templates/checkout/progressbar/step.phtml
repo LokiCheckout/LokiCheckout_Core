@@ -6,7 +6,6 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
 use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
@@ -15,7 +14,6 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var Progressbar $magewire */
 /** @var StepNavigator $stepNavigator */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
 $step = $block->getStep();

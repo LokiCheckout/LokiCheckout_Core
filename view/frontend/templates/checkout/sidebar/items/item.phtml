@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
@@ -15,7 +13,6 @@ use Yireo\LokiCheckout\ViewModel\ProductImage;
 /** @var BlockRenderer $blockRenderer */
 /** @var array $item */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
@@ -24,7 +21,7 @@ $item = $block->getItem();
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('flex gap-4 my-8') ?>">
+<div class="<?= $css('flex gap-4 my-8') ?>">
     <img
         src="<?= $productImageUrl ?>"
         width="<?= $width ?>"

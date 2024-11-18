@@ -3,18 +3,16 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PaymentMethod\Banktransfer;
 
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BlockAttribute $blockAttribute */
 /** @var Banktransfer $configuration */
 $configuration = $viewModelFactory->create(Banktransfer::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('') ?>">
+<div  class="<?= $css('') ?>">
     <?php if ($configuration->getInstructions()): ?>
         <?= __('Instructions') ?>:<br/>
         <?= $configuration->getInstructions() ?>

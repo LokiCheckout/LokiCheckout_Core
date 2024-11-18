@@ -4,20 +4,18 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
 /** @var StepNavigator $stepNavigator */
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('') ?>" x-data="LokiCheckoutSteps">
+<div  class="<?= $css('') ?>" x-data="LokiCheckoutSteps">
     <?php foreach ($block->getChildNames() as $childName) : ?>
         <?php $stepBlock = $block->getLayout()->getBlock($childName); ?>
         <?php $step = $stepBlock->getMagewire(); ?>

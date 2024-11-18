@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
@@ -13,13 +12,12 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('border-b border-gray-200') ?>">
+<div  class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
         <p class="mb-4">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>

@@ -5,7 +5,6 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
-use Override;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
@@ -60,12 +59,5 @@ class PaymentMethods extends Component
         $this->emit('paymentMethodChange', $value);
 
         return $value;
-    }
-
-    public function getJsName(): string
-    {
-        $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
-
-        return preg_replace('#[_.-]+#', '', $name);
     }
 }

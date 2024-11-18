@@ -2,16 +2,14 @@
 declare(strict_types=1);
 
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var PaymentDetails $magewire */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('mb-4 relative') ?>">
+<div  class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
 
     <span class="text-xl font-bold"><?= __('Payment Method') ?></span><br>

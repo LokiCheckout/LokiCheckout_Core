@@ -10,7 +10,7 @@ $magewire = $block->getComponent();
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
+        Alpine.data('<?= $block->getComponentName() ?>', () => ({
             value: '<?= $magewire->value ?>',
             <?php foreach($magewire->getPaymentMethods() as $paymentMethod): ?>
             show_<?= $paymentMethod->getCode() ?>: false,

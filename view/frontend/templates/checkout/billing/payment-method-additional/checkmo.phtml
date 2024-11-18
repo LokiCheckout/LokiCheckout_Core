@@ -3,18 +3,16 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PaymentMethod\CheckMoneyOrder;
 
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BlockAttribute $blockAttribute */
 /** @var CheckMoneyOrder $configuration */
 $configuration = $viewModelFactory->create(CheckMoneyOrder::class);
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('') ?>">
+<div  class="<?= $css('') ?>">
     <?php if ($configuration->getPayableTo()): ?>
         <p><?= __('Make Check Payable to') ?>: <?= $configuration->getPayableTo() ?></p>
     <?php endif; ?>

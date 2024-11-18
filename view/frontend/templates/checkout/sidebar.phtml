@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -15,9 +14,8 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var BlockAttribute $blockAttribute */
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<aside <?= $blockAttribute() ?> class="<?= $css('my-2 order-2') ?>">
+<aside  class="<?= $css('my-2 order-2') ?>">
     <?= $block->getChildHtml(); ?>
 </aside>

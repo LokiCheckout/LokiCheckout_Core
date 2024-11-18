@@ -3,14 +3,12 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
-use Yireo\LokiCheckout\Util\Block\BlockAttribute;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var Items $magewire */
 /** @var CssClass $css */
-/** @var BlockAttribute $blockAttribute */
 /** @var BlockRenderer $blockRenderer */
 
 if (empty($magewire->items)) {
@@ -18,7 +16,7 @@ if (empty($magewire->items)) {
 }
 
 ?>
-<div <?= $blockAttribute() ?> class="<?= $css('relative') ?>">
+<div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki.checkout.utils.loader-overlay') ?>
 
     <ul role="list">
