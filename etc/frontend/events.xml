@@ -11,6 +11,7 @@
     </event>
 
     <event name="view_block_abstract_to_html_after">
+        <observer name="Yireo_LokiCheckout::addHtmlAttributes" instance="Yireo\LokiCheckout\Observer\AddHtmlAttributes"/>
         <observer name="Yireo_LokiCheckout::addDebuggingInfo" instance="Yireo\LokiCheckout\Observer\AddDebuggingInfo"/>
     </event>
 </config>

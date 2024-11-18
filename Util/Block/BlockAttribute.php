@@ -4,6 +4,9 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 
+/**
+ * @deprecated This is done via an observer instead
+ */
 class BlockAttribute
 {
     private ?AbstractBlock $block = null;
@@ -23,6 +26,8 @@ class BlockAttribute
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
+            $attributeValue = str_replace('{id}', $this->block->getJsId(), $attributeValue);
+
             $htmlAttribute .= ' '.$attributeName.'="'.$attributeValue.'"';
         }
 

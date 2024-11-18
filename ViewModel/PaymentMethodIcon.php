@@ -19,18 +19,11 @@ class PaymentMethodIcon implements ArgumentInterface
 
     public function getIcon(string $paymentMethodCode): string
     {
-        // @todo: Move this to Mollie module with DI plugin
-        if (false === preg_match('/^mollie_methods_(.*)$/', $paymentMethodCode, $match)) {
-            return '';
-        };
+        return '';
+    }
 
-        if (empty($match)) {
-            return '';
-        }
-
-        $iconFileId = 'Mollie_Payment::images/methods/'.$match[1].'.svg';
-        $iconUrl = $this->assetRepository->getUrl($iconFileId);
-
-        return '<img src="'.$iconUrl.'" />';
+    public function getAssetRepository(): AssetRepository
+    {
+        return $this->assetRepository;
     }
 }
