@@ -27,9 +27,7 @@ class ShippingDetails extends Component
 
     public function getHtml(): string
     {
-        try {
-            $this->stepNavigator->getStepByCode('shipping');
-        } catch(UnknownStepException) {
+        if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
 

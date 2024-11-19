@@ -21,9 +21,7 @@ class ShippingAddress extends Component
 
     public function getHtml(): string
     {
-        try {
-            $this->stepNavigator->getStepByCode('shipping');
-        } catch(UnknownStepException) {
+        if ($this->shippingAddressState->getQuote()->isVirtual()) {
             return '';
         }
 
