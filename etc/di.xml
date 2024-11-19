@@ -1,16 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Magewirephp\Magewire\Model\ComponentManager">
-        <arguments>
-            <argument name="hydrationPool" xsi:type="array">
-                <item name="Yireo_LokiCheckout::setterInjectionHydrator" xsi:type="array">
-                    <item name="class" xsi:type="object">Yireo\LokiCheckout\Magewire\Hydrator\SetterInjectionHydrator</item>
-                </item>
-            </argument>
-        </arguments>
-    </type>
-
     <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>

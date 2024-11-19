@@ -2,23 +2,19 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
-use Magento\Customer\Model\Session as CustomerSession;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\AttributeBehaviour;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectCheckoutSession;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectCustomerSession;
 
 abstract class QuoteFieldComponent extends FieldComponent
 {
     use AttributeBehaviour;
+    use InjectCheckoutSession;
+    use InjectCustomerSession;
 
     protected string $elementId = '';
     public string $value = '';
     public bool $valid = true;
-
-    public function __construct(
-        protected CheckoutSession $checkoutSession,
-        protected CustomerSession $customerSession
-    ) {
-    }
 
     public function boot(): void
     {

@@ -24,7 +24,12 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function booted(): void
     {
-        $this->listeners[static::class.'::afterSetValue'] = 'refresh';
+        $this->addRefreshListener(static::class.'::afterSetValue');
+    }
+
+    protected function addRefreshListener(string $listener)
+    {
+        $this->listeners[$listener] = 'refresh';
     }
 
     // @todo: Why does this not allow a listener to the trait method validate() directly?
@@ -42,6 +47,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     {
         $className = static::class;
         $className = str_replace('\Interceptor', '', $className);
+        $className = str_replace('\Proxy', '', $className);
         $baseClassname = basename(str_replace('\\', '/', $className));
 
         return strtolower(trim(preg_replace('/([A-Z]|[0-9]+)/', "_$1", $baseClassname), '_'));

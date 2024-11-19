@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Other;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Newsletter\Model\GuestSubscriptionChecker;
+use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Magewirephp\Magewire\Component;
 
@@ -14,10 +15,9 @@ class Newsletter extends Component
 
     public function __construct(
         private CheckoutSession $checkoutSession,
-        private CustomerSession $customerSession,
         private SubscriptionManagerInterface $subscriptionManager,
         private GuestSubscriptionChecker $guestSubscriptionChecker,
-        private \Magento\Newsletter\Model\SubscriberFactory $subscriberFactory
+        private SubscriberFactory $subscriberFactory
     ) {
     }
 

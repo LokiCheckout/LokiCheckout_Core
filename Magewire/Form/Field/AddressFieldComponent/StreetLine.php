@@ -2,31 +2,37 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-use Magento\Framework\App\Config\ScopeConfigInterface;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectStreetlinesFactory;
 
 class StreetLine extends AddressFieldComponent
 {
+    use InjectScopeConfig;
+    use InjectStreetlinesFactory;
+
     protected int $index = 0;
 
-    public function __construct(
-        private ScopeConfigInterface $scopeConfig,
-    ) {
+    public function booted(): void
+    {
+        parent::booted();
+        $this->addRefreshListener('StreetUpdated');
     }
 
     protected function loadValue(): void
     {
-        $street = trim((string)$this->addressState->load('street'));
-        $streetLines = explode("\n", $street);
-        $this->value = isset($streetLines[$this->index]) ? $streetLines[$this->index] : '';
+        $street = (string)$this->addressState->load('street');
+        $streetlines = $this->streetlinesFactory->createFromStreet($street);
+        $this->value = $streetlines->getLineByIndex($this->index);
     }
 
     protected function saveValue($value)
     {
         $street = (string)$this->addressState->load('street');
-        $streetLines = explode("\n", $street);
-        $streetLines[$this->index] = (string)$value;
-        $this->addressState->save('street', implode("\n", $streetLines));
+        $streetlines = $this->streetlinesFactory->createFromStreet($street);
+        $streetlines = $streetlines->setLineByIndex($this->index, $this->value);
+        $this->addressState->save('street', $streetlines->toString());
+        $this->emit('StreetUpdated'); // @todo: Standardize event names
     }
 
     public function isVisible(): bool

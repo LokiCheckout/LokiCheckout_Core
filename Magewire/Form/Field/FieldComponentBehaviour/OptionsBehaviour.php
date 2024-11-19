@@ -9,6 +9,11 @@ trait OptionsBehaviour
 {
     protected ?OptionModelInterface $optionModel = null;
 
+    public function setOptionModel(OptionModelInterface $optionModel): void
+    {
+        $this->optionModel = $optionModel;
+    }
+
     public function getOptions(): array
     {
         if (false === $this->optionModel instanceof OptionModelInterface) {
@@ -16,10 +21,5 @@ trait OptionsBehaviour
         }
 
         return $this->optionModel->getOptions($this);
-    }
-
-    public function setOptionModel(OptionModelInterface $optionModel): void
-    {
-        $this->optionModel = $optionModel;
     }
 }

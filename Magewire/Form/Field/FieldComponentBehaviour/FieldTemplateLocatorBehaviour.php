@@ -2,16 +2,12 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectFieldTemplateLocator;
 use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
 trait FieldTemplateLocatorBehaviour
 {
-    protected ?FieldTemplateLocator $fieldTemplateLocator = null;
-
-    public function setFieldTemplateLocator(FieldTemplateLocator $fieldTemplateLocator)
-    {
-        $this->fieldTemplateLocator = $fieldTemplateLocator;
-    }
+    use InjectFieldTemplateLocator;
 
     public function getFieldTemplate(): string
     {
