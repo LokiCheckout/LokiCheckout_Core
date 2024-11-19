@@ -4,6 +4,7 @@
         <yireo_loki_checkout>
             <general>
                 <enable>1</enable>
+                <theme>default</theme>
                 <enable_same_as_billing>1</enable_same_as_billing>
                 <enable_vat_id_only_for_company>1</enable_vat_id_only_for_company>
                 <debug>0</debug>

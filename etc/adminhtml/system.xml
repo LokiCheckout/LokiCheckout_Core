@@ -15,17 +15,30 @@
                        type="select"
                        sortOrder="1"
                        showInDefault="1"
-                       showInWebsite="0"
+                       showInWebsite="1"
                        showInStore="0">
                     <label>Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="theme"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="0">
+                    <label>Theme</label>
+                    <source_model>Yireo\LokiCheckout\Config\Source\ThemeOptions</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
                 </field>
                 <field id="enable_same_as_billing"
                        translate="label"
                        type="select"
                        sortOrder="1"
                        showInDefault="1"
-                       showInWebsite="0"
+                       showInWebsite="1"
                        showInStore="0">
                     <label>Enable Same As Billing</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -38,8 +51,8 @@
                        type="select"
                        sortOrder="1"
                        showInDefault="1"
-                       showInWebsite="0"
-                       showInStore="0">
+                       showInWebsite="1"
+                       showInStore="1">
                     <label>Enable Vat ID Only For Companies</label>
                     <comment>Show the VAT ID field only if a company value is entered</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -52,8 +65,8 @@
                        type="select"
                        sortOrder="1"
                        showInDefault="1"
-                       showInWebsite="0"
-                       showInStore="0">
+                       showInWebsite="1"
+                       showInStore="1">
                     <label>Debug</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
