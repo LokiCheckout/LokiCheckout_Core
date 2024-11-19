@@ -9,6 +9,7 @@
             <tab>yireo</tab>
             <resource>Yireo_LokiCheckout::configuration</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
                 <field id="enable"
                        translate="label"
                        type="select"
@@ -27,6 +28,20 @@
                        showInWebsite="0"
                        showInStore="0">
                     <label>Enable Same As Billing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="enable_vat_id_only_for_company"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="0"
+                       showInStore="0">
+                    <label>Enable Vat ID Only For Companies</label>
+                    <comment>Show the VAT ID field only if a company value is entered</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/*/enable">1</field>
@@ -53,6 +68,7 @@
                        showInWebsite="0"
                        showInStore="0">
                     <label>License Key</label>
+                    <comment>Login in your Yireo Account and navigate to "My Licenses"</comment>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>

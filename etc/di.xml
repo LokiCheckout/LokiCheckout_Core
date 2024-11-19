@@ -88,6 +88,10 @@
         </arguments>
     </type>
 
+    <type name="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin">
+
+    </type>
+
     <type name="Yireo\HyvaThemeAutoRegistration\Observer\RegisterModuleForHyvaConfig">
         <arguments>
             <argument name="modulePrefixes" xsi:type="array">

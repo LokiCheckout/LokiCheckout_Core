@@ -34,6 +34,11 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable_same_as_billing');
     }
 
+    public function enableVatIdOnlyForCompany(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable_vat_id_only_for_company');
+    }
+
     public function isDebug(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
