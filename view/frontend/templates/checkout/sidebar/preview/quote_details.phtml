@@ -10,9 +10,14 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var QuoteDetails $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+$html = $block->getChildHtml();
+if (empty($html)) {
+    echo '<div></div>';
+    return;
+}
 ?>
 <div  class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="text-xl font-bold"><?= __('Details') ?></span><br>
-    <?= $block->getChildHtml() ?>
+    <?= $html ?>
 </div>
