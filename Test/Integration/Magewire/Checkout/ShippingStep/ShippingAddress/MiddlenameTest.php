@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Middlename;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Middlename;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 #[AppArea('frontend')]
 class MiddlenameTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.shipping-step.shipping-address.middlename';
+    const BLOCK_NAME = 'loki-checkout.shipping-address.middlename';
 
     use CartFixture;
     use ProductFixture;

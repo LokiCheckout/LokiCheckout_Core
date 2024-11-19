@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <move element="loki-checkout.login" destination="loki-checkout.sidebar" as="login" before="-"/>
+        <move element="loki-checkout.agreements" destination="loki-checkout.sidebar.other" as="agreements"/>
+        <move element="loki-checkout.newsletter" destination="loki-checkout.sidebar.other" as="newsletter"/>
+
+        <move element="loki-checkout.customer.dob" destination="loki-checkout.shipping-step.address-form" as="dob"/>
+        <move element="loki-checkout.customer.gender" destination="loki-checkout.shipping-step.address-form" as="gender"/>
+
+        <move element="loki-checkout.progressbar" destination="loki-checkout" as="progressbar" />
+    </body>
+</page>

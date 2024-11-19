@@ -1,0 +1,23 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var BillingAddress $magewire */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+?>
+<div class="<?= $css('') ?>">
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
+    <?= $block->getChildHtml('billing-as-shipping') ?>
+
+    <?php if ($magewire->getBillingAsShippingValue()): ?>
+        <?= $block->getChildHtml('address-view') ?>
+    <?php else: ?>
+        <?= $block->getChildHtml('address-form') ?>
+    <?php endif; ?>
+</div>

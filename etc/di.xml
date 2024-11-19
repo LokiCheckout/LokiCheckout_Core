@@ -32,6 +32,23 @@
         </arguments>
     </virtualType>
 
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\OneStep">
+        <arguments>
+            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualOneStepValidator</argument>
+        </arguments>
+    </type>
+
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualOneStepValidator" >
+        <arguments>
+            <argument name="validationRules" xsi:type="array">
+                <!-- @todo Add all other rules here -->
+                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
+                <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
+                <item name="shippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
     <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
         <arguments>
             <argument name="validationRules" xsi:type="array">

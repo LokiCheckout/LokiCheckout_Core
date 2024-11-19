@@ -9,7 +9,7 @@
         <plugin name="Yireo_LokiCheckout::addCspInlineScripts" type="Yireo\LokiCheckout\Plugin\AddCspInlineScripts"/>
     </type>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Postcode">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
@@ -17,7 +17,7 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress\Postcode">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
@@ -25,7 +25,7 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\VatId">
         <arguments>
             <argument name="filters" xsi:type="array">
                 <item name="uppercase" xsi:type="object">Yireo\LokiCheckout\Filter\Uppercase</item>
@@ -33,7 +33,7 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Telephone">
+    <type name="Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Telephone">
         <arguments>
             <argument name="filters" xsi:type="array">
                 <item name="numeric" xsi:type="string">numeric</item>

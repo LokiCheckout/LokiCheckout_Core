@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+$childHtml = $block->getChildHtml();
+if (empty($childHtml)) {
+    return;
+}
+?>
+<div  class="<?= $css('loki-checkout-sidebar-other card p-8 my-4') ?>">
+    <?= $block->getChildHtml() ?>
+</div>

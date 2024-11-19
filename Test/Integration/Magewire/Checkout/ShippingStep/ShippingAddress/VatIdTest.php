@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\ShippingStep\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\VatId;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\VatId;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
@@ -13,7 +13,7 @@ use Magento\TestFramework\Fixture\Config;
 class VatIdTest extends LokiTestCase
 {
 
-    const BLOCK_NAME = 'loki-checkout.shipping-step.shipping-address.vat_id';
+    const BLOCK_NAME = 'loki-checkout.shipping-address.vat_id';
 
     use CartFixture;
     use ProductFixture;

@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Checkout $magewire */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+$currentStep = $magewire->currentStep;
+?>
+<div class="<?= $css('space-y-6') ?>">
+    <?= $block->getChildHtml('progressbar') ?>
+
+    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?> relative">
+        <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
+        <?= $block->getChildHtml('steps'); ?>
+        <?= $block->getChildHtml('sidebar'); ?>
+    </div>
+</div>

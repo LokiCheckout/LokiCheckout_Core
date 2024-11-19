@@ -28,6 +28,8 @@ class Agreements extends Component
         foreach ($this->getSavedCheckoutAgreements() as $savedAgreement) {
             $this->agreements[$savedAgreement->getAgreementId()] = true;
         }
+
+        $this->agreements;
     }
 
     public function isEnabled(): bool
@@ -56,6 +58,7 @@ class Agreements extends Component
 
         $savedAgreements = array_unique($savedAgreements);
         $quote->getPayment()->getExtensionAttributes()->setAgreementIds($savedAgreements);
+        $quote->getPayment()->save();
         $quote->save();
         return $agreements;
     }

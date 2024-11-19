@@ -3,18 +3,16 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\BillingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BillingAddress $magewire */
 /** @var CssClass $css */
 /** @var SortedChildBlocks $sortedChildBlocks */
 $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 ?>
-<div  class="<?= $css('grid grid-cols-12 gap-8 mb-8') ?>">
+<div class="<?= $css('grid grid-cols-12 gap-8 mb-8') ?>">
     <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>
         <?= $childBlock->toHtml() ?>
     <?php endforeach; ?>

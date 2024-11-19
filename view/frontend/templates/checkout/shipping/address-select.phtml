@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var ShippingAddress $magewire */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+?>
+<?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
+
+<select
+    wire:loading.attr="aria-busy"
+    wire:loading.class="disabled"
+    wire:model="currentShippingAddress"
+    class="form-input block w-full invalid:border-red-500 valid:border-green-500">
+    <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
+        <option value="<?= $shippingAddressId ?>"><?= $shippingAddresLabel ?></option>
+    <?php endforeach; ?>
+</select>

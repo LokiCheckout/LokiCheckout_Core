@@ -1,0 +1,46 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var ShippingAddress $magewire */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+/** @var SortedChildBlocks $sortedChildBlocks */
+$sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
+?>
+<div class="<?= $css('mb-8') ?>" x-data="<?= $block->getComponentName() ?>">
+    <?php if (count($magewire->shippingAddresses) > 0): ?>
+        <?= $block->getChildHtml('address-select') ?>
+        <button class="btn my-4 btn-primary" type="button" @click="toggleShowNewAddress"
+                wire:loading.attr="disabled">
+            <?= __('New Address') ?>
+        </button>
+    <?php endif; ?>
+
+    <div x-show="showNewAddress">
+        <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
+        <?= $block->getChildHtml('address-form') ?>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('<?= $block->getComponentName() ?>', () => ({
+                showNewAddress: <?= $magewire->newAddress ? 'true' : 'false' ?>,
+                toggleShowNewAddress() {
+                    this.showNewAddress = !this.showNewAddress;
+                    if (this.showNewAddress === true) {
+                        Magewire.find('<?= $magewire->id ?>').cleanCustomerAddress();
+                    }
+                }
+            }));
+        });
+    </script>
+</div>

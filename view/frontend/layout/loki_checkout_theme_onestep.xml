@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <!-- Theme layout -->
+        <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::checkout-theme-onestep.phtml"/>
+        <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::checkout/steps-theme-onestep.phtml">
+            <block name="loki-checkout.one-step" as="one-step" template="Yireo_LokiCheckout::checkout/one-step.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\OneStep</argument>
+                </arguments>
+
+                <container name="loki-checkout.one-step.col1" as="col1" htmlTag="div" htmlClass="col1"/>
+                <container name="loki-checkout.one-step.col2" as="col2" htmlTag="div" htmlClass="col2"/>
+            </block>
+        </referenceBlock>
+
+        <!-- Column 1 -->
+        <move element="loki-checkout.customer.email" destination="loki-checkout.one-step.col1" as="email"/>
+        <move element="loki-checkout.shipping-address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
+        <move element="loki-checkout.billing-address" destination="loki-checkout.one-step.col1" as="billing-address"/>
+
+        <!-- Column 2 -->
+        <move element="loki-checkout.shipping.shipping-methods" destination="loki-checkout.one-step.col2" as="shipping-methods"/>
+        <move element="loki-checkout.billing.payment-methods" destination="loki-checkout.one-step.col2" as="payment-methods"/>
+
+        <!-- Sidebar -->
+        <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
+        <move element="loki-checkout.billing-step.forward-button" destination="loki-checkout.sidebar" as="submit-button"/>
+    </body>
+</page>

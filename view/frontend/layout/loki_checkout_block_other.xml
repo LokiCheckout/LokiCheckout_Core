@@ -2,22 +2,22 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki-checkout.other.agreements" as="agreements"
+            name="loki-checkout.agreements" as="agreements"
             ifconfig="checkout/options/enable_agreements"
-            template="Yireo_LokiCheckout::checkout/other/agreements.phtml">
+            template="Yireo_LokiCheckout::checkout/agreements.phtml">
             <arguments>
-                <argument name="magewire" xsi:type="object" >
+                <argument name="magewire" xsi:type="object">
                     Yireo\LokiCheckout\Magewire\Checkout\Other\Agreements
                 </argument>
             </arguments>
         </block>
 
-                <block
-            name="loki-checkout.other.newsletter" as="newsletter"
+        <block
+            name="loki-checkout.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
-            template="Yireo_LokiCheckout::checkout/other/newsletter.phtml">
+            template="Yireo_LokiCheckout::checkout/newsletter.phtml">
             <arguments>
-                <argument name="magewire" xsi:type="object" >
+                <argument name="magewire" xsi:type="object">
                     Yireo\LokiCheckout\Magewire\Checkout\Other\Newsletter
                 </argument>
             </arguments>

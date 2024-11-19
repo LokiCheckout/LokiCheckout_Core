@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingAddress\Region;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Region;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 class RegionOptionModel implements ArgumentInterface, OptionModelInterface

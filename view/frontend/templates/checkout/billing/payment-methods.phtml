@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\BillingStep\PaymentMethods;
+use Yireo\LokiCheckout\Magewire\Checkout\Billing\PaymentMethods;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
@@ -36,12 +36,12 @@ $paymentMethods = $magewire->getPaymentMethods();
 
                     <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
                         <?= $blockRenderer->html(
-                            'loki-checkout.billing-step.payment-methods.'.$code.'.form',
+                            'loki-checkout.billing.payment-methods.'.$code.'.form',
                             $block,
                             ['method' => $code]
                         ) ?>
                         <?= $blockRenderer->html(
-                            'loki-checkout.billing-step.payment-methods.'.$code.'.additional',
+                            'loki-checkout.billing.payment-methods.'.$code.'.additional',
                             $block,
                             ['method' => $code])
                         ?>
@@ -51,5 +51,5 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php endforeach; ?>
     </ul>
 
-    <?= $blockRenderer->html('loki-checkout.billing-step.payment-methods.script', $block) ?>
+    <?= $blockRenderer->html('loki-checkout.billing.payment-methods.script', $block) ?>
 </div>

@@ -24,7 +24,7 @@ $component = $this->getComponent();
                 elementId: '<?= $component->getElementId() ?>',
                 step: '<?= $component->getStep() ?>',
                 value: '<?= $component->getJsValue() ?>',
-                valid: <?= $component->valid ? 'true': 'false' ?>,
+                valid: <?= $component->valid ? 'true' : 'false' ?>,
                 rules: [
                     <?php foreach($component->getJsValidators() as $jsValidator): ?>
                     '<?= $jsValidator ?>',
@@ -37,13 +37,13 @@ $component = $this->getComponent();
 
                     // @todo: With livewire:init this does not work in Hyva
                     //document.addEventListener('livewire:init', () => {
-                        Livewire.hook('element.updated', (element, component) => {
-                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                                this.valid = this.$component(this).valid;
-                                this.updated();
-                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
-                            }
-                        });
+                    Livewire.hook('element.updated', (element, component) => {
+                        if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                            this.valid = this.$component(this).valid;
+                            this.updated();
+                            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
+                        }
+                    });
                     //});
 
                     this.afterInit();

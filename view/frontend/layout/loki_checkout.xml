@@ -1,32 +1,34 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <!-- Cleanup -->
+    <update handle="loki_checkout_clean"/>
 
-    <update handle="loki_checkout_remove_other"/>
-
+    <!-- Block definition -->
     <update handle="loki_checkout_block_sidebar"/>
     <update handle="loki_checkout_block_progressbar"/>
     <update handle="loki_checkout_block_login"/>
 
     <update handle="loki_checkout_block_customer"/>
     <update handle="loki_checkout_block_other"/>
-    <update handle="loki_checkout_block_shipping_step"/>
+    <update handle="loki_checkout_block_shipping_other"/>
     <update handle="loki_checkout_block_shipping_address"/>
     <update handle="loki_checkout_block_shipping_methods"/>
 
-
-    <update handle="loki_checkout_block_billing_step"/>
-    <update handle="loki_checkout_block_billing_view"/>
+    <update handle="loki_checkout_block_billing_other"/>
     <update handle="loki_checkout_block_billing_address"/>
     <update handle="loki_checkout_block_payment_methods"/>
-    <update handle="loki_checkout_theme_default"/>
+
+    <!-- Misc -->
+    <update handle="loki_checkout_misc"/>
 
     <body>
         <referenceContainer name="content">
-            <block name="loki-checkout" template="Yireo_LokiCheckout::checkout.phtml" cacheable="false">
+            <block name="loki-checkout" cacheable="false">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout</argument>
                 </arguments>
-                <block name="loki-checkout.steps" as="steps" template="Yireo_LokiCheckout::checkout/steps.phtml"/>
+
+                <block name="loki-checkout.steps" as="steps"/>
             </block>
         </referenceContainer>
 

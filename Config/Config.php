@@ -43,4 +43,25 @@ class Config
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
     }
+
+    public function getTheme()
+    {
+        // @todo: Allow for switching themes easily in backend
+        $theme = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/theme');
+        //$theme = 'onestep';
+        if (false === in_array($theme, $this->getAvailableThemes())) {
+            return 'default';
+        }
+
+        return $theme;
+    }
+
+    private function getAvailableThemes(): array
+    {
+        // @todo: Make this extensible
+        return [
+            'default',
+            'onestep',
+        ];
+    }
 }

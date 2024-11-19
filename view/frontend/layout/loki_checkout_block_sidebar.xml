@@ -80,6 +80,8 @@
                     </arguments>
                 </block>
             </block>
+
+            <block name="loki-checkout.sidebar.other" as="other" template="Yireo_LokiCheckout::checkout/sidebar/other.phtml"/>
         </block>
     </body>
 </page>

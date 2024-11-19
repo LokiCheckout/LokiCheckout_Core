@@ -12,22 +12,9 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BillingStep $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$enableBillingAsShipping = $magewire->enableBillingAsShipping();
-$billingAsShipping = $magewire->billingAsShipping;
 ?>
 <div  class="<?= $css('') ?>">
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
-
-    <?php if ($enableBillingAsShipping): ?>
-        <?= $blockRenderer->html('loki-checkout.billing-step.billing-as-shipping') ?>
-    <?php endif; ?>
-
-    <?php if ($billingAsShipping): ?>
-        <?= $block->getChildHtml('address-view') ?>
-    <?php else: ?>
-        <?= $block->getChildHtml('address-form') ?>
-    <?php endif; ?>
-
+    <?= $block->getChildHtml('billing-address') ?>
     <?= $block->getChildHtml('payment-methods') ?>
 
     <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">

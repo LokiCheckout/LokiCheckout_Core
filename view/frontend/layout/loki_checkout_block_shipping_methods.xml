@@ -2,15 +2,15 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki-checkout.shipping-step.shipping-methods"
+            name="loki-checkout.shipping.shipping-methods"
             template="Yireo_LokiCheckout::checkout/shipping/shipping-methods.phtml">
             <arguments>
                 <argument name="magewire" xsi:type="object">
-                    Yireo\LokiCheckout\Magewire\Checkout\ShippingStep\ShippingMethods
+                    Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods
                 </argument>
             </arguments>
             <block
-                name="loki-checkout.shipping-step.shipping-methods.script"
+                name="loki-checkout.shipping.shipping-methods.script"
                 as="script"
                 template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/script.phtml">
             </block>
