@@ -5,12 +5,12 @@ namespace Yireo\LokiCheckout\Magewire\Checkout;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Step\StepInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingStep extends Component implements StepInterface
 {
     public function __construct(
-        private readonly ShippingAddressState $shippingAddressState,
+        private readonly CheckoutState $checkoutState,
         private readonly ValidatorInterface $stepValidator,
     ) {
     }
@@ -27,7 +27,7 @@ class ShippingStep extends Component implements StepInterface
 
     public function isEnabled(): bool
     {
-        return true;
+        return false === (bool)$this->checkoutState->getQuote()->isVirtual();
     }
 
     public function isAccessable(): bool
@@ -37,7 +37,7 @@ class ShippingStep extends Component implements StepInterface
 
     public function isVisible(): bool
     {
-        return false === $this->shippingAddressState->getShippingAddress()->getQuote()->isVirtual();
+        return true;
     }
 
     public function validate(): true|array

@@ -169,6 +169,10 @@ class StepNavigator implements ArgumentInterface
                 continue;
             }
 
+            if (false === $magewire->isEnabled()) {
+                continue;
+            }
+
             $this->steps[$magewire->getCode()] = $magewire;
         }
 

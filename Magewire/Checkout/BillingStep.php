@@ -6,7 +6,9 @@ use Magento\Framework\DataObject\Copy;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Exception\UnknownStepException;
 use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
@@ -24,7 +26,8 @@ class BillingStep extends Component implements StepInterface
         private readonly BillingAddressState $billingAddressState,
         private readonly ShippingAddressState $shippingAddressState,
         private readonly Copy $copyService,
-        private CartRepositoryInterface $cartRepository
+        private CartRepositoryInterface $cartRepository,
+        private StepNavigator $stepNavigator
     ) {
     }
 
@@ -42,7 +45,17 @@ class BillingStep extends Component implements StepInterface
 
     public function enableBillingAsShipping(): bool
     {
-        return $this->config->enableSameAsBilling();
+        if (false === $this->config->enableSameAsBilling()) {
+            return false;
+        }
+
+        try {
+            $this->stepNavigator->getStepByCode('shipping');
+        } catch(UnknownStepException) {
+            return false;
+        }
+
+        return true;
     }
 
     public function updatedBillingAsShipping(mixed $billingAsShipping)

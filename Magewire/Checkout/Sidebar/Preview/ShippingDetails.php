@@ -6,6 +6,8 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Exception\UnknownStepException;
+use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingDetails extends Component
@@ -18,12 +20,19 @@ class ShippingDetails extends Component
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly ShippingConfig $shippingConfig,
-        private readonly ScopeConfigInterface $scopeConfig
+        private readonly ScopeConfigInterface $scopeConfig,
+        private StepNavigator $stepNavigator
     ) {
     }
 
     public function getHtml(): string
     {
+        try {
+            $this->stepNavigator->getStepByCode('shipping');
+        } catch(UnknownStepException) {
+            return '';
+        }
+
         $shippingMethod = $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
         if (empty($shippingMethod)) {
             return '';
