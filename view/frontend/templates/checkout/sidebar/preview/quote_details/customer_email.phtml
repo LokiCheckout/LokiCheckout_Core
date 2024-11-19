@@ -9,9 +9,14 @@ use Yireo\LokiCheckout\ViewModel\QuoteDetails;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var QuoteDetails $quoteDetails */
 $quoteDetails = $viewModelFactory->create(QuoteDetails::class);
+$email = $quoteDetails->getEmail();
+if (empty($email)) {
+    return '';
+}
+
 ?>
 <div>
     <span><?= __('Email') ?></span>:
-    <?= $quoteDetails->getEmail() ?>
+    <?= $email ?>
 </div>
 

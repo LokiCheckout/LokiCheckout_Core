@@ -9,9 +9,13 @@ use Yireo\LokiCheckout\ViewModel\QuoteDetails;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var QuoteDetails $quoteDetails */
 $quoteDetails = $viewModelFactory->create(QuoteDetails::class);
+$dob = $quoteDetails->getDob();
+if (empty($dob)) {
+    return '';
+}
 ?>
 <div>
     <span><?= __('Date of Birth') ?></span>:
-    <?= $quoteDetails->getDob() ?>
+    <?= $dob ?>
 </div>
 

@@ -9,9 +9,13 @@ use Yireo\LokiCheckout\ViewModel\QuoteDetails;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var QuoteDetails $quoteDetails */
 $quoteDetails = $viewModelFactory->create(QuoteDetails::class);
+$gender = $quoteDetails->getGender();
+if (empty($gender)) {
+    return '';
+}
 ?>
 <div>
     <span><?= __('Gender') ?></span>:
-    <?= $quoteDetails->getGender() ?>
+    <?= $gender ?>
 </div>
 
