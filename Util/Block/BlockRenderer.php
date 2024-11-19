@@ -72,7 +72,7 @@ class BlockRenderer
         }
 
         if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('Unexpected block type "%1"', $blockIdentifier));
+            throw new RuntimeException((string)__('No block found with identifier "%1"', $blockIdentifier));
         }
 
         $block->setAncestorBlock($ancestorBlock);
