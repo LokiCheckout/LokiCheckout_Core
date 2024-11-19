@@ -89,7 +89,16 @@
     </type>
 
     <type name="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin">
-
+        <arguments>
+            <argument name="injectables" xsi:type="array">
+                <item name="config" xsi:type="object">Yireo\LokiCheckout\Config\Config</item>
+                <item name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface</item>
+                <item name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</item>
+                <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>
+                <item name="streetlinesFactory" xsi:type="object">Yireo\LokiCheckout\ValueObject\StreetlinesFactory</item>
+                <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
+            </argument>
+        </arguments>
     </type>
 
     <type name="Yireo\HyvaThemeAutoRegistration\Observer\RegisterModuleForHyvaConfig">
