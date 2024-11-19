@@ -41,11 +41,6 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
-                        <argument name="css_classes" xsi:type="array">
-                            <item name="block" xsi:type="array">
-                                <item name="col-span" xsi:type="string">col-span-2</item>
-                            </item>
-                        </argument>
                         <argument name="max_length" xsi:type="number">6</argument>
                     </arguments>
                 </block>
@@ -56,11 +51,6 @@
                     <arguments>
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Firstname
-                        </argument>
-                        <argument name="css_classes" xsi:type="array">
-                            <item name="block" xsi:type="array">
-                                <item name="col-span" xsi:type="string">col-span-5</item>
-                            </item>
                         </argument>
                     </arguments>
                 </block>
@@ -83,11 +73,6 @@
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Lastname
                         </argument>
-                        <argument name="css_classes" xsi:type="array">
-                            <item name="block" xsi:type="array">
-                                <item name="col-span" xsi:type="string">col-span-5</item>
-                            </item>
-                        </argument>
                         <argument name="field_label" xsi:type="string">Surname</argument>
                     </arguments>
                 </block>
@@ -99,11 +84,6 @@
                     <arguments>
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Suffix
-                        </argument>
-                        <argument name="css_classes" xsi:type="array">
-                            <item name="block" xsi:type="array">
-                                <item name="col-span" xsi:type="string">col-span-2</item>
-                            </item>
                         </argument>
                     </arguments>
                 </block>

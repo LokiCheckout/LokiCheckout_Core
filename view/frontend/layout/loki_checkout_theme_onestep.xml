@@ -9,13 +9,15 @@
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\OneStep</argument>
                 </arguments>
 
-                <container name="loki-checkout.one-step.col1" as="col1" htmlTag="div" htmlClass="col1"/>
+                <container name="loki-checkout.one-step.col1" as="col1" htmlTag="div" htmlClass="col1">
+                    <container name="loki-checkout.one-step.col1.email-container" htmlTag="div" htmlClass="mb-8"/>
+                </container>
                 <container name="loki-checkout.one-step.col2" as="col2" htmlTag="div" htmlClass="col2"/>
             </block>
         </referenceBlock>
 
         <!-- Column 1 -->
-        <move element="loki-checkout.customer.email" destination="loki-checkout.one-step.col1" as="email"/>
+        <move element="loki-checkout.customer.email" destination="loki-checkout.one-step.col1.email-container" as="email"/>
         <move element="loki-checkout.shipping-address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
         <move element="loki-checkout.billing-address" destination="loki-checkout.one-step.col1" as="billing-address"/>
 
