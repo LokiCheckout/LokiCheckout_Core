@@ -19,7 +19,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
-<div  class="<?= $css('relative w-full mb-8') ?>" x-data="<?= $magewire->getJsName() ?>">
+<div class="<?= $css('relative w-full mb-8') ?>" x-data="<?= $magewire->getJsName() ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
@@ -29,7 +29,11 @@ $shippingMethods = $magewire->getShippingMethods();
             <label for="shipping-<?= $code ?>">
                 <div class="flex cursor-pointer">
                     <div class="p-4">
-                        <input type="radio" value="<?= $code ?>" x-model="value" id="shipping-<?= $code ?>" <?= $magewire->value === $code ? 'checked' : '' ?>>
+                        <input type="radio"
+                               value="<?= $code ?>"
+                               x-model="method"
+                               id="shipping-<?= $code ?>"
+                            <?= $magewire->value === $code ? 'checked' : '' ?>>
                     </div>
                     <div class="p-4 w-auto font-bold">
                         <?= $priceFormatter->format($shippingMethod->getAmount()) ?>

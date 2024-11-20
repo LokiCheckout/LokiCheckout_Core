@@ -10,11 +10,9 @@ use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            value: '<?= $magewire->value ?>',
+            method: '<?= $magewire->value ?>',
             init() {
-                this.value = '<?= $magewire->value ?>';
-
-                this.$watch('value', () => {
+                this.$watch('method', () => {
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                         detail: { method: this.value}
                     }));
