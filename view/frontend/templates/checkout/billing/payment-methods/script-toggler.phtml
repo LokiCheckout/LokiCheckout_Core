@@ -1,0 +1,12 @@
+<script>
+    window.addEventListener('checkout:payment:method-activate', (event) => {
+        const paymentCode = event.detail.method;
+        const elements = document.querySelectorAll('[data-payment-method-code]');
+        elements.forEach(element => {
+            element.style.display = 'none';
+        });
+
+        const element = document.querySelector('[data-payment-method-code="' + paymentCode + '"]');
+        element.style.display = 'block';
+    });
+</script>

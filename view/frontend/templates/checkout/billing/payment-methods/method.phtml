@@ -13,15 +13,16 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var PaymentMethodInterface $paymentMethod */
 $paymentMethod = $block->getMethod();
-$current = $block->getCurrent();
+$code = $paymentMethod->getCode();
+$isCurrent = $block->getIsCurrent();
+$componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
 ?>
-<?php $code = $paymentMethod->getCode(); ?>
-
 <li class="cursor-pointer relative my-4 py-2">
     <input
         type="radio"
         x-model="value"
         value="<?= $code ?>"
+        <?php if ($isCurrent) : ?>checked<?php endif ?>
         id="payment-<?= $code ?>">
 
     <div class="inline-block ml-4">
@@ -29,7 +30,7 @@ $current = $block->getCurrent();
         <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
     </div>
 
-    <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
+    <div class="m-4 ml-10 <?php if (!$isCurrent) : ?>hidden<?php endif ?>" data-payment-method-code="<?= $code ?>">
         <?= $blockRenderer->html(
             'loki-checkout.billing.payment-methods.'.$code.'.form',
             $block,

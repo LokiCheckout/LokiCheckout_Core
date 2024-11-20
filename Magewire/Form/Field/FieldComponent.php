@@ -113,9 +113,8 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function isVisible(): bool
     {
-        return true;
+        return true; // @todo: Is this still a handy thing?
     }
-
 
     public function isDisabled(): bool
     {

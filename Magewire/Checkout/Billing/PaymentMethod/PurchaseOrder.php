@@ -7,6 +7,8 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PurchaseOrder extends FieldComponent
 {
+    protected $listeners = ['paymentMethodChange' => 'refresh'];
+
     public string $value = '';
 
     public function __construct(
@@ -35,10 +37,4 @@ class PurchaseOrder extends FieldComponent
     {
         return (string)__('Purchase Order Number');
     }
-
-    public function isVisible(): bool
-    {
-        return $this->checkoutState->getQuote()->getPayment()->getMethod() === 'purchaseorder';
-    }
-
 }

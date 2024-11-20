@@ -1,0 +1,29 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+$magewireId = $block->getMagewireId();
+$paymentMethodCode = $block->getMethodCode();
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $block->getParentBlock()->getComponentName() ?>', () => ({
+            wireId: '<?= $magewireId ?>',
+            value: '<?= $paymentMethodCode ?>',
+            init() {
+                const selector = '[data-payment-method-code="' + this.value + '"]';
+                document.querySelector(selector).style.display = 'block';
+
+                this.$watch('value', () => {
+                    window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
+                        detail: { method: this.value}
+                    }));
+
+                    this.$component(this).call('setValue', this.value);
+                });
+            }
+        }));
+    });
+</script>

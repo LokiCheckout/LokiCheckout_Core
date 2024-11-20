@@ -24,11 +24,15 @@ $paymentMethods = $magewire->getPaymentMethods();
                 $block,
                 [
                     'method' => $paymentMethod,
-                    'current' => $paymentMethod->getCode() === $magewire->value,
+                    'is_current' => $paymentMethod->getCode() === $magewire->value,
                 ]
             ) ?>
         <?php endforeach; ?>
     </ul>
 
-    <?= $blockRenderer->html('loki-checkout.billing.payment-methods.script', $block) ?>
+    <?= $blockRenderer->getChildHtml('script-component', $block, [
+        'magewire_id' => $magewire->id,
+        'method_code' => $magewire->value,
+    ]) ?>
+    <?= $blockRenderer->getChildHtml('script-toggler', $block, []) ?>
 </div>
