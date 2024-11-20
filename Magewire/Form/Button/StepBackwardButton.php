@@ -48,12 +48,6 @@ class StepBackwardButton extends Component implements ButtonInterface
         $this->emit('stepChange', $this->getStep());
     }
 
-    public function allow(): bool
-    {
-        // @todo: Allow checking upon validation rules
-        return true;
-    }
-
     public function isVisible(): bool
     {
         if ($this->stepNavigator->isFirstStep($this->stepNavigator->getCurrentStep())) {

@@ -15,26 +15,26 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         Alpine.store('step', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
+            getComponents() {
+                return Object.values(this.components);
+            },
+            getComponentsByStep(step) {
+                return this.getComponents().filter(component => component.step === step);
+            },
             add(component) {
                 this.components[component.name] = component;
             },
             get(componentName) {
                 return this.components[componentName];
             },
-            hasOnlyValidComponents(step) {
-                return !this.hasInvalidComponents(step);
+            getInvalidComponents(step) {
+                return this.getComponentsByStep(step).filter(component => component.valid === false);
             },
             hasInvalidComponents(step) {
-                let hasInvalid = false;
-                Object.keys(this.components).forEach(componentName => {
-                    component = this.components[componentName];
-
-                    if (component.valid === false && component.step === step) {
-                        hasInvalid = true;
-                    }
-                });
-
-                return hasInvalid;
+                return this.getInvalidComponents(step).length > 0;
+            },
+            hasOnlyValidComponents(step) {
+                return !this.hasInvalidComponents(step);
             },
             lock(component) {
                 this.components[component.name].locked = true;

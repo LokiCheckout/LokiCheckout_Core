@@ -8,6 +8,5 @@ interface ButtonInterface
     public function getElementId(): string;
     public function getStep(): string;
     public function submit();
-    public function allow(): bool;
     public function isVisible(): bool;
 }

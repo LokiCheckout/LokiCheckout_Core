@@ -10,15 +10,15 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 
 if (false === $magewire instanceof StepBackwardButton) {
-    echo '<div>Not a valid button class: '.get_class($magewire).'</div>';
+    echo '<div></div>';
 
     return;
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>"  <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
-    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn m-2', 'button') ?> <?= $magewire->allow() ? 'btn-secondary' : 'disabled:opacity-75' ?>"
+    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"
-        <?= $magewire->allow() ? '' : 'disabled="disabled"' ?>
+            :class="valid ? 'btn-primary' : 'disabled:opacity-75'"
             wire:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>

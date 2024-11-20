@@ -62,11 +62,6 @@ class StepForwardButton extends Component implements ButtonInterface
         }
     }
 
-    public function allow(): bool
-    {
-        return true;
-    }
-
     public function isVisible(): bool
     {
         return true;
