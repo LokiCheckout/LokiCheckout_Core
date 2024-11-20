@@ -29,16 +29,6 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 
-    public function enableSameAsBilling(): bool
-    {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable_same_as_billing');
-    }
-
-    public function enableVatIdOnlyForCompany(): bool
-    {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable_vat_id_only_for_company');
-    }
-
     public function isDebug(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
@@ -54,6 +44,21 @@ class Config
         }
 
         return $theme;
+    }
+
+    public function enableSameAsBilling(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_same_as_billing');
+    }
+
+    public function getSameAsBillingValue(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/same_as_billing_value');
+    }
+
+    public function enableVatIdOnlyForCompany(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_vat_id_only_for_company');
     }
 
     private function getAvailableThemes(): array

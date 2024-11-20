@@ -33,33 +33,6 @@
                         <field id="*/*/enable">1</field>
                     </depends>
                 </field>
-                <field id="enable_same_as_billing"
-                       translate="label"
-                       type="select"
-                       sortOrder="1"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="0">
-                    <label>Enable Same As Billing</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <depends>
-                        <field id="*/*/enable">1</field>
-                    </depends>
-                </field>
-                <field id="enable_vat_id_only_for_company"
-                       translate="label"
-                       type="select"
-                       sortOrder="1"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1">
-                    <label>Enable Vat ID Only For Companies</label>
-                    <comment>Show the VAT ID field only if a company value is entered</comment>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <depends>
-                        <field id="*/*/enable">1</field>
-                    </depends>
-                </field>
                 <field id="debug"
                        translate="label"
                        type="select"
@@ -82,6 +55,49 @@
                        showInStore="0">
                     <label>License Key</label>
                     <comment>Login in your Yireo Account and navigate to "My Licenses"</comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="fields" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Field settings</label>
+                <field id="enable_same_as_billing"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="0">
+                    <label>Enable Same As Billing Checkbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="same_as_billing_value"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="0">
+                    <label>Default Value for Same As Billing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable_same_as_billing">1</field>
+                    </depends>
+                </field>
+                <field id="enable_vat_id_only_for_company"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable Vat ID Only For Companies</label>
+                    <comment>Show the VAT ID field only if a company value is entered</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>
