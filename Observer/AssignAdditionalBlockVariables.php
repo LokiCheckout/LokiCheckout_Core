@@ -42,7 +42,9 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         $block->assign('css', $this->cssClass->setBlock($block));
         $block->assign('blockRenderer', $this->blockRenderer);
 
-        $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());
-        $block->setComponentName($componentName);
+        if (!$block->getComponentName()) {
+            $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());
+            $block->setComponentName($componentName);
+        }
     }
 }
