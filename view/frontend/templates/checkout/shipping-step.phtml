@@ -24,7 +24,6 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
     <?= $block->getChildHtml('shipping-methods') ?>
 
     <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
-        <?= $block->getChildHtml('backward-button') ?>
-        <?= $block->getChildHtml('forward-button') ?>
+        <?= $block->getChildHtml('buttons') ?>
     </div>
 </div>
