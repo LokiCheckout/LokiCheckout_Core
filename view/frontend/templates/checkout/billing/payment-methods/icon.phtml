@@ -3,15 +3,22 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PaymentMethodIcon;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentMethodIcon $paymentMethodIcon */
+/** @var CssClass $css */
+// @todo: Show how to change CSS here
 
 $paymentMethodCode = $block->getCode();
 $paymentMethodIcon = $viewModelFactory->create(PaymentMethodIcon::class);
+$icon = $paymentMethodIcon->getIcon($paymentMethodCode);
+if (empty($icon)) {
+    return;
+}
 ?>
-<div  class="float-right drop-shadow-2xl">
+<div class="<?= $css('inline-block mr-2 drop-shadow-2xl') ?>">
     <?= $paymentMethodIcon->getIcon($paymentMethodCode) ?>
 </div>

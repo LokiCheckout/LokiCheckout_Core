@@ -11,10 +11,11 @@
                 </argument>
             </arguments>
             <block
-                name="loki-checkout.billing.payment-methods.script"
-                as="script"
-                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script.phtml">
-            </block>
+                name="loki-checkout.billing.payment-methods.method" as="method"
+                template="Yireo_LokiCheckout::checkout/billing/payment-methods/method.phtml"/>
+            <block
+                name="loki-checkout.billing.payment-methods.script" as="script"
+                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script.phtml"/>
         </block>
 
         <block

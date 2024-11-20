@@ -14,40 +14,19 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
-<div  class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>">
+<div class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
     <ul>
         <?php foreach ($paymentMethods as $paymentMethod): ?>
-            <?php $code = $paymentMethod->getCode(); ?>
-            <?php $current = $paymentMethod->getCode() === $magewire->value; ?>
-            <label for="payment-<?= $code ?>">
-                <?php // @todo: Move this to a child template ?>
-                <li class="cursor-pointer relative my-4 py-2">
-                    <input
-                        type="radio"
-                        x-model="value"
-                        value="<?= $code ?>"
-                        id="payment-<?= $code ?>">
-
-                    <span class="ml-4"><?= $paymentMethod->getTitle() ?></span>
-
-                    <?= $blockRenderer->html('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
-
-                    <div class="m-4 ml-10 <?= $current ? 'block' : 'hidden' ?>" x-ref="<?= $paymentMethod->getCode() ?>">
-                        <?= $blockRenderer->html(
-                            'loki-checkout.billing.payment-methods.'.$code.'.form',
-                            $block,
-                            ['method' => $code]
-                        ) ?>
-                        <?= $blockRenderer->html(
-                            'loki-checkout.billing.payment-methods.'.$code.'.additional',
-                            $block,
-                            ['method' => $code])
-                        ?>
-                    </div>
-                </li>
-            </label>
+            <?= $blockRenderer->html(
+                'loki-checkout.billing.payment-methods.method',
+                $block,
+                [
+                    'method' => $paymentMethod,
+                    'current' => $paymentMethod->getCode() === $magewire->value,
+                ]
+            ) ?>
         <?php endforeach; ?>
     </ul>
 
