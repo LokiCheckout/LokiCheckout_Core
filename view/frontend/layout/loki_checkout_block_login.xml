@@ -9,6 +9,16 @@
                 <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\Login
                 </argument>
             </arguments>
+
+            <block class="Magento\Customer\Block\Form\Login" name="loki-checkout.login.form" as="form" template="Magento_Customer::form/login.phtml">
+                <arguments>
+                    <argument name="button_lock_manager" xsi:type="object">Magento\Framework\View\Element\ButtonLockManager</argument>
+                </arguments>
+
+                <container name="form.additional.info" as="form_additional_info">
+                    <block name="loki-checkout.login.form.additional" template="Yireo_LokiCheckout::checkout/login/form_additional.phtml"/>
+                </container>
+            </block>
         </block>
     </body>
 </page>

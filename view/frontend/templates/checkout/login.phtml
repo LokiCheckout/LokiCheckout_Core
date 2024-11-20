@@ -16,12 +16,29 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
+
+$logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div  class="<?= $css('card bg-gray-100 my-2') ?>">
+<div  class="<?= $css('card bg-gray-100 my-2') ?>" x-data="<?= $block->getComponentName() ?>">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
+        (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)
     <?php else: ?>
-        <a href="/customer/account"><?= __('Sign In') ?></a>
+        <button @click="toggleShowForm"><?= __('Sign In') ?></button>
     <?php endif; ?>
-    <?= $block->getChildHtml() ?>
+
+    <div x-cloak x-show="showForm">
+    <?= $block->getChildHtml('form') ?>
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('<?= $block->getComponentName() ?>', () => ({
+                showForm: false,
+                toggleShowForm() {
+                    this.showForm = !this.showForm;
+                }
+            }));
+        });
+    </script>
 </div>
