@@ -7,6 +7,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FieldTemplate
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\JsValidateBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
 
 abstract class FieldComponent extends Component implements FormFieldInterface
@@ -16,6 +17,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     use JsValidateBehaviour;
     use FieldTemplateLocatorBehaviour;
     use ParentBehaviour;
+    use StepBehaviour;
 
     protected string $elementId = '';
 

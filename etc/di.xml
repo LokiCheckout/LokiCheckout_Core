@@ -57,6 +57,14 @@
         </arguments>
     </type>
 
+    <type name="Magewirephp\Magewire\Model\ComponentManager">
+        <arguments>
+            <argument name="hydrationPool" xsi:type="array">
+                <item name="loki_component_register" xsi:type="object">Yireo\LokiCheckout\Magewire\Hydrator\ComponentRegisterHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+
     <!--
     <type name="Magewirephp\Magewire\Model\ComponentResolver">
         <arguments>

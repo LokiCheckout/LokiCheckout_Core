@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
@@ -28,11 +29,14 @@ if (false === $magewire->isVisible()) {
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
-     ) && 'required' ?> <?= $magewire->getFieldName() ?>" x-data="<?= $magewire->getJsName() ?>">
+     ) && 'required' ?> <?= $magewire->getFieldName() ?>"
+     x-data="<?= $magewire->getJsName() ?>">
+
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
         <?= __($magewire->getFieldLabel()) ?>
         <?= $magewire->isRequired() ? $block->getBlockHtml('loki-checkout.utils.required') : '' ?>
     </label>
+
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
         <?= $blockRenderer->html($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
 

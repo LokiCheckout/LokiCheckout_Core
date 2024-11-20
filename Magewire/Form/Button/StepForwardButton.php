@@ -4,6 +4,8 @@ namespace Yireo\LokiCheckout\Magewire\Form\Button;
 
 use Exception;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\ComponentRegistry;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepForwardButton extends Component implements ButtonInterface
@@ -16,7 +18,13 @@ class StepForwardButton extends Component implements ButtonInterface
 
     public function __construct(
         private StepNavigator $stepNavigator,
+        private ComponentRegistry $componentRegistry
     ) {
+    }
+
+    public function getComponents(): array
+    {
+        return $this->componentRegistry->getComponentsByStep($this->getStep());
     }
 
     public function getElementId(): string

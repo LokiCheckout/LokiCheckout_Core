@@ -34,12 +34,14 @@ class SetterInjectionPlugin
             }
         }
 
-        if ($component instanceof BillingAddressFieldComponentInterface) {
-            $component->setAddressState($this->billingAddressState);
+        if ($component instanceof ShippingAddressFieldComponentInterface) {
+            $component->setStep('shipping'); // @todo: What about onestep?
+            $component->setAddressState($this->shippingAddressState);
         }
 
-        if ($component instanceof ShippingAddressFieldComponentInterface) {
-            $component->setAddressState($this->shippingAddressState);
+        if ($component instanceof BillingAddressFieldComponentInterface) {
+            $component->setStep('billing'); // @todo: What about onestep?
+            $component->setAddressState($this->billingAddressState);
         }
 
         return $component;
