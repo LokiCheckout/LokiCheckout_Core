@@ -32,16 +32,22 @@ class BillingAsShippingService
         return true;
     }
 
-    public function getValueFromAddress(AddressInterface $address)
+    public function getValueFromAddress(AddressInterface $address): bool
     {
         if (false === $this->isEnabled()) {
             return false;
         }
 
-        return (bool)$address->getSameAsBilling();
+        $currentValue = $address->getSameAsBilling();
+        if ($currentValue !== null) {
+            return (bool)$currentValue;
+        }
+
+        // @todo: Does this work or not?
+        return $this->config->getSameAsBillingValue();
     }
 
-    public function copy(AddressInterface $fromAddress, AddressInterface $toAddress)
+    public function copy(AddressInterface $fromAddress, AddressInterface $toAddress): void
     {
         $this->copyService->copyFieldsetToTarget(
             'customer_address',

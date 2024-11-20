@@ -17,7 +17,7 @@ class BillingAsShipping extends Component
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
         private readonly ShippingAddressState $shippingAddressState,
-        private CartRepositoryInterface $cartRepository,
+        private readonly CartRepositoryInterface $cartRepository,
         private readonly BillingAsShippingService $billingAsShippingService
     ) {
     }

@@ -25,6 +25,10 @@ class BillingAddress extends Component
 
     public function getHtml(): string
     {
+        if ($this->isSameAsShipping()) {
+            return '';
+        }
+
         $address = $this->billingAddressState->getBillingAddress();
         return $this->addressRenderer->getHtml($address);
     }
