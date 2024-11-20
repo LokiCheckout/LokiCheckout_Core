@@ -18,7 +18,7 @@ $paymentMethodCode = $block->getMethodCode();
 
                 this.$watch('value', () => {
                     window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
-                        detail: { method: this.value}
+                        detail: {method: this.value}
                     }));
 
                     this.$component(this).call('setValue', this.value);
