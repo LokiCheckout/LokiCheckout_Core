@@ -16,7 +16,7 @@ if (false === $magewire instanceof StepForwardButton) {
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
-    <button x-show="<?= $magewire->isVisible() ? 'true' : 'false' ?>" class="hidden <?= $css('btn m-2', 'button') ?>"
+    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn m-2', 'button') ?>"
             type="button"
             :disabled="!valid"
             :class="valid ? 'btn-primary' : 'disabled:opacity-75'"
@@ -25,12 +25,6 @@ if (false === $magewire instanceof StepForwardButton) {
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
-
-    <pre>
-        <?php foreach ($magewire->getComponents() as $component): ?>
-            <?= get_class($component) ?><br/>
-        <?php endforeach; ?>
-    </pre>
 
     <?= $block->getChildBlock('script')->addData(['component' => $magewire])->toHtml(); ?>
 </div>

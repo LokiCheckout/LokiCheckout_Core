@@ -12,15 +12,16 @@ $magewire = $block->getComponent();
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
             wireId: '<?= $magewire->id ?>',
+            visible: <?= $magewire->isVisible() ? 'true' : 'false' ?>,
             valid: <?= $magewire->allow() ? 'true' : 'false' ?>,
             init() {
-                this.update();
+                this.updateValid();
 
                 window.addEventListener('yireo-loki-checkout.step-change', () => {
-                    this.update();
+                    this.updateValid();
                 });
             },
-            update() {
+            updateValid() {
                 this.valid = !Alpine.store('step').hasInvalidComponents('<?= $magewire->getStep() ?>');
             },
             submit() {

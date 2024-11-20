@@ -15,32 +15,31 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep();
 ?>
-<div  class="<?= $css('') ?>" x-data="<?= $block->getComponentName() ?>">
+<div class="<?= $css('') ?>">
     <?php foreach ($block->getChildNames() as $childName) : ?>
         <?php $stepBlock = $block->getLayout()->getBlock($childName); ?>
         <?php $step = $stepBlock->getMagewire(); ?>
-        <div x-show="<?= $step->getCode() ?>" x-transition>
+        <?php $isCurrent = $stepNavigator->isCurrentStep($step) ?>
+        <div
+            x-data="<?= $block->getComponentName() . ucfirst($step->getCode()) ?>"
+            <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
+             x-show="visible"
+             x-transition>
             <?= $block->getLayout()->getBlock($childName)->toHtml() ?>
         </div>
-    <?php endforeach; ?>
 
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('<?= $block->getComponentName() ?>', () => ({
-                currentStep: '<?= $currentStep->getCode() ?>',
-                <?php foreach ($stepNavigator->getSteps() as $step): ?>
-                <?= $step->getCode() ?>: <?= $stepNavigator->isCurrentStep($step) ? 'true' : 'false' ?>,
-                <?php endforeach; ?>
-                init() {
-                    this.currentStep = Alpine.store('step').currentStep;
-                    Livewire.on('stepChange', (stepCode) => {
-                        this.currentStep = stepCode;
-                        <?php foreach ($stepNavigator->getSteps() as $step): ?>
-                        this.<?= $step->getCode() ?> = '<?= $step->getCode() ?>' === stepCode;
-                        <?php endforeach; ?>
-                    });
-                }
-            }));
-        });
-    </script>
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('<?= $block->getComponentName() . ucfirst($step->getCode()) ?>', () => ({
+                    visible: <?= $isCurrent ? 'true' : 'false' ?>,
+                    init() {
+                        //this.visible = '<?= $step->getCode() ?>' === Alpine.store('step').currentStep; // @todo: Is this needed?
+                        Livewire.on('stepChange', (stepCode) => {
+                            this.visible = '<?= $step->getCode() ?>' === stepCode;
+                        });
+                    }
+                }));
+            });
+        </script>
+    <?php endforeach; ?>
 </div>
