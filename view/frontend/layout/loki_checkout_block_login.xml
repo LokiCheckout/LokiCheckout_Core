@@ -14,10 +14,8 @@
                 <arguments>
                     <argument name="button_lock_manager" xsi:type="object">Magento\Framework\View\Element\ButtonLockManager</argument>
                 </arguments>
-
-                <container name="form.additional.info" as="form_additional_info">
-                    <block name="loki-checkout.login.form.additional" template="Yireo_LokiCheckout::checkout/login/form_additional.phtml"/>
-                </container>
+                
+                <container name="form.additional.info" as="form_additional_info"/>
             </block>
         </block>
     </body>
