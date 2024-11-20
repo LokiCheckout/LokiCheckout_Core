@@ -25,7 +25,7 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
         </button>
     <?php endif; ?>
 
-    <div x-show="showNewAddress">
+    <div x-cloak x-show="showNewAddress">
         <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
         <?= $block->getChildHtml('address-form') ?>
     </div>

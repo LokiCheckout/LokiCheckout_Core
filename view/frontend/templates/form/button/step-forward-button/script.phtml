@@ -18,11 +18,12 @@ $magewire = $block->getComponent();
                 this.updateValid();
 
                 window.addEventListener('yireo-loki-checkout.step-change', () => {
+                    this.valid = false;
                     this.updateValid();
                 });
             },
             updateValid() {
-                this.valid = !Alpine.store('step').hasInvalidComponents('<?= $magewire->getStep() ?>');
+                this.valid = Alpine.store('step').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
             },
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));

@@ -21,10 +21,14 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             get(componentName) {
                 return this.components[componentName];
             },
+            hasOnlyValidComponents(step) {
+                return !this.hasInvalidComponents(step);
+            },
             hasInvalidComponents(step) {
                 let hasInvalid = false;
                 Object.keys(this.components).forEach(componentName => {
                     component = this.components[componentName];
+
                     if (component.valid === false && component.step === step) {
                         hasInvalid = true;
                     }

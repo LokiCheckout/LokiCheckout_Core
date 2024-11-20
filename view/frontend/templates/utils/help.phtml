@@ -22,7 +22,7 @@ $text = $block->getAncestorBlock()->getHelpText();
              height="<?= $size ?>">
     </button>
 
-    <div x-show="show" class="<?= $css('absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white', 'popup') ?>">
+    <div x-cloak x-show="show" class="<?= $css('absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white', 'popup') ?>">
         <?= $text ?>
     </div>
 
