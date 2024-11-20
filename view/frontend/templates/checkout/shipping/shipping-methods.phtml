@@ -24,29 +24,34 @@ $shippingMethods = $magewire->getShippingMethods();
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
     <div>
-        <?php foreach ($shippingMethods as $shippingMethod): ?>
-            <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
-            <label for="shipping-<?= $code ?>">
-                <div class="flex cursor-pointer">
-                    <div class="p-4">
-                        <input type="radio"
-                               value="<?= $code ?>"
-                               x-model="method"
-                               id="shipping-<?= $code ?>"
-                            <?= $magewire->value === $code ? 'checked' : '' ?>>
+        <?php if (!empty($shippingMethods)): ?>
+            <?php foreach ($shippingMethods as $shippingMethod): ?>
+                <?php /** @todo: Move this to child-template */ ?>
+                <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
+                <label for="shipping-<?= $code ?>">
+                    <div class="flex cursor-pointer">
+                        <div class="p-4">
+                            <input type="radio"
+                                   value="<?= $code ?>"
+                                   x-model="method"
+                                   id="shipping-<?= $code ?>"
+                                <?= $magewire->value === $code ? 'checked' : '' ?>>
+                        </div>
+                        <div class="p-4 w-auto font-bold">
+                            <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
+                        </div>
+                        <div class="p-4 w-auto">
+                            <?= $shippingMethod->getMethodTitle() ?>
+                        </div>
+                        <div class="p-4">
+                            <?= $shippingMethod->getCarrierTitle() ?>
+                        </div>
                     </div>
-                    <div class="p-4 w-auto font-bold">
-                        <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
-                    </div>
-                    <div class="p-4 w-auto">
-                        <?= $shippingMethod->getMethodTitle() ?>
-                    </div>
-                    <div class="p-4">
-                        <?= $shippingMethod->getCarrierTitle() ?>
-                    </div>
-                </div>
-            </label>
-        <?php endforeach; ?>
+                </label>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <?= __('No shipping methods available') ?>
+        <?php endif; ?>
     </div>
 
     <?= $block->getChildHtml('script') ?>

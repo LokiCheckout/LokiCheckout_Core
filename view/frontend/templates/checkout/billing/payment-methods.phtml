@@ -17,18 +17,23 @@ $paymentMethods = $magewire->getPaymentMethods();
 <div class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
-    <ul>
-        <?php foreach ($paymentMethods as $paymentMethod): ?>
-            <?= $blockRenderer->html(
-                'loki-checkout.billing.payment-methods.method',
-                $block,
-                [
-                    'method' => $paymentMethod,
-                    'is_current' => $paymentMethod->getCode() === $magewire->value,
-                ]
-            ) ?>
-        <?php endforeach; ?>
-    </ul>
+
+    <?php if (!empty($paymentMethods)): ?>
+        <ul>
+            <?php foreach ($paymentMethods as $paymentMethod): ?>
+                <?= $blockRenderer->html(
+                    'loki-checkout.billing.payment-methods.method',
+                    $block,
+                    [
+                        'method' => $paymentMethod,
+                        'is_current' => $paymentMethod->getCode() === $magewire->value,
+                    ]
+                ) ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <?= __('No payment methods available') ?>
+    <?php endif; ?>
 
     <?= $blockRenderer->getChildHtml('script-component', $block, [
         'magewire_id' => $magewire->id,
