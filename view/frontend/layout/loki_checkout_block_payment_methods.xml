@@ -23,6 +23,7 @@
                 template="Yireo_LokiCheckout::checkout/billing/payment-methods/script-toggler.phtml"/>
         </block>
 
+        <!-- @todo Move this to separate module -->
         <block
             name="loki-checkout.billing.payment-methods.purchaseorder.form"
             template="Yireo_LokiCheckout::form/field.phtml">
@@ -33,6 +34,13 @@
                 <argument name="additional_css" xsi:type="string">p-4 border border-zinc-200 bg-zinc-100</argument>
             </arguments>
         </block>
+
+        <!-- @todo Move this to separate module -->
+        <referenceBlock name="loki-checkout.sidebar.preview.payment_details">
+            <block
+                name="loki-checkout.sidebar.preview.payment_details.purchaseorder"
+                template="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details/purchaseorder.phtml"/>
+        </referenceBlock>
 
         <block
             name="loki-checkout.billing.payment-methods.banktransfer.additional"

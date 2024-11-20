@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
+/** @var Template $block */
 /** @var PaymentDetails $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
@@ -19,4 +21,5 @@ if (empty($html)) {
 
     <span class="text-xl font-bold"><?= __('Payment Method') ?></span><br>
     <?= $html ?>
+    <?= $block->getChildHtml() ?>
 </div>
