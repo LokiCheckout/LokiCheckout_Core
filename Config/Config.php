@@ -29,11 +29,6 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 
-    public function isDebug(): bool
-    {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
-    }
-
     public function getTheme()
     {
         // @todo: Allow for switching themes easily in backend
@@ -44,6 +39,11 @@ class Config
         }
 
         return $theme;
+    }
+
+    public function isDebug(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
     }
 
     public function enableSameAsBilling(): bool
