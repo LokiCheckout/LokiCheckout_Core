@@ -6,12 +6,16 @@ use Override;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 
 class Region extends AddressFieldComponent implements FormTextSelectFieldInterface
 {
     protected $listeners = ['shippingStepSave' => 'refresh'];
 
     use OptionsBehaviour;
+    use InjectScopeConfig;
+    use InjectConfig;
 
     #[Override]
     public function boot(): void
@@ -33,5 +37,34 @@ class Region extends AddressFieldComponent implements FormTextSelectFieldInterfa
 
         $this->setValue($value);
         return $value;
+    }
+
+    public function isRequired(): bool
+    {
+        $countryId = $this->addressState->load('country_id');
+        if (empty($countryId)) {
+            return true;
+        }
+
+        $optionalCountries = $this->scopeConfig->getValue('general/country/optional_zip_countries');
+        $optionalCountries = explode(',', $optionalCountries);
+        if (in_array($countryId, $optionalCountries)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isVisible(): bool
+    {
+        if (false === $this->config->hideRegionWhenOptional()) {
+            return true;
+        }
+
+        if ($this->isRequired()) {
+            return true;
+        }
+
+        return false;
     }
 }

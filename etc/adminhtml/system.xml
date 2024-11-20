@@ -88,6 +88,19 @@
                         <field id="*/*/enable_same_as_billing">1</field>
                     </depends>
                 </field>
+                <field id="hide_region_when_optional"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="0">
+                    <label>Hide Region When Optional</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
                 <field id="enable_vat_id_only_for_company"
                        translate="label"
                        type="select"

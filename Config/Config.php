@@ -61,6 +61,11 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_vat_id_only_for_company');
     }
 
+    public function hideRegionWhenOptional(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/hide_region_when_optional');
+    }
+
     private function getAvailableThemes(): array
     {
         // @todo: Make this extensible

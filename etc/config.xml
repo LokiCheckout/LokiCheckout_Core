@@ -11,6 +11,7 @@
                 <enable_same_as_billing>1</enable_same_as_billing>
                 <same_as_billing_value>1</same_as_billing_value>
                 <enable_vat_id_only_for_company>0</enable_vat_id_only_for_company>
+                <hide_region_when_optional>0</hide_region_when_optional>
             </fields>
         </yireo_loki_checkout>
     </default>
