@@ -2,23 +2,21 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 
-use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingView  extends Component
 {
     public function __construct(
-        private readonly AddressConfig $addressConfig,
-        private readonly BillingAddressState $billingAddressState
+        private readonly BillingAddressState $billingAddressState,
+        private readonly AddressRenderer $addressRenderer
     ) {
     }
 
     public function getHtml(): string
     {
         $address = $this->billingAddressState->getBillingAddress();
-        $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
-
-        return $renderer->renderArray($address);
+        return $this->addressRenderer->getHtml($address);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
 
-use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingAddress extends Component
@@ -11,8 +11,9 @@ class ShippingAddress extends Component
     protected $listeners = ['shippingStepSave' => 'refresh'];
 
     public function __construct(
-        private readonly AddressConfig $addressConfig,
         private readonly ShippingAddressState $shippingAddressState,
+        private readonly AddressRenderer $addressRenderer
+
     ) {
     }
 
@@ -23,8 +24,6 @@ class ShippingAddress extends Component
         }
 
         $address = $this->shippingAddressState->getShippingAddress();
-        $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
-
-        return $renderer->renderArray($address);
+        return $this->addressRenderer->getHtml($address);
     }
 }

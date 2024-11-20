@@ -10,6 +10,7 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
