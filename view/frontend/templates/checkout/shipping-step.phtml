@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
@@ -12,10 +13,11 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var ShippingStep $magewire */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<div  class="<?= $css('') ?>">
+<div class="<?= $css('') ?>">
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping']) ?>
 
     <div class="<?= $css('mb-8', 'email') ?>">
