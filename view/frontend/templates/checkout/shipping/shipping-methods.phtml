@@ -23,7 +23,13 @@ $shippingMethods = $magewire->getShippingMethods();
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
-    <div>
+    <div
+        data-type="field"
+        x-ref="field"
+        <?php if ($magewire->hasErrors()): ?>
+            aria-invalid="true" data-invalid="true"
+        <?php endif ?>
+        class="border border-transparent data-[invalid=true]:border-red-500">
         <?php if (!empty($shippingMethods)): ?>
             <?php foreach ($shippingMethods as $shippingMethod): ?>
                 <?php /** @todo: Move this to child-template */ ?>
@@ -33,7 +39,7 @@ $shippingMethods = $magewire->getShippingMethods();
                         <div class="p-4">
                             <input type="radio"
                                    value="<?= $code ?>"
-                                   x-model="method"
+                                   x-model="value"
                                    id="shipping-<?= $code ?>"
                                 <?= $magewire->value === $code ? 'checked' : '' ?>>
                         </div>
@@ -53,6 +59,8 @@ $shippingMethods = $magewire->getShippingMethods();
             <?= __('No shipping methods available') ?>
         <?php endif; ?>
     </div>
+
+    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
 
     <?= $block->getChildHtml('script') ?>
 </div>

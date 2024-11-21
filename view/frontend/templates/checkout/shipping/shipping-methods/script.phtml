@@ -10,9 +10,18 @@ use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            method: '<?= $magewire->value ?>',
+            name: '<?= $magewire->getJsName() ?>',
+            wireId: '<?= $magewire->id ?>',
+            step: 'shipping', // @todo: make this dynamic just like with FieldComponents
+            value: '<?= $magewire->value ?>',
+            valid: <?= $magewire->valid ? 'true' : 'false' ?>,
+            rules: [
+                'required'
+            ],
             init() {
-                this.$watch('method', () => {
+                Alpine.store('step').add(this);
+
+                this.$watch('value', () => {
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                         detail: { method: this.value}
                     }));

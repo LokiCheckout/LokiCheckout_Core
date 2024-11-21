@@ -13,8 +13,8 @@ class ShippingMethods extends Component
     use InjectConfig;
 
     private array $shippingMethods = [];
-
     public string $value = '';
+    public bool $valid = false;
 
     public function __construct(
         private readonly ShippingMethodManagementInterface $shippingMethodManagement,
@@ -47,6 +47,10 @@ class ShippingMethods extends Component
             $this->shippingAddressState->getShippingAddress()->setShippingMethod($firstShippingMethod);
             $quote->save();
         }
+
+        if (!empty($this->value)) {
+            $this->valid = true;
+        }
     }
 
     /**
@@ -68,6 +72,7 @@ class ShippingMethods extends Component
             ->setShippingMethod($value);
 
         $quote->save();
+        $this->valid = true;
 
         $this->emit('shippingStepSave');
 

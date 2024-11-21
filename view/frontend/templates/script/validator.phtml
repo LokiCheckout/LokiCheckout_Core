@@ -17,7 +17,8 @@
 
             component.rules.forEach(rule => {
                 if (false === this.rules[rule](component)) {
-                    isValid = false;
+                    isValid = false; // @todo: Exit at first rule that fails
+                    return false;
                 }
             })
 
@@ -30,23 +31,26 @@
             return isValid;
         },
         setInvalid: function (component) {
-            Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
-                element.setCustomValidity('Value is invalid');
+            component.valid = false;
+            const elements = component.$root.querySelectorAll('[data-type="field"]');
+            elements.forEach(element => {
+                if (element.tagName === 'input') {
+                    element.setCustomValidity('Value is invalid');
+                }
                 element.setAttribute('data-invalid', true);
                 element.setAttribute('aria-invalid', true);
             });
 
-            component.valid = false;
             window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
         },
         setValid: function (component) {
+            component.valid = true;
             Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
                 element.setCustomValidity('');
                 element.removeAttribute('data-invalid');
                 element.removeAttribute('aria-invalid');
             });
 
-            component.valid = true;
             window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
         }
     }

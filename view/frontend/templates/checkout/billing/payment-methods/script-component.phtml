@@ -13,9 +13,7 @@ $paymentMethodCode = $block->getMethodCode();
             wireId: '<?= $magewireId ?>',
             value: '<?= $paymentMethodCode ?>',
             init() {
-                const selector = '[data-payment-method-code="' + this.value + '"]';
-                document.querySelector(selector).style.display = 'block';
-
+                this.showPaymentMethodBlocks();
                 this.$watch('value', () => {
                     window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
                         detail: {method: this.value}
@@ -23,6 +21,20 @@ $paymentMethodCode = $block->getMethodCode();
 
                     this.$component(this).call('setValue', this.value);
                 });
+            },
+            showPaymentMethodBlocks() {
+                if (!this.value) {
+                    return;
+                }
+
+                const selector = '[data-payment-method-code="' + this.value + '"]';
+                const element = document.querySelector(selector);
+                if (element) {
+                    element.style.display = 'block';
+                    return;
+                }
+
+                console.warn('No element for selector', selector);
             }
         }));
     });

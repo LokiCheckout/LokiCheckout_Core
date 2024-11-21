@@ -22,7 +22,7 @@ $paymentMethods = $magewire->getPaymentMethods();
         <ul>
             <?php foreach ($paymentMethods as $paymentMethod): ?>
                 <?= $blockRenderer->html(
-                    'loki-checkout.billing.payment-methods.method',
+                    'loki-checkout.billing.payment-methods.item',
                     $block,
                     [
                         'method' => $paymentMethod,
