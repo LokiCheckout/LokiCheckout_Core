@@ -5,10 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
 {
+    use InjectConfig;
+
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
     public string $value = '';
@@ -21,12 +24,15 @@ class PaymentMethods extends Component
 
     public function boot()
     {
-        $cartId = $this->checkoutState->getQuote()->getId();
+        $quote = $this->checkoutState->getQuote();
+        $cartId = $quote->getId();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
-        $this->value = (string) $this->checkoutState->getQuote()->getPayment()->getMethod();
+        $this->value = (string) $quote->getPayment()->getMethod();
 
-        if (empty($this->value)) {
+        if (empty($this->value) && $this->config->selectDefaultPaymentMethod()) {
             $this->value = $this->getDefaultPayment();
+            $quote->setShippingMethod($this->value);
+            $quote->save();
         }
     }
 

@@ -20,12 +20,11 @@ class BillingAddressState implements AddressStateInterface
         return $this->getBillingAddress()->getData($attributeCode);
     }
 
-    public function save(string $attributeCode, string $value)
+    public function save(string $attributeCode, string $value): void
     {
         $address = $this->getBillingAddress();
         $address->setData($attributeCode, $value);
         $address->getResource()->save($address);
-        //$this->checkoutSession->getQuote()->save();
     }
 
     public function getQuote(): Quote

@@ -66,6 +66,16 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/hide_region_when_optional');
     }
 
+    public function selectDefaultShippingMethod(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/shipping/select_default_shipping_method');
+    }
+
+    public function selectDefaultPaymentMethod(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/billing/select_default_payment_method');
+    }
+
     private function getAvailableThemes(): array
     {
         // @todo: Make this extensible

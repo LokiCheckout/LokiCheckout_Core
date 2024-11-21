@@ -5,10 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingMethods extends Component
 {
+    use InjectConfig;
+
     private array $shippingMethods = [];
 
     public string $value = '';
@@ -37,7 +40,7 @@ class ShippingMethods extends Component
             $this->value = '';
         }
 
-        if (empty($this->value)) {
+        if (empty($this->value) && $this->config->selectDefaultShippingMethod()) {
             // @todo: Make this optional
             $firstShippingMethod = (string)array_key_first($this->shippingMethods);
             $this->value = $firstShippingMethod;

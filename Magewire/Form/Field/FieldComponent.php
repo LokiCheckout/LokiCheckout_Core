@@ -26,7 +26,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function booted(): void
     {
-        $this->addRefreshListener(static::class.'::afterSetValue');
+        //$this->addRefreshListener(static::class.'::afterSetValue'); // @todo: Is this still needed in the first place?
     }
 
     protected function addRefreshListener(string $listener)

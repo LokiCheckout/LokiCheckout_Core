@@ -7,7 +7,9 @@ use Magento\Quote\Model\Quote;
 
 interface AddressStateInterface extends ArgumentInterface
 {
-    public function load(string $attributeCode):mixed;
-    public function save(string $attributeCode, string $value);
+    public function load(string $attributeCode): mixed;
+
+    public function save(string $attributeCode, string $value): void;
+
     public function getQuote(): Quote;
 }
