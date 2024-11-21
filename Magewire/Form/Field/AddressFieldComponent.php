@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field;
 
+use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\AddressStateBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\AttributeBehaviour;
 
@@ -29,16 +30,9 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     public function getFieldLabel(): string
     {
-        $parentBlock = $this->getParent();
-        if ($parentBlock) {
-            $fieldLabel = (string)$parentBlock->getFieldLabel();
-            if (!empty($fieldLabel)) {
-                if ($fieldLabel === '-') {
-                    return '';
-                }
-
-                return $fieldLabel;
-            }
+        $fieldLabel = $this->getFieldLabelFromLayout();
+        if (!empty($fieldLabel)) {
+            return $fieldLabel;
         }
 
         $attributeLabel = $this->getAttributeLabel();
@@ -49,6 +43,24 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return $this->getFieldName();
     }
 
+    protected function getFieldLabelFromLayout(): string
+    {
+        $parentBlock = $this->getParent();
+        if (false === $parentBlock instanceof Template) {
+            return '';
+        }
+
+        $fieldLabel = (string)$parentBlock->getFieldLabel();
+        if (empty($fieldLabel)) {
+            return '';
+        }
+
+        if ($fieldLabel === '-') {
+            return '';
+        }
+
+        return $fieldLabel;
+    }
 
     public function getStep(): string
     {

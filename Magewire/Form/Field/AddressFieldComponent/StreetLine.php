@@ -40,4 +40,18 @@ class StreetLine extends AddressFieldComponent
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
         return $streetLines > $this->index;
     }
+
+    public function getFieldLabel(): string
+    {
+        $fieldLabel = $this->getFieldLabelFromLayout();
+        if (!empty($fieldLabel)) {
+            return $fieldLabel;
+        }
+
+        if ($this->index > 0) {
+            return '';
+        }
+
+        return $this->getFieldName();
+    }
 }
