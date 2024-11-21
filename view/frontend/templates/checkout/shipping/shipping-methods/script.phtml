@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
             name: '<?= $magewire->getJsName() ?>',
             wireId: '<?= $magewire->id ?>',
-            step: 'shipping', // @todo: make this dynamic just like with FieldComponents
+            step: '<?= $magewire->getStep() ?>',
             value: '<?= $magewire->value ?>',
             valid: <?= $magewire->valid ? 'true' : 'false' ?>,
             rules: [

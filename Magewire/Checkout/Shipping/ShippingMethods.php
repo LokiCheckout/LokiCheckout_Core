@@ -5,12 +5,14 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingMethods extends Component
 {
     use InjectConfig;
+    use StepBehaviour;
 
     private array $shippingMethods = [];
     public string $value = '';
