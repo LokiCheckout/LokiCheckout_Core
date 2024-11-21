@@ -41,12 +41,13 @@ class ShippingAddress extends Component
         $customer = $this->customerRepository->getById($this->customerSession->getCustomerId());
         $this->checkoutState->getQuote()->assignCustomer($customer);
 
-        $this->currentShippingAddress = (string)$customer->getDefaultShipping();
         $this->shippingAddresses = $this->getCustomerAddresses($customer);
-
         if (empty($this->shippingAddresses)) {
             $this->newAddress = true;
+            return;
         }
+
+        $this->currentShippingAddress = (string)$customer->getDefaultShipping();
     }
 
 

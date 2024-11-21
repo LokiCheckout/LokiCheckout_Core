@@ -21,7 +21,7 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
         <?= $block->getChildHtml('address-select') ?>
         <button class="btn my-4 btn-primary" type="button" @click="toggleShowNewAddress"
                 wire:loading.attr="disabled">
-            <?= __('New Address') ?>
+            <?= __('Or Add A New Address') ?>
         </button>
     <?php endif; ?>
 
