@@ -1,0 +1,42 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\ViewModel\PriceFormatter;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var PriceFormatter $priceFormatter */
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$code = $block->getCode();
+$shippingMethod = $block->getMethod();
+$isCurrent = (bool)$block->getIsCurrent();
+?>
+<li class="cursor-pointer relative flex">
+    <div class="p-4">
+        <input type="radio"
+               value="<?= $code ?>"
+               x-model="value"
+               id="shipping-<?= $code ?>"
+            <?= $isCurrent ? 'checked' : '' ?>>
+    </div>
+    <div class="p-4 w-auto font-bold">
+        <label for="shipping-<?= $code ?>">
+            <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
+        </label>
+    </div>
+    <div class="p-4 w-auto">
+        <label for="shipping-<?= $code ?>">
+            <?= $shippingMethod->getMethodTitle() ?>
+        </label>
+    </div>
+    <div class="p-4">
+        <label for="shipping-<?= $code ?>">
+            <?= $shippingMethod->getCarrierTitle() ?>
+        </label>
+    </div>
+</li>

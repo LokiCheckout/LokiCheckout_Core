@@ -31,36 +31,25 @@ $shippingMethods = $magewire->getShippingMethods();
         <?php endif ?>
         class="border border-transparent data-[invalid=true]:border-red-500">
         <?php if (!empty($shippingMethods)): ?>
-            <?php foreach ($shippingMethods as $shippingMethod): ?>
-                <?php /** @todo: Move this to child-template */ ?>
-                <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
-                <label for="shipping-<?= $code ?>">
-                    <div class="flex cursor-pointer">
-                        <div class="p-4">
-                            <input type="radio"
-                                   value="<?= $code ?>"
-                                   x-model="value"
-                                   id="shipping-<?= $code ?>"
-                                <?= $magewire->value === $code ? 'checked' : '' ?>>
-                        </div>
-                        <div class="p-4 w-auto font-bold">
-                            <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
-                        </div>
-                        <div class="p-4 w-auto">
-                            <?= $shippingMethod->getMethodTitle() ?>
-                        </div>
-                        <div class="p-4">
-                            <?= $shippingMethod->getCarrierTitle() ?>
-                        </div>
-                    </div>
-                </label>
-            <?php endforeach; ?>
+            <ul>
+                <?php foreach ($shippingMethods as $shippingMethod): ?>
+                    <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
+                    <?= $blockRenderer->html(
+                        'loki-checkout.shipping.shipping-methods.item',
+                        $block,
+                        [
+                            'method' => $shippingMethod,
+                            'code' => $code,
+                            'is_current' => $code === $magewire->value,
+                        ]
+                    ) ?>
+                <?php endforeach; ?>
+            </ul>
         <?php else: ?>
             <?= __('No shipping methods available') ?>
         <?php endif; ?>
     </div>
 
     <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
-
     <?= $block->getChildHtml('script') ?>
 </div>
