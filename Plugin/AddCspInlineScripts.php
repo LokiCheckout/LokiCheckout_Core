@@ -17,7 +17,7 @@ class AddCspInlineScripts
 
     public function afterToHtml(Template $block, $html): string
     {
-        if (false === strstr((string)$block->getNameInLayout(), 'loki_checkout.')) {
+        if (false === strstr((string)$block->getNameInLayout(), 'loki-checkout')) {
             return (string)$html;
         }
 
