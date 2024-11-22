@@ -247,6 +247,10 @@
                     </arguments>
                 </block>
             </block>
+
+            <block name="loki-checkout.shipping-address.address-form-scripts"
+                   as="address-form-scripts"
+                   template="Yireo_LokiCheckout::checkout/shipping/address-form-scripts.phtml"/>
         </block>
     </body>
 </page>
