@@ -28,6 +28,7 @@ $buttonLabelSelectAddress = __('Select Address');
             },
             toggleNewAddress() {
                 this.newAddress = !this.newAddress;
+                Magewire.find('<?= $magewireId ?>').setNewAddress(this.newAddress);
             }
         }));
     });

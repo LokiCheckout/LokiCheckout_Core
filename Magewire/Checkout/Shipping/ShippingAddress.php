@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\AddressInterface;
@@ -28,28 +29,47 @@ class ShippingAddress extends Component
         private SearchCriteriaBuilder $searchCriteriaBuilder,
         private AddressConfig $addressConfig,
         private AddressMapper $addressMapper,
+        private CheckoutSession $checkoutSession
     ) {
     }
 
     public function boot()
     {
-        if (false === $this->customerSession->isLoggedIn()) {
-            $this->newAddress = true;
-            return;
+        if ($this->customerSession->isLoggedIn()) {
+            $this->bootForCustomer();
         }
 
+        $this->newAddress = $this->loadNewAddress();
+    }
+
+    private function bootForCustomer()
+    {
         $customer = $this->customerRepository->getById($this->customerSession->getCustomerId());
         $this->checkoutState->getQuote()->assignCustomer($customer);
 
         $this->shippingAddresses = $this->getCustomerAddresses($customer);
-        if (empty($this->shippingAddresses)) {
-            $this->newAddress = true;
-            return;
-        }
-
         $this->currentShippingAddress = (string)$customer->getDefaultShipping();
     }
 
+    private function loadNewAddress(): bool
+    {
+        if (false === $this->customerSession->isLoggedIn()) {
+            return true;
+        }
+
+        if (empty($this->shippingAddresses)) {
+            return true;
+        }
+
+        return (bool)$this->checkoutSession->getNewAddress();
+    }
+
+    public function setNewAddress($newAddress): void
+    {
+        $newAddress = (bool)$newAddress;
+        $this->checkoutSession->setNewAddress($newAddress);
+        $this->newAddress = $newAddress;
+    }
 
     public function updatedCurrentShippingAddress(mixed $value): mixed
     {

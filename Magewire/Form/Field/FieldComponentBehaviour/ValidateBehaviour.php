@@ -12,6 +12,8 @@ trait ValidateBehaviour
 
     public function validate(): bool
     {
+        // @todo: This is a VERY VERY VERY ugly work-around
+
         if ($this->isRequired() && empty($this->value)) {
             $this->error('value', (string)__('Value is required'));
 
