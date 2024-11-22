@@ -22,11 +22,17 @@ class StreetlinesFactory
 
     public function createFromStreet(string $street): Streetlines
     {
+        $street = str_replace("\n\n", "\n", $street);
         $streetParts = explode("\n", $street);
-        $streetName = $streetParts[0] ?? '';
-        $houseNumber = $streetParts[1] ?? '';
-        $houseNumberAddition = $streetParts[2] ?? '';
 
-        return $this->create($streetName, $houseNumber, $houseNumberAddition);
+        if (count($streetParts) === 2 && preg_match('/^([0-9]+)$/', $streetParts[0])) {
+            array_unshift($streetParts, '');
+        }
+
+        return $this->create(
+            $streetParts[0] ?? '',
+            $streetParts[1] ?? '',
+            $streetParts[2] ?? ''
+        );
     }
 }
