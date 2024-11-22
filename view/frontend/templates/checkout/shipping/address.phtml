@@ -36,25 +36,5 @@ $buttonLabelSelectAddress = __('Select Address');
         <?= $block->getChildHtml('address-form') ?>
     </div>
 
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('<?= $block->getComponentName() ?>', () => ({
-                newAddress: <?= $magewire->newAddress ? 'true' : 'false' ?>,
-                buttonLabel: '<?= $magewire->newAddress ? $buttonLabelSelectAddress : $buttonLabelNewAddress ?>',
-                init() {
-                    this.$watch('newAddress', (newAddress) => {
-                        if (newAddress === true) {
-                            Magewire.find('<?= $magewire->id ?>').cleanCustomerAddress();
-                            this.buttonLabel = '<?= $buttonLabelSelectAddress ?>';
-                        } else {
-                            this.buttonLabel = '<?= $buttonLabelNewAddress ?>';
-                        }
-                    });
-                },
-                toggleNewAddress() {
-                    this.newAddress = !this.newAddress;
-                }
-            }));
-        });
-    </script>
+    <?= $block->getChildHtml('script') ?>
 </div>

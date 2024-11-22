@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+
+/** @var Template $block */
+/** @var ShippingAddress $magewire */
+$newAddress = (bool)$magewire->newAddress;
+$magewireId = (string)$magewire->id;
+$buttonLabelNewAddress = __('New Address');
+$buttonLabelSelectAddress = __('Select Address');
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('<?= $block->getParentBlock()->getComponentName() ?>', () => ({
+            newAddress: <?= $newAddress ? 'true' : 'false' ?>,
+            buttonLabel: '<?= $newAddress ? $buttonLabelSelectAddress : $buttonLabelNewAddress ?>',
+            init() {
+                this.$watch('newAddress', (newAddress) => {
+                    if (newAddress === true) {
+                        Magewire.find('<?= $magewireId ?>').cleanCustomerAddress();
+                        this.buttonLabel = '<?= $buttonLabelSelectAddress ?>';
+                    } else {
+                        this.buttonLabel = '<?= $buttonLabelNewAddress ?>';
+                    }
+                });
+            },
+            toggleNewAddress() {
+                this.newAddress = !this.newAddress;
+            }
+        }));
+    });
+</script>

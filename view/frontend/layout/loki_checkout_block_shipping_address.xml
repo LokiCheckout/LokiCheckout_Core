@@ -10,6 +10,10 @@
                 </argument>
             </arguments>
 
+            <block
+                name="loki-checkout.shipping-address.address.script" as="script"
+                template="Yireo_LokiCheckout::checkout/shipping/address/script.phtml"/>
+
             <!--
             @todo: Implement this when swapping addresses
             <block
@@ -24,7 +28,8 @@
 
             <block
                 name="loki-checkout.shipping-address.address-select" as="address-select"
-                template="Yireo_LokiCheckout::checkout/shipping/address-select.phtml"/>
+                template="Yireo_LokiCheckout::checkout/shipping/address-select.phtml">
+            </block>
 
             <block
                 name="loki-checkout.shipping-address.address-form" as="address-form"
