@@ -17,6 +17,8 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model="currentShippingAddress"
+    :class="newAddress ? 'disabled:opacity-75' : ''"
+    :disabled="newAddress"
     class="form-input block w-full invalid:border-red-500 valid:border-green-500">
     <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
         <option value="<?= $shippingAddressId ?>"><?= $shippingAddresLabel ?></option>

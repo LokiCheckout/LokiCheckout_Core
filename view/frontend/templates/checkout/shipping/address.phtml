@@ -15,17 +15,23 @@ use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 /** @var BlockRenderer $blockRenderer */
 /** @var SortedChildBlocks $sortedChildBlocks */
 $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
+$buttonLabelNewAddress = __('New Address');
+$buttonLabelSelectAddress = __('Select Address');
 ?>
 <div class="<?= $css('mb-8') ?>" x-data="<?= $block->getComponentName() ?>">
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <?= $block->getChildHtml('address-select') ?>
-        <button class="btn my-4 btn-primary" type="button" @click="toggleShowNewAddress"
-                wire:loading.attr="disabled">
-            <?= __('Or Add A New Address') ?>
+        <button
+            class="btn btn-primary my-4"
+            x-text="buttonLabel"
+            type="button"
+            @click="toggleNewAddress"
+            wire:loading.attr="disabled">
+            <?= $buttonLabelNewAddress ?>
         </button>
     <?php endif; ?>
 
-    <div x-cloak x-show="showNewAddress">
+    <div x-cloak x-show="newAddress">
         <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
         <?= $block->getChildHtml('address-form') ?>
     </div>
@@ -33,12 +39,20 @@ $sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('<?= $block->getComponentName() ?>', () => ({
-                showNewAddress: <?= $magewire->newAddress ? 'true' : 'false' ?>,
-                toggleShowNewAddress() {
-                    this.showNewAddress = !this.showNewAddress;
-                    if (this.showNewAddress === true) {
-                        Magewire.find('<?= $magewire->id ?>').cleanCustomerAddress();
-                    }
+                newAddress: <?= $magewire->newAddress ? 'true' : 'false' ?>,
+                buttonLabel: '<?= $magewire->newAddress ? $buttonLabelSelectAddress : $buttonLabelNewAddress ?>',
+                init() {
+                    this.$watch('newAddress', (newAddress) => {
+                        if (newAddress === true) {
+                            Magewire.find('<?= $magewire->id ?>').cleanCustomerAddress();
+                            this.buttonLabel = '<?= $buttonLabelSelectAddress ?>';
+                        } else {
+                            this.buttonLabel = '<?= $buttonLabelNewAddress ?>';
+                        }
+                    });
+                },
+                toggleNewAddress() {
+                    this.newAddress = !this.newAddress;
                 }
             }));
         });

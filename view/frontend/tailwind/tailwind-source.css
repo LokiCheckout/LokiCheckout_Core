@@ -1,0 +1,11 @@
+@layer components {
+    .btn {
+        &:disabled {
+            @apply bg-zinc-500 text-white shadow-md;
+
+            &:hover {
+                @apply bg-zinc-400 text-white shadow-lg;
+            }
+        }
+    }
+}
