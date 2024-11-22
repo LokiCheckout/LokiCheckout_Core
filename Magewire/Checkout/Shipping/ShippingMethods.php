@@ -65,17 +65,8 @@ class ShippingMethods extends Component
 
     public function setValue(string $value)
     {
-        $shippingAddress = $this->shippingAddressState->getShippingAddress();
-        $quote = $shippingAddress->getQuote();
-
-        $shippingAddress
-            ->setCollectShippingRates(true)
-            ->collectShippingRates()
-            ->setShippingMethod($value);
-
-        $quote->save();
+        $this->saveShippingMethodToQuote($value);
         $this->valid = true;
-
         $this->emit('shippingStepSave');
 
         return $value;
@@ -86,5 +77,18 @@ class ShippingMethods extends Component
         $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
 
         return preg_replace('#[_.-]+#', '', $name);
+    }
+
+    private function saveShippingMethodToQuote(string $shippingMethodCode): void
+    {
+        $shippingAddress = $this->shippingAddressState->getShippingAddress();
+        $quote = $shippingAddress->getQuote();
+
+        $shippingAddress
+            ->setCollectShippingRates(true)
+            ->collectShippingRates()
+            ->setShippingMethod($shippingMethodCode);
+
+        $quote->save();
     }
 }

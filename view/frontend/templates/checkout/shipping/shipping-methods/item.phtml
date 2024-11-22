@@ -19,7 +19,6 @@ $isCurrent = (bool)$block->getIsCurrent();
 <li class="cursor-pointer relative flex">
     <div class="p-4">
         <input type="radio"
-               value="<?= $code ?>"
                x-model="value"
                id="shipping-<?= $code ?>"
             <?= $isCurrent ? 'checked' : '' ?>>

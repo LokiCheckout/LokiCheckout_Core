@@ -19,6 +19,7 @@ use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
                 'required'
             ],
             init() {
+                this.code = '<?= $magewire->value ?>';
                 Alpine.store('step').add(this);
 
                 this.$watch('value', () => {
