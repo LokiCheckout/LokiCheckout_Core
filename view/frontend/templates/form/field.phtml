@@ -26,6 +26,10 @@ if (false === $magewire->isVisible()) {
 
     return;
 }
+
+$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
+$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
+$blockRenderer->addScriptBlock($magewire->getNameInLayout() . '.additional_script', $block);
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
@@ -50,6 +54,4 @@ if (false === $magewire->isVisible()) {
     </div>
 
     <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
-    <?= $blockRenderer->html('form/field/text/script.phtml', $block) ?>
-    <?= $blockRenderer->html($magewire->getNameInLayout().'.additional_script', $block, ['component' => $magewire]) ?>
 </div>
