@@ -16,9 +16,9 @@ if (false === $magewire instanceof StepBackwardButton) {
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>"  <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
-    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn btn-secondary m-2', 'button') ?>"
+    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
-            :class="valid ? 'btn-primary' : 'disabled:opacity-75'"
+            :disabled="!valid"
             wire:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
