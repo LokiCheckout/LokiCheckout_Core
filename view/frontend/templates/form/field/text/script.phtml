@@ -29,21 +29,29 @@ $component = $this->getComponent();
                     '<?= $jsValidator ?>',
                     <?php endforeach; ?>
                 ],
+                initActions: [
+                    addToAlpineStore() {
+                        Alpine.store('components').add(this);
+                    },
+                    livewireElementUpdated() {
+                        // @todo: With livewire:init this does not work in Hyva
+                        //document.addEventListener('livewire:init', () => {
+                        Livewire.hook('element.updated', (element, component) => {
+                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                                this.valid = this.$component(this).valid;
+                                this.updated();
+                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
+                            }
+                        });
+                        //});
+                    }
+                ],
                 init() {
-                    this.beforeInit();
+                    this.beforeInit(); // @todo: Remove this, in favor of initActions
 
-                    Alpine.store('components').add(this);
-
-                    // @todo: With livewire:init this does not work in Hyva
-                    //document.addEventListener('livewire:init', () => {
-                    Livewire.hook('element.updated', (element, component) => {
-                        if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                            this.valid = this.$component(this).valid;
-                            this.updated();
-                            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
-                        }
+                    this.initActions.forEach(callback => {
+                        callback();
                     });
-                    //});
 
                     this.afterInit();
                 },
