@@ -35,6 +35,20 @@
                 template="Yireo_LokiCheckout::checkout/billing/address-form.phtml">
 
                 <block
+                    name="loki-checkout.billing-address.account_type" as="account_type"
+                    template="Yireo_LokiCheckout::form/field.phtml" before="-">
+                    <arguments>
+                        <argument name="magewire" xsi:type="object">
+                            Yireo\LokiCheckout\Magewire\Checkout\Other\AccountType
+                        </argument>
+                        <argument name="option_model" xsi:type="object">
+                            Yireo\LokiCheckout\ViewModel\OptionModel\AccountTypeOptionModel
+                        </argument>
+                        <argument name="input" xsi:type="string">radio</argument>
+                    </arguments>
+                </block>
+
+                <block
                     name="loki-checkout.billing-address.prefix" as="prefix"
                     ifconfig="customer/address/prefix_show"
                     template="Yireo_LokiCheckout::form/field.phtml">

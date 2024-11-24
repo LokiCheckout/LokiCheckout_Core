@@ -72,7 +72,7 @@
                     <label>Enable Same As Billing Checkbox</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable">1</field>
+                        <field id="*/general/enable">1</field>
                     </depends>
                 </field>
                 <field id="same_as_billing_value"
@@ -85,7 +85,7 @@
                     <label>Default Value for Same As Billing</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable_same_as_billing">1</field>
+                        <field id="*/general/enable_same_as_billing">1</field>
                     </depends>
                 </field>
                 <field id="hide_region_when_optional"
@@ -98,7 +98,7 @@
                     <label>Hide Region When Optional</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable">1</field>
+                        <field id="*/general/enable">1</field>
                     </depends>
                 </field>
                 <field id="enable_vat_id_only_for_company"
@@ -112,7 +112,7 @@
                     <comment>Show the VAT ID field only if a company value is entered</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable">1</field>
+                        <field id="*/general/enable">1</field>
                     </depends>
                 </field>
             </group>
@@ -129,7 +129,7 @@
                     <comment>Automatically select the first shipping method</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable">1</field>
+                        <field id="*/general/enable">1</field>
                     </depends>
                 </field>
             </group>
@@ -146,7 +146,23 @@
                     <comment>Automatically select the first payment method</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
-                        <field id="*/*/enable">1</field>
+                        <field id="*/general/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="account_type" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Account Type settings</label>
+                <field id="hide_company"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Hide Company when Account Type is Individual</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enable">1</field>
                     </depends>
                 </field>
             </group>
