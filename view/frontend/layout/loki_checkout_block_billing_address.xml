@@ -118,14 +118,6 @@
                         </argument>
                         <argument name="field_label" xsi:type="string">Street</argument>
                     </arguments>
-
-                    <!--
-                    <block
-                        name="loki-checkout.billing-address.street0.additional_script"
-                        as="additional_script"
-                        template="Yireo_LokiCheckout::form/field/street0/additional_script.phtml"
-                    />
-                    -->
                 </block>
 
                 <block
@@ -142,14 +134,6 @@
                         </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
-
-                    <!--
-                    <block
-                        name="loki-checkout.billing-address.street1.additional_script"
-                        as="additional_script"
-                        template="Yireo_LokiCheckout::form/field/street1/additional_script.phtml"
-                    />
-                    -->
                 </block>
 
                 <block
@@ -166,14 +150,6 @@
                         </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
-
-                    <!--
-                    <block
-                        name="loki-checkout.billing-address.street2.additional_script"
-                        as="additional_script"
-                        template="Yireo_LokiCheckout::form/field/street2/additional_script.phtml"
-                    />
-                    -->
                 </block>
 
                 <block
@@ -190,14 +166,6 @@
                         </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
-
-                    <!--
-                    <block
-                        name="loki-checkout.billing-address.street3.additional_script"
-                        as="additional_script"
-                        template="Yireo_LokiCheckout::form/field/street3/additional_script.phtml"
-                    />
-                    -->
                 </block>
 
                 <block
