@@ -32,7 +32,7 @@ $component = $this->getComponent();
                 init() {
                     this.beforeInit();
 
-                    Alpine.store('step').add(this);
+                    Alpine.store('components').add(this);
 
                     // @todo: With livewire:init this does not work in Hyva
                     //document.addEventListener('livewire:init', () => {

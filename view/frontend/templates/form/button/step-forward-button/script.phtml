@@ -21,12 +21,12 @@ $magewire = $block->getComponent();
                 });
             },
             updateValid() {
-                this.valid = Alpine.store('step').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
+                this.valid = Alpine.store('components').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
                 return this.valid;
             },
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));
-                Alpine.store('step').getComponentsByStep('<?= $magewire->getStep() ?>').forEach((component) => {
+                Alpine.store('components').getComponentsByStep('<?= $magewire->getStep() ?>').forEach((component) => {
                     window.LokiCheckoutValidator.validate(component);
                 });
 

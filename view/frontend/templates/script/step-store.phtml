@@ -12,7 +12,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.store('step', {
+        Alpine.store('components', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
             getComponents() {
