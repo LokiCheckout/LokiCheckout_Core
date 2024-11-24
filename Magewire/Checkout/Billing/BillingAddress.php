@@ -27,10 +27,10 @@ class BillingAddress extends Component
 
     public function isEnabled(): bool
     {
-        return $this->hasPayableAmount();
+        return $this->requirePayment();
     }
 
-    private function hasPayableAmount(): bool
+    private function requirePayment(): bool
     {
         return $this->billingAddressState->getQuote()->getGrandTotal() > 0;
     }
