@@ -12,7 +12,7 @@ class BillingAddress extends Component
 
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
-        private readonly BillingAsShippingService $billingAsShippingService
+        private readonly BillingAsShippingService $billingAsShippingService,
     ) {
     }
 
@@ -23,5 +23,15 @@ class BillingAddress extends Component
         }
 
         return (bool)$this->billingAddressState->getBillingAddress()->getSameAsBilling();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->hasPayableAmount();
+    }
+
+    private function hasPayableAmount(): bool
+    {
+        return $this->billingAddressState->getQuote()->getGrandTotal() > 0;
     }
 }

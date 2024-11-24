@@ -51,6 +51,11 @@ class ShippingAddress extends Component
         $this->currentShippingAddress = (string)$customer->getDefaultShipping();
     }
 
+    public function isEnabled(): bool
+    {
+        return false === (bool)$this->checkoutState->getQuote()->isVirtual();
+    }
+
     private function loadNewAddress(): bool
     {
         if (false === $this->customerSession->isLoggedIn()) {
