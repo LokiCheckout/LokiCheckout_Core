@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
@@ -21,6 +22,7 @@ class ShippingMethods extends Component
     public function __construct(
         private readonly ShippingMethodManagementInterface $shippingMethodManagement,
         private readonly ShippingAddressState $shippingAddressState,
+        private readonly CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -47,7 +49,7 @@ class ShippingMethods extends Component
             $firstShippingMethod = (string)array_key_first($this->shippingMethods);
             $this->value = $firstShippingMethod;
             $this->shippingAddressState->getShippingAddress()->setShippingMethod($firstShippingMethod);
-            $quote->save();
+            $this->cartRepository->save($quote);
         }
 
         if (!empty($this->value)) {
@@ -89,6 +91,6 @@ class ShippingMethods extends Component
             ->collectShippingRates()
             ->setShippingMethod($shippingMethodCode);
 
-        $quote->save();
+        $this->cartRepository->save($quote);
     }
 }

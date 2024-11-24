@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
@@ -18,7 +19,8 @@ class PaymentMethods extends Component
 
     public function __construct(
         private CheckoutState $checkoutState,
-        private PaymentMethodManagementInterface $paymentMethodManagement
+        private PaymentMethodManagementInterface $paymentMethodManagement,
+        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -32,7 +34,7 @@ class PaymentMethods extends Component
         if (empty($this->value) && $this->config->selectDefaultPaymentMethod()) {
             $this->value = $this->getDefaultPayment();
             $quote->setShippingMethod($this->value);
-            $quote->save();
+            $this->cartRepository->save($quote);
         }
     }
 

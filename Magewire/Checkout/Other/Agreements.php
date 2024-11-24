@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Other;
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magewirephp\Magewire\Component;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
@@ -16,6 +17,7 @@ class Agreements extends Component
         private CheckoutSession $checkoutSession,
         private CheckoutAgreementsListInterface $checkoutAgreementsList,
         private ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
+        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -58,8 +60,9 @@ class Agreements extends Component
 
         $savedAgreements = array_unique($savedAgreements);
         $quote->getPayment()->getExtensionAttributes()->setAgreementIds($savedAgreements);
-        $quote->getPayment()->save();
-        $quote->save();
+        $quote->getPayment()->save(); // @todo: Do this differently (or is it needed)
+        $this->cartRepository->save($quote);
+
         return $agreements;
     }
 
