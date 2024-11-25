@@ -48,14 +48,6 @@
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_dob" as="customer_dob" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_dob.phtml"/>
                 </block>
 
-                <block name="loki-checkout.sidebar.preview.shipping_address" as="shipping_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_address.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingAddress
-                        </argument>
-                    </arguments>
-                </block>
-
                 <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details.phtml">
                     <arguments>
                         <argument name="magewire" xsi:type="object">

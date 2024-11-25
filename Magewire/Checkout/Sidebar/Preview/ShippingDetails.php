@@ -6,7 +6,9 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingDetails extends Component
 {
@@ -19,10 +21,22 @@ class ShippingDetails extends Component
         private readonly CheckoutState $checkoutState,
         private readonly ShippingConfig $shippingConfig,
         private readonly ScopeConfigInterface $scopeConfig,
+        private readonly ShippingAddressState $shippingAddressState,
+        private readonly AddressRenderer $addressRenderer
     ) {
     }
 
-    public function getHtml(): string
+    public function getAddressHtml(): string
+    {
+        if ($this->shippingAddressState->getQuote()->isVirtual()) {
+            return '';
+        }
+
+        $address = $this->shippingAddressState->getShippingAddress();
+        return $this->addressRenderer->getHtml($address);
+    }
+
+    public function getMethodHtml(): string
     {
         if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
