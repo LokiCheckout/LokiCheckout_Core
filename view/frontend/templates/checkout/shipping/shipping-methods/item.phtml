@@ -3,20 +3,22 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
+/** @var ShippingMethods $magewire */
+
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
-$isCurrent = (bool)$block->getIsCurrent();
+$isCurrent = $magewire->value === $code;
 ?>
-<li class="<?= $css('cursor-pointer relative flex') ?>">
+<li class="<?= $css('cursor-pointer relative flex') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('p-4', 'input-container') ?>">
         <input type="radio"
                x-model="value"

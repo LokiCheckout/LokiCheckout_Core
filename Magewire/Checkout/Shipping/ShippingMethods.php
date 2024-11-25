@@ -18,7 +18,9 @@ class ShippingMethods extends Component
     use JsNameBehaviour;
 
     private array $shippingMethods = [];
+
     public string $value = '';
+
     public bool $valid = false;
 
     public function __construct(
@@ -70,12 +72,12 @@ class ShippingMethods extends Component
     public function setValue(string $value)
     {
         $this->saveShippingMethodToQuote($value);
+        $this->value = $value;
         $this->valid = true;
         $this->emit('shippingStepSave');
 
         return $value;
     }
-
 
     private function saveShippingMethodToQuote(string $shippingMethodCode): void
     {

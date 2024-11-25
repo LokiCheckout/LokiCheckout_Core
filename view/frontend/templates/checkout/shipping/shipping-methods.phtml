@@ -22,7 +22,7 @@ $shippingMethods = $magewire->getShippingMethods();
 <div class="<?= $css('relative w-full mb-8') ?>" x-data="<?= $magewire->getJsName() ?>">
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
-
+    VALUE: <?= $magewire->value ?>
     <form
         data-type="field"
         x-ref="field"
@@ -40,7 +40,6 @@ $shippingMethods = $magewire->getShippingMethods();
                         [
                             'method' => $shippingMethod,
                             'code' => $code,
-                            'is_current' => $code === $magewire->value,
                         ]
                     ) ?>
                 <?php endforeach; ?>

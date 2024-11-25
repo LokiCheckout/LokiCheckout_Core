@@ -24,11 +24,10 @@ $component = $block->getComponent();
                 Alpine.store('components').add(this);
 
                 this.$watch('value', () => {
+                    this.$component(this).call('setValue', this.value);
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                         detail: { method: this.value}
                     }));
-
-                    this.$component(this).call('setValue', this.value);
                 });
             }
         }));
