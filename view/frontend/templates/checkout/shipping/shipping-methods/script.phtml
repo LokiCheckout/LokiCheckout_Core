@@ -20,7 +20,7 @@ $component = $block->getComponent();
                 'required'
             ],
             init() {
-                this.code = '<?= $component->value ?>';
+                this.value = '<?= $component->value ?>';
                 Alpine.store('components').add(this);
 
                 this.$watch('value', () => {

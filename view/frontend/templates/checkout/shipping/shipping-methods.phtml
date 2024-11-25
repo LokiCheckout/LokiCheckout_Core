@@ -23,7 +23,7 @@ $shippingMethods = $magewire->getShippingMethods();
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
-    <div
+    <form
         data-type="field"
         x-ref="field"
         <?php if ($magewire->hasErrors()): ?>
@@ -48,7 +48,7 @@ $shippingMethods = $magewire->getShippingMethods();
         <?php else: ?>
             <?= __('No shipping methods available') ?>
         <?php endif; ?>
-    </div>
+    </form>
 
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
     <?= $block->getChildHtml('script') ?>
