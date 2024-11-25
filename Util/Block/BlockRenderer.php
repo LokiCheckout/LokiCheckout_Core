@@ -49,14 +49,18 @@ class BlockRenderer
      *
      * @return AbstractBlock
      */
-    public function getBlockByName(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): AbstractBlock
+    public function getBlockByName(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
     {
         $block = $this->layout->getBlock($blockName);
         if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('No block found with template "%1"', $blockName));
+            throw new RuntimeException((string)__('No block found with name "%1"', $blockName));
         }
 
         $this->populateBlock($block, $ancestorBlock, $data);
+
+        if (empty($block->getTemplate())) {
+            throw new RuntimeException((string)__('No template found with block "%1"', $blockName));
+        }
 
         return $block;
     }
@@ -101,8 +105,7 @@ class BlockRenderer
     public function getBlockHtml(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
     {
         try {
-            $block = $this->getBlockByName($blockName, $ancestorBlock, $data);
-            return $block->toHtml();
+            return $this->getBlockByName($blockName, $ancestorBlock, $data)->toHtml();
         } catch(InvalidArgumentException|RuntimeException $e) {
             return '<!-- Block with name "'.$blockName.'": ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
         }
