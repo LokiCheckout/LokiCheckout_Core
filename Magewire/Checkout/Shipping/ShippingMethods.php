@@ -7,6 +7,7 @@ use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\JsNameBehaviour;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
@@ -14,6 +15,7 @@ class ShippingMethods extends Component
 {
     use InjectConfig;
     use StepBehaviour;
+    use JsNameBehaviour;
 
     private array $shippingMethods = [];
     public string $value = '';
@@ -74,12 +76,6 @@ class ShippingMethods extends Component
         return $value;
     }
 
-    public function getJsName(): string
-    {
-        $name = ucwords($this->getParent()->getNameInLayout(), '_.-');
-
-        return preg_replace('#[_.-]+#', '', $name);
-    }
 
     private function saveShippingMethodToQuote(string $shippingMethodCode): void
     {

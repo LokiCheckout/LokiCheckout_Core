@@ -5,15 +5,16 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 
 /** @var Template $block */
-/** @var ShippingAddress $magewire */
-$newAddress = (bool)$magewire->newAddress;
-$magewireId = (string)$magewire->id;
+/** @var ShippingAddress $component */
+$component = $block->getComponent();
+$newAddress = (bool)$component->newAddress;
+$magewireId = (string)$component->id;
 $buttonLabelNewAddress = __('New Address');
 $buttonLabelSelectAddress = __('Select Address');
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $block->getParentBlock()->getComponentName() ?>', () => ({
+        Alpine.data('<?= $component->getJsName() ?>', () => ({
             newAddress: <?= $newAddress ? 'true' : 'false' ?>,
             buttonLabel: '<?= $newAddress ? $buttonLabelSelectAddress : $buttonLabelNewAddress ?>',
             init() {

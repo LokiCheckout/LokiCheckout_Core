@@ -10,10 +10,6 @@
                 </argument>
             </arguments>
 
-            <block
-                name="loki-checkout.shipping-address.address.script" as="script"
-                template="Yireo_LokiCheckout::checkout/shipping/address/script.phtml"/>
-
             <!--
             @todo: Implement this when swapping addresses
             <block
@@ -252,6 +248,7 @@
         <referenceBlock name="loki-checkout.script.alpine-component-initializer">
             <arguments>
                 <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.shipping-address" xsi:type="string">Yireo_LokiCheckout::checkout/shipping/address/script.phtml</item>
                     <item name="loki-checkout.shipping-address.prefix" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
                     <item name="loki-checkout.shipping-address.firstname" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
                     <item name="loki-checkout.shipping-address.middlename" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
