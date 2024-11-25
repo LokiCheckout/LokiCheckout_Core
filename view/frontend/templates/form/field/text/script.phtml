@@ -10,9 +10,40 @@ $component = $this->getComponent();
 ?>
 <script>
     LokiCheckoutAlpineCall(() => {
-        createAlpineFieldComponent(
-            '<?= $component->getJsName() ?>',
-            JSON.parse('<?= $component->getComponentDataAsJson() ?>')
-        )
+        Alpine.data('<?= $component->getJsName() ?>', () => {
+            const componentData = JSON.parse('<?= $component->getComponentDataAsJson() ?>');
+            return LokiCheckoutFieldComponentExtender.extend({
+                ...componentData,
+                initActions: {
+                    addToAlpineStore: function () {
+                        Alpine.store('components').add(this);
+                    },
+                    livewireElementUpdated: function () {
+                        Livewire.hook('element.updated', (element, component) => {
+                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                                this.valid = this.$component(this).valid;
+                                this.updated();
+                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
+                            }
+                        });
+                    }
+                },
+                init() {
+                    Object.entries(this.initActions).forEach(([key, callback]) => {
+                        callback.apply(this);
+                    });
+                },
+                submit() {
+                    this.beforeSubmit();
+
+                    if (false === window.LokiCheckoutValidator.validate(this)) {
+                        return false;
+                    }
+
+                    this.$component(this).call('setValue', this.value);
+                    this.afterSubmit();
+                },
+            });
+        });
     });
 </script>

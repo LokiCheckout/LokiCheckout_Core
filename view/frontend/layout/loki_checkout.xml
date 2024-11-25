@@ -34,7 +34,6 @@
 
         <referenceContainer name="after.body.start">
             <block name="loki-checkout.script.alpine-call" template="Yireo_LokiCheckout::script/alpine-call.phtml"/>
-            <block name="loki-checkout.script.component-creator" template="Yireo_LokiCheckout::script/component-creator.phtml"/>
             <block name="loki-checkout.script.component-extender" template="Yireo_LokiCheckout::script/component-extender.phtml"/>
         </referenceContainer>
 
