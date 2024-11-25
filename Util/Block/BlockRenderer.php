@@ -102,11 +102,10 @@ class BlockRenderer
     {
         try {
             $block = $this->getBlockByName($blockName, $ancestorBlock, $data);
-        } catch(RuntimeException $e) {
-            return '';
+            return $block->toHtml();
+        } catch(InvalidArgumentException|RuntimeException $e) {
+            return '<!-- Block with name "'.$blockName.'": ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
         }
-
-        return $block->toHtml();
     }
 
     /**
