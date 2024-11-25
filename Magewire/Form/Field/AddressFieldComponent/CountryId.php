@@ -12,7 +12,7 @@ class CountryId extends AddressFieldComponent implements FormSelectFieldInterfac
 
     protected array $filters = ['country_id'];
 
-    public function updatedValue($value)
+    public function updatedValue(mixed $value): mixed
     {
         $this->addressState->save('region', '');
         $this->addressState->save('region_id', '');

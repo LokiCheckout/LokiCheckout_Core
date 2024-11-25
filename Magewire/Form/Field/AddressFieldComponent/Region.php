@@ -29,7 +29,7 @@ class Region extends AddressFieldComponent implements FormTextSelectFieldInterfa
         $this->value = (string)$this->addressState->load('region');
     }
 
-    public function updatedValue($value)
+    public function updatedValue(mixed $value): mixed
     {
         if (is_numeric($value)) {
             $this->addressState->save('region_id', $value);
