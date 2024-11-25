@@ -29,11 +29,11 @@ $component = $this->getComponent();
                     '<?= $jsValidator ?>',
                     <?php endforeach; ?>
                 ],
-                initActions: [
-                    addToAlpineStore() {
+                initActions: {
+                    addToAlpineStore: function () {
                         Alpine.store('components').add(this);
                     },
-                    livewireElementUpdated() {
+                    livewireElementUpdated: function () {
                         // @todo: With livewire:init this does not work in Hyva
                         //document.addEventListener('livewire:init', () => {
                         Livewire.hook('element.updated', (element, component) => {
@@ -45,11 +45,11 @@ $component = $this->getComponent();
                         });
                         //});
                     }
-                ],
+                },
                 init() {
                     this.beforeInit(); // @todo: Remove this, in favor of initActions
 
-                    this.initActions.forEach(callback => {
+                    Object.entries(this.initActions).forEach(([key, callback]) => {
                         callback();
                     });
 
