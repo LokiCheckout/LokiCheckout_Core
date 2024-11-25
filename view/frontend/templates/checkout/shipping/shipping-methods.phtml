@@ -29,7 +29,7 @@ $shippingMethods = $magewire->getShippingMethods();
         <?php if ($magewire->hasErrors()): ?>
             aria-invalid="true" data-invalid="true"
         <?php endif ?>
-        class="border border-transparent data-[invalid=true]:border-red-500">
+        class="<?= $css('border border-transparent data-[invalid=true]:border-red-500', 'container') ?>">
         <?php if (!empty($shippingMethods)): ?>
             <ul>
                 <?php foreach ($shippingMethods as $shippingMethod): ?>

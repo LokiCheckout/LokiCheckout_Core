@@ -19,37 +19,37 @@ $couponCode = $quote->getCouponCode();
 ?>
 <div  class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
-        <p class="mb-4">
+        <p class="<?= $css('mb-4', 'current') ?>">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
             <strong><?= $couponCode ?></strong>
         </p>
         <button
             type="button"
-            class="btn btn-secondary"
+            class="<?= $css('btn btn-secondary', 'button-remove') ?>"
             wire:click="removeCouponCode"
             wire:loading.attr="disabled"
         ><?= __('Remove coupon code') ?></button>
     <?php else: ?>
-        <details class="group">
-            <summary class="flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer">
+        <details class="<?= $css('group', 'details' ) ?>">
+            <summary class="<?= $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
                 <span><?= __('Apply Discount Code') ?></span>
                 <img
                     alt="<?= __('Expand') ?>"
                     src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
-                    class="<?= $css('') ?> inline-block group-open:rotate-180 transition-transform"
+                    class="<?= $css('inline-block group-open:rotate-180 transition-transform') ?>"
                     width="20"
                     height="20"
                 >
             </summary>
 
             <div>
-                <label class="block mb-3">
-                    <span class="sr-only"><?php __('Discount Code') ?></span>
-                    <input type="text" wire:model.lazy="couponCode" class="form-input w-full">
+                <label class="<?= $css('block mb-3', 'label') ?>">
+                    <span class="<?= $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
+                    <input type="text" wire:model.lazy="couponCode" class="<?= $css('form-input w-full', 'input') ?>">
                 </label>
                 <button
                     type="button"
-                    class="btn btn-secondary w-full justify-center text-center"
+                    class="<?= $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
                     wire:click="applyCouponCode"
                     wire:loading.attr="disabled"
                 ><?= __('Apply') ?></button>

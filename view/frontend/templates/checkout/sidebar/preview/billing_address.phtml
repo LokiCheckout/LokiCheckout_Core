@@ -16,9 +16,9 @@ if (empty($html)) {
 ?>
 <div  class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
-    <span class="text-xl font-bold"><?= __('Billing Address') ?></span><br>
+    <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
     <?php if ($magewire->isSameAsShipping()): ?>
-    <small><?= __('Same as shipping address') ?></small>
+    <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
     <?php endif; ?>
 </div>

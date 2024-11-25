@@ -25,7 +25,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
     class="<?= $css('hidden md:block card rounded-lg') ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
-    <ul class="flex items-center">
+    <ul class="<?= $css('flex items-center', 'list') ?>">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?= $block->getChildBlock('step')->addData(['step' => $step])->toHtml() ?>
         <?php endforeach; ?>

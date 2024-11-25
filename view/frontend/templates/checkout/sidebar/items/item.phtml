@@ -26,16 +26,24 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
         width="<?= $width ?>"
         height="<?= $width ?>"
         alt=""
-        class="shrink-0"
+        class="<?= $css('shrink-0', 'image') ?>"
     >
-    <div>
-        <div class="grow">
+    <div class="<?= $css('', 'outer') ?>">
+        <div class="<?= $css('grow', 'inner') ?>">
             <p><strong><?= $item['name'] ?><br></strong></p>
-            <dl class="text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2">
-                <dt class="font-medium"><?= __('Price') ?>:</dt>
-                <dd><?= $priceFormatterViewModel->format($item['price']) ?></dd>
-                <dt class="font-medium"><?= __('Quantity') ?>:</dt>
-                <dd><?= $item['qty'] ?></dd>
+            <dl class="<?= $css('text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2', 'list') ?>">
+                <dt class="<?= $css('font-medium', 'price-label') ?>">
+                    <?= __('Price') ?>:
+                </dt>
+                <dd class="<?= $css('', 'price-value') ?>">
+                    <?= $priceFormatterViewModel->format($item['price']) ?>
+                </dd>
+                <dt class="<?= $css('font-medium', 'qty-label') ?>">
+                    <?= __('Quantity') ?>:
+                </dt>
+                <dd class="<?= $css('', 'qty-value') ?>">
+                    <?= $item['qty'] ?>
+                </dd>
             </dl>
         </div>
 

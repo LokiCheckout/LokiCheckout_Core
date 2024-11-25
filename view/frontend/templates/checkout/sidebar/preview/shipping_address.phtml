@@ -18,6 +18,6 @@ if (empty($html)) {
 <div  class="<?= $css('mb-4 relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
 
-    <span class="text-xl font-bold"><?= __('Shipping Address') ?></span><br>
+    <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Shipping Address') ?></span><br>
     <address><?= $html ?></address>
 </div>
