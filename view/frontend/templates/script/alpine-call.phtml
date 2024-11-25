@@ -1,0 +1,11 @@
+<script>
+    const LokiCheckoutAlpineCall = function(callback) {
+        if (window.Alpine === undefined) {
+            document.addEventListener('alpine:init', () => {
+                callback();
+            });
+        } else {
+            callback();
+        }
+    }
+</script>

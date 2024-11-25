@@ -10,10 +10,6 @@ class VatId extends GenericVatIdComponent implements ShippingAddressFieldCompone
 {
     use InjectConfig;
 
-    protected $listeners = [
-        'shippingAddressCompanySave' => 'refresh'
-    ];
-
     public function isVisible(): bool
     {
         if (false === $this->config->enableVatIdOnlyForCompany()) {

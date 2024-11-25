@@ -8,6 +8,10 @@ use Yireo\LokiCheckout\Util\CountryIdVatPrefixMapping;
 
 class VatId extends AddressFieldComponent
 {
-    protected $listeners = ['shippingStepSave' => 'refresh'];
+    protected $listeners = [
+        'countrySave' => 'refresh',
+        'shippingStepSave' => 'refresh'
+    ];
+
     protected array $filters = ['vat_id'];
 }

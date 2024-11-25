@@ -1,7 +1,6 @@
 <?php
 declare(strict_types=1);
 
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
@@ -27,7 +26,7 @@ if (false === $magewire->isVisible()) {
     return;
 }
 
-$blockRenderer->addScriptBlock($magewire->getNameInLayout() . '.additional_script', $block);
+$blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script', $block);
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
@@ -52,4 +51,6 @@ $blockRenderer->addScriptBlock($magewire->getNameInLayout() . '.additional_scrip
     </div>
 
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+
+    <?= $blockRenderer->getBlockTemplate('form/field/text/script.phtml', $block) ?>
 </div>

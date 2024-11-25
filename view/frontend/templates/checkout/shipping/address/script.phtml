@@ -13,7 +13,7 @@ $buttonLabelNewAddress = __('New Address');
 $buttonLabelSelectAddress = __('Select Address');
 ?>
 <script>
-    document.addEventListener('alpine:init', () => {
+    LokiCheckoutAlpineCall(() => {
         Alpine.data('<?= $component->getJsName() ?>', () => ({
             newAddress: <?= $newAddress ? 'true' : 'false' ?>,
             buttonLabel: '<?= $newAddress ? $buttonLabelSelectAddress : $buttonLabelNewAddress ?>',

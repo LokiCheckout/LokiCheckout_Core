@@ -10,6 +10,8 @@
                 </argument>
             </arguments>
 
+            <block name="loki-checkout.shipping-address.script" as="script" template="Yireo_LokiCheckout::checkout/shipping/address/script.phtml"/>
+
             <!--
             @todo: Implement this when swapping addresses
             <block
@@ -248,23 +250,9 @@
         <referenceBlock name="loki-checkout.script.alpine-component-initializer">
             <arguments>
                 <argument name="components" xsi:type="array">
-                    <item name="loki-checkout.shipping-address" xsi:type="string">Yireo_LokiCheckout::checkout/shipping/address/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.prefix" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.firstname" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.middlename" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.lastname" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.street0" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.street1" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.street2" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.street3" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.postcode" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.city" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.region" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.country_id" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.company" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.telephone" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.fax" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
-                    <item name="loki-checkout.shipping-address.vat_id" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.shipping-address" xsi:type="string">
+                        Yireo_LokiCheckout::checkout/shipping/address/script.phtml
+                    </item>
                 </argument>
             </arguments>
         </referenceBlock>

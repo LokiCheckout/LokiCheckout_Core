@@ -17,6 +17,7 @@ class CountryId extends AddressFieldComponent implements FormSelectFieldInterfac
         $this->addressState->save('region', '');
         $this->addressState->save('region_id', '');
         $this->setValue($value);
+        $this->emit('countrySave'); // @todo: Standardize event names
         return $value;
     }
 }

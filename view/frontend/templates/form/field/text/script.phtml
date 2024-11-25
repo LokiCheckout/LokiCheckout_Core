@@ -2,66 +2,17 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var Template $fieldBlock */
 /** @var AddressFieldComponent $component */
-/** @var ViewModelFactory $viewModelFactory */
-/** @var BlockRenderer $blockRenderer */
-$fieldBlock = $block->getFieldBlock();
 $component = $this->getComponent();
 ?>
 <script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $component->getJsName() ?>', () => {
-            return LokiCheckoutFieldComponentExtender.extend({
-                name: '<?= $component->getJsName() ?>',
-                wireId: '<?= $component->id ?>',
-                elementId: '<?= $component->getElementId() ?>',
-                step: '<?= $component->getStep() ?>',
-                value: '<?= $component->getJsValue() ?>',
-                valid: <?= $component->valid ? 'true' : 'false' ?>,
-                rules: [
-                    <?php foreach($component->getJsValidators() as $jsValidator): ?>
-                    '<?= $jsValidator ?>',
-                    <?php endforeach; ?>
-                ],
-                initActions: {
-                    addToAlpineStore: function() {
-                        Alpine.store('components').add(this);
-                    },
-                    livewireElementUpdated: function() {
-                        // @todo: With livewire:init this does not work in Hyva
-                        //document.addEventListener('livewire:init', () => {
-                        Livewire.hook('element.updated', (element, component) => {
-                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                                this.valid = this.$component(this).valid;
-                                this.updated();
-                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change'));
-                            }
-                        });
-                        //});
-                    }
-                },
-                init() {
-                    Object.entries(this.initActions).forEach(([key, callback]) => {
-                        callback.apply(this);
-                    });
-                },
-                submit() {
-                    this.beforeSubmit();
-
-                    if (false === window.LokiCheckoutValidator.validate(this)) {
-                        return false;
-                    }
-
-                    this.$component(this).call('setValue', this.value);
-                    this.afterSubmit();
-                },
-            });
-        });
+    LokiCheckoutAlpineCall(() => {
+        createAlpineFieldComponent(
+            '<?= $component->getJsName() ?>',
+            JSON.parse('<?= $component->getComponentDataAsJson() ?>')
+        )
     });
 </script>

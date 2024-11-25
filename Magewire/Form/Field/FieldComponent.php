@@ -166,4 +166,28 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     {
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
     }
+
+
+    public function getComponentData(): array
+    {
+        $rules = [];
+        foreach ($this->getJsValidators() as $jsValidator) {
+            $rules[] = $jsValidator;
+        }
+
+        return [
+            'name' => $this->getJsName(),
+            'wireId' => $this->id,
+            'elementId' => $this->getElementId(),
+            'step' => $this->getStep(),
+            'value' => $this->getJsValue(),
+            'valid' => $this->valid,
+            'rules' => $rules,
+        ];
+    }
+
+    public function getComponentDataAsJson(): string
+    {
+        return json_encode($this->getComponentData());
+    }
 }
