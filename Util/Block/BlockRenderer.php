@@ -112,7 +112,7 @@ class BlockRenderer
      */
     public function getBlockTemplate(string $templateName, ?AbstractBlock $ancestorBlock = null, array $data = []): string
     {
-        return $this->getTemplateBlock($templateName, $ancestorBlock, $data)->toHtml();
+        return $this->getBlockWithTemplate($templateName, $ancestorBlock, $data)->toHtml();
     }
 
     /**
@@ -138,6 +138,7 @@ class BlockRenderer
      * @param array         $data
      *
      * @return void
+     * @deprecated Use XML layout instead
      */
     public function addScriptTemplate(string $templateName, AbstractBlock $parentBlock, array $data = []): void
     {
