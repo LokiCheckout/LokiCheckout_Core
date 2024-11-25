@@ -4,8 +4,10 @@ namespace Yireo\LokiCheckout\Block;
 
 
 use Magento\Framework\View\Element\AbstractBlock;
+use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Context;
 use Magento\Framework\View\Element\Template;
+use RuntimeException;
 use Yireo\LokiCheckout\Magewire\ComponentRegistry;
 
 class ComponentInitializer extends AbstractBlock
@@ -20,9 +22,13 @@ class ComponentInitializer extends AbstractBlock
     protected function _toHtml()
     {
         $html = '';
-        echo 'JISSE222';
         foreach ($this->getComponents() as $componentName => $templateName) {
-            $html .= $this->getScriptBlockFromComponent($componentName, $templateName)->toHtml();
+            $block = $this->getScriptBlockFromComponent($componentName, $templateName);
+            if (false === $block instanceof BlockInterface) {
+                continue;
+            }
+
+            $html .= $block->toHtml();
         }
 
         return $html;
@@ -33,11 +39,15 @@ class ComponentInitializer extends AbstractBlock
         return (array)$this->getData('components');
     }
 
-    private function getScriptBlockFromComponent(string $componentName, string $templateName): Template
+    private function getScriptBlockFromComponent(string $componentName, string $templateName): ?Template
     {
-        $component = $this->componentRegistry->getComponentById($componentName);
+        try {
+            $component = $this->componentRegistry->getComponentById($componentName);
+        } catch(RuntimeException $e) {
+            return null;
+        }
+
         $scriptName = $componentName . '.' . $componentName;
-        echo $component->getParent()->getNameInLayout();
         $block = $this->getLayout()->createBlock(Template::class, $scriptName);
         $block->setTemplate($templateName);
         $block->setComponent($component);

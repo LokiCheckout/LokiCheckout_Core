@@ -223,7 +223,7 @@
                 </block>
 
                 <block
-                    name="loki-checkout.shipping-step.billing-address.fax" as="fax"
+                    name="loki-checkout.billing-address.fax" as="fax"
                     ifconfig="customer/address/fax_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
@@ -245,5 +245,28 @@
                 </block>
             </block>
         </block>
+
+        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
+            <arguments>
+                <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.billing-address.prefix" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.firstname" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.middlename" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.lastname" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.street0" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.street1" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.street2" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.street3" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.postcode" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.city" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.region" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.country_id" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.company" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.telephone" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.fax" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                    <item name="loki-checkout.billing-address.vat_id" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                </argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>

@@ -27,8 +27,6 @@ if (false === $magewire->isVisible()) {
     return;
 }
 
-$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
-$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
 $blockRenderer->addScriptBlock($magewire->getNameInLayout() . '.additional_script', $block);
 ?>
 <div id="<?= $magewire->getElementId() ?>"
@@ -42,16 +40,16 @@ $blockRenderer->addScriptBlock($magewire->getNameInLayout() . '.additional_scrip
     </label>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
-        <?= $blockRenderer->html($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
+        <?= $blockRenderer->getBlockTemplate($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
 
         <div wire:loading x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
-            <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
+            <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-small') ?>
         </div>
 
         <?php if ($block->getHelpText()): ?>
-            <?= $blockRenderer->html('utils/help.phtml', $block) ?>
+            <?= $blockRenderer->getBlockTemplate('utils/help.phtml', $block) ?>
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
 </div>

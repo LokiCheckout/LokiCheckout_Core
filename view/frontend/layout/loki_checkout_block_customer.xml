@@ -12,6 +12,14 @@
             </arguments>
         </block>
 
+        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
+            <arguments>
+                <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.customer.email" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+
         <block
             name="loki-checkout.customer.gender" as="customer_gender"
             ifconfig="customer/address/gender_show"
@@ -26,6 +34,14 @@
             </arguments>
         </block>
 
+        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
+            <arguments>
+                <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.customer.gender" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+
         <block
             name="loki-checkout.customer.dob" as="customer_dob"
             ifconfig="customer/address/dob_show"
@@ -36,5 +52,13 @@
                 </argument>
             </arguments>
         </block>
+
+        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
+            <arguments>
+                <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.customer.dob" xsi:type="string">Yireo_LokiCheckout::form/field/text/script.phtml</item>
+                </argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>

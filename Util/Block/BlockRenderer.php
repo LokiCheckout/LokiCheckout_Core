@@ -66,6 +66,23 @@ class BlockRenderer
     }
 
     /**
+     * @param string             $blockIdentifier
+     * @param AbstractBlock|null $parentBlock
+     * @param array              $data
+     *
+     * @return string
+     * @deprecated Use getBlockTemplate() or getBlockHtml()
+     */
+    public function html(string $blockIdentifier, ?AbstractBlock $parentBlock = null, array $data = []): string
+    {
+        try {
+            return (string)$this->get($blockIdentifier, $parentBlock, $data)?->toHtml();
+        } catch (RuntimeException|InvalidArgumentException $e) {
+            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
+        }
+    }
+
+    /**
      * @param string             $blockName
      * @param AbstractBlock|null $ancestorBlock
      * @param array              $data
@@ -116,20 +133,14 @@ class BlockRenderer
     }
 
     /**
-     * @param string             $blockIdentifier
-     * @param AbstractBlock|null $parentBlock
-     * @param array              $data
-     *
+     * @param string $blockName
+     * @param AbstractBlock|null $ancestorBlock
+     * @param array $data
      * @return string
-     * @deprecated Use getBlockTemplate() or getBlockHtml()
      */
-    public function html(string $blockIdentifier, ?AbstractBlock $parentBlock = null, array $data = []): string
+    public function getBlockHtml(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
     {
-        try {
-            return (string)$this->get($blockIdentifier, $parentBlock, $data)?->toHtml();
-        } catch (RuntimeException|InvalidArgumentException $e) {
-            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
-        }
+        return $this->getBlockByName($blockName, $ancestorBlock, $data)->toHtml();
     }
 
     /**
