@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Magewire;
 
 use Magewirephp\Magewire\Component;
+use RuntimeException;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 class ComponentRegistry
@@ -16,6 +17,23 @@ class ComponentRegistry
     public function register(Component $component)
     {
         $this->components[get_class($component)] = $component;
+    }
+
+    /**
+     * @param string $componentName
+     * @return Component
+     * @throws RuntimeException
+     */
+    public function getComponentById(string $componentName): Component
+    {
+        foreach ($this->getComponents() as $component) {
+            if ($component->id === $componentName) {
+                return $component;
+            }
+        }
+
+        // @todo: Custom exception
+        throw new RuntimeException("Component with name '{$componentName}' not found");
     }
 
     public function getComponents(): array
