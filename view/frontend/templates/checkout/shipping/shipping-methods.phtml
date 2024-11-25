@@ -20,8 +20,8 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $magewire->getShippingMethods();
 ?>
 <div class="<?= $css('relative w-full mb-8') ?>" x-data="<?= $magewire->getJsName() ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay', $block) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
 
     <div
         data-type="field"
@@ -34,7 +34,7 @@ $shippingMethods = $magewire->getShippingMethods();
             <ul>
                 <?php foreach ($shippingMethods as $shippingMethod): ?>
                     <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
-                    <?= $blockRenderer->html(
+                    <?= $blockRenderer->getBlockHtml(
                         'loki-checkout.shipping.shipping-methods.item',
                         $block,
                         [
@@ -50,6 +50,6 @@ $shippingMethods = $magewire->getShippingMethods();
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
     <?= $block->getChildHtml('script') ?>
 </div>

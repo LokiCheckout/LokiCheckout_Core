@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= $css('') ?>">
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
     <?= $block->getChildHtml('billing-as-shipping') ?>
 
     <?php if ($magewire->getBillingAsShippingValue()): ?>

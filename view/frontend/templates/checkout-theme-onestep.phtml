@@ -18,7 +18,7 @@ $currentStep = $magewire->currentStep;
     <?= $block->getChildHtml('progressbar') ?>
 
     <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?> relative">
-        <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
+        <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay', $block) ?>
         <?= $block->getChildHtml('steps'); ?>
         <?= $block->getChildHtml('sidebar'); ?>
     </div>

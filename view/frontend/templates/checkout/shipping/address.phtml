@@ -33,7 +33,7 @@ $buttonLabelSelectAddress = __('Select Address');
 
     <?php if ($magewire->newAddress): ?>
     <div>
-        <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
+        <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
         <?= $block->getChildHtml('address-form') ?>
     </div>
     <?php endif; ?>

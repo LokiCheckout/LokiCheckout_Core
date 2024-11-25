@@ -15,13 +15,13 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
 
     <?php if (!empty($paymentMethods)): ?>
         <ul>
             <?php foreach ($paymentMethods as $paymentMethod): ?>
-                <?= $blockRenderer->html(
+                <?= $blockRenderer->getBlockHtml(
                     'loki-checkout.billing.payment-methods.item',
                     $block,
                     [

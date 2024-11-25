@@ -26,17 +26,17 @@ $componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
         id="payment-<?= $code ?>">
 
     <div class="inline-block ml-4">
-        <?= $blockRenderer->html('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
+        <?= $blockRenderer->getBlockTemplate('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
         <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
     </div>
 
     <div class="m-4 ml-10 <?php if (!$isCurrent) : ?>hidden<?php endif ?>" data-payment-method-code="<?= $code ?>">
-        <?= $blockRenderer->html(
+        <?= $blockRenderer->getBlockHtml(
             'loki-checkout.billing.payment-methods.'.$code.'.form',
             $block,
             ['method' => $code]
         ) ?>
-        <?= $blockRenderer->html(
+        <?= $blockRenderer->getBlockHtml(
             'loki-checkout.billing.payment-methods.'.$code.'.additional',
             $block,
             ['method' => $code]

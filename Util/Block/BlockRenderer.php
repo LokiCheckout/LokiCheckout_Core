@@ -43,46 +43,6 @@ class BlockRenderer
     }
 
     /**
-     * @param string             $blockIdentifier
-     * @param AbstractBlock|null $ancestorBlock
-     * @param array              $data
-     *
-     * @param string             $blockName
-     *
-     * @return Template
-     * @deprecated Use getBlockByName or getBlockByTemplate instead
-     */
-    public function get(
-        string         $blockIdentifier,
-        ?AbstractBlock $ancestorBlock = null,
-        array          $data = [],
-        string         $blockName = '',
-    ): AbstractBlock {
-        if (str_ends_with($blockIdentifier, '.phtml')) {
-            return $this->getBlockWithTemplate($blockIdentifier, $ancestorBlock, $data);
-        }
-
-        return $this->getBlockByName($blockName, $ancestorBlock, $data);
-    }
-
-    /**
-     * @param string             $blockIdentifier
-     * @param AbstractBlock|null $parentBlock
-     * @param array              $data
-     *
-     * @return string
-     * @deprecated Use getBlockTemplate() or getBlockHtml()
-     */
-    public function html(string $blockIdentifier, ?AbstractBlock $parentBlock = null, array $data = []): string
-    {
-        try {
-            return (string)$this->get($blockIdentifier, $parentBlock, $data)?->toHtml();
-        } catch (RuntimeException|InvalidArgumentException $e) {
-            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
-        }
-    }
-
-    /**
      * @param string             $blockName
      * @param AbstractBlock|null $ancestorBlock
      * @param array              $data
@@ -140,29 +100,13 @@ class BlockRenderer
      */
     public function getBlockHtml(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
     {
-        return $this->getBlockByName($blockName, $ancestorBlock, $data)->toHtml();
-    }
-
-    /**
-     * @param string        $templateName
-     * @param AbstractBlock $parentBlock
-     * @param array         $data
-     *
-     * @return void
-     * @deprecated Use XML layout instead
-     */
-    public function addScriptTemplate(string $templateName, AbstractBlock $parentBlock, array $data = []): void
-    {
-        $blockName = $parentBlock->getNameInLayout() . '.script';
-
         try {
-            $block = $this->getBlockByName($blockName);
-        } catch (\RuntimeException $e) {
-            $block = $this->getBlockFromTemplate($templateName, $blockName);
+            $block = $this->getBlockByName($blockName, $ancestorBlock, $data);
+        } catch(RuntimeException $e) {
+            return '';
         }
 
-        $this->populateBlock($block, $parentBlock, $data);
-        $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
+        return $block->toHtml();
     }
 
     /**
