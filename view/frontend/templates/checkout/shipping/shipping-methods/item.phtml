@@ -16,25 +16,25 @@ $code = $block->getCode();
 $shippingMethod = $block->getMethod();
 $isCurrent = (bool)$block->getIsCurrent();
 ?>
-<li class="cursor-pointer relative flex">
-    <div class="p-4">
+<li class="<?= $css('cursor-pointer relative flex') ?>">
+    <div class="<?= $css('p-4', 'input-container') ?>">
         <input type="radio"
                x-model="value"
                value="<?= $code ?>"
                id="shipping-<?= $code ?>"
             <?= $isCurrent ? 'checked' : '' ?>>
     </div>
-    <div class="p-4 w-auto font-bold">
+    <div class="<?= $css('p-4 w-auto font-bold', 'amount-container') ?>">
         <label for="shipping-<?= $code ?>">
             <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
         </label>
     </div>
-    <div class="p-4 w-auto">
+    <div class="<?= $css('p-4 w-auto', 'method-container') ?>">
         <label for="shipping-<?= $code ?>">
             <?= $shippingMethod->getMethodTitle() ?>
         </label>
     </div>
-    <div class="p-4">
+    <div class="<?= $css('p-4', 'carrier-container') ?>'">
         <label for="shipping-<?= $code ?>">
             <?= $shippingMethod->getCarrierTitle() ?>
         </label>

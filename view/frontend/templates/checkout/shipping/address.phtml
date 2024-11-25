@@ -22,7 +22,7 @@ $buttonLabelSelectAddress = __('Select Address');
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <?= $block->getChildHtml('address-select') ?>
         <button
-            class="btn btn-primary my-4"
+            class="<?= $css('btn btn-primary my-4', 'button') ?>"
             x-text="buttonLabel"
             type="button"
             @click="toggleNewAddress"
