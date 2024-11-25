@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Other;
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magewirephp\Magewire\Component;
 use Magento\Checkout\Model\Session as CheckoutSession;
@@ -17,7 +18,7 @@ class Agreements extends Component
         private CheckoutSession $checkoutSession,
         private CheckoutAgreementsListInterface $checkoutAgreementsList,
         private ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
-        private CartRepositoryInterface $cartRepository
+        private SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
     }
 
@@ -27,11 +28,9 @@ class Agreements extends Component
             $this->agreements[$agreement->getAgreementId()] = false;
         }
 
-        foreach ($this->getSavedCheckoutAgreements() as $savedAgreement) {
-            $this->agreements[$savedAgreement->getAgreementId()] = true;
+        foreach ($this->getSavedCheckoutAgreementIds() as $savedAgreementId) {
+            $this->agreements[$savedAgreementId] = true;
         }
-
-        $this->agreements;
     }
 
     public function isEnabled(): bool
@@ -41,8 +40,7 @@ class Agreements extends Component
 
     public function updatedAgreements(array $agreements): array
     {
-        $quote = $this->checkoutSession->getQuote();
-        $savedAgreements = (array)$quote->getPayment()->getExtensionAttributes()->getAgreementIds();
+        $savedAgreements = (array)$this->getSavedCheckoutAgreementIds();
 
         foreach ($agreements as $agreementId => $agreementValue) {
             if (in_array($agreementId, $savedAgreements) && $agreementValue === true) {
@@ -54,22 +52,29 @@ class Agreements extends Component
                 continue;
             }
 
-            // @todo: This does not work yet
             $savedAgreements[] = $agreementId;
         }
 
         $savedAgreements = array_unique($savedAgreements);
-        $quote->getPayment()->getExtensionAttributes()->setAgreementIds($savedAgreements);
-        $quote->getPayment()->save(); // @todo: Do this differently (or is it needed)
-        $this->cartRepository->save($quote);
+        $this->checkoutSession->setAgreementIds($savedAgreements);
 
         return $agreements;
     }
 
+    public function getSavedCheckoutAgreementIds(): array
+    {
+        $agreementIds = (array)$this->checkoutSession->getAgreementIds();
+        if (empty($agreementIds)) {
+            return [];
+        }
+
+        return $agreementIds;
+    }
+
     public function getSavedCheckoutAgreements(): array
     {
-        $quote = $this->checkoutSession->getQuote();
-        return (array)$quote->getPayment()->getExtensionAttributes()->getAgreementIds();
+        $this->searchCriteriaBuilder->addFilter('agreement_id', $this->getSavedCheckoutAgreementIds(), 'in');
+        return $this->checkoutAgreementsList->getList($this->searchCriteriaBuilder->create());
     }
 
     /**
