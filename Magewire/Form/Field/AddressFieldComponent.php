@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\AddressStateBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour\AttributeBehaviour;
+use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
 abstract class AddressFieldComponent extends FieldComponent implements AddressFieldInterface
 {
@@ -25,7 +26,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     protected function loadValue(): void
     {
-        $this->value = trim((string)$this->addressState->load($this->getFieldName()));
+        $this->value = trim((string)$this->getAddressState()->load($this->getFieldName()));
     }
 
     public function getFieldLabel(): string

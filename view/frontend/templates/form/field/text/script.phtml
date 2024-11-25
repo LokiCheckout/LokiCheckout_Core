@@ -16,10 +16,10 @@ $component = $this->getComponent();
                 ...componentData,
                 initActions: {
                     addToAlpineStore: function () {
-                        Alpine.store('components').add(this);
+                        window.Alpine.store('components').add(this);
                     },
                     livewireElementUpdated: function () {
-                        Livewire.hook('element.updated', (element, component) => {
+                        window.Livewire.hook('element.updated', (element, component) => {
                             if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
                                 this.valid = this.$component(this).valid;
                                 this.updated();

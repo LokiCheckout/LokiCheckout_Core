@@ -85,7 +85,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return $this->value;
     }
 
-    public function setValue(mixed $value)
+    public function setValue(mixed $value): void
     {
         $value = $this->filterValue($value);
         $this->value = $value;
@@ -97,7 +97,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         }
     }
 
-    public function updatedValue($value)
+    public function updatedValue(mixed $value): mixed
     {
         $this->setValue($value);
 

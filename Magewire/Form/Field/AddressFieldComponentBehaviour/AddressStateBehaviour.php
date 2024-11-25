@@ -16,6 +16,11 @@ trait AddressStateBehaviour
      */
     public function getAddressState(): ?AddressStateInterface
     {
+        // @todo: Should this ever be returning null?
+        if (false === $this->addressState instanceof AddressStateInterface) {
+            throw new \RuntimeException('Empty address state: '.get_class($this));
+        }
+
         return $this->addressState;
     }
 }
