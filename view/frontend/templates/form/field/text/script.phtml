@@ -47,13 +47,9 @@ $component = $this->getComponent();
                     }
                 },
                 init() {
-                    this.beforeInit(); // @todo: Remove this, in favor of initActions
-
                     Object.entries(this.initActions).forEach(([key, callback]) => {
                         callback();
                     });
-
-                    this.afterInit();
                 },
                 submit() {
                     this.beforeSubmit();
