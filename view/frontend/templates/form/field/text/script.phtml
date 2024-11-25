@@ -30,10 +30,10 @@ $component = $this->getComponent();
                     <?php endforeach; ?>
                 ],
                 initActions: {
-                    addToAlpineStore: function () {
+                    addToAlpineStore: function() {
                         Alpine.store('components').add(this);
                     },
-                    livewireElementUpdated: function () {
+                    livewireElementUpdated: function() {
                         // @todo: With livewire:init this does not work in Hyva
                         //document.addEventListener('livewire:init', () => {
                         Livewire.hook('element.updated', (element, component) => {
@@ -48,7 +48,7 @@ $component = $this->getComponent();
                 },
                 init() {
                     Object.entries(this.initActions).forEach(([key, callback]) => {
-                        callback();
+                        callback.apply(this);
                     });
                 },
                 submit() {

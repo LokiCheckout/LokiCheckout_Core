@@ -38,14 +38,12 @@
 
         <referenceContainer name="before.body.end">
             <block name="loki-checkout.script.aria-invalid" template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
-            <block name="loki-checkout.script.step-store" template="Yireo_LokiCheckout::script/step-store.phtml"/>
+            <block name="loki-checkout.script.components-store" template="Yireo_LokiCheckout::script/components-store.phtml"/>
             <block name="loki-checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>
             <block name="loki-checkout.script.magic-component" template="Yireo_LokiCheckout::script/magic-component.phtml"/>
             <block name="loki-checkout.script.validator" template="Yireo_LokiCheckout::script/validator.phtml"/>
-
-            <container name="loki-checkout.script.alpine-components"/>
-
             <block name="loki-checkout.script.alpine-component-initializer" class="Yireo\LokiCheckout\Block\ComponentInitializer" />
+            <container name="loki-checkout.script.alpine-components"/>
         </referenceContainer>
 
         <block name="loki-checkout.generic.title" template="Yireo_LokiCheckout::generic/title.phtml"/>
