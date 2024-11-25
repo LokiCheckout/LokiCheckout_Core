@@ -13,12 +13,17 @@
             <block
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/item.phtml"/>
-
-            <block
-                name="loki-checkout.shipping.shipping-methods.script"
-                as="script"
-                template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/script.phtml">
-            </block>
         </block>
+
+        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
+            <arguments>
+                <argument name="components" xsi:type="array">
+                    <item name="loki-checkout.shipping.shipping-methods" xsi:type="string">
+                        Yireo_LokiCheckout::checkout/shipping/shipping-methods/script.phtml
+                    </item>
+
+                </argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>

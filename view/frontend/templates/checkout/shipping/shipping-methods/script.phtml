@@ -5,21 +5,22 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
 
 /** @var Template $block */
-/** @var ShippingMethods $magewire */
+/** @var ShippingMethods $component */
+$component = $block->getComponent();
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            name: '<?= $magewire->getJsName() ?>',
-            wireId: '<?= $magewire->id ?>',
-            step: '<?= $magewire->getStep() ?>',
-            value: '<?= $magewire->value ?>',
-            valid: <?= $magewire->valid ? 'true' : 'false' ?>,
+        Alpine.data('<?= $component->getJsName() ?>', () => ({
+            name: '<?= $component->getJsName() ?>',
+            wireId: '<?= $component->id ?>',
+            step: '<?= $component->getStep() ?>',
+            value: '<?= $component->value ?>',
+            valid: <?= $component->valid ? 'true' : 'false' ?>,
             rules: [
                 'required'
             ],
             init() {
-                this.code = '<?= $magewire->value ?>';
+                this.code = '<?= $component->value ?>';
                 Alpine.store('components').add(this);
 
                 this.$watch('value', () => {

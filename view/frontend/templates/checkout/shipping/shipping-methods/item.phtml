@@ -20,6 +20,7 @@ $isCurrent = (bool)$block->getIsCurrent();
     <div class="p-4">
         <input type="radio"
                x-model="value"
+               value="<?= $code ?>"
                id="shipping-<?= $code ?>"
             <?= $isCurrent ? 'checked' : '' ?>>
     </div>
