@@ -38,11 +38,7 @@ class CssClass
         $blockCssClasses = (array)$this->block->getData('css_classes');
         $cssClasses = array_merge_recursive($cssClasses, $blockCssClasses);
 
-        if ($scope === 'block') {
-            $nameInLayout = $this->block->getNameInLayout();
-            $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
-            $cssClasses[$scope]['blockClass'] = $blockClass;
-        }
+
 
         $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
 
@@ -53,6 +49,12 @@ class CssClass
             }
 
             $css .= ' ' . $cssClassValue;
+        }
+
+        if ($scope === 'block') {
+            $nameInLayout = $this->block->getNameInLayout();
+            $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
+            $css = $blockClass . ' '.trim($css);
         }
 
         return trim($css);
