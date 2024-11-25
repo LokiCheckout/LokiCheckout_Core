@@ -23,7 +23,7 @@ class Postcode extends AddressFieldComponent
         if (is_bool($required)) {
             return $required;
         }
-        
+
         $countries = $this->directoryData->getCountriesWithOptionalZip();
         $countryId = $this->addressState->load('country_id');
 
