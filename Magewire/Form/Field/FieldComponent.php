@@ -108,7 +108,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function isRequired(): bool
     {
-        return true;
+        return false;
     }
 
     public function isVisible(): bool
