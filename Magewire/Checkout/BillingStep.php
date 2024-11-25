@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
@@ -16,6 +17,7 @@ class BillingStep extends Component implements StepInterface
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
         private readonly BillingAddressState $billingAddressState,
+        private StepNavigator $stepNavigator
     ) {
     }
 
@@ -41,7 +43,12 @@ class BillingStep extends Component implements StepInterface
 
     public function isAccessable(): bool
     {
-        return true;
+        // @todo: Move this logic to step navigator itself
+        if ($this->stepNavigator->isCurrentStep($this)) {
+            return true;
+        }
+
+        return false;
     }
 
     public function validate(): true|array
