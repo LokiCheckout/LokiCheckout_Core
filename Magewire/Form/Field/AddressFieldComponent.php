@@ -108,6 +108,11 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     public function isRequired(): bool
     {
+        $required = $this->getParent()->getData('is_required');
+        if (is_bool($required)) {
+            return $required;
+        }
+
         return (bool)$this->getAttribute()->getIsRequired();
     }
 }
