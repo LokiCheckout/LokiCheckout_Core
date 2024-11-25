@@ -41,7 +41,7 @@
                 element.setAttribute('aria-invalid', true);
             });
 
-            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
+            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         },
         setValid: function (component) {
             component.valid = true;
@@ -51,7 +51,7 @@
                 element.removeAttribute('aria-invalid');
             });
 
-            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.step-change', {detail: {component}}));
+            window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         }
     }
 

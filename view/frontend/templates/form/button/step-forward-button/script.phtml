@@ -16,7 +16,7 @@ $magewire = $block->getComponent();
             valid: true,
             init() {
                 this.updateValid();
-                window.addEventListener('yireo-loki-checkout.step-change', () => {
+                window.addEventListener('yireo-loki-checkout.component-change', () => {
                     this.updateValid();
                 });
             },
