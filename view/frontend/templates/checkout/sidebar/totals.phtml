@@ -17,17 +17,40 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote()->collectTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<div  class="<?= $css('') ?>">
-    <dl class="grid grid-cols-2 gap-y-1 ">
-        <dt class="font-medium"><?= __('Subtotal') ?></dt>
-        <dd class="text-right"><?= $priceFormatter->format($quote->getSubtotal()) ?></dd>
-        <dt class="font-medium"><?= __('Shipping & Handling') ?></dt>
-        <dd class="text-right"><?= $priceFormatter->format($quote->getShippingAmount()) ?></dd>
-        <dt class="font-medium"><?= __('Tax') ?></dt>
-        <dd class="text-right"><?= $priceFormatter->format($quote->getTaxAmount()) ?></dd>
-        <div class="font-bold text-lg grid grid-cols-2 gap-x-2 col-span-full">
-            <dt><?= __('Grand Total') ?></dt>
-            <dd class="text-right"><?= $priceFormatter->format($quote->getGrandTotal()) ?></dd>
-        </div>
+<div class="<?= $css('') ?>">
+    <dl class="<?= $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
+        <?= $block->getChildHtml('after') ?>
+
+        <dt class="<?= $css('font-medium', 'subtotal-label') ?>">
+            <?= __('Subtotal') ?>
+        </dt>
+        <dd class="<?= $css('text-right', 'subtotal-value') ?>">
+            <?= $priceFormatter->format($quote->getSubtotal()) ?>
+        </dd>
+
+        <dt class="<?= $css('font-medium', 'shipping-label') ?>">
+            <?= __('Shipping & Handling') ?>
+        </dt>
+        <dd class="<?= $css('text-right', 'shipping-value') ?>">
+            <?= $priceFormatter->format($quote->getShippingAmount()) ?>
+        </dd>
+
+        <dt class="<?= $css('font-medium', 'tax-label') ?>">
+            <?= __('Tax') ?>
+        </dt>
+        <dd class="<?= $css('text-right', 'tax-value') ?>">
+            <?= $priceFormatter->format($quote->getTaxAmount()) ?>
+        </dd>
+
+        <?= $block->getChildHtml('inner') ?>
+
+        <dt class="<?= $css('font-bold text-lg', 'total-label') ?>">
+            <?= __('Grand Total') ?>
+        </dt>
+        <dd class="<?= $css('font-bold text-lg text-right', 'total-value') ?>">
+            <?= $priceFormatter->format($quote->getGrandTotal()) ?>
+        </dd>
+
+        <?= $block->getChildHtml('after') ?>
     </dl>
 </div>
