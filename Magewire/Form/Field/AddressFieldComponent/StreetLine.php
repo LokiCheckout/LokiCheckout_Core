@@ -35,6 +35,15 @@ class StreetLine extends AddressFieldComponent
         $this->emit('StreetUpdated'); // @todo: Standardize event names
     }
 
+    public function isRequired(): bool
+    {
+        if ($this->index === 0) {
+            return true;
+        }
+
+        return parent::isRequired();
+    }
+
     public function isVisible(): bool
     {
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
