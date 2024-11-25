@@ -30,7 +30,7 @@ $blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script'
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
-     ) && 'required' ?> <?= $magewire->getFieldName() ?>"
+     ) ? 'required': 'optional' ?> <?= $magewire->getFieldName() ?>"
      x-data="<?= $magewire->getJsName() ?>">
 
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
