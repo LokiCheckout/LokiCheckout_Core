@@ -9,8 +9,7 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 class StepBackwardButton extends Component implements ButtonInterface
 {
     protected $listeners = [
-        'shippingStepSave' => 'refresh',
-        'billingStepSave' => 'refresh',
+        'stepChange' => 'refresh',
     ];
 
     public function __construct(

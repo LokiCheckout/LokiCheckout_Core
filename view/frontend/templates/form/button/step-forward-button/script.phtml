@@ -12,7 +12,6 @@ $magewire = $block->getComponent();
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $magewire->getJsName() ?>', () => ({
             wireId: '<?= $magewire->id ?>',
-            visible: <?= $magewire->isVisible() ? 'true' : 'false' ?>,
             valid: true,
             init() {
                 this.updateValid();

@@ -23,7 +23,8 @@
                 <argument name="magewire" xsi:type="object" shared="false">
                     Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton
                 </argument>
-                <argument name="button_label" xsi:type="string">Proceed to Review &amp; Payments</argument>
+                <!-- @todo: Change this text if there are only free items -->
+                <argument name="button_label" xsi:type="string">Pay &amp; Place Order</argument>
             </arguments>
             <block
                 name="loki-checkout.billing-step.forward-button.script" as="script"

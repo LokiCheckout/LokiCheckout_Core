@@ -16,13 +16,15 @@ if (false === $magewire instanceof StepForwardButton) {
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>" <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
-    <button <?php if (false === $magewire->isVisible()): ?>x-cloak<?php endif; ?> x-show="visible" class="<?= $css('btn btn-primary m-2', 'button') ?>"
+    <?php if ($magewire->isVisible()): ?>
+    <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
             :disabled="!valid"
             x-on:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
+    <?php endif; ?>
 
     <?= $block->getChildBlock('script')->addData(['component' => $magewire])->toHtml(); ?>
 </div>
