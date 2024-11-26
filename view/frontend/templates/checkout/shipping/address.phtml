@@ -6,15 +6,12 @@ use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingAddress $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var SortedChildBlocks $sortedChildBlocks */
-$sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
 $buttonLabelNewAddress = __('New Address');
 $buttonLabelSelectAddress = __('Select Address');
 ?>

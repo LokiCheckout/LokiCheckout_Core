@@ -6,18 +6,18 @@ use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
+use Yireo\LokiCheckout\Util\Block\GridBlock;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShippingAddress $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var SortedChildBlocks $sortedChildBlocks */
-$sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
+/** @var GridBlock $gridBlock */
+$gridBlock = $viewModelFactory->create(GridBlock::class);
 ?>
 <div class="<?= $css('grid grid-cols-12 gap-8') ?>">
-    <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>
+    <?php foreach ($gridBlock->getChildren($block) as $childBlock): ?>
         <?= $childBlock->toHtml() ?>
     <?php endforeach; ?>
 </div>

@@ -4,16 +4,16 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\SortedChildBlocks;
+use Yireo\LokiCheckout\Util\Block\GridBlock;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
-/** @var SortedChildBlocks $sortedChildBlocks */
-$sortedChildBlocks = $viewModelFactory->create(SortedChildBlocks::class);
+/** @var GridBlock $gridBlock */
+$gridBlock = $viewModelFactory->create(GridBlock::class);
 ?>
 <div class="<?= $css('grid grid-cols-12 gap-8 mb-8') ?>">
-    <?php foreach ($sortedChildBlocks->getChildren($block) as $childBlock): ?>
+    <?php foreach ($gridBlock->getChildren($block) as $childBlock): ?>
         <?= $childBlock->toHtml() ?>
     <?php endforeach; ?>
 </div>
