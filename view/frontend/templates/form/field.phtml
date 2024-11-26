@@ -4,12 +4,13 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var Component|FormFieldInterface $magewire */
+/** @var FieldComponent $magewire */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
@@ -30,12 +31,14 @@ $blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script'
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
-     ) ? 'required': 'optional' ?> <?= $magewire->getFieldName() ?>"
+     ) ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
      x-data="<?= $magewire->getJsName() ?>">
 
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
         <?= __($magewire->getFieldLabel()) ?>
-        <?= $magewire->isRequired() ? $block->getBlockHtml('loki-checkout.utils.required') : '' ?>
+        <?php if ($magewire->isRequired() && $magewire->getConfig()->useRequiredBlock()): ?>
+            <?= $block->getBlockHtml('loki-checkout.utils.required'); ?>
+        <?php endif; ?>
     </label>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">

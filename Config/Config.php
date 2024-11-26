@@ -46,6 +46,11 @@ class Config
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
     }
 
+    public function useRequiredBlock(): bool
+    {
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/use_required_block');
+    }
+
     public function enableSameAsBilling(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_same_as_billing');

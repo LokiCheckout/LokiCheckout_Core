@@ -3,15 +3,19 @@
 namespace Yireo\LokiCheckout\Magewire\Form\Field;
 
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\JsValidateBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
 
 abstract class FieldComponent extends Component implements FormFieldInterface
 {
+    use InjectConfig;
+
     use FilterBehaviour;
     use ValidateBehaviour;
     use JsValidateBehaviour;
@@ -189,5 +193,10 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function getComponentDataAsJson(): string
     {
         return json_encode($this->getComponentData());
+    }
+
+    public function getConfig(): Config
+    {
+        return $this->config;
     }
 }

@@ -8,6 +8,7 @@
                 <debug>0</debug>
             </general>
             <fields>
+                <use_required_block>1</use_required_block>
                 <enable_same_as_billing>1</enable_same_as_billing>
                 <same_as_billing_value>1</same_as_billing_value>
                 <enable_vat_id_only_for_company>0</enable_vat_id_only_for_company>
