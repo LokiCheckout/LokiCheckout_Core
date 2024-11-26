@@ -26,7 +26,7 @@ class GridBlock implements ArgumentInterface
 
             if (isset($gridConfiguration[$childAlias])) {
                 $sortOrder = $gridConfiguration[$childAlias]['sortOrder'];
-                $gridCssClasses =  ['grid' => $gridConfiguration[$childAlias]['gridCssClasses']];
+                $gridCssClasses =  ['block' => ['col-span' => $gridConfiguration[$childAlias]['gridCssClasses']]];
             } else {
                 $gridCssClasses = $defaultCssClasses;
                 $sortOrder = $defaultSortOrder;
