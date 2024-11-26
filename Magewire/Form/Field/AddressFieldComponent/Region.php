@@ -6,7 +6,7 @@ use Override;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 
 class Region extends AddressFieldComponent implements FormTextSelectFieldInterface
@@ -15,7 +15,7 @@ class Region extends AddressFieldComponent implements FormTextSelectFieldInterfa
 
     use OptionsBehaviour;
     use InjectScopeConfig;
-    use InjectConfig;
+    use InjectLokiCheckoutConfig;
 
     #[Override]
     public function boot(): void
@@ -57,7 +57,7 @@ class Region extends AddressFieldComponent implements FormTextSelectFieldInterfa
 
     public function isVisible(): bool
     {
-        if (false === $this->config->hideRegionWhenOptional()) {
+        if (false === $this->lokiCheckoutConfig->hideRegionWhenOptional()) {
             return true;
         }
 

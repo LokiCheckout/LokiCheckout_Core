@@ -116,7 +116,7 @@
     <type name="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin">
         <arguments>
             <argument name="injectables" xsi:type="array">
-                <item name="config" xsi:type="object">Yireo\LokiCheckout\Config\Config</item>
+                <item name="lokiCheckoutConfig" xsi:type="object">Yireo\LokiCheckout\Config\Config</item>
                 <item name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface</item>
                 <item name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</item>
                 <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>

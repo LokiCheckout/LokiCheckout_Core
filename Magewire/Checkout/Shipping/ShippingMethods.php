@@ -8,12 +8,12 @@ use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\JsNameBehaviour;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ShippingMethods extends Component
 {
-    use InjectConfig;
+    use InjectLokiCheckoutConfig;
     use StepBehaviour;
     use JsNameBehaviour;
 
@@ -48,7 +48,7 @@ class ShippingMethods extends Component
             $this->value = '';
         }
 
-        if (empty($this->value) && $this->config->selectDefaultShippingMethod()) {
+        if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultShippingMethod()) {
             // @todo: Make this optional
             $firstShippingMethod = (string)array_key_first($this->shippingMethods);
             $this->value = $firstShippingMethod;

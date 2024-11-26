@@ -6,12 +6,12 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectConfig;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class PaymentMethods extends Component
 {
-    use InjectConfig;
+    use InjectLokiCheckoutConfig;
 
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
@@ -31,7 +31,7 @@ class PaymentMethods extends Component
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
         $this->value = (string) $quote->getPayment()->getMethod();
 
-        if (empty($this->value) && $this->config->selectDefaultPaymentMethod()) {
+        if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
             $this->value = $this->getDefaultPayment();
             $quote->setShippingMethod($this->value);
             $this->cartRepository->save($quote);
