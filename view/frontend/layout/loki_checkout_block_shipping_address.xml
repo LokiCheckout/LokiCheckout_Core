@@ -41,6 +41,7 @@
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Prefix
                         </argument>
+                        <argument name="field_type" xsi:type="string">text_select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
@@ -162,6 +163,7 @@
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Region
                         </argument>
+                        <argument name="field_type" xsi:type="string">text_select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
                         </argument>
@@ -175,6 +177,7 @@
                         <argument name="magewire" xsi:type="object">
                             Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\CountryId
                         </argument>
+                        <argument name="field_type" xsi:type="string">select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
                         </argument>

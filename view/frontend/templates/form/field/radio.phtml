@@ -1,0 +1,41 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+
+/** @var Template $block */
+/** @var FieldComponent|OptionsBehaviour $magewire */
+/** @var CssClass $css */
+
+$optionModel = $block->getAncestorBlock()->getOptionModel();
+$magewire->setOptionModel($optionModel);
+?>
+<div class="<?= $css('w-full grid grid-cols-2 p-2') ?>" data-type="field">
+    <?php $i = 0; ?>
+    <?php foreach ($magewire->getOptions() as $optionValue => $optionLabel): ?>
+        <div class="<?= $css('', 'option') ?>">
+            <input type="radio"
+                   id="<?= $magewire->getElementId() ?>-field-<?= $i ?>"
+                   wire:loading.attr="aria-busy"
+                   wire:loading.class="disabled"
+                   wire:model="value"
+                   value="<?= $optionValue ?>"
+                <?php if ($magewire->value === $optionValue): ?>
+                    checked
+                <?php endif; ?>
+                <?php if ($magewire->isDisabled()): ?>
+                    disabled="disabled"
+                <?php endif ?>
+            />
+            <label
+                class="<?= $css('pl-2', 'label') ?>"
+                for="<?= $magewire->getElementId() ?>-field-<?= $i ?>">
+                <?= __($optionLabel) ?>
+            </label>
+        </div>
+        <?php $i++; ?>
+    <?php endforeach; ?>
+</div>

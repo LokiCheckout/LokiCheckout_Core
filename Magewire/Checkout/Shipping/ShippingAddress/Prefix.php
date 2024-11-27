@@ -3,9 +3,8 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Prefix as GenericPrefixComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
 
-class Prefix extends GenericPrefixComponent implements FormTextSelectFieldInterface, ShippingAddressFieldComponentInterface
+class Prefix extends GenericPrefixComponent implements ShippingAddressFieldComponentInterface
 {
 }

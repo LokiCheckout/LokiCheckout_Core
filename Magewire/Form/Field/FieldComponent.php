@@ -27,6 +27,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public string $value = '';
     public bool $valid = true;
+    public bool $visible = true;
 
     public function booted(): void
     {
@@ -117,7 +118,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public function isVisible(): bool
     {
-        return true; // @todo: Is this still a handy thing?
+        return $this->visible;
     }
 
     public function isDisabled(): bool

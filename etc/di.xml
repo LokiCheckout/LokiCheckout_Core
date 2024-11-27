@@ -122,6 +122,7 @@
                 <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>
                 <item name="streetlinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetlinesFactory</item>
                 <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
+                <item name="componentRegistry" xsi:type="object">Yireo\LokiCheckout\Magewire\ComponentRegistry</item>
             </argument>
         </arguments>
     </type>

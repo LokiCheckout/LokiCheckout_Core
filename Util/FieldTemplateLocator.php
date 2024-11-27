@@ -2,26 +2,47 @@
 
 namespace Yireo\LokiCheckout\Util;
 
+use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormSelectFieldInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 
 class FieldTemplateLocator
 {
     public function getFieldTemplateFromComponent(FieldComponent $component): string
     {
-        if ($component instanceof FormTextSelectFieldInterface) {
-            return 'Yireo_LokiCheckout::form/field/text_select.phtml';
+        $parentBlock = $component->getParent();
+        if (false === $parentBlock instanceof AbstractBlock) {
+            return $this->getFieldTemplateByType('text');
         }
 
-        if ($component instanceof FormSelectFieldInterface) {
-            return 'Yireo_LokiCheckout::form/field/select.phtml';
+        $fieldTemplate = $parentBlock->getFieldTemplate();
+        if (false === empty($fieldTemplate)) {
+            return $fieldTemplate;
         }
 
+        $fieldType = $parentBlock->getFieldType();
+        if (array_key_exists($fieldType, $this->getFieldTemplateMapping())) {
+            return $this->getFieldTemplateByType($fieldType);
+        }
+
+        return $this->getFieldTemplateByType('text');
+    }
+
+    public function getFieldTemplateByType(string $type): string
+    {
+        return $this->getFieldTemplateMapping()[$type];
+    }
+
+    public function getFieldTemplateMapping(): array
+    {
         // @todo: Radiobox
         // @todo: Checkbox
         // @todo: Textarea
 
-        return 'Yireo_LokiCheckout::form/field/text.phtml';
+        return [
+            'text' => 'Yireo_LokiCheckout::form/field/text.phtml',
+            'radio' => 'Yireo_LokiCheckout::form/field/radio.phtml',
+            'select' => 'Yireo_LokiCheckout::form/field/select.phtml',
+            'text_select' => 'Yireo_LokiCheckout::form/field/text_select.phtml',
+        ];
     }
 }

@@ -3,10 +3,9 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Region as GenericRegionComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
 use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
 
-class Region extends GenericRegionComponent implements FormTextSelectFieldInterface, ShippingAddressFieldComponentInterface
+class Region extends GenericRegionComponent implements ShippingAddressFieldComponentInterface
 {
     protected $listeners = [
         'shippingAddressCountryIdSave' => 'refresh'

@@ -4,11 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormTextSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var Component|FormTextSelectFieldInterface $magewire */
+/** @var FieldComponent|OptionsBehaviour $magewire */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 

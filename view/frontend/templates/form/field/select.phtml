@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormSelectFieldInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 /** @var Template $block */
-/** @var Component|FormSelectFieldInterface $magewire */
+/** @var FieldComponent|OptionsBehaviour $magewire */
 /** @var CssClass $css */
 
 $optionModel = $block->getAncestorBlock()->getOptionModel();
