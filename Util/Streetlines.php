@@ -11,9 +11,9 @@ class Streetlines
     ) {
     }
 
-    public function setStreetName(string $streetName): Streetlines
+    public function setStreetName(string $streetName): void
     {
-        return new Streetlines($streetName, $this->getHouseNumber(), $this->getHouseNumberAddition());
+        $this->streetName = $streetName;
     }
 
     public function getStreetName(): string
