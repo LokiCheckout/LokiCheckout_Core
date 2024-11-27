@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\SetterInjection;
 
-use Yireo\LokiCheckout\ValueObject\StreetlinesFactory;
+use Yireo\LokiCheckout\Util\StreetlinesFactory;
 
 trait InjectStreetlinesFactory
 {
