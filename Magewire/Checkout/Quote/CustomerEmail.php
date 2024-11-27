@@ -8,7 +8,6 @@ class CustomerEmail extends QuoteFieldComponent
 {
     public string $email = '';
 
-    protected array $jsValidators = ['email'];
     protected array $validators = ['email'];
 
     public function getFieldLabel(): string

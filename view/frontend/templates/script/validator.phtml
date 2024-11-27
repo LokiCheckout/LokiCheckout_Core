@@ -15,11 +15,12 @@
             isValid = true;
             window.LokiCheckoutMessenger.clear(component);
 
-            component.rules.forEach(rule => {
+            component.rules.every(rule => {
                 if (false === this.rules[rule](component)) {
-                    isValid = false; // @todo: Exit at first rule that fails
-                    return false;
+                    isValid = false;
                 }
+
+                return isValid;
             })
 
             if (false === isValid) {
@@ -53,14 +54,5 @@
 
             window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         }
-    }
-
-    window.LokiCheckoutValidator.rules.email = function (component) {
-        if (/\S+@\S+\.\S+/.test(component.value) === false) {
-            window.LokiCheckoutMessenger.error('<?= __('Not a valid email') ?>', component);
-            return false;
-        }
-
-        return true;
     }
 </script>

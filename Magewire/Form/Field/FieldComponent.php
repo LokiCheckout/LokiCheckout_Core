@@ -6,7 +6,6 @@ use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config as LokiCheckoutConfig;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehaviour;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\JsValidateBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
@@ -18,7 +17,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     use FilterBehaviour;
     use ValidateBehaviour;
-    use JsValidateBehaviour;
     use FieldTemplateLocatorBehaviour;
     use ParentBehaviour;
     use StepBehaviour;
@@ -176,8 +174,8 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function getComponentData(): array
     {
         $rules = [];
-        foreach ($this->getJsValidators() as $jsValidator) {
-            $rules[] = $jsValidator;
+        foreach ($this->getValidators() as $validator) {
+            $rules[] = $validator;
         }
 
         return [

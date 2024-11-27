@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 use Magento\Framework\App\ObjectManager;
+use RuntimeException;
 use Yireo\LokiCheckout\Validator\Component\FieldValidatorInterface;
 use Yireo\LokiCheckout\Validator\Component\FieldValidatorRegistry;
 
@@ -12,20 +13,12 @@ trait ValidateBehaviour
 
     public function validate(): bool
     {
-        // @todo: This is a VERY VERY VERY ugly work-around
-
-        if ($this->isRequired() && empty($this->value)) {
-            $this->error('value', (string)__('Value is required'));
-
-            return false;
-        }
-
         $addressFieldValidatorRegistry = ObjectManager::getInstance()->get(FieldValidatorRegistry::class);
         $selectedValidators = $addressFieldValidatorRegistry->getSelectedValidators($this->getValidators());
 
         foreach ($selectedValidators as $validator) {
             if (false === $validator instanceof FieldValidatorInterface) {
-                throw new \Error('Wrong validator: '.var_export($validator, true));
+                throw new RuntimeException('Wrong validator: '.var_export($validator, true));
             }
 
             $rt = $validator->validate($this);
@@ -39,10 +32,22 @@ trait ValidateBehaviour
 
     public function getValidators(): array
     {
-        if ($this->hasMinLength() || $this->hasMaxLength()) {
-            $this->validators[] = 'length';
+        $validators = [];
+        if ($this->isRequired()) {
+            $validators[] = 'required';
         }
 
-        return array_merge($this->validators, array_values((array)$this->getParent()->getValidators()));
+        if ($this->hasMinLength() || $this->hasMaxLength()) {
+            $validators[] = 'length';
+        }
+
+        $validators = array_merge(
+            $validators,
+            $this->validators,
+            array_values((array)$this->getParent()->getValidators())
+        );
+
+        $validators = array_unique($validators);
+        return $validators;
     }
 }
