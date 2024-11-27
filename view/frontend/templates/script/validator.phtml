@@ -16,6 +16,10 @@
             window.LokiCheckoutMessenger.clear(component);
 
             component.rules.every(rule => {
+                if (this.rules[rule] === undefined) {
+                    return true;
+                }
+
                 if (false === this.rules[rule](component)) {
                     isValid = false;
                 }
