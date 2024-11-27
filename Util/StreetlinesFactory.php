@@ -22,7 +22,6 @@ class StreetlinesFactory
 
     public function createFromStreet(string $street): Streetlines
     {
-        $street = str_replace("\n\n", "\n", $street);
         $streetParts = explode("\n", $street);
 
         if (count($streetParts) === 2 && preg_match('/^([0-9]+)$/', $streetParts[0])) {
