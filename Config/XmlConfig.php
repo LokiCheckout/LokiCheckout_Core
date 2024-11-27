@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Config;
 
 use Magento\Framework\Config\Data as DataConfig;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Field;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
 
 class XmlConfig extends DataConfig
 {
@@ -29,12 +29,12 @@ class XmlConfig extends DataConfig
 
     private function createGridLayout(string $name, array $gridData): GridLayout
     {
-        $fields = [];
-        foreach ($gridData['fields'] as $fieldData) {
-            $fields[] = new Field(
-                $fieldData['name'],
-                $fieldData['sortOrder'],
-                $fieldData['gridClass']
+        $blocks = [];
+        foreach ($gridData['blocks'] as $blockData) {
+            $blocks[] = new Block(
+                $blockData['alias'],
+                $blockData['sortOrder'],
+                $blockData['gridClass']
             );
         }
 
@@ -42,7 +42,7 @@ class XmlConfig extends DataConfig
             $name,
             (int) $gridData['defaultSortOrder'],
             (string) $gridData['defaultGridClass'],
-            $fields
+            $blocks
         );
     }
 }

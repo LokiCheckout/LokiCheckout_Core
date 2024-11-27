@@ -24,12 +24,12 @@ class Converter implements ConverterInterface
         $gridLayoutElements = $source->getElementsByTagName('grid_layout');
 
         foreach ($gridLayoutElements as $gridLayoutElement) {
-            $fields = [];
-            foreach ($gridLayoutElement->getElementsByTagName('field') as $field) {
-                $fields[] = [
-                    'name' => (string)$field->getAttribute('name'),
-                    'sortOrder' => (int)$field->getAttribute('sortOrder'),
-                    'gridClass' => (string)$field->getAttribute('gridClass'),
+            $blocks = [];
+            foreach ($gridLayoutElement->getElementsByTagName('block') as $block) {
+                $blocks[] = [
+                    'alias' => (string)$block->getAttribute('alias'),
+                    'sortOrder' => (int)$block->getAttribute('sortOrder'),
+                    'gridClass' => (string)$block->getAttribute('gridClass'),
                 ];
             }
 
@@ -40,7 +40,7 @@ class Converter implements ConverterInterface
             $gridLayouts[$gridName] = [
                 'defaultSortOrder' => !empty($defaultSortOrder) ? $defaultSortOrder : 99,
                 'defaultGridClass' => !empty($defaultGridClass) ? $defaultGridClass : 'col-span-6',
-                'fields' => $fields,
+                'blocks' => $blocks,
             ];
         }
 

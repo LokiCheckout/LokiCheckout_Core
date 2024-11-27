@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
 
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Field;
-use Yireo\LokiCheckout\Exception\XmlConfig\FieldNotFoundException;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
+use Yireo\LokiCheckout\Exception\XmlConfig\BlockNotFoundException;
 
 class GridLayout
 {
@@ -11,7 +11,7 @@ class GridLayout
         private string $name,
         private int $defaultSortOrder,
         private string $defaultGridClass,
-        private array $fields = []
+        private array $blocks = []
     ) {
     }
 
@@ -31,26 +31,26 @@ class GridLayout
     }
 
     /**
-     * @return Field[]
+     * @return Block[]
      */
-    public function getFields(): array
+    public function getBlocks(): array
     {
-        return $this->fields;
+        return $this->blocks;
     }
 
     /**
-     * @param string $fieldName
-     * @return Field
-     * @throws FieldNotFoundException
+     * @param string $blockAlias
+     * @return Block
+     * @throws BlockNotFoundException
      */
-    public function getField(string $fieldName): Field
+    public function getBlock(string $blockAlias): Block
     {
-        foreach ($this->getFields() as $field) {
-            if ($field->getName() === $fieldName) {
-                return $field;
+        foreach ($this->getBlocks() as $block) {
+            if ($block->getAlias() === $blockAlias) {
+                return $block;
             }
         }
 
-        throw new FieldNotFoundException((string)__('Field with name "%1" not found in grid layout', $fieldName));
+        throw new BlockNotFoundException((string)__('Block with name "%1" not found in grid layout', $blockAlias));
     }
 }

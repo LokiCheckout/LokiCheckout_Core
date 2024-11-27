@@ -1,40 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiCheckout:etc/loki_checkout.xsd">
-    <grid_layout name="default">
-        <field name="prefix" sortOrder="1" gridClass="col-span-6"/>
-        <field name="firstname" sortOrder="1" gridClass="col-span-6"/>
-        <field name="middlename" sortOrder="2" gridClass="col-span-6"/>
-        <field name="lastname" sortOrder="3" gridClass="col-span-6"/>
-        <field name="street0" sortOrder="4" gridClass="col-span-6"/>
-        <field name="street1" sortOrder="5" gridClass="col-span-6"/>
-        <field name="street2" sortOrder="6" gridClass="col-span-6"/>
-        <field name="street3" sortOrder="7" gridClass="col-span-6"/>
-        <field name="postcode" sortOrder="8" gridClass="col-span-6"/>
-        <field name="city" sortOrder="9" gridClass="col-span-6"/>
-        <field name="region" sortOrder="10" gridClass="col-span-6"/>
-        <field name="country_id" sortOrder="11" gridClass="col-span-6"/>
-        <field name="telephone" sortOrder="12" gridClass="col-span-6"/>
-        <field name="fax" sortOrder="13" gridClass="col-span-6"/>
-        <field name="company" sortOrder="14" gridClass="col-span-6"/>
-        <field name="vat_id" sortOrder="15" gridClass="col-span-6"/>
-    </grid_layout>
-
-    <grid_layout name="dutch">
-        <field name="prefix" sortOrder="3" gridClass="col-span-6"/>
-        <field name="firstname" sortOrder="2" gridClass="col-span-6"/>
-        <field name="middlename" sortOrder="1" gridClass="col-span-6"/>
-        <field name="lastname" sortOrder="3" gridClass="col-span-6"/>
-        <field name="street0" sortOrder="4" gridClass="col-span-6"/>
-        <field name="street1" sortOrder="5" gridClass="col-span-6"/>
-        <field name="street2" sortOrder="6" gridClass="col-span-6"/>
-        <field name="street3" sortOrder="7" gridClass="col-span-6"/>
-        <field name="postcode" sortOrder="8" gridClass="col-span-6"/>
-        <field name="city" sortOrder="9" gridClass="col-span-6"/>
-        <field name="region" sortOrder="10" gridClass="col-span-6"/>
-        <field name="country_id" sortOrder="11" gridClass="col-span-6"/>
-        <field name="telephone" sortOrder="12" gridClass="col-span-6"/>
-        <field name="fax" sortOrder="13" gridClass="col-span-6"/>
-        <field name="company" sortOrder="14" gridClass="col-span-6"/>
-        <field name="vat_id" sortOrder="15" gridClass="col-span-6"/>
+    <grid_layout name="default_grid">
+        <block alias="prefix" sortOrder="1" gridClass="col-span-6"/>
+        <block alias="firstname" sortOrder="2" gridClass="col-span-6"/>
+        <block alias="middlename" sortOrder="3" gridClass="col-span-6"/>
+        <block alias="lastname" sortOrder="4" gridClass="col-span-6"/>
+        <block alias="street0" sortOrder="5" gridClass="col-span-6"/>
+        <block alias="street1" sortOrder="6" gridClass="col-span-6"/>
+        <block alias="street2" sortOrder="7" gridClass="col-span-6"/>
+        <block alias="street3" sortOrder="8" gridClass="col-span-6"/>
+        <block alias="postcode" sortOrder="9" gridClass="col-span-6"/>
+        <block alias="city" sortOrder="10" gridClass="col-span-6"/>
+        <block alias="region" sortOrder="11" gridClass="col-span-6"/>
+        <block alias="country_id" sortOrder="12" gridClass="col-span-6"/>
+        <block alias="telephone" sortOrder="13" gridClass="col-span-6"/>
+        <block alias="fax" sortOrder="14" gridClass="col-span-6"/>
+        <block alias="company" sortOrder="15" gridClass="col-span-6"/>
+        <block alias="vat_id" sortOrder="16" gridClass="col-span-6"/>
     </grid_layout>
 </config>

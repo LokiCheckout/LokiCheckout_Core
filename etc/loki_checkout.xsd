@@ -14,18 +14,18 @@
   <xs:complexType name="gridLayoutType">
     <xs:annotation>
       <xs:documentation>
-        Description of field grid
+        Description of block grid
       </xs:documentation>
     </xs:annotation>
     <xs:sequence maxOccurs="unbounded">
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="field">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="block">
         <xs:complexType>
           <xs:annotation>
             <xs:documentation>
               Settings for specific field component in grid
             </xs:documentation>
           </xs:annotation>
-          <xs:attribute name="name" type="xs:string" use="required"/>
+          <xs:attribute name="alias" type="xs:string" use="required"/>
           <xs:attribute name="sortOrder" type="xs:int" use="optional"/>
           <xs:attribute name="gridClass" type="xs:string" use="optional"/>
         </xs:complexType>

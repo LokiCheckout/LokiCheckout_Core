@@ -2,18 +2,18 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
 
-class Field
+class Block
 {
     public function __construct(
-        private string $name,
+        private string $alias,
         private int $sortOrder,
         private string $gridClass
     ) {
     }
 
-    public function getName(): string
+    public function getAlias(): string
     {
-        return $this->name;
+        return $this->alias;
     }
 
     public function getSortOrder(): int

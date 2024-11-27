@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Exception\XmlConfig;
 
 use RuntimeException;
 
-class FieldNotFoundException extends RuntimeException
+class BlockNotFoundException extends RuntimeException
 {
 
 }
