@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="config">
+    <xs:annotation>
+      <xs:documentation>Configuration options for the Yireo Loki Checkout</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="grid_layout" type="gridLayoutType"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="gridLayoutType">
+    <xs:annotation>
+      <xs:documentation>
+        Description of field grid
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="field">
+        <xs:complexType>
+          <xs:annotation>
+            <xs:documentation>
+              Settings for specific field component in grid
+            </xs:documentation>
+          </xs:annotation>
+          <xs:attribute name="name" type="xs:string" use="required"/>
+          <xs:attribute name="sortOrder" type="xs:int" use="optional"/>
+          <xs:attribute name="gridClass" type="xs:string" use="optional"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
+    <xs:attribute name="defaultGridClass" type="xs:string" use="optional"/>
+  </xs:complexType>
+</xs:schema>
