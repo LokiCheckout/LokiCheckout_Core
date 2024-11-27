@@ -11,15 +11,6 @@ class Streetlines
     ) {
     }
 
-    public static function create(string $street): Streetlines
-    {
-        $streetParts = explode("\n", $street);
-        $streetName = isset($streetParts[0]) ? $streetParts[0] : '';
-        $houseNumber = isset($streetParts[1]) ? $streetParts[1] : '';
-        $houseNumberAddition = isset($streetParts[2]) ? $streetParts[2] : '';
-        return new Streetlines($streetName, $houseNumber, $houseNumberAddition);
-    }
-
     public function setStreetName(string $streetName): Streetlines
     {
         return new Streetlines($streetName, $this->getHouseNumber(), $this->getHouseNumberAddition());
