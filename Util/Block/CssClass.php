@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Util\Block\CssClassParser\CssClassParserInterface;
 
 class CssClass
@@ -13,7 +14,8 @@ class CssClass
      * @param CssClassParserInterface[] $cssClassParsers
      */
     public function __construct(
-        private array $cssClassParsers = []
+        private XmlConfig $xmlConfig,
+        private array     $cssClassParsers = [],
     ) {
     }
 
@@ -38,7 +40,15 @@ class CssClass
         $blockCssClasses = (array)$this->block->getData('css_classes');
         $cssClasses = array_merge_recursive($cssClasses, $blockCssClasses);
 
-
+        // @todo: Carefully review this. Are we insane?
+        if ($scope === 'block') {
+            $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig();
+            if (!empty($gridClassesFromXmlConfig)) {
+                $cssClasses = array_merge_recursive($cssClasses, [
+                    'block' => ['grid' => $gridClassesFromXmlConfig]
+                ]);
+            }
+        }
 
         $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
 
@@ -54,10 +64,32 @@ class CssClass
         if ($scope === 'block') {
             $nameInLayout = $this->block->getNameInLayout();
             $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
-            $css = $blockClass . ' '.trim($css);
+            $css = $blockClass . ' ' . trim($css);
         }
 
         return trim($css);
+    }
+
+    private function getGridClassesFromXmlConfig(): string
+    {
+        $parentBlock = $this->block->getParentBlock();
+        if (empty($parentBlock)) {
+            return '';
+        }
+
+        $gridLayoutName = (string)$parentBlock->getGridLayout();
+        if (empty($gridLayoutName)) {
+            return '';
+        }
+
+        $blockAlias = $this->block->getLayout()->getElementAlias($this->block->getNameInLayout());
+        if (empty($blockAlias)) {
+            return '';
+        }
+
+        $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
+        $block = $gridLayout->getBlock($blockAlias);
+        return $block->getGridClass();
     }
 
     private function getDefaultCssClasses(): array
@@ -66,7 +98,7 @@ class CssClass
         $templateId = preg_replace('/\.phtml/', '', $templateId);
         $templateId = str_replace('/', '.', $templateId);
 
-        $defaultBlockName = 'loki-checkout.defaults.'.$templateId;
+        $defaultBlockName = 'loki-checkout.defaults.' . $templateId;
         $defaultBlock = $this->block->getLayout()->getBlock($defaultBlockName);
         if (empty($defaultBlock)) {
             return [];
