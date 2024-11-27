@@ -13,8 +13,8 @@ class StreetlinesFactoryTest extends TestCase
         $objectManager = new SimpleObjectManager;
         $streetlinesFactory = new StreetlinesFactory($objectManager);
 
-        $streetlines = $streetlinesFactory->create('Example Street', '1', 'A');
-        $this->assertSame('Example Street', $streetlines->getStreetName());
+        $streetlines = $streetlinesFactory->create('Example', '1', 'A');
+        $this->assertSame('Example', $streetlines->getStreetName());
         $this->assertSame('1', $streetlines->getHouseNumber());
         $this->assertSame('A', $streetlines->getHouseNumberAddition());
     }
@@ -41,7 +41,7 @@ class StreetlinesFactoryTest extends TestCase
     public function getCreateFromStreetInput(): array
     {
         return [
-            ["Example Street\n1\nA", 'Example Street', '1', 'A'],
+            ["Example\n1\nA", 'Example', '1', 'A'],
             ["\n1\nA", '', '1', 'A'],
             ["\n\nA", '', '', 'A'],
             [" \n \nA", '', '', 'A'],

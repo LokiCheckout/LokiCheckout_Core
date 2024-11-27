@@ -33,15 +33,15 @@ class Streetlines
 
     public function toString(): string
     {
-        return trim(implode("\n", $this->getLines()));
+        return implode("\n", $this->getLines());
     }
 
     public function getLines(): array
     {
         return [
-            0 => $this->getStreetName(),
-            1 => $this->getHouseNumber(),
-            2 => $this->getHouseNumberAddition(),
+            $this->getStreetName(),
+            $this->getHouseNumber(),
+            $this->getHouseNumberAddition(),
         ];
     }
 
