@@ -11,6 +11,11 @@ trait ValidateBehaviour
 {
     protected array $validators = [];
 
+    public function addValidator(string $validator): void
+    {
+        $this->validators[] = $validator;
+    }
+
     public function validate(): bool
     {
         $addressFieldValidatorRegistry = ObjectManager::getInstance()->get(FieldValidatorRegistry::class);

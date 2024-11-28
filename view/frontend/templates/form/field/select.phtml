@@ -17,6 +17,7 @@ $magewire->setOptionModel($optionModel);
     id="<?= $magewire->getElementId() ?>-field"
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
+    data-type="field"
     x-ref="field"
     x-model="value"
     x-on:change="submit"

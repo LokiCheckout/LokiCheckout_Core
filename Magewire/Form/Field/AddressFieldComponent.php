@@ -107,7 +107,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $address = $this->snakeToCamel($this->getAddressType());
         $field = $this->snakeToCamel($this->getFieldName());
         $this->emit('afterSave'.$address.'Address'.$field);
-        $this->emit('afterSave'.$field.'Address');
+        $this->emit('afterSave'.$address.'Address');
 
         parent::afterSave($value);
     }
