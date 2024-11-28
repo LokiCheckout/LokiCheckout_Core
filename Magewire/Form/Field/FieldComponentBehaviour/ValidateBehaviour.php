@@ -41,13 +41,17 @@ trait ValidateBehaviour
             $validators[] = 'length';
         }
 
+        $layoutValidators = [];
+        if (!empty($this->getParent()->getValidators())) {
+            $layoutValidators = array_values((array)$this->getParent()->getValidators());
+        }
+
         $validators = array_merge(
             $validators,
             $this->validators,
-            array_values((array)$this->getParent()->getValidators())
+            $layoutValidators
         );
 
-        $validators = array_unique($validators);
-        return $validators;
+        return array_unique($validators);
     }
 }

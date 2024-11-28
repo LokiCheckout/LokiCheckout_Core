@@ -24,7 +24,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     protected string $elementId = '';
 
-    public string $value = '';
+    public string|bool|int $value = '';
     public bool $valid = true;
     public bool $visible = true;
 
@@ -34,7 +34,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         parent::boot();
     }
 
-    protected function addRefreshListener(string $listener)
+    public function addRefreshListener(string $listener)
     {
         $this->listeners[$listener] = 'refresh';
     }

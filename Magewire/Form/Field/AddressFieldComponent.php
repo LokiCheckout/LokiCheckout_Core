@@ -12,7 +12,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
     use AddressStateBehaviour;
 
     protected string $elementId = '';
-    public string $value = '';
     public bool $valid = true;
 
     public function boot(): void
@@ -113,14 +112,14 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         parent::afterSave($value);
     }
 
-    protected function addFieldRefreshListener(string $fieldName): void
+    public function addFieldRefreshListener(string $fieldName): void
     {
         $address = $this->snakeToCamel($this->getAddressType());
         $field = $this->snakeToCamel($fieldName);
         $this->addRefreshListener('afterSave'.$address.'Address'.$field);
     }
 
-    protected function addAddressRefreshListener(string $address = ''): void
+    public function addAddressRefreshListener(string $address = ''): void
     {
         if (empty($address)) {
             $address = $this->getAddressType();
@@ -130,7 +129,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->addRefreshListener('afterSave'.$address.'Address');
     }
 
-    protected function addStepRefreshListener(string $step = ''): void
+    public function addStepRefreshListener(string $step = ''): void
     {
         if (empty($step)) {
             $step = $this->getStep();
