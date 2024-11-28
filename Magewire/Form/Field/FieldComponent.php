@@ -4,20 +4,21 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field;
 
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config as LokiCheckoutConfig;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FieldTemplateLocatorBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectFieldTemplateLocator;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
+use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
 abstract class FieldComponent extends Component implements FormFieldInterface
 {
     use InjectLokiCheckoutConfig;
+    use InjectFieldTemplateLocator;
 
     use FilterBehaviour;
     use ValidateBehaviour;
-    use FieldTemplateLocatorBehaviour;
     use ParentBehaviour;
     use StepBehaviour;
 
@@ -69,6 +70,15 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         ];
     }
 
+    public function getFieldTemplate(): string
+    {
+        if (false === $this->fieldTemplateLocator instanceof FieldTemplateLocator) {
+            throw new \RuntimeException('FieldTemplateLocator not set for "'.get_class($this).'"');
+        }
+
+        return $this->fieldTemplateLocator?->getFieldTemplateFromComponent($this);
+    }
+
     public function getListeners(): array
     {
         $parentBlock = $this->getParent();
@@ -76,7 +86,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
             $this->listeners = array_merge($this->listeners, (array)$parentBlock->getListeners());
         }
 
-        $this->listeners = array_unique($this->listeners);
         return $this->listeners;
     }
 
