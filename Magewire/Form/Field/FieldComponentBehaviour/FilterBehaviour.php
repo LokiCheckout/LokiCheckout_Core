@@ -40,6 +40,6 @@ trait FilterBehaviour
 
     public function getFilters(): array
     {
-        return array_merge(['filters'], $this->filters, array_values((array)$this->getParent()->getFilters()));
+        return array_merge($this->filters, array_values((array)$this->getParent()->getFilters()));
     }
 }
