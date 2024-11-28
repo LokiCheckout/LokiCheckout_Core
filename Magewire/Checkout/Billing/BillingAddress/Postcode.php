@@ -7,7 +7,4 @@ use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface
 
 class Postcode extends GenericPostcodeComponent implements BillingAddressFieldComponentInterface
 {
-    protected $listeners = [
-        'billingAddressCountryIdSave' => 'refresh'
-    ];
 }

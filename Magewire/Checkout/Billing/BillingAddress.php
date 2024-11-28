@@ -8,7 +8,10 @@ use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingAddress extends Component
 {
-    protected $listeners = ['billingStepSave' => 'refresh'];
+    protected $listeners = [
+        'afterSaveBillingAddress' => 'refresh',
+        'afterSaveBillingStep' => 'refresh',
+    ];
 
     public function __construct(
         private readonly BillingAddressState $billingAddressState,

@@ -23,7 +23,7 @@ $component = $this->getComponent();
                             if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
                                 this.valid = this.$component(this).valid;
                                 this.updated();
-                                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
                             }
                         });
                     }

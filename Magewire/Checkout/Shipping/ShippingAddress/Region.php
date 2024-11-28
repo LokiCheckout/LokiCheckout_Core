@@ -7,7 +7,4 @@ use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterfac
 
 class Region extends GenericRegionComponent implements ShippingAddressFieldComponentInterface
 {
-    protected $listeners = [
-        'shippingAddressCountryIdSave' => 'refresh'
-    ];
 }

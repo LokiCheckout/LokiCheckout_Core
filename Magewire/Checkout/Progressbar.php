@@ -8,9 +8,9 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 class Progressbar extends Component
 {
     protected $listeners = [
-        'shippingStepSave' => 'refresh',
-        'billingStepSave' => 'refresh',
-        'stepChange' => 'onStepChange',
+        'afterSaveShippingStep' => 'refresh',
+        'afterSaveBillingStep' => 'refresh',
+        'afterChangeStep' => 'onStepChange',
     ];
 
     public string $currentStepCode = '';
@@ -29,9 +29,9 @@ class Progressbar extends Component
     {
         $this->currentStepCode = $stepCode;
         $this->stepNavigator->setCurrentStepByCode($stepCode);
-        $this->emit('shippingStepSave'); // @todo: Pick the right event only
-        $this->emit('billingStepSave');
-        $this->emit('stepChange', $stepCode);
+        $this->emit('afterSaveShippingStep');
+        $this->emit('afterSaveBillingStep');
+        $this->emit('afterChangeStep', $stepCode);
     }
 
     public function onStepChange(string $stepCode)

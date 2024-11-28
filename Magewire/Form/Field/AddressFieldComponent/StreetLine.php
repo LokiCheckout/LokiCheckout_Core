@@ -16,7 +16,7 @@ class StreetLine extends AddressFieldComponent
     public function booted(): void
     {
         parent::booted();
-        $this->addRefreshListener('StreetUpdated');
+        $this->addFieldRefreshListener('street');
     }
 
     protected function loadValue(): void
@@ -26,13 +26,20 @@ class StreetLine extends AddressFieldComponent
         $this->value = $streetlines->getLineByIndex($this->index);
     }
 
-    protected function saveValue($value)
+    public function save($value): void
     {
         $street = (string)$this->addressState->load('street');
         $streetlines = $this->streetlinesFactory->createFromStreet($street);
         $streetlines = $streetlines->setLineByIndex($this->index, $this->value);
         $this->addressState->save('street', $streetlines->toString());
-        $this->emit('StreetUpdated'); // @todo: Standardize event names
+    }
+
+    protected function afterSave($value): void
+    {
+        parent::afterSave($value);
+        $addressPrefix = $this->snakeToCamel($this->getAddressType());
+        $this->emit('afterSave'.$addressPrefix.'AddressStreet');
+        $this->emit('afterSaveStreet');
     }
 
     public function isRequired(): bool
@@ -47,6 +54,7 @@ class StreetLine extends AddressFieldComponent
     public function isVisible(): bool
     {
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
+
         return $streetLines > $this->index;
     }
 

@@ -7,7 +7,9 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 
 class Checkout extends Component
 {
-    protected $listeners = ['stepChange' => 'stepChange'];
+    protected $listeners = [
+        'afterChangeStep' => 'onStepChange'
+    ];
 
     public string $currentStep = '';
 
@@ -21,7 +23,7 @@ class Checkout extends Component
         $this->currentStep = $this->stepNavigator->getCurrentStep()->getCode();
     }
 
-    public function stepChange()
+    public function onStepChange()
     {
         $this->currentStep = $this->stepNavigator->getCurrentStep()->getCode();
     }

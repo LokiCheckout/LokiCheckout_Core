@@ -53,7 +53,7 @@ abstract class QuoteFieldComponent extends FieldComponent
         $this->checkoutSession->getQuote()->setData($this->getFieldName(), $value);
         $this->checkoutSession->getQuote()->save(); // @todo
 
-        $this->emit('quoteSave');
+        $this->emit('afterSaveQuote');
 
         $this->afterSave($value);
     }

@@ -18,6 +18,8 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
     public function boot(): void
     {
         $this->loadValue();
+
+        // Validate the field when loading the HTML document (but not for AJAX calls)
         if ($this->request->isPreceding() && !empty($this->value)) {
             $this->valid = $this->validate();
         }
@@ -28,6 +30,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->value = trim((string)$this->getAddressState()->load($this->getFieldName()));
     }
 
+    // @todo: Move this into a trait or a child-class
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
@@ -43,6 +46,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return $this->getFieldName();
     }
 
+    // @todo: Move this into a trait or a child-class
     protected function getFieldLabelFromLayout(): string
     {
         $parentBlock = $this->getParent();
@@ -62,6 +66,15 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return $fieldLabel;
     }
 
+    public function getAddressType(): string
+    {
+        if ($this instanceof BillingAddressFieldComponentInterface) {
+            return 'billing';
+        }
+
+        return 'shipping';
+    }
+
     public function getStep(): string
     {
         if ($this instanceof ShippingAddressFieldComponentInterface) {
@@ -75,35 +88,9 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return 'unknown';
     }
 
-    protected function beforeSave($value): void
-    {
-    }
-
-    protected function saveValue($value)
-    {
-        $this->addressState->save($this->getFieldName(), $value);
-    }
-
     public function save($value): void
     {
-        $this->beforeSave($value);
-        $this->saveValue($value);
-
-        if ($this instanceof ShippingAddressFieldComponentInterface) {
-            $this->emit('shippingAddress'.$this->snakeToCamel($this->getFieldName()).'Save');
-            $this->emit('shippingStepSave');
-        }
-
-        if ($this instanceof BillingAddressFieldComponentInterface) {
-            $this->emit('billingAddress'.$this->snakeToCamel($this->getFieldName()).'Save');
-            $this->emit('billingStepSave');
-        }
-
-        $this->afterSave($value);
-    }
-
-    protected function afterSave($value): void
-    {
+        $this->addressState->save($this->getFieldName(), $value);
     }
 
     public function isRequired(): bool
@@ -114,5 +101,42 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         }
 
         return (bool)$this->getAttribute()->getIsRequired();
+    }
+
+    protected function afterSave($value): void
+    {
+        $addressPrefix = $this->snakeToCamel($this->getAddressType());
+        $fieldNameSuffix = $this->snakeToCamel($this->getFieldName());
+        $this->emit('afterSave'.$addressPrefix.'Address'.$fieldNameSuffix);
+        $this->emit('afterSave'.$addressPrefix.'Address');
+
+        parent::afterSave($value);
+    }
+
+    protected function addFieldRefreshListener(string $fieldName): void
+    {
+        $address = $this->snakeToCamel($this->getAddressType());
+        $field = $this->snakeToCamel($fieldName);
+        $this->addRefreshListener('afterSave'.$address.'Address'.$field);
+    }
+
+    protected function addAddressRefreshListener(string $address = ''): void
+    {
+        if (empty($address)) {
+            $address = $this->getAddressType();
+        }
+
+        $address = $this->snakeToCamel($address);
+        $this->addRefreshListener('afterSave'.$address.'Address');
+    }
+
+    protected function addStepRefreshListener(string $step = ''): void
+    {
+        if (empty($step)) {
+            $step = $this->getStep();
+        }
+
+        $step = $this->snakeToCamel($step);
+        $this->addRefreshListener('afterSave'.$step.'Step');
     }
 }

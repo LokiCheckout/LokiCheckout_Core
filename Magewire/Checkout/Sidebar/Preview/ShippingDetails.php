@@ -13,8 +13,9 @@ use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 class ShippingDetails extends Component
 {
     protected $listeners = [
-        'shippingStepSave' => 'refresh',
-        'quoteSave' => 'refresh',
+        'afterSaveShippingStep' => 'refresh',
+        'afterSaveShippingAddress' => 'refresh',
+        'afterSaveShippingMethod' => 'refresh',
     ];
 
     public function __construct(

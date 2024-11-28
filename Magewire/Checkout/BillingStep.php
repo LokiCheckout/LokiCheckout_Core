@@ -10,7 +10,9 @@ use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingStep extends Component implements StepInterface
 {
-    protected $listeners = ['billingStepSave' => 'refresh'];
+    protected $listeners = [
+        'afterSaveBillingStep' => 'refresh'
+    ];
 
     public string $refreshToken = '';
 

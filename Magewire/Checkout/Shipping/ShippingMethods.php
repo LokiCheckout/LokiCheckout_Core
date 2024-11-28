@@ -74,7 +74,8 @@ class ShippingMethods extends Component
         $this->saveShippingMethodToQuote($value);
         $this->value = $value;
         $this->valid = true;
-        $this->emit('shippingStepSave');
+        $this->emit('afterSaveShippingStep');
+        $this->emit('afterSaveShippingMethod');
 
         return $value;
     }

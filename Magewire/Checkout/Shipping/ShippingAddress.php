@@ -93,7 +93,7 @@ class ShippingAddress extends Component
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
         $quoteShippingAddress->save();
-        $this->emit('shippingStepSave');
+        $this->emit('afterSaveShippingAddress');
 
         return $value;
     }
@@ -107,7 +107,7 @@ class ShippingAddress extends Component
         $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
         $quoteShippingAddress->setCustomerAddressId(0);
         $quoteShippingAddress->save();
-        $this->emit('shippingStepSave');
+        $this->emit('afterSaveShippingAddress');
     }
 
     private function getCustomerAddresses(CustomerInterface $customer): array

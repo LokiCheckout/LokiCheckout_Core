@@ -6,5 +6,5 @@ use Magewirephp\Magewire\Component;
 
 class QuoteDetails extends Component
 {
-    protected $listeners = ['quoteSave' => 'refresh'];
+    protected $listeners = ['afterSaveQuote' => 'refresh'];
 }

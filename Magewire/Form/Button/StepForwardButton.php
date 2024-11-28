@@ -5,13 +5,12 @@ namespace Yireo\LokiCheckout\Magewire\Form\Button;
 use Exception;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\ComponentRegistry;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepForwardButton extends Component implements ButtonInterface
 {
     protected $listeners = [
-        'stepChange' => 'refresh',
+        'afterChangeStep' => 'refresh',
     ];
 
     public function __construct(
@@ -46,7 +45,7 @@ class StepForwardButton extends Component implements ButtonInterface
     public function submit()
     {
         $this->clearFlashMessages();
-        $this->emit('stepValidate', $this->getStep());
+        $this->emit('afterValidateStep', $this->getStep());
 
         try {
             $result = $this->stepNavigator->setNextStep($this);
@@ -56,7 +55,7 @@ class StepForwardButton extends Component implements ButtonInterface
         }
 
         if (true === $result) {
-            $this->emit('stepChange', $this->getStep());
+            $this->emit('afterChangeStep', $this->getStep());
         }
     }
 

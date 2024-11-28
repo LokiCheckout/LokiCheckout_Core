@@ -10,7 +10,9 @@ use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class BillingAsShipping extends Component
 {
-    protected $listeners = ['billingStepSave' => 'refresh'];
+    protected $listeners = [
+        'afterSaveBillingAddress' => 'refresh'
+    ];
 
     public bool $billingAsShipping = true;
 
@@ -50,7 +52,7 @@ class BillingAsShipping extends Component
         }
 
         $this->cartRepository->save($this->billingAddressState->getQuote());
-        $this->emit('billingStepSave');
+        $this->emit('afterSaveBillingAddress');
 
         return $billingAsShipping;
     }

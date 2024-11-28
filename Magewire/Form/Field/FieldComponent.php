@@ -27,9 +27,10 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public bool $valid = true;
     public bool $visible = true;
 
-    public function booted(): void
+    public function boot(): void
     {
-        //$this->addRefreshListener(static::class.'::afterSetValue'); // @todo: Is this still needed in the first place?
+        $this->value = $this->getDefaultValue();
+        parent::boot();
     }
 
     protected function addRefreshListener(string $listener)
@@ -60,6 +61,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     abstract public function getFieldLabel(): string;
 
+    // @todo: Is this still needed?
     public function getFieldData(): array
     {
         return [
@@ -71,10 +73,10 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     {
         $parentBlock = $this->getParent();
         if ($parentBlock && $parentBlock->getListeners()) {
-            // @todo: Test whether this is properly working or not
             $this->listeners = array_merge($this->listeners, (array)$parentBlock->getListeners());
         }
 
+        $this->listeners = array_unique($this->listeners);
         return $this->listeners;
     }
 
@@ -88,6 +90,11 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return $this->value;
     }
 
+    public function getDefaultValue(): string
+    {
+        return '';
+    }
+
     public function setValue(mixed $value): void
     {
         $value = $this->filterValue($value);
@@ -95,8 +102,10 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         $this->valid = $this->validate();
 
         if (false === $this->hasErrors()) {
+            $this->beforeSave($value);
             $this->save($value);
-            $this->emit(static::class.'::afterSetValue');
+            $this->afterSave($value);
+            $this->emit('afterSave'.$this->snakeToCamel($this->getFieldName()));
         }
     }
 
@@ -107,7 +116,15 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return $value;
     }
 
+    protected function beforeSave($value): void
+    {
+    }
+
     abstract public function save($value): void;
+
+    protected function afterSave($value): void
+    {
+    }
 
     public function isRequired(): bool
     {
@@ -137,6 +154,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return preg_replace('#[_.-]+#', '', $name);
     }
 
+    // @todo: Rename this to getDomElementId()?
     public function getElementId(): string
     {
         $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
@@ -144,6 +162,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
     }
 
+    // @todo: Rename this to setDomElementId()?
     public function setElementId(string $elementId)
     {
         $this->elementId = $elementId;
@@ -170,7 +189,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
     }
 
-
+    // @todo: Rename to getAlpineData()
     public function getComponentData(): array
     {
         $rules = [];

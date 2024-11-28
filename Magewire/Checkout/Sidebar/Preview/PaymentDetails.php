@@ -8,8 +8,9 @@ use Magewirephp\Magewire\Component;
 class PaymentDetails extends Component
 {
     protected $listeners = [
-        'billingStepSave' => 'refresh',
-        'quoteSave' => 'refresh',
+        'afterSaveBillingStep' => 'refresh',
+        'afterSaveBillingAddress' => 'refresh',
+        'afterSaveQuote' => 'refresh',
     ];
 
     public function __construct(

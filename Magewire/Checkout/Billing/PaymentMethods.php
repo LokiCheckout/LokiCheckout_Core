@@ -63,8 +63,8 @@ class PaymentMethods extends Component
         $quote->getPayment()->importData(['method' => $value]);
         $this->checkoutState->saveQuote($quote);
 
-        $this->emit('billingStepSave');
-        $this->emit('paymentMethodChange', $value);
+        $this->emit('afterSaveBillingStep');
+        $this->emit('afterSavePaymentMethod', $value);
 
         return $value;
     }

@@ -17,11 +17,13 @@ class CouponCode extends Component
     public function applyCouponCode(): void
     {
         $this->checkoutState->getQuote()->setCouponCode($this->getCouponCode());
+        $this->emit('afterApplyCouponCode');
     }
 
     public function removeCouponCode(): void
     {
         $this->checkoutState->getQuote()->setCouponCode('');
+        $this->emit('afterRemoveCouponCode');
     }
 
     private function getCouponCode(): string

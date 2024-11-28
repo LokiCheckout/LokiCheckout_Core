@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 class StepBackwardButton extends Component implements ButtonInterface
 {
     protected $listeners = [
-        'stepChange' => 'refresh',
+        'afterChangeStep' => 'refresh',
     ];
 
     public function __construct(
@@ -44,7 +44,7 @@ class StepBackwardButton extends Component implements ButtonInterface
             return;
         }
 
-        $this->emit('stepChange', $this->getStep());
+        $this->emit('afterChangeStep', $this->getStep());
     }
 
     public function isVisible(): bool

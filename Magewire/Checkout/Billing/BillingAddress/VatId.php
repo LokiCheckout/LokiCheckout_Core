@@ -7,7 +7,4 @@ use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface
 
 class VatId extends GenericVatIdComponent implements BillingAddressFieldComponentInterface
 {
-    protected $listeners = [
-        'billingAddressCompanySave' => 'refresh'
-    ];
 }

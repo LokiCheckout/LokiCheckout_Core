@@ -10,8 +10,6 @@ use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 
 class Region extends AddressFieldComponent
 {
-    protected $listeners = ['shippingStepSave' => 'refresh'];
-
     use OptionsBehaviour;
     use InjectScopeConfig;
     use InjectLokiCheckoutConfig;
@@ -26,6 +24,12 @@ class Region extends AddressFieldComponent
         }
 
         $this->value = (string)$this->addressState->load('region');
+    }
+
+    public function booted(): void
+    {
+        parent::booted();
+        $this->addFieldRefreshListener('country_id');
     }
 
     public function updatedValue(mixed $value): mixed

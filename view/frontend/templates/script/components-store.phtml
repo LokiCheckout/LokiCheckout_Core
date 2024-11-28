@@ -38,11 +38,11 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             lock(component) {
                 this.components[component.name].locked = true;
-                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
             },
             unlock(component) {
                 this.components[component.name].locked = false;
-                window.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
             },
             isLocked(component) {
                 return this.components[component.name].locked;

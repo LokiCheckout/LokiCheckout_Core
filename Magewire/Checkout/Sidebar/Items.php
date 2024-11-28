@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 class Items extends Component
 {
     protected $listeners = [
-        'quoteSave' => 'refresh'
+        'afterSaveQuote' => 'refresh'
     ];
 
     public array|null $items = [];
