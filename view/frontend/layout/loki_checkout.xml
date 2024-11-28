@@ -45,6 +45,7 @@
             <block name="loki-checkout.script.magic-component" template="Yireo_LokiCheckout::script/magic-component.phtml"/>
             <block name="loki-checkout.script.validator" template="Yireo_LokiCheckout::script/validator.phtml"/>
             <block name="loki-checkout.script.validator-rules.email" template="Yireo_LokiCheckout::script/validator-rules/email.phtml"/>
+            <block name="loki-checkout.script.validator-rules.number" template="Yireo_LokiCheckout::script/validator-rules/number.phtml"/>
             <block name="loki-checkout.script.alpine-component-initializer" class="Yireo\LokiCheckout\Block\ComponentInitializer" />
             <container name="loki-checkout.script.alpine-components"/>
         </referenceContainer>

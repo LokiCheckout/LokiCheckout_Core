@@ -104,6 +104,7 @@
         <arguments>
             <argument name="validators" xsi:type="array">
                 <item name="required" xsi:type="object">Yireo\LokiCheckout\Validator\Component\RequiredValidator</item>
+                <item name="number" xsi:type="object">Yireo\LokiCheckout\Validator\Component\NumberValidator</item>
                 <item name="length" xsi:type="object">Yireo\LokiCheckout\Validator\Component\LengthValidator</item>
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
                 <item name="email" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailValidator</item>
