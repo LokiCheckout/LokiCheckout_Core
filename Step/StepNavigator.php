@@ -3,6 +3,8 @@
 namespace Yireo\LokiCheckout\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\Request\Http;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
@@ -17,7 +19,7 @@ class StepNavigator implements ArgumentInterface
     public function __construct(
         private readonly LayoutInterface $layout,
         private readonly CheckoutSession $checkoutSession,
-        private readonly FinalStep $finalStep
+        private readonly FinalStep $finalStep,
     ) {
     }
 
@@ -31,6 +33,10 @@ class StepNavigator implements ArgumentInterface
         }
 
         if (false === $this->currentStep instanceof StepInterface) {
+            $this->currentStep = $this->getFirstStep();
+        }
+
+        if ($this->currentStep->validate() === false) {
             $this->currentStep = $this->getFirstStep();
         }
 

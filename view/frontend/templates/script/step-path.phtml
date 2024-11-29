@@ -12,6 +12,6 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <script>
     (function() {
-        document.location.hash = '<?= $stepNavigator->getCurrentStep()->getCode() ?>';
+        window.location.hash = '<?= $stepNavigator->getCurrentStep()->getCode() ?>';
     })();
 </script>

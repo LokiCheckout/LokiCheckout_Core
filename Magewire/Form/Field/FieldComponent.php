@@ -34,6 +34,14 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         parent::boot();
     }
 
+    public function booted(): void
+    {
+        parent::booted();
+        if ($this->isRequired() && empty($this->value)) {
+            $this->valid = false;
+        }
+    }
+
     public function addRefreshListener(string $listener)
     {
         $this->listeners[$listener] = 'refresh';
