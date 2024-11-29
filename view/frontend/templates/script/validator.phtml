@@ -21,8 +21,13 @@
                     return true;
                 }
 
-                if (false == this.rules[rule](component)) {
-                    isValid = false;
+                const result = this.rules[rule](component);
+                if (Boolean(result && typeof result.then === 'function')) {
+                    result.then(value => {
+                        isValid = value;
+                    })
+                } else {
+                    isValid = result;
                 }
 
                 return isValid;
