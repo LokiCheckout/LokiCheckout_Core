@@ -58,6 +58,11 @@ class StreetLine extends AddressFieldComponent
         return $streetLines > $this->index;
     }
 
+    public function getFieldName(): string
+    {
+        return 'street'.$this->index;
+    }
+
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
@@ -70,5 +75,10 @@ class StreetLine extends AddressFieldComponent
         }
 
         return $this->getFieldName();
+    }
+
+    public function getIndex(): int
+    {
+        return $this->index;
     }
 }

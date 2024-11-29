@@ -35,7 +35,7 @@ $magewire = $this->getComponent();
     <?php if ($magewire->hasMax()): ?>
         max="<?= $magewire->getMax() ?>"
     <?php endif ?>
-    <?php if ($magewire->hasErrors()): ?>
+    <?php if ($magewire->hasErrors() || false === $magewire->valid): ?>
         aria-invalid="true" data-invalid="true"
     <?php endif ?>
     <?php if ($magewire->getPlaceholder()): ?>
