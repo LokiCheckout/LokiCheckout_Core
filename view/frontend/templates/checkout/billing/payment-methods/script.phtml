@@ -2,23 +2,39 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\Billing\PaymentMethods;
 
 /** @var Template $block */
-$magewireId = $block->getMagewireId();
+/** @var PaymentMethods $component */
 $paymentMethodCode = $block->getMethodCode();
+$component = $block->getComponent();
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('<?= $block->getParentBlock()->getComponentName() ?>', () => ({
-            wireId: '<?= $magewireId ?>',
+            name: '<?= $block->getParentBlock()->getComponentName() ?>',
+            wireId: '<?= $component->id ?>',
+            step: '<?= $component->getStep() ?>',
             value: '<?= $paymentMethodCode ?>',
+            valid: <?= $component->valid ? 'true' : 'false' ?>,
+            rules: ['required'],
             init() {
+                Alpine.store('components').add(this);
+
                 this.showPaymentMethodBlocks();
-                this.$watch('value', () => {
+
+                if (this.value) {
+                    this.rules = ['required', this.value];
                     window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
                         detail: {method: this.value}
                     }));
+                }
 
+                this.$watch('value', () => {
+                    this.rules = ['required', this.value];
+                    window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
+                        detail: {method: this.value}
+                    }));
                     this.$component(this).call('setValue', this.value);
                 });
             },
@@ -34,7 +50,7 @@ $paymentMethodCode = $block->getMethodCode();
                     return;
                 }
 
-                console.warn('No element for selector', selector);
+                console.error('No element for selector', selector);
             }
         }));
     });

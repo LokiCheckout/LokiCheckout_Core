@@ -1,15 +1,16 @@
 <script>
-    window.LokiCheckoutMessenger = {
+    const LokiCheckoutMessenger = {
         error: function (message, component) {
             const errorContainer = component.$refs.errors;
             if (!errorContainer) {
-                console.error('Error message sent to empty HTML element');
-                return;
+                console.error('Error message sent to empty HTML element ($refs.error)', component);
+                return false;
             }
 
             const errorElement = document.createElement("li");
             errorElement.textContent = message;
             errorContainer.appendChild(errorElement);
+            return false;
         },
         clear: function (component) {
             const errorContainer = component.$refs.errors;

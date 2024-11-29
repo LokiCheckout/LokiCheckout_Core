@@ -36,7 +36,7 @@ $component = $this->getComponent();
                 submit() {
                     this.beforeSubmit();
 
-                    if (false === window.LokiCheckoutValidator.validate(this)) {
+                    if (false === LokiCheckoutValidator.validate(this)) {
                         return false;
                     }
 

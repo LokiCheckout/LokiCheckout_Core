@@ -1,10 +1,10 @@
 <script>
-    window.LokiCheckoutValidator = {
+    LokiCheckoutValidator = {
         rules: {
             required: (component) => {
                 isValid = true;
                 if (component.value === '' || component.value === undefined) {
-                    window.LokiCheckoutMessenger.error('<?= __('Value is required') ?>', component);
+                    LokiCheckoutMessenger.error('<?= __('Value is required') ?>', component);
                     isValid = false;
                 }
 
@@ -13,19 +13,23 @@
         },
         validate: function (component) {
             isValid = true;
-            window.LokiCheckoutMessenger.clear(component);
+            LokiCheckoutMessenger.clear(component);
 
             component.rules.every(rule => {
                 if (this.rules[rule] === undefined) {
+                    console.error('Rule not found', rule, component);
                     return true;
                 }
+                console.log('rule', rule, this.rules[rule](component));
 
-                if (false === this.rules[rule](component)) {
+                if (false == this.rules[rule](component)) {
                     isValid = false;
                 }
 
                 return isValid;
             })
+
+            console.log('Valid', isValid, component.rules);
 
             if (false === isValid) {
                 this.setInvalid(component);

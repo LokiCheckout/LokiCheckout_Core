@@ -17,20 +17,21 @@ $code = $paymentMethod->getCode();
 $isCurrent = $block->getIsCurrent();
 $componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
 ?>
-<li class="<?= $css('cursor-pointer relative my-4 py-2') ?>">
-    <input
-        type="radio"
-        x-model="value"
-        value="<?= $code ?>"
-        <?php if ($isCurrent) : ?>checked<?php endif ?>
-        id="payment-<?= $code ?>">
+<li class="<?= $css('cursor-pointer relative my-4 p-4') ?>">
+    <div class="<?= $css('flex', 'method') ?>">
+        <input
+            type="radio"
+            x-model="value"
+            value="<?= $code ?>"
+            <?php if ($isCurrent) : ?>checked<?php endif ?>
+            id="payment-<?= $code ?>"
+            class="<?= $css('mr-4', 'input') ?>">
 
-    <div class="<?= $css('inline-block ml-4', 'method') ?>">
         <?= $blockRenderer->getBlockTemplate('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
         <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
     </div>
 
-    <div class="<?= $css('m-4 ml-10', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>" data-payment-method-code="<?= $code ?>">
+    <div class="<?= $css('m-4 ml-24', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>" data-payment-method-code="<?= $code ?>">
         <?= $blockRenderer->getBlockHtml(
             'loki-checkout.billing.payment-methods.'.$code.'.form',
             $block,

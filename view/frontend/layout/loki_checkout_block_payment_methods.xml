@@ -14,8 +14,8 @@
                 template="Yireo_LokiCheckout::checkout/billing/payment-methods/item.phtml"/>
 
             <block
-                name="loki-checkout.billing.payment-methods.script-component" as="script-component"
-                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script-component.phtml"/>
+                name="loki-checkout.billing.payment-methods.script" as="script"
+                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script.phtml"/>
 
             <block
                 name="loki-checkout.billing.payment-methods.script-toggler" as="script-toggler"

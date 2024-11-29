@@ -26,9 +26,10 @@ $magewire = $block->getComponent();
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));
                 Alpine.store('components').getComponentsByStep('<?= $magewire->getStep() ?>').forEach((component) => {
-                    window.LokiCheckoutValidator.validate(component);
+                    LokiCheckoutValidator.validate(component);
                 });
 
+                return;
                 if (this.updateValid()) {
                     this.$component(this).call('submit');
                 }

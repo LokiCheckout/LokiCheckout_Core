@@ -16,14 +16,20 @@ $component = $block->getComponent();
             step: '<?= $component->getStep() ?>',
             value: '<?= $component->value ?>',
             valid: <?= $component->valid ? 'true' : 'false' ?>,
-            rules: [
-                'required'
-            ],
+            rules: ['required'],
             init() {
-                this.value = '<?= $component->value ?>';
+                this.value = '<?= $component->value ?>'; // @todo: Is this needed?
+                if (this.value) {
+                    this.rules = ['required', this.value];
+                    window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
+                        detail: { method: this.value}
+                    }));
+                }
+
                 Alpine.store('components').add(this);
 
                 this.$watch('value', () => {
+                    this.rules = ['required', this.value];
                     this.$component(this).call('setValue', this.value);
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                         detail: { method: this.value}

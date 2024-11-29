@@ -18,26 +18,36 @@ $paymentMethods = $magewire->getPaymentMethods();
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
 
-    <?php if (!empty($paymentMethods)): ?>
-        <ul>
-            <?php foreach ($paymentMethods as $paymentMethod): ?>
-                <?= $blockRenderer->getBlockHtml(
-                    'loki-checkout.billing.payment-methods.item',
-                    $block,
-                    [
-                        'method' => $paymentMethod,
-                        'is_current' => $paymentMethod->getCode() === $magewire->value,
-                    ]
-                ) ?>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        <?= __('No payment methods available') ?>
-    <?php endif; ?>
+    <form
+        data-type="field"
+        x-ref="field"
+        <?php if ($magewire->hasErrors()): ?>
+            aria-invalid="true" data-invalid="true"
+        <?php endif ?>
+        class="<?= $css('border border-transparent data-[invalid=true]:border-red-500', 'container') ?>">
+        <?php if (!empty($paymentMethods)): ?>
+            <ul>
+                <?php foreach ($paymentMethods as $paymentMethod): ?>
+                    <?= $blockRenderer->getBlockHtml(
+                        'loki-checkout.billing.payment-methods.item',
+                        $block,
+                        [
+                            'method' => $paymentMethod,
+                            'is_current' => $paymentMethod->getCode() === $magewire->value,
+                        ]
+                    ) ?>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <?= __('No payment methods available') ?>
+        <?php endif; ?>
+    </form>
 
-    <?= $blockRenderer->getChildHtml('script-component', $block, [
-        'magewire_id' => $magewire->id,
+    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+
+    <?= $blockRenderer->getChildHtml('script', $block, [
         'method_code' => $magewire->value,
     ]) ?>
+
     <?= $blockRenderer->getChildHtml('script-toggler', $block, []) ?>
 </div>
