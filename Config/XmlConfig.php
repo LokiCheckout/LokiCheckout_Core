@@ -4,10 +4,7 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Config;
 
 use Magento\Framework\App\ObjectManager;
-use Magento\Framework\Config\CacheInterface;
 use Magento\Framework\Config\Data as DataConfig;
-use Magento\Framework\Config\ReaderInterface;
-use Magento\Framework\Serialize\SerializerInterface;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
@@ -46,7 +43,7 @@ class XmlConfig extends DataConfig
     {
         $steps = [];
         foreach ($themeData['steps'] as $stepData) {
-            $component = ObjectManager::getInstance()->get($stepData['component']);
+            $component = ObjectManager::getInstance()->get($stepData['component_class']);
 
             $steps[] = new Step(
                 $stepData['name'],
