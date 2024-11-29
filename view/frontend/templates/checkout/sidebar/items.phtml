@@ -22,7 +22,7 @@ if (empty($magewire->items)) {
 
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
-            <li wire:ignore>
+            <li>
                 <?= $blockRenderer->getChildHtml('item', $block, [
                     'item' => $item,
                 ]) ?>

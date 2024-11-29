@@ -36,7 +36,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
                     <?= __('Price') ?>:
                 </dt>
                 <dd class="<?= $css('', 'price-value') ?>">
-                    <?= $priceFormatterViewModel->format($item['price']) ?>
+                    <?= $priceFormatterViewModel->format($item['price_incl_tax']) ?>
                 </dd>
                 <dt class="<?= $css('font-medium', 'qty-label') ?>">
                     <?= __('Quantity') ?>:
