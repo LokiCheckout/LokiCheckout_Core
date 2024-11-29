@@ -20,7 +20,6 @@
                     console.error('Rule not found', rule, component);
                     return true;
                 }
-                console.log('rule', rule, this.rules[rule](component));
 
                 if (false == this.rules[rule](component)) {
                     isValid = false;
@@ -28,8 +27,6 @@
 
                 return isValid;
             })
-
-            console.log('Valid', isValid, component.rules);
 
             if (false === isValid) {
                 this.setInvalid(component);
