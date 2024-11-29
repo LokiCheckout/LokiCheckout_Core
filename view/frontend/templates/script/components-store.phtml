@@ -28,12 +28,12 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 }
 
                 if (!component.step) {
-                    console.error('Unable to add component to store: No step set', component);
+                    console.error('Unable to add component to store: No step set', component.name);
                     return;
                 }
 
                 if (!component.valid) {
-                    console.error('Unable to add component to store: No valid flag set', component);
+                    console.error('Unable to add component to store: No valid flag set', component.name);
                     return;
                 }
 
