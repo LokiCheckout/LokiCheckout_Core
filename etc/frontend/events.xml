@@ -14,4 +14,8 @@
         <observer name="Yireo_LokiCheckout::addHtmlAttributes" instance="Yireo\LokiCheckout\Observer\AddHtmlAttributes"/>
         <observer name="Yireo_LokiCheckout::addDebuggingInfo" instance="Yireo\LokiCheckout\Observer\AddDebuggingInfo"/>
     </event>
+
+    <event name="checkout_cart_save_after">
+        <observer name="Yireo_LokiCheckout::resetStepAfterCartSave" instance="Yireo\LokiCheckout\Observer\ResetStepAfterCartSave"/>
+    </event>
 </config>

@@ -1,21 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiCheckout:etc/loki_checkout.xsd">
-    <grid_layout name="default_grid">
-        <block alias="prefix" sortOrder="1" gridClass="col-span-6"/>
-        <block alias="firstname" sortOrder="2" gridClass="col-span-6"/>
-        <block alias="middlename" sortOrder="3" gridClass="col-span-6"/>
-        <block alias="lastname" sortOrder="4" gridClass="col-span-6"/>
-        <block alias="street0" sortOrder="5" gridClass="col-span-6"/>
-        <block alias="street1" sortOrder="6" gridClass="col-span-6"/>
-        <block alias="street2" sortOrder="7" gridClass="col-span-6"/>
-        <block alias="street3" sortOrder="8" gridClass="col-span-6"/>
-        <block alias="postcode" sortOrder="9" gridClass="col-span-6"/>
-        <block alias="city" sortOrder="10" gridClass="col-span-6"/>
-        <block alias="region" sortOrder="11" gridClass="col-span-6"/>
-        <block alias="country_id" sortOrder="12" gridClass="col-span-6"/>
-        <block alias="telephone" sortOrder="13" gridClass="col-span-6"/>
-        <block alias="fax" sortOrder="14" gridClass="col-span-6"/>
-        <block alias="company" sortOrder="15" gridClass="col-span-6"/>
-        <block alias="vat_id" sortOrder="16" gridClass="col-span-6"/>
-    </grid_layout>
+    <themes>
+        <theme name="default">
+            <steps>
+                <step name="shipping" component="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep"/>
+                <step name="billing" component="Yireo\LokiCheckout\Magewire\Checkout\BillingStep"/>
+            </steps>
+        </theme>
+        <theme name="onestep">
+            <steps>
+                <step name="onestep" component="Yireo\LokiCheckout\Magewire\Checkout\OneStep"/>
+            </steps>
+        </theme>
+    </themes>
+
+    <grid_layouts>
+        <grid_layout name="default_grid">
+            <block alias="prefix" sortOrder="1" gridClass="col-span-6"/>
+            <block alias="firstname" sortOrder="2" gridClass="col-span-6"/>
+            <block alias="middlename" sortOrder="3" gridClass="col-span-6"/>
+            <block alias="lastname" sortOrder="4" gridClass="col-span-6"/>
+            <block alias="street0" sortOrder="5" gridClass="col-span-6"/>
+            <block alias="street1" sortOrder="6" gridClass="col-span-6"/>
+            <block alias="street2" sortOrder="7" gridClass="col-span-6"/>
+            <block alias="street3" sortOrder="8" gridClass="col-span-6"/>
+            <block alias="postcode" sortOrder="9" gridClass="col-span-6"/>
+            <block alias="city" sortOrder="10" gridClass="col-span-6"/>
+            <block alias="region" sortOrder="11" gridClass="col-span-6"/>
+            <block alias="country_id" sortOrder="12" gridClass="col-span-6"/>
+            <block alias="telephone" sortOrder="13" gridClass="col-span-6"/>
+            <block alias="fax" sortOrder="14" gridClass="col-span-6"/>
+            <block alias="company" sortOrder="15" gridClass="col-span-6"/>
+            <block alias="vat_id" sortOrder="16" gridClass="col-span-6"/>
+        </grid_layout>
+    </grid_layouts>
 </config>

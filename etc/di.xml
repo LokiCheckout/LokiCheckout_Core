@@ -143,11 +143,17 @@
             <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator</argument>
             <argument name="fileName" xsi:type="string">loki_checkout.xml</argument>
             <argument name="idAttributes" xsi:type="array">
-                <item name="/config/grid_layout" xsi:type="array">
+                <item name="/config/themes/theme" xsi:type="array">
+                    <item name="name" xsi:type="string">name</item>
+                </item>
+                <item name="/config/themes/theme/steps/step" xsi:type="array">
+                    <item name="name" xsi:type="string">name</item>
+                </item>
+                <item name="/config/grid_layouts/grid_layout" xsi:type="array">
                      <item name="name" xsi:type="string">name</item>
                 </item>
-                <item name="/config/grid_layout/block" xsi:type="array">
-                    <item name="name" xsi:type="string">name</item>
+                <item name="/config/grid_layouts/grid_layout/block" xsi:type="array">
+                    <item name="alias" xsi:type="string">alias</item>
                 </item>
             </argument>
         </arguments>

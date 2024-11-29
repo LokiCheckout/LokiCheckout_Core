@@ -6,7 +6,7 @@ use Magento\Checkout\Model\Session;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\TestCase;
 use Yireo\LokiCheckout\Step\FinalStep;
-use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepNavigatorTest extends TestCase
@@ -78,9 +78,9 @@ class StepNavigatorTest extends TestCase
         );
     }
 
-    private function getStep(string $stepCode): StepInterface
+    private function getStep(string $stepCode): StepComponentInterface
     {
-        $step = $this->createMock(StepInterface::class);
+        $step = $this->createMock(StepComponentInterface::class);
         $step->method('getCode')->willReturn($stepCode);
         return $step;
     }

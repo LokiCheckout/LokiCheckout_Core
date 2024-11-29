@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiCheckout\Step\StepInterface;
+use Yireo\LokiCheckout\Step\StepComponentInterface;
 
 // @todo: Add integration test
 trait StepBehaviour
@@ -36,7 +36,7 @@ trait StepBehaviour
 
     private function getStepNameFromBlock(AbstractBlock $block): string
     {
-        if ($block->getMagewire() instanceof StepInterface) {
+        if ($block->getMagewire() instanceof StepComponentInterface) {
             return $block->getMagewire()->getCode();
         }
 

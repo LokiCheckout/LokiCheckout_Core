@@ -14,8 +14,34 @@ class Converter implements ConverterInterface
     public function convert($source)
     {
         return [
+            'themes' => $this->getThemes($source),
             'gridLayouts' => $this->getGridLayouts($source)
         ];
+    }
+
+    private function getThemes(DOMDocument $source): array
+    {
+        $themes = [];
+        $themeElements = $source->getElementsByTagName('theme');
+
+        foreach ($themeElements as $themeElement) {
+            $steps = [];
+            foreach ($themeElement->getElementsByTagName('step') as $stepElement) {
+                $steps[] = [
+                    'name' => (string)$stepElement->getAttribute('name'),
+                    'component_class' => $stepElement->getAttribute('component'),
+                ];
+            }
+
+            $themeName = (string)$themeElement->getAttribute('name');
+
+            $themes[$themeName] = [
+                'name' => $themeName,
+                'steps' => $steps,
+            ];
+        }
+
+        return $themes;
     }
 
     private function getGridLayouts(DOMDocument $source): array
@@ -25,11 +51,11 @@ class Converter implements ConverterInterface
 
         foreach ($gridLayoutElements as $gridLayoutElement) {
             $blocks = [];
-            foreach ($gridLayoutElement->getElementsByTagName('block') as $block) {
+            foreach ($gridLayoutElement->getElementsByTagName('block') as $blockElement) {
                 $blocks[] = [
-                    'alias' => (string)$block->getAttribute('alias'),
-                    'sortOrder' => (int)$block->getAttribute('sortOrder'),
-                    'gridClass' => (string)$block->getAttribute('gridClass'),
+                    'alias' => (string)$blockElement->getAttribute('alias'),
+                    'sortOrder' => (int)$blockElement->getAttribute('sortOrder'),
+                    'gridClass' => (string)$blockElement->getAttribute('gridClass'),
                 ];
             }
 

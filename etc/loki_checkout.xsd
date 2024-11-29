@@ -1,39 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="config">
-    <xs:annotation>
-      <xs:documentation>Configuration options for the Yireo Loki Checkout</xs:documentation>
-    </xs:annotation>
     <xs:complexType>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="grid_layout" type="gridLayoutType"/>
+        <xs:element name="themes" type="lokiCheckoutThemesType" minOccurs="0" />
+        <xs:element name="grid_layouts" type="lokiCheckoutGridLayoutsType" minOccurs="0" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
-  <xs:complexType name="gridLayoutType">
-    <xs:annotation>
-      <xs:documentation>
-        Description of block grid
-      </xs:documentation>
-    </xs:annotation>
-    <xs:sequence maxOccurs="unbounded">
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="block">
-        <xs:complexType>
-          <xs:annotation>
-            <xs:documentation>
-              Settings for specific field component in grid
-            </xs:documentation>
-          </xs:annotation>
-          <xs:attribute name="alias" type="xs:string" use="required"/>
-          <xs:attribute name="sortOrder" type="xs:int" use="optional"/>
-          <xs:attribute name="gridClass" type="xs:string" use="optional"/>
-        </xs:complexType>
-      </xs:element>
+  <xs:complexType name="lokiCheckoutThemesType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="theme" type="lokiCheckoutThemeType"/>
     </xs:sequence>
+  </xs:complexType>
 
+  <xs:complexType name="lokiCheckoutThemeType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="steps" type="lokiCheckoutStepsType"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutStepsType">
+    <xs:sequence maxOccurs="unbounded">
+      <xs:element name="step" type="lokiCheckoutStepType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutStepType">
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="component" type="phpClassName" use="required"/>
+  </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutGridLayoutsType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="grid_layout" type="lokiCheckoutGridLayoutType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutGridLayoutType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="block" type="lokiCheckoutBlockType"/>
+    </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
     <xs:attribute name="defaultGridClass" type="xs:string" use="optional"/>
   </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutBlockType">
+    <xs:attribute name="alias" type="xs:string" use="required"/>
+    <xs:attribute name="sortOrder" type="xs:int" use="optional"/>
+    <xs:attribute name="gridClass" type="xs:string" use="optional"/>
+  </xs:complexType>
+
+  <!-- @todo Why can't we just re-use this from config.xsd? -->
+  <xs:simpleType name="phpClassName">
+    <xs:annotation>
+      <xs:documentation>
+        A string that matches a Fully Qualified Class Name from PHP, especially not starting
+        with a backslash as this is an invalid character to start a class name with but a
+        somewhat common mistake so this simple type can be used to validate against it
+        already
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(\\?[a-zA-Z_&#x7f;-&#xff;][a-zA-Z0-9_&#x7f;-&#xff;]*)(\\[a-zA-Z_&#x7f;-&#xff;][a-zA-Z0-9_&#x7f;-&#xff;]*)*"/>
+    </xs:restriction>
+  </xs:simpleType>
 </xs:schema>

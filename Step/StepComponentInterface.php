@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Step;
 
-interface StepInterface
+interface StepComponentInterface
 {
     public function getCode(): string;
     public function getLabel(): string;
