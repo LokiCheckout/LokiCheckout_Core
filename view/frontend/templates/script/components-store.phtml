@@ -22,17 +22,17 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return this.getComponents().filter(component => component.step === step);
             },
             add(component) {
-                if (!component.name) {
+                if (component.name === undefined) {
                     console.error('Unable to add component to store: No name set', component);
                     return;
                 }
 
-                if (!component.step) {
+                if (component.step === undefined) {
                     console.error('Unable to add component to store: No step set', component.name);
                     return;
                 }
 
-                if (!component.valid) {
+                if (component.valid === undefined) {
                     console.error('Unable to add component to store: No valid flag set', component.name);
                     return;
                 }
