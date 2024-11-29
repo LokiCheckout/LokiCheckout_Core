@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar;
 
-use Magento\Quote\Api\Data\CartItemInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Util\Cart\ItemConvertor;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class Items extends Component
@@ -15,7 +15,8 @@ class Items extends Component
     public array|null $items = [];
 
     public function __construct(
-        protected CheckoutState $checkoutState,
+        private CheckoutState $checkoutState,
+        private ItemConvertor $itemConvertor
     ) {
     }
 
@@ -33,14 +34,7 @@ class Items extends Component
     {
         $items = [];
         foreach ($this->checkoutState->getQuote()->getItems() as $item) {
-            /** @var CartItemInterface $item */
-            $items[] = [
-                'id' => $item->getId(),
-                'sku' => $item->getSku(),
-                'name' => $item->getName(),
-                'price' => $item->getPrice(),
-                'qty' => $item->getQty(),
-            ];
+            $items[] = $this->itemConvertor->toArray($item);
         }
 
         return $items;
