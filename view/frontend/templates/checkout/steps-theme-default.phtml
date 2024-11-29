@@ -33,8 +33,7 @@ $currentStep = $stepNavigator->getCurrentStep();
                 Alpine.data('<?= $block->getComponentName() . ucfirst($step->getCode()) ?>', () => ({
                     visible: <?= $isCurrent ? 'true' : 'false' ?>,
                     init() {
-                        //this.visible = '<?= $step->getCode() ?>' === Alpine.store('components').currentStep; // @todo: Is this needed?
-                        Livewire.on('stepChange', (stepCode) => {
+                        Magewire.on('afterChangeStep', (stepCode) => {
                             this.visible = '<?= $step->getCode() ?>' === stepCode;
                         });
                     }

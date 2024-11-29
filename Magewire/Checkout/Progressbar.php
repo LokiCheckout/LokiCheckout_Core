@@ -29,8 +29,6 @@ class Progressbar extends Component
     {
         $this->currentStepCode = $stepCode;
         $this->stepNavigator->setCurrentStepByCode($stepCode);
-        $this->emit('afterSaveShippingStep');
-        $this->emit('afterSaveBillingStep');
         $this->emit('afterChangeStep', $stepCode);
     }
 

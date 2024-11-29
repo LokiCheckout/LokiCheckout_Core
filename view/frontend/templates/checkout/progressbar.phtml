@@ -33,7 +33,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
     <script>
         document.addEventListener('magewire:load', () => {
-            Livewire.on('stepChange', (stepCode) => {
+            Magewire.on('afterChangeStep', (stepCode) => {
                 Alpine.store('components').currentStep = stepCode;
                 window.location.hash = stepCode;
                 document.body.scrollTop = 0;

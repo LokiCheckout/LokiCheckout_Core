@@ -93,8 +93,8 @@ class StepNavigator implements ArgumentInterface
 
         $nextStep = $this->getNextStep($currentStep);
         $this->setCurrentStepByCode($nextStep->getCode());
+        // @todo: $this->checkoutSession->setStepData();
         return true;
-        //$this->checkoutSession->setStepData();
     }
 
     /**
