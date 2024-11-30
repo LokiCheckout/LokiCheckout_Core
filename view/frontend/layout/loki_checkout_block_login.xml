@@ -2,7 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            ifconfig="checkout/options/enable_guest_checkout_login"
             name="loki-checkout.login"
             template="Yireo_LokiCheckout::checkout/login.phtml">
             <arguments>
