@@ -17,6 +17,10 @@ class ShippingMethods extends Component
     use StepBehaviour;
     use JsNameBehaviour;
 
+    protected $listeners = [
+        'afterSaveShippingStep' => 'refresh',
+        'afterSaveShippingAddress' => 'refresh',
+    ];
     private array $shippingMethods = [];
 
     public string $value = '';
