@@ -23,7 +23,9 @@
                         </argument>
                     </arguments>
 
+                    <container name="loki-checkout.sidebar.items.before" as="before" />
                     <block name="loki-checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
+                    <container name="loki-checkout.sidebar.items.after" as="after" />
                 </block>
 
                 <block name="loki-checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">

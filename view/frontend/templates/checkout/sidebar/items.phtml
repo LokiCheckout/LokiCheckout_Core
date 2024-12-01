@@ -19,6 +19,7 @@ if (empty($magewire->items)) {
 ?>
 <div class="<?= $css('relative') ?>">
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay') ?>
+    <?= $block->getChildHtml('before') ?>
 
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
@@ -29,4 +30,6 @@ if (empty($magewire->items)) {
             </li>
         <?php endforeach; ?>
     </ul>
+
+    <?= $block->getChildHtml('after') ?>
 </div>
