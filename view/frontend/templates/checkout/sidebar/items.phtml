@@ -23,9 +23,9 @@ if (empty($magewire->items)) {
     <ul role="list">
         <?php foreach ($magewire->getItems() as $item) : ?>
             <li>
-                <?= $blockRenderer->getChild('item', $block, [
+                <?= $blockRenderer->getChildHtml('item', $block, [
                     'item' => $item,
-                ])->setNameInLayout($block->getNameInLayout().'.item.'.$item['id'])->toHtml() ?>
+                ]) ?>
             </li>
         <?php endforeach; ?>
     </ul>

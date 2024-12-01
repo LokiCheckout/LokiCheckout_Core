@@ -17,6 +17,11 @@ $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
 
 $item = $block->getItem();
+if (empty($item)) {
+    echo '<div>No item data</div>';
+    return;
+}
+
 $width = 75;
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
 ?>
