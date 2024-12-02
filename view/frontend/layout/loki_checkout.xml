@@ -33,6 +33,7 @@
         </referenceContainer>
 
         <referenceContainer name="after.body.start">
+            <block name="loki-checkout.script.logger" template="Yireo_LokiCheckout::script/logger.phtml"/>
             <block name="loki-checkout.script.alpine-call" template="Yireo_LokiCheckout::script/alpine-call.phtml"/>
             <block name="loki-checkout.script.component-extender" template="Yireo_LokiCheckout::script/component-extender.phtml"/>
             <block name="loki-checkout.script.messenger" template="Yireo_LokiCheckout::script/messenger.phtml"/>

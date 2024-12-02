@@ -1,0 +1,27 @@
+<?php declare(strict_types=1);
+?>
+<script>
+    function yireoLokiCheckoutLogger(...args) {
+        //const debug = window.YIREO_LOKI_CHECKOUT_DEBUG || false;// @todo: Enable this
+        const debug = true;
+        if (false === debug) {
+            return;
+        }
+
+        var color = 'gray';
+        if (args[0].toLowerCase().startsWith('success')) {
+            color = 'green';
+        }
+
+        if (args[0].toLowerCase().startsWith('warning')) {
+            color = 'orange';
+        }
+
+        if (args[0].toLowerCase().startsWith('error')) {
+            color = 'red';
+        }
+
+        var css = 'color:white; background-color:' + color + '; padding:1px;'
+        console.log('%cYireo_LokiCheckout', css, ...args);
+    }
+</script>
