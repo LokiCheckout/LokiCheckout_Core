@@ -51,6 +51,7 @@
 
             <container name="loki-checkout.script.alpine-components">
                 <block name="loki-checkout.script.components.field-component" template="Yireo_LokiCheckout::script/component/field-component.phtml" />
+                <block name="loki-checkout.script.components.shipping-address-component" template="Yireo_LokiCheckout::script/component/shipping-address-component.phtml" />
                 <block name="loki-checkout.script.components.shipping-methods-component" template="Yireo_LokiCheckout::script/component/shipping-methods-component.phtml" />
                 <block name="loki-checkout.script.components.payment-methods-component" template="Yireo_LokiCheckout::script/component/payment-methods-component.phtml" />
                 <block name="loki-checkout.script.components.step-component" template="Yireo_LokiCheckout::script/component/step-component.phtml" />

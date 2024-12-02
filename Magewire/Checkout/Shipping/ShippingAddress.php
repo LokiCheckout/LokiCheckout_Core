@@ -11,27 +11,27 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\JsNameBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
 class ShippingAddress extends Component
 {
-    use JsNameBehaviour;
+    use AlpineDataBehaviour;
 
     public array $shippingAddresses = [];
     public int|string $currentShippingAddress = 0;
     public bool $newAddress = false;
 
     public function __construct(
-        private CheckoutState $checkoutState,
-        private CustomerSession $customerSession,
+        private CheckoutState               $checkoutState,
+        private CustomerSession             $customerSession,
         private CustomerRepositoryInterface $customerRepository,
-        private CustomerAddressRepository $customerAddressRepository,
-        private SearchCriteriaBuilder $searchCriteriaBuilder,
-        private AddressConfig $addressConfig,
-        private AddressMapper $addressMapper,
-        private CheckoutSession $checkoutSession,
+        private CustomerAddressRepository   $customerAddressRepository,
+        private SearchCriteriaBuilder       $searchCriteriaBuilder,
+        private AddressConfig               $addressConfig,
+        private AddressMapper               $addressMapper,
+        private CheckoutSession             $checkoutSession,
     ) {
     }
 
@@ -153,5 +153,25 @@ class ShippingAddress extends Component
             ->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT)
             ->getRenderer()
             ->renderArray($addressData);
+    }
+
+    public function getComponentData(): array
+    {
+        return [
+            'wireId' => $this->id,
+            'newAddress' => $this->newAddress ? 'true' : 'false',
+            'buttonLabelSelectAddress' => $this->getButtonLabelNewAddress(),
+            'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),
+        ];
+    }
+
+    public function getButtonLabelNewAddress(): string
+    {
+        return (string)__('Add new shipping address');
+    }
+
+    public function getButtonLabelSelectAddress(): string
+    {
+        return (string)__('Select existing address from list');
     }
 }

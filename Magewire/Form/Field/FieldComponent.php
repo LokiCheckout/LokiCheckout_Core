@@ -160,30 +160,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return false;
     }
 
-
-
-    public function getJsName(): string
-    {
-        // @todo: Use CamelCaseConvertor instead or even getParentBlock()->getJsId()
-        $name = ucwords($this->getNameInLayout(), '_.-');
-
-        return preg_replace('#[_.-]+#', '', $name);
-    }
-
-    // @todo: Rename this to getDomElementId()?
-    public function getElementId(): string
-    {
-        $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
-
-        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
-    }
-
-    // @todo: Rename this to setDomElementId()?
-    public function setElementId(string $elementId)
-    {
-        $this->elementId = $elementId;
-    }
-
     protected function setErrorsFromValidation(true|array $errors): bool
     {
         if (true === $errors) {
