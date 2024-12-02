@@ -107,7 +107,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return $this->value;
     }
 
-    public function getDefaultValue(): string
+    public function getDefaultValue(): string|bool|int
     {
         return '';
     }
