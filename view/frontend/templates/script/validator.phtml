@@ -17,7 +17,7 @@
 
             component.rules.every(rule => {
                 if (this.rules[rule] === undefined) {
-                    console.error('Rule not found', rule, component);
+                    yireoLokiCheckoutLogger('WARNING: Rule "' + rule + '" not found', component);
                     return true;
                 }
 
