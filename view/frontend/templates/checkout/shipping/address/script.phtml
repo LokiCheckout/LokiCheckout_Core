@@ -9,8 +9,8 @@ use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 $component = $block->getComponent();
 $newAddress = (bool)$component->newAddress;
 $magewireId = (string)$component->id;
-$buttonLabelNewAddress = __('New Address');
-$buttonLabelSelectAddress = __('Select Address');
+$buttonLabelNewAddress = __('Add new shipping address');
+$buttonLabelSelectAddress = __('Select existing address from list');
 ?>
 <script>
     LokiCheckoutAlpineCall(() => {
