@@ -22,6 +22,15 @@ $magewire = $block->getComponent();
             },
             updateValid() {
                 this.valid = Alpine.store('components').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
+                if (!this.valid) {
+                    const components = [];
+                    Alpine.store('components').getInvalidComponents('<?= $magewire->getStep() ?>').forEach((component) => {
+                        components.push(component.name);
+                    })
+
+                    yireoLokiCheckoutLogger('INFO: Invalid components', components);
+                }
+
                 return this.valid;
             },
             submit() {
