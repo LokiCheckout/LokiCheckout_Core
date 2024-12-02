@@ -3,7 +3,7 @@
         error: function (message, component) {
             const errorContainer = component.$refs.errors;
             if (!errorContainer) {
-                console.error('Error message sent to empty HTML element ($refs.error)', component);
+                yireoLokiCheckoutLogger('ERROR: Message sent to empty HTML element ($refs.error)', component);
                 return false;
             }
 

@@ -46,9 +46,10 @@
             const elements = component.$root.querySelectorAll('[data-type="field"]');
             elements.forEach(element => {
                 if (element.tagName === 'input') {
-                    element.setCustomValidity('Value is invalid');
+                    if (typeof element.setCustomValidity === 'function') {
+                        element.setCustomValidity('Value is invalid');
+                    }
                 }
-                element.setAttribute('data-invalid', true);
                 element.setAttribute('aria-invalid', true);
             });
 
@@ -57,9 +58,10 @@
         setValid: function (component) {
             component.valid = true;
             Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
-                element.setCustomValidity('');
-                element.removeAttribute('data-invalid');
-                element.removeAttribute('aria-invalid');
+                if (typeof element.setCustomValidity === 'function') {
+                    element.setCustomValidity('');
+                }
+                element.setAttribute('aria-invalid', false);
             });
 
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
