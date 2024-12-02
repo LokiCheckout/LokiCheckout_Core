@@ -46,11 +46,20 @@ class ShippingAddress extends Component
 
     private function bootForCustomer()
     {
+        $quote = $this->checkoutState->getQuote();
         $customer = $this->customerRepository->getById($this->customerSession->getCustomerId());
-        $this->checkoutState->getQuote()->assignCustomer($customer);
+        $quote->assignCustomer($customer);
 
         $this->shippingAddresses = $this->getCustomerAddresses($customer);
         $this->currentShippingAddress = (string)$customer->getDefaultShipping();
+
+        if ($this->currentShippingAddress) {
+            $customerShippingAddress = $this->customerAddressRepository->getById((int)$this->currentShippingAddress);
+            $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
+            $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
+            $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
+            $quoteShippingAddress->save();
+        }
     }
 
     public function isEnabled(): bool
