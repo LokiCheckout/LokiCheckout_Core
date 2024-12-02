@@ -35,13 +35,11 @@ $magewire = $this->getComponent();
     <?php if ($magewire->hasMax()): ?>
         max="<?= $magewire->getMax() ?>"
     <?php endif ?>
-    <?php if ($magewire->hasErrors() || false === $magewire->valid): ?>
-        aria-invalid="true" data-invalid="true"
-    <?php endif ?>
+    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
     <?php if ($magewire->getPlaceholder()): ?>
         placeholder="<?= $magewire->getPlaceholder() ?>"
     <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     type="<?= $magewire->getInputType() ?>"
-    class="<?= $css('form-input w-full data-[invalid=true]:border-red-500', 'input') ?>"
+    class="<?= $css('form-input w-full', 'input') ?>"
 >

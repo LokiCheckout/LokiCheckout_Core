@@ -21,13 +21,11 @@ $magewire->setOptionModel($optionModel);
     x-ref="field"
     x-model="value"
     x-on:change="submit"
-    <?php if ($magewire->hasErrors()): ?>
-        aria-invalid="true" data-invalid="true"
-    <?php endif ?>
+    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
     <?= $magewire->isRequired() ? 'required' : '' ?>
-    class="<?= $css('form-select w-full data-[invalid=true]:border-red-500') ?>"
+    class="<?= $css('form-select w-full') ?>"
 >
     <?php foreach ($optionModel->getOptions($magewire) as $optionValue => $optionLabel): ?>
-    <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
+        <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>
 </select>

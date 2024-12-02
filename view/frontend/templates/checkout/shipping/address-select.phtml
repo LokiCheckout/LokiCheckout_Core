@@ -14,12 +14,15 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
 
 <select
+    id="<?= $magewire->getElementId() ?>-field"
+    data-type="field"
+    aria-invalid="<?= $magewire->hasErrors() ? 'true' : 'false' ?>"
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     wire:model="currentShippingAddress"
     :class="newAddress ? 'disabled:opacity-75' : ''"
     :disabled="newAddress"
-    class="form-input block w-full invalid:border-red-500 valid:border-green-500">
+    class="form-input block w-full">
     <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
         <option value="<?= $shippingAddressId ?>"><?= $shippingAddresLabel ?></option>
     <?php endforeach; ?>

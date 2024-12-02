@@ -8,4 +8,15 @@
             }
         }
     }
+
+    [data-type="label"],
+    [data-type="field"] {
+        &[aria-invalid=true] {
+            @apply border-red-500;
+        }
+
+        &[aria-invalid=false] {
+            @apply border-green-500;
+        }
+    }
 }
