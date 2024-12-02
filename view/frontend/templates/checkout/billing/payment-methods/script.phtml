@@ -20,7 +20,6 @@ $component = $block->getComponent();
             rules: ['required'],
             init() {
                 Alpine.store('components').add(this);
-
                 this.showPaymentMethodBlocks();
 
                 if (this.value) {
