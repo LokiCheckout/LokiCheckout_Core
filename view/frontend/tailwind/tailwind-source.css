@@ -15,8 +15,8 @@
             @apply border-red-500;
         }
 
-        &[aria-invalid=false] {
+        /*&[aria-invalid=false] {
             @apply border-green-500;
-        }
+        }*/
     }
 }
