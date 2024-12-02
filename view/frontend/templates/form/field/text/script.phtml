@@ -10,11 +10,6 @@ $component = $this->getComponent();
 ?>
 <script>
     LokiCheckoutAlpineCall(() => {
-        //if (Alpine.store('components').get('<?= $component->getJsName() ?>') !== undefined) {
-        //    YireoLokiCheckoutLogger('Component already in store', '<?= $component->getJsName() ?>');
-        //    return;
-        //}
-
         Alpine.data('<?= $component->getJsName() ?>', () => {
             const componentData = JSON.parse('<?= $component->getComponentDataAsJson() ?>');
             return LokiCheckoutFieldComponentExtender.extend({
