@@ -36,7 +36,10 @@ $component = $block->getComponent();
                         detail: {method: this.value}
                     }));
                     this.$component(this).call('setValue', this.value);
-                    this.valid = true;
+
+                    if (this.value) {
+                        this.valid = true;
+                    }
                 });
             },
             showPaymentMethodBlocks() {

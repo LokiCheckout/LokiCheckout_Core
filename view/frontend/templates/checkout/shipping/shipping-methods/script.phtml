@@ -30,7 +30,10 @@ $component = $block->getComponent();
                 this.$watch('value', () => {
                     this.rules = ['required', this.value];
                     this.$component(this).call('setValue', this.value);
-                    this.valid = true;
+                    if (this.value) {
+                        this.valid = true;
+                    }
+
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                         detail: {method: this.value}
                     }));
