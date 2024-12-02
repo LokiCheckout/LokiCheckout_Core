@@ -14,20 +14,20 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
+$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
 
 if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
-    echo '<div style="display:none">skipped</div>';
-
-    return;
-}
-
-if (false === $magewire->isVisible()) {
-    echo '<div style="display:none">not visible</div>';
+    echo '<div style="display:none">not a Magewire component</div>';
 
     return;
 }
 
 $blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script', $block);
+if (false === $magewire->isVisible()) {
+    echo '<div x-data="'.$magewire->getJsName().'"  style="display:none">not visible</div>';
+
+    return;
+}
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
@@ -54,6 +54,4 @@ $blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script'
     </div>
 
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
-
-    <?= $blockRenderer->getBlockTemplate('form/field/text/script.phtml', $block) ?>
 </div>

@@ -8,6 +8,7 @@ use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
+use OutOfBoundsException;
 use RuntimeException;
 
 class BlockRenderer
@@ -16,7 +17,7 @@ class BlockRenderer
 
     public function __construct(
         private LayoutInterface $layout,
-        private string          $scriptContainer = 'loki-checkout.script.alpine-components'
+        private string $scriptContainer = 'loki-checkout.script.alpine-components'
     ) {
     }
 
@@ -38,14 +39,14 @@ class BlockRenderer
         try {
             return (string)$this->getChild($blockAlias, $parentBlock, $data)?->toHtml();
         } catch (RuntimeException|InvalidArgumentException $e) {
-            return '<!-- ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
+            return '<!-- '.$e->getMessage().' -->'; // @todo: Only report this in debug mode
         }
     }
 
     /**
-     * @param string             $blockName
+     * @param string $blockName
      * @param AbstractBlock|null $ancestorBlock
-     * @param array              $data
+     * @param array $data
      *
      * @return AbstractBlock
      */
@@ -66,14 +67,17 @@ class BlockRenderer
     }
 
     /**
-     * @param string             $templateName
+     * @param string $templateName
      * @param AbstractBlock|null $ancestorBlock
-     * @param array              $data
+     * @param array $data
      *
      * @return Template
      */
-    public function getBlockWithTemplate(string $templateName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
-    {
+    public function getBlockWithTemplate(
+        string $templateName,
+        ?AbstractBlock $ancestorBlock = null,
+        array $data = []
+    ): Template {
         $block = $this->getBlockFromTemplate($templateName);
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block found with template "%1"', $templateName));
@@ -85,14 +89,17 @@ class BlockRenderer
     }
 
     /**
-     * @param string             $templateName
+     * @param string $templateName
      * @param AbstractBlock|null $ancestorBlock
-     * @param array              $data
+     * @param array $data
      *
      * @return string
      */
-    public function getBlockTemplate(string $templateName, ?AbstractBlock $ancestorBlock = null, array $data = []): string
-    {
+    public function getBlockTemplate(
+        string $templateName,
+        ?AbstractBlock $ancestorBlock = null,
+        array $data = []
+    ): string {
         return $this->getBlockWithTemplate($templateName, $ancestorBlock, $data)->toHtml();
     }
 
@@ -106,15 +113,16 @@ class BlockRenderer
     {
         try {
             return $this->getBlockByName($blockName, $ancestorBlock, $data)->toHtml();
-        } catch(InvalidArgumentException|RuntimeException $e) {
-            return '<!-- Block with name "'.$blockName.'": ' . $e->getMessage() . ' -->'; // @todo: Only report this in debug mode
+        } catch (InvalidArgumentException|RuntimeException $e) {
+            return '<!-- Block with name "'.$blockName.'": '.$e->getMessage(
+                ).' -->'; // @todo: Only report this in debug mode
         }
     }
 
     /**
-     * @param string        $blockName
+     * @param string $blockName
      * @param AbstractBlock $parentBlock
-     * @param array         $data
+     * @param array $data
      *
      * @return void
      */
@@ -126,7 +134,35 @@ class BlockRenderer
         }
 
         $this->populateBlock($block, $parentBlock, $data);
-        $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
+        try {
+            $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
+        } catch (OutOfBoundsException $outOfBoundsException) {
+            // @todo: Log this
+        }
+    }
+
+    /**
+     * @param string $blockName
+     * @param AbstractBlock $parentBlock
+     * @param array $data
+     *
+     * @return void
+     */
+    public function addScriptTemplate(string $templateName, AbstractBlock $ancestorBlock, array $data = []): void
+    {
+        $block = $this->getBlockWithTemplate($templateName, $ancestorBlock, $data);
+        if (false === $block instanceof AbstractBlock) {
+            return;
+        }
+
+        $blockName = $block->getNameInLayout();
+        $this->populateBlock($block, $ancestorBlock, $data);
+
+        try {
+            $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
+        } catch (OutOfBoundsException $outOfBoundsException) {
+            // @todo: Log this
+        }
     }
 
     /**
@@ -138,14 +174,14 @@ class BlockRenderer
     private function getBlockFromTemplate(string $templateName, string $blockName = ''): Template
     {
         if (false === strstr($templateName, '::')) {
-            $templateName = 'Yireo_LokiCheckout::' . $templateName;
+            $templateName = 'Yireo_LokiCheckout::'.$templateName;
         }
 
         return $this->layout->createBlock(Template::class, $blockName)->setTemplate($templateName);
     }
 
     /**
-     * @param AbstractBlock      $block
+     * @param AbstractBlock $block
      * @param AbstractBlock|null $ancestorBlock
      *
      * @return void
@@ -186,7 +222,7 @@ class BlockRenderer
 
         if (isset($this->counters[$nameInLayout])) {
             $increment++;
-            $block->setNameInLayout($nameInLayout . '.' . $increment);
+            $block->setNameInLayout($nameInLayout.'.'.$increment);
             $this->counters[$nameInLayout] = 0;
         } else {
             $this->counters[$nameInLayout] = 0;
