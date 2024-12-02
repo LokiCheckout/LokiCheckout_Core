@@ -18,11 +18,10 @@ $component = $block->getComponent();
             valid: <?= $component->valid ? 'true' : 'false' ?>,
             rules: ['required'],
             init() {
-                this.value = '<?= $component->value ?>'; // @todo: Is this needed?
                 if (this.value) {
                     this.rules = ['required', this.value];
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
-                        detail: { method: this.value}
+                        detail: {method: this.value}
                     }));
                 }
 
@@ -31,8 +30,9 @@ $component = $block->getComponent();
                 this.$watch('value', () => {
                     this.rules = ['required', this.value];
                     this.$component(this).call('setValue', this.value);
+                    this.valid = true;
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
-                        detail: { method: this.value}
+                        detail: {method: this.value}
                     }));
                 });
             }
