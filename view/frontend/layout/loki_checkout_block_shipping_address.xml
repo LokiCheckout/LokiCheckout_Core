@@ -229,15 +229,5 @@
                 </block>
             </block>
         </block>
-
-        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
-            <arguments>
-                <argument name="components" xsi:type="array">
-                    <item name="loki-checkout.shipping-address" xsi:type="string">
-                        Yireo_LokiCheckout::checkout/shipping/address/script.phtml
-                    </item>
-                </argument>
-            </arguments>
-        </referenceBlock>
     </body>
 </page>

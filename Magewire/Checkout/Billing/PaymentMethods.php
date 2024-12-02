@@ -7,6 +7,7 @@ use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
@@ -14,6 +15,7 @@ class PaymentMethods extends Component
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
+    use AlpineDataBehaviour;
 
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
@@ -32,6 +34,7 @@ class PaymentMethods extends Component
         $quote = $this->checkoutState->getQuote();
         $cartId = $quote->getId();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
+
         $this->value = (string)$quote->getPayment()->getMethod();
 
         if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {

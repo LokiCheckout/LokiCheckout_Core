@@ -14,26 +14,28 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-$blockRenderer->addScriptTemplate('form/field/text/script.phtml', $block);
 
+// @todo: Solve this from Magewire by using a different template
 if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
     echo '<div style="display:none">not a Magewire component</div>';
 
     return;
 }
 
-$blockRenderer->addScriptBlock($magewire->getNameInLayout().'.additional_script', $block);
-if (false === $magewire->isVisible()) {
-    echo '<div x-data="'.$magewire->getJsName().'"  style="display:none">not visible</div>';
-
+if (false === $magewire->isVisible()) { // @todo: Solve this from Magewire by using a different template
+    ?>
+    <div x-data="LokiCheckoutFieldComponent"
+         data-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">Not visible
+    </div>
+    <?php
     return;
 }
 ?>
 <div id="<?= $magewire->getElementId() ?>"
-     class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired(
-     ) ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
-     x-data="<?= $magewire->getJsName() ?>">
-
+     class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
+     x-data="LokiCheckoutFieldComponent"
+     data-component='<?= $magewire->getComponentDataAsJson() ?>'
+>
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
         <?= __($magewire->getFieldLabel()) ?>
         <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>

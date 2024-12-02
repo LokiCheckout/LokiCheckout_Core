@@ -8,6 +8,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehavio
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectFieldTemplateLocator;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\Util\FieldTemplateLocator;
@@ -21,6 +22,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     use ValidateBehaviour;
     use ParentBehaviour;
     use StepBehaviour;
+    use AlpineDataBehaviour;
 
     protected string $elementId = '';
 
@@ -158,10 +160,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return false;
     }
 
-    public function getJsValue(): string
-    {
-        return str_replace("\n", '\n', $this->value); // @todo: Is this good enough?
-    }
+
 
     public function getJsName(): string
     {
@@ -206,33 +205,9 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
     }
 
-    // @todo: Rename to getAlpineData()
-    public function getComponentData(): array
-    {
-        $rules = [];
-        foreach ($this->getValidators() as $validator) {
-            $rules[] = $validator;
-        }
-
-        return [
-            'name' => $this->getJsName(),
-            'wireId' => $this->id,
-            'elementId' => $this->getElementId(),
-            'step' => $this->getStep(),
-            'value' => $this->getJsValue(),
-            'valid' => $this->isValid(),
-            'rules' => $rules,
-        ];
-    }
-
     public function isValid(): bool
     {
         return $this->valid;
-    }
-
-    public function getComponentDataAsJson(): string
-    {
-        return json_encode($this->getComponentData());
     }
 
     public function getLokiCheckoutConfig(): LokiCheckoutConfig

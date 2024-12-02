@@ -1,23 +1,19 @@
-<?php
-declare(strict_types=1);
-
-use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods;
-
-/** @var Template $block */
-/** @var ShippingMethods $component */
-$component = $block->getComponent();
-?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $component->getJsName() ?>', () => ({
-            name: '<?= $component->getJsName() ?>',
-            wireId: '<?= $component->id ?>',
-            step: '<?= $component->getStep() ?>',
-            value: '<?= $component->value ?>',
-            valid: <?= $component->valid ? 'true' : 'false' ?>,
+        Alpine.data('LokiCheckoutShippingMethods', () => ({
+            name: '',
+            wireId: '',
+            elementId: '',
+            step: '',
+            value: '',
+            valid: false,
             rules: ['required'],
             init() {
+                const componentData = JSON.parse(this.$el.dataset.component);
+                for (const [key, value] of Object.entries(componentData)) {
+                    this[key] = value;
+                }
+
                 if (this.value) {
                     this.rules = ['required', this.value];
                     window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {

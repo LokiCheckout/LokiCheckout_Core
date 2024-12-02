@@ -1,19 +1,14 @@
-<?php
-declare(strict_types=1);
-
-use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
-
-/** @var Template $block */
-/** @var AddressFieldComponent $component */
-$component = $this->getComponent();
-?>
 <script>
-    LokiCheckoutAlpineCall(() => {
-        Alpine.data('<?= $component->getJsName() ?>', () => {
-            const componentData = JSON.parse('<?= $component->getComponentDataAsJson() ?>');
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutFieldComponent', () => {
             return LokiCheckoutFieldComponentExtender.extend({
-                ...componentData,
+                name: '',
+                wireId: '',
+                elementId: '',
+                step: '',
+                value: '',
+                valid: false,
+                rules: [],
                 initActions: {
                     addToAlpineStore: function () {
                         Alpine.store('components').add(this);
@@ -29,6 +24,11 @@ $component = $this->getComponent();
                     }
                 },
                 init() {
+                    const componentData = JSON.parse(this.$el.dataset.component);
+                    for (const [key, value] of Object.entries(componentData)) {
+                        this[key] = value;
+                    }
+
                     // @todo: Find a nicer way to do this
                     if (this.newAddress !== undefined && this.newAddress === false) {
                         this.rules = [];
@@ -39,15 +39,13 @@ $component = $this->getComponent();
                         callback.apply(this);
                     });
                 },
+                updated() {},
                 submit() {
-                    this.beforeSubmit();
-
                     if (false === LokiCheckoutValidator.validate(this)) {
                         return false;
                     }
 
                     this.$component(this).call('setValue', this.value);
-                    this.afterSubmit();
                 },
             });
         });

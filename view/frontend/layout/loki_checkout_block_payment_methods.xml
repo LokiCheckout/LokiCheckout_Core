@@ -12,14 +12,6 @@
             <block
                 name="loki-checkout.billing.payment-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/billing/payment-methods/item.phtml"/>
-
-            <block
-                name="loki-checkout.billing.payment-methods.script" as="script"
-                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script.phtml"/>
-
-            <block
-                name="loki-checkout.billing.payment-methods.script-toggler" as="script-toggler"
-                template="Yireo_LokiCheckout::checkout/billing/payment-methods/script-toggler.phtml"/>
         </block>
 
         <block
@@ -36,5 +28,11 @@
             name="loki-checkout.billing.payment-methods.checkmo.additional"
             template="Yireo_LokiCheckout::checkout/billing/payment-method-additional/checkmo.phtml">
         </block>
+
+        <referenceContainer name="loki-checkout.script.alpine-components">
+            <block
+                name="loki-checkout.billing.payment-methods.script-toggler" as="script-toggler"
+                template="Yireo_LokiCheckout::script/payment-method-toggler.phtml"/>
+        </referenceContainer>
     </body>
 </page>

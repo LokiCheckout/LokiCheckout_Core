@@ -14,16 +14,5 @@
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/item.phtml"/>
         </block>
-
-        <referenceBlock name="loki-checkout.script.alpine-component-initializer">
-            <arguments>
-                <argument name="components" xsi:type="array">
-                    <item name="loki-checkout.shipping.shipping-methods" xsi:type="string">
-                        Yireo_LokiCheckout::checkout/shipping/shipping-methods/script.phtml
-                    </item>
-
-                </argument>
-            </arguments>
-        </referenceBlock>
     </body>
 </page>

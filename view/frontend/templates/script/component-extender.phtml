@@ -5,13 +5,6 @@
             this.extenders.push(extender);
         },
         extend(component) {
-            component.updated = function () {
-            };
-            component.beforeSubmit = function () {
-            };
-            component.afterSubmit = function () {
-            };
-
             this.extenders.forEach((extender) => {
                 component = extender(component);
             })

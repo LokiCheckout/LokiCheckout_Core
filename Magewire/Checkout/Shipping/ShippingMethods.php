@@ -7,6 +7,7 @@ use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\JsNameBehaviour;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
@@ -16,6 +17,7 @@ class ShippingMethods extends Component
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
     use JsNameBehaviour;
+    use AlpineDataBehaviour;
 
     protected $listeners = [
         'afterSaveShippingStep' => 'refresh',

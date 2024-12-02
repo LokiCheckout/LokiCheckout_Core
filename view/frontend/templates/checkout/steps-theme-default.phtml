@@ -21,24 +21,12 @@ $currentStep = $stepNavigator->getCurrentStep();
         <?php $step = $stepBlock->getMagewire(); ?>
         <?php $isCurrent = $stepNavigator->isCurrentStep($step) ?>
         <div
-            x-data="<?= $block->getComponentName() . ucfirst($step->getCode()) ?>"
+            x-data="LokiCheckoutStep"
+            data-component='{"step":"<?= $step->getCode() ?>", "visible": <?= $isCurrent ? 'true' : 'false' ?>}'
             <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
              x-show="visible"
              x-transition>
             <?= $block->getLayout()->getBlock($childName)->toHtml() ?>
         </div>
-
-        <script>
-            document.addEventListener('alpine:init', () => {
-                Alpine.data('<?= $block->getComponentName() . ucfirst($step->getCode()) ?>', () => ({
-                    visible: <?= $isCurrent ? 'true' : 'false' ?>,
-                    init() {
-                        Magewire.on('afterChangeStep', (stepCode) => {
-                            this.visible = '<?= $step->getCode() ?>' === stepCode;
-                        });
-                    }
-                }));
-            });
-        </script>
     <?php endforeach; ?>
 </div>

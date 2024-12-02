@@ -1,0 +1,18 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutStep', () => ({
+            step: 'unknown',
+            visible: false,
+            init() {
+                const componentData = JSON.parse(this.$el.dataset.component);
+                for (const [key, value] of Object.entries(componentData)) {
+                    this[key] = value;
+                }
+
+                Magewire.on('afterChangeStep', (stepCode) => {
+                    this.visible = this.step === stepCode;
+                });
+            }
+        }));
+    });
+</script>
