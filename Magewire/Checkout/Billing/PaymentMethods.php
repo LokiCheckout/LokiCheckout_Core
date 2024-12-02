@@ -64,6 +64,9 @@ class PaymentMethods extends Component
     {
         // @todo: Verify that this is a correct payment
         $this->value = $value;
+        if (!empty($value)) {
+            $this->valid = true;
+        }
 
         $quote = $this->checkoutState->getQuote();
         $quote->setPaymentMethod($value);

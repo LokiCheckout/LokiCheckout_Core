@@ -20,6 +20,9 @@ $magewire = $block->getComponent();
                     this.updateValid();
                 });
             },
+            isDisabled() {
+                return this.valid !== true;
+            },
             updateValid() {
                 this.valid = Alpine.store('components').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
                 if (!this.valid) {
@@ -46,7 +49,8 @@ $magewire = $block->getComponent();
                 // @todo: Is this a good UI benefit?
                 setTimeout(() => {
                     this.valid = true;
-                }, 4000)
+                    console.log('Resetting valid');
+                }, 4000);
             }
         }));
     });
