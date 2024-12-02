@@ -24,6 +24,11 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     :disabled="newAddress"
     class="form-input block w-full">
     <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
-        <option value="<?= $shippingAddressId ?>"><?= $shippingAddresLabel ?></option>
+        <option
+            value="<?= $shippingAddressId ?>"
+            <?= (int)$shippingAddressId === (int)$magewire->currentShippingAddress ? 'selected' : '' ?>
+        >
+            <?= $shippingAddresLabel ?>
+        </option>
     <?php endforeach; ?>
 </select>

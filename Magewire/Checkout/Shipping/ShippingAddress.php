@@ -20,7 +20,7 @@ class ShippingAddress extends Component
     use JsNameBehaviour;
 
     public array $shippingAddresses = [];
-    public string $currentShippingAddress = '';
+    public int|string $currentShippingAddress = 0;
     public bool $newAddress = false;
 
     public function __construct(
@@ -31,7 +31,7 @@ class ShippingAddress extends Component
         private SearchCriteriaBuilder $searchCriteriaBuilder,
         private AddressConfig $addressConfig,
         private AddressMapper $addressMapper,
-        private CheckoutSession $checkoutSession
+        private CheckoutSession $checkoutSession,
     ) {
     }
 
@@ -51,15 +51,21 @@ class ShippingAddress extends Component
         $quote->assignCustomer($customer);
 
         $this->shippingAddresses = $this->getCustomerAddresses($customer);
-        $this->currentShippingAddress = (string)$customer->getDefaultShipping();
 
-        if ($this->currentShippingAddress) {
-            $customerShippingAddress = $this->customerAddressRepository->getById((int)$this->currentShippingAddress);
-            $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
-            $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
-            $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
-            $quoteShippingAddress->save();
+        $this->currentShippingAddress = (int)$quote->getShippingAddress()->getCustomerAddressId();
+        if (!$this->currentShippingAddress) {
+            $this->currentShippingAddress = (int)$customer->getDefaultShipping();
         }
+
+        if (!$this->currentShippingAddress) {
+            return;
+        }
+
+        if ((int)$quote->getShippingAddress()->getCustomerAddressId() == (int)$this->currentShippingAddress) {
+            return;
+        }
+
+        $this->saveCustomerAddressId((int)$this->currentShippingAddress);
     }
 
     public function isEnabled(): bool
@@ -89,7 +95,7 @@ class ShippingAddress extends Component
 
     public function updatedCurrentShippingAddress(mixed $value): mixed
     {
-        if (false === $this->customerSession->isLoggedIn()) {
+        if (false === (bool)$this->customerSession->isLoggedIn()) {
             return $value;
         }
 
@@ -97,11 +103,7 @@ class ShippingAddress extends Component
             return $value;
         }
 
-        $customerShippingAddress = $this->customerAddressRepository->getById((int)$value);
-        $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
-        $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
-        $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
-        $quoteShippingAddress->save();
+        $this->saveCustomerAddressId((int)$value);
         $this->emit('afterSaveShippingAddress');
 
         return $value;
@@ -125,11 +127,22 @@ class ShippingAddress extends Component
         $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
 
         $addresses = [];
+        $addresses[] = ''; // @todo: Make this optional
+
         foreach ($searchResults->getItems() as $address) {
             $addresses[$address->getId()] = $this->getAddressInline($address);
         }
 
         return $addresses;
+    }
+
+    private function saveCustomerAddressId(int $customerAddressId): void
+    {
+        $customerShippingAddress = $this->customerAddressRepository->getById((int)$customerAddressId);
+        $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
+        $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
+        $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
+        $quoteShippingAddress->save();
     }
 
     private function getAddressInline(AddressInterface $address): string
