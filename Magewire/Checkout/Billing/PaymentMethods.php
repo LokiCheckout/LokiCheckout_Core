@@ -76,4 +76,9 @@ class PaymentMethods extends Component
 
         return $value;
     }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
+    }
 }

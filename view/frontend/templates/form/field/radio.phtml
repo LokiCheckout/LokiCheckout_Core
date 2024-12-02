@@ -14,7 +14,7 @@ $optionModel = $block->getAncestorBlock()->getOptionModel();
 $magewire->setOptionModel($optionModel);
 ?>
 <div class="<?= $css('w-full grid grid-cols-2 p-2') ?>"
-     aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+     aria-invalid="<?= $magewire->isValid() ? 'false' : 'true' ?>"
      data-type="field">
     <?php $i = 0; ?>
     <?php foreach ($magewire->getOptions() as $optionValue => $optionLabel): ?>

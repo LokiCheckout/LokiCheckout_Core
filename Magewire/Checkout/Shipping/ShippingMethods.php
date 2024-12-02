@@ -84,6 +84,11 @@ class ShippingMethods extends Component
         return $value;
     }
 
+    public function isValid(): bool
+    {
+        return $this->valid;
+    }
+
     private function saveShippingMethodToQuote(string $shippingMethodCode): void
     {
         $shippingAddress = $this->shippingAddressState->getShippingAddress();

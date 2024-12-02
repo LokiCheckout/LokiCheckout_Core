@@ -220,9 +220,14 @@ abstract class FieldComponent extends Component implements FormFieldInterface
             'elementId' => $this->getElementId(),
             'step' => $this->getStep(),
             'value' => $this->getJsValue(),
-            'valid' => $this->valid,
+            'valid' => $this->isValid(),
             'rules' => $rules,
         ];
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
     }
 
     public function getComponentDataAsJson(): string
