@@ -15,17 +15,13 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 
+// @todo: Determine LokiCheckoutFieldComponent from component method getAlpineComponentName()
+
 // @todo: Solve this from Magewire by using a different template
-if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
-    echo '<div style="display:none">not a Magewire component</div>';
-
-    return;
-}
-
-if (false === $magewire->isVisible()) { // @todo: Solve this from Magewire by using a different template
+if (false === $magewire->isVisible()) {
     ?>
     <div x-data="LokiCheckoutFieldComponent"
-         data-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">Not visible
+         data-loki-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">Not visible
     </div>
     <?php
     return;
@@ -34,8 +30,12 @@ if (false === $magewire->isVisible()) { // @todo: Solve this from Magewire by us
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
      x-data="LokiCheckoutFieldComponent"
-     data-component='<?= $magewire->getComponentDataAsJson() ?>'
+     x-title="<?= $magewire->getJsName() ?>"
+     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
 >
+    <?= $block->getChildHtml('before') ?>
+
+    <!-- @todo: Move label in subtemplate -->
     <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
         <?= __($magewire->getFieldLabel()) ?>
         <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
@@ -56,4 +56,5 @@ if (false === $magewire->isVisible()) { // @todo: Solve this from Magewire by us
     </div>
 
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $block->getChildHtml('after') ?>
 </div>

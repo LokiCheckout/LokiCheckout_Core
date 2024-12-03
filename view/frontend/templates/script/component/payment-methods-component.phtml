@@ -9,12 +9,10 @@
             valid: false,
             rules: ['required'],
             init() {
-                const componentData = JSON.parse(this.$el.dataset.component);
+                const componentData = JSON.parse(this.$el.dataset.lokiComponent);
                 for (const [key, value] of Object.entries(componentData)) {
                     this[key] = value;
                 }
-
-                this.showPaymentMethodBlocks();
 
                 if (this.value) {
                     this.rules = ['required', this.value];
@@ -36,20 +34,6 @@
                         detail: {method: this.value}
                     }));
                 });
-            },
-            showPaymentMethodBlocks() {
-                if (!this.value) {
-                    return;
-                }
-
-                const selector = '[data-payment-method-code="' + this.value + '"]';
-                const element = document.querySelector(selector);
-                if (element) {
-                    element.style.display = 'block';
-                    return;
-                }
-
-                yireoLokiCheckoutLogger('WARNING: No element for selector', selector);
             }
         }));
     });

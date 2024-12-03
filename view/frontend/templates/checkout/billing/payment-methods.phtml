@@ -15,7 +15,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $paymentMethods = $magewire->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>" x-data="LokiCheckoutPaymentMethods"
-     data-component='<?= $magewire->getComponentDataAsJson() ?>'
+     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
 >
     <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>

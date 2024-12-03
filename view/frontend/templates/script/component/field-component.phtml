@@ -24,7 +24,7 @@
                     }
                 },
                 init() {
-                    const componentData = JSON.parse(this.$el.dataset.component);
+                    const componentData = JSON.parse(this.$el.dataset.lokiComponent);
                     for (const [key, value] of Object.entries(componentData)) {
                         this[key] = value;
                     }

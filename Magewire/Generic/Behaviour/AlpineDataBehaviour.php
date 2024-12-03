@@ -14,7 +14,7 @@ trait AlpineDataBehaviour
         }
 
         return [
-            'name' => $this->id,
+            'name' => $this->getJsName(),
             'wireId' => $this->id,
             'elementId' => $this->getElementId(),
             'step' => $this->getStep(),
@@ -32,12 +32,12 @@ trait AlpineDataBehaviour
     public function getJsName(): string
     {
         // @todo: Use CamelCaseConvertor instead or even getParentBlock()->getJsId()
-        $name = ucwords((string)$this->getNameInLayout(), '_.-');
+        $name = $this->getNameInLayout();
         if (empty($name)) {
-            return $this->id;
+            $name = $this->id;
         }
 
-        return preg_replace('#[_.-]+#', '', $name);
+        return $this->toCamelCase($name);
     }
 
     public function getJsValue(): string
@@ -62,4 +62,11 @@ trait AlpineDataBehaviour
         $this->elementId = $elementId;
     }
 
+    // @todo: Move this into trait or something
+    private function toCamelCase(string $text): string
+    {
+        $text = ucwords($text, '_.-');
+
+        return preg_replace('#[_.-]+#', '', $text);
+    }
 }

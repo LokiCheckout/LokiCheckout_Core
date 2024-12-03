@@ -7,26 +7,30 @@
             buttonLabelSelectAddress: '',
             buttonLabelNewAddress: '',
             init() {
-                const componentData = JSON.parse(this.$el.dataset.component);
+                const componentData = JSON.parse(this.$el.dataset.lokiComponent);
                 for (const [key, value] of Object.entries(componentData)) {
                     this[key] = value;
                 }
 
+                this.buttonLabel = this.getButtonLabel();
+
                 this.$watch('newAddress', (newAddress) => {
+                    Magewire.find(this.wireId).setNewAddress(this.newAddress);
                     if (newAddress === true) {
                         Magewire.find(this.wireId).cleanCustomerAddress();
-                        this.buttonLabel = this.buttonLabelSelectAddress;
-                    } else {
-                        this.buttonLabel = this.buttonLabelNewAddress;
                     }
                 });
             },
             getButtonLabel() {
+                if (this.newAddress === true) {
+                    return this.buttonLabelSelectAddress;
+                }
 
+                return this.buttonLabelNewAddress;
             },
             toggleNewAddress() {
                 this.newAddress = !this.newAddress;
-                Magewire.find(this.wireId).setNewAddress(this.newAddress);
+                this.buttonLabel = this.getButtonLabel();
             }
         }));
     });

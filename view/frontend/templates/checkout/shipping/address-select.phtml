@@ -11,7 +11,9 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Select your Shipping Address']) ?>
+<?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, [
+    'title' => 'Select your Shipping Address'
+]) ?>
 
 <select
     id="<?= $magewire->getElementId() ?>-field"

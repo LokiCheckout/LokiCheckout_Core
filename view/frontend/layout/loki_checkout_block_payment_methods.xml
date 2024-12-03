@@ -32,10 +32,5 @@
             <block name="loki-checkout.script.components.payment-methods-component"
                    template="Yireo_LokiCheckout::script/component/payment-methods-component.phtml"/>
         </referenceContainer>
-
-        <referenceContainer name="before.body.end">
-            <block name="loki-checkout.billing.payment-methods.script-toggler"
-                   template="Yireo_LokiCheckout::script/payment-method-toggler.phtml"/>
-        </referenceContainer>
     </body>
 </page>

@@ -22,7 +22,7 @@ $currentStep = $stepNavigator->getCurrentStep();
         <?php $isCurrent = $stepNavigator->isCurrentStep($step) ?>
         <div
             x-data="LokiCheckoutStep"
-            data-component='{"step":"<?= $step->getCode() ?>", "visible": <?= $isCurrent ? 'true' : 'false' ?>}'
+            data-loki-component='{"step":"<?= $step->getCode() ?>", "visible": <?= $isCurrent ? 'true' : 'false' ?>}'
             <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
              x-show="visible"
              x-transition>

@@ -22,6 +22,7 @@ $componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
         <input
             type="radio"
             x-model="value"
+            name="payment_method"
             value="<?= $code ?>"
             <?php if ($isCurrent) : ?>checked<?php endif ?>
             id="payment-<?= $code ?>"
@@ -31,7 +32,7 @@ $componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
         <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
     </div>
 
-    <div class="<?= $css('m-4 ml-24', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>" data-payment-method-code="<?= $code ?>">
+    <div class="<?= $css('m-4 ml-24', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
         <?= $blockRenderer->getBlockHtml(
             'loki-checkout.billing.payment-methods.'.$code.'.form',
             $block,

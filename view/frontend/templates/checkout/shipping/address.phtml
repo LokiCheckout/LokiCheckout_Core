@@ -13,9 +13,10 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $css('mb-8') ?>" x-data="LokiCheckoutShippingAddress" data-component='<?= $magewire->getComponentDataAsJson() ?>'>
+<div class="<?= $css('mb-8') ?>" x-data="LokiCheckoutShippingAddress" data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'>
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <?= $block->getChildHtml('address-select') ?>
+
         <button
             class="<?= $css('btn btn-primary my-4', 'button') ?>"
             x-text="buttonLabel"
@@ -27,7 +28,10 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
     <?php endif; ?>
 
     <div x-cloak x-show="newAddress">
-        <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Enter a New Address']) ?>
+        <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, [
+            'title' => 'Enter a New Address'
+        ]) ?>
+
         <?= $block->getChildHtml('address-form') ?>
     </div>
 </div>

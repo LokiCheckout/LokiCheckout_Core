@@ -15,7 +15,7 @@ if (false === $magewire instanceof StepBackwardButton) {
     return;
 }
 ?>
-<div id="<?= $magewire->getElementId() ?>"  <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>">
+<div id="<?= $magewire->getElementId() ?>"  <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>" x-title="<?= $magewire->getJsName() ?>">
     <?php if ($magewire->isVisible()): ?>
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"
