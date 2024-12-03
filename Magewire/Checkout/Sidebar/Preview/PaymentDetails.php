@@ -10,6 +10,7 @@ class PaymentDetails extends Component
     protected $listeners = [
         'afterSaveBillingStep' => 'refresh',
         'afterSaveBillingAddress' => 'refresh',
+        'afterSavePaymentMethod' => 'refresh',
         'afterSaveQuote' => 'refresh',
     ];
 
