@@ -15,13 +15,14 @@ class CssClass
      */
     public function __construct(
         private XmlConfig $xmlConfig,
-        private array     $cssClassParsers = [],
+        private array $cssClassParsers = [],
     ) {
     }
 
     public function setBlock(Template $block): CssClass
     {
         $this->block = $block;
+
         return $this;
     }
 
@@ -45,7 +46,7 @@ class CssClass
             $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig();
             if (!empty($gridClassesFromXmlConfig)) {
                 $cssClasses = array_merge_recursive($cssClasses, [
-                    'block' => ['grid' => $gridClassesFromXmlConfig]
+                    'block' => ['grid' => $gridClassesFromXmlConfig],
                 ]);
             }
         }
@@ -58,14 +59,13 @@ class CssClass
                 $cssClassValue = array_pop($cssClassValue);
             }
 
-            $css .= ' ' . $cssClassValue;
+            $css .= ' '.$cssClassValue;
         }
 
-        if ($scope === 'block') {
-            $nameInLayout = $this->block->getNameInLayout();
-            $blockClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
-            $css = $blockClass . ' ' . trim($css);
-        }
+        $nameInLayout = $this->block->getNameInLayout();
+        $scopeClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
+        $scopeClass .= '-'.$scope;
+        $css = $scopeClass.' '.trim($css);
 
         return trim($css);
     }
@@ -89,6 +89,7 @@ class CssClass
 
         $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
         $block = $gridLayout->getBlock($blockAlias);
+
         return $block->getGridClass();
     }
 
@@ -98,7 +99,7 @@ class CssClass
         $templateId = preg_replace('/\.phtml/', '', $templateId);
         $templateId = str_replace('/', '.', $templateId);
 
-        $defaultBlockName = 'loki-checkout.defaults.' . $templateId;
+        $defaultBlockName = 'loki-checkout.defaults.'.$templateId;
         $defaultBlock = $this->block->getLayout()->getBlock($defaultBlockName);
         if (empty($defaultBlock)) {
             return [];
