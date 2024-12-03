@@ -13,7 +13,7 @@ if (!$size) {
 
 $text = $block->getAncestorBlock()->getHelpText();
 ?>
-<div class="<?= $css('relative') ?>" x-data="<?= $block->getComponentName() ?>" x-cloak>
+<div class="<?= $css('relative') ?>" x-data="LokiCheckoutToggle" x-cloak>
     <button type="button" @click="toggle">
         <img alt="<?= __('Show help') ?>"
              src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/help.svg'); ?>"
@@ -25,15 +25,4 @@ $text = $block->getAncestorBlock()->getHelpText();
     <div x-cloak x-show="show" class="<?= $css('absolute z-50 right-0 w-100 p-3 bg-zinc-400 text-white', 'popup') ?>">
         <?= $text ?>
     </div>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('<?= $block->getComponentName() ?>', () => ({
-                show: false,
-                toggle() {
-                    this.show = !this.show;
-                }
-            }));
-        });
-    </script>
 </div>

@@ -85,6 +85,10 @@
                 <block
                     name="loki-checkout.script.components.step-forward-button"
                     template="Yireo_LokiCheckout::script/component/step-forward-button.phtml" />
+
+                <block
+                    name="loki-checkout.script.components.toggle"
+                    template="Yireo_LokiCheckout::script/component/toggle.phtml" />
             </container>
         </referenceContainer>
 
