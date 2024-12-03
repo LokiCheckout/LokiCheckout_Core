@@ -21,7 +21,6 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <nav
-
     class="<?= $css('hidden md:block card rounded-lg') ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
@@ -30,15 +29,4 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             <?= $block->getChildBlock('step')->addData(['step' => $step])->toHtml() ?>
         <?php endforeach; ?>
     </ul>
-
-    <script>
-        document.addEventListener('magewire:load', () => {
-            Magewire.on('afterChangeStep', (stepCode) => {
-                Alpine.store('components').currentStep = stepCode;
-                window.location.hash = stepCode;
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
-            });
-        });
-    </script>
 </nav>
