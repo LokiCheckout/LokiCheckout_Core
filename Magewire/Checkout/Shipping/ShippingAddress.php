@@ -159,7 +159,7 @@ class ShippingAddress extends Component
     {
         return [
             'wireId' => $this->id,
-            'newAddress' => $this->newAddress ? 'true' : 'false',
+            'newAddress' => $this->newAddress ? true : false,
             'buttonLabelSelectAddress' => $this->getButtonLabelSelectAddress(),
             'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),
         ];
