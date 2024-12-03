@@ -18,7 +18,7 @@ class Checkout extends Component
     ){
     }
 
-    public function boot(): void
+    public function mount(): void
     {
         $this->currentStep = $this->stepNavigator->getCurrentStep()->getCode();
     }

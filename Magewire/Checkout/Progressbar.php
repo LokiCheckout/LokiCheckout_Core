@@ -20,7 +20,7 @@ class Progressbar extends Component
     ) {
     }
 
-    public function boot(): void
+    public function mount(): void
     {
         $this->currentStepCode = $this->stepNavigator->getCurrentStep()->getCode();
     }
