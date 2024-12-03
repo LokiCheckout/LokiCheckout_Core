@@ -22,6 +22,7 @@ $isCurrent = $magewire->value === $code;
     <div class="<?= $css('p-4', 'input-container') ?>">
         <input type="radio"
                x-model="value"
+               name="shipping_method"
                value="<?= $code ?>"
                id="shipping-<?= $code ?>"
             <?= $isCurrent ? 'checked' : '' ?>>
