@@ -85,6 +85,10 @@ class BlockRenderer
 
         $this->populateBlock($block, $ancestorBlock, $data);
 
+        if ($ancestorBlock) {
+            $block->setCssName($ancestorBlock->getNameInLayout().'-child');
+        }
+
         return $block;
     }
 

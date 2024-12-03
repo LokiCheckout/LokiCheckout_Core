@@ -62,9 +62,18 @@ class CssClass
             $css .= ' '.$cssClassValue;
         }
 
-        $nameInLayout = $this->block->getNameInLayout();
-        $scopeClass = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
-        $scopeClass .= '-scope-'.$scope;
+        $cssName = $this->block->getCssName();
+        if (empty($cssName)) {
+            $nameInLayout = $this->block->getNameInLayout();
+            $cssName = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
+        }
+
+        if ($scope === 'block') {
+            $scopeClass = $cssName;
+        } else {
+            $scopeClass = $cssName .'__'.$scope;
+        }
+
         $css = $scopeClass.' '.trim($css);
 
         return trim($css);
