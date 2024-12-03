@@ -13,8 +13,6 @@
                             Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode
                         </argument>
                     </arguments>
-
-                    <block name="loki-checkout.sidebar.coupon_code.script" as="script" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code/script.phtml"/>
                 </block>
 
                 <block name="loki-checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">

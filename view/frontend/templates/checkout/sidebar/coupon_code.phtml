@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode;
@@ -12,6 +13,9 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
+
+// @todo: Separate in smaller templates
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
