@@ -1,5 +1,11 @@
 <script>
-    const LokiCheckoutFieldComponentExtender = {
+    const LokiCheckoutComponentExtender = {
+        merge(component) {
+            const componentData = JSON.parse(component.$el.dataset.lokiComponent);
+            for (const [key, value] of Object.entries(componentData)) {
+                component[key] = value;
+            }
+        },
         extenders: [],
         addExtender(extender) {
             this.extenders.push(extender);

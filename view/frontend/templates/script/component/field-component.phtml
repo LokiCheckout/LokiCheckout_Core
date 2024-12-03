@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutFieldComponent', () => {
-            return LokiCheckoutFieldComponentExtender.extend({
+            return LokiCheckoutComponentExtender.extend({
                 name: '',
                 wireId: '',
                 elementId: '',
@@ -24,10 +24,7 @@
                     }
                 },
                 init() {
-                    const componentData = JSON.parse(this.$el.dataset.lokiComponent);
-                    for (const [key, value] of Object.entries(componentData)) {
-                        this[key] = value;
-                    }
+                    LokiCheckoutComponentExtender.merge(this);
 
                     // @todo: Find a nicer way to do this
                     if (this.newAddress !== undefined && this.newAddress === false) {

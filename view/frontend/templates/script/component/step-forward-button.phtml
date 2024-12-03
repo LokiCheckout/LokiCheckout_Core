@@ -5,10 +5,7 @@
             step: '',
             valid: false,
             init() {
-                const componentData = JSON.parse(this.$el.dataset.lokiComponent);
-                for (const [key, value] of Object.entries(componentData)) {
-                    this[key] = value;
-                }
+                LokiCheckoutComponentExtender.merge(this);
 
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {
