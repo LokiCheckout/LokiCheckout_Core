@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <block
+            name="loki-checkout.utils.save"
+            template="Yireo_LokiCheckout::utils/save.phtml"/>
+
+        <block
+            name="loki-checkout.utils.trash"
+            template="Yireo_LokiCheckout::utils/trash.phtml"/>
+    </body>
+</page>

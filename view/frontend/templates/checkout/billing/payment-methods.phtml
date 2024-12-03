@@ -17,8 +17,8 @@ $paymentMethods = $magewire->getPaymentMethods();
 <div class="<?= $css('relative') ?>" x-data="LokiCheckoutPaymentMethods"
      data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
 >
-    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
 
     <form
         data-type="field"
@@ -28,7 +28,7 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php if (!empty($paymentMethods)): ?>
             <ul>
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
-                    <?= $blockRenderer->getBlockHtml(
+                    <?= $blockRenderer->html(
                         'loki-checkout.billing.payment-methods.item',
                         $block,
                         [
@@ -43,5 +43,5 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
 </div>

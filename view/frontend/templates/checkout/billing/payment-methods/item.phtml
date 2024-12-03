@@ -6,12 +6,17 @@ use Magento\Payment\Api\Data\PaymentMethodInterface;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
 /** @var PaymentMethodInterface $paymentMethod */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var TemplateRenderer $templateRenderer */
+
+$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $paymentMethod = $block->getMethod();
 $code = $paymentMethod->getCode();
 $isCurrent = $block->getIsCurrent();
@@ -28,17 +33,21 @@ $componentName = $block->getParentBlock()->getComponentName() . ucfirst($code);
             id="payment-<?= $code ?>"
             class="<?= $css('mr-4', 'input') ?>">
 
-        <?= $blockRenderer->getBlockTemplate('checkout/billing/payment-methods/icon.phtml', $block, ['code' => $code]) ?>
+        <?= $templateRenderer->html('checkout/billing/payment-methods/icon.phtml', $block, [
+            'alias' => $code,
+            'code' => $code
+        ]) ?>
+
         <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
     </div>
 
     <div class="<?= $css('m-4 ml-24', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
-        <?= $blockRenderer->getBlockHtml(
+        <?= $blockRenderer->html(
             'loki-checkout.billing.payment-methods.'.$code.'.form',
             $block,
             ['method' => $code]
         ) ?>
-        <?= $blockRenderer->getBlockHtml(
+        <?= $blockRenderer->html(
             'loki-checkout.billing.payment-methods.'.$code.'.additional',
             $block,
             ['method' => $code]

@@ -51,6 +51,14 @@ class CssClass
             }
         }
 
+        // @todo: Beautify this
+        $nameInLayout = $this->block->getNameInLayout();
+        $defaultsBlock = $this->block->getLayout()->getBlock('loki-checkout.defaults');
+        $blockData = $defaultsBlock->getData($nameInLayout);
+        if (!empty($blockData) && !empty($blockData['css_classes']) && is_array($blockData['css_classes'])) {
+            $cssClasses = array_merge_recursive($cssClasses, $blockData['css_classes']);
+        }
+
         $cssClasses[$scope] = $this->parse($cssClasses[$scope]);
 
         $css = '';
@@ -64,7 +72,6 @@ class CssClass
 
         $cssName = $this->block->getCssName();
         if (empty($cssName)) {
-            $nameInLayout = $this->block->getNameInLayout();
             $cssName = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
         }
 

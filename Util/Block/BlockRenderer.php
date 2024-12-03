@@ -4,43 +4,15 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use InvalidArgumentException;
 use Magento\Framework\View\Element\AbstractBlock;
-use Magento\Framework\View\Element\BlockInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
-use Magewirephp\Magewire\Component;
-use OutOfBoundsException;
 use RuntimeException;
 
-class BlockRenderer
+class BlockRenderer extends AbstractRenderer
 {
-    private array $counters = [];
-
     public function __construct(
         private LayoutInterface $layout,
-        private string $scriptContainer = 'loki-checkout.script.alpine-components'
     ) {
-    }
-
-    public function getChild(string $blockAlias, AbstractBlock $parentBlock, array $data = []): AbstractBlock
-    {
-        $block = $parentBlock->getChildBlock($blockAlias);
-        if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('No block alias "%1"', $blockAlias));
-        }
-
-        $this->populateBlock($block, $parentBlock, $data);
-        $this->setIncrementalName($block);
-
-        return $block;
-    }
-
-    public function getChildHtml(string $blockAlias, AbstractBlock $parentBlock, array $data = [])
-    {
-        try {
-            return (string)$this->getChild($blockAlias, $parentBlock, $data)?->toHtml();
-        } catch (RuntimeException|InvalidArgumentException $e) {
-            return '<!-- '.$e->getMessage().' -->'; // @todo: Only report this in debug mode
-        }
     }
 
     /**
@@ -50,7 +22,7 @@ class BlockRenderer
      *
      * @return AbstractBlock
      */
-    public function getBlockByName(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
+    public function get(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
     {
         $block = $this->layout->getBlock($blockName);
         if (false === $block instanceof AbstractBlock) {
@@ -67,169 +39,18 @@ class BlockRenderer
     }
 
     /**
-     * @param string $templateName
-     * @param AbstractBlock|null $ancestorBlock
-     * @param array $data
-     *
-     * @return Template
-     */
-    public function getBlockWithTemplate(
-        string $templateName,
-        ?AbstractBlock $ancestorBlock = null,
-        array $data = []
-    ): Template {
-        $block = $this->getBlockFromTemplate($templateName);
-        if (false === $block instanceof AbstractBlock) {
-            throw new RuntimeException((string)__('No block found with template "%1"', $templateName));
-        }
-
-        $this->populateBlock($block, $ancestorBlock, $data);
-
-        if ($ancestorBlock) {
-            $block->setCssName($ancestorBlock->getNameInLayout().'-child');
-        }
-
-        return $block;
-    }
-
-    /**
-     * @param string $templateName
-     * @param AbstractBlock|null $ancestorBlock
-     * @param array $data
-     *
-     * @return string
-     */
-    public function getBlockTemplate(
-        string $templateName,
-        ?AbstractBlock $ancestorBlock = null,
-        array $data = []
-    ): string {
-        return $this->getBlockWithTemplate($templateName, $ancestorBlock, $data)->toHtml();
-    }
-
-    /**
      * @param string $blockName
      * @param AbstractBlock|null $ancestorBlock
      * @param array $data
      * @return string
      */
-    public function getBlockHtml(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
+    public function html(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
     {
         try {
-            return $this->getBlockByName($blockName, $ancestorBlock, $data)->toHtml();
+            return $this->get($blockName, $ancestorBlock, $data)->toHtml();
         } catch (InvalidArgumentException|RuntimeException $e) {
             return '<!-- Block with name "'.$blockName.'": '.$e->getMessage(
                 ).' -->'; // @todo: Only report this in debug mode
-        }
-    }
-
-    /**
-     * @param string $blockName
-     * @param AbstractBlock $parentBlock
-     * @param array $data
-     *
-     * @return void
-     */
-    public function addScriptBlock(string $blockName, AbstractBlock $parentBlock, array $data = []): void
-    {
-        $block = $this->layout->getBlock($blockName);
-        if (false === $block instanceof AbstractBlock) {
-            return;
-        }
-
-        $this->populateBlock($block, $parentBlock, $data);
-        try {
-            $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
-        } catch (OutOfBoundsException $outOfBoundsException) {
-            // @todo: Log this
-        }
-    }
-
-    /**
-     * @param string $blockName
-     * @param AbstractBlock $parentBlock
-     * @param array $data
-     *
-     * @return void
-     */
-    public function addScriptTemplate(string $templateName, AbstractBlock $ancestorBlock, array $data = []): void
-    {
-        $block = $this->getBlockWithTemplate($templateName, $ancestorBlock, $data);
-        if (false === $block instanceof AbstractBlock) {
-            return;
-        }
-
-        $blockName = $block->getNameInLayout();
-        $this->populateBlock($block, $ancestorBlock, $data);
-
-        try {
-            $this->layout->setChild($this->scriptContainer, $blockName, $blockName);
-        } catch (OutOfBoundsException $outOfBoundsException) {
-            // @todo: Log this
-        }
-    }
-
-    /**
-     * @param string $templateName
-     * @param string $blockName
-     *
-     * @return Template
-     */
-    private function getBlockFromTemplate(string $templateName, string $blockName = ''): Template
-    {
-        if (false === strstr($templateName, '::')) {
-            $templateName = 'Yireo_LokiCheckout::'.$templateName;
-        }
-
-        return $this->layout->createBlock(Template::class, $blockName)->setTemplate($templateName);
-    }
-
-    /**
-     * @param AbstractBlock $block
-     * @param AbstractBlock|null $ancestorBlock
-     *
-     * @return void
-     */
-    private function populateBlock(AbstractBlock $block, ?AbstractBlock $ancestorBlock = null, array $data = []): void
-    {
-        if (false === $ancestorBlock instanceof AbstractBlock) {
-            return;
-        }
-
-        $block->setAncestorBlock($ancestorBlock);
-        $block->addData($data);
-
-        if ($block->getData('magewire') instanceof Component) {
-            return;
-        }
-
-        $component = $ancestorBlock->getData('magewire');
-        if ($component instanceof Component) {
-            $block->setData('component', $component);
-        }
-
-        $component = $ancestorBlock->getData('component');
-        if ($component instanceof Component) {
-            $block->setData('component', $component);
-        }
-    }
-
-    private function setIncrementalName(AbstractBlock $block)
-    {
-        $nameInLayout = $block->getNameInLayout();
-        if (preg_match('/\.(\d)$/', $nameInLayout, $match)) {
-            $nameInLayout = preg_replace('/\.\d$/', '', $nameInLayout);
-            $increment = $match[1];
-        } else {
-            $increment = 0;
-        }
-
-        if (isset($this->counters[$nameInLayout])) {
-            $increment++;
-            $block->setNameInLayout($nameInLayout.'.'.$increment);
-            $this->counters[$nameInLayout] = 0;
-        } else {
-            $this->counters[$nameInLayout] = 0;
         }
     }
 }

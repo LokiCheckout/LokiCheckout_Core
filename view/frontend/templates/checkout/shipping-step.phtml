@@ -18,7 +18,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <div class="<?= $css('') ?>">
-    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Shipping']) ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping']) ?>
 
     <div class="<?= $css('mb-8', 'email') ?>">
         <?= $block->getChildHtml('email') ?>

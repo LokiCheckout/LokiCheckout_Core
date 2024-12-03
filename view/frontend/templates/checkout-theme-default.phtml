@@ -19,7 +19,7 @@ $currentStep = $magewire->currentStep;
 
     <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?>">
         <div class="<?= $css('col-span-2 relative', 'grid-steps') ?>">
-            <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-overlay', $block) ?>
+            <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
             <?= $block->getChildHtml('steps'); ?>
         </div>
 

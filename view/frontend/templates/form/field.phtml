@@ -2,28 +2,26 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormFieldInterface;
-use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
 /** @var FieldComponent $magewire */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
+/** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
+
+$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 
 // @todo: Determine LokiCheckoutFieldComponent from component method getAlpineComponentName()
 
-// @todo: Solve this from Magewire by using a different template
 if (false === $magewire->isVisible()) {
-    ?>
-    <div x-data="LokiCheckoutFieldComponent"
-         data-loki-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">Not visible
-    </div>
-    <?php
+    echo $templateRenderer->html('utils/not-visible.phtml', $block);
     return;
 }
 ?>
@@ -35,26 +33,20 @@ if (false === $magewire->isVisible()) {
 >
     <?= $block->getChildHtml('before') ?>
 
-    <!-- @todo: Move label in subtemplate -->
-    <label for="<?= $magewire->getElementId() ?>-field" class="<?= $css('inline-block mb-1.5', 'label') ?>">
-        <?= __($magewire->getFieldLabel()) ?>
-        <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
-            <?= $block->getBlockHtml('loki-checkout.utils.required'); ?>
-        <?php endif; ?>
-    </label>
+    <?= $templateRenderer->html('form/field/label.phtml', $block, ['alias' => 'label']) ?>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
-        <?= $blockRenderer->getBlockTemplate($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
+        <?= $templateRenderer->html($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
 
         <div wire:loading x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
-            <?= $blockRenderer->getBlockHtml('loki-checkout.utils.loader-small') ?>
+            <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
         </div>
 
         <?php if ($block->getHelpText()): ?>
-            <?= $blockRenderer->getBlockTemplate('utils/help.phtml', $block) ?>
+            <?= $templateRenderer->html('utils/help.phtml', $block, ['alias' => 'help']) ?>
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->getBlockHtml('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
     <?= $block->getChildHtml('after') ?>
 </div>

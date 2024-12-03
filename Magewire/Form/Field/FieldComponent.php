@@ -76,6 +76,7 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function getFieldData(): array
     {
         return [
+            'alias' => 'field',
             'css_classes' => $this->getParent()->getCssClasses(),
         ];
     }

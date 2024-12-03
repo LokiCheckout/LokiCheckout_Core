@@ -3,26 +3,30 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\Block\ChildRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 use Yireo\LokiCheckout\ViewModel\ProductImage;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BlockRenderer $blockRenderer */
+/** @var ChildRenderer $childRenderer */
 /** @var array $item */
 /** @var CssClass $css */
-$priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
-$productImageViewModel = $viewModelFactory->create(ProductImage::class);
-
 $item = $block->getItem();
 if (empty($item)) {
     echo '<div>No item data</div>';
     return;
 }
 
-$width = 75;
+$width = (int)$block->getWidth();
+if (empty($width)) {
+    $width = 75;
+}
+
+$childRenderer = $viewModelFactory->create(ChildRenderer::class);
+$priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
+$productImageViewModel = $viewModelFactory->create(ProductImage::class);
 $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
 ?>
 <div class="<?= $css('flex gap-4 my-8') ?>">
@@ -52,6 +56,9 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
             </dl>
         </div>
 
-        <?= $blockRenderer->getChildHtml('actions', $block, ['item' => $item]) ?>
+        <?= $childRenderer->html('actions', $block, [
+            'alias' => 'actions',
+            'item' => $item
+        ]) ?>
     </div>
 </div>

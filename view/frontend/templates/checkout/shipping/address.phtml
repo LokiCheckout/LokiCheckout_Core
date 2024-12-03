@@ -28,7 +28,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
     <?php endif; ?>
 
     <div x-cloak x-show="newAddress">
-        <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, [
+        <?= $blockRenderer->html('loki-checkout.generic.title', $block, [
             'title' => 'Enter a New Address'
         ]) ?>
 

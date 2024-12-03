@@ -14,7 +14,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div  class="<?= $css('') ?>">
-    <?= $blockRenderer->getBlockHtml('loki-checkout.generic.title', $block, ['title' => 'Billing']) ?>
+    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing']) ?>
 
     <?= $block->getChildHtml('billing-address') ?>
     <?= $block->getChildHtml('payment-methods') ?>

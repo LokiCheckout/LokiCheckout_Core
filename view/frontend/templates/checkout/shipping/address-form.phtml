@@ -3,17 +3,14 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\GridBlock;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ShippingAddress $magewire */
 /** @var CssClass $css */
-/** @var BlockRenderer $blockRenderer */
 /** @var GridBlock $gridBlock */
+
 $gridBlock = $viewModelFactory->create(GridBlock::class);
 ?>
 <div class="<?= $css('grid grid-cols-12 gap-8') ?>">

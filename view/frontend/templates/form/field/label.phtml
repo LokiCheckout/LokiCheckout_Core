@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var FieldComponent $magewire */
+/** @var CssClass $css */
+?>
+<label
+    for="<?= $magewire->getElementId() ?>-field"
+    class="<?= $css('inline-block mb-1.5') ?>">
+    <?= __($magewire->getFieldLabel()) ?>
+
+    <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
+        <?= $block->html('loki-checkout.utils.required'); ?>
+    <?php endif; ?>
+</label>
