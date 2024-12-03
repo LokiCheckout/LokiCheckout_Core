@@ -14,5 +14,10 @@
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/item.phtml"/>
         </block>
+
+        <referenceContainer name="loki-checkout.script.alpine-components">
+            <block name="loki-checkout.script.components.shipping-methods-component"
+                   template="Yireo_LokiCheckout::script/component/shipping-methods-component.phtml" />
+        </referenceContainer>
     </body>
 </page>

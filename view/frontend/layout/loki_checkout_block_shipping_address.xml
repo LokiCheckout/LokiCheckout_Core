@@ -229,5 +229,11 @@
                 </block>
             </block>
         </block>
+
+        <referenceContainer name="loki-checkout.script.alpine-components">
+            <block
+                name="loki-checkout.script.components.shipping-address-component"
+                template="Yireo_LokiCheckout::script/component/shipping-address-component.phtml"/>
+        </referenceContainer>
     </body>
 </page>
