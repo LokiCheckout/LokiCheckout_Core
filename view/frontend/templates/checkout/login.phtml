@@ -19,26 +19,18 @@ $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div  class="<?= $css('card bg-gray-100 my-2') ?>" x-data="<?= $block->getComponentName() ?>">
+<div class="<?= $css('card bg-gray-100 my-2') ?>"
+     x-data="LokiCheckoutToggle"
+     x-title="<?= $block->getComponentName() ?>">
+
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
         (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)
     <?php else: ?>
-        <button @click="toggleShowForm"><?= __('Sign In') ?></button>
+        <button @click="toggle"><?= __('Sign In') ?></button>
     <?php endif; ?>
 
-    <div x-cloak x-show="showForm">
-    <?= $block->getChildHtml('form') ?>
+    <div x-cloak x-show="show">
+        <?= $block->getChildHtml('form') ?>
     </div>
-
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('<?= $block->getComponentName() ?>', () => ({
-                showForm: false,
-                toggleShowForm() {
-                    this.showForm = !this.showForm;
-                }
-            }));
-        });
-    </script>
 </div>
