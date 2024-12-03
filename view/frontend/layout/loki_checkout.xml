@@ -38,9 +38,6 @@
                 name="loki-checkout.script.logger"
                 template="Yireo_LokiCheckout::script/logger.phtml"/>
             <block
-                name="loki-checkout.script.alpine-call"
-                template="Yireo_LokiCheckout::script/alpine-call.phtml"/>
-            <block
                 name="loki-checkout.script.component-store"
                 template="Yireo_LokiCheckout::script/component-store.phtml"/>
             <block
