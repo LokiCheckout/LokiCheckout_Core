@@ -57,15 +57,9 @@ class ShippingAddress extends Component
             $this->currentShippingAddress = (int)$customer->getDefaultShipping();
         }
 
-        if (!$this->currentShippingAddress) {
-            return;
+        if (!empty($this->currentShippingAddress)) {
+            $this->saveCustomerAddressId((int)$this->currentShippingAddress);
         }
-
-        if ((int)$quote->getShippingAddress()->getCustomerAddressId() == (int)$this->currentShippingAddress) {
-            return;
-        }
-
-        $this->saveCustomerAddressId((int)$this->currentShippingAddress);
     }
 
     public function isEnabled(): bool
