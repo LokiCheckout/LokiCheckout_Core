@@ -40,7 +40,12 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 this.components[component.name] = component;
             },
             get(componentName) {
-                return this.components[componentName];
+                if (this.components[componentName]) {
+                    return this.components[componentName];
+                }
+
+                yireoLokiCheckoutLogger('ERROR: No such a component', componentName, this.components);
+
             },
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);
