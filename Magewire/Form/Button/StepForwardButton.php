@@ -5,10 +5,16 @@ namespace Yireo\LokiCheckout\Magewire\Form\Button;
 use Exception;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\ComponentRegistry;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class StepForwardButton extends Component implements ButtonInterface
 {
+    use AlpineDataBehaviour;
+
+    public string $value = '';
+    public bool $valid = false;
+
     protected $listeners = [
         'afterChangeStep' => 'refresh',
     ];
@@ -57,6 +63,11 @@ class StepForwardButton extends Component implements ButtonInterface
         if (true === $result) {
             $this->emit('afterChangeStep', $this->getStep());
         }
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
     }
 
     public function isVisible(): bool

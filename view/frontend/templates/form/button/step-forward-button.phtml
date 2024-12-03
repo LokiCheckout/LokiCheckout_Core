@@ -8,14 +8,14 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var Template $block */
 /** @var StepForwardButton $magewire */
 /** @var CssClass $css */
-
-if (false === $magewire instanceof StepForwardButton) {
-    echo '<div></div>';
-
-    return;
-}
 ?>
-<div id="<?= $magewire->getElementId() ?>" <?= $css('') ?> x-data="<?= $magewire->getJsName() ?>" x-title="<?= $magewire->getJsName() ?>">
+<div
+    id="<?= $magewire->getElementId() ?>"
+    class="<?= $css('') ?>"
+    x-data="StepForwardButton"
+    x-title="<?= $magewire->getJsName() ?>"
+    data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
+>
     <?php if ($magewire->isVisible()): ?>
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
@@ -25,6 +25,4 @@ if (false === $magewire instanceof StepForwardButton) {
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
     <?php endif; ?>
-
-    <?= $block->getChildBlock('script')->addData(['component' => $magewire])->toHtml(); ?>
 </div>

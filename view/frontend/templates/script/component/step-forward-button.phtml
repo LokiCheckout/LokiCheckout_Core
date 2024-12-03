@@ -1,20 +1,15 @@
-<?php
-declare(strict_types=1);
-
-use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Button\ButtonInterface;
-
-/** @var Template $block */
-/** @var ButtonInterface $magewire */
-$magewire = $block->getComponent();
-?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('<?= $magewire->getJsName() ?>', () => ({
-            wireId: '<?= $magewire->id ?>',
-            step: '<?= $magewire->getStep() ?>',
-            valid: true,
+        Alpine.data('StepForwardButton', () => ({
+            wireId: '',
+            step: '',
+            valid: false,
             init() {
+                const componentData = JSON.parse(this.$el.dataset.lokiComponent);
+                for (const [key, value] of Object.entries(componentData)) {
+                    this[key] = value;
+                }
+
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {
                     this.updateValid();
@@ -24,10 +19,10 @@ $magewire = $block->getComponent();
                 return this.valid !== true;
             },
             updateValid() {
-                this.valid = Alpine.store('components').hasOnlyValidComponents('<?= $magewire->getStep() ?>');
+                this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
                 if (!this.valid) {
                     const components = [];
-                    Alpine.store('components').getInvalidComponents('<?= $magewire->getStep() ?>').forEach((component) => {
+                    Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
                         components.push(component.name);
                     })
 
@@ -38,7 +33,7 @@ $magewire = $block->getComponent();
             },
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));
-                Alpine.store('components').getComponentsByStep('<?= $magewire->getStep() ?>').forEach((component) => {
+                Alpine.store('components').getComponentsByStep(this.step).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 

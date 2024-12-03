@@ -1,0 +1,15 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('StepBackwardButton', () => ({
+            wireId: '',
+            step: '',
+            valid: true,
+            init() {
+                const componentData = JSON.parse(this.$el.dataset.lokiComponent);
+                for (const [key, value] of Object.entries(componentData)) {
+                    this[key] = value;
+                }
+            }
+        }));
+    });
+</script>
