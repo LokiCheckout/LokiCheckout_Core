@@ -41,8 +41,8 @@
                 name="loki-checkout.script.alpine-call"
                 template="Yireo_LokiCheckout::script/alpine-call.phtml"/>
             <block
-                name="loki-checkout.script.components-store"
-                template="Yireo_LokiCheckout::script/components-store.phtml"/>
+                name="loki-checkout.script.component-store"
+                template="Yireo_LokiCheckout::script/component-store.phtml"/>
             <block
                 name="loki-checkout.script.component-extender"
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
@@ -62,8 +62,8 @@
                 name="loki-checkout.script.aria-invalid"
                 template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
             <block
-                name="loki-checkout.script.magic-component"
-                template="Yireo_LokiCheckout::script/magic-component.phtml"/>
+                name="loki-checkout.script.component-magic-wire"
+                template="Yireo_LokiCheckout::script/component-magic-wire.phtml"/>
 
             <block
                 name="loki-checkout.script.validator-rules.email"

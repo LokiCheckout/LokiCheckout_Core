@@ -1,5 +1,23 @@
 <script>
     const LokiCheckoutComponentExtender = {
+        // @todo WIP
+        create() {
+            return {
+                name: '',
+                elementId: '',
+                wireId: '',
+                step: '',
+            }
+        },
+        // @todo WIP
+        createField() {
+            return {
+                ...this.create(),
+                value: '',
+                valid: false,
+                rules: [],
+            }
+        },
         merge(component) {
             const componentData = JSON.parse(component.$el.dataset.lokiComponent);
             for (const [key, value] of Object.entries(componentData)) {
