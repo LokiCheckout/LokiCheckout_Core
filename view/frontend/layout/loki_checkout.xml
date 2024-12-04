@@ -117,7 +117,7 @@
         <block name="loki-checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
         <block name="loki-checkout.utils.errors" template="Yireo_LokiCheckout::utils/errors.phtml"/>
 
-        <block name="loki-checkout.defaults"/>
+        <block name="loki-checkout.css_classes"/>
 
         <block name="loki-checkout.defaults.form.field">
             <arguments>
