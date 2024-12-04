@@ -42,12 +42,10 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     {
         parent::booted();
 
-        /*
-         * @todo: This causes all fields to be red-bordered by default which is bad UI
-        if ($this->isRequired() && empty($this->value)) {
-            $this->valid = false;
-        }
-        */
+        // @todo: This causes all fields to be red-bordered by default which is bad UI
+        //if ($this->isRequired() && empty($this->value)) {
+        //    $this->valid = false;
+        //}
     }
 
     // @todo: Why does this not allow a listener to the trait method validate() directly?

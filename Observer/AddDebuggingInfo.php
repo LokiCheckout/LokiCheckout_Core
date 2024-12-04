@@ -38,7 +38,7 @@ class AddDebuggingInfo implements ObserverInterface
 
 
         $transport = $observer->getEvent()->getTransport();
-        $html = $transport->getHtml();
+        $html = trim((string)$transport->getHtml());
         if (empty($html)) {
             return;
         }
@@ -56,10 +56,10 @@ class AddDebuggingInfo implements ObserverInterface
         }
 
         if (true === $this->config->addHtmlHints()) {
-            $html = '<!-- '
-                . 'block "' . $block->getNameInLayout() . '"; '
-                . 'template "' . $block->getTemplate() . '"; '
-                .'-->' . $html;
+            $html = '<!-- LOKI_DEBUG '
+                . 'block ' . $block->getNameInLayout() . ', '
+                . 'template ' . $block->getTemplate() . ' '
+                .' -->' . $html;
         }
 
         $transport->setHtml($html);

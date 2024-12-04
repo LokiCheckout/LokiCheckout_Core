@@ -8,13 +8,10 @@ class GenericComponent extends Component
 {
     public bool $visible = true;
 
-    private string $originalTemplate = '';
-
     public function booted(): void
     {
         parent::booted();
 
-        $this->originalTemplate = $this->getParent()->getTemplate();
         if (false === $this->visible) {
             $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
         }
@@ -44,14 +41,12 @@ class GenericComponent extends Component
         return $this->visible;
     }
 
-    public function updatedVisible(bool $value): bool
+    public function updatedVisible(bool $visible): bool
     {
-        if (false === $value) {
+        if (false === $visible) {
             $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
-        } else {
-            $this->switchTemplate($this->originalTemplate);
         }
 
-        return $value;
+        return $visible;
     }
 }
