@@ -33,19 +33,6 @@
                         <field id="*/*/enable">1</field>
                     </depends>
                 </field>
-                <field id="debug"
-                       translate="label"
-                       type="select"
-                       sortOrder="1"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1">
-                    <label>Debug</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <depends>
-                        <field id="*/*/enable">1</field>
-                    </depends>
-                </field>
                 <field id="license_key"
                        translate="label"
                        type="text"
@@ -55,6 +42,48 @@
                        showInStore="0">
                     <label>License Key</label>
                     <comment>Login in your Yireo Account and navigate to "My Licenses"</comment>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="debug" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Debugging</label>
+                <field id="enable"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Enable Debugging</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enable">1</field>
+                    </depends>
+                </field>
+                <field id="html_hints"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Add Hints to HTML Output</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
+                <field id="debug_block"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Add Debug Block</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>

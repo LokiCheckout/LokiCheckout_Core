@@ -43,7 +43,17 @@ class Config
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/debug');
+        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/enable');
+    }
+
+    public function addDebugBlock(): bool
+    {
+        return $this->isDebug() && (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/debug_block');
+    }
+
+    public function addHtmlHints(): bool
+    {
+        return $this->isDebug() && (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/html_hints');
     }
 
     public function useRequiredBlock(): bool

@@ -25,17 +25,17 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
+        // @todo: Configure which blocks to allow for this
         if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
             return;
         }
 
+        // Do not debug the debug block itself
         if ($block->getNameInLayout() === self::DEBUG_BLOCK) {
             return;
         }
 
-        if (false === $this->config->isDebug()) {
-            return;
-        }
+
 
         $transport = $observer->getEvent()->getTransport();
         $html = $transport->getHtml();
@@ -48,10 +48,19 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
-        $html .= $debugBlock->setData([
-            'ancestor_block' => $block,
-            'component' => $block->getMagewire()
-        ])->toHtml();
+        if (true === $this->config->addDebugBlock()) {
+            $html .= $debugBlock->setData([
+                'ancestor_block' => $block,
+                'component' => $block->getMagewire()
+            ])->toHtml();
+        }
+
+        if (true === $this->config->addHtmlHints()) {
+            $html = '<!-- '
+                . 'block "' . $block->getNameInLayout() . '"; '
+                . 'template "' . $block->getTemplate() . '"; '
+                .'-->' . $html;
+        }
 
         $transport->setHtml($html);
 
