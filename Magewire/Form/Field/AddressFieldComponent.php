@@ -67,15 +67,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         return $fieldLabel;
     }
 
-    public function getAddressType(): string
-    {
-        if ($this instanceof BillingAddressFieldComponentInterface) {
-            return 'billing';
-        }
-
-        return 'shipping';
-    }
-
     public function getStep(): string
     {
         if ($this instanceof ShippingAddressFieldComponentInterface) {
@@ -112,6 +103,16 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         $this->emit('afterSave'.$address.'Address');
 
         parent::afterSave($value);
+    }
+
+    protected function afterSetValue($value): void
+    {
+        $address = $this->snakeToCamel($this->getAddressType());
+        $field = $this->snakeToCamel($this->getFieldName());
+        $this->emit('afterSet'.$address.'Address'.$field);
+        $this->emit('afterSet'.$address.'Address');
+
+        parent::afterSetValue($value);
     }
 
     public function addFieldRefreshListener(string $fieldName): void

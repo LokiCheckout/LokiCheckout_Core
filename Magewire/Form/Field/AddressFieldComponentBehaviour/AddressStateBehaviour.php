@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponentBehaviour;
 
+use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectAddressState;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
@@ -22,5 +23,14 @@ trait AddressStateBehaviour
         }
 
         return $this->addressState;
+    }
+
+    public function getAddressType(): string
+    {
+        if ($this instanceof BillingAddressFieldComponentInterface) {
+            return 'billing';
+        }
+
+        return 'shipping';
     }
 }
