@@ -12,9 +12,9 @@ class VatId extends AddressFieldComponent
 
     protected array $filters = ['vat_id'];
 
-    public function booted(): void
+    public function boot(): void
     {
-        parent::booted();
+        parent::boot();
         $this->addFieldRefreshListener('company');
         $this->addFieldRefreshListener('country_id');
 

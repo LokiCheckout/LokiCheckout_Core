@@ -13,11 +13,10 @@ class StreetLine extends AddressFieldComponent
 
     protected int $index = 0;
 
-    public function booted(): void
+    public function boot(): void
     {
-        parent::booted();
+        parent::boot();
         $this->addFieldRefreshListener('street');
-
 
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
         if ($streetLines <= $this->index) {

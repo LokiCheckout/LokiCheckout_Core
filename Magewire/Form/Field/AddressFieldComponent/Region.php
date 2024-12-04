@@ -30,13 +30,9 @@ class Region extends AddressFieldComponent
             $this->visible = false;
         }
 
-        parent::boot();
-    }
-
-    public function booted(): void
-    {
-        parent::booted();
         $this->addFieldRefreshListener('country_id');
+
+        parent::boot();
     }
 
     public function updatedValue(mixed $value): mixed

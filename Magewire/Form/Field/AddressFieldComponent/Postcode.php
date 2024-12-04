@@ -16,9 +16,9 @@ class Postcode extends AddressFieldComponent
     ) {
     }
 
-    public function booted(): void
+    public function boot(): void
     {
-        parent::booted();
+        parent::boot();
         $this->addFieldRefreshListener('country_id');
     }
 
