@@ -27,6 +27,14 @@
                     </argument>
                 </arguments>
 
+                <block
+                    name="loki-checkout.billing-step.title" as="title"
+                    template="Yireo_LokiCheckout::generic/title.phtml">
+                    <arguments>
+                        <argument name="title" xsi:type="string">Billing</argument>
+                    </arguments>
+                </block>
+
                 <container name="loki-checkout.billing-step.buttons" as="buttons"/>
             </block>
         </referenceBlock>
