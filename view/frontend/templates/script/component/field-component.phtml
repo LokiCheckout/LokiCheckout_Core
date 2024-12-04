@@ -7,7 +7,7 @@
                 elementId: '',
                 step: '',
                 value: '',
-                valid: false,
+                valid: true,
                 rules: [],
                 initActions: {
                     addToAlpineStore: function () {
@@ -26,15 +26,15 @@
                 init() {
                     LokiCheckoutComponentExtender.merge(this);
 
+                    Object.entries(this.initActions).forEach(([key, callback]) => {
+                        callback.apply(this);
+                    });
+
                     // @todo: Find a nicer way to do this
                     if (this.newAddress !== undefined && this.newAddress === false) {
                         this.rules = [];
                         this.valid = true;
                     }
-
-                    Object.entries(this.initActions).forEach(([key, callback]) => {
-                        callback.apply(this);
-                    });
                 },
                 updated() {},
                 submit() {

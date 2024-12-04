@@ -39,9 +39,13 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function booted(): void
     {
         parent::booted();
+
+        /*
+         * @todo: This causes all fields to be red-bordered by default which is bad UI
         if ($this->isRequired() && empty($this->value)) {
             $this->valid = false;
         }
+        */
     }
 
     public function addRefreshListener(string $listener)
