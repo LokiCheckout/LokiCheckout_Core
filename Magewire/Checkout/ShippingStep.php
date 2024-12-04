@@ -2,17 +2,27 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
-class ShippingStep extends Component implements StepComponentInterface
+class ShippingStep extends GenericComponent implements StepComponentInterface
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly ValidatorInterface $stepValidator,
     ) {
+    }
+
+    public function boot(): void
+    {
+        // @todo: Double-check for virtual products
+        if ((bool)$this->checkoutState->getQuote()->isVirtual()) {
+            $this->visible = false;
+        }
+
+        parent::boot();
     }
 
     public function getCode(): string
@@ -25,17 +35,14 @@ class ShippingStep extends Component implements StepComponentInterface
         return 'Shipping';
     }
 
+    // @todo: Is this still needed?
     public function isEnabled(): bool
-    {
-        return false === (bool)$this->checkoutState->getQuote()->isVirtual();
-    }
-
-    public function isAccessable(): bool
     {
         return true;
     }
 
-    public function isVisible(): bool
+    // @todo: Is this still needed?
+    public function isAccessable(): bool
     {
         return true;
     }

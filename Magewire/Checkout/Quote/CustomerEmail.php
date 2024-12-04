@@ -13,6 +13,16 @@ class CustomerEmail extends QuoteFieldComponent
 
     protected array $validators = ['email'];
 
+    public function boot(): void
+    {
+        if ($this->customerSession->isLoggedIn()) {
+            $this->valid = true;
+            $this->visible = false;
+        }
+
+        parent::boot();
+    }
+
     public function getFieldLabel(): string
     {
         return 'Email';
@@ -26,22 +36,5 @@ class CustomerEmail extends QuoteFieldComponent
     public function isRequired(): bool
     {
         return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isValid(): bool
-    {
-        if ($this->customerSession->isLoggedIn()) {
-            return true;
-        }
-
-        return $this->valid;
-    }
-
-    public function isVisible(): bool
-    {
-        return false === $this->customerSession->isLoggedIn();
     }
 }

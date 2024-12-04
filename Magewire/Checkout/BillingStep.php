@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
-class BillingStep extends Component implements StepComponentInterface
+class BillingStep extends GenericComponent implements StepComponentInterface
 {
     protected $listeners = [
         'afterSaveBillingStep' => 'refresh'

@@ -17,6 +17,12 @@ class StreetLine extends AddressFieldComponent
     {
         parent::booted();
         $this->addFieldRefreshListener('street');
+
+
+        $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
+        if ($streetLines <= $this->index) {
+            $this->visible = false;
+        }
     }
 
     protected function loadValue(): void
@@ -49,13 +55,6 @@ class StreetLine extends AddressFieldComponent
         }
 
         return parent::isRequired();
-    }
-
-    public function isVisible(): bool
-    {
-        $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
-
-        return $streetLines > $this->index;
     }
 
     public function getFieldName(): string

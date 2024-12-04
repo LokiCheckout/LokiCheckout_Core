@@ -17,20 +17,21 @@ class VatId extends AddressFieldComponent
         parent::booted();
         $this->addFieldRefreshListener('company');
         $this->addFieldRefreshListener('country_id');
+
+        $this->setVisibility();
     }
 
-    #[Override]
-    public function isVisible(): bool
+    private function setVisibility(): void
     {
         if (false === $this->lokiCheckoutConfig->enableVatIdOnlyForCompany()) {
-            return true;
+            return;
         }
 
         $company = $this->addressState->load('company');
-        if (empty($company)) {
-            return false;
+        if (!empty($company)) {
+            return;
         }
 
-        return true;
+        $this->visible = false; // @todo: Double-check that this is still working
     }
 }

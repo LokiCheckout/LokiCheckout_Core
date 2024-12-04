@@ -3,10 +3,11 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 
-class OneStep extends Component implements StepComponentInterface
+class OneStep extends GenericComponent implements StepComponentInterface
 {
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
@@ -23,17 +24,13 @@ class OneStep extends Component implements StepComponentInterface
         return 'One Step';
     }
 
+    // // @todo: Is this still needed?
     public function isEnabled(): bool
     {
         return true;
     }
 
     public function isAccessable(): bool
-    {
-        return true;
-    }
-
-    public function isVisible(): bool
     {
         return true;
     }
