@@ -10,6 +10,14 @@
                     </argument>
                 </arguments>
 
+                <block
+                    name="loki-checkout.shipping-step.title" as="title"
+                    template="Yireo_LokiCheckout::generic/title.phtml">
+                    <arguments>
+                        <argument name="title" xsi:type="string">Shipping</argument>
+                    </arguments>
+                </block>
+
                 <container name="loki-checkout.shipping-step.buttons" as="buttons"/>
             </block>
 

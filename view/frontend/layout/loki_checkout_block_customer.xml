@@ -8,6 +8,11 @@
                 <argument name="magewire" xsi:type="object" >
                     Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail
                 </argument>
+                <argument name="css_classes" xsi:type="array">
+                    <item name="block" xsi:type="array">
+                        <item name="custom" xsi:type="string">mb-8</item>
+                    </item>
+                </argument>
                 <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
             </arguments>
         </block>
