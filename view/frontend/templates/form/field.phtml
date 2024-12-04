@@ -19,11 +19,6 @@ $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 
 // @todo: Determine LokiCheckoutFieldComponent from component method getAlpineComponentName()
-
-if (false === $magewire->isVisible()) {
-    echo $templateRenderer->html('utils/not-visible.phtml', $block);
-    return;
-}
 ?>
 <div id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"

@@ -5,10 +5,9 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 /** @var Template $block */
-/** @var FieldComponent $component */
-$component = $block->getComponent();
+/** @var FieldComponent $magewire */
 ?>
 <div x-data="LokiCheckoutFieldComponent"
-     data-loki-component='<?= $component->getComponentDataAsJson() ?>' style="display:none">
+     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">
     Not visible
 </div>

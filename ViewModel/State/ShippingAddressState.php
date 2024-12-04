@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\ResourceConnection;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
 
@@ -13,7 +12,6 @@ class ShippingAddressState implements AddressStateInterface
     public function __construct(
         private CheckoutSession $checkoutSession,
         private ScopeConfigInterface $scopeConfig,
-        private ResourceConnection $resourceConnection
     ) {
     }
 

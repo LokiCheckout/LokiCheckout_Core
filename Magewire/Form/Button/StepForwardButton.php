@@ -3,12 +3,12 @@
 namespace Yireo\LokiCheckout\Magewire\Form\Button;
 
 use Exception;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\ComponentRegistry;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
-class StepForwardButton extends Component implements ButtonInterface
+class StepForwardButton extends GenericComponent implements ButtonInterface
 {
     use AlpineDataBehaviour;
 
@@ -68,10 +68,5 @@ class StepForwardButton extends Component implements ButtonInterface
     public function isValid(): bool
     {
         return $this->valid;
-    }
-
-    public function isVisible(): bool
-    {
-        return true;
     }
 }

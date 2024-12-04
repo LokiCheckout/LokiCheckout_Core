@@ -16,7 +16,6 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     x-title="<?= $magewire->getJsName() ?>"
     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
 >
-    <?php if ($magewire->isVisible()): ?>
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
             :disabled="isDisabled"
@@ -24,5 +23,4 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
-    <?php endif; ?>
 </div>

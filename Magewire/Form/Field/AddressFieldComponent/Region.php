@@ -24,6 +24,13 @@ class Region extends AddressFieldComponent
         }
 
         $this->value = (string)$this->addressState->load('region');
+
+        // @todo: This does not work properly at sequential requests
+        if ($this->lokiCheckoutConfig->hideRegionWhenOptional() && false === $this->isRequired()) {
+            $this->visible = false;
+        }
+
+        parent::boot();
     }
 
     public function booted(): void
@@ -56,18 +63,5 @@ class Region extends AddressFieldComponent
         }
 
         return true;
-    }
-
-    public function isVisible(): bool
-    {
-        if (false === $this->lokiCheckoutConfig->hideRegionWhenOptional()) {
-            return true;
-        }
-
-        if ($this->isRequired()) {
-            return true;
-        }
-
-        return false;
     }
 }

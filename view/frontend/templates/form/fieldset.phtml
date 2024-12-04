@@ -13,18 +13,6 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
-
-if (false === $magewire instanceof FormFieldInterface || false === $magewire instanceof Component) {
-    echo '<div style="display:none">skipped</div>';
-
-    return;
-}
-
-if (false === $magewire->isVisible()) {
-    echo '<div style="display:none">not visible</div>';
-
-    return;
-}
 ?>
 <fieldset id="<?= $magewire->getElementId() ?>"
      class="<?= $css('field w-auto relative') ?>">

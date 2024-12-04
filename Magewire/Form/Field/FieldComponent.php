@@ -9,11 +9,12 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehavio
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ValidateBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectFieldTemplateLocator;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
-abstract class FieldComponent extends Component implements FormFieldInterface
+abstract class FieldComponent extends GenericComponent implements FormFieldInterface
 {
     use InjectLokiCheckoutConfig;
     use InjectFieldTemplateLocator;
@@ -28,7 +29,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
 
     public string|bool|int $value = '';
     public bool $valid = true;
-    public bool $visible = true;
 
     public function boot(): void
     {
@@ -46,11 +46,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
             $this->valid = false;
         }
         */
-    }
-
-    public function addRefreshListener(string $listener)
-    {
-        $this->listeners[$listener] = 'refresh';
     }
 
     // @todo: Why does this not allow a listener to the trait method validate() directly?
@@ -92,16 +87,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
         }
 
         return $this->fieldTemplateLocator?->getFieldTemplateFromComponent($this);
-    }
-
-    public function getListeners(): array
-    {
-        $parentBlock = $this->getParent();
-        if ($parentBlock && $parentBlock->getListeners()) {
-            $this->listeners = array_merge($this->listeners, (array)$parentBlock->getListeners());
-        }
-
-        return $this->listeners;
     }
 
     public function getInputType(): string
@@ -153,11 +138,6 @@ abstract class FieldComponent extends Component implements FormFieldInterface
     public function isRequired(): bool
     {
         return false;
-    }
-
-    public function isVisible(): bool
-    {
-        return $this->visible;
     }
 
     public function isDisabled(): bool
