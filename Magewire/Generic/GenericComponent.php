@@ -8,11 +8,11 @@ class GenericComponent extends Component
 {
     public bool $visible = true;
 
-    public function mount(): void
+    public function boot(): void
     {
-        parent::mount();
+        parent::boot();
 
-        if (false === $this->isVisible()) {
+        if (false === $this->visible) {
             $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
         }
     }
@@ -32,6 +32,10 @@ class GenericComponent extends Component
         return $this->listeners;
     }
 
+    /**
+     * @return bool
+     * @deprecated Use $this->visible directly instead
+     */
     public function isVisible(): bool
     {
         return $this->visible;

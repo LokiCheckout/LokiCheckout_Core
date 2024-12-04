@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field;
 
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config as LokiCheckoutConfig;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\ParentBehaviour;
@@ -32,7 +31,10 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
 
     public function boot(): void
     {
-        $this->value = $this->getDefaultValue();
+        if (empty($this->value)) {
+            $this->value = $this->getDefaultValue();
+        }
+
         parent::boot();
     }
 

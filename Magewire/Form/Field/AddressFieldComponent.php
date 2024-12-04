@@ -22,6 +22,8 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         if ($this->request->isPreceding() && !empty($this->value)) {
             $this->valid = $this->validate();
         }
+
+        parent::boot();
     }
 
     protected function loadValue(): void
