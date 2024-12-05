@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Generic;
 
 use Magewirephp\Magewire\Component;
 
-class GenericComponent extends Component
+abstract class GenericComponent extends Component
 {
     public bool $visible = true;
 

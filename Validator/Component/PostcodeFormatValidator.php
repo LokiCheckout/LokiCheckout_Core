@@ -31,14 +31,30 @@ class PostcodeFormatValidator implements FieldValidatorInterface
         }
 
         $patterns = $postcodes[$countryId];
+
+        $examples = [];
         foreach ($patterns as $pattern) {
+            $examples[] = $pattern['example'];
             preg_match('/'.(string)$pattern['pattern'].'/', $postcode, $matches);
             if (count($matches)) {
                 return true;
             }
         }
 
-        $component->error('value', 'Invalid postcode format');
+        $component->error('value', $this->getErrorMessageFromExamples($examples));
         return false;
+    }
+
+    private function getErrorMessageFromExamples(array $examples): string
+    {
+        if (empty($examples)) {
+            return (string)__('Invalid postcode format');
+        }
+
+        if (count($examples) === 1) {
+            return (string)__('Postcode needs to be in the format %1', $examples[0]);
+        }
+
+        return (string)__('Postcode needs to be in one of the following formats: %1', implode(', ', $examples));
     }
 }

@@ -104,14 +104,8 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
         return '';
     }
 
-    protected function beforeSetValue($value): void
-    {
-    }
-
     public function setValue(mixed $value): void
     {
-        $this->beforeSetValue($value);
-
         $value = $this->filterValue($value);
         $this->value = $value;
         $this->valid = $this->validate();
@@ -122,12 +116,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
             $this->afterSave($value);
             $this->emit('afterSave'.$this->snakeToCamel($this->getFieldName()));
         }
-
-        $this->afterSetValue($value);
-    }
-
-    protected function afterSetValue($value): void
-    {
     }
 
     public function updatedValue(mixed $value): mixed

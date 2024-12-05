@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\XmlConfig;
+use Yireo\LokiCheckout\Exception\XmlConfig\BlockNotFoundException;
 use Yireo\LokiCheckout\Util\Block\CssClassParser\CssClassParserInterface;
 
 class CssClass
@@ -104,7 +105,12 @@ class CssClass
         }
 
         $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
-        $block = $gridLayout->getBlock($blockAlias);
+
+        try {
+            $block = $gridLayout->getBlock($blockAlias);
+        } catch(BlockNotFoundException $exception) {
+            return '';
+        }
 
         return $block->getGridClass();
     }

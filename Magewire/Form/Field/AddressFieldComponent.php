@@ -105,16 +105,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         parent::afterSave($value);
     }
 
-    protected function afterSetValue($value): void
-    {
-        $address = $this->snakeToCamel($this->getAddressType());
-        $field = $this->snakeToCamel($this->getFieldName());
-        $this->emit('afterSet'.$address.'Address'.$field);
-        $this->emit('afterSet'.$address.'Address');
-
-        parent::afterSetValue($value);
-    }
-
     public function addFieldRefreshListener(string $fieldName): void
     {
         $address = $this->snakeToCamel($this->getAddressType());

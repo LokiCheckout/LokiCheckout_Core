@@ -18,7 +18,7 @@ $magewire = $this->getComponent();
     wire:loading.class="disabled"
     data-type="field"
     x-ref="field"
-    x-model="value"
+    x-model.lazy="value"
     x-on:change="submit"
     <?php if ($magewire->isDisabled()): ?>
         disabled="disabled"
