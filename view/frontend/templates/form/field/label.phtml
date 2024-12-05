@@ -15,6 +15,6 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     <?= __($magewire->getFieldLabel()) ?>
 
     <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
-        <?= $block->html('loki-checkout.utils.required'); ?>
+        <?= $blockRenderer->html('loki-checkout.utils.required'); ?>
     <?php endif; ?>
 </label>
