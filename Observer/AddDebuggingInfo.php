@@ -89,7 +89,7 @@ class AddDebuggingInfo implements ObserverInterface
             if (!empty($validators)) {
                 $debugLines['validators'] = implode('|', $validators);
             }
-            
+
             $filters =  $component->getFilters();
             if (!empty($filters)) {
                 $debugLines['filters'] = implode('|', $filters);
