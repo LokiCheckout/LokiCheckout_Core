@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 
-class CountryId extends AddressFieldComponent
+abstract class CountryId extends AddressFieldComponent
 {
     use OptionsBehaviour;
 

@@ -8,7 +8,7 @@ class LengthValidator implements FieldValidatorInterface
 {
     public function validate(FieldComponent $component): bool
     {
-        $value = $component->getValue();
+        $value = $component->value;
         if (false === is_string($value)) {
             return true;
         }

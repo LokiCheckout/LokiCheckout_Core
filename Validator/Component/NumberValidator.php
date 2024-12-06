@@ -8,7 +8,7 @@ class NumberValidator implements FieldValidatorInterface
 {
     public function validate(FieldComponent $component): bool
     {
-        $value = $component->getValue();
+        $value = $component->value;
         if (false === is_numeric($value)) {
             $component->error('value', (string)__('Value must contain numbers only'));
 

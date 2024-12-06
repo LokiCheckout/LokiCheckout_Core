@@ -3,12 +3,15 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 
 class OneStep extends GenericComponent implements StepComponentInterface
 {
+    use AlpineDataBehaviour;
+
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
     ) {

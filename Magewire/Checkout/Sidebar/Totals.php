@@ -7,6 +7,11 @@ use Magewirephp\Magewire\Component;
 class Totals extends Component
 {
     protected $listeners = [
-        'afterSaveQuote' => 'refresh'
+        'afterSaveQuote' => 'refresh',
+        'afterSavePaymentMethod' => 'refresh',
+        'afterSaveBillingStep' => 'refresh',
+        'afterSaveBillingAddress' => 'refresh',
+        'afterSaveShippingStep' => 'refresh',
+        'afterSaveShippingAddress' => 'refresh',
     ];
 }

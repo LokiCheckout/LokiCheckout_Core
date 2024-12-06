@@ -8,41 +8,36 @@
                 step: '',
                 value: '',
                 valid: true,
+                disabled: false,
                 rules: [],
-                initActions: {
-                    addToAlpineStore: function () {
-                        Alpine.store('components').add(this);
-                    },
-                    livewireElementUpdated: function () {
-                        Livewire.hook('element.updated', (element, component) => {
-                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                                this.valid = this.$component(this).valid;
-                                this.updated();
-                                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                            }
-                        });
-                    }
-                },
                 init() {
                     LokiCheckoutComponentExtender.merge(this);
 
-                    Object.entries(this.initActions).forEach(([key, callback]) => {
-                        callback.apply(this);
+                    Alpine.store('components').add(this);
+
+                    Livewire.hook('element.updated', (element, component) => {
+                        // @todo: Is this actually needed?
+                        if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                            this.valid = Magewire.find(this.wireId).valid;
+                            this.updated();
+                            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                        }
                     });
 
-                    // @todo: Find a nicer way to do this
-                    if (this.newAddress !== undefined && this.newAddress === false) {
-                        this.rules = [];
-                        this.valid = true;
-                    }
+                    // @todo: This should no longer be needed
+                    //if (this.newAddress !== undefined && this.newAddress === false) {
+                    //    this.rules = [];
+                    //    this.valid = true;
+                    //}
                 },
+                // @todo: Is updated() actually needed for something
                 updated() {},
                 submit() {
                     if (false === LokiCheckoutValidator.validate(this)) {
                         return false;
                     }
 
-                    this.$component(this).call('setValue', this.value);
+                    Magewire.find(this.wireId).call('setValue', this.value);
                 },
             });
         });

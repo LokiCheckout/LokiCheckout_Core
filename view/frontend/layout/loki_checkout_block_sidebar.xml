@@ -32,6 +32,8 @@
                             Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Totals
                         </argument>
                     </arguments>
+
+                    <block name="loki-checkout.sidebar.totals.grand_total" as="grand_total" template="Yireo_LokiCheckout::checkout/sidebar/totals/grand_total.phtml"/>
                 </block>
             </block>
 

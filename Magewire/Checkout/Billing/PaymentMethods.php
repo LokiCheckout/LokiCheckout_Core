@@ -5,13 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
-class PaymentMethods extends Component
+class PaymentMethods extends GenericComponent
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
@@ -31,25 +31,45 @@ class PaymentMethods extends Component
 
     public function boot()
     {
-        $quote = $this->checkoutState->getQuote();
-        $cartId = $quote->getId();
+        $cart = $this->checkoutState->getQuote();
+        $cartId = $cart->getId();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
 
-        $this->value = (string)$quote->getPayment()->getMethod();
+        $this->value = (string)$cart->getPayment()->getMethod();
 
-        if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
+        if (false === $this->isPaymentMethodAvailable($this->value)) {
+            $this->value = '';
+            $cart->setPaymentMethod('');
+            $this->cartRepository->save($cart);
+        }
+
+        if (empty($this->value)) {
             $this->value = $this->getDefaultPayment();
-            $quote->setShippingMethod($this->value);
-            $this->cartRepository->save($quote);
+            $cart->setPaymentMethod($this->value);
+            $this->cartRepository->save($cart);
         }
 
         if (!empty($this->value)) {
+            $cart->collectTotals();
+        }
+
+        if (!empty($this->value) && $this->request->isPreceding()) {
             $this->valid = true;
         }
+
+        parent::boot();
     }
 
     public function getDefaultPayment(): string
     {
+        if (empty($this->paymentMethods)) {
+            return '';
+        }
+
+        if (false === $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
+            return '';
+        }
+
         $firstPaymentMethod = array_shift($this->paymentMethods);
 
         return (string)$firstPaymentMethod->getCode();
@@ -63,13 +83,17 @@ class PaymentMethods extends Component
         return $this->paymentMethods;
     }
 
-    public function setValue(string $value)
+    public function setValue(string $value): void
     {
-        // @todo: Verify that this is a correct payment
         $this->value = $value;
-        if (!empty($value)) {
-            $this->valid = true;
+
+        if (false === $this->isPaymentMethodAvailable($value)) {
+            $this->valid = false;
+            $this->value = '';
+            return;
         }
+
+        $this->valid = true;
 
         $quote = $this->checkoutState->getQuote();
         $quote->setPaymentMethod($value);
@@ -79,12 +103,21 @@ class PaymentMethods extends Component
 
         $this->emit('afterSaveBillingStep');
         $this->emit('afterSavePaymentMethod', $value);
-
-        return $value;
     }
 
     public function isValid(): bool
     {
         return $this->valid;
+    }
+
+    private function isPaymentMethodAvailable(string $code): bool
+    {
+        foreach ($this->paymentMethods as $paymentMethod) {
+            if ($paymentMethod->getCode() === $code) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

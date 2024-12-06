@@ -45,4 +45,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="\Yireo\LokiCheckout\Observer\AddDebuggingInfo">
+        <arguments>
+            <argument name="blockPrefixes" xsi:type="array">
+                <item name="loki-checkout" xsi:type="string">loki-checkout</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

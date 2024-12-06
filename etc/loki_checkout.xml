@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiCheckout:etc/loki_checkout.xsd">
     <themes>
-        <theme name="default">
+        <theme name="default" label="Multi Step Checkout (default)">
             <steps>
                 <step name="shipping" component="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep"/>
                 <step name="billing" component="Yireo\LokiCheckout\Magewire\Checkout\BillingStep"/>
             </steps>
         </theme>
-        <theme name="onestep">
+        <theme name="onestep" label="One Step Checkout">
             <steps>
                 <step name="onestep" component="Yireo\LokiCheckout\Magewire\Checkout\OneStep"/>
             </steps>

@@ -6,7 +6,7 @@ use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectStreetlinesFactory;
 
-class StreetLine extends AddressFieldComponent
+abstract class StreetLine extends AddressFieldComponent
 {
     use InjectScopeConfig;
     use InjectStreetlinesFactory;

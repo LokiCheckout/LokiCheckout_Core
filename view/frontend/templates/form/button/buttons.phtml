@@ -1,0 +1,12 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var CssClass $css */
+?>
+<div class="<?= $css('mb-8 float-right flex') ?>">
+    <?= $block->getChildHtml() ?>
+</div>

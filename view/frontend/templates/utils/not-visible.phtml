@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 /** @var Template $block */
 /** @var FieldComponent $magewire */
 ?>
-<div x-data="LokiCheckoutFieldComponent"
-     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">
-    Not visible
+<div
+     aria-hidden="true"
+     style="display:none; visibility: hidden;">
 </div>

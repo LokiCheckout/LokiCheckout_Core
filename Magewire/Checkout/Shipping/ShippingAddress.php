@@ -5,39 +5,41 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Customer\Api\Data\AddressInterface;
-use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
+use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
-class ShippingAddress extends Component
+class ShippingAddress extends GenericComponent
 {
     use AlpineDataBehaviour;
+    use StepBehaviour;
 
     public array $shippingAddresses = [];
     public int|string $currentShippingAddress = 0;
     public bool $newAddress = false;
 
     public function __construct(
-        private CheckoutState               $checkoutState,
-        private CustomerSession             $customerSession,
+        private CheckoutState $checkoutState,
+        private CustomerSession $customerSession,
         private CustomerRepositoryInterface $customerRepository,
-        private CustomerAddressRepository   $customerAddressRepository,
-        private SearchCriteriaBuilder       $searchCriteriaBuilder,
-        private AddressConfig               $addressConfig,
-        private AddressMapper               $addressMapper,
-        private CheckoutSession             $checkoutSession,
+        private CustomerAddressRepository $customerAddressRepository,
+        private SearchCriteriaBuilder $searchCriteriaBuilder,
+        private AddressConfig $addressConfig,
+        private AddressMapper $addressMapper,
+        private CheckoutSession $checkoutSession,
+        private CustomerProvider $customerProvider,
     ) {
     }
 
     public function boot()
     {
-        if ($this->customerSession->isLoggedIn()) {
+        if ($this->customerProvider->isLoggedIn()) {
             $this->bootForCustomer();
         }
 
@@ -48,9 +50,8 @@ class ShippingAddress extends Component
     {
         $quote = $this->checkoutState->getQuote();
         $customer = $this->customerRepository->getById($this->customerSession->getCustomerId());
-        $quote->assignCustomer($customer);
 
-        $this->shippingAddresses = $this->getCustomerAddresses($customer);
+        $this->shippingAddresses = $this->customerProvider->getAddresses();
 
         $this->currentShippingAddress = (int)$quote->getShippingAddress()->getCustomerAddressId();
         if (!$this->currentShippingAddress) {
@@ -69,11 +70,11 @@ class ShippingAddress extends Component
 
     private function loadNewAddress(): bool
     {
-        if (false === $this->customerSession->isLoggedIn()) {
+        if (false === $this->customerProvider->isLoggedIn()) {
             return true;
         }
 
-        if (empty($this->shippingAddresses)) {
+        if (count($this->shippingAddresses) < 1) {
             return true;
         }
 
@@ -85,26 +86,11 @@ class ShippingAddress extends Component
         $newAddress = (bool)$newAddress;
         $this->checkoutSession->setNewAddress($newAddress);
         $this->newAddress = $newAddress;
-    }
 
-    public function updatedCurrentShippingAddress(mixed $value): mixed
-    {
-        if (false === (bool)$this->customerSession->isLoggedIn()) {
-            return $value;
+        if (false === $this->newAddress) {
+            return;
         }
 
-        if (false === (int)$value > 0) {
-            return $value;
-        }
-
-        $this->saveCustomerAddressId((int)$value);
-        $this->emit('afterSaveShippingAddress');
-
-        return $value;
-    }
-
-    public function cleanCustomerAddress(): void
-    {
         if (false === $this->customerSession->isLoggedIn()) {
             return;
         }
@@ -115,44 +101,9 @@ class ShippingAddress extends Component
         $this->emit('afterSaveShippingAddress');
     }
 
-    private function getCustomerAddresses(CustomerInterface $customer): array
-    {
-        $this->searchCriteriaBuilder->addFilter('parent_id', $customer->getId());
-        $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
-
-        $addresses = [];
-        $addresses[] = ''; // @todo: Make this optional
-
-        foreach ($searchResults->getItems() as $address) {
-            $addresses[$address->getId()] = $this->getAddressInline($address);
-        }
-
-        return $addresses;
-    }
-
-    private function saveCustomerAddressId(int $customerAddressId): void
-    {
-        $customerShippingAddress = $this->customerAddressRepository->getById((int)$customerAddressId);
-        $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
-        $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
-        $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
-        $quoteShippingAddress->save();
-    }
-
-    private function getAddressInline(AddressInterface $address): string
-    {
-        $addressData = $this->addressMapper->toFlatArray($address);
-
-        return $this->addressConfig
-            ->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT)
-            ->getRenderer()
-            ->renderArray($addressData);
-    }
-
-    public function getComponentData(): array
+    public function getAdditionalAlpineData(): array
     {
         return [
-            'wireId' => $this->id,
             'newAddress' => $this->newAddress ? true : false,
             'buttonLabelSelectAddress' => $this->getButtonLabelSelectAddress(),
             'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),

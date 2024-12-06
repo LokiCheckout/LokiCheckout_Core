@@ -24,8 +24,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     use StepBehaviour;
     use AlpineDataBehaviour;
 
-    protected string $elementId = '';
-
     public string|bool|int $value = '';
     public bool $valid = true;
 
@@ -92,11 +90,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     public function getInputType(): string
     {
         return 'text';
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
     }
 
     public function getDefaultValue(): string|bool|int

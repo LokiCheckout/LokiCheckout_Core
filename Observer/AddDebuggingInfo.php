@@ -6,8 +6,9 @@ namespace Yireo\LokiCheckout\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 class AddDebuggingInfo implements ObserverInterface
 {
@@ -15,6 +16,7 @@ class AddDebuggingInfo implements ObserverInterface
 
     public function __construct(
         private readonly Config $config,
+        private array $blockPrefixes = [],
     ) {
     }
 
@@ -25,8 +27,14 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
-        // @todo: Configure which blocks to allow for this
-        if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
+        $prefixMatch = false;
+        foreach ($this->blockPrefixes as $prefix) {
+            if (preg_match('/^'.$prefix.'/', (string)$block->getNameInLayout())) {
+                $prefixMatch = true;
+            }
+        }
+
+        if (false === $prefixMatch) {
             return;
         }
 
@@ -34,8 +42,6 @@ class AddDebuggingInfo implements ObserverInterface
         if ($block->getNameInLayout() === self::DEBUG_BLOCK) {
             return;
         }
-
-
 
         $transport = $observer->getEvent()->getTransport();
         $html = trim((string)$transport->getHtml());
@@ -51,18 +57,62 @@ class AddDebuggingInfo implements ObserverInterface
         if (true === $this->config->addDebugBlock()) {
             $html .= $debugBlock->setData([
                 'ancestor_block' => $block,
-                'component' => $block->getMagewire()
+                'component' => $block->getMagewire(),
             ])->toHtml();
         }
 
+        $html = trim($html);
         if (true === $this->config->addHtmlHints()) {
-            $html = '<!-- LOKI_DEBUG '
-                . 'block ' . $block->getNameInLayout() . ', '
-                . 'template ' . $block->getTemplate() . ' '
-                .' -->' . $html;
+            $debugHtml = '<!-- LOKI_DEBUG ';
+            $debugLines = $this->getDebugLines($block);
+            foreach($debugLines as $debugLineName => $debugLineValue) {
+                $debugHtml .= $debugLineName.' = '.$debugLineValue.', ';
+            }
+            $debugHtml .= ' -->';
+
+            $html = $html . $debugHtml;
         }
 
         $transport->setHtml($html);
 
+    }
+
+    private function getDebugLines(Template $block): array
+    {
+        $debugLines = [];
+        $debugLines['name'] = $block->getNameInLayout();
+        $debugLines['template'] = $block->getTemplate();
+
+        $component = $this->getComponentFromBlock($block);
+        if ($component instanceof FieldComponent) {
+            $validators = $component->getValidators();
+            if (!empty($validators)) {
+                $debugLines['validators'] = implode('|', $validators);
+            }
+
+            $filters =  $component->getFilters();
+            if (!empty($filters)) {
+                $debugLines['filters'] = implode('|', $filters);
+            }
+        }
+
+        return $debugLines;
+    }
+
+    /**
+     * @param Template $block
+     * @return Component|null
+     */
+    private function getComponentFromBlock(Template $block): ?Component
+    {
+        if ($block->getMagewire() instanceof Component) {
+            return $block->getMagewire();
+        }
+
+        if ($block->getComponent() instanceof Component) {
+            return $block->getComponent();
+        }
+
+        return null;
     }
 }

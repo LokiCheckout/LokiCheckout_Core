@@ -32,12 +32,6 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
         parent::mount();
     }
 
-    public function getElementId(): string
-    {
-        $elementId = $this->getParent()->getNameInLayout();
-        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
-    }
-
     public function getStep(): string
     {
         return $this->stepNavigator->getCurrentStep()->getCode();

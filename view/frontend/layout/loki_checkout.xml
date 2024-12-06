@@ -29,7 +29,7 @@
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout</argument>
                 </arguments>
 
-                <block name="loki-checkout.steps" as="steps"/>
+                <block name="loki-checkout.steps" as="steps" template="Yireo_LokiCheckout::checkout/steps.phtml"/>
             </block>
         </referenceContainer>
 
@@ -70,6 +70,9 @@
                 template="Yireo_LokiCheckout::script/validator-rules/number.phtml"/>
 
             <container name="loki-checkout.script.alpine-components">
+                <block
+                    name="loki-checkout.script.components.generic-component"
+                    template="Yireo_LokiCheckout::script/component/generic-component.phtml" />
                 <block
                     name="loki-checkout.script.components.field-component"
                     template="Yireo_LokiCheckout::script/component/field-component.phtml" />

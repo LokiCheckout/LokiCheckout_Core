@@ -14,7 +14,7 @@ class GenderValidator implements FieldValidatorInterface
 
     public function validate(FieldComponent $component): bool
     {
-        $gender = trim($component->getValue());
+        $gender = trim($component->value);
 
         if (empty($gender)) {
             return true;

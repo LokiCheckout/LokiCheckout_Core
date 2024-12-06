@@ -2,35 +2,48 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddressSelect;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var ShippingAddress $magewire */
+/** @var ShippingAddressSelect $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+$showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
+$emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>
-<?= $blockRenderer->html('loki-checkout.generic.title', $block, [
-    'title' => 'Select your Shipping Address'
-]) ?>
+<div class="<?= $css('') ?>"
+     x-data="LokiCheckoutFieldComponent"
+     x-title="<?= $magewire->getAlpineComponentName() ?>"
+     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
+>
+    <?= $block->getChildHtml('title') ?>
 
-<select
-    id="<?= $magewire->getElementId() ?>-field"
-    data-type="field"
-    aria-invalid="<?= $magewire->hasErrors() ? 'true' : 'false' ?>"
-    wire:loading.attr="aria-busy"
-    wire:loading.class="disabled"
-    wire:model="currentShippingAddress"
-    :class="newAddress ? 'disabled:opacity-75' : ''"
-    :disabled="newAddress"
-    class="form-input block w-full">
-    <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
-        <option
-            value="<?= $shippingAddressId ?>"
-            <?= (int)$shippingAddressId === (int)$magewire->currentShippingAddress ? 'selected' : '' ?>
-        >
-            <?= $shippingAddresLabel ?>
-        </option>
-    <?php endforeach; ?>
-</select>
+    <select
+        id="<?= $magewire->getElementId() ?>-field"
+        data-type="field"
+        aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+        wire:loading.attr="aria-busy"
+        wire:loading.class="disabled"
+        wire:model="value"
+        :class="disabled ? 'disabled:opacity-75' : ''"
+        :disabled="disabled"
+        <?php if ($magewire->isDisabled()): ?>
+            disabled="disabled"
+        <?php endif ?>
+        class="<?= $css('form-input block w-full', 'select') ?>"
+    >
+        <?php if ($showEmptySelectOption): ?>
+        <option value="0"><?= $emptySelectOptionLabel ?></option>
+        <?php endif; ?>
+        <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
+            <option
+                value="<?= $shippingAddressId ?>"
+                <?= (int)$shippingAddressId === (int)$magewire->value ? 'selected' : '' ?>
+            >
+                <?= $shippingAddresLabel ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+</div>

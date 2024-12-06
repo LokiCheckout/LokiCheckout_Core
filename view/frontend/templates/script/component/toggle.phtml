@@ -7,4 +7,9 @@
             }
         }));
     });
+
+    // @todo: This is such a dirty hack
+    if (!console.warn && console.warning) {
+        console.warn = console.warning;
+    }
 </script>

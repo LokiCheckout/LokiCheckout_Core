@@ -15,15 +15,36 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         Alpine.store('components', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
+            getComponentNames() {
+                return Object.keys(this.components);
+            },
             getComponents() {
                 return Object.values(this.components);
             },
             getComponentsByStep(step) {
                 return this.getComponents().filter(component => component.step === step);
             },
+            removeInvisibleComponents() {
+                const invisibleComponents = [];
+                for (const [componentName, component] of Object.entries(this.components)) {
+                    if (!document.getElementById(component.elementId)) {
+                        delete this.components[componentName];
+                        invisibleComponents.push(componentName);
+                    }
+                }
+
+                if (invisibleComponents.length > 0) {
+                    yireoLokiCheckoutLogger('NOTICE: Removing invisible components from store', invisibleComponents);
+                }
+            },
             add(component) {
                 if (!component.name) {
                     yireoLokiCheckoutLogger('ERROR: Unable to add Alpine.js component to store: No name set', component);
+                    return;
+                }
+
+                if (!component.elementId) {
+                    yireoLokiCheckoutLogger('ERROR: Unable to add Alpine.js component to store: No elementId set', component.name);
                     return;
                 }
 
@@ -44,8 +65,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                     return this.components[componentName];
                 }
 
-                yireoLokiCheckoutLogger('ERROR: No such a component', componentName, this.components);
-
+                throw new Error('No such a component');
             },
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);
@@ -79,5 +99,14 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return hasLocked;
             }
         })
+
+        document.addEventListener('magewire:loader:done', () => {
+            Alpine.store('components').removeInvisibleComponents();
+        });
+        /*
+        Livewire.hook('element.removed', (element, component) => {
+            Alpine.store('components').removeInvisibleComponents();
+        });
+         */
     });
 </script>

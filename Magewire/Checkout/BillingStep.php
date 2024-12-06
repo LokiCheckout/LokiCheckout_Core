@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Checkout;
 
+use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
@@ -10,8 +11,11 @@ use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingStep extends GenericComponent implements StepComponentInterface
 {
+    use AlpineDataBehaviour;
+
     protected $listeners = [
-        'afterSaveBillingStep' => 'refresh'
+        'afterChangeStep' => 'refresh',
+        'afterSaveBillingStep' => 'refresh',
     ];
 
     public string $refreshToken = '';
@@ -19,8 +23,17 @@ class BillingStep extends GenericComponent implements StepComponentInterface
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
         private readonly BillingAddressState $billingAddressState,
-        private StepNavigator $stepNavigator
+        private readonly StepNavigator $stepNavigator
     ) {
+    }
+
+    public function boot(): void
+    {
+        if (false === $this->stepNavigator->isCurrentStep($this)) {
+            $this->visible = false;
+        }
+
+        parent::boot();
     }
 
     public function getCode(): string

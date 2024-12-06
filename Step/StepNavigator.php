@@ -5,10 +5,12 @@ namespace Yireo\LokiCheckout\Step;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
 
@@ -19,6 +21,7 @@ class StepNavigator implements ArgumentInterface
 
     public function __construct(
         private readonly XmlConfig $xmlConfig,
+        private readonly Config $config,
         private readonly LayoutInterface $layout,
         private readonly CheckoutSession $checkoutSession,
         private readonly FinalStep $finalStep,
@@ -90,11 +93,13 @@ class StepNavigator implements ArgumentInterface
 
         if ($this->isLastStep($currentStep)) {
             $this->finalStep->validate();
+
             return $this->finalStep->submit($source);
         }
 
         $nextStep = $this->getNextStep($currentStep);
         $this->setCurrentStepByCode($nextStep->getCode());
+
         // @todo: $this->checkoutSession->setStepData();
         return true;
     }
@@ -164,8 +169,12 @@ class StepNavigator implements ArgumentInterface
             return $this->steps;
         }
 
-        // @todo: How to switch between themes?
-        $theme = $this->xmlConfig->getTheme('default');
+        $currentThemeName = $this->config->getTheme();
+        $theme = $this->xmlConfig->getTheme($currentThemeName);
+
+        /** @var Template $parentBlock */
+        $parentBlock = $this->layout->getBlock('loki-checkout.steps');
+
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
             $stepComponent = $step->getComponent();
@@ -175,6 +184,13 @@ class StepNavigator implements ArgumentInterface
 
             if (false === $stepComponent->isEnabled()) {
                 continue;
+            }
+
+            $stepBlockAlias = $step->getName().'-step';
+
+            if ($parentBlock instanceof Template) {
+                $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
+                $stepComponent->setParent($stepBlock);
             }
 
             $this->steps[$stepComponent->getCode()] = $stepComponent;

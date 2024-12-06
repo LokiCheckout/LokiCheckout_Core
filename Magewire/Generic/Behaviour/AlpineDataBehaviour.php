@@ -2,9 +2,14 @@
 
 namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
 
+use Magento\Framework\View\Element\AbstractBlock;
+
 trait AlpineDataBehaviour
 {
-    public function getComponentData(): array
+    use DomElementBehaviour;
+    use StringConversionBehaviour;
+
+    public function getAlpineData(): array
     {
         $rules = [];
         if (method_exists($this, 'getValidators')) {
@@ -13,28 +18,48 @@ trait AlpineDataBehaviour
             }
         }
 
-        return [
-            'name' => $this->getJsName(),
+        $data = [
+            'name' => $this->getAlpineComponentName(),
             'wireId' => $this->id,
-            'elementId' => $this->getElementId(),
+            'elementId' => $this->getDomElementId(),
             'step' => $this->getStep(),
-            'value' => $this->getJsValue(),
-            'valid' => $this->isValid(),
             'rules' => $rules,
         ];
+
+        $data = array_merge($data, $this->getAdditionalAlpineData());
+
+        if (property_exists($this, 'value')) {
+            $data['value'] = $this->getJsValue();
+        }
+
+        if (property_exists($this, 'valid')) {
+            $data['valid'] = $this->valid;
+        }
+
+        return $data;
     }
 
-    public function getComponentDataAsJson(): string
+    public function getAdditionalAlpineData(): array
     {
-        return json_encode($this->getComponentData());
+        return [];
     }
 
-    public function getJsName(): string
+    public function getAlpineDataAsJson(): string
     {
-        // @todo: Use CamelCaseConvertor instead or even getParentBlock()->getJsId()
-        $name = $this->getNameInLayout();
+        return json_encode($this->getAlpineData());
+    }
+
+    public function getAlpineComponentName(): string
+    {
+        $name = '';
+
+        $parent = $this->getParent();
+        if ($parent instanceof AbstractBlock) {
+            $name = $parent->getNameInLayout();
+        }
+
         if (empty($name)) {
-            $name = $this->id;
+            $name = (string)$this->id;
         }
 
         return $this->toCamelCase($name);
@@ -43,30 +68,5 @@ trait AlpineDataBehaviour
     public function getJsValue(): string
     {
         return str_replace("\n", '\n', $this->value); // @todo: Is this good enough?
-    }
-
-    // @todo: Rename this to getDomElementId()?
-    public function getElementId(): string
-    {
-        $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
-        if (empty($elementId)) {
-            return $this->id;
-        }
-
-        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $elementId);
-    }
-
-    // @todo: Rename this to setDomElementId()?
-    public function setElementId(string $elementId)
-    {
-        $this->elementId = $elementId;
-    }
-
-    // @todo: Move this into trait or something
-    private function toCamelCase(string $text): string
-    {
-        $text = ucwords($text, '_.-');
-
-        return preg_replace('#[_.-]+#', '', $text);
     }
 }

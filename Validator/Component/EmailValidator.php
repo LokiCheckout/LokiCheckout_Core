@@ -14,7 +14,7 @@ class EmailValidator implements FieldValidatorInterface
 
     public function validate(FieldComponent $component): bool
     {
-        $email = trim($component->getValue());
+        $email = trim($component->value);
 
         if (empty($email)) {
             $component->error('value', 'This value is required');

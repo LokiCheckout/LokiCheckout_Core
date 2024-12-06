@@ -61,13 +61,11 @@ class AddHtmlAttributes implements ObserverInterface
     private function getHtmlAttributes(AbstractBlock $block): string
     {
         $attributes = (array)$block->getData('html_attributes');
-        if (empty($attributes)) {
-            return '';
-        }
+        $attributes['id'] = $this->getElementId($block);
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
-            // @todo: Allow for more variables
+            // @todo: Allow for more variables to be dealt with here
             $attributeValue = str_replace('{component_name}', $this->getComponentName($block), $attributeValue);
             $htmlAttribute .= ' ' . $attributeName . '="' . $attributeValue . '"';
         }
@@ -75,8 +73,16 @@ class AddHtmlAttributes implements ObserverInterface
         return trim($htmlAttribute);
     }
 
+    private function getElementId(AbstractBlock $block): string
+    {
+        $nameInLayout = strtolower((string)$block->getNameInLayout());
+        // @todo: Find all instances of this kind of thing and DRY
+        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $nameInLayout);
+    }
+
     private function getComponentName(AbstractBlock $block): string
     {
+        // @todo: How much are we depending upon getJsId() here?
         return $this->camelCaseConvertor->toCamelCase($block->getJsId());
     }
 }

@@ -14,7 +14,7 @@ class PrefixValidator implements FieldValidatorInterface
 
     public function validate(FieldComponent $component): bool
     {
-        $prefix = trim($component->getValue());
+        $prefix = trim($component->value);
 
         if (empty($prefix)) {
             return true;

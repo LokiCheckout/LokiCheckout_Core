@@ -10,8 +10,6 @@
                 </argument>
             </arguments>
 
-            <block name="loki-checkout.shipping-address.script" as="script" template="Yireo_LokiCheckout::checkout/shipping/address/script.phtml"/>
-
             <!--
             @todo: Implement this when swapping addresses
             <block
@@ -27,6 +25,32 @@
             <block
                 name="loki-checkout.shipping-address.address-select" as="address-select"
                 template="Yireo_LokiCheckout::checkout/shipping/address-select.phtml">
+                <arguments>
+                    <argument name="magewire" xsi:type="object">
+                        Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddressSelect
+                    </argument>
+                </arguments>
+
+                <block
+                    name="loki-checkout.billing-address.address-select.title" as="title"
+                    template="Yireo_LokiCheckout::generic/title.phtml">
+                    <arguments>
+                        <argument name="title" xsi:type="string">Select your Shipping Address</argument>
+                    </arguments>
+                </block>
+            </block>
+
+            <block
+                name="loki-checkout.shipping-address.address-toggle-select" as="address-toggle-select"
+                template="Yireo_LokiCheckout::checkout/shipping/address-toggle-select.phtml">
+            </block>
+
+            <block
+                name="loki-checkout.billing-address.address-form-title" as="address-form-title"
+                template="Yireo_LokiCheckout::generic/title.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string">Enter a New Address</argument>
+                </arguments>
             </block>
 
             <block

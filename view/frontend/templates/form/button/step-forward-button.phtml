@@ -10,15 +10,14 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 ?>
 <div
-    id="<?= $magewire->getElementId() ?>"
     class="<?= $css('') ?>"
     x-data="StepForwardButton"
-    x-title="<?= $magewire->getJsName() ?>"
-    data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
+    x-title="<?= $magewire->getAlpineComponentName() ?>"
+    data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
-            :disabled="isDisabled"
+            :disabled="!valid"
             x-on:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>

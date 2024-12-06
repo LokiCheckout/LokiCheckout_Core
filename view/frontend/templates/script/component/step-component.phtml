@@ -2,6 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
             step: 'unknown',
+            name: '',
             visible: false,
             init() {
                 LokiCheckoutComponentExtender.merge(this);

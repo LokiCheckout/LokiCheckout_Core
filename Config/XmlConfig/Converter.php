@@ -34,9 +34,11 @@ class Converter implements ConverterInterface
             }
 
             $themeName = (string)$themeElement->getAttribute('name');
+            $themeLabel = (string)$themeElement->getAttribute('label');
 
             $themes[$themeName] = [
                 'name' => $themeName,
+                'label' => $themeLabel,
                 'steps' => $steps,
             ];
         }

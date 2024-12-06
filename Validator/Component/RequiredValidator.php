@@ -8,7 +8,7 @@ class RequiredValidator implements FieldValidatorInterface
 {
     public function validate(FieldComponent $component): bool
     {
-        $value = $component->getValue();
+        $value = $component->value;
         if (empty($value)) {
             $component->error('value', (string)__('Value is required'));
 

@@ -17,16 +17,9 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
-<div class="<?= $css('') ?>">
-    <?= $block->getChildHtml('before') ?>
-    <?= $block->getChildHtml('title') ?>
-    <?= $block->getChildHtml('email') ?>
-    <?= $block->getChildHtml('shipping-address') ?>
-    <?= $block->getChildHtml('shipping-methods') ?>
-
-    <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
-        <?= $block->getChildHtml('buttons') ?>
-    </div>
-
-    <?= $block->getChildHtml('after') ?>
+<div class="<?= $css('') ?>"
+     x-data="LokiCheckoutStep"
+     x-title="<?= $magewire->getAlpineComponentName() ?>"
+     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
+    <?= $block->getChildHtml() ?>
 </div>

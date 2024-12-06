@@ -4,6 +4,6 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-class Company extends AddressFieldComponent
+abstract class Company extends AddressFieldComponent
 {
 }

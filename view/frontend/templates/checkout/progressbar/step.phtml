@@ -21,6 +21,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $step = $block->getStep();
 $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
+$skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 ?>
 <li
     class="<?= $css('step flex items-center aria-[current=step]:font-bold') ?>"
@@ -42,7 +43,7 @@ $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
         </button>
     <?php endif; ?>
 
-    <?php if (false === $stepNavigator->isLastStep($step)): ?>
+    <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
         <span class="<?= $css('inline-flex justify-center items-center px-2', 'separator') ?>" aria-hidden="true">
              <?= $blockRenderer->html('loki-checkout.utils.separator') ?>
         </span>
