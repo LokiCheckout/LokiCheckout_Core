@@ -37,19 +37,35 @@ class PaymentMethods extends GenericComponent
 
         $this->value = (string)$quote->getPayment()->getMethod();
 
-        if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
+        if (false === $this->isPaymentMethodAvailable($this->value)) {
+            $this->value = '';
+            $quote->setPaymentMethod('');
+            $this->cartRepository->save($quote);
+        }
+
+        if (empty($this->value)) {
             $this->value = $this->getDefaultPayment();
             $quote->setPaymentMethod($this->value);
             $this->cartRepository->save($quote);
         }
 
-        if (!empty($this->value)) {
+        if (!empty($this->value) && $this->request->isPreceding()) {
             $this->valid = true;
         }
+
+        parent::boot();
     }
 
     public function getDefaultPayment(): string
     {
+        if (empty($this->paymentMethods)) {
+            return '';
+        }
+
+        if (false === $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
+            return '';
+        }
+
         $firstPaymentMethod = array_shift($this->paymentMethods);
 
         return (string)$firstPaymentMethod->getCode();
@@ -63,13 +79,17 @@ class PaymentMethods extends GenericComponent
         return $this->paymentMethods;
     }
 
-    public function setValue(string $value)
+    public function setValue(string $value): void
     {
-        // @todo: Verify that this is a correct payment
         $this->value = $value;
-        if (!empty($value)) {
-            $this->valid = true;
+
+        if (false === $this->isPaymentMethodAvailable($value)) {
+            $this->valid = false;
+            $this->value = '';
+            return;
         }
+
+        $this->valid = true;
 
         $quote = $this->checkoutState->getQuote();
         $quote->setPaymentMethod($value);
@@ -79,12 +99,21 @@ class PaymentMethods extends GenericComponent
 
         $this->emit('afterSaveBillingStep');
         $this->emit('afterSavePaymentMethod', $value);
-
-        return $value;
     }
 
     public function isValid(): bool
     {
         return $this->valid;
+    }
+
+    private function isPaymentMethodAvailable(string $code): bool
+    {
+        foreach ($this->paymentMethods as $paymentMethod) {
+            if ($paymentMethod->getCode() === $code) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
