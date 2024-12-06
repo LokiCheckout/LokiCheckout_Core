@@ -31,22 +31,26 @@ class PaymentMethods extends GenericComponent
 
     public function boot()
     {
-        $quote = $this->checkoutState->getQuote();
-        $cartId = $quote->getId();
+        $cart = $this->checkoutState->getQuote();
+        $cartId = $cart->getId();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
 
-        $this->value = (string)$quote->getPayment()->getMethod();
+        $this->value = (string)$cart->getPayment()->getMethod();
 
         if (false === $this->isPaymentMethodAvailable($this->value)) {
             $this->value = '';
-            $quote->setPaymentMethod('');
-            $this->cartRepository->save($quote);
+            $cart->setPaymentMethod('');
+            $this->cartRepository->save($cart);
         }
 
         if (empty($this->value)) {
             $this->value = $this->getDefaultPayment();
-            $quote->setPaymentMethod($this->value);
-            $this->cartRepository->save($quote);
+            $cart->setPaymentMethod($this->value);
+            $this->cartRepository->save($cart);
+        }
+
+        if (!empty($this->value)) {
+            $cart->collectTotals();
         }
 
         if (!empty($this->value) && $this->request->isPreceding()) {
