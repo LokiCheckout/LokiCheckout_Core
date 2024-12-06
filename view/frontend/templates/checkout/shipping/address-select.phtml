@@ -10,6 +10,8 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var ShippingAddress $magewire */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+$showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
+$emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>
 <div class="<?= $css('') ?>">
     <select
@@ -22,6 +24,9 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
         :class="newAddress ? 'disabled:opacity-75' : ''"
         :disabled="newAddress"
         class="<?= $css('form-input block w-full', 'select') ?>">
+        <?php if ($showEmptySelectOption): ?>
+        <option value="0"><?= $emptySelectOptionLabel ?></option>
+        <?php endif; ?>
         <?php foreach ($magewire->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
             <option
                 value="<?= $shippingAddressId ?>"
