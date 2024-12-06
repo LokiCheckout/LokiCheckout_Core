@@ -6,7 +6,9 @@ namespace Yireo\LokiCheckout\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
+use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 class AddDebuggingInfo implements ObserverInterface
 {
@@ -61,13 +63,56 @@ class AddDebuggingInfo implements ObserverInterface
 
         $html = trim($html);
         if (true === $this->config->addHtmlHints()) {
-            $html = $html . '<!-- LOKI_DEBUG '
-                .'block '.$block->getNameInLayout().', '
-                .'template '.$block->getTemplate().' '
-                .' -->';
+            $debugHtml = '<!-- LOKI_DEBUG ';
+            $debugLines = $this->getDebugLines($block);
+            foreach($debugLines as $debugLineName => $debugLineValue) {
+                $debugHtml .= $debugLineName.' = '.$debugLineValue.', ';
+            }
+            $debugHtml .= ' -->';
+
+            $html = $html . $debugHtml;
         }
 
         $transport->setHtml($html);
 
+    }
+
+    private function getDebugLines(Template $block): array
+    {
+        $debugLines = [];
+        $debugLines['name'] = $block->getNameInLayout();
+        $debugLines['template'] = $block->getTemplate();
+
+        $component = $this->getComponentFromBlock($block);
+        if ($component instanceof FieldComponent) {
+            $validators = $component->getValidators();
+            if (!empty($validators)) {
+                $debugLines['validators'] = implode('|', $validators);
+            }
+            
+            $filters =  $component->getFilters();
+            if (!empty($filters)) {
+                $debugLines['filters'] = implode('|', $filters);
+            }
+        }
+
+        return $debugLines;
+    }
+
+    /**
+     * @param Template $block
+     * @return Component|null
+     */
+    private function getComponentFromBlock(Template $block): ?Component
+    {
+        if ($block->getMagewire() instanceof Component) {
+            return $block->getMagewire();
+        }
+
+        if ($block->getComponent() instanceof Component) {
+            return $block->getComponent();
+        }
+
+        return null;
     }
 }
