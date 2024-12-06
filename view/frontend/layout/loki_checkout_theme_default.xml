@@ -18,7 +18,7 @@
                     </arguments>
                 </block>
 
-                <container name="loki-checkout.shipping-step.buttons" as="buttons"/>
+                <block name="loki-checkout.shipping-step.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" />
             </block>
 
             <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::checkout/billing-step.phtml">
@@ -35,7 +35,7 @@
                     </arguments>
                 </block>
 
-                <container name="loki-checkout.billing-step.buttons" as="buttons"/>
+                <block name="loki-checkout.billing-step.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" />
             </block>
         </referenceBlock>
 

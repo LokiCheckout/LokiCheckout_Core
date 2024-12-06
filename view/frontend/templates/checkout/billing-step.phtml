@@ -22,10 +22,6 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
     <?= $block->getChildHtml('title') ?>
     <?= $block->getChildHtml('billing-address') ?>
     <?= $block->getChildHtml('payment-methods') ?>
-
-    <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
-        <?= $block->getChildHtml('buttons') ?>
-    </div>
-
+    <?= $block->getChildHtml('buttons') ?>
     <?= $block->getChildHtml('after') ?>
 </div>

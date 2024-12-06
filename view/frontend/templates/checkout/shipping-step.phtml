@@ -27,10 +27,6 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
     <?= $block->getChildHtml('email') ?>
     <?= $block->getChildHtml('shipping-address') ?>
     <?= $block->getChildHtml('shipping-methods') ?>
-
-    <div class="<?= $css('mb-8 float-right flex', 'buttons') ?>">
-        <?= $block->getChildHtml('buttons') ?>
-    </div>
-
+    <?= $block->getChildHtml('buttons') ?>
     <?= $block->getChildHtml('after') ?>
 </div>
