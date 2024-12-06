@@ -7,7 +7,6 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
 
 class AddDebuggingInfo implements ObserverInterface
 {
@@ -15,6 +14,7 @@ class AddDebuggingInfo implements ObserverInterface
 
     public function __construct(
         private readonly Config $config,
+        private array $blockPrefixes = [],
     ) {
     }
 
@@ -25,8 +25,14 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
-        // @todo: Configure which blocks to allow for this
-        if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
+        $prefixMatch = false;
+        foreach ($this->blockPrefixes as $prefix) {
+            if (preg_match('/^'.$prefix.'/', (string)$block->getNameInLayout())) {
+                $prefixMatch = true;
+            }
+        }
+
+        if (false === $prefixMatch) {
             return;
         }
 
@@ -34,8 +40,6 @@ class AddDebuggingInfo implements ObserverInterface
         if ($block->getNameInLayout() === self::DEBUG_BLOCK) {
             return;
         }
-
-
 
         $transport = $observer->getEvent()->getTransport();
         $html = trim((string)$transport->getHtml());
@@ -51,15 +55,15 @@ class AddDebuggingInfo implements ObserverInterface
         if (true === $this->config->addDebugBlock()) {
             $html .= $debugBlock->setData([
                 'ancestor_block' => $block,
-                'component' => $block->getMagewire()
+                'component' => $block->getMagewire(),
             ])->toHtml();
         }
 
         if (true === $this->config->addHtmlHints()) {
             $html = '<!-- LOKI_DEBUG '
-                . 'block ' . $block->getNameInLayout() . ', '
-                . 'template ' . $block->getTemplate() . ' '
-                .' -->' . $html;
+                .'block '.$block->getNameInLayout().', '
+                .'template '.$block->getTemplate().' '
+                .' -->'.$html;
         }
 
         $transport->setHtml($html);
