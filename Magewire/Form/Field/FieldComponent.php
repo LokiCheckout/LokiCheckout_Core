@@ -92,11 +92,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
         return 'text';
     }
 
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
     public function getDefaultValue(): string|bool|int
     {
         return '';

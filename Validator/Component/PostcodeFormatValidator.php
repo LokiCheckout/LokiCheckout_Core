@@ -15,7 +15,7 @@ class PostcodeFormatValidator implements FieldValidatorInterface
     public function validate(FieldComponent $component): bool
     {
         $countryId = $component->getAddressState()->load('country_id');
-        $postcode = $component->getValue();
+        $postcode = $component->value;
 
         if (empty($postcode)) {
             return true;
@@ -41,20 +41,20 @@ class PostcodeFormatValidator implements FieldValidatorInterface
             }
         }
 
-        $component->error('value', $this->getErrorMessageFromExamples($examples));
+        $component->error('value', $this->getErrorMessageFromExamples($postcode, $examples));
         return false;
     }
 
-    private function getErrorMessageFromExamples(array $examples): string
+    private function getErrorMessageFromExamples(string $postcode, array $examples): string
     {
         if (empty($examples)) {
-            return (string)__('Invalid postcode format');
+            return (string)__('Postcode "%1" has invalid format', $postcode);
         }
 
         if (count($examples) === 1) {
-            return (string)__('Postcode needs to be in the format %1', $examples[0]);
+            return (string)__('Postcode "%1" needs to be in the format %2', $postcode, $examples[0]);
         }
 
-        return (string)__('Postcode needs to be in one of the following formats: %1', implode(', ', $examples));
+        return (string)__('Postcode "%1" needs to be in one of the following formats: %1', $postcode, implode(', ', $examples));
     }
 }
