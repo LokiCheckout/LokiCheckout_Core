@@ -12,9 +12,6 @@
                     this.updateValid();
                 });
             },
-            isDisabled() {
-                return this.valid !== true;
-            },
             updateValid() {
                 this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
                 if (!this.valid) {
