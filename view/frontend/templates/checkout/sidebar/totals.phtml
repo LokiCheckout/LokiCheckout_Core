@@ -15,42 +15,23 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote()->collectTotals();
+$totals = $quote->getTotals();
+
+
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
 <div class="<?= $css('') ?>">
     <dl class="<?= $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
-        <?= $block->getChildHtml('after') ?>
+        <?= $block->getChildHtml('before') ?>
 
-        <dt class="<?= $css('font-medium', 'subtotal-label') ?>">
-            <?= __('Subtotal') ?>
-        </dt>
-        <dd class="<?= $css('text-right', 'subtotal-value') ?>">
-            <?= $priceFormatter->format($quote->getSubtotal()) ?>
-        </dd>
-
-        <dt class="<?= $css('font-medium', 'shipping-label') ?>">
-            <?= __('Shipping & Handling') ?>
-        </dt>
-        <dd class="<?= $css('text-right', 'shipping-value') ?>">
-            <?= $priceFormatter->format($quote->getShippingAmount()) ?>
-        </dd>
-
-        <dt class="<?= $css('font-medium', 'tax-label') ?>">
-            <?= __('Tax') ?>
-        </dt>
-        <dd class="<?= $css('text-right', 'tax-value') ?>">
-            <?= $priceFormatter->format($quote->getTaxAmount()) ?>
-        </dd>
-
-        <?= $block->getChildHtml('inner') ?>
-
-        <dt class="<?= $css('font-bold text-lg', 'total-label') ?>">
-            <?= __('Grand Total') ?>
-        </dt>
-        <dd class="<?= $css('font-bold text-lg text-right', 'total-value') ?>">
-            <?= $priceFormatter->format($quote->getGrandTotal()) ?>
-        </dd>
-
+        <?php foreach ($totals as $total) : ?>
+            <dt class="<?= $css('font-medium', $total->getCode() . '-label') ?>">
+                <?= __($total->getTitle()) ?>
+            </dt>
+            <dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
+                <?= $priceFormatter->format($total->getValue()) ?>
+            </dd>
+        <?php endforeach; ?>
         <?= $block->getChildHtml('after') ?>
     </dl>
 </div>
