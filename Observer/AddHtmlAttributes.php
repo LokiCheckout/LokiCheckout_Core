@@ -75,8 +75,9 @@ class AddHtmlAttributes implements ObserverInterface
 
     private function getElementId(AbstractBlock $block): string
     {
+        $nameInLayout = strtolower((string)$block->getNameInLayout());
         // @todo: Find all instances of this kind of thing and DRY
-        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', (string)$block->getNameInLayout());
+        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $nameInLayout);
     }
 
     private function getComponentName(AbstractBlock $block): string

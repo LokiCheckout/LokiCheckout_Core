@@ -13,8 +13,12 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $css('mb-8') ?>" x-data="LokiCheckoutShippingAddress" data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'>
+<div class="<?= $css('mb-8') ?>"
+     x-data="LokiCheckoutShippingAddress"
+     x-title="LokiCheckoutShippingAddress"
+     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
     <?php if (count($magewire->shippingAddresses) > 0): ?>
+        <?= $block->getChildHtml('address-select-title') ?>
         <?= $block->getChildHtml('address-select') ?>
     <?php endif; ?>
 

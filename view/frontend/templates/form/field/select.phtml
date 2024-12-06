@@ -14,7 +14,6 @@ $optionModel = $block->getAncestorBlock()->getOptionModel();
 $magewire->setOptionModel($optionModel);
 ?>
 <select
-    id="<?= $magewire->getElementId() ?>-field"
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
     data-type="field"

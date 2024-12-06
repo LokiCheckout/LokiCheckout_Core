@@ -21,9 +21,26 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponentsByStep(step) {
                 return this.getComponents().filter(component => component.step === step);
             },
+            removeInvisibleComponents() {
+                for (const [componentName, component] of Object.entries(this.components)) {
+                    if (!component.elementId) {
+                        return;
+                    }
+
+                    const element = document.getElementById(component.elementId);
+                    if (!element) {
+                        console.log('Unknown component', component.elementId);
+                    }
+                }
+            },
             add(component) {
                 if (!component.name) {
                     yireoLokiCheckoutLogger('ERROR: Unable to add Alpine.js component to store: No name set', component);
+                    return;
+                }
+
+                if (!component.elementId) {
+                    yireoLokiCheckoutLogger('ERROR: Unable to add Alpine.js component to store: No elementId set', component.name);
                     return;
                 }
 
@@ -79,5 +96,14 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return hasLocked;
             }
         })
+
+        document.addEventListener('magewire:loader:done', () => {
+            Alpine.store('components').removeInvisibleComponents();
+        });
+        /*
+        Livewire.hook('element.removed', (element, component) => {
+            Alpine.store('components').removeInvisibleComponents();
+        });
+         */
     });
 </script>

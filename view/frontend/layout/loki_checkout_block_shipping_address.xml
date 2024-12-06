@@ -23,6 +23,14 @@
                 template="Yireo_LokiCheckout::checkout/shipping/address-view.phtml"/>
 
             <block
+                name="loki-checkout.billing-address.address-select-title" as="address-select-title"
+                template="Yireo_LokiCheckout::generic/title.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string">Select your Shipping Address</argument>
+                </arguments>
+            </block>
+
+            <block
                 name="loki-checkout.shipping-address.address-select" as="address-select"
                 template="Yireo_LokiCheckout::checkout/shipping/address-select.phtml">
             </block>

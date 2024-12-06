@@ -12,10 +12,11 @@ use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
-class ShippingAddress extends Component
+class ShippingAddress extends GenericComponent
 {
     use AlpineDataBehaviour;
 
@@ -149,10 +150,9 @@ class ShippingAddress extends Component
             ->renderArray($addressData);
     }
 
-    public function getComponentData(): array
+    public function getAdditionalAlpineData(): array
     {
         return [
-            'wireId' => $this->id,
             'newAddress' => $this->newAddress ? true : false,
             'buttonLabelSelectAddress' => $this->getButtonLabelSelectAddress(),
             'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),
