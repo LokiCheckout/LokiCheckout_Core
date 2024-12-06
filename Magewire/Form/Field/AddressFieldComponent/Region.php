@@ -52,12 +52,12 @@ abstract class Region extends AddressFieldComponent
             return true;
         }
 
-        $optionalCountries = $this->scopeConfig->getValue('general/country/optional_zip_countries');
-        $optionalCountries = explode(',', $optionalCountries);
-        if (in_array($countryId, $optionalCountries)) {
-            return false;
+        $countriesWithStateRequired = $this->scopeConfig->getValue('general/region/state_required');
+        $countriesWithStateRequired = explode(',', $countriesWithStateRequired);
+        if (in_array($countryId, $countriesWithStateRequired)) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }

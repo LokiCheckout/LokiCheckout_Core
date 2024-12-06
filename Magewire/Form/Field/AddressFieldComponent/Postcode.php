@@ -25,7 +25,7 @@ abstract class Postcode extends AddressFieldComponent
     #[Override]
     public function isRequired(): bool
     {
-        $required = $this->getParent()->getData('is_required');
+        $required = $this->getParent()->getIsRequired();
         if (is_bool($required)) {
             return $required;
         }
