@@ -18,11 +18,9 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
      x-title="LokiCheckoutShippingAddress"
      data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
     <?php if (count($magewire->shippingAddresses) > 0): ?>
-        <?= $block->getChildHtml('address-select-title') ?>
         <?= $block->getChildHtml('address-select') ?>
+        <?= $block->getChildHtml('address-toggle-select') ?>
     <?php endif; ?>
-
-    <?= $block->getChildHtml('address-toggle-select') ?>
 
     <?php if($magewire->newAddress): ?>
         <?= $block->getChildHtml('address-form-title') ?>

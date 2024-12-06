@@ -18,6 +18,8 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
      x-title="<?= $magewire->getAlpineComponentName() ?>"
      data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
 >
+    <?= $block->getChildHtml('title') ?>
+
     <select
         id="<?= $magewire->getElementId() ?>-field"
         data-type="field"
