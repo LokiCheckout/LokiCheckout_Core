@@ -9,27 +9,18 @@
                 value: '',
                 valid: true,
                 rules: [],
-                // @todo: Get rid of initActions, yuck
-                initActions: {
-                    addToAlpineStore: function () {
-                        Alpine.store('components').add(this);
-                    },
-                    livewireElementUpdated: function () {
-                        Livewire.hook('element.updated', (element, component) => {
-                            // @todo: Is this actually needed?
-                            if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                                this.valid = this.$component(this).valid;
-                                this.updated();
-                                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                            }
-                        });
-                    }
-                },
                 init() {
                     LokiCheckoutComponentExtender.merge(this);
 
-                    Object.entries(this.initActions).forEach(([key, callback]) => {
-                        callback.apply(this);
+                    Alpine.store('components').add(this);
+
+                    Livewire.hook('element.updated', (element, component) => {
+                        // @todo: Is this actually needed?
+                        if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                            this.valid = this.$component(this).valid;
+                            this.updated();
+                            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                        }
                     });
 
                     // @todo: This should no longer be needed
