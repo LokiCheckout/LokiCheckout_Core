@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Step;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
@@ -168,6 +169,10 @@ class StepNavigator implements ArgumentInterface
 
         $currentThemeName = $this->config->getTheme();
         $theme = $this->xmlConfig->getTheme($currentThemeName);
+
+        /** @var Template $parentBlock */
+        $parentBlock = $this->layout->getBlock('loki-checkout.steps');
+
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
             $stepComponent = $step->getComponent();
@@ -179,6 +184,13 @@ class StepNavigator implements ArgumentInterface
                 continue;
             }
 
+            $stepBlockAlias = $step->getName().'-step';
+            $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
+            if (false === $stepBlock instanceof Template) {
+                throw new \RuntimeException('Could not find block "'.$stepBlockAlias.'" for step');
+            }
+
+            $stepComponent->setParent($stepBlock);
             $this->steps[$stepComponent->getCode()] = $stepComponent;
         }
 
