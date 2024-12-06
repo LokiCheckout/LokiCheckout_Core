@@ -59,11 +59,12 @@ class AddDebuggingInfo implements ObserverInterface
             ])->toHtml();
         }
 
+        $html = trim($html);
         if (true === $this->config->addHtmlHints()) {
-            $html = '<!-- LOKI_DEBUG '
+            $html = $html . '<!-- LOKI_DEBUG '
                 .'block '.$block->getNameInLayout().', '
                 .'template '.$block->getTemplate().' '
-                .' -->'.$html;
+                .' -->';
         }
 
         $transport->setHtml($html);
