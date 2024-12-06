@@ -35,10 +35,10 @@
                     this.$component(this).call('submit');
                 }
 
-                // @todo: Is this a good UI benefit?
                 setTimeout(() => {
-                    this.valid = true;
-                    console.log('Resetting valid');
+                    if (this.valid) {
+                        this.valid = true;
+                    }
                 }, 4000);
             }
         }));
