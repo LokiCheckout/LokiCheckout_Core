@@ -10,8 +10,7 @@ trait DomElementBehaviour
 
     protected string $elementId = '';
 
-    // @todo: Rename this to getDomElementId()?
-    public function getElementId(): string
+    public function getDomElementId(): string
     {
         $elementId = $this->elementId;
         if (empty($elementId)) {
@@ -25,12 +24,7 @@ trait DomElementBehaviour
             return $this->id;
         }
 
+        $elementId = strtolower($elementId);
         return $this->removeDashes($elementId);
-    }
-
-    // @todo: Rename this to setDomElementId()?
-    public function setElementId(string $elementId)
-    {
-        $this->elementId = $elementId;
     }
 }

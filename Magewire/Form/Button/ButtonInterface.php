@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Button;
 
 interface ButtonInterface
 {
-    public function getElementId(): string;
+    public function getDomElementId(): string;
     public function getStep(): string;
     public function submit();
     public function isVisible(): bool;

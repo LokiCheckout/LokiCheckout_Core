@@ -19,7 +19,7 @@ trait AlpineDataBehaviour
         $data = [
             'name' => $this->getAlpineComponentName(),
             'wireId' => $this->id,
-            'elementId' => $this->getElementId(),
+            'elementId' => $this->getDomElementId(),
             'step' => $this->getStep(),
             'rules' => $rules,
         ];
