@@ -15,6 +15,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         Alpine.store('components', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
+            getComponentNames() {
+                return Object.keys(this.components);
+            },
             getComponents() {
                 return Object.values(this.components);
             },
@@ -22,15 +25,16 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return this.getComponents().filter(component => component.step === step);
             },
             removeInvisibleComponents() {
+                const invisibleComponents = [];
                 for (const [componentName, component] of Object.entries(this.components)) {
-                    if (!component.elementId) {
-                        return;
+                    if (!document.getElementById(component.elementId)) {
+                        delete this.components[componentName];
+                        invisibleComponents.push(componentName);
                     }
+                }
 
-                    const element = document.getElementById(component.elementId);
-                    if (!element) {
-                        console.log('Unknown component', component.elementId);
-                    }
+                if (invisibleComponents.length > 0) {
+                    yireoLokiCheckoutLogger('NOTICE: Removing invisible components from store', invisibleComponents);
                 }
             },
             add(component) {
@@ -61,8 +65,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                     return this.components[componentName];
                 }
 
-                yireoLokiCheckoutLogger('ERROR: No such a component', componentName, this.components);
-
+                throw new Error('No such a component');
             },
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);
