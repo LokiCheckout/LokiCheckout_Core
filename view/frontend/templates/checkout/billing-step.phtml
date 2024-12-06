@@ -13,7 +13,11 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div  class="<?= $css('') ?>">
+<div class="<?= $css('') ?>"
+     x-data="LokiCheckoutStep"
+     x-title="<?= $magewire->getAlpineComponentName() ?>"
+     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
+
     <?= $block->getChildHtml('before') ?>
     <?= $block->getChildHtml('title') ?>
     <?= $block->getChildHtml('billing-address') ?>

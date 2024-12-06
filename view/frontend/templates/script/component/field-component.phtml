@@ -25,6 +25,7 @@
                 },
                 init() {
                     LokiCheckoutComponentExtender.merge(this);
+                    console.log('FieldComponent', this.name);
 
                     Object.entries(this.initActions).forEach(([key, callback]) => {
                         callback.apply(this);

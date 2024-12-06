@@ -3,7 +3,7 @@
     <body>
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::checkout-theme-default.phtml"/>
 
-        <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::checkout/steps-theme-default.phtml">
+        <referenceBlock name="loki-checkout.steps" >
             <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\ShippingStep

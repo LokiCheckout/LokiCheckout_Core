@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
 
+use Magento\Framework\View\Element\AbstractBlock;
+
 trait AlpineDataBehaviour
 {
     use DomElementBehaviour;
@@ -49,9 +51,15 @@ trait AlpineDataBehaviour
 
     public function getAlpineComponentName(): string
     {
-        $name = $this->getNameInLayout();
+        $name = '';
+
+        $parent = $this->getParent();
+        if ($parent instanceof AbstractBlock) {
+            $name = $parent->getNameInLayout();
+        }
+
         if (empty($name)) {
-            $name = $this->id;
+            $name = (string)$this->id;
         }
 
         return $this->toCamelCase($name);

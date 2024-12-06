@@ -21,7 +21,7 @@ trait DomElementBehaviour
         }
 
         if (empty($elementId)) {
-            return $this->id;
+            return (string)$this->id;
         }
 
         $elementId = strtolower($elementId);
