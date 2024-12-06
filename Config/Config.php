@@ -10,6 +10,7 @@ class Config
     public function __construct(
         private ScopeConfigInterface $scopeConfig,
         private ModuleManager $moduleManager,
+        private XmlConfig $xmlConfig
     ) {
     }
 
@@ -31,10 +32,8 @@ class Config
 
     public function getTheme()
     {
-        // @todo: Allow for switching themes easily in backend
         $theme = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/theme');
-        //$theme = 'onestep';
-        if (false === in_array($theme, $this->getAvailableThemes())) {
+        if (false === array_key_exists($theme, $this->xmlConfig->getThemes())) {
             return 'default';
         }
 
@@ -89,14 +88,5 @@ class Config
     public function selectDefaultPaymentMethod(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/billing/select_default_payment_method');
-    }
-
-    private function getAvailableThemes(): array
-    {
-        // @todo: Make this extensible
-        return [
-            'default',
-            'onestep',
-        ];
     }
 }

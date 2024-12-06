@@ -4,25 +4,25 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
+use Yireo\LokiCheckout\Config\XmlConfig;
 
 class ThemeOptions implements OptionSourceInterface
 {
+    public function __construct(
+        private XmlConfig $xmlConfig,
+    ) {
+    }
 
     public function toOptionArray()
     {
-        return [
-            [
-                'value' => 'default',
-                'label' => __('Multi Step Checkout (default)')
-            ],
-            [
-                'value' => 'onestep',
-                'label' => __('One Step Checkout')
-            ],
-            /*[
-                'value' => 'simplestep',
-                'label' => __('Simple Step Checkout')
-            ]*/
-        ];
+        $options = [];
+        foreach($this->xmlConfig->getThemes() as $theme) {
+            $options[] = [
+                'value' => $theme->getName(),
+                'label' => $theme->getLabel(),
+            ];
+        }
+
+        return $options;
     }
 }

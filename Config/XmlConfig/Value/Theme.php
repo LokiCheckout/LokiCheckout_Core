@@ -10,6 +10,7 @@ class Theme
 {
     public function __construct(
         private string $name,
+        private string $label,
         private array $steps = []
     ) {
     }
@@ -18,6 +19,12 @@ class Theme
     {
         return $this->name;
     }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
     /**
      * @return Step[]
      */

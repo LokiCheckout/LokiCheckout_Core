@@ -17,7 +17,14 @@ class XmlConfig extends DataConfig
      */
     public function getThemes(): array
     {
-        return $this->get('themes');
+        $themes = [];
+        $themesData = $this->get('themes');
+        foreach($themesData as $themeData) {
+            $themeName = $themeData['name'];
+            $themes[$themeName] = $this->createTheme($themeData);
+        }
+
+        return $themes;
     }
 
     /**
@@ -28,7 +35,7 @@ class XmlConfig extends DataConfig
     {
         $themes = $this->getThemes();
         if (isset($themes[$name])) {
-            return $this->createTheme($name, $themes[$name]);
+            return $themes[$name];
         }
 
         throw new \RuntimeException((string)__('Unknown theme "%1"', $name));
@@ -39,7 +46,7 @@ class XmlConfig extends DataConfig
      * @param array $themeData
      * @return Theme
      */
-    private function createTheme(string $themeName, array $themeData): Theme
+    private function createTheme(array $themeData): Theme
     {
         $steps = [];
         foreach ($themeData['steps'] as $stepData) {
@@ -51,8 +58,12 @@ class XmlConfig extends DataConfig
             );
         }
 
+        $themeName = $themeData['name'];
+        $themeLabel = $themeData['label'];
+
         return new Theme(
             $themeName,
+            $themeLabel,
             $steps
         );
     }
