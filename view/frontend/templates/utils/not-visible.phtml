@@ -8,6 +8,8 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 /** @var FieldComponent $magewire */
 ?>
 <div x-data="LokiCheckoutFieldComponent"
-     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>' style="display:none">
-    Not visible
+     x-title="<?= $magewire->getJsName() ?>"
+     data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
+     aria-hidden="true"
+     style="display:none; visibility: hidden;">
 </div>
