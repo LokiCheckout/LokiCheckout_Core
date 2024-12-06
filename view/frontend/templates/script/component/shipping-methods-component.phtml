@@ -22,7 +22,7 @@
 
                 this.$watch('value', () => {
                     this.rules = ['required', this.value];
-                    this.$component(this).call('setValue', this.value);
+                    Magewire.find(this.wireId).call('setValue', this.value);
                     if (this.value) {
                         this.valid = true;
                     }
