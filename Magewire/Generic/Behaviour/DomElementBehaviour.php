@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
 
+use Magento\Framework\View\Element\AbstractBlock;
+
 trait DomElementBehaviour
 {
     use StringConversionBehaviour;
@@ -11,7 +13,14 @@ trait DomElementBehaviour
     // @todo: Rename this to getDomElementId()?
     public function getElementId(): string
     {
-        $elementId = !empty($this->elementId) ? $this->elementId : $this->getNameInLayout();
+        $elementId = $this->elementId;
+        if (empty($elementId)) {
+            $parent = $this->getParent();
+            if ($parent instanceof AbstractBlock) {
+                $elementId = $parent->getNameInLayout();
+            }
+        }
+
         if (empty($elementId)) {
             return $this->id;
         }

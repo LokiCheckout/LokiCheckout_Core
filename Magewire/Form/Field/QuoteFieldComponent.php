@@ -12,7 +12,6 @@ abstract class QuoteFieldComponent extends FieldComponent
     use InjectCheckoutSession;
     use InjectCustomerSession;
 
-    protected string $elementId = '';
     public bool $valid = true;
 
     public function boot(): void

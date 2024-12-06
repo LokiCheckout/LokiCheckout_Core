@@ -10,7 +10,6 @@ use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
