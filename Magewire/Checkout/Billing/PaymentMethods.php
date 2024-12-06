@@ -39,7 +39,7 @@ class PaymentMethods extends GenericComponent
 
         if (empty($this->value) && $this->lokiCheckoutConfig->selectDefaultPaymentMethod()) {
             $this->value = $this->getDefaultPayment();
-            $quote->setShippingMethod($this->value);
+            $quote->setPaymentMethod($this->value);
             $this->cartRepository->save($quote);
         }
 
