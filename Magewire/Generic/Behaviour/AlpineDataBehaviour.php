@@ -42,43 +42,19 @@ trait AlpineDataBehaviour
         return [];
     }
 
-    /**
-     * @deprecated Use getAlpineData() instead
-     */
-    public function getComponentData(): array
-    {
-        return $this->getAlpineData();
-    }
-
     public function getAlpineDataAsJson(): string
     {
         return json_encode($this->getAlpineData());
     }
-    /**
-     * @deprecated Use getAlpineDataAsJson() instead
-     */
-    public function getComponentDataAsJson(): string
-    {
-        return $this->getAlpineDataAsJson();
-    }
 
     public function getAlpineComponentName(): string
     {
-        // @todo: Use CamelCaseConvertor instead or even getParentBlock()->getJsId()
         $name = $this->getNameInLayout();
         if (empty($name)) {
             $name = $this->id;
         }
 
         return $this->toCamelCase($name);
-    }
-
-    /**
-     * @deprecated Use getAlpineComponentName() instead
-     */
-    public function getJsName(): string
-    {
-        return $this->getAlpineComponentName();
     }
 
     public function getJsValue(): string

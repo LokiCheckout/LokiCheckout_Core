@@ -11,8 +11,8 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 ?>
 <div class="<?= $css('') ?>"
     x-data="StepBackwardButton"
-    x-title="<?= $magewire->getJsName() ?>"
-    data-loki-component='<?= $magewire->getComponentDataAsJson() ?>'
+    x-title="<?= $magewire->getAlpineComponentName() ?>"
+    data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"

@@ -53,7 +53,7 @@ interface FormFieldInterface
      *
      * @return string
      */
-    public function getJsName(): string;
+    public function getAlpineComponentName(): string;
 
     /**
      * Determine if this field its value is valid or not.
