@@ -6,7 +6,7 @@ use Override;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 
-class VatId extends AddressFieldComponent
+abstract class VatId extends AddressFieldComponent
 {
     use InjectLokiCheckoutConfig;
 

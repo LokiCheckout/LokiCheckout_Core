@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-class Street3 extends StreetLine
+abstract class Street3 extends StreetLine
 {
     protected int $index = 3;
 }

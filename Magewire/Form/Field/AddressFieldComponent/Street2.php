@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 
-class Street2 extends StreetLine
+abstract class Street2 extends StreetLine
 {
     use OptionsBehaviour;
 

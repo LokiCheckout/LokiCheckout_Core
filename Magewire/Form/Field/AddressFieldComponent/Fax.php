@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-class Fax extends AddressFieldComponent
+abstract class Fax extends AddressFieldComponent
 {
     public function getInputType(): string
     {

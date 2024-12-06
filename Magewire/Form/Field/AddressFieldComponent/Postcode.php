@@ -6,7 +6,7 @@ use Magento\Directory\Helper\Data as DirectoryData;
 use Override;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-class Postcode extends AddressFieldComponent
+abstract class Postcode extends AddressFieldComponent
 {
     protected array $validators = ['postcode'];
     protected array $filters = ['uppercase'];

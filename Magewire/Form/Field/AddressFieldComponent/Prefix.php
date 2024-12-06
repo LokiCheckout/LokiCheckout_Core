@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
 
-class Prefix extends AddressFieldComponent
+abstract class Prefix extends AddressFieldComponent
 {
     use OptionsBehaviour;
 

@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
-class Lastname extends AddressFieldComponent
+abstract class Lastname extends AddressFieldComponent
 {
     public function beforeSave($value): void
     {

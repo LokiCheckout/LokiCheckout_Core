@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehavi
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 
-class Region extends AddressFieldComponent
+abstract class Region extends AddressFieldComponent
 {
     use OptionsBehaviour;
     use InjectScopeConfig;
