@@ -5,13 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
-class PaymentMethods extends Component
+class PaymentMethods extends GenericComponent
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
