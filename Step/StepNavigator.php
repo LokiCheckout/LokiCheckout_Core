@@ -186,11 +186,10 @@ class StepNavigator implements ArgumentInterface
 
             $stepBlockAlias = $step->getName().'-step';
             $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
-            if (false === $stepBlock instanceof Template) {
-                throw new \RuntimeException('Could not find block "'.$stepBlockAlias.'" for step');
+            if ($stepBlock instanceof Template) {
+                $stepComponent->setParent($stepBlock);
             }
 
-            $stepComponent->setParent($stepBlock);
             $this->steps[$stepComponent->getCode()] = $stepComponent;
         }
 
