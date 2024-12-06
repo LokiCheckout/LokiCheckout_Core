@@ -76,6 +76,7 @@ class CssClass
             $cssName = preg_replace('/([^0-9a-zA-Z]+)/', '-', (string)$nameInLayout);
         }
 
+        $css = 'scope-'.$scope. ' ' .trim($css);
         if ($scope === 'block') {
             $scopeClass = $cssName;
         } else {
