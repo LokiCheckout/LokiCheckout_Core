@@ -21,7 +21,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $step = $block->getStep();
 $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
-$skipSeparator = (bool)$block->getSkipSeparator(); // @doc
+$skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 ?>
 <li
     class="<?= $css('step flex items-center aria-[current=step]:font-bold') ?>"
