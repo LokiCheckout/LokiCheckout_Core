@@ -15,6 +15,7 @@ $magewire = $this->getComponent();
 <input
     wire:loading.attr="aria-busy"
     wire:loading.class="disabled"
+    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
     data-type="field"
     x-ref="field"
     x-model.lazy="value"
@@ -34,7 +35,6 @@ $magewire = $this->getComponent();
     <?php if ($magewire->hasMax()): ?>
         max="<?= $magewire->getMax() ?>"
     <?php endif ?>
-    aria-invalid="<?= $magewire->isValid() ? 'false' : 'true' ?>"
     <?php if ($magewire->getPlaceholder()): ?>
         placeholder="<?= $magewire->getPlaceholder() ?>"
     <?php endif ?>

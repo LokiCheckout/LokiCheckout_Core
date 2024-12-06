@@ -11,11 +11,8 @@
 
                 this.buttonLabel = this.getButtonLabel();
 
-                this.$watch('newAddress', (newAddress) => {
+                this.$watch('newAddress', () => {
                     Magewire.find(this.wireId).setNewAddress(this.newAddress);
-                    if (newAddress === true) {
-                        Magewire.find(this.wireId).cleanCustomerAddress();
-                    }
                 });
             },
             getButtonLabel() {

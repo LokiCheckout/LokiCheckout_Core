@@ -22,6 +22,8 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
         <?= $block->getChildHtml('address-select') ?>
     <?php endif; ?>
 
+    <?= $block->getChildHtml('address-toggle-select') ?>
+
     <?php if($magewire->newAddress): ?>
         <?= $block->getChildHtml('address-form-title') ?>
         <?= $block->getChildHtml('address-form') ?>

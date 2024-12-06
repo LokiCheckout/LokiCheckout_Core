@@ -9,12 +9,14 @@
                 value: '',
                 valid: true,
                 rules: [],
+                // @todo: Get rid of initActions, yuck
                 initActions: {
                     addToAlpineStore: function () {
                         Alpine.store('components').add(this);
                     },
                     livewireElementUpdated: function () {
                         Livewire.hook('element.updated', (element, component) => {
+                            // @todo: Is this actually needed?
                             if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
                                 this.valid = this.$component(this).valid;
                                 this.updated();
@@ -30,12 +32,13 @@
                         callback.apply(this);
                     });
 
-                    // @todo: Find a nicer way to do this
-                    if (this.newAddress !== undefined && this.newAddress === false) {
-                        this.rules = [];
-                        this.valid = true;
-                    }
+                    // @todo: This should no longer be needed
+                    //if (this.newAddress !== undefined && this.newAddress === false) {
+                    //    this.rules = [];
+                    //    this.valid = true;
+                    //}
                 },
+                // @todo: Is updated() actually needed for something
                 updated() {},
                 submit() {
                     if (false === LokiCheckoutValidator.validate(this)) {

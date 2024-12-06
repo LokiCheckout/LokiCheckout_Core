@@ -71,6 +71,9 @@
 
             <container name="loki-checkout.script.alpine-components">
                 <block
+                    name="loki-checkout.script.components.generic-component"
+                    template="Yireo_LokiCheckout::script/component/generic-component.phtml" />
+                <block
                     name="loki-checkout.script.components.field-component"
                     template="Yireo_LokiCheckout::script/component/field-component.phtml" />
                 <block

@@ -11,8 +11,6 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
     use AttributeBehaviour;
     use AddressStateBehaviour;
 
-    public bool $valid = true;
-
     public function boot(): void
     {
         $this->loadValue();

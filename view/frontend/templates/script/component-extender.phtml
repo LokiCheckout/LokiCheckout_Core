@@ -18,8 +18,11 @@
                 rules: [],
             }
         },
+        getComponentData(component) {
+            return JSON.parse(component.$el.dataset.lokiComponent);
+        },
         merge(component) {
-            const componentData = JSON.parse(component.$el.dataset.lokiComponent);
+            const componentData = this.getComponentData(component);
             for (const [key, value] of Object.entries(componentData)) {
                 component[key] = value;
             }

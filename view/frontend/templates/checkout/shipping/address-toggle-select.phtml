@@ -1,0 +1,23 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var ShippingAddress $magewire */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+$showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
+$emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
+?>
+<button
+    class="<?= $css('btn btn-primary my-4') ?>"
+    x-text="buttonLabel"
+    type="button"
+    @click="toggleNewAddress"
+    wire:loading.attr="disabled">
+    <?= $magewire->getButtonLabelNewAddress() ?>
+</button>

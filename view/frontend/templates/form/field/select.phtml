@@ -20,7 +20,10 @@ $magewire->setOptionModel($optionModel);
     x-ref="field"
     x-model="value"
     x-on:change="submit"
-    aria-invalid="<?= $magewire->isValid() ? 'false' : 'true' ?>"
+    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+    <?php if ($magewire->isDisabled()): ?>
+        disabled="disabled"
+    <?php endif ?>
     <?= $magewire->isRequired() ? 'required' : '' ?>
     class="<?= $css('form-select w-full') ?>"
 >
