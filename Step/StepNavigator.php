@@ -93,11 +93,13 @@ class StepNavigator implements ArgumentInterface
 
         if ($this->isLastStep($currentStep)) {
             $this->finalStep->validate();
+
             return $this->finalStep->submit($source);
         }
 
         $nextStep = $this->getNextStep($currentStep);
         $this->setCurrentStepByCode($nextStep->getCode());
+
         // @todo: $this->checkoutSession->setStepData();
         return true;
     }
@@ -185,8 +187,9 @@ class StepNavigator implements ArgumentInterface
             }
 
             $stepBlockAlias = $step->getName().'-step';
-            $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
-            if ($stepBlock instanceof Template) {
+
+            if ($parentBlock instanceof Template) {
+                $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
                 $stepComponent->setParent($stepBlock);
             }
 
