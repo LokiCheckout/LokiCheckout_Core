@@ -13,13 +13,17 @@ trait AlpineDataBehaviour
             }
         }
 
+        if (false === $this->visible) {
+            $this->valid = true;
+        }
+
         return [
             'name' => $this->getJsName(),
             'wireId' => $this->id,
             'elementId' => $this->getElementId(),
             'step' => $this->getStep(),
             'value' => $this->getJsValue(),
-            'valid' => $this->isValid(),
+            'valid' => $this->valid,
             'rules' => $rules,
         ];
     }
