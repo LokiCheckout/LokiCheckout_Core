@@ -22,11 +22,5 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
      x-title="<?= $magewire->getAlpineComponentName() ?>"
      data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
 
-    <?= $block->getChildHtml('before') ?>
-    <?= $block->getChildHtml('title') ?>
-    <?= $block->getChildHtml('email') ?>
-    <?= $block->getChildHtml('shipping-address') ?>
-    <?= $block->getChildHtml('shipping-methods') ?>
-    <?= $block->getChildHtml('buttons') ?>
-    <?= $block->getChildHtml('after') ?>
+    <?= $block->getChildHtml() ?>
 </div>

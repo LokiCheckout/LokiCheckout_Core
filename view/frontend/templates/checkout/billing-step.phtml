@@ -18,10 +18,5 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
      x-title="<?= $magewire->getAlpineComponentName() ?>"
      data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
 
-    <?= $block->getChildHtml('before') ?>
-    <?= $block->getChildHtml('title') ?>
-    <?= $block->getChildHtml('billing-address') ?>
-    <?= $block->getChildHtml('payment-methods') ?>
-    <?= $block->getChildHtml('buttons') ?>
-    <?= $block->getChildHtml('after') ?>
+    <?= $block->getChildHtml() ?>
 </div>
