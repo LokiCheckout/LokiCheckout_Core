@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\ViewModel\PriceFormatter;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var DataObject $total */
+/** @var CssClass $css */
+// @todo: Document this overriding mechanism
+
+$total = $block->getTotal();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+?>
+<dt class="<?= $css('font-bold', $total->getCode() . '-label') ?>">
+    <?= __($total->getTitle()) ?>
+</dt>
+<dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
+    <?= $priceFormatter->format($total->getValue()) ?>
+</dd>

@@ -16,8 +16,6 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote()->collectTotals();
 $totals = $quote->getTotals();
-
-
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
 <div class="<?= $css('') ?>">
@@ -25,12 +23,17 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
         <?= $block->getChildHtml('before') ?>
 
         <?php foreach ($totals as $total) : ?>
-            <dt class="<?= $css('font-medium', $total->getCode() . '-label') ?>">
-                <?= __($total->getTitle()) ?>
-            </dt>
-            <dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
-                <?= $priceFormatter->format($total->getValue()) ?>
-            </dd>
+            <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
+            <?php if ($childBlock) : ?>
+                <?= $childBlock->setData(['total' => $total])->toHtml() ?>
+            <?php else: ?>
+                <dt class="<?= $css('font-medium', $total->getCode().'-label') ?>">
+                    <?= __($total->getTitle()) ?>
+                </dt>
+                <dd class="<?= $css('text-right', $total->getCode().'-value') ?>">
+                    <?= $priceFormatter->format($total->getValue()) ?>
+                </dd>
+            <?php endif; ?>
         <?php endforeach; ?>
         <?= $block->getChildHtml('after') ?>
     </dl>
