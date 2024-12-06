@@ -121,8 +121,6 @@ class ShippingAddress extends GenericComponent
         $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
 
         $addresses = [];
-        $addresses[] = ''; // @todo: Make this optional
-
         foreach ($searchResults->getItems() as $address) {
             $addresses[$address->getId()] = $this->getAddressInline($address);
         }
