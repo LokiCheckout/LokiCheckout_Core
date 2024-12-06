@@ -4,10 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var FieldComponent $magewire */
 /** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
 ?>
 <label
     for="<?= $magewire->getElementId() ?>-field"
@@ -15,6 +17,6 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     <?= __($magewire->getFieldLabel()) ?>
 
     <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
-        <?= $block->html('loki-checkout.utils.required'); ?>
+        <?= $blockRenderer->html('loki-checkout.utils.required'); ?>
     <?php endif; ?>
 </label>
