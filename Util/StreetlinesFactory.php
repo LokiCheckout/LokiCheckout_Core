@@ -20,10 +20,8 @@ class StreetlinesFactory
         ]);
     }
 
-    public function createFromStreet(string $street): Streetlines
+    public function createFromStreetParts(array $streetParts): Streetlines
     {
-        $streetParts = explode("\n", $street);
-
         if (count($streetParts) === 2 && preg_match('/^([0-9]+)$/', $streetParts[0])) {
             array_unshift($streetParts, '');
         }
@@ -33,5 +31,12 @@ class StreetlinesFactory
             $streetParts[1] ?? '',
             $streetParts[2] ?? ''
         );
+    }
+
+    public function createFromStreet(string $street): Streetlines
+    {
+        $streetParts = explode("\n", $street);
+
+        return $this->createFromStreetParts($streetParts);
     }
 }
