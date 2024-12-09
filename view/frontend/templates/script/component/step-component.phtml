@@ -1,12 +1,9 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
-            step: 'unknown',
-            name: '',
+            ...LokiGenericComponentType,
             visible: false,
-            init() {
-                LokiCheckoutComponentExtender.merge(this);
-
+            afterInit() {
                 Magewire.on('afterChangeStep', (stepCode) => {
                     this.visible = this.step === stepCode;
                 });
