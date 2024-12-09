@@ -1,12 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutGenericComponent', () => ({
-            name: '',
-            wireId: '',
-            elementId: '',
-            init() {
-                LokiCheckoutComponentExtender.merge(this);
-            }
+            ...LokiGenericComponentType
         }));
     });
 </script>

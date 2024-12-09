@@ -1,14 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('LokiCheckoutFieldComponent', () => {
-            return {
-                ...LokiFieldComponentType,
-                init() {
-                    this.loadInitialData(this);
-                    this.register(this);
-                    this.triggerComponentChange(this);
-                }
-            }
-        });
+        Alpine.data('LokiCheckoutFieldComponent', () => ({
+            ...LokiFieldComponentType
+        }));
     });
 </script>

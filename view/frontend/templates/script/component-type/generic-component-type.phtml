@@ -4,22 +4,29 @@
         elementId: '',
         step: '',
         name: '',
-        loadInitialData() {
-            const jsonData = JSON.parse(this.$el.getAttribute('data-loki-component'));
-            Object.entries(jsonData).forEach(([key, value]) => {
-                this[key] = value;
-            });
+        initActions: {
+            loadInitialData() {
+                const jsonData = JSON.parse(this.$el.getAttribute('data-loki-component'));
+                Object.entries(jsonData).forEach(([key, value]) => {
+                    this[key] = value;
+                });
+            },
+            register() {
+                Alpine.store('components').add(this);
+            },
+            listenToComponentChange() {
+                Livewire.hook('element.updated', (element, component) => {
+                    // @todo: Is this actually needed?
+                    if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
+                        this.valid = Magewire.find(this.wireId).valid;
+                        document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                    }
+                });
+            }
         },
-        register(component) {
-            Alpine.store('components').add(component);
-        },
-        triggerComponentChange(currentComponent) {
-            Livewire.hook('element.updated', (element, component) => {
-                // @todo: Is this actually needed?
-                if (currentComponent.elementId === component.el.id && currentComponent.elementId + '-field' === element.id) {
-                    currentComponent.valid = Magewire.find(currentComponent.wireId).valid;
-                    document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                }
+        init() {
+            Object.entries(this.initActions).forEach(([key, callback]) => {
+                callback.apply(this);
             });
         }
     };
