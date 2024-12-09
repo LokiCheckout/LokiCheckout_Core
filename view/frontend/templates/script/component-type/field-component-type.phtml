@@ -5,12 +5,21 @@
         valid: true,
         disabled: false,
         rules: [],
+        beforeValidate() {
+        },
+        beforeSubmit() {
+        },
         submit() {
+            this.beforeValidate();
             if (false === LokiCheckoutValidator.validate(this)) {
                 return false;
             }
 
+            this.beforeSubmit();
             Magewire.find(this.wireId).call('setValue', this.value);
+            this.afterSubmit();
+        },
+        afterSubmit() {
         },
     };
 </script>
