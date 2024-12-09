@@ -96,5 +96,8 @@ class ShippingMethods extends FieldComponent
         return 'Shipping Methods';
     }
 
-
+    public function isRequired(): bool
+    {
+        return true;
+    }
 }
