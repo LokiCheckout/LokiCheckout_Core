@@ -112,4 +112,9 @@ class PaymentMethods extends FieldComponent
     {
         return 'Payment Method';
     }
+
+    public function isRequired(): bool
+    {
+        return true;
+    }
 }
