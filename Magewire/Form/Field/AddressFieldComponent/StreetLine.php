@@ -18,13 +18,6 @@ abstract class StreetLine extends AddressFieldComponent
         parent::boot();
 
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
-
-        for($i = 0; $i < $streetLines; $i++) {
-            if ($i !== $this->index) {
-                $this->addFieldRefreshListener('street'.$i);
-            }
-        }
-
         if ($streetLines <= $this->index) {
             $this->visible = false;
         }
