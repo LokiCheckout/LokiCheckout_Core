@@ -1,13 +1,14 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutFieldComponent', () => {
-            return LokiCheckoutComponentExtender.extend({
-                ...LokiFieldComponent.create(this),
+            return {
+                ...LokiFieldComponentType,
                 init() {
+                    this.loadInitialData(this);
                     this.register(this);
                     this.triggerComponentChange(this);
                 }
-            });
+            }
         });
     });
 </script>

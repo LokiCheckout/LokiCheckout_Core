@@ -1,27 +1,26 @@
 <script>
-    const LokiGenericComponent = {
-        component: {
-            wireId: '',
-            elementId: '',
-            step: '',
-            name: '',
-            register(component) {
-                Alpine.store('components').add(component);
-            },
-            triggerComponentChange(currentComponent) {
-                Livewire.hook('element.updated', (element, component) => {
-                    // @todo: Is this actually needed?
-                    if (currentComponent.elementId === component.el.id && currentComponent.elementId + '-field' === element.id) {
-                        currentComponent.valid = Magewire.find(currentComponent.wireId).valid;
-                        document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                    }
-                });
-            }
+    const LokiGenericComponentType = {
+        wireId: '',
+        elementId: '',
+        step: '',
+        name: '',
+        loadInitialData() {
+            const jsonData = JSON.parse(this.$el.getAttribute('data-loki-component'));
+            Object.entries(jsonData).forEach(([key, value]) => {
+                this[key] = value;
+            });
         },
-        create(component) {
-            const componentData = this.component;
-            const jsonData = JSON.parse(component.$el.getAttribute('data-loki-component'));
-            return {...componentData, ...jsonData};
+        register(component) {
+            Alpine.store('components').add(component);
+        },
+        triggerComponentChange(currentComponent) {
+            Livewire.hook('element.updated', (element, component) => {
+                // @todo: Is this actually needed?
+                if (currentComponent.elementId === component.el.id && currentComponent.elementId + '-field' === element.id) {
+                    currentComponent.valid = Magewire.find(currentComponent.wireId).valid;
+                    document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                }
+            });
         }
     };
 </script>
