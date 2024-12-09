@@ -1,36 +1,23 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingMethods', () => ({
-            name: '',
-            wireId: '',
-            elementId: '',
-            step: '',
-            value: '',
-            valid: false,
-            rules: ['required'],
-            init() {
-                LokiCheckoutComponentExtender.merge(this);
-
-                if (this.value) {
-                    this.rules = ['required', this.value];
-                    window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
-                        detail: {method: this.value}
-                    }));
-                }
-
-                Alpine.store('components').add(this);
-
-                this.$watch('value', () => {
-                    this.rules = ['required', this.value];
-                    Magewire.find(this.wireId).call('setValue', this.value);
-                    if (this.value) {
-                        this.valid = true;
-                    }
-
-                    window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
-                        detail: {method: this.value}
-                    }));
-                });
+            ...LokiFieldComponentType
+            initActions: {
+                ...LokiFieldComponentType.initActions,
+                initShippingMethod() {
+                    this.dispatchShippingMethodEvent();
+                },
+            },
+            dispatchShippingMethodEvent() {
+                window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
+                    detail: {method: this.value}
+                }));
+            },
+            beforeSubmit() {
+                this.rules = ['required', this.value]; // @todo: Doesn't this stick when switching value?
+            },
+            afterSubmit() {
+                this.dispatchShippingMethodEvent();
             }
         }));
     });
