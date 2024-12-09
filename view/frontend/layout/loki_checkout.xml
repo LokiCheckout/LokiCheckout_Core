@@ -19,7 +19,8 @@
     <update handle="loki_checkout_block_billing_address"/>
     <update handle="loki_checkout_block_payment_methods"/>
 
-    <!-- Misc -->
+    <!-- Other -->
+    <update handle="loki_checkout_script"/>
     <update handle="loki_checkout_misc"/>
 
     <body>
@@ -31,65 +32,6 @@
 
                 <block name="loki-checkout.steps" as="steps" template="Yireo_LokiCheckout::checkout/steps.phtml"/>
             </block>
-        </referenceContainer>
-
-        <referenceContainer name="after.body.start">
-            <block
-                name="loki-checkout.script.logger"
-                template="Yireo_LokiCheckout::script/logger.phtml"/>
-            <block
-                name="loki-checkout.script.component-store"
-                template="Yireo_LokiCheckout::script/component-store.phtml"/>
-            <block
-                name="loki-checkout.script.component-extender"
-                template="Yireo_LokiCheckout::script/component-extender.phtml"/>
-            <block
-                name="loki-checkout.script.messenger"
-                template="Yireo_LokiCheckout::script/messenger.phtml"/>
-            <block
-                name="loki-checkout.script.validator"
-                template="Yireo_LokiCheckout::script/validator.phtml"/>
-        </referenceContainer>
-
-        <referenceContainer name="before.body.end">
-            <block
-                name="loki-checkout.script.step-path"
-                template="Yireo_LokiCheckout::script/step-path.phtml"/>
-            <block
-                name="loki-checkout.script.aria-invalid"
-                template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
-            <block
-                name="loki-checkout.script.component-magic-wire"
-                template="Yireo_LokiCheckout::script/component-magic-wire.phtml"/>
-
-            <block
-                name="loki-checkout.script.validator-rules.email"
-                template="Yireo_LokiCheckout::script/validator-rules/email.phtml"/>
-            <block
-                name="loki-checkout.script.validator-rules.number"
-                template="Yireo_LokiCheckout::script/validator-rules/number.phtml"/>
-
-            <container name="loki-checkout.script.alpine-components">
-                <block
-                    name="loki-checkout.script.components.generic-component"
-                    template="Yireo_LokiCheckout::script/component/generic-component.phtml" />
-                <block
-                    name="loki-checkout.script.components.field-component"
-                    template="Yireo_LokiCheckout::script/component/field-component.phtml" />
-                <block
-                    name="loki-checkout.script.components.step-component"
-                    template="Yireo_LokiCheckout::script/component/step-component.phtml" />
-                <block
-                    name="loki-checkout.script.components.step-backward-button"
-                    template="Yireo_LokiCheckout::script/component/step-backward-button.phtml" />
-                <block
-                    name="loki-checkout.script.components.step-forward-button"
-                    template="Yireo_LokiCheckout::script/component/step-forward-button.phtml" />
-
-                <block
-                    name="loki-checkout.script.components.toggle"
-                    template="Yireo_LokiCheckout::script/component/toggle.phtml" />
-            </container>
         </referenceContainer>
 
         <block
