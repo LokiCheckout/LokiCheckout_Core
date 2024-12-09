@@ -20,7 +20,7 @@
         },
         create(component) {
             const componentData = this.component;
-            const jsonData = JSON.parse(component.$el.getAttribute('x-init-data'));
+            const jsonData = JSON.parse(component.$el.getAttribute('data-loki-component'));
             return {...componentData, ...jsonData};
         }
     };
