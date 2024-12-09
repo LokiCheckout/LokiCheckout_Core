@@ -2,43 +2,11 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutFieldComponent', () => {
             return LokiCheckoutComponentExtender.extend({
-                name: '',
-                wireId: '',
-                elementId: '',
-                step: '',
-                value: '',
-                valid: true,
-                disabled: false,
-                rules: [],
+                ...LokiFieldComponent.create(this),
                 init() {
-                    LokiCheckoutComponentExtender.merge(this);
-
-                    Alpine.store('components').add(this);
-
-                    Livewire.hook('element.updated', (element, component) => {
-                        // @todo: Is this actually needed?
-                        if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                            this.valid = Magewire.find(this.wireId).valid;
-                            this.updated();
-                            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                        }
-                    });
-
-                    // @todo: This should no longer be needed
-                    //if (this.newAddress !== undefined && this.newAddress === false) {
-                    //    this.rules = [];
-                    //    this.valid = true;
-                    //}
-                },
-                // @todo: Is updated() actually needed for something
-                updated() {},
-                submit() {
-                    if (false === LokiCheckoutValidator.validate(this)) {
-                        return false;
-                    }
-
-                    Magewire.find(this.wireId).call('setValue', this.value);
-                },
+                    this.register(this);
+                    this.triggerComponentChange(this);
+                }
             });
         });
     });
