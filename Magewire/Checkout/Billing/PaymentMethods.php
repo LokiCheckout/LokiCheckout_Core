@@ -5,13 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
-class PaymentMethods extends GenericComponent
+class PaymentMethods extends FieldComponent
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
@@ -19,8 +19,6 @@ class PaymentMethods extends GenericComponent
 
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
-    public string $value = '';
-    public bool $valid = false;
 
     public function __construct(
         private CheckoutState $checkoutState,
@@ -29,7 +27,7 @@ class PaymentMethods extends GenericComponent
     ) {
     }
 
-    public function boot()
+    public function boot(): void
     {
         $cart = $this->checkoutState->getQuote();
         $cartId = $cart->getId();
@@ -51,10 +49,6 @@ class PaymentMethods extends GenericComponent
 
         if (!empty($this->value)) {
             $cart->collectTotals();
-        }
-
-        if (!empty($this->value) && $this->request->isPreceding()) {
-            $this->valid = true;
         }
 
         parent::boot();
@@ -83,10 +77,8 @@ class PaymentMethods extends GenericComponent
         return $this->paymentMethods;
     }
 
-    public function setValue(string $value): void
+    public function save($value): void
     {
-        $this->value = $value;
-
         if (false === $this->isPaymentMethodAvailable($value)) {
             $this->valid = false;
             $this->value = '';
@@ -105,11 +97,6 @@ class PaymentMethods extends GenericComponent
         $this->emit('afterSavePaymentMethod', $value);
     }
 
-    public function isValid(): bool
-    {
-        return $this->valid;
-    }
-
     private function isPaymentMethodAvailable(string $code): bool
     {
         foreach ($this->paymentMethods as $paymentMethod) {
@@ -119,5 +106,10 @@ class PaymentMethods extends GenericComponent
         }
 
         return false;
+    }
+
+    public function getFieldLabel(): string
+    {
+        return 'Payment Method';
     }
 }
