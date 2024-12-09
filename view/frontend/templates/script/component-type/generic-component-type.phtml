@@ -1,0 +1,27 @@
+<script>
+    const LokiGenericComponent = {
+        component: {
+            wireId: '',
+            elementId: '',
+            step: '',
+            name: '',
+            register(component) {
+                Alpine.store('components').add(component);
+            },
+            triggerComponentChange(currentComponent) {
+                Livewire.hook('element.updated', (element, component) => {
+                    // @todo: Is this actually needed?
+                    if (currentComponent.elementId === component.el.id && currentComponent.elementId + '-field' === element.id) {
+                        currentComponent.valid = Magewire.find(currentComponent.wireId).valid;
+                        document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                    }
+                });
+            }
+        },
+        create(component) {
+            const componentData = this.component;
+            const jsonData = JSON.parse(component.$el.getAttribute('x-init-data'));
+            return {...componentData, ...jsonData};
+        }
+    };
+</script>

@@ -1,0 +1,19 @@
+<script>
+    const LokiFieldComponent = {
+        ...LokiGenericComponent,
+        component: {
+            ...LokiGenericComponent.component,
+            value: '',
+            valid: true,
+            disabled: false,
+            rules: [],
+            submit() {
+                if (false === LokiCheckoutValidator.validate(this)) {
+                    return false;
+                }
+
+                Magewire.find(this.wireId).call('setValue', this.value);
+            },
+        }
+    };
+</script>
