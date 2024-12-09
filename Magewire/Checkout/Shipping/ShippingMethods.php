@@ -5,13 +5,13 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
-class ShippingMethods extends GenericComponent
+class ShippingMethods extends FieldComponent
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
@@ -21,11 +21,8 @@ class ShippingMethods extends GenericComponent
         'afterSaveShippingStep' => 'refresh',
         'afterSaveShippingAddress' => 'refresh',
     ];
+
     private array $shippingMethods = [];
-
-    public string $value = '';
-
-    public bool $valid = false;
 
     public function __construct(
         private readonly ShippingMethodManagementInterface $shippingMethodManagement,
@@ -34,7 +31,7 @@ class ShippingMethods extends GenericComponent
     ) {
     }
 
-    public function boot()
+    public function boot(): void
     {
         $shippingAddress = $this->shippingAddressState->getShippingAddress();
         $quote = $shippingAddress->getQuote();
@@ -73,20 +70,12 @@ class ShippingMethods extends GenericComponent
         return $this->shippingMethods;
     }
 
-    public function setValue(string $value)
+    public function save($value): void
     {
         $this->saveShippingMethodToQuote($value);
-        $this->value = $value;
-        $this->valid = true;
         $this->emit('afterSaveShippingStep');
         $this->emit('afterSaveShippingMethod');
 
-        return $value;
-    }
-
-    public function isValid(): bool
-    {
-        return $this->valid;
     }
 
     private function saveShippingMethodToQuote(string $shippingMethodCode): void
@@ -101,4 +90,11 @@ class ShippingMethods extends GenericComponent
 
         $this->cartRepository->save($quote);
     }
+
+    public function getFieldLabel(): string
+    {
+        return 'Shipping Methods';
+    }
+
+
 }
