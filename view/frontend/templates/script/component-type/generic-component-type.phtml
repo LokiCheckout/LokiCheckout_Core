@@ -22,12 +22,20 @@
                         document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
                     }
                 });
-            }
+            },
+        },
+        beforeInit() {
         },
         init() {
+            this.beforeInit();
+
             Object.entries(this.initActions).forEach(([key, callback]) => {
                 callback.apply(this);
             });
+
+            this.afterInit();
+        },
+        afterInit() {
         }
     };
 </script>
