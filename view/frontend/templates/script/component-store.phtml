@@ -39,22 +39,22 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             add(component) {
                 if (!component.name) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No name set', JSON.parse(JSON.stringify(component)));
+                    yireoLokiCheckoutLogger('WARNING: Not adding nameless Alpine.js component to store:', component.wireId);
                     return;
                 }
 
                 if (!component.elementId) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No elementId set', component.name);
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store: No elementId set');
                     return;
                 }
 
                 if (!component.step) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No step set', component.name);
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store: No step set');
                     return;
                 }
 
                 if (component.valid === undefined) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No valid flag set', component.name);
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store, because it has no valid flag set');
                     return;
                 }
 
