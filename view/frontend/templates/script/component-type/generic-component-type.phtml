@@ -4,13 +4,14 @@
         elementId: '',
         step: '',
         name: '',
+        visible: false,
         initActions: {
-            loadInitialData() {
+            /*loadInitialData: function() {
                 const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
-                Object.entries(jsonData).forEach(([key, value]) => {
+                for ([key, value] of Object.entries(jsonData)) {
                     this[key] = value;
-                });
-            },
+                }
+            },*/
             register() {
                 Alpine.store('components').add(this);
             },
@@ -29,9 +30,14 @@
         init() {
             this.beforeInit();
 
-            Object.entries(this.initActions).forEach(([key, callback]) => {
+            const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
+            for ([key, value] of Object.entries(jsonData)) {
+                this[key] = value;
+            }
+
+            for ([key, callback] of Object.entries(this.initActions)) {
                 callback.apply(this);
-            });
+            }
 
             this.afterInit();
         },

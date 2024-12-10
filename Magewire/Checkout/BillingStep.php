@@ -18,7 +18,7 @@ class BillingStep extends GenericComponent implements StepComponentInterface
         'afterSaveBillingStep' => 'refresh',
     ];
 
-    public string $refreshToken = '';
+    public string $refreshToken = ''; // @todo: What is this again?
 
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
@@ -30,10 +30,22 @@ class BillingStep extends GenericComponent implements StepComponentInterface
     public function boot(): void
     {
         if (false === $this->stepNavigator->isCurrentStep($this)) {
-            $this->allowRendering = false;
+            $this->visible = false;
         }
 
+        // @todo: Double-check for free products
+        //if ((bool)$this->checkoutState->getQuote()->isVirtual()) {
+        //    $this->allowRendering = false;
+        //}
+
         parent::boot();
+    }
+
+    public function getAdditionalAlpineData(): array
+    {
+        return [
+            'currentStep' => $this->getCode(),
+        ];
     }
 
     public function getCode(): string

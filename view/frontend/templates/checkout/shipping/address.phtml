@@ -15,7 +15,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 ?>
 <div class="<?= $css('mb-8') ?>"
      x-data="LokiCheckoutShippingAddress"
-     x-title="LokiCheckoutShippingAddress"
+     x-title="<?= $magewire->getAlpineComponentName() ?>"
      x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'>
     <?php if (count($magewire->shippingAddresses) > 0): ?>
         <?= $block->getChildHtml('address-select') ?>

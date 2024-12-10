@@ -28,7 +28,7 @@ class ShippingStep extends GenericComponent implements StepComponentInterface
     public function boot(): void
     {
         if (false === $this->stepNavigator->isCurrentStep($this)) {
-            $this->allowRendering = false;
+            $this->visible = false;
         }
 
         // @todo: Double-check for virtual products
@@ -37,6 +37,13 @@ class ShippingStep extends GenericComponent implements StepComponentInterface
         }
 
         parent::boot();
+    }
+
+    public function getAdditionalAlpineData(): array
+    {
+        return [
+            'currentStep' => $this->getCode(),
+        ];
     }
 
     public function getCode(): string

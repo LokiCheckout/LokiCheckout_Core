@@ -2,11 +2,8 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutPaymentMethods', () => ({
             ...LokiFieldComponentType,
-            initActions: {
-                ...LokiFieldComponentType.initActions,
-                initPaymentMethod() {
-                    this.dispatchPaymentMethodEvent();
-                },
+            afterInit() {
+                this.dispatchPaymentMethodEvent();
             },
             dispatchPaymentMethodEvent() {
                 window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {

@@ -1,16 +1,9 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingAddress', () => ({
-            wireId: '',
-            newAddress: true,
-            buttonLabel: '',
-            buttonLabelSelectAddress: '',
-            buttonLabelNewAddress: '',
-            init() {
-                LokiCheckoutComponentExtender.merge(this);
-
+            ...Object.assign({}, LokiGenericComponentType),
+            afterInit() {
                 this.buttonLabel = this.getButtonLabel();
-
                 this.$watch('newAddress', () => {
                     Magewire.find(this.wireId).setNewAddress(this.newAddress);
                 });

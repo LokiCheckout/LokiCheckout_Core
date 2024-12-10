@@ -21,7 +21,7 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= $css('card bg-gray-100 my-2') ?>"
      x-data="LokiCheckoutToggle"
-     x-title="<?= $block->getComponentName() ?>">
+     x-title="<?= $magewire->getAlpineComponentName() ?>">
 
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>

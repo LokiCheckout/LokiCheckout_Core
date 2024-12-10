@@ -3,6 +3,8 @@
 namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
 
 use Magento\Framework\View\Element\AbstractBlock;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 
 trait AlpineDataBehaviour
 {
@@ -11,33 +13,33 @@ trait AlpineDataBehaviour
 
     public function getAlpineData(): array
     {
-        $rules = [];
-        if (method_exists($this, 'getValidators')) {
-            foreach ($this->getValidators() as $validator) {
-                $rules[] = $validator;
+        $data = [];
+
+        if ($this instanceof GenericComponent) {
+            $data = [
+                ...$data,
+                'name' => $this->getAlpineComponentName(),
+                'wireId' => $this->id,
+                'elementId' => $this->getDomElementId(),
+                'step' => $this->getStep(),
+                'visible' => $this->visible,
+            ];
+        }
+
+        if ($this instanceof FieldComponent) {
+            $rules = [];
+            if (method_exists($this, 'getValidators')) {
+                foreach ($this->getValidators() as $validator) {
+                    $rules[] = $validator;
+                }
             }
-        }
 
-        $data = [
-            'name' => $this->getAlpineComponentName(),
-            'wireId' => $this->id,
-            'elementId' => $this->getDomElementId(),
-            'step' => $this->getStep(),
-            'visible' => $this->visible,
-            'rules' => $rules,
-        ];
-
-        $data = array_merge($data, $this->getAdditionalAlpineData());
-
-        if (property_exists($this, 'value')) {
+            $data['rules'] = $rules;
             $data['value'] = $this->getJsValue();
-        }
-
-        if (property_exists($this, 'valid')) {
             $data['valid'] = $this->valid;
         }
 
-        return $data;
+        return array_merge($data, $this->getAdditionalAlpineData());
     }
 
     public function getAdditionalAlpineData(): array

@@ -16,7 +16,7 @@ $paymentMethods = $magewire->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>"
      x-data="LokiCheckoutPaymentMethods"
-     x-title="LokiCheckoutPaymentMethods"
+     x-title="<?= $magewire->getAlpineComponentName() ?>"
      x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
