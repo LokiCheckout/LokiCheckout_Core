@@ -23,7 +23,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 <div class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
      x-data="LokiCheckoutFieldComponent"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
-     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <?= $block->getChildHtml('before') ?>
 

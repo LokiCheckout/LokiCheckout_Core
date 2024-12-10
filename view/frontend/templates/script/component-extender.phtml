@@ -19,7 +19,7 @@
             }
         },
         getComponentData(component) {
-            return JSON.parse(component.$el.dataset.lokiComponent);
+            return JSON.parse(component.$el.getAttribute('x-init-data'));
         },
         merge(component) {
             const componentData = this.getComponentData(component);

@@ -22,7 +22,7 @@ $shippingMethods = $magewire->getShippingMethods();
 <div class="<?= $css('relative w-full mb-8') ?>"
      x-data="LokiCheckoutShippingMethods"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
-     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>

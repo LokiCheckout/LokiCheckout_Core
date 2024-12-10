@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutStep"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
-     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'>
+     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'>
 
     <?= $block->getChildHtml() ?>
 </div>

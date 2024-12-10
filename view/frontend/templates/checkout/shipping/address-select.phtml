@@ -16,7 +16,7 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutFieldComponent"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
-     data-loki-component='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
 >
     <?= $block->getChildHtml('title') ?>
 

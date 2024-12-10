@@ -6,7 +6,7 @@
         name: '',
         initActions: {
             loadInitialData() {
-                const jsonData = JSON.parse(this.$el.getAttribute('data-loki-component'));
+                const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
                 Object.entries(jsonData).forEach(([key, value]) => {
                     this[key] = value;
                 });
