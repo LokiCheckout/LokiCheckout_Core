@@ -23,6 +23,7 @@ trait AlpineDataBehaviour
                 'elementId' => $this->getDomElementId(),
                 'step' => $this->getStep(),
                 'visible' => $this->visible,
+                'lazyLoad' => $this->lazyLoad,
             ];
         }
 

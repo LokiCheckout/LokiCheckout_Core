@@ -17,6 +17,8 @@ class ShippingMethods extends FieldComponent
     use StepBehaviour;
     use AlpineDataBehaviour;
 
+    public bool $lazyLoad = false; // @todo: Make this configurable
+
     protected $listeners = [
         'afterSaveShippingStep' => 'refresh',
         'afterSaveShippingAddress' => 'refresh',
@@ -33,6 +35,10 @@ class ShippingMethods extends FieldComponent
 
     public function boot(): void
     {
+        if ($this->isLazyload()) {
+            return;
+        }
+
         $shippingAddress = $this->shippingAddressState->getShippingAddress();
         $quote = $shippingAddress->getQuote();
         $shippingAddress
@@ -60,6 +66,8 @@ class ShippingMethods extends FieldComponent
         if (!empty($this->value)) {
             $this->valid = true;
         }
+
+        parent::boot();
     }
 
     /**

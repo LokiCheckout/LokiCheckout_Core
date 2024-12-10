@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('StepBackwardButton', () => ({
-            ...Object.assign({}, LokiGenericComponentType),
+            ...LokiGenericComponentType,
             valid: true
         }));
     });

@@ -8,6 +8,7 @@ abstract class GenericComponent extends Component
 {
     public bool $visible = true;
     public bool $allowRendering = true;
+    public bool $lazyLoad = false;
 
     public function booted(): void
     {
@@ -16,6 +17,11 @@ abstract class GenericComponent extends Component
         if (false === $this->allowRendering) {
             $this->switchTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
+    }
+
+    public function isLazyload(): bool
+    {
+        return $this->lazyLoad && $this->request->isPreceding();
     }
 
     public function addRefreshListener(string $listener)

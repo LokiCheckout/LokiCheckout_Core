@@ -20,6 +20,8 @@ class PaymentMethods extends FieldComponent
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
 
+    public bool $lazyLoad = false; // @todo: Make this configurable
+
     public function __construct(
         private CheckoutState $checkoutState,
         private PaymentMethodManagementInterface $paymentMethodManagement,
@@ -29,6 +31,10 @@ class PaymentMethods extends FieldComponent
 
     public function boot(): void
     {
+        if ($this->isLazyload()) {
+            return;
+        }
+
         $cart = $this->checkoutState->getQuote();
         $cartId = $cart->getId();
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);

@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutSteps', () => ({
-            ...Object.assign({}, LokiGenericComponentType),
+            ...LokiGenericComponentType,
             afterInit() {
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {

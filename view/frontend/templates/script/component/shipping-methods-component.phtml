@@ -2,16 +2,13 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingMethods', () => ({
             ...LokiFieldComponentType,
-            initActions: {
-                ...LokiFieldComponentType.initActions,
-                initShippingMethod() {
-                    this.dispatchShippingMethodEvent();
-                    this.$watch('value', () => {
-                        if (this.value) {
-                            this.submit();
-                        }
-                    });
-                },
+            afterInit() {
+                this.dispatchShippingMethodEvent();
+                this.$watch('value', () => {
+                    if (this.value) {
+                        this.submit();
+                    }
+                });
             },
             dispatchShippingMethodEvent() {
                 window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {

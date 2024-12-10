@@ -6,12 +6,12 @@
         name: '',
         visible: false,
         initActions: {
-            /*loadInitialData: function() {
+            loadInitialData: function() {
                 const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
                 for ([key, value] of Object.entries(jsonData)) {
                     this[key] = value;
                 }
-            },*/
+            },
             register() {
                 Alpine.store('components').add(this);
             },
@@ -30,13 +30,13 @@
         init() {
             this.beforeInit();
 
-            const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
-            for ([key, value] of Object.entries(jsonData)) {
-                this[key] = value;
-            }
-
             for ([key, callback] of Object.entries(this.initActions)) {
                 callback.apply(this);
+            }
+
+            if (this.lazyLoad && this.wireId) {
+                Magewire.find(this.wireId).$refresh();
+                return;
             }
 
             this.afterInit();
