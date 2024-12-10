@@ -16,7 +16,7 @@ class CustomerEmail extends QuoteFieldComponent
     public function boot(): void
     {
         if ($this->customerSession->isLoggedIn()) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         parent::boot();

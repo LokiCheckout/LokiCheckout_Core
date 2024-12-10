@@ -28,12 +28,12 @@ class ShippingStep extends GenericComponent implements StepComponentInterface
     public function boot(): void
     {
         if (false === $this->stepNavigator->isCurrentStep($this)) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         // @todo: Double-check for virtual products
         if ((bool)$this->checkoutState->getQuote()->isVirtual()) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         parent::boot();

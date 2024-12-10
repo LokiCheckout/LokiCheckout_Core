@@ -30,7 +30,7 @@ class ShippingAddressSelect extends FieldComponent
     public function boot(): void
     {
         if (false === $this->customerProvider->isLoggedIn()) {
-            $this->visible = false;
+            $this->allowRendering = false;
             $this->valid = false;
 
             return;

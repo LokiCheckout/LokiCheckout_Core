@@ -27,7 +27,7 @@ abstract class Region extends AddressFieldComponent
 
         // @todo: This does not work properly at sequential requests
         if ($this->lokiCheckoutConfig->hideRegionWhenOptional() && false === $this->isRequired()) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         $this->addFieldRefreshListener('country_id');

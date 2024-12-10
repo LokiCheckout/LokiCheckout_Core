@@ -7,13 +7,14 @@ use Magewirephp\Magewire\Component;
 abstract class GenericComponent extends Component
 {
     public bool $visible = true;
+    public bool $allowRendering = true;
 
     public function booted(): void
     {
         parent::booted();
 
-        if (false === $this->visible) {
-            $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
+        if (false === $this->allowRendering) {
+            $this->switchTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
     }
 
@@ -32,12 +33,12 @@ abstract class GenericComponent extends Component
         return $this->listeners;
     }
 
-    public function updatedVisible(bool $visible): bool
+    public function updatedAllowRendering(bool $allowRendering): bool
     {
-        if (false === $visible) {
-            $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
+        if (false === $allowRendering) {
+            $this->switchTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
 
-        return $visible;
+        return $allowRendering;
     }
 }

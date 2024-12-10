@@ -26,7 +26,7 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
     public function mount(): void
     {
         if ($this->stepNavigator->isFirstStep($this->stepNavigator->getCurrentStep())) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         parent::mount();

@@ -32,6 +32,6 @@ abstract class VatId extends AddressFieldComponent
             return;
         }
 
-        $this->visible = false; // @todo: Double-check that this is still working
+        $this->allowRendering = false; // @todo: Double-check that this is still working
     }
 }

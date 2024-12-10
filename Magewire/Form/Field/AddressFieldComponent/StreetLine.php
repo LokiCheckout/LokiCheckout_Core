@@ -19,7 +19,7 @@ abstract class StreetLine extends AddressFieldComponent
 
         $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
         if ($streetLines <= $this->index) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
     }
 

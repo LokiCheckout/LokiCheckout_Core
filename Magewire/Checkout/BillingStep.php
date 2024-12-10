@@ -30,7 +30,7 @@ class BillingStep extends GenericComponent implements StepComponentInterface
     public function boot(): void
     {
         if (false === $this->stepNavigator->isCurrentStep($this)) {
-            $this->visible = false;
+            $this->allowRendering = false;
         }
 
         parent::boot();

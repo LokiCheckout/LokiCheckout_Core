@@ -40,7 +40,7 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     {
         parent::booted();
 
-        if (false === $this->visible) {
+        if (false === $this->allowRendering) {
             $this->valid = true;
         }
 
