@@ -61,11 +61,4 @@ interface FormFieldInterface
      * @return bool
      */
     public function validate(): bool;
-
-    /**
-     * Determine if this field is visible or not.
-     *
-     * @return bool
-     */
-    public function isVisible(): bool;
 }

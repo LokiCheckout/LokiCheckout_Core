@@ -32,15 +32,6 @@ abstract class GenericComponent extends Component
         return $this->listeners;
     }
 
-    /**
-     * @return bool
-     * @deprecated Use $this->visible directly instead
-     */
-    public function isVisible(): bool
-    {
-        return $this->visible;
-    }
-
     public function updatedVisible(bool $visible): bool
     {
         if (false === $visible) {

@@ -8,5 +8,4 @@ interface ButtonInterface
     public function getDomElementId(): string;
     public function getStep(): string;
     public function submit();
-    public function isVisible(): bool;
 }
