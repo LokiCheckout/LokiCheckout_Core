@@ -25,7 +25,7 @@ $isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
      x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
      <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
      x-show="visible"
-     x-transition
+     x-transition.duration.500ms.opacity
 >
     <?= $block->getChildHtml() ?>
 </div>
