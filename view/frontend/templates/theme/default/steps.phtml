@@ -2,11 +2,24 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var CssClass $css */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var StepNavigator $stepNavigator */
+
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
+$currentStep = $stepNavigator->getCurrentStep();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= $css('') ?>"
+     <?php /*
+x-data="LokiCheckoutSteps"
+     x-title="LokiCheckoutSteps"
+     x-init-data='{"step": "<?= $currentStep->getCode() ?>"}'
+ */ ?>
+>
     <?= $block->getChildHtml() ?>
 </div>

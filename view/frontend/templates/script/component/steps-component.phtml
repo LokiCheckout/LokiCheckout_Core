@@ -1,0 +1,45 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutSteps', () => ({
+            ...LokiGenericComponentType,
+            initActions: {
+                loadInitialData: LokiGenericComponentType.initActions.loadInitialData,
+                afterInit() {
+                    this.updateValid();
+                    document.addEventListener('yireo-loki-checkout.component-change', () => {
+                        this.updateValid();
+                    });
+                },
+            },
+            updateValid() {
+                this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
+                if (!this.valid) {
+                    const components = [];
+                    Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
+                        components.push(component.name);
+                    })
+
+                    yireoLokiCheckoutLogger('INFO: Invalid components for step "'+this.step+'"', components);
+                }
+
+                return this.valid;
+            },
+            submit() {
+                window.dispatchEvent(new CustomEvent('clear-messages'));
+                Alpine.store('components').getComponentsByStep(this.step).forEach((component) => {
+                    LokiCheckoutValidator.validate(component);
+                });
+
+                if (true === this.updateValid()) {
+                    Magewire.find(this.wireId).call('submit');
+                }
+
+                setTimeout(() => {
+                    if (this.valid) {
+                        this.valid = true;
+                    }
+                }, 4000);
+            }
+        }));
+    });
+</script>

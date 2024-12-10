@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Magewire\Checkout\ShippingStep;
+use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -14,12 +15,17 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
+$isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
 ?>
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutStep"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
-     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'>
+     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+     <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
+     x-show="visible"
+     x-transition
+>
     <?= $block->getChildHtml() ?>
 </div>

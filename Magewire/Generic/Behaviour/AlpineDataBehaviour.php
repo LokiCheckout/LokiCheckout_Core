@@ -23,6 +23,7 @@ trait AlpineDataBehaviour
             'wireId' => $this->id,
             'elementId' => $this->getDomElementId(),
             'step' => $this->getStep(),
+            'visible' => $this->visible,
             'rules' => $rules,
         ];
 
