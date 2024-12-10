@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::checkout-theme-default.phtml"/>
+        <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/default/checkout.phtml"/>
 
-        <referenceBlock name="loki-checkout.steps" >
+        <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
             <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\ShippingStep
