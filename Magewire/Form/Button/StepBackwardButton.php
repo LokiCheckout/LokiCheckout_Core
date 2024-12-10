@@ -32,7 +32,7 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
         parent::mount();
     }
 
-    public function getStep(): string
+    public function getCurrentStep(): string
     {
         return $this->stepNavigator->getCurrentStep()->getCode();
     }
@@ -46,11 +46,16 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
             return;
         }
 
-        $this->emit('afterChangeStep', $this->getStep());
+        $this->emit('afterChangeStep', $this->getCurrentStep());
     }
 
     public function isValid(): bool
     {
         return $this->valid;
+    }
+
+    public function getStep(): string
+    {
+        return 'any';
     }
 }

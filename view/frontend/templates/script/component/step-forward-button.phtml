@@ -2,12 +2,14 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('StepForwardButton', () => ({
             ...LokiGenericComponentType,
-            valid: false,
-            afterInit() {
-                this.updateValid();
-                document.addEventListener('yireo-loki-checkout.component-change', () => {
+            initActions: {
+                ...LokiGenericComponentType.initActions,
+                afterInit() {
                     this.updateValid();
-                });
+                    document.addEventListener('yireo-loki-checkout.component-change', () => {
+                        this.updateValid();
+                    });
+                },
             },
             updateValid() {
                 this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);

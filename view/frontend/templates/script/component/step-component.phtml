@@ -2,11 +2,13 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
             ...LokiGenericComponentType,
-            visible: false,
-            afterInit() {
-                Magewire.on('afterChangeStep', (stepCode) => {
-                    this.visible = this.step === stepCode;
-                });
+            initActions: {
+                ...LokiGenericComponentType.initActions,
+                changeVisibilityOnStepChange() {
+                    Magewire.on('afterChangeStep', (stepCode) => {
+                        this.visible = this.step === stepCode;
+                    });
+                },
             }
         }));
     });

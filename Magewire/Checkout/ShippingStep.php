@@ -65,4 +65,9 @@ class ShippingStep extends GenericComponent implements StepComponentInterface
     {
         return $this->stepValidator->validate();
     }
+
+    public function getStep(): string
+    {
+        return 'any';
+    }
 }

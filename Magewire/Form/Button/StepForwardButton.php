@@ -27,10 +27,10 @@ class StepForwardButton extends GenericComponent implements ButtonInterface
 
     public function getComponents(): array
     {
-        return $this->componentRegistry->getComponentsByStep($this->getStep());
+        return $this->componentRegistry->getComponentsByStep($this->getCurrentStep());
     }
 
-    public function getStep(): string
+    public function getCurrentStep(): string
     {
         return $this->stepNavigator->getCurrentStep()->getCode();
     }
@@ -38,7 +38,7 @@ class StepForwardButton extends GenericComponent implements ButtonInterface
     public function submit()
     {
         $this->clearFlashMessages();
-        $this->emit('afterValidateStep', $this->getStep());
+        $this->emit('afterValidateStep', $this->getCurrentStep());
 
         try {
             $result = $this->stepNavigator->setNextStep($this);
@@ -48,12 +48,17 @@ class StepForwardButton extends GenericComponent implements ButtonInterface
         }
 
         if (true === $result) {
-            $this->emit('afterChangeStep', $this->getStep());
+            $this->emit('afterChangeStep', $this->getCurrentStep());
         }
     }
 
     public function isValid(): bool
     {
         return $this->valid;
+    }
+
+    public function getStep(): string
+    {
+        return 'any';
     }
 }
