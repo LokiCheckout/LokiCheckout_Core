@@ -42,6 +42,9 @@
             <block
                 name="loki-checkout.script.validator-rules.number"
                 template="Yireo_LokiCheckout::script/validator-rules/number.phtml"/>
+            <block
+                name="loki-checkout.script.validator-rules.postcode"
+                template="Yireo_LokiCheckout::script/validator-rules/postcode.phtml"/>
 
             <container name="loki-checkout.script.alpine-components">
                 <block

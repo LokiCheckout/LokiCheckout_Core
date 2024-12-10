@@ -1,0 +1,51 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\ViewModel\PostcodePatterns;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var PostcodePatterns $postcodePatterns */
+$postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
+?>
+<script>
+    const postcodePatterns = {};
+    <?php foreach($postcodePatterns->getConfiguration() as $countryCode => $patterns) : ?>
+    postcodePatterns['<?= $countryCode ?>'] = [];
+    <?php foreach($patterns as $patternName => $pattern): ?>
+    postcodePatterns['<?= $countryCode ?>'].push({
+        example: '<?= $pattern['example'] ?>',
+        pattern: /<?= $pattern['pattern'] ?>/
+    });
+    <?php endforeach; ?>
+    <?php endforeach; ?>
+
+    LokiCheckoutValidator.rules.postcode = function (component) {
+        // @todo: The following is kind of ugly. Wouldn't Alpine.store('components').get('country_id') be nicer?
+        const countryComponentName = component.name.includes('Billing') ? 'LokiCheckoutBillingAddressCountryId' : 'LokiCheckoutShippingAddressCountryId';
+        const countryComponent = Alpine.store('components').get(countryComponentName);
+        if (!countryComponent) {
+            return true;
+        }
+
+        const countryId = countryComponent.value;
+        if (!countryId) {
+            return true;
+        }
+
+        if (!Object.keys(postcodePatterns).includes(countryId)) {
+            return true;
+        }
+
+        for (const [key, value] of Object.entries(postcodePatterns[countryId])) {
+            if (value['pattern'].test(component.value) === false) {
+                LokiCheckoutMessenger.error('<?= __('Not a valid postcode') ?>', component);
+                return false;
+            }
+        }
+
+        return true;
+    }
+</script>
