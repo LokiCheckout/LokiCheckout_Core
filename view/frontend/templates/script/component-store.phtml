@@ -39,7 +39,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             add(component) {
                 if (!component.name) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No name set', component);
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component to store: No name set', JSON.parse(JSON.stringify(component)));
                     return;
                 }
 
