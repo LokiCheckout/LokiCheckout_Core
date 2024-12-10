@@ -4,7 +4,7 @@
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/default/checkout.phtml"/>
 
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
-            <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::checkout/shipping-step.phtml">
+            <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\ShippingStep
                     </argument>
@@ -21,7 +21,7 @@
                 <block name="loki-checkout.shipping-step.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
             </block>
 
-            <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::checkout/billing-step.phtml">
+            <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
                 <arguments>
                     <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\BillingStep
                     </argument>
