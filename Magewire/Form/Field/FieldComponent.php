@@ -40,6 +40,10 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     {
         parent::booted();
 
+        if (false === $this->visible) {
+            $this->valid = true;
+        }
+
         // @todo: This causes all fields to be red-bordered by default which is bad UI
         //if ($this->isRequired() && empty($this->value)) {
         //    $this->valid = false;

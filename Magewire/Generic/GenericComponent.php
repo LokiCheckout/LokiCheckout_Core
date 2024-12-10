@@ -14,7 +14,6 @@ abstract class GenericComponent extends Component
 
         if (false === $this->visible) {
             $this->switchTemplate('Yireo_LokiCheckout::utils/not-visible.phtml');
-            $this->valid = true; // @todo: Valid only exists in FieldComponent
         }
     }
 
