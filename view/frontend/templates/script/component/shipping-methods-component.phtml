@@ -6,6 +6,11 @@
                 ...LokiFieldComponentType.initActions,
                 initShippingMethod() {
                     this.dispatchShippingMethodEvent();
+                    this.$watch('value', () => {
+                        if (this.value) {
+                            this.submit();
+                        }
+                    });
                 },
             },
             dispatchShippingMethodEvent() {
