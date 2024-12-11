@@ -55,9 +55,11 @@ class CssClass
         // @todo: Beautify this
         $nameInLayout = $this->block->getNameInLayout();
         $defaultsBlock = $this->block->getLayout()->getBlock('loki-checkout.css_classes');
-        $blockData = $defaultsBlock->getData($nameInLayout);
-        if (!empty($blockData)) {
-            $cssClasses = array_merge_recursive($cssClasses, $blockData);
+        if ($defaultsBlock) {
+            $blockData = $defaultsBlock->getData($nameInLayout);
+            if (!empty($blockData)) {
+                $cssClasses = array_merge_recursive($cssClasses, $blockData);
+            }
         }
 
         $cssClasses[$scope] = $this->parse($cssClasses[$scope]);

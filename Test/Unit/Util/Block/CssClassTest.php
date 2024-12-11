@@ -7,17 +7,19 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 class CssClassTest extends TestCase
 {
     public function testWithBasicInput()
     {
-        $cssClass = new CssClass();
+        $xmlConfig = $this->createMock(XmlConfig::class);
+        $cssClass = new CssClass($xmlConfig);
         $cssClass->setBlock($this->getBlock());
 
-        $this->assertEquals('class1 class2', $cssClass('class1 class2'));
-        //$this->assertEquals('class1 class1', $cssClass('class1'));
+        $this->assertEquals('scope-block class1 class2', $cssClass('class1 class2'));
+        //$this->assertEquals('scope-block class1', $cssClass('class1 class1'));
     }
 
     public function testWithBlockConfiguration()
@@ -25,9 +27,10 @@ class CssClassTest extends TestCase
         $block = $this->getBlock();
         $block->setCssClasses(['block' => ['additional' => 'class2']]);
 
-        $cssClass = new CssClass();
+        $xmlConfig = $this->createMock(XmlConfig::class);
+        $cssClass = new CssClass($xmlConfig);
         $cssClass->setBlock($block);
-        $this->assertEquals('class1 class2', $cssClass('class1'));
+        $this->assertEquals('scope-block class1 class2', $cssClass('class1'));
     }
 
     public function testWithOtherConfiguration()
@@ -35,9 +38,10 @@ class CssClassTest extends TestCase
         $block = $this->getBlock();
         $block->setCssClasses(['other' => ['additional' => 'class2']]);
 
-        $cssClass = new CssClass();
+        $xmlConfig = $this->createMock(XmlConfig::class);
+        $cssClass = new CssClass($xmlConfig);
         $cssClass->setBlock($block);
-        $this->assertEquals('class1 class2', $cssClass('class1', 'other'));
+        $this->assertEquals('__other scope-other class1 class2', $cssClass('class1', 'other'));
     }
 
     private function getBlock(): Template|MockObject
