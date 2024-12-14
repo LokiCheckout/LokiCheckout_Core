@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 >
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"
-            :disabled="!valid"
+            :disabled="disabled"
             wire:click="submit"
             wire:loading.attr="disabled">
         <?= __((string)$block->getButtonLabel()) ?>
