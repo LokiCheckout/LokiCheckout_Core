@@ -20,6 +20,7 @@
                     // @todo: Is this actually needed?
                     if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
                         this.valid = Magewire.find(this.wireId).valid;
+                        this.value = Magewire.find(this.wireId).value;
                         document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
                     }
                 });
