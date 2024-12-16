@@ -20,13 +20,7 @@ class BillingAsShippingService
             return false;
         }
 
-        $currentValue = $address->getSameAsBilling();
-
-        if ($currentValue !== null) {
-            return (bool)$currentValue;
-        }
-
-        return $this->config->getSameAsBillingValue();
+        return (bool)$address->getSameAsBilling();
     }
 
     public function copy(AddressInterface $fromAddress, AddressInterface $toAddress): void

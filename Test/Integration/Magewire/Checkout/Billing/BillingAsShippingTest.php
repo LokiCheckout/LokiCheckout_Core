@@ -40,24 +40,4 @@ class BillingAsShippingTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
     }
-
-    #[Config('yireo_loki_checkout/fields/same_as_billing_value', 0)]
-    public function testDefaultFalseValue()
-    {
-        $this->assertStoreConfigValueEquals(0, 'yireo_loki_checkout/fields/same_as_billing_value');
-
-        $component = $this->getDummyComponentInstance(BillingAsShipping::class);
-        $component->boot();
-        $this->assertSame(false, $component->billingAsShipping);
-    }
-
-    #[Config('yireo_loki_checkout/fields/same_as_billing_value', 1)]
-    public function testDefaultTrueValue()
-    {
-        $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/fields/same_as_billing_value');
-
-        $component = $this->getDummyComponentInstance(BillingAsShipping::class);
-        $component->boot();
-        $this->assertSame(true, $component->billingAsShipping);
-    }
 }
