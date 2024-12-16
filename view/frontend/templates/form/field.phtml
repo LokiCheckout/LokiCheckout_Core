@@ -21,6 +21,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 // @todo: Determine LokiCheckoutFieldComponent from component method getAlpineComponentName()
 ?>
 <div class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
+     wire:key="<?= $magewire->getHash() ?>"
      x-data="LokiCheckoutFieldComponent"
      x-title="<?= $magewire->getAlpineComponentName() ?>"
      x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'

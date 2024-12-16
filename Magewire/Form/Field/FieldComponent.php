@@ -172,4 +172,14 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
     {
         return $this->lokiCheckoutConfig;
     }
+
+    public function getHash(): string
+    {
+        $identifiers = [];
+        $identifiers[] = $this->id;
+        $identifiers[] = $this->isDisabled();
+        $identifiers[] = $this->value;
+
+        return md5(implode('-', $identifiers));
+    }
 }
