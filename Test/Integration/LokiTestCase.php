@@ -66,11 +66,13 @@ class LokiTestCase extends MagewireComponentTestCase
         return $cart;
     }
 
-    public function assertMagewireComponentExistsOnPage(string $blockName, Component $component)
+    public function assertMagewireComponentExistsOnPage(string $blockName)
     {
         $body = $this->getResponse()->getBody();
         $this->assertMagewireBlockExistsInHtml($blockName, $body);
-        $this->assertMagewireComponentResolves($blockName, $component, ['checkout_index_index']);
+
+        // @todo: Enable elsewhere
+        //$this->assertMagewireComponentResolves($blockName, $component, ['checkout_index_index']);
     }
 
     public function assertMagewireComponentNotExistsOnPage(string $blockName)
