@@ -111,8 +111,13 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
             $this->beforeSave($value);
             $this->save($value);
             $this->afterSave($value);
-            $this->emit('afterSave'.$this->snakeToCamel($this->getFieldName()));
+            $this->emit($this->getAfterSaveEventName(), $this->value);
         }
+    }
+
+    public function getAfterSaveEventName(): string
+    {
+        return 'afterSave'.$this->snakeToCamel($this->getFieldName());
     }
 
     public function updatedValue(mixed $value): mixed

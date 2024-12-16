@@ -24,6 +24,13 @@
                         document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
                     }
                 });
+
+                /*
+                Livewire.on(this.afterSaveEventName, (value) => {
+                    console.log('afterSaveEvent event', value);
+                    this.value = value;
+                });
+                 */
             },
         },
         beforeInit() {
