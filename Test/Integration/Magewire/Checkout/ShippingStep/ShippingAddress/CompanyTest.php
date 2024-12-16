@@ -2,23 +2,28 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
 
+use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
+use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Company;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
-#[AppArea('frontend')]
+#[
+    AppArea('frontend'),
+    DataFixture(ProductFixture::class, ['price' => 100], as: 'p1'),
+    DataFixture(GuestCartFixture::class, as: 'cart'),
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$p1.id$','qty' => 1])
+]
 class CompanyTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.company';
 
-    use CartFixture;
-    use ProductFixture;
-
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getCart();
+
         $cart->getShippingAddress()->addData(['company' => '']);
         $this->dispatchToCheckout($cart);
 
@@ -31,7 +36,7 @@ class CompanyTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getCart();
         $cart->getShippingAddress()->addData(['company' => 'Yireo']);
         $this->dispatchToCheckout($cart);
 

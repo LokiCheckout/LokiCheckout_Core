@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Fixture;
 
-use Magento\TestFramework\ObjectManager;
+use Magento\Framework\App\ObjectManager;
 
 trait GetObjectManager
 {

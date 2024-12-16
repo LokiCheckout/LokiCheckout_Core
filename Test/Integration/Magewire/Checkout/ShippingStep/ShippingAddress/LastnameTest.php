@@ -5,21 +5,21 @@ namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\Shippin
 use Magento\TestFramework\Fixture\AppArea;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Lastname;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
+/**
+ * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+ */
 #[AppArea('frontend')]
 class LastnameTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.lastname';
 
     use CartFixture;
-    use ProductFixture;
-
 
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['lastname' => '']);
         $this->dispatchToCheckout($cart);
 
@@ -33,7 +33,7 @@ class LastnameTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['lastname' => 'Doe']);
         $this->dispatchToCheckout($cart);
 

@@ -1,28 +1,28 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Quote;
 
-use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Email;
+use Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
-#[AppArea('frontend')]
-class EmailTest extends LokiTestCase
+/**
+ * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+ * @magentoAppArea frontend
+ */
+class CustomerEmailTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.shipping-step.email';
+    const BLOCK_NAME = 'loki-checkout.customer.email';
 
     use CartFixture;
-    use ProductFixture;
 
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['email' => '']);
         $this->dispatchToCheckout($cart);
 
-        $component = $this->getObjectManager()->get(Email::class);
+        $component = $this->getObjectManager()->get(CustomerEmail::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
         $component->validate();
@@ -32,11 +32,11 @@ class EmailTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->setData('email', 'john@example.com');
         $this->dispatchToCheckout($cart);
 
-        $component = $this->getObjectManager()->get(Email::class);
+        $component = $this->getObjectManager()->get(CustomerEmail::class);
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
 
         $this->assertMagewireComponentHasNoErrors($component);

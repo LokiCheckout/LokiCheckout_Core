@@ -4,23 +4,20 @@ namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\Shippin
 
 use Magento\TestFramework\Fixture\AppArea;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\VatId;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 use Magento\TestFramework\Fixture\Config;
 
+/**
+ * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+ */
 #[AppArea('frontend')]
 class VatIdTest extends LokiTestCase
 {
-
     const BLOCK_NAME = 'loki-checkout.shipping-address.vat_id';
-
-    use CartFixture;
-    use ProductFixture;
 
     public function testDisabled()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['vat_id' => '']);
         $this->dispatchToCheckout($cart);
 
@@ -30,7 +27,7 @@ class VatIdTest extends LokiTestCase
     #[Config('customer/address/taxvat_show', 1, 'store', 'default')]
     public function testComponentWithUsVatId()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['country_id' => 'US', 'vat_id' => '']);
         $this->dispatchToCheckout($cart);
 

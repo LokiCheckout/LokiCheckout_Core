@@ -10,7 +10,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Checkout\Quote\Email;
+use Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail;
 use Yireo\LokiCheckout\Validator\Component\EmailValidator;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
@@ -21,9 +21,7 @@ class EmailValidatorTest extends MagewireComponentTestCase
     public function testWithNoValue(): void
     {
         $validator = ObjectManager::getInstance()->get(EmailValidator::class);
-        $component = ObjectManager::getInstance()->get(Email::class);
-        $addressState = ObjectManager::getInstance()->get(ShippingAddressState::class);
-        $component->setAddressState($addressState);
+        $component = ObjectManager::getInstance()->get(CustomerEmail::class);
 
         $this->assertFalse($validator->validate($component));
     }
@@ -38,11 +36,8 @@ class EmailValidatorTest extends MagewireComponentTestCase
     public function testWithVariousValues(string $email, bool $return): void
     {
         $validator = ObjectManager::getInstance()->get(EmailValidator::class);
-        $component = ObjectManager::getInstance()->get(Email::class);
+        $component = ObjectManager::getInstance()->get(CustomerEmail::class);
         $component->value = $email;
-
-        $addressState = ObjectManager::getInstance()->get(ShippingAddressState::class);
-        $component->setAddressState($addressState);
 
         $this->assertSame($return, $validator->validate($component));
     }
@@ -63,11 +58,8 @@ class EmailValidatorTest extends MagewireComponentTestCase
         $this->createCustomer('john@example.com');
 
         $validator = ObjectManager::getInstance()->get(EmailValidator::class);
-        $component = ObjectManager::getInstance()->get(Email::class);
+        $component = ObjectManager::getInstance()->get(CustomerEmail::class);
         $component->value = 'john@example.com';
-
-        $addressState = ObjectManager::getInstance()->get(ShippingAddressState::class);
-        $component->setAddressState($addressState);
 
         $this->assertFalse($validator->validate($component));
         $this->assertMagewireComponentHasError($component, 'This email address is not available');

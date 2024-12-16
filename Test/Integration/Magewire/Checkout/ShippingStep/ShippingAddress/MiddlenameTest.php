@@ -6,20 +6,21 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Middlename;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
+/**
+ * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+ */
 #[AppArea('frontend')]
 class MiddlenameTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.middlename';
 
     use CartFixture;
-    use ProductFixture;
 
     public function testDisabled()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['middlename' => '']);
         $this->dispatchToCheckout($cart);
 
@@ -29,7 +30,7 @@ class MiddlenameTest extends LokiTestCase
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['middlename' => '']);
         $this->dispatchToCheckout($cart);
 
@@ -43,7 +44,7 @@ class MiddlenameTest extends LokiTestCase
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['middlename' => 'van']);
         $this->dispatchToCheckout($cart);
 
