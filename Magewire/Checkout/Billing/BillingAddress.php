@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 
 use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
 class BillingAddress extends Component
@@ -15,21 +16,19 @@ class BillingAddress extends Component
 
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
-        private readonly Config $config
+        private readonly BillingAsShippingService $billingAsShippingService,
     ) {
     }
 
     public function getBillingAsShippingValue(): bool
     {
-        if (false === $this->config->enableSameAsBilling()) {
-            return false;
-        }
-
-        return (bool)$this->billingAddressState->getBillingAddress()->getSameAsBilling();
+        return $this->billingAsShippingService->getValueFromAddress(
+            $this->billingAddressState->getBillingAddress()
+        );
     }
 
     public function isEnabled(): bool
     {
-        return $this->billingAddressState->getQuote()->getGrandTotal() > 0;
+        return $this->billingAddressState->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
     }
 }

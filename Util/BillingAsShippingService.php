@@ -16,12 +16,16 @@ class BillingAsShippingService
 
     public function getValueFromAddress(AddressInterface $address): bool
     {
+        if (false === $this->config->enableSameAsBilling()) {
+            return false;
+        }
+
         $currentValue = $address->getSameAsBilling();
+
         if ($currentValue !== null) {
             return (bool)$currentValue;
         }
 
-        // @todo: Does this work or not?
         return $this->config->getSameAsBillingValue();
     }
 

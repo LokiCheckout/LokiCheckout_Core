@@ -9,6 +9,7 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
+use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
 use Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAsShipping;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
@@ -16,14 +17,15 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
     AppArea('frontend'),
     DataFixture(ProductFixture::class, ['price' => 100], as: 'p1'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$p1.id$','qty' => 1])
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$p1.id$', 'qty' => 1])
 ]
 class BillingAsShippingTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.billing-address.billing-as-shipping';
 
+    use AssertStoreConfigValueEquals;
+
     #[Config('yireo_loki_checkout/fields/enable_same_as_billing', 0, 'store', 'default')]
-    #[Cache('layout', false)]
     public function testDisabled()
     {
         $cart = $this->getCart();
@@ -32,7 +34,6 @@ class BillingAsShippingTest extends LokiTestCase
     }
 
     #[Config('yireo_loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')]
-    #[Cache('layout', false)]
     public function testEnabled()
     {
         $cart = $this->getCart();
@@ -40,9 +41,23 @@ class BillingAsShippingTest extends LokiTestCase
         $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
     }
 
-    public function testDefaultValue()
+    #[Config('yireo_loki_checkout/fields/same_as_billing_value', 0)]
+    public function testDefaultFalseValue()
     {
-        $component = $this->getDummyComponentInstance(BillingAsShipping::class);
+        $this->assertStoreConfigValueEquals(0, 'yireo_loki_checkout/fields/same_as_billing_value');
 
+        $component = $this->getDummyComponentInstance(BillingAsShipping::class);
+        $component->boot();
+        $this->assertSame(false, $component->billingAsShipping);
+    }
+
+    #[Config('yireo_loki_checkout/fields/same_as_billing_value', 1)]
+    public function testDefaultTrueValue()
+    {
+        $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/fields/same_as_billing_value');
+
+        $component = $this->getDummyComponentInstance(BillingAsShipping::class);
+        $component->boot();
+        $this->assertSame(true, $component->billingAsShipping);
     }
 }
