@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Quote;
 
 use Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 /**
@@ -14,8 +13,6 @@ class CustomerEmailTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.customer.email';
 
-    use CartFixture;
-
     public function testComponentWithoutValue()
     {
         $cart = $this->getGuestCart();
@@ -23,7 +20,7 @@ class CustomerEmailTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(CustomerEmail::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
         $this->assertMagewireComponentHasErrors($component);
@@ -37,7 +34,7 @@ class CustomerEmailTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(CustomerEmail::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
 
         $this->assertMagewireComponentHasNoErrors($component);
     }
