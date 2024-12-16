@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
 
 use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
@@ -21,20 +22,13 @@ class BillingAddress extends Component
 
     public function getBillingAsShippingValue(): bool
     {
-        if (false === $this->billingAsShippingService->isEnabled()) {
-            return false;
-        }
-
-        return (bool)$this->billingAddressState->getBillingAddress()->getSameAsBilling();
+        return $this->billingAsShippingService->getValueFromAddress(
+            $this->billingAddressState->getBillingAddress()
+        );
     }
 
     public function isEnabled(): bool
     {
-        return $this->requirePayment();
-    }
-
-    private function requirePayment(): bool
-    {
-        return $this->billingAddressState->getQuote()->getGrandTotal() > 0;
+        return $this->billingAddressState->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
     }
 }

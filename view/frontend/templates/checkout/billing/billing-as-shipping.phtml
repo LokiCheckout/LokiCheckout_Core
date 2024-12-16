@@ -8,10 +8,6 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BillingAsShipping $magewire */
-if (false === $magewire->isBillingAsShippingEnabled()) {
-    echo '<div><!-- Disabled --></div>';
-    return;
-}
 ?>
 <div class="<?= $css('card mb-8') ?>">
     <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">

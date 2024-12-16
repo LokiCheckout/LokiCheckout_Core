@@ -40,14 +40,15 @@ class PaymentMethods extends FieldComponent
         $this->paymentMethods = $this->paymentMethodManagement->getList($cartId);
 
         $this->value = (string)$cart->getPayment()->getMethod();
+        $this->sanityChecks();
 
-        if (false === $this->isPaymentMethodAvailable($this->value)) {
+        if (false === $this->isPaymentMethodAvailable($this->value) && $cart->getPaymentMethod()) {
             $this->value = '';
             $cart->setPaymentMethod('');
             $this->cartRepository->save($cart);
         }
 
-        if (empty($this->value)) {
+        if (empty($this->value) && $cart->getPaymentMethod()) {
             $this->value = $this->getDefaultPayment();
             $cart->setPaymentMethod($this->value);
             $this->cartRepository->save($cart);
@@ -122,5 +123,25 @@ class PaymentMethods extends FieldComponent
     public function isRequired(): bool
     {
         return true;
+    }
+
+    private function sanityChecks(): void
+    {
+        if (empty($this->value)) {
+            return;
+        }
+
+        $cart = $this->checkoutState->getQuote();
+        if ($this->isPaymentMethodAvailable($this->value)) {
+            return;
+        }
+
+        if (!$cart->getPaymentMethod()) {
+            return;
+        }
+
+        $this->value = $this->getDefaultPayment();
+        $cart->setPaymentMethod('');
+        $this->cartRepository->save($cart);
     }
 }

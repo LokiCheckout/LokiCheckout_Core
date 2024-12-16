@@ -2,29 +2,25 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
 
-use Magento\TestFramework\Fixture\AppArea;
 use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Firstname;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckout\Test\Integration\Fixture\ProductFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
-#[AppArea('frontend')]
+/**
+ * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
+ * @magentoAppArea frontend
+ */
 class FirstnameTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.firstname';
 
-    use CartFixture;
-    use ProductFixture;
-
-
     public function testComponentWithoutValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['firstname' => '']);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Firstname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
         $this->assertMagewireComponentHasErrors($component);
@@ -33,12 +29,12 @@ class FirstnameTest extends LokiTestCase
 
     public function testComponentWithValue()
     {
-        $cart = $this->getGuestCart($this->getProduct());
+        $cart = $this->getGuestCart();
         $cart->getShippingAddress()->addData(['firstname' => 'John']);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Firstname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME, $component);
+        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
 
         $this->assertMagewireComponentHasNoErrors($component);
     }

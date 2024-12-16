@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
 
 class ComponentRegistry
 {
-    private array $components;
+    private array $components = [];
 
     public function register(Component $component)
     {

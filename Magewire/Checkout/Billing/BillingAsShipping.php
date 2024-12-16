@@ -36,11 +36,6 @@ class BillingAsShipping extends Component
         }
     }
 
-    public function isBillingAsShippingEnabled(): bool
-    {
-        return $this->billingAsShippingService->isEnabled();
-    }
-
     public function updatedBillingAsShipping(mixed $billingAsShipping)
     {
         $billingAsShipping = (bool)$billingAsShipping;

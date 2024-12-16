@@ -11,6 +11,7 @@
             </arguments>
 
             <block
+                ifconfig="yireo_loki_checkout/fields/enable_same_as_billing"
                 name="loki-checkout.billing-address.billing-as-shipping" as="billing-as-shipping"
                 template="Yireo_LokiCheckout::checkout/billing/billing-as-shipping.phtml">
                 <arguments>

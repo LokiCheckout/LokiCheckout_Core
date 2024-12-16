@@ -2,42 +2,42 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Fixture;
 
-use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Checkout\Model\Session;
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
-use Magento\Quote\Api\GuestCartManagementInterface;
 use Magento\Quote\Model\MaskedQuoteIdToQuoteId;
 
 trait CartFixture
 {
-    use GetObjectManager;
-
-    public function getGuestCart(?ProductInterface $product = null): CartInterface
+    /**
+     * This requires the data fixture Magento/Checkout/_files/quote_with_simple_products.php
+     *
+     * @return CartInterface
+     */
+    public function getGuestCart(): CartInterface
     {
-        $guestCartManagement = $this->getObjectManager()->get(GuestCartManagementInterface::class);
-        $maskedQuoteIdToQuoteId = $this->getObjectManager()->get(MaskedQuoteIdToQuoteId::class);
-        $cartRepository = $this->getObjectManager()->get(CartRepositoryInterface::class);
+        $quoteRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
+        $searchCriteriaBuilder = ObjectManager::getInstance()->get(SearchCriteriaBuilder::class);
+        $searchCriteriaBuilder->addFilter('reserved_order_id', 'test_quote_with_simple_products');
+        $searchCriteriaBuilder->setPageSize(1);
+        $searchResults = $quoteRepository->getList($searchCriteriaBuilder->create());
+        if ($searchResults->getTotalCount() === 0) {
+            throw new \RuntimeException('Quote is empty');
+        }
 
-        $maskId = $guestCartManagement->createEmptyCart();
-        $cartId = $maskedQuoteIdToQuoteId->execute($maskId);
+        $cart = $searchResults->getItems()[0];
 
         $checkoutSession = $this->getObjectManager()->get(Session::class);
-        $checkoutSession->setQuoteId($cartId);
-
-        $cart = $cartRepository->get($cartId);
-
-        if ($product) {
-            $cart->addProduct($product, 1);
-            $cart->setItemsQty(1);
-            $cart->setItemsCount(1);
-        }
+        $checkoutSession->setQuoteId($cart->getId());
 
         return $cart;
     }
 
+    /*
     public function getCustomerCart(int $customerId): CartInterface
     {
         static $cart = null;
@@ -61,4 +61,5 @@ trait CartFixture
 
         return $cartRepository->get($cartId);
     }
+    */
 }

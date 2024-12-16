@@ -118,19 +118,6 @@
                         <field id="*/general/enable">1</field>
                     </depends>
                 </field>
-                <field id="same_as_billing_value"
-                       translate="label"
-                       type="select"
-                       sortOrder="1"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="0">
-                    <label>Default Value for Same As Billing</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <depends>
-                        <field id="*/general/enable_same_as_billing">1</field>
-                    </depends>
-                </field>
                 <field id="hide_region_when_optional"
                        translate="label"
                        type="select"
