@@ -12,6 +12,7 @@ use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use Magewirephp\Magewire\Component;
+use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
 use Yireo\LokiCheckout\Magewire\ComponentRegistry;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
@@ -23,6 +24,7 @@ class LokiTestCase extends MagewireComponentTestCase
     protected ?ComponentRegistry $componentRegistry = null;
 
     use CartFixture;
+    use AssertStoreConfigValueEquals;
 
     protected function setUp(): void
     {
@@ -31,11 +33,20 @@ class LokiTestCase extends MagewireComponentTestCase
         $this->objectManager = Bootstrap::getObjectManager();
         $this->fixtures = DataFixtureStorageManager::getStorage();
         $this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
+
+        $this->assertModuleIsEnabled('Yireo_LokiCheckout');
+        $this->assertModuleIsEnabled('Magewirephp_Magewire');
+        $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
     }
 
     public function dispatchToCheckout(CartInterface $cart)
     {
         $this->assertTrue($cart->getItemsCount() > 0);
+        $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
+            'loki_checkout',
+            'loki_checkout_theme_default',
+        ]);
+
         $this->dispatch('checkout/index/index');
 
         /** @var Http $response */
@@ -46,7 +57,7 @@ class LokiTestCase extends MagewireComponentTestCase
 
     public function getComponentByBlockName(string $blockName): Component
     {
-        $layout = $this->_objectManager->get(LayoutInterface::class);
+        $layout = $this->getObjectManager()->get(LayoutInterface::class);
         $block = $layout->getBlock($blockName);
         $this->assertInstanceOf(Template::class, $block);
 

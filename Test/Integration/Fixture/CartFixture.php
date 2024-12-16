@@ -13,8 +13,6 @@ use Magento\Quote\Model\MaskedQuoteIdToQuoteId;
 
 trait CartFixture
 {
-    use GetObjectManager;
-
     /**
      * This requires the data fixture Magento/Checkout/_files/quote_with_simple_products.php
      *
