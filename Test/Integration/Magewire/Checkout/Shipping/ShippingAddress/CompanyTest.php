@@ -23,7 +23,6 @@ class CompanyTest extends LokiTestCase
     public function testComponentWithoutValue()
     {
         $cart = $this->getCart();
-
         $cart->getShippingAddress()->addData(['company' => '']);
         $this->dispatchToCheckout($cart);
 

@@ -20,9 +20,7 @@ class PrefixTest extends LokiTestCase
     public function testDisabled()
     {
         $cart = $this->getGuestCart();
-        $cart->getShippingAddress()->addData(['prefix' => '']);
         $this->dispatchToCheckout($cart);
-
         $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
