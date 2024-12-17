@@ -14,7 +14,7 @@ class ShippingStep extends GenericComponent implements StepComponentInterface
     use AlpineDataBehaviour;
 
     protected $listeners = [
-        'afterChangeStep' => 'refresh',
+        //'afterChangeStep' => 'refresh',
         'afterSaveShippingStep' => 'refresh',
     ];
 

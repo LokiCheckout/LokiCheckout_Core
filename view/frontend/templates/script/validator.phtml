@@ -15,6 +15,10 @@
             isValid = true;
             LokiCheckoutMessenger.clear(component);
 
+            if (!component.validators) {
+                return true;
+            }
+
             component.validators.every(validator => {
                 if (this.validators[validator] === undefined) {
                     //yireoLokiCheckoutLogger('WARNING: Validator "' + validator + '" not found', component);

@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Magewire\Form\Button;
 
 use Exception;
+use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
 use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
 use Yireo\LokiCheckout\Step\StepNavigator;
@@ -10,8 +11,8 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 class StepBackwardButton extends GenericComponent implements ButtonInterface
 {
     use AlpineDataBehaviour;
+    use StepBehaviour;
 
-    public string $value = '';
     public bool $valid = true;
 
     protected $listeners = [
@@ -25,7 +26,7 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
 
     public function boot(): void
     {
-        if ($this->stepNavigator->isFirstStep($this->stepNavigator->getCurrentStep())) {
+        if ($this->stepNavigator->isFirstStep($this->stepNavigator->getStepByCode($this->getStep()))) {
             $this->allowRendering = false;
         }
 
@@ -46,11 +47,6 @@ class StepBackwardButton extends GenericComponent implements ButtonInterface
             return;
         }
 
-        $this->emit('afterChangeStep', $this->getCurrentStep());
-    }
-
-    public function getStep(): string
-    {
-        return 'any';
+        $this->emit('afterChangeStep', $this->stepNavigator->getCurrentStep()->getCode());
     }
 }

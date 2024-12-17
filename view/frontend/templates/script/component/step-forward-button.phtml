@@ -2,9 +2,18 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
             ...LokiGenericComponentType,
+            valid: true,
             afterInit() {
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {
+                    this.updateValid();
+                });
+
+                document.addEventListener('magewire:loader:start', () => {
+                   this.valid = false;
+                });
+
+                document.addEventListener('magewire:loader:done', () => {
                     this.updateValid();
                 });
             },
@@ -34,6 +43,7 @@
                     Magewire.find(this.wireId).call('submit');
                 }
 
+                // Fail-safe enabling of the button
                 setTimeout(() => {
                     if (this.valid) {
                         this.valid = true;

@@ -3,6 +3,15 @@
         Alpine.data('StepBackwardButton', () => ({
             ...LokiGenericComponentType,
             valid: true,
+            afterInit() {
+                document.addEventListener('magewire:loader:start', () => {
+                    this.valid = false;
+                });
+
+                document.addEventListener('magewire:loader:done', () => {
+                    this.valid = true;
+                });
+            },
             disabled() {
                 return !this.valid;
             },

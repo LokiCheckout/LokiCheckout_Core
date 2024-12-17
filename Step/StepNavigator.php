@@ -63,7 +63,7 @@ class StepNavigator implements ArgumentInterface
     {
         $currentStep = $this->getCurrentStep();
         if ($this->isFirstStep($currentStep)) {
-            throw new UnknownStepException('This is already the first step');
+            return;
         }
 
         $previousStep = $this->getPreviousStep($currentStep);
@@ -100,7 +100,6 @@ class StepNavigator implements ArgumentInterface
         $nextStep = $this->getNextStep($currentStep);
         $this->setCurrentStepByCode($nextStep->getCode());
 
-        // @todo: $this->checkoutSession->setStepData();
         return true;
     }
 
@@ -190,7 +189,10 @@ class StepNavigator implements ArgumentInterface
 
             if ($parentBlock instanceof Template) {
                 $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
-                $stepComponent->setParent($stepBlock);
+
+                if ($stepBlock instanceof Template) {
+                    $stepComponent->setParent($stepBlock);
+                }
             }
 
             $this->steps[$stepComponent->getCode()] = $stepComponent;

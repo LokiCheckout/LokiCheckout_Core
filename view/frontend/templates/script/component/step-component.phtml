@@ -4,7 +4,6 @@
             ...LokiGenericComponentType,
             afterInit() {
                 Magewire.on('afterChangeStep', (stepCode) => {
-                    console.log('afterChangeStep', stepCode);
                     this.visible = this.currentStep === stepCode;
                 });
             }

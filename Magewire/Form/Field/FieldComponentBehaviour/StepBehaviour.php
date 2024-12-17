@@ -28,6 +28,7 @@ trait StepBehaviour
 
         $step = $this->getStepNameFromBlock($block);
         if (!empty($step)) {
+            $this->step = $step;
             return $step;
         }
 

@@ -2,6 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutSteps', () => ({
             ...LokiGenericComponentType,
+            /*
             afterInit() {
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {
@@ -36,7 +37,7 @@
                         this.valid = true;
                     }
                 }, 4000);
-            }
+            }*/
         }));
     });
 </script>

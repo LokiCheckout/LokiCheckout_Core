@@ -23,7 +23,7 @@ class PaymentDetails extends Component
     {
         $payment = $this->checkoutSession->getQuote()->getPayment();
         try {
-            return $payment->getMethodInstance()->getTitle();
+            return (string)$payment->getMethodInstance()->getTitle();
         } catch(\Exception $e) {
             return '';
         }

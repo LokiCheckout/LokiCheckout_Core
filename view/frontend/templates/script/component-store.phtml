@@ -103,10 +103,5 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         document.addEventListener('magewire:loader:done', () => {
             Alpine.store('components').removeInvisibleComponents();
         });
-        /*
-        Livewire.hook('element.removed', (element, component) => {
-            Alpine.store('components').removeInvisibleComponents();
-        });
-         */
     });
 </script>

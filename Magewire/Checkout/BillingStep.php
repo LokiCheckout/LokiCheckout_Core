@@ -14,7 +14,7 @@ class BillingStep extends GenericComponent implements StepComponentInterface
     use AlpineDataBehaviour;
 
     protected $listeners = [
-        'afterChangeStep' => 'refresh',
+        //'afterChangeStep' => 'refresh',
         'afterSaveBillingStep' => 'refresh',
     ];
 
