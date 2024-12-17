@@ -13,7 +13,7 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
 
     public function boot(): void
     {
-        $this->loadValue();
+        $this->value = $this->getSavedValue();
         parent::boot();
     }
 
@@ -27,9 +27,9 @@ abstract class AddressFieldComponent extends FieldComponent implements AddressFi
         parent::booted();
     }
 
-    protected function loadValue(): void
+    protected function getSavedValue(): mixed
     {
-        $this->value = trim((string)$this->getAddressState()->load($this->getFieldName()));
+        return trim((string)$this->getAddressState()->load($this->getFieldName()));
     }
 
     // @todo: Move this into a trait or a child-class

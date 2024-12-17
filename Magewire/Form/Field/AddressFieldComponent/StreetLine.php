@@ -23,11 +23,11 @@ abstract class StreetLine extends AddressFieldComponent
         }
     }
 
-    protected function loadValue(): void
+    protected function getSavedValue(): mixed
     {
         $street = (string)$this->addressState->load('street');
         $streetlines = $this->streetlinesFactory->createFromStreet($street);
-        $this->value = $streetlines->getLineByIndex($this->index);
+        return $streetlines->getLineByIndex($this->index);
     }
 
     public function save($value): void
