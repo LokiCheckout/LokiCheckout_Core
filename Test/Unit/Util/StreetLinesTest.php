@@ -3,9 +3,9 @@
 namespace Yireo\LokiCheckout\Test\Unit\Util;
 
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Util\Streetlines;
+use Yireo\LokiCheckout\Util\StreetLines;
 
-class StreetlinesTest extends TestCase
+class StreetLinesTest extends TestCase
 {
     /**
      * @return void
@@ -17,10 +17,10 @@ class StreetlinesTest extends TestCase
         string $houseNumber,
         string $houseNumberAddition
     ) {
-        $streetlines = new Streetlines($streetName, $houseNumber, $houseNumberAddition);
-        $this->assertSame($streetName, $streetlines->getStreetName());
-        $this->assertSame($houseNumber, $streetlines->getHouseNumber());
-        $this->assertSame($houseNumberAddition, $streetlines->getHouseNumberAddition());
+        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition);
+        $this->assertSame($streetName, $streetLines->getStreetName());
+        $this->assertSame($houseNumber, $streetLines->getHouseNumber());
+        $this->assertSame($houseNumberAddition, $streetLines->getHouseNumberAddition());
     }
 
     /**
@@ -29,8 +29,8 @@ class StreetlinesTest extends TestCase
      */
     public function testGetLines(string $street, string $streetName, string $houseNumber, string $houseNumberAddition)
     {
-        $streetlines = new Streetlines($streetName, $houseNumber, $houseNumberAddition);
-        $lines = $streetlines->getLines();
+        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition);
+        $lines = $streetLines->getLines();
         $this->assertSame($streetName, $lines[0], var_export($lines, true));
         $this->assertSame($houseNumber, $lines[1], var_export($lines, true));
         $this->assertSame($houseNumberAddition, $lines[2], var_export($lines, true));
@@ -42,8 +42,8 @@ class StreetlinesTest extends TestCase
      */
     public function testToString(string $street, string $streetName, string $houseNumber, string $houseNumberAddition)
     {
-        $streetlines = new Streetlines($streetName, $houseNumber, $houseNumberAddition);
-        $this->assertSame($street, $streetlines->toString());
+        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition);
+        $this->assertSame($street, $streetLines->toString());
     }
 
     public function getTestArguments(): array

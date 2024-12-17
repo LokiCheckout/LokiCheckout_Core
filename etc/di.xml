@@ -121,7 +121,7 @@
                 <item name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface</item>
                 <item name="checkoutSession" xsi:type="object">Magento\Checkout\Model\Session</item>
                 <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>
-                <item name="streetlinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetlinesFactory</item>
+                <item name="streetLinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetLinesFactory</item>
                 <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
                 <item name="componentRegistry" xsi:type="object">Yireo\LokiCheckout\Magewire\ComponentRegistry</item>
             </argument>

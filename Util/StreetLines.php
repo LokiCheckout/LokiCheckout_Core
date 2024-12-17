@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-class Streetlines
+class StreetLines
 {
     public function __construct(
         private string $streetName = '',
@@ -55,11 +55,11 @@ class Streetlines
         return '';
     }
 
-    public function setLineByIndex(int $index, string $value): Streetlines
+    public function setLineByIndex(int $index, string $value): StreetLines
     {
         $streetName = ($index === 0) ? $value : $this->getStreetName();
         $houseNumber = ($index === 1) ? $value : $this->getHouseNumber();
         $houseNumberAddition = ($index === 2) ? $value : $this->getHouseNumberAddition();
-        return new Streetlines($streetName, $houseNumber, $houseNumberAddition);
+        return new StreetLines($streetName, $houseNumber, $houseNumberAddition);
     }
 }

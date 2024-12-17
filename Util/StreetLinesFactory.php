@@ -4,23 +4,23 @@ namespace Yireo\LokiCheckout\Util;
 
 use Magento\Framework\ObjectManagerInterface;
 
-class StreetlinesFactory
+class StreetLinesFactory
 {
     public function __construct(
         private ObjectManagerInterface $objectManager
     ) {
     }
 
-    public function create(string $streetName, string $houseNumber, string $houseNumberAddition = ''): Streetlines
+    public function create(string $streetName, string $houseNumber, string $houseNumberAddition = ''): StreetLines
     {
-        return $this->objectManager->create(Streetlines::class, [
+        return $this->objectManager->create(StreetLines::class, [
             'streetName' => $streetName,
             'houseNumber' => $houseNumber,
             'houseNumberAddition' => $houseNumberAddition,
         ]);
     }
 
-    public function createFromStreetParts(array $streetParts): Streetlines
+    public function createFromStreetParts(array $streetParts): StreetLines
     {
         if (count($streetParts) === 2 && preg_match('/^([0-9]+)$/', $streetParts[0])) {
             array_unshift($streetParts, '');
@@ -33,7 +33,7 @@ class StreetlinesFactory
         );
     }
 
-    public function createFromStreet(string $street): Streetlines
+    public function createFromStreet(string $street): StreetLines
     {
         $streetParts = explode("\n", $street);
 

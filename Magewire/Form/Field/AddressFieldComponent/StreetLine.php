@@ -4,12 +4,12 @@ namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
 
 use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
 use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectStreetlinesFactory;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectStreetLinesFactory;
 
 abstract class StreetLine extends AddressFieldComponent
 {
     use InjectScopeConfig;
-    use InjectStreetlinesFactory;
+    use InjectStreetLinesFactory;
 
     protected int $index = 0;
 
@@ -26,16 +26,16 @@ abstract class StreetLine extends AddressFieldComponent
     protected function getSavedValue(): mixed
     {
         $street = (string)$this->addressState->load('street');
-        $streetlines = $this->streetlinesFactory->createFromStreet($street);
-        return $streetlines->getLineByIndex($this->index);
+        $streetLines = $this->streetLinesFactory->createFromStreet($street);
+        return $streetLines->getLineByIndex($this->index);
     }
 
     public function save($value): void
     {
         $street = (string)$this->addressState->load('street');
-        $streetlines = $this->streetlinesFactory->createFromStreet($street);
-        $streetlines = $streetlines->setLineByIndex($this->index, $this->value);
-        $this->addressState->save('street', $streetlines->toString());
+        $streetLines = $this->streetLinesFactory->createFromStreet($street);
+        $streetLines = $streetLines->setLineByIndex($this->index, $this->value);
+        $this->addressState->save('street', $streetLines->toString());
     }
 
     public function isRequired(): bool

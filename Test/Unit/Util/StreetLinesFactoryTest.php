@@ -4,19 +4,19 @@ namespace Yireo\LokiCheckout\Test\Unit\Util;
 
 use PHPUnit\Framework\TestCase;
 use Yireo\LokiCheckout\Test\Unit\Stub\SimpleObjectManager;
-use Yireo\LokiCheckout\Util\StreetlinesFactory;
+use Yireo\LokiCheckout\Util\StreetLinesFactory;
 
-class StreetlinesFactoryTest extends TestCase
+class StreetLinesFactoryTest extends TestCase
 {
     public function testCreate()
     {
         $objectManager = new SimpleObjectManager;
-        $streetlinesFactory = new StreetlinesFactory($objectManager);
+        $streetLinesFactory = new StreetLinesFactory($objectManager);
 
-        $streetlines = $streetlinesFactory->create('Example', '1', 'A');
-        $this->assertSame('Example', $streetlines->getStreetName());
-        $this->assertSame('1', $streetlines->getHouseNumber());
-        $this->assertSame('A', $streetlines->getHouseNumberAddition());
+        $streetLines = $streetLinesFactory->create('Example', '1', 'A');
+        $this->assertSame('Example', $streetLines->getStreetName());
+        $this->assertSame('1', $streetLines->getHouseNumber());
+        $this->assertSame('A', $streetLines->getHouseNumberAddition());
     }
 
     /**
@@ -30,12 +30,12 @@ class StreetlinesFactoryTest extends TestCase
     public function testCreateFromStreet(string $street, string $streetName, string $streetNumber, string $streetNumberAddition)
     {
         $objectManager = new SimpleObjectManager;
-        $streetlinesFactory = new StreetlinesFactory($objectManager);
+        $streetLinesFactory = new StreetLinesFactory($objectManager);
 
-        $streetlines = $streetlinesFactory->createFromStreet($street);
-        $this->assertSame($streetName, $streetlines->getStreetName());
-        $this->assertSame($streetNumber, $streetlines->getHouseNumber());
-        $this->assertSame($streetNumberAddition, $streetlines->getHouseNumberAddition());
+        $streetLines = $streetLinesFactory->createFromStreet($street);
+        $this->assertSame($streetName, $streetLines->getStreetName());
+        $this->assertSame($streetNumber, $streetLines->getHouseNumber());
+        $this->assertSame($streetNumberAddition, $streetLines->getHouseNumberAddition());
     }
 
     public function getCreateFromStreetInput(): array
