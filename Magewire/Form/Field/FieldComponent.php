@@ -56,11 +56,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
         return $this->valid = $this->validate();
     }
 
-    protected function filter(string $value): string
-    {
-        return $value;
-    }
-
     public function getFieldName(): string
     {
         $className = static::class;

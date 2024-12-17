@@ -16,9 +16,9 @@ trait FilterBehaviour
         }
 
         if (is_array($value)) {
-            foreach ($value as $v) {
-                if (is_string($v)) {
-                    $v = $this->filter($v);
+            foreach ($value as $index => $subvalue) {
+                if (is_string($subvalue)) {
+                    $value[$index] = $this->filter($subvalue);
                 }
             }
         }
