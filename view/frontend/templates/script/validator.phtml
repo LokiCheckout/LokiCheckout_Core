@@ -1,6 +1,6 @@
 <script>
     LokiCheckoutValidator = {
-        rules: {
+        validators: {
             required: (component) => {
                 isValid = true;
                 if (component.value === '' || component.value === undefined) {
@@ -15,13 +15,13 @@
             isValid = true;
             LokiCheckoutMessenger.clear(component);
 
-            component.rules.every(rule => {
-                if (this.rules[rule] === undefined) {
-                    //yireoLokiCheckoutLogger('WARNING: Rule "' + rule + '" not found', component);
+            component.validators.every(validator => {
+                if (this.validators[validator] === undefined) {
+                    //yireoLokiCheckoutLogger('WARNING: Validator "' + validator + '" not found', component);
                     return true;
                 }
 
-                const result = this.rules[rule](component);
+                const result = this.validators[validator](component);
                 if (Boolean(result && typeof result.then === 'function')) {
                     result.then(value => {
                         isValid = value;

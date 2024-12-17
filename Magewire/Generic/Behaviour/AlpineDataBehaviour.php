@@ -28,14 +28,14 @@ trait AlpineDataBehaviour
         }
 
         if ($this instanceof FieldComponent) {
-            $rules = [];
+            $validators = [];
             if (method_exists($this, 'getValidators')) {
                 foreach ($this->getValidators() as $validator) {
-                    $rules[] = $validator;
+                    $validators[] = $validator;
                 }
             }
 
-            $data['rules'] = $rules;
+            $data['validators'] = $validators;
             $data['value'] = $this->getJsValue();
             $data['valid'] = $this->valid;
         }

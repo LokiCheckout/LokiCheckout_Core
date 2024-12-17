@@ -1,5 +1,5 @@
 <script>
-    LokiCheckoutValidator.rules.email = function (component) {
+    LokiCheckoutValidator.validators.email = function (component) {
         if (/\S+@\S+\.\S+/.test(component.value) === false) {
             LokiCheckoutMessenger.error('<?= __('Not a valid email') ?>', component);
             return false;

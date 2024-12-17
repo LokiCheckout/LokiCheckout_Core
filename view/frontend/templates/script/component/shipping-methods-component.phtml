@@ -16,7 +16,7 @@
                 }));
             },
             beforeSubmit() {
-                this.rules = ['required', this.value]; // @todo: Doesn't this stick when switching value?
+                this.validators = ['required', this.value]; // @todo: Doesn't this stick when switching value?
             },
             afterSubmit() {
                 this.dispatchShippingMethodEvent();

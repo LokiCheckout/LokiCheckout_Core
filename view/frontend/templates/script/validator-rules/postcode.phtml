@@ -22,7 +22,7 @@ $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
     <?php endforeach; ?>
     <?php endforeach; ?>
 
-    LokiCheckoutValidator.rules.postcode = function (component) {
+    LokiCheckoutValidator.validators.postcode = function (component) {
         // @todo: The following is kind of ugly. Wouldn't Alpine.store('components').get('country_id') be nicer?
         const countryComponentName = component.name.includes('Billing') ? 'LokiCheckoutBillingAddressCountryId' : 'LokiCheckoutShippingAddressCountryId';
         const countryComponent = Alpine.store('components').get(countryComponentName);

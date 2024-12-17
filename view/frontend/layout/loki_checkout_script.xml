@@ -37,14 +37,14 @@
                 template="Yireo_LokiCheckout::script/component-magic-wire.phtml"/>
 
             <block
-                name="loki-checkout.script.validator-rules.email"
-                template="Yireo_LokiCheckout::script/validator-rules/email.phtml"/>
+                name="loki-checkout.script.validators.email"
+                template="Yireo_LokiCheckout::script/validators/email.phtml"/>
             <block
-                name="loki-checkout.script.validator-rules.number"
-                template="Yireo_LokiCheckout::script/validator-rules/number.phtml"/>
+                name="loki-checkout.script.validators.number"
+                template="Yireo_LokiCheckout::script/validators/number.phtml"/>
             <block
-                name="loki-checkout.script.validator-rules.postcode"
-                template="Yireo_LokiCheckout::script/validator-rules/postcode.phtml"/>
+                name="loki-checkout.script.validators.postcode"
+                template="Yireo_LokiCheckout::script/validators/postcode.phtml"/>
 
             <container name="loki-checkout.script.alpine-components">
                 <block
