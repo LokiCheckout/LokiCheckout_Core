@@ -17,20 +17,19 @@
             },
             listenToComponentChange() {
                 Livewire.hook('element.updated', (element, component) => {
-                    // @todo: Is this actually needed?
-                    if (this.elementId === component.el.id && this.elementId + '-field' === element.id) {
-                        this.valid = Magewire.find(this.wireId).valid;
-                        this.value = Magewire.find(this.wireId).value;
-                        document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                    if (this.elementId !== component.el.id) {
+                        return;
                     }
-                });
 
-                /*
-                Livewire.on(this.afterSaveEventName, (value) => {
-                    console.log('afterSaveEvent event', value);
-                    this.value = value;
+                    if (element.getAttribute('wire:id') !== component.id) {
+                        return;
+                    }
+
+                    this.valid = Magewire.find(this.wireId).valid;
+                    this.value = Magewire.find(this.wireId).value;
+
+                    document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
                 });
-                 */
             },
         },
         beforeInit() {

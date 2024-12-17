@@ -6,6 +6,7 @@ use Magewirephp\Magewire\Component;
 
 class Totals extends Component
 {
+    // @todo: Make this all configurable (through the XML layout?)
     protected $listeners = [
         'afterSaveQuote' => 'refresh',
         'afterSavePaymentMethod' => 'refresh',

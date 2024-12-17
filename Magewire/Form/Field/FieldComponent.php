@@ -44,7 +44,7 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
             $this->valid = true;
         }
 
-        // @todo: This causes all fields to be red-bordered by default which is bad UI
+        // @todo: This causes all fields to be red-bordered by default which is bad UI, but make it optional
         //if ($this->isRequired() && empty($this->value)) {
         //    $this->valid = false;
         //}
@@ -103,6 +103,7 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
 
     public function setValue(mixed $value): void
     {
+        $this->clearErrors();
         $value = $this->filterValue($value);
         $this->value = $value;
         $this->valid = $this->validate();
@@ -111,13 +112,8 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
             $this->beforeSave($value);
             $this->save($value);
             $this->afterSave($value);
-            $this->emit($this->getAfterSaveEventName(), $this->value);
+            //$this->emit($this->getAfterSaveEventName(), $this->value); // @todo: Is this needed?
         }
-    }
-
-    public function getAfterSaveEventName(): string
-    {
-        return 'afterSave'.$this->snakeToCamel($this->getFieldName());
     }
 
     public function updatedValue(mixed $value): mixed

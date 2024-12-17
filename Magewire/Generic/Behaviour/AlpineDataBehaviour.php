@@ -38,7 +38,6 @@ trait AlpineDataBehaviour
             $data['rules'] = $rules;
             $data['value'] = $this->getJsValue();
             $data['valid'] = $this->valid;
-            $data['afterSaveEventName'] = $this->getAfterSaveEventName();
         }
 
         return array_merge($data, $this->getAdditionalAlpineData());
