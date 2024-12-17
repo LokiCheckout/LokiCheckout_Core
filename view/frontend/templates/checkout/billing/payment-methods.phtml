@@ -25,7 +25,7 @@ $paymentMethods = $magewire->getPaymentMethods();
     <form
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $magewire->isValid() ? 'false' : 'true' ?>"
+        aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
             <ul>

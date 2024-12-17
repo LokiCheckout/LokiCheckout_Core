@@ -51,9 +51,4 @@ class StepForwardButton extends GenericComponent implements ButtonInterface
             $this->emit('afterChangeStep', $this->getStep());
         }
     }
-
-    public function isValid(): bool
-    {
-        return $this->valid;
-    }
 }

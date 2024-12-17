@@ -159,11 +159,6 @@ abstract class FieldComponent extends GenericComponent implements FormFieldInter
         return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
     }
 
-    public function isValid(): bool
-    {
-        return $this->valid;
-    }
-
     public function getLokiCheckoutConfig(): LokiCheckoutConfig
     {
         return $this->lokiCheckoutConfig;
