@@ -15,7 +15,7 @@
             register() {
                 Alpine.store('components').add(this);
             },
-            listenToComponentChange() {
+            rehydrate() {
                 Livewire.hook('element.updated', (element, component) => {
                     if (this.elementId !== component.el.id) {
                         return;
