@@ -1,0 +1,73 @@
+<?php declare(strict_types=1);
+
+namespace Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectScopeConfig;
+use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Magewire\SetterInjection\InjectStreetLinesFactory;
+
+abstract class StreetLine extends AddressFieldComponent
+{
+    use InjectScopeConfig;
+    use InjectStreetLinesFactory;
+
+    protected int $index = 0;
+
+    public function boot(): void
+    {
+        parent::boot();
+
+        $streetLines = (int)$this->scopeConfig->getValue('customer/address/street_lines');
+        if ($streetLines <= $this->index) {
+            $this->allowRendering = false;
+        }
+    }
+
+    protected function getSavedValue(): mixed
+    {
+        $street = (string)$this->addressState->load('street');
+        $streetLines = $this->streetLinesFactory->createFromStreet($street);
+        return $streetLines->getLineByIndex($this->index);
+    }
+
+    public function save($value): void
+    {
+        $street = (string)$this->addressState->load('street');
+        $streetLines = $this->streetLinesFactory->createFromStreet($street);
+        $streetLines = $streetLines->setLineByIndex($this->index, $this->value);
+        $this->addressState->save('street', $streetLines->toString());
+    }
+
+    public function isRequired(): bool
+    {
+        if ($this->index === 0) {
+            return true;
+        }
+
+        return parent::isRequired();
+    }
+
+    public function getFieldName(): string
+    {
+        return 'street'.$this->index;
+    }
+
+    public function getFieldLabel(): string
+    {
+        $fieldLabel = $this->getFieldLabelFromLayout();
+        if (!empty($fieldLabel)) {
+            return $fieldLabel;
+        }
+
+        if ($this->index > 0) {
+            return '';
+        }
+
+        return $this->getFieldName();
+    }
+
+    public function getIndex(): int
+    {
+        return $this->index;
+    }
+}
