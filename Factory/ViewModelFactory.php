@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Factory;
+namespace Yireo\LokiComponents\Factory;
 
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

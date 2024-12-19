@@ -7,7 +7,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\CamelCaseConvertor;
