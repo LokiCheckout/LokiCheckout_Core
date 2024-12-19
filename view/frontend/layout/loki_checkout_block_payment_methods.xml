@@ -4,11 +4,6 @@
         <block
             name="loki-checkout.billing.payment-methods"
             template="Yireo_LokiCheckout::checkout/billing/payment-methods.phtml">
-            <arguments>
-                <argument name="magewire" xsi:type="object">
-                    Yireo\LokiCheckout\Magewire\Checkout\Billing\PaymentMethods
-                </argument>
-            </arguments>
             <block
                 name="loki-checkout.billing.payment-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/billing/payment-methods/item.phtml"/>

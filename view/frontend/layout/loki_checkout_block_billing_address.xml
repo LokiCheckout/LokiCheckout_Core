@@ -4,32 +4,15 @@
         <block
             name="loki-checkout.billing-address"
             template="Yireo_LokiCheckout::checkout/billing/address.phtml">
-            <arguments>
-                <argument name="magewire" xsi:type="object">
-                    Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress
-                </argument>
-            </arguments>
 
             <block
                 ifconfig="yireo_loki_checkout/fields/enable_same_as_billing"
                 name="loki-checkout.billing-address.billing-as-shipping" as="billing-as-shipping"
-                template="Yireo_LokiCheckout::checkout/billing/billing-as-shipping.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAsShipping
-                    </argument>
-                </arguments>
-            </block>
+                template="Yireo_LokiCheckout::checkout/billing/billing-as-shipping.phtml"/>
 
             <block
                 name="loki-checkout.billing-address.address-view" as="address-view"
-                template="Yireo_LokiCheckout::checkout/billing/address-view.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">
-                        Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingView
-                    </argument>
-                </arguments>
-            </block>
+                template="Yireo_LokiCheckout::checkout/billing/address-view.phtml"/>
 
             <block
                 name="loki-checkout.billing-address.address-form" as="address-form"
@@ -40,9 +23,6 @@
                     ifconfig="customer/address/prefix_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Prefix
-                        </argument>
                         <argument name="field_type" xsi:type="string">text_select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
@@ -53,52 +33,29 @@
                 <block
                     name="loki-checkout.billing-address.firstname" as="firstname"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Firstname
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.middlename" as="middlename"
                     ifconfig="customer/address/middlename_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Middlename
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.lastname" as="lastname"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Lastname
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.suffix" as="suffix"
                     ifconfig="customer/address/suffix_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Suffix
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.street0" as="street0"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Street0
-                        </argument>
                         <argument name="field_label" xsi:type="string">Street</argument>
                     </arguments>
                 </block>
@@ -107,9 +64,6 @@
                     name="loki-checkout.billing-address.street1" as="street1"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Street1
-                        </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
                 </block>
@@ -118,9 +72,6 @@
                     name="loki-checkout.billing-address.street2" as="street2"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Street2
-                        </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
                 </block>
@@ -129,9 +80,6 @@
                     name="loki-checkout.billing-address.street3" as="street3"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Street3
-                        </argument>
                         <argument name="field_label" xsi:type="string">-</argument>
                     </arguments>
                 </block>
@@ -140,9 +88,6 @@
                     name="loki-checkout.billing-address.postcode" as="postcode"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Postcode
-                        </argument>
                     </arguments>
                 </block>
 
@@ -150,9 +95,6 @@
                     name="loki-checkout.billing-address.city" as="city"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\City
-                        </argument>
                     </arguments>
                 </block>
 
@@ -160,9 +102,6 @@
                     name="loki-checkout.billing-address.region" as="region"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Region
-                        </argument>
                         <argument name="field_type" xsi:type="string">text_select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
@@ -174,9 +113,6 @@
                     name="loki-checkout.billing-address.country_id" as="country_id"
                     template="Yireo_LokiCheckout::form/field.phtml">
                     <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\CountryId
-                        </argument>
                         <argument name="field_type" xsi:type="string">select</argument>
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
@@ -188,44 +124,24 @@
                     name="loki-checkout.billing-address.company" as="company"
                     ifconfig="customer/address/company_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Company
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.telephone" as="telephone"
                     ifconfig="customer/address/telephone_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Telephone
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.fax" as="fax"
                     ifconfig="customer/address/fax_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\Fax
-                        </argument>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.vat_id" as="vat_id"
                     ifconfig="customer/address/taxvat_show"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="magewire" xsi:type="object">
-                            Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress\VatId
-                        </argument>
-                    </arguments>
                 </block>
             </block>
         </block>

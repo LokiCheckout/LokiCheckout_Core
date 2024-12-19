@@ -5,10 +5,6 @@
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/onestep/checkout.phtml"/>
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/onestep/steps.phtml">
             <block name="loki-checkout.one-step" as="one-step" template="Yireo_LokiCheckout::theme/onestep/one-step.phtml">
-                <arguments>
-                    <argument name="magewire" xsi:type="object">Yireo\LokiCheckout\Magewire\Checkout\OneStep</argument>
-                </arguments>
-
                 <container name="loki-checkout.one-step.col1" as="col1" htmlTag="div" htmlClass="col1">
                     <container name="loki-checkout.one-step.col1.email-container" htmlTag="div" htmlClass="mb-8"/>
                 </container>

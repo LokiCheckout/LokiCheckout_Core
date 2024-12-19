@@ -4,11 +4,6 @@
         <block
             name="loki-checkout.shipping.shipping-methods"
             template="Yireo_LokiCheckout::checkout/shipping/shipping-methods.phtml">
-            <arguments>
-                <argument name="magewire" xsi:type="object">
-                    Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingMethods
-                </argument>
-            </arguments>
 
             <block
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
