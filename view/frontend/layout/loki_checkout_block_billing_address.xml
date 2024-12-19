@@ -87,15 +87,11 @@
                 <block
                     name="loki-checkout.billing-address.postcode" as="postcode"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                    </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing-address.city" as="city"
                     template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                    </arguments>
                 </block>
 
                 <block
