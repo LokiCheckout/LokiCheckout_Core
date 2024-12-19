@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\City as GenericCityComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\City as GenericCityComponent;
+use Yireo\LokiCheckout\Component\Form\Field\ShippingAddressFieldInterface;
 
-class City extends GenericCityComponent implements ShippingAddressFieldComponentInterface
+class City extends GenericCityComponent implements ShippingAddressFieldInterface
 {
 }

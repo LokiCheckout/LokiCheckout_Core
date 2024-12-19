@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Company;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Company;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 #[
@@ -27,10 +27,10 @@ class CompanyTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Company::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 
     public function testComponentWithValue()
@@ -40,9 +40,9 @@ class CompanyTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Company::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 }

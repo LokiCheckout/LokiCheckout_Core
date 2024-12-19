@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Middlename;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Middlename;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 /**
@@ -21,7 +21,7 @@ class MiddlenameTest extends LokiTestCase
         $cart->getShippingAddress()->addData(['middlename' => '']);
         $this->dispatchToCheckout($cart);
 
-        $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
@@ -32,10 +32,10 @@ class MiddlenameTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Middlename::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 
     #[Config('customer/address/middlename_show', 1, 'store', 'default')]
@@ -46,9 +46,9 @@ class MiddlenameTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Middlename::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 }

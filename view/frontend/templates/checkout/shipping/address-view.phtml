@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
-/** @var ShippingAddress $magewire */
+/** @var ShippingAddress $component */
 /** @var CssClass $css */
 
 ?>
 <div  class="<?= $css('mb-4') ?>">
-    <address><?= $magewire->getHtml() ?></address>
+    <address><?= $component->getHtml() ?></address>
 </div>

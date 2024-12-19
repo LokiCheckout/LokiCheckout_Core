@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel;
 
 class PrefixValidator implements FieldValidatorInterface
@@ -12,9 +12,9 @@ class PrefixValidator implements FieldValidatorInterface
     ) {
     }
 
-    public function validate(FieldComponent $component): bool
+    public function validate(Field $component): bool
     {
-        $prefix = trim($component->value);
+        $prefix = trim($component->getValue());
 
         if (empty($prefix)) {
             return true;
@@ -26,7 +26,7 @@ class PrefixValidator implements FieldValidatorInterface
         }
 
         if (false === in_array($prefix, $prefixOptions)) {
-            $component->error('value', 'Invalid prefix');
+            $component->getErrorContainer()->addError((string)__('Invalid prefix'));
 
             return false;
         }

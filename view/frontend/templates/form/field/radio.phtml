@@ -2,40 +2,39 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 /** @var Template $block */
-/** @var FieldComponent|OptionsBehaviour $magewire */
+/** @var FieldInterface|OptionsBehaviour $component */
 /** @var CssClass $css */
 
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$magewire->setOptionModel($optionModel);
+$component->setOptionModel($optionModel);
 ?>
 <div class="<?= $css('w-full grid grid-cols-2 p-2') ?>"
-     aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+     aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
      data-type="field">
     <?php $i = 0; ?>
-    <?php foreach ($magewire->getOptions() as $optionValue => $optionLabel): ?>
+    <?php foreach ($component->getOptions() as $optionValue => $optionLabel): ?>
         <div class="<?= $css('', 'option') ?>">
             <input type="radio"
-                   id="<?= $magewire->getElementId() ?>-field-<?= $i ?>"
-                   wire:loading.attr="aria-busy"
-                   wire:loading.class="disabled"
-                   wire:model="value"
+                   id="<?= $component->getDomId() ?>-field-<?= $i ?>"
+                   x-model="value"
 
                    value="<?= $optionValue ?>"
-                <?php if ($magewire->value === $optionValue): ?>
+                <?php if ($component->getValue() === $optionValue): ?>
                     checked
                 <?php endif; ?>
-                <?php if ($magewire->isDisabled()): ?>
+                <?php if ($component->isDisabled()): ?>
                     disabled="disabled"
                 <?php endif ?>
             />
             <label
                 class="<?= $css('pl-2', 'label') ?>"
-                for="<?= $magewire->getElementId() ?>-field-<?= $i ?>">
+                for="<?= $component->getDomId() ?>-field-<?= $i ?>">
                 <?= __($optionLabel) ?>
             </label>
         </div>

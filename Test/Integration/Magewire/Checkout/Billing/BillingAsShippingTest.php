@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Billing;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Billing;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAsShipping;
+use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 #[
@@ -30,7 +30,7 @@ class BillingAsShippingTest extends LokiTestCase
     {
         $cart = $this->getCart();
         $this->dispatchToCheckout($cart);
-        $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
     #[Config('yireo_loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')]
@@ -38,6 +38,6 @@ class BillingAsShippingTest extends LokiTestCase
     {
         $cart = $this->getCart();
         $this->dispatchToCheckout($cart);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 }

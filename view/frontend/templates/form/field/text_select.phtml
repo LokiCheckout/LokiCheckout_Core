@@ -2,20 +2,20 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
-/** @var FieldComponent|OptionsBehaviour $magewire */
+/** @var FieldInterface|OptionsBehaviour $component */
 /** @var ViewModelFactory $viewModelFactory */
 
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$magewire->setOptionModel($optionModel);
+$component->setOptionModel($optionModel);
 
-if (count($optionModel->getOptions($magewire)) > 0) {
+if (count($optionModel->getOptions($component)) > 0) {
     $block->setOptionModel($optionModel);
     echo $templateRenderer->html('form/field/select.phtml', $block, ['alias' => 'select']);
     return;

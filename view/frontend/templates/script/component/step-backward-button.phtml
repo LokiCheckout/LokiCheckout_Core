@@ -1,14 +1,14 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('StepBackwardButton', () => ({
-            ...LokiGenericComponentType,
+            ...LokiCheckoutGenericComponentType,
             valid: true,
             afterInit() {
-                document.addEventListener('magewire:loader:start', () => {
+                document.addEventListener('@todo', () => {
                     this.valid = false;
                 });
 
-                document.addEventListener('magewire:loader:done', () => {
+                document.addEventListener('@todo', () => {
                     this.valid = true;
                 });
             },

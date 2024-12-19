@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\ShippingDetails;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
-/** @var ShippingDetails $magewire */
+/** @var ShippingDetails $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$addressHtml = $magewire->getAddressHtml();
-$methodHtml = $magewire->getMethodHtml();
+$addressHtml = $component->getAddressHtml();
+$methodHtml = $component->getMethodHtml();
 
 if (empty($addressHtml)) {
     echo '<div></div>';

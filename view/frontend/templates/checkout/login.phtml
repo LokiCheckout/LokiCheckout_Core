@@ -2,17 +2,19 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Login;
+use Yireo\LokiCheckout\Component\Checkout\Login;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var Login $magewire */
+/** @var Login $component */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
@@ -21,8 +23,8 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= $css('card bg-gray-100 my-2') ?>"
      x-data="LokiCheckoutToggle"
-     x-title="<?= $magewire->getAlpineComponentName() ?>">
-
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+>
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
         (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)

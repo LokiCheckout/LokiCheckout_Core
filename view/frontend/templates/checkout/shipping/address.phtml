@@ -2,27 +2,31 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ShippingAddress $magewire */
+/** @var ShippingAddress $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var AlpineComponentData $alpineComponentData */
+
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div class="<?= $css('mb-8') ?>"
      x-data="LokiCheckoutShippingAddress"
-     x-title="<?= $magewire->getAlpineComponentName() ?>"
-     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'>
-    <?php if (count($magewire->shippingAddresses) > 0): ?>
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'>
+    <?php if (count($component->getShippingAddresses()) > 0): ?>
         <?= $block->getChildHtml('address-select') ?>
         <?= $block->getChildHtml('address-toggle-select') ?>
     <?php endif; ?>
 
-    <?php if($magewire->newAddress): ?>
+    <?php if($component->isNewAddress()): ?>
         <?= $block->getChildHtml('address-form-title') ?>
         <?= $block->getChildHtml('address-form') ?>
     <?php endif; ?>

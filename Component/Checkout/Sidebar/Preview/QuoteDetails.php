@@ -1,10 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
+namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class QuoteDetails extends Component
+class QuoteDetails  implements ComponentInterface
 {
-    protected $listeners = ['afterSaveQuote' => 'refresh'];
 }

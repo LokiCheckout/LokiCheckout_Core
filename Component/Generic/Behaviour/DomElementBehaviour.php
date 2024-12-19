@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
+namespace Yireo\LokiCheckout\Component\Generic\Behaviour;
 
 use Magento\Framework\View\Element\AbstractBlock;
 
@@ -14,7 +14,7 @@ trait DomElementBehaviour
     {
         $elementId = $this->elementId;
         if (empty($elementId)) {
-            $parent = $this->getParent();
+            $parent = $this->getBlock();
             if ($parent instanceof AbstractBlock) {
                 $elementId = $parent->getNameInLayout();
             }

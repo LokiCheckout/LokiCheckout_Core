@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
 interface OptionModelInterface
 {
-    public function getOptions(Component $component): array;
+    public function getOptions(ComponentInterface $component): array;
 }

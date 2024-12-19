@@ -1,18 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar;
+namespace Yireo\LokiCheckout\Component\Checkout\Sidebar;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class Totals extends Component
+class Totals implements ComponentInterface
 {
-    // @todo: Make this all configurable (through the XML layout?)
-    protected $listeners = [
-        'afterSaveQuote' => 'refresh',
-        'afterSavePaymentMethod' => 'refresh',
-        'afterSaveBillingStep' => 'refresh',
-        'afterSaveBillingAddress' => 'refresh',
-        'afterSaveShippingStep' => 'refresh',
-        'afterSaveShippingAddress' => 'refresh',
-    ];
 }

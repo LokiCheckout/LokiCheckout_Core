@@ -1,6 +1,6 @@
 <script>
-    const LokiFieldComponentType = {
-        ...LokiGenericComponentType,
+    const LokiCheckoutFieldComponentType = {
+        ...LokiCheckoutGenericComponentType,
         value: '',
         valid: true,
         disabled: false,
@@ -16,7 +16,8 @@
             }
 
             this.beforeSubmit();
-            Magewire.find(this.wireId).call('setValue', this.value);
+            console.log('Submitting', this.blockId, this.value, this.target);
+            this.post({value: this.value});
             this.afterSubmit();
         },
         afterSubmit() {

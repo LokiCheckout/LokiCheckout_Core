@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Component\Checkout;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class Login extends Component
+class Login implements ComponentInterface
 {
 }

@@ -4,12 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\CouponCode;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var CouponCode $magewire */
+/** @var CouponCode $component */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
@@ -21,7 +21,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div  class="<?= $css('border-b border-gray-200') ?>">
+<div class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
         <p class="<?= $css('mb-4', 'current') ?>">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
@@ -30,8 +30,7 @@ $couponCode = $quote->getCouponCode();
         <button
             type="button"
             class="<?= $css('btn btn-secondary', 'button-remove') ?>"
-            wire:click="removeCouponCode"
-            wire:loading.attr="disabled"
+            @click="removeCouponCode"
         ><?= __('Remove coupon code') ?></button>
     <?php else: ?>
         <details class="<?= $css('group', 'details' ) ?>">
@@ -49,13 +48,12 @@ $couponCode = $quote->getCouponCode();
             <div>
                 <label class="<?= $css('block mb-3', 'label') ?>">
                     <span class="<?= $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
-                    <input type="text" wire:model.lazy="couponCode" class="<?= $css('form-input w-full', 'input') ?>">
+                    <input type="text" x-model="couponCode" class="<?= $css('form-input w-full', 'input') ?>">
                 </label>
                 <button
                     type="button"
                     class="<?= $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
-                    wire:click="applyCouponCode"
-                    wire:loading.attr="disabled"
+                    @click="applyCouponCode"
                 ><?= __('Apply') ?></button>
             </div>
         </details>

@@ -18,7 +18,6 @@ class ModuleTest extends TestCase
         // @todo: Follow module.xml dependencies instead
         $requiredModules = [
             'Yireo_LokiCheckout',
-            'Magewirephp_Magewire',
             'Magento_CatalogInventory'
         ];
         foreach ($requiredModules as $moduleName) {

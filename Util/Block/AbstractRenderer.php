@@ -4,7 +4,8 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
+
 
 abstract class AbstractRenderer implements ArgumentInterface
 {
@@ -28,17 +29,8 @@ abstract class AbstractRenderer implements ArgumentInterface
         $block->setAncestorBlock($ancestorBlock);
         $block->addData($data);
 
-        if ($block->getData('magewire') instanceof Component) {
-            return;
-        }
-
-        $component = $ancestorBlock->getData('magewire');
-        if ($component instanceof Component) {
-            $block->setData('component', $component);
-        }
-
         $component = $ancestorBlock->getData('component');
-        if ($component instanceof Component) {
+        if ($component instanceof ComponentInterface) {
             $block->setData('component', $component);
         }
     }

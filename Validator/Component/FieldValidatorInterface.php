@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 interface FieldValidatorInterface
 {
-    public function validate(FieldComponent $component): bool;
+    public function validate(Field $component): bool;
 }

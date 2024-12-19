@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
-            ...LokiGenericComponentType,
+            ...LokiCheckoutGenericComponentType,
             valid: true,
             afterInit() {
                 this.updateValid();
@@ -9,11 +9,11 @@
                     this.updateValid();
                 });
 
-                document.addEventListener('magewire:loader:start', () => {
+                document.addEventListener('@todo', () => {
                    this.valid = false;
                 });
 
-                document.addEventListener('magewire:loader:done', () => {
+                document.addEventListener('@todo', () => {
                     this.updateValid();
                 });
             },
@@ -40,7 +40,7 @@
                 });
 
                 if (true === this.updateValid()) {
-                    Magewire.find(this.wireId).call('submit');
+                    this.post({});
                 }
 
                 // Fail-safe enabling of the button

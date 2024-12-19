@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
+    <component name="loki-checkout.shipping-address"
+               domId="loki-checkout-shipping-address"
+               className="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress"
+    />
+</components>

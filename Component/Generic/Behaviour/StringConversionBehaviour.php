@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Generic\Behaviour;
+namespace Yireo\LokiCheckout\Component\Generic\Behaviour;
 
 trait StringConversionBehaviour
 {

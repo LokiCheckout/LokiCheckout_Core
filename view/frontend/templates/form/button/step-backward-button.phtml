@@ -2,22 +2,31 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Button\StepBackwardButton;
+use Yireo\LokiCheckout\Component\Form\Button\StepBackwardButton;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var StepBackwardButton $magewire */
+/** @var StepBackwardButton $component */
 /** @var CssClass $css */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var AlpineComponentData $alpineComponentData */
+if (empty($component)) {
+    throw new \RuntimeException('No component found for block "'.$block->getNameInLayout().'"');
+}
+
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div class="<?= $css('') ?>"
-    x-data="StepBackwardButton"
-    x-title="<?= $magewire->getAlpineComponentName() ?>"
-    x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-data="StepBackwardButton"
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
 >
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"
             :disabled="disabled"
-            wire:click="submit">
+            @click="submit">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
 </div>

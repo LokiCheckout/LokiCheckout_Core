@@ -2,38 +2,42 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
-/** @var FieldComponent $magewire */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
-
+/** @var Field $component */
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+if (empty($component)) {
+    throw new \RuntimeException('No component found for block "'.$block->getNameInLayout().'"');
+}
 
-// @todo: Determine LokiCheckoutFieldComponent from component method getAlpineComponentName()
 ?>
-<div class="<?= $css('field w-auto relative') ?> <?= $magewire->isRequired() ? 'required' : 'optional' ?> <?= $magewire->getFieldName() ?>"
-     wire:key="<?= $magewire->getHash() ?>"
+<div class="<?= $css('field w-auto relative') ?> <?= $component->isRequired() ? 'required' : 'optional' ?> <?= $component->getFieldName() ?>"
      x-data="LokiCheckoutFieldComponent"
-     x-title="<?= $magewire->getAlpineComponentName() ?>"
-     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-target
 >
     <?= $block->getChildHtml('before') ?>
 
     <?= $templateRenderer->html('form/field/label.phtml', $block, ['alias' => 'label']) ?>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
-        <?= $templateRenderer->html($magewire->getFieldTemplate(), $block, $magewire->getFieldData()) ?>
+        <?= $templateRenderer->html($component->getFieldTemplate(), $block, $component->getFieldData()) ?>
 
-        <div wire:loading x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
+        <div x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
         </div>
 
@@ -42,6 +46,6 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $component->getErrorContainer()->getErrors()]) ?>
     <?= $block->getChildHtml('after') ?>
 </div>

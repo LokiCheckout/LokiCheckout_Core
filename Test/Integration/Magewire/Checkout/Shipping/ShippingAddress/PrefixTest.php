@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Prefix;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Prefix;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 use Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel;
 
@@ -21,7 +21,7 @@ class PrefixTest extends LokiTestCase
     {
         $cart = $this->getGuestCart();
         $this->dispatchToCheckout($cart);
-        $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
     #[Config('customer/address/prefix_show', 1, 'store', 'default')]
@@ -32,11 +32,11 @@ class PrefixTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Prefix::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->clearErrors();
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 
     #[Config('customer/address/prefix_show', 1, 'store', 'default')]
@@ -47,11 +47,11 @@ class PrefixTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Prefix::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->clearErrors();
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 
     #[Config('customer/address/prefix_options', 'Mr,Mrs', 'store', 'default')]
@@ -61,12 +61,12 @@ class PrefixTest extends LokiTestCase
         $this->assertContains('prefix', $component->getValidators());
 
         $prefixOptionModel = $this->getObjectManager()->get(PrefixOptionModel::class);
-        $component->getParent()->setData('option_model', $prefixOptionModel);
+        $component->getBlock()->setData('option_model', $prefixOptionModel);
 
         $component->value = 'Miss';
         $component->clearErrors();
         $component->validate();
-        $this->assertMagewireComponentHasErrors($component);
-        $this->assertMagewireComponentHasError($component, 'Invalid prefix');
+        $this->assertComponentHasErrors($component);
+        $this->assertComponentHasError($component, 'Invalid prefix');
     }
 }

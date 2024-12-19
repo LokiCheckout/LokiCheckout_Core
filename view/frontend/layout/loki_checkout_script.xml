@@ -33,10 +33,6 @@
                 name="loki-checkout.script.aria-invalid"
                 template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
             <block
-                name="loki-checkout.script.component-magic-wire"
-                template="Yireo_LokiCheckout::script/component-magic-wire.phtml"/>
-
-            <block
                 name="loki-checkout.script.validators.email"
                 template="Yireo_LokiCheckout::script/validators/email.phtml"/>
             <block

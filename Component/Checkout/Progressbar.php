@@ -1,18 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout;
+namespace Yireo\LokiCheckout\Component\Checkout;
 
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiComponents\Component\MutableComponentInterface;
 
-class Progressbar extends Component
+class Progressbar implements MutableComponentInterface
 {
-    protected $listeners = [
-        'afterSaveShippingStep' => 'refresh',
-        'afterSaveBillingStep' => 'refresh',
-        'afterChangeStep' => 'onStepChange',
-    ];
-
     public string $currentStepCode = '';
 
     public function __construct(
@@ -20,20 +14,13 @@ class Progressbar extends Component
     ) {
     }
 
-    public function boot(): void
+    public function getCurrentStep()
     {
-        $this->currentStepCode = $this->stepNavigator->getCurrentStep()->getCode();
+        return $this->stepNavigator->getCurrentStep()->getCode();
     }
 
-    public function goToStep(string $stepCode)
+    public function mutate(array $data = []): void
     {
-        $this->currentStepCode = $stepCode;
-        $this->stepNavigator->setCurrentStepByCode($stepCode);
-        $this->emit('afterChangeStep', $stepCode);
-    }
-
-    public function onStepChange(string $stepCode)
-    {
-        $this->currentStepCode = $stepCode;
+        $this->stepNavigator->setCurrentStepByCode($data['step']);
     }
 }

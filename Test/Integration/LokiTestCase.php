@@ -11,13 +11,13 @@ use Magento\Quote\Api\Data\CartInterface;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
-use Magewirephp\Magewire\Component;
-use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Magewire\ComponentRegistry;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
 
-class LokiTestCase extends MagewireComponentTestCase
+use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
+use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ComponentRegistry;
+use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+
+class LokiTestCase extends TestCase
 {
     protected ?ObjectManagerInterface $objectManager = null;
     protected ?DataFixtureStorage $fixtures = null;
@@ -35,7 +35,6 @@ class LokiTestCase extends MagewireComponentTestCase
         $this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
 
         $this->assertModuleIsEnabled('Yireo_LokiCheckout');
-        $this->assertModuleIsEnabled('Magewirephp_Magewire');
         $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
     }
 
@@ -55,15 +54,15 @@ class LokiTestCase extends MagewireComponentTestCase
         $this->assertNotEmpty($response->getBody(), 'No body');
     }
 
-    public function getComponentByBlockName(string $blockName): Component
+    public function getComponentByBlockName(string $blockName): ComponentInterface
     {
         $layout = $this->getObjectManager()->get(LayoutInterface::class);
         $block = $layout->getBlock($blockName);
         $this->assertInstanceOf(Template::class, $block);
 
-        $magewire = $block->getMagewire();
-        $this->assertInstanceOf(Component::class, $block);
-        return $magewire;
+        $component = $block->getData('component');
+        $this->assertInstanceOf(ComponentInterface::class, $component);
+        return $component;
     }
 
     protected function getCart(): CartInterface
@@ -77,19 +76,16 @@ class LokiTestCase extends MagewireComponentTestCase
         return $cart;
     }
 
-    public function assertMagewireComponentExistsOnPage(string $blockName)
+    public function assertComponentExistsOnPage(string $blockName)
     {
         $body = $this->getResponse()->getBody();
-        $this->assertMagewireBlockExistsInHtml($blockName, $body);
-
-        // @todo: Enable elsewhere
-        //$this->assertMagewireComponentResolves($blockName, $component, ['checkout_index_index']);
+        // @todo
     }
 
-    public function assertMagewireComponentNotExistsOnPage(string $blockName)
+    public function assertComponentNotExistsOnPage(string $blockName)
     {
         $body = $this->getResponse()->getBody();
-        $this->assertStringNotContainsString('wire:id="'.$blockName.'"', $body);
+        $this->assertStringNotContainsString('x-title="'.$blockName.'"', $body);
     }
 
     protected function addDummyBlockToComponent(Component $component): Component

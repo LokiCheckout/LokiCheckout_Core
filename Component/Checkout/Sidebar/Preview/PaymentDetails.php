@@ -1,19 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
+namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class PaymentDetails extends Component
+class PaymentDetails  implements ComponentInterface
 {
-    protected $listeners = [
-        'afterSaveBillingStep' => 'refresh',
-        'afterSaveBillingAddress' => 'refresh',
-        'afterSavePaymentMethod' => 'refresh',
-        'afterSaveQuote' => 'refresh',
-    ];
-
     public function __construct(
         private readonly CheckoutSession $checkoutSession,
     ) {

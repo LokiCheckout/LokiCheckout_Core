@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Middlename as GenericMiddlenameComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\Middlename as GenericMiddlenameComponent;
+use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
 
-class Middlename extends GenericMiddlenameComponent implements BillingAddressFieldComponentInterface
+class Middlename extends GenericMiddlenameComponent implements BillingAddressFieldInterface
 {
 }

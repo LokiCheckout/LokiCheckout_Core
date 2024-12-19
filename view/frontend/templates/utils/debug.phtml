@@ -2,18 +2,16 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
 /** @var Template $block */
-/** @var \Yireo\LokiCheckout\Util\Block\CssClass $css */
-/** @var Component|null $component */
+/** @var CssClass $css */
+/** @var ComponentInterface|null $component */
 /** @var Template $ancestorBlock */
-if (isset($magewire)) {
-    $component = $magewire;
-} else {
-    $component = $block->getComponent();
-}
 
+$component = $block->getComponent();
 $ancestorBlock = $block->getAncestorBlock();
 ?>
 <div x-data="{open:false}" class="<?= $css('absolute top-0 left-0') ?>">
@@ -26,14 +24,11 @@ $ancestorBlock = $block->getAncestorBlock();
         </svg>
     </button>
     <div x-cloak x-show="open" class="<?= $css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal') ?>">
-        Component: <?= ($component instanceof Component) ? get_class($component) : 'none' ?><br/>
+        Component: <?= ($component instanceof ComponentInterface) ? get_class($component) : 'none' ?><br/>
         Block: <?= get_class($ancestorBlock) ?><br/>
         Name in layout: <?= $ancestorBlock->getNameInLayout() ?><br/>
         Template file: <?= $ancestorBlock->getTemplateFile() ?><br/>
-        <?php if ($component instanceof Component): ?>
-        Listeners: <?= var_export($component->getListeners(), true) ?><br/>
-        <?php endif; ?>
-        <?php if ($component instanceof \Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent): ?>
+        <?php if ($component instanceof AddressField): ?>
             Validators: <?= implode(', ', $component->getValidators()) ?><br/>
             Filters: <?= implode(', ', $component->getFilters()) ?><br/>
         <?php endif; ?>

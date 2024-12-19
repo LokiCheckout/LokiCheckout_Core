@@ -5,12 +5,18 @@
             name="loki-checkout.agreements" as="agreements"
             ifconfig="checkout/options/enable_agreements"
             template="Yireo_LokiCheckout::checkout/agreements.phtml">
+            <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Other\Agreements</argument>
+            </arguments>
         </block>
 
         <block
             name="loki-checkout.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
             template="Yireo_LokiCheckout::checkout/newsletter.phtml">
+            <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Other\Newsletter</argument>
+            </arguments>
         </block>
     </body>
 </page>

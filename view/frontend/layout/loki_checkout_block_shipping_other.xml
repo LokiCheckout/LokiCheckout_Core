@@ -5,12 +5,17 @@
         <block
             name="loki-checkout.shipping-step.backward-button"
             template="Yireo_LokiCheckout::form/button/step-backward-button.phtml">
+            <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Form\Button\StepBackwardButton</argument>
+                <argument name="button_label" xsi:type="string">Back to previous step</argument>
+            </arguments>
         </block>
 
         <block
             name="loki-checkout.shipping-step.forward-button"
             template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
             <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Form\Button\StepForwardButton</argument>
                 <argument name="button_label" xsi:type="string">Proceed to Review &amp;amp; Payments</argument>
             </arguments>
         </block>

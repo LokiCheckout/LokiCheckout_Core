@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Field;
+namespace Yireo\LokiCheckout\Component\Form\Field;
 
-interface AddressFieldInterface extends FormFieldInterface
+interface AddressFieldInterface extends FieldInterface
 {
     public function getAttributeCode(): string;
     public function getAttributeLabel(): string;

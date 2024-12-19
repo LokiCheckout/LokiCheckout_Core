@@ -2,23 +2,28 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Button\StepForwardButton;
+use Yireo\LokiCheckout\Component\Form\Button\StepForwardButton;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var StepForwardButton $magewire */
+/** @var StepForwardButton $component */
 /** @var CssClass $css */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div
     class="<?= $css('') ?>"
     x-data="LokiCheckoutStepForwardButton"
-    x-title="<?= $magewire->getAlpineComponentName() ?>"
-    x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+    x-title="<?= $alpineComponentData->getName($block) ?>"
+    x-init-data='<?= $alpineComponentData->getJson($component) ?>'
 >
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
             :disabled="disabled"
-            x-on:click="submit">
+            @click="submit">
         <?= __((string)$block->getButtonLabel()) ?>
     </button>
 </div>

@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
 class Step
 {
     public function __construct(
         private string $name,
-        private Component $component
+        private ComponentInterface $component
     ) {
     }
 
@@ -17,7 +17,7 @@ class Step
         return $this->name;
     }
 
-    public function getComponent(): Component
+    public function getComponent(): ComponentInterface
     {
         return $this->component;
     }

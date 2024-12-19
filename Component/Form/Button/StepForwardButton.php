@@ -1,49 +1,38 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Button;
+namespace Yireo\LokiCheckout\Component\Form\Button;
 
 use Exception;
-use Yireo\LokiCheckout\Magewire\ComponentRegistry;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
+use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 
-class StepForwardButton extends GenericComponent implements ButtonInterface
+class StepForwardButton extends Generic implements ButtonInterface
 {
-    use AlpineDataBehaviour;
     use StepBehaviour;
 
     public bool $valid = false;
 
-    protected $listeners = [
-        'afterChangeStep' => 'refresh',
-    ];
-
     public function __construct(
         private StepNavigator $stepNavigator,
-        private ComponentRegistry $componentRegistry
+        private ComponentRegistry $componentRegistry,
+        private MessageManager $messageManager,
     ) {
-    }
-
-    public function getComponents(): array
-    {
-        return $this->componentRegistry->getComponentsByStep($this->getStep());
     }
 
     public function submit()
     {
-        $this->clearFlashMessages();
-
         try {
-            $result = $this->stepNavigator->setNextStep($this);
+            $result = $this->stepNavigator->setNextStep();
         } catch (Exception $e) {
-            $this->dispatchErrorMessage($e->getMessage());
+            $this->messageManager->addErrorMessage($e->getMessage());
             return;
         }
 
         if (true === $result) {
-            $this->emit('afterChangeStep', $this->stepNavigator->getCurrentStep()->getCode());
+            // @todo: Trigger afterChangeStep()
         }
     }
 }

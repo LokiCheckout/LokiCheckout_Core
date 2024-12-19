@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\CountryId as GenericCountryIdComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\CountryId as GenericCountryIdComponent;
+use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
 
-class CountryId extends GenericCountryIdComponent implements BillingAddressFieldComponentInterface
+class CountryId extends GenericCountryIdComponent implements BillingAddressFieldInterface
 {
 }

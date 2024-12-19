@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\PaymentDetails;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var PaymentDetails $magewire */
+/** @var PaymentDetails $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$html = $magewire->getHtml();
+$html = $component->getHtml();
 if (empty($html)) {
     echo '<div></div>';
     return;

@@ -6,7 +6,7 @@
             }
         });
 
-        document.addEventListener("magewire:update", function (event) {
+        document.addEventListener("@todo", function (event) {
             event.target.querySelectorAll('[aria-invalid]').forEach(function (element) {
                 if (typeof element.setCustomValidity === 'function') {
                     element.setCustomValidity('Field is invalid');

@@ -1,28 +1,20 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping;
 
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
+
+use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
-class ShippingMethods extends FieldComponent
+class ShippingMethods extends Field
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
-    use AlpineDataBehaviour;
-
-    public bool $lazyLoad = false; // @todo: Make this configurable
-
-    protected $listeners = [
-        'afterSaveShippingStep' => 'refresh',
-        'afterSaveShippingAddress' => 'refresh',
-    ];
 
     private array $shippingMethods = [];
 
@@ -33,7 +25,7 @@ class ShippingMethods extends FieldComponent
     ) {
     }
 
-    public function boot(): void
+    public function initialize(): void
     {
         if ($this->isLazyload()) {
             return;
@@ -67,7 +59,7 @@ class ShippingMethods extends FieldComponent
             $this->valid = true;
         }
 
-        parent::boot();
+        parent::initialize();
     }
 
     /**
@@ -81,8 +73,6 @@ class ShippingMethods extends FieldComponent
     public function save($value): void
     {
         $this->saveShippingMethodToQuote($value);
-        $this->emit('afterSaveShippingStep');
-        $this->emit('afterSaveShippingMethod');
 
     }
 

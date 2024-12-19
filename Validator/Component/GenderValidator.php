@@ -2,7 +2,8 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel;
 
 class GenderValidator implements FieldValidatorInterface
@@ -12,9 +13,9 @@ class GenderValidator implements FieldValidatorInterface
     ) {
     }
 
-    public function validate(FieldComponent $component): bool
+    public function validate(Field $component): bool
     {
-        $gender = trim($component->value);
+        $gender = trim($component->getValue());
 
         if (empty($gender)) {
             return true;
@@ -26,7 +27,7 @@ class GenderValidator implements FieldValidatorInterface
         }
 
         if (false === array_key_exists($gender, $genderOptions)) {
-            $component->error('value', 'Invalid gender');
+            $component->getErrorContainer()->addError('Invalid gender');
 
             return false;
         }

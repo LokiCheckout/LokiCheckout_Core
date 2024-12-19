@@ -1,23 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview;
+namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
-use Magewirephp\Magewire\Component;
+
 use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class ShippingDetails extends Component
+class ShippingDetails implements ComponentInterface
 {
-    protected $listeners = [
-        'afterSaveShippingStep' => 'refresh',
-        'afterSaveShippingAddress' => 'refresh',
-        'afterSaveShippingMethod' => 'refresh',
-    ];
-
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly ShippingConfig $shippingConfig,

@@ -2,19 +2,26 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAsShipping;
+use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var BillingAsShipping $magewire */
+/** @var BillingAsShipping $component */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
-<div class="<?= $css('card mb-8') ?>">
+<div class="<?= $css('card mb-8') ?>"
+     x-data="LokiCheckoutGenericComponent"
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+>
     <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">
         <input type="checkbox"
-               wire:model="billingAsShipping"
-               wire:loading.attr="aria-busy"
-               wire:loading.class="disabled"
+               x-model="billingAsShipping"
                id="billing_as_shipping">
         <span class="<?= $css('pl-2', 'span') ?>">
             <?= __('My billing and shipping address are the same') ?>

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\VatId;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\VatId;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 use Magento\TestFramework\Fixture\Config;
 
@@ -21,7 +21,7 @@ class VatIdTest extends LokiTestCase
         $cart->getShippingAddress()->addData(['vat_id' => '']);
         $this->dispatchToCheckout($cart);
 
-        $this->assertMagewireComponentNotExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
     #[Config('customer/address/taxvat_show', 1, 'store', 'default')]
@@ -32,9 +32,9 @@ class VatIdTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(VatId::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 }

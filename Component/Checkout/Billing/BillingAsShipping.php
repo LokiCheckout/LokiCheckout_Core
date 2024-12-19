@@ -1,21 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing;
 
 use Magento\Quote\Api\CartRepositoryInterface;
-use Magewirephp\Magewire\Component;
+
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiComponents\Component\MutableComponentInterface;
 
-class BillingAsShipping extends Component
+class BillingAsShipping implements MutableComponentInterface
 {
-    protected $listeners = [
-        'afterSaveBillingAddress' => 'refresh'
-    ];
-
-    public bool $billingAsShipping = true;
-
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
         private readonly ShippingAddressState $shippingAddressState,
@@ -24,21 +19,34 @@ class BillingAsShipping extends Component
     ) {
     }
 
-    public function boot(): void
+    public function isBillingAsShipping(): bool
     {
-        $this->billingAsShipping = $this->billingAsShippingService->getValueFromAddress(
+        $billingAsShipping = $this->billingAsShippingService->getValueFromAddress(
             $this->billingAddressState->getBillingAddress()
         );
 
-        if (true === $this->billingAsShipping) {
+        if (true === $billingAsShipping) {
             $this->copyShippingToBilling();
             $this->cartRepository->save($this->billingAddressState->getQuote());
         }
+
+        return $billingAsShipping;
     }
 
-    public function updatedBillingAsShipping(mixed $billingAsShipping)
+    public function getAlpineData(): array
     {
-        $billingAsShipping = (bool)$billingAsShipping;
+        return [
+            'billingAsShipping' => $this->isBillingAsShipping()
+        ];
+    }
+
+    public function mutate(array $data = []): void
+    {
+        if (!isset($data['billingAsShipping'])) {
+            return;
+        }
+
+        $billingAsShipping = $data['billingAsShipping'];
         $billingAddress = $this->billingAddressState->getBillingAddress();
 
         $billingAddress->setSameAsBilling((int)$billingAsShipping);
@@ -47,9 +55,6 @@ class BillingAsShipping extends Component
         }
 
         $this->cartRepository->save($this->billingAddressState->getQuote());
-        $this->emit('afterSaveBillingAddress');
-
-        return $billingAsShipping;
     }
 
     private function copyShippingToBilling()

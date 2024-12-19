@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\SetterInjection;
+namespace Yireo\LokiCheckout\Component\SetterInjection;
 
-use Yireo\LokiCheckout\Magewire\ComponentRegistry;
+use Yireo\LokiCheckout\Component\ComponentRegistry;
 
 trait InjectComponentRegistry
 {

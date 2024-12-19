@@ -3,7 +3,8 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Customer\Api\AccountManagementInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 class EmailValidator implements FieldValidatorInterface
 {
@@ -12,18 +13,18 @@ class EmailValidator implements FieldValidatorInterface
     ) {
     }
 
-    public function validate(FieldComponent $component): bool
+    public function validate(Field $component): bool
     {
-        $email = trim($component->value);
+        $email = trim($component->getValue());
 
         if (empty($email)) {
-            $component->error('value', 'This value is required');
+            $component->getErrorContainer()->addError('This value is required');
 
             return false;
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $component->error('value', 'Invalid email');
+            $component->getErrorContainer()->addError( 'Invalid email');
 
             return false;
         }
@@ -32,13 +33,13 @@ class EmailValidator implements FieldValidatorInterface
         $domain = $parts[1];
         if (false === checkdnsrr($domain)) {
             $message = (string)__('Domain "%s" does not seem to be valid');
-            $component->error('value', sprintf($message, $domain));
+            $component->getErrorContainer()->addError( sprintf($message, $domain));
             return false;
         }
 
         // Mental note, this only triggers if `checkout/options/enable_guest_checkout_login` is enabled
         if (false === $this->accountManagement->isEmailAvailable($email)) {
-            $component->error('value', 'This email address is not available');
+            $component->getErrorContainer()->addError( 'This email address is not available');
 
             return false;
         }

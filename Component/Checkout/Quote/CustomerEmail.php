@@ -1,26 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Quote;
+namespace Yireo\LokiCheckout\Component\Checkout\Quote;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\QuoteFieldComponent;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectCustomerSession;
+use Yireo\LokiCheckout\Component\Form\Field\QuoteField;
+use Yireo\LokiCheckout\Component\SetterInjection\InjectCustomerSession;
 
-class CustomerEmail extends QuoteFieldComponent
+class CustomerEmail extends QuoteField
 {
     use InjectCustomerSession;
 
     public string $email = '';
 
     protected array $validators = ['email'];
-
-    public function boot(): void
-    {
-        if ($this->customerSession->isLoggedIn()) {
-            $this->allowRendering = false;
-        }
-
-        parent::boot();
-    }
 
     public function getFieldLabel(): string
     {
@@ -30,6 +21,15 @@ class CustomerEmail extends QuoteFieldComponent
     public function getInputType(): string
     {
         return 'email';
+    }
+
+    public function isAllowRendering(): bool
+    {
+        if ($this->customerSession->isLoggedIn()) {
+            return false;
+        }
+
+        return true;
     }
 
     public function isRequired(): bool

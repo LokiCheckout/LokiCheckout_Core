@@ -2,43 +2,41 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
-/** @var AddressFieldComponent $magewire */
+/** @var Field $component */
 /** @var CssClass $css */
 $fieldBlock = $block->getFieldBlock();
-$magewire = $this->getComponent();
+$component = $block->getComponent();
 ?>
 <input
-    wire:loading.attr="aria-busy"
-    wire:loading.class="disabled"
-    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+    aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
     data-type="field"
     x-ref="field"
     x-model.lazy="value"
-    x-on:change="submit"
-    <?php if ($magewire->isDisabled()): ?>
+    @change="submit"
+    <?php if ($component->isDisabled()): ?>
         disabled="disabled"
     <?php endif ?>
-    <?php if ($magewire->hasMinLength()): ?>
-        minlength="<?= $magewire->getMinLength() ?>"
+    <?php if ($component->hasMinLength()): ?>
+        minlength="<?= $component->getMinLength() ?>"
     <?php endif ?>
-    <?php if ($magewire->hasMaxLength()): ?>
-        maxlength="<?= $magewire->getMaxLength() ?>"
+    <?php if ($component->hasMaxLength()): ?>
+        maxlength="<?= $component->getMaxLength() ?>"
     <?php endif ?>
-    <?php if ($magewire->hasMin()): ?>
-        min="<?= $magewire->getMin() ?>"
+    <?php if ($component->hasMin()): ?>
+        min="<?= $component->getMin() ?>"
     <?php endif ?>
-    <?php if ($magewire->hasMax()): ?>
-        max="<?= $magewire->getMax() ?>"
+    <?php if ($component->hasMax()): ?>
+        max="<?= $component->getMax() ?>"
     <?php endif ?>
-    <?php if ($magewire->getPlaceholder()): ?>
-        placeholder="<?= $magewire->getPlaceholder() ?>"
+    <?php if ($component->getPlaceholder()): ?>
+        placeholder="<?= $component->getPlaceholder() ?>"
     <?php endif ?>
-    <?= $magewire->isRequired() ? 'required' : '' ?>
-    type="<?= $magewire->getInputType() ?>"
+    <?= $component->isRequired() ? 'required' : '' ?>
+    type="<?= $component->getInputType() ?>"
     class="<?= $css('form-input w-full disabled:bg-zinc-100', 'input') ?>"
 >

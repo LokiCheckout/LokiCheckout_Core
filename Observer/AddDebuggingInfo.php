@@ -6,9 +6,10 @@ namespace Yireo\LokiCheckout\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
-use Magewirephp\Magewire\Component;
+
+use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
 class AddDebuggingInfo implements ObserverInterface
 {
@@ -57,7 +58,7 @@ class AddDebuggingInfo implements ObserverInterface
         if (true === $this->config->addDebugBlock()) {
             $html .= $debugBlock->setData([
                 'ancestor_block' => $block,
-                'component' => $block->getMagewire(),
+                'component' => $block->getComponent(),
             ])->toHtml();
         }
 
@@ -84,7 +85,7 @@ class AddDebuggingInfo implements ObserverInterface
         $debugLines['template'] = $block->getTemplate();
 
         $component = $this->getComponentFromBlock($block);
-        if ($component instanceof FieldComponent) {
+        if ($component instanceof FieldInterface) {
             $validators = $component->getValidators();
             if (!empty($validators)) {
                 $debugLines['validators'] = implode('|', $validators);
@@ -101,15 +102,11 @@ class AddDebuggingInfo implements ObserverInterface
 
     /**
      * @param Template $block
-     * @return Component|null
+     * @return ComponentInterface|null
      */
-    private function getComponentFromBlock(Template $block): ?Component
+    private function getComponentFromBlock(Template $block): ?ComponentInterface
     {
-        if ($block->getMagewire() instanceof Component) {
-            return $block->getMagewire();
-        }
-
-        if ($block->getComponent() instanceof Component) {
+        if ($block->getComponent() instanceof ComponentInterface) {
             return $block->getComponent();
         }
 

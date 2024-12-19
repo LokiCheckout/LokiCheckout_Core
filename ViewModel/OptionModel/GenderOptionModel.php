@@ -1,14 +1,16 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\ComponentInterface;
+
 
 class GenderOptionModel implements ArgumentInterface, OptionModelInterface
 {
     // @todo: Is there really no code in Magento for this?
-    public function getOptions(Component $component): array
+    public function getOptions(ComponentInterface $component): array
     {
         return [
             '' => __(''),

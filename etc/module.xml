@@ -4,7 +4,7 @@
         <sequence>
             <module name="Magento_Checkout"/>
             <module name="Magento_Store"/>
-            <module name="Magewirephp_Magewire"/>
+            <module name="Yireo_LokiComponents"/>
             <module name="Yireo_CspUtilities"/>
             <module name="Yireo_HyvaThemeAutoRegistration"/>
         </sequence>

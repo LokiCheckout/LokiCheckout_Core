@@ -5,6 +5,10 @@
 
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
             <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
+                <arguments>
+                    <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep</argument>
+                </arguments>
+
                 <block
                     name="loki-checkout.shipping-step.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
@@ -17,6 +21,10 @@
             </block>
 
             <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
+                <arguments>
+                    <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Step\BillingStep</argument>
+                </arguments>
+
                 <block
                     name="loki-checkout.billing-step.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">

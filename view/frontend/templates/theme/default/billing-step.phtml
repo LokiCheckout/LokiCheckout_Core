@@ -2,8 +2,9 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\BillingStep;
+use Yireo\LokiCheckout\Component\Checkout\Step\BillingStep;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -11,18 +12,20 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BillingStep $magewire */
+/** @var BillingStep $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
-$duration = $magewire->getParent()->getDuration() ?? '300ms';
+$duration = $component->getBlock()->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutStep"
-     x-title="<?= $magewire->getAlpineComponentName() ?>"
-     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
      <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
      x-show="visible"
      x-transition.duration.<?= $duration ?>.opacity

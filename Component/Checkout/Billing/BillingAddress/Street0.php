@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Street0 as GenericStreetComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\FormTextMultipleFieldInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\Street0 as GenericStreetComponent;
+use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
+use Yireo\LokiCheckout\Component\Form\Field\FormTextMultipleFieldInterface;
 
-class Street0 extends GenericStreetComponent implements BillingAddressFieldComponentInterface
+class Street0 extends GenericStreetComponent implements BillingAddressFieldInterface
 {
 }

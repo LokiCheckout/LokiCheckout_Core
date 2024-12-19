@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Lastname as GenericLastnameComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\Lastname as GenericLastnameComponent;
+use Yireo\LokiCheckout\Component\Form\Field\ShippingAddressFieldInterface;
 
-class Lastname extends GenericLastnameComponent implements ShippingAddressFieldComponentInterface
+class Lastname extends GenericLastnameComponent implements ShippingAddressFieldInterface
 {
 }

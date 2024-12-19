@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing\BillingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\VatId as GenericVatIdComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\BillingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\VatId as GenericVatIdComponent;
+use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
 
-class VatId extends GenericVatIdComponent implements BillingAddressFieldComponentInterface
+class VatId extends GenericVatIdComponent implements BillingAddressFieldInterface
 {
 }

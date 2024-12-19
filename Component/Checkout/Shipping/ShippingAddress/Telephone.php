@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\AddressFieldComponent\Telephone as GenericTelephoneComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\ShippingAddressFieldComponentInterface;
+use Yireo\LokiCheckout\Component\Form\Field\AddressField\Telephone as GenericTelephoneComponent;
+use Yireo\LokiCheckout\Component\Form\Field\ShippingAddressFieldInterface;
 
-class Telephone extends GenericTelephoneComponent implements ShippingAddressFieldComponentInterface
+class Telephone extends GenericTelephoneComponent implements ShippingAddressFieldInterface
 {
 }

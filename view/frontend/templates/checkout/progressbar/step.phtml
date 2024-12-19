@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Progressbar;
+use Yireo\LokiCheckout\Component\Checkout\Progressbar;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var Template $block */
 /** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Progressbar $magewire */
+/** @var Progressbar $component */
 /** @var StepNavigator $stepNavigator */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
@@ -38,7 +38,7 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
              <?= $step->getLabel() ?>
         </span>
     <?php else: ?>
-        <button wire:click="goToStep('<?= $step->getCode() ?>')">
+        <button @click="goToStep('<?= $step->getCode() ?>')">
             <?= __($step->getLabel()) ?>
         </button>
     <?php endif; ?>

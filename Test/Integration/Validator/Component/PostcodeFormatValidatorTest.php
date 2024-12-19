@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Test\Integration\Validator\Component;
 
 use Magento\Framework\App\ObjectManager;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Postcode;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Postcode;
 use Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 

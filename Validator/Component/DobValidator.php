@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 class DobValidator implements FieldValidatorInterface
 {
@@ -11,9 +11,9 @@ class DobValidator implements FieldValidatorInterface
     ) {
     }
 
-    public function validate(FieldComponent $component): bool
+    public function validate(Field $component): bool
     {
-        $value = $component->value;
+        $value = $component->getValue();
         if (false === is_string($value)) {
             return true;
         }
@@ -21,7 +21,7 @@ class DobValidator implements FieldValidatorInterface
         $dob = strtotime($value);
         if ($dob > time()) {
             $msg = __('You can not be from the future', $this->minimumYears);
-            $component->error('value', (string) $msg);
+            $component->getErrorContainer()->addError((string)$msg);
 
             return false;
         }
@@ -29,7 +29,7 @@ class DobValidator implements FieldValidatorInterface
         $minimumAge = $this->minimumYears * 365 * 24 * 60 * 60;
         if (time() - $dob < $minimumAge) {
             $msg = __('You need to be at least %1 years old', $this->minimumYears);
-            $component->error('value', (string) $msg);
+            $component->getErrorContainer()->addError((string)$msg);
 
             return false;
         }

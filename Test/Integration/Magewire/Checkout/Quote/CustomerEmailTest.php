@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Quote;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Quote;
 
-use Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail;
+use Yireo\LokiCheckout\Component\Checkout\Quote\CustomerEmail;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 /**
@@ -20,11 +20,11 @@ class CustomerEmailTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(CustomerEmail::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasErrors($component);
-        $this->assertMagewireComponentHasError($component, 'Value is required');
+        $this->assertComponentHasErrors($component);
+        $this->assertComponentHasError($component, 'Value is required');
     }
 
     public function testComponentWithValue()
@@ -34,8 +34,8 @@ class CustomerEmailTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(CustomerEmail::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 }

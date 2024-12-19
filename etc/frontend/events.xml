@@ -7,6 +7,7 @@
     </event>
 
     <event name="view_block_abstract_to_html_before">
+        <observer name="Yireo_LokiCheckout::addComponent" instance="Yireo\LokiCheckout\Observer\AddComponent"/>
         <observer name="Yireo_LokiCheckout::assignAdditionalBlockVariables" instance="Yireo\LokiCheckout\Observer\AssignAdditionalBlockVariables"/>
     </event>
 

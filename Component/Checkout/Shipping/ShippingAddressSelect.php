@@ -1,19 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Model\Address\Config as AddressConfig;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
-class ShippingAddressSelect extends FieldComponent
+class ShippingAddressSelect extends Field
 {
-    use AlpineDataBehaviour;
     use StepBehaviour;
 
     public array $shippingAddresses = [];
@@ -27,15 +26,8 @@ class ShippingAddressSelect extends FieldComponent
     ) {
     }
 
-    public function boot(): void
+    public function initialize(): void
     {
-        if (false === $this->customerProvider->isLoggedIn()) {
-            $this->allowRendering = false;
-            $this->valid = false;
-
-            return;
-        }
-
         $this->shippingAddresses = $this->customerProvider->getAddresses();
 
         $quote = $this->checkoutSession->getQuote();
@@ -48,13 +40,6 @@ class ShippingAddressSelect extends FieldComponent
         if (!empty($this->value)) {
             $this->save((string)$this->value);
         }
-    }
-
-    public function getAdditionalAlpineData(): array
-    {
-        return [
-            'disabled' => $this->isDisabled(),
-        ];
     }
 
     public function isDisabled(): bool
@@ -75,13 +60,6 @@ class ShippingAddressSelect extends FieldComponent
         return parent::validate();
     }
 
-    protected function afterSave($value): void
-    {
-        $this->emit('afterSaveShippingAddress');
-        parent::afterSave($value);
-    }
-
-
     public function getFieldLabel(): string
     {
         return 'Select your Shipping Address';
@@ -94,5 +72,14 @@ class ShippingAddressSelect extends FieldComponent
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
         $quoteShippingAddress->save();
+    }
+
+    public function isAllowRendering(): bool
+    {
+        if (false === $this->customerProvider->isLoggedIn()) {
+            return false;
+        }
+
+        return parent::isAllowRendering();
     }
 }

@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Preview\BillingAddress;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
-/** @var BillingAddress $magewire */
+/** @var BillingAddress $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$html = $magewire->getHtml();
+$html = $component->getHtml();
 if (empty($html)) {
     echo '<div></div>';
     return;
@@ -18,7 +18,7 @@ if (empty($html)) {
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
-    <?php if ($magewire->isSameAsShipping()): ?>
+    <?php if ($component->isSameAsShipping()): ?>
     <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
     <?php endif; ?>
 </div>

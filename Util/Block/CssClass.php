@@ -92,7 +92,7 @@ class CssClass
 
     private function getGridClassesFromXmlConfig(): string
     {
-        $parentBlock = $this->block->getParentBlock();
+        $parentBlock = $this->block->getBlockBlock();
         if (empty($parentBlock)) {
             return '';
         }

@@ -26,7 +26,6 @@ class EnableCheckout implements ObserverInterface
             return;
         }
 
-        // @todo: Double-check that Magewire is enabled (and other dependencies)
         // @todo: Better check for this?
         $handles = $this->layout->getUpdate()->getHandles();
         if (false === in_array('checkout_index_index', $handles)) {

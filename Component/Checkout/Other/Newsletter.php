@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Other;
+namespace Yireo\LokiCheckout\Component\Checkout\Other;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
-use Magewirephp\Magewire\Component;
+use Yireo\LokiComponents\Component\MutableComponentInterface;
 
-class Newsletter extends Component
+
+class Newsletter implements MutableComponentInterface
 {
     public bool $signup = false;
 
@@ -21,7 +21,7 @@ class Newsletter extends Component
     ) {
     }
 
-    public function boot(): void
+    public function initialize(): void
     {
         $email = (string)$this->checkoutSession->getQuote()->getCustomerEmail();
         if (!empty($email)) {
@@ -29,11 +29,16 @@ class Newsletter extends Component
         }
     }
 
-    public function updatedSignup(bool $value): bool
+    public function mutate(array $data = []): void
     {
+        if (!isset($data['subscribe'])) {
+            return;
+        }
+
+        $subscribe = (bool)$data['subscribe'];
         $email = (string)$this->checkoutSession->getQuote()->getCustomerEmail();
         $storeId = (int)$this->checkoutSession->getQuote()->getStoreId();
-        if ($value) {
+        if ($subscribe) {
             $this->subscriptionManager->subscribe($email, $storeId);
         } else {
             $subscriber = $this->subscriberFactory->create();
@@ -43,7 +48,5 @@ class Newsletter extends Component
                 $this->subscriptionManager->unsubscribe($email, $storeId, $confirmCode);
             }
         }
-
-        return $value;
     }
 }

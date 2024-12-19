@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Other\Agreements;
+use Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Agreements $magewire */
+/** @var Agreements $component */
 
-if (false === $magewire->isEnabled()) {
+if (false === $component->isEnabled()) {
     return '<div></div>';
 }
 ?>
 <div>
-    <?php foreach ($magewire->getCheckoutAgreements() as $agreement): ?>
-        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" wire:model="agreements.<?= $agreement->getAgreementId() ?>"/>
+    <?php foreach ($component->getCheckoutAgreements() as $agreement): ?>
+        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" x-model="agreements.<?= $agreement->getAgreementId() ?>"/>
         <label for="agreement<?= $agreement->getAgreementId() ?>">
             <?= $agreement->getName() ?>
         </label>

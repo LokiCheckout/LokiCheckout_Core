@@ -1,11 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Form\Button;
+namespace Yireo\LokiCheckout\Component\Form\Button;
 
-interface ButtonInterface
+use Yireo\LokiCheckout\Component\GenericInterface;
+
+interface ButtonInterface extends GenericInterface
 {
-    public function getDomElementId(): string;
     public function getStep(): string;
     public function submit();
 }

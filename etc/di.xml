@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\ShippingStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>
         </arguments>
@@ -17,7 +17,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\BillingStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualBillingStepValidator</argument>
         </arguments>
@@ -32,7 +32,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Magewire\Checkout\OneStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualOneStepValidator</argument>
         </arguments>
@@ -55,35 +55,6 @@
             </argument>
         </arguments>
     </type>
-
-    <type name="Magewirephp\Magewire\Model\ComponentManager">
-        <arguments>
-            <argument name="hydrationPool" xsi:type="array">
-                <item name="loki_component_register" xsi:type="object">Yireo\LokiCheckout\Magewire\Hydrator\ComponentRegisterHydrator</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <!--
-    <type name="Magewirephp\Magewire\Model\ComponentResolver">
-        <arguments>
-            <argument name="resolvers" xsi:type="array">
-                <item name="loki_resolver" xsi:type="object">Yireo\LokiCheckout\Magewire\Resolver\LokiResolver</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <type name="Yireo\LokiCheckout\Magewire\Resolver\LokiResolver">
-        <arguments>
-            <argument name="componentMapping" xsi:type="array">
-                <item name="content_schedule_block0" xsi:type="array">
-                    <item name="template" xsi:type="string">Yireo_Example::example.phtml</item>
-                    <item name="componentClass" xsi:type="string">Yireo\Example\Magewire\MyExample</item>
-                </item>
-            </argument>
-        </arguments>
-    </type>
-    -->
 
     <type name="Yireo\LokiCheckout\Filter\FilterRegistry">
         <arguments>
@@ -114,7 +85,7 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Plugin\SetterInjectionPlugin">
+    <type name="Yireo\LokiCheckout\Util\SetterInjection">
         <arguments>
             <argument name="injectables" xsi:type="array">
                 <item name="lokiCheckoutConfig" xsi:type="object">Yireo\LokiCheckout\Config\Config</item>
@@ -123,7 +94,7 @@
                 <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>
                 <item name="streetLinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetLinesFactory</item>
                 <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
-                <item name="componentRegistry" xsi:type="object">Yireo\LokiCheckout\Magewire\ComponentRegistry</item>
+                <item name="errorContainerFactory" xsi:type="object">Yireo\LokiCheckout\Util\ErrorContainerFactory</item>
             </argument>
         </arguments>
     </type>

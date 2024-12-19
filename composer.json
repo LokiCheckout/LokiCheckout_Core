@@ -1,7 +1,7 @@
 {
   "name": "yireo/magento2-loki-checkout",
-  "version": "0.0.4",
-  "description": "A developer-friendly Magewire-based checkout for Magento 2",
+  "version": "0.0.5",
+  "description": "A developer-friendly AlpineJS-based checkout for Magento 2",
   "type": "magento2-module",
   "homepage": "https://loki-checkout.com/",
   "authors": [
@@ -13,15 +13,13 @@
   "require": {
     "magento/framework": "^103.0",
     "symfony/validator": "^7.1",
-    "magewirephp/magewire": "^1.11",
     "yireo/magento2-csp-utilities": "^1.0",
     "yireo/magento2-hyva-theme-auto-registration": "^1.0",
     "php": "^8.3",
     "ext-dom": "*"
   },
   "require-dev": {
-    "yireo/magento2-integration-test-helper": "@dev",
-    "yireo/magento2-magewire-test-utils": "@dev"
+    "yireo/magento2-integration-test-helper": "@dev"
   },
   "suggest": {
     "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"

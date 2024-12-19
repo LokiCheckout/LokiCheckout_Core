@@ -8,7 +8,6 @@ use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
 use Magento\Payment\Helper\Data as PaymentHelper;
 use Magento\Sales\Api\OrderRepositoryInterface;
-use Magewirephp\Magewire\Component;
 use Yireo\LokiCheckout\Step\FinalStep\RedirectUrl;
 use Yireo\LokiCheckout\Validator\QuoteValidator;
 
@@ -47,7 +46,7 @@ class FinalStep
         return $this->quoteValidator->validate();
     }
 
-    public function submit(Component $source): bool
+    public function submit(): bool
     {
         $quote = $this->checkoutSession->getQuote();
         $shippingAddress = $quote->getShippingAddress();
@@ -70,7 +69,9 @@ class FinalStep
         $paymentMethod = $this->paymentHelper->getMethodInstance($paymentCode);
 
         $this->dispatchSaveOrderEvent();
-        $source->redirect($this->redirectUrl->get($paymentMethod, $order));
+
+        // @todo: Redirect
+        die($this->redirectUrl->get($paymentMethod, $order));
 
         return true;
     }

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Magewire\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Magewire\Checkout\Shipping\ShippingAddress\Lastname;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Lastname;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 /**
@@ -21,11 +21,11 @@ class LastnameTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Lastname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
         $component->validate();
-        $this->assertMagewireComponentHasErrors($component);
-        $this->assertMagewireComponentHasError($component, 'Value is required');
+        $this->assertComponentHasErrors($component);
+        $this->assertComponentHasError($component, 'Value is required');
     }
 
     public function testComponentWithValue()
@@ -35,8 +35,8 @@ class LastnameTest extends LokiTestCase
         $this->dispatchToCheckout($cart);
 
         $component = $this->getObjectManager()->get(Lastname::class);
-        $this->assertMagewireComponentExistsOnPage(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
-        $this->assertMagewireComponentHasNoErrors($component);
+        $this->assertComponentHasNoErrors($component);
     }
 }

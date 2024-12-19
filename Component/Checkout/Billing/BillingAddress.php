@@ -1,19 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing;
 
-use Magewirephp\Magewire\Component;
-use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class BillingAddress extends Component
+class BillingAddress implements ComponentInterface
 {
-    protected $listeners = [
-        'afterSaveBillingAddress' => 'refresh',
-        'afterSaveBillingStep' => 'refresh',
-    ];
-
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
         private readonly BillingAsShippingService $billingAsShippingService,

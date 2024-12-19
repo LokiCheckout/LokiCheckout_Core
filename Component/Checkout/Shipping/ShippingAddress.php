@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Shipping;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
@@ -8,21 +8,19 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\GenericComponent;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
+use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 
-class ShippingAddress extends GenericComponent
+class ShippingAddress extends Generic
 {
-    use AlpineDataBehaviour;
     use StepBehaviour;
 
-    public array $shippingAddresses = [];
-    public int|string $currentShippingAddress = 0;
-    public bool $newAddress = false;
+    private array $shippingAddresses = [];
+    private int|string $currentShippingAddress = 0;
+    private bool $newAddress = false;
 
     public function __construct(
         private CheckoutState $checkoutState,
@@ -37,7 +35,7 @@ class ShippingAddress extends GenericComponent
     ) {
     }
 
-    public function boot()
+    public function initialize(): void
     {
         if ($this->customerProvider->isLoggedIn()) {
             $this->bootForCustomer();
@@ -59,7 +57,7 @@ class ShippingAddress extends GenericComponent
         }
 
         if (!empty($this->currentShippingAddress)) {
-            $this->saveCustomerAddressId((int)$this->currentShippingAddress);
+            $this->saveCustomerAddressId((int)$this->currentShippingAddress); // @todo
         }
     }
 
@@ -97,11 +95,10 @@ class ShippingAddress extends GenericComponent
 
         $quoteShippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
         $quoteShippingAddress->setCustomerAddressId(0);
-        $quoteShippingAddress->save();
-        $this->emit('afterSaveShippingAddress');
+        $quoteShippingAddress->save(); // @todo
     }
 
-    public function getAdditionalAlpineData(): array
+    public function getAlpineData(): array
     {
         return [
             'newAddress' => $this->newAddress ? true : false,
@@ -118,5 +115,15 @@ class ShippingAddress extends GenericComponent
     public function getButtonLabelSelectAddress(): string
     {
         return (string)__('Select existing address from list');
+    }
+
+    public function getShippingAddresses(): array
+    {
+        return $this->shippingAddresses;
+    }
+
+    public function isNewAddress():bool
+    {
+        return $this->newAddress;
     }
 }

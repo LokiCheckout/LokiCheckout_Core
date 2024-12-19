@@ -2,22 +2,25 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Billing\PaymentMethods;
+use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var PaymentMethods $magewire */
+/** @var PaymentMethods $component */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
-$paymentMethods = $magewire->getPaymentMethods();
+/** @var AlpineComponentData $alpineComponentData */
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+$paymentMethods = $component->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>"
      x-data="LokiCheckoutPaymentMethods"
-     x-title="<?= $magewire->getAlpineComponentName() ?>"
-     x-init-data='<?= $magewire->getAlpineDataAsJson() ?>'
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
 >
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
@@ -25,7 +28,7 @@ $paymentMethods = $magewire->getPaymentMethods();
     <form
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
+        aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
             <ul>
@@ -35,7 +38,7 @@ $paymentMethods = $magewire->getPaymentMethods();
                         $block,
                         [
                             'method' => $paymentMethod,
-                            'is_current' => $paymentMethod->getCode() === $magewire->value,
+                            'is_current' => $paymentMethod->getCode() === $component->getValue(),
                         ]
                     ) ?>
                 <?php endforeach; ?>
@@ -45,5 +48,9 @@ $paymentMethods = $magewire->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $magewire->getErrors()]) ?>
+    <?= $blockRenderer->html(
+        'loki-checkout.utils.errors',
+        $block,
+        ['errors' => $component->getErrorContainer()->getErrors()]
+    ) ?>
 </div>

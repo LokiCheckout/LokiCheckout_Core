@@ -5,6 +5,7 @@
             name="loki-checkout.customer.email" as="customer_email"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Quote\CustomerEmail</argument>
                 <argument name="css_classes" xsi:type="array">
                     <item name="block" xsi:type="array">
                         <item name="custom" xsi:type="string">mb-8</item>
@@ -19,6 +20,7 @@
             ifconfig="customer/address/gender_show"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Quote\CustomerGender</argument>
                 <argument name="field_type" xsi:type="string">select</argument>
                 <argument name="option_model" xsi:type="object">
                     Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel
@@ -30,6 +32,9 @@
             name="loki-checkout.customer.dob" as="customer_dob"
             ifconfig="customer/address/dob_show"
             template="Yireo_LokiCheckout::form/field.phtml">
+            <arguments>
+                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Quote\CustomerDob</argument>
+            </arguments>
         </block>
     </body>
 </page>

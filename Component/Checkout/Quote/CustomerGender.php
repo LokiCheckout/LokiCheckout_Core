@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Quote;
+namespace Yireo\LokiCheckout\Component\Checkout\Quote;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
-use Yireo\LokiCheckout\Magewire\Form\Field\QuoteFieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\QuoteField;
 
-class CustomerGender extends QuoteFieldComponent
+class CustomerGender extends QuoteField
 {
     use OptionsBehaviour;
 
@@ -15,5 +15,4 @@ class CustomerGender extends QuoteFieldComponent
     {
         return (string)__('Gender');
     }
-
 }

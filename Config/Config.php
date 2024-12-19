@@ -23,10 +23,6 @@ class Config
 
     public function isEnabled(): bool
     {
-        if (false === $this->moduleManager->isEnabled('Magewirephp_Magewire')) {
-            return false;
-        }
-
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 

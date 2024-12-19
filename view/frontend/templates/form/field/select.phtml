@@ -2,32 +2,33 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 /** @var Template $block */
-/** @var FieldComponent|OptionsBehaviour $magewire */
+/** @var Field|OptionsBehaviour $component */
 /** @var CssClass $css */
 
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$magewire->setOptionModel($optionModel);
+$component->setOptionModel($optionModel);
+
+// @todo: Check disabled state
+// @todo: Check aria-busy
 ?>
 <select
-    wire:loading.attr="aria-busy"
-    wire:loading.class="disabled"
     data-type="field"
     x-ref="field"
     x-model="value"
-    x-on:change="submit"
-    aria-invalid="<?= $magewire->valid ? 'false' : 'true' ?>"
-    <?php if ($magewire->isDisabled()): ?>
+    @change="submit"
+    aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+    <?php if ($component->isDisabled()): ?>
         disabled="disabled"
     <?php endif ?>
-    <?= $magewire->isRequired() ? 'required' : '' ?>
+    <?= $component->isRequired() ? 'required' : '' ?>
     class="<?= $css('form-select w-full') ?>"
 >
-    <?php foreach ($optionModel->getOptions($magewire) as $optionValue => $optionLabel): ?>
+    <?php foreach ($optionModel->getOptions($component) as $optionValue => $optionLabel): ?>
         <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>
 </select>

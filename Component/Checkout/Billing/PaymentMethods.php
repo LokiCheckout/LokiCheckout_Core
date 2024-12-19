@@ -1,26 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Billing;
+namespace Yireo\LokiCheckout\Component\Checkout\Billing;
 
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponentBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Magewire\Generic\Behaviour\AlpineDataBehaviour;
-use Yireo\LokiCheckout\Magewire\SetterInjection\InjectLokiCheckoutConfig;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
+use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
+
+use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
-class PaymentMethods extends FieldComponent
+class PaymentMethods extends Field
 {
     use InjectLokiCheckoutConfig;
     use StepBehaviour;
-    use AlpineDataBehaviour;
 
     /** @var PaymentMethodInterface[] $paymentMethods */
     private array $paymentMethods = [];
-
-    public bool $lazyLoad = false; // @todo: Make this configurable
 
     public function __construct(
         private CheckoutState $checkoutState,
@@ -29,7 +26,7 @@ class PaymentMethods extends FieldComponent
     ) {
     }
 
-    public function boot(): void
+    public function initialize(): void
     {
         if ($this->isLazyload()) {
             return;
@@ -58,7 +55,7 @@ class PaymentMethods extends FieldComponent
             $cart->collectTotals();
         }
 
-        parent::boot();
+        parent::initialize();
     }
 
     public function getDefaultPayment(): string
@@ -99,9 +96,6 @@ class PaymentMethods extends FieldComponent
         $quote->setInventoryProcessed(false);
         $quote->getPayment()->importData(['method' => $value]);
         $this->checkoutState->saveQuote($quote);
-
-        $this->emit('afterSaveBillingStep');
-        $this->emit('afterSavePaymentMethod', $value);
     }
 
     private function isPaymentMethodAvailable(string $code): bool

@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Quote;
+namespace Yireo\LokiCheckout\Component\Checkout\Quote;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\QuoteFieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\QuoteField;
 
-class CustomerDob extends QuoteFieldComponent
+class CustomerDob extends QuoteField
 {
     protected array $validators = ['dob'];
 
-    public function boot(): void
+    public function initialize(): void
     {
-        parent::boot();
-        $this->getParent()->setMax(date('Y-m-d', time()));
+        parent::initialize();
+        $this->getBlock()->setMax(date('Y-m-d', time()));
     }
 
     public function getJsValue(): string

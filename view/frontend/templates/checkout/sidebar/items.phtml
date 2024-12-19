@@ -3,19 +3,19 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Magewire\Checkout\Sidebar\Items;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Items;
 use Yireo\LokiCheckout\Util\Block\ChildRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Items $magewire */
+/** @var Items $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 
-if (empty($magewire->items)) {
+if (empty($component->items)) {
     echo '<div>No items</div>';
     return;
 }
@@ -28,7 +28,7 @@ $childRenderer = $viewModelFactory->create(ChildRenderer::class);
     <?= $block->getChildHtml('before') ?>
 
     <ul role="list">
-        <?php foreach ($magewire->getItems() as $item) : ?>
+        <?php foreach ($component->getItems() as $item) : ?>
             <li>
                 <?= $childRenderer->html('item', $block, [
                     'alias' => 'item',

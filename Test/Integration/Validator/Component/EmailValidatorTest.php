@@ -10,13 +10,12 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
-use Yireo\LokiCheckout\Magewire\Checkout\Quote\CustomerEmail;
+use PHPUnit\Framework\TestCase;
+use Yireo\LokiCheckout\Component\Checkout\Quote\CustomerEmail;
 use Yireo\LokiCheckout\Validator\Component\EmailValidator;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\MagewireTestUtils\Test\Integration\MagewireComponentTestCase;
 
 #[AppArea('frontend')]
-class EmailValidatorTest extends MagewireComponentTestCase
+class EmailValidatorTest extends TestCase
 {
     public function testWithNoValue(): void
     {
@@ -62,7 +61,7 @@ class EmailValidatorTest extends MagewireComponentTestCase
         $component->value = 'john@example.com';
 
         $this->assertFalse($validator->validate($component));
-        $this->assertMagewireComponentHasError($component, 'This email address is not available');
+        $this->assertComponentHasError($component, 'This email address is not available');
     }
 
     private function createCustomer(string $email)

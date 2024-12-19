@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\SetterInjection;
+namespace Yireo\LokiCheckout\Component\SetterInjection;
 
 use Yireo\LokiCheckout\Util\StreetLinesFactory;
 

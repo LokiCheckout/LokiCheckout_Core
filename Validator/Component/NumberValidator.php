@@ -2,15 +2,15 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 class NumberValidator implements FieldValidatorInterface
 {
-    public function validate(FieldComponent $component): bool
+    public function validate(Field $component): bool
     {
-        $value = $component->value;
+        $value = $component->getValue();
         if (false === is_numeric($value)) {
-            $component->error('value', (string)__('Value must contain numbers only'));
+            $component->getErrorContainer()->addError((string)__('Value must contain numbers only'));
 
             return false;
         }

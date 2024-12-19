@@ -1,19 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Magewire\Checkout\Other;
+namespace Yireo\LokiCheckout\Component\Checkout\Other;
 
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magento\Quote\Api\CartRepositoryInterface;
-use Magewirephp\Magewire\Component;
+
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Yireo\LokiComponents\Component\MutableComponentInterface;
 
-class Agreements extends Component
+class Agreements implements MutableComponentInterface
 {
-    public array $agreements = [];
-
     public function __construct(
         private CheckoutSession $checkoutSession,
         private CheckoutAgreementsListInterface $checkoutAgreementsList,
@@ -22,7 +20,7 @@ class Agreements extends Component
     ) {
     }
 
-    public function boot(): void
+    public function initialize(): void
     {
         foreach ($this->getCheckoutAgreements() as $agreement) {
             $this->agreements[$agreement->getAgreementId()] = false;
@@ -38,8 +36,13 @@ class Agreements extends Component
         return count($this->getCheckoutAgreements()) > 0;
     }
 
-    public function updatedAgreements(array $agreements): array
+    public function mutate(array $data = []): void
     {
+        if (empty($data['agreements'])) {
+            return;
+        }
+
+        $agreements = $data['agreements'];
         $savedAgreements = (array)$this->getSavedCheckoutAgreementIds();
 
         foreach ($agreements as $agreementId => $agreementValue) {
@@ -57,8 +60,6 @@ class Agreements extends Component
 
         $savedAgreements = array_unique($savedAgreements);
         $this->checkoutSession->setAgreementIds($savedAgreements);
-
-        return $agreements;
     }
 
     public function getSavedCheckoutAgreementIds(): array

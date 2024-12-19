@@ -1,6 +1,8 @@
 <script>
-    const LokiGenericComponentType = {
-        wireId: '',
+    const LokiCheckoutGenericComponentType = {
+        ...LokiComponentType,
+        blockId: '',
+        target: '',
         elementId: '',
         step: '',
         name: '',
@@ -14,23 +16,7 @@
             },
             register() {
                 Alpine.store('components').add(this);
-            },
-            rehydrate() {
-                Livewire.hook('element.updated', (element, component) => {
-                    if (this.elementId !== component.el.id) {
-                        return;
-                    }
-
-                    if (element.getAttribute('wire:id') !== component.id) {
-                        return;
-                    }
-
-                    //this.valid = Magewire.find(this.wireId).valid;
-                    //this.value = Magewire.find(this.wireId).value;
-
-                    document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
-                });
-            },
+            }
         },
         beforeInit() {
         },
@@ -41,8 +27,8 @@
                 callback.apply(this);
             }
 
-            if (this.lazyLoad && this.wireId) {
-                Magewire.find(this.wireId).$refresh();
+            if (this.lazyLoad) {
+                this.post({});
                 return;
             }
 

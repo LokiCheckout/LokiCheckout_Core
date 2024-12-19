@@ -1,12 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
-            ...LokiGenericComponentType,
-            afterInit() {
-                Magewire.on('afterChangeStep', (stepCode) => {
-                    this.visible = this.currentStep === stepCode;
-                });
-            }
+            ...LokiCheckoutGenericComponentType
         }));
     });
 </script>

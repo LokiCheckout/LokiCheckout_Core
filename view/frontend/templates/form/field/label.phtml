@@ -2,21 +2,22 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var FieldComponent $magewire */
+/** @var Field $component */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+$component = $block->getComponent();
 ?>
 <label
-    for="<?= $magewire->getElementId() ?>-field"
+    for="<?= $component->getDomId() ?>-field"
     class="<?= $css('inline-block mb-1.5') ?>">
-    <?= __($magewire->getFieldLabel()) ?>
+    <?= __($component->getFieldLabel()) ?>
 
-    <?php if ($magewire->isRequired() && $magewire->getLokiCheckoutConfig()->useRequiredBlock()): ?>
+    <?php if ($component->isRequired() && $component->getLokiCheckoutConfig()->useRequiredBlock()): ?>
         <?= $blockRenderer->html('loki-checkout.utils.required'); ?>
     <?php endif; ?>
 </label>

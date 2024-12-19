@@ -7,6 +7,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 $size = (int)$block->getSize();
+return; // @todo: Temporarily disable
 ?>
 <img alt="<?= __('Loading') ?>"
      src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/loader.svg'); ?>"

@@ -3,23 +3,23 @@
 namespace Yireo\LokiCheckout\Util;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiCheckout\Magewire\Form\Field\FieldComponent;
+use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
 
 class FieldTemplateLocator
 {
-    public function getFieldTemplateFromComponent(FieldComponent $component): string
+    public function getFieldTemplateFromComponent(FieldInterface $component): string
     {
-        $parentBlock = $component->getParent();
-        if (false === $parentBlock instanceof AbstractBlock) {
+        $block = $component->getBlock();
+        if (false === $block instanceof AbstractBlock) {
             return $this->getFieldTemplateByType('text');
         }
 
-        $fieldTemplate = $parentBlock->getFieldTemplate();
+        $fieldTemplate = $block->getFieldTemplate();
         if (false === empty($fieldTemplate)) {
             return $fieldTemplate;
         }
 
-        $fieldType = $parentBlock->getFieldType();
+        $fieldType = $block->getFieldType();
         if (array_key_exists($fieldType, $this->getFieldTemplateMapping())) {
             return $this->getFieldTemplateByType($fieldType);
         }
