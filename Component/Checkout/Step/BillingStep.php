@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 
-class BillingStep  extends Generic implements StepInterface
+class BillingStep extends Generic implements StepInterface
 {
     public function __construct(
         private readonly ValidatorInterface $stepValidator,

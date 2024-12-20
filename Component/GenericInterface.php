@@ -3,8 +3,9 @@
 namespace Yireo\LokiCheckout\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-interface GenericInterface
+interface GenericInterface extends ComponentInterface
 {
     public function isLazyLoad(): bool;
     public function isAllowRendering(): bool;

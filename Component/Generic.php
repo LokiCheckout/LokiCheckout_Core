@@ -3,9 +3,8 @@
 namespace Yireo\LokiCheckout\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiComponents\Component\ComponentInterface;
 
-abstract class Generic implements GenericInterface, ComponentInterface
+abstract class Generic implements GenericInterface
 {
     protected bool $visible = true;
     protected bool $lazyLoad = true;

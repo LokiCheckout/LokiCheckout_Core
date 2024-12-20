@@ -4,11 +4,13 @@ namespace Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiCheckout\Component\SetterInjection\InjectComponentRegistry;
 
 // @todo: Add integration test
 trait StepBehaviour
 {
+    use InjectComponentRegistry;
+
     protected string $step = '';
 
     public function setStep(string $step): void
@@ -33,7 +35,13 @@ trait StepBehaviour
 
     private function getStepNameFromBlock(AbstractBlock $block): string
     {
-        if ($block->getComponent() instanceof StepInterface) {
+        try {
+            $component = $this->componentRegistry->getViewModelFromBlock($block);
+        } catch (\RuntimeException $e) {
+            $component = null;
+        }
+
+        if ($component instanceof StepInterface) {
             return $block->getComponent()->getCode();
         }
 

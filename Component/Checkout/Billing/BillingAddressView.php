@@ -6,7 +6,7 @@ use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiComponents\Component\ComponentInterface;
 
-class BillingView implements ComponentInterface
+class BillingAddressView implements ComponentInterface
 {
     public function __construct(
         private readonly BillingAddressState $billingAddressState,

@@ -7,9 +7,9 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\MutableComponentInterface;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class BillingAsShipping implements MutableComponentInterface
+class BillingAsShipping implements ComponentInterface
 {
     public function __construct(
         private readonly BillingAddressState $billingAddressState,

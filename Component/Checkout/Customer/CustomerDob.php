@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Quote;
+namespace Yireo\LokiCheckout\Component\Checkout\Customer;
 
 use Yireo\LokiCheckout\Component\Form\Field\QuoteField;
 

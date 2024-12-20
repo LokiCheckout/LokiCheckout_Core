@@ -2,20 +2,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
 /** @var Template $block */
-/** @var ViewModelFactory $viewModelFactory */
 /** @var Agreements $component */
-
-if (false === $component->isEnabled()) {
-    return '<div></div>';
-}
 ?>
 <div>
     <?php foreach ($component->getCheckoutAgreements() as $agreement): ?>
-        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" x-model="agreements.<?= $agreement->getAgreementId() ?>"/>
+        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
         <label for="agreement<?= $agreement->getAgreementId() ?>">
             <?= $agreement->getName() ?>
         </label>

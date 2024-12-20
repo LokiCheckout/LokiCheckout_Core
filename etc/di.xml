@@ -95,6 +95,7 @@
                 <item name="streetLinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetLinesFactory</item>
                 <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
                 <item name="errorContainerFactory" xsi:type="object">Yireo\LokiCheckout\Util\ErrorContainerFactory</item>
+                <item name="componentRegistry" xsi:type="object">Yireo\LokiComponents\Component\ComponentRegistry</item>
             </argument>
         </arguments>
     </type>

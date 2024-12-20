@@ -4,53 +4,45 @@
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/default/checkout.phtml"/>
 
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
-            <block name="loki-checkout.shipping-step" as="shipping-step" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
-                <arguments>
-                    <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep</argument>
-                </arguments>
-
+            <block name="loki-checkout.steps.shipping" as="shipping-step" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
                 <block
-                    name="loki-checkout.shipping-step.title" as="title"
+                    name="loki-checkout.steps.shipping.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
                     <arguments>
                         <argument name="title" xsi:type="string">Shipping</argument>
                     </arguments>
                 </block>
 
-                <block name="loki-checkout.shipping-step.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
+                <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
             </block>
 
-            <block name="loki-checkout.billing-step" as="billing-step" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
-                <arguments>
-                    <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Step\BillingStep</argument>
-                </arguments>
-
+            <block name="loki-checkout.steps.billing" as="billing-step" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
                 <block
-                    name="loki-checkout.billing-step.title" as="title"
+                    name="loki-checkout.steps.billing.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
                     <arguments>
                         <argument name="title" xsi:type="string">Billing</argument>
                     </arguments>
                 </block>
 
-                <block name="loki-checkout.billing-step.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-" />
+                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-" />
             </block>
         </referenceBlock>
 
         <!-- Shipping step -->
-        <move element="loki-checkout.customer.email" destination="loki-checkout.shipping-step" as="email" before="buttons"/>
-        <move element="loki-checkout.shipping-address" destination="loki-checkout.shipping-step" as="shipping-address" before="buttons"/>
-        <move element="loki-checkout.shipping.shipping-methods" destination="loki-checkout.shipping-step" as="shipping-methods" before="buttons" />
+        <move element="loki-checkout.customer.email" destination="loki-checkout.steps.shipping" as="email" before="buttons"/>
+        <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
+        <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons" />
 
-        <move element="loki-checkout.shipping-step.backward-button" destination="loki-checkout.shipping-step.buttons" as="backward-button"/>
-        <move element="loki-checkout.shipping-step.forward-button" destination="loki-checkout.shipping-step.buttons" as="forward-button"/>
+        <move element="loki-checkout.steps.shipping.backward-button" destination="loki-checkout.steps.shipping.buttons" as="backward-button"/>
+        <move element="loki-checkout.steps.shipping.forward-button" destination="loki-checkout.steps.shipping.buttons" as="forward-button"/>
 
         <!-- Billing step -->
-        <move element="loki-checkout.billing-address" destination="loki-checkout.billing-step" as="billing-address" before="buttons"/>
-        <move element="loki-checkout.billing.payment-methods" destination="loki-checkout.billing-step" as="payment-methods" before="buttons"/>
+        <move element="loki-checkout.billing.address" destination="loki-checkout.steps.billing" as="billing-address" before="buttons"/>
+        <move element="loki-checkout.billing.payment-methods" destination="loki-checkout.steps.billing" as="payment-methods" before="buttons"/>
 
-        <move element="loki-checkout.billing-step.backward-button" destination="loki-checkout.billing-step.buttons" as="backward-button"/>
-        <move element="loki-checkout.billing-step.forward-button" destination="loki-checkout.billing-step.buttons" as="forward-button"/>
+        <move element="loki-checkout.steps.billing.backward-button" destination="loki-checkout.steps.billing.buttons" as="backward-button"/>
+        <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.steps.billing.buttons" as="forward-button"/>
 
         <!-- Sidebar -->
         <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>

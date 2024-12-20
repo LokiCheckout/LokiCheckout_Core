@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Agreements $component */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var AlpineComponentData $alpineComponentData */
+
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+?>
+<div class="<?= $css('') ?>"
+     x-data="LokiCheckoutFieldComponent"
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+>
+    <?= $block->getChildHtml() ?>
+</div>

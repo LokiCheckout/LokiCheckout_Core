@@ -3,9 +3,9 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar;
 
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Component\MutableComponentInterface;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-class CouponCode implements MutableComponentInterface
+class CouponCode implements ComponentInterface
 {
     public function __construct(
         private CheckoutState $checkoutState

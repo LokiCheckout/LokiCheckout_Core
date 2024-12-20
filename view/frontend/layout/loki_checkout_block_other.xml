@@ -1,22 +1,18 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <block
-            name="loki-checkout.agreements" as="agreements"
-            ifconfig="checkout/options/enable_agreements"
-            template="Yireo_LokiCheckout::checkout/agreements.phtml">
-            <arguments>
-                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Other\Agreements</argument>
-            </arguments>
+        <block name="loki-checkout.agreements" template="Yireo_LokiCheckout::checkout/other/agreements.phtml">
+            <block
+                name="loki-checkout.agreements.form" as="form"
+                ifconfig="checkout/options/enable_agreements"
+                template="Yireo_LokiComponents::form.phtml">
+                <block name="loki-checkout.agreements.form.fields" as="fields" template="Yireo_LokiCheckout::checkout/other/agreements-fields.phtml"/>
+            </block>
         </block>
 
         <block
             name="loki-checkout.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
-            template="Yireo_LokiCheckout::checkout/newsletter.phtml">
-            <arguments>
-                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Other\Newsletter</argument>
-            </arguments>
-        </block>
+            template="Yireo_LokiCheckout::checkout/other/newsletter.phtml"/>
     </body>
 </page>

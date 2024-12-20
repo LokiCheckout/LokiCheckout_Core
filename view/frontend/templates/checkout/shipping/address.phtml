@@ -22,12 +22,12 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
      x-title="<?= $alpineComponentData->getName($block) ?>"
      x-init-data='<?= $alpineComponentData->getJson($component) ?>'>
     <?php if (count($component->getShippingAddresses()) > 0): ?>
-        <?= $block->getChildHtml('address-select') ?>
-        <?= $block->getChildHtml('address-toggle-select') ?>
+        <?= $block->getChildHtml('select') ?>
+        <?= $block->getChildHtml('toggle-select') ?>
     <?php endif; ?>
 
     <?php if($component->isNewAddress()): ?>
-        <?= $block->getChildHtml('address-form-title') ?>
-        <?= $block->getChildHtml('address-form') ?>
+        <?= $block->getChildHtml('form-title') ?>
+        <?= $block->getChildHtml('form') ?>
     <?php endif; ?>
 </div>

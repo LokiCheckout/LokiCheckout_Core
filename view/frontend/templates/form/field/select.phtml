@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Component\Form\Field\Field;
 /** @var Template $block */
 /** @var Field|OptionsBehaviour $component */
 /** @var CssClass $css */
-
+$component = $block->getComponent();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $component->setOptionModel($optionModel);
 

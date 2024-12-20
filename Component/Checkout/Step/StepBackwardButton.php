@@ -1,8 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Form\Button;
+namespace Yireo\LokiCheckout\Component\Checkout\Step;
 
 use Exception;
+use Yireo\LokiCheckout\Component\Form\Button\ButtonInterface;
 use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Yireo\LokiCheckout\Component\Generic;

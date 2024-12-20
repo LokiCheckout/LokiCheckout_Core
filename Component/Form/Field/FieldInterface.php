@@ -3,10 +3,9 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Form\Field;
 
-use Yireo\LokiComponents\Component\MutableComponentInterface;
 use Yireo\LokiCheckout\Component\GenericInterface;
 
-interface FieldInterface extends GenericInterface, MutableComponentInterface
+interface FieldInterface extends GenericInterface
 {
     /**
      * Name of the field itself.

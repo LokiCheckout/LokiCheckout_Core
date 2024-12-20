@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\SetterInjection;
 
-use Yireo\LokiCheckout\Component\ComponentRegistry;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 
 trait InjectComponentRegistry
 {

@@ -10,7 +10,7 @@ use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 /** @var Template $block */
 /** @var FieldInterface|OptionsBehaviour $component */
 /** @var ViewModelFactory $viewModelFactory */
-
+$component = $block->getComponent();
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $component->setOptionModel($optionModel);

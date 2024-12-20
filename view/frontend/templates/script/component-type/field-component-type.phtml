@@ -16,7 +16,6 @@
             }
 
             this.beforeSubmit();
-            console.log('Submitting', this.blockId, this.value, this.target);
             this.post({value: this.value});
             this.afterSubmit();
         },

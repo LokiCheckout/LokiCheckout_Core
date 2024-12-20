@@ -2,64 +2,33 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block name="loki-checkout.sidebar" template="Yireo_LokiCheckout::checkout/sidebar.phtml">
-            <arguments>
-                <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar</argument>
-            </arguments>
 
             <block name="loki-checkout.sidebar.summary" as="summary" template="Yireo_LokiCheckout::checkout/sidebar/summary.phtml">
-                <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode</argument>
-                    </arguments>
-                </block>
+                <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml"/>
 
                 <block name="loki-checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Items</argument>
-                    </arguments>
-
-                    <container name="loki-checkout.sidebar.items.before" as="before" />
+                    <container name="loki-checkout.sidebar.items.before" as="before"/>
                     <block name="loki-checkout.sidebar.items.item" as="item" template="Yireo_LokiCheckout::checkout/sidebar/items/item.phtml"/>
-                    <container name="loki-checkout.sidebar.items.after" as="after" />
+                    <container name="loki-checkout.sidebar.items.after" as="after"/>
                 </block>
 
                 <block name="loki-checkout.sidebar.totals" as="totals" template="Yireo_LokiCheckout::checkout/sidebar/totals.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Totals</argument>
-                    </arguments>
-
                     <block name="loki-checkout.sidebar.totals.grand_total" as="grand_total" template="Yireo_LokiCheckout::checkout/sidebar/totals/grand_total.phtml"/>
                 </block>
             </block>
 
             <block name="loki-checkout.sidebar.preview" as="preview" template="Yireo_LokiCheckout::checkout/sidebar/preview.phtml">
                 <block name="loki-checkout.sidebar.preview.quote_details" as="quote_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\QuoteDetails</argument>
-                    </arguments>
-
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_email" as="customer_email" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_email.phtml"/>
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_gender" as="customer_gender" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_gender.phtml"/>
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_dob" as="customer_dob" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_dob.phtml"/>
                 </block>
 
-                <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails</argument>
-                    </arguments>
-                </block>
+                <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details.phtml"/>
 
-                <block name="loki-checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/billing_address.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress</argument>
-                    </arguments>
-                </block>
+                <block name="loki-checkout.sidebar.preview.billing_address" as="billing_address" template="Yireo_LokiCheckout::checkout/sidebar/preview/billing_address.phtml"/>
 
-                <block name="loki-checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details.phtml">
-                    <arguments>
-                        <argument name="component" xsi:type="object">Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails</argument>
-                    </arguments>
-                </block>
+                <block name="loki-checkout.sidebar.preview.payment_details" as="payment_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details.phtml"/>
             </block>
 
             <block name="loki-checkout.sidebar.other" as="other" template="Yireo_LokiCheckout::checkout/sidebar/other.phtml"/>

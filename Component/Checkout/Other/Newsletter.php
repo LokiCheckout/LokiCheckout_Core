@@ -6,10 +6,9 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
-use Yireo\LokiComponents\Component\MutableComponentInterface;
+use Yireo\LokiComponents\Component\ComponentInterface;
 
-
-class Newsletter implements MutableComponentInterface
+class Newsletter implements ComponentInterface
 {
     public bool $signup = false;
 

@@ -20,18 +20,18 @@ class AlpineComponentData implements ArgumentInterface
     ) {
     }
 
-    public function getData(ComponentInterface $component): array
+    public function getData(GenericInterface $component): array
     {
         $data = [];
+        $block = $component->getBlock();
 
         try {
-            $componentDefinition = $this->componentRegistry->getComponentDefinitionByComponent($component);
-            $data['name'] = $componentDefinition->getName();
-            $data['elementId'] = $componentDefinition->getDomId();
+            $data['name'] = $this->getName($block);
+            $data['elementId'] = $this->componentRegistry->getElementIdByBlockName($block->getNameInLayout());
         } catch(\RuntimeException $e) {}
 
         if ($component instanceof GenericInterface) {
-            $data['blockId'] = $component->getBlock()->getNameInLayout();
+            $data['blockId'] = $block->getNameInLayout();
             $data['target'] = $this->getTargets($component);
         }
 
