@@ -2,11 +2,14 @@
 
 namespace Yireo\LokiCheckout\Util;
 
+use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
 use Yireo\LokiCheckout\Component\Form\Field\ShippingAddressFieldInterface;
+use Yireo\LokiCheckout\Component\Generic;
+use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Mutator\MutatorInterface;
 
 class SetterInjection
 {
@@ -18,28 +21,89 @@ class SetterInjection
     }
 
     /**
-     * @param ComponentInterface $component
-     * @return ComponentInterface
+     * @param GenericInterface $component
+     * @return GenericInterface
      */
-    public function injectDependencies(ComponentInterface $component): ComponentInterface
+    public function injectIntoComponent(Generic $component): Generic
     {
         foreach ($this->injectables as $injectableName => $injectable) {
-            $method = 'set' . ucfirst($injectableName);
+            $method = 'set'.ucfirst($injectableName);
             if (method_exists($component, $method)) {
                 call_user_func([$component, $method], $injectable);
             }
         }
 
-        if ($component instanceof ShippingAddressFieldInterface) {
-            $component->setStep('shipping'); // @todo: What about onestep?
-            $component->setAddressState($this->shippingAddressState);
-        }
+        if ($component instanceof AddressField) {
+            if ($this->isShippingComponent($component)) {
+                $component->setStep('shipping'); // @todo: What about onestep?
+                $component->setAddressState($this->shippingAddressState);
+            }
 
-        if ($component instanceof BillingAddressFieldInterface) {
-            $component->setStep('billing'); // @todo: What about onestep?
-            $component->setAddressState($this->billingAddressState);
+            if ($this->isBillingComponent($component)) {
+                $component->setStep('billing'); // @todo: What about onestep?
+                $component->setAddressState($this->billingAddressState);
+            }
         }
 
         return $component;
+    }
+
+    /**
+     * @param MutatorInterface $component
+     * @return MutatorInterface
+     */
+    public function injectIntoMutator(MutatorInterface $mutator): MutatorInterface
+    {
+        foreach ($this->injectables as $injectableName => $injectable) {
+            $method = 'set'.ucfirst($injectableName);
+            if (method_exists($mutator, $method)) {
+                call_user_func([$mutator, $method], $injectable);
+            }
+        }
+
+        $component = $mutator->getComponent();
+        if ($component instanceof AddressField) {
+            if ($this->isShippingComponent($component)) {
+                $mutator->setStep('shipping'); // @todo: What about onestep?
+                $mutator->setAddressState($this->shippingAddressState);
+            }
+
+            if ($this->isBillingComponent($component)) {
+                $mutator->setStep('billing'); // @todo: What about onestep?
+                $mutator->setAddressState($this->billingAddressState);
+            }
+        }
+
+        return $mutator;
+    }
+
+    private function isShippingComponent(AddressField $component): bool
+    {
+        if ($component instanceof ShippingAddressFieldInterface) {
+            return true;
+        }
+
+        if (strstr($component->getBlock()->getNameInLayout(), 'shipping.address')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function isBillingComponent(AddressField $component): bool
+    {
+        if (false === $component instanceof AddressField) {
+            return false;
+        }
+
+        if ($component instanceof BillingAddressFieldInterface) {
+            return true;
+        }
+
+        if (strstr($component->getBlock()->getNameInLayout(), 'billing.address')) {
+            return true;
+        }
+
+        return false;
     }
 }

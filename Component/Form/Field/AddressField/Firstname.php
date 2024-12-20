@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Component\Form\Field\AddressField;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 
-abstract class Firstname extends AddressField
+class Firstname extends AddressField
 {
     public function beforeSave($value): void
     {

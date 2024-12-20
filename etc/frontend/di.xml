@@ -14,6 +14,11 @@
                 type="Yireo\LokiCheckout\Plugin\AdditionalComponentHydration"/>
     </type>
 
+    <type name="Yireo\LokiComponents\Mutator\Hydrator">
+        <plugin name="AdditionalMutatorHydration"
+                type="Yireo\LokiCheckout\Plugin\AdditionalMutatorHydration"/>
+    </type>
+
     <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Postcode">
         <arguments>
             <argument name="validators" xsi:type="array">

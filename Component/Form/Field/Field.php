@@ -77,35 +77,6 @@ abstract class Field extends Generic implements FieldInterface
         return '';
     }
 
-    public function mutate(array $data = []): void
-    {
-        if (!isset($data['value'])) {
-            return;
-        }
-
-        $value = $data['value'];
-        $this->errorContainer->clear();
-        $value = $this->filterValue($value);
-        $this->value = $value;
-        $this->valid = $this->validate();
-
-        if (false === $this->errorContainer->hasErrors()) {
-            $this->beforeSave($value);
-            $this->save($value);
-            $this->afterSave($value);
-        }
-    }
-
-    protected function beforeSave($value): void
-    {
-    }
-
-    abstract public function save($value): void;
-
-    protected function afterSave($value): void
-    {
-    }
-
     /**
      * @return bool
      */
