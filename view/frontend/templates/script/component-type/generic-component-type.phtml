@@ -10,8 +10,6 @@
         initActions: {
             loadInitialData: function() {
                 const jsonData = JSON.parse(this.$el.getAttribute('x-init-data'));
-                console.log('reload?', jsonData);
-
                 for ([key, value] of Object.entries(jsonData)) {
                     this[key] = value;
                 }
