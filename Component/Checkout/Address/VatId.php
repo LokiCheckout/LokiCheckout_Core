@@ -6,7 +6,7 @@ use Override;
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
 
-abstract class VatId extends AddressField
+class VatId extends AddressField
 {
     use InjectLokiCheckoutConfig;
 

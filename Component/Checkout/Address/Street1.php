@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address;
 
-abstract class Street1 extends StreetLine
+class Street1 extends StreetLine
 {
     protected int $index = 1;
 }

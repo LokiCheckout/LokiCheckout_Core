@@ -4,6 +4,6 @@ namespace Yireo\LokiCheckout\Component\Checkout\Address;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 
-abstract class City extends AddressField
+class City extends AddressField
 {
 }

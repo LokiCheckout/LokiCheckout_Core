@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\Address;
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
 
-abstract class CountryId extends AddressField
+class CountryId extends AddressField
 {
     use OptionsBehaviour;
 

@@ -10,12 +10,12 @@
     </type>
 
     <type name="Yireo\LokiComponents\Component\Hydrator">
-        <plugin name="AdditionalComponentHydration"
+        <plugin name="Yireo_LokiCheckout::additionalComponentHydration"
                 type="Yireo\LokiCheckout\Plugin\AdditionalComponentHydration"/>
     </type>
 
     <type name="Yireo\LokiComponents\Mutator\Hydrator">
-        <plugin name="AdditionalMutatorHydration"
+        <plugin name="Yireo_LokiCheckout::additionalMutatorHydration"
                 type="Yireo\LokiCheckout\Plugin\AdditionalMutatorHydration"/>
     </type>
 
