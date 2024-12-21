@@ -3,8 +3,6 @@
 namespace Yireo\LokiCheckout\Util;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
-use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
-use Yireo\LokiCheckout\Component\Form\Field\ShippingAddressFieldInterface;
 use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
@@ -79,10 +77,6 @@ class SetterInjection
 
     private function isShippingComponent(AddressField $component): bool
     {
-        if ($component instanceof ShippingAddressFieldInterface) {
-            return true;
-        }
-
         if (strstr($component->getBlock()->getNameInLayout(), 'shipping.address')) {
             return true;
         }
@@ -92,14 +86,6 @@ class SetterInjection
 
     private function isBillingComponent(AddressField $component): bool
     {
-        if (false === $component instanceof AddressField) {
-            return false;
-        }
-
-        if ($component instanceof BillingAddressFieldInterface) {
-            return true;
-        }
-
         if (strstr($component->getBlock()->getNameInLayout(), 'billing.address')) {
             return true;
         }

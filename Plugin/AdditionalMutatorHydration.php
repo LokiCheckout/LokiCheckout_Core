@@ -32,6 +32,14 @@ class AdditionalMutatorHydration
             return [$mutator, $block, $component];
         }
 
+        if (method_exists($mutator, 'setComponent')) {
+            $mutator->setComponent($component);
+        }
+
+        if (method_exists($mutator, 'setBlock')) {
+            $mutator->setBlock($block);
+        }
+
         $this->setterInjection->injectIntoMutator($mutator);
 
         return [$mutator, $block, $component];

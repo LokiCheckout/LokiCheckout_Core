@@ -6,6 +6,7 @@ use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\FilterBehaviour;
 use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\ValidateBehaviour;
 use Yireo\LokiCheckout\Component\SetterInjection\InjectErrorContainerFactory;
 use Yireo\LokiComponents\Mutator\MutatorInterface;
+use Yireo\LokiCheckout\Mutator\Generic;
 
 abstract class Field extends Generic implements MutatorInterface
 {

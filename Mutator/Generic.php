@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Mutator\Form\Field;
+namespace Yireo\LokiCheckout\Mutator;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiComponents\Component\ComponentInterface;

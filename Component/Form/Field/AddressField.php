@@ -54,11 +54,11 @@ abstract class AddressField extends Field implements AddressFieldInterface
 
     public function getStep(): string
     {
-        if ($this instanceof ShippingAddressFieldInterface) {
+        if (strstr($this->getBlock()->getNameInLayout(), 'shipping.address')) {
             return 'shipping';
         }
 
-        if ($this instanceof BillingAddressFieldInterface) {
+        if (strstr($this->getBlock()->getNameInLayout(), 'billing.address')) {
             return 'billing';
         }
 

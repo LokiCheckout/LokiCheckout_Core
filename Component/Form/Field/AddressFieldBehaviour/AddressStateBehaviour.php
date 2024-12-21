@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Form\Field\AddressFieldBehaviour;
 
-use Yireo\LokiCheckout\Component\Form\Field\BillingAddressFieldInterface;
 use Yireo\LokiCheckout\Component\SetterInjection\InjectAddressState;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
@@ -27,7 +26,7 @@ trait AddressStateBehaviour
 
     public function getAddressType(): string
     {
-        if ($this instanceof BillingAddressFieldInterface) {
+        if (strstr($this->getBlock()->getNameInLayout(), 'billing.address')) {
             return 'billing';
         }
 
