@@ -37,7 +37,7 @@ if (empty($component)) {
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
         <?= $templateRenderer->html($component->getFieldTemplate(), $block, $component->getFieldData()) ?>
 
-        <div x-cloak class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
+        <div x-cloak x-show="loading" class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
         </div>
 

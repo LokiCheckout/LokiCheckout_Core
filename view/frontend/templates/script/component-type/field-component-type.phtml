@@ -4,6 +4,7 @@
         value: '',
         valid: true,
         disabled: false,
+        loading: false,
         validators: [],
         beforeValidate() {
         },
@@ -16,7 +17,9 @@
             }
 
             this.beforeSubmit();
+            this.loading = true;
             this.post({value: this.value});
+            this.loading = false;
             this.afterSubmit();
         },
         afterSubmit() {
