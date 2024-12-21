@@ -43,105 +43,105 @@
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/prefix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Prefix">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix">
         <block name="loki-checkout.shipping.address.prefix" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/firstname"
-        viewModel="Yireo\LokiCheckout\Component\Form\Field\AddressField\Firstname"
-        mutator="Yireo\LokiCheckout\Mutator\Checkout\Shipping\ShippingAddress\Firstname">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname"
+        mutator="Yireo\LokiCheckout\Mutator\Checkout\Address\Firstname">
         <block name="loki-checkout.shipping.address.firstname" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/middlename"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Middlename">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename">
         <block name="loki-checkout.shipping.address.middlename" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/lastname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Lastname">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname">
         <block name="loki-checkout.shipping.address.lastname" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/suffix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Suffix">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix">
         <block name="loki-checkout.shipping.address.suffix" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/street0"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Street0">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0">
         <block name="loki-checkout.shipping.address.street0" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/street1"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Street1">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1">
         <block name="loki-checkout.shipping.address.street1" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/street2"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Street2">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2">
         <block name="loki-checkout.shipping.address.street2" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/street3"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Street3">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3">
         <block name="loki-checkout.shipping.address.street3" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/postcode"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Postcode"
-        mutator="Yireo\LokiCheckout\Mutator\Checkout\Shipping\ShippingAddress\Postcode">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode"
+        mutator="Yireo\LokiCheckout\Mutator\Checkout\Address\Postcode">
         <block name="loki-checkout.shipping.address.postcode" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/city"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\City">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City">
         <block name="loki-checkout.shipping.address.city" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/region"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Region">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region">
         <block name="loki-checkout.shipping.address.region" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/country_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\CountryId">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId">
         <block name="loki-checkout.shipping.address.country_id" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/company"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Company">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company">
         <block name="loki-checkout.shipping.address.company" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/telephone"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Telephone">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone">
         <block name="loki-checkout.shipping.address.telephone" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/fax"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Fax">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax">
         <block name="loki-checkout.shipping.address.fax" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/shipping/address/vat_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\VatId">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId">
         <block name="loki-checkout.shipping.address.vat_id" role="source"/>
     </component>
 
@@ -233,103 +233,103 @@
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/prefix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Prefix">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix">
         <block name="loki-checkout.billing.address.prefix" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/firstname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Firstname">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname">
         <block name="loki-checkout.billing.address.firstname" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/middlename"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Middlename">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename">
         <block name="loki-checkout.billing.address.middlename" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/lastname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Lastname">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname">
         <block name="loki-checkout.billing.address.lastname" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/suffix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Suffix">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix">
         <block name="loki-checkout.billing.address.suffix" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/street0"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Street0">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0">
         <block name="loki-checkout.billing.address.street0" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/street1"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Street1">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1">
         <block name="loki-checkout.billing.address.street1" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/street2"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Street2">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2">
         <block name="loki-checkout.billing.address.street2" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/street3"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Street3">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3">
         <block name="loki-checkout.billing.address.street3" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/postcode"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Postcode">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode">
         <block name="loki-checkout.billing.address.postcode" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/city"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\City">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City">
         <block name="loki-checkout.billing.address.city" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/region"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Region">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region">
         <block name="loki-checkout.billing.address.region" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/country_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\CountryId">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId">
         <block name="loki-checkout.billing.address.country_id" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/company"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Company">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company">
         <block name="loki-checkout.billing.address.company" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/telephone"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Telephone">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone">
         <block name="loki-checkout.billing.address.telephone" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/fax"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Fax">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax">
         <block name="loki-checkout.billing.address.fax" role="source"/>
     </component>
 
     <component
         name="Yireo_LokiCheckout::checkout/billing.address/vat_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\VatId">
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId">
         <block name="loki-checkout.billing.address.vat_id" role="source"/>
     </component>
 
