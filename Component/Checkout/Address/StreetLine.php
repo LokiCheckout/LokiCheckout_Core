@@ -30,13 +30,6 @@ class StreetLine extends AddressField
         return $streetLines->getLineByIndex($this->index);
     }
 
-    public function save($value): void
-    {
-        $street = (string)$this->addressState->load('street');
-        $streetLines = $this->streetLinesFactory->createFromStreet($street);
-        $streetLines = $streetLines->setLineByIndex($this->index, $this->value);
-        $this->addressState->save('street', $streetLines->toString());
-    }
 
     public function isRequired(): bool
     {

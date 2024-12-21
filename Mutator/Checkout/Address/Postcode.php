@@ -6,6 +6,6 @@ use Yireo\LokiCheckout\Mutator\Form\Field\AddressField;
 
 class Postcode extends AddressField
 {
-    protected array $validators = ['postcode'];
+    protected array $validators = ['postcode']; // @todo: Borrow from component instead
     protected array $filters = ['uppercase'];
 }

@@ -6,4 +6,12 @@ use Yireo\LokiCheckout\Mutator\Form\Field\AddressField;
 
 class Streetline extends AddressField
 {
+
+    public function save($value): void
+    {
+        $street = (string)$this->addressState->load('street');
+        $streetLines = $this->streetLinesFactory->createFromStreet($street);
+        $streetLines = $streetLines->setLineByIndex($this->index, $this->value);
+        $this->addressState->save('street', $streetLines->toString());
+    }
 }

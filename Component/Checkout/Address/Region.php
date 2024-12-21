@@ -33,16 +33,6 @@ class Region extends AddressField
         parent::initialize();
     }
 
-    public function updatedValue(mixed $value): mixed
-    {
-        if (is_numeric($value)) {
-            $this->addressState->save('region_id', $value);
-        }
-
-        $this->setValue($value);
-        return $value;
-    }
-
     public function isRequired(): bool
     {
         $countryId = $this->addressState->load('country_id');
