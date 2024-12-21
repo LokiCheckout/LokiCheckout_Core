@@ -32,7 +32,7 @@
         name="Yireo_LokiCheckout::checkout/shipping/address"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress">
         <block name="loki-checkout.shipping.address" role="source"/>
-        <block name="loki-checkout.shipping.address-view" role="source"/>
+        <block name="loki-checkout.shipping.address-view" role="target"/>
     </component>
 
     <component
@@ -364,8 +364,8 @@
         viewModel="Yireo\LokiCheckout\Component\Checkout\Other\Agreements"
         mutator="Yireo\LokiCheckout\Mutator\Checkout\Other\Agreements">
         <block name="loki-checkout.agreements" role="source"/>
-        <block name="loki-checkout.agreements.form" role="source"/>
-        <block name="loki-checkout.agreements.form.fields" role="source"/>
+        <block name="loki-checkout.agreements.form" role="target"/>
+        <block name="loki-checkout.agreements.form.fields" role="target"/>
     </component>
 
     <!-- Theme components -->
