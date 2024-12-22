@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
@@ -11,7 +11,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
-/** @var ShippingMethods $viewModel */
+/** @var ViewModel $viewModel */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();

@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Form\Field\FieldViewModel;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
@@ -14,7 +14,7 @@ use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
-/** @var Field $viewModel */
+/** @var FieldViewModel $viewModel */
 /** @var AlpineComponentData $alpineComponentData */
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
@@ -42,6 +42,6 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $viewModel->getErrorContainer()->getErrors()]) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $viewModel->getComponent()->getMessages()->getErrors()]) ?>
     <?= $block->getChildHtml('after') ?>
 </div>

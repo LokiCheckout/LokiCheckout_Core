@@ -3,8 +3,10 @@
 namespace Yireo\LokiCheckout\Util;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
+use Yireo\LokiCheckout\Component\Form\Field\AddressFieldViewModelViewModel;
 use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Component\GenericInterface;
+use Yireo\LokiCheckout\Component\GenericViewModelInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\Mutator\MutatorInterface;
@@ -19,10 +21,10 @@ class SetterInjection
     }
 
     /**
-     * @param GenericInterface $component
-     * @return GenericInterface
+     * @param GenericViewModelInterface $component
+     * @return GenericViewModelInterface
      */
-    public function injectIntoViewModel(Generic $viewModel): Generic
+    public function injectIntoViewModel(GenericViewModelInterface $viewModel): GenericViewModelInterface
     {
         foreach ($this->injectables as $injectableName => $injectable) {
             $method = 'set'.ucfirst($injectableName);
@@ -31,7 +33,7 @@ class SetterInjection
             }
         }
 
-        if ($viewModel instanceof AddressField) {
+        if ($viewModel instanceof AddressFieldViewModelViewModel) {
             if ($this->isShippingComponent($viewModel)) {
                 $viewModel->setStep('shipping'); // @todo: What about onestep?
                 $viewModel->setAddressState($this->shippingAddressState);
@@ -60,7 +62,7 @@ class SetterInjection
         }
 
         $component = $mutator->getComponent();
-        if ($component instanceof AddressField) {
+        if ($component instanceof AddressFieldViewModelViewModel) {
             if ($this->isShippingComponent($component)) {
                 $mutator->setStep('shipping'); // @todo: What about onestep?
                 $mutator->setAddressState($this->shippingAddressState);
@@ -75,7 +77,7 @@ class SetterInjection
         return $mutator;
     }
 
-    private function isShippingComponent(AddressField $component): bool
+    private function isShippingComponent(AddressFieldViewModelViewModel $component): bool
     {
         if (strstr($component->getBlock()->getNameInLayout(), 'shipping.address')) {
             return true;
@@ -84,7 +86,7 @@ class SetterInjection
         return false;
     }
 
-    private function isBillingComponent(AddressField $component): bool
+    private function isBillingComponent(AddressFieldViewModelViewModel $component): bool
     {
         if (strstr($component->getBlock()->getNameInLayout(), 'billing.address')) {
             return true;

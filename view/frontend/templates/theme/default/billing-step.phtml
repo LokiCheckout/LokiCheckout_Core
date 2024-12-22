@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Step\BillingStep;
+use Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\ViewModel;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BillingStep $viewModel */
+/** @var ViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var AlpineComponentData $alpineComponentData */

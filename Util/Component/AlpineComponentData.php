@@ -4,13 +4,13 @@ namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepInterface;
-use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
+use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
+use Yireo\LokiCheckout\Component\Form\Field\FieldViewModelInterface;
 use Yireo\LokiCheckout\Component\Generic\Behaviour\StringConversionBehaviour;
-use Yireo\LokiCheckout\Component\GenericInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiCheckout\Component\GenericViewModelInterface;
 use Yireo\LokiComponents\ViewModel\ComponentUtil;
 
+// @todo: Retrieve targets from Component-class instead of ViewModel-class
 class AlpineComponentData implements ArgumentInterface
 {
     use StringConversionBehaviour;
@@ -20,49 +20,58 @@ class AlpineComponentData implements ArgumentInterface
     ) {
     }
 
-    public function getData(GenericInterface $component): array
+    public function getData(GenericViewModelInterface $viewModel): array
     {
         $data = [];
-        $block = $component->getBlock();
+        $block = $viewModel->getBlock();
 
         try {
             $data['name'] = $this->getName($block);
             $data['elementId'] = $this->componentUtil->getElementIdByBlockName($block->getNameInLayout());
         } catch(\RuntimeException $e) {}
 
-        if ($component instanceof GenericInterface) {
+        if ($viewModel instanceof GenericViewModelInterface) {
             $data['blockId'] = $block->getNameInLayout();
-            $data['target'] = $this->getTargets($component);
+            $data['target'] = $this->getTargets($viewModel);
         }
 
-        if ($component instanceof FieldInterface) {
+        if ($viewModel instanceof FieldViewModelInterface) {
             $validators = [];
-            foreach ($component->getValidators() as $validator) {
+            foreach ($viewModel->getValidators() as $validator) {
                 $validators[] = $validator;
             }
 
             $data['validators'] = $validators;
-            $data['value'] = $component->getValue();
-            $data['valid'] = $component->isValid();
-            $data['disabled'] = $component->isDisabled();
-            $data['step'] = $component->getStep();
+
+            $filters = [];
+            foreach ($viewModel->getFilters() as $filter) {
+                $filters[] = $filter;
+            }
+
+            $data['filter'] = $filters;
+
+
+            $data['value'] = $viewModel->getValue();
+            $data['valid'] = $viewModel->isValid();
+            $data['disabled'] = $viewModel->isDisabled();
+            $data['step'] = $viewModel->getStep();
         }
 
-        if ($component instanceof StepInterface) {
-            $data['step'] = $component->getCode();
-            $data['visible'] = $component->isVisible();
+        if ($viewModel instanceof StepViewModelInterface) {
+            $data['step'] = $viewModel->getCode();
+            $data['visible'] = $viewModel->isVisible();
         }
 
-        if (method_exists($component, 'getAlpineData')) {
-            $data = array_merge($data, $component->getAlpineData());
+        if (method_exists($viewModel, 'getAlpineData')) {
+            $data = array_merge($data, $viewModel->getAlpineData());
         }
 
         return $data;
     }
 
-    public function getJson(GenericInterface $component): string
+    public function getJson(GenericViewModelInterface $viewModel): string
     {
-        return json_encode($this->getData($component));
+        return json_encode($this->getData($viewModel));
     }
 
     public function getName(AbstractBlock $block): string
@@ -75,14 +84,14 @@ class AlpineComponentData implements ArgumentInterface
         return str_replace("\n", '\n', $value); // @todo: Is this good enough?
     }
 
-    private function getTargets(GenericInterface $component): string
+    private function getTargets(GenericViewModelInterface $viewModel): string
     {
         $targetNames = [
-            ...$component->getTargets(),
-            $component->getBlock()->getNameInLayout()
+            ...$viewModel->getTargets(),
+            $viewModel->getBlock()->getNameInLayout()
         ];
 
-        $targets = (array)$component->getBlock()->getTargets();
+        $targets = (array)$viewModel->getBlock()->getTargets();
         foreach ($targets as $target) {
             $targetNames[] = $target;
         }

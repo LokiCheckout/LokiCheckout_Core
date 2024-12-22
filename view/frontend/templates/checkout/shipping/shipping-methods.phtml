@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
@@ -13,7 +13,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var bool $debug */
-/** @var ShippingMethods $viewModel */
+/** @var ViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var PriceFormatter $priceFormatter */
 /** @var AlpineComponentData $alpineComponentData */
@@ -56,7 +56,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
     <?= $blockRenderer->html(
         'loki-checkout.utils.errors',
         $block,
-        ['errors' => $viewModel->getErrorContainer()->getErrors()]
+        ['errors' => $viewModel->getComponent()->getMessages()->getErrors()]
     ) ?>
     <?= $block->getChildHtml('script') ?>
 </div>

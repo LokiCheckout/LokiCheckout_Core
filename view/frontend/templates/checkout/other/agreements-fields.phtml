@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
+use Yireo\LokiCheckout\Component\Checkout\Other\Mutator;
 
 /** @var Template $block */
-/** @var Agreements $viewModel */
+/** @var Mutator $viewModel */
 ?>
 <div>
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>

@@ -10,40 +10,8 @@
     </type>
 
     <type name="Yireo\LokiComponents\Component\ComponentHydrator">
-        <plugin name="Yireo_LokiCheckout::additionalComponentHydration"
-                type="Yireo\LokiCheckout\Plugin\AdditionalComponentHydration"/>
-    </type>
-
-    <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Postcode">
-        <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <type name="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Postcode">
-        <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="postcodeFormat" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\VatId">
-        <arguments>
-            <argument name="filters" xsi:type="array">
-                <item name="uppercase" xsi:type="object">Yireo\LokiCheckout\Filter\Uppercase</item>
-            </argument>
-        </arguments>
-    </type>
-
-    <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Telephone">
-        <arguments>
-            <argument name="filters" xsi:type="array">
-                <item name="numeric" xsi:type="string">numeric</item>
-            </argument>
-        </arguments>
+        <plugin name="Yireo_LokiCheckout::additionalHydration"
+                type="Yireo\LokiCheckout\Plugin\AdditionalHydration"/>
     </type>
 
     <type name="\Yireo\LokiCheckout\Observer\AddDebuggingInfo">

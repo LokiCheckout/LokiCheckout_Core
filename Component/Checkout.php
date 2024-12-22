@@ -2,9 +2,8 @@
 
 namespace Yireo\LokiCheckout\Component;
 
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
 
-class Checkout implements ViewModelInterface
+class Checkout  extends ParentViewModel
 {
 }

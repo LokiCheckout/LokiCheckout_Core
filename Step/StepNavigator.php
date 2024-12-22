@@ -8,14 +8,14 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
 use RuntimeException;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepInterface;
+use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
 
 class StepNavigator implements ArgumentInterface
 {
-    private StepInterface|false $currentStep = false;
+    private StepViewModelInterface|false $currentStep = false;
     private array $steps = [];
 
     public function __construct(
@@ -28,16 +28,16 @@ class StepNavigator implements ArgumentInterface
     ) {
     }
 
-    public function getCurrentStep(): StepInterface
+    public function getCurrentStep(): StepViewModelInterface
     {
-        if (false === $this->currentStep instanceof StepInterface) {
+        if (false === $this->currentStep instanceof StepViewModelInterface) {
             try {
                 $this->setCurrentStepByCode((string)$this->checkoutSession->getCurrentStep());
             } catch (UnknownStepException $unknownStepException) {
             }
         }
 
-        if (false === $this->currentStep instanceof StepInterface) {
+        if (false === $this->currentStep instanceof StepViewModelInterface) {
             $this->currentStep = $this->getFirstStep();
         }
 
@@ -70,7 +70,7 @@ class StepNavigator implements ArgumentInterface
         $this->setCurrentStepByCode($previousStep->getCode());
     }
 
-    public function validateStep(StepInterface $step): bool
+    public function validateStep(StepViewModelInterface $step): bool
     {
         $validationResult = $step->validate();
         if (true === $validationResult) {
@@ -105,10 +105,11 @@ class StepNavigator implements ArgumentInterface
 
     /**
      * @param string $stepCode
-     * @return StepInterface
+     *
+     * @return StepViewModelInterface
      * @throws UnknownStepException
      */
-    public function getStepByCode(string $stepCode): StepInterface
+    public function getStepByCode(string $stepCode): StepViewModelInterface
     {
         foreach ($this->getSteps() as $step) {
             if ($step->getCode() === $stepCode) {
@@ -119,40 +120,40 @@ class StepNavigator implements ArgumentInterface
         throw new UnknownStepException('Unknown step code "'.$stepCode.'"');
     }
 
-    public function isCurrentStep(StepInterface $step): bool
+    public function isCurrentStep(StepViewModelInterface $step): bool
     {
         return $step->getCode() === $this->getCurrentStep()->getCode();
     }
 
-    public function isFirstStep(StepInterface $step): bool
+    public function isFirstStep(StepViewModelInterface $step): bool
     {
         return $step->getCode() === $this->getFirstStep()->getCode();
     }
 
-    public function isLastStep(StepInterface $step): bool
+    public function isLastStep(StepViewModelInterface $step): bool
     {
         return $step->getCode() === $this->getLastStep()->getCode();
     }
 
-    public function getFirstStep(): StepInterface
+    public function getFirstStep(): StepViewModelInterface
     {
         $steps = $this->getSteps();
         return array_shift($steps);
     }
 
-    public function getLastStep(): StepInterface
+    public function getLastStep(): StepViewModelInterface
     {
         $steps = $this->getSteps();
         return array_pop($steps);
     }
 
-    public function addStep(StepInterface $step)
+    public function addStep(StepViewModelInterface $step)
     {
         $this->steps[$step->getCode()] = $step;
     }
 
     /**
-     * @return StepInterface[]
+     * @return StepViewModelInterface[]
      */
     public function getSteps(): array
     {
@@ -169,7 +170,7 @@ class StepNavigator implements ArgumentInterface
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
             $stepComponent = $step->getComponent();
-            if (false === $stepComponent instanceof StepInterface) {
+            if (false === $stepComponent instanceof StepViewModelInterface) {
                 continue;
             }
 
@@ -197,7 +198,7 @@ class StepNavigator implements ArgumentInterface
         return $this->steps;
     }
 
-    public function getNextStep(StepInterface $currentStep): StepInterface
+    public function getNextStep(StepViewModelInterface $currentStep): StepViewModelInterface
     {
         $returnNextStep = false;
         foreach ($this->getSteps() as $step) {
@@ -213,12 +214,12 @@ class StepNavigator implements ArgumentInterface
         throw new UnknownStepException('No next step to "'.$currentStep->getCode().'"');
     }
 
-    public function getPreviousStep(StepInterface $currentStep): StepInterface
+    public function getPreviousStep(StepViewModelInterface $currentStep): StepViewModelInterface
     {
         $previous = false;
         $steps = $this->getSteps();
         foreach ($steps as $step) {
-            if ($step->getCode() === $currentStep->getCode() && $previous instanceof StepInterface) {
+            if ($step->getCode() === $currentStep->getCode() && $previous instanceof StepViewModelInterface) {
                 return $previous;
             }
 

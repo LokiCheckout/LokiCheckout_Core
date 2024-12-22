@@ -51,6 +51,6 @@ $paymentMethods = $viewModel->getPaymentMethods();
     <?= $blockRenderer->html(
         'loki-checkout.utils.errors',
         $block,
-        ['errors' => $viewModel->getErrorContainer()->getErrors()]
+        ['errors' => $viewModel->getComponent()->getMessages()->getErrors()]
     ) ?>
 </div>

@@ -3,13 +3,13 @@
     <themes>
         <theme name="default" label="Multi Step Checkout (default)">
             <steps>
-                <step name="shipping" component="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep"/>
-                <step name="billing" component="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep"/>
+                <step name="shipping" component="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ViewModel"/>
+                <step name="billing" component="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\ViewModel"/>
             </steps>
         </theme>
         <theme name="onestep" label="One Step Checkout">
             <steps>
-                <step name="onestep" component="Yireo\LokiCheckout\Component\Checkout\Step\OneStep"/>
+                <step name="onestep" component="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\ViewModel"/>
             </steps>
         </theme>
     </themes>

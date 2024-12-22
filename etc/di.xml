@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ViewModel">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>
         </arguments>
@@ -17,7 +17,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\ViewModel">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualBillingStepValidator</argument>
         </arguments>
@@ -32,7 +32,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\ViewModel">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualOneStepValidator</argument>
         </arguments>
@@ -56,28 +56,19 @@
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Filter\FilterRegistry">
+    <type name="Yireo\LokiComponents\Component\Filter\FilterRegistry">
         <arguments>
             <argument name="filters" xsi:type="array">
-                <item name="country_id" xsi:type="object">Yireo\LokiCheckout\Filter\CountryId</item>
-                <item name="vat_id" xsi:type="object">Yireo\LokiCheckout\Filter\VatId</item>
-                <item name="trim" xsi:type="object">Yireo\LokiCheckout\Filter\Trim</item>
-                <item name="capitalize" xsi:type="object">Yireo\LokiCheckout\Filter\Capitalize</item>
-                <item name="lowercase" xsi:type="object">Yireo\LokiCheckout\Filter\Lowercase</item>
-                <item name="numeric" xsi:type="object">Yireo\LokiCheckout\Filter\Numeric</item>
-                <item name="uppercase" xsi:type="object">Yireo\LokiCheckout\Filter\Uppercase</item>
+                <item name="country_id" xsi:type="object">Yireo\LokiCheckout\Component\Filter\CountryId</item>
+                <item name="vat_id" xsi:type="object">Yireo\LokiCheckout\Component\Filter\VatId</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Validator\Component\FieldValidatorRegistry">
+    <type name="Yireo\LokiComponents\Component\Validator\ValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
-                <item name="required" xsi:type="object">Yireo\LokiCheckout\Validator\Component\RequiredValidator</item>
-                <item name="number" xsi:type="object">Yireo\LokiCheckout\Validator\Component\NumberValidator</item>
-                <item name="length" xsi:type="object">Yireo\LokiCheckout\Validator\Component\LengthValidator</item>
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-                <item name="email" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailValidator</item>
                 <item name="prefix" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PrefixValidator</item>
                 <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
                 <item name="dob" xsi:type="object">Yireo\LokiCheckout\Validator\Component\DobValidator</item>
@@ -94,7 +85,6 @@
                 <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session</item>
                 <item name="streetLinesFactory" xsi:type="object">Yireo\LokiCheckout\Util\StreetLinesFactory</item>
                 <item name="fieldTemplateLocator" xsi:type="object">Yireo\LokiCheckout\Util\FieldTemplateLocator</item>
-                <item name="errorContainerFactory" xsi:type="object">Yireo\LokiCheckout\Util\ErrorContainerFactory</item>
                 <item name="componentRegistry" xsi:type="object">Yireo\LokiComponents\Component\ComponentRegistry</item>
             </argument>
         </arguments>

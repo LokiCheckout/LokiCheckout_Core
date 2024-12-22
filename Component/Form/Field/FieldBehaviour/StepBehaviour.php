@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepInterface;
+use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Component\SetterInjection\InjectComponentRegistry;
 
 // @todo: Add integration test
@@ -42,7 +42,7 @@ trait StepBehaviour
             $viewModel = null;
         }
 
-        if ($viewModel instanceof StepInterface) {
+        if ($viewModel instanceof StepViewModelInterface) {
             return $viewModel->getCode();
         }
 
