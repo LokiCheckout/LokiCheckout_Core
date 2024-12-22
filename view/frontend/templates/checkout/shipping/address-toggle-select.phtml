@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var ShippingAddress $component */
+/** @var ShippingAddress $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
@@ -19,5 +19,5 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
     type="button"
     @click="toggleNewAddress"
 >
-    <?= $component->getButtonLabelNewAddress() ?>
+    <?= $viewModel->getButtonLabelNewAddress() ?>
 </button>

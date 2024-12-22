@@ -7,8 +7,9 @@ use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class Newsletter implements ComponentInterface
+class Newsletter implements ViewModelInterface
 {
     public bool $signup = false;
 

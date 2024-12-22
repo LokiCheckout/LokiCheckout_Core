@@ -5,8 +5,9 @@ namespace Yireo\LokiCheckout\Component\Checkout\Sidebar;
 use Yireo\LokiCheckout\Util\Cart\ItemConvertor;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class Items implements ComponentInterface
+class Items implements ViewModelInterface
 {
     public function __construct(
         private CheckoutState $checkoutState,

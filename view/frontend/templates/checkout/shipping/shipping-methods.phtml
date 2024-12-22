@@ -13,26 +13,26 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var bool $debug */
-/** @var ShippingMethods $component */
+/** @var ShippingMethods $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var PriceFormatter $priceFormatter */
 /** @var AlpineComponentData $alpineComponentData */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
-$shippingMethods = $component->getShippingMethods();
+$shippingMethods = $viewModel->getShippingMethods();
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div class="<?= $css('relative w-full mb-8') ?>"
      x-data="LokiCheckoutShippingMethods"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
     <form
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+        aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
         <?php if (!empty($shippingMethods)): ?>
             <ul>
@@ -56,7 +56,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
     <?= $blockRenderer->html(
         'loki-checkout.utils.errors',
         $block,
-        ['errors' => $component->getErrorContainer()->getErrors()]
+        ['errors' => $viewModel->getErrorContainer()->getErrors()]
     ) ?>
     <?= $block->getChildHtml('script') ?>
 </div>

@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
 
 abstract class AbstractRenderer implements ArgumentInterface
@@ -12,8 +12,9 @@ abstract class AbstractRenderer implements ArgumentInterface
     private array $counters = [];
 
     /**
-     * @param AbstractBlock $block
+     * @param AbstractBlock      $block
      * @param AbstractBlock|null $ancestorBlock
+     * @param array              $data
      *
      * @return void
      */
@@ -29,9 +30,9 @@ abstract class AbstractRenderer implements ArgumentInterface
         $block->setAncestorBlock($ancestorBlock);
         $block->addData($data);
 
-        $component = $ancestorBlock->getData('component');
-        if ($component instanceof ComponentInterface) {
-            $block->setData('component', $component);
+        $viewModel = $ancestorBlock->getViewModel();
+        if ($viewModel instanceof ViewModelInterface) {
+            $block->setViewModel($viewModel);
         }
     }
 

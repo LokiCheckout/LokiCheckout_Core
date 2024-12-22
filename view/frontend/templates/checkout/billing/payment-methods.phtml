@@ -10,17 +10,17 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var PaymentMethods $component */
+/** @var PaymentMethods $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
 /** @var AlpineComponentData $alpineComponentData */
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
-$paymentMethods = $component->getPaymentMethods();
+$paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>"
      x-data="LokiCheckoutPaymentMethods"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
@@ -28,7 +28,7 @@ $paymentMethods = $component->getPaymentMethods();
     <form
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+        aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
             <ul>
@@ -38,7 +38,7 @@ $paymentMethods = $component->getPaymentMethods();
                         $block,
                         [
                             'method' => $paymentMethod,
-                            'is_current' => $paymentMethod->getCode() === $component->getValue(),
+                            'is_current' => $paymentMethod->getCode() === $viewModel->getValue(),
                         ]
                     ) ?>
                 <?php endforeach; ?>
@@ -51,6 +51,6 @@ $paymentMethods = $component->getPaymentMethods();
     <?= $blockRenderer->html(
         'loki-checkout.utils.errors',
         $block,
-        ['errors' => $component->getErrorContainer()->getErrors()]
+        ['errors' => $viewModel->getErrorContainer()->getErrors()]
     ) ?>
 </div>

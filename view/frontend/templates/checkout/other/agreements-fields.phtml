@@ -5,10 +5,10 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
 /** @var Template $block */
-/** @var Agreements $component */
+/** @var Agreements $viewModel */
 ?>
 <div>
-    <?php foreach ($component->getCheckoutAgreements() as $agreement): ?>
+    <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
         <label for="agreement<?= $agreement->getAgreementId() ?>">
             <?= $agreement->getName() ?>

@@ -5,8 +5,9 @@ namespace Yireo\LokiCheckout\Component\Checkout\Billing;
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class BillingAddress implements ComponentInterface
+class BillingAddress implements ViewModelInterface
 {
     public function __construct(
         private readonly BillingAddressState $billingAddressState,

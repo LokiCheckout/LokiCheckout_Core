@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var ShippingAddressSelect $component */
+/** @var ShippingAddressSelect $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
@@ -21,18 +21,18 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutFieldComponent"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <?= $block->getChildHtml('title') ?>
 
     <select
-        id="<?= $component->getDomId() ?>-field"
+        id="<?= $viewModel->getDomId() ?>-field"
         data-type="field"
-        aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+        aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         x-model="value"
         :class="disabled ? 'disabled:opacity-75' : ''"
         :disabled="disabled"
-        <?php if ($component->isDisabled()): ?>
+        <?php if ($viewModel->isDisabled()): ?>
             disabled="disabled"
         <?php endif ?>
         class="<?= $css('form-input block w-full', 'select') ?>"
@@ -40,10 +40,10 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         <?php if ($showEmptySelectOption): ?>
             <option value="0"><?= $emptySelectOptionLabel ?></option>
         <?php endif; ?>
-        <?php foreach ($component->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
+        <?php foreach ($viewModel->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
             <option
                 value="<?= $shippingAddressId ?>"
-                <?= (int)$shippingAddressId === (int)$component->getValue() ? 'selected' : '' ?>
+                <?= (int)$shippingAddressId === (int)$viewModel->getValue() ? 'selected' : '' ?>
             >
                 <?= $shippingAddresLabel ?>
             </option>

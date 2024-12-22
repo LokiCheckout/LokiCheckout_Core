@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var BillingAsShipping $component */
+/** @var BillingAsShipping $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var AlpineComponentData $alpineComponentData */
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
@@ -17,7 +17,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 <div class="<?= $css('card mb-8') ?>"
      x-data="LokiCheckoutGenericComponent"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">
         <input type="checkbox"

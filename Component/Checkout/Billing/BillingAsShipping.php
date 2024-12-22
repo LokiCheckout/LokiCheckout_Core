@@ -8,8 +8,9 @@ use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class BillingAsShipping implements ComponentInterface
+class BillingAsShipping implements ViewModelInterface
 {
     public function __construct(
         private readonly BillingAddressState $billingAddressState,

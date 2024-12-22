@@ -10,12 +10,12 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Items $component */
+/** @var Items $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 
-if (empty($component->items)) {
+if (empty($viewModel->items)) {
     echo '<div>No items</div>';
     return;
 }
@@ -28,7 +28,7 @@ $childRenderer = $viewModelFactory->create(ChildRenderer::class);
     <?= $block->getChildHtml('before') ?>
 
     <ul role="list">
-        <?php foreach ($component->getItems() as $item) : ?>
+        <?php foreach ($viewModel->getItems() as $item) : ?>
             <li>
                 <?= $childRenderer->html('item', $block, [
                     'alias' => 'item',

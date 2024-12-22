@@ -3,9 +3,9 @@
 namespace Yireo\LokiCheckout\Component\Checkout;
 
 use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class Progressbar implements ComponentInterface
+class Progressbar implements ViewModelInterface
 {
     public string $currentStepCode = '';
 

@@ -4,8 +4,9 @@ namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class PaymentDetails  implements ComponentInterface
+class PaymentDetails  implements ViewModelInterface
 {
     public function __construct(
         private readonly CheckoutSession $checkoutSession,

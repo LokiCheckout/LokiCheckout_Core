@@ -36,13 +36,14 @@ trait StepBehaviour
     private function getStepNameFromBlock(AbstractBlock $block): string
     {
         try {
-            $component = $this->componentRegistry->getViewModelFromBlock($block);
+            $component = $this->componentRegistry->getComponentFromBlock($block);
+            $viewModel = $component->getViewModel();
         } catch (\RuntimeException $e) {
-            $component = null;
+            $viewModel = null;
         }
 
-        if ($component instanceof StepInterface) {
-            return $block->getComponent()->getCode();
+        if ($viewModel instanceof StepInterface) {
+            return $viewModel->getCode();
         }
 
         $parentBlock = $block->getParentBlock();

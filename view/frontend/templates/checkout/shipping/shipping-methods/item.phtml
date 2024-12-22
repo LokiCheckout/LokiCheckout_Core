@@ -11,12 +11,12 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
-/** @var ShippingMethods $component */
+/** @var ShippingMethods $viewModel */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
-$isCurrent = $component->getValue() === $code;
+$isCurrent = $viewModel->getValue() === $code;
 ?>
 <li class="<?= $css('cursor-pointer relative flex') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('p-4', 'input-container') ?>">

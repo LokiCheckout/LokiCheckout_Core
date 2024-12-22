@@ -3,7 +3,8 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview;
 
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class QuoteDetails  implements ComponentInterface
+class QuoteDetails  implements ViewModelInterface
 {
 }

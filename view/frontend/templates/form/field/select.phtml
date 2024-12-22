@@ -7,11 +7,11 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 /** @var Template $block */
-/** @var Field|OptionsBehaviour $component */
+/** @var Field|OptionsBehaviour $viewModel */
 /** @var CssClass $css */
-$component = $block->getComponent();
+$viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$component->setOptionModel($optionModel);
+$viewModel->setOptionModel($optionModel);
 
 // @todo: Check disabled state
 // @todo: Check aria-busy
@@ -21,14 +21,14 @@ $component->setOptionModel($optionModel);
     x-ref="field"
     x-model="value"
     @change="submit"
-    aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
-    <?php if ($component->isDisabled()): ?>
+    aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
+    <?php if ($viewModel->isDisabled()): ?>
         disabled="disabled"
     <?php endif ?>
-    <?= $component->isRequired() ? 'required' : '' ?>
+    <?= $viewModel->isRequired() ? 'required' : '' ?>
     class="<?= $css('form-select w-full') ?>"
 >
-    <?php foreach ($optionModel->getOptions($component) as $optionValue => $optionLabel): ?>
+    <?php foreach ($optionModel->getOptions($viewModel) as $optionValue => $optionLabel): ?>
         <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
     <?php endforeach; ?>
 </select>

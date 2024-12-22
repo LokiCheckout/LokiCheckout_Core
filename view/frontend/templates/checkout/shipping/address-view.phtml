@@ -4,10 +4,10 @@ declare(strict_types=1);
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
-/** @var ShippingAddress $component */
+/** @var ShippingAddress $viewModel */
 /** @var CssClass $css */
 
 ?>
 <div  class="<?= $css('mb-4') ?>">
-    <address><?= $component->getHtml() ?></address>
+    <address><?= $viewModel->getHtml() ?></address>
 </div>

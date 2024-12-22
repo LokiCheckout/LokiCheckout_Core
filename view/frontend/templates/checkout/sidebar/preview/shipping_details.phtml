@@ -5,11 +5,11 @@ use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
-/** @var ShippingDetails $component */
+/** @var ShippingDetails $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$addressHtml = $component->getAddressHtml();
-$methodHtml = $component->getMethodHtml();
+$addressHtml = $viewModel->getAddressHtml();
+$methodHtml = $viewModel->getMethodHtml();
 
 if (empty($addressHtml)) {
     echo '<div></div>';

@@ -8,33 +8,33 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Component\Form\Field\Field;
 
 /** @var Template $block */
-/** @var FieldInterface|OptionsBehaviour $component */
+/** @var FieldInterface|OptionsBehaviour $viewModel */
 /** @var CssClass $css */
 
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$component->setOptionModel($optionModel);
+$viewModel->setOptionModel($optionModel);
 ?>
 <div class="<?= $css('w-full grid grid-cols-2 p-2') ?>"
-     aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+     aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
      data-type="field">
     <?php $i = 0; ?>
-    <?php foreach ($component->getOptions() as $optionValue => $optionLabel): ?>
+    <?php foreach ($viewModel->getOptions() as $optionValue => $optionLabel): ?>
         <div class="<?= $css('', 'option') ?>">
             <input type="radio"
-                   id="<?= $component->getDomId() ?>-field-<?= $i ?>"
+                   id="<?= $viewModel->getDomId() ?>-field-<?= $i ?>"
                    x-model="value"
 
                    value="<?= $optionValue ?>"
-                <?php if ($component->getValue() === $optionValue): ?>
+                <?php if ($viewModel->getValue() === $optionValue): ?>
                     checked
                 <?php endif; ?>
-                <?php if ($component->isDisabled()): ?>
+                <?php if ($viewModel->isDisabled()): ?>
                     disabled="disabled"
                 <?php endif ?>
             />
             <label
                 class="<?= $css('pl-2', 'label') ?>"
-                for="<?= $component->getDomId() ?>-field-<?= $i ?>">
+                for="<?= $viewModel->getDomId() ?>-field-<?= $i ?>">
                 <?= __($optionLabel) ?>
             </label>
         </div>

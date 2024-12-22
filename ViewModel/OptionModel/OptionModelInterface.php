@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
 interface OptionModelInterface
 {
-    public function getOptions(ComponentInterface $component): array;
+    public function getOptions(ViewModelInterface $viewModel): array;
 }

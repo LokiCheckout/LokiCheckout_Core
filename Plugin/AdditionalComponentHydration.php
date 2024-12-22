@@ -7,6 +7,8 @@ use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiCheckout\Component\Form\Field\AddressField\Firstname;
 use Yireo\LokiCheckout\Util\SetterInjection;
+use Yireo\LokiComponents\Component\Component;
+use Yireo\LokiComponents\Component\ComponentHydrator;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\Hydrator;
 
@@ -18,7 +20,7 @@ class AdditionalComponentHydration
     }
 
     /**
-     * @param Hydrator $subject
+     * @param ComponentHydrator $subject
      * @param AbstractBlock $block
      * @param ComponentInterface $component
      * @return array
@@ -39,24 +41,26 @@ class AdditionalComponentHydration
     }*/
 
     /**
-     * @param Hydrator $subject
+     * @param ComponentHydrator $subject
      * @param AbstractBlock $block
      * @param ComponentInterface $component
      * @return void
      */
-    public function afterHydrate(Hydrator $subject, $return, AbstractBlock $block, ComponentInterface $component): void
+    public function afterHydrateBlock(ComponentHydrator $subject, $return, AbstractBlock $block, Component $component): void
     {
         $blockName = (string)$block->getNameInLayout();
         if (false === preg_match('/^loki-checkout/', $blockName) > 0) {
             return;
         }
 
-        if ($component instanceof Generic) {
-            $this->setterInjection->injectIntoComponent($component);
-            $component->initialize();
+        $viewModel = $component->getViewModel();
+
+        if ($viewModel instanceof Generic) {
+            $this->setterInjection->injectIntoViewModel($viewModel);
+            $viewModel->initialize();
         }
 
-        if ($component instanceof Generic && false === $component->isAllowRendering()) {
+        if ($viewModel instanceof Generic && false === $viewModel->isAllowRendering()) {
             $block->setTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
     }

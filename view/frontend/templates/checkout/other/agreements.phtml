@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var Agreements $component */
+/** @var Agreements $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var AlpineComponentData $alpineComponentData */
 
@@ -18,7 +18,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutFieldComponent"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <?= $block->getChildHtml() ?>
 </div>

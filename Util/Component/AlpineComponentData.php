@@ -9,14 +9,14 @@ use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
 use Yireo\LokiCheckout\Component\Generic\Behaviour\StringConversionBehaviour;
 use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ComponentRegistry;
+use Yireo\LokiComponents\ViewModel\ComponentUtil;
 
 class AlpineComponentData implements ArgumentInterface
 {
     use StringConversionBehaviour;
 
     public function __construct(
-        private ComponentRegistry $componentRegistry,
+        private ComponentUtil $componentUtil
     ) {
     }
 
@@ -27,7 +27,7 @@ class AlpineComponentData implements ArgumentInterface
 
         try {
             $data['name'] = $this->getName($block);
-            $data['elementId'] = $this->componentRegistry->getElementIdByBlockName($block->getNameInLayout());
+            $data['elementId'] = $this->componentUtil->getElementIdByBlockName($block->getNameInLayout());
         } catch(\RuntimeException $e) {}
 
         if ($component instanceof GenericInterface) {
@@ -60,7 +60,7 @@ class AlpineComponentData implements ArgumentInterface
         return $data;
     }
 
-    public function getJson(ComponentInterface $component): string
+    public function getJson(GenericInterface $component): string
     {
         return json_encode($this->getData($component));
     }

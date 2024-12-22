@@ -8,10 +8,10 @@ use Yireo\LokiComponents\Component\ComponentInterface;
 
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var ComponentInterface|null $component */
+/** @var ComponentInterface|null $viewModel */
 /** @var Template $ancestorBlock */
 
-$component = $block->getComponent();
+$viewModel = $block->getViewModel();
 $ancestorBlock = $block->getAncestorBlock();
 ?>
 <div x-data="{open:false}" class="<?= $css('absolute top-0 left-0') ?>">
@@ -24,13 +24,13 @@ $ancestorBlock = $block->getAncestorBlock();
         </svg>
     </button>
     <div x-cloak x-show="open" class="<?= $css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal') ?>">
-        Component: <?= ($component instanceof ComponentInterface) ? get_class($component) : 'none' ?><br/>
+        Component: <?= ($viewModel instanceof ComponentInterface) ? get_class($viewModel) : 'none' ?><br/>
         Block: <?= get_class($ancestorBlock) ?><br/>
         Name in layout: <?= $ancestorBlock->getNameInLayout() ?><br/>
         Template file: <?= $ancestorBlock->getTemplateFile() ?><br/>
-        <?php if ($component instanceof AddressField): ?>
-            Validators: <?= implode(', ', $component->getValidators()) ?><br/>
-            Filters: <?= implode(', ', $component->getFilters()) ?><br/>
+        <?php if ($viewModel instanceof AddressField): ?>
+            Validators: <?= implode(', ', $viewModel->getValidators()) ?><br/>
+            Filters: <?= implode(', ', $viewModel->getFilters()) ?><br/>
         <?php endif; ?>
 
     </div>

@@ -3,7 +3,8 @@
 namespace Yireo\LokiCheckout\Component\Checkout;
 
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class Login implements ComponentInterface
+class Login implements ViewModelInterface
 {
 }

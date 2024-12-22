@@ -10,7 +10,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ShippingAddress $component */
+/** @var ShippingAddress $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var AlpineComponentData $alpineComponentData */
@@ -20,13 +20,13 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 <div class="<?= $css('mb-8') ?>"
      x-data="LokiCheckoutShippingAddress"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'>
-    <?php if (count($component->getShippingAddresses()) > 0): ?>
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'>
+    <?php if (count($viewModel->getShippingAddresses()) > 0): ?>
         <?= $block->getChildHtml('select') ?>
         <?= $block->getChildHtml('toggle-select') ?>
     <?php endif; ?>
 
-    <?php if($component->isNewAddress()): ?>
+    <?php if($viewModel->isNewAddress()): ?>
         <?= $block->getChildHtml('form-title') ?>
         <?= $block->getChildHtml('form') ?>
     <?php endif; ?>

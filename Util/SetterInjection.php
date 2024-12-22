@@ -7,7 +7,7 @@ use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Mutator\MutatorInterface;
+use Yireo\LokiComponents\Component\Mutator\MutatorInterface;
 
 class SetterInjection
 {
@@ -22,28 +22,28 @@ class SetterInjection
      * @param GenericInterface $component
      * @return GenericInterface
      */
-    public function injectIntoComponent(Generic $component): Generic
+    public function injectIntoViewModel(Generic $viewModel): Generic
     {
         foreach ($this->injectables as $injectableName => $injectable) {
             $method = 'set'.ucfirst($injectableName);
-            if (method_exists($component, $method)) {
-                call_user_func([$component, $method], $injectable);
+            if (method_exists($viewModel, $method)) {
+                call_user_func([$viewModel, $method], $injectable);
             }
         }
 
-        if ($component instanceof AddressField) {
-            if ($this->isShippingComponent($component)) {
-                $component->setStep('shipping'); // @todo: What about onestep?
-                $component->setAddressState($this->shippingAddressState);
+        if ($viewModel instanceof AddressField) {
+            if ($this->isShippingComponent($viewModel)) {
+                $viewModel->setStep('shipping'); // @todo: What about onestep?
+                $viewModel->setAddressState($this->shippingAddressState);
             }
 
-            if ($this->isBillingComponent($component)) {
-                $component->setStep('billing'); // @todo: What about onestep?
-                $component->setAddressState($this->billingAddressState);
+            if ($this->isBillingComponent($viewModel)) {
+                $viewModel->setStep('billing'); // @todo: What about onestep?
+                $viewModel->setAddressState($this->billingAddressState);
             }
         }
 
-        return $component;
+        return $viewModel;
     }
 
     /**

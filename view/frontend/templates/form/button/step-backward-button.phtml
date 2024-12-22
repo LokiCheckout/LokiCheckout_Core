@@ -8,11 +8,11 @@ use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var StepBackwardButton $component */
+/** @var StepBackwardButton $viewModel */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var AlpineComponentData $alpineComponentData */
-if (empty($component)) {
+if (empty($viewModel)) {
     throw new \RuntimeException('No component found for block "'.$block->getNameInLayout().'"');
 }
 
@@ -21,7 +21,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 <div class="<?= $css('') ?>"
      x-data="StepBackwardButton"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"

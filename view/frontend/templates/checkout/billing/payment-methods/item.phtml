@@ -20,7 +20,7 @@ $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $paymentMethod = $block->getMethod();
 $code = $paymentMethod->getCode();
 $isCurrent = $block->getIsCurrent();
-$componentName = $block->getBlockBlock()->getComponentName() . ucfirst($code);
+$viewModelName = $block->getBlockBlock()->getComponentName() . ucfirst($code);
 ?>
 <li class="<?= $css('cursor-pointer relative my-4 p-4') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('flex', 'method') ?>">

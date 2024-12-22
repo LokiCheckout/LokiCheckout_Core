@@ -3,7 +3,8 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar;
 
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class Totals implements ComponentInterface
+class Totals implements ViewModelInterface
 {
 }

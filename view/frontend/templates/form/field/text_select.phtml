@@ -8,14 +8,14 @@ use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
-/** @var FieldInterface|OptionsBehaviour $component */
+/** @var FieldInterface|OptionsBehaviour $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
-$component = $block->getComponent();
+$viewModel = $block->getViewModel();
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$component->setOptionModel($optionModel);
+$viewModel->setOptionModel($optionModel);
 
-if (count($optionModel->getOptions($component)) > 0) {
+if (count($optionModel->getOptions($viewModel)) > 0) {
     $block->setOptionModel($optionModel);
     echo $templateRenderer->html('form/field/select.phtml', $block, ['alias' => 'select']);
     return;

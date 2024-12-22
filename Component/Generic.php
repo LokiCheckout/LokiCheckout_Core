@@ -9,7 +9,6 @@ abstract class Generic implements GenericInterface
     protected bool $visible = true;
     protected bool $lazyLoad = true;
     protected bool $allowRendering = true;
-    protected string $domId = '';
     protected ?AbstractBlock $block = null;
 
     public function initialize(): void
@@ -36,6 +35,7 @@ abstract class Generic implements GenericInterface
             return $domId;
         }
 
+        // @todo: Change this with the regex again
         return $this->block->getNameInLayout();
     }
 

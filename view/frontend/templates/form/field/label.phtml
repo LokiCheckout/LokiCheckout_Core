@@ -7,17 +7,18 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var Field $component */
+/** @var Field $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$component = $block->getComponent();
+
+$viewModel = $block->getViewModel();
 ?>
 <label
-    for="<?= $component->getDomId() ?>-field"
+    for="<?= $viewModel->getDomId() ?>-field"
     class="<?= $css('inline-block mb-1.5') ?>">
-    <?= __($component->getFieldLabel()) ?>
+    <?= __($viewModel->getFieldLabel()) ?>
 
-    <?php if ($component->isRequired() && $component->getLokiCheckoutConfig()->useRequiredBlock()): ?>
+    <?php if ($viewModel->isRequired() && $viewModel->getLokiCheckoutConfig()->useRequiredBlock()): ?>
         <?= $blockRenderer->html('loki-checkout.utils.required'); ?>
     <?php endif; ?>
 </label>

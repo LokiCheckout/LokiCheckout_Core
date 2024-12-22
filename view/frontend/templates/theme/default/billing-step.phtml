@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var BillingStep $component */
+/** @var BillingStep $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var AlpineComponentData $alpineComponentData */
@@ -20,12 +20,12 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
-$duration = $component->getBlock()->getDuration() ?? '300ms';
+$duration = $viewModel->getBlock()->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutStep"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
      <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
      x-show="visible"
      x-transition.duration.<?= $duration ?>.opacity

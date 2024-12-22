@@ -10,8 +10,9 @@ use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
 
-class ShippingDetails implements ComponentInterface
+class ShippingDetails implements ViewModelInterface
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,

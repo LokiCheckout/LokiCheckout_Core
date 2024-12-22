@@ -12,17 +12,17 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var ShippingStep $component */
+/** @var ShippingStep $viewModel */
 /** @var AlpineComponentData $alpineComponentData */
-$component = $viewModelFactory->create(ShippingStep::class);
+$viewModel = $viewModelFactory->create(ShippingStep::class);
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $duration = $block->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
      x-data="LokiCheckoutStep"
      x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($component) ?>'
-     <?php if (false === $component->isVisible()): ?>x-cloak<?php endif; ?>
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
+     <?php if (false === $viewModel->isVisible()): ?>x-cloak<?php endif; ?>
      x-show="visible"
      x-transition.duration.<?= $duration ?>.opacity
 >

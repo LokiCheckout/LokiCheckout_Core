@@ -7,36 +7,36 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
-/** @var Field $component */
+/** @var Field $viewModel */
 /** @var CssClass $css */
 $fieldBlock = $block->getFieldBlock();
-$component = $block->getComponent();
+$viewModel = $block->getViewModel();
 ?>
 <input
-    aria-invalid="<?= $component->isValid() ? 'false' : 'true' ?>"
+    aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
     data-type="field"
     x-ref="field"
     x-model.lazy="value"
     @change="submit"
-    <?php if ($component->isDisabled()): ?>
+    <?php if ($viewModel->isDisabled()): ?>
         disabled="disabled"
     <?php endif ?>
-    <?php if ($component->hasMinLength()): ?>
-        minlength="<?= $component->getMinLength() ?>"
+    <?php if ($viewModel->hasMinLength()): ?>
+        minlength="<?= $viewModel->getMinLength() ?>"
     <?php endif ?>
-    <?php if ($component->hasMaxLength()): ?>
-        maxlength="<?= $component->getMaxLength() ?>"
+    <?php if ($viewModel->hasMaxLength()): ?>
+        maxlength="<?= $viewModel->getMaxLength() ?>"
     <?php endif ?>
-    <?php if ($component->hasMin()): ?>
-        min="<?= $component->getMin() ?>"
+    <?php if ($viewModel->hasMin()): ?>
+        min="<?= $viewModel->getMin() ?>"
     <?php endif ?>
-    <?php if ($component->hasMax()): ?>
-        max="<?= $component->getMax() ?>"
+    <?php if ($viewModel->hasMax()): ?>
+        max="<?= $viewModel->getMax() ?>"
     <?php endif ?>
-    <?php if ($component->getPlaceholder()): ?>
-        placeholder="<?= $component->getPlaceholder() ?>"
+    <?php if ($viewModel->getPlaceholder()): ?>
+        placeholder="<?= $viewModel->getPlaceholder() ?>"
     <?php endif ?>
-    <?= $component->isRequired() ? 'required' : '' ?>
-    type="<?= $component->getInputType() ?>"
+    <?= $viewModel->isRequired() ? 'required' : '' ?>
+    type="<?= $viewModel->getInputType() ?>"
     class="<?= $css('form-input w-full disabled:bg-zinc-100', 'input') ?>"
 >

@@ -7,10 +7,10 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var PaymentDetails $component */
+/** @var PaymentDetails $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$html = $component->getHtml();
+$html = $viewModel->getHtml();
 if (empty($html)) {
     echo '<div></div>';
     return;

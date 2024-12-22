@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Mutator\Checkout\Other;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Yireo\LokiComponents\Mutator\MutatorInterface;
+use Yireo\LokiComponents\Component\Mutator\MutatorInterface;
 
 class Agreements implements MutatorInterface
 {

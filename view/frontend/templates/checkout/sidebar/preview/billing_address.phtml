@@ -5,10 +5,10 @@ use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
-/** @var BillingAddress $component */
+/** @var BillingAddress $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$html = $component->getHtml();
+$html = $viewModel->getHtml();
 if (empty($html)) {
     echo '<div></div>';
     return;
@@ -18,7 +18,7 @@ if (empty($html)) {
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
-    <?php if ($component->isSameAsShipping()): ?>
+    <?php if ($viewModel->isSameAsShipping()): ?>
     <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
     <?php endif; ?>
 </div>
