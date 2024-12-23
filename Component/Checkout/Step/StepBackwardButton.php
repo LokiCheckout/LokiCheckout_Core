@@ -9,7 +9,7 @@ use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
-class StepBackwardButton extends Generic implements ButtonInterface
+class StepBackwardButton extends Generic implements StepButtonInterface
 {
     use StepBehaviour;
 

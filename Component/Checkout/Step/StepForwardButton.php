@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
 use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
-class StepForwardButton extends Generic implements ButtonInterface
+class StepForwardButton extends Generic implements StepButtonInterface
 {
     use StepBehaviour;
 
