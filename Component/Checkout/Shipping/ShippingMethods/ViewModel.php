@@ -8,12 +8,10 @@ use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
 
 use Yireo\LokiCheckout\Component\Form\Field\FieldViewModel;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
 class ViewModel extends FieldViewModel
 {
-    use InjectLokiCheckoutConfig;
     use StepBehaviour;
 
     private array $shippingMethods = [];

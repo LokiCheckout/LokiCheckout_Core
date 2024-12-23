@@ -3,11 +3,9 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Customer\Email;
 
 use Yireo\LokiCheckout\Component\Form\Field\QuoteFieldViewModel;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectCustomerSession;
 
 class ViewModel extends QuoteFieldViewModel
 {
-    use InjectCustomerSession;
 
     public string $email = '';
 

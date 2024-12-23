@@ -6,12 +6,22 @@ use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository;
 
 class RegionRepository extends AddressFieldRepository
 {
+    protected function getData(): mixed
+    {
+        $regionId = (string)$this->getAddressState()->load('region_id');
+        if (is_numeric($regionId) && $regionId > 0) {
+            return $regionId;
+        }
+
+        return (string)$this->getAddressState()->load('region');
+    }
+
     protected function saveData(mixed $data): void
     {
         if (is_numeric($data)) {
             $this->getAddressState()->save('region_id', $data);
         }
 
-        parent::saveData($data);
+        $this->getAddressState()->save('region', $data);
     }
 }

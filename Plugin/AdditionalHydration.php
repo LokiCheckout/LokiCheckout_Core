@@ -5,19 +5,12 @@ namespace Yireo\LokiCheckout\Plugin;
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Component\Generic;
 use Yireo\LokiCheckout\Component\GenericViewModelInterface;
-use Yireo\LokiCheckout\Util\SetterInjection;
 use Yireo\LokiComponents\Component\Component;
 use Yireo\LokiComponents\Component\ComponentHydrator;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModelInterface;
 
 class AdditionalHydration
 {
-    public function __construct(
-        private SetterInjection $setterInjection
-    ) {
-    }
-
     /**
      * @param ComponentHydrator $subject
      * @param AbstractBlock $block
@@ -38,7 +31,6 @@ class AdditionalHydration
         }
 
         if ($viewModel instanceof GenericViewModelInterface) {
-            $this->setterInjection->injectIntoViewModel($viewModel);
             $viewModel->initialize();
         }
 

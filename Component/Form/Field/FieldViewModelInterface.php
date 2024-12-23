@@ -43,11 +43,6 @@ interface FieldViewModelInterface extends GenericViewModelInterface
     public function isRequired(): bool;
 
     /**
-     * @return mixed
-     */
-    public function getValue(): mixed;
-
-    /**
      * @return bool
      */
     public function isValid(): bool;

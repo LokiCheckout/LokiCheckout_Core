@@ -2,17 +2,12 @@
 
 namespace Yireo\LokiCheckout\Component;
 
-use Yireo\LokiComponents\Component\ViewModel;
+use Yireo\LokiComponents\Component\ComponentViewModel;
 
-abstract class GenericViewModel extends ViewModel implements GenericViewModelInterface
+class GenericViewModel extends ComponentViewModel implements GenericViewModelInterface
 {
-    protected bool $visible = true;
     protected bool $lazyLoad = true;
     protected bool $allowRendering = true;
-
-    public function initialize(): void
-    {
-    }
 
     /**
      * @return bool
@@ -25,16 +20,5 @@ abstract class GenericViewModel extends ViewModel implements GenericViewModelInt
     public function isAllowRendering(): bool
     {
         return $this->allowRendering;
-    }
-
-    public function getDomId(): string
-    {
-        $domId = trim((string)$this->block->getDomId());
-        if (!empty($domId)) {
-            return $domId;
-        }
-
-        // @todo: Change this with the regex again
-        return $this->block->getNameInLayout();
     }
 }

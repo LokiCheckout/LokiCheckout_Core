@@ -6,17 +6,18 @@ use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Component\Form\Field\FieldViewModelInterface;
-use Yireo\LokiCheckout\Component\Generic\Behaviour\StringConversionBehaviour;
 use Yireo\LokiCheckout\Component\GenericViewModelInterface;
+use Yireo\LokiCheckout\Util\CamelCaseConvertor;
+use Yireo\LokiCheckout\Util\IdConvertor;
 use Yireo\LokiComponents\ViewModel\ComponentUtil;
 
 // @todo: Retrieve targets from Component-class instead of ViewModel-class
 class AlpineComponentData implements ArgumentInterface
 {
-    use StringConversionBehaviour;
-
     public function __construct(
-        private ComponentUtil $componentUtil
+        private ComponentUtil      $componentUtil,
+        private IdConvertor        $idConvertor,
+        private CamelCaseConvertor $camelCaseConvertor
     ) {
     }
 
@@ -28,7 +29,8 @@ class AlpineComponentData implements ArgumentInterface
         try {
             $data['name'] = $this->getName($block);
             $data['elementId'] = $this->componentUtil->getElementIdByBlockName($block->getNameInLayout());
-        } catch(\RuntimeException $e) {}
+        } catch (\RuntimeException $e) {
+        }
 
         if ($viewModel instanceof GenericViewModelInterface) {
             $data['blockId'] = $block->getNameInLayout();
@@ -76,7 +78,7 @@ class AlpineComponentData implements ArgumentInterface
 
     public function getName(AbstractBlock $block): string
     {
-        return $this->toCamelCase($block->getNameInLayout());
+        return $this->camelCaseConvertor->toCamelCase($block->getNameInLayout());
     }
 
     public function getJsValue(string $value): string
@@ -104,14 +106,9 @@ class AlpineComponentData implements ArgumentInterface
     private function convertDomIds(array $domIds): array
     {
         foreach ($domIds as $domIdIndex => $domId) {
-            $domIds[$domIdIndex] = $this->getDomId($domId);
+            $domIds[$domIdIndex] = $this->idConvertor->toElementId($domId);
         }
 
         return $domIds;
-    }
-
-    private function getDomId(string $id): string
-    {
-        return preg_replace('/([^a-z\-]+)/', '-', $id);
     }
 }

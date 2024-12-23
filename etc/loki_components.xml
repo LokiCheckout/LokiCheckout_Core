@@ -48,70 +48,81 @@
 
     <component
         name="checkout/shipping/address/prefix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.prefix"/>
+        <validator name="prefix"/>
     </component>
 
     <component
         name="checkout/shipping/address/firstname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\FirstnameRepository">
         <source name="loki-checkout.shipping.address.firstname"/>
     </component>
 
     <component
         name="checkout/shipping/address/middlename"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.middlename"/>
     </component>
 
     <component
         name="checkout/shipping/address/lastname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\LastnameRepository">
         <source name="loki-checkout.shipping.address.lastname"/>
     </component>
 
     <component
         name="checkout/shipping/address/suffix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
+        repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.suffix"/>
     </component>
 
     <component
         name="checkout/shipping/address/street0"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.shipping.address.street0"/>
     </component>
 
     <component
         name="checkout/shipping/address/street1"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.shipping.address.street1"/>
     </component>
 
     <component
         name="checkout/shipping/address/street2"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.shipping.address.street2"/>
     </component>
 
     <component
         name="checkout/shipping/address/street3"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.shipping.address.street3"/>
     </component>
 
     <component
         name="checkout/shipping/address/postcode"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\ViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\PostcodeContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\PostcodeViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.postcode"/>
         <validator name="postcode" />
@@ -120,21 +131,24 @@
 
     <component
         name="checkout/shipping/address/city"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.city"/>
     </component>
 
     <component
         name="checkout/shipping/address/region"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionRepository">
         <source name="loki-checkout.shipping.address.region"/>
     </component>
 
     <component
         name="checkout/shipping/address/country_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdRepository">
         <source name="loki-checkout.shipping.address.country_id"/>
         <filter name="country_id"/>
@@ -142,14 +156,16 @@
 
     <component
         name="checkout/shipping/address/company"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.company"/>
     </component>
 
     <component
         name="checkout/shipping/address/telephone"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.telephone"/>
         <filter name="numeric"/>
@@ -157,7 +173,8 @@
 
     <component
         name="checkout/shipping/address/fax"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.fax"/>
         <filter name="numeric"/>
@@ -165,9 +182,11 @@
 
     <component
         name="checkout/shipping/address/vat_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\VatId\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel"
+        repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.shipping.address.vat_id"/>
+        <validator name="vat_id"/>
     </component>
 
     <component
@@ -263,70 +282,80 @@
 
     <component
         name="checkout/billing.address/prefix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.prefix"/>
     </component>
 
     <component
         name="checkout/billing.address/firstname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\FirstnameRepository">
         <source name="loki-checkout.billing.address.firstname"/>
     </component>
 
     <component
         name="checkout/billing.address/middlename"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.middlename"/>
     </component>
 
     <component
         name="checkout/billing.address/lastname"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\LastnameRepository">
         <source name="loki-checkout.billing.address.lastname"/>
     </component>
 
     <component
         name="checkout/billing.address/suffix"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
+        repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.suffix"/>
     </component>
 
     <component
         name="checkout/billing.address/street0"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.billing.address.street0"/>
     </component>
 
     <component
         name="checkout/billing.address/street1"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.billing.address.street1"/>
     </component>
 
     <component
         name="checkout/billing.address/street2"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.billing.address.street2"/>
     </component>
 
     <component
         name="checkout/billing.address/street3"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Repository">
+        repository="\Yireo\LokiCheckout\Component\Checkout\Address\Streetline\StreetLineRepository">
         <source name="loki-checkout.billing.address.street3"/>
     </component>
 
     <component
         name="checkout/billing.address/postcode"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\ViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\PostcodeContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\PostcodeViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.postcode"/>
         <validator name="postcode"/>
@@ -335,21 +364,24 @@
 
     <component
         name="checkout/billing.address/city"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.city"/>
     </component>
 
     <component
         name="checkout/billing.address/region"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionRepository">
         <source name="loki-checkout.billing.address.region"/>
     </component>
 
     <component
         name="checkout/billing.address/country_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdRepository">
         <source name="loki-checkout.billing.address.country_id"/>
         <filter name="country_id"/>
@@ -357,14 +389,16 @@
 
     <component
         name="checkout/billing.address/company"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.company"/>
     </component>
 
     <component
         name="checkout/billing.address/telephone"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.telephone"/>
         <filter name="numeric"/>
@@ -372,7 +406,8 @@
 
     <component
         name="checkout/billing.address/fax"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\ViewModel"
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxViewModel"
         repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.fax"/>
         <filter name="numeric"/>
@@ -380,9 +415,11 @@
 
     <component
         name="checkout/billing.address/vat_id"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\ViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\VatId\Repository">
+        context="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel"
+        repository="Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository">
         <source name="loki-checkout.billing.address.vat_id"/>
+        <validator name="vat_id"/>
     </component>
 
     <component

@@ -2,15 +2,25 @@
 
 namespace Yireo\LokiCheckout\Component\Form\AddressField;
 
-use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Util\Component\AddressStateProvider;
+use Yireo\LokiCheckout\Component\Form\Field\FieldContext;
+use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
+use Yireo\LokiCheckout\Util\Component\AttributeProvider;
+use Yireo\LokiCheckout\Util\Component\StepProvider;
+use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
-class AddressFieldContext implements ComponentContextInterface
+class AddressFieldContext extends FieldContext
 {
     public function __construct(
-        public readonly ShippingAddressState $shippingAddressState,
-        public readonly BillingAddressState $billingAddressState,
+        public readonly FieldTemplateLocator $fieldTemplateLocator,
+        public readonly AlpineComponentData $alpineComponentData,
+        public readonly StepProvider $stepProvider,
+        public readonly AddressStateProvider $addressStateProvider,
+        public readonly AttributeProvider $attributeProvider,
+        public readonly ScopeConfigInterface $scopeConfig,
+        public readonly Config $moduleConfig
     ) {
     }
 }

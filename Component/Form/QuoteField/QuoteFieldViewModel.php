@@ -3,14 +3,10 @@
 namespace Yireo\LokiCheckout\Component\Form\QuoteField;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressFieldBehaviour\AttributeBehaviour;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectCheckoutSession;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectCustomerSession;
 
 abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldViewModelInterface
 {
     use AttributeBehaviour;
-    use InjectCheckoutSession;
-    use InjectCustomerSession;
 
     protected function getSavedValue(): string|bool|int
     {

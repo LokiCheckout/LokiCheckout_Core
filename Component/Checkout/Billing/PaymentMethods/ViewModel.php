@@ -5,16 +5,13 @@ namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
-use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
 
 use Yireo\LokiCheckout\Component\Form\Field\FieldViewModel;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ViewModel extends FieldViewModel
 {
-    use InjectLokiCheckoutConfig;
     use StepBehaviour;
 
     /** @var PaymentMethodInterface[] $paymentMethods */

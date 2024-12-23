@@ -3,31 +3,17 @@
 namespace Yireo\LokiCheckout\Component\Form\Field;
 
 use Yireo\LokiCheckout\Component\GenericViewModel;
-use Yireo\LokiCheckout\Config\Config as LokiCheckoutConfig;
-use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\ParentBehaviour;
-use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\StepBehaviour;
-use Yireo\LokiCheckout\Component\Generic;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectFieldTemplateLocator;
-use Yireo\LokiCheckout\Component\SetterInjection\InjectLokiCheckoutConfig;
-use Yireo\LokiCheckout\Util\FieldTemplateLocator;
 
 abstract class FieldViewModel extends GenericViewModel implements FieldViewModelInterface
 {
-    use InjectLokiCheckoutConfig;
-    use InjectFieldTemplateLocator;
+    protected string $step = '';
 
-    use ParentBehaviour;
-    use StepBehaviour;
-
-
-    public function initialize(): void
-    {
-        $this->value = $this->getSavedValue();
-    }
-
+    /**
+     * @deprecated Use getData instead
+     */
     public function getValue(): mixed
     {
-        return $this->value;
+        return $this->getData();
     }
 
     public function getFieldName(): string
@@ -49,11 +35,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function getFieldTemplate(): string
     {
-        if (false === $this->fieldTemplateLocator instanceof FieldTemplateLocator) {
-            throw new \RuntimeException('FieldTemplateLocator not set for "'.get_class($this).'"');
-        }
-
-        return $this->fieldTemplateLocator?->getFieldTemplateFromViewModel($this);
+        return $this->getContext()->fieldTemplateLocator->getFieldTemplateFromViewModel($this);
     }
 
     public function getInputType(): string
@@ -61,26 +43,78 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
         return 'text';
     }
 
-    protected function getSavedValue(): string|bool|int
+    public function isValid(): bool
     {
-        return '';
+        return true;
     }
 
     public function isDisabled(): bool
     {
-        return false;
+        return (bool)$this->getBlock()->getDisabled();
     }
 
-    // @todo: Remove this?
-    protected function snakeToCamel(string $text): string
+    public function getNameInLayout(): string
     {
-        return str_replace(' ', '', ucwords(str_replace('_', ' ', $text)));
+        return $this->getBlock()->getNameInLayout();
     }
 
-    public function getLokiCheckoutConfig(): LokiCheckoutConfig
+    public function getPlaceholder(): string
     {
-        return $this->lokiCheckoutConfig;
+        return (string)$this->getBlock()->getPlaceholder();
     }
 
+    public function hasMinLength(): bool
+    {
+        return is_numeric($this->getBlock()->getMinLength());
+    }
 
+    public function getMinLength(): int
+    {
+        return (int)$this->getBlock()->getMinLength();
+    }
+
+    public function hasMaxLength(): bool
+    {
+        return is_numeric($this->getBlock()->getMaxLength());
+    }
+
+    public function getMaxLength(): int
+    {
+        return (int)$this->getBlock()->getMaxLength();
+    }
+
+    public function hasMin(): bool
+    {
+        return !empty($this->getBlock()->getMin());
+    }
+
+    public function getMin(): string
+    {
+        return (string)$this->getBlock()->getMin();
+    }
+
+    public function hasMax(): bool
+    {
+        return !empty($this->getBlock()->getMax());
+    }
+
+    public function getMax(): string
+    {
+        return (string)$this->getBlock()->getMax();
+    }
+
+    public function setStep(string $step): void
+    {
+        $this->step = $step;
+    }
+
+    public function getStep(): string
+    {
+        if (!empty($this->step)) {
+            return $this->step;
+        }
+
+        $this->step = $this->getContext()->stepProvider->getStep($this->getBlock());
+        return $this->step;
+    }
 }
