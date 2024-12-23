@@ -2,11 +2,10 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\Validator\ValidatorInterface;
+use Yireo\LokiComponents\Validator\ValidatorInterface;
 
 class GenderValidator implements ValidatorInterface
 {

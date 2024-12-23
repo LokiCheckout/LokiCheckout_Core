@@ -6,8 +6,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class ViewModel  extends ParentViewModel
 {

@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Form\Field;
 
-use Yireo\LokiComponents\Component\Mutator\Mutator;
+use Yireo\LokiComponents\Component\Repository\Mutator;
 
 abstract class FieldMutator extends Mutator
 {

@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Util\SetterInjection;
 use Yireo\LokiComponents\Component\Component;
 use Yireo\LokiComponents\Component\ComponentHydrator;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 class AdditionalHydration
 {

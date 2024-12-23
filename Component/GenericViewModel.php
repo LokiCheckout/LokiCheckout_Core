@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component;
 
-use Yireo\LokiComponents\Component\ViewModel\ViewModel;
+use Yireo\LokiComponents\Component\ViewModel;
 
 abstract class GenericViewModel extends ViewModel implements GenericViewModelInterface
 {

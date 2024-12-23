@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component;
 
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class Checkout  extends ParentViewModel
 {

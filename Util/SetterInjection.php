@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Component\GenericInterface;
 use Yireo\LokiCheckout\Component\GenericViewModelInterface;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\Mutator\MutatorInterface;
+use Yireo\LokiComponents\Component\Repository\MutatorInterface;
 
 class SetterInjection
 {

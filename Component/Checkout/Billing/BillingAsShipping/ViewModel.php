@@ -3,13 +3,10 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping;
 
 use Magento\Quote\Api\CartRepositoryInterface;
-
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class ViewModel  extends ParentViewModel
 {

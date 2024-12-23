@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Validator\Component;
 
 use Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\Validator\ValidatorInterface;
+use Yireo\LokiComponents\Validator\ValidatorInterface;
 
 class PrefixValidator implements ValidatorInterface
 {

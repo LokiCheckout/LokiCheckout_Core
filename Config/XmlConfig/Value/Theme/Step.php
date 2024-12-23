@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 class Step
 {

@@ -3,7 +3,7 @@
     <group name="default">
         <!-- Progressbar component -->
         <component
-            name="Yireo_LokiCheckout::checkout/progressbar"
+            name="checkout/progressbar"
             viewModel="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\ProgressBar\Mutator">
             <source name="loki-checkout.progressbar"/>
@@ -11,21 +11,21 @@
 
         <!-- Customer components -->
         <component
-            name="Yireo_LokiCheckout::checkout/customer/email"
+            name="checkout/customer/email"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Email\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Customer\Email\Mutator">
             <source name="loki-checkout.customer.email"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/customer/gender"
+            name="checkout/customer/gender"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Gender\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Customer\Gender\Mutator">
             <source name="loki-checkout.customer.gender"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/customer/dob"
+            name="checkout/customer/dob"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Dob\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Customer\Dob\Mutator">
             <source name="loki-checkout.customer.dob"/>
@@ -33,7 +33,7 @@
 
         <!-- Shipping components -->
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address"
+            name="checkout/shipping/address"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Mutator">
             <source name="loki-checkout.shipping.address"/>
@@ -41,77 +41,77 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address-toggle-select"
+            name="checkout/shipping/address-toggle-select"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\Mutator">
             <source name="loki-checkout.shipping.address.toggle-select"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/prefix"
+            name="checkout/shipping/address/prefix"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\Mutator">
             <source name="loki-checkout.shipping.address.prefix"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/firstname"
+            name="checkout/shipping/address/firstname"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\Mutator">
             <source name="loki-checkout.shipping.address.firstname"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/middlename"
+            name="checkout/shipping/address/middlename"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\Mutator">
             <source name="loki-checkout.shipping.address.middlename"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/lastname"
+            name="checkout/shipping/address/lastname"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\Mutator">
             <source name="loki-checkout.shipping.address.lastname"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/suffix"
+            name="checkout/shipping/address/suffix"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\Mutator">
             <source name="loki-checkout.shipping.address.suffix"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/street0"
+            name="checkout/shipping/address/street0"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Mutator">
             <source name="loki-checkout.shipping.address.street0"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/street1"
+            name="checkout/shipping/address/street1"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Mutator">
             <source name="loki-checkout.shipping.address.street1"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/street2"
+            name="checkout/shipping/address/street2"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Mutator">
             <source name="loki-checkout.shipping.address.street2"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/street3"
+            name="checkout/shipping/address/street3"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Mutator">
             <source name="loki-checkout.shipping.address.street3"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/postcode"
+            name="checkout/shipping/address/postcode"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\Mutator">
             <source name="loki-checkout.shipping.address.postcode"/>
@@ -120,35 +120,35 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/city"
+            name="checkout/shipping/address/city"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\City\Mutator">
             <source name="loki-checkout.shipping.address.city"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/region"
+            name="checkout/shipping/address/region"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Region\Mutator">
             <source name="loki-checkout.shipping.address.region"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/country_id"
+            name="checkout/shipping/address/country_id"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\Mutator">
             <source name="loki-checkout.shipping.address.country_id"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/company"
+            name="checkout/shipping/address/company"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Company\Mutator">
             <source name="loki-checkout.shipping.address.company"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/telephone"
+            name="checkout/shipping/address/telephone"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\Mutator">
             <source name="loki-checkout.shipping.address.telephone"/>
@@ -160,7 +160,7 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/fax"
+            name="checkout/shipping/address/fax"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Fax\Mutator">
             <source name="loki-checkout.shipping.address.fax"/>
@@ -172,28 +172,28 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/address/vat_id"
+            name="checkout/shipping/address/vat_id"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\VatId\Mutator">
             <source name="loki-checkout.shipping.address.vat_id"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping/methods"
+            name="checkout/shipping/methods"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\Mutator">
             <source name="loki-checkout.shipping.methods"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping-step/backward-button"
+            name="checkout/shipping-step/backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\StepBackwardButton\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Step\StepBackwardButton\Mutator">
             <source name="loki-checkout.steps.shipping.backward-button"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/shipping-step/forward-button"
+            name="checkout/shipping-step/forward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\StepForwardButton\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Step\StepForwardButton\Mutator">
             <source name="loki-checkout.steps.shipping.forward-button"/>
@@ -201,139 +201,139 @@
 
         <!-- Sidebar components -->
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar">
+            name="checkout/sidebar">
             <source name="loki-checkout.sidebar"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/coupon_code"
+            name="checkout/sidebar/coupon_code"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\Mutator">
             <source name="loki-checkout.sidebar.coupon_code"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/items"
+            name="checkout/sidebar/items"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Items\ViewModel">
             <source name="loki-checkout.sidebar.items"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/totals"
+            name="checkout/sidebar/totals"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Totals\ViewModel">
             <source name="loki-checkout.sidebar.totals"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details"
+            name="checkout/sidebar/preview/quote_details"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\QuoteDetails\ViewModel">
             <source name="loki-checkout.sidebar.preview.quote_details"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/preview/shipping_details"
+            name="checkout/sidebar/preview/shipping_details"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails\ViewModel">
             <source name="loki-checkout.sidebar.preview.shipping_details"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/preview/billing_address"
+            name="checkout/sidebar/preview/billing_address"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress\ViewModel">
             <source name="loki-checkout.sidebar.preview.billing_address"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/sidebar/preview/payment_details"
+            name="checkout/sidebar/preview/payment_details"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails\ViewModel">
             <source name="loki-checkout.sidebar.preview.payment_details"/>
         </component>
 
         <!-- Billing components -->
         <component
-            name="Yireo_LokiCheckout::checkout/billing/address"
+            name="checkout/billing/address"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\Mutator">
             <source name="loki-checkout.billing.address"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing/address/billing-as-shipping"
+            name="checkout/billing/address/billing-as-shipping"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\Mutator">
             <source name="loki-checkout.billing.address.billing-as-shipping"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing/address/view"
+            name="checkout/billing/address/view"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddressView\ViewModel">
             <source name="loki-checkout.billing.address.view"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/prefix"
+            name="checkout/billing.address/prefix"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\Mutator">
             <source name="loki-checkout.billing.address.prefix"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/firstname"
+            name="checkout/billing.address/firstname"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Firstname\Mutator">
             <source name="loki-checkout.billing.address.firstname"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/middlename"
+            name="checkout/billing.address/middlename"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\Mutator">
             <source name="loki-checkout.billing.address.middlename"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/lastname"
+            name="checkout/billing.address/lastname"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Lastname\Mutator">
             <source name="loki-checkout.billing.address.lastname"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/suffix"
+            name="checkout/billing.address/suffix"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Suffix\Mutator">
             <source name="loki-checkout.billing.address.suffix"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/street0"
+            name="checkout/billing.address/street0"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Mutator">
             <source name="loki-checkout.billing.address.street0"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/street1"
+            name="checkout/billing.address/street1"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Mutator">
             <source name="loki-checkout.billing.address.street1"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/street2"
+            name="checkout/billing.address/street2"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Mutator">
             <source name="loki-checkout.billing.address.street2"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/street3"
+            name="checkout/billing.address/street3"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Mutator">
             <source name="loki-checkout.billing.address.street3"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/postcode"
+            name="checkout/billing.address/postcode"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Postcode\Mutator">
             <source name="loki-checkout.billing.address.postcode"/>
@@ -348,35 +348,35 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/city"
+            name="checkout/billing.address/city"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\City\Mutator">
             <source name="loki-checkout.billing.address.city"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/region"
+            name="checkout/billing.address/region"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Region\Mutator">
             <source name="loki-checkout.billing.address.region"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/country_id"
+            name="checkout/billing.address/country_id"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\Mutator">
             <source name="loki-checkout.billing.address.country_id"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/company"
+            name="checkout/billing.address/company"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Company\Mutator">
             <source name="loki-checkout.billing.address.company"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/telephone"
+            name="checkout/billing.address/telephone"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\Mutator">
             <source name="loki-checkout.billing.address.telephone"/>
@@ -388,7 +388,7 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/fax"
+            name="checkout/billing.address/fax"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\Fax\Mutator">
             <source name="loki-checkout.billing.address.fax"/>
@@ -400,28 +400,28 @@
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing.address/vat_id"
+            name="checkout/billing.address/vat_id"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Address\VatId\Mutator">
             <source name="loki-checkout.billing.address.vat_id"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing/payment-methods"
+            name="checkout/billing/payment-methods"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\Mutator">
             <source name="loki-checkout.billing.payment-methods"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing-step/backward-button"
+            name="checkout/billing-step/backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\StepBackwardButton\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Step\StepBackwardButton\Mutator">
             <source name="loki-checkout.steps.billing.backward-button"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/billing-step/forward-button"
+            name="checkout/billing-step/forward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\StepForwardButton\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Step\StepForwardButton\Mutator">
             <source name="loki-checkout.steps.billing.forward-button"/>
@@ -429,14 +429,14 @@
 
         <!-- Other components -->
         <component
-            name="Yireo_LokiCheckout::checkout/newsletter"
+            name="checkout/newsletter"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Other\Newsletter\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Other\Newsletter\Mutator">
             <source name="loki-checkout.newsletter"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/agreements"
+            name="checkout/agreements"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Other\Agreements\ViewModel"
             mutator="Yireo\LokiCheckout\Component\Checkout\Other\Agreements\Mutator">
             <source name="loki-checkout.agreements"/>
@@ -446,19 +446,19 @@
 
         <!-- Theme components -->
         <component
-            name="Yireo_LokiCheckout::checkout/steps/shipping"
+            name="checkout/steps/shipping"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ViewModel">
             <source name="loki-checkout.steps.shipping"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/steps/billing"
+            name="checkout/steps/billing"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\ViewModel">
             <source name="loki-checkout.steps.billing"/>
         </component>
 
         <component
-            name="Yireo_LokiCheckout::checkout/steps/single"
+            name="checkout/steps/single"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\ViewModel">
             <source name="loki-checkout.steps.single"/>
         </component>

@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\ProgressBar;
 
 use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class ViewModel extends ParentViewModel
 {

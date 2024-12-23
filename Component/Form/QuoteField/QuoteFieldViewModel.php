@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Form\Field;
+namespace Yireo\LokiCheckout\Component\Form\QuoteField;
 
 use Yireo\LokiCheckout\Component\Form\Field\AddressFieldBehaviour\AttributeBehaviour;
 use Yireo\LokiCheckout\Component\SetterInjection\InjectCheckoutSession;

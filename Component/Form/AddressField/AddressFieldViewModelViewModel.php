@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Form\Field;
+namespace Yireo\LokiCheckout\Component\Form\AddressField;
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Form\Field\AddressFieldBehaviour\AddressStateBehaviour;
@@ -78,13 +78,5 @@ abstract class AddressFieldViewModelViewModel extends FieldViewModel implements 
         }
 
         return (bool)$this->getAttribute()->getIsRequired();
-    }
-
-    public function getTargets(): array
-    {
-        return [
-            ...parent::getTargets(),
-            'loki-checkout.sidebar',
-        ];
     }
 }

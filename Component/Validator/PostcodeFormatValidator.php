@@ -3,11 +3,10 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
-use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Yireo\LokiCheckout\Component\Form\Field\AddressField;
 use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\Validator\ValidatorInterface;
+use Yireo\LokiComponents\Validator\ValidatorInterface;
 
 class PostcodeFormatValidator implements ValidatorInterface
 {

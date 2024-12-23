@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Yireo\LokiComponents\Component\Mutator\Mutator as ParentMutator;
+use Yireo\LokiComponents\Component\Repository\Mutator as ParentMutator;
 
 class Mutator extends ParentMutator
 {

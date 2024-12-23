@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 interface OptionModelInterface
 {

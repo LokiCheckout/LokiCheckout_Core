@@ -5,13 +5,10 @@ namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
-
 use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class ViewModel  extends ParentViewModel
 {

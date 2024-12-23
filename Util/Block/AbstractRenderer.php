@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 
 abstract class AbstractRenderer implements ArgumentInterface

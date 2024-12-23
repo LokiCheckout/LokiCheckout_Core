@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 
 class GenderOptionModel implements ArgumentInterface, OptionModelInterface

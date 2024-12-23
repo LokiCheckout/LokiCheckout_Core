@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Validator\Component;
 
 use Yireo\LokiCheckout\Component\Form\Field\Field;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\Validator\ValidatorInterface;
+use Yireo\LokiComponents\Validator\ValidatorInterface;
 
 class DobValidator implements ValidatorInterface
 {

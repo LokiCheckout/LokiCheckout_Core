@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Customer\Dob;
 
-use Yireo\LokiComponents\Component\Mutator\Mutator as ParentMutator;
+use Yireo\LokiComponents\Component\Repository\Mutator as ParentMutator;
 
 class Mutator extends ParentMutator
 {

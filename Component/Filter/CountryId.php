@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Filter;
 
-use Yireo\LokiComponents\Component\Filter\FilterInterface;
+use Yireo\LokiComponents\Filter\FilterInterface;
 
 class CountryId implements FilterInterface
 {

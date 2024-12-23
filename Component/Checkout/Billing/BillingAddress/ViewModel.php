@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
 use Yireo\LokiCheckout\Util\BillingAsShippingService;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
-use Yireo\LokiComponents\Component\ViewModel\ViewModel as ParentViewModel;
+use Yireo\LokiComponents\Component\ViewModel as ParentViewModel;
 
 class ViewModel extends ParentViewModel
 {

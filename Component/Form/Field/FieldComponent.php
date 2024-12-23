@@ -3,11 +3,11 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Form\Field;
 
-use Yireo\LokiComponents\Component\Component;
+use Yireo\LokiComponents\Component\MutableComponent;
 
-class FieldComponent extends Component
+class FieldComponent extends MutableComponent
 {
-    protected string|bool|int $value = '';
+    protected mixed $value = '';
     protected bool $valid = true;
 
     public function getValidators(): array

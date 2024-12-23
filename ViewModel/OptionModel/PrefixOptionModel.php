@@ -5,8 +5,7 @@ namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ViewModel\ViewModelInterface;
+use Yireo\LokiComponents\Component\ViewModelInterface;
 
 
 class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
