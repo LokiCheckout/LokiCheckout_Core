@@ -23,10 +23,12 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
      x-title="<?= $alpineComponentData->getName($block) ?>"
      x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
-    <?= $block->getChildHtml('title') ?>
+    <label for="<?= $viewModel->getElementId() ?>">
+        <?= $block->getChildHtml('title') ?>
+    </label>
 
     <select
-        id="<?= $viewModel->getDomId() ?>-field"
+        id="<?= $viewModel->getElementId() ?>-field"
         data-type="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         x-model="value"

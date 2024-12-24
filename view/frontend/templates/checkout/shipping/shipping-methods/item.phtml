@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
@@ -11,12 +11,13 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
-/** @var ViewModel $viewModel */
+/** @var ShippingMethodsViewModel $viewModel */
 
+$viewModel = $block->getViewModel();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
-$isCurrent = $viewModel->getValue() === $code;
+$isCurrent = $viewModel->getCurrentShippingCode() === $code;
 ?>
 <li class="<?= $css('cursor-pointer relative flex') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('p-4', 'input-container') ?>">

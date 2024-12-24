@@ -2,20 +2,20 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Items\ItemsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\Items;
 use Yireo\LokiCheckout\Util\Block\ChildRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Items $viewModel */
+/** @var ItemsViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 
-if (empty($viewModel->items)) {
+if (empty($viewModel->getItems())) {
     echo '<div>No items</div>';
     return;
 }

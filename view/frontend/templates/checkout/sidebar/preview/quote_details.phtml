@@ -2,14 +2,13 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\QuoteDetails;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
-/** @var QuoteDetails $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+
 $html = $block->getChildHtml();
 if (empty($html)) {
     echo '<div></div>';

@@ -1,13 +1,19 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails\ShippingDetailsViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 
-/** @var ShippingDetails $viewModel */
+/** @var Template $block */
+/** @var ShippingDetailsViewModel $viewModel */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+
+$viewModel = $viewModelFactory->create(ShippingDetailsViewModel::class);
 $addressHtml = $viewModel->getAddressHtml();
 $methodHtml = $viewModel->getMethodHtml();
 

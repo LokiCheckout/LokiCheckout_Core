@@ -4,24 +4,25 @@ namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
-use Yireo\LokiCheckout\Component\Form\Field\FieldViewModelInterface;
-use Yireo\LokiCheckout\Component\GenericViewModelInterface;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
 use Yireo\LokiCheckout\Util\CamelCaseConvertor;
 use Yireo\LokiCheckout\Util\IdConvertor;
-use Yireo\LokiComponents\ViewModel\ComponentUtil;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+use Yireo\LokiComponents\Util\ComponentUtil;
 
 // @todo: Retrieve targets from Component-class instead of ViewModel-class
 class AlpineComponentData implements ArgumentInterface
 {
     public function __construct(
-        private ComponentUtil      $componentUtil,
-        private IdConvertor        $idConvertor,
+        private ComponentUtil $componentUtil,
+        private IdConvertor $idConvertor,
         private CamelCaseConvertor $camelCaseConvertor
     ) {
     }
 
-    public function getData(GenericViewModelInterface $viewModel): array
+    public function getData(ComponentViewModelInterface $viewModel): array
     {
         $data = [];
         $block = $viewModel->getBlock();
@@ -71,7 +72,7 @@ class AlpineComponentData implements ArgumentInterface
         return $data;
     }
 
-    public function getJson(GenericViewModelInterface $viewModel): string
+    public function getJson(ComponentViewModelInterface $viewModel): string
     {
         return json_encode($this->getData($viewModel));
     }
@@ -90,7 +91,7 @@ class AlpineComponentData implements ArgumentInterface
     {
         $targetNames = [
             ...$viewModel->getTargets(),
-            $viewModel->getBlock()->getNameInLayout()
+            $viewModel->getBlock()->getNameInLayout(),
         ];
 
         $targets = (array)$viewModel->getBlock()->getTargets();
@@ -100,6 +101,7 @@ class AlpineComponentData implements ArgumentInterface
 
         $targetNames = $this->convertDomIds($targetNames);
         $targetNames = array_unique($targetNames);
+
         return implode(' ', $targetNames);
     }
 

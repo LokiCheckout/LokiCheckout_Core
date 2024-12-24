@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Postcode;
 
 use Override;
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
 
 /**
  * @method PostcodeContext getContext()

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Component\Checkout\Billing\BillingAddress;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var Template $block */
 /** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Progressbar $viewModel */
+/** @var ProgressBarViewModel $viewModel */
 /** @var CheckoutState $checkoutState */
 /** @var StepNavigator $stepNavigator */
 /** @var CssClass $css */

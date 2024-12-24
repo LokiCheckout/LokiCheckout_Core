@@ -2,14 +2,18 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails\PaymentDetailsViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var PaymentDetails $viewModel */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var PaymentDetailsViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+
+$viewModel = $viewModelFactory->create(PaymentDetailsViewModel::class);
 $html = $viewModel->getHtml();
 if (empty($html)) {
     echo '<div></div>';

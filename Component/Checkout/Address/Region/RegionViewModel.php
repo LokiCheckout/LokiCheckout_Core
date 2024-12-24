@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Region;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel;
-use Yireo\LokiCheckout\Component\Form\Field\FieldBehaviour\OptionsBehaviour;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Field\FieldBehaviour\OptionsBehaviour;
 
 
 class RegionViewModel extends AddressFieldViewModel

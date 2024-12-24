@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Streetline;
+namespace Yireo\LokiCheckout\Component\Checkout\Address\StreetLine;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 /**
  * @method StreetLineContext getContext()
@@ -13,20 +13,19 @@ class StreetLineRepository extends AddressFieldRepository
     {
         $street = (string)$this->getAddressState()->load('street');
         $streetLines = $this->getContext()->streetLinesFactory->createFromStreet($street);
-        return $streetLines->getLineByIndex($this->index);
+        return $streetLines->getLineByIndex($this->getIndex());
     }
 
     protected function saveData(mixed $data): void
     {
-        $street = (string)$this->addressState->load('street');
+        $street = (string)$this->getAddressState()->load('street');
         $streetLines = $this->getContext()->streetLinesFactory->createFromStreet($street);
         $streetLines = $streetLines->setLineByIndex($this->getIndex(), $data);
-        $this->addressState->save('street', $streetLines->toString());
+        $this->getAddressState()->save('street', $streetLines->toString());
     }
 
     private function getIndex(): int
     {
-        $fieldName = $this->getFieldName(); // @todo: Add a regex to extract index from field name
-        return 42;
+        return (int)str_replace('street', '', $this->getFieldName());
     }
 }

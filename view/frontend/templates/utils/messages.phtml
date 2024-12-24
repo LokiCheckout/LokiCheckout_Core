@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiComponents\Messages\Message;
+
+/**
+ * Note that if you change this template, it needs to remain compatible with LokiCheckoutMessenger
+ */
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Message[] $messages */
+$messages = $block->getMessages();
+// @todo: Refactor this so that there can be both notices, warnings and errors
+?>
+<ul class="<?= $css('error text-red-800') ?>" x-ref="errors">
+    <?php foreach ($messages as $message): ?>
+        <li class="<?= $message->getType() ?>"><?= $message->getText() ?></li>
+    <?php endforeach; ?>
+</ul>

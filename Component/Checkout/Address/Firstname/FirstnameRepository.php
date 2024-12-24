@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Firstname;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 class FirstnameRepository extends AddressFieldRepository
 {

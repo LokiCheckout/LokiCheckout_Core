@@ -1,13 +1,19 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress;
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress\BillingAddressViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
-/** @var BillingAddress $viewModel */
+/** @var Template $block */
+/** @var BillingAddressViewModel $viewModel */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+
+$viewModel = $viewModelFactory->create(BillingAddressViewModel::class);
 $html = $viewModel->getHtml();
 if (empty($html)) {
     echo '<div></div>';

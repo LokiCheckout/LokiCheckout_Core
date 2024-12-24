@@ -3,25 +3,31 @@ declare(strict_types=1);
 
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
+use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var CouponCode $viewModel */
+/** @var CouponCodeViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var AlpineComponentData $alpineComponentData */
 
 // @todo: Separate in smaller templates
-
+$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div class="<?= $css('border-b border-gray-200') ?>">
+<div class="<?= $css('border-b border-gray-200') ?>"
+     x-data="LokiCheckoutCouponCodeComponent"
+     x-title="<?= $alpineComponentData->getName($block) ?>"
+     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
+>
     <?php if (!empty($couponCode)): ?>
         <p class="<?= $css('mb-4', 'current') ?>">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
@@ -48,7 +54,7 @@ $couponCode = $quote->getCouponCode();
             <div>
                 <label class="<?= $css('block mb-3', 'label') ?>">
                     <span class="<?= $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
-                    <input type="text" x-model="couponCode" class="<?= $css('form-input w-full', 'input') ?>">
+                    <input type="text" x-model="value" class="<?= $css('form-input w-full', 'input') ?>">
                 </label>
                 <button
                     type="button"

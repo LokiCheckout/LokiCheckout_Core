@@ -7,7 +7,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 
-use Yireo\LokiCheckout\Component\Form\Field\FieldInterface;
+use Yireo\LokiCheckout\Component\Base\Field\FieldInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiComponents\Component\ComponentInterface;
 

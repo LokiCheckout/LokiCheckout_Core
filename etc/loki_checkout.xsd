@@ -31,7 +31,7 @@
 
   <xs:complexType name="lokiCheckoutStepType">
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="component" type="phpClassName" use="required"/>
+    <xs:attribute name="blockName" type="xs:string" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="lokiCheckoutGridLayoutsType">

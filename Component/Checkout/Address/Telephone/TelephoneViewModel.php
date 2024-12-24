@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Telephone;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
 
 class TelephoneViewModel extends AddressFieldViewModel
 {

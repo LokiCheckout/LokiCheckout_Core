@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiCheckout\Exception\XmlConfig\BlockNotFoundException;
+use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 use Yireo\LokiCheckout\Util\Block\CssClassParser\CssClassParserInterface;
 
 class CssClass

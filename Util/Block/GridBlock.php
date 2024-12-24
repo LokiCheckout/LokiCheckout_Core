@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Util\Block;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiCheckout\Exception\XmlConfig\BlockNotFoundException;
+use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 
 class GridBlock implements ArgumentInterface
 {

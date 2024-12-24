@@ -3,9 +3,10 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step;
 
-use Yireo\LokiCheckout\Component\GenericViewModelInterface;
+use Magento\Framework\View\Element\AbstractBlock;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
-interface StepViewModelInterface extends GenericViewModelInterface
+interface StepViewModelInterface extends ComponentViewModelInterface
 {
     public function getCode(): string;
     public function getLabel(): string;

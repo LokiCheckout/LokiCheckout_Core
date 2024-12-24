@@ -1,0 +1,14 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
+            ...LokiCheckoutFieldComponentType,
+            removeCouponCode() {
+                this.value = '';
+                this.submit();
+            },
+            applyCouponCode() {
+                this.submit();
+            }
+        }));
+    });
+</script>

@@ -2,9 +2,6 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-use Magento\Eav\Model\Attribute;
-use Magento\Eav\Model\Config as EavConfig;
-use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\UrlFactory;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;

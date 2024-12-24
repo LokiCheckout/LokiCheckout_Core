@@ -2,26 +2,23 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ShippingAddress $viewModel */
+/** @var ShippingAddressViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var AlpineComponentData $alpineComponentData */
 
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
-<div class="<?= $css('mb-8') ?>"
-     x-data="LokiCheckoutShippingAddress"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'>
-    <?php if (count($viewModel->getShippingAddresses()) > 0): ?>
+<div class="<?= $css('mb-8') ?>">
+    <?php if (count($viewModel->getAddresses()) > 0): ?>
         <?= $block->getChildHtml('select') ?>
         <?= $block->getChildHtml('toggle-select') ?>
     <?php endif; ?>

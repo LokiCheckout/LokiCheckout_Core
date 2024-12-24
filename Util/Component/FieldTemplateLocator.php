@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiCheckout\Component\Form\Field\FieldViewModelInterface;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
 
 class FieldTemplateLocator
 {

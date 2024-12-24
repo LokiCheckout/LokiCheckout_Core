@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
 
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
-use Yireo\LokiCheckout\Exception\XmlConfig\BlockNotFoundException;
+use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 
 class GridLayout
 {

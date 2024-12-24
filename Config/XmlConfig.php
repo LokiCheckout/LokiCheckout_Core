@@ -50,11 +50,9 @@ class XmlConfig extends DataConfig
     {
         $steps = [];
         foreach ($themeData['steps'] as $stepData) {
-            $component = ObjectManager::getInstance()->get($stepData['component_class']);
-
             $steps[] = new Step(
                 $stepData['name'],
-                $component
+                $stepData['blockName'],
             );
         }
 

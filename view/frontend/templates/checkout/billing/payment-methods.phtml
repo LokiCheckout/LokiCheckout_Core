@@ -2,15 +2,15 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var PaymentMethods $viewModel */
+/** @var PaymentMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
 /** @var AlpineComponentData $alpineComponentData */
@@ -49,8 +49,8 @@ $paymentMethods = $viewModel->getPaymentMethods();
     </form>
 
     <?= $blockRenderer->html(
-        'loki-checkout.utils.errors',
+        'loki-checkout.utils.messages',
         $block,
-        ['errors' => $viewModel->getComponent()->getMessages()->getErrors()]
+        ['messages' => $viewModel->getMessageManager()->getLocalMessages()]
     ) ?>
 </div>

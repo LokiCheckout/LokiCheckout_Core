@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\StreetLine;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldViewModel;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
 
 class StreetLineViewModel extends AddressFieldViewModel
 {
@@ -24,11 +24,6 @@ class StreetLineViewModel extends AddressFieldViewModel
         }
 
         return parent::isRequired();
-    }
-
-    public function getFieldName(): string
-    {
-        return 'street'.$this->getIndex();
     }
 
     public function getFieldLabel(): string

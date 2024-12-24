@@ -54,14 +54,16 @@
                     template="Yireo_LokiCheckout::script/component/step-component.phtml" />
                 <block
                     name="loki-checkout.script.components.step-backward-button"
-                    template="Yireo_LokiCheckout::script/component/step-backward-button.phtml" />
+                    template="Yireo_LokiCheckout::script/component/step-backward-button-component.phtml" />
                 <block
                     name="loki-checkout.script.components.step-forward-button"
-                    template="Yireo_LokiCheckout::script/component/step-forward-button.phtml" />
-
+                    template="Yireo_LokiCheckout::script/component/step-forward-button-component.phtml" />
+                <block
+                    name="loki-checkout.script.components.coupon-code"
+                    template="Yireo_LokiCheckout::script/component/coupon-code-component.phtml" />
                 <block
                     name="loki-checkout.script.components.toggle"
-                    template="Yireo_LokiCheckout::script/component/toggle.phtml" />
+                    template="Yireo_LokiCheckout::script/component/toggle-component.phtml" />
             </container>
         </referenceContainer>
     </body>

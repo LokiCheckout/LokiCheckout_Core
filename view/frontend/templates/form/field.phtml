@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Form\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -42,6 +42,6 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.errors', $block, ['errors' => $viewModel->getComponent()->getMessages()->getErrors()]) ?>
+    <?= $blockRenderer->html('loki-checkout.utils.messages', $block, ['messages' => $viewModel->getMessageManager()->getLocalMessages()]) ?>
     <?= $block->getChildHtml('after') ?>
 </div>

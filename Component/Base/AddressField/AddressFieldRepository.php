@@ -1,0 +1,34 @@
+<?php declare(strict_types=1);
+
+namespace Yireo\LokiCheckout\Component\Base\AddressField;
+
+use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
+use Yireo\LokiComponents\Component\ComponentRepository;
+
+/**
+ * @method AddressFieldContext getContext()
+ */
+class AddressFieldRepository extends ComponentRepository
+{
+    protected function getData(): mixed
+    {
+        return $this->getAddressState()->load($this->getFieldName());
+    }
+
+    protected function saveData(mixed $data): void
+    {
+        $this->getAddressState()->save($this->getFieldName(), $data);
+    }
+
+    protected function getAddressState(): AddressStateInterface
+    {
+        return $this->getContext()->addressStateProvider->getAddressState($this->component->getBlock());
+    }
+
+    protected function getFieldName(): string
+    {
+        $blockName = $this->component->getBlock()->getNameInLayout();
+        $blockNameParts = explode('.', $blockName);
+        return array_pop($blockNameParts);
+    }
+}

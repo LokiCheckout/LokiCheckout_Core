@@ -4,8 +4,7 @@ namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiComponents\Component\ViewModelInterface;
-
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 class CountryOptionModel implements ArgumentInterface, OptionModelInterface
 {
@@ -14,7 +13,7 @@ class CountryOptionModel implements ArgumentInterface, OptionModelInterface
     ) {
     }
 
-    public function getOptions(ViewModelInterface $viewModel): array
+    public function getOptions(ComponentViewModelInterface $viewModel): array
     {
         $countries = [];
         foreach ($this->directoryHelper->getCountryCollection() as $country) {

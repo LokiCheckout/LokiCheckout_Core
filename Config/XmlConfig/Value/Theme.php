@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
 
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme\Step;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
-use Yireo\LokiCheckout\Exception\XmlConfig\StepNotFoundException;
+use Yireo\LokiCheckout\Exception\StepNotFoundException;
 
 class Theme
 {

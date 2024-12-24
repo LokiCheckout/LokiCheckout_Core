@@ -29,7 +29,7 @@ class Converter implements ConverterInterface
             foreach ($themeElement->getElementsByTagName('step') as $stepElement) {
                 $steps[] = [
                     'name' => (string)$stepElement->getAttribute('name'),
-                    'component_class' => $stepElement->getAttribute('component'),
+                    'blockName' => (string)$stepElement->getAttribute('blockName'),
                 ];
             }
 

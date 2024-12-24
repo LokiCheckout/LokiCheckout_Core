@@ -5,8 +5,8 @@ namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 use Magento\Directory\Model\Region;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Form\Field\AddressField;
-use Yireo\LokiComponents\Component\ViewModelInterface;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 class RegionOptionModel implements ArgumentInterface, OptionModelInterface
 {
@@ -15,10 +15,11 @@ class RegionOptionModel implements ArgumentInterface, OptionModelInterface
     ) {
     }
 
-    public function getOptions(ViewModelInterface $viewModel): array
+    public function getOptions(ComponentViewModelInterface $viewModel): array
     {
-        /** @var AddressField $viewModel */
-        $countryId = $viewModel->getAddressState()->load('country_id');
+        /** @var AddressFieldViewModel $viewModel */
+        $addressState = $viewModel->getContext()->addressStateProvider->getAddressState($viewModel->getBlock());
+        $countryId = $addressState->load('country_id');
         if (empty($countryId)) {
             return [];
         }

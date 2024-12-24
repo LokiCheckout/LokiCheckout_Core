@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Util\Component;
+namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;

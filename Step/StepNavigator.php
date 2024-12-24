@@ -4,14 +4,15 @@ namespace Yireo\LokiCheckout\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
-use RuntimeException;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
+use Yireo\LokiCheckout\Exception\StepNotFoundException;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 
 class StepNavigator implements ArgumentInterface
 {
@@ -25,6 +26,7 @@ class StepNavigator implements ArgumentInterface
         private readonly CheckoutSession $checkoutSession,
         private readonly FinalStep $finalStep,
         private readonly MessageManager $messageManager,
+        private readonly ComponentRegistry $componentRegistry
     ) {
     }
 
@@ -154,6 +156,7 @@ class StepNavigator implements ArgumentInterface
 
     /**
      * @return StepViewModelInterface[]
+     * @throws StepNotFoundException
      */
     public function getSteps(): array
     {
@@ -164,42 +167,40 @@ class StepNavigator implements ArgumentInterface
         $currentThemeName = $this->config->getTheme();
         $theme = $this->xmlConfig->getTheme($currentThemeName);
 
-        /** @var Template $parentBlock */
-        $parentBlock = $this->layout->getBlock('loki-checkout.steps');
-
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
-            $stepComponent = $step->getComponent();
-            if (false === $stepComponent instanceof StepViewModelInterface) {
+            $stepBlock = $this->layout->getBlock($step->getBlockName());
+            if (false === $stepBlock instanceof AbstractBlock) {
+                throw new StepNotFoundException('No block with name "'.$step->getBlockName().'"');
+            }
+
+            $stepComponent = $this->componentRegistry->getComponentFromBlock($stepBlock);
+            $stepViewModel = $stepComponent->getViewModel();
+
+            if (false === $stepViewModel instanceof StepViewModelInterface) {
                 continue;
             }
 
-            if (false === $stepComponent->isEnabled()) {
+            if (false === $stepViewModel->isEnabled()) {
                 continue;
             }
 
-            $stepBlockAlias = $step->getName().'-step';
-
-            if ($parentBlock instanceof Template) {
-                $stepBlock = $parentBlock->getChildBlock($stepBlockAlias);
-
-                if ($stepBlock instanceof Template) {
-                    $stepComponent->setBlock($stepBlock);
-                }
-            }
-
-            $this->steps[$stepComponent->getCode()] = $stepComponent;
+            $this->steps[$stepViewModel->getCode()] = $stepViewModel;
         }
 
         if (empty($this->steps)) {
-            throw new RuntimeException('No steps defined');
+            throw new StepNotFoundException('No steps defined');
         }
 
         return $this->steps;
     }
 
-    public function getNextStep(StepViewModelInterface $currentStep): StepViewModelInterface
+    public function getNextStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
     {
+        if (false === $currentStep instanceof StepViewModelInterface) {
+            $currentStep = $this->getCurrentStep();
+        }
+
         $returnNextStep = false;
         foreach ($this->getSteps() as $step) {
             if ($returnNextStep) {
@@ -214,8 +215,12 @@ class StepNavigator implements ArgumentInterface
         throw new UnknownStepException('No next step to "'.$currentStep->getCode().'"');
     }
 
-    public function getPreviousStep(StepViewModelInterface $currentStep): StepViewModelInterface
+    public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
     {
+        if (false === $currentStep instanceof StepViewModelInterface) {
+            $currentStep = $this->getCurrentStep();
+        }
+
         $previous = false;
         $steps = $this->getSteps();
         foreach ($steps as $step) {

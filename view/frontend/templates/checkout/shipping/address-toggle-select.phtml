@@ -3,21 +3,28 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var ShippingAddress $viewModel */
+/** @var ShippingAddressToggleSelectViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
 $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>
-<button
-    class="<?= $css('btn btn-primary my-4') ?>"
-    x-text="buttonLabel"
-    type="button"
-    @click="toggleNewAddress"
->
-    <?= $viewModel->getButtonLabelNewAddress() ?>
-</button>
+<div
+    x-data="LokiCheckoutShippingAddressToggleSelect"
+    x-title="<?= $alpineComponentData->getName($block) ?>"
+    x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'>
+    <button
+        class="<?= $css('btn btn-primary my-4') ?>"
+        x-text="buttonLabel"
+        x-model="toggle"
+        type="button"
+        @click="submit"
+    >
+        <?= $viewModel->getButtonLabelNewAddress() ?>
+    </button>
+</div>

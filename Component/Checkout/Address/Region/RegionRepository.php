@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Region;
 
-use Yireo\LokiCheckout\Component\Form\AddressField\AddressFieldRepository;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 class RegionRepository extends AddressFieldRepository
 {

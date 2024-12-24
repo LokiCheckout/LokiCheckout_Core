@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ViewModel;
+use Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ShippingStepViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var ViewModel $viewModel */
+/** @var ShippingStepViewModel $viewModel */
 /** @var AlpineComponentData $alpineComponentData */
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $duration = $block->getDuration() ?? '300ms';

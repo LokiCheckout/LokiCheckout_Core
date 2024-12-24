@@ -2,13 +2,11 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 
-use Yireo\LokiComponents\Component\ViewModelInterface;
-
 class Step
 {
     public function __construct(
         private string $name,
-        private ViewModelInterface $component
+        private string $blockName
     ) {
     }
 
@@ -17,8 +15,9 @@ class Step
         return $this->name;
     }
 
-    public function getComponent(): ViewModelInterface
+    public function getBlockName(): string
     {
-        return $this->component;
+        return $this->blockName;
     }
+
 }

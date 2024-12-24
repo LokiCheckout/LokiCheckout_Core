@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ViewModel">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ShippingStepContext">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>
         </arguments>
@@ -17,7 +17,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\ViewModel">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\BillingStepContext">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualBillingStepValidator</argument>
         </arguments>
@@ -32,7 +32,7 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\ViewModel">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\OneStepContext">
         <arguments>
             <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualOneStepValidator</argument>
         </arguments>

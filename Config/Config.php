@@ -4,8 +4,9 @@ namespace Yireo\LokiCheckout\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
+use Magento\Framework\View\Element\Block\ArgumentInterface;
 
-class Config
+class Config implements ArgumentInterface
 {
     public function __construct(
         private ScopeConfigInterface $scopeConfig,
@@ -23,6 +24,14 @@ class Config
 
     public function isEnabled(): bool
     {
+        if (false === $this->moduleManager->isEnabled('Yireo_LokiComponents')) {
+            return false;
+        }
+
+        if (false === $this->moduleManager->isEnabled('Yireo_LokiCheckout')) {
+            return false;
+        }
+
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 

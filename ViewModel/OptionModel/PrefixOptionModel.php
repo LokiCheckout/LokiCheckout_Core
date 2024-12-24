@@ -5,8 +5,7 @@ namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
-use Yireo\LokiComponents\Component\ViewModelInterface;
-
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
 {
@@ -15,7 +14,7 @@ class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
     ) {
     }
 
-    public function getOptions(ViewModelInterface $viewModel): array
+    public function getOptions(ComponentViewModelInterface $viewModel): array
     {
         $prefixOptions = $this->scopeConfig->getValue('customer/address/prefix_options', ScopeInterface::SCOPE_STORE);
         $prefixOptions = explode(',', (string)$prefixOptions);
