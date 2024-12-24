@@ -39,4 +39,11 @@ class ShippingMethodsViewModel extends ComponentViewModel
     {
         return true;
     }
+
+    public function getAlpineData(): array
+    {
+        return [
+            'value' => $this->getCurrentShippingCode()
+        ];
+    }
 }

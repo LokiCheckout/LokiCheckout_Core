@@ -24,7 +24,7 @@ if (empty($addressHtml)) {
 }
 
 ?>
-<div class="<?= $css('relative') ?>">
+<div class="<?= $css('relative') ?>" x-data='{"loading":false}'>
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
 
     <div class="<?= $css('mb-4', 'address') ?>">

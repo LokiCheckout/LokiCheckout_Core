@@ -2,14 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Component\Checkout\Other\Mutator;
+use Yireo\LokiCheckout\Component\Checkout\Other\Newsletter\NewsletterViewModel;
 
 /** @var Template $block */
-/** @var ViewModelFactory $viewModelFactory */
-/** @var Mutator $viewModel */
+/** @var NewsletterViewModel $viewModel */
 ?>
-<div>
+<div x-data='{"signup":""}'>
     <input type="checkbox" x-model="signup"/>
     <label><?= __('Sign up for our newsletter') ?></label>
 </div>

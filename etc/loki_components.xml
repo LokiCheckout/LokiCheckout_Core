@@ -33,6 +33,8 @@
             context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
+            <target name="loki-checkout.sidebar.totals"/>
+            <target name="loki-checkout.sidebar.preview.shipping_details"/>
         </component>
 
         <component

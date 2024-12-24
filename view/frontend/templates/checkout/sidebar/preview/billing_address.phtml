@@ -20,11 +20,12 @@ if (empty($html)) {
     return;
 }
 ?>
-<div  class="<?= $css('mb-4 relative') ?>">
+<div class="<?= $css('mb-4 relative') ?>"
+     x-data='{"loading":false}'>
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
     <?php if ($viewModel->isSameAsShipping()): ?>
-    <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
+        <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
     <?php endif; ?>
 </div>

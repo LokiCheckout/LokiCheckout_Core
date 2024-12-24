@@ -15,7 +15,7 @@ if (empty($html)) {
     return;
 }
 ?>
-<div  class="<?= $css('mb-4 relative') ?>">
+<div  class="<?= $css('mb-4 relative') ?>" x-data='{"loading":false}'>
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Details') ?></span><br>
     <?= $html ?>

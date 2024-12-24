@@ -27,33 +27,30 @@ class AlpineComponentData implements ArgumentInterface
         $data = [];
         $block = $viewModel->getBlock();
 
+        $data['name'] = $this->getName($block);
+        $data['blockId'] = $block->getNameInLayout();
+        $data['target'] = $this->getTargets($viewModel);
+
         try {
-            $data['name'] = $this->getName($block);
             $data['elementId'] = $this->componentUtil->getElementIdByBlockName($block->getNameInLayout());
         } catch (\RuntimeException $e) {
         }
 
-        if ($viewModel instanceof GenericViewModelInterface) {
-            $data['blockId'] = $block->getNameInLayout();
-            $data['target'] = $this->getTargets($viewModel);
+        $validators = [];
+        foreach ($viewModel->getValidators() as $validator) {
+            $validators[] = $validator;
         }
 
+        $data['validators'] = $validators;
+
+        $filters = [];
+        foreach ($viewModel->getFilters() as $filter) {
+            $filters[] = $filter;
+        }
+
+        $data['filters'] = $filters;
+
         if ($viewModel instanceof FieldViewModelInterface) {
-            $validators = [];
-            foreach ($viewModel->getValidators() as $validator) {
-                $validators[] = $validator;
-            }
-
-            $data['validators'] = $validators;
-
-            $filters = [];
-            foreach ($viewModel->getFilters() as $filter) {
-                $filters[] = $filter;
-            }
-
-            $data['filter'] = $filters;
-
-
             $data['value'] = $viewModel->getValue();
             $data['valid'] = $viewModel->isValid();
             $data['disabled'] = $viewModel->isDisabled();
@@ -87,7 +84,7 @@ class AlpineComponentData implements ArgumentInterface
         return str_replace("\n", '\n', $value); // @todo: Is this good enough?
     }
 
-    private function getTargets(GenericViewModelInterface $viewModel): string
+    private function getTargets(ComponentViewModelInterface $viewModel): string
     {
         $targetNames = [
             ...$viewModel->getTargets(),
