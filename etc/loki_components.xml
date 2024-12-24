@@ -56,6 +56,7 @@
             context="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsRepository">
+            <target name="loki-checkout.sidebar.preview.payment_details"/>
         </component>
 
         <component
@@ -133,6 +134,8 @@
         defaultContext="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldContext"
         defaultRepository="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldRepository"
     >
+        <target name="loki-checkout.sidebar.preview.quote_details"/>
+
         <component
             name="loki-checkout.customer.email"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Email\EmailViewModel">
@@ -155,6 +158,9 @@
         defaultViewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
         defaultRepository="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository"
     >
+        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.sidebar.preview.billing_address"/>
+
         <component
             name="loki-checkout.shipping.address.prefix"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel">
