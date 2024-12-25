@@ -51,7 +51,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        $shippingMethod = (string)$data['value'];
+        $shippingMethod = (string)$data;
         $shippingMethod = $this->sanitizeShippingMethod($shippingMethod);
 
         $shippingAddress = $this->getContext()->shippingAddressState->getShippingAddress();

@@ -17,8 +17,7 @@ class AddressFieldRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        print_r($data);
-        $this->getAddressState()->save($this->getFieldName(), $data['value']);
+        $this->getAddressState()->save($this->getFieldName(), $data);
     }
 
     protected function getAddressState(): AddressStateInterface
