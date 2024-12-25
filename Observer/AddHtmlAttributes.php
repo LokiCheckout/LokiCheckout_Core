@@ -42,10 +42,9 @@ class AddHtmlAttributes implements ObserverInterface
         }
 
         $htmlTag = $match[1];
-        if (true === in_array($htmlTag, ['script', 'template'])) {
+        if (true === in_array($htmlTag, ['script'])) {
             return;
         }
-
 
         $htmlAttributes = $this->getHtmlAttributes($block);
         if (empty($htmlAttributes)) {
@@ -65,7 +64,7 @@ class AddHtmlAttributes implements ObserverInterface
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
-            // @todo: Allow for more variables to be dealt with here
+            // @todo: Remove this
             $attributeValue = str_replace('{component_name}', $this->getComponentName($block), $attributeValue);
             $htmlAttribute .= ' ' . $attributeName . '="' . $attributeValue . '"';
         }
