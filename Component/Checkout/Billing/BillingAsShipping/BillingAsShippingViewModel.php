@@ -10,17 +10,4 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class BillingAsShippingViewModel extends ComponentViewModel
 {
-    public function isBillingAsShipping(): bool
-    {
-        return (bool)$this->getRepository()->get();
-    }
-
-    // @todo: Rewrite this somehow?
-    public function getAlpineData(): array
-    {
-        return [
-            'billingAsShipping' => $this->isBillingAsShipping()
-        ];
-    }
-
 }

@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -13,15 +12,10 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var PaymentMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
-/** @var AlpineComponentData $alpineComponentData */
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
-<div class="<?= $css('relative') ?>"
-     x-data="LokiCheckoutPaymentMethods"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
->
+<div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
 

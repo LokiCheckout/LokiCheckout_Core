@@ -32,4 +32,9 @@ class PaymentMethodsViewModel extends FieldViewModel
     {
         return true;
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutPaymentMethods';
+    }
 }
