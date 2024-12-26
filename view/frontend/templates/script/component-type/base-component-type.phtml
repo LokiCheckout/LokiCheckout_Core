@@ -1,0 +1,19 @@
+<script>
+    const LokiCheckoutBaseComponentType = {
+        ...LokiComponentType,
+        step: '',
+        visible: false,
+        lazyLoad: false,
+        initActions: {
+            ...LokiComponentType.initActions,
+            register() {
+                Alpine.store('components').add(this);
+            },
+            lazyLoad() {
+                if (this.lazyLoad) {
+                    this.post({});
+                }
+            }
+        }
+    };
+</script>
