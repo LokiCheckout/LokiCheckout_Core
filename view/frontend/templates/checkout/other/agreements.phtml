@@ -15,11 +15,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
-<div class="<?= $css('') ?>"
-     x-data="LokiCheckoutFieldComponent"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
->
+<div class="<?= $css('') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
         <label for="agreement<?= $agreement->getAgreementId() ?>">
