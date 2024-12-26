@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Field\Field;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
-/** @var Field $viewModel */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var CssClass $css */
 $fieldBlock = $block->getFieldBlock();
 $viewModel = $block->getViewModel();
