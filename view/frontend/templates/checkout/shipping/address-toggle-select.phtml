@@ -14,10 +14,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
 $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>
-<div
-    x-data="LokiCheckoutShippingAddressToggleSelect"
-    x-title="<?= $alpineComponentData->getName($block) ?>"
-    x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'>
+<div>
     <button
         class="<?= $css('btn btn-primary my-4') ?>"
         x-text="buttonLabel"

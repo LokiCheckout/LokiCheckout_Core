@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
-/** @var ShippingAddressSelect $viewModel */
+/** @var ShippingAddressSelectViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
@@ -18,11 +18,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
 $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>
-<div class="<?= $css('') ?>"
-     x-data="LokiCheckoutFieldComponent"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
->
+<div class="<?= $css('') ?>">
     <label for="<?= $viewModel->getElementId() ?>">
         <?= $block->getChildHtml('title') ?>
     </label>

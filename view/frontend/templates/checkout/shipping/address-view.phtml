@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
+use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 
-/** @var ShippingAddress $viewModel */
+/** @var ShippingAddressViewModel $viewModel */
 /** @var CssClass $css */
 
 ?>
-<div  class="<?= $css('mb-4') ?>">
+<div class="<?= $css('mb-4') ?>">
     <address><?= $viewModel->getHtml() ?></address>
 </div>

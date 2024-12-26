@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
 
 /**
  * @method ShippingAddressContext getContext()
  */
-class ShippingAddressSelectViewModel extends GenericViewModel
+class ShippingAddressSelectViewModel extends FieldViewModel
 {
     public function getAddresses(): array
     {

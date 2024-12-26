@@ -34,4 +34,9 @@ class ShippingAddressToggleSelectViewModel extends ComponentViewModel
     {
         return (string)__('Select existing address from list');
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutShippingAddressToggleSelect';
+    }
 }
