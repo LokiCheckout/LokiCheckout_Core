@@ -1,14 +1,10 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <block name="loki-checkout.agreements" template="Yireo_LokiCheckout::checkout/other/agreements.phtml">
-            <block
-                name="loki-checkout.agreements.form" as="form"
-                ifconfig="checkout/options/enable_agreements"
-                template="Yireo_LokiComponents::form.phtml">
-                <block name="loki-checkout.agreements.form.fields" as="fields" template="Yireo_LokiCheckout::checkout/other/agreements-fields.phtml"/>
-            </block>
-        </block>
+        <block
+            name="loki-checkout.agreements"
+            ifconfig="checkout/options/enable_agreements"
+            template="Yireo_LokiCheckout::checkout/other/agreements.phtml"/>
 
         <block
             name="loki-checkout.newsletter" as="newsletter"

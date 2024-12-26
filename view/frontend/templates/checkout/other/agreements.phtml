@@ -2,14 +2,14 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Other\Mutator;
+use Yireo\LokiCheckout\Component\Checkout\Other\Agreements\AgreementsViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var Mutator $viewModel */
+/** @var AgreementsViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var AlpineComponentData $alpineComponentData */
 
@@ -20,5 +20,13 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
      x-title="<?= $alpineComponentData->getName($block) ?>"
      x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
 >
-    <?= $block->getChildHtml() ?>
+    <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
+        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
+        <label for="agreement<?= $agreement->getAgreementId() ?>">
+            <?= $agreement->getName() ?>
+        </label>
+        <div>
+            <?= $agreement->getContent() ?>
+        </div>
+    <?php endforeach; ?>
 </div>

@@ -8,12 +8,7 @@
             <block
                 name="loki-checkout.script.component-store"
                 template="Yireo_LokiCheckout::script/component-store.phtml"/>
-            <block
-                name="loki-checkout.script.component-type.generic"
-                template="Yireo_LokiCheckout::script/component-type/generic-component-type.phtml"/>
-            <block
-                name="loki-checkout.script.component-type.field"
-                template="Yireo_LokiCheckout::script/component-type/field-component-type.phtml"/>
+
             <block
                 name="loki-checkout.script.component-extender"
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
@@ -42,29 +37,35 @@
                 name="loki-checkout.script.validators.postcode"
                 template="Yireo_LokiCheckout::script/validators/postcode.phtml"/>
 
-            <container name="loki-checkout.script.alpine-components">
+            <referenceContainer name="loki-component-types">
+                <block
+                    name="loki-checkout.script.component-type.generic"
+                    template="Yireo_LokiCheckout::script/component-type/generic-component-type.phtml"/>
+                <block
+                    name="loki-checkout.script.component-type.field"
+                    template="Yireo_LokiCheckout::script/component-type/field-component-type.phtml"/>
+            </referenceContainer>
+
+            <referenceContainer name="loki-components">
                 <block
                     name="loki-checkout.script.components.generic-component"
-                    template="Yireo_LokiCheckout::script/component/generic-component.phtml" />
+                    template="Yireo_LokiCheckout::script/component/generic-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.field-component"
-                    template="Yireo_LokiCheckout::script/component/field-component.phtml" />
+                    template="Yireo_LokiCheckout::script/component/field-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.step-component"
-                    template="Yireo_LokiCheckout::script/component/step-component.phtml" />
+                    template="Yireo_LokiCheckout::script/component/step-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.step-backward-button"
-                    template="Yireo_LokiCheckout::script/component/step-backward-button-component.phtml" />
+                    template="Yireo_LokiCheckout::script/component/step-backward-button-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.step-forward-button"
-                    template="Yireo_LokiCheckout::script/component/step-forward-button-component.phtml" />
+                    template="Yireo_LokiCheckout::script/component/step-forward-button-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.coupon-code"
-                    template="Yireo_LokiCheckout::script/component/coupon-code-component.phtml" />
-                <block
-                    name="loki-checkout.script.components.toggle"
-                    template="Yireo_LokiCheckout::script/component/toggle-component.phtml" />
-            </container>
+                    template="Yireo_LokiCheckout::script/component/coupon-code-component.phtml"/>
+            </referenceContainer>
         </referenceContainer>
     </body>
 </page>
