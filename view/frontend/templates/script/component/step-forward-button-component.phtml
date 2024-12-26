@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
-            ...LokiCheckoutGenericComponentType,
+            ...LokiCheckoutBaseComponentType,
             valid: true,
             afterInit() {
                 this.updateValid();

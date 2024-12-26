@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingAddress', () => ({
-            ...LokiCheckoutGenericComponentType,
+            ...LokiCheckoutBaseComponentType,
             afterInit() {
                 this.buttonLabel = this.getButtonLabel();
                 this.$watch('newAddress', () => {
