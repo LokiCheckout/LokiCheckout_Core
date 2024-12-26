@@ -20,12 +20,7 @@ $alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
-<div class="<?= $css('field w-auto relative') ?> <?= $viewModel->isRequired() ? 'required' : 'optional' ?> <?= $viewModel->getFieldName() ?>"
-     x-data="LokiCheckoutFieldComponent"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
-     x-target
->
+<div class="<?= $css('field w-auto relative') ?> <?= $viewModel->isRequired() ? 'required' : 'optional' ?> <?= $viewModel->getFieldName() ?>">
     <?= $block->getChildHtml('before') ?>
 
     <?= $templateRenderer->html('form/field/label.phtml', $block, ['alias' => 'label']) ?>

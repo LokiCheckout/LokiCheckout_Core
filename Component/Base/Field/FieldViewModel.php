@@ -25,6 +25,11 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
         return array_pop($parts);
     }
 
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutFieldComponent';
+    }
+
     abstract public function getFieldLabel(): string;
 
     // @todo: Is this still needed?
