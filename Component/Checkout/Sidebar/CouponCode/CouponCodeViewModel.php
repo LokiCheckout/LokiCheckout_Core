@@ -20,4 +20,9 @@ class CouponCodeViewModel extends FieldViewModel
     {
         return 'Coupon code';
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutCouponCodeComponent';
+    }
 }

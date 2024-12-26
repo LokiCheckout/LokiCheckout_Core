@@ -23,7 +23,7 @@ if (empty($viewModel->getItems())) {
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 ?>
-<div class="<?= $css('relative') ?>" x-data='{"loading":false}'
+<div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $block->getChildHtml('before') ?>
 

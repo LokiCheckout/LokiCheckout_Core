@@ -27,10 +27,10 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
             <?php if ($childBlock) : ?>
                 <?= $childBlock->setData(['total' => $total])->toHtml() ?>
             <?php else: ?>
-                <dt class="<?= $css('font-medium', $total->getCode().'-label') ?>">
+                <dt class="<?= $css('font-medium', $total->getCode() . '-label') ?>">
                     <?= __($total->getTitle()) ?>
                 </dt>
-                <dd class="<?= $css('text-right', $total->getCode().'-value') ?>">
+                <dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
                     <?= $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>

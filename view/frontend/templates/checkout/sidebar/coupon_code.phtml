@@ -23,11 +23,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();
 ?>
-<div class="<?= $css('border-b border-gray-200') ?>"
-     x-data="LokiCheckoutCouponCodeComponent"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
->
+<div class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
         <p class="<?= $css('mb-4', 'current') ?>">
             <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
