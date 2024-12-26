@@ -20,7 +20,7 @@ $isLoggedIn = $customerSession->isLoggedIn();
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= $css('card bg-gray-100 my-2') ?>"
-     x-data="LokiCheckoutToggle"
+     x-data="LokiComponentToggle"
      x-title="<?= $alpineComponentData->getName($block) ?>"
 >
     <?php if ($isLoggedIn): ?>
