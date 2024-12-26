@@ -46,4 +46,9 @@ class ShippingMethodsViewModel extends ComponentViewModel
             'value' => $this->getCurrentShippingCode()
         ];
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutShippingMethods';
+    }
 }

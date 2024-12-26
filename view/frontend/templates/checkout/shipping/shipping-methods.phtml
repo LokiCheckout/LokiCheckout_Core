@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -16,17 +15,11 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var PriceFormatter $priceFormatter */
-/** @var AlpineComponentData $alpineComponentData */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $viewModel->getShippingMethods();
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
-<div class="<?= $css('relative w-full mb-8') ?>"
-     x-data="LokiCheckoutShippingMethods"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
->
+<div class="<?= $css('relative w-full mb-8') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
     <form
