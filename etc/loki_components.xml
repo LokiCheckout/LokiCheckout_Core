@@ -323,6 +323,10 @@
     <componentGroup
         name="step-buttons"
         defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
+        <defaultTarget name="loki-checkout.steps.single"/>
+        <defaultTarget name="loki-checkout.steps.shipping"/>
+        <defaultTarget name="loki-checkout.steps.billing"/>
+
         <component
             name="loki-checkout.steps.shipping.backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonViewModel"
