@@ -10,9 +10,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var StepBackwardButtonViewModel $viewModel */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
-if (empty($viewModel)) {
-    throw new \RuntimeException('No component found for block "'.$block->getNameInLayout().'"');
-}
+
 ?>
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
