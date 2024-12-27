@@ -11,9 +11,9 @@ abstract class AbstractRenderer implements ArgumentInterface
     private array $counters = [];
 
     /**
-     * @param AbstractBlock      $block
+     * @param AbstractBlock $block
      * @param AbstractBlock|null $ancestorBlock
-     * @param array              $data
+     * @param array $data
      *
      * @return void
      */
