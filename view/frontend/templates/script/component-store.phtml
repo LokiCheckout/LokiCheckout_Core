@@ -16,7 +16,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         Alpine.store('components', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
-            getComponentNames() {
+            getComponentIds() {
                 return Object.keys(this.components);
             },
             getComponents() {
