@@ -50,12 +50,25 @@
      */
 
     [aria-busy] {
+        .field-loader,
+        .loader {
+            display: block;
+        }
+
+        .loader-overlay {
+            display: flex;
+        }
+    }
+
+    /*
+    [aria-busy] {
         --loading-size: 64px;
         --loading-stroke: 6px;
         --loading-duration: 1s;
         position: relative;
         opacity: .75
     }
+
     [aria-busy]:before {
         content: '';
         position: absolute;
@@ -70,7 +83,9 @@
         border-top-color: rgba(0, 0, 0, 0.5);
         animation: rotate calc(var(--loading-duration)) linear infinite;
     }
+
     @keyframes rotate {
         100% { transform: rotate(360deg); }
     }
+     */
 }

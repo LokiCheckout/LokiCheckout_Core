@@ -26,7 +26,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
         <?= $templateRenderer->html($viewModel->getFieldTemplate(), $block, $viewModel->getFieldData()) ?>
 
-        <div x-cloak x-show="loading" class="<?= $css('field-loader absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
+        <div class="<?= $css('field-loader hidden absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
         </div>
 
