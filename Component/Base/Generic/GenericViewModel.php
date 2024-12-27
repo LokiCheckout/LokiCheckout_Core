@@ -9,6 +9,8 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class GenericViewModel extends ComponentViewModel implements GenericViewModelInterface
 {
+    protected string $step = '';
+
     protected bool $lazyLoad = true;
     protected bool $allowRendering = true;
 
@@ -28,5 +30,28 @@ class GenericViewModel extends ComponentViewModel implements GenericViewModelInt
     public function isAllowRendering(): bool
     {
         return $this->allowRendering;
+    }
+
+
+    public function setStep(string $step): void
+    {
+        $this->step = $step;
+    }
+
+    public function getStep(): string
+    {
+        if (!empty($this->step)) {
+            return $this->step;
+        }
+
+        $this->step = $this->getContext()->stepProvider->getStep($this->getBlock());
+        return $this->step;
+    }
+
+    public function getJsData(): ?array
+    {
+        return [
+            'step' => $this->getStep(),
+        ];
     }
 }

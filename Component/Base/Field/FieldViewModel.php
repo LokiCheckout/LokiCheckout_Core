@@ -9,8 +9,6 @@ use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
  */
 abstract class FieldViewModel extends GenericViewModel implements FieldViewModelInterface
 {
-    protected string $step = '';
-
     public function getFieldName(): string
     {
         $parts = explode('.', $this->getNameInLayout());
@@ -106,20 +104,5 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
     public function getMax(): string
     {
         return (string)$this->getBlock()->getMax();
-    }
-
-    public function setStep(string $step): void
-    {
-        $this->step = $step;
-    }
-
-    public function getStep(): string
-    {
-        if (!empty($this->step)) {
-            return $this->step;
-        }
-
-        $this->step = $this->getContext()->stepProvider->getStep($this->getBlock());
-        return $this->step;
     }
 }

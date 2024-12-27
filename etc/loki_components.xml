@@ -6,6 +6,9 @@
             context="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarRepository">
+            <target name="loki-checkout.steps.single"/>
+            <target name="loki-checkout.steps.shipping"/>
+            <target name="loki-checkout.steps.billing"/>
         </component>
 
         <component

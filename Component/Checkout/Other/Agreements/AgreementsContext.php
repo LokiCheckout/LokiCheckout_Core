@@ -6,6 +6,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Yireo\LokiCheckout\Util\Component\StepProvider;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 
 /**
@@ -15,6 +16,7 @@ class AgreementsContext implements ComponentContextInterface
 {
     public function __construct(
         public readonly CheckoutSession $checkoutSession,
+        public readonly StepProvider $stepProvider,
         public readonly CheckoutAgreementsListInterface $checkoutAgreementsList,
         public readonly ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
         public readonly SearchCriteriaBuilder $searchCriteriaBuilder

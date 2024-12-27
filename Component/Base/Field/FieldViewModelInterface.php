@@ -47,5 +47,4 @@ interface FieldViewModelInterface extends GenericViewModelInterface
      */
     public function isValid(): bool;
 
-    public function getStep(): string;
 }

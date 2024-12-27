@@ -27,10 +27,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             removeInvisibleComponents() {
                 const invisibleComponents = [];
-                for (const [componentName, component] of Object.entries(this.components)) {
+                for (const [componentId, component] of Object.entries(this.components)) {
                     if (!document.getElementById(component.elementId)) {
-                        delete this.components[componentName];
-                        invisibleComponents.push(componentName);
+                        delete this.components[componentId];
+                        invisibleComponents.push(componentId);
                     }
                 }
 
@@ -39,34 +39,34 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 }
             },
             add(component) {
-                if (!component.name) {
-                    //yireoLokiCheckoutLogger('WARNING: Not adding nameless Alpine.js component to store:', component.domId);
+                if (!component.id) {
+                    yireoLokiCheckoutLogger('WARNING: Not adding ID-less Alpine.js component to store:', component);
                     return;
                 }
 
                 if (!component.elementId) {
-                    //yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store: No elementId set');
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store: No elementId set');
                     return;
                 }
 
                 if (!component.step) {
-                    //yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store: No step set');
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store: No step set');
                     return;
                 }
 
                 if (component.valid === undefined) {
-                    //yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.name + '" to store, because it has no valid flag set');
+                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store, because it has no valid flag set');
                     return;
                 }
 
-                this.components[component.name] = component;
+                this.components[component.id] = component;
             },
-            get(componentName) {
-                if (this.components[componentName]) {
-                    return this.components[componentName];
+            get(componentId) {
+                if (this.components[componentId]) {
+                    return this.components[componentId];
                 }
 
-                throw new Error('No such a component: ' + componentName);
+                throw new Error('No such a component: ' + componentId);
             },
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);
@@ -78,20 +78,20 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return !this.hasInvalidComponents(step);
             },
             lock(component) {
-                this.components[component.name].locked = true;
+                this.components[component.id].locked = true;
                 document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
             },
             unlock(component) {
-                this.components[component.name].locked = false;
+                this.components[component.id].locked = false;
                 document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
             },
             isLocked(component) {
-                return this.components[component.name].locked;
+                return this.components[component.id].locked;
             },
             hasLockedComponents(step) {
                 let hasLocked = false;
-                Object.keys(this.components).forEach(componentName => {
-                    component = this.components[componentName];
+                Object.keys(this.components).forEach(componentId => {
+                    component = this.components[componentId];
                     if (component.locked === true && component.step === step) {
                         hasLocked = true;
                     }

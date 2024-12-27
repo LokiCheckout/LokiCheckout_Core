@@ -9,6 +9,9 @@ use Yireo\LokiCheckout\ViewModel\PostcodePatterns;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PostcodePatterns $postcodePatterns */
 $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
+
+$countryComponent = 'LokiCheckoutShippingAddressCountryId';
+echo $countryComponent;
 ?>
 <script>
     const postcodePatterns = {};
