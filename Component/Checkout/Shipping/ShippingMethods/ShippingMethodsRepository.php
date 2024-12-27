@@ -20,14 +20,14 @@ class ShippingMethodsRepository extends ComponentRepository
             return $shippingMethods;
         }
 
-        $shippingAddress = $this->getContext()->shippingAddressState->getShippingAddress();
+        $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
         $quote = $shippingAddress->getQuote();
         $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates();
 
         $shippingMethods = [];
-        foreach ($this->getContext()->shippingMethodManagement->getList($quote->getId()) as $shippingMethod) {
+        foreach ($this->getContext()->getShippingMethodManagement()->getList($quote->getId()) as $shippingMethod) {
             $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
             $shippingMethods[$shippingMethodCode] = $shippingMethod;
         }
@@ -37,7 +37,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function getData(): mixed
     {
-        $shippingAddress = $this->getContext()->shippingAddressState->getShippingAddress();
+        $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
 
         $currentShippingMethod = (string)$shippingAddress->getShippingMethod();
         $sanitizedShippingMethod = $this->sanitizeShippingMethod($currentShippingMethod);
@@ -54,7 +54,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingMethod = (string)$data;
         $shippingMethod = $this->sanitizeShippingMethod($shippingMethod);
 
-        $shippingAddress = $this->getContext()->shippingAddressState->getShippingAddress();
+        $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
         $quote = $shippingAddress->getQuote();
 
         $shippingAddress
@@ -62,7 +62,7 @@ class ShippingMethodsRepository extends ComponentRepository
             ->collectShippingRates()
             ->setShippingMethod($shippingMethod);
 
-        $this->getContext()->cartRepository->save($quote);
+        $this->getContext()->getCartRepository()->save($quote);
     }
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
@@ -72,7 +72,7 @@ class ShippingMethodsRepository extends ComponentRepository
             $shippingMethodCode = '';
         }
 
-        if (empty($shippingMethodCode) && $this->getContext()->moduleConfig->selectDefaultShippingMethod()) {
+        if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
             $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 

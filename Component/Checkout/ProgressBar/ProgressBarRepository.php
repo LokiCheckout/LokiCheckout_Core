@@ -11,11 +11,11 @@ class ProgressBarRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
-        return $this->getContext()->stepNavigator->getCurrentStep()->getCode();
+        return $this->getContext()->getStepNavigator()->getCurrentStep()->getCode();
     }
 
     protected function saveData(mixed $data): void
     {
-        $this->getContext()->stepNavigator->setCurrentStepByCode($data);
+        $this->getContext()->getStepNavigator()->setCurrentStepByCode($data);
     }
 }

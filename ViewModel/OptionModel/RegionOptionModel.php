@@ -18,7 +18,7 @@ class RegionOptionModel implements ArgumentInterface, OptionModelInterface
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
         /** @var AddressFieldViewModel $viewModel */
-        $addressState = $viewModel->getContext()->addressStateProvider->getAddressState($viewModel->getBlock());
+        $addressState = $viewModel->getContext()->getAddressStateProvider()->getAddressState($viewModel->getBlock());
         $countryId = $addressState->load('country_id');
         if (empty($countryId)) {
             return [];

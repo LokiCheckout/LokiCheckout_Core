@@ -5,13 +5,16 @@ namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
+/**
+ * @method AgreementsContext getContext()
+ */
 class AgreementsRepository extends ComponentRepository
 {
     public function getSavedCheckoutAgreements(): array
     {
-        $this->getContext()->searchCriteriaBuilder->addFilter('agreement_id', $this->getSavedCheckoutAgreementIds(), 'in');
+        $this->getContext()->getSearchCriteriaBuilder()->addFilter('agreement_id', $this->getSavedCheckoutAgreementIds(), 'in');
 
-        return $this->getContext()->checkoutAgreementsList->getList($this->getContext()->searchCriteriaBuilder->create());
+        return $this->getContext()->getCheckoutAgreementsList()->getList($this->getContext()->getSearchCriteriaBuilder()->create());
     }
 
     /**
@@ -19,16 +22,16 @@ class AgreementsRepository extends ComponentRepository
      */
     public function getCheckoutAgreements(): array
     {
-        $searchCriteria = $this->getContext()->activeStoreAgreementsFilter->buildSearchCriteria();
+        $searchCriteria = $this->getContext()->getActiveStoreAgreementsFilter()->buildSearchCriteria();
 
-        return $this->getContext()->checkoutAgreementsList->getList($searchCriteria);
+        return $this->getContext()->getCheckoutAgreementsList()->getList($searchCriteria);
     }
 
     protected function getData(): mixed
     {
         // @todo: Should this just be stored in the session?
         $value = [];
-        $agreementIds = (array)$this->getContext()->checkoutSession->getAgreementIds();
+        $agreementIds = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
         foreach ($agreementIds as $agreementId) {
             if (empty($agreementId)) {
                 continue;
@@ -67,12 +70,12 @@ class AgreementsRepository extends ComponentRepository
         }
 
         $savedAgreements = array_unique($savedAgreements);
-        $this->getContext()->checkoutSession->setAgreementIds($savedAgreements);
+        $this->getContext()->getCheckoutSession()->setAgreementIds($savedAgreements);
     }
 
     private function getSavedCheckoutAgreementIds(): array
     {
-        $agreementIds = (array)$this->getContext()->checkoutSession->getAgreementIds();
+        $agreementIds = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
         if (empty($agreementIds)) {
             return [];
         }

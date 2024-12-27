@@ -44,7 +44,7 @@ class GenericViewModel extends ComponentViewModel implements GenericViewModelInt
             return $this->step;
         }
 
-        $this->step = $this->getContext()->stepProvider->getStep($this->getBlock());
+        $this->step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
         return $this->step;
     }
 

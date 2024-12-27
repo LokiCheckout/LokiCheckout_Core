@@ -10,6 +10,8 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
 use Yireo\LokiCheckout\Util\Component\StepProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
+use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -20,6 +22,16 @@ class GenericContext implements ComponentContextInterface
     public function getCheckoutState(): CheckoutState
     {
         return $this->get(CheckoutState::class);
+    }
+
+    public function getShippingAddressState(): ShippingAddressState
+    {
+        return $this->get(ShippingAddressState::class);
+    }
+
+    public function getBillingAddressState(): BillingAddressState
+    {
+        return $this->get(BillingAddressState::class);
     }
 
     public function getCustomerSession(): CustomerSession

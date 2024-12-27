@@ -12,7 +12,7 @@ class ShippingAddressSelectViewModel extends FieldViewModel
 {
     public function getAddresses(): array
     {
-        return $this->getContext()->customerProvider->getAddresses();
+        return $this->getContext()->getCustomerProvider()->getAddresses();
     }
 
     public function getCurrentAddressId(): int
@@ -32,7 +32,7 @@ class ShippingAddressSelectViewModel extends FieldViewModel
 
     public function isAllowRendering(): bool
     {
-        if (false === $this->getContext()->customerProvider->isLoggedIn()) {
+        if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return false;
         }
 

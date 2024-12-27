@@ -18,7 +18,7 @@ class PostcodeViewModel extends AddressFieldViewModel
             return $required;
         }
 
-        $countries = $this->getContext()->directoryData->getCountriesWithOptionalZip();
+        $countries = $this->getContext()->getDirectoryData()->getCountriesWithOptionalZip();
         $countryId = $this->getAddressState()->load('country_id');
 
         return false === in_array($countryId, $countries);

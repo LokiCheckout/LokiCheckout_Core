@@ -12,13 +12,13 @@ class BillingAsShippingRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
-        $billingAsShipping = $this->getContext()->billingAsShippingService->getValueFromAddress(
-            $this->getContext()->billingAddressState->getBillingAddress()
+        $billingAsShipping = $this->getContext()->getBillingAsShippingService()->getValueFromAddress(
+            $this->getContext()->getBillingAddressState()->getBillingAddress()
         );
 
         if (true === $billingAsShipping) {
             $this->copyShippingToBilling();
-            $this->getContext()->cartRepository->save($this->getContext()->billingAddressState->getQuote());
+            $this->getContext()->getCartRepository()->save($this->getContext()->getBillingAddressState()->getQuote());
         }
 
         return $billingAsShipping;
@@ -31,21 +31,21 @@ class BillingAsShippingRepository extends ComponentRepository
         }
 
         $billingAsShipping = $data['billingAsShipping'];
-        $billingAddress = $this->getContext()->billingAddressState->getBillingAddress();
+        $billingAddress = $this->getContext()->getBillingAddressState()->getBillingAddress();
 
         $billingAddress->setSameAsBilling((int)$billingAsShipping);
         if (true === $billingAsShipping) {
             $this->copyShippingToBilling();
         }
 
-        $this->getContext()->cartRepository->save($this->getContext()->billingAddressState->getQuote());
+        $this->getContext()->getCartRepository()->save($this->getContext()->getBillingAddressState()->getQuote());
     }
 
     protected function copyShippingToBilling()
     {
-        $this->getContext()->billingAsShippingService->copy(
-            $this->getContext()->shippingAddressState->getShippingAddress(),
-            $this->getContext()->billingAddressState->getBillingAddress(),
+        $this->getContext()->getBillingAsShippingService()->copy(
+            $this->getContext()->getShippingAddressState()->getShippingAddress(),
+            $this->getContext()->getBillingAddressState()->getBillingAddress(),
         );
     }
 }

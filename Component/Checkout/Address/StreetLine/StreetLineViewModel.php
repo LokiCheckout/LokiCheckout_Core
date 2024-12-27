@@ -8,7 +8,7 @@ class StreetLineViewModel extends AddressFieldViewModel
 {
     public function isAllowRendering(): bool
     {
-        $streetLines = (int)$this->getContext()->scopeConfig->getValue('customer/address/street_lines');
+        $streetLines = (int)$this->getContext()->getScopeConfig()->getValue('customer/address/street_lines');
         if ($streetLines <= $this->getIndex()) {
             return false;
         }

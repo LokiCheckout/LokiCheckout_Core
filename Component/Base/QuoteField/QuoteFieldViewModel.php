@@ -19,7 +19,7 @@ abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldV
             }
         }
 
-        $attributeLabel = $this->getContext()->attributeProvider->getAttributeLabel($this->getFieldName());
+        $attributeLabel = $this->getContext()->getAttributeProvider()->getAttributeLabel($this->getFieldName());
         if (!empty($attributeLabel)) {
             return $attributeLabel;
         }
@@ -29,6 +29,6 @@ abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldV
 
     public function isRequired(): bool
     {
-        return (bool)$this->getContext()->attributeProvider->getAttribute($this->getFieldName())->getIsRequired();
+        return (bool)$this->getContext()->getAttributeProvider()->getAttribute($this->getFieldName())->getIsRequired();
     }
 }

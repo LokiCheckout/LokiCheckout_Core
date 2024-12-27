@@ -11,9 +11,9 @@ class NewsletterRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
-        $email = (string)$this->getContext()->checkoutSession->getQuote()->getCustomerEmail();
+        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
         if (!empty($email)) {
-            return $this->getContext()->guestSubscriptionChecker->isSubscribed($email);
+            return $this->getContext()->getGuestSubscriptionChecker()->isSubscribed($email);
         }
 
         return false;
@@ -26,16 +26,16 @@ class NewsletterRepository extends ComponentRepository
         }
 
         $subscribe = (bool)$data['subscribe'];
-        $email = (string)$this->getContext()->checkoutSession->getQuote()->getCustomerEmail();
-        $storeId = (int)$this->getContext()->checkoutSession->getQuote()->getStoreId();
+        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
+        $storeId = (int)$this->getContext()->getCheckoutSession()->getQuote()->getStoreId();
         if ($subscribe) {
-            $this->getContext()->subscriptionManager->subscribe($email, $storeId);
+            $this->getContext()->getSubscriptionManager()->subscribe($email, $storeId);
         } else {
-            $subscriber = $this->getContext()->subscriberFactory->create();
+            $subscriber = $this->getContext()->getSubscriberFactory()->create();
             $subscriber->load($email, 'email');
             if ($subscriber->getId() > 0) {
                 $confirmCode = $subscriber->getSubscriberConfirmCode();
-                $this->getContext()->subscriptionManager->unsubscribe($email, $storeId, $confirmCode);
+                $this->getContext()->getSubscriptionManager()->unsubscribe($email, $storeId, $confirmCode);
             }
         }
     }

@@ -12,18 +12,18 @@ class ShippingAddressSelectRepository extends ComponentRepository
 {
     public function getAddresses(): array
     {
-        return $this->getContext()->customerProvider->getAddresses();
+        return $this->getContext()->getCustomerProvider()->getAddresses();
     }
 
     protected function getData(): mixed
     {
-        if (false === $this->getContext()->customerProvider->isLoggedIn()) {
+        if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return 0;
         }
 
-        $quote = $this->getContext()->checkoutSession->getQuote();
-        $customer = $this->getContext()->customerRepository->getById(
-            $this->getContext()->customerSession->getCustomerId()
+        $quote = $this->getContext()->getCheckoutSession()->getQuote();
+        $customer = $this->getContext()->getCustomerRepository()->getById(
+            $this->getContext()->getCustomerSession()->getCustomerId()
         );
 
         $selectedAddressId = (int)$quote->getShippingAddress()->getCustomerAddressId();
@@ -34,7 +34,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
         $sanitizedAddressId = $this->sanitizeSelectedAddressId($selectedAddressId);
 
         if (empty($sanitizedAddressId)) {
-            $sanitizedAddressId = $this->getContext()->customerProvider->getDefaultShippingAddressId();
+            $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
         }
 
         if ($sanitizedAddressId !== $selectedAddressId) {
@@ -46,14 +46,14 @@ class ShippingAddressSelectRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        if (false === $this->getContext()->customerProvider->isLoggedIn()) {
+        if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return;
         }
 
         $selectedAddressId = $this->sanitizeSelectedAddressId((int)$data);
 
-        $customerShippingAddress = $this->getContext()->customerAddressRepository->getById($selectedAddressId);
-        $quoteShippingAddress = $this->getContext()->checkoutSession->getQuote()->getShippingAddress();
+        $customerShippingAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
+        $quoteShippingAddress = $this->getContext()->getCheckoutSession()->getQuote()->getShippingAddress();
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
         $quoteShippingAddress->save(); // @todo

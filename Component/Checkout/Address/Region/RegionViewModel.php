@@ -13,7 +13,7 @@ class RegionViewModel extends AddressFieldViewModel
     public function isAllowRendering(): bool
     {
         // @todo: This does not work properly at sequential requests
-        if ($this->getContext()->moduleConfig->hideRegionWhenOptional() && false === $this->isRequired()) {
+        if ($this->getContext()->getModuleConfig()->hideRegionWhenOptional() && false === $this->isRequired()) {
             $this->allowRendering = false;
         }
 
@@ -27,7 +27,7 @@ class RegionViewModel extends AddressFieldViewModel
             return true;
         }
 
-        $countriesWithStateRequired = $this->getContext()->scopeConfig->getValue('general/region/state_required');
+        $countriesWithStateRequired = $this->getContext()->getScopeConfig()->getValue('general/region/state_required');
         $countriesWithStateRequired = explode(',', $countriesWithStateRequired);
         if (in_array($countryId, $countriesWithStateRequired)) {
             return true;

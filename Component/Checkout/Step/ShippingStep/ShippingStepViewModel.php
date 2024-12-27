@@ -23,7 +23,7 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
 
     public function isEnabled(): bool
     {
-        if ((bool)$this->getContext()->checkoutState->getQuote()->isVirtual()) {
+        if ((bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual()) {
             return false;
         }
 
@@ -37,12 +37,12 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
 
     public function isVisible(): bool
     {
-        return $this->getContext()->stepNavigator->isCurrentStep($this);
+        return $this->getContext()->getStepNavigator()->isCurrentStep($this);
     }
 
     public function validate(): true|array
     {
-        return $this->getContext()->stepValidator->validate();
+        return $this->getContext()->getStepValidator()->validate();
     }
 
     public function getJsComponentName(): ?string

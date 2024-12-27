@@ -12,11 +12,11 @@ class ShippingAddressViewModel extends ComponentViewModel
 {
     public function getAddresses(): array
     {
-        if (false === $this->getContext()->customerSession->isLoggedIn()) {
+        if (false === $this->getContext()->getCustomerSession()->isLoggedIn()) {
             return [];
         }
 
-        return $this->getContext()->customerProvider->getAddresses();
+        return $this->getContext()->getCustomerProvider()->getAddresses();
     }
 
     public function isNewAddress(): bool
@@ -31,6 +31,6 @@ class ShippingAddressViewModel extends ComponentViewModel
 
     protected function getQuote(): Quote
     {
-        return $this->getContext()->checkoutSession->getQuote();
+        return $this->getContext()->getCheckoutSession()->getQuote();
     }
 }

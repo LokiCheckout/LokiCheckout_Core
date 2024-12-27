@@ -10,7 +10,7 @@ class VatIdViewModel extends AddressFieldViewModel
     #[Override]
     public function isAllowRendering(): bool
     {
-        if (false === $this->getContext()->moduleConfig->enableVatIdOnlyForCompany()) {
+        if (false === $this->getContext()->getModuleConfig()->enableVatIdOnlyForCompany()) {
             return parent::isAllowRendering();
         }
 

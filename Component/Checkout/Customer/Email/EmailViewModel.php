@@ -19,7 +19,7 @@ class EmailViewModel extends QuoteFieldViewModel
 
     public function isAllowRendering(): bool
     {
-        if ($this->getContext()->customerSession->isLoggedIn()) {
+        if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
             return false;
         }
 

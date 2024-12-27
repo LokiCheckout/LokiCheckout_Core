@@ -17,7 +17,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
 
     public function getLabel(): string
     {
-        $quote = $this->getContext()->billingAddressState->getBillingAddress()->getQuote();
+        $quote = $this->getContext()->getBillingAddressState()->getBillingAddress()->getQuote();
         if (false === $quote->getGrandTotal() > 0) {
             return 'Review'; // @todo: Test for this
         }
@@ -35,7 +35,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
     public function isAccessable(): bool
     {
         // @todo: Move this logic to step navigator itself
-        if ($this->getContext()->stepNavigator->isCurrentStep($this)) {
+        if ($this->getContext()->getStepNavigator()->isCurrentStep($this)) {
             return true;
         }
 
@@ -44,12 +44,12 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
 
     public function isVisible(): bool
     {
-        return $this->getContext()->stepNavigator->isCurrentStep($this);
+        return $this->getContext()->getStepNavigator()->isCurrentStep($this);
     }
 
     public function validate(): true|array
     {
-        return $this->getContext()->stepValidator->validate();
+        return $this->getContext()->getStepValidator()->validate();
     }
 
     public function getJsComponentName(): ?string

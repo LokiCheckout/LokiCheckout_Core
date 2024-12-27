@@ -11,19 +11,19 @@ class BillingAddressViewModel extends GenericViewModel
 {
     public function getBillingAsShippingValue(): bool
     {
-        return $this->getContext()->billingAsShippingService->getValueFromAddress(
-            $this->getContext()->billingAddressState->getBillingAddress()
+        return $this->getContext()->getBillingAsShippingService()->getValueFromAddress(
+            $this->getContext()->getBillingAddressState()->getBillingAddress()
         );
     }
 
     public function isEnabled(): bool
     {
-        return $this->getContext()->billingAddressState->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
+        return $this->getContext()->getBillingAddressState()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
     }
 
     public function getHtml(): string
     {
-        $address = $this->getContext()->billingAddressState->getBillingAddress();
-        return $this->getContext()->addressRenderer->getHtml($address);
+        $address = $this->getContext()->getBillingAddressState()->getBillingAddress();
+        return $this->getContext()->getAddressRenderer()->getHtml($address);
     }
 }

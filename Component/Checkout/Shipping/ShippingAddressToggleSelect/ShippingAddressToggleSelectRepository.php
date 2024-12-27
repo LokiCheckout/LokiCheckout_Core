@@ -23,6 +23,6 @@ class ShippingAddressToggleSelectRepository extends ComponentRepository
 
     protected function getCheckoutSession(): CheckoutSession
     {
-        return $this->getContext()->checkoutSession;
+        return $this->getContext()->getCheckoutSession();
     }
 }

@@ -29,7 +29,7 @@ class StepBackwardButtonViewModel extends GenericViewModel
 
     protected function getStepNavigator(): StepNavigator
     {
-        return $this->getContext()->stepNavigator;
+        return $this->getContext()->getStepNavigator();
     }
 
     public function getJsComponentName(): ?string

@@ -12,14 +12,14 @@ class StreetLineRepository extends AddressFieldRepository
     protected function getData(): mixed
     {
         $street = (string)$this->getAddressState()->load('street');
-        $streetLines = $this->getContext()->streetLinesFactory->createFromStreet($street);
+        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);
         return $streetLines->getLineByIndex($this->getIndex());
     }
 
     protected function saveData(mixed $data): void
     {
         $street = (string)$this->getAddressState()->load('street');
-        $streetLines = $this->getContext()->streetLinesFactory->createFromStreet($street);
+        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);
         $streetLines = $streetLines->setLineByIndex($this->getIndex(), $data);
         $this->getAddressState()->save('street', $streetLines->toString());
     }

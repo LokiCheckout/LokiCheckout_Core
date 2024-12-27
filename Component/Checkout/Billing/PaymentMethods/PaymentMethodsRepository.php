@@ -14,7 +14,7 @@ class PaymentMethodsRepository extends ComponentRepository
     {
         $cart = $this->getQuote();
         $cartId = $cart->getId();
-        return $this->getContext()->paymentMethodManagement->getList($cartId);
+        return $this->getContext()->getPaymentMethodManagement()->getList($cartId);
     }
 
     public function getDefaultPayment(): string
@@ -24,7 +24,7 @@ class PaymentMethodsRepository extends ComponentRepository
             return '';
         }
 
-        if (false === $this->getContext()->moduleConfig->selectDefaultPaymentMethod()) {
+        if (false === $this->getContext()->getModuleConfig()->selectDefaultPaymentMethod()) {
             return '';
         }
 
@@ -52,13 +52,13 @@ class PaymentMethodsRepository extends ComponentRepository
         $quote->setPaymentMethod($data);
         $quote->setInventoryProcessed(false);
         $quote->getPayment()->importData(['method' => $data]);
-        $this->getContext()->cartRepository->save($quote);
+        $this->getContext()->getCartRepository()->save($quote);
         $quote->collectTotals();
     }
 
     protected function getQuote(): Quote
     {
-        return $this->getContext()->checkoutState->getQuote();
+        return $this->getContext()->getCheckoutState()->getQuote();
     }
 
     protected function sanitizePaymentMethod(string $paymentMethod): string

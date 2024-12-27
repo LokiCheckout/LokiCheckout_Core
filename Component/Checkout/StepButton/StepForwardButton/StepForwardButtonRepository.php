@@ -16,7 +16,7 @@ class StepForwardButtonRepository extends ComponentRepository
     protected function getData(): mixed
     {
         try {
-            return $this->getContext()->stepNavigator->getNextStep()->getCode();
+            return $this->getContext()->getStepNavigator()->getNextStep()->getCode();
         } catch(UnknownStepException $e) {
             return null;
         }
@@ -27,12 +27,12 @@ class StepForwardButtonRepository extends ComponentRepository
         try {
             $this->getStepNavigator()->setNextStep();
         } catch (UnknownStepException $e) {
-            $this->getContext()->messageManager->addErrorMessage($e->getMessage());
+            $this->getContext()->getMessageManager()->addErrorMessage($e->getMessage());
         }
     }
 
     protected function getStepNavigator(): StepNavigator
     {
-        return $this->getContext()->stepNavigator;
+        return $this->getContext()->getStepNavigator();
     }
 }

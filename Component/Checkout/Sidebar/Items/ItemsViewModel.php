@@ -11,8 +11,8 @@ class ItemsViewModel extends ComponentViewModel
     public function getItems(): array
     {
         $items = [];
-        foreach ($this->getContext()->checkoutState->getQuote()->getItems() as $item) {
-            $items[] = $this->getContext()->itemConvertor->toArray($item);
+        foreach ($this->getContext()->getCheckoutState()->getQuote()->getItems() as $item) {
+            $items[] = $this->getContext()->getItemConvertor()->toArray($item);
         }
 
         if (empty($items)) {

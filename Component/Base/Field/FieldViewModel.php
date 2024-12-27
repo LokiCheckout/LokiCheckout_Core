@@ -33,7 +33,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function getFieldTemplate(): string
     {
-        return $this->getContext()->fieldTemplateLocator->getFieldTemplateFromViewModel($this);
+        return $this->getContext()->getFieldTemplateLocator()->getFieldTemplateFromViewModel($this);
     }
 
     public function getInputType(): string

@@ -10,7 +10,7 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  * @method ShippingMethodsContext getContext()
  * @method ShippingMethodsRepository getRepository()
  */
-class ShippingMethodsViewModel extends ComponentViewModel
+class ShippingMethodsViewModel extends FieldViewModel
 {
     /**
      * @return ShippingMethodInterface[]

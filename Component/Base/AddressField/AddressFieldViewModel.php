@@ -32,7 +32,7 @@ class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewMo
             return $fieldLabel;
         }
 
-        $attributeLabel = $this->getContext()->attributeProvider->getAttributeLabel($this->getFieldName());
+        $attributeLabel = $this->getContext()->getAttributeProvider()->getAttributeLabel($this->getFieldName());
         if (!empty($attributeLabel)) {
             return $attributeLabel;
         }
@@ -62,7 +62,7 @@ class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewMo
 
     public function getStep(): string
     {
-        return $this->getContext()->stepProvider->getStep($this->getBlock());
+        return $this->getContext()->getStepProvider()->getStep($this->getBlock());
     }
 
     public function isRequired(): bool
@@ -72,11 +72,11 @@ class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewMo
             return $required;
         }
 
-        return (bool)$this->getContext()->attributeProvider->getAttribute($this->getFieldName())->getIsRequired();
+        return (bool)$this->getContext()->getAttributeProvider()->getAttribute($this->getFieldName())->getIsRequired();
     }
 
     protected function getAddressState(): AddressStateInterface
     {
-        return $this->getContext()->addressStateProvider->getAddressState($this->getBLock());
+        return $this->getContext()->getAddressStateProvider()->getAddressState($this->getBLock());
     }
 }
