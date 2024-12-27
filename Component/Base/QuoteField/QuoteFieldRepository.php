@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
 use Magento\Quote\Api\Data\CartInterface;
+use Magento\Quote\Model\Quote;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
@@ -28,7 +29,7 @@ class QuoteFieldRepository extends ComponentRepository
         return array_pop($blockNameParts);
     }
 
-    protected function getQuote(): CartInterface
+    protected function getQuote(): Quote
     {
         return $this->getContext()->checkoutSession->getQuote();
     }

@@ -30,7 +30,7 @@
         </referenceBlock>
 
         <!-- Shipping step -->
-        <move element="loki-checkout.customer.email" destination="loki-checkout.steps.shipping" as="email" before="buttons"/>
+        <move element="loki-checkout.customer.customer_email" destination="loki-checkout.steps.shipping" as="customer_email" before="buttons"/>
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
         <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons" />
 

@@ -138,17 +138,17 @@
         <defaultTarget name="loki-checkout.sidebar.preview.quote_details"/>
 
         <component
-            name="loki-checkout.customer.email"
+            name="loki-checkout.customer.customer_email"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Email\EmailViewModel">
         </component>
 
         <component
-            name="loki-checkout.customer.gender"
+            name="loki-checkout.customer.customer_gender"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Gender\GenderViewModel">
         </component>
 
         <component
-            name="loki-checkout.customer.dob"
+            name="loki-checkout.customer.customer_dob"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Dob\DobViewModel">
         </component>
     </componentGroup>

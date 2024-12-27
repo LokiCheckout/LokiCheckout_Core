@@ -13,7 +13,7 @@
         </referenceBlock>
 
         <!-- Column 1 -->
-        <move element="loki-checkout.customer.email" destination="loki-checkout.one-step.col1.email-container" as="email"/>
+        <move element="loki-checkout.customer.customer_email" destination="loki-checkout.one-step.col1.email-container" as="customer_email"/>
         <move element="loki-checkout.shipping-address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
         <move element="loki-checkout.billing-address" destination="loki-checkout.one-step.col1" as="billing-address"/>
 

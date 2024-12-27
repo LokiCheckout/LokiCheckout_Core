@@ -5,8 +5,8 @@
         <move element="loki-checkout.agreements" destination="loki-checkout.sidebar.other" as="agreements"/>
         <move element="loki-checkout.newsletter" destination="loki-checkout.sidebar.other" as="newsletter"/>
 
-        <move element="loki-checkout.customer.dob" destination="loki-checkout.shipping-step.address-form" as="dob"/>
-        <move element="loki-checkout.customer.gender" destination="loki-checkout.shipping-step.address-form" as="gender"/>
+        <move element="loki-checkout.customer.customer_dob" destination="loki-checkout.shipping-step.address-form" as="customer_dob"/>
+        <move element="loki-checkout.customer.customer_gender" destination="loki-checkout.shipping-step.address-form" as="customer_gender"/>
 
         <move element="loki-checkout.progressbar" destination="loki-checkout" as="progressbar" />
     </body>
