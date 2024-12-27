@@ -11,14 +11,6 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 {
     protected string $step = '';
 
-    /**
-     * @deprecated Use getData instead
-     */
-    public function getValue(): mixed
-    {
-        return $this->getData();
-    }
-
     public function getFieldName(): string
     {
         $parts = explode('.', $this->getNameInLayout());

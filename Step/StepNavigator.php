@@ -171,7 +171,7 @@ class StepNavigator implements ArgumentInterface
         foreach ($steps as $step) {
             $stepBlock = $this->layout->getBlock($step->getBlockName());
             if (false === $stepBlock instanceof AbstractBlock) {
-                throw new StepNotFoundException('No block with name "'.$step->getBlockName().'"');
+                continue;
             }
 
             $stepComponent = $this->componentRegistry->getComponentFromBlock($stepBlock);

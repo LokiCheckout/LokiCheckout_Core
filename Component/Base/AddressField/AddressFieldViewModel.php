@@ -11,9 +11,17 @@ use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
  */
 class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewModelInterface
 {
-    public function getData(): mixed
+    public function getValue(): mixed
     {
         return trim((string)$this->getComponent()->getRepository()->get());
+    }
+
+    /**
+     * @deprecated Use getValue instead
+     */
+    public function getData(): mixed
+    {
+        return $this->getValue();
     }
 
     // @todo: Move this into a trait or a child-class
