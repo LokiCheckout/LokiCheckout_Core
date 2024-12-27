@@ -9,7 +9,6 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ProgressBarRepository extends ComponentRepository
 {
-
     protected function getData(): mixed
     {
         return $this->getContext()->stepNavigator->getCurrentStep()->getCode();
@@ -17,10 +16,6 @@ class ProgressBarRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        if (!isset($data['step'])) {
-            return;
-        }
-
-        $this->getContext()->stepNavigator->setCurrentStepByCode($data['step']);
+        $this->getContext()->stepNavigator->setCurrentStepByCode($data);
     }
 }

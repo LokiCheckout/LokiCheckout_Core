@@ -36,6 +36,9 @@
             <block
                 name="loki-checkout.script.validators.postcode"
                 template="Yireo_LokiCheckout::script/validators/postcode.phtml"/>
+            <block
+                name="loki-checkout.script.hacks"
+                template="Yireo_LokiCheckout::script/hacks.phtml"/>
 
             <referenceContainer name="loki-component-types">
                 <block
@@ -53,6 +56,9 @@
                 <block
                     name="loki-checkout.script.components.field-component"
                     template="Yireo_LokiCheckout::script/component/field-component.phtml"/>
+                <block
+                    name="loki-checkout.script.components.steps-component"
+                    template="Yireo_LokiCheckout::script/component/steps-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.step-component"
                     template="Yireo_LokiCheckout::script/component/step-component.phtml"/>

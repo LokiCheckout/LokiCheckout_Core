@@ -9,4 +9,8 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class ProgressBarViewModel extends ComponentViewModel
 {
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutSteps';
+    }
 }

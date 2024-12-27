@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step;
 
-use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 interface StepViewModelInterface extends ComponentViewModelInterface
