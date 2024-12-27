@@ -8,6 +8,6 @@ use Yireo\LokiCheckout\Component\Checkout\Other\Newsletter\NewsletterViewModel;
 /** @var NewsletterViewModel $viewModel */
 ?>
 <div>
-    <input type="checkbox" x-model="value"/>
+    <input type="checkbox" x-model="value" @change="submit"/>
     <label><?= __('Sign up for our newsletter') ?></label>
 </div>

@@ -21,22 +21,21 @@ class NewsletterRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        if (!isset($data['subscribe'])) {
+        $subscribe = (bool)$data;
+        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
+        $storeId = (int)$this->getContext()->getCheckoutSession()->getQuote()->getStoreId();
+        if (true === $subscribe) {
+            $this->getContext()->getSubscriptionManager()->subscribe($email, $storeId);
+
             return;
         }
 
-        $subscribe = (bool)$data['subscribe'];
-        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
-        $storeId = (int)$this->getContext()->getCheckoutSession()->getQuote()->getStoreId();
-        if ($subscribe) {
-            $this->getContext()->getSubscriptionManager()->subscribe($email, $storeId);
-        } else {
-            $subscriber = $this->getContext()->getSubscriberFactory()->create();
-            $subscriber->load($email, 'email');
-            if ($subscriber->getId() > 0) {
-                $confirmCode = $subscriber->getSubscriberConfirmCode();
-                $this->getContext()->getSubscriptionManager()->unsubscribe($email, $storeId, $confirmCode);
-            }
+        $subscriber = $this->getContext()->getSubscriberFactory()->create();
+        $subscriber->load($email, 'subscriber_email');
+        echo 'Subscriber: ' . $subscriber->getId();
+        if ($subscriber->getId() > 0) {
+            $confirmCode = $subscriber->getSubscriberConfirmCode();
+            $this->getContext()->getSubscriptionManager()->unsubscribe($email, $storeId, $confirmCode);
         }
     }
 }

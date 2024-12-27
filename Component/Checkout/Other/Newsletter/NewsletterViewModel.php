@@ -2,8 +2,12 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 
-class NewsletterViewModel extends ComponentViewModel
+class NewsletterViewModel extends FieldViewModel
 {
+    public function getFieldLabel(): string
+    {
+        return 'Newsletter';
+    }
 }
