@@ -65,98 +65,100 @@
                     name="loki-checkout.billing.address.middlename" as="middlename"
                     ifconfig="customer/address/middlename_show"
                     template="Yireo_LokiCheckout::form/field.phtml"/>
+
+
+                <block
+                    name="loki-checkout.billing.address.lastname" as="lastname"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.suffix" as="suffix"
+                    ifconfig="customer/address/suffix_show"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.street0" as="street0"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_label" xsi:type="string">Street</argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.street1" as="street1"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_label" xsi:type="string">-</argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.street2" as="street2"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_label" xsi:type="string">-</argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.street3" as="street3"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_label" xsi:type="string">-</argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.postcode" as="postcode"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.city" as="city"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.region" as="region"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_type" xsi:type="string">text_select</argument>
+                        <argument name="option_model" xsi:type="object">
+                            Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.country_id" as="country_id"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_type" xsi:type="string">select</argument>
+                        <argument name="option_model" xsi:type="object">
+                            Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
+                        </argument>
+                    </arguments>
+                </block>
+
+                <block
+                    name="loki-checkout.billing.address.company" as="company"
+                    ifconfig="customer/address/company_show"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.telephone" as="telephone"
+                    ifconfig="customer/address/telephone_show"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.fax" as="fax"
+                    ifconfig="customer/address/fax_show"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.billing.address.vat_id" as="vat_id"
+                    ifconfig="customer/address/taxvat_show"
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
             </block>
 
-            <block
-                name="loki-checkout.billing.address.lastname" as="lastname"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.suffix" as="suffix"
-                ifconfig="customer/address/suffix_show"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.street0" as="street0"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_label" xsi:type="string">Street</argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.street1" as="street1"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_label" xsi:type="string">-</argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.street2" as="street2"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_label" xsi:type="string">-</argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.street3" as="street3"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_label" xsi:type="string">-</argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.postcode" as="postcode"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.city" as="city"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.region" as="region"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_type" xsi:type="string">text_select</argument>
-                    <argument name="option_model" xsi:type="object">
-                        Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
-                    </argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.country_id" as="country_id"
-                template="Yireo_LokiCheckout::form/field.phtml">
-                <arguments>
-                    <argument name="field_type" xsi:type="string">select</argument>
-                    <argument name="option_model" xsi:type="object">
-                        Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
-                    </argument>
-                </arguments>
-            </block>
-
-            <block
-                name="loki-checkout.billing.address.company" as="company"
-                ifconfig="customer/address/company_show"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.telephone" as="telephone"
-                ifconfig="customer/address/telephone_show"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.fax" as="fax"
-                ifconfig="customer/address/fax_show"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.vat_id" as="vat_id"
-                ifconfig="customer/address/taxvat_show"
-                template="Yireo_LokiCheckout::form/field.phtml"/>
         </block>
     </body>
 </page>
