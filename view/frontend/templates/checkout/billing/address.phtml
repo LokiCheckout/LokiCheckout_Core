@@ -16,8 +16,9 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 
     <?= $block->getChildHtml('billing-as-shipping') ?>
     <?php if ($viewModel->getBillingAsShippingValue()): ?>
-        <?= $block->getChildHtml('address-view') ?>
+
+        <?= $block->getChildHtml('view') ?>
     <?php else: ?>
-        <?= $block->getChildHtml('address-form') ?>
+        <?= $block->getChildHtml('form') ?>
     <?php endif; ?>
 </div>
