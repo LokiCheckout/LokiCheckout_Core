@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton;
 
 use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
 use Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext;
+use Yireo\LokiCheckout\Exception\UnknownStepException;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 /**
@@ -13,7 +14,12 @@ class StepBackwardButtonViewModel extends GenericViewModel
 {
     public function isAllowRendering(): bool
     {
-        $previousStep = $this->getStepNavigator()->getPreviousStep();
+        try {
+            $previousStep = $this->getStepNavigator()->getPreviousStep();
+        } catch (UnknownStepException $e) {
+            return false;
+        }
+
         if ($this->getStepNavigator()->isFirstStep($previousStep)) {
             return false;
         }

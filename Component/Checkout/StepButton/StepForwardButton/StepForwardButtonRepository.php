@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Step\StepForwardButton;
+namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton;
 
 use Exception;
 use Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext;

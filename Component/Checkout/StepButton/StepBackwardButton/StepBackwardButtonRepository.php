@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton;
 
 use Exception;
 use Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext;
+use Yireo\LokiCheckout\Exception\UnknownStepException;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -14,7 +15,11 @@ class StepBackwardButtonRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
+        try {
         return $this->getStepNavigator()->getPreviousStep()->getCode();
+        } catch (UnknownStepException $e) {
+            return null;
+        }
     }
 
     protected function saveData(mixed $data): void
