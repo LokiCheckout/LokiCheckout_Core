@@ -6,9 +6,7 @@
             name="loki-checkout.progressbar"
             viewModel="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarRepository">
-            <target name="loki-checkout.steps.single"/>
-            <target name="loki-checkout.steps.shipping"/>
-            <target name="loki-checkout.steps.billing"/>
+            <target name="checkout-steps-container"/>
         </component>
 
         <component
@@ -323,9 +321,7 @@
     <componentGroup
         name="step-buttons"
         defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
-        <defaultTarget name="loki-checkout.steps.single"/>
-        <defaultTarget name="loki-checkout.steps.shipping"/>
-        <defaultTarget name="loki-checkout.steps.billing"/>
+        <defaultTarget name="checkout-steps-container"/>
 
         <component
             name="loki-checkout.steps.shipping.backward-button"

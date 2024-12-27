@@ -48,16 +48,16 @@
         }
     }
      */
+    [aria-busy] > .loader-overlay {
+        display: flex;
+    }
 
-    [aria-busy] {
-        .field-loader,
-        .loader {
-            display: block;
-        }
+    [aria-busy] > .loader {
+        display: block;
+    }
 
-        .loader-overlay {
-            display: flex;
-        }
+    [aria-busy] > .field-loader {
+        display: flex;
     }
 
     /*
