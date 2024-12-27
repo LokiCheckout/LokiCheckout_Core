@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ShippingStepViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -13,17 +12,12 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ShippingStepViewModel $viewModel */
-/** @var AlpineComponentData $alpineComponentData */
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+
 $duration = $block->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
-     x-data="LokiCheckoutStep"
-     x-title="<?= $alpineComponentData->getName($block) ?>"
-     x-init-data='<?= $alpineComponentData->getJson($viewModel) ?>'
      <?php if (false === $viewModel->isVisible()): ?>x-cloak<?php endif; ?>
      x-show="visible"
-     x-transition.duration.<?= $duration ?>.opacity
->
+     x-transition.duration.<?= $duration ?>.opacity>
     <?= $block->getChildHtml() ?>
 </div>

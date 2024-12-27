@@ -4,11 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Component\Base\Field\Field;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
-/** @var Field|OptionsBehaviour $viewModel */
+/** @var ComponentViewModelInterface|OptionsBehaviour $viewModel */
 /** @var CssClass $css */
+
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $viewModel->setOptionModel($optionModel);

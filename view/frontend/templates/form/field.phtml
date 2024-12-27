@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
@@ -15,8 +14,7 @@ use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 /** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
 /** @var FieldViewModel $viewModel */
-/** @var AlpineComponentData $alpineComponentData */
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>

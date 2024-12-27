@@ -4,15 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BillingAsShippingViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var AlpineComponentData $alpineComponentData */
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div class="<?= $css('card mb-8') ?>">
     <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">

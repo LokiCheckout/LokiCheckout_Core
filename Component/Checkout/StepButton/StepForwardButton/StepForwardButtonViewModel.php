@@ -10,4 +10,8 @@ use Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext;
  */
 class StepForwardButtonViewModel extends GenericViewModel
 {
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutStepForwardButton';
+    }
 }

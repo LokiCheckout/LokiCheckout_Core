@@ -5,7 +5,6 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
@@ -13,8 +12,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var AlpineComponentData $alpineComponentData */
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
+
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
 $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
 ?>

@@ -25,4 +25,9 @@ class StepBackwardButtonViewModel extends GenericViewModel
     {
         return $this->getContext()->stepNavigator;
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutStepBackwardButton';
+    }
 }

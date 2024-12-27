@@ -51,4 +51,9 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
     {
         return $this->getContext()->stepValidator->validate();
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutStep';
+    }
 }

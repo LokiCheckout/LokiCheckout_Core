@@ -44,4 +44,9 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
     {
         return $this->getContext()->stepValidator->validate();
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutStep';
+    }
 }

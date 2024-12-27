@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -15,10 +14,8 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
-/** @var AlpineComponentData $alpineComponentData */
 
 // @todo: Separate in smaller templates
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote();
 $couponCode = $quote->getCouponCode();

@@ -4,16 +4,13 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Other\Agreements\AgreementsViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Component\AlpineComponentData;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var AgreementsViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var AlpineComponentData $alpineComponentData */
 
-$alpineComponentData = $viewModelFactory->create(AlpineComponentData::class);
 ?>
 <div class="<?= $css('') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
