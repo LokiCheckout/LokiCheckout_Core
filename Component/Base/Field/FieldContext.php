@@ -2,17 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
-use Yireo\LokiCheckout\Util\Component\StepProvider;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Util\Component\FieldTemplateLocator;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class FieldContext implements ComponentContextInterface
+class FieldContext extends GenericContext
 {
-    public function __construct(
-        public readonly FieldTemplateLocator $fieldTemplateLocator,
-        public readonly CheckoutState $checkoutState,
-        public readonly StepProvider $stepProvider,
-    ) {
+    public function getFieldTemplateLocator(): FieldTemplateLocator
+    {
+        return $this->get(FieldTemplateLocator::class);
     }
 }

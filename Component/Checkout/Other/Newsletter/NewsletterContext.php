@@ -2,21 +2,25 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
-use Yireo\LokiCheckout\Util\Component\StepProvider;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Magento\Newsletter\Model\SubscriberFactory;
 
-class NewsletterContext implements ComponentContextInterface
+class NewsletterContext extends GenericContext
 {
-    public function __construct(
-        public CheckoutSession $checkoutSession,
-        public readonly StepProvider $stepProvider,
-        public SubscriptionManagerInterface $subscriptionManager,
-        public GuestSubscriptionChecker $guestSubscriptionChecker,
-        public SubscriberFactory $subscriberFactory
-    ) {
+    public function getSubscriptionManager(): SubscriptionManagerInterface
+    {
+        return $this->get(SubscriptionManagerInterface::class);
+    }
+
+    public function getGuestSubscriptionChecker(): GuestSubscriptionChecker
+    {
+        return $this->get(GuestSubscriptionChecker::class);
+    }
+
+    public function getSubscriberFactory(): SubscriberFactory
+    {
+        return $this->get(SubscriberFactory::class);
     }
 }

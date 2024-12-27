@@ -2,19 +2,18 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step\BillingStep;
 
-use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class BillingStepContext implements ComponentContextInterface
+class BillingStepContext extends GenericContext
 {
     public function __construct(
-        public readonly CheckoutState $checkoutState,
         public readonly ValidatorInterface $stepValidator,
-        public readonly BillingAddressState $billingAddressState,
-        public readonly StepNavigator $stepNavigator
     ) {
+    }
+
+    public function getStepValidator(): ValidatorInterface
+    {
+        return $this->stepValidator;
     }
 }

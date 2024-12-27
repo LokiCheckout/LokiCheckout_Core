@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
-    <componentGroup name="default">
+    <componentGroup name="default" defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
+
         <component
             name="loki-checkout.progressbar"
-            context="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarRepository">
             <target name="loki-checkout.steps.single"/>
@@ -112,8 +112,7 @@
         </component>
     </componentGroup>
 
-    <componentGroup
-        name="steps">
+    <componentGroup name="steps">
         <component
             name="loki-checkout.steps.shipping"
             context="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ShippingStepContext"
@@ -136,7 +135,7 @@
     <componentGroup
         name="quoteFields"
         defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
-        defaultContext="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldContext"
+        defaultContext="Yireo\LokiCheckout\Component\Base\Field\FieldContext"
         defaultRepository="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldRepository"
     >
         <defaultTarget name="loki-checkout.sidebar.preview.quote_details"/>
@@ -323,7 +322,7 @@
 
     <componentGroup
         name="step-buttons"
-        defaultContext="Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext">
+        defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
         <component
             name="loki-checkout.steps.shipping.backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonViewModel"

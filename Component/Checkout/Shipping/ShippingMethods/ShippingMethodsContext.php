@@ -2,21 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
 
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Util\Component\StepProvider;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 
-class ShippingMethodsContext implements ComponentContextInterface
+class ShippingMethodsContext extends GenericContext
 {
-    public function __construct(
-        public readonly ShippingMethodManagementInterface $shippingMethodManagement,
-        public readonly ShippingAddressState $shippingAddressState,
-        public readonly StepProvider $stepProvider,
-        public readonly CartRepositoryInterface $cartRepository,
-        public readonly Config $moduleConfig
-    ) {
+    public function getShippingMethodManagement(): ShippingMethodManagementInterface
+    {
+        return $this->get(ShippingMethodManagementInterface::class);
     }
 }

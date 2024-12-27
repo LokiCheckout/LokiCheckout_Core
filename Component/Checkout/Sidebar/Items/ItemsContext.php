@@ -2,15 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Items;
 
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Util\Cart\ItemConvertor;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class ItemsContext implements ComponentContextInterface
+class ItemsContext extends GenericContext
 {
-    public function __construct(
-        public CheckoutState $checkoutState,
-        public ItemConvertor $itemConvertor
-    ) {
+    public function getItemConvertor(): ItemConvertor
+    {
+        return $this->get(ItemConvertor::class);
     }
 }

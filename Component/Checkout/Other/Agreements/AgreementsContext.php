@@ -2,24 +2,25 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Yireo\LokiCheckout\Util\Component\StepProvider;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 
-/**
- * @method AgreementsContext getContext()
- */
-class AgreementsContext implements ComponentContextInterface
+class AgreementsContext extends GenericContext
 {
-    public function __construct(
-        public readonly CheckoutSession $checkoutSession,
-        public readonly StepProvider $stepProvider,
-        public readonly CheckoutAgreementsListInterface $checkoutAgreementsList,
-        public readonly ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
-        public readonly SearchCriteriaBuilder $searchCriteriaBuilder
-    ) {
+    public function getCheckoutAgreementsList(): CheckoutAgreementsListInterface
+    {
+        return $this->get(CheckoutAgreementsListInterface::class);
+    }
+
+    public function getActiveStoreAgreementsFilter(): ActiveStoreAgreementsFilter
+    {
+        return $this->get(ActiveStoreAgreementsFilter::class);
+    }
+
+    public function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+    {
+        return $this->get(SearchCriteriaBuilder::class);
     }
 }

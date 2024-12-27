@@ -9,31 +9,44 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class ShippingAddressContext implements ComponentContextInterface
+class ShippingAddressContext extends GenericContext
 {
-    public function __construct(
-        public CheckoutState $checkoutState,
-        public CustomerSession $customerSession,
-        public CustomerRepositoryInterface $customerRepository,
-        public CustomerAddressRepository $customerAddressRepository,
-        public SearchCriteriaBuilder $searchCriteriaBuilder,
-        public AddressConfig $addressConfig,
-        public AddressMapper $addressMapper,
-        public CheckoutSession $checkoutSession,
-        public CustomerProvider $customerProvider,
-    ) {
+    public function getCustomerRepository(): CustomerRepositoryInterface
+    {
+        return $this->get(CustomerRepositoryInterface::class);
+    }
+
+    public function getCustomerAddressRepository(): CustomerAddressRepository
+    {
+        return $this->get(CustomerAddressRepository::class);
+    }
+
+    public function getSearchCriteriaBuilder(): SearchCriteriaBuilder
+    {
+        return $this->get(SearchCriteriaBuilder::class);
+    }
+
+    public function getAddressConfig(): AddressConfig
+    {
+        return $this->get(AddressConfig::class);
+    }
+
+    public function getAddressMapper(): AddressMapper
+    {
+        return $this->get(AddressMapper::class);
     }
 
     public function isNewAddress(): bool
     {
-        if (false === $this->customerSession->isLoggedIn()) {
+        if (false === $this->getCustomerSession()->isLoggedIn()) {
             return true;
         }
 
-        return (bool)$this->checkoutSession->getIsNewAddress();
+        return (bool)$this->getCustomerSession()->getIsNewAddress();
     }
 }

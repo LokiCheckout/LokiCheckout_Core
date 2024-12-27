@@ -33,7 +33,6 @@ class CheckoutState implements ArgumentInterface
         return $this->checkoutSession;
     }
 
-    // @todo: Where is this needed?
     public function getCustomerSession(): CustomerSession
     {
         return $this->customerSession;

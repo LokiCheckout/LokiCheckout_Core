@@ -3,20 +3,12 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Postcode;
 
 use Magento\Directory\Helper\Data as DirectoryData;
-use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
-use Yireo\LokiCheckout\Util\Component\AttributeProvider;
-use Yireo\LokiCheckout\Util\Component\StepProvider;
-use Yireo\LokiCheckout\Util\Component\FieldTemplateLocator;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext;
 
-class PostcodeContext implements ComponentContextInterface
+class PostcodeContext extends AddressFieldContext
 {
-    public function __construct(
-        public readonly FieldTemplateLocator $fieldTemplateLocator,
-        public readonly StepProvider $stepProvider,
-        public readonly AddressStateProvider $addressStateProvider,
-        public readonly AttributeProvider $attributeProvider,
-        public readonly DirectoryData $directoryData,
-    ) {
+    public function getDirectoryData(): DirectoryData
+    {
+        return $this->get(DirectoryData::class);
     }
 }
