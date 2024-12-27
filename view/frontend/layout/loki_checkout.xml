@@ -28,7 +28,7 @@
     <body>
         <referenceContainer name="content">
             <block name="loki-checkout" cacheable="false">
-                <block name="loki-checkout.steps" as="steps" template="Yireo_LokiCheckout::checkout/steps.phtml"/>
+                <block name="loki-checkout.steps" as="steps"/>
             </block>
         </referenceContainer>
 
