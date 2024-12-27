@@ -27,6 +27,7 @@ abstract class AbstractRenderer implements ArgumentInterface
         }
 
         $block->setAncestorBlock($ancestorBlock);
+        $block->setUniqId($this->getUniqId($block, $ancestorBlock));
         $block->addData($data);
 
         $viewModel = $ancestorBlock->getViewModel();
@@ -64,5 +65,13 @@ abstract class AbstractRenderer implements ArgumentInterface
         }
 
         $block->setNameInLayout($parentBlock->getNameInLayout().'.'.$alias);
+    }
+
+    protected function getUniqId(AbstractBlock $block, AbstractBlock $ancestorBlock): string
+    {
+        $ancestorId = $ancestorBlock->getNameInLayout();
+        $blockId = str_replace('loki-checkout.', '', $block->getNameInLayout());
+
+        return $ancestorId.'-'.$blockId;
     }
 }

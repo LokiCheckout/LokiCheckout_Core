@@ -8,11 +8,13 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\CamelCaseConvertor;
+use Yireo\LokiComponents\Util\IdConvertor;
 
 class AddHtmlAttributes implements ObserverInterface
 {
     public function __construct(
-        private CamelCaseConvertor $camelCaseConvertor
+        private CamelCaseConvertor $camelCaseConvertor,
+        private IdConvertor $idConvertor
     ) {
     }
 
@@ -74,9 +76,13 @@ class AddHtmlAttributes implements ObserverInterface
 
     private function getElementId(AbstractBlock $block): string
     {
+        $elementId = $block->getUniqId();
+        if (!empty($elementId)) {
+            return $this->idConvertor->toElementId($elementId);
+        }
+
         $nameInLayout = strtolower((string)$block->getNameInLayout());
-        // @todo: Find all instances of this kind of thing and DRY
-        return preg_replace('#([^a-zA-Z0-9]{1})#', '-', $nameInLayout);
+        return $this->idConvertor->toElementId($nameInLayout);
     }
 
     private function getComponentName(AbstractBlock $block): string

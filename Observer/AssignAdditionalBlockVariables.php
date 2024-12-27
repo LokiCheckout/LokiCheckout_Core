@@ -19,7 +19,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         private readonly ViewModelFactory $viewModelFactory,
         private readonly CssClassFactory $cssClassFactory,
         private readonly BlockRenderer $blockRenderer,
-        private readonly CamelCaseConvertor $camelCaseConvertor
+        private readonly CamelCaseConvertor $camelCaseConvertor,
     ) {
     }
 
