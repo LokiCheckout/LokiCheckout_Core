@@ -7,7 +7,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Util\CamelCaseConvertor;
+use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
 class AddHtmlAttributes implements ObserverInterface
 {

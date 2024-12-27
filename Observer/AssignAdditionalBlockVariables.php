@@ -10,7 +10,7 @@ use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\Util\CamelCaseConvertor;
+use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {

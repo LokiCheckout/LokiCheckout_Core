@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Test\Unit\Util;
 
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Util\CamelCaseConvertor;
+use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
 class CamelCaseConvertorTest extends TestCase
 {

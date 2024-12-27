@@ -4,11 +4,10 @@ namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
-use Yireo\LokiCheckout\Util\CamelCaseConvertor;
-use Yireo\LokiCheckout\Util\IdConvertor;
+use Yireo\LokiComponents\Util\CamelCaseConvertor;
+use Yireo\LokiComponents\Util\IdConvertor;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 use Yireo\LokiComponents\Util\ComponentUtil;
 
