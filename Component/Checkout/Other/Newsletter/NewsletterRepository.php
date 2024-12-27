@@ -32,7 +32,6 @@ class NewsletterRepository extends ComponentRepository
 
         $subscriber = $this->getContext()->getSubscriberFactory()->create();
         $subscriber->load($email, 'subscriber_email');
-        echo 'Subscriber: ' . $subscriber->getId();
         if ($subscriber->getId() > 0) {
             $confirmCode = $subscriber->getSubscriberConfirmCode();
             $this->getContext()->getSubscriptionManager()->unsubscribe($email, $storeId, $confirmCode);
