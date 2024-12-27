@@ -1,49 +1,28 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
-use Yireo\LokiComponents\Component\MutableComponent;
+use Yireo\LokiComponents\Component\Component;
 
-die('Do not use FieldComponent');; // @todo Remove
-class FieldComponent extends MutableComponent
+/**
+ * @method FieldRepository getRepository()
+ * @method FieldViewModel getViewModel()
+ */
+class FieldComponent extends Component
 {
-    protected mixed $value = '';
-    protected bool $valid = true;
-
-    public function getValidators(): array
+    public function getValidators(array $validators = []): array
     {
-        $validators = [];
-        if ($this->getRepository()->getFieldName()) {
-            $validators[] = $this->getRepository()->getFieldName();
-        }
+        $viewModel = $this->getViewModel();
+        $validators[] = $viewModel->getFieldName();
 
-        if ($this->isRequired()) {
+        if ($viewModel->isRequired()) {
             $validators[] = 'required';
         }
 
-        if ($this->hasMinLength() || $this->hasMaxLength()) {
+        if ($viewModel->hasMinLength() || $viewModel->hasMaxLength()) {
             $validators[] = 'length';
         }
 
-        $layoutValidators = (array)$this->getViewModel()->getBlock()->getValidators();
-        if (!empty($layoutValidators)) {
-            $validators = array_merge($validators, array_values((array)$layoutValidators));
-        }
-
-        return array_unique($validators);
-    }
-
-    /**
-     * @return bool
-     */
-    public function isValid(): bool
-    {
-        return $this->valid;
-    }
-
-    public function isRequired(): bool
-    {
-        return false;
+        return parent::getValidators($validators);
     }
 }

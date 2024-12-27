@@ -132,6 +132,7 @@
 
     <componentGroup
         name="quoteFields"
+        defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         defaultContext="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldContext"
         defaultRepository="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldRepository"
     >
@@ -155,6 +156,7 @@
 
     <componentGroup
         name="addressFields"
+        defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         defaultContext="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext"
         defaultViewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
         defaultRepository="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository"
@@ -299,6 +301,7 @@
 
     <componentGroup
         name="streetAddressFields"
+        defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         defaultContext="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineContext"
         defaultViewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         defaultRepository="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineRepository">
