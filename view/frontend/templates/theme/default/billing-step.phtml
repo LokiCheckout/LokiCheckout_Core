@@ -21,9 +21,8 @@ $isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
 $duration = $viewModel->getBlock()->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
-     <?php if (false === $isCurrent): ?>x-cloak<?php endif; ?>
+     x-cloak
      x-show="visible"
-     x-transition.duration.<?= $duration ?>.opacity
->
+     x-transition.duration.<?= $duration ?>.opacity>
     <?= $block->getChildHtml() ?>
 </div>
