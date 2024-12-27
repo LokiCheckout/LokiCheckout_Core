@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 $duration = $block->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>"
-     <?php if (false === $viewModel->isVisible()): ?>x-cloak<?php endif; ?>
+     x-cloak
      x-show="visible"
      x-transition.duration.<?= $duration ?>.opacity>
     <?= $block->getChildHtml() ?>

@@ -302,6 +302,9 @@
         defaultContext="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineContext"
         defaultViewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         defaultRepository="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineRepository">
+        <defaultTarget name="loki-checkout.sidebar.preview.shipping_details"/>
+        <defaultTarget name="loki-checkout.sidebar.preview.billing_address"/>
+
         <component name="loki-checkout.shipping.address.street0"/>
         <component name="loki-checkout.shipping.address.street1"/>
         <component name="loki-checkout.shipping.address.street2"/>

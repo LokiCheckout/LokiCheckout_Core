@@ -49,4 +49,11 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
     {
         return 'LokiCheckoutStep';
     }
+
+    public function getJsData(): ?array
+    {
+        return [
+            'visible' => $this->isVisible(),
+        ];
+    }
 }
