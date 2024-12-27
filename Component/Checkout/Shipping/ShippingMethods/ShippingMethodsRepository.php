@@ -10,6 +10,8 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ShippingMethodsRepository extends ComponentRepository
 {
+    private string $currentShippingMethod = '';
+
     /**
      * @return ShippingMethodInterface[]
      */
@@ -37,6 +39,10 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function getData(): mixed
     {
+        if (!empty($this->currentShippingMethod)) {
+            return $this->currentShippingMethod;
+        }
+
         $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
 
         $currentShippingMethod = (string)$shippingAddress->getShippingMethod();
@@ -62,17 +68,20 @@ class ShippingMethodsRepository extends ComponentRepository
             ->collectShippingRates()
             ->setShippingMethod($shippingMethod);
 
-        $this->getContext()->getCartRepository()->save($quote);
+        $quote->save();
+
+        $this->currentShippingMethod = $shippingMethod;
     }
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
-            // @todo: Show a warning that something went wrong
+            $this->component->getViewModel()->getMessageManager()->addLocalError('Method not allowed'); // @todo: Beautify
             $shippingMethodCode = '';
         }
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
+            $this->component->getViewModel()->getMessageManager()->addLocalNotice('Setting default method'); // @todo: Make optional
             $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 

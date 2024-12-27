@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -12,13 +13,16 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var PriceFormatter $priceFormatter */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $quote = $checkoutState->getQuote()->collectTotals();
 $totals = $quote->getTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= $css('relative') ?>">
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+
     <dl class="<?= $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
         <?= $block->getChildHtml('before') ?>
 
