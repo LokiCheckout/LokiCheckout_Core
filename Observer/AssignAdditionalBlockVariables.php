@@ -5,8 +5,12 @@ namespace Yireo\LokiCheckout\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiComponents\Component\ComponentRegistry;
+use Yireo\LokiComponents\Exception\NoComponentFoundException;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClassFactory;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -20,6 +24,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         private readonly CssClassFactory $cssClassFactory,
         private readonly BlockRenderer $blockRenderer,
         private readonly CamelCaseConvertor $camelCaseConvertor,
+        private readonly ComponentRegistry $componentRegistry
     ) {
     }
 
@@ -45,6 +50,22 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         if (!$block->getComponentName()) {
             $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());
             $block->setComponentName($componentName);
+        }
+
+        $this->allowRendering($block);
+    }
+
+    private function allowRendering(AbstractBlock $block): void
+    {
+        try {
+            $component = $this->componentRegistry->getComponentFromBlock($block);
+        } catch(NoComponentFoundException $exeption) {
+            return;
+        }
+
+        $viewModel = $component->getViewModel();
+        if ($viewModel instanceof GenericViewModelInterface && false === $viewModel->isAllowRendering()) {
+            $block->setTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
     }
 }

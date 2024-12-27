@@ -15,7 +15,7 @@
         clear: function (component) {
             const errorContainer = component.$refs.errors;
             if (!errorContainer) {
-                yireoLokiCheckoutLogger('ERROR: Clear attempt on empty HTML element', component.name);
+                yireoLokiCheckoutLogger('ERROR: Clear attempt on empty HTML element', component.id);
                 return;
             }
 

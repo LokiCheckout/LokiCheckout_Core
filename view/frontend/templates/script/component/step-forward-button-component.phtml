@@ -25,7 +25,7 @@
                 if (!this.valid) {
                     const components = [];
                     Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
-                        components.push(component.name);
+                        components.push(component.id);
                     })
 
                     yireoLokiCheckoutLogger('INFO: Invalid components for step "' + this.step + '"', components);

@@ -9,11 +9,6 @@
         <plugin name="Yireo_LokiCheckout::addCspInlineScripts" type="Yireo\LokiCheckout\Plugin\AddCspInlineScripts"/>
     </type>
 
-    <type name="Yireo\LokiComponents\Component\ComponentHydrator">
-        <plugin name="Yireo_LokiCheckout::additionalHydration"
-                type="Yireo\LokiCheckout\Plugin\AdditionalHydration"/>
-    </type>
-
     <type name="\Yireo\LokiCheckout\Observer\AddDebuggingInfo">
         <arguments>
             <argument name="blockPrefixes" xsi:type="array">

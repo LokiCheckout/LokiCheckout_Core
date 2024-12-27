@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton;
 
+use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
-use Yireo\LokiCheckout\Component\Checkout\StepButton\StepButtonContext;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 /**
- * @method StepButtonContext getContext()
+ * @method GenericContext getContext()
  */
 class StepBackwardButtonViewModel extends GenericViewModel
 {
