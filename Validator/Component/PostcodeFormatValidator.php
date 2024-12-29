@@ -45,8 +45,11 @@ class PostcodeFormatValidator implements ValidatorInterface
             }
         }
 
+        $errorMessage = $this->getErrorMessageFromExamples($postcode, $examples);
+        //echo $errorMessage."\n";
+
         $messages = $component->getViewModel()->getMessageManager();
-        $messages->addLocalError($this->getErrorMessageFromExamples($postcode, $examples));
+        $messages->addLocalError($errorMessage);
 
         return false;
     }
@@ -58,7 +61,7 @@ class PostcodeFormatValidator implements ValidatorInterface
         }
 
         if (count($examples) === 1) {
-            return (string)__('Postcode "%1" needs to be in the format %2', $postcode, $examples[0]);
+            return (string)__('Postcode "%1" needs to be in the format "%2"', $postcode, $examples[0]);
         }
 
         return (string)__('Postcode "%1" needs to be in one of the following formats: %2', $postcode, implode(', ', $examples));
