@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\LayoutInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
@@ -169,12 +168,7 @@ class StepNavigator implements ArgumentInterface
 
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
-            $stepBlock = $this->layout->getBlock($step->getBlockName());
-            if (false === $stepBlock instanceof AbstractBlock) {
-                continue;
-            }
-
-            $stepComponent = $this->componentRegistry->getComponentFromBlock($stepBlock);
+            $stepComponent = $this->componentRegistry->getComponentFromBlockName($step->getBlockName());
             $stepViewModel = $stepComponent->getViewModel();
 
             if (false === $stepViewModel instanceof StepViewModelInterface) {
