@@ -61,6 +61,6 @@ class PostcodeFormatValidator implements ValidatorInterface
             return (string)__('Postcode "%1" needs to be in the format %2', $postcode, $examples[0]);
         }
 
-        return (string)__('Postcode "%1" needs to be in one of the following formats: %1', $postcode, implode(', ', $examples));
+        return (string)__('Postcode "%1" needs to be in one of the following formats: %2', $postcode, implode(', ', $examples));
     }
 }
