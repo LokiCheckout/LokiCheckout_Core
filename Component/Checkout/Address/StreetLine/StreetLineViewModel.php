@@ -42,7 +42,7 @@ class StreetLineViewModel extends AddressFieldViewModel
 
     private function getIndex(): int
     {
-        $fieldName = $this->getFieldName(); // @todo: Add a regex to extract index from field name
-        return 42;
+        $fieldName = $this->getFieldName();
+        return (int)str_replace('street', '', $fieldName);
     }
 }
