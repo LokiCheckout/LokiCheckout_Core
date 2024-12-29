@@ -56,8 +56,12 @@
         display: block;
     }
 
-    [aria-busy] > .field-loader {
-        display: flex;
+    [aria-busy] {
+        &.field {
+            .field-loader {
+                display: flex;
+            }
+        }
     }
 
     /*
