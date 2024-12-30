@@ -77,7 +77,6 @@ class PaymentMethodsRepository extends ComponentRepository
         }
 
         if (false === $this->isPaymentMethodAvailable($paymentMethod)) {
-            echo 'Method is not available';
             return $this->getDefaultPayment();
         }
 
