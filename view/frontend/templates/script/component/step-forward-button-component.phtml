@@ -22,7 +22,6 @@
             },
             updateValid() {
                 this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
-                console.log('Updating valid', this.valid);
                 if (!this.valid) {
                     const components = [];
                     Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
