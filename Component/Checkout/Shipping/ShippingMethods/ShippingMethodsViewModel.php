@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
 
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
-use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
  * @method ShippingMethodsContext getContext()
@@ -20,14 +19,17 @@ class ShippingMethodsViewModel extends FieldViewModel
         return $this->getRepository()->getShippingMethods();
     }
 
+    /**
+     * @deprecated Just use getValue()
+     */
     public function getCurrentShippingCode(): string
     {
-        return (string)$this->getRepository()->get();
+        return (string)$this->getValue();
     }
 
     public function isValid(): bool
     {
-        return !empty($this->getCurrentShippingCode());
+        return !empty($this->getValue());
     }
 
     public function getFieldLabel(): string
@@ -38,13 +40,6 @@ class ShippingMethodsViewModel extends FieldViewModel
     public function isRequired(): bool
     {
         return true;
-    }
-
-    public function getAlpineData(): array
-    {
-        return [
-            'value' => $this->getCurrentShippingCode()
-        ];
     }
 
     public function getJsComponentName(): ?string

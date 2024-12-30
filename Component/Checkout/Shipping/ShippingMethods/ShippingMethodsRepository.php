@@ -22,8 +22,8 @@ class ShippingMethodsRepository extends ComponentRepository
             return $shippingMethods;
         }
 
-        $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
-        $quote = $shippingAddress->getQuote();
+        $quote = $this->getContext()->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
         $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates();

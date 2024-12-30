@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Component\Base\Generic;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
@@ -77,6 +78,17 @@ class GenericContext implements ComponentContextInterface
     public function getMessageManager(): MessageManager
     {
         return $this->get(MessageManager::class);
+    }
+
+    public function getQuote(): Quote
+    {
+        static $quote = null;
+        if ($quote instanceof Quote) {
+            return $quote;
+        }
+
+        $quote = $this->getCheckoutSession()->getQuote();
+        return $quote;
     }
 
     public function __call(string $name, array $arguments)
