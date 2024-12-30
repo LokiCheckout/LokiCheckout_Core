@@ -17,6 +17,6 @@ class ProgressBarRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        $this->getContext()->getStepNavigator()->setCurrentStepByCode($data);
+        $this->getContext()->getStepNavigator()->setCurrentStepByCode((string)$data);
     }
 }
