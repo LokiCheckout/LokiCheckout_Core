@@ -8,7 +8,6 @@
             <block
                 name="loki-checkout.script.component-store"
                 template="Yireo_LokiCheckout::script/component-store.phtml"/>
-
             <block
                 name="loki-checkout.script.component-extender"
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
