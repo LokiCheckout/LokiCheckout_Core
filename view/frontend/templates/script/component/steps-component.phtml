@@ -2,10 +2,14 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutSteps', () => ({
             ...LokiCheckoutBaseComponentType,
+            currentStep: 'none',
             initActions: {
                 ...LokiCheckoutBaseComponentType.initActions,
-                replaceHash() {
-                    window.location.hash = Alpine.store('components').currentStep;
+                setCurrentStep() {
+                    if (this.currentStep !== 'none') {
+                        window.location.hash = this.currentStep;
+                        Alpine.store('components').currentStep = this.currentStep;
+                    }
                 }
             },
             submit(event) {
@@ -16,45 +20,7 @@
 
                 this.value = step;
                 this.post();
-
-                window.location.hash = step;
             }
-            /*
-            afterInit() {
-                this.updateValid();
-                document.addEventListener('yireo-loki-checkout.component-change', () => {
-                    this.updateValid();
-                });
-            },
-            updateValid() {
-                this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
-                if (!this.valid) {
-                    const components = [];
-                    Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
-                        components.push(component.name);
-                    })
-
-                    yireoLokiCheckoutLogger('INFO: Invalid components for step "' + this.step + '"', components);
-                }
-
-                return this.valid;
-            },
-            submit() {
-                window.dispatchEvent(new CustomEvent('clear-messages'));
-                Alpine.store('components').getComponentsByStep(this.step).forEach((component) => {
-                    LokiCheckoutValidator.validate(component);
-                });
-
-                if (true === this.updateValid()) {
-                    this.post({});
-                }
-
-                setTimeout(() => {
-                    if (this.valid) {
-                        this.valid = true;
-                    }
-                }, 4000);
-            }*/
         }));
     });
 </script>

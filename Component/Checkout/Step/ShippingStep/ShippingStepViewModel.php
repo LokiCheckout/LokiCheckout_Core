@@ -54,6 +54,12 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
     {
         return [
             'visible' => $this->isVisible(),
+            'step' => $this->getStep(),
         ];
+    }
+
+    public function getStep(): string
+    {
+        return 'none';
     }
 }

@@ -22,9 +22,6 @@
 
         <referenceContainer name="before.body.end">
             <block
-                name="loki-checkout.script.step-path"
-                template="Yireo_LokiCheckout::script/step-path.phtml"/>
-            <block
                 name="loki-checkout.script.aria-invalid"
                 template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
             <block

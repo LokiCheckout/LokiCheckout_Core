@@ -1,9 +1,0 @@
-<script>
-    // @todo: Rename this template
-    document.addEventListener('afterChangeStep', (stepCode) => {
-        Alpine.store('components').currentStep = stepCode;
-        window.location.hash = stepCode;
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-    });
-</script>

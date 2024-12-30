@@ -14,4 +14,17 @@ class ProgressBarViewModel extends ComponentViewModel
     {
         return 'LokiCheckoutSteps';
     }
+
+    public function getStep(): string
+    {
+        return 'none';
+    }
+
+    public function getJsData(): ?array
+    {
+        return [
+            'step' => $this->getStep(),
+            'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
+        ];
+    }
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
     <componentGroup name="default" defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
-        <component name="loki-checkout.steps"/>
+        <component
+            name="loki-checkout.steps"
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Steps\StepsViewModel"/>
 
         <component
             name="loki-checkout.progressbar"
@@ -323,6 +325,7 @@
         name="step-buttons"
         defaultContext="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
         <defaultTarget name="loki-checkout.steps"/>
+        <defaultTarget name="loki-checkout.progressbar"/>
 
         <component
             name="loki-checkout.steps.shipping.backward-button"

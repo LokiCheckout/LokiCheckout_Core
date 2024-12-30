@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
@@ -10,10 +11,12 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var StepNavigator $stepNavigator */
+/** @var BlockRenderer $blockRenderer */
 
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= $css('relative') ?>">
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
     <?= $block->getChildHtml() ?>
 </div>
