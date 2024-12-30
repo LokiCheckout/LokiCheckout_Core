@@ -15,6 +15,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
     <label for="billing_as_shipping" class="<?= $css('', 'label') ?>">
         <input type="checkbox"
                x-model="value"
+               @change="submit"
                id="billing_as_shipping">
         <span class="<?= $css('pl-2', 'span') ?>">
             <?= __('My billing and shipping address are the same') ?>

@@ -11,7 +11,9 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= $css('relative') ?>">
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?= $block->getChildHtml('shipping-as-billing') ?>

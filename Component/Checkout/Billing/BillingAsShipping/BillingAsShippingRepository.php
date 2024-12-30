@@ -26,11 +26,7 @@ class BillingAsShippingRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        if (!isset($data['billingAsShipping'])) {
-            return;
-        }
-
-        $billingAsShipping = $data['billingAsShipping'];
+        $billingAsShipping = (bool)$data;
         $billingAddress = $this->getContext()->getBillingAddressState()->getBillingAddress();
 
         $billingAddress->setSameAsBilling((int)$billingAsShipping);

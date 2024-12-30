@@ -47,10 +47,12 @@
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressViewModel"/>
 
         <component
-            name="loki-checkout.billing.address.billing-as-shipping"
+            name="loki-checkout.billing.address.shipping-as-billing"
             context="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingViewModel"
-            repository="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingRepository"/>
+            repository="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingRepository">
+            <target name="loki-checkout.billing.address"/>
+        </component>
 
         <component
             name="loki-checkout.billing.address.view"
@@ -158,7 +160,7 @@
     </componentGroup>
 
     <componentGroup
-        name="addressFields"
+        name="shippingAddressFields"
         defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         defaultContext="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext"
         defaultViewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
@@ -240,6 +242,17 @@
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel">
             <validator name="vat_id"/>
         </component>
+    </componentGroup>
+
+    <componentGroup
+        name="billingAddressFields"
+        defaultClass="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        defaultContext="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext"
+        defaultViewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
+        defaultRepository="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository"
+    >
+        <defaultTarget name="loki-checkout.sidebar.preview.shipping_details"/>
+        <defaultTarget name="loki-checkout.sidebar.preview.billing_address"/>
 
         <component
             name="loki-checkout.billing.address.prefix"
