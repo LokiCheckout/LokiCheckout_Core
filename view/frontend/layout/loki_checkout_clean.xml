@@ -4,5 +4,8 @@
         <!-- @todo: Find an alternative for this -->
         <referenceBlock name="checkout.root" remove="true" />
         <referenceBlock name="fallback.module.missing" remove="true"/>
+
+        <!-- @todo: Make this optional -->
+        <referenceBlock name="topmenu_generic" remove="true"/>
     </body>
 </page>
