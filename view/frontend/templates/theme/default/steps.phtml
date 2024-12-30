@@ -14,9 +14,9 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
 /** @var BlockRenderer $blockRenderer */
 
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
-$currentStep = $stepNavigator->getCurrentStep();
+$currentStep = $stepNavigator->getCurrentStep()->getCode();
 ?>
 <div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
-    <?= $block->getChildHtml() ?>
+    <?= $block->getChildHtml($currentStep.'-step') ?>
 </div>

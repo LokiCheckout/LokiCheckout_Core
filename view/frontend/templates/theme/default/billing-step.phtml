@@ -20,9 +20,6 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
 $duration = $viewModel->getBlock()->getDuration() ?? '300ms';
 ?>
-<div class="<?= $css('') ?>"
-     x-cloak
-     x-show="visible"
-     x-transition.duration.<?= $duration ?>.opacity>
+<div class="<?= $css('') ?>">
     <?= $block->getChildHtml() ?>
 </div>
