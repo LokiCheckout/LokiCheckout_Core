@@ -328,18 +328,21 @@
             name="loki-checkout.steps.shipping.backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonRepository">
+            <target name="loki-checkout.steps"/>
         </component>
 
         <component
             name="loki-checkout.steps.shipping.forward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonRepository">
+            <target name="loki-checkout.steps"/>
         </component>
 
         <component
             name="loki-checkout.steps.billing.backward-button"
             viewModel="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton\StepBackwardButtonRepository">
+            <target name="loki-checkout.steps"/>
         </component>
 
         <component

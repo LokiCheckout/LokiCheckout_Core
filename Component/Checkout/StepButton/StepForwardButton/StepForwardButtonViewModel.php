@@ -14,4 +14,9 @@ class StepForwardButtonViewModel extends GenericViewModel
     {
         return 'LokiCheckoutStepForwardButton';
     }
+
+    public function getStep(): string
+    {
+        return 'none';
+    }
 }

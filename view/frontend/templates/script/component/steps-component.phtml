@@ -2,6 +2,12 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutSteps', () => ({
             ...LokiCheckoutBaseComponentType,
+            initActions: {
+                ...LokiCheckoutBaseComponentType.initActions,
+                replaceHash() {
+                    window.location.hash = Alpine.store('components').currentStep;
+                }
+            },
             submit(event) {
                 const step = event.target.getAttribute('data-step');
                 if (step === this.value) {

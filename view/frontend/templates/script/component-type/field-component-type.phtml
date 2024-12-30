@@ -20,6 +20,7 @@
             this.afterSubmit();
         },
         afterSubmit() {
+            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component:this}}));
         },
     };
 </script>

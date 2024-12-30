@@ -21,7 +21,7 @@ class StepProvider
             return $step;
         }
 
-        return 'unknown';
+        return 'none';
     }
 
     private function getStepNameFromBlock(AbstractBlock $block): string
