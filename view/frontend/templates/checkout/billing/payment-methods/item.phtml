@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Magento\Payment\Api\Data\PaymentMethodInterface;
+use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
@@ -13,8 +14,8 @@ use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
 /** @var PaymentMethodInterface $paymentMethod */
-/** @var ViewModelFactory $viewModelFactory */
 /** @var TemplateRenderer $templateRenderer */
+/** @var PaymentMethodsViewModel $viewModel */
 
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $viewModel = $block->getViewModel();
@@ -27,6 +28,7 @@ $isCurrent = $block->getIsCurrent();
         <input
             type="radio"
             x-model="value"
+            @change="submit"
             name="payment_method"
             value="<?= $code ?>"
             <?php if ($isCurrent) : ?>checked<?php endif ?>

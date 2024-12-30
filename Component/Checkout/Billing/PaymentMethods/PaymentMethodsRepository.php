@@ -38,6 +38,11 @@ class PaymentMethodsRepository extends ComponentRepository
         $cart = $this->getQuote();
         $paymentMethod = (string)$cart->getPayment()->getMethod();
         $sanitizedPaymentMethod = $this->sanitizePaymentMethod($paymentMethod);
+
+        if (empty($paymentMethod)) {
+            $paymentMethod = $this->getDefaultPayment();
+        }
+
         if ($paymentMethod !== $sanitizedPaymentMethod) {
             $this->saveData($sanitizedPaymentMethod);
         }
@@ -48,6 +53,10 @@ class PaymentMethodsRepository extends ComponentRepository
     protected function saveData(mixed $data): void
     {
         $data = $this->sanitizePaymentMethod((string)$data);
+        if (empty($data)) {
+            return;
+        }
+
         $quote = $this->getQuote();
         $quote->setPaymentMethod($data);
         $quote->setInventoryProcessed(false);
@@ -67,12 +76,8 @@ class PaymentMethodsRepository extends ComponentRepository
             return $this->getDefaultPayment();
         }
 
-        $cart = $this->getQuote();
-        if ($this->isPaymentMethodAvailable($paymentMethod)) {
-            return $this->getDefaultPayment();
-        }
-
-        if (!$cart->getPaymentMethod()) {
+        if (false === $this->isPaymentMethodAvailable($paymentMethod)) {
+            echo 'Method is not available';
             return $this->getDefaultPayment();
         }
 
@@ -87,6 +92,7 @@ class PaymentMethodsRepository extends ComponentRepository
             }
         }
 
+        $this->component->getViewModel()->getMessageManager()->addLocalError('Method is not available');
         return false;
     }
 }
