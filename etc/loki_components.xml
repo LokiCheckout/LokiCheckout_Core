@@ -205,6 +205,7 @@
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionRepository">
             <target name="loki-checkout.shipping.address.postcode"/>
+            <target name="loki-checkout.shipping.methods"/>
         </component>
 
         <component
@@ -213,6 +214,7 @@
             repository="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdRepository">
             <target name="loki-checkout.shipping.address.postcode"/>
             <target name="loki-checkout.shipping.address.region"/>
+            <target name="loki-checkout.shipping.methods"/>
             <filter name="country_id"/>
         </component>
 
