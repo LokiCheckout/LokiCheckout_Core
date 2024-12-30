@@ -16,7 +16,7 @@ class ShippingAddressToggleSelectViewModel extends ComponentViewModel
         return (bool)$this->getRepository()->get();
     }
 
-    public function getAlpineData(): array
+    public function getJsData(): array
     {
         return [
             'newAddress' => $this->getContext()->isNewAddress() ? true : false,
@@ -37,6 +37,6 @@ class ShippingAddressToggleSelectViewModel extends ComponentViewModel
 
     public function getJsComponentName(): ?string
     {
-        return 'LokiCheckoutShippingAddressToggleSelect';
+        return 'LokiCheckoutShippingAddress';
     }
 }

@@ -18,9 +18,9 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
     <button
         class="<?= $css('btn btn-primary my-4') ?>"
         x-text="buttonLabel"
-        x-model="toggle"
+        x-model="value"
         type="button"
-        @click="submit"
+        @click="toggleNewAddress"
     >
         <?= $viewModel->getButtonLabelNewAddress() ?>
     </button>

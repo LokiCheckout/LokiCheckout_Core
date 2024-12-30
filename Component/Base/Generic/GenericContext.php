@@ -10,6 +10,7 @@ use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
 use Yireo\LokiCheckout\Util\Component\StepProvider;
+use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
@@ -38,6 +39,11 @@ class GenericContext implements ComponentContextInterface
     public function getCustomerSession(): CustomerSession
     {
         return $this->get(CustomerSession::class);
+    }
+
+    public function getCustomerProvider(): CustomerProvider
+    {
+        return $this->get(CustomerProvider::class);
     }
 
     public function getCheckoutSession(): CheckoutSession
@@ -93,6 +99,10 @@ class GenericContext implements ComponentContextInterface
 
     public function __call(string $name, array $arguments)
     {
+        if (static::class === GenericContext::class) {
+            throw new \RuntimeException('Method "'.$name.'" not found in '.__CLASS__);
+        }
+
         $parent = ObjectManager::getInstance()->get(GenericContext::class);
         return call_user_func([$parent, $name], $arguments);
     }

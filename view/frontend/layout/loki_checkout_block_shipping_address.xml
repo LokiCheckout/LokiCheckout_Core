@@ -31,7 +31,7 @@
 
             <block
                 name="loki-checkout.shipping.address.toggle-select" as="toggle-select"
-                template="Yireo_LokiCheckout::checkout/shipping/toggle-select.phtml"/>
+                template="Yireo_LokiCheckout::checkout/shipping/address-toggle-select.phtml"/>
 
             <block
                 name="loki-checkout.shipping.address.form-title" as="form-title"

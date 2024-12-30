@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect;
 
+use Magento\Customer\Api\Data\AddressInterface;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -51,8 +52,16 @@ class ShippingAddressSelectRepository extends ComponentRepository
         }
 
         $selectedAddressId = $this->sanitizeSelectedAddressId((int)$data);
+        if (false === $selectedAddressId > 0) {
+            return;
+        }
 
         $customerShippingAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
+
+        if (false === $customerShippingAddress instanceof AddressInterface) {
+            return;
+        }
+
         $quoteShippingAddress = $this->getContext()->getCheckoutSession()->getQuote()->getShippingAddress();
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
@@ -62,6 +71,10 @@ class ShippingAddressSelectRepository extends ComponentRepository
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int
     {
         foreach ($this->getAddresses() as $address) {
+            if (false === $address instanceof AddressInterface) {
+                continue;
+            }
+
             if ($address->getId() === $selectedAddressId) {
                 return $selectedAddressId;
             }

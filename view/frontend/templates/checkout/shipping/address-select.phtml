@@ -15,6 +15,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 
 $showEmptySelectOption = (bool)$block->getShowEmptySelectOption(); // @doc
 $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
+
 ?>
 <div class="<?= $css('') ?>">
     <label for="<?= $viewModel->getElementId() ?>">
@@ -36,7 +37,7 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         <?php if ($showEmptySelectOption): ?>
             <option value="0"><?= $emptySelectOptionLabel ?></option>
         <?php endif; ?>
-        <?php foreach ($viewModel->shippingAddresses as $shippingAddressId => $shippingAddresLabel): ?>
+        <?php foreach ($viewModel->getAddresses() as $shippingAddressId => $shippingAddresLabel): ?>
             <option
                 value="<?= $shippingAddressId ?>"
                 <?= (int)$shippingAddressId === (int)$viewModel->getValue() ? 'selected' : '' ?>

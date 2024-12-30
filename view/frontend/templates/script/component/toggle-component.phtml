@@ -1,0 +1,11 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutToggleComponent', () => ({
+            ...LokiCheckoutBaseComponentType,
+            submit() {
+                this.value = !this.value;
+                this.post();
+            }
+        }));
+    });
+</script>
