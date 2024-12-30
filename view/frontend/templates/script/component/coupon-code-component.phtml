@@ -2,12 +2,21 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutFieldComponentType,
+            isOpen() {
+                return this.value.length > 0;
+            },
             removeCouponCode() {
                 this.value = '';
-                this.submit();
+                this.post({
+                    code: '',
+                    task: 'remove'
+                });
             },
             applyCouponCode() {
-                this.submit();
+                this.post({
+                    code: this.value,
+                    task: 'apply'
+                });
             }
         }));
     });

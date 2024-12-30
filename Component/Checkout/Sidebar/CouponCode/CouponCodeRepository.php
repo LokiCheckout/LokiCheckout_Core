@@ -23,15 +23,15 @@ class CouponCodeRepository extends ComponentRepository
 
     protected function saveData(mixed $data): void
     {
-        if (empty($data['action']) || empty($data['code'])) {
+        if (empty($data['task']) || !isset($data['code'])) {
             return;
         }
 
-        if ($data['action'] === 'apply') {
+        if ($data['task'] === 'apply') {
             $this->getContext()->getCheckoutState()->getQuote()->setCouponCode($data['code']);
         }
 
-        if ($data['action'] === 'remove') {
+        if ($data['task'] === 'remove') {
             $this->getContext()->getCheckoutState()->getQuote()->setCouponCode('');
         }
     }

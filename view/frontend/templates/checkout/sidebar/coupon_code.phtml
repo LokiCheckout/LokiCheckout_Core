@@ -32,7 +32,7 @@ $couponCode = $quote->getCouponCode();
             @click="removeCouponCode"
         ><?= __('Remove coupon code') ?></button>
     <?php else: ?>
-        <details class="<?= $css('group', 'details' ) ?>">
+        <details :open="isOpen" class="<?= $css('group', 'details' ) ?>">
             <summary class="<?= $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
                 <span><?= __('Apply Discount Code') ?></span>
                 <img
