@@ -14,13 +14,14 @@ class StepBackwardButtonViewModel extends GenericViewModel
 {
     public function isAllowRendering(): bool
     {
-        try {
-            $previousStep = $this->getStepNavigator()->getPreviousStep();
-        } catch (UnknownStepException $e) {
+        $currentStep = $this->getStepNavigator()->getCurrentStep();
+        if ($this->getStepNavigator()->isFirstStep($currentStep)) {
             return false;
         }
 
-        if ($this->getStepNavigator()->isFirstStep($previousStep)) {
+        try {
+            $previousStep = $this->getStepNavigator()->getPreviousStep();
+        } catch (UnknownStepException $e) {
             return false;
         }
 
