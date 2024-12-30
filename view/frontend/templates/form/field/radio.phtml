@@ -10,6 +10,7 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 /** @var ComponentViewModelInterface|OptionsBehaviour $viewModel */
 /** @var CssClass $css */
 
+$viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 $viewModel->setOptionModel($optionModel);
 ?>
@@ -19,11 +20,12 @@ $viewModel->setOptionModel($optionModel);
     <?php $i = 0; ?>
     <?php foreach ($viewModel->getOptions() as $optionValue => $optionLabel): ?>
         <div class="<?= $css('', 'option') ?>">
-            <input type="radio"
-                   id="<?= $viewModel->getElementId() ?>-field-<?= $i ?>"
-                   x-model="value"
-
-                   value="<?= $optionValue ?>"
+            <input
+                type="radio"
+                id="<?= $viewModel->getElementId() ?>-field-<?= $i ?>"
+                x-model="value"
+                @change="submit"
+                value="<?= $optionValue ?>"
                 <?php if ($viewModel->getValue() === $optionValue): ?>
                     checked
                 <?php endif; ?>

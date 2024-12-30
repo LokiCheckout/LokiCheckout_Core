@@ -221,7 +221,9 @@
         </component>
 
         <component
-            name="loki-checkout.shipping.address.company">
+            name="loki-checkout.shipping.address.company"
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Company\CompanyViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Address\Company\CompanyRepository">
             <target name="loki-checkout.shipping.address.vat_id"/>
         </component>
 
