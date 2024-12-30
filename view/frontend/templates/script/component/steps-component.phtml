@@ -8,7 +8,7 @@
                 setCurrentStep() {
                     if (this.currentStep !== 'none') {
                         window.location.hash = this.currentStep;
-                        Alpine.store('components').currentStep = this.currentStep;
+                        Alpine.store('checkout').currentStep = this.currentStep;
                     }
                 }
             },

@@ -7,7 +7,7 @@
         initActions: {
             ...LokiComponentType.initActions,
             register() {
-                Alpine.store('components').add(this);
+                Alpine.store('checkout').add(this);
             },
             lazyLoad() {
                 if (this.lazyLoad) {

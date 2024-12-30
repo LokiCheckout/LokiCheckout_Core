@@ -21,10 +21,10 @@
                 return !this.valid;
             },
             updateValid() {
-                this.valid = Alpine.store('components').hasOnlyValidComponents(this.step);
+                this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.step);
                 if (!this.valid) {
                     const components = [];
-                    Alpine.store('components').getInvalidComponents(this.step).forEach((component) => {
+                    Alpine.store('checkout').getInvalidComponents(this.step).forEach((component) => {
                         components.push(component.id);
                     })
 
@@ -35,7 +35,7 @@
             },
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));
-                Alpine.store('components').getComponentsByStep(this.step).forEach((component) => {
+                Alpine.store('checkout').getComponentsByStep(this.step).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 

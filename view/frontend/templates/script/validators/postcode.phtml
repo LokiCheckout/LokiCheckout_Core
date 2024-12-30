@@ -25,9 +25,9 @@ $countryComponent = 'LokiCheckoutShippingAddressCountryId'; // @todo: Find a sma
     <?php endforeach; ?>
 
     LokiCheckoutValidator.validators.postcode = function (component) {
-        // @todo: The following is kind of ugly. Wouldn't Alpine.store('components').get('country_id') be nicer?
+        // @todo: The following is kind of ugly. Wouldn't Alpine.store('checkout').get('country_id') be nicer?
         const countryComponentName = component.name.includes('Billing') ? 'LokiCheckoutBillingAddressCountryId' : 'LokiCheckoutShippingAddressCountryId';
-        const countryComponent = Alpine.store('components').get(countryComponentName);
+        const countryComponent = Alpine.store('checkout').get(countryComponentName);
         if (!countryComponent) {
             return true;
         }

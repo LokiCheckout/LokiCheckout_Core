@@ -13,7 +13,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.store('components', {
+        Alpine.store('checkout', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
             components: [],
             getComponentIds() {
@@ -102,7 +102,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
         })
 
         document.addEventListener('@todo', () => {
-            Alpine.store('components').removeInvisibleComponents();
+            Alpine.store('checkout').removeInvisibleComponents();
         });
     });
 </script>
