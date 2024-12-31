@@ -2,19 +2,10 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var ViewModelFactory $viewModelFactory */
-/** @var ProgressBarViewModel $viewModel */
-/** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-/** @var BlockRenderer $blockRenderer */
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
 ?>
 <aside class="<?= $css('my-2 order-2') ?>">
     <?= $block->getChildHtml(); ?>
