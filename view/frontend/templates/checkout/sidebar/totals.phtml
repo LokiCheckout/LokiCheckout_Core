@@ -16,7 +16,8 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var BlockRenderer $blockRenderer */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
-$quote = $checkoutState->getQuote()->collectTotals();
+$quote = $checkoutState->getQuote();
+$quote->collectTotals();
 $totals = $quote->getTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
