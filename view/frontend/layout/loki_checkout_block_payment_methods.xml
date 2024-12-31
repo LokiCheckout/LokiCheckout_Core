@@ -3,28 +3,28 @@
     <body>
         <block
             name="loki-checkout.payment.methods"
-            template="Yireo_LokiCheckout::checkout/billing/payment-methods.phtml">
+            template="Yireo_LokiCheckout::checkout/payment/payment-methods.phtml">
 
             <block
-                name="loki-checkout.billing.payment-methods.item" as="item"
-                template="Yireo_LokiCheckout::checkout/billing/payment-methods/item.phtml"/>
+                name="loki-checkout.payment.payment-methods.item" as="item"
+                template="Yireo_LokiCheckout::checkout/payment/payment-methods/item.phtml"/>
         </block>
 
         <block
-            name="loki-checkout.billing.payment-methods.banktransfer.additional"
-            template="Yireo_LokiCheckout::checkout/billing/payment-method-additional/banktransfer.phtml">
+            name="loki-checkout.payment.payment-methods.banktransfer.additional"
+            template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/banktransfer.phtml">
         </block>
 
         <block
-            name="loki-checkout.billing.payment-methods.cashondelivery.additional"
-            template="Yireo_LokiCheckout::checkout/billing/payment-method-additional/cashondelivery.phtml">
+            name="loki-checkout.payment.payment-methods.cashondelivery.additional"
+            template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/cashondelivery.phtml">
         </block>
 
-        <block name="loki-checkout.billing.payment-methods.checkmo.additional"
-               template="Yireo_LokiCheckout::checkout/billing/payment-method-additional/checkmo.phtml">
+        <block name="loki-checkout.payment.payment-methods.checkmo.additional"
+               template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/checkmo.phtml">
         </block>
 
-        <referenceContainer name="loki-checkout.script.alpine-components">
+        <referenceContainer name="loki-components">
             <block name="loki-checkout.script.components.payment-methods-component"
                    template="Yireo_LokiCheckout::script/component/payment-methods-component.phtml"/>
         </referenceContainer>

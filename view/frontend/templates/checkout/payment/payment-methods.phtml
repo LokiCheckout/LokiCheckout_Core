@@ -28,7 +28,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
             <ul>
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= $blockRenderer->html(
-                        'loki-checkout.billing.payment-methods.item',
+                        'loki-checkout.payment.payment-methods.item',
                         $block,
                         [
                             'method' => $paymentMethod,
