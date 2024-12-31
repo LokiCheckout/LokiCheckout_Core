@@ -35,7 +35,7 @@ class Config implements ArgumentInterface
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
     }
 
-    public function getTheme()
+    public function getTheme(): string
     {
         $theme = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/theme');
         if (false === array_key_exists($theme, $this->xmlConfig->getThemes())) {
