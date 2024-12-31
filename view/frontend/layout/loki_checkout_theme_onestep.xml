@@ -23,6 +23,6 @@
 
         <!-- Sidebar -->
         <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
-        <move element="loki-checkout.billing-step.forward-button" destination="loki-checkout.sidebar" as="submit-button"/>
+        <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.sidebar" as="submit-button"/>
     </body>
 </page>

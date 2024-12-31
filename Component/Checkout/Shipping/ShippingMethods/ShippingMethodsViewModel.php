@@ -27,11 +27,6 @@ class ShippingMethodsViewModel extends FieldViewModel
         return (string)$this->getValue();
     }
 
-    public function isValid(): bool
-    {
-        return !empty($this->getValue());
-    }
-
     public function getFieldLabel(): string
     {
         return 'Shipping Methods';
