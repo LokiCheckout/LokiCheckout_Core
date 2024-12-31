@@ -7,10 +7,9 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldInterface;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
+use Yireo\LokiComponents\Exception\NoComponentFoundException;
 
 class AddDebuggingInfo implements ObserverInterface
 {
@@ -19,7 +18,7 @@ class AddDebuggingInfo implements ObserverInterface
     public function __construct(
         private readonly ComponentRegistry $componentRegistry,
         private readonly Config $config,
-        private array           $blockPrefixes = [],
+        private array $blockPrefixes = [],
     ) {
     }
 
@@ -32,7 +31,7 @@ class AddDebuggingInfo implements ObserverInterface
 
         $prefixMatch = false;
         foreach ($this->blockPrefixes as $prefix) {
-            if (preg_match('/^' . $prefix . '/', (string)$block->getNameInLayout())) {
+            if (preg_match('/^'.$prefix.'/', (string)$block->getNameInLayout())) {
                 $prefixMatch = true;
             }
         }
@@ -69,11 +68,11 @@ class AddDebuggingInfo implements ObserverInterface
             $debugHtml = '<!-- LOKI_DEBUG ';
             $debugLines = $this->getDebugLines($block);
             foreach ($debugLines as $debugLineName => $debugLineValue) {
-                $debugHtml .= $debugLineName . ' = ' . $debugLineValue . ', ';
+                $debugHtml .= $debugLineName.' = '.$debugLineValue.', ';
             }
             $debugHtml .= ' -->';
 
-            $html = $html . $debugHtml;
+            $html = $html.$debugHtml;
         }
 
         $transport->setHtml($html);
@@ -86,7 +85,12 @@ class AddDebuggingInfo implements ObserverInterface
         $debugLines['name'] = $block->getNameInLayout();
         $debugLines['template'] = $block->getTemplate();
 
-        $component = $this->componentRegistry->getComponentFromBlock($block);
+        try {
+            $component = $this->componentRegistry->getComponentFromBlock($block);
+        } catch (NoComponentFoundException $exception) {
+            return $debugLines;
+        }
+
         $validators = $component->getValidators();
         if (!empty($validators)) {
             $debugLines['validators'] = implode('|', $validators);
