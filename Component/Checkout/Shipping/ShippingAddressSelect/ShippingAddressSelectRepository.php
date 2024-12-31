@@ -22,7 +22,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return 0;
         }
 
-        $quote = $this->getContext()->getCheckoutSession()->getQuote();
+        $quote = $this->getContext()->getQuote();
         $customer = $this->getContext()->getCustomerRepository()->getById(
             $this->getContext()->getCustomerSession()->getCustomerId()
         );
@@ -62,7 +62,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
-        $quoteShippingAddress = $this->getContext()->getCheckoutSession()->getQuote()->getShippingAddress();
+        $quoteShippingAddress = $this->getContext()->getQuote()->getShippingAddress();
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
         $quoteShippingAddress->save(); // @todo

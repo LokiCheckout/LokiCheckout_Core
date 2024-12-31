@@ -31,6 +31,6 @@ class ShippingAddressViewModel extends ComponentViewModel
 
     protected function getQuote(): Quote
     {
-        return $this->getContext()->getCheckoutSession()->getQuote();
+        return $this->getContext()->getQuote();
     }
 }

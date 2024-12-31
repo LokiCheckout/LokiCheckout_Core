@@ -8,8 +8,8 @@ class LastnameRepository extends AddressFieldRepository
 {
     protected function saveData(mixed $data): void
     {
-        if ($this->getAddressState()->getQuote()->getCustomerIsGuest()) {
-            $this->getAddressState()->getQuote()->setCustomerLastname($data);
+        if ($this->getContext()->getQuote()->getCustomerIsGuest()) {
+            $this->getContext()->getQuote()->setCustomerLastname($data);
         }
 
         parent::saveData($data);

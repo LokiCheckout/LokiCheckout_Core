@@ -67,7 +67,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
     protected function getQuote(): Quote
     {
-        return $this->getContext()->getCheckoutState()->getQuote();
+        return $this->getContext()->getQuote();
     }
 
     protected function sanitizePaymentMethod(string $paymentMethod): string

@@ -18,7 +18,7 @@ class BillingAddressViewModel extends GenericViewModel
 
     public function isEnabled(): bool
     {
-        return $this->getContext()->getBillingAddressState()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
+        return $this->getContext()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
     }
 
     public function getHtml(): string

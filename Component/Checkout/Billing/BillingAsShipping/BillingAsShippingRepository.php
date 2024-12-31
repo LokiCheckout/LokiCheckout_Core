@@ -18,7 +18,7 @@ class BillingAsShippingRepository extends ComponentRepository
 
         if (true === $billingAsShipping) {
             $this->copyShippingToBilling();
-            $this->getContext()->getCartRepository()->save($this->getContext()->getBillingAddressState()->getQuote());
+            $this->getContext()->getCartRepository()->save($this->getContext()->getQuote());
         }
 
         return $billingAsShipping;
@@ -34,7 +34,7 @@ class BillingAsShippingRepository extends ComponentRepository
             $this->copyShippingToBilling();
         }
 
-        $this->getContext()->getCartRepository()->save($this->getContext()->getBillingAddressState()->getQuote());
+        $this->getContext()->getCartRepository()->save($this->getContext()->getQuote());
     }
 
     protected function copyShippingToBilling()

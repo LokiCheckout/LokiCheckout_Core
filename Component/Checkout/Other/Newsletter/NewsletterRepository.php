@@ -11,7 +11,7 @@ class NewsletterRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
-        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
+        $email = (string)$this->getContext()->getQuote()->getCustomerEmail();
         if (!empty($email)) {
             return $this->getContext()->getGuestSubscriptionChecker()->isSubscribed($email);
         }
@@ -22,8 +22,8 @@ class NewsletterRepository extends ComponentRepository
     protected function saveData(mixed $data): void
     {
         $subscribe = (bool)$data;
-        $email = (string)$this->getContext()->getCheckoutSession()->getQuote()->getCustomerEmail();
-        $storeId = (int)$this->getContext()->getCheckoutSession()->getQuote()->getStoreId();
+        $email = (string)$this->getContext()->getQuote()->getCustomerEmail();
+        $storeId = (int)$this->getContext()->getQuote()->getStoreId();
         if (true === $subscribe) {
             $this->getContext()->getSubscriptionManager()->subscribe($email, $storeId);
 

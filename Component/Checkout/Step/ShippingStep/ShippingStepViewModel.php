@@ -23,7 +23,7 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
 
     public function isEnabled(): bool
     {
-        if ((bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual()) {
+        if ((bool)$this->getContext()->getQuote()->isVirtual()) {
             return false;
         }
 

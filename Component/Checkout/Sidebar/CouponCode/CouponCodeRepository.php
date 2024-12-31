@@ -17,7 +17,7 @@ class CouponCodeRepository extends ComponentRepository
         return preg_replace(
             '/([^a-zA-Z0-9\-\_]+)/',
             '',
-            (string)$this->getContext()->getCheckoutState()->getQuote()->getCouponCode()
+            (string)$this->getContext()->getQuote()->getCouponCode()
         );
     }
 
@@ -28,11 +28,11 @@ class CouponCodeRepository extends ComponentRepository
         }
 
         if ($data['task'] === 'apply') {
-            $this->getContext()->getCheckoutState()->getQuote()->setCouponCode($data['code']);
+            $this->getContext()->getQuote()->setCouponCode($data['code']);
         }
 
         if ($data['task'] === 'remove') {
-            $this->getContext()->getCheckoutState()->getQuote()->setCouponCode('');
+            $this->getContext()->getQuote()->setCouponCode('');
         }
     }
 }
