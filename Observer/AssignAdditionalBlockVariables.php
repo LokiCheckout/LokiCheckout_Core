@@ -8,7 +8,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
-use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Exception\NoComponentFoundException;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
@@ -19,7 +18,6 @@ use Yireo\LokiComponents\Util\CamelCaseConvertor;
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
     public function __construct(
-        private readonly Config $config,
         private readonly ViewModelFactory $viewModelFactory,
         private readonly CssClassFactory $cssClassFactory,
         private readonly BlockRenderer $blockRenderer,
@@ -43,7 +41,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         $block->assign('blockClass', $blockClass); // @todo: deprecate this
 
         $block->assign('viewModelFactory', $this->viewModelFactory);
-        $block->assign('debug', $this->config->isDebug()); // @todo: Is this relevant
         $block->assign('css', $this->cssClassFactory->create()->setBlock($block));
         $block->assign('blockRenderer', $this->blockRenderer);
 
