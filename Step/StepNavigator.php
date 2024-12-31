@@ -5,7 +5,6 @@ namespace Yireo\LokiCheckout\Step;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Framework\View\LayoutInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
@@ -21,7 +20,6 @@ class StepNavigator implements ArgumentInterface
     public function __construct(
         private readonly XmlConfig $xmlConfig,
         private readonly Config $config,
-        private readonly LayoutInterface $layout,
         private readonly CheckoutSession $checkoutSession,
         private readonly FinalStep $finalStep,
         private readonly MessageManager $messageManager,
@@ -231,5 +229,11 @@ class StepNavigator implements ArgumentInterface
     public function getFinalStep(): FinalStep
     {
         return $this->finalStep;
+    }
+
+    public function reset(): void
+    {
+        $this->steps = [];
+        $this->currentStep = false;
     }
 }
