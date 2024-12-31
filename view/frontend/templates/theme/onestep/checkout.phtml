@@ -17,9 +17,11 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 <div class="<?= $css('space-y-6') ?>">
     <?= $block->getChildHtml('progressbar') ?>
 
-    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?> relative">
-        <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
-        <?= $block->getChildHtml('steps'); ?>
+    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?>">
+        <div class="<?= $css('col-span-2', 'column-steps') ?> relative">
+            <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
+            <?= $block->getChildHtml('steps'); ?>
+        </div>
         <?= $block->getChildHtml('sidebar'); ?>
     </div>
 </div>

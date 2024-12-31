@@ -39,7 +39,7 @@
 
         <!-- Billing step -->
         <move element="loki-checkout.billing.address" destination="loki-checkout.steps.billing" as="billing-address" before="buttons"/>
-        <move element="loki-checkout.billing.payment-methods" destination="loki-checkout.steps.billing" as="payment-methods" before="buttons"/>
+        <move element="loki-checkout.payment.methods" destination="loki-checkout.steps.billing" as="payment-methods" before="buttons"/>
 
         <move element="loki-checkout.steps.billing.backward-button" destination="loki-checkout.steps.billing.buttons" as="backward-button"/>
         <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.steps.billing.buttons" as="forward-button"/>

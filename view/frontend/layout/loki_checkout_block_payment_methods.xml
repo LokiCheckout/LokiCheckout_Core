@@ -2,7 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
         <block
-            name="loki-checkout.billing.payment-methods"
+            name="loki-checkout.payment.methods"
             template="Yireo_LokiCheckout::checkout/billing/payment-methods.phtml">
 
             <block

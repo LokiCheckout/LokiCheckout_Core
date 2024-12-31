@@ -14,12 +14,12 @@
 
         <!-- Column 1 -->
         <move element="loki-checkout.customer.customer_email" destination="loki-checkout.one-step.col1.email-container" as="customer_email"/>
-        <move element="loki-checkout.shipping-address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
-        <move element="loki-checkout.billing-address" destination="loki-checkout.one-step.col1" as="billing-address"/>
+        <move element="loki-checkout.shipping.address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
+        <move element="loki-checkout.billing.address" destination="loki-checkout.one-step.col1" as="billing-address"/>
 
         <!-- Column 2 -->
-        <move element="loki-checkout.shipping.shipping-methods" destination="loki-checkout.one-step.col2" as="shipping-methods"/>
-        <move element="loki-checkout.billing.payment-methods" destination="loki-checkout.one-step.col2" as="payment-methods"/>
+        <move element="loki-checkout.shipping.methods" destination="loki-checkout.one-step.col2" as="shipping-methods"/>
+        <move element="loki-checkout.payment.methods" destination="loki-checkout.one-step.col2" as="payment-methods"/>
 
         <!-- Sidebar -->
         <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>

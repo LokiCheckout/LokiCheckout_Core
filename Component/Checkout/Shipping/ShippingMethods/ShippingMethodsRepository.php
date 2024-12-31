@@ -75,6 +75,10 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
+        if (empty($shippingMethodCode)) {
+            return $shippingMethodCode;
+        }
+
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
             $this->component->getViewModel()->getMessageManager()->addLocalError('Method not allowed'); // @todo: Beautify
             $shippingMethodCode = '';

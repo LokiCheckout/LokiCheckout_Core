@@ -60,7 +60,7 @@
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressViewModel"/>
 
         <component
-            name="loki-checkout.billing.payment-methods"
+            name="loki-checkout.payment.methods"
             context="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsRepository">
@@ -288,6 +288,8 @@
             name="loki-checkout.billing.address.region"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Address\Region\RegionRepository">
+            <target name="loki-checkout.billing.address.postcode"/>
+            <target name="loki-checkout.payment.methods"/>
         </component>
 
         <component
@@ -295,6 +297,7 @@
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdViewModel"
             repository="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdRepository">
             <filter name="country_id"/>
+            <target name="loki-checkout.payment.methods"/>
         </component>
 
         <component
