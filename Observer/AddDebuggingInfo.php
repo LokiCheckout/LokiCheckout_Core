@@ -17,7 +17,7 @@ class AddDebuggingInfo implements ObserverInterface
 
     public function __construct(
         private readonly Config $config,
-        private array $blockPrefixes = [],
+        private array           $blockPrefixes = [],
     ) {
     }
 
@@ -30,7 +30,7 @@ class AddDebuggingInfo implements ObserverInterface
 
         $prefixMatch = false;
         foreach ($this->blockPrefixes as $prefix) {
-            if (preg_match('/^'.$prefix.'/', (string)$block->getNameInLayout())) {
+            if (preg_match('/^' . $prefix . '/', (string)$block->getNameInLayout())) {
                 $prefixMatch = true;
             }
         }
@@ -66,8 +66,8 @@ class AddDebuggingInfo implements ObserverInterface
         if (true === $this->config->addHtmlHints()) {
             $debugHtml = '<!-- LOKI_DEBUG ';
             $debugLines = $this->getDebugLines($block);
-            foreach($debugLines as $debugLineName => $debugLineValue) {
-                $debugHtml .= $debugLineName.' = '.$debugLineValue.', ';
+            foreach ($debugLines as $debugLineName => $debugLineValue) {
+                $debugHtml .= $debugLineName . ' = ' . $debugLineValue . ', ';
             }
             $debugHtml .= ' -->';
 
@@ -85,16 +85,14 @@ class AddDebuggingInfo implements ObserverInterface
         $debugLines['template'] = $block->getTemplate();
 
         $component = $this->getComponentFromBlock($block);
-        if ($component instanceof FieldInterface) {
-            $validators = $component->getValidators();
-            if (!empty($validators)) {
-                $debugLines['validators'] = implode('|', $validators);
-            }
+        $validators = $component->getValidators();
+        if (!empty($validators)) {
+            $debugLines['validators'] = implode('|', $validators);
+        }
 
-            $filters =  $component->getFilters();
-            if (!empty($filters)) {
-                $debugLines['filters'] = implode('|', $filters);
-            }
+        $filters = $component->getFilters();
+        if (!empty($filters)) {
+            $debugLines['filters'] = implode('|', $filters);
         }
 
         return $debugLines;
@@ -102,6 +100,7 @@ class AddDebuggingInfo implements ObserverInterface
 
     /**
      * @param Template $block
+     *
      * @return ComponentInterface|null
      */
     private function getComponentFromBlock(Template $block): ?ComponentInterface
