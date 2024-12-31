@@ -10,12 +10,14 @@ use Magento\Payment\Helper\Data as PaymentHelper;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Yireo\LokiCheckout\Step\FinalStep\RedirectUrl;
 use Yireo\LokiCheckout\Validator\QuoteValidator;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class FinalStep
 {
     public function __construct(
         private QuoteValidator $quoteValidator,
         private CheckoutSession $checkoutSession,
+        private CheckoutState $checkoutState,
         private RedirectUrl $redirectUrl,
         private Onepage $onepage,
         private EventManager $eventManager,
@@ -48,7 +50,7 @@ class FinalStep
 
     public function submit(): bool
     {
-        $quote = $this->checkoutSession->getQuote();
+        $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress
             ->setCollectShippingRates(true)

@@ -2,16 +2,15 @@
 
 namespace Yireo\LokiCheckout\Validator;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
-use Magento\Framework\Validation\ValidationResult;
 use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class StepValidator implements ValidatorInterface
 {
     public function __construct(
-        protected readonly CheckoutSession $checkoutSession,
+        protected readonly CheckoutState $checkoutState,
         protected readonly array $validationRules = [],
     ) {
     }
@@ -23,7 +22,7 @@ class StepValidator implements ValidatorInterface
      */
     public function validate(): array|true
     {
-        $quote = $this->checkoutSession->getQuote();
+        $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();
         $shippingMethod = $shippingAddress->getShippingMethod();
         if (empty($shippingMethod)) {

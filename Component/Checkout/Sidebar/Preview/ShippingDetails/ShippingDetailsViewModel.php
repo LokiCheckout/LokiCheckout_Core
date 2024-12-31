@@ -23,7 +23,7 @@ class ShippingDetailsViewModel implements ArgumentInterface
 
     public function getAddressHtml(): string
     {
-        if ($this->shippingAddressState->getQuote()->isVirtual()) {
+        if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
 

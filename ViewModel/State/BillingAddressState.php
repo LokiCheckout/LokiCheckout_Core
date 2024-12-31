@@ -2,15 +2,14 @@
 
 namespace Yireo\LokiCheckout\ViewModel\State;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class BillingAddressState implements AddressStateInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession,
+        private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig
     ) {
     }
@@ -26,15 +25,9 @@ class BillingAddressState implements AddressStateInterface
         $address->setData($attributeCode, $value);
         $address->getResource()->save($address);
     }
-
-    public function getQuote(): Quote
-    {
-        return $this->checkoutSession->getQuote();
-    }
-
     public function getBillingAddress(): Address
     {
-        $billingAddress = $this->getQuote()->getBillingAddress();
+        $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
         if (!$billingAddress->getCountryId()) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $billingAddress->setCountryId($defaultCountryId);

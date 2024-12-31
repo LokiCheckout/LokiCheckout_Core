@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\ViewModel;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
@@ -10,24 +9,24 @@ use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
 class QuoteDetails implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession,
+        private CheckoutState $checkoutState,
         private DateTimeFactory $dateTimeFactory
     ) {
     }
 
     public function getEmail(): string
     {
-        return (string)$this->checkoutSession->getQuote()->getCustomerEmail();
+        return (string)$this->checkoutState->getQuote()->getCustomerEmail();
     }
 
     public function getGender(): string
     {
-        return (string)$this->checkoutSession->getQuote()->getCustomerGender();
+        return (string)$this->checkoutState->getQuote()->getCustomerGender();
     }
 
     public function getDob(): string
     {
-        $dob =(string)$this->checkoutSession->getQuote()->getCustomerDob();
+        $dob =(string)$this->checkoutState->getQuote()->getCustomerDob();
         if (empty($dob)) {
             return '';
         }

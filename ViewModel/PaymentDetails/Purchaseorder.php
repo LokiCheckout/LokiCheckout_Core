@@ -2,18 +2,18 @@
 
 namespace Yireo\LokiCheckout\ViewModel\PaymentDetails;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class Purchaseorder implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession
+        private CheckoutState $checkoutState
     ){
     }
 
     public function getPoNumber(): string
     {
-        return (string)$this->checkoutSession->getQuote()->getPayment()->getPoNumber();
+        return (string)$this->checkoutState->getQuote()->getPayment()->getPoNumber();
     }
 }
