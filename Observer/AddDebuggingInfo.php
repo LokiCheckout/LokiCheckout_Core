@@ -10,12 +10,14 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Field\FieldInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 
 class AddDebuggingInfo implements ObserverInterface
 {
     const DEBUG_BLOCK = 'loki-checkout.utils.debug';
 
     public function __construct(
+        private readonly ComponentRegistry $componentRegistry,
         private readonly Config $config,
         private array           $blockPrefixes = [],
     ) {
@@ -84,7 +86,7 @@ class AddDebuggingInfo implements ObserverInterface
         $debugLines['name'] = $block->getNameInLayout();
         $debugLines['template'] = $block->getTemplate();
 
-        $component = $this->getComponentFromBlock($block);
+        $component = $this->componentRegistry->getComponentFromBlock($block);
         $validators = $component->getValidators();
         if (!empty($validators)) {
             $debugLines['validators'] = implode('|', $validators);
@@ -96,19 +98,5 @@ class AddDebuggingInfo implements ObserverInterface
         }
 
         return $debugLines;
-    }
-
-    /**
-     * @param Template $block
-     *
-     * @return ComponentInterface|null
-     */
-    private function getComponentFromBlock(Template $block): ?ComponentInterface
-    {
-        if ($block->getComponent() instanceof ComponentInterface) {
-            return $block->getComponent();
-        }
-
-        return null;
     }
 }
