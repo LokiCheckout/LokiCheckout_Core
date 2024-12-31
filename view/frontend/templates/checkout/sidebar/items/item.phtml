@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Magento\Quote\Api\Data\CartItemInterface;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\ChildRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
@@ -11,14 +12,10 @@ use Yireo\LokiCheckout\ViewModel\ProductImage;
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ChildRenderer $childRenderer */
-/** @var array $item */
+/** @var CartItemInterface $item */
 /** @var CssClass $css */
-$item = $block->getItem();
-if (empty($item)) {
-    echo '<div>No item data</div>';
-    return;
-}
 
+$item = $block->getItem();
 $width = (int)$block->getWidth();
 if (empty($width)) {
     $width = 75;
@@ -27,9 +24,9 @@ if (empty($width)) {
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
-$productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width);
+$productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
 ?>
-<div class="<?= $css('flex gap-4 my-8') ?>">
+<div class="<?= $css('flex gap-4 my-8') ?>" data-item-id="<?= $item->getItemId() ?>" data-item-qty="<?= $item->getQty() ?>">
     <img
         src="<?= $productImageUrl ?>"
         width="<?= $width ?>"
@@ -39,19 +36,19 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item['sku'], $width
     >
     <div class="<?= $css('', 'outer') ?>">
         <div class="<?= $css('grow', 'inner') ?>">
-            <p><strong><?= $item['name'] ?><br></strong></p>
+            <p><strong><?= $item->getName() ?><br></strong></p>
             <dl class="<?= $css('text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2', 'list') ?>">
                 <dt class="<?= $css('font-medium', 'price-label') ?>">
                     <?= __('Price') ?>:
                 </dt>
                 <dd class="<?= $css('', 'price-value') ?>">
-                    <?= $priceFormatterViewModel->format($item['price_incl_tax']) ?>
+                    <?= $priceFormatterViewModel->format($item->getPriceInclTax()) ?>
                 </dd>
                 <dt class="<?= $css('font-medium', 'qty-label') ?>">
                     <?= __('Quantity') ?>:
                 </dt>
                 <dd class="<?= $css('', 'qty-value') ?>">
-                    <?= $item['qty'] ?>
+                    <?= $item->getQty() ?>
                 </dd>
             </dl>
         </div>

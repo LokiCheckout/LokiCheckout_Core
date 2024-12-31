@@ -2,24 +2,18 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Items;
 
+use Magento\Quote\Api\Data\CartItemInterface;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 /**
  * @method ItemsContext getContext()
  */
 class ItemsViewModel extends ComponentViewModel
 {
+    /**
+     * @return CartItemInterface[]
+     */
     public function getItems(): array
     {
-        $items = [];
-        foreach ($this->getContext()->getQuote()->getItems() as $item) {
-            $items[] = $this->getContext()->getItemConvertor()->toArray($item);
-        }
-
-        if (empty($items)) {
-            // @todo: Dispatch message "No items in the cart"
-            // @todo: Redirect to checkout/cart
-        }
-
-        return $items;
+        return $this->getContext()->getQuote()->getItems();
     }
 }
