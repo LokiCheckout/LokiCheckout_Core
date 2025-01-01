@@ -241,9 +241,9 @@
 
         <component
             name="loki-checkout.shipping.address.vat_id"
-            viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel">
-            <validator name="vat_id"/>
-        </component>
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdRepository"
+        />
     </componentGroup>
 
     <componentGroup
@@ -317,9 +317,9 @@
 
         <component
             name="loki-checkout.billing.address.vat_id"
-            viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel">
-            <validator name="vat_id"/>
-        </component>
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdRepository"
+        />
     </componentGroup>
 
     <componentGroup

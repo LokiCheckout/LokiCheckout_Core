@@ -22,12 +22,12 @@ class AddressFieldRepository extends ComponentRepository
 
     protected function getAddressState(): AddressStateInterface
     {
-        return $this->getContext()->getAddressStateProvider()->getAddressState($this->component->getBlock());
+        return $this->getContext()->getAddressState($this->getComponentName());
     }
 
     protected function getFieldName(): string
     {
-        $blockName = $this->component->getBlock()->getNameInLayout();
+        $blockName = $this->getComponentName();
         $blockNameParts = explode('.', $blockName);
         return array_pop($blockNameParts);
     }

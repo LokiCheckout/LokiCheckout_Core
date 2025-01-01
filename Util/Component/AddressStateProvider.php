@@ -16,16 +16,20 @@ class AddressStateProvider
     ) {
     }
 
-    public function getAddressType(AbstractBlock $block): string
+    public function getAddressType(AbstractBlock|string $block): string
     {
-        if (strstr($block->getNameInLayout(), 'billing.address')) {
+        if ($block instanceof AbstractBlock) {
+            $block = $block->getNameInLayout();
+        }
+
+        if (strstr($block, 'billing.address')) {
             return 'billing';
         }
 
         return 'shipping';
     }
 
-    public function getAddressState(AbstractBlock $block): AddressStateInterface
+    public function getAddressState(AbstractBlock|string $block): AddressStateInterface
     {
         if ($this->isBillingAddressType($block)) {
             return $this->getBillingAddressState();
@@ -34,13 +38,12 @@ class AddressStateProvider
         return $this->getShippingAddressState();
     }
 
-
-    public function isShippingAddressType(AbstractBlock $block): bool
+    public function isShippingAddressType(AbstractBlock|string $block): bool
     {
         return $this->getAddressType($block) === 'shipping';
     }
 
-    public function isBillingAddressType(AbstractBlock $block): bool
+    public function isBillingAddressType(AbstractBlock|string $block): bool
     {
         return $this->getAddressType($block) === 'billing';
     }
