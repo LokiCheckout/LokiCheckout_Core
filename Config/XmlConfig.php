@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Config;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Config\Data as DataConfig;
+use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
@@ -38,7 +39,7 @@ class XmlConfig extends DataConfig
             return $themes[$name];
         }
 
-        throw new \RuntimeException((string)__('Unknown theme "%1"', $name));
+        throw new RuntimeException((string)__('Unknown theme "%1"', $name));
     }
 
     /**
@@ -85,7 +86,7 @@ class XmlConfig extends DataConfig
             return $this->createGridLayout($name, $gridLayouts[$name]);
         }
 
-        throw new \RuntimeException((string)__('Unknown grid layout "%1"', $name));
+        throw new RuntimeException((string)__('Unknown grid layout "%1"', $name));
     }
 
     /**
@@ -106,6 +107,7 @@ class XmlConfig extends DataConfig
 
         return new GridLayout(
             $name,
+            (string)$gridData['theme'],
             (int)$gridData['defaultSortOrder'],
             (string)$gridData['defaultGridClass'],
             $blocks
