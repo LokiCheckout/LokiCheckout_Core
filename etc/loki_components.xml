@@ -285,7 +285,7 @@
         <component
             name="loki-checkout.billing.address.middlename"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\MiddlenameViewModel"
-            repository="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\MiddlenameViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Address\Middlename\MiddlenameRepository"
         />
 
         <component
