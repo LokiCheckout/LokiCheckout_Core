@@ -2,19 +2,16 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
-use Yireo\LokiCheckout\Util\AddressRenderer;
-use Yireo\LokiCheckout\Util\BillingAsShippingService;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressContext;
 
-class BillingAddressContext extends GenericContext
+class BillingAddressContext extends AddressContext
 {
-    public function getBillingAsShippingService(): BillingAsShippingService
+    public function isNewAddress(): bool
     {
-        return $this->get(BillingAsShippingService::class);
-    }
+        if (false === $this->getCustomerSession()->isLoggedIn()) {
+            return true;
+        }
 
-    public function getAddressRenderer(): AddressRenderer
-    {
-        return $this->get(AddressRenderer::class);
+        return (bool)$this->getCustomerSession()->getIsNewBillingAddress();
     }
 }

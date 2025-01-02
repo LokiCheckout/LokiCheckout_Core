@@ -1,15 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping;
+namespace Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping;
 
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
-use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext;
 
-/**
- * @method BillingAddressContext getContext()
- */
 class BillingAsShippingViewModel extends FieldViewModel
 {
+    public function getValue(): mixed
+    {
+        return parent::getValue();
+    }
+
     public function getFieldLabel(): string
     {
         return 'Shipping as Billing';

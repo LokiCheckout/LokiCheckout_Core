@@ -10,13 +10,14 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class ShippingAddressViewModel extends ComponentViewModel
 {
-    public function getAddresses(): array
+    public function isEnabled(): bool
     {
-        if (false === $this->getContext()->getCustomerSession()->isLoggedIn()) {
-            return [];
-        }
+        return false === (bool)$this->getQuote()->isVirtual();
+    }
 
-        return $this->getContext()->getCustomerProvider()->getAddresses();
+    public function isSameAddress(): bool
+    {
+        return $this->getContext()->getSameAddressService()->isEnabled();
     }
 
     public function isNewAddress(): bool
@@ -24,9 +25,13 @@ class ShippingAddressViewModel extends ComponentViewModel
         return $this->getContext()->isNewAddress();
     }
 
-    public function isEnabled(): bool
+    public function getAddresses(): array
     {
-        return false === (bool)$this->getQuote()->isVirtual();
+        if (false === $this->getContext()->getCustomerSession()->isLoggedIn()) {
+            return [];
+        }
+
+        return $this->getContext()->getCustomerProvider()->getAddresses();
     }
 
     protected function getQuote(): Quote

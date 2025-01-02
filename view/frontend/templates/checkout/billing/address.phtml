@@ -17,7 +17,7 @@ use Yireo\LokiCheckout\Util\Block\CssClass;
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Billing Address']) ?>
 
     <?= $block->getChildHtml('shipping-as-billing') ?>
-    <?php if ($viewModel->getBillingAsShippingValue()): ?>
+    <?php if ($viewModel->isSameAddress()): ?>
         <?= $block->getChildHtml('view') ?>
     <?php else: ?>
         <?= $block->getChildHtml('form') ?>

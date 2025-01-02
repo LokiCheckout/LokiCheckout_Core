@@ -13,12 +13,12 @@ class ShippingAddressToggleSelectRepository extends ComponentRepository
 {
     protected function getData(): mixed
     {
-        return (bool)$this->getCheckoutSession()->getIsNewAddress();
+        return (bool)$this->getCheckoutSession()->getIsNewShippingAddress();
     }
 
     protected function saveData(mixed $data): void
     {
-        $this->getCheckoutSession()->setIsNewAddress((bool)$data);
+        $this->getCheckoutSession()->setIsNewShippingAddress((bool)$data);
     }
 
     protected function getCheckoutSession(): CheckoutSession

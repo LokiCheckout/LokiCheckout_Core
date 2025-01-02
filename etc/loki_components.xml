@@ -19,6 +19,14 @@
         </component>
 
         <component
+            name="loki-checkout.shipping.address.billing-as-shipping"
+            context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingRepository">
+            <target name="loki-checkout.billing.address"/>
+        </component>
+
+        <component
             name="loki-checkout.shipping.address.toggle-select"
             context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
             viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectViewModel"
@@ -49,8 +57,8 @@
         <component
             name="loki-checkout.billing.address.shipping-as-billing"
             context="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext"
-            viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingViewModel"
-            repository="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping\BillingAsShippingRepository">
+            viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingViewModel"
+            repository="Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingRepository">
             <target name="loki-checkout.billing.address"/>
         </component>
 

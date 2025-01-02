@@ -9,16 +9,19 @@ use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
  */
 class BillingAddressViewModel extends GenericViewModel
 {
-    public function getBillingAsShippingValue(): bool
-    {
-        return $this->getContext()->getBillingAsShippingService()->getValueFromAddress(
-            $this->getContext()->getBillingAddressState()->getBillingAddress()
-        );
-    }
-
     public function isEnabled(): bool
     {
         return $this->getContext()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
+    }
+
+    public function isSameAddress(): bool
+    {
+        return $this->getContext()->getSameAddressService()->isEnabled();
+    }
+
+    public function isNewAddress(): bool
+    {
+        return $this->getContext()->isNewAddress();
     }
 
     public function getHtml(): string
