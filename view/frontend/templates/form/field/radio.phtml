@@ -2,23 +2,21 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
-/** @var ComponentViewModelInterface|OptionsBehaviour $viewModel */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var CssClass $css */
 
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$viewModel->setOptionModel($optionModel);
 ?>
 <div class="<?= $css('w-full grid grid-cols-2 p-2') ?>"
      aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
      data-type="field">
     <?php $i = 0; ?>
-    <?php foreach ($viewModel->getOptions() as $optionValue => $optionLabel): ?>
+    <?php foreach ($optionModel->getOptions($viewModel) as $optionValue => $optionLabel): ?>
         <div class="<?= $css('', 'option') ?>">
             <input
                 type="radio"

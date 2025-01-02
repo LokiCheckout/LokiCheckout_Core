@@ -3,13 +3,10 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Region;
 
 use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
-use Yireo\LokiCheckout\Component\Base\Field\FieldBehaviour\OptionsBehaviour;
 
 
 class RegionViewModel extends AddressFieldViewModel
 {
-    use OptionsBehaviour;
-
     public function isAllowRendering(): bool
     {
         // @todo: This does not work properly at sequential requests

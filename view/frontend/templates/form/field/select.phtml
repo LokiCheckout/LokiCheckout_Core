@@ -2,17 +2,15 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Field\FieldBehaviour\OptionsBehaviour;
 use Yireo\LokiCheckout\Util\Block\CssClass;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
-/** @var ComponentViewModelInterface|OptionsBehaviour $viewModel */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var CssClass $css */
 
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
-$viewModel->setOptionModel($optionModel);
 
 // @todo: Check disabled state
 // @todo: Check aria-busy
