@@ -26,7 +26,7 @@ class StepForwardButtonRepository extends ComponentRepository
         try {
             $this->getStepNavigator()->setNextStep();
         } catch (UnknownStepException $e) {
-            $this->getContext()->getGlobalMessageManager()->addError($e->getMessage());
+            $this->getContext()->getGlobalMessageRegistry()->addError($e->getMessage());
         }
     }
 

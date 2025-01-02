@@ -17,7 +17,7 @@ use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
-use Yireo\LokiComponents\Messages\GlobalMessageManager;
+use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 
 class GenericContext implements ComponentContextInterface
 {
@@ -81,9 +81,9 @@ class GenericContext implements ComponentContextInterface
         return $this->get(CartRepositoryInterface::class);
     }
 
-    public function getGlobalMessageManager(): GlobalMessageManager
+    public function getGlobalMessageRegistry(): GlobalMessageRegistry
     {
-        return $this->get(GlobalMessageManager::class);
+        return $this->get(GlobalMessageRegistry::class);
     }
 
     public function getQuote(): Quote

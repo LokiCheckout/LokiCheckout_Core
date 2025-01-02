@@ -80,12 +80,12 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
-            $this->component->getLocalMessageManager()->addError('Method not allowed'); // @todo: Beautify
+            $this->component->getLocalMessageRegistry()->addError($this->component, 'Method not allowed'); // @todo: Beautify
             $shippingMethodCode = '';
         }
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
-            $this->component->getLocalMessageManager()->addNotice('Setting default method'); // @todo: Make optional
+            $this->component->getLocalMessageRegistry()->addNotice($this->component, 'Setting default method'); // @todo: Make optional
             $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 

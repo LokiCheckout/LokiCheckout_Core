@@ -48,7 +48,7 @@ class PostcodeFormatValidator implements ValidatorInterface
         $errorMessage = $this->getErrorMessageFromExamples($postcode, $examples);
         //echo $errorMessage."\n";
 
-        $component->getLocalMessageManager()->addError($errorMessage);
+        $component->getLocalMessageRegistry()->addError($component, $errorMessage);
 
         return false;
     }

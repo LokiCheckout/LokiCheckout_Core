@@ -27,7 +27,7 @@ class StepBackwardButtonRepository extends ComponentRepository
         try {
             $this->getStepNavigator()->setPreviousStep();
         } catch (Exception $e) {
-            $this->getContext()->getGlobalMessageManager()->addError($e->getMessage()); // @todo: Only in Developer Mode
+            $this->getContext()->getGlobalMessageRegistry()->addError($e->getMessage()); // @todo: Only in Developer Mode
             return;
         }
     }

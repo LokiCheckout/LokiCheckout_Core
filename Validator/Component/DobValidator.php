@@ -19,11 +19,11 @@ class DobValidator implements ValidatorInterface
         }
 
         $dob = strtotime($value);
-        $messages = $component->getLocalMessageManager();
+        $messages = $component->getLocalMessageRegistry();
 
         if ($dob > time()) {
             $msg = __('You can not be from the future', $this->minimumYears);
-            $messages->addError((string)$msg);
+            $messages->addError($component, (string)$msg);
 
             return false;
         }
@@ -31,7 +31,7 @@ class DobValidator implements ValidatorInterface
         $minimumAge = $this->minimumYears * 365 * 24 * 60 * 60;
         if (time() - $dob < $minimumAge) {
             $msg = __('You need to be at least %1 years old', $this->minimumYears);
-            $messages->addError((string)$msg);
+            $messages->addError($component, (string)$msg);
 
             return false;
         }

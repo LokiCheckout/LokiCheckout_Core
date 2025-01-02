@@ -27,7 +27,7 @@ class GenderValidator implements ValidatorInterface
         }
 
         if (false === array_key_exists($gender, $genderOptions)) {
-            $component->getMessages()->addError('Invalid gender');
+            $component->getLocalMessageRegistry()->addError($component, 'Invalid gender');
 
             return false;
         }
