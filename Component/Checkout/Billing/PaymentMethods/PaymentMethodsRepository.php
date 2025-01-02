@@ -91,7 +91,7 @@ class PaymentMethodsRepository extends ComponentRepository
             }
         }
 
-        $this->component->getViewModel()->getMessageManager()->addLocalError('Method is not available');
+        $this->component->getLocalMessageManager()->addError('Method is not available');
         return false;
     }
 }

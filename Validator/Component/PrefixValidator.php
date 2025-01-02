@@ -26,9 +26,8 @@ class PrefixValidator implements ValidatorInterface
             return true;
         }
 
-        $messages = $component->getViewModel()->getMessageManager();
         if (false === in_array($prefix, $prefixOptions)) {
-            $messages->addLocalError((string)__('Invalid prefix'));
+            $component->getLocalMessageManager()->addError((string)__('Invalid prefix'));
 
             return false;
         }

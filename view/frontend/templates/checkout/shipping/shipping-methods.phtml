@@ -49,7 +49,7 @@ $shippingMethods = $viewModel->getShippingMethods();
     <?= $blockRenderer->html(
         'loki-checkout.utils.messages',
         $block,
-        ['messages' => $viewModel->getMessageManager()->getLocalMessages()]
+        ['messages' => $viewModel->getMessages()]
     ) ?>
 
     <?= $block->getChildHtml('script') ?>
