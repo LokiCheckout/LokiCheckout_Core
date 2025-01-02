@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 
-class GridBlock implements ArgumentInterface
+class SortedBlocks implements ArgumentInterface
 {
     public function __construct(
         private XmlConfig $xmlConfig,
@@ -27,8 +27,6 @@ class GridBlock implements ArgumentInterface
         $childNames = $parentBlock->getChildNames();
         $children = [];
 
-        $parentBlock->getChildHtml();
-
         foreach ($childNames as $childName) {
             $childBlock = $parentBlock->getLayout()->getBlock($childName);
             if (false === $childBlock instanceof AbstractBlock) {
@@ -38,22 +36,12 @@ class GridBlock implements ArgumentInterface
             $childAlias = $childBlock->getLayout()->getElementAlias($childName);
             try {
                 $block = $gridLayout->getBlock($childAlias);
-                $gridClass = $block->getGridClass();
                 $sortOrder = $block->getSortOrder();
             } catch(BlockNotFoundException $exception) {
-                //echo $exception->getMessage(); @todo: Handle this differently
-                $gridClass = $gridLayout->getDefaultGridClass();
                 $sortOrder = $gridLayout->getDefaultSortOrder();
             }
 
-            $cssClasses = (array)$childBlock->getCssClasses();
             $childBlock->setSortOrder($sortOrder);
-            $childBlock->setCssClasses(array_merge_recursive($cssClasses, [
-                'block' => [
-                    'grid' => $gridClass
-                ],
-            ]));
-
             $children[] = $childBlock;
         }
 

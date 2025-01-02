@@ -47,7 +47,9 @@ class CssClass
             $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig();
             if (!empty($gridClassesFromXmlConfig)) {
                 $cssClasses = array_merge_recursive($cssClasses, [
-                    'block' => ['grid' => $gridClassesFromXmlConfig],
+                    'block' => [
+                        'grid' => $gridClassesFromXmlConfig
+                    ],
                 ]);
             }
         }
@@ -92,17 +94,23 @@ class CssClass
 
     private function getGridClassesFromXmlConfig(): string
     {
-        $parentBlock = $this->block->getBlockBlock();
+        $parentBlock = $this->block->getParentBlock();
         if (empty($parentBlock)) {
             return '';
         }
 
         $gridLayoutName = (string)$parentBlock->getGridLayout();
+
         if (empty($gridLayoutName)) {
             return '';
         }
 
         $blockAlias = $this->block->getLayout()->getElementAlias($this->block->getNameInLayout());
+        if (empty($blockAlias)) {
+            $blockParts = explode('.', $this->block->getNameInLayout());
+            $blockAlias = array_pop($blockParts);
+        }
+
         if (empty($blockAlias)) {
             return '';
         }
