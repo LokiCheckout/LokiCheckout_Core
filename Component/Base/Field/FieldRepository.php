@@ -9,4 +9,10 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 abstract class FieldRepository extends ComponentRepository
 {
+    public function getFieldName(): string
+    {
+        $blockName = $this->getComponentName();
+        $blockNameParts = explode('.', $blockName);
+        return array_pop($blockNameParts);
+    }
 }

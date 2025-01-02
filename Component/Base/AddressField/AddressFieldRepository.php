@@ -10,6 +10,13 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class AddressFieldRepository extends ComponentRepository
 {
+    public function getFieldName(): string
+    {
+        $blockName = $this->getComponentName();
+        $blockNameParts = explode('.', $blockName);
+        return array_pop($blockNameParts);
+    }
+
     protected function getData(): mixed
     {
         return $this->getAddressState()->load($this->getFieldName());
@@ -23,12 +30,5 @@ class AddressFieldRepository extends ComponentRepository
     protected function getAddressState(): AddressStateInterface
     {
         return $this->getContext()->getAddressState($this->getComponentName());
-    }
-
-    protected function getFieldName(): string
-    {
-        $blockName = $this->getComponentName();
-        $blockNameParts = explode('.', $blockName);
-        return array_pop($blockNameParts);
     }
 }

@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
 use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
+use Yireo\LokiComponents\Messages\Message;
 
 /**
  * @method FieldContext getContext()
@@ -43,6 +44,12 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function isValid(): bool
     {
+        foreach ($this->getMessages() as $message) {
+            if ($message->getType() === Message::TYPE_ERROR) {
+                return false;
+            }
+        }
+
         return true;
     }
 
