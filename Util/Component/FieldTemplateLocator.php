@@ -34,7 +34,6 @@ class FieldTemplateLocator
 
     public function getFieldTemplateMapping(): array
     {
-        // @todo: Radiobox
         // @todo: Checkbox
         // @todo: Textarea
 

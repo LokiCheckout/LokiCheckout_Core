@@ -426,41 +426,57 @@
     <component
         name="loki-checkout.shipping.address.street0"
         group="shippingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Street0ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Street0Repository"
     />
 
     <component
         name="loki-checkout.shipping.address.street1"
         group="shippingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Street1ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Street1Repository"
     />
 
     <component
         name="loki-checkout.shipping.address.street2"
         group="shippingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Street2ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Street2Repository"
     />
 
     <component
         name="loki-checkout.shipping.address.street3"
         group="shippingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3Repository"
     />
 
     <component
         name="loki-checkout.billing.address.street0"
         group="billingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Street0ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street0\Street0Repository"
     />
 
     <component
         name="loki-checkout.billing.address.street1"
         group="billingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Street1ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street1\Street1Repository"
     />
 
     <component
         name="loki-checkout.billing.address.street2"
         group="billingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Street2ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street2\Street2Repository"
     />
 
     <component
         name="loki-checkout.billing.address.street3"
         group="billingAddressStreetFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3ViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3Repository"
     />
 
     <component
