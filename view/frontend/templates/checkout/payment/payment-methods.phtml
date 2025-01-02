@@ -42,9 +42,5 @@ $paymentMethods = $viewModel->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html(
-        'loki-components.utils.local-messages',
-        $block,
-        ['messages' => $viewModel->getMessages()]
-    ) ?>
+    <?= $blockRenderer->html('loki-components.utils.local-messages', $block) ?>
 </div>

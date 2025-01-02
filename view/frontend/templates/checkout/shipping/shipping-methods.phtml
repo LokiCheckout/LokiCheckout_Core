@@ -46,11 +46,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html(
-        'loki-components.utils.local-messages',
-        $block,
-        ['messages' => $viewModel->getMessages()]
-    ) ?>
+    <?= $blockRenderer->html('loki-components.utils.local-messages', $block) ?>
 
     <?= $block->getChildHtml('script') ?>
 </div>
