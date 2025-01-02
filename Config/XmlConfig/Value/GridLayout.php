@@ -9,7 +9,6 @@ class GridLayout
 {
     public function __construct(
         private string $name,
-        private string $theme,
         private int $defaultSortOrder,
         private string $defaultGridClass,
         private array $blocks = []
@@ -19,11 +18,6 @@ class GridLayout
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function getTheme(): string
-    {
-        return $this->theme;
     }
 
     public function getDefaultSortOrder(): int

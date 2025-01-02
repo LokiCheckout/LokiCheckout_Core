@@ -107,7 +107,6 @@ class XmlConfig extends DataConfig
 
         return new GridLayout(
             $name,
-            (string)$gridData['theme'],
             (int)$gridData['defaultSortOrder'],
             (string)$gridData['defaultGridClass'],
             $blocks
