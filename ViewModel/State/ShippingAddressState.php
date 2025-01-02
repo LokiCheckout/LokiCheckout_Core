@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address;
+use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class ShippingAddressState implements AddressStateInterface
@@ -11,6 +12,7 @@ class ShippingAddressState implements AddressStateInterface
     public function __construct(
         private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig,
+        private SameAddressService $sameAddressService
     ) {
     }
 
@@ -21,9 +23,15 @@ class ShippingAddressState implements AddressStateInterface
 
     public function save(string $attributeCode, string $value): void
     {
-        $address = $this->getShippingAddress();
-        $address->setData($attributeCode, $value);
-        $address->getResource()->save($address);
+        $shippingAddress = $this->getShippingAddress();
+        $shippingAddress->setData($attributeCode, $value);
+
+        if ($this->sameAddressService->isEnabled()) {
+            $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
+            $billingAddress->setData($attributeCode, $value);
+        }
+
+        $this->checkoutState->saveQuote($this->checkoutState->getQuote());
     }
     public function getShippingAddress(): Address
     {
