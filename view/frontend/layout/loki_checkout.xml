@@ -58,7 +58,6 @@
         <block name="loki-checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
         <block name="loki-checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki-checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
-        <block name="loki-checkout.utils.messages" template="Yireo_LokiCheckout::utils/messages.phtml"/>
 
         <block name="loki-checkout.css_classes"/>
 

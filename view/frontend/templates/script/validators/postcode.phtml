@@ -43,7 +43,7 @@ $countryComponent = 'LokiCheckoutShippingAddressCountryId'; // @todo: Find a sma
 
         for (const [key, value] of Object.entries(postcodePatterns[countryId])) {
             if (value['pattern'].test(component.value) === false) {
-                LokiCheckoutMessenger.error('<?= __('Not a valid postcode') ?>', component);
+                component.messages.push({type:'error', text: '<?= __('Not a valid postcode') ?>'});
                 return false;
             }
         }

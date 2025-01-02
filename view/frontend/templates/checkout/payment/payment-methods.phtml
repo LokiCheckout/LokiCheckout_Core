@@ -43,7 +43,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
     </form>
 
     <?= $blockRenderer->html(
-        'loki-checkout.utils.messages',
+        'loki-components.utils.local-messages',
         $block,
         ['messages' => $viewModel->getMessages()]
     ) ?>

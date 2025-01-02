@@ -35,6 +35,6 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-checkout.utils.messages', $block, ['messages' => $viewModel->getMessages()]) ?>
+    <?= $blockRenderer->html('loki-components.utils.local-messages', $block, ['messages' => $viewModel->getMessages()]) ?>
     <?= $block->getChildHtml('after') ?>
 </div>

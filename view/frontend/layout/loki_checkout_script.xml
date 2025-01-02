@@ -12,9 +12,6 @@
                 name="loki-checkout.script.component-extender"
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
             <block
-                name="loki-checkout.script.messenger"
-                template="Yireo_LokiCheckout::script/messenger.phtml"/>
-            <block
                 name="loki-checkout.script.validator"
                 template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>

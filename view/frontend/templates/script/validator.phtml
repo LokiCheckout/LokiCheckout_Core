@@ -4,7 +4,7 @@
             required: (component) => {
                 isValid = true;
                 if (component.value === '' || component.value === undefined) {
-                    LokiCheckoutMessenger.error('<?= __('Value is required') ?>', component);
+                    component.messages.push({type:'error', text: '<?= __('Value is required') ?>'});
                     isValid = false;
                 }
 
@@ -13,7 +13,7 @@
         },
         validate: function (component) {
             isValid = true;
-            LokiCheckoutMessenger.clear(component);
+            component.messages = [];
 
             if (!component.validators) {
                 return true;
