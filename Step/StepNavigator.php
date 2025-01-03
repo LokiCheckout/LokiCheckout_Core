@@ -166,7 +166,7 @@ class StepNavigator implements ArgumentInterface
 
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
-            $stepComponent = $this->componentRegistry->getComponentFromBlockName($step->getBlockName());
+            $stepComponent = $this->componentRegistry->getComponentByName($step->getBlockName());
             $stepViewModel = $stepComponent->getViewModel();
 
             if (false === $stepViewModel instanceof StepViewModelInterface) {
