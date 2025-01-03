@@ -6,10 +6,9 @@ use Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldViewModel;
 
 class DobViewModel extends QuoteFieldViewModel
 {
-    public function initialize(): void
+    public function getMax(): string
     {
-        parent::initialize();
-        $this->getBlock()->setMax(date('Y-m-d', time()));
+        return date('Y-m-d', time());
     }
 
     public function getJsValue(): string

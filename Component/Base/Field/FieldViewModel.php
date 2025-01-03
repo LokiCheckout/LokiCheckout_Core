@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
 use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
-use Yireo\LokiComponents\Messages\Message;
+use Yireo\LokiComponents\Messages\LocalMessage;
 
 /**
  * @method FieldContext getContext()
@@ -45,7 +45,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
     public function isValid(): bool
     {
         foreach ($this->getMessages() as $message) {
-            if ($message->getType() === Message::TYPE_ERROR) {
+            if ($message->getType() === LocalMessage::TYPE_ERROR) {
                 return false;
             }
         }
@@ -75,7 +75,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMinLength(): bool
     {
-        return is_numeric($this->getBlock()->getMinLength());
+        return $this->getMinLength() > 0;
     }
 
     public function getMinLength(): int
@@ -85,7 +85,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMaxLength(): bool
     {
-        return is_numeric($this->getBlock()->getMaxLength());
+        return $this->getMaxLength() > 0;
     }
 
     public function getMaxLength(): int
@@ -95,7 +95,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMin(): bool
     {
-        return !empty($this->getBlock()->getMin());
+        return !empty($this->getMin());
     }
 
     public function getMin(): string
@@ -105,7 +105,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMax(): bool
     {
-        return !empty($this->getBlock()->getMax());
+        return !empty($this->getMax());
     }
 
     public function getMax(): string
