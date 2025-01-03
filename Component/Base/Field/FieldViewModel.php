@@ -95,7 +95,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMin(): bool
     {
-        return !empty($this->getMin());
+        return $this->getMin() > 0;
     }
 
     public function getMin(): string
@@ -105,7 +105,7 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
 
     public function hasMax(): bool
     {
-        return !empty($this->getMax());
+        return $this->getMax() > 0;
     }
 
     public function getMax(): string
