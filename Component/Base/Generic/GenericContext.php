@@ -14,12 +14,12 @@ use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiComponents\Component\ComponentContext;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 
-class GenericContext implements ComponentContextInterface
+class GenericContext implements ComponentContext
 {
     public function getCheckoutState(): CheckoutState
     {
