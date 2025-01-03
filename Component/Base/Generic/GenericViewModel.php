@@ -14,11 +14,6 @@ class GenericViewModel extends ComponentViewModel implements GenericViewModelInt
     protected bool $lazyLoad = true;
     protected bool $allowRendering = true;
 
-    // @todo: Make sure this is called
-    public function initialize(): void
-    {
-    }
-
     /**
      * @return bool
      */
