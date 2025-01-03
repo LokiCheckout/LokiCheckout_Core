@@ -11,13 +11,14 @@ class DobViewModel extends QuoteFieldViewModel
         return date('Y-m-d', time());
     }
 
-    public function getJsValue(): string
+    public function getValue(): string
     {
-        if (!empty($this->value)) {
-            return date('Y-m-d', strtotime($this->value));
+        $value = parent::getValue();
+        if (empty($value)) {
+            return '';
         }
 
-        return '';
+        return date('Y-m-d', strtotime((string)$value));
     }
 
     public function getFieldLabel(): string
