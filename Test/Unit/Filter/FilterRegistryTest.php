@@ -14,6 +14,6 @@ class FilterRegistryTest extends TestCase
         $filter2 = $this->createMock(FilterInterface::class);
 
         $filterRegistry = new FilterRegistry(['item1' => $filter1, 'item2' => $filter2]);
-        $this->assertCount(2, $filterRegistry->getSelectedFilters(['item1', 'item2', 'item3']));
+        $this->assertCount(2, $filterRegistry->getApplicableFilters(['item1', 'item2', 'item3']));
     }
 }
