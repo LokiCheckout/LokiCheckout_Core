@@ -43,7 +43,7 @@ class GenericViewModel extends ComponentViewModel implements GenericViewModelInt
         return $this->step;
     }
 
-    public function getJsData(): ?array
+    public function getJsData(): array
     {
         return [
             'step' => $this->getStep(),

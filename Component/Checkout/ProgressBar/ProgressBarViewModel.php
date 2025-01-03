@@ -20,7 +20,7 @@ class ProgressBarViewModel extends ComponentViewModel
         return 'none';
     }
 
-    public function getJsData(): ?array
+    public function getJsData(): array
     {
         return [
             'step' => $this->getStep(),

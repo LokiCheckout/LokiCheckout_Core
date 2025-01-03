@@ -53,6 +53,13 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
         return true;
     }
 
+    public function getJsData(): array
+    {
+        return [
+            'valid' => $this->isValid(),
+        ];
+    }
+
     public function isRequired(): bool
     {
         return false;

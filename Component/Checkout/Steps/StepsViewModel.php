@@ -10,7 +10,7 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class StepsViewModel extends ComponentViewModel
 {
-    public function getJsData(): ?array
+    public function getJsData(): array
     {
         return [
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode()

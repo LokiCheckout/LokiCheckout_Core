@@ -6,7 +6,7 @@
             }
         });
 
-        document.addEventListener("@todo", function (event) {
+        document.addEventListener("loki:dom-update", function (event) {
             event.target.querySelectorAll('[aria-invalid]').forEach(function (element) {
                 if (typeof element.setCustomValidity === 'function') {
                     element.setCustomValidity('Field is invalid');
