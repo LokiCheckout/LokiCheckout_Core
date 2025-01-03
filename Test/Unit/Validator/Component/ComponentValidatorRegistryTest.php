@@ -14,6 +14,6 @@ class ComponentValidatorRegistryTest extends TestCase
         $validator2 = $this->createMock(FieldValidatorInterface::class);
 
         $validatorRegistry = new FieldValidatorRegistry(['item1' => $validator1, 'item2' => $validator2]);
-        $this->assertCount(2, $validatorRegistry->getSelectedValidators(['item1', 'item2', 'item3']));
+        $this->assertCount(2, $validatorRegistry->getApplicableValidators(['item1', 'item2', 'item3']));
     }
 }
