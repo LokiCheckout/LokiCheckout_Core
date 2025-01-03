@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
 /** @var Template $fieldBlock */
-/** @var ComponentViewModelInterface $viewModel */
+/** @var FieldViewModel $viewModel */
 /** @var CssClass $css */
 
 $fieldBlock = $block->getFieldBlock();
@@ -21,6 +21,9 @@ $viewModel = $block->getViewModel();
     @change="submit"
     <?php if ($viewModel->isDisabled()): ?>
         disabled="disabled"
+    <?php endif ?>
+    <?php if ($viewModel->hasAutocomplete()): ?>
+        autocomplete="<?= $viewModel->getAutocomplete() ?>"
     <?php endif ?>
     <?php if ($viewModel->hasMinLength()): ?>
         minlength="<?= $viewModel->getMinLength() ?>"

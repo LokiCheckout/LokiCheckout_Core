@@ -73,6 +73,16 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
         return (string)$this->getBlock()->getPlaceholder();
     }
 
+    public function hasAutocomplete(): bool
+    {
+        return !empty($this->getAutocomplete());
+    }
+
+    public function getAutocomplete(): string
+    {
+        return (string)$this->getBlock()->getAutocomplete();
+    }
+
     public function hasMinLength(): bool
     {
         return $this->getMinLength() > 0;
