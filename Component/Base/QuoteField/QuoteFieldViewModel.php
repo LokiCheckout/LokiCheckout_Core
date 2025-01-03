@@ -2,10 +2,11 @@
 
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
+use Yireo\LokiCheckout\Component\Base\Field\FieldContext;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 
 /**
- * @method QuoteFieldContext getContext()
+ * @method FieldContext getContext()
  */
 abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldViewModelInterface
 {
