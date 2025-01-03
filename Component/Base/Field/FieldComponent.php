@@ -23,6 +23,7 @@ class FieldComponent extends Component
             $validators[] = 'length';
         }
 
+        // @todo: Improve this logic
         return parent::getValidators($validators);
     }
 }
