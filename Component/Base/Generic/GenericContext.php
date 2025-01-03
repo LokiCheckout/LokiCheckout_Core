@@ -19,7 +19,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 
-class GenericContext implements ComponentContext
+class GenericContext extends ComponentContext
 {
     public function getCheckoutState(): CheckoutState
     {
@@ -34,11 +34,6 @@ class GenericContext implements ComponentContext
     public function getBillingAddressState(): BillingAddressState
     {
         return $this->get(BillingAddressState::class);
-    }
-
-    public function getCustomerSession(): CustomerSession
-    {
-        return $this->get(CustomerSession::class);
     }
 
     public function getCustomerProvider(): CustomerProvider
