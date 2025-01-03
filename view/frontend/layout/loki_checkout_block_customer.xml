@@ -5,11 +5,6 @@
             name="loki-checkout.customer.customer_email" as="customer_email"
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
-                <argument name="css_classes" xsi:type="array">
-                    <item name="block" xsi:type="array">
-                        <item name="custom" xsi:type="string">mb-8</item>
-                    </item>
-                </argument>
                 <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
             </arguments>
         </block>

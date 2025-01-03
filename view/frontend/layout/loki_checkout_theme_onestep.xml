@@ -8,14 +8,16 @@
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/onestep/steps.phtml">
             <block name="loki-checkout.step.single" as="single-step" template="Yireo_LokiCheckout::theme/onestep/one-step.phtml">
                 <container name="loki-checkout.one-step.col1" as="col1" htmlTag="div" htmlClass="col1">
-                    <container name="loki-checkout.one-step.col1.email-container" htmlTag="div" htmlClass="mb-8"/>
+                    <container name="loki-checkout.one-step.col1.customer-fields" htmlTag="div" htmlClass="grid gap-8 mb-8"/>
                 </container>
                 <container name="loki-checkout.one-step.col2" as="col2" htmlTag="div" htmlClass="col2"/>
             </block>
         </referenceBlock>
 
         <!-- Column 1 -->
-        <move element="loki-checkout.customer.customer_email" destination="loki-checkout.one-step.col1.email-container" as="customer_email"/>
+        <move element="loki-checkout.customer.customer_email" destination="loki-checkout.one-step.col1.customer-fields" as="customer_email"/>
+        <move element="loki-checkout.customer.customer_gender" destination="loki-checkout.one-step.col1.customer-fields" as="customer_gender"/>
+        <move element="loki-checkout.customer.customer_dob" destination="loki-checkout.one-step.col1.customer-fields" as="customer_dob"/>
         <move element="loki-checkout.shipping.address" destination="loki-checkout.one-step.col1" as="shipping-address"/>
         <move element="loki-checkout.billing.address" destination="loki-checkout.one-step.col1" as="billing-address"/>
 
