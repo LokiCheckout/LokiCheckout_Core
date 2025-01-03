@@ -2,23 +2,10 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\BillingStepViewModel;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
-/** @var ViewModelFactory $viewModelFactory */
-/** @var BillingStepViewModel $viewModel */
 /** @var CssClass $css */
-/** @var BlockRenderer $blockRenderer */
-
-$stepNavigator = $viewModelFactory->create(StepNavigator::class);
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
-$isCurrent = $stepNavigator->getCurrentStep()->getCode() === 'shipping';
-$duration = $viewModel->getBlock()->getDuration() ?? '300ms';
 ?>
 <div class="<?= $css('') ?>">
     <?= $block->getChildHtml() ?>
