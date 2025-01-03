@@ -206,6 +206,7 @@
         name="loki-checkout.customer.customer_email"
         group="quoteFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Email\EmailViewModel">
+        <validator name="email"/>
     </component>
 
     <component
