@@ -4,7 +4,7 @@
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/default/checkout.phtml"/>
 
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
-            <block name="loki-checkout.steps.shipping-step" as="shipping" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
+            <block name="loki-checkout.steps.shipping" as="shipping" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
                 <block
                     name="loki-checkout.steps.shipping.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
@@ -13,12 +13,12 @@
                     </arguments>
                 </block>
 
-                <container name="loki-checkout.steps.shipping.customer-fields" />
+                <container name="loki-checkout.steps.shipping.customer-fields" htmlTag="div" htmlClass="grid gap-8 mb-8"/>
 
                 <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
             </block>
 
-            <block name="loki-checkout.steps.billing-step" as="billing" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
+            <block name="loki-checkout.steps.billing" as="billing" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
                 <block
                     name="loki-checkout.steps.billing.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
