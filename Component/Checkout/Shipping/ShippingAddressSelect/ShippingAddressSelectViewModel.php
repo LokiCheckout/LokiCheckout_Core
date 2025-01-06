@@ -10,9 +10,9 @@ use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddre
  */
 class ShippingAddressSelectViewModel extends FieldViewModel
 {
-    public function getAddresses(): array
+    public function getAddressLines(): array
     {
-        return $this->getContext()->getCustomerProvider()->getAddresses();
+        return $this->getContext()->getCustomerProvider()->getAddressLines();
     }
 
     public function getCurrentAddressId(): int

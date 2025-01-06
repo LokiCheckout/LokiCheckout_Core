@@ -103,8 +103,17 @@
         name="loki-checkout.shipping.address.select"
         context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectRepository"
-    />
+        repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectRepository">
+        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.sidebar.preview.billing_address"/>
+        <target name="loki-checkout.shipping.address.view"/>
+    </component>
+
+    <component
+        name="loki-checkout.shipping.address.view"
+        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel"
+    ></component>
 
     <component
         name="loki-checkout.shipping.methods"

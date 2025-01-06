@@ -37,9 +37,13 @@ class CustomerProvider
         $customer = $this->getCustomer();
         $this->searchCriteriaBuilder->addFilter('parent_id', $customer->getId());
         $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
+        return $searchResults->getItems();
+    }
 
+    public function getAddressLines(): array
+    {
         $addresses = [];
-        foreach ($searchResults->getItems() as $address) {
+        foreach ($this->getAddresses() as $address) {
             $addresses[$address->getId()] = $this->getAddressInline($address);
         }
 

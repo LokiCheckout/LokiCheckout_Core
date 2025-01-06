@@ -31,7 +31,13 @@ class ShippingAddressViewModel extends ComponentViewModel
             return [];
         }
 
-        return $this->getContext()->getCustomerProvider()->getAddresses();
+        return $this->getContext()->getCustomerProvider()->getAddressLines();
+    }
+
+    public function getHtml(): string
+    {
+        $address = $this->getContext()->getShippingAddressState()->getShippingAddress();
+        return $this->getContext()->getAddressRenderer()->getHtml($address);
     }
 
     protected function getQuote(): Quote

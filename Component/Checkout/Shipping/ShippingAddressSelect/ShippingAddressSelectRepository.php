@@ -11,11 +11,6 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ShippingAddressSelectRepository extends ComponentRepository
 {
-    public function getAddresses(): array
-    {
-        return $this->getContext()->getCustomerProvider()->getAddresses();
-    }
-
     protected function getData(): mixed
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
@@ -51,13 +46,15 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
+        echo 'original='.$data.'; ';
         $selectedAddressId = $this->sanitizeSelectedAddressId((int)$data);
+        echo 'sanitized='.$selectedAddressId.'; ';
+
         if (false === $selectedAddressId > 0) {
             return;
         }
 
         $customerShippingAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
-
         if (false === $customerShippingAddress instanceof AddressInterface) {
             return;
         }
@@ -70,12 +67,12 @@ class ShippingAddressSelectRepository extends ComponentRepository
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int
     {
-        foreach ($this->getAddresses() as $address) {
+        foreach ($this->getContext()->getCustomerProvider()->getAddresses() as $address) {
             if (false === $address instanceof AddressInterface) {
                 continue;
             }
 
-            if ($address->getId() === $selectedAddressId) {
+            if ((int)$address->getId() === $selectedAddressId) {
                 return $selectedAddressId;
             }
         }

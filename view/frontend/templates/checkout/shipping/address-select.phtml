@@ -38,7 +38,7 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         <?php if ($showEmptySelectOption): ?>
             <option value="0"><?= $emptySelectOptionLabel ?></option>
         <?php endif; ?>
-        <?php foreach ($viewModel->getAddresses() as $shippingAddressId => $shippingAddresLabel): ?>
+        <?php foreach ($viewModel->getAddressLines() as $shippingAddressId => $shippingAddresLabel): ?>
             <option
                 value="<?= $shippingAddressId ?>"
                 <?= (int)$shippingAddressId === (int)$viewModel->getValue() ? 'selected' : '' ?>
