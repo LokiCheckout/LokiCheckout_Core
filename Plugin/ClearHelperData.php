@@ -6,14 +6,16 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 
 class ClearHelperData
 {
-    public function afterClearQuote(CheckoutSession $checkoutSession)
+    public function afterClearQuote(CheckoutSession $checkoutSession): CheckoutSession
     {
         $this->resetLokiCheckout($checkoutSession);
+        return $checkoutSession;
     }
 
-    public function afterClearStorage(CheckoutSession $checkoutSession)
+    public function afterClearStorage(CheckoutSession $checkoutSession): CheckoutSession
     {
         $this->resetLokiCheckout($checkoutSession);
+        return $checkoutSession;
     }
 
     public function afterClearHelperData(CheckoutSession $checkoutSession)
@@ -21,9 +23,16 @@ class ClearHelperData
         $this->resetLokiCheckout($checkoutSession);
     }
 
-    public function afterResetCheckout(CheckoutSession $checkoutSession)
+    public function afterResetCheckout(CheckoutSession $checkoutSession): CheckoutSession
     {
         $this->resetLokiCheckout($checkoutSession);
+        return $checkoutSession;
+    }
+
+    public function afterReplaceQuote(CheckoutSession $checkoutSession): CheckoutSession
+    {
+        $this->resetLokiCheckout($checkoutSession);
+        return $checkoutSession;
     }
 
     private function resetLokiCheckout(CheckoutSession $checkoutSession)

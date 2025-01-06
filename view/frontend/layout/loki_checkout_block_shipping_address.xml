@@ -118,7 +118,11 @@
 
                 <block
                     name="loki-checkout.shipping.address.postcode" as="postcode"
-                    template="Yireo_LokiCheckout::form/field.phtml"/>
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="is_required" xsi:type="boolean">true</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.city" as="city"
