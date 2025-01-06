@@ -27,6 +27,7 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         data-type="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         x-model="value"
+        @change="submit"
         :class="disabled ? 'disabled:opacity-75' : ''"
         :disabled="disabled"
         <?php if ($viewModel->isDisabled()): ?>
