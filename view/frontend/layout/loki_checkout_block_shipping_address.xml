@@ -20,6 +20,10 @@
             <block
                 name="loki-checkout.shipping.address.select" as="select"
                 template="Yireo_LokiCheckout::checkout/shipping/address-select.phtml">
+                <arguments>
+                    <argument name="show_empty_select_option" xsi:type="boolean">true</argument>
+                </arguments>
+
                 <block
                     name="loki-checkout.shipping.address.select.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
