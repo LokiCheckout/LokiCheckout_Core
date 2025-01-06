@@ -15,6 +15,13 @@ class StepForwardButtonViewModel extends GenericViewModel
         return 'LokiCheckoutStepForwardButton';
     }
 
+    public function getJsData(): array
+    {
+        return [
+            'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
+        ];
+    }
+
     public function getStep(): string
     {
         return 'none';

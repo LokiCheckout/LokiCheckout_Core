@@ -2,18 +2,11 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
             ...LokiCheckoutBaseComponentType,
+            currentStep: '',
             valid: true,
             afterInit() {
                 this.updateValid();
                 document.addEventListener('yireo-loki-checkout.component-change', () => {
-                    this.updateValid();
-                });
-
-                document.addEventListener('@todo', () => {
-                   this.valid = false;
-                });
-
-                document.addEventListener('@todo', () => {
                     this.updateValid();
                 });
             },
@@ -21,21 +14,21 @@
                 return !this.valid;
             },
             updateValid() {
-                this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.step);
+                this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.currentStep);
                 if (!this.valid) {
                     const components = [];
-                    Alpine.store('checkout').getInvalidComponents(this.step).forEach((component) => {
+                    Alpine.store('checkout').getInvalidComponents(this.currentStep).forEach((component) => {
                         components.push(component.id);
                     })
 
-                    yireoLokiCheckoutLogger('INFO: Invalid components for step "' + this.step + '"', components);
+                    yireoLokiCheckoutLogger('INFO: Invalid components for step "' + this.currentStep + '"', components);
                 }
 
                 return this.valid;
             },
             submit() {
                 window.dispatchEvent(new CustomEvent('clear-messages'));
-                Alpine.store('checkout').getComponentsByStep(this.step).forEach((component) => {
+                Alpine.store('checkout').getComponentsByStep(this.currentStep).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 
