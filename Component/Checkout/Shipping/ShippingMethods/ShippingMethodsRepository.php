@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
 
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Exception\StateException;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -80,12 +82,18 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
-            $this->component->getLocalMessageRegistry()->addError($this->component, 'Method not allowed'); // @todo: Beautify
+            $this->component->getLocalMessageRegistry()->addError(
+                $this->component,
+                'Method not allowed'
+            ); // @todo: Beautify
             $shippingMethodCode = '';
         }
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
-            $this->component->getLocalMessageRegistry()->addNotice($this->component, 'Setting default method'); // @todo: Make optional
+            $this->component->getLocalMessageRegistry()->addNotice(
+                $this->component,
+                'Setting default method'
+            ); // @todo: Make optional
             $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 

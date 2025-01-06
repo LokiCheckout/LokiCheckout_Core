@@ -42,7 +42,9 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
+        <div class="p-4">
             <?= __('No shipping methods available') ?>
+        </div>
         <?php endif; ?>
     </form>
 

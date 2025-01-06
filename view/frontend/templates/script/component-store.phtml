@@ -44,21 +44,6 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                     return;
                 }
 
-                if (!component.elementId) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store: No elementId set');
-                    return;
-                }
-
-                if (!component.step) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store: No step set');
-                    return;
-                }
-
-                if (component.valid === undefined) {
-                    yireoLokiCheckoutLogger('WARNING: Unable to add Alpine.js component "' + component.id + '" to store, because it has no valid flag set');
-                    return;
-                }
-
                 this.components[component.id] = component;
                 document.dispatchEvent(new CustomEvent('yireo-loki-components.component-register', {detail: {component}}));
             },
