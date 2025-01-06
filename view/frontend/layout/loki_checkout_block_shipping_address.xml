@@ -41,6 +41,7 @@
                 name="loki-checkout.shipping.address.form-title" as="form-title"
                 template="Yireo_LokiCheckout::generic/title.phtml">
                 <arguments>
+                    <!-- @todo Set title to "Enter your Address" when guest checkout -->
                     <argument name="title" xsi:type="string">Enter a New Address</argument>
                 </arguments>
             </block>

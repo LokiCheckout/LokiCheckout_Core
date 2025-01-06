@@ -27,12 +27,15 @@ class CouponCodeRepository extends ComponentRepository
             return;
         }
 
+        $quote = $this->getContext()->getQuote();
         if ($data['task'] === 'apply') {
-            $this->getContext()->getQuote()->setCouponCode($data['code']);
+            $quote->setCouponCode($data['code']);
+            $this->getContext()->getCartRepository()->save($quote);
         }
 
         if ($data['task'] === 'remove') {
-            $this->getContext()->getQuote()->setCouponCode('');
+            $quote->setCouponCode('');
+            $this->getContext()->getCartRepository()->save($quote);
         }
     }
 }
