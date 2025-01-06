@@ -25,7 +25,9 @@ class AddressRenderer
 
         /** @var RendererInterface $renderer */
         $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
-        return $renderer->renderArray($addressData);
+        $html = $renderer->renderArray($addressData);
+        $html = preg_replace('/^<br(\s+)\/>$/msi', '', $html);
+        return $html;
     }
 
     private function isEmpty(array $addressData): bool
