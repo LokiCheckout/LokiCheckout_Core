@@ -180,22 +180,6 @@
                     </depends>
                 </field>
             </group>
-            <group id="account_type" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Account Type settings</label>
-                <field id="hide_company"
-                       translate="label"
-                       type="select"
-                       sortOrder="1"
-                       showInDefault="1"
-                       showInWebsite="1"
-                       showInStore="1">
-                    <label>Hide Company when Account Type is Individual</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <depends>
-                        <field id="*/general/enable">1</field>
-                    </depends>
-                </field>
-            </group>
         </section>
     </system>
 </config>
