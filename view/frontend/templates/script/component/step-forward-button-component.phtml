@@ -5,11 +5,24 @@
             redirectUrl: '',
             currentStep: '',
             valid: true,
-            afterInit() {
-                this.updateValid();
-                document.addEventListener('yireo-loki-checkout.component-change', () => {
+            initActions: {
+                ...LokiCheckoutBaseComponentType.initActions,
+                redirectIfNeeded() {
+                    if (this.redirectUrl) {
+                        window.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
+                            component: this,
+                            redirectUrl: this.redirectUrl
+                        }));
+
+                        window.location.replace(this.redirectUrl);
+                    }
+                },
+                updateValid() {
                     this.updateValid();
-                });
+                    document.addEventListener('yireo-loki-checkout.component-change', () => {
+                        this.updateValid();
+                    });
+                }
             },
             disabled() {
                 return !this.valid;
@@ -39,15 +52,6 @@
                     }));
 
                     this.post();
-                }
-
-                if (this.redirectUrl) {
-                    window.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
-                        component: this,
-                        redirectUrl: this.redirectUrl
-                    }));
-
-                    window.location.replace(this.redirectUrl);
                 }
 
                 // Fail-safe enabling of the button

@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Observer;
 
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\UrlFactory;
@@ -15,6 +16,7 @@ class EnableCheckout implements ObserverInterface
     public function __construct(
         private readonly Config $config,
         private readonly LayoutInterface $layout,
+        private CheckoutSession $checkoutSession,
         private CustomerSession $customerSession,
         private UrlFactory $urlFactory,
     ) {
@@ -39,6 +41,7 @@ class EnableCheckout implements ObserverInterface
             $this->layout->getUpdate()->addHandle('hyva_loki_checkout');
         }
 
+        $this->checkoutSession->setLokiRedirectUrl('');
         $this->customerSession->setBeforeAuthUrl($this->urlFactory->create()->getUrl('checkout/index/index'));
     }
 }

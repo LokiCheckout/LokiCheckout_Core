@@ -6,6 +6,16 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 
 class ClearHelperData
 {
+    public function afterClearQuote(CheckoutSession $checkoutSession)
+    {
+        $this->resetLokiCheckout($checkoutSession);
+    }
+
+    public function afterClearStorage(CheckoutSession $checkoutSession)
+    {
+        $this->resetLokiCheckout($checkoutSession);
+    }
+
     public function afterClearHelperData(CheckoutSession $checkoutSession)
     {
         $this->resetLokiCheckout($checkoutSession);
