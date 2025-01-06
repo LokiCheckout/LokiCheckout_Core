@@ -108,6 +108,7 @@
 
     <component
         name="loki-checkout.shipping.methods"
+        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
@@ -137,6 +138,7 @@
 
     <component
         name="loki-checkout.payment.methods"
+        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsRepository">
