@@ -97,7 +97,9 @@
         context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectRepository"
-    />
+    >
+        <target name="loki-checkout.shipping.address"/>
+    </component>
 
     <component
         name="loki-checkout.shipping.address.select"

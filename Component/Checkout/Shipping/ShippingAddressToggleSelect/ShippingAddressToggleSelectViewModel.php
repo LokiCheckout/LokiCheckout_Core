@@ -11,15 +11,10 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
  */
 class ShippingAddressToggleSelectViewModel extends ComponentViewModel
 {
-    public function isNewAddress(): bool
-    {
-        return (bool)$this->getRepository()->get();
-    }
-
     public function getJsData(): array
     {
         return [
-            'newAddress' => $this->getContext()->isNewAddress() ? true : false,
+            'value' => $this->getValue(),
             'buttonLabelSelectAddress' => $this->getButtonLabelSelectAddress(),
             'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),
         ];

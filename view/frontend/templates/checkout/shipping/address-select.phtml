@@ -29,7 +29,6 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         x-model="value"
         @change="submit"
         :class="disabled ? 'disabled:opacity-75' : ''"
-        :disabled="disabled"
         <?php if ($viewModel->isDisabled()): ?>
             disabled="disabled"
         <?php endif ?>

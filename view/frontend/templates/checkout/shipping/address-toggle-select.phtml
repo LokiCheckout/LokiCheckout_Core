@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectViewModel;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Block\CssClass;
@@ -20,7 +19,7 @@ $emptySelectOptionLabel = (string)$block->getEmptySelectOptionLabel(); // @doc
         x-text="buttonLabel"
         x-model="value"
         type="button"
-        @click="toggleNewAddress"
+        @click="toggle"
     >
         <?= $viewModel->getButtonLabelNewAddress() ?>
     </button>

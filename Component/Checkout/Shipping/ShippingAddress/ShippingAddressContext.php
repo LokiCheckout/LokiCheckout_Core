@@ -12,6 +12,6 @@ class ShippingAddressContext extends AddressContext
             return true;
         }
 
-        return (bool)$this->getCustomerSession()->getIsNewShippingAddress();
+        return (bool)$this->getCheckoutSession()->getIsNewShippingAddress();
     }
 }

@@ -15,11 +15,6 @@ class ShippingAddressSelectViewModel extends FieldViewModel
         return $this->getContext()->getCustomerProvider()->getAddressLines();
     }
 
-    public function getCurrentAddressId(): int
-    {
-        return (int)$this->getData();
-    }
-
     public function getFieldLabel(): string
     {
         return 'Select your Shipping Address';
