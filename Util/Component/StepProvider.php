@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
+use RuntimeException;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 class StepProvider
 {
@@ -26,13 +28,7 @@ class StepProvider
 
     private function getStepNameFromBlock(AbstractBlock $block): string
     {
-        try {
-            $component = $this->componentRegistry->getComponentFromBlock($block);
-            $viewModel = $component->getViewModel();
-        } catch (\RuntimeException $e) {
-            $viewModel = null;
-        }
-
+        $viewModel = $this->getViewModelFromBlock($block);
         if ($viewModel instanceof StepViewModelInterface) {
             return $viewModel->getCode();
         }
@@ -43,5 +39,21 @@ class StepProvider
         }
 
         return $this->getStepNameFromBlock($parentBlock);
+    }
+
+    private function getViewModelFromBlock(AbstractBlock $block): ?ComponentViewModelInterface
+    {
+        $viewModel = $block->getViewModel();
+        if ($viewModel instanceof ComponentViewModelInterface) {
+            return $viewModel;
+        }
+
+        try {
+            $component = $this->componentRegistry->getComponentFromBlock($block);
+            return $component->getViewModel();
+        } catch (RuntimeException $e) {
+        }
+
+        return null;
     }
 }

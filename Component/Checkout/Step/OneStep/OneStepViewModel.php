@@ -13,7 +13,7 @@ class OneStepViewModel extends ComponentViewModel implements StepViewModelInterf
 {
     public function getCode(): string
     {
-        return 'onestep';
+        return 'one';
     }
 
     public function getLabel(): string

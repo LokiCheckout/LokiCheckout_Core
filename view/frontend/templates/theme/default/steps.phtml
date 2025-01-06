@@ -18,5 +18,5 @@ $currentStep = $stepNavigator->getCurrentStep()->getCode();
 ?>
 <div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
-    <?= $block->getChildHtml($currentStep.'-step') ?>
+    <?= $block->getChildHtml($currentStep) ?>
 </div>

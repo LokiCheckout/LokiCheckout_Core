@@ -9,7 +9,7 @@
         </theme>
         <theme name="onestep" label="One Step Checkout">
             <steps>
-                <step name="onestep" blockName="loki-checkout.steps.single"/>
+                <step name="one" blockName="loki-checkout.steps.one"/>
             </steps>
         </theme>
     </themes>

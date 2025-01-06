@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\Validator\ValidatorInterface;
 class OneStepContext extends GenericContext
 {
     public function __construct(
-        public readonly ValidatorInterface $stepValidator,
+        public readonly ValidatorInterface $stepValidator, // @todo: This does not call upon parent constructor
     ) {
     }
 

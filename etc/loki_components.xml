@@ -197,7 +197,7 @@
     </component>
 
     <component
-        name="loki-checkout.steps.single"
+        name="loki-checkout.steps.one"
         context="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\OneStepContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\OneStepViewModel">
     </component>
