@@ -60,6 +60,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 }
 
                 this.components[component.id] = component;
+                document.dispatchEvent(new CustomEvent('yireo-loki-components.component-register', {detail: {component}}));
             },
             get(componentId) {
                 if (this.components[componentId]) {
