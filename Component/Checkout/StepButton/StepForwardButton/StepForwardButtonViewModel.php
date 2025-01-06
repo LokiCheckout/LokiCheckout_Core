@@ -19,6 +19,7 @@ class StepForwardButtonViewModel extends GenericViewModel
     {
         return [
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
+            'redirectUrl' => $this->getContext()->getCheckoutSession()->getLokiRedirectUrl(),
         ];
     }
 

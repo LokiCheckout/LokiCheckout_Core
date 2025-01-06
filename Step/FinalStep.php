@@ -59,7 +59,7 @@ class FinalStep
 
         $quote->setInventoryProcessed(false); // @todo: Is this needed?
         $this->onepage->setQuote($quote); // @todo: Is this needed?
-        $this->onepage->saveOrder();
+        $this->onepage->saveOrder(); // @todo: Remove dependency with OnePage?
 
         try {
             $order = $this->orderRepository->get($this->checkoutSession->getLastOrderId());
@@ -72,8 +72,7 @@ class FinalStep
 
         $this->dispatchSaveOrderEvent();
 
-        // @todo: Redirect
-        die($this->redirectUrl->get($paymentMethod, $order));
+        $this->checkoutSession->setLokiRedirectUrl($this->redirectUrl->get($paymentMethod, $order));
 
         return true;
     }

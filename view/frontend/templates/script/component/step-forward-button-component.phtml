@@ -2,6 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
             ...LokiCheckoutBaseComponentType,
+            redirectUrl: '',
             currentStep: '',
             valid: true,
             afterInit() {
@@ -27,13 +28,26 @@
                 return this.valid;
             },
             submit() {
-                window.dispatchEvent(new CustomEvent('clear-messages'));
+                window.dispatchEvent(new CustomEvent('clear-messages')); // @todo: Use Loki specific event
                 Alpine.store('checkout').getComponentsByStep(this.currentStep).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 
                 if (true === this.updateValid()) {
+                    window.dispatchEvent(new CustomEvent('loki-checkout-before-step-forward', {
+                        component: this
+                    }));
+
                     this.post();
+                }
+
+                if (this.redirectUrl) {
+                    window.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
+                        component: this,
+                        redirectUrl: this.redirectUrl
+                    }));
+
+                    window.location.replace(this.redirectUrl);
                 }
 
                 // Fail-safe enabling of the button
