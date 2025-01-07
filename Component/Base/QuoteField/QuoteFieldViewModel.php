@@ -32,4 +32,9 @@ abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldV
     {
         return (bool)$this->getContext()->getAttributeProvider()->getAttribute($this->getFieldName())->getIsRequired();
     }
+
+    public function getStep(): string
+    {
+        return $this->getContext()->getStepProvider()->getStep($this->getBlock());
+    }
 }
