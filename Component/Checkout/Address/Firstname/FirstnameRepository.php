@@ -6,7 +6,7 @@ use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 class FirstnameRepository extends AddressFieldRepository
 {
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         if ($this->getContext()->getQuote()->getCustomerIsGuest()) {
             $this->getContext()->getQuote()->setCustomerFirstname($data);

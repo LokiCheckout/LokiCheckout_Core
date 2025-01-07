@@ -39,7 +39,7 @@ class ShippingMethodsRepository extends ComponentRepository
         return $shippingMethods;
     }
 
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         if (!empty($this->currentShippingMethod)) {
             return $this->currentShippingMethod;
@@ -57,7 +57,7 @@ class ShippingMethodsRepository extends ComponentRepository
         return $sanitizedShippingMethod;
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         $shippingMethod = (string)$data;
         $shippingMethod = $this->sanitizeShippingMethod($shippingMethod);

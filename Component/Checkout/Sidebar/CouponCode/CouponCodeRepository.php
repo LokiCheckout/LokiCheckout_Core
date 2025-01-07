@@ -10,7 +10,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class CouponCodeRepository extends ComponentRepository
 {
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         // @todo: Double-check that this matches Magento core logic
         // @todo: Move this into a validator "coupon_code"
@@ -21,7 +21,7 @@ class CouponCodeRepository extends ComponentRepository
         );
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         if (empty($data['task']) || !isset($data['code'])) {
             return;

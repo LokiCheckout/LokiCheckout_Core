@@ -10,12 +10,12 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ProgressBarRepository extends ComponentRepository
 {
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         return $this->getContext()->getStepNavigator()->getCurrentStep()->getCode();
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         $this->getContext()->getStepNavigator()->setCurrentStepByCode((string)$data);
     }

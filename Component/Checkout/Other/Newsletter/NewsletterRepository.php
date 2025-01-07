@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class NewsletterRepository extends ComponentRepository
 {
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         $email = (string)$this->getContext()->getQuote()->getCustomerEmail();
         if (!empty($email)) {
@@ -19,7 +19,7 @@ class NewsletterRepository extends ComponentRepository
         return false;
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         $subscribe = (bool)$data;
         $email = (string)$this->getContext()->getQuote()->getCustomerEmail();

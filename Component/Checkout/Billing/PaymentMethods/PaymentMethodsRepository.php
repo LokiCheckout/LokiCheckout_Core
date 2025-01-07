@@ -33,7 +33,7 @@ class PaymentMethodsRepository extends ComponentRepository
         return (string)$firstPaymentMethod->getCode();
     }
 
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         $cart = $this->getQuote();
         $paymentMethod = (string)$cart->getPayment()->getMethod();
@@ -50,7 +50,7 @@ class PaymentMethodsRepository extends ComponentRepository
         return $sanitizedPaymentMethod;
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         $data = $this->sanitizePaymentMethod((string)$data);
         if (empty($data)) {

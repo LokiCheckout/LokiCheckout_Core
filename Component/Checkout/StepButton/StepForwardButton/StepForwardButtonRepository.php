@@ -12,7 +12,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class StepForwardButtonRepository extends ComponentRepository
 {
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         try {
             return $this->getContext()->getStepNavigator()->getNextStep()->getCode();
@@ -21,7 +21,7 @@ class StepForwardButtonRepository extends ComponentRepository
         }
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         try {
             $this->getStepNavigator()->setNextStep();

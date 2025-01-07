@@ -11,7 +11,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ShippingAddressSelectRepository extends ComponentRepository
 {
-    protected function getValue(): mixed
+    public function getValue(): mixed
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return 0;
@@ -40,7 +40,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
         return $sanitizedAddressId;
     }
 
-    protected function saveValue(mixed $data): void
+    public function saveValue(mixed $data): void
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return;
