@@ -5,7 +5,6 @@ namespace Yireo\LokiCheckout\Util\Cart;
 use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
 use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Magento\Quote\Api\CartTotalRepositoryInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class CartTotals implements ArgumentInterface
