@@ -4,21 +4,15 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var CouponCodeViewModel $viewModel */
-/** @var ViewModelFactory $viewModelFactory */
-/** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 
 // @todo: Separate in smaller templates
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
-$quote = $checkoutState->getQuote();
-$couponCode = $quote->getCouponCode();
+$couponCode = $viewModel->getValue();
 ?>
 <div class="<?= $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>

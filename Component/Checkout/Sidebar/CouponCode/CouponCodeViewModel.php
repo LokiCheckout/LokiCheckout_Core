@@ -11,11 +11,6 @@ use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
  */
 class CouponCodeViewModel extends FieldViewModel
 {
-    public function getCouponCode(): string
-    {
-        return (string)$this->getRepository()->get();
-    }
-
     public function getFieldLabel(): string
     {
         return 'Coupon code';
