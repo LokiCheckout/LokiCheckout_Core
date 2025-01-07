@@ -9,14 +9,14 @@ use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
  */
 class StreetLineRepository extends AddressFieldRepository
 {
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         $street = (string)$this->getAddressState()->load('street');
         $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);
         return $streetLines->getLineByIndex($this->getIndex());
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         $street = (string)$this->getAddressState()->load('street');
         $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);

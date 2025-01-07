@@ -6,12 +6,12 @@ use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 class LastnameRepository extends AddressFieldRepository
 {
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         if ($this->getContext()->getQuote()->getCustomerIsGuest()) {
             $this->getContext()->getQuote()->setCustomerLastname($data);
         }
 
-        parent::saveData($data);
+        parent::saveValue($data);
     }
 }

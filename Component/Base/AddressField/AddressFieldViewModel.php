@@ -16,14 +16,6 @@ class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewMo
         return trim((string)$this->getComponent()->getRepository()->get());
     }
 
-    /**
-     * @deprecated Use getValue instead
-     */
-    public function getData(): mixed
-    {
-        return $this->getValue();
-    }
-
     // @todo: Move this into a trait or a child-class
     public function getFieldLabel(): string
     {

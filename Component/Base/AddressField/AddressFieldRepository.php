@@ -17,12 +17,12 @@ class AddressFieldRepository extends ComponentRepository
         return array_pop($blockNameParts);
     }
 
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         return $this->getAddressState()->load($this->getFieldName());
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         $this->getAddressState()->save($this->getFieldName(), $data);
     }

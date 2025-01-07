@@ -10,7 +10,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ShippingAsBillingRepository extends ComponentRepository
 {
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         $sameAddressService = $this->getContext()->getSameAddressService();
         $useSameAddress = $sameAddressService->isEnabled();
@@ -22,7 +22,7 @@ class ShippingAsBillingRepository extends ComponentRepository
         return $useSameAddress;
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         $billingAsShipping = (bool)$data;
         $address = $this->getContext()->getShippingAddressState()->getShippingAddress();

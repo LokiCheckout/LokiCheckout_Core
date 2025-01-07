@@ -11,12 +11,12 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class QuoteFieldRepository extends ComponentRepository
 {
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         return (string)$this->getQuote()->getData($this->getFieldName());
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         $this->getQuote()->setData($this->getFieldName(), $data);
         $this->getQuote()->save(); // @todo

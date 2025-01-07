@@ -10,12 +10,12 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class ShippingAddressToggleSelectRepository extends ComponentRepository
 {
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         return (bool)$this->getContext()->getCheckoutSession()->getIsNewShippingAddress();
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         $this->getContext()->getCheckoutSession()->setIsNewShippingAddress((int)$data);
     }

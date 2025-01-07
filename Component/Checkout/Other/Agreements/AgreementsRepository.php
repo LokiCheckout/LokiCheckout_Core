@@ -27,7 +27,7 @@ class AgreementsRepository extends ComponentRepository
         return $this->getContext()->getCheckoutAgreementsList()->getList($searchCriteria);
     }
 
-    protected function getData(): mixed
+    protected function getValue(): mixed
     {
         // @todo: Should this just be stored in the session?
         $value = [];
@@ -43,7 +43,7 @@ class AgreementsRepository extends ComponentRepository
         return $value;
     }
 
-    protected function saveData(mixed $data): void
+    protected function saveValue(mixed $data): void
     {
         if (empty($data)) {
             return;
