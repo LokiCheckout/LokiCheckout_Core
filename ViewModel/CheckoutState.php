@@ -6,7 +6,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Quote\Model\Quote;
+use Magento\Quote\Api\Data\CartInterface;
 
 class CheckoutState implements ArgumentInterface
 {
@@ -17,19 +17,20 @@ class CheckoutState implements ArgumentInterface
     ) {
     }
 
-    public function getQuote(): Quote
+    public function getQuote(): CartInterface
     {
         static $quote = null;
-        if ($quote instanceof Quote) {
+        if ($quote instanceof CartInterface) {
             return $quote;
         }
 
         $quoteId = $this->checkoutSession->getQuoteId();
         $quote = $this->cartRepository->get($quoteId);
+
         return $quote;
     }
 
-    public function saveQuote(Quote $quote)
+    public function saveQuote(CartInterface $quote)
     {
         $quote->collectTotals();
         $this->cartRepository->save($quote);

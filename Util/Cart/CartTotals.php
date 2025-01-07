@@ -19,4 +19,19 @@ class CartTotals implements ArgumentInterface
         $totals = $this->cartTotalRepository->get($this->checkoutState->getQuote()->getId());
         return (float)$totals->getDiscountAmount();
     }
+
+    public function getDiscountLabel(): string
+    {
+        $description = trim((string)$this->checkoutState->getQuote()->getDiscountDescription());
+        if (empty($description)) {
+            $description = $this->checkoutState->getQuote()->getCouponCode();
+        }
+
+        if (!empty($description)) {
+            return (string)__('Discount (%1)', $description);
+        }
+
+        return (string)__('Discount');
+    }
 }
+

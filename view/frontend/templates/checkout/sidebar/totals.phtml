@@ -31,12 +31,12 @@ $cartTotals = $viewModelFactory->create(CartTotals::class);
         <?= $block->getChildHtml('before') ?>
 
         <?php if($cartTotals->getDiscount()) : ?>
-        <dt class="<?= $css('font-medium', 'discount-label') ?>">
-            <?= __('Discount') ?>
-        </dt>
-        <dd class="<?= $css('text-right', 'discount-value') ?>">
-            <?= $priceFormatter->format($cartTotals->getDiscount()) ?>
-        </dd>
+            <dt class="<?= $css('font-medium', 'discount-label') ?>">
+                <?= $cartTotals->getDiscountLabel() ?>
+            </dt>
+            <dd class="<?= $css('text-right', 'discount-value') ?>">
+                <?= $priceFormatter->format($cartTotals->getDiscount()) ?>
+            </dd>
         <?php endif; ?>
 
         <?php foreach ($totals as $total) : ?>

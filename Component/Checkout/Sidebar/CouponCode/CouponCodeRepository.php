@@ -13,7 +13,7 @@ class CouponCodeRepository extends ComponentRepository
     public function getValue(): mixed
     {
         // @todo: Double-check that this matches Magento core logic
-        // @todo: Move this into a validator "coupon_code"
+        // @todo: Move this into a filter "coupon_code"
         return preg_replace(
             '/([^a-zA-Z0-9\-\_]+)/',
             '',
