@@ -4,7 +4,6 @@
             ...LokiCheckoutFieldComponentType,
             afterInit() {
                 this.$refs.details.addEventListener('toggle', event => {
-                    console.log('toggle', event);
                     if (this.$refs.details.open) {
                         this.$refs.input.focus();
                     }
