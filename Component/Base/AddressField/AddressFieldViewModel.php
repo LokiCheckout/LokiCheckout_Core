@@ -13,7 +13,7 @@ class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewMo
 {
     public function getValue(): mixed
     {
-        return trim((string)$this->getComponent()->getRepository()->get());
+        return trim((string)$this->getComponent()->getRepository()->getValue());
     }
 
     // @todo: Move this into a trait or a child-class
