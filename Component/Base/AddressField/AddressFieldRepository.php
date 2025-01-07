@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Component\Base\AddressField;
 
+use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
+use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -10,6 +12,12 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class AddressFieldRepository extends ComponentRepository
 {
+    public function __construct(
+        protected AddressStateProvider $addressStateProvider,
+        protected SameAddressService $sameAddressService
+    ) {
+    }
+
     public function getFieldName(): string
     {
         $blockName = $this->getComponentName();
@@ -29,6 +37,6 @@ class AddressFieldRepository extends ComponentRepository
 
     protected function getAddressState(): AddressStateInterface
     {
-        return $this->getContext()->getAddressState($this->getComponentName());
+        return $this->addressStateProvider->getAddressState($this->getComponentName());
     }
 }
