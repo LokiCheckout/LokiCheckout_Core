@@ -7,44 +7,62 @@ use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 use Magento\Framework\Api\SearchCriteriaBuilder;
+use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext;
 use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\Util\SameAddressService;
+use Yireo\LokiCheckout\Util\StreetLinesFactory;
+use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
+use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class AddressContext extends GenericContext
+class AddressContext implements ComponentContextInterface
 {
+    use InheritFromParentContext;
+
+    public function __construct(
+        private readonly GenericContext $parentContext,
+        private readonly SameAddressService $sameAddressService,
+        private readonly CustomerRepositoryInterface $customerRepository,
+        private readonly CustomerAddressRepository $customerAddressRepository,
+        private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
+        private readonly AddressConfig $addressConfig,
+        private readonly AddressMapper $addressMapper,
+        private readonly AddressRenderer $addressRenderer,
+    ) {
+    }
+
     public function getSameAddressService(): SameAddressService
     {
-        return $this->get(SameAddressService::class);
+        return $this->sameAddressService;
     }
 
     public function getCustomerRepository(): CustomerRepositoryInterface
     {
-        return $this->get(CustomerRepositoryInterface::class);
+        return $this->customerRepository;
     }
 
     public function getCustomerAddressRepository(): CustomerAddressRepository
     {
-        return $this->get(CustomerAddressRepository::class);
+        return $this->customerAddressRepository;
     }
 
     public function getSearchCriteriaBuilder(): SearchCriteriaBuilder
     {
-        return $this->get(SearchCriteriaBuilder::class);
+        return $this->searchCriteriaBuilder;
     }
 
     public function getAddressConfig(): AddressConfig
     {
-        return $this->get(AddressConfig::class);
+        return $this->addressConfig;
     }
 
     public function getAddressMapper(): AddressMapper
     {
-        return $this->get(AddressMapper::class);
+        return $this->addressMapper;
     }
 
     public function getAddressRenderer(): AddressRenderer
     {
-        return $this->get(AddressRenderer::class);
+        return $this->addressRenderer;
     }
 }

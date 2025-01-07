@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Util\Cart;
 
+use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
+use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartTotalRepositoryInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -11,27 +13,26 @@ class CartTotals implements ArgumentInterface
     public function __construct(
         private CheckoutState $checkoutState,
         private CartTotalRepositoryInterface $cartTotalRepository,
+        private TotalsInformationManagementInterface $totalsInformationManagement,
+        private TotalsInformationInterfaceFactory $totalsInformatonFactory
     ) {
     }
 
-    public function getDiscount(): float
+    public function getTotals()
     {
-        $totals = $this->cartTotalRepository->get($this->checkoutState->getQuote()->getId());
-        return (float)$totals->getDiscountAmount();
-    }
+        $quote = $this->checkoutState->getQuote();
+        $totals = $this->totalsInformatonFactory->create();
+        $totals->setAddress($quote->getShippingAddress());
 
-    public function getDiscountLabel(): string
-    {
-        $description = trim((string)$this->checkoutState->getQuote()->getDiscountDescription());
-        if (empty($description)) {
-            $description = $this->checkoutState->getQuote()->getCouponCode();
+        $shippingMethod = $quote->getShippingAddress()?->getShippingMethod();
+        if (!empty($shippingMethod)) {
+            list($carrierCode, $carrierMethod) = explode('_', $shippingMethod);
+            $totals->setShippingCarrierCode($carrierCode);
+            $totals->setShippingMethodCode($carrierMethod);
         }
 
-        if (!empty($description)) {
-            return (string)__('Discount (%1)', $description);
-        }
-
-        return (string)__('Discount');
+        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totals);
+        return $totals->getTotalSegments();
     }
 }
 

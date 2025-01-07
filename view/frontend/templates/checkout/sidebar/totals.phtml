@@ -6,38 +6,24 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\Util\Cart\CartTotals;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\CssClass;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
-/** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var CartTotals $cartTotals */
 
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
-$quote = $checkoutState->getQuote();
-$quote->collectTotals();
-$totals = $quote->getTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $cartTotals = $viewModelFactory->create(CartTotals::class);
+$totals = $cartTotals->getTotals();
 ?>
 <div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
 
     <dl class="<?= $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
         <?= $block->getChildHtml('before') ?>
-
-        <?php if($cartTotals->getDiscount()) : ?>
-            <dt class="<?= $css('font-medium', 'discount-label') ?>">
-                <?= $cartTotals->getDiscountLabel() ?>
-            </dt>
-            <dd class="<?= $css('text-right', 'discount-value') ?>">
-                <?= $priceFormatter->format($cartTotals->getDiscount()) ?>
-            </dd>
-        <?php endif; ?>
 
         <?php foreach ($totals as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
