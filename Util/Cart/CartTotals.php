@@ -12,16 +12,15 @@ class CartTotals implements ArgumentInterface
 {
     public function __construct(
         private CheckoutState $checkoutState,
-        private CartTotalRepositoryInterface $cartTotalRepository,
         private TotalsInformationManagementInterface $totalsInformationManagement,
-        private TotalsInformationInterfaceFactory $totalsInformatonFactory
+        private TotalsInformationInterfaceFactory $totalsInformationFactory
     ) {
     }
 
     public function getTotals()
     {
         $quote = $this->checkoutState->getQuote();
-        $totals = $this->totalsInformatonFactory->create();
+        $totals = $this->totalsInformationFactory->create();
         $totals->setAddress($quote->getShippingAddress());
 
         $shippingMethod = $quote->getShippingAddress()?->getShippingMethod();
