@@ -4,11 +4,16 @@ namespace Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep;
 
 use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
+use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
+use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class ShippingStepContext extends GenericContext
+class ShippingStepContext implements ComponentContextInterface
 {
+    use InheritFromParentContext;
+
     public function __construct(
-        public readonly ValidatorInterface $stepValidator,
+        private GenericContext $parentContext,
+        private readonly ValidatorInterface $stepValidator,
     ) {
     }
 

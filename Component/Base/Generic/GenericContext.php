@@ -19,6 +19,7 @@ use Yireo\LokiComponents\Component\ComponentContext;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 
+// @todo: Rename to CheckoutContext
 class GenericContext implements ComponentContextInterface
 {
     use InheritFromParentContext;

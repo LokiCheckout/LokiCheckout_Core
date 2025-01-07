@@ -6,21 +6,33 @@ use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
+use Yireo\LokiComponents\Component\ComponentContextInterface;
 
-class AgreementsContext extends GenericContext
+class AgreementsContext implements ComponentContextInterface
 {
+    use InheritFromParentContext;
+
+    public function __construct(
+        private readonly GenericContext $parentContext,
+        private readonly CheckoutAgreementsListInterface $checkoutAgreementsList,
+        private readonly ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
+        private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
+    ) {
+    }
+
     public function getCheckoutAgreementsList(): CheckoutAgreementsListInterface
     {
-        return $this->get(CheckoutAgreementsListInterface::class);
+        return $this->checkoutAgreementsList;
     }
 
     public function getActiveStoreAgreementsFilter(): ActiveStoreAgreementsFilter
     {
-        return $this->get(ActiveStoreAgreementsFilter::class);
+        return $this->activeStoreAgreementsFilter;
     }
 
     public function getSearchCriteriaBuilder(): SearchCriteriaBuilder
     {
-        return $this->get(SearchCriteriaBuilder::class);
+        return $this->searchCriteriaBuilder;
     }
 }
