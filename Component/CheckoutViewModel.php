@@ -4,6 +4,9 @@ namespace Yireo\LokiCheckout\Component;
 
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
+/**
+ * @deprecated
+ */
 class CheckoutViewModel extends ComponentViewModel
 {
 }
