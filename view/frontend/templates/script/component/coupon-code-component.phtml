@@ -2,6 +2,11 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutFieldComponentType,
+            afterInit() {
+                this.$watch('isOpen', (value) => {
+                    console.log('dialog open', value);
+                })
+            },
             isOpen() {
                 return this.value.length > 0;
             },
