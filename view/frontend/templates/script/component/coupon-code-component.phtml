@@ -3,11 +3,13 @@
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutFieldComponentType,
             afterInit() {
-                this.$refs.details.addEventListener('toggle', event => {
-                    if (this.$refs.details.open) {
-                        this.$refs.input.focus();
-                    }
-                })
+                if (this.$refs.details) {
+                    this.$refs.details.addEventListener('toggle', event => {
+                        if (this.$refs.details.open && this.$refs.input) {
+                            this.$refs.input.focus();
+                        }
+                    })
+                }
             },
             isOpen() {
                 return this.value.length > 0;

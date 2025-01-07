@@ -31,11 +31,13 @@ class CouponCodeRepository extends ComponentRepository
         if ($data['task'] === 'apply') {
             $quote->setCouponCode($data['code']);
             $this->getContext()->getCartRepository()->save($quote);
+            $this->getGlobalMessageRegistry()->addSuccess('Applied coupon code');
         }
 
         if ($data['task'] === 'remove') {
             $quote->setCouponCode('');
             $this->getContext()->getCartRepository()->save($quote);
+            $this->getGlobalMessageRegistry()->addSuccess('Removed coupon code');
         }
     }
 }
