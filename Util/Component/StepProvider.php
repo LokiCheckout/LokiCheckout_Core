@@ -4,17 +4,14 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use RuntimeException;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
+use Magento\Framework\View\LayoutInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Component\ComponentRegistry;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 class StepProvider
 {
     public function __construct(
-        private readonly ComponentRegistry $componentRegistry,
-        private readonly StepNavigator $stepNavigator
+        private readonly StepNavigator $stepNavigator,
+        private readonly LayoutInterface $layout
     ) {
     }
 
@@ -25,9 +22,11 @@ class StepProvider
             return $singleStep;
         }
 
-        $step = $this->getStepNameFromBlock($block);
-        if (!empty($step)) {
-            return $step;
+        foreach ($this->stepNavigator->getSteps() as $step) {
+            $stepElements = $this->findElementNamesByBlockName($step->getComponentName());
+            if (in_array($block->getNameInLayout(), $stepElements)) {
+                return $step->getCode();
+            }
         }
 
         return 'none';
@@ -42,34 +41,21 @@ class StepProvider
         return $this->stepNavigator->getFirstStep()->getCode();
     }
 
-    private function getStepNameFromBlock(AbstractBlock $block): string
+    private function findElementNamesByBlockName(string $blockName): array
     {
-        $viewModel = $this->getViewModelFromBlock($block);
-        if ($viewModel instanceof StepViewModelInterface) {
-            return $viewModel->getCode();
+        static $allElementNames = [];
+        if (isset($allElementNames[$blockName]) && is_array($allElementNames[$blockName])) {
+            return $allElementNames[$blockName];
         }
 
-        $parentBlock = $block->getParentBlock();
-        if (false === $parentBlock instanceof AbstractBlock) {
-            return '';
+        $elementNames[] = $blockName;
+
+        $childNames = $this->layout->getChildNames($blockName);
+        foreach ($childNames as $childName) {
+            $elementNames = array_merge($elementNames, $this->findElementNamesByBlockName($childName));
         }
 
-        return $this->getStepNameFromBlock($parentBlock);
-    }
-
-    private function getViewModelFromBlock(AbstractBlock $block): ?ComponentViewModelInterface
-    {
-        $viewModel = $block->getViewModel();
-        if ($viewModel instanceof ComponentViewModelInterface) {
-            return $viewModel;
-        }
-
-        try {
-            $component = $this->componentRegistry->getComponentFromBlock($block);
-            return $component->getViewModel();
-        } catch (RuntimeException $e) {
-        }
-
-        return null;
+        $allElementNames[$blockName] = $elementNames;
+        return $elementNames;
     }
 }

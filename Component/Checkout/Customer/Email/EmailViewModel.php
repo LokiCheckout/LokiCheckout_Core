@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Customer\Email;
 
-
 use Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldViewModel;
 
 class EmailViewModel extends QuoteFieldViewModel
