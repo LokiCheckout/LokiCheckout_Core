@@ -6,11 +6,9 @@ use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
-use Magento\TestFramework\Fixture\Cache;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAsShipping;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 #[
