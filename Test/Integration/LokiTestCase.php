@@ -22,7 +22,7 @@ class LokiTestCase extends AbstractController
 {
     protected ?ObjectManagerInterface $objectManager = null;
     protected ?DataFixtureStorage $fixtures = null;
-    protected ?ComponentRegistry $componentRegistry = null;
+    //protected ?ComponentRegistry $componentRegistry = null;
 
     use CartFixture;
     use AssertStoreConfigValueEquals;
@@ -34,7 +34,7 @@ class LokiTestCase extends AbstractController
 
         $this->objectManager = Bootstrap::getObjectManager();
         $this->fixtures = DataFixtureStorageManager::getStorage();
-        $this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
+        //$this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
 
         $this->assertModuleIsEnabled('Yireo_LokiComponents');
         $this->assertModuleIsEnabled('Yireo_LokiCheckout');
