@@ -3,13 +3,14 @@
 namespace Yireo\LokiCheckout\Test\Unit\Step;
 
 use Magento\Checkout\Model\Session;
-use Magento\Framework\View\LayoutInterface;
+use Magento\Framework\Message\ManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Step\FinalStep;
-use Yireo\LokiCheckout\Step\StepComponentInterface;
 use Yireo\LokiCheckout\Step\StepNavigator;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 
 class StepNavigatorTest extends TestCase
 {
@@ -76,15 +77,16 @@ class StepNavigatorTest extends TestCase
         return new StepNavigator(
             $this->createMock(XmlConfig::class),
             $this->createMock(Config::class),
-            $this->createMock(LayoutInterface::class),
             $this->createMock(Session::class),
             $this->createMock(FinalStep::class),
+            $this->createMock(ManagerInterface::class),
+            $this->createMock(ComponentRegistry::class),
         );
     }
 
-    private function getStep(string $stepCode): StepComponentInterface
+    private function getStep(string $stepCode): StepViewModelInterface
     {
-        $step = $this->createMock(StepComponentInterface::class);
+        $step = $this->createMock(StepViewModelInterface::class);
         $step->method('getCode')->willReturn($stepCode);
         return $step;
     }
