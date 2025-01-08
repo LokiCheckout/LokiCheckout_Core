@@ -15,18 +15,30 @@ use Magento\TestFramework\TestCase\AbstractController;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+use Yireo\LokiComponents\Filter\Filter;
+use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasError;
+use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasErrors;
+use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasNoErrors;
+use Yireo\LokiComponents\Test\Integration\Traits\CreateComponent;
+use Yireo\LokiComponents\Test\Integration\Traits\GetComponent;
+use Yireo\LokiComponents\Util\IdConvertor;
+use Yireo\LokiComponents\Validator\Validator;
 
 class LokiTestCase extends AbstractController
 {
     protected ?ObjectManagerInterface $objectManager = null;
     protected ?DataFixtureStorage $fixtures = null;
-    //protected ?ComponentRegistry $componentRegistry = null;
 
     use CartFixture;
     use AssertStoreConfigValueEquals;
     use AssertModuleIsEnabled;
+
+    use GetComponent;
+    use CreateComponent;
+    use AssertComponentHasErrors;
+    use AssertComponentHasError;
+    use AssertComponentHasNoErrors;
 
     protected function setUp(): void
     {
@@ -34,7 +46,6 @@ class LokiTestCase extends AbstractController
 
         $this->objectManager = Bootstrap::getObjectManager();
         $this->fixtures = DataFixtureStorageManager::getStorage();
-        //$this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
 
         $this->assertModuleIsEnabled('Yireo_LokiComponents');
         $this->assertModuleIsEnabled('Yireo_LokiCheckout');
@@ -45,6 +56,7 @@ class LokiTestCase extends AbstractController
     {
         $this->assertTrue($cart->getItemsCount() > 0);
         $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
+            'checkout_index_index',
             'loki_checkout',
             'loki_checkout_theme_default',
         ]);
@@ -65,16 +77,21 @@ class LokiTestCase extends AbstractController
 
         $component = $block->getData('component');
         $this->assertInstanceOf(ComponentInterface::class, $component);
+
         return $component;
     }
 
     protected function getCart(): CartInterface
     {
         $cart = $this->fixtures->get('cart');
+        echo 'Cart ID: '.$cart->getId()."\n\n";
+
         $this->assertInstanceOf(CartInterface::class, $cart);
 
         $checkoutSession = $this->getObjectManager()->get(Session::class);
         $checkoutSession->setQuoteId($cart->getId());
+
+        $this->assertSame($cart->getId(), $checkoutSession->getQuote()->getId());
 
         return $cart;
     }
@@ -82,7 +99,8 @@ class LokiTestCase extends AbstractController
     public function assertComponentExistsOnPage(string $blockName)
     {
         $body = $this->getResponse()->getBody();
-        // @todo
+        $elementId = $this->getObjectManager()->get(IdConvertor::class)->toElementId($blockName);
+        $this->assertStringContainsString($body, '"'.$elementId.'"');
     }
 
     public function assertComponentNotExistsOnPage(string $blockName)
@@ -91,9 +109,13 @@ class LokiTestCase extends AbstractController
         $this->assertStringNotContainsString('x-title="'.$blockName.'"', $body);
     }
 
-    protected function getDummyComponentInstance(string $componentClass): ComponentInterface
+    public function getValidator(): Validator
     {
-        $component = $this->getObjectManager()->get($componentClass);
-        return $component;
+        return $this->getObjectManager()->get(Validator::class);
+    }
+
+    public function getFilter(): Filter
+    {
+        return $this->getObjectManager()->get(Filter::class);
     }
 }

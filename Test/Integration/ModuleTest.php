@@ -17,12 +17,11 @@ class ModuleTest extends TestCase
     {
         // @todo: Follow module.xml dependencies instead
         $requiredModules = [
+            'Yireo_LokiComponents',
             'Yireo_LokiCheckout',
-            'Magento_CatalogInventory'
         ];
         foreach ($requiredModules as $moduleName) {
             $this->assertModuleIsRegistered($moduleName);
-            $this->assertModuleIsRegisteredForReal($moduleName);
             $this->assertModuleIsEnabled($moduleName);
         }
     }

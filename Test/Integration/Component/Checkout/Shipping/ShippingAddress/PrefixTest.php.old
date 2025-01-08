@@ -57,7 +57,7 @@ class PrefixTest extends LokiTestCase
     #[Config('customer/address/prefix_options', 'Mr,Mrs', 'store', 'default')]
     public function testComponentWithWrongOptionValue()
     {
-        $component = $this->getDummyComponentInstance(Prefix::class);
+        $component = $this->getComponentInstance(Prefix::class);
         $this->assertContains('prefix', $component->getValidators());
 
         $prefixOptionModel = $this->getObjectManager()->get(PrefixOptionModel::class);

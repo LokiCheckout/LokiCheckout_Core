@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Quote;
 
-use Yireo\LokiCheckout\Component\Checkout\Quote\CustomerEmail;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 
 /**
@@ -11,7 +10,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
  */
 class CustomerEmailTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.email';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_email';
 
     public function testComponentWithoutValue()
     {
@@ -19,10 +18,13 @@ class CustomerEmailTest extends LokiTestCase
         $cart->getShippingAddress()->addData(['email' => '']);
         $this->dispatchToCheckout($cart);
 
-        $component = $this->getObjectManager()->get(CustomerEmail::class);
+        $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentExistsOnPage(self::BLOCK_NAME);
 
-        $component->validate();
+        $this->assertContains('email', $component->getValidators());
+
+        $this->getValidator()->validate($component, '');
+
         $this->assertComponentHasErrors($component);
         $this->assertComponentHasError($component, 'Value is required');
     }

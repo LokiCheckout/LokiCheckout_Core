@@ -4,6 +4,8 @@ namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Helper\Image as ImageHelper;
+use Magento\Catalog\Model\Product;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class ProductImage implements ArgumentInterface
@@ -16,7 +18,13 @@ class ProductImage implements ArgumentInterface
 
     public function getImageUrlBySku(string $sku, int $width = 75): string
     {
-        $product = $this->productRepository->get($sku);
+        try {
+            $product = $this->productRepository->get($sku);
+        } catch (NoSuchEntityException $e) {
+            return '';
+        }
+
+        /** @var Product $product */
         return $this->imageHelper->init($product, 'product_base_image')
             ->constrainOnly(true)
             ->keepAspectRatio(true)
