@@ -11,13 +11,14 @@ use Magento\Quote\Api\Data\CartInterface;
 use Magento\TestFramework\Fixture\DataFixtureStorage;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
-
+use Magento\TestFramework\TestCase\AbstractController;
+use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 
-class LokiTestCase extends TestCase
+class LokiTestCase extends AbstractController
 {
     protected ?ObjectManagerInterface $objectManager = null;
     protected ?DataFixtureStorage $fixtures = null;
@@ -25,6 +26,7 @@ class LokiTestCase extends TestCase
 
     use CartFixture;
     use AssertStoreConfigValueEquals;
+    use AssertModuleIsEnabled;
 
     protected function setUp(): void
     {
@@ -88,17 +90,9 @@ class LokiTestCase extends TestCase
         $this->assertStringNotContainsString('x-title="'.$blockName.'"', $body);
     }
 
-    protected function addDummyBlockToComponent(Component $component): Component
-    {
-        $block = $this->getObjectManager()->create(Template::class);
-        $component->setParent($block);
-        return $component;
-    }
-
-    protected function getDummyComponentInstance(string $componentClass): Component
+    protected function getDummyComponentInstance(string $componentClass): ComponentInterface
     {
         $component = $this->getObjectManager()->get($componentClass);
-        $this->addDummyBlockToComponent($component);
         return $component;
     }
 }
