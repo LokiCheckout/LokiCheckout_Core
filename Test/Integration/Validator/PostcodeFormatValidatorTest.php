@@ -1,23 +1,23 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Validator\Component;
+namespace Yireo\LokiCheckout\Test\Integration\Validator;
 
 use Magento\Framework\App\ObjectManager;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Postcode;
 use Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use Yireo\LokiComponents\Component\Component;
 
 class PostcodeFormatValidatorTest extends TestCase
 {
     public function testValidateWithEmptyValues(): void
     {
         $validator = ObjectManager::getInstance()->get(PostcodeFormatValidator::class);
-        $component = ObjectManager::getInstance()->get(Postcode::class);
+        $component = ObjectManager::getInstance()->get(Component::class);
         $addressState = ObjectManager::getInstance()->get(ShippingAddressState::class);
         $component->setAddressState($addressState);
 
-        $this->assertTrue($validator->validate($component));
+        $this->assertTrue($validator->validate($component->getViewModel(), null));
     }
 
     /**
@@ -30,15 +30,14 @@ class PostcodeFormatValidatorTest extends TestCase
     public function testValidateWithValues(string $postcode, string $countryId, bool $return): void
     {
         $validator = ObjectManager::getInstance()->get(PostcodeFormatValidator::class);
-        $component = ObjectManager::getInstance()->get(Postcode::class);
-        $component->value = $postcode;
+        $component = ObjectManager::getInstance()->get(Component::class);
 
         $addressState = ObjectManager::getInstance()->get(ShippingAddressState::class);
         $addressState->save('postcode', $postcode);
         $addressState->save('country_id', $countryId);
         $component->setAddressState($addressState);
 
-        $this->assertSame($return, $validator->validate($component));
+        $this->assertSame($return, $validator->validate($component->getViewModel(), $postcode));
     }
 
     public function getValues(): array

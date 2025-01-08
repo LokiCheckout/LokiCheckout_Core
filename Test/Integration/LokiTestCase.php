@@ -36,6 +36,7 @@ class LokiTestCase extends AbstractController
         $this->fixtures = DataFixtureStorageManager::getStorage();
         $this->componentRegistry = $this->objectManager->get(ComponentRegistry::class);
 
+        $this->assertModuleIsEnabled('Yireo_LokiComponents');
         $this->assertModuleIsEnabled('Yireo_LokiCheckout');
         $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
     }
