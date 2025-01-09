@@ -12,12 +12,12 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 ?>
-<div class="<?= $css('w-full grid grid-cols-2 p-2') ?>"
+<div class="<?= $css('w-full grid grid-cols-1 md:grid-cols-2 p-2') ?>"
      aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
      data-type="field">
     <?php $i = 0; ?>
     <?php foreach ($optionModel->getOptions($viewModel) as $optionValue => $optionLabel): ?>
-        <div class="<?= $css('', 'option') ?>">
+        <div class="<?= $css('pb-4', 'option') ?>">
             <input
                 type="radio"
                 id="<?= $viewModel->getElementId() ?>-field-<?= $i ?>"
