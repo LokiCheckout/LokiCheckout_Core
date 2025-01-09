@@ -3,6 +3,15 @@
     <body>
         <block name="loki-checkout.progressbar" template="Yireo_LokiCheckout::checkout/progressbar.phtml">
             <block name="loki-checkout.progressbar.step" as="step" template="Yireo_LokiCheckout::checkout/progressbar/step.phtml"/>
+
+            <!--
+            @todo
+            <arguments>
+                <argument name="css">
+                    <item name="block" xsi:type="string">hidden md:block card rounded-lg relative</item>
+                </argument>
+            </arguments>
+            -->
         </block>
     </body>
 </page>
