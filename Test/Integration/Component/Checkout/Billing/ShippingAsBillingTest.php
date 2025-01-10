@@ -43,6 +43,7 @@ class ShippingAsBillingTest extends LokiTestCase
     {
         $cart = $this->getCart();
         $this->dispatchToCheckout($cart);
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
+        $component = $this->getComponent(self::BLOCK_NAME);
+        $this->assertComponentExistsOnPage($component);
     }
 }

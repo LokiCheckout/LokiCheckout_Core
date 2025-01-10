@@ -17,6 +17,7 @@ trait CartFixture
      * This requires the data fixture Magento/Checkout/_files/quote_with_simple_products.php
      *
      * @return CartInterface
+     * @deprecated Use PHP Attributes instead
      */
     public function getGuestCart(): CartInterface
     {

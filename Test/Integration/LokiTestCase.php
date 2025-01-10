@@ -95,8 +95,9 @@ class LokiTestCase extends AbstractController
         return $cart;
     }
 
-    public function assertComponentExistsOnPage(string $blockName)
+    public function assertComponentExistsOnPage(ComponentInterface $component)
     {
+        $blockName = $component->getName();
         $elementId = $this->getObjectManager()->get(IdConvertor::class)->toElementId($blockName);
         $this->assertElementIdExistsOnPage($elementId);
     }
