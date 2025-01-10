@@ -112,6 +112,13 @@ class LokiTestCase extends AbstractController
         $this->assertStringNotContainsString('x-title="'.$blockName.'"', $body);
     }
 
+    protected function assertComponentValidators(ComponentInterface $component, array $validators)
+    {
+        foreach ($validators as $validator) {
+            $this->assertContains($validator, $component->getValidators());
+        }
+    }
+
     public function getValidator(): Validator
     {
         return $this->getObjectManager()->get(Validator::class);

@@ -32,7 +32,7 @@ class CustomerEmailTest extends LokiTestCase
     public function testComponentValidationWithoutValue()
     {
         $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertCustomerEmailComponentValidation($component);
+        $this->assertComponentValidators($component, ['required', 'email']);
 
         $rt = $this->getValidator()->validate($component, '');
         $this->assertFalse($rt, 'Validation did not fail for empty value');
@@ -45,7 +45,7 @@ class CustomerEmailTest extends LokiTestCase
         $value = 'john@example.com';
 
         $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertCustomerEmailComponentValidation($component);
+        $this->assertComponentValidators($component, ['required', 'email']);
 
         $rt = $this->getValidator()->validate($component, $value);
         $this->assertTrue($rt, 'Validation failed for value: '.$value);
@@ -58,18 +58,11 @@ class CustomerEmailTest extends LokiTestCase
         $value = 'john';
 
         $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertCustomerEmailComponentValidation($component);
+        $this->assertComponentValidators($component, ['required', 'email']);
 
         $rt = $this->getValidator()->validate($component, $value);
         $this->assertFalse($rt, 'Validation did not fail for value: '.$value);
         $this->assertComponentHasErrors($component);
         $this->assertComponentHasError($component, 'Invalid email');
-    }
-
-    private function assertCustomerEmailComponentValidation(ComponentInterface $component)
-    {
-        $this->assertContains('required', $component->getValidators());
-        $this->assertContains('email', $component->getValidators());
-        $this->assertTrue($component->getViewModel()->isRequired());
     }
 }
