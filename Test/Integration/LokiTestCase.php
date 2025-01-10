@@ -106,7 +106,7 @@ class LokiTestCase extends AbstractController
         $body = $this->getResponse()->getBody();
         preg_match_all('/ id="([^\"]+)"/', $body, $matches);
         $found = str_contains($body, '"'.$elementId.'"');
-        $this->assertTrue($found, 'Element ID not found: '.implode("\n", $matches[0]));
+        $this->assertTrue($found, 'Element ID "'.$elementId.'" not found: '.implode("\n", $matches[1]));
     }
 
     public function assertComponentNotExistsOnPage(string $blockName)

@@ -30,15 +30,15 @@ DataFixture(
 DataFixture(SetPaymentMethodFixture::class, ['cart_id' => '$cart.id$', 'method' => 'free']),
 */
 
-class BillingAsShippingTest extends LokiTestCase
+class ShippingAsBillingTest extends LokiTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.shipping.address.billing-as-shipping';
+    const BLOCK_NAME = 'loki-checkout.billing.address.shipping-as-billing';
 
     use AssertStoreConfigValueEquals;
 
     #[
         AppArea('frontend'),
-        Config('yireo_loki_checkout/general/theme', 'onestep', 'store', 'default'),
+        Config('yireo_loki_checkout/general/theme', 'onestep'),
         DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
@@ -53,7 +53,7 @@ class BillingAsShippingTest extends LokiTestCase
 
     #[
         AppArea('frontend'),
-        Config('yireo_loki_checkout/general/theme', 'onestep', 'store', 'default'),
+        Config('yireo_loki_checkout/general/theme', 'onestep'),
         DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
