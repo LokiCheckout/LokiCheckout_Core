@@ -33,7 +33,7 @@
     "ext-dom": "*"
   },
   "require-dev": {
-    "yireo/magento2-integration-test-helper": "@dev"
+    "yireo/magento2-integration-test-helper": "^0.0.15"
   },
   "suggest": {
     "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"
