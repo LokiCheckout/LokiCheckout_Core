@@ -48,8 +48,12 @@ class LokiTestCase extends AbstractController
         $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
     }
 
-    public function dispatchToCheckout(CartInterface $cart)
+    public function dispatchToCheckout(?CartInterface $cart = null)
     {
+        if ($cart === null) {
+            $cart = $this->getCart();
+        }
+
         $this->assertTrue($cart->getItemsCount() > 0);
         $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
             'checkout_index_index',

@@ -8,7 +8,6 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
-use Yireo\LokiComponents\Component\ComponentInterface;
 
 #[
     AppArea('frontend'),
@@ -22,8 +21,7 @@ class CustomerEmailTest extends LokiTestCase
 
     public function testComponentOnPage()
     {
-        $cart = $this->getCart();
-        $this->dispatchToCheckout($cart);
+        $this->dispatchToCheckout();
 
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentExistsOnPage($component);
@@ -49,20 +47,40 @@ class CustomerEmailTest extends LokiTestCase
 
         $rt = $this->getValidator()->validate($component, $value);
         $this->assertTrue($rt, 'Validation failed for value: '.$value);
-        $this->assertComponentHasNoErrors($component);
     }
 
-
-    public function testComponentValidationWithInvalidValue()
-    {
-        $value = 'john';
-
+    /**
+     * @param string $value
+     * @param bool $expectedResult
+     * @param array $expectedErrors
+     * @return void
+     * @dataProvider getTestData
+     */
+    public function testComponentValidationWithInvalidValue(
+        string $value,
+        bool $expectedResult,
+        array $expectedErrors
+    ) {
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentValidators($component, ['required', 'email']);
 
-        $rt = $this->getValidator()->validate($component, $value);
-        $this->assertFalse($rt, 'Validation did not fail for value: '.$value);
-        $this->assertComponentHasErrors($component);
-        $this->assertComponentHasError($component, 'Invalid email');
+        $result = $this->getValidator()->validate($component, $value);
+        $this->assertSame($expectedResult, $result, 'Validation did not fail for value: '.$value);
+
+        if(empty($expectedErrors)) {
+            $this->assertComponentHasNoErrors($component);
+        }
+
+        foreach ($expectedErrors as $expectedError) {
+            $this->assertComponentHasError($component, $expectedError);
+        }
+    }
+
+    public function getTestData(): array
+    {
+        return [
+            ['john', false, ['Invalid email']],
+            ['john@example.com', true, []],
+        ];
     }
 }
