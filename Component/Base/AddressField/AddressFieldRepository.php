@@ -30,7 +30,7 @@ class AddressFieldRepository extends ComponentRepository
         return $this->getAddressState()->load($this->getFieldName());
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $this->getAddressState()->save($this->getFieldName(), $data);
     }

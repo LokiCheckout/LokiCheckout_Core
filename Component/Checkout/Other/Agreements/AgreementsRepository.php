@@ -43,7 +43,7 @@ class AgreementsRepository extends ComponentRepository
         return $value;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         if (empty($data)) {
             return;

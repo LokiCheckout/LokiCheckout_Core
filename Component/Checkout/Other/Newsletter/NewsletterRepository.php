@@ -19,7 +19,7 @@ class NewsletterRepository extends ComponentRepository
         return false;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $subscribe = (bool)$data;
         $email = (string)$this->getContext()->getQuote()->getCustomerEmail();

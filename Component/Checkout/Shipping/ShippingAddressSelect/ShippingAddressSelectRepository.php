@@ -40,7 +40,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
         return $sanitizedAddressId;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return;

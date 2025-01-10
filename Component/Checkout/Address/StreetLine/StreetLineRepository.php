@@ -16,7 +16,7 @@ class StreetLineRepository extends AddressFieldRepository
         return $streetLines->getLineByIndex($this->getIndex());
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $street = (string)$this->getAddressState()->load('street');
         $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);

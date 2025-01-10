@@ -22,7 +22,7 @@ class StepBackwardButtonRepository extends ComponentRepository
         }
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         try {
             $this->getStepNavigator()->setPreviousStep();

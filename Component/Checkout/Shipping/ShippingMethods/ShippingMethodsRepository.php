@@ -57,7 +57,7 @@ class ShippingMethodsRepository extends ComponentRepository
         return $sanitizedShippingMethod;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $shippingMethod = (string)$data;
         $shippingMethod = $this->sanitizeShippingMethod($shippingMethod);

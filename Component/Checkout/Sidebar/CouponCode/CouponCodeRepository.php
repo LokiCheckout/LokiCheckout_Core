@@ -21,7 +21,7 @@ class CouponCodeRepository extends ComponentRepository
         );
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         if (empty($data['task']) || !isset($data['code'])) {
             return;

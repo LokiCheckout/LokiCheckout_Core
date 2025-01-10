@@ -15,7 +15,7 @@ class ProgressBarRepository extends ComponentRepository
         return $this->getContext()->getStepNavigator()->getCurrentStep()->getCode();
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $this->getContext()->getStepNavigator()->setCurrentStepByCode((string)$data);
     }

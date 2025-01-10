@@ -22,7 +22,7 @@ class ShippingAsBillingRepository extends ComponentRepository
         return $useSameAddress;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $billingAsShipping = (bool)$data;
         $address = $this->getContext()->getShippingAddressState()->getShippingAddress();

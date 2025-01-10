@@ -6,7 +6,7 @@ use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
 
 class CountryIdRepository extends AddressFieldRepository
 {
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $this->getAddressState()->save('region', '');
         $this->getAddressState()->save('region_id', '');

@@ -48,7 +48,7 @@ class PaymentMethodsRepository extends ComponentRepository
         return $sanitizedPaymentMethod;
     }
 
-    public function saveValue(mixed $data): void
+    public function saveValue(mixed $value): void
     {
         $data = $this->sanitizePaymentMethod((string)$data);
         if (empty($data)) {
