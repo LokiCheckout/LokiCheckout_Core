@@ -23,6 +23,7 @@ use Yireo\LokiComponents\Test\Integration\Traits\GetComponent;
 use Yireo\LokiComponents\Util\IdConvertor;
 use Yireo\LokiComponents\Validator\Validator;
 
+// @todo: Split up in LokiCheckoutTestCase and LokiCheckoutComponentTestCase
 class LokiTestCase extends AbstractController
 {
     protected ?ObjectManagerInterface $objectManager = null;
@@ -120,6 +121,29 @@ class LokiTestCase extends AbstractController
     {
         foreach ($validators as $validator) {
             $this->assertContains($validator, $component->getValidators());
+        }
+    }
+
+    protected function assertComponentValidation(
+        ComponentInterface $component,
+        mixed $value,
+        bool $expectedResult,
+        array $expectedErrors)
+    {
+        $result = $this->getValidator()->validate($component, $value);
+
+        if (true === $expectedResult) {
+            $this->assertTrue($result, 'Validation did not succeed for value: '.$value);
+        } else {
+            $this->assertFalse($result, 'Validation did not fail for value: '.$value);
+        }
+
+        if(empty($expectedErrors)) {
+            $this->assertComponentHasNoErrors($component);
+        }
+
+        foreach ($expectedErrors as $expectedError) {
+            $this->assertComponentHasError($component, $expectedError);
         }
     }
 

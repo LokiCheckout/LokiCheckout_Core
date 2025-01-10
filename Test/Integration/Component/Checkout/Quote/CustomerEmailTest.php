@@ -15,6 +15,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
 ]
+// @todo: Test saving to quote
 class CustomerEmailTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.customer.customer_email';
@@ -22,31 +23,8 @@ class CustomerEmailTest extends LokiTestCase
     public function testComponentOnPage()
     {
         $this->dispatchToCheckout();
-
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentExistsOnPage($component);
-    }
-
-    public function testComponentValidationWithoutValue()
-    {
-        $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators($component, ['required', 'email']);
-
-        $rt = $this->getValidator()->validate($component, '');
-        $this->assertFalse($rt, 'Validation did not fail for empty value');
-        $this->assertComponentHasErrors($component);
-        $this->assertComponentHasError($component, 'This value is required');
-    }
-
-    public function testComponentValidationWithValue()
-    {
-        $value = 'john@example.com';
-
-        $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators($component, ['required', 'email']);
-
-        $rt = $this->getValidator()->validate($component, $value);
-        $this->assertTrue($rt, 'Validation failed for value: '.$value);
     }
 
     /**
@@ -56,29 +34,20 @@ class CustomerEmailTest extends LokiTestCase
      * @return void
      * @dataProvider getTestData
      */
-    public function testComponentValidationWithInvalidValue(
+    public function testComponentValidation(
         string $value,
         bool $expectedResult,
         array $expectedErrors
     ) {
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentValidators($component, ['required', 'email']);
-
-        $result = $this->getValidator()->validate($component, $value);
-        $this->assertSame($expectedResult, $result, 'Validation did not fail for value: '.$value);
-
-        if(empty($expectedErrors)) {
-            $this->assertComponentHasNoErrors($component);
-        }
-
-        foreach ($expectedErrors as $expectedError) {
-            $this->assertComponentHasError($component, $expectedError);
-        }
+        $this->assertComponentValidation($component, $value, $expectedResult, $expectedErrors);
     }
 
     public function getTestData(): array
     {
         return [
+            ['', false, ['Value is required']],
             ['john', false, ['Invalid email']],
             ['john@example.com', true, []],
         ];
