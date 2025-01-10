@@ -58,7 +58,7 @@ class LokiTestCase extends AbstractController
         $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
             'checkout_index_index',
             'loki_checkout',
-            'loki_checkout_theme_default',
+            'loki_checkout_theme_onestep',
         ]);
 
         $this->dispatch('checkout/index/index');
@@ -97,9 +97,16 @@ class LokiTestCase extends AbstractController
 
     public function assertComponentExistsOnPage(string $blockName)
     {
-        $body = $this->getResponse()->getBody();
         $elementId = $this->getObjectManager()->get(IdConvertor::class)->toElementId($blockName);
-        $this->assertStringContainsString('"'.$elementId.'"', $body);
+        $this->assertElementIdExistsOnPage($elementId);
+    }
+
+    public function assertElementIdExistsOnPage(string $elementId)
+    {
+        $body = $this->getResponse()->getBody();
+        preg_match_all('/ id="([^\"]+)"/', $body, $matches);
+        $found = str_contains($body, '"'.$elementId.'"');
+        $this->assertTrue($found, 'Element ID not found: '.implode("\n", $matches[0]));
     }
 
     public function assertComponentNotExistsOnPage(string $blockName)

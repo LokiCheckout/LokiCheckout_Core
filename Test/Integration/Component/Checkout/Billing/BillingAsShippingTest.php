@@ -38,7 +38,7 @@ class BillingAsShippingTest extends LokiTestCase
 
     #[
         AppArea('frontend'),
-        Config('yireo_loki_checkout/general/onestep', '1', 'store', 'default'),
+        Config('yireo_loki_checkout/general/theme', 'onestep', 'store', 'default'),
         DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
@@ -53,7 +53,7 @@ class BillingAsShippingTest extends LokiTestCase
 
     #[
         AppArea('frontend'),
-        Config('yireo_loki_checkout/general/onestep', '1', 'store', 'default'),
+        Config('yireo_loki_checkout/general/theme', 'onestep', 'store', 'default'),
         DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])

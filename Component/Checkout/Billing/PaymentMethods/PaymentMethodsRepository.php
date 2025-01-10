@@ -12,9 +12,7 @@ class PaymentMethodsRepository extends ComponentRepository
 {
     public function getPaymentMethods(): array
     {
-        $cart = $this->getQuote();
-        $cartId = $cart->getId();
-        return $this->getContext()->getPaymentMethodManagement()->getList($cartId);
+        return $this->getContext()->getPaymentMethodManagement()->getList($this->getQuote()->getId());
     }
 
     public function getDefaultPayment(): string

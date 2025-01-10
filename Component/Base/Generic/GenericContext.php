@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Component\Base\Generic;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Quote\Model\Quote;
+use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
@@ -101,14 +101,8 @@ class GenericContext implements ComponentContextInterface
         return $this->globalMessageRegistry;
     }
 
-    public function getQuote(): Quote
+    public function getQuote(): CartInterface
     {
-        static $quote = null;
-        if ($quote instanceof Quote) {
-            return $quote;
-        }
-
-        $quote = $this->getCheckoutSession()->getQuote();
-        return $quote;
+        return $this->checkoutState->getQuote();
     }
 }
