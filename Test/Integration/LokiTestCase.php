@@ -84,7 +84,6 @@ class LokiTestCase extends AbstractController
     protected function getCart(): CartInterface
     {
         $cart = $this->fixtures->get('cart');
-        echo 'Cart ID: '.$cart->getId()."\n\n";
 
         $this->assertInstanceOf(CartInterface::class, $cart);
 
@@ -100,7 +99,7 @@ class LokiTestCase extends AbstractController
     {
         $body = $this->getResponse()->getBody();
         $elementId = $this->getObjectManager()->get(IdConvertor::class)->toElementId($blockName);
-        $this->assertStringContainsString($body, '"'.$elementId.'"');
+        $this->assertStringContainsString('"'.$elementId.'"', $body);
     }
 
     public function assertComponentNotExistsOnPage(string $blockName)
