@@ -10,6 +10,6 @@ class CountryIdRepository extends AddressFieldRepository
     {
         $this->getAddressState()->save('region', '');
         $this->getAddressState()->save('region_id', '');
-        parent::saveValue($data);
+        parent::saveValue($value);
     }
 }

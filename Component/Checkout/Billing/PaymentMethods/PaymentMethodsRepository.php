@@ -50,15 +50,15 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $data = $this->sanitizePaymentMethod((string)$data);
-        if (empty($data)) {
+        $value = $this->sanitizePaymentMethod((string)$value);
+        if (empty($value)) {
             return;
         }
 
         $quote = $this->getQuote();
-        $quote->setPaymentMethod($data);
+        $quote->setPaymentMethod($value);
         $quote->setInventoryProcessed(false);
-        $quote->getPayment()->importData(['method' => $data]);
+        $quote->getPayment()->importData(['method' => $value]);
         $this->getContext()->getCartRepository()->save($quote);
         $quote->collectTotals();
     }

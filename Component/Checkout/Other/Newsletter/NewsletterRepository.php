@@ -21,7 +21,7 @@ class NewsletterRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $subscribe = (bool)$data;
+        $subscribe = (bool)$value;
         $email = (string)$this->getContext()->getQuote()->getCustomerEmail();
         $storeId = (int)$this->getContext()->getQuote()->getStoreId();
         if (true === $subscribe) {

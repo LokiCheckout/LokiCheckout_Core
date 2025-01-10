@@ -18,7 +18,7 @@ class QuoteFieldRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $this->getQuote()->setData($this->getFieldName(), $data);
+        $this->getQuote()->setData($this->getFieldName(), $value);
         $this->getQuote()->save(); // @todo
     }
 

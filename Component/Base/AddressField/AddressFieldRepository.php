@@ -32,7 +32,7 @@ class AddressFieldRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $this->getAddressState()->save($this->getFieldName(), $data);
+        $this->getAddressState()->save($this->getFieldName(), $value);
     }
 
     protected function getAddressState(): AddressStateInterface

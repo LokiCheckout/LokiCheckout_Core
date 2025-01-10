@@ -17,6 +17,6 @@ class ShippingAddressToggleSelectRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $this->getContext()->getCheckoutSession()->setIsNewShippingAddress((int)$data);
+        $this->getContext()->getCheckoutSession()->setIsNewShippingAddress((int)$value);
     }
 }

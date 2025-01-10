@@ -46,10 +46,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
-        echo 'original='.$data.'; ';
-        $selectedAddressId = $this->sanitizeSelectedAddressId((int)$data);
-        echo 'sanitized='.$selectedAddressId.'; ';
-
+        $selectedAddressId = $this->sanitizeSelectedAddressId((int)$value);
         if (false === $selectedAddressId > 0) {
             return;
         }

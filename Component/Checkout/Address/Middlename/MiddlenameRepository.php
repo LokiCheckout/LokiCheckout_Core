@@ -9,9 +9,9 @@ class MiddlenameRepository extends AddressFieldRepository
     public function saveValue(mixed $value): void
     {
         if ($this->getContext()->getQuote()->getCustomerIsGuest()) {
-            $this->getContext()->getQuote()->setCustomerMiddlename($data);
+            $this->getContext()->getQuote()->setCustomerMiddlename($value);
         }
 
-        parent::saveValue($data);
+        parent::saveValue($value);
     }
 }

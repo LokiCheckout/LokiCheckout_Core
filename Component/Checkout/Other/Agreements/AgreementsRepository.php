@@ -45,12 +45,12 @@ class AgreementsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        if (empty($data)) {
+        if (empty($value)) {
             return;
         }
 
         $incomingAgreements = [];
-        foreach ((array)$data as $agreementId) {
+        foreach ((array)$value as $agreementId) {
             $incomingAgreements[] = (int)$agreementId;
         }
 

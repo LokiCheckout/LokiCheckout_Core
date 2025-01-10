@@ -9,9 +9,9 @@ class FirstnameRepository extends AddressFieldRepository
     public function saveValue(mixed $value): void
     {
         if ($this->getContext()->getQuote()->getCustomerIsGuest()) {
-            $this->getContext()->getQuote()->setCustomerFirstname($data);
+            $this->getContext()->getQuote()->setCustomerFirstname($value);
         }
 
-        parent::saveValue($data);
+        parent::saveValue($value);
     }
 }

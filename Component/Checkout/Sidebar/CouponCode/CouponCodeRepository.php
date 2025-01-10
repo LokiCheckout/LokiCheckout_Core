@@ -23,18 +23,18 @@ class CouponCodeRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        if (empty($data['task']) || !isset($data['code'])) {
+        if (empty($value['task']) || !isset($value['code'])) {
             return;
         }
 
         $quote = $this->getContext()->getQuote();
-        if ($data['task'] === 'apply') {
-            $quote->setCouponCode($data['code']);
+        if ($value['task'] === 'apply') {
+            $quote->setCouponCode($value['code']);
             $this->getContext()->getCartRepository()->save($quote);
             $this->getGlobalMessageRegistry()->addSuccess('Applied coupon code');
         }
 
-        if ($data['task'] === 'remove') {
+        if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
             $this->getContext()->getCartRepository()->save($quote);
             $this->getGlobalMessageRegistry()->addSuccess('Removed coupon code');
