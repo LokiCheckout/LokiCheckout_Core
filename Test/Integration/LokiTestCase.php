@@ -17,9 +17,7 @@ use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEq
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiComponents\Filter\Filter;
-use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasError;
-use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasErrors;
-use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentHasNoErrors;
+use Yireo\LokiComponents\Test\Integration\Traits\AssertComponentErrors;
 use Yireo\LokiComponents\Test\Integration\Traits\CreateComponent;
 use Yireo\LokiComponents\Test\Integration\Traits\GetComponent;
 use Yireo\LokiComponents\Util\IdConvertor;
@@ -36,9 +34,7 @@ class LokiTestCase extends AbstractController
 
     use GetComponent;
     use CreateComponent;
-    use AssertComponentHasErrors;
-    use AssertComponentHasError;
-    use AssertComponentHasNoErrors;
+    use AssertComponentErrors;
 
     protected function setUp(): void
     {

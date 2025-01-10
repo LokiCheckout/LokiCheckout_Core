@@ -29,27 +29,50 @@ class CustomerEmailTest extends LokiTestCase
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertCustomerEmailComponentIsValid($component);
 
-        $this->getValidator()->validate($component, '');
+        $rt = $this->getValidator()->validate($component, '');
+        $this->assertFalse($rt, 'Validation did not fail for empty value');
         $this->assertComponentHasErrors($component);
-        $this->assertComponentHasError($component, 'Value is required');
+        $this->assertComponentHasError($component, 'This value is required');
     }
 
     public function testComponentWithValue()
     {
+        $value = 'john@example.com';
+
         $cart = $this->getCart();
-        $cart->getShippingAddress()->setData('email', 'john@example.com');
+        $cart->getShippingAddress()->setData('email', $value);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertCustomerEmailComponentIsValid($component);
 
-        $this->getValidator()->validate($component, 'john@example.com');
+        $rt = $this->getValidator()->validate($component, $value);
+        $this->assertTrue($rt, 'Validation failed for value: '.$value);
         $this->assertComponentHasNoErrors($component);
+    }
+
+
+    public function testComponentWithInvalidValue()
+    {
+        $value = 'john';
+
+        $cart = $this->getCart();
+        $cart->getShippingAddress()->setData('email', $value);
+        $this->dispatchToCheckout($cart);
+
+        $component = $this->getComponent(self::BLOCK_NAME);
+        $this->assertCustomerEmailComponentIsValid($component);
+
+        $rt = $this->getValidator()->validate($component, $value);
+        $this->assertFalse($rt, 'Validation did not fail for value: '.$value);
+        $this->assertComponentHasErrors($component);
+        $this->assertComponentHasError($component, 'Invalid email');
     }
 
     private function assertCustomerEmailComponentIsValid(ComponentInterface $component)
     {
         $this->assertComponentExistsOnPage($component);
+        $this->assertContains('required', $component->getValidators());
         $this->assertContains('email', $component->getValidators());
         $this->assertTrue($component->getViewModel()->isRequired());
     }
