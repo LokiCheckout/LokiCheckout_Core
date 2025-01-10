@@ -19,15 +19,16 @@ class CheckoutState implements ArgumentInterface
 
     public function getQuote(): CartInterface
     {
-        static $quote = null;
-        if ($quote instanceof CartInterface) {
-            return $quote;
+        $quoteId = $this->checkoutSession->getQuoteId();
+        static $quotes = [];
+
+        if (isset($quotes[$quoteId]) && $quotes[$quoteId] instanceof CartInterface) {
+            return $quotes[$quoteId];
         }
 
-        $quoteId = $this->checkoutSession->getQuoteId();
-        $quote = $this->cartRepository->get($quoteId);
+        $quotes[$quoteId] = $this->cartRepository->get($quoteId);
 
-        return $quote;
+        return $quotes[$quoteId];
     }
 
     public function saveQuote(CartInterface $quote)
