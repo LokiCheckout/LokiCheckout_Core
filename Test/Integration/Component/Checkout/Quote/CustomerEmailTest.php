@@ -20,10 +20,9 @@ class CustomerEmailTest extends LokiTestCase
 {
     const BLOCK_NAME = 'loki-checkout.customer.customer_email';
 
-    public function testComponentWithoutValue()
+    public function testComponentValidationWithoutValue()
     {
         $cart = $this->getCart();
-        $cart->getShippingAddress()->addData(['email' => '']);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getComponent(self::BLOCK_NAME);
@@ -35,12 +34,11 @@ class CustomerEmailTest extends LokiTestCase
         $this->assertComponentHasError($component, 'This value is required');
     }
 
-    public function testComponentWithValue()
+    public function testComponentValidationWithValue()
     {
         $value = 'john@example.com';
 
         $cart = $this->getCart();
-        $cart->getShippingAddress()->setData('email', $value);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getComponent(self::BLOCK_NAME);
@@ -52,12 +50,11 @@ class CustomerEmailTest extends LokiTestCase
     }
 
 
-    public function testComponentWithInvalidValue()
+    public function testComponentValidationWithInvalidValue()
     {
         $value = 'john';
 
         $cart = $this->getCart();
-        $cart->getShippingAddress()->setData('email', $value);
         $this->dispatchToCheckout($cart);
 
         $component = $this->getComponent(self::BLOCK_NAME);
