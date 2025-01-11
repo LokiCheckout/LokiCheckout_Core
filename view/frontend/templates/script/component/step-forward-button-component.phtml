@@ -52,6 +52,12 @@
                     }));
 
                     this.post();
+                    return;
+                }
+
+                const firstInvalidElement = LokiCheckoutValidator.findFirstInvalidElement();
+                if (firstInvalidElement) {
+                    firstInvalidElement.focus();
                 }
 
                 // Fail-safe enabling of the button

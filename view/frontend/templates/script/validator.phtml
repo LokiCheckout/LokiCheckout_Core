@@ -73,6 +73,9 @@
             });
 
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+        },
+        findFirstInvalidElement: function() {
+            return Object.values(document.querySelectorAll('[aria-invalid="true"]')).shift();
         }
     }
 </script>
