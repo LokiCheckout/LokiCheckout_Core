@@ -57,6 +57,7 @@
                 element.setAttribute('aria-invalid', true);
             });
 
+            document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         },
         setValid: function (component) {
@@ -68,6 +69,7 @@
                 element.setAttribute('aria-invalid', false);
             });
 
+            document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         }
     }
