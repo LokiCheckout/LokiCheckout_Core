@@ -54,10 +54,11 @@
                         element.setCustomValidity('Value is invalid');
                     }
                 }
+
                 element.setAttribute('aria-invalid', true);
+                document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
             });
 
-            document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         },
         setValid: function (component) {
@@ -66,10 +67,11 @@
                 if (typeof element.setCustomValidity === 'function') {
                     element.setCustomValidity('');
                 }
+
+                document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
                 element.setAttribute('aria-invalid', false);
             });
 
-            document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         }
     }
