@@ -42,25 +42,6 @@ abstract class FieldViewModel extends GenericViewModel implements FieldViewModel
         return 'text';
     }
 
-    public function isValid(): bool
-    {
-        foreach ($this->getMessages() as $message) {
-            if ($message->getType() === LocalMessage::TYPE_ERROR) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function getJsData(): array
-    {
-        return [
-            ...parent::getJsData(),
-            'valid' => $this->isValid(),
-        ];
-    }
-
     public function isRequired(): bool
     {
         return false;
