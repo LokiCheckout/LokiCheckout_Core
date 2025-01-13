@@ -18,6 +18,7 @@ use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
 use Yireo\LokiComponents\Component\ComponentContext;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
+use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 
 class CheckoutContext implements ComponentContextInterface
@@ -109,6 +110,21 @@ class CheckoutContext implements ComponentContextInterface
 
     public function getQuote(): CartInterface
     {
-        return $this->checkoutState->getQuote();
+        $quote = $this->checkoutState->getQuote();
+        $this->redirectIfNoCartItems();
+
+        return $quote;
+    }
+
+    public function redirectIfNoCartItems()
+    {
+        $quote = $this->checkoutState->getQuote();
+        if ($quote->getItemsQty() > 0) {
+            return;
+        }
+
+        $this->getCoreMessageManager()->addWarningMessage('No items in cart');
+        $url = $this->getUrlFactory()->create()->getUrl('checkout/cart');
+        throw new RedirectException($url);
     }
 }
