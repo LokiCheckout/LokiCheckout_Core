@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Component\Base\Generic;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
@@ -38,6 +39,7 @@ class GenericContext implements ComponentContextInterface
         private AttributeProvider $attributeProvider,
         private CartRepositoryInterface $cartRepository,
         private GlobalMessageRegistry $globalMessageRegistry,
+        private CoreMessageManager $coreMessageManager
     ) {
     }
 
@@ -99,6 +101,11 @@ class GenericContext implements ComponentContextInterface
     public function getGlobalMessageRegistry(): GlobalMessageRegistry
     {
         return $this->globalMessageRegistry;
+    }
+
+    public function getCoreMessageManager(): CoreMessageManager
+    {
+        return $this->coreMessageManager;
     }
 
     public function getQuote(): CartInterface
