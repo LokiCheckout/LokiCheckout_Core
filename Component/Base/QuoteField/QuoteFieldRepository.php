@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
-use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
