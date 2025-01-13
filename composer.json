@@ -38,9 +38,7 @@
   "suggest": {
     "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"
   },
-  "license": [
-    "OSL-3.0"
-  ],
+  "license": "OSL-3.0",
   "autoload": {
     "files": [
       "registration.php"
