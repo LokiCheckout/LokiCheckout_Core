@@ -70,6 +70,10 @@
                 <block
                     name="loki-checkout.script.components.payment-methods"
                     template="Yireo_LokiCheckout::script/component/payment-methods-component.phtml"/>
+                <!-- @todo: Only load this on the page if this is actually needed -->
+                <block
+                    name="loki-checkout.script.components.payment-method"
+                    template="Yireo_LokiCheckout::script/component/payment-method-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.coupon-code"
                     template="Yireo_LokiCheckout::script/component/coupon-code-component.phtml"/>

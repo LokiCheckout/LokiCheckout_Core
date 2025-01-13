@@ -6,9 +6,12 @@
                 this.dispatchPaymentMethodEvent();
             },
             dispatchPaymentMethodEvent() {
+                // @todo: Is this also fired when the value is empty?
                 window.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
                     detail: {method: this.value}
                 }));
+
+                // @todo: Trigger an event "checkout:payment:method-deactivate"
             },
             beforeSubmit() {
                 this.validators = ['required', this.value]; // @todo: Doesn't this stick when switching value?

@@ -25,7 +25,7 @@ class PaymentMethodsViewModel extends FieldViewModel
 
     public function getFieldLabel(): string
     {
-        return 'Payment Method';
+        return 'Payment Methods';
     }
 
     public function isRequired(): bool
