@@ -3,10 +3,10 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 
 /**
- * @method GenericContext getContext()
+ * @method CheckoutContext getContext()
  * @method CouponCodeRepository getRepository()
  */
 class CouponCodeViewModel extends FieldViewModel

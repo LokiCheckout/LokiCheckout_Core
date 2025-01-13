@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 use Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface;
 use Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 
@@ -14,7 +14,7 @@ class AgreementsContext implements ComponentContextInterface
     use InheritFromParentContext;
 
     public function __construct(
-        private readonly GenericContext $parentContext,
+        private readonly CheckoutContext $parentContext,
         private readonly CheckoutAgreementsListInterface $checkoutAgreementsList,
         private readonly ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
         private readonly SearchCriteriaBuilder $searchCriteriaBuilder,

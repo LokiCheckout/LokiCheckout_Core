@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Component\Base\Generic;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
- * @method GenericContext getContext()
+ * @method CheckoutContext getContext()
  */
 class GenericViewModel extends ComponentViewModel implements GenericViewModelInterface
 {

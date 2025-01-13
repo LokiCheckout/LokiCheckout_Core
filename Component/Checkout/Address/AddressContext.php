@@ -8,7 +8,7 @@ use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\Util\StreetLinesFactory;
@@ -20,7 +20,7 @@ class AddressContext implements ComponentContextInterface
     use InheritFromParentContext;
 
     public function __construct(
-        private readonly GenericContext $parentContext,
+        private readonly CheckoutContext $parentContext,
         private readonly SameAddressService $sameAddressService,
         private readonly CustomerRepositoryInterface $customerRepository,
         private readonly CustomerAddressRepository $customerAddressRepository,

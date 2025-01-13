@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step\BillingStep;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiCheckout\Validator\ValidatorInterface;
 use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
@@ -12,7 +12,7 @@ class BillingStepContext implements ComponentContextInterface
     use InheritFromParentContext;
 
     public function __construct(
-        private readonly GenericContext $parentContext,
+        private readonly CheckoutContext $parentContext,
         private readonly ValidatorInterface $stepValidator,
     ) {
     }

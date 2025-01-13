@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\ProgressBar;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
- * @method GenericContext getContext()
+ * @method CheckoutContext getContext()
  */
 class ProgressBarRepository extends ComponentRepository
 {

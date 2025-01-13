@@ -2,7 +2,7 @@
 <components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
     <group
         name="checkout"
-        context="Yireo\LokiCheckout\Component\Base\Generic\GenericContext"
+        context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext"
     />
 
     <group
@@ -59,7 +59,7 @@
 
     <group
         name="stepButtons"
-        context="Yireo\LokiCheckout\Component\Base\Generic\GenericContext">
+        context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext">
         <target name="loki-checkout.steps"/>
         <target name="loki-checkout.progressbar"/>
     </group>

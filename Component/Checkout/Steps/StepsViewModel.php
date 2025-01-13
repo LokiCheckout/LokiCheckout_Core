@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Steps;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
- * @method GenericContext getContext()
+ * @method CheckoutContext getContext()
  */
 class StepsViewModel extends ComponentViewModel
 {
