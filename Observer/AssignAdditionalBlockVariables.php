@@ -7,7 +7,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModelInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Exception\NoComponentFoundException;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
@@ -61,7 +61,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         }
 
         $viewModel = $component->getViewModel();
-        if ($viewModel instanceof GenericViewModelInterface && false === $viewModel->isAllowRendering()) {
+        if ($viewModel instanceof CheckoutViewModelInterface && false === $viewModel->isAllowRendering()) {
             $block->setTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
         }
     }

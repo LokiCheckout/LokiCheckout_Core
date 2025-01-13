@@ -2,12 +2,12 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method BillingAddressContext getContext()
  */
-class BillingAddressViewModel extends GenericViewModel
+class BillingAddressViewModel extends CheckoutViewModel
 {
     public function isEnabled(): bool
     {

@@ -7,7 +7,7 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
 /**
  * @method CheckoutContext getContext()
  */
-class GenericViewModel extends ComponentViewModel implements GenericViewModelInterface
+class CheckoutViewModel extends ComponentViewModel implements CheckoutViewModelInterface
 {
     protected string $step = '';
 

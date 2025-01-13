@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiComponents\Messages\LocalMessage;
 
 /**
  * @method FieldContext getContext()
  */
-abstract class FieldViewModel extends GenericViewModel implements FieldViewModelInterface
+abstract class FieldViewModel extends CheckoutViewModel implements FieldViewModelInterface
 {
     public function getFieldName(): string
     {

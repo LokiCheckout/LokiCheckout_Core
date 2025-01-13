@@ -3,14 +3,14 @@
 namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepBackwardButton;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 /**
  * @method CheckoutContext getContext()
  */
-class StepBackwardButtonViewModel extends GenericViewModel
+class StepBackwardButtonViewModel extends CheckoutViewModel
 {
     public function isAllowRendering(): bool
     {

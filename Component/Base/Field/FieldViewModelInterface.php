@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
-use Yireo\LokiCheckout\Component\Base\Generic\GenericViewModelInterface;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModelInterface;
 
-interface FieldViewModelInterface extends GenericViewModelInterface
+interface FieldViewModelInterface extends CheckoutViewModelInterface
 {
     /**
      * Name of the field itself.
