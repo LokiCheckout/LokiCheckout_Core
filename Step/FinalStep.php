@@ -11,6 +11,7 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 use Yireo\LokiCheckout\Step\FinalStep\RedirectUrl;
 use Yireo\LokiCheckout\Validator\QuoteValidator;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiComponents\Exception\RedirectException;
 
 class FinalStep
 {
@@ -72,9 +73,8 @@ class FinalStep
 
         $this->dispatchSaveOrderEvent();
 
-        $this->checkoutSession->setLokiRedirectUrl($this->redirectUrl->get($paymentMethod, $order));
-
-        return true;
+        $redirectUrl = $this->redirectUrl->get($paymentMethod, $order);
+        throw new RedirectException($redirectUrl);
     }
 
     private function dispatchSaveOrderEvent()
