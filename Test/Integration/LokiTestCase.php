@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Test\Integration;
 
+use Laminas\Http\Header\GenericHeader;
+use Laminas\Http\Headers;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\ObjectManagerInterface;
@@ -22,6 +24,7 @@ use Yireo\LokiComponents\Test\Integration\Traits\CreateComponent;
 use Yireo\LokiComponents\Test\Integration\Traits\GetComponent;
 use Yireo\LokiComponents\Util\IdConvertor;
 use Yireo\LokiComponents\Validator\Validator;
+use Magento\Framework\App\Request\Http as HttpRequest;
 
 // @todo: Split up in LokiCheckoutTestCase and LokiCheckoutComponentTestCase
 class LokiTestCase extends AbstractController
@@ -130,6 +133,8 @@ class LokiTestCase extends AbstractController
         bool $expectedResult,
         array $expectedErrors)
     {
+        $this->setAsAjaxRequest();
+
         $result = $this->getValidator()->validate($component, $value);
 
         if (true === $expectedResult) {
@@ -145,6 +150,14 @@ class LokiTestCase extends AbstractController
         foreach ($expectedErrors as $expectedError) {
             $this->assertComponentHasError($component, $expectedError);
         }
+    }
+
+    protected function setAsAjaxRequest(): void
+    {
+        $headers = new Headers();
+        $headers->addHeader(GenericHeader::fromString('X-Alpine-Request:1'));
+        $this->getObjectManager()->get(HttpRequest::class)->setHeaders($headers);
+
     }
 
     public function getValidator(): Validator
