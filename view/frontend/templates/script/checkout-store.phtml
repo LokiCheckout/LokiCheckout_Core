@@ -15,12 +15,11 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
     document.addEventListener('alpine:init', () => {
         Alpine.store('checkout', {
             currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
-            components: [],
             getComponentIds() {
-                return Object.keys(this.components);
+                return Alpine.store('components').getComponentIds();
             },
             getComponents() {
-                return Object.values(this.components);
+                return Alpine.store('components').getComponents();
             },
             getComponentsByStep(step) {
                 return this.getComponents().filter(component => component.step === step);
@@ -39,20 +38,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 }
             },
             add(component) {
-                if (!component.id) {
-                    yireoLokiCheckoutLogger('WARNING: Not adding ID-less Alpine.js component to store:', component);
-                    return;
-                }
-
-                this.components[component.id] = component;
-                document.dispatchEvent(new CustomEvent('yireo-loki-components.component-register', {detail: {component}}));
+                return Alpine.store('components').add(component);
             },
             get(componentId) {
-                if (this.components[componentId]) {
-                    return this.components[componentId];
-                }
-
-                throw new Error('No such a component: ' + componentId);
+                return Alpine.store('components').get(componentId);
             },
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);

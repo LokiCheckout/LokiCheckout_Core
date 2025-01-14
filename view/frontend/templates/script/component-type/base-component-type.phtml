@@ -6,13 +6,18 @@
         lazyLoad: false,
         initActions: {
             ...LokiComponentType.initActions,
-            register() {
-                Alpine.store('checkout').add(this);
-            },
             lazyLoad() {
                 if (this.lazyLoad) {
                     this.post({});
                 }
+            }
+        },
+        getDetails() {
+            console.log('override');
+            return {
+                ...LokiComponentType.getDetails(),
+                step: this.step,
+                visible: this.visible,
             }
         }
     };
