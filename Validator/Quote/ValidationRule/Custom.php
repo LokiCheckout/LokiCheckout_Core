@@ -9,18 +9,27 @@ use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
 class Custom implements QuoteValidationRuleInterface
 {
     public function __construct(
-        private ValidationResultFactory $validationResultFactory
+        private ValidationResultFactory $validationResultFactory,
+        private \Yireo\LokiCheckout\Config\Config $config,
     ) {
     }
 
     public function validate(Quote $quote): array
     {
+        if (false === $this->config->isEnabled()) {
+            return [];
+        }
+
         $validationErrors = [];
 
         if ($quote->isVirtual()) {
-            $validationErrors[] = __(
+            /*$validationErrors[] = __(
                 '@todo: Supporting virtual quotes is still in progress'
-            );
+            );*/
+        }
+
+        if (empty($validationErrors)) {
+            return [];
         }
 
         return [$this->validationResultFactory->create(['errors' => $validationErrors])];

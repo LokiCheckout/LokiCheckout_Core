@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Observer;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Message\Manager as MessageManager;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Step\StepNavigator;
 
 class ResetStepAfterCartSave implements ObserverInterface
@@ -12,11 +13,16 @@ class ResetStepAfterCartSave implements ObserverInterface
     public function __construct(
         private StepNavigator $stepNavigator,
         private MessageManager $messageManager,
+        private Config $config
     ) {
     }
 
     public function execute(Observer $observer)
     {
+        if (false === $this->config->isEnabled()) {
+            return;
+        }
+
         try {
             $this->stepNavigator->setCurrentStepByCode($this->stepNavigator->getFirstStep()->getCode());
         } catch (\Exception $e) {
