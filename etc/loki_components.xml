@@ -109,6 +109,7 @@
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.shipping.address.view"/>
+        <target name="loki-checkout.shipping.methods"/>
     </component>
 
     <component
