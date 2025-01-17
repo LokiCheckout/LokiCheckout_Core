@@ -13,6 +13,7 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
     public function getFieldName(): string
     {
         $parts = explode('.', $this->getNameInLayout());
+
         return array_pop($parts);
     }
 
@@ -29,6 +30,14 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
         return [
             'alias' => 'field',
             'css_classes' => $this->getBlock()->getCssClasses(),
+        ];
+    }
+
+    public function getJsData(): array
+    {
+        return [
+            ...parent::getJsData(),
+            'field_name' => $this->getFieldName(),
         ];
     }
 

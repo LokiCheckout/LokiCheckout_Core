@@ -24,6 +24,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponentsByStep(step) {
                 return this.getComponents().filter(component => component.step === step);
             },
+            getComponentsByFieldNameAndStep(fieldName, step) {
+                return this.getComponents().filter(component => component.field_name === fieldName && component.step === step);
+            },
             removeInvisibleComponents() {
                 const invisibleComponents = [];
                 for (const [componentId, component] of Object.entries(this.components)) {

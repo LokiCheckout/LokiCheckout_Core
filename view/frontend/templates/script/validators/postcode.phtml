@@ -9,8 +9,6 @@ use Yireo\LokiCheckout\ViewModel\PostcodePatterns;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PostcodePatterns $postcodePatterns */
 $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
-
-$countryComponent = 'LokiCheckoutShippingAddressCountryId'; // @todo: Find a smart way to do this
 ?>
 <script>
     const postcodePatterns = {};
@@ -25,10 +23,12 @@ $countryComponent = 'LokiCheckoutShippingAddressCountryId'; // @todo: Find a sma
     <?php endforeach; ?>
 
     LokiCheckoutValidator.validators.postcode = function (component) {
-        // @todo: The following is kind of ugly. Wouldn't Alpine.store('checkout').get('country_id') be nicer?
-        const countryComponentName = component.name.includes('Billing') ? 'LokiCheckoutBillingAddressCountryId' : 'LokiCheckoutShippingAddressCountryId';
-        const countryComponent = Alpine.store('checkout').get(countryComponentName);
-        if (!countryComponent) {
+        const countryComponent = Alpine.store('checkout').getComponentsByFieldNameAndStep(
+            'country_id',
+            component.step
+        )[0];
+
+        if (!countryComponent || !countryComponent.id) {
             return true;
         }
 
