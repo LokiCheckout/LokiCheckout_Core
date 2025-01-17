@@ -116,7 +116,7 @@
         name="loki-checkout.shipping.address.view"
         context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel"
-    ></component>
+    />
 
     <component
         name="loki-checkout.shipping.methods"
