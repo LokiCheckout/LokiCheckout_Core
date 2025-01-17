@@ -320,7 +320,7 @@
         group="shippingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneRepository">
-        <filter name="positive_numeric"/>
+        <filter name="positive_number"/>
     </component>
 
     <component
@@ -328,7 +328,7 @@
         group="shippingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxRepository">
-        <filter name="positive_numeric"/><!-- @todo Add a telephone filter instead -->
+        <filter name="positive_number"/><!-- @todo Add a telephone filter instead -->
     </component>
 
     <component
@@ -419,7 +419,7 @@
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Telephone\TelephoneRepository">
-        <filter name="positive_numeric"/>
+        <filter name="positive_number"/>
     </component>
 
     <component
@@ -427,7 +427,7 @@
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Fax\FaxRepository">
-        <filter name="positive_numeric"/>
+        <filter name="positive_number"/>
     </component>
 
     <component
