@@ -56,7 +56,6 @@ class AddHtmlAttributes implements ObserverInterface
         $html = preg_replace('/^<([a-z]{2,})/', '<\1 ' . $htmlAttributes, $html);
 
         $transport->setHtml($html);
-
     }
 
     private function getHtmlAttributes(AbstractBlock $block): string

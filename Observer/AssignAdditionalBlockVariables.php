@@ -56,7 +56,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
     {
         try {
             $component = $this->componentRegistry->getComponentFromBlock($block);
-        } catch(NoComponentFoundException $exeption) {
+        } catch (NoComponentFoundException $exeption) {
             return;
         }
 
