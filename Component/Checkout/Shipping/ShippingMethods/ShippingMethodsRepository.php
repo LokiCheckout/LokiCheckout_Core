@@ -31,7 +31,14 @@ class ShippingMethodsRepository extends ComponentRepository
             ->collectShippingRates();
 
         $shippingMethods = [];
-        foreach ($this->getContext()->getShippingMethodManagement()->getList($quote->getId()) as $shippingMethod) {
+        try {
+            $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
+        } catch (StateException|NoSuchEntityException $e) {
+            $this->getGlobalMessageRegistry()->addError($e->getMessage());
+            return [];
+        }
+
+        foreach ($availableMethods as $shippingMethod) {
             $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
             $shippingMethods[$shippingMethodCode] = $shippingMethod;
         }
