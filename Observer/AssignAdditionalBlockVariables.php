@@ -63,6 +63,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         $viewModel = $component->getViewModel();
         if ($viewModel instanceof CheckoutViewModelInterface && false === $viewModel->isAllowRendering()) {
             $block->setTemplate('Yireo_LokiCheckout::utils/not-rendered.phtml');
+            $block->setNotRendered(true);
         }
     }
 }
