@@ -70,8 +70,8 @@ abstract class AbstractRenderer implements ArgumentInterface
     protected function getUniqId(AbstractBlock $block, AbstractBlock $ancestorBlock): string
     {
         $ancestorId = $ancestorBlock->getNameInLayout();
-        $blockId = str_replace('loki-checkout.', '', $block->getNameInLayout());
+        $blockParts = explode('.', $block->getNameInLayout());
 
-        return $ancestorId.'-'.$blockId;
+        return $ancestorId.'-'.array_pop($blockParts);
     }
 }
