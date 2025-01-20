@@ -19,13 +19,13 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 ?>
 <div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
+    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
     <?= $block->getChildHtml('before') ?>
 
     <ul role="list">
         <?php foreach ($viewModel->getItems() as $item) : ?>
             <li>
-                <?= $childRenderer->html('item', $block, [
+                <?= $childRenderer->html($block,'item', [
                     'alias' => 'item',
                     'item' => $item,
                 ]) ?>

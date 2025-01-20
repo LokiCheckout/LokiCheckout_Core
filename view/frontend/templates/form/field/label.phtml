@@ -23,6 +23,6 @@ $viewModel = $block->getViewModel();
     <?= __($viewModel->getFieldLabel()) ?>
 
     <?php if ($viewModel->isRequired() && $config->useRequiredBlock()): ?>
-        <?= $blockRenderer->html('loki-checkout.utils.required'); ?>
+        <?= $blockRenderer->html($block, 'loki-checkout.utils.required'); ?>
     <?php endif; ?>
 </label>

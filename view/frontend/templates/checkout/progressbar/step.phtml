@@ -47,7 +47,7 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 
     <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
         <span class="<?= $css('inline-flex justify-center items-center px-2', 'separator') ?>" aria-hidden="true">
-             <?= $blockRenderer->html('loki-checkout.utils.separator') ?>
+             <?= $blockRenderer->html($block,'loki-checkout.utils.separator') ?>
         </span>
     <?php endif; ?>
 </li>

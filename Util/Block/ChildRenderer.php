@@ -8,24 +8,29 @@ use RuntimeException;
 
 class ChildRenderer extends AbstractRenderer
 {
-    public function get(string $blockAlias, AbstractBlock $ancestorBlock, array $data = []): AbstractBlock
-    {
-        $this->ancestorBlock = $ancestorBlock;
+    public function get(
+        AbstractBlock $ancestorBlock,
+        string $blockAlias,
+        array $data = []
+    ): AbstractBlock {
         $block = $ancestorBlock->getChildBlock($blockAlias);
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block alias "%1"', $blockAlias));
         }
 
-        $this->populateBlock($block, $data);
-        $this->setNameInLayout($block, (string)$block->getAlias());
+        $this->populateBlock($block, $ancestorBlock, $data);
+        $this->setNameInLayout($block, $ancestorBlock);
 
         return $block;
     }
 
-    public function html(string $blockAlias, AbstractBlock $ancestorBlock, array $data = [])
-    {
+    public function html(
+        AbstractBlock $ancestorBlock,
+        string $blockAlias,
+        array $data = []
+    ) {
         try {
-            return (string)$this->get($blockAlias, $ancestorBlock, $data)?->toHtml();
+            return (string)$this->get($ancestorBlock, $blockAlias, $data)?->toHtml();
         } catch (RuntimeException|InvalidArgumentException $e) {
             return '<!-- '.$e->getMessage().' -->'; // @todo: Only report this in debug mode
         }

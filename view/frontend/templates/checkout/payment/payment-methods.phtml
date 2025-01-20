@@ -16,8 +16,8 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
+    <?= $blockRenderer->html($block, 'loki-checkout.utils.loader-overlay', ) ?>
+    <?= $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Payment Methods']) ?>
 
     <form
         data-type="field"
@@ -28,8 +28,8 @@ $paymentMethods = $viewModel->getPaymentMethods();
             <ul>
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= $blockRenderer->html(
-                        'loki-checkout.payment.payment-methods.item',
                         $block,
+                        'loki-checkout.payment.payment-methods.item',
                         [
                             'method' => $paymentMethod,
                             'is_current' => $paymentMethod->getCode() === $viewModel->getValue(),
@@ -42,5 +42,5 @@ $paymentMethods = $viewModel->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html('loki-components.utils.local-messages', $block) ?>
+    <?= $blockRenderer->html($block,'loki-components.utils.local-messages') ?>
 </div>

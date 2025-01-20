@@ -17,20 +17,22 @@ class BlockRenderer extends AbstractRenderer
 
     /**
      * @param string $blockName
-     * @param AbstractBlock|null $ancestorBlock
+     * @param AbstractBlock $ancestorBlock
      * @param array $data
      *
-     * @return AbstractBlock
+     * @return Template
      */
-    public function get(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
-    {
-        $this->ancestorBlock = $ancestorBlock;
+    public function get(
+        AbstractBlock $ancestorBlock,
+        string $blockName,
+        array $data = []
+    ): AbstractBlock {
         $block = $this->layout->getBlock($blockName);
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block found with name "%1"', $blockName));
         }
 
-        $this->populateBlock($block, $data);
+        $this->populateBlock($block, $ancestorBlock, $data);
 
         if (empty($block->getTemplate())) {
             throw new RuntimeException((string)__('No template found with block "%1"', $blockName));
@@ -41,14 +43,17 @@ class BlockRenderer extends AbstractRenderer
 
     /**
      * @param string $blockName
-     * @param AbstractBlock|null $ancestorBlock
+     * @param AbstractBlock $ancestorBlock
      * @param array $data
      * @return string
      */
-    public function html(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = [])
-    {
+    public function html(
+        AbstractBlock $ancestorBlock,
+        string $blockName,
+        array $data = []
+    ) {
         try {
-            return $this->get($blockName, $ancestorBlock, $data)->toHtml();
+            return $this->get($ancestorBlock, $blockName, $data)->toHtml();
         } catch (InvalidArgumentException|RuntimeException $e) {
             return '<!-- Block with name "'.$blockName.'": '.$e->getMessage(
                 ).' -->'; // @todo: Only report this in debug mode

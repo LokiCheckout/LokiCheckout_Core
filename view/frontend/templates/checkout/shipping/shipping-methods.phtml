@@ -20,8 +20,8 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $viewModel->getShippingMethods();
 ?>
 <div class="<?= $css('relative w-full mb-8') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
-    <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Shipping Methods']) ?>
+    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
     <form
         data-type="field"
         x-ref="field"
@@ -32,8 +32,8 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?php foreach ($shippingMethods as $shippingMethod): ?>
                     <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
                     <?= $blockRenderer->html(
-                        'loki-checkout.shipping.shipping-methods.item',
                         $block,
+                        'loki-checkout.shipping.shipping-methods.item',
                         [
                             'method' => $shippingMethod,
                             'code' => $code,
@@ -48,7 +48,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html('loki-components.utils.local-messages', $block) ?>
+    <?= $blockRenderer->html($block,'loki-components.utils.local-messages') ?>
 
     <?= $block->getChildHtml('script') ?>
 </div>

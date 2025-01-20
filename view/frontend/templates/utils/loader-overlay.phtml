@@ -17,5 +17,5 @@ if (empty($size)) {
 <div
     aria-live="polite"
     class="<?= $css('loader-overlay hidden z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60 justify-center items-center') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader', $block, ['size' => $size]) ?>
+    <?= $blockRenderer->html($block,'loki-checkout.utils.loader', ['size' => $size]) ?>
 </div>

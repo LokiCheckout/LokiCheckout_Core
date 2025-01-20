@@ -16,9 +16,9 @@ $optionModel = $block->getAncestorBlock()->getOptionModel();
 if ($optionModel instanceof OptionModelInterface) {
     if (count($optionModel->getOptions($viewModel)) > 0) {
         $block->setOptionModel($optionModel);
-        echo $templateRenderer->html('form/field/select.phtml', ['alias' => 'select']);
+        echo $templateRenderer->html($block,'form/field/select.phtml', ['alias' => 'select']);
         return;
     }
 }
 
-echo $templateRenderer->html('form/field/text.phtml', ['alias' => 'text']);
+echo $templateRenderer->html($block,'form/field/text.phtml', ['alias' => 'text']);

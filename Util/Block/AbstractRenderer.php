@@ -8,36 +8,18 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 abstract class AbstractRenderer implements ArgumentInterface
 {
-    protected ?AbstractBlock $ancestorBlock = null;
-
     private array $counters = [];
 
-    public function setAncestorBlock(AbstractBlock $block): AbstractRenderer
-    {
-        $this->ancestorBlock = $block;
-        return $this;
-    }
-
-    /**
-     * @param AbstractBlock $block
-     * @param AbstractBlock|null $ancestorBlock
-     * @param array $data
-     *
-     * @return void
-     */
     protected function populateBlock(
         AbstractBlock $block,
+        AbstractBlock $ancestorBlock,
         array $data = []
     ): void {
-        if (false === $this->ancestorBlock instanceof AbstractBlock) {
-            return;
-        }
-
-        $block->setAncestorBlock($this->ancestorBlock);
-        $block->setUniqId($this->getUniqId($block));
+        $block->setAncestorBlock($ancestorBlock);
+        $block->setUniqId($this->getUniqId($block, $ancestorBlock));
         $block->addData($data);
 
-        $viewModel = $this->ancestorBlock->getViewModel();
+        $viewModel = $ancestorBlock->getViewModel();
         if ($viewModel instanceof ComponentViewModelInterface) {
             $block->setViewModel($viewModel);
         }
@@ -55,32 +37,38 @@ abstract class AbstractRenderer implements ArgumentInterface
         return $this->counters[$nameInLayout];
     }
 
-    protected function getAlias(AbstractBlock $block): string
-    {
-        $alias = $block->getAlias();
-        if (!empty($alias)) {
-            return $alias;
+    protected function getBlockAlias(
+        ?AbstractBlock $block = null,
+        ?AbstractBlock $ancestorBlock = null,
+        array $data = []
+    ): string {
+        if ($block instanceof AbstractBlock) {
+            $alias = $block->getAlias();
+            if (!empty($alias)) {
+                return $alias;
+            }
         }
 
-        if ($this->ancestorBlock instanceof AbstractBlock) {
-            return 'child'.$this->getCounter($this->ancestorBlock);
+        if (isset($data['alias'])) {
+            return $data['alias'];
+        }
+
+        if ($ancestorBlock instanceof AbstractBlock) {
+            return 'block'.$this->getCounter($ancestorBlock);
         }
 
         return '';
     }
 
-    protected function setNameInLayout(AbstractBlock $block, string $alias = ''): void
+    protected function setNameInLayout(AbstractBlock $block, AbstractBlock $ancestorBlock): void
     {
-        if (empty($alias)) {
-            $alias = $this->getAlias($block);
-        }
-
-        $block->setNameInLayout($this->ancestorBlock->getNameInLayout().'.'.$alias);
+        $alias = $this->getBlockAlias($block, $ancestorBlock);
+        $block->setNameInLayout($ancestorBlock->getNameInLayout().'.'.$alias);
     }
 
-    protected function getUniqId(AbstractBlock $block): string
+    protected function getUniqId(AbstractBlock $block, AbstractBlock $ancestorBlock): string
     {
-        $ancestorId = $this->ancestorBlock->getNameInLayout();
+        $ancestorId = $ancestorBlock->getNameInLayout();
         $blockParts = explode('.', $block->getNameInLayout());
         return $ancestorId.'-'.array_pop($blockParts);
     }

@@ -21,7 +21,7 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
+    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
     <?php if ($viewModel->isSameAsShipping()): ?>

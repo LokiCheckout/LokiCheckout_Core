@@ -37,7 +37,9 @@ $isCurrent = $block->getIsCurrent();
 
         <div>
             <div class="<?= $css('flex', 'method') ?>">
-                <?= $templateRenderer->html('checkout/payment/payment-methods/icon.phtml', [
+                <?= $templateRenderer->html(
+                    $block,
+                    'checkout/payment/payment-methods/icon.phtml', [
                     'alias' => $code,
                     'code' => $code,
                 ]) ?>
@@ -47,14 +49,14 @@ $isCurrent = $block->getIsCurrent();
 
             <div class="<?= $css('my-4', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= $blockRenderer->html(
-                    'loki-checkout.payment.payment-methods.'.$code.'.form',
                     $block,
+                    'loki-checkout.payment.payment-methods.'.$code.'.form',
                     ['method' => $code]
                 ) ?>
 
                 <?= $blockRenderer->html(
-                    'loki-checkout.payment.payment-methods.'.$code.'.additional',
                     $block,
+                    'loki-checkout.payment.payment-methods.'.$code.'.additional',
                     ['method' => $code]
                 )
                 ?>

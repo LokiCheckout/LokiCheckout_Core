@@ -46,9 +46,9 @@ class AssignAdditionalBlockVariables implements ObserverInterface
 
         $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('css', $this->cssClassFactory->create()->setBlock($block));
-        $block->assign('blockRenderer', $this->blockRenderer->setAncestorBlock($block));
-        $block->assign('childRenderer', $this->childRenderer->setAncestorBlock($block));
-        $block->assign('templateRenderer', $this->templateRenderer->setAncestorBlock($block));
+        $block->assign('blockRenderer', $this->blockRenderer);
+        $block->assign('childRenderer', $this->childRenderer);
+        $block->assign('templateRenderer', $this->templateRenderer);
 
         if (!$block->getComponentName()) {
             $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());

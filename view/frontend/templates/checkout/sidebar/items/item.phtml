@@ -53,7 +53,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
             </dl>
         </div>
 
-        <?= $childRenderer->html('actions', $block, [
+        <?= $childRenderer->html($block,'actions', [
             'alias' => 'actions',
             'item' => $item
         ]) ?>
