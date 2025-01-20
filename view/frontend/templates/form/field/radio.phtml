@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
@@ -11,6 +12,11 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
+if (false === $optionModel instanceof OptionModelInterface) {
+    echo 'No options found';
+    return;
+}
+
 ?>
 <div class="<?= $css('w-full grid grid-cols-1 md:grid-cols-2 p-2') ?>"
      aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"

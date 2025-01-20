@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Util\Block\CssClass;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
@@ -11,6 +12,10 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
+if (false === $optionModel instanceof OptionModelInterface) {
+    echo 'No options found';
+    return;
+}
 
 // @todo: Check disabled state
 // @todo: Check aria-busy

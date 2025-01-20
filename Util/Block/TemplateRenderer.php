@@ -35,6 +35,12 @@ class TemplateRenderer extends AbstractRenderer
 
         $this->populateBlock($block, $data);
 
+        if (str_ends_with($templateName, 'radio.phtml')) {
+            //print_r(array_keys($block->getAncestorBlock()->getData()));
+            //echo gettype($block->getAncestorBlock()->getNameInLayout());
+            //exit;
+        }
+
         return $block;
     }
 
