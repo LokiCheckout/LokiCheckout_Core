@@ -14,8 +14,8 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 ?>
 <div class="<?= $css('') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <input type="checkbox" id="agreement<?= $agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
-        <label for="agreement<?= $agreement->getAgreementId() ?>">
+        <input type="checkbox" id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
+        <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>">
             <?= $agreement->getName() ?>
         </label>
         <div>
