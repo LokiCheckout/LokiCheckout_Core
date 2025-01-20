@@ -37,7 +37,7 @@ $isCurrent = $block->getIsCurrent();
 
         <div>
             <div class="<?= $css('flex', 'method') ?>">
-                <?= $templateRenderer->html('checkout/payment/payment-methods/icon.phtml', $block, [
+                <?= $templateRenderer->html('checkout/payment/payment-methods/icon.phtml', [
                     'alias' => $code,
                     'code' => $code,
                 ]) ?>

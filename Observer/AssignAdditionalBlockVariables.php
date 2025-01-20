@@ -8,6 +8,8 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModelInterface;
+use Yireo\LokiCheckout\Util\Block\ChildRenderer;
+use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Exception\NoComponentFoundException;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
@@ -21,6 +23,8 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         private readonly ViewModelFactory $viewModelFactory,
         private readonly CssClassFactory $cssClassFactory,
         private readonly BlockRenderer $blockRenderer,
+        private readonly ChildRenderer $childRenderer,
+        private readonly TemplateRenderer $templateRenderer,
         private readonly CamelCaseConvertor $camelCaseConvertor,
         private readonly ComponentRegistry $componentRegistry
     ) {
@@ -42,7 +46,9 @@ class AssignAdditionalBlockVariables implements ObserverInterface
 
         $block->assign('viewModelFactory', $this->viewModelFactory);
         $block->assign('css', $this->cssClassFactory->create()->setBlock($block));
-        $block->assign('blockRenderer', $this->blockRenderer);
+        $block->assign('blockRenderer', $this->blockRenderer->setAncestorBlock($block));
+        $block->assign('childRenderer', $this->childRenderer->setAncestorBlock($block));
+        $block->assign('templateRenderer', $this->templateRenderer->setAncestorBlock($block));
 
         if (!$block->getComponentName()) {
             $componentName = $this->camelCaseConvertor->toCamelCase($block->getJsId());

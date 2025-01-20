@@ -23,35 +23,32 @@ class TemplateRenderer extends AbstractRenderer
      */
     public function get(
         string $templateName,
-        AbstractBlock $ancestorBlock,
         array $data = []
     ): Template {
-        $blockAlias = $this->createChildAlias($ancestorBlock, $data);
-        $blockName = $ancestorBlock->getNameInLayout().'.'.$blockAlias;
+        $blockAlias = $this->createChildAlias($this->ancestorBlock, $data);
+        $blockName = $this->ancestorBlock->getNameInLayout().'.'.$blockAlias;
         $block = $this->createBlockFromTemplate($templateName, $blockName);
 
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block found with template "%1"', $templateName));
         }
 
-        $this->populateBlock($block, $ancestorBlock, $data);
+        $this->populateBlock($block, $data);
 
         return $block;
     }
 
     /**
      * @param string $templateName
-     * @param AbstractBlock $ancestorBlock
      * @param array $data
      *
      * @return string
      */
     public function html(
         string $templateName,
-        AbstractBlock $ancestorBlock,
         array $data = []
     ): string {
-        return $this->get($templateName, $ancestorBlock, $data)->toHtml();
+        return $this->get($templateName, $data)->toHtml();
     }
 
     /**
@@ -60,13 +57,13 @@ class TemplateRenderer extends AbstractRenderer
      *
      * @return Template
      */
-    private function createBlockFromTemplate(string $templateName, $blockName): Template
+    private function createBlockFromTemplate(string $templateName, string $blockName): Template
     {
-        if (false === strstr($templateName, '::')) {
+        if (false === str_contains($templateName, '::')) {
             $templateName = 'Yireo_LokiCheckout::'.$templateName;
         }
 
-        if (false === strstr($templateName, '.phtml')) {
+        if (false === str_contains($templateName, '.phtml')) {
             $templateName = $templateName.'.phtml';
         }
 
@@ -78,12 +75,12 @@ class TemplateRenderer extends AbstractRenderer
         return $this->layout->createBlock(Template::class, $blockName)->setTemplate($templateName);
     }
 
-    private function createChildAlias(AbstractBlock $parentBlock, array $data): string
+    private function createChildAlias(AbstractBlock $ancestorBlock, array $data): string
     {
         if (isset($data['alias'])) {
             return $data['alias'];
         }
 
-        return 'child'.$this->getCounter($parentBlock);
+        return 'child'.$this->getCounter($ancestorBlock);
     }
 }

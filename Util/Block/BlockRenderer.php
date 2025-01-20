@@ -24,12 +24,13 @@ class BlockRenderer extends AbstractRenderer
      */
     public function get(string $blockName, ?AbstractBlock $ancestorBlock = null, array $data = []): Template
     {
+        $this->ancestorBlock = $ancestorBlock;
         $block = $this->layout->getBlock($blockName);
         if (false === $block instanceof AbstractBlock) {
             throw new RuntimeException((string)__('No block found with name "%1"', $blockName));
         }
 
-        $this->populateBlock($block, $ancestorBlock, $data);
+        $this->populateBlock($block, $data);
 
         if (empty($block->getTemplate())) {
             throw new RuntimeException((string)__('No template found with block "%1"', $blockName));

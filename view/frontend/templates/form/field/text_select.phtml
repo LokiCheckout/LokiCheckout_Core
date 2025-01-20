@@ -4,23 +4,21 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
 /** @var FieldViewModel $viewModel */
-/** @var ViewModelFactory $viewModelFactory */
+/** @var TemplateRenderer $templateRenderer */
 
-$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 
 if ($optionModel instanceof OptionModelInterface) {
     if (count($optionModel->getOptions($viewModel)) > 0) {
         $block->setOptionModel($optionModel);
-        echo $templateRenderer->html('form/field/select.phtml', $block, ['alias' => 'select']);
+        echo $templateRenderer->html('form/field/select.phtml', ['alias' => 'select']);
         return;
     }
 }
 
-echo $templateRenderer->html('form/field/text.phtml', $block, ['alias' => 'text']);
+echo $templateRenderer->html('form/field/text.phtml', ['alias' => 'text']);

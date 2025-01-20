@@ -21,20 +21,20 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 <div class="<?= $css('field w-auto relative') ?> <?= $viewModel->isRequired() ? 'required' : 'optional' ?> <?= $viewModel->getFieldName() ?>">
     <?= $block->getChildHtml('before') ?>
 
-    <?= $templateRenderer->html('form/field/label.phtml', $block, ['alias' => 'label']) ?>
+    <?= $templateRenderer->html('form/field/label.phtml', ['alias' => 'label']) ?>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
-        <?= $templateRenderer->html($viewModel->getFieldTemplate(), $block, $viewModel->getFieldData()) ?>
+        <?= $templateRenderer->html($viewModel->getFieldTemplate(), $viewModel->getFieldData()) ?>
 
         <div class="<?= $css('field-loader hidden absolute inset-y-0 right-0 pt-1 pr-2', 'loader') ?>">
             <?= $blockRenderer->html('loki-checkout.utils.loader-small') ?>
         </div>
 
         <?php if ($block->getHelpText()): ?>
-            <?= $templateRenderer->html('utils/help.phtml', $block, ['alias' => 'help']) ?>
+            <?= $templateRenderer->html('utils/help.phtml', ['alias' => 'help']) ?>
         <?php endif; ?>
     </div>
 
-    <?= $blockRenderer->html('loki-components.utils.local-messages', $block) ?>
+    <?= $blockRenderer->html('loki-components.utils.local-messages') ?>
     <?= $block->getChildHtml('after') ?>
 </div>

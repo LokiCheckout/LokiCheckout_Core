@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $blockRenderer->html('loki-checkout.generic.title', $block, ['title' => 'Payment Methods']) ?>
 
     <form

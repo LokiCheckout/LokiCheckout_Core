@@ -19,7 +19,7 @@ $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 ?>
 <div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html('loki-checkout.utils.loader-overlay', $block) ?>
     <?= $block->getChildHtml('before') ?>
 
     <ul role="list">

@@ -24,7 +24,6 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
 
     abstract public function getFieldLabel(): string;
 
-    // @todo: Is this still needed?
     public function getFieldData(): array
     {
         return [
