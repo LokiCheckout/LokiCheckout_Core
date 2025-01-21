@@ -7,6 +7,24 @@
         </arguments>
     </type>
 
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="yireo:loki-checkout:modules:list" xsi:type="object">Yireo\LokiCheckout\Console\Command\ListLokiCheckoutModulesCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Yireo\LokiCheckout\Config\LokiCheckoutModules">
+        <arguments>
+            <argument name="modules" xsi:type="array">
+                <item name="Yireo_LokiComponents" xsi:type="string">Yireo_LokiComponents</item>
+                <item name="Yireo_LokiComponentsDebugger" xsi:type="string">Yireo_LokiComponentsDebugger</item>
+                <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
+            </argument>
+        </arguments>
+    </type>
+
     <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator" >
         <arguments>
             <argument name="validationRules" xsi:type="array">
