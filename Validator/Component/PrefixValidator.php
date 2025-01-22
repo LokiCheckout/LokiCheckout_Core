@@ -13,7 +13,7 @@ class PrefixValidator implements ValidatorInterface
     ) {
     }
 
-    public function validate(ComponentInterface $component, mixed $value): bool
+    public function validate(mixed $value, ?ComponentInterface $component = null): true|array
     {
         $prefix = trim($value);
 
@@ -27,9 +27,7 @@ class PrefixValidator implements ValidatorInterface
         }
 
         if (false === in_array($prefix, $prefixOptions)) {
-            $component->getLocalMessageRegistry()->addError($component, (string)__('Invalid prefix'));
-
-            return false;
+            return [(string)__('Invalid prefix')];
         }
 
         return true;

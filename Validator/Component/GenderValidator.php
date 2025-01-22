@@ -13,7 +13,7 @@ class GenderValidator implements ValidatorInterface
     ) {
     }
 
-    public function validate(ComponentInterface $component, mixed $value): bool
+    public function validate(mixed $value, ?ComponentInterface $component = null): true|array
     {
         $gender = trim((string)$value);
 
@@ -27,9 +27,7 @@ class GenderValidator implements ValidatorInterface
         }
 
         if (false === array_key_exists($gender, $genderOptions)) {
-            $component->getLocalMessageRegistry()->addError($component, 'Invalid gender');
-
-            return false;
+            return['Invalid gender'];
         }
 
         return true;

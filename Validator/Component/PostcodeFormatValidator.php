@@ -15,7 +15,7 @@ class PostcodeFormatValidator implements ValidatorInterface
     ) {
     }
 
-    public function validate(ComponentInterface $component, mixed $value): bool
+    public function validate(mixed $value, ?ComponentInterface $component = null): true|array
     {
         $addressState = $this->addressStateProvider->getAddressState($component->getBlock());
         $countryId = $addressState->load('country_id');
@@ -45,12 +45,7 @@ class PostcodeFormatValidator implements ValidatorInterface
             }
         }
 
-        $errorMessage = $this->getErrorMessageFromExamples($postcode, $examples);
-        //echo $errorMessage."\n";
-
-        $component->getLocalMessageRegistry()->addError($component, $errorMessage);
-
-        return false;
+        return [$this->getErrorMessageFromExamples($postcode, $examples)];
     }
 
     private function getErrorMessageFromExamples(string $postcode, array $examples): string
