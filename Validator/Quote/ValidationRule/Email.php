@@ -5,13 +5,11 @@ namespace Yireo\LokiCheckout\Validator\Quote\ValidationRule;
 use Magento\Framework\Validation\ValidationResultFactory;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
-use Yireo\LokiComponents\Component\ComponentRegistry;
 
 class Email implements QuoteValidationRuleInterface
 {
     public function __construct(
         private readonly ValidationResultFactory $validationResultFactory,
-        private readonly ComponentRegistry $componentRegistry,
     ) {
     }
 
