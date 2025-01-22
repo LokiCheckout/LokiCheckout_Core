@@ -20,8 +20,17 @@ class ShippingAddressViewModel extends ComponentViewModel
         return $this->getContext()->getSameAddressService()->isEnabled();
     }
 
+    public function showSelectAddress(): bool
+    {
+        return count($this->getAddresses()) > 0;
+    }
+
     public function isNewAddress(): bool
     {
+        if (false === count($this->getAddresses()) > 0) {
+            return true;
+        }
+
         return $this->getContext()->isNewAddress();
     }
 

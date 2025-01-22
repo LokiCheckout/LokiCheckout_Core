@@ -15,7 +15,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 ?>
 <div class="<?= $css('mb-8') ?>">
-    <?php if (count($viewModel->getAddresses()) > 0): ?>
+    <?php if ($viewModel->showSelectAddress()): ?>
         <?= $block->getChildHtml('select') ?>
         <?= $block->getChildHtml('toggle-select') ?>
     <?php endif; ?>
