@@ -17,7 +17,7 @@ class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
         $prefixOptions = $this->scopeConfig->getValue('customer/address/prefix_options', ScopeInterface::SCOPE_STORE);
-        $prefixOptions = explode(',', (string)$prefixOptions);
+        $prefixOptions = explode(';', (string)$prefixOptions);
 
         $options = [];
         foreach ($prefixOptions as $prefixOption) {
