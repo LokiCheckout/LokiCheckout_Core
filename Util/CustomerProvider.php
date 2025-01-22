@@ -74,8 +74,6 @@ class CustomerProvider
     {
         $addressData = $this->addressMapper->toFlatArray($address);
         $format = $this->addressConfig->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT);
-        echo get_class($format);
-
-        return $format->getRenderer()->renderArray($addressData);
+        return $format->getData('renderer')->renderArray($addressData);
     }
 }
