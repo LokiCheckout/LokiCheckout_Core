@@ -25,12 +25,18 @@
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator" >
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
-                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
-                <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
-                <item name="shippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+                <item name="emailValidationRule" xsi:type="object">
+                    Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email
+                </item>
+                <item name="shippingAddressValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule
+                </item>
+                <item name="shippingMethodValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule
+                </item>
             </argument>
         </arguments>
     </virtualType>
@@ -41,11 +47,15 @@
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualBillingStepValidator" >
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualBillingStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
-                <item name="billingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\BillingAddressValidationRule</item>
-                <item name="paymentMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\PaymentMethodValidationRule</item>
+                <item name="billingAddressValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\BillingAddressValidationRule
+                </item>
+                <item name="paymentMethodValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\PaymentMethodValidationRule
+                </item>
             </argument>
         </arguments>
     </virtualType>
@@ -56,12 +66,18 @@
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualOneStepValidator" >
+    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualOneStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
-                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
-                <item name="shippingAddressValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule</item>
-                <item name="shippingMethodValidationRule" xsi:type="object">Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule</item>
+                <item name="emailValidationRule" xsi:type="object">
+                    Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email
+                </item>
+                <item name="shippingAddressValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule
+                </item>
+                <item name="shippingMethodValidationRule" xsi:type="object">
+                    Magento\Quote\Model\ValidationRules\ShippingMethodValidationRule
+                </item>
             </argument>
         </arguments>
     </virtualType>
@@ -69,7 +85,7 @@
     <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
         <arguments>
             <argument name="validationRules" xsi:type="array">
-                <item name="loki" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Custom</item>
+                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
             </argument>
         </arguments>
     </type>
@@ -105,7 +121,8 @@
     <virtualType name="Yireo\LokiCheckout\Config\XmlConfig\VirtualFileReader" type="Magento\Framework\Config\Reader\Filesystem">
         <arguments>
             <argument name="converter" xsi:type="object">\Yireo\LokiCheckout\Config\XmlConfig\Converter</argument>
-            <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator</argument>
+            <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator
+            </argument>
             <argument name="fileName" xsi:type="string">loki_checkout.xml</argument>
             <argument name="idAttributes" xsi:type="array">
                 <item name="/config/themes/theme" xsi:type="array">
@@ -115,7 +132,7 @@
                     <item name="name" xsi:type="string">name</item>
                 </item>
                 <item name="/config/grid_layouts/grid_layout" xsi:type="array">
-                     <item name="name" xsi:type="string">name</item>
+                    <item name="name" xsi:type="string">name</item>
                 </item>
                 <item name="/config/grid_layouts/grid_layout/block" xsi:type="array">
                     <item name="alias" xsi:type="string">alias</item>

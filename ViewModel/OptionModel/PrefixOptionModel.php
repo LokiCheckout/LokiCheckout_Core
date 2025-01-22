@@ -10,7 +10,7 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
 {
     public function __construct(
-        private ScopeConfigInterface $scopeConfig,
+        private readonly ScopeConfigInterface $scopeConfig,
     ) {
     }
 
@@ -18,9 +18,6 @@ class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
     {
         $prefixOptions = $this->scopeConfig->getValue('customer/address/prefix_options', ScopeInterface::SCOPE_STORE);
         $prefixOptions = explode(',', (string)$prefixOptions);
-        if (empty($prefixOptions)) {
-            return [];
-        }
 
         $options = [];
         foreach ($prefixOptions as $prefixOption) {
