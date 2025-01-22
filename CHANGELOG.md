@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Huge refactor to move context dependencies in the open
+- Fix address when customer is logged in and has no addresses to select yet
 
 ## [0.0.5] - 21 January 2025
 - Initial public release
