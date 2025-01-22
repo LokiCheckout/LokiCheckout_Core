@@ -2,12 +2,11 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep;
 
-use Yireo\LokiCheckout\Component\Checkout\Step\StepContext;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
- * @method StepContext getContext()
+ * @method ShippingStepContext getContext()
  */
 class ShippingStepViewModel extends ComponentViewModel implements StepViewModelInterface
 {
@@ -23,7 +22,7 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
 
     public function isEnabled(): bool
     {
-        if ((bool)$this->getContext()->getQuote()->isVirtual()) {
+        if ((bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual()) {
             return false;
         }
 

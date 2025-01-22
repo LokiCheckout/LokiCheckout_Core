@@ -37,6 +37,7 @@ class CustomerProvider
         $customer = $this->getCustomer();
         $this->searchCriteriaBuilder->addFilter('parent_id', $customer->getId());
         $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
+
         return $searchResults->getItems();
     }
 
@@ -53,12 +54,14 @@ class CustomerProvider
     public function getDefaultShippingAddressId(): string
     {
         $customer = $this->getCustomer();
+
         return (string)$customer->getDefaultShipping();
     }
 
     public function getDefaultBillingAddressId(): string
     {
         $customer = $this->getCustomer();
+
         return (string)$customer->getDefaultBilling();
     }
 
@@ -70,10 +73,9 @@ class CustomerProvider
     private function getAddressInline(AddressInterface $address): string
     {
         $addressData = $this->addressMapper->toFlatArray($address);
+        $format = $this->addressConfig->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT);
+        echo get_class($format);
 
-        return $this->addressConfig
-            ->getFormatByCode(AddressConfig::DEFAULT_ADDRESS_FORMAT)
-            ->getRenderer()
-            ->renderArray($addressData);
+        return $format->getRenderer()->renderArray($addressData);
     }
 }

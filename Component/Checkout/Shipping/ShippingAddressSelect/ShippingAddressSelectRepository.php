@@ -17,7 +17,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return 0;
         }
 
-        $quote = $this->getContext()->getQuote();
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
         $customer = $this->getContext()->getCustomerRepository()->getById(
             $this->getContext()->getCustomerSession()->getCustomerId()
         );
@@ -56,7 +56,7 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
-        $quoteShippingAddress = $this->getContext()->getQuote()->getShippingAddress();
+        $quoteShippingAddress = $this->getContext()->getCheckoutState()->getQuote()->getShippingAddress();
         $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
         $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
         $quoteShippingAddress->save(); // @todo

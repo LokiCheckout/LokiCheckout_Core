@@ -11,7 +11,7 @@ class BillingAddressViewModel extends CheckoutViewModel
 {
     public function isEnabled(): bool
     {
-        return $this->getContext()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
+        return $this->getContext()->getCheckoutState()->getQuote()->getGrandTotal() > 0; // @todo: Check how this goes
     }
 
     public function isSameAddress(): bool

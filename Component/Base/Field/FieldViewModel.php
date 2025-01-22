@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiComponents\Messages\LocalMessage;
 
 /**
  * @method FieldContext getContext()

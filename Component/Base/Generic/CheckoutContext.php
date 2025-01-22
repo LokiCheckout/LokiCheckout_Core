@@ -15,18 +15,15 @@ use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\Behaviour\InheritFromParentContext;
-use Yireo\LokiComponents\Component\ComponentContext;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
+use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\UrlFactory;
 
 class CheckoutContext implements ComponentContextInterface
 {
-    use InheritFromParentContext;
-
     public function __construct(
-        private ComponentContext $parentContext,
         private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
@@ -39,7 +36,9 @@ class CheckoutContext implements ComponentContextInterface
         private AttributeProvider $attributeProvider,
         private CartRepositoryInterface $cartRepository,
         private GlobalMessageRegistry $globalMessageRegistry,
-        private CoreMessageManager $coreMessageManager
+        private CoreMessageManager $coreMessageManager,
+        private readonly CustomerSession $customerSession,
+        private readonly UrlFactory $urlFactory,
     ) {
     }
 
@@ -126,5 +125,15 @@ class CheckoutContext implements ComponentContextInterface
         $this->getCoreMessageManager()->addWarningMessage('No items in cart');
         $url = $this->getUrlFactory()->create()->getUrl('checkout/cart');
         throw new RedirectException($url);
+    }
+
+    public function getCustomerSession(): CustomerSession
+    {
+        return $this->customerSession;
+    }
+
+    public function getUrlFactory(): UrlFactory
+    {
+        return $this->urlFactory;
     }
 }

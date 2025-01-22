@@ -14,6 +14,6 @@ class ItemsViewModel extends ComponentViewModel
      */
     public function getItems(): array
     {
-        return $this->getContext()->getQuote()->getItems();
+        return $this->getContext()->getCheckoutState()->getQuote()->getItems();
     }
 }

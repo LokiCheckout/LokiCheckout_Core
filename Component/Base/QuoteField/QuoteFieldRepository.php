@@ -31,6 +31,6 @@ class QuoteFieldRepository extends ComponentRepository
 
     protected function getQuote(): Quote
     {
-        return $this->getContext()->getQuote();
+        return $this->getContext()->getCheckoutState()->getQuote();
     }
 }

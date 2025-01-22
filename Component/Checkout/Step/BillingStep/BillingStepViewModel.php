@@ -17,7 +17,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
 
     public function getLabel(): string
     {
-        $quote = $this->getContext()->getQuote();
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
         if (false === $quote->getGrandTotal() > 0) {
             return 'Review'; // @todo: Test for this
         }
