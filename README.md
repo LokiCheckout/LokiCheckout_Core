@@ -1,5 +1,19 @@
-# Yireo LokiCheckout
+# Yireo_LokiCheckout
 
-**A developer-friendly Magento 2 checkout based on TailwindCSS and AlpineJS**
+**This is the main core package of the LokiCheckout.**
 
-See https://www.loki-checkout.com/docs/ for instructions.
+Current status: Stable
+
+## Installation
+Install this package via composer (assuming you have setup the `composer.yireo.com` repository correctly already):
+```bash
+composer require yireo/magento2-loki-checkout
+```
+
+Next, enable this module:
+```bash
+bin/magento module:enable Yireo_LokiCheckout
+```
+
+## Settings
+In the Magento Admin Panel, you can navigate to **Store > Configuration > Yireo > Yireo LokiCheckout** for various settings.
