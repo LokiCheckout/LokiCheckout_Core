@@ -12,16 +12,12 @@ use Yireo\LokiCheckout\Util\Block\ChildRenderer;
 use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Exception\NoComponentFoundException;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Util\Block\CssClassFactory;
 use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
     public function __construct(
-        private readonly ViewModelFactory $viewModelFactory,
-        private readonly CssClassFactory $cssClassFactory,
         private readonly BlockRenderer $blockRenderer,
         private readonly ChildRenderer $childRenderer,
         private readonly TemplateRenderer $templateRenderer,
@@ -37,11 +33,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
             return;
         }
 
-        $blockClass = str_replace('.', '-', (string)$block->getNameInLayout());
-        $block->assign('blockClass', $blockClass); // @todo: deprecate this
-
-        $block->assign('viewModelFactory', $this->viewModelFactory);
-        $block->assign('css', $this->cssClassFactory->create()->setBlock($block));
         $block->assign('blockRenderer', $this->blockRenderer);
         $block->assign('childRenderer', $this->childRenderer);
         $block->assign('templateRenderer', $this->templateRenderer);
