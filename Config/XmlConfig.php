@@ -10,6 +10,7 @@ use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme\Step;
+use Yireo\LokiCheckout\Exception\UnknownThemeException;
 
 class XmlConfig extends DataConfig
 {
@@ -39,7 +40,7 @@ class XmlConfig extends DataConfig
             return $themes[$name];
         }
 
-        throw new RuntimeException((string)__('Unknown theme "%1"', $name));
+        throw new UnknownThemeException((string)__('Unknown theme "%1"', $name));
     }
 
     /**
