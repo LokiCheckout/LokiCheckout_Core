@@ -4,16 +4,20 @@ namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
+use Yireo\LokiComponents\Exception\RedirectException;
 
 class CheckoutState implements ArgumentInterface
 {
     public function __construct(
         private readonly CheckoutSession $checkoutSession,
         private readonly CustomerSession $customerSession,
-        private readonly CartRepositoryInterface $cartRepository
+        private readonly CartRepositoryInterface $cartRepository,
+        private readonly UrlFactory $urlFactory,
     ) {
     }
 
@@ -26,7 +30,12 @@ class CheckoutState implements ArgumentInterface
             return $quotes[$quoteId];
         }
 
-        $quotes[$quoteId] = $this->cartRepository->get($quoteId);
+        try {
+            $quotes[$quoteId] = $this->cartRepository->get($quoteId);
+        } catch (NoSuchEntityException $e) {
+            $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
+            throw new RedirectException($redirectUrl);
+        }
 
         return $quotes[$quoteId];
     }
