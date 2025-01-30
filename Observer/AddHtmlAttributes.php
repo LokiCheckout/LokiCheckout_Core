@@ -25,7 +25,7 @@ class AddHtmlAttributes implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
+        if (!preg_match('/^loki-checkout/', (string)$block->getNameInLayout()) > 0) {
             return;
         }
 
@@ -35,7 +35,7 @@ class AddHtmlAttributes implements ObserverInterface
             return;
         }
 
-        if (false === preg_match('/^<([a-z]{2,})/', $html, $match)) {
+        if (!preg_match('/^<([a-z]{2,})/', $html, $match)) {
             return;
         }
 
