@@ -10,6 +10,7 @@ use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\StepNotFoundException;
 use Yireo\LokiCheckout\Exception\UnknownStepException;
+use Yireo\LokiCheckout\Exception\UnknownThemeException;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 
 class StepNavigator implements ArgumentInterface
@@ -162,7 +163,12 @@ class StepNavigator implements ArgumentInterface
         }
 
         $currentThemeName = $this->config->getTheme();
-        $theme = $this->xmlConfig->getTheme($currentThemeName);
+
+        try {
+            $theme = $this->xmlConfig->getTheme($currentThemeName);
+        } catch (UnknownThemeException $e) {
+            $theme = $this->xmlConfig->getTheme('default');
+        }
 
         $steps = $theme->getSteps();
         foreach ($steps as $step) {
