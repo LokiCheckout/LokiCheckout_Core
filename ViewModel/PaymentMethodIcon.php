@@ -45,6 +45,10 @@ class PaymentMethodIcon implements ArgumentInterface
 
     public function getIconOutput(string $iconPath, string $iconType): string
     {
+        if (false === $iconPath) {
+            return '';
+        }
+
         if ($iconType === 'svg') {
             return file_get_contents($iconPath);
         }
