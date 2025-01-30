@@ -147,4 +147,12 @@
             <argument name="cacheId" xsi:type="string">yireo_loki_checkout</argument>
         </arguments>
     </type>
+
+    <type name="Yireo\LokiComponents\Util\Block\CssClass">
+        <arguments>
+            <argument name="cssClassParsers" xsi:type="array">
+                <item name="grid-class" xsi:type="object">Yireo\LokiCheckout\Util\Block\CssClassParser\GridClassParser</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

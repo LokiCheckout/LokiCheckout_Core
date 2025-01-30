@@ -33,11 +33,7 @@ class AssignAdditionalBlockVariables implements ObserverInterface
     public function execute(Observer $observer)
     {
         $block = $observer->getEvent()->getBlock();
-        if (false === $block instanceof Template) {
-            return;
-        }
-
-        if (!preg_match('/^loki-checkout/', (string)$block->getNameInLayout())) {
+        if (false === $this->isBlockAllowed($block)) {
             return;
         }
 
@@ -56,6 +52,23 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         }
 
         $this->allowRendering($block);
+    }
+
+    private function isBlockAllowed(AbstractBlock $block): bool
+    {
+        if (false === $block instanceof Template) {
+            return false;
+        }
+
+        if (preg_match('/^loki-checkout/', (string)$block->getNameInLayout())) {
+            return true;
+        }
+
+        if (preg_match('/^loki-components/', (string)$block->getNameInLayout())) {
+            return true;
+        }
+
+        return false;
     }
 
     private function allowRendering(AbstractBlock $block): void
