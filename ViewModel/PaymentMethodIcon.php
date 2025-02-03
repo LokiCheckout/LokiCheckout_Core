@@ -43,9 +43,13 @@ class PaymentMethodIcon implements ArgumentInterface
         return false;
     }
 
-    public function getIconOutput(string $iconPath, string $iconType): string
+    public function getIconOutput(false|string $iconPath, string $iconType): string
     {
         if (false === $iconPath) {
+            return '';
+        }
+
+        if (false === file_exists($iconPath)) {
             return '';
         }
 
