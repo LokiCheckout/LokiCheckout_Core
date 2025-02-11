@@ -23,6 +23,7 @@ $shippingMethods = $viewModel->getShippingMethods();
     <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
     <?= $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
     <form
+        id="shipping-methods"
         data-type="field"
         x-ref="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"

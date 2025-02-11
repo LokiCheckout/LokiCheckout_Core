@@ -20,6 +20,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
     <?= $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Payment Methods']) ?>
 
     <form
+        id="payment-methods"
         data-type="field"
         x-ref="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"

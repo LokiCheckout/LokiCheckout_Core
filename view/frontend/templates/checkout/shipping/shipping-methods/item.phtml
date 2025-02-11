@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Magento\Quote\Model\Cart\ShippingMethod;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\CssClass;
@@ -12,6 +13,7 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var ShippingMethodsViewModel $viewModel */
+/** @var ShippingMethod $shippingMethod */
 
 $viewModel = $block->getViewModel();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
@@ -21,12 +23,16 @@ $isCurrent = $viewModel->getCurrentShippingCode() === $code;
 ?>
 <li class="<?= $css('cursor-pointer relative flex') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('p-4', 'input-container') ?>">
+        <?php if ($shippingMethod->getAvailable()) : ?>
         <input type="radio"
                x-model="value"
                name="shipping_method"
                value="<?= $code ?>"
                id="shipping-<?= $code ?>"
             <?= $isCurrent ? 'checked' : '' ?>>
+        <?php else: ?>
+        <input type="radio" disabled/>
+        <?php endif; ?>
     </div>
     <div class="<?= $css('p-4 w-auto font-bold', 'amount-container') ?>">
         <label for="shipping-<?= $code ?>">
