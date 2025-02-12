@@ -66,8 +66,13 @@ class ShippingMethodsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        $shippingMethod = (string)$value;
-        $shippingMethod = $this->sanitizeShippingMethod($shippingMethod);
+        $shippingMethodCode = (string)$value;
+        $shippingMethodCode = $this->sanitizeShippingMethod($shippingMethodCode);
+        $shippingMethod = $this->getShippingMethods()[$shippingMethodCode];
+
+        $shippingRate = $this->getContext()->getRateFactory()->create()
+            ->setCode($shippingMethodCode)
+            ->setPrice($shippingMethod->getAmount());
 
         $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
         $quote = $this->getContext()->getCheckoutState()->getQuote();
@@ -75,11 +80,12 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress
             ->setCollectShippingRates(true)
             ->collectShippingRates()
-            ->setShippingMethod($shippingMethod);
+            ->addShippingRate($shippingRate);
 
         $this->getContext()->getCartRepository()->save($quote);
+        $quote->collectTotals();
 
-        $this->currentShippingMethod = $shippingMethod;
+        $this->currentShippingMethod = $shippingMethodCode;
     }
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string

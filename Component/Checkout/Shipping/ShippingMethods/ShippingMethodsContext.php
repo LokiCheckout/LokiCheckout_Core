@@ -9,6 +9,7 @@ use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
+use Magento\Quote\Model\Quote\Address\RateFactory;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
@@ -37,6 +38,7 @@ class ShippingMethodsContext implements ComponentContextInterface
         private CartRepositoryInterface $cartRepository,
         private GlobalMessageRegistry $globalMessageRegistry,
         private CoreMessageManager $coreMessageManager,
+        private RateFactory $rateFactory,
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
     ) {
@@ -120,5 +122,10 @@ class ShippingMethodsContext implements ComponentContextInterface
     public function getUrlFactory(): UrlFactory
     {
         return $this->urlFactory;
+    }
+
+    public function getRateFactory(): RateFactory
+    {
+        return $this->rateFactory;
     }
 }
