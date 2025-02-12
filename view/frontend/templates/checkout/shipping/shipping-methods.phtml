@@ -20,8 +20,12 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $viewModel->getShippingMethods();
 ?>
 <div class="<?= $css('relative w-full mb-8') ?>">
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
-    <?= $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
+    <?php if ($viewModel->isDisabled()) : ?>
+        <?= $blockRenderer->html($block, 'loki-checkout.utils.disabled-overlay') ?>
+    <?php endif; ?>
+
+    <?= $blockRenderer->html($block, 'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
     <form
         id="shipping-methods"
         data-type="field"
@@ -43,13 +47,13 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-        <div class="p-4">
-            <?= __('No shipping methods available') ?>
-        </div>
+            <div class="p-4">
+                <?= __('No shipping methods available') ?>
+            </div>
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html($block,'loki-components.utils.local-messages') ?>
+    <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
 
     <?= $block->getChildHtml('script') ?>
 </div>

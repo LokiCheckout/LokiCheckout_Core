@@ -37,6 +37,24 @@ class ShippingMethodsViewModel extends FieldViewModel
         return true;
     }
 
+    public function isDisabled(): bool
+    {
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
+        $shippingAddress->setShouldIgnoreValidation(false);
+        $validationResult = $shippingAddress->validate();
+        if ($validationResult !== true) {
+            /*foreach ($validationResult as $validationError) {
+                $this->getComponent()->getLocalMessageRegistry()->addWarning($this->getComponent(), (string)$validationError);
+            }*/
+            // @todo: Add a friendly reminder to complete the address first
+
+            return true;
+        }
+
+        return false;
+    }
+
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutShippingMethods';

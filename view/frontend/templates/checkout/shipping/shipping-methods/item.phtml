@@ -20,18 +20,25 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
 $isCurrent = $viewModel->getCurrentShippingCode() === $code;
+
+$mainClasses = [];
+$mainClasses[] = $isCurrent ? 'active' : 'inactive';
+$mainClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
 ?>
-<li class="<?= $css('cursor-pointer relative flex') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
+<li class="<?= $css('cursor-pointer relative flex') ?> <?= implode(' ', $mainClasses) ?>">
     <div class="<?= $css('p-4', 'input-container') ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
-        <input type="radio"
-               x-model="value"
-               name="shipping_method"
-               value="<?= $code ?>"
-               id="shipping-<?= $code ?>"
-            <?= $isCurrent ? 'checked' : '' ?>>
+            <input type="radio"
+                   x-model="value"
+                   name="shipping_method"
+                   value="<?= $code ?>"
+                <?php if ($viewModel->isDisabled()): ?>
+                    disabled="disabled"
+                <?php endif; ?>
+                   id="shipping-<?= $code ?>"
+                <?= $isCurrent ? 'checked' : '' ?>>
         <?php else: ?>
-        <input type="radio" disabled/>
+            <input type="radio" disabled/>
         <?php endif; ?>
     </div>
     <div class="<?= $css('p-4 w-auto font-bold', 'amount-container') ?>">
