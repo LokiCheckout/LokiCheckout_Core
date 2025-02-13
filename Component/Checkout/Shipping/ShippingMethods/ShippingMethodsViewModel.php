@@ -39,6 +39,7 @@ class ShippingMethodsViewModel extends FieldViewModel
 
     public function isDisabled(): bool
     {
+        // @todo: Move this to specific helper-class
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setShouldIgnoreValidation(false);
