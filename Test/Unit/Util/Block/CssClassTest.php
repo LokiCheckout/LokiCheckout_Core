@@ -14,8 +14,7 @@ class CssClassTest extends TestCase
 {
     public function testWithBasicInput()
     {
-        $xmlConfig = $this->createMock(XmlConfig::class);
-        $cssClass = new CssClass($xmlConfig);
+        $cssClass = new CssClass([]);
         $cssClass->setBlock($this->getBlock());
 
         $this->assertEquals('scope-block class1 class2', $cssClass('class1 class2'));
@@ -27,8 +26,7 @@ class CssClassTest extends TestCase
         $block = $this->getBlock();
         $block->setCssClasses(['block' => ['additional' => 'class2']]);
 
-        $xmlConfig = $this->createMock(XmlConfig::class);
-        $cssClass = new CssClass($xmlConfig);
+        $cssClass = new CssClass([]);
         $cssClass->setBlock($block);
         $this->assertEquals('scope-block class1 class2', $cssClass('class1'));
     }
@@ -38,8 +36,7 @@ class CssClassTest extends TestCase
         $block = $this->getBlock();
         $block->setCssClasses(['other' => ['additional' => 'class2']]);
 
-        $xmlConfig = $this->createMock(XmlConfig::class);
-        $cssClass = new CssClass($xmlConfig);
+        $cssClass = new CssClass([]);
         $cssClass->setBlock($block);
         $this->assertEquals('__other scope-other class1 class2', $cssClass('class1', 'other'));
     }
