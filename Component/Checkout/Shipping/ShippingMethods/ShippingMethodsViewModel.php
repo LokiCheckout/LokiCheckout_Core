@@ -37,22 +37,6 @@ class ShippingMethodsViewModel extends FieldViewModel
         return true;
     }
 
-    public function isDisabled(): bool
-    {
-        // @todo: Move this to specific helper-class
-        $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-        $shippingAddress->setShouldIgnoreValidation(false);
-        $validationResult = $shippingAddress->validate();
-        if ($validationResult !== true) {
-            // @todo: Add a friendly reminder to complete the address first
-
-            return true;
-        }
-
-        return false;
-    }
-
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutShippingMethods';
