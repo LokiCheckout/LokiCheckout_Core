@@ -61,7 +61,7 @@ class AddHtmlAttributes implements ObserverInterface
     private function getHtmlAttributes(AbstractBlock $block): string
     {
         $attributes = (array)$block->getData('html_attributes');
-        //$attributes['id'] = $this->getElementId($block); // @todo: This is no longer needed?
+        $attributes['id'] = $this->getElementId($block); // @todo: Detect that no duplicate ID is added
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
