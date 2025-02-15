@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 class FieldTemplateLocator
 {
@@ -20,6 +21,10 @@ class FieldTemplateLocator
         }
 
         $fieldType = $block->getFieldType();
+        if ($fieldType === 'text_select') {
+            $fieldType = $this->getFieldTemplateFromTextSelect($block);
+        }
+
         if (array_key_exists($fieldType, $this->getFieldTemplateMapping())) {
             return $this->getFieldTemplateByType($fieldType);
         }
@@ -41,7 +46,28 @@ class FieldTemplateLocator
             'text' => 'Yireo_LokiCheckout::form/field/text.phtml',
             'radio' => 'Yireo_LokiCheckout::form/field/radio.phtml',
             'select' => 'Yireo_LokiCheckout::form/field/select.phtml',
-            'text_select' => 'Yireo_LokiCheckout::form/field/text_select.phtml',
         ];
+    }
+
+    /**
+     * @param AbstractBlock $block
+     * @return string
+     * @todo: Allow for multiple field template locators
+     */
+    private function getFieldTemplateFromTextSelect(AbstractBlock $block): string
+    {
+        $viewModel = $block->getViewModel();
+        $optionModel = $block->getOptionModel();
+
+        if (false === $optionModel instanceof OptionModelInterface) {
+            return 'text';
+        }
+
+        if (count($optionModel->getOptions($viewModel)) === 0) {
+            return 'text';
+        }
+
+        $block->setOptionModel($optionModel);
+        return 'select';
     }
 }
