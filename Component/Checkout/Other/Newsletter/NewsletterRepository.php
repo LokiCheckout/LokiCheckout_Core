@@ -17,14 +17,17 @@ class NewsletterRepository extends ComponentRepository
             return false;
         }
 
-        return $this->isSubscribed($email);
+        if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
+            return $this->isCustomerSubscribed($email);
+        }
+
+        return $this->isGuestSubscribed($email);
     }
 
     public function saveValue(mixed $value): void
     {
-        $subscribe = (bool)$value;
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if (true === $subscribe) {
+        if (true === (bool)$value) {
             $this->subscribeEmail($email);
             $this->getGlobalMessageRegistry()->addNotice('You have been subscribed to the newsletter');
 
@@ -69,7 +72,23 @@ class NewsletterRepository extends ComponentRepository
         return (int)$this->getContext()->getCheckoutState()->getQuote()->getStoreId();
     }
 
-    private function isSubscribed(string $email): bool
+    private function isCustomerSubscribed(): bool
+    {
+        $storeIds = $this->getContext()->getStoreManager()->getWebsite()->getStoreIds();
+        $connection = $this->getContext()->getResourceConnection()->getConnection();
+        $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
+        $select = $connection
+            ->select()
+            ->from($this->getContext()->getResourceConnection()->getTableName('newsletter_subscriber'))
+            ->where('store_id IN (?)', $storeIds)
+            ->where('customer_id = '.$customerId)
+            ->where('subscriber_status = 1')
+            ->limit(1);
+
+        return (bool)$connection->fetchOne($select);
+    }
+
+    private function isGuestSubscribed(string $email): bool
     {
         if (empty($email)) {
             return false;
