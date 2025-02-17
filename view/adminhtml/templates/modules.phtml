@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\ViewModel\Adminhtml\Modules;
+
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Modules $modulesViewModel */
+$modulesViewModel = $viewModelFactory->create(Modules::class);
+?>
+
+<table>
+    <tbody>
+    <?php foreach ($modulesViewModel->getModules() as $module): ?>
+    <tr>
+        <td><?= $module['name'] ?></td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

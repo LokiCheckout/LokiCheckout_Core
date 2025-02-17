@@ -4,6 +4,8 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="Yireo_LokiCheckout::configuration" title="Yireo Loki Checkout" sortOrder="1"/>
+                <resource id="Yireo_LokiCheckout::modules" title="Yireo Loki Checkout Module Overview" sortOrder="1"/>
+                <resource id="Yireo_LokiCheckout::check" title="Yireo Loki Checkout System Check" sortOrder="1"/>
             </resource>
         </resources>
     </acl>
