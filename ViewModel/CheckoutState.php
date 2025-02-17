@@ -13,36 +13,45 @@ use Yireo\LokiComponents\Exception\RedirectException;
 
 class CheckoutState implements ArgumentInterface
 {
+    private int $quoteId = 0;
+    private array $quotes = [];
+
     public function __construct(
-        private readonly CheckoutSession $checkoutSession,
+        private CheckoutSession $checkoutSession,
         private readonly CustomerSession $customerSession,
         private readonly CartRepositoryInterface $cartRepository,
         private readonly UrlFactory $urlFactory,
     ) {
     }
 
+    public function setQuoteId(int $quoteId): void
+    {
+        $this->quoteId = $quoteId;
+    }
+
     public function getQuote(): Quote
     {
-        $quoteId = $this->checkoutSession->getQuoteId();
-        static $quotes = [];
+        if (empty($this->quoteId)) {
+            $this->quoteId = (int)$this->checkoutSession->getQuote()->getId();
+        }
 
-        if (isset($quotes[$quoteId]) && $quotes[$quoteId] instanceof Quote) {
-            return $quotes[$quoteId];
+        if (isset($this->quotes[$this->quoteId]) && $this->quotes[$this->quoteId] instanceof Quote) {
+            return $this->quotes[$this->quoteId];
         }
 
         try {
-            $quotes[$quoteId] = $this->cartRepository->get($quoteId);
+            $this->quotes[$this->quoteId] = $this->cartRepository->get($this->quoteId);
         } catch (NoSuchEntityException $e) {
             $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
             throw new RedirectException($redirectUrl);
         }
 
-        return $quotes[$quoteId];
+        return $this->quotes[$this->quoteId];
     }
 
     public function saveQuote(Quote $quote)
     {
-        $quote->collectTotals();
+        $quote->collectTotals(); // @todo: Is this always needed with every single save?
         $this->cartRepository->save($quote);
     }
 

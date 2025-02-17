@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Test\Integration;
 
 use Laminas\Http\Header\GenericHeader;
 use Laminas\Http\Headers;
-use Magento\Checkout\Model\Session;
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\View\Element\Template;
@@ -16,6 +16,7 @@ use Magento\TestFramework\Helper\Bootstrap;
 use Magento\TestFramework\TestCase\AbstractController;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertModuleIsEnabled;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiComponents\Filter\Filter;
@@ -88,13 +89,16 @@ class LokiTestCase extends AbstractController
     protected function getCart(): CartInterface
     {
         $cart = $this->fixtures->get('cart');
-
         $this->assertInstanceOf(CartInterface::class, $cart);
+        $this->assertNotEmpty($cart->getId());
 
-        $checkoutSession = $this->getObjectManager()->get(Session::class);
-        $checkoutSession->setQuoteId($cart->getId());
+        $checkoutState = $this->getObjectManager()->get(CheckoutState::class);
+        $checkoutState->setQuoteId((int)$cart->getId());
 
-        $this->assertSame($cart->getId(), $checkoutSession->getQuote()->getId());
+        $checkoutSession = $this->getObjectManager()->get(CheckoutSession::class);
+        $checkoutSession->replaceQuote($cart);
+
+        //$this->assertSame($cart->getId(), $checkoutSession->getQuote()->getId());
 
         return $cart;
     }

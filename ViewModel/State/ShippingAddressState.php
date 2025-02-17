@@ -33,6 +33,7 @@ class ShippingAddressState implements AddressStateInterface
 
         $this->checkoutState->saveQuote($this->checkoutState->getQuote());
     }
+
     public function getShippingAddress(): Address
     {
         $shippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
