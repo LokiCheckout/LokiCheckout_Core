@@ -9,6 +9,10 @@
         <block
             name="loki-checkout.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
-            template="Yireo_LokiCheckout::checkout/other/newsletter.phtml"/>
+            template="Yireo_LokiCheckout::form/field.phtml">
+            <arguments>
+                <argument name="field_type" xsi:type="string">checkbox</argument>
+            </arguments>
+        </block>
     </body>
 </page>

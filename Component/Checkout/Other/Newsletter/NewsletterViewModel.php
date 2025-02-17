@@ -8,6 +8,17 @@ class NewsletterViewModel extends FieldViewModel
 {
     public function getFieldLabel(): string
     {
-        return 'Newsletter';
+        return 'Sign up for our newsletter';
+    }
+
+
+    public function isDisabled(): bool
+    {
+        $email = $this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
+        if (empty($email)) {
+            return true;
+        }
+
+        return false;
     }
 }

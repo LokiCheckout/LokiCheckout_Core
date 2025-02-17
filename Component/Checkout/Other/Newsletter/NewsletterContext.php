@@ -5,12 +5,13 @@ namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
-use Magento\Newsletter\Model\GuestSubscriptionChecker;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Newsletter\Model\SubscriberFactory;
+use Magento\Store\Model\StoreManagerInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
@@ -28,8 +29,8 @@ class NewsletterContext implements ComponentContextInterface
 {
     public function __construct(
         private readonly SubscriptionManagerInterface $subscriptionManager,
-        private readonly GuestSubscriptionChecker $guestSubscriptionChecker,
         private readonly SubscriberFactory $subscriberFactory,
+        private readonly StoreManagerInterface $storeManager,
         private AddressStateProvider $addressStateProvider,
         private FieldTemplateLocator $fieldTemplateLocator,
         private CheckoutSession $checkoutSession,
@@ -47,17 +48,13 @@ class NewsletterContext implements ComponentContextInterface
         private CoreMessageManager $coreMessageManager,
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
+        private readonly ResourceConnection $resourceConnection
     ) {
     }
 
     public function getSubscriptionManager(): SubscriptionManagerInterface
     {
         return $this->subscriptionManager;
-    }
-
-    public function getGuestSubscriptionChecker(): GuestSubscriptionChecker
-    {
-        return $this->guestSubscriptionChecker;
     }
 
     public function getSubscriberFactory(): SubscriberFactory
@@ -148,5 +145,15 @@ class NewsletterContext implements ComponentContextInterface
     public function getUrlFactory(): UrlFactory
     {
         return $this->urlFactory;
+    }
+
+    public function getStoreManager(): StoreManagerInterface
+    {
+        return $this->storeManager;
+    }
+
+    public function getResourceConnection(): ResourceConnection
+    {
+        return $this->resourceConnection;
     }
 }
