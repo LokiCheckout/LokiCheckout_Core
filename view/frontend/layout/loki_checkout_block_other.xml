@@ -12,6 +12,7 @@
             template="Yireo_LokiCheckout::form/field.phtml">
             <arguments>
                 <argument name="field_type" xsi:type="string">checkbox</argument>
+                <argument name="show_field_label" xsi:type="boolean">false</argument>
             </arguments>
         </block>
     </body>

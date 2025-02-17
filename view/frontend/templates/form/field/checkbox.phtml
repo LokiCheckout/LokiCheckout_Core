@@ -17,22 +17,22 @@ $viewModel = $block->getViewModel();
 <div class="<?= $css('w-full p-2') ?>"
      aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
      data-type="field">
-            <input
-                type="checkbox"
-                id="<?= $viewModel->getElementId() ?>-field"
-                x-model="value"
-                @change="submit"
-                value="<?= $viewModel->getValue() ?>"
-                <?php if ($viewModel->getValue() === true): ?>
-                    checked
-                <?php endif; ?>
-                <?php if ($viewModel->isDisabled()): ?>
-                    disabled="disabled"
-                <?php endif ?>
-            />
-            <label
-                class="<?= $css('pl-2', 'label') ?>"
-                for="<?= $viewModel->getElementId() ?>-field">
-                <?= $viewModel->getFieldLabel() ?>
-            </label>
+    <input
+        type="checkbox"
+        id="<?= $viewModel->getElementId() ?>-field-input"
+        x-model="value"
+        @change="submit"
+        value="<?= $viewModel->getValue() ?>"
+        <?php if ($viewModel->getValue() === true): ?>
+            checked
+        <?php endif; ?>
+        <?php if ($viewModel->isDisabled()): ?>
+            disabled="disabled"
+        <?php endif ?>
+    />
+    <label
+        class="<?= $css('pl-2', 'label') ?>"
+        for="<?= $viewModel->getElementId() ?>-field-input">
+        <?= $viewModel->getInputLabel() ?>
+    </label>
 </div>

@@ -18,10 +18,13 @@ use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
-<div class="<?= $css('field w-auto relative') ?> <?= $viewModel->isRequired() ? 'required' : 'optional' ?> <?= $viewModel->getFieldName() ?>">
+<div class="<?= $css('field w-auto relative') ?> <?= $viewModel->isRequired(
+) ? 'required' : 'optional' ?> <?= $viewModel->getFieldName() ?>">
     <?= $block->getChildHtml('before') ?>
 
-    <?= $templateRenderer->html($block, 'form/field/label.phtml', ['alias' => 'label']) ?>
+    <?php if ($viewModel->showFieldLabel()): ?>
+        <?= $templateRenderer->html($block, 'form/field/label.phtml', ['alias' => 'label']) ?>
+    <?php endif; ?>
 
     <div class="<?= $css('relative space-y-2 flex', 'field') ?>">
         <?= $templateRenderer->html($block, $viewModel->getFieldTemplate(), $viewModel->getFieldData()) ?>

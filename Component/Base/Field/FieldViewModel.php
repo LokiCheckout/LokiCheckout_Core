@@ -23,6 +23,16 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
 
     abstract public function getFieldLabel(): string;
 
+    public function showFieldLabel(): bool
+    {
+        $showFieldLabel = $this->getBlock()->getShowFieldLabel();
+        if (is_bool($showFieldLabel)) {
+            return $showFieldLabel;
+        }
+
+        return true;
+    }
+
     public function getFieldData(): array
     {
         return [
@@ -47,6 +57,11 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
     public function getInputType(): string
     {
         return 'text';
+    }
+
+    public function getInputLabel(): string
+    {
+        return '';
     }
 
     public function isRequired(): bool

@@ -8,9 +8,13 @@ class NewsletterViewModel extends FieldViewModel
 {
     public function getFieldLabel(): string
     {
-        return 'Sign up for our newsletter';
+        return 'Newsletter';
     }
 
+    public function getInputLabel(): string
+    {
+        return 'Sign up for our newsletter';
+    }
 
     public function isDisabled(): bool
     {
