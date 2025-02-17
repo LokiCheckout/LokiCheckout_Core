@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+
+/** @var Template $block */
+/** @var ComponentViewModelInterface $viewModel */
+/** @var CssClass $css */
+/** @var FieldViewModel $viewModel */
+
+$viewModel = $block->getViewModel();
+?>
+<div class="<?= $css('w-full p-2') ?>"
+     aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
+     data-type="field">
+            <input
+                type="checkbox"
+                id="<?= $viewModel->getElementId() ?>-field"
+                x-model="value"
+                @change="submit"
+                value="<?= $viewModel->getValue() ?>"
+                <?php if ($viewModel->getValue() === true): ?>
+                    checked
+                <?php endif; ?>
+                <?php if ($viewModel->isDisabled()): ?>
+                    disabled="disabled"
+                <?php endif ?>
+            />
+            <label
+                class="<?= $css('pl-2', 'label') ?>"
+                for="<?= $viewModel->getElementId() ?>-field">
+                <?= $viewModel->getFieldLabel() ?>
+            </label>
+</div>
