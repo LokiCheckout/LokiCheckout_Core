@@ -120,21 +120,20 @@ class LokiTestCase extends AbstractController
         $this->assertStringNotContainsString('x-title="'.$blockName.'"', $body);
     }
 
-    protected function assertComponentValidators(ComponentInterface $component, array $validators)
+    protected function assertComponentValidators(array $expectedValidators, ComponentInterface $component)
     {
-        foreach ($validators as $validator) {
-            $this->assertContains($validator, $component->getValidators());
+        foreach ($expectedValidators as $expectedValidator) {
+            $this->assertContains($expectedValidator, $component->getValidators());
         }
     }
 
     protected function assertComponentValidation(
+        bool $expectedResult,
+        array $expectedErrors,
         ComponentInterface $component,
         mixed $value,
-        bool $expectedResult,
-        array $expectedErrors)
-    {
+    ) {
         $this->setAsAjaxRequest();
-
         $result = $this->getValidator()->validate($component, $value);
 
         if (true === $expectedResult) {
@@ -155,7 +154,7 @@ class LokiTestCase extends AbstractController
     protected function setAsAjaxRequest(): void
     {
         $headers = new Headers();
-        $headers->addHeader(GenericHeader::fromString('X-Alpine-Request:1'));
+        $headers->addHeader(GenericHeader::fromString('X-Alpine-Request: 1'));
         $this->getObjectManager()->get(HttpRequest::class)->setHeaders($headers);
 
     }

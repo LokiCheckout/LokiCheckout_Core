@@ -41,8 +41,8 @@ class FirstnameTest extends LokiTestCase
         array $expectedErrors
     ) {
         $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators($component, ['required']);
-        $this->assertComponentValidation($component, $value, $expectedResult, $expectedErrors);
+        $this->assertComponentValidators(['required'], $component);
+        $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
     public function getTestData(): array

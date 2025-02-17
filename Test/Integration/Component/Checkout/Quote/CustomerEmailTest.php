@@ -40,8 +40,8 @@ class CustomerEmailTest extends LokiTestCase
         array $expectedErrors
     ) {
         $component = $this->getComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators($component, ['required', 'email']);
-        $this->assertComponentValidation($component, $value, $expectedResult, $expectedErrors);
+        $this->assertComponentValidators(['required', 'email'], $component);
+        $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
     public function getTestData(): array
