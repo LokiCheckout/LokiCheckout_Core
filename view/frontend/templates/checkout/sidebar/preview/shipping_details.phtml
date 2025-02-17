@@ -29,7 +29,7 @@ if (empty($addressHtml)) {
 
     <div class="<?= $css('mb-4', 'address') ?>">
         <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Shipping Address') ?></span><br>
-        <?= $addressHtml ?>
+        <address><?= $addressHtml ?></address>
     </div>
 
     <?php if (!empty($methodHtml)): ?>
