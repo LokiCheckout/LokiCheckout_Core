@@ -39,10 +39,9 @@ class FieldTemplateLocator
 
     public function getFieldTemplateMapping(): array
     {
-        // @todo: Textarea
-
         return [
             'text' => 'Yireo_LokiCheckout::form/field/text.phtml',
+            'textarea' => 'Yireo_LokiCheckout::form/field/textarea.phtml',
             'radio' => 'Yireo_LokiCheckout::form/field/radio.phtml',
             'checkbox' => 'Yireo_LokiCheckout::form/field/checkbox.phtml',
             'select' => 'Yireo_LokiCheckout::form/field/select.phtml',
