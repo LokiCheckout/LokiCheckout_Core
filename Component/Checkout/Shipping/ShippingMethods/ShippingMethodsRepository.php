@@ -94,7 +94,6 @@ class ShippingMethodsRepository extends ComponentRepository
 
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
             $this->component->getLocalMessageRegistry()->addError(
-                $this->component,
                 'Method not allowed'
             ); // @todo: Beautify
             $shippingMethodCode = '';
@@ -102,7 +101,6 @@ class ShippingMethodsRepository extends ComponentRepository
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
             $this->component->getLocalMessageRegistry()->addNotice(
-                $this->component,
                 'Setting default method'
             ); // @todo: Make optional
             $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
