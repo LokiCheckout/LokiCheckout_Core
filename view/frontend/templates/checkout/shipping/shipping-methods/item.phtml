@@ -19,7 +19,7 @@ $viewModel = $block->getViewModel();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
-$isCurrent = $viewModel->getCurrentShippingCode() === $code;
+$isCurrent = $viewModel->getValue() === $code;
 
 $mainClasses = [];
 $mainClasses[] = $isCurrent ? 'active' : 'inactive';
@@ -38,7 +38,7 @@ $mainClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                    id="shipping-<?= $code ?>"
                 <?= $isCurrent ? 'checked' : '' ?>>
         <?php else: ?>
-            <input type="radio" disabled/>
+            <input type="radio" id="shipping-<?= $code ?>" disabled/>
         <?php endif; ?>
     </div>
     <div class="<?= $css('p-4 w-auto font-bold', 'amount-container') ?>">
