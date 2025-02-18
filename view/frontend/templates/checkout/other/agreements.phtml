@@ -12,14 +12,35 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var ViewModelFactory $viewModelFactory */
 
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= $css('p-2') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <input type="checkbox" id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>" value="<?= $agreement->getAgreementId() ?>" x-model="value" @change="submit"/>
-        <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>">
-            <?= $agreement->getName() ?>
-        </label>
-        <div>
-            <?= $agreement->getContent() ?>
+        <div class="<?= $css('pb-2', 'item') ?>">
+            <input
+                type="checkbox"
+                id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
+                value="<?= $agreement->getAgreementId() ?>"
+                x-model="value.<?= 'a'.$agreement->getAgreementId() ?>"
+                @change="submit"
+                <?php if ($viewModel->getValue() === true): ?>
+                    checked
+                <?php endif; ?>
+                <?php if ($viewModel->isDisabled()): ?>
+                    disabled="disabled"
+                <?php endif ?>
+                class="<?= $css('form-checkbox mt-2 float-left disabled:bg-zinc-100', 'input') ?>"
+            />
+
+            <div class="<?= $css('inline-block pl-4', 'label-block') ?>">
+                <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
+                       class="<?= $css('', 'label') ?>">
+                    <?= $agreement->getCheckboxText() ?>
+                </label>
+                <br/>
+
+                <span class="<?= $css('italic', 'content') ?>">
+                    <?= $agreement->getContent() ?>
+                </span>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>

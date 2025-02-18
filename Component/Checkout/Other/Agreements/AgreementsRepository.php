@@ -10,13 +10,6 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class AgreementsRepository extends ComponentRepository
 {
-    public function getSavedCheckoutAgreements(): array
-    {
-        $this->getContext()->getSearchCriteriaBuilder()->addFilter('agreement_id', $this->getSavedCheckoutAgreementIds(), 'in');
-
-        return $this->getContext()->getCheckoutAgreementsList()->getList($this->getContext()->getSearchCriteriaBuilder()->create());
-    }
-
     /**
      * @return AgreementInterface[]
      */
@@ -29,15 +22,12 @@ class AgreementsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        // @todo: Should this just be stored in the session?
-        $value = [];
-        $agreementIds = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
-        foreach ($agreementIds as $agreementId) {
-            if (empty($agreementId)) {
-                continue;
-            }
+        $savedAgreements = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
 
-            $value[] = $agreementId;
+        $value = [];
+        foreach ($this->getCheckoutAgreements() as $agreement) {
+            $agreementId = $agreement->getAgreementId();
+            $value['a'.$agreementId] = in_array($agreementId, $savedAgreements);
         }
 
         return $value;
@@ -49,38 +39,18 @@ class AgreementsRepository extends ComponentRepository
             return;
         }
 
-        $incomingAgreements = [];
-        foreach ((array)$value as $agreementId) {
-            $incomingAgreements[] = (int)$agreementId;
-        }
-
-        $savedAgreements = $this->getSavedCheckoutAgreementIds();
-
-        foreach ($incomingAgreements as $agreementId => $agreementValue) {
-            if (in_array($agreementId, $savedAgreements) && $agreementValue === true) {
+        $savedAgreements = [];
+        foreach ((array)$value as $agreementId => $agreed) {
+            if ($agreed === false) {
                 continue;
             }
 
-            if (in_array($agreementId, $savedAgreements) && $agreementValue === false) {
-                unset($incomingAgreements[$agreementId]);
-                continue;
-            }
-
+            $agreementId = (int)str_replace('a', '', $agreementId);
             $savedAgreements[] = $agreementId;
         }
 
         $savedAgreements = array_unique($savedAgreements);
+
         $this->getContext()->getCheckoutSession()->setAgreementIds($savedAgreements);
     }
-
-    private function getSavedCheckoutAgreementIds(): array
-    {
-        $agreementIds = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
-        if (empty($agreementIds)) {
-            return [];
-        }
-
-        return $agreementIds;
-    }
-
 }

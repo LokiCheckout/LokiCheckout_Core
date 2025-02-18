@@ -78,6 +78,9 @@
                     name="loki-checkout.script.components.coupon-code"
                     template="Yireo_LokiCheckout::script/component/coupon-code-component.phtml"/>
                 <block
+                    name="loki-checkout.script.components.agreements"
+                    template="Yireo_LokiCheckout::script/component/agreements-component.phtml"/>
+                <block
                     name="loki-checkout.script.components.toggle-component"
                     template="Yireo_LokiCheckout::script/component/toggle-component.phtml"/>
                 <block

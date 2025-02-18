@@ -20,4 +20,22 @@ class AgreementsViewModel extends FieldViewModel
     {
         return 'Agreements';
     }
+
+    public function getJsComponentName(): string
+    {
+        return 'LokiCheckoutAgreementsComponent';
+    }
+
+    public function getJsData(): array
+    {
+        $agreementIds = [];
+        foreach ($this->getCheckoutAgreements() as $agreement) {
+            $agreementIds[] = $agreement->getId();
+        }
+
+        return [
+            ...parent::getJsData(),
+            'agreements' => []
+        ];
+    }
 }
