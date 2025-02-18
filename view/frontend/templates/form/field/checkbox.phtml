@@ -4,7 +4,6 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
@@ -29,9 +28,13 @@ $viewModel = $block->getViewModel();
         <?php if ($viewModel->isDisabled()): ?>
             disabled="disabled"
         <?php endif ?>
+        class="<?= $css('form-checkbox disabled:bg-zinc-100', 'input') ?>"
     />
     <label
-        class="<?= $css('pl-2', 'label') ?>"
+        class="<?= $css('pl-2 data-[disabled]:text-zinc-600', 'label') ?>"
+        <?php if ($viewModel->isDisabled()): ?>
+            data-disabled="disabled"
+        <?php endif ?>
         for="<?= $viewModel->getElementId() ?>-field-input">
         <?= $viewModel->getInputLabel() ?>
     </label>
