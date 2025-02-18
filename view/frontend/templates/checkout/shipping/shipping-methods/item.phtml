@@ -56,7 +56,11 @@ $mainClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
             <?= $shippingMethod->getCarrierTitle() ?>
 
             <?php if (false === $shippingMethod->getAvailable()) : ?>
-                (not available)
+                <?php if ($shippingMethod->getErrorMessage()): ?>
+                    (<?= $shippingMethod->getErrorMessage() ?>)
+                <?php else: ?>
+                    (Not available)
+                <?php endif; ?>
             <?php endif; ?>
         </label>
     </div>
