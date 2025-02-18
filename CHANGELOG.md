@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Improve streetlines logic with faulty values
 - Append streetline values if streetlines config is wrong
+- Add "not available" text to unavailable shipping methods
 
 ## [0.0.6] - 13 February 2025
 ### Fixed

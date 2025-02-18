@@ -54,6 +54,10 @@ $mainClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
     <div class="<?= $css('p-4', 'carrier-container') ?>">
         <label for="shipping-<?= $code ?>">
             <?= $shippingMethod->getCarrierTitle() ?>
+
+            <?php if (false === $shippingMethod->getAvailable()) : ?>
+                (not available)
+            <?php endif; ?>
         </label>
     </div>
 </li>
