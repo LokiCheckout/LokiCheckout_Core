@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Append streetline values if streetlines config is wrong
+
 ## [0.0.6] - 13 February 2025
 ### Fixed
 - Fix address when customer is logged in and has no addresses to select yet

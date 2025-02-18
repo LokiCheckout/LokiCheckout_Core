@@ -7,7 +7,7 @@ use Magento\Framework\ObjectManagerInterface;
 class StreetLinesFactory
 {
     public function __construct(
-        private ObjectManagerInterface $objectManager
+        private ObjectManagerInterface $objectManager,
     ) {
     }
 
