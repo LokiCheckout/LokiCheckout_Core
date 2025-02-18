@@ -14,11 +14,18 @@ abstract class ScopeConfigValue implements SystemCheckInterface
 
     public function getResult(): CheckResult
     {
+        $value = $this->scopeConfig->getValue($this->getScopeConfigPath());
         return new CheckResult(
             $this->getScopeConfigPath(),
-            $this->scopeConfig->getValue($this->getScopeConfigPath()),
+            $value,
+            $this->isValid($value),
             $this->getRecommendation()
         );
+    }
+
+    protected function isValid($value): bool
+    {
+        return true;
     }
 
     abstract protected function getScopeConfigPath(): string;

@@ -9,6 +9,11 @@ class AddressLines extends ScopeConfigValue
         return 'customer/address/street_lines';
     }
 
+
+    protected function isValid($value): bool
+    {
+        return $value > 2;
+    }
     protected function getRecommendation(): string
     {
         return 'Most of the time, 3 or 4 is a good idea';

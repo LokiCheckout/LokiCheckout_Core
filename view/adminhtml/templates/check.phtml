@@ -40,7 +40,19 @@ $systemCheckCollection = $viewModelFactory->create(SystemCheckCollection::class)
                 </td>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?= $systemCheck->getResult()->getValue() ?>
+
+                    </div>
+
+                    <div class="data-grid-cell-content">
+                        <?php if ($systemCheck->getResult()->isValid()): ?>
+                            <span class="system-check system-check-notice">
+                                <?= $systemCheck->getResult()->getValue() ?>
+                            </span>
+                        <?php else: ?>
+                            <span class="system-check system-check-error">
+                                <?= $systemCheck->getResult()->getValue() ?>
+                            </span>
+                        <?php endif; ?>
                     </div>
                 </td>
                 <td>
@@ -53,3 +65,28 @@ $systemCheckCollection = $viewModelFactory->create(SystemCheckCollection::class)
         </tbody>
     </table>
 </div>
+
+<style>
+    .system-check {
+        padding: 1px 3px 1px 3px;
+    }
+
+    .system-check-error {
+        border: 1px solid #e22626;
+        background: #f9d4d4;
+        color: #e22626;
+    }
+
+    .system-check-warning {
+        border: 1px solid #ff8538;
+        background: #ffe3cd;
+        color: #ff833b;
+    }
+
+    .system-check-notice {
+        border: 1px solid #5b8116;
+        background: #d0e5a9;
+        color: #185b00;
+    }
+</style>
+

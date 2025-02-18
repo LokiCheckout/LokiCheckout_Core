@@ -7,6 +7,7 @@ class CheckResult
     public function __construct(
         private string $label,
         private mixed $value,
+        private bool $valid,
         private string $recommendation
     ) {
     }
@@ -24,5 +25,10 @@ class CheckResult
     public function getRecommendation(): string
     {
         return $this->recommendation;
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
     }
 }
