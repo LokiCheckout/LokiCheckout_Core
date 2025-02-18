@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Plugin;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 
-class ClearHelperData
+class ClearHelperDataPlugin
 {
     public function afterClearQuote(CheckoutSession $checkoutSession): CheckoutSession
     {

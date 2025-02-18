@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Plugin;
 use Magento\Framework\View\Element\Template;
 use Yireo\CspUtilities\Util\ReplaceInlineScripts;
 
-class AddCspInlineScripts
+class AddCspInlineScriptsPlugin
 {
     private ReplaceInlineScripts $replaceInlineScripts;
 
