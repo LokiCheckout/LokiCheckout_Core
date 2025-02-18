@@ -22,14 +22,27 @@ class StreetLinesFactory
 
     public function createFromStreetParts(array $streetParts): StreetLines
     {
-        if (count($streetParts) === 2 && preg_match('/^([0-9]+)$/', $streetParts[0])) {
-            array_unshift($streetParts, '');
+        $newStreetParts = [];
+        foreach ($streetParts as $streetIndex => $streetPart) {
+            if ($streetIndex === 0 && preg_match('/^([0-9]+)/', $streetPart)) {
+                $newStreetParts[] = '';
+            }
+
+            if (preg_match('/^([0-9]+)(.*)$/', $streetPart, $match)) {
+                $newStreetParts[] =  $match[1];
+                if (!empty($match[2])) {
+                    $newStreetParts[] =  $match[2];
+                }
+                continue;
+            }
+
+            $newStreetParts[] = trim($streetPart);
         }
 
         return $this->create(
-            $streetParts[0] ?? '',
-            $streetParts[1] ?? '',
-            $streetParts[2] ?? ''
+            $newStreetParts[0] ?? '',
+                $newStreetParts[1] ?? '',
+                $newStreetParts[2] ?? ''
         );
     }
 

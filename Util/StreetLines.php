@@ -21,9 +21,19 @@ class StreetLines
         return trim($this->streetName);
     }
 
+    public function setHouseNumber(string $houseNumber): void
+    {
+        $this->houseNumber = $houseNumber;
+    }
+
     public function getHouseNumber(): string
     {
         return trim($this->houseNumber);
+    }
+
+    public function setHouseNumberAddition(string $houseNumberAddition): void
+    {
+        $this->houseNumberAddition = $houseNumberAddition;
     }
 
     public function getHouseNumberAddition(): string

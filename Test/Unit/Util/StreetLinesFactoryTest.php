@@ -36,7 +36,7 @@ class StreetLinesFactoryTest extends TestCase
         $streetLines = $streetLinesFactory->createFromStreet($street);
         $this->assertSame($streetName, $streetLines->getStreetName());
         $this->assertSame($streetNumber, $streetLines->getHouseNumber());
-        $this->assertSame($streetNumberAddition, $streetLines->getHouseNumberAddition());
+        $this->assertSame($streetNumberAddition, $streetLines->getHouseNumberAddition(), var_export($streetLines->getLines(), true));
     }
 
     public function getCreateFromStreetInput(): array
@@ -47,6 +47,8 @@ class StreetLinesFactoryTest extends TestCase
             ["\n\nA", '', '', 'A'],
             [" \n \nA", '', '', 'A'],
             [" \n \nA\n\n\n", '', '', 'A'],
+            ["12AA", '', '12', 'AA'],
+            ["12\nAA", '', '12', 'AA'],
         ];
     }
 }

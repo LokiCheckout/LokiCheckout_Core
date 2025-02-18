@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- Improve streetlines logic with faulty values
 - Append streetline values if streetlines config is wrong
 
 ## [0.0.6] - 13 February 2025
