@@ -28,4 +28,9 @@ class LokiCheckoutModules
             return $moduleManager->isEnabled($module);
         });
     }
+
+    public function hasModule(string $moduleName): bool
+    {
+        return in_array($moduleName, $this->modules);
+    }
 }

@@ -9,12 +9,120 @@ use Yireo\LokiCheckout\ViewModel\Adminhtml\Modules;
 $modulesViewModel = $viewModelFactory->create(Modules::class);
 ?>
 
-<table>
-    <tbody>
-    <?php foreach ($modulesViewModel->getModules() as $module): ?>
-    <tr>
-        <td><?= $module['name'] ?></td>
-    </tr>
-    <?php endforeach; ?>
-    </tbody>
-</table>
+<div class="admin__data-grid-wrap">
+    <table class="data-grid">
+        <thead>
+        <tr>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content">
+                    Module name
+                </span>
+            </th>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content">
+                    Module status
+                </span>
+            </th>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content" title="Optional DI hook for various tasks">
+                    LokiCheckout registered
+                </span>
+            </th>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content">
+                    Composer name
+                </span>
+            </th>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content" title="Current version locked in your root composer.lock">
+                    Current version
+                </span>
+            </th>
+            <th class="data-grid-th">
+                <span class="data-grid-cell-content" title="Latest version as read from https://composer.yireo.com/">
+                    Newest version
+                </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($modulesViewModel->getModules() as $module): ?>
+            <tr>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?= $module->getModuleName() ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?php if ($module->isModuleStatus()): ?>
+                            <span class="module-status module-status-notice">Enabled</span>
+                        <?php else: ?>
+                            <span class="module-status module-status-error">Disabled</span>
+                        <?php endif; ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?php if ($module->isLokiCheckoutRegistered()): ?>
+                            <span class="module-status module-status-notice">Yes</span>
+                        <?php else: ?>
+                            <span class="module-status module-status-warning">No</span>
+                        <?php endif; ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <code><?= $module->getComposerName() ?></code>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?= $module->getComposerVersion() ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="data-grid-cell-content">
+                        <?php if ($module->getComposerVersion() === $module->getLatestComposerVersion()): ?>
+                            <span class="module-status module-status-notice">
+                                <?= $module->getLatestComposerVersion() ?>
+                            </span>
+                        <?php else: ?>
+                            <span class="module-status module-status-error">
+                                <?= $module->getLatestComposerVersion() ?>
+                            </span>
+                        <?php endif; ?>
+                    </div>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .module-status {
+        margin: 1px;
+        border-width: 1px;
+        border-style: solid;
+        padding: 6px;
+    }
+
+    .module-status-error {
+        border: 1px solid #e22626;
+        background: #f9d4d4;
+        color: #e22626;
+    }
+
+    .module-status-warning {
+        border: 1px solid #ff8538;
+        background: #ffe3cd;
+        color: #ff833b;
+    }
+
+    .module-status-notice {
+        border: 1px solid #5b8116;
+        background: #d0e5a9;
+        color: #185b00;
+    }
+</style>
