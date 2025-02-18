@@ -19,14 +19,6 @@ class ShippingMethodsViewModel extends FieldViewModel
         return $this->getRepository()->getShippingMethods();
     }
 
-    /**
-     * @deprecated Just use getValue()
-     */
-    public function getCurrentShippingCode(): string
-    {
-        return (string)$this->getValue();
-    }
-
     public function getFieldLabel(): string
     {
         return 'Shipping Methods';

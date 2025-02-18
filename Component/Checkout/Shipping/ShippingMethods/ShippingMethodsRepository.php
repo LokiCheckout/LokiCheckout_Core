@@ -13,37 +13,43 @@ use Yireo\LokiComponents\Component\ComponentRepository;
 class ShippingMethodsRepository extends ComponentRepository
 {
     private string $currentShippingMethod = '';
+    private array $shippingMethods = [];
 
     /**
      * @return ShippingMethodInterface[]
      */
     public function getShippingMethods(): array
     {
-        static $shippingMethods = null;
-        if (is_array($shippingMethods)) {
-            return $shippingMethods;
+        if (!empty($this->shippingMethods)) {
+            return $this->shippingMethods;
         }
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-        $shippingAddress
-            ->setCollectShippingRates(true)
-            ->collectShippingRates();
+        if ($quote->isVirtual() || 0 == $quote->getItemsCount()) {
+            return [];
+        }
 
-        $shippingMethods = [];
+        $quote->collectTotals();
+
+        $shippingAddress = $quote->getShippingAddress();
+        $shippingAddress->setCollectShippingRates(true);
+        $shippingAddress->collectShippingRates();
+        $this->getContext()->getTotalsCollector()->collectAddressTotals($quote, $shippingAddress);
+
         try {
             $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
         } catch (StateException|NoSuchEntityException $e) {
             $this->getGlobalMessageRegistry()->addError($e->getMessage());
+
             return [];
         }
 
         foreach ($availableMethods as $shippingMethod) {
             $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
-            $shippingMethods[$shippingMethodCode] = $shippingMethod;
+            $this->shippingMethods[$shippingMethodCode] = $shippingMethod;
         }
 
-        return $shippingMethods;
+        return $this->shippingMethods;
     }
 
     public function getValue(): mixed
@@ -70,18 +76,26 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingMethodCode = $this->sanitizeShippingMethod($shippingMethodCode);
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-
         $shippingAddress = $quote->getShippingAddress();
-        $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
-        $shippingAddress->setShippingMethod($shippingMethodCode);
-        $shippingAddress->removeAllShippingRates();
-        $shippingAddress->save();
+        if (empty($shippingMethodCode)) {
+            $shippingAddress->setCollectShippingRates(true);
+            $shippingAddress->collectShippingRates();
+            $shippingAddress->setShippingMethod('');
+            $shippingAddress->save();
+            $this->currentShippingMethod = '';
+
+            return;
+        }
+
+        $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
+        $shippingAddress->setShippingMethod($shippingMethodCode);
         $shippingAddress->addShippingRate($rate);
-        $shippingAddress->save();
+
+        $this->getContext()->getCartRepository()->save($quote);
 
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();
     }
@@ -93,17 +107,12 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
-            $this->component->getLocalMessageRegistry()->addError(
-                'Method not allowed'
-            ); // @todo: Beautify
+            $this->component->getLocalMessageRegistry()->addError('Method not allowed');
             $shippingMethodCode = '';
         }
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
-            $this->component->getLocalMessageRegistry()->addNotice(
-                'Setting default method'
-            ); // @todo: Make optional
-            $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
+            //$shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 
         return $shippingMethodCode;

@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Model\Session">
-        <plugin name="Yireo_LokiCheckout::clearHelperData"
-                type="Yireo\LokiCheckout\Plugin\ClearHelperData"/>
+        <plugin name="Yireo_LokiCheckout::clearHelperData" type="Yireo\LokiCheckout\Plugin\ClearHelperData"/>
     </type>
 
     <type name="Magento\Framework\View\Element\Template">
         <plugin name="Yireo_LokiCheckout::addCspInlineScripts" type="Yireo\LokiCheckout\Plugin\AddCspInlineScripts"/>
     </type>
 
-    <type name="\Yireo\LokiCheckout\Observer\AddDebuggingInfo">
+    <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
+        <plugin name="Yireo_LokiCheckout::fixFreeShippingSubtotal" type="Yireo\LokiCheckout\Plugin\FixFreeShippingSubtotalPlugin"/>
+    </type>
+
+    <type name="Yireo\LokiCheckout\Observer\AddDebuggingInfo">
         <arguments>
             <argument name="blockPrefixes" xsi:type="array">
                 <item name="loki-checkout" xsi:type="string">loki-checkout</item>

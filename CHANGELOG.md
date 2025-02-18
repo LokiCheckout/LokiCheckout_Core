@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Fixed
+- Add DI plugin as workaround for non-working `free_shipping_subtotal`
 - Improve streetlines logic with faulty values
 - Append streetline values if streetlines config is wrong
 - Add "not available" text to unavailable shipping methods

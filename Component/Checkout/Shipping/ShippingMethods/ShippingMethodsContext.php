@@ -10,6 +10,7 @@ use Magento\Framework\UrlFactory;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\ShippingMethodManagementInterface;
 use Magento\Quote\Model\Quote\Address\RateFactory;
+use Magento\Quote\Model\Quote\TotalsCollector;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
@@ -41,6 +42,7 @@ class ShippingMethodsContext implements ComponentContextInterface
         private RateFactory $rateFactory,
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
+        private readonly TotalsCollector $totalsCollector
     ) {
     }
 
@@ -127,5 +129,10 @@ class ShippingMethodsContext implements ComponentContextInterface
     public function getRateFactory(): RateFactory
     {
         return $this->rateFactory;
+    }
+
+    public function getTotalsCollector(): TotalsCollector
+    {
+        return $this->totalsCollector;
     }
 }
