@@ -16,10 +16,10 @@ class FixFreeShippingSubtotalPlugin
 
     public function afterGetShippingMethods(ShippingMethodsRepository $subject, array $shippingMethods): array
     {
-        $freeShippingSubtotal = (float)$this->scopeConfig->getValue('carriers/freeshipping/free_shipping_subtotal');
+        $freeShippingSubtotal = $this->scopeConfig->getValue('carriers/freeshipping/free_shipping_subtotal');
         $taxIncluding = (bool)$this->scopeConfig->getValue('carriers/freeshipping/carriers/freeshipping/tax_including');
 
-        if (empty($freeShippingSubtotal)) {
+        if (false === is_numeric($freeShippingSubtotal)) {
             return $shippingMethods;
         }
 
