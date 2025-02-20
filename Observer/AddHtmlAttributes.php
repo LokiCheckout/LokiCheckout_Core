@@ -69,8 +69,6 @@ class AddHtmlAttributes implements ObserverInterface
                 continue;
             }
 
-            // @todo: Remove this
-            $attributeValue = str_replace('{component_name}', $this->getComponentName($block), $attributeValue);
             $htmlAttribute .= ' ' . $attributeName . '="' . $attributeValue . '"';
         }
 
