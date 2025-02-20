@@ -19,7 +19,7 @@ class FixFreeShippingSubtotalPlugin
         $freeShippingSubtotal = $this->scopeConfig->getValue('carriers/freeshipping/free_shipping_subtotal');
         $taxIncluding = (bool)$this->scopeConfig->getValue('carriers/freeshipping/carriers/freeshipping/tax_including');
 
-        if (false === is_numeric($freeShippingSubtotal)) {
+        if (false === is_numeric($freeShippingSubtotal) && false === is_float($freeShippingSubtotal)) {
             return $shippingMethods;
         }
 
