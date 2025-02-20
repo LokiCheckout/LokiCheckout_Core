@@ -63,9 +63,15 @@ class AddHtmlAttributes implements ObserverInterface
         $attributes = (array)$block->getData('html_attributes');
         $attributes['id'] = $this->getElementId($block);
 
+        if (!preg_match('/^<([^>]+)>/', $currentHtml, $match)) {
+            return $currentHtml;
+        }
+
+        $firstTagHtml = $currentHtml[0];
+
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
-            if (str_contains($currentHtml, ' '.$attributeName.'="')) {
+            if (str_contains($firstTagHtml, ' '.$attributeName.'="')) {
                 continue;
             }
 
