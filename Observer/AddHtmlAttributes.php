@@ -48,7 +48,7 @@ class AddHtmlAttributes implements ObserverInterface
             return;
         }
 
-        $htmlAttributes = $this->getHtmlAttributes($block);
+        $htmlAttributes = $this->getHtmlAttributes($block, $html);
         if (empty($htmlAttributes)) {
             return;
         }
@@ -58,13 +58,17 @@ class AddHtmlAttributes implements ObserverInterface
         $transport->setHtml($html);
     }
 
-    private function getHtmlAttributes(AbstractBlock $block): string
+    private function getHtmlAttributes(AbstractBlock $block, string $currentHtml): string
     {
         $attributes = (array)$block->getData('html_attributes');
-        $attributes['id'] = $this->getElementId($block); // @todo: Detect that no duplicate ID is added
+        $attributes['id'] = $this->getElementId($block);
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
+            if (str_contains($currentHtml, ' '.$attributeName.'="')) {
+                continue;
+            }
+
             // @todo: Remove this
             $attributeValue = str_replace('{component_name}', $this->getComponentName($block), $attributeValue);
             $htmlAttribute .= ' ' . $attributeName . '="' . $attributeValue . '"';
