@@ -18,20 +18,23 @@ class StreetLinesFactory
         string $houseNumber,
         string $houseNumberAddition = '',
         string $street4 = '',
+        ?int $maximumNumber = null
     ): StreetLines {
+        if ($maximumNumber === null) {
+            $maximumNumber = $this->getNumberOfStreetLines();
+        }
+
         return $this->objectManager->create(StreetLines::class, [
             'streetName' => $streetName,
             'houseNumber' => $houseNumber,
             'houseNumberAddition' => $houseNumberAddition,
             'street4' => $street4,
-            'maximumNumber' => $this->getNumberOfStreetLines(),
+            'maximumNumber' => $maximumNumber,
         ]);
     }
 
-    public function createFromStreetParts(array $streetParts): StreetLines
+    public function createFromStreetParts(array $streetParts, ?int $maximumNumber = null): StreetLines
     {
-        $streetParts = array_slice($streetParts, 0, $this->getNumberOfStreetLines());
-
         $newStreetParts = [];
         foreach ($streetParts as $streetIndex => $streetPart) {
             if ($streetIndex === 0 && preg_match('/^([0-9]+)/', $streetPart)) {
@@ -53,7 +56,8 @@ class StreetLinesFactory
             $newStreetParts[0] ?? '',
             $newStreetParts[1] ?? '',
             $newStreetParts[2] ?? '',
-            $newStreetParts[3] ?? ''
+            $newStreetParts[3] ?? '',
+                $maximumNumber
         );
     }
 
