@@ -30,7 +30,7 @@ if (false === $optionModel instanceof OptionModelInterface) {
         disabled="disabled"
     <?php endif ?>
     <?= $viewModel->isRequired() ? 'required' : '' ?>
-    class="<?= $css('form-select w-full') ?>"
+    class="<?= $css('form-select w-full disabled:bg-zinc-100') ?>"
 >
     <?php foreach ($optionModel->getOptions($viewModel) as $optionValue => $optionLabel): ?>
         <option value="<?= $optionValue ?>"><?= $optionLabel ?></option>
