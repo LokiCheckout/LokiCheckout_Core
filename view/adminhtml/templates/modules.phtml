@@ -50,12 +50,12 @@ $modulesViewModel = $viewModelFactory->create(Modules::class);
             <tr>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?= $module->getModuleName() ?>
+                        <?= $module->getName() ?>
                     </div>
                 </td>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?php if ($module->isModuleStatus()): ?>
+                        <?php if ($module->isEnabled()): ?>
                             <span class="module-status module-status-notice">Enabled</span>
                         <?php else: ?>
                             <span class="module-status module-status-error">Disabled</span>
@@ -78,20 +78,21 @@ $modulesViewModel = $viewModelFactory->create(Modules::class);
                 </td>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?= $module->getComposerVersion() ?>
+                        <code>
+                        <?php if ($module->isDevVersion()): ?>
+                            <?= $modulesViewModel->shortenGitCommit($module->getGitInfo()->getCommit()) ?>
+                        <?php else: ?>
+                            <?= $module->getComposerVersion() ?>
+                        <?php endif; ?>
+                        </code>
                     </div>
                 </td>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?php if ($module->getComposerVersion() === $module->getLatestComposerVersion()): ?>
-                            <span class="module-status module-status-notice">
-                                <?= $module->getLatestComposerVersion() ?>
+                        <?php $cssClass = $modulesViewModel->getLatestModuleVersionClass($module) ?>
+                            <span class="module-status module-status-<?= $cssClass ?>">
+                                <?= $modulesViewModel->getLatestModuleVersion($module) ?>
                             </span>
-                        <?php else: ?>
-                            <span class="module-status module-status-error">
-                                <?= $module->getLatestComposerVersion() ?>
-                            </span>
-                        <?php endif; ?>
                     </div>
                 </td>
             </tr>

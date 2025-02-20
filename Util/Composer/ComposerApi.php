@@ -31,14 +31,14 @@ class ComposerApi
     {
         $packages = $this->getPackages();
         if (!isset($packages[$composerName])) {
-            return 'unknown';
+            return '';
         }
 
         $versions = [];
         $devCommit = '';
         foreach ($packages[$composerName] as $package) {
             if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $package['version'], $match)) {
-                $devCommit = substr($match[2], strlen($match[2]) - 8, 8);
+                $devCommit = $match[2];
                 continue;
             }
 
@@ -51,5 +51,21 @@ class ComposerApi
 
         usort($versions, 'version_compare');
         return array_pop($versions);
+    }
+
+    public function getLatestCommit(string $composerName): string
+    {
+        $packages = $this->getPackages();
+        if (!isset($packages[$composerName])) {
+            return '';
+        }
+
+        foreach ($packages[$composerName] as $package) {
+            if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $package['version'], $match)) {
+                return $match[2];
+            }
+        }
+
+        return '';
     }
 }
