@@ -3,6 +3,8 @@
     <type name="Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheckCollection">
         <arguments>
             <argument name="checks" xsi:type="array">
+                <item name="store_country_id" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\StoreCountryId</item>
+                <item name="merchant_vat_number" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\MerchantVatNumber</item>
                 <item name="address_lines" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\AddressLines</item>
                 <item name="csp" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\CspMode</item>
             </argument>
