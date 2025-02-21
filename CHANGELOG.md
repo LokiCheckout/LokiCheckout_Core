@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 21 February 2025
+## [0.0.7] - 21 February 2025
 ### Added
 - New admin page for Module Status
 - New admin page for System Checks
