@@ -56,10 +56,12 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
-        $quoteShippingAddress = $this->getContext()->getCheckoutState()->getQuote()->getShippingAddress();
-        $quoteShippingAddress->importCustomerAddressData($customerShippingAddress);
-        $quoteShippingAddress->setCustomerAddressId($customerShippingAddress->getId());
-        $quoteShippingAddress->save(); // @todo
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
+        $shippingAddress->importCustomerAddressData($customerShippingAddress);
+        $shippingAddress->setCustomerAddressId($customerShippingAddress->getId());
+
+        $this->getContext()->getCartRepository()->save($quote);
     }
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int

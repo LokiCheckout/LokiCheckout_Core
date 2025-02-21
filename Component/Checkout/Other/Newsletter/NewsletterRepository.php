@@ -18,7 +18,7 @@ class NewsletterRepository extends ComponentRepository
         }
 
         if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
-            return $this->isCustomerSubscribed($email);
+            return $this->isCustomerSubscribed();
         }
 
         return $this->isGuestSubscribed($email);
@@ -35,7 +35,7 @@ class NewsletterRepository extends ComponentRepository
         }
 
         $subscriber = $this->getContext()->getSubscriberFactory()->create();
-        $subscriber->load($email, 'subscriber_email');
+        $subscriber->load($email, 'subscriber_email'); // @phpstan-ignore-line
         if (!$subscriber->getId() > 0) {
             return;
         }
