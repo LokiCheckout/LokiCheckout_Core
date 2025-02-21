@@ -6,11 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 21 February 2025
 ### Added
 - New admin page for Module Status
 - New admin page for System Checks
+- Add reusable RegionProvider
 
 ### Fixed
+- Set disabled CSS for select as well
+- Fix issue with HTML attributes for nested components
 - Fix JS numeric validator
 - Simplify Agreements handling
 - Add DI plugin as workaround for non-working `free_shipping_subtotal`
@@ -22,7 +26,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rewrite newsletter subscribe logic
 - Rename console message from INFO to DEBUG
 
+### Removed
+- Remove deprecated `{component_name}` variable for HTML attribute
+
 ### Refactor
+- Better handling of streetlines
 - Rename plugin classes to include `Plugin` suffix
 - Refactor LocalMessageRegistry methods
 - Refactor `text_select` to avoid unneeded ID suffix
