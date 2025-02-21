@@ -33,14 +33,15 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        $cart = $this->getQuote();
-        $paymentMethod = (string)$cart->getPayment()->getMethod();
-        $sanitizedPaymentMethod = $this->sanitizePaymentMethod($paymentMethod);
+        $quote = $this->getQuote();
+        $paymentMethod = (string)$quote->getPayment()->getMethod();
 
         if (empty($paymentMethod)) {
             $paymentMethod = $this->getDefaultPayment();
+            $this->saveValue($paymentMethod);
         }
 
+        $sanitizedPaymentMethod = $this->sanitizePaymentMethod($paymentMethod);
         if ($paymentMethod !== $sanitizedPaymentMethod) {
             $this->saveValue($sanitizedPaymentMethod);
         }
