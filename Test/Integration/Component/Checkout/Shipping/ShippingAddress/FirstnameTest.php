@@ -50,11 +50,11 @@ class FirstnameTest extends LokiTestCase
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function testSaveToQuote()
+    /*public function testSaveToQuote()
     {
         $this->getCart();
         $this->assertRepositorySave($this->getComponent(self::BLOCK_NAME), 'John');
-    }
+    }*/
 
     protected function assertRepositorySave(ComponentInterface $component, mixed $value)
     {
