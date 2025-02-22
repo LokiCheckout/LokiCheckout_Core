@@ -3,13 +3,22 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress;
 
 use Magento\Quote\Model\Quote;
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method ShippingAddressContext getContext()
  */
-class ShippingAddressViewModel extends ComponentViewModel
+class ShippingAddressViewModel extends CheckoutViewModel
 {
+    public function isAllowRendering(): bool
+    {
+        if ($this->getQuote()->isVirtual()) {
+            return false;
+        }
+
+        return parent::isAllowRendering();
+    }
+
     public function isEnabled(): bool
     {
         return false === (bool)$this->getQuote()->isVirtual();
@@ -49,7 +58,7 @@ class ShippingAddressViewModel extends ComponentViewModel
         return $this->getContext()->getAddressRenderer()->getHtml($address);
     }
 
-    protected function getQuote(): Quote
+    private function getQuote(): Quote
     {
         return $this->getContext()->getCheckoutState()->getQuote();
     }

@@ -26,11 +26,25 @@ class ShippingMethodsViewModel extends FieldViewModel
 
     public function isRequired(): bool
     {
-        return true;
+        return $this->isVirtualQuote() ? false : true;
+    }
+
+    public function isAllowRendering(): bool
+    {
+        if ($this->isVirtualQuote()) {
+            return false;
+        }
+
+        return parent::isAllowRendering();
     }
 
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutShippingMethods';
+    }
+
+    private function isVirtualQuote(): bool
+    {
+        return $this->getContext()->getCheckoutState()->getQuote()->isVirtual();
     }
 }
