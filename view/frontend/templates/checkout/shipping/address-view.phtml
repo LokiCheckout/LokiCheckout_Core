@@ -6,8 +6,11 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 
 /** @var ShippingAddressViewModel $viewModel */
 /** @var CssClass $css */
-
+$html = $viewModel->getHtml();
+if (empty($html)) {
+    return;
+}
 ?>
 <div class="<?= $css('mb-4') ?>">
-    <address><?= $viewModel->getHtml() ?></address>
+    <address><?= $html ?></address>
 </div>
