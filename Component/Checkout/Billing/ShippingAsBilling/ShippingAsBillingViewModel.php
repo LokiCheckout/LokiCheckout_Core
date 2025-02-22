@@ -10,4 +10,13 @@ class ShippingAsBillingViewModel extends FieldViewModel
     {
         return 'Shipping as Billing';
     }
+
+    public function isAllowRendering(): bool
+    {
+        if ($this->getContext()->getCheckoutState()->getQuote()->isVirtual()) {
+            return false;
+        }
+
+        return parent::isAllowRendering();
+    }
 }
