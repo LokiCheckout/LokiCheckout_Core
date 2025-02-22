@@ -50,7 +50,9 @@ $modulesViewModel = $viewModelFactory->create(Modules::class);
             <tr>
                 <td>
                     <div class="data-grid-cell-content">
-                        <?= $module->getName() ?>
+                        <a href="https://loki-checkout.com/docs/04-modules/<?= $module->getName() ?>">
+                            <?= $module->getName() ?>
+                        </a>
                     </div>
                 </td>
                 <td>
