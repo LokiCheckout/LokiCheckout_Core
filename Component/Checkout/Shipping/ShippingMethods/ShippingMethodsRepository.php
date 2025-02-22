@@ -94,6 +94,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
+        //$shippingAddress->removeAllShippingRates();;
         $shippingAddress->addShippingRate($rate);
 
         $this->getContext()->getCartRepository()->save($quote);
