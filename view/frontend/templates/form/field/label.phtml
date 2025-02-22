@@ -19,7 +19,7 @@ $viewModel = $block->getViewModel();
 ?>
 <label
     for="<?= $viewModel->getElementId() ?>-field"
-    class="<?= $css('inline-block mb-1.5') ?>">
+    class="<?= $css('inline-block mt-2 md:mt-0 mb-1.5') ?>">
     <?= __($viewModel->getFieldLabel()) ?>
 
     <?php if ($viewModel->isRequired() && $config->useRequiredBlock()): ?>
