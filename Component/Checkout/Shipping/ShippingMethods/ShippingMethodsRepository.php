@@ -79,6 +79,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress = $quote->getShippingAddress();
 
         if (empty($shippingMethodCode)) {
+            echo "EMPTY CODE\n";
             $shippingAddress->setCollectShippingRates(true);
             $shippingAddress->collectShippingRates();
             $shippingAddress->setShippingMethod('');
@@ -91,10 +92,11 @@ class ShippingMethodsRepository extends ComponentRepository
 
         $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
+        echo "SHIPPING METHOD CODE: $shippingMethodCode\n";
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
-        //$shippingAddress->removeAllShippingRates();;
+        //$shippingAddress->removeAllShippingRates();
         $shippingAddress->addShippingRate($rate);
 
         $this->getContext()->getCartRepository()->save($quote);
@@ -114,7 +116,7 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
-            //$shippingMethodCode = (string)array_key_first($this->getShippingMethods());
+            $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
         }
 
         return $shippingMethodCode;
