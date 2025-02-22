@@ -25,7 +25,12 @@ class SameAddressService
             return false;
         }
 
-        $address = $this->checkoutState->getQuote()->getShippingAddress();
+        $quote = $this->checkoutState->getQuote();
+        if ($quote->isVirtual()) {
+            return false;
+        }
+
+        $address = $quote->getShippingAddress();
 
         return (bool)$address->getSameAsBilling();
     }

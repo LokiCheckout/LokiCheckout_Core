@@ -6,11 +6,6 @@ use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 
 class ShippingAsBillingViewModel extends FieldViewModel
 {
-    public function getValue(): mixed
-    {
-        return parent::getValue();
-    }
-
     public function getFieldLabel(): string
     {
         return 'Shipping as Billing';
