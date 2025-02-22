@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CheckoutState $checkoutState */
+/** @var CssClass $css */
+
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
+if (false === $checkoutState->getQuote()->isVirtual()) {
+    return;
+}
+
+echo $block->getBlockHtml('loki-checkout.customer');

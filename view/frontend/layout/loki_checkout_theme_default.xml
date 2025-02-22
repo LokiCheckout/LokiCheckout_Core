@@ -13,7 +13,7 @@
                     </arguments>
                 </block>
 
-                <container name="loki-checkout.steps.shipping.customer-fields" htmlTag="div" htmlClass="grid gap-8 mb-8"/>
+                <block name="loki-checkout.steps.shipping.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/shipping-customer-fields.phtml"/>
 
                 <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
             </block>
@@ -27,15 +27,13 @@
                     </arguments>
                 </block>
 
+                <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/billing-customer-fields.phtml"/>
+
                 <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-" />
             </block>
         </referenceBlock>
 
         <!-- Shipping step -->
-        <move element="loki-checkout.customer.customer_email" destination="loki-checkout.steps.shipping.customer-fields" as="customer_email"/>
-        <move element="loki-checkout.customer.customer_gender" destination="loki-checkout.steps.shipping.customer-fields" as="customer_gender"/>
-        <move element="loki-checkout.customer.customer_dob" destination="loki-checkout.steps.shipping.customer-fields" as="customer_dob"/>
-
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
         <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons" />
 

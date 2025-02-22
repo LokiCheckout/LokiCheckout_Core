@@ -1,29 +1,39 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <block
-            name="loki-checkout.customer.customer_email" as="customer_email"
-            template="Yireo_LokiCheckout::form/field.phtml">
+        <block name="loki-checkout.customer" template="Yireo_LokiCheckout::generic/container.phtml">
             <arguments>
-                <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
-            </arguments>
-        </block>
-
-        <block
-            name="loki-checkout.customer.customer_gender" as="customer_gender"
-            ifconfig="customer/address/gender_show"
-            template="Yireo_LokiCheckout::form/field.phtml">
-            <arguments>
-                <argument name="field_type" xsi:type="string">select</argument>
-                <argument name="option_model" xsi:type="object">
-                    Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel
+                <argument name="css_classes" xsi:type="array">
+                    <item name="block" xsi:type="array">
+                        <item name="default" xsi:type="string">grid gap-8 mb-8</item>
+                    </item>
                 </argument>
             </arguments>
-        </block>
 
-        <block
-            name="loki-checkout.customer.customer_dob" as="customer_dob"
-            ifconfig="customer/address/dob_show"
-            template="Yireo_LokiCheckout::form/field.phtml"/>
+            <block
+                name="loki-checkout.customer.customer_email" as="customer_email"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki-checkout.customer.customer_gender" as="customer_gender"
+                ifconfig="customer/address/gender_show"
+                template="Yireo_LokiCheckout::form/field.phtml">
+                <arguments>
+                    <argument name="field_type" xsi:type="string">select</argument>
+                    <argument name="option_model" xsi:type="object">
+                        Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel
+                    </argument>
+                </arguments>
+            </block>
+
+            <block
+                name="loki-checkout.customer.customer_dob" as="customer_dob"
+                ifconfig="customer/address/dob_show"
+                template="Yireo_LokiCheckout::form/field.phtml"/>
+        </block>
     </body>
 </page>
