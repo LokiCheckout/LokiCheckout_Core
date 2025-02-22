@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.2] - 22 February 2025
+### Fixed
+- Update loki_checkout.xml grid CSS for mobile
+
 ## [0.1.1] - 22 February 2025
 - Small responsive fixes
 - Show no billing step title if quote is virtual
