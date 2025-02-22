@@ -5,6 +5,8 @@ namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Shippi
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
+use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Api\Data\ShippingMethodInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
@@ -12,12 +14,12 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
-use PHPUnit\Framework\TestCase;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
+use Magento\TestFramework\Fixture\Config;
 
 #[
     AppIsolation(true),
@@ -30,6 +32,43 @@ use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 class ShippingMethodsRepositoryTest extends LokiTestCase
 {
     const COMPONENT_NAME = 'loki-checkout.shipping.methods';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->getCart();
+        $this->saveShippingAddressValues();
+    }
+
+    #[
+        Config('carriers/flatrate/active', 1),
+    ]
+    public function testGetShippingMethodsWithFlatRate()
+    {
+        /** @var ShippingMethodsRepository $repository */
+        $repository = $this->getComponentRepository(self::COMPONENT_NAME);
+        $shippingMethods = $repository->getShippingMethods();
+        $shippingMethodCodes = $this->getShippingMethodCodes($shippingMethods);
+        $this->assertContains('flatrate', $shippingMethodCodes, implode(' ', $shippingMethodCodes));
+    }
+
+    #[
+        Config('carriers/flatrate/active', 1),
+        Config('carriers/freeshipping/active', 1),
+        Config('carriers/freeshipping/free_shipping_subtotal', 50),
+    ]
+    public function testGetShippingMethodsWithFreeShipping()
+    {
+        $this->saveShippingAddressValues();
+
+        /** @var ShippingMethodsRepository $repository */
+        $repository = $this->getComponentRepository(self::COMPONENT_NAME);
+        $shippingMethods = $repository->getShippingMethods();
+        $shippingMethodCodes = $this->getShippingMethodCodes($shippingMethods);
+
+        $this->assertContains('freeshipping', $shippingMethodCodes, implode(' ', $shippingMethodCodes));
+        $this->assertContains('flatrate', $shippingMethodCodes, implode(' ', $shippingMethodCodes));
+    }
 
     public function testSaveValueWithNonExistingShippingMethod()
     {
@@ -50,9 +89,34 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
 
     private function getComponentRepository(string $blockId): ComponentRepositoryInterface
     {
-        $this->getCart();
         $componentRegistry = ObjectManager::getInstance()->get(ComponentRegistry::class);
         $component = $componentRegistry->getComponentByName($blockId);
         return $component->getRepository();
+    }
+
+    private function saveShippingAddressValues(array $values = []): void
+    {
+        $quote = $this->getQuote();
+
+        $shippingAddress = $quote->getShippingAddress();
+        $shippingAddress->setPostcode($values['postcode'] ?? '1111AA');
+        $shippingAddress->setCity($values['city'] ?? 'Amsterdam');
+        $shippingAddress->setCountryId($values['country_id'] ?? 'NL');
+
+        $cartRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
+        $cartRepository->save($quote);
+    }
+
+    /**
+     * @params $shippingMethods ShippingMethodInterface[]
+     */
+    private function getShippingMethodCodes(array $shippingMethods = []): array
+    {
+        $shippingMethodCodes = [];
+        foreach ($shippingMethods as $shippingMethod) {
+            $shippingMethodCodes[] = $shippingMethod->getMethodCode();
+        }
+
+        return $shippingMethodCodes;
     }
 }
