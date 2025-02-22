@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
+
+/** @var Template $block */
+/** @var TemplateRenderer $templateRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CheckoutState $checkoutState */
+
+$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
+if ($checkoutState->getQuote()->isVirtual()) {
+    return;
+}
+
+echo $templateRenderer->html($block, 'Yireo_LokiCheckout::generic/title.phtml', ['title' => 'Billing']);

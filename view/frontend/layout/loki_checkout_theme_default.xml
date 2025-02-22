@@ -21,11 +21,7 @@
             <block name="loki-checkout.steps.billing" as="billing" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
                 <block
                     name="loki-checkout.steps.billing.title" as="title"
-                    template="Yireo_LokiCheckout::generic/title.phtml">
-                    <arguments>
-                        <argument name="title" xsi:type="string">Billing</argument>
-                    </arguments>
-                </block>
+                    template="Yireo_LokiCheckout::theme/default/billing-step-title.phtml"/>
 
                 <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/billing-customer-fields.phtml"/>
 
