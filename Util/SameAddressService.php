@@ -51,7 +51,7 @@ class SameAddressService
 
         try {
             $this->cartRepository->save($quote);
-        } catch(InputException $inputException) {
+        } catch (InputException $inputException) {
             // @todo: What to do here?
         }
 
