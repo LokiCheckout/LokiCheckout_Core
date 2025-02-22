@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.1] - 22 February 2025
+- Small responsive fixes
+- Show no billing step title if quote is virtual
+- Simplify customer fields block in onestep theme
+- Allow customer fields to be shown in either billing or shipping step
+- Hide shipping address view and shipping methods for virtual quote
+- Hide same-as-billing for virtual quotes
+- Empty address was still showing country
+- Disable Same as Shipping if quote is virtual
+- Allow hiding billing title via XML layout
+- Default payment method was not saved to quote
+- Lift requirements
+
 ## [0.1.0] - 21 February 2025
 - Version bump
 
