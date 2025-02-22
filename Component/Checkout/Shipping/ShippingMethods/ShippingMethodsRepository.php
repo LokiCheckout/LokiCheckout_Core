@@ -79,7 +79,6 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress = $quote->getShippingAddress();
 
         if (empty($shippingMethodCode)) {
-            echo "EMPTY CODE\n";
             $shippingAddress->setCollectShippingRates(true);
             $shippingAddress->collectShippingRates();
             $shippingAddress->setShippingMethod('');
@@ -92,7 +91,6 @@ class ShippingMethodsRepository extends ComponentRepository
 
         $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
-        echo "SHIPPING METHOD CODE: $shippingMethodCode\n";
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
