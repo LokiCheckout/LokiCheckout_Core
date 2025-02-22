@@ -34,6 +34,14 @@ class AddressRenderer
     {
         $isEmpty = true;
         foreach ($addressData as $fieldName => $fieldValue) {
+            if (is_string($fieldValue)) {
+                $fieldValue = trim($fieldValue);
+            }
+
+            if (is_array($fieldValue) && count($fieldValue) === 1 && empty(trim((string)$fieldValue[0]))) {
+                continue;
+            }
+
             if (in_array($fieldName, ['id', 'country_id', 'vat_id'])) {
                 continue;
             }
