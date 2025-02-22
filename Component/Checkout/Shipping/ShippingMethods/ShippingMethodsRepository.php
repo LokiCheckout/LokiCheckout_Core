@@ -33,8 +33,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setCollectShippingRates(true);
-        $shippingAddress->collectShippingRates();
-        $this->getContext()->getTotalsCollector()->collectAddressTotals($quote, $shippingAddress);
+        //$shippingAddress->collectShippingRates(); // @todo: Remove?
 
         try {
             $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
@@ -43,6 +42,8 @@ class ShippingMethodsRepository extends ComponentRepository
 
             return [];
         }
+
+        $this->getContext()->getTotalsCollector()->collectAddressTotals($quote, $shippingAddress);// @todo: Remove?
 
         foreach ($availableMethods as $shippingMethod) {
             $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
@@ -94,8 +95,8 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
-        //$shippingAddress->removeAllShippingRates();
-        $shippingAddress->addShippingRate($rate);
+        //$shippingAddress->removeAllShippingRates();// @todo: Remove?
+        $shippingAddress->addShippingRate($rate);// @todo: Remove?
 
         $this->getContext()->getCartRepository()->save($quote);
 
