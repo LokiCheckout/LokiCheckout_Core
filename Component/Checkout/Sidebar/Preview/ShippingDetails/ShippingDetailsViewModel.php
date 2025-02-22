@@ -57,7 +57,7 @@ class ShippingDetailsViewModel implements ArgumentInterface
 
     private function getCarrier(string $carrierCode): AbstractCarrierInterface
     {
-        foreach ($this->shippingConfig->getActiveCarriers() as $activeCarrier) {
+        foreach ($this->shippingConfig->getAllCarriers() as $activeCarrier) {
             if ($activeCarrier->getCarrierCode() === $carrierCode) {
                 return $activeCarrier;
             }
