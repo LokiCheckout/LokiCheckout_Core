@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 23 February 2025
+### Fixed
+- Remove unneeded collectTotals
+- Cleanup totals calculation
+- Cleanup cart totals rendering
+- Failsafe to skip loading shipping methods if country ID is empty
+- Make sure default country ID is saved to quote
+- Prevent endless loop when submitting to AJAX which then fails
+- Simplify shipping method calculation
+- Recalculate totals properly via AJAX
+- Fix shipping methods test except totals
+- Re-enable default shipping method pick
+- Dont render address template when HTML is empty anyway
+- Add doc link to module overview
+- Carrier label not found if carrier no longer active
+
 ## [0.1.2] - 22 February 2025
 ### Fixed
 - Update loki_checkout.xml grid CSS for mobile
