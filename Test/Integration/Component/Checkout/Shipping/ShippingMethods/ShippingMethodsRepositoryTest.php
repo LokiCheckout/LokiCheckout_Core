@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingMethods;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
+use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
@@ -193,7 +195,7 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
 
         $this->assertNotEmpty($shippingAddress->getWeight());
 
-        $quote->collectTotals();
+        //$quote->collectTotals();
 
         $cartRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
         $cartRepository->save($quote);
@@ -323,14 +325,25 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
 
     private function assertTotalsContainShippingMethod(string $shippingMethod, Quote $quote): void
     {
-        $totals = $quote->getTotals();
-        $totalCodes = [];
-        foreach ($totals as $total) {
-            $totalCodes[] = $total->getCode();
-            $totalStrings[] = var_export($total->getFullInfo(), true);
+        $totalsInformationFactory = ObjectManager::getInstance()->get(TotalsInformationInterfaceFactory::class);
+        $totalsInformation = $totalsInformationFactory->create();
+        $totalsInformation->setAddress($quote->getShippingAddress());
+
+        $totalsInformationManagement = ObjectManager::getInstance()->get(TotalsInformationManagementInterface::class);
+        $totals = $totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
+
+        $totalSegments = $totals->getTotalSegments();
+        $totalSegmentCodes = [];
+        $totalSegmentStrings = [];
+        foreach ($totalSegments as $totalSegment) {
+            $totalSegmentCodes[] = $totalSegment->getCode();
+            $totalSegmentStrings[] = var_export($totalSegment->getTitle(), true);
         }
 
-        $this->assertNotEmpty($totalCodes);
-        $this->assertContains($shippingMethod, $totalStrings, var_export($totalStrings, true));
+        $shippingMethodLabel = $shippingMethod;
+
+        $this->assertNotEmpty($totalSegments);
+        $this->assertContains('shipping', $totalSegmentCodes);
+        $this->assertContains($shippingMethodLabel, $totalSegmentStrings, var_export($totalSegmentStrings, true));
     }
 }
