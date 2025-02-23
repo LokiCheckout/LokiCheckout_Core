@@ -323,8 +323,15 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         return $this->getComponentRepository(self::COMPONENT_NAME);
     }
 
-    private function assertTotalsContainShippingMethod(string $shippingMethod, Quote $quote): void
+    private function assertTotalsContainShippingMethod(string $shippingMethodCode, Quote $quote): void
     {
+        $shippingMethodLabel = '';
+        foreach ($this->getRepository()->getShippingMethods() as $shippingMethod) {
+            if (str_starts_with($shippingMethodCode, $shippingMethod->getMethodCode().'_')) {
+                $shippingMethodLabel = $shippingMethod->getMethodTitle();
+            }
+        }
+
         $totalsInformationFactory = ObjectManager::getInstance()->get(TotalsInformationInterfaceFactory::class);
         $totalsInformation = $totalsInformationFactory->create();
         $totalsInformation->setAddress($quote->getShippingAddress());
@@ -334,16 +341,18 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
 
         $totalSegments = $totals->getTotalSegments();
         $totalSegmentCodes = [];
-        $totalSegmentStrings = [];
+        $totalSegmentTitles = [];
+        $shippingMethodLabelMatched = false;
         foreach ($totalSegments as $totalSegment) {
             $totalSegmentCodes[] = $totalSegment->getCode();
-            $totalSegmentStrings[] = var_export($totalSegment->getTitle(), true);
+            $totalSegmentTitles[] = $totalSegment->getTitle();
+            if (str_contains($totalSegment->getTitle(), $shippingMethodLabel)) {
+                $shippingMethodLabelMatched = true;
+            }
         }
-
-        $shippingMethodLabel = $shippingMethod;
 
         $this->assertNotEmpty($totalSegments);
         $this->assertContains('shipping', $totalSegmentCodes);
-        $this->assertContains($shippingMethodLabel, $totalSegmentStrings, var_export($totalSegmentStrings, true));
+        $this->assertTrue($shippingMethodLabelMatched, var_export($totalSegmentTitles, true));
     }
 }
