@@ -96,7 +96,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
         //$shippingAddress->removeAllShippingRates();// @todo: Remove?
-        $shippingAddress->addShippingRate($rate);// @todo: Remove?
+        //$shippingAddress->addShippingRate($rate);// @todo: Remove?
 
         $this->getContext()->getCartRepository()->save($quote);
 

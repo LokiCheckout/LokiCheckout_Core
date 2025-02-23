@@ -6,9 +6,9 @@ namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Shippi
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\App\ResourceConnection;
 use Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate;
 use Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\Collection as TablerateCollection;
-use Magento\OfflineShipping\Test\Fixture\TablerateFixture;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Quote\Model\Quote;
@@ -71,35 +71,49 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         $this->assertShippingMethodAvailable('freeshipping_freeshipping', $shippingMethods);
     }
 
-    /*
+
     #[
         ConfigFixture('carriers/instore/active', 1, 'store'),
     ]
     // @todo: Not detected by Shipping::collectRates - is this replaced by MSI?
     public function testGetShippingMethodsWithInStoreShipping()
     {
+        $this->markTestSkipped();
+        return;
         $this->getCart();
         $this->saveShippingAddressValues();
 
         $repository = $this->getRepository();
         $shippingMethods = $repository->getShippingMethods();
         $this->assertShippingMethodAvailable('instore', $shippingMethods);
-    }*/
+    }
 
     #[
         ConfigFixture('carriers/tablerate/active', 1, 'store'),
+        ConfigFixture('carriers/tablerate/condition_name', 'package_qty', 'store'),
     ]
     public function testGetShippingMethodsWithTableRates()
     {
-        $this->createTablerate('NL', '*', '*', 0, 42);
-        $this->createTablerate('NL', '*', '*', 42, 0);
+        $this->cleanTableRates();
+        $this->createTablerate('NL', '*', '*', 0, 1, 'package_qty', '1');
+
+        $this->assertCarrierIsActive('tablerate');
 
         $this->getCart();
         $this->saveShippingAddressValues();
 
         $repository = $this->getRepository();
         $shippingMethods = $repository->getShippingMethods();
-        $this->assertShippingMethodAvailable('tablerate', $shippingMethods);
+        $this->assertShippingMethodAvailable('tablerate_bestway', $shippingMethods);
+    }
+
+    public function testGetShippingMethodsWithTableRatesAndFreeShipping()
+    {
+        $this->markTestSkipped();
+        return;
+        $address->setFreeShipping(true);
+        $item->setFreeShipping(true);
+        $item->setFreeShippingMethod('tablerate_bestway');
     }
 
     public function testSaveValueWithExistingShippingMethod()
@@ -114,6 +128,7 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         $shippingAddress = $quote->getShippingAddress();
         $this->assertAddressHasShippingMethod('flatrate_flatrate', $shippingAddress);
         $this->assertAddressContainsRate('flatrate', $shippingAddress);
+        $this->assertTotalsContainShippingMethod('flatrate_flatrate', $quote);
     }
 
     public function testSaveValueWithNonExistingShippingMethod()
@@ -191,19 +206,37 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
     }
 
     /**
-     * @params $shippingMethods ShippingMethodInterface[]
+     * @params $availableShippingMethods ShippingMethodInterface[]
      */
     private function assertShippingMethodAvailable(string $expectedMethod, array $availableShippingMethods = []): void
     {
-        $shippingMethodCodes = array_keys($availableShippingMethods);
-        $debugMsg = 'Available shipping rates: ';
-
-        $shippingRates = $this->getQuote()->getShippingAddress()->getAllShippingRates();
-        foreach ($shippingRates as $shippingRate) {
-            $debugMsg .= ' '.$shippingRate->getCode();
+        $shippingMethodCodes = [];
+        foreach ($availableShippingMethods as $availableShippingMethod) {
+            $shippingMethodCodes[] = $availableShippingMethod->getCarrierCode()
+                .'_'
+                .$availableShippingMethod->getMethodCode();
         }
 
+        $debugMsg = 'Available shipping rates: ';
+        $debugMsg .= implode(', ', $shippingMethodCodes);
+
         $this->assertContains($expectedMethod, $shippingMethodCodes, $debugMsg);
+    }
+
+    private function assertCarrierIsActive(string $carrierCode): void
+    {
+        $shippingConfig = ObjectManager::getInstance()->get(\Magento\Shipping\Model\Config::class);
+        $activeCarriers = $shippingConfig->getActiveCarriers();
+        $activeCarrierCodes = [];
+        foreach ($activeCarriers as $activeCarrier) {
+            $activeCarrierCodes[] = $activeCarrier->getCarrierCode();
+        }
+
+        $this->assertContains(
+            $carrierCode,
+            $activeCarrierCodes,
+            'Active carriers: '.implode(', ', $activeCarrierCodes)
+        );
     }
 
     private function assertAddressHasShippingMethod(string $expectedMethod, AddressInterface $address): void
@@ -228,6 +261,13 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         $this->assertTrue($found, $debugMsg);
     }
 
+    private function cleanTableRates()
+    {
+        $resourceConnection = ObjectManager::getInstance()->create(ResourceConnection::class);
+        $table = $resourceConnection->getTableName('shipping_tablerate');
+        $resourceConnection->getConnection()->query('DELETE FROM '.$table);
+    }
+
     private function createTablerate(
         string $countryId = 'US',
         string $regionId = '*',
@@ -235,7 +275,7 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         int $price = 0,
         int $cost = 0,
         string $conditionName = 'package_qty',
-        int $conditionValue = 1,
+        string $conditionValue = '',
         int $websiteId = 1,
     ): void {
         $data = [
@@ -285,5 +325,18 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
     private function getRepository(): ShippingMethodsRepository
     {
         return $this->getComponentRepository(self::COMPONENT_NAME);
+    }
+
+    private function assertTotalsContainShippingMethod(string $shippingMethod, Quote $quote): void
+    {
+        $totals = $quote->getTotals();
+        $totalCodes = [];
+        foreach ($totals as $total) {
+            $totalCodes[] = $total->getCode();
+            $totalStrings[] = var_export($total->getFullInfo(), true);
+        }
+
+        $this->assertNotEmpty($totalCodes);
+        $this->assertContains($shippingMethod, $totalStrings, var_export($totalStrings, true));
     }
 }
