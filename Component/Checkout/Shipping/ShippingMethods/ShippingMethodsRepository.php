@@ -33,7 +33,6 @@ class ShippingMethodsRepository extends ComponentRepository
 
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setCollectShippingRates(true);
-        //$shippingAddress->collectShippingRates(); // @todo: Remove?
 
         try {
             $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
@@ -42,8 +41,6 @@ class ShippingMethodsRepository extends ComponentRepository
 
             return [];
         }
-
-        $this->getContext()->getTotalsCollector()->collectAddressTotals($quote, $shippingAddress);// @todo: Remove?
 
         foreach ($availableMethods as $shippingMethod) {
             $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
@@ -80,8 +77,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress = $quote->getShippingAddress();
 
         if (empty($shippingMethodCode)) {
-            $shippingAddress->setCollectShippingRates(true);
-            $shippingAddress->collectShippingRates();
+            $shippingAddress->removeAllShippingRates();
             $shippingAddress->setShippingMethod('');
             $this->getContext()->getCartRepository()->save($quote);
 
@@ -90,13 +86,12 @@ class ShippingMethodsRepository extends ComponentRepository
             return;
         }
 
-        //$rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
+        $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
         $shippingAddress->setShippingMethod($shippingMethodCode);
-        //$shippingAddress->removeAllShippingRates();// @todo: Remove?
-        //$shippingAddress->addShippingRate($rate);// @todo: Remove?
+        $shippingAddress->addShippingRate($rate);
 
         $this->getContext()->getCartRepository()->save($quote);
 
@@ -106,18 +101,38 @@ class ShippingMethodsRepository extends ComponentRepository
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
         if (empty($shippingMethodCode)) {
+            return $this->getDefaultShippingMethod();
+        }
+
+        $shippingMethods = $this->getShippingMethods();
+        if (empty($shippingMethods)) {
+            $this->component->getLocalMessageRegistry()->addError('No shipping methods available');
+            return '';
+        }
+
+        if (false === array_key_exists($shippingMethodCode, $shippingMethods)) {
+            $this->component->getLocalMessageRegistry()->addError('Chosen shipping method is not available');
+            return $this->getDefaultShippingMethod();
+        }
+
+        if (!empty($shippingMethodCode)) {
             return $shippingMethodCode;
         }
 
-        if (false === array_key_exists($shippingMethodCode, $this->getShippingMethods())) {
-            $this->component->getLocalMessageRegistry()->addError('Method not allowed');
-            $shippingMethodCode = '';
+        return $this->getDefaultShippingMethod();
+    }
+
+    private function getDefaultShippingMethod(): string
+    {
+        if (false === $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
+            return '';
         }
 
-        if (empty($shippingMethodCode) && $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
-            $shippingMethodCode = (string)array_key_first($this->getShippingMethods());
+        $shippingMethods = $this->getShippingMethods();
+        if (empty($shippingMethods)) {
+            return '';
         }
 
-        return $shippingMethodCode;
+        return (string)array_key_first($shippingMethods);
     }
 }
