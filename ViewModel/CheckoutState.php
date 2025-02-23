@@ -51,7 +51,6 @@ class CheckoutState implements ArgumentInterface
 
     public function saveQuote(Quote $quote)
     {
-        $quote->collectTotals(); // @todo: Is this always needed with every single save?
         $this->cartRepository->save($quote);
     }
 
