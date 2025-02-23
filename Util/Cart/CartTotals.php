@@ -21,15 +21,13 @@ class CartTotals implements ArgumentInterface
     public function getTotals()
     {
         $quote = $this->checkoutState->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-
+        
         if ($this->ajax->isAjax()) {
             $quote->setTotalsCollectedFlag(false);
-            $quote->collectTotals();
         }
 
         $totalsInformation = $this->totalsInformationFactory->create();
-        $totalsInformation->setAddress($shippingAddress);
+        $totalsInformation->setAddress($quote->getShippingAddress());
 
         $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
         return $totals->getTotalSegments();
