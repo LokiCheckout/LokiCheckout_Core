@@ -30,7 +30,7 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         $shippingAddress = $quote->getShippingAddress();
-        if(!$shippingAddress->getCountryId()) {
+        if (!$shippingAddress->getCountryId()) {
             return [];
         }
 
@@ -110,11 +110,13 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingMethods = $this->getShippingMethods();
         if (empty($shippingMethods)) {
             $this->component->getLocalMessageRegistry()->addError('No shipping methods available');
+
             return '';
         }
 
         if (false === array_key_exists($shippingMethodCode, $shippingMethods)) {
             $this->component->getLocalMessageRegistry()->addError('Chosen shipping method is not available');
+
             return $this->getDefaultShippingMethod();
         }
 
