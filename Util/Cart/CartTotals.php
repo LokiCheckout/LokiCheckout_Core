@@ -24,22 +24,14 @@ class CartTotals implements ArgumentInterface
         $shippingAddress = $quote->getShippingAddress();
 
         if ($this->ajax->isAjax()) {
+            $quote->setTotalsCollectedFlag(false);
             $quote->collectTotals();
-            $shippingAddress->setCollectShippingRates(true);
-            $shippingAddress->collectShippingRates();
         }
 
-        $totals = $this->totalsInformationFactory->create();
-        $totals->setAddress($shippingAddress);
+        $totalsInformation = $this->totalsInformationFactory->create();
+        $totalsInformation->setAddress($shippingAddress);
 
-        $shippingMethod = $shippingAddress->getShippingMethod();
-        if (!empty($shippingMethod)) {
-            list($carrierCode, $carrierMethod) = explode('_', $shippingMethod);
-            $totals->setShippingCarrierCode($carrierCode);
-            $totals->setShippingMethodCode($carrierMethod);
-        }
-
-        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totals);
+        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
         return $totals->getTotalSegments();
     }
 }
