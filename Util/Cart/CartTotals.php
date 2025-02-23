@@ -21,7 +21,7 @@ class CartTotals implements ArgumentInterface
     public function getTotals()
     {
         $quote = $this->checkoutState->getQuote();
-        
+
         if ($this->ajax->isAjax()) {
             $quote->setTotalsCollectedFlag(false);
         }
