@@ -5,7 +5,7 @@
             afterInit() {
                 this.dispatchShippingMethodEvent();
                 this.$watch('value', () => {
-                    if (this.value) {
+                    if (this.value && this.value !== this.originalValue) {
                         this.submit();
                     }
                 });
