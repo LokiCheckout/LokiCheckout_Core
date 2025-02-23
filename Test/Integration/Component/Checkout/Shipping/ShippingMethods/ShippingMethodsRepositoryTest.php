@@ -126,6 +126,7 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
 
         $quote = $this->getQuote();
         $shippingAddress = $quote->getShippingAddress();
+
         $this->assertAddressHasShippingMethod('flatrate_flatrate', $shippingAddress);
         $this->assertAddressContainsRate('flatrate', $shippingAddress);
         $this->assertTotalsContainShippingMethod('flatrate_flatrate', $quote);
@@ -193,13 +194,6 @@ class ShippingMethodsRepositoryTest extends LokiTestCase
         $this->assertNotEmpty($shippingAddress->getWeight());
 
         $quote->collectTotals();
-
-        $cartRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
-        $cartRepository->save($quote);
-
-        $shippingAddress->setCollectShippingRates(true);
-        $shippingAddress->setFreeMethodWeight(true);
-        $shippingAddress->collectShippingRates();
 
         $cartRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
         $cartRepository->save($quote);
