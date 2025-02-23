@@ -29,9 +29,12 @@ class ShippingMethodsRepository extends ComponentRepository
             return [];
         }
 
-        $quote->collectTotals();
-
         $shippingAddress = $quote->getShippingAddress();
+        if(!$shippingAddress->getCountryId()) {
+            return [];
+        }
+
+        $quote->collectTotals();
         $shippingAddress->setCollectShippingRates(true);
 
         try {
