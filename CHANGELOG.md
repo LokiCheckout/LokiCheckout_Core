@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.4] - 23 February 2025
+### Fixed
+- Intercept exception with addShippingRate
+
 ## [0.1.3] - 23 February 2025
 ### Fixed
 - Remove unneeded collectTotals
