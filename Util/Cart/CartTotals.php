@@ -6,23 +6,33 @@ use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
 use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiComponents\Util\Ajax;
 
 class CartTotals implements ArgumentInterface
 {
     public function __construct(
         private CheckoutState $checkoutState,
         private TotalsInformationManagementInterface $totalsInformationManagement,
-        private TotalsInformationInterfaceFactory $totalsInformationFactory
+        private TotalsInformationInterfaceFactory $totalsInformationFactory,
+        private Ajax $ajax
     ) {
     }
 
     public function getTotals()
     {
         $quote = $this->checkoutState->getQuote();
-        $totals = $this->totalsInformationFactory->create();
-        $totals->setAddress($quote->getShippingAddress());
+        $shippingAddress = $quote->getShippingAddress();
 
-        $shippingMethod = $quote->getShippingAddress()?->getShippingMethod();
+        if ($this->ajax->isAjax()) {
+            $quote->collectTotals();
+            $shippingAddress->setCollectShippingRates(true);
+            $shippingAddress->collectShippingRates();
+        }
+
+        $totals = $this->totalsInformationFactory->create();
+        $totals->setAddress($shippingAddress);
+
+        $shippingMethod = $shippingAddress->getShippingMethod();
         if (!empty($shippingMethod)) {
             list($carrierCode, $carrierMethod) = explode('_', $shippingMethod);
             $totals->setShippingCarrierCode($carrierCode);
