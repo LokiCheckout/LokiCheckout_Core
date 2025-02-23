@@ -90,7 +90,7 @@ class ShippingMethodsRepository extends ComponentRepository
             return;
         }
 
-        $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
+        //$rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
 
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
