@@ -17,7 +17,7 @@ $total = $block->getTotal();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
 <dt class="total label <?= $css('font-bold', $total->getCode() . '-label') ?>">
-    <?= __($total->getTitle()) ?>
+    <?= __(trim($total->getTitle())) ?>
 </dt>
 <dd class="total value <?= $css('text-right', $total->getCode() . '-value') ?>">
     <?= $priceFormatter->format($total->getValue()) ?>

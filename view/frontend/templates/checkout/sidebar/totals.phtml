@@ -31,7 +31,7 @@ $totals = $cartTotals->getTotals();
                 <?= $childBlock->setData(['total' => $total])->toHtml() ?>
             <?php else: ?>
                 <dt class="<?= $css('font-medium', $total->getCode() . '-label') ?>">
-                    <?= __($total->getTitle()) ?>
+                    <?= __(trim($total->getTitle())) ?>
                 </dt>
                 <dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
                     <?= $priceFormatter->format($total->getValue()) ?>
