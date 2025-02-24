@@ -22,6 +22,7 @@ $viewModel = $block->getViewModel();
 $paymentMethod = $block->getMethod();
 $code = $paymentMethod->getCode();
 $isCurrent = $block->getIsCurrent();
+$showHidden = (bool)$block->getShowHidden(); // @doc
 ?>
 <li class="<?= $css('cursor-pointer relative my-4 p-4') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
     <div class="<?= $css('flex', 'method') ?>">
@@ -47,6 +48,7 @@ $isCurrent = $block->getIsCurrent();
                 <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
             </div>
 
+            <?php if ($isCurrent || $showHidden) : ?>
             <div class="<?= $css('my-4', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= $blockRenderer->html(
                     $block,
@@ -61,6 +63,7 @@ $isCurrent = $block->getIsCurrent();
                 )
                 ?>
             </div>
+            <?php endif; ?>
         </div>
     </div>
 </li>
