@@ -10,6 +10,11 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var StepForwardButtonViewModel $viewModel */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
+
+$buttonLabel = $block->getButtonLabel();
+if ($viewModel->getContext()->getQuote()->isVirtual()) {
+    $buttonLabel = $block->getButtonLabelWithoutPayment();
+}
 ?>
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
