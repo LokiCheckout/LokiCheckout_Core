@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.5] - 24 February 2025
+### Fixed
+- Prevent exception when selecting shipping method repeatedly
+- Allow default value in field to be saved automatically
+- Retrieve option model from ViewModel
+- Remove empty option for gender
+- Remove bgcolor from login card
+- Add Dutch translations
+- Remove demo field label "Surname"
+
 ## [0.1.4] - 23 February 2025
 ### Fixed
 - Intercept exception with addShippingRate
