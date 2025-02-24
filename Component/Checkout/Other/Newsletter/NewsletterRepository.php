@@ -3,12 +3,13 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 
 use Magento\Newsletter\Model\Subscriber;
+use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
  * @method NewsletterContext getContext()
  */
-class NewsletterRepository extends ComponentRepository
+class NewsletterRepository extends FieldRepository
 {
     public function getValue(): mixed
     {
