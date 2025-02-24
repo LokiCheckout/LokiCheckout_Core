@@ -23,7 +23,7 @@ class ShippingAddressState implements AddressStateInterface
         return $this->getShippingAddress()->getData($attributeCode);
     }
 
-    public function save(string $attributeCode, string $value): void
+    public function save(string $attributeCode, bool|string $value): void
     {
         $shippingAddress = $this->getShippingAddress();
         $shippingAddress->setData($attributeCode, $value);

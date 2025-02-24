@@ -166,6 +166,15 @@
                     name="loki-checkout.shipping.address.vat_id" as="vat_id"
                     ifconfig="customer/address/taxvat_show"
                     template="Yireo_LokiCheckout::form/field.phtml"/>
+
+                <block
+                    name="loki-checkout.shipping.address.save_in_address_book" as="save_in_address_book"
+                    template="Yireo_LokiCheckout::form/field.phtml">
+                    <arguments>
+                        <argument name="field_type" xsi:type="string">checkbox</argument>
+                        <argument name="show_field_label" xsi:type="boolean">false</argument>
+                    </arguments>
+                </block>
             </block>
         </block>
 

@@ -341,6 +341,13 @@
     />
 
     <component
+        name="loki-checkout.shipping.address.save_in_address_book"
+        group="shippingAddressFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookRepository"
+    />
+
+    <component
         name="loki-checkout.billing.address.prefix"
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel"
@@ -437,6 +444,13 @@
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\VatId\VatIdRepository"
+    />
+
+    <component
+        name="loki-checkout.billing.address.save_in_address_book"
+        group="billingAddressFields"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookRepository"
     />
 
     <component
