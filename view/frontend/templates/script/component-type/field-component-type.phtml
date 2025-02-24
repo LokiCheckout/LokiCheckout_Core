@@ -20,6 +20,11 @@
             this.afterSubmit();
         },
         afterSubmit() {
+            const buttonComponent = Alpine.store('components').get('LokiCheckoutStepsShippingForwardButton');
+            if (buttonComponent) {
+                buttonComponent.updateValid();
+            }
+
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component:this}}));
         },
     };

@@ -35,7 +35,9 @@
                         components.push(component.id);
                     })
 
-                    //yireoLokiCheckoutLogger('DEBUG: Invalid components for step "' + this.currentStep + '"', components);
+                    yireoLokiCheckoutLogger('DEBUG: Invalid components for step "' + this.currentStep + '"', components);
+                } else {
+                    console.log('Valid');
                 }
 
                 return this.valid;
