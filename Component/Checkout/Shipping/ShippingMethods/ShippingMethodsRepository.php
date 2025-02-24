@@ -89,18 +89,14 @@ class ShippingMethodsRepository extends ComponentRepository
             return;
         }
 
-        $rate = $quote->getShippingAddress()->getShippingRateByCode($shippingMethodCode);
-
         $shippingAddress->setShippingMethod($shippingMethodCode);
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
 
-        try {
-            $shippingAddress->addShippingRate($rate);
-        } catch(\Exception $e) {
-            $this->getGlobalMessageRegistry()->addError($e->getMessage());
-        }
+        $quote->collectTotals();
+        $this->getContext()->getCartRepository()->save($quote);
 
+        $shippingAddress->setShippingMethod($shippingMethodCode);
         $this->getContext()->getCartRepository()->save($quote);
 
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();
