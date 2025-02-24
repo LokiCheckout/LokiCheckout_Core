@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.6] - 24 February 2025
+
+### Added
+- Save in Address Book checkbox
+- Add more translation strings
+
+### Fixed
+- Prevent null from throwing TypeError / Beautify shipping method label
+- Allow saving more variable types
+- Call to undefined method getDefaultValue()
+- Wrong exception caught
+- Prevent saving non-existing payment method still set as default
+
 ## [0.1.5] - 24 February 2025
 ### Fixed
 - Prevent exception when selecting shipping method repeatedly
