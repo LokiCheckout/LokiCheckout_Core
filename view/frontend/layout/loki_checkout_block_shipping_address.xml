@@ -74,11 +74,7 @@
 
                 <block
                     name="loki-checkout.shipping.address.lastname" as="lastname"
-                    template="Yireo_LokiCheckout::form/field.phtml">
-                    <arguments>
-                        <argument name="field_label" xsi:type="string">Surname</argument><!-- @todo Move demo -->
-                    </arguments>
-                </block>
+                    template="Yireo_LokiCheckout::form/field.phtml"/>
 
                 <block
                     name="loki-checkout.shipping.address.suffix" as="suffix"
