@@ -13,7 +13,7 @@ use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 $viewModel = $block->getViewModel();
 $optionModel = $viewModel->getOptionModel();
 if (false === $optionModel instanceof OptionModelInterface) {
-    echo 'No options found';
+    echo __('No options found');
     return;
 }
 

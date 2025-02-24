@@ -13,7 +13,7 @@ use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 $viewModel = $block->getViewModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 if (false === $optionModel instanceof OptionModelInterface) {
-    echo 'No options found';
+    echo __('No options found');
     return;
 }
 
