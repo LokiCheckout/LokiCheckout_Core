@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Util\Block\CssClassParser;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiComponents\Exception\NoBlockFoundException;
+use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 use Yireo\LokiComponents\Util\Block\CssClassParser\CssClassParserInterface;
 
 class GridClassParser implements CssClassParserInterface
@@ -58,7 +58,7 @@ class GridClassParser implements CssClassParserInterface
 
         try {
             $block = $gridLayout->getBlock($blockAlias);
-        } catch (NoBlockFoundException $exception) {
+        } catch (BlockNotFoundException $exception) {
             return '';
         }
 
