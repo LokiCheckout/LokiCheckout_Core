@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 
+use InvalidArgumentException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
@@ -45,14 +46,24 @@ class ShippingDetailsViewModel implements ArgumentInterface
 
         list($carrierCode, $carrierMethod) = explode('_', $shippingMethod);
 
-        $carrierTitle = $this->scopeConfig->getValue(
-            'carriers/'.$carrierCode.'/title',
-        );
+        $parts = [];
 
         $carrier = $this->getCarrier($carrierCode);
-        $methodTitle = $this->getMethodLabel($carrier, $carrierMethod);
+        $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
 
-        return $methodTitle.' / '.$carrierTitle;
+        if (!empty($methodTitle)) {
+            $parts[] = $methodTitle;
+        }
+
+        $carrierTitle = trim($this->scopeConfig->getValue(
+            'carriers/'.$carrierCode.'/title',
+        ));
+
+        if (!empty($carrierTitle)) {
+            $parts[] = $carrierTitle;
+        }
+
+        return implode(' / ', $parts);
     }
 
     private function getCarrier(string $carrierCode): AbstractCarrierInterface
@@ -63,7 +74,7 @@ class ShippingDetailsViewModel implements ArgumentInterface
             }
         }
 
-        throw new \InvalidArgumentException('Carrier not found: '.$carrierCode);
+        throw new InvalidArgumentException('Carrier not found: '.$carrierCode);
     }
 
     private function getMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string
@@ -71,7 +82,7 @@ class ShippingDetailsViewModel implements ArgumentInterface
         $carrierMethods = $carrier->getAllowedMethods();
         foreach ($carrierMethods as $carrierCode => $carrierLabel) {
             if ($carrierMethod === $carrierCode) {
-                return $carrierLabel;
+                return (string)$carrierLabel;
             }
         }
 
