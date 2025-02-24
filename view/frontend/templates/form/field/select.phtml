@@ -2,15 +2,16 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
 /** @var Template $block */
-/** @var ComponentViewModelInterface $viewModel */
+/** @var FieldViewModelInterface $viewModel */
 /** @var CssClass $css */
 
 $viewModel = $block->getViewModel();
+$optionModel = $viewModel->getOptionModel();
 $optionModel = $block->getAncestorBlock()->getOptionModel();
 if (false === $optionModel instanceof OptionModelInterface) {
     echo 'No options found';

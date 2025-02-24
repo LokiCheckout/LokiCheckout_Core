@@ -2,7 +2,9 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
+use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 /**
  * @method FieldContext getContext()
@@ -132,5 +134,22 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
     public function getMax(): string
     {
         return (string)$this->getBlock()->getMax();
+    }
+
+    public function getOptionModel(): ?OptionModelInterface
+    {
+        $block = $this->getBlock();
+        if ($block->getOptionModel() instanceof OptionModelInterface) {
+            return $block->getOptionModel();
+        }
+
+        $ancestorBlock = $block->getAncestorBlock();
+        if ($ancestorBlock instanceof AbstractBlock) {
+            if ($ancestorBlock->getOptionModel() instanceof OptionModelInterface) {
+                return $ancestorBlock->getOptionModel();
+            }
+        }
+
+        return null;
     }
 }

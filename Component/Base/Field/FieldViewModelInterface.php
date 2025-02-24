@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\Component\Base\Field;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModelInterface;
+use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
 
 interface FieldViewModelInterface extends CheckoutViewModelInterface
 {
@@ -47,4 +48,5 @@ interface FieldViewModelInterface extends CheckoutViewModelInterface
      */
     public function isValid(): bool;
 
+    public function getOptionModel(): ?OptionModelInterface;
 }
