@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 
+use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
  * @method CheckoutContext getContext()
  */
-class CouponCodeRepository extends ComponentRepository
+class CouponCodeRepository extends FieldRepository
 {
     public function getValue(): mixed
     {
