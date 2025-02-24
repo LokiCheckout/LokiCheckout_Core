@@ -2,15 +2,15 @@
 
 namespace Yireo\LokiCheckout\Component\Base\AddressField;
 
+use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
-use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
  * @method AddressFieldContext getContext()
  */
-class AddressFieldRepository extends ComponentRepository
+class AddressFieldRepository extends FieldRepository
 {
     public function __construct(
         protected AddressStateProvider $addressStateProvider,

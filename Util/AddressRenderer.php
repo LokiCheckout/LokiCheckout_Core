@@ -42,7 +42,7 @@ class AddressRenderer
                 continue;
             }
 
-            if (in_array($fieldName, ['id', 'country_id', 'vat_id'])) {
+            if (in_array($fieldName, ['id', 'country_id', 'vat_id', 'gender', 'suffix', 'prefix'])) {
                 continue;
             }
 

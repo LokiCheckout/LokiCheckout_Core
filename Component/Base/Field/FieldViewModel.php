@@ -56,6 +56,25 @@ abstract class FieldViewModel extends CheckoutViewModel implements FieldViewMode
         return $this->getContext()->getFieldTemplateLocator()->getFieldTemplateFromViewModel($this);
     }
 
+    public function getValue(): mixed
+    {
+        $value = parent::getValue();
+        if (!empty($value)) {
+            return $value;
+        }
+
+        if (false === $this->getComponent()->hasRepository()) {
+            return null;
+        }
+
+        $defaultValue = $this->getComponent()->getRepository()->getDefaultValue();
+        if (!empty($defaultValue)) {
+            $this->getComponent()->getRepository()->saveValue($defaultValue);
+        }
+
+        return $value;
+    }
+
     public function getInputType(): string
     {
         return 'text';

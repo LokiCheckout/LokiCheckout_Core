@@ -3,13 +3,14 @@
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
 use Magento\Quote\Model\Quote;
+use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
  * @method CheckoutContext getContext()
  */
-class QuoteFieldRepository extends ComponentRepository
+class QuoteFieldRepository extends FieldRepository
 {
     public function getValue(): mixed
     {
@@ -22,7 +23,7 @@ class QuoteFieldRepository extends ComponentRepository
         $this->getContext()->getCartRepository()->save($this->getQuote());
     }
 
-    protected function getFieldName(): string
+    public function getFieldName(): string
     {
         $blockName = $this->component->getBlock()->getNameInLayout();
         $blockNameParts = explode('.', $blockName);
