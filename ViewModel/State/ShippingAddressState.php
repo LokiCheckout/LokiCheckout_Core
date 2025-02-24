@@ -23,27 +23,28 @@ class ShippingAddressState implements AddressStateInterface
         return $this->getShippingAddress()->getData($attributeCode);
     }
 
-    public function save(string $attributeCode, bool|string $value): void
+    public function save(string $attributeCode, string|bool|int $value): void
     {
-        $shippingAddress = $this->getShippingAddress();
+        $quote = $this->checkoutState->getQuote();
+
+        $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setData($attributeCode, $value);
 
         if ($this->sameAddressService->isEnabled()) {
-            $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
-            $billingAddress->setData($attributeCode, $value);
+            $quote->getBillingAddress()->setData($attributeCode, $value);
         }
 
-        $this->checkoutState->saveQuote($this->checkoutState->getQuote());
+        $this->cartRepository->save($quote);
     }
-
     public function getShippingAddress(): Address
     {
-        $shippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
+        $quote = $this->checkoutState->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
 
         if (!$shippingAddress->getCountryId()) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $shippingAddress->setCountryId($defaultCountryId);
-            $this->cartRepository->save($this->checkoutState->getQuote());
+            $this->cartRepository->save($quote);
         }
 
         return $shippingAddress;
