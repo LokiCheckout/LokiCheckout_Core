@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -36,11 +37,6 @@ class PaymentMethodsRepository extends ComponentRepository
         $quote = $this->getQuote();
         $paymentMethod = (string)$quote->getPayment()->getMethod();
 
-        if (empty($paymentMethod)) {
-            $paymentMethod = $this->getDefaultPayment();
-            $this->saveValue($paymentMethod);
-        }
-
         $sanitizedPaymentMethod = $this->sanitizePaymentMethod($paymentMethod);
         if ($paymentMethod !== $sanitizedPaymentMethod) {
             $this->saveValue($sanitizedPaymentMethod);
@@ -52,14 +48,24 @@ class PaymentMethodsRepository extends ComponentRepository
     public function saveValue(mixed $value): void
     {
         $value = $this->sanitizePaymentMethod((string)$value);
+        $quote = $this->getQuote();
+
         if (empty($value)) {
+            $quote->setPaymentMethod($value);
+            $this->getContext()->getCartRepository()->save($quote);
             return;
         }
 
-        $quote = $this->getQuote();
         $quote->setPaymentMethod($value);
         $quote->setInventoryProcessed(false);
-        $quote->getPayment()->importData(['method' => $value]);
+
+        try {
+            $quote->getPayment()->importData(['method' => $value]);
+        } catch (LocalizedException $e) {
+            $this->getGlobalMessageRegistry()->addError($e->getMessage());
+            return;
+        }
+
         $this->getContext()->getCartRepository()->save($quote);
         $quote->collectTotals();
     }
