@@ -6,8 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.6] - 24 February 2025
+## [0.1.7] - 24 February 2025
+### Fixed
+- Hide payment method component by default
+- Fix non-existing method NewsletterRepository::getDefaultValue()
+- Change Place Order label when virtual quote
+- Add missing Dutch translation
 
+## [0.1.6] - 24 February 2025
 ### Added
 - Save in Address Book checkbox
 - Add more translation strings
