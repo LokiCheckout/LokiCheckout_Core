@@ -13,7 +13,6 @@
             name="loki-checkout.steps.billing.forward-button"
             template="Yireo_LokiCheckout::form/button/step-forward-button.phtml">
             <arguments>
-                <!-- @todo: Change this text if there are only free items -->
                 <argument name="button_label" xsi:type="string">Pay &amp;amp; Place Order</argument>
                 <argument name="button_label_without_payment" xsi:type="string">Place Order</argument>
             </arguments>
