@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.8] - 24 February 2025
+### Fixed
+- Rerun LokiCheckoutStepsShippingForwardButton.updateValid() at every update
+
 ## [0.1.7] - 24 February 2025
 ### Fixed
 - Hide payment method component by default
