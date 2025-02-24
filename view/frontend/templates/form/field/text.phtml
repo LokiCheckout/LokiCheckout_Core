@@ -38,7 +38,7 @@ $viewModel = $block->getViewModel();
         max="<?= $viewModel->getMax() ?>"
     <?php endif ?>
     <?php if ($viewModel->getPlaceholder()): ?>
-        placeholder="<?= $viewModel->getPlaceholder() ?>"
+        placeholder="<?= __($viewModel->getPlaceholder()) ?>"
     <?php endif ?>
     <?= $viewModel->isRequired() ? 'required' : '' ?>
     type="<?= $viewModel->getInputType() ?>"
