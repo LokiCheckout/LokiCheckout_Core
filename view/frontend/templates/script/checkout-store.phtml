@@ -60,11 +60,11 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             lock(component) {
                 this.components[component.id].locked = true;
-                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
             },
             unlock(component) {
                 this.components[component.id].locked = false;
-                document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+                document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
             },
             isLocked(component) {
                 return this.components[component.id].locked;

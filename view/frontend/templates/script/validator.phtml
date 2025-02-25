@@ -60,7 +60,7 @@
                 });
             }
 
-            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+            document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
         },
         setValid: function (component) {
             component.valid = true;
@@ -75,7 +75,7 @@
                 });
             }
 
-            document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
+            document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
         },
         findFirstInvalidElement: function() {
             return Object.values(document.querySelectorAll('[aria-invalid="true"]'))
