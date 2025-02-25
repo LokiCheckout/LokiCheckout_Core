@@ -4,6 +4,7 @@
         <referenceContainer name="after.body.start">
             <block
                 name="loki-checkout.script.logger"
+                after="loki-components.script.logger"
                 template="Yireo_LokiCheckout::script/logger.phtml"/>
             <block
                 name="loki-checkout.script.checkout-store"
