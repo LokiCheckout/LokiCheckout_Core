@@ -18,10 +18,8 @@
                     }
                 },
                 updateValid() {
-                    document.addEventListener('yireo-loki-checkout.component-change', (event) => {
-                        setTimeout(() => {
-                            this.updateValid();
-                        }, 100);
+                    document.addEventListener('yireo-loki-checkout.component-change', () => {
+                        this.updateValid();
                     });
 
                     this.updateValid();
