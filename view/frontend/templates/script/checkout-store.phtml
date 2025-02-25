@@ -21,20 +21,49 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponents() {
                 return Alpine.store('components').getComponents();
             },
+            getComponentArray() {
+                return Alpine.store('components').getComponentArray();
+            },
             getComponentsByStep(step) {
-                return this.getComponents().filter(component => component.step === step);
+                if (!step) {
+                    LokiCheckoutLogger.error('getInvalidComponents() called without step argument');
+                    return {};
+                }
+
+                const components = {};
+                this.getComponentArray().forEach(component => {
+                    if (component.step === step) {
+                        components[component.id] = component;
+                    }
+                });
+                return components;
+            },
+            getComponentArrayByStep(step) {
+                return Object.values(this.getComponentsByStep(step));
             },
             getComponentsByFieldNameAndStep(fieldName, step) {
-                return this.getComponents().filter(component => component.field_name === fieldName && component.step === step);
+                const components = {};
+                this.getComponentArray().forEach(component => {
+                    if (component.field_name === fieldName && component.step === step) {
+                        components[component.id] = component;
+                    }
+                });
+                return components;
+            },
+            getComponentArrayByFieldNameAndStep(fieldName, step) {
+                return Object.values(this.getComponentsByFieldNameAndStep(fieldName, step));
+            },
+            getComponentByFieldNameAndStep(fieldName, step) {
+                return this.getComponentArrayByFieldNameAndStep(fieldName, step).find(() => true);
             },
             removeInvisibleComponents() {
                 const invisibleComponents = [];
-                for (const [componentId, component] of Object.entries(this.components)) {
+                this.getComponentArray().forEach(component => {
                     if (!document.getElementById(component.elementId)) {
-                        delete this.components[componentId];
-                        invisibleComponents.push(componentId);
+                        delete this.components[component.id];
+                        invisibleComponents.push(component.id);
                     }
-                }
+                });
 
                 if (invisibleComponents.length > 0) {
                     LokiCheckoutLogger.notice('Removing invisible components from store', invisibleComponents);
@@ -47,7 +76,16 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return Alpine.store('components').get(componentId);
             },
             getInvalidComponents(step) {
-                return this.getComponentsByStep(step).filter(component => component.valid === false);
+                const components = {};
+                this.getComponentArrayByStep(step).forEach(component => {
+                    if (component.valid === false) {
+                        components[component.id] = component;
+                    }
+                });
+                return components;
+            },
+            getInvalidComponentArray(step) {
+                return Object.values(this.getInvalidComponents(step));
             },
             getInvalidComponentIds(step) {
                 return Object.keys(this.getInvalidComponents(step));
@@ -71,8 +109,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             },
             hasLockedComponents(step) {
                 let hasLocked = false;
-                Object.keys(this.components).forEach(componentId => {
-                    component = this.components[componentId];
+                this.getComponentArrayByStep(step).forEach(component => {
                     if (component.locked === true && component.step === step) {
                         hasLocked = true;
                     }
@@ -80,7 +117,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
                 return hasLocked;
             }
-        })
+        });
 
         // @doc
         document.addEventListener('loki-checkout.checkout-store.remove-invisible', () => {

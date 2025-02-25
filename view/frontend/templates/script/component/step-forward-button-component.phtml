@@ -31,11 +31,7 @@
             updateValid() {
                 this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.currentStep);
                 if (!this.valid) {
-                    const components = [];
-                    Alpine.store('checkout').getInvalidComponents(this.currentStep).forEach((component) => {
-                        components.push(component.id);
-                    })
-
+                    const components = Alpine.store('checkout').getInvalidComponentIds(this.currentStep);
                     LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
                 }
 
@@ -44,7 +40,7 @@
             submit() {
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
-                Alpine.store('checkout').getComponentsByStep(this.currentStep).forEach((component) => {
+                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 
