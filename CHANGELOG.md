@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.9] - 25 February 2025
+### Fixed
+- Standardize JS event names
+- Rename checkout:payment:method-activate to loki-checkout prefix
+- Rename loki-checkout-before-redirect to loki-checkout.before-redirect
+- Rename loki:dom-update to loki-components:dom-update
+- Rename yireo-loki-checkout.component-change to loki-components.component.update
+- Add generic LokiComponentsLogger
+- Refactor yireoLokiCheckoutLogger to LokiCheckoutLogger object
+- StepForwardButton not activated after component updates (use $nextTick)
+
 ## [0.1.8] - 24 February 2025
 ### Fixed
 - Rerun LokiCheckoutStepsShippingForwardButton.updateValid() at every update
