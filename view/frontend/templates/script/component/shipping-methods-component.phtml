@@ -9,7 +9,7 @@
                 });
             },
             dispatchShippingMethodEvent() {
-                window.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
+                document.dispatchEvent(new CustomEvent('checkout:shipping:method-activate', {
                     detail: {method: this.value}
                 }));
             },

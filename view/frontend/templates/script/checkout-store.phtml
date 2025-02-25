@@ -49,8 +49,11 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 return this.getComponentsByStep(step).filter(component => component.valid === false);
             },
+            getInvalidComponentIds(step) {
+                return Object.keys(this.getInvalidComponents(step));
+            },
             hasInvalidComponents(step) {
-                return this.getInvalidComponents(step).length > 0;
+                return Object.values(this.getInvalidComponents(step)).length > 0;
             },
             hasOnlyValidComponents(step) {
                 return !this.hasInvalidComponents(step);
@@ -79,7 +82,8 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             }
         })
 
-        document.addEventListener('@todo', () => {
+        // @doc
+        document.addEventListener('loki-checkout.checkout-store.remove-invisible', () => {
             Alpine.store('checkout').removeInvisibleComponents();
         });
     });

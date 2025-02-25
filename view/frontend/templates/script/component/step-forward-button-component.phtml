@@ -9,7 +9,7 @@
                 ...LokiCheckoutBaseComponentType.initActions,
                 redirectIfNeeded() {
                     if (this.redirectUrl) {
-                        window.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
+                        document.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
                             component: this,
                             redirectUrl: this.redirectUrl
                         }));
@@ -18,10 +18,13 @@
                     }
                 },
                 updateValid() {
-                    this.updateValid();
-                    document.addEventListener('yireo-loki-checkout.component-change', () => {
-                        this.updateValid();
+                    document.addEventListener('yireo-loki-checkout.component-change', (event) => {
+                        setTimeout(() => {
+                            this.updateValid();
+                        }, 100);
                     });
+
+                    this.updateValid();
                 }
             },
             disabled() {
@@ -36,25 +39,23 @@
                     })
 
                     yireoLokiCheckoutLogger('DEBUG: Invalid components for step "' + this.currentStep + '"', components);
-                } else {
-                    console.log('Valid');
                 }
 
                 return this.valid;
             },
             submit() {
-                window.dispatchEvent(new CustomEvent('clear-messages')); // @todo: Use Loki specific event
+                document.dispatchEvent(new CustomEvent('clear-messages')); // @todo: Use Loki specific event
                 Alpine.store('checkout').getComponentsByStep(this.currentStep).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
                 });
 
                 if (true === this.updateValid()) {
-                    window.dispatchEvent(new CustomEvent('loki-checkout-before-step-forward', {
+                    document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
                         component: this
                     }));
 
                     this.post();
-                    return;
+                    return true;
                 }
 
                 const firstInvalidElement = LokiCheckoutValidator.findFirstInvalidElement();
@@ -62,12 +63,7 @@
                     firstInvalidElement.focus();
                 }
 
-                // Fail-safe enabling of the button
-                setTimeout(() => {
-                    if (this.valid) {
-                        this.valid = true;
-                    }
-                }, 4000);
+                return false;
             }
         }));
     });

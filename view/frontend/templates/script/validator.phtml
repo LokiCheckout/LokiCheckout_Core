@@ -21,7 +21,6 @@
 
             component.validators.every(validator => {
                 if (this.validators[validator] === undefined) {
-                    //yireoLokiCheckoutLogger('WARNING: Validator "' + validator + '" not found', component);
                     return true;
                 }
 
@@ -47,35 +46,41 @@
         },
         setInvalid: function (component) {
             component.valid = false;
-            const elements = component.$root.querySelectorAll('[data-type="field"]');
-            elements.forEach(element => {
-                if (element.tagName === 'input') {
-                    if (typeof element.setCustomValidity === 'function') {
-                        element.setCustomValidity('Value is invalid');
+            if (component.$root) {
+                const elements = component.$root.querySelectorAll('[data-type="field"]');
+                elements.forEach(element => {
+                    if (element.tagName === 'input') {
+                        if (typeof element.setCustomValidity === 'function') {
+                            element.setCustomValidity('Value is invalid');
+                        }
                     }
-                }
 
-                element.setAttribute('aria-invalid', true);
-                document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
-            });
+                    element.setAttribute('aria-invalid', true);
+                    document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
+                });
+            }
 
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         },
         setValid: function (component) {
             component.valid = true;
-            Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
-                if (typeof element.setCustomValidity === 'function') {
-                    element.setCustomValidity('');
-                }
+            if (component.$root) {
+                Array.from(component.$root.getElementsByTagName('input')).forEach(element => {
+                    if (typeof element.setCustomValidity === 'function') {
+                        element.setCustomValidity('');
+                    }
 
-                document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
-                element.setAttribute('aria-invalid', false);
-            });
+                    document.dispatchEvent(new CustomEvent('loki:dom-update', {target: {element}}));
+                    element.setAttribute('aria-invalid', false);
+                });
+            }
 
             document.dispatchEvent(new CustomEvent('yireo-loki-checkout.component-change', {detail: {component}}));
         },
         findFirstInvalidElement: function() {
-            return Object.values(document.querySelectorAll('[aria-invalid="true"]')).shift();
+            return Object.values(document.querySelectorAll('[aria-invalid="true"]'))
+                .filter(htmlElement => !htmlElement.disabled)
+                .shift();
         }
     }
 </script>
