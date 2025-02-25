@@ -42,7 +42,7 @@
                 return this.valid;
             },
             submit() {
-                document.dispatchEvent(new CustomEvent('clear-messages')); // @todo: Use Loki specific event
+                document.dispatchEvent(new CustomEvent('clear-messages'));
 
                 Alpine.store('checkout').getComponentsByStep(this.currentStep).forEach((component) => {
                     LokiCheckoutValidator.validate(component);
