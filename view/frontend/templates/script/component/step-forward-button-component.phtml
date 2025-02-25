@@ -9,7 +9,7 @@
                 ...LokiCheckoutBaseComponentType.initActions,
                 redirectIfNeeded() {
                     if (this.redirectUrl) {
-                        document.dispatchEvent(new CustomEvent('loki-checkout-before-redirect', {
+                        document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
                             component: this,
                             redirectUrl: this.redirectUrl
                         }));
