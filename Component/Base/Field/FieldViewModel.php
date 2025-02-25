@@ -5,11 +5,12 @@ namespace Yireo\LokiCheckout\Component\Base\Field;
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\ViewModel\OptionModel\OptionModelInterface;
+use Yireo\LokiComponents\Component\Behaviour\LengthBehaviourInterface;
 
 /**
  * @method FieldContext getContext()
  */
-abstract class FieldViewModel extends CheckoutViewModel implements FieldViewModelInterface
+abstract class FieldViewModel extends CheckoutViewModel implements FieldViewModelInterface,LengthBehaviourInterface
 {
     public function getFieldName(): string
     {
