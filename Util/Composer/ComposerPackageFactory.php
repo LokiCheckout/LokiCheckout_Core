@@ -20,11 +20,13 @@ class ComposerPackageFactory
         $composerData = json_decode(file_get_contents($composerFile), true);
         $composerName = $composerData['name'];
         $composerVersion = $this->composerLock->getComposerVersion($composerName);
+        $composerDate = $this->composerLock->getComposerDate($composerName);
 
         return new ComposerPackage(
             $moduleName,
             $composerName,
-            $composerVersion
+            $composerVersion,
+            $composerDate
         );
     }
 

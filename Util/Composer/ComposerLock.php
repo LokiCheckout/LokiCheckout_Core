@@ -24,6 +24,23 @@ class ComposerLock
         return $composerLockData;
     }
 
+    public function getComposerDate(string $composerName): string
+    {
+        $data = $this->getComposerLockData();
+        if (!isset($data['packages'])) {
+            return '';
+        }
+
+        foreach ($data['packages'] as $package) {
+            if ($package['name'] === $composerName && isset($package['time'])) {
+                return date('Y-m-d H:i:s', strtotime($package['time']));
+            }
+        }
+
+        $composerFile = $this->directoryList->getRoot() . '/composer.lock';
+        return date('Y-m-d H:i:s', filemtime($composerFile));
+    }
+
     public function getComposerVersion(string $composerName): string
     {
         $data = $this->getComposerLockData();

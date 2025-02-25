@@ -27,6 +27,27 @@ class ComposerApi
         return $packages;
     }
 
+    public function getAvailableVersionDate(string $composerName): string
+    {
+        $packages = $this->getPackages();
+        $availableVersion = $this->getAvailableVersion($composerName);
+
+        if (!isset($packages[$composerName][$availableVersion])) {
+            return 'n/a';
+        }
+
+        $package = $packages[$composerName][$availableVersion];
+        if (isset($package['time'])) {
+            return date('Y-m-d H:i:s', strtotime($package['time']));
+        }
+
+        if (isset($package['release_date'])) {
+            return date('Y-m-d H:i:s', strtotime($package['release_date']));
+        }
+
+        return 'n/a';
+    }
+
     public function getAvailableVersion(string $composerName): string
     {
         $packages = $this->getPackages();

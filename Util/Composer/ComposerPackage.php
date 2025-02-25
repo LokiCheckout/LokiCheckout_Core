@@ -8,6 +8,7 @@ class ComposerPackage
         private string $moduleName,
         private string $composerName,
         private string $composerVersion,
+        private string $composerDate,
     ) {
     }
 
@@ -24,5 +25,10 @@ class ComposerPackage
     public function getComposerVersion(): string
     {
         return $this->composerVersion;
+    }
+
+    public function getComposerDate(): string
+    {
+        return $this->composerDate;
     }
 }

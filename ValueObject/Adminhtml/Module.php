@@ -72,4 +72,14 @@ class Module
             'path' => $this->getModulePath(),
         ]);
     }
+
+    public function getDate(): string
+    {
+        return $this->composerPackage->getComposerDate();
+    }
+
+    public function getLatestModuleDate(): string
+    {
+        return $this->composerApi->getAvailableVersionDate($this->composerPackage->getComposerName());
+    }
 }
