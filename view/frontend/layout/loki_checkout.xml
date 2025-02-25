@@ -61,7 +61,7 @@
         <block name="loki-checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
         <block name="loki-checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
 
-        <block name="loki-checkout.css_classes"/>
+        <block name="loki-components.css_classes"/>
 
         <block name="loki-checkout.defaults.form.field">
             <arguments>
