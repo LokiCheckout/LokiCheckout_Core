@@ -10,26 +10,52 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 $config = $viewModelFactory->create(Config::class);
 ?>
 <script>
-    function yireoLokiCheckoutLogger(...args) {
-        const debug = <?= $config->isDebug() ? 'true' : 'false' ?>;
-        if (false === debug) {
-            return;
-        }
+    const LokiCheckoutLogger = {
+        allowDebugging: <?= $config->isDebug() ? 'true' : 'false' ?>,
+        prefix: 'Yireo_LokiCheckout',
+        getColor(logType) {
+            if (logType === 'notice') {
+                return '#6495ED';
+            }
 
-        var color = 'gray';
-        if (args[0].toLowerCase().startsWith('success')) {
-            color = 'green';
-        }
+            if (logType === 'success') {
+                return 'green';
+            }
 
-        if (args[0].toLowerCase().startsWith('warning')) {
-            color = 'orange';
-        }
+            if (logType === 'warning') {
+                return 'orange';
+            }
 
-        if (args[0].toLowerCase().startsWith('error')) {
-            color = 'red';
-        }
+            if (logType === 'error') {
+                return 'red';
+            }
 
-        var css = 'color:white; background-color:' + color + '; padding:1px;'
-        console.log('%cYireo_LokiCheckout', css, ...args);
-    }
+            return 'gray';
+        },
+        notice(...args) {
+            return this.message('notice', ...args);
+        },
+        success(...args) {
+            return this.message('success', ...args);
+        },
+        warning(...args) {
+            return this.message('warning', ...args);
+        },
+        error(...args) {
+            return this.message('error', ...args);
+        },
+        debug(...args) {
+            if (!this.allowDebugging) {
+                return;
+            }
+
+            return this.message('debug', ...args);
+        },
+        message(messageType, ...args) {
+            const color = this.getColor(messageType);
+            const prefix = this.prefix + ' [' + messageType.toUpperCase() + ']';
+            const css = 'color:white; background-color:' + color + '; padding:1px;'
+            console.log('%c' + prefix, css, ...args);
+        }
+    };
 </script>

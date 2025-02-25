@@ -37,7 +37,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 }
 
                 if (invisibleComponents.length > 0) {
-                    yireoLokiCheckoutLogger('NOTICE: Removing invisible components from store', invisibleComponents);
+                    LokiCheckoutLogger.notice('Removing invisible components from store', invisibleComponents);
                 }
             },
             add(component) {

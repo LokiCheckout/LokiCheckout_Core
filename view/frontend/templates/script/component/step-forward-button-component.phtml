@@ -36,7 +36,7 @@
                         components.push(component.id);
                     })
 
-                    yireoLokiCheckoutLogger('DEBUG: Invalid components for step "' + this.currentStep + '"', components);
+                    LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
                 }
 
                 return this.valid;
