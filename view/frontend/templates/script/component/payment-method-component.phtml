@@ -6,7 +6,7 @@
                 this.dispatchPaymentMethodEvent();
             },
             dispatchPaymentMethodEvent() {
-                document.dispatchEvent(new CustomEvent('checkout:payment:method-activate', {
+                document.dispatchEvent(new CustomEvent('loki-checkout:payment:method-activate', {
                     detail: {method: this.value}
                 }));
             },
