@@ -67,7 +67,7 @@
             <arguments>
                 <argument name="css_classes" xsi:type="array">
                     <item name="block" xsi:type="array">
-                        <item name="grid" xsi:type="string">col-span-6</item>
+                        <item name="grid" xsi:type="string">col-span-12 md:col-span-6</item>
                     </item>
                 </argument>
             </arguments>
