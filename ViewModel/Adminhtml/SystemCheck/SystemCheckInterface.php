@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
 
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResult;
+use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollection;
 
 interface SystemCheckInterface
 {
-    public function getResult(): CheckResult;
+    public function getCheckResultCollection(): CheckResultCollection;
 }

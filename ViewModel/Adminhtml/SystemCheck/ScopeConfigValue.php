@@ -3,19 +3,22 @@
 namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResult;
+use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
-abstract class ScopeConfigValue implements SystemCheckInterface
+abstract class ScopeConfigValue extends SystemCheck
 {
     public function __construct(
         private ScopeConfigInterface $scopeConfig,
+        CheckResultCollectionFactory $checkResultCollectionFactory,
     ) {
+        parent::__construct($checkResultCollectionFactory);
     }
 
-    public function getResult(): CheckResult
+    protected function execute(): void
     {
         $value = $this->scopeConfig->getValue($this->getScopeConfigPath());
-        return new CheckResult(
+
+        $this->addCheckResult(
             $this->getScopeConfigPath(),
             $value,
             $this->isValid($value),

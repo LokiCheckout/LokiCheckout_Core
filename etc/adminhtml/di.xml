@@ -2,7 +2,8 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheckCollection">
         <arguments>
-            <argument name="checks" xsi:type="array">
+            <argument name="systemChecks" xsi:type="array">
+                <item name="dev_modules" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\DevModules</item>
                 <item name="store_country_id" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\StoreCountryId</item>
                 <item name="merchant_vat_number" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\MerchantVatNumber</item>
                 <item name="address_lines" xsi:type="object">Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\AddressLines</item>

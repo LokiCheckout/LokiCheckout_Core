@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\SystemCheckInterface;
 class SystemCheckCollection implements ArgumentInterface
 {
     public function __construct(
-        private array $checks = []
+        private array $systemChecks = []
     ) {
     }
 
@@ -17,6 +17,6 @@ class SystemCheckCollection implements ArgumentInterface
      */
     public function getSystemChecks(): array
     {
-        return $this->checks;
+        return $this->systemChecks;
     }
 }

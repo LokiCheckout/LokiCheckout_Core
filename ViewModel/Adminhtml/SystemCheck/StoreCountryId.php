@@ -9,7 +9,6 @@ class StoreCountryId extends ScopeConfigValue
         return 'general/store_information/country_id';
     }
 
-
     protected function isValid($value): bool
     {
         return !empty($value);

@@ -32,35 +32,33 @@ $systemCheckCollection = $viewModelFactory->create(SystemCheckCollection::class)
         </thead>
         <tbody>
         <?php foreach ($systemCheckCollection->getSystemChecks() as $systemCheck): ?>
-            <tr>
-                <td>
-                    <div class="data-grid-cell-content">
-                        <?= $systemCheck->getResult()->getLabel() ?>
-                    </div>
-                </td>
-                <td>
-                    <div class="data-grid-cell-content">
-
-                    </div>
-
-                    <div class="data-grid-cell-content">
-                        <?php if ($systemCheck->getResult()->isValid()): ?>
-                            <span class="system-check system-check-notice">
-                                <?= $systemCheck->getResult()->getValue() ?>
+            <?php foreach ($systemCheck->getCheckResultCollection()->get() as $checkResult): ?>
+                <tr>
+                    <td>
+                        <div class="data-grid-cell-content">
+                            <?= $checkResult->getLabel() ?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="data-grid-cell-content">
+                            <?php if ($checkResult->isValid()): ?>
+                                <span class="system-check system-check-notice">
+                                <?= $checkResult->getValue() ?>
                             </span>
-                        <?php else: ?>
-                            <span class="system-check system-check-error">
-                                <?= $systemCheck->getResult()->getValue() ?>
+                            <?php else: ?>
+                                <span class="system-check system-check-error">
+                                <?= $checkResult->getValue() ?>
                             </span>
-                        <?php endif; ?>
-                    </div>
-                </td>
-                <td>
-                    <div class="data-grid-cell-content">
-                        <?= $systemCheck->getResult()->getRecommendation() ?>
-                    </div>
-                </td>
-            </tr>
+                            <?php endif; ?>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="data-grid-cell-content">
+                            <?= $checkResult->getRecommendation() ?>
+                        </div>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         <?php endforeach; ?>
         </tbody>
     </table>

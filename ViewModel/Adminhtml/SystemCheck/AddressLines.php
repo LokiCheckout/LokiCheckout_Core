@@ -9,7 +9,6 @@ class AddressLines extends ScopeConfigValue
         return 'customer/address/street_lines';
     }
 
-
     protected function isValid($value): bool
     {
         return $value > 2;
