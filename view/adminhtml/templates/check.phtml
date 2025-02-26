@@ -33,6 +33,7 @@ $systemCheckCollection = $viewModelFactory->create(SystemCheckCollection::class)
         <tbody>
         <?php foreach ($systemCheckCollection->getSystemChecks() as $systemCheck): ?>
             <?php foreach ($systemCheck->getCheckResultCollection()->get() as $checkResult): ?>
+                <?php $valueClassSuffix = $checkResult->isValid() ? 'notice' : 'error'; ?>
                 <tr>
                     <td>
                         <div class="data-grid-cell-content">
@@ -40,16 +41,8 @@ $systemCheckCollection = $viewModelFactory->create(SystemCheckCollection::class)
                         </div>
                     </td>
                     <td>
-                        <div class="data-grid-cell-content">
-                            <?php if ($checkResult->isValid()): ?>
-                                <span class="system-check system-check-notice">
-                                <?= $checkResult->getValue() ?>
-                            </span>
-                            <?php else: ?>
-                                <span class="system-check system-check-error">
-                                <?= $checkResult->getValue() ?>
-                            </span>
-                            <?php endif; ?>
+                        <div class="data-grid-cell-content system-check system-check-<?= $valueClassSuffix ?>">
+                            <?= $checkResult->getValue() ?>
                         </div>
                     </td>
                     <td>
