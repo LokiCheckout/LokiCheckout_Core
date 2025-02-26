@@ -48,7 +48,7 @@ class CustomerEmailTest extends LokiTestCase
     {
         return [
             ['', false, ['Value is required']],
-            ['john', false, ['Invalid email']],
+            ['john', false, ['Invalid email address']],
             ['john@example.com', true, []],
         ];
     }
