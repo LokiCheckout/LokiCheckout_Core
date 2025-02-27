@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonViewModel;
+use Yireo\LokiCheckout\ViewModel\StepForwardButtonLabel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
@@ -10,17 +11,16 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var StepForwardButtonViewModel $viewModel */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
+/** @var StepForwardButtonLabel $stepForwardButtonLabel */
 
-$buttonLabel = $block->getButtonLabel();
-if ($viewModel->getContext()->getQuote()->isVirtual()) {
-    $buttonLabel = $block->getButtonLabelWithoutPayment();
-}
+$stepForwardButtonLabel = $viewModelFactory->create(StepForwardButtonLabel::class);
+$buttonLabel = $stepForwardButtonLabel->getLabel($block);
 ?>
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
             :disabled="disabled"
             @click="submit">
-        <?= __((string)$block->getButtonLabel()) ?>
+        <?= __((string)$buttonLabel) ?>
     </button>
 </div>
