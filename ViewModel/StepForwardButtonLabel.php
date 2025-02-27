@@ -15,7 +15,7 @@ class StepForwardButtonLabel implements ArgumentInterface
 
     public function getLabel(AbstractBlock $block): string
     {
-        $buttonLabelWithoutPayment = trim($block->getButtonLabelWithoutPayment());
+        $buttonLabelWithoutPayment = trim((string)$block->getButtonLabelWithoutPayment());
         $quote = $this->checkoutState->getQuote();
 
         if ($buttonLabelWithoutPayment && false === $quote->getGrandTotal() > 0) {

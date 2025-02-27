@@ -45,7 +45,7 @@ $showHidden = (bool)$block->getShowHidden(); // @doc
                     'code' => $code,
                 ]) ?>
 
-                <label for="payment-<?= $code ?>" class=""><?= $paymentMethod->getTitle() ?></label>
+                <label for="payment-<?= $code ?>" class="<?= $css('', 'label') ?>"><?= $paymentMethod->getTitle() ?></label>
             </div>
 
             <?php if ($isCurrent || $showHidden) : ?>
