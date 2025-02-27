@@ -8,11 +8,15 @@ use Magento\Framework\View\LayoutInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
+
+    protected $themeName = 'loki_checkout_theme_default';
 
     protected function setUp(): void
     {
@@ -21,6 +25,11 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->assertModuleIsEnabled('Yireo_LokiCheckout');
         $this->assertModuleIsEnabled('Yireo_LokiFieldComponents');
         $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
+    }
+
+    public function getCheckoutComponent(string $blockName): ComponentInterface
+    {
+        return $this->getComponentWithBlock($blockName, ['default', 'loki_components', 'loki_field_components', 'loki_checkout', $this->themeName]);
     }
 
     public function dispatchToCheckout(?CartInterface $cart = null)
@@ -57,5 +66,14 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $checkoutSession->replaceQuote($cart);
 
         return $cart;
+    }
+
+    protected function assertRepositorySave(ComponentInterface $component, mixed $value)
+    {
+        $repository = $component->getRepository();
+        $this->assertInstanceOf(ComponentRepositoryInterface::class, $repository);
+
+        $repository->saveValue($value);
+        $this->assertSame($value, $repository->getValue());
     }
 }

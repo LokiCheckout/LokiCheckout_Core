@@ -10,8 +10,6 @@ use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 
 #[
     AppIsolation(true),
@@ -21,7 +19,6 @@ use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
     AppArea('frontend'),
 ]
-// @todo: Test saving to quote
 class FirstnameTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.firstname';
@@ -29,7 +26,7 @@ class FirstnameTest extends LokiCheckoutTestCase
     public function testComponentOnPage()
     {
         $this->dispatchToCheckout();
-        $component = $this->getComponent(self::BLOCK_NAME, ['default', 'loki_components', 'loki_field_components', 'loki_checkout', 'loki_checkout_theme_default']);
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentExistsOnPage($component);
     }
 
@@ -45,24 +42,9 @@ class FirstnameTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ) {
-        $component = $this->getComponent(self::BLOCK_NAME);
+        $component = $this->getComponentWithBlock(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
-    }
-
-    /*public function testSaveToQuote()
-    {
-        $this->getCart();
-        $this->assertRepositorySave($this->getComponent(self::BLOCK_NAME), 'John');
-    }*/
-
-    protected function assertRepositorySave(ComponentInterface $component, mixed $value)
-    {
-        $repository = $component->getRepository();
-        $this->assertInstanceOf(ComponentRepositoryInterface::class, $repository);
-
-        $repository->saveValue($value);
-        $this->assertSame($value, $repository->getValue());
     }
 
     public function getTestData(): array

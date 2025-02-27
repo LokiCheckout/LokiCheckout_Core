@@ -23,7 +23,7 @@ class CustomerEmailTest extends LokiCheckoutTestCase
     public function testComponentOnPage()
     {
         $this->dispatchToCheckout();
-        $component = $this->getComponent(self::BLOCK_NAME);
+        $component = $this->getComponentWithBlock(self::BLOCK_NAME);
         $this->assertComponentExistsOnPage($component);
     }
 
@@ -39,7 +39,7 @@ class CustomerEmailTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ) {
-        $component = $this->getComponent(self::BLOCK_NAME);
+        $component = $this->getComponentWithBlock(self::BLOCK_NAME);
         $this->assertComponentValidators(['required', 'email'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
