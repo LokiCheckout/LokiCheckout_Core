@@ -23,7 +23,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
@@ -37,7 +37,7 @@ use Magento\TestFramework\Fixture\Config as ConfigFixture;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
     AppArea('frontend'),
 ]
-class ShippingMethodsRepositoryTest extends LokiTestCase
+class ShippingMethodsRepositoryTest extends LokiCheckoutTestCase
 {
     const COMPONENT_NAME = 'loki-checkout.shipping.methods';
 

@@ -9,7 +9,7 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 
@@ -22,14 +22,14 @@ use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
     AppArea('frontend'),
 ]
 // @todo: Test saving to quote
-class FirstnameTest extends LokiTestCase
+class FirstnameTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.firstname';
 
     public function testComponentOnPage()
     {
         $this->dispatchToCheckout();
-        $component = $this->getComponent(self::BLOCK_NAME);
+        $component = $this->getComponent(self::BLOCK_NAME, ['default', 'loki_components', 'loki_field_components', 'loki_checkout', 'loki_checkout_theme_default']);
         $this->assertComponentExistsOnPage($component);
     }
 

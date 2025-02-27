@@ -4,14 +4,14 @@ namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Shippi
 
 use Magento\TestFramework\Fixture\AppArea;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\VatId;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 use Magento\TestFramework\Fixture\Config;
 
 /**
  * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
  */
 #[AppArea('frontend')]
-class VatIdTest extends LokiTestCase
+class VatIdTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.vat_id';
 

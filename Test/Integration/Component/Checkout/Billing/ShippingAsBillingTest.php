@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
     AppArea('frontend'),
@@ -18,7 +18,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
 ]
-class ShippingAsBillingTest extends LokiTestCase
+class ShippingAsBillingTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.billing.address.shipping-as-billing';
 

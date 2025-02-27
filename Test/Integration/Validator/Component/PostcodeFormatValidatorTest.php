@@ -6,7 +6,7 @@ use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
@@ -14,7 +14,7 @@ use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Test\Integration\Traits\CreateComponent;
 
 #[AppArea('frontend')]
-class PostcodeFormatValidatorTest extends LokiTestCase
+class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
 {
     use CreateComponent;
 

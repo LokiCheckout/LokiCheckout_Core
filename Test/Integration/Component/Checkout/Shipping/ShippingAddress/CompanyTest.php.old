@@ -8,7 +8,7 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Company;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
     AppArea('frontend'),
@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$p1.id$','qty' => 1])
 ]
-class CompanyTest extends LokiTestCase
+class CompanyTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.company';
 

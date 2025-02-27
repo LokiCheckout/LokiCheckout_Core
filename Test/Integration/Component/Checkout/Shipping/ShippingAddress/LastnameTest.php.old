@@ -4,13 +4,13 @@ namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Shippi
 
 use Magento\TestFramework\Fixture\AppArea;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\Lastname;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 /**
  * @magentoDataFixture Magento/Checkout/_files/quote_with_simple_products.php
  */
 #[AppArea('frontend')]
-class LastnameTest extends LokiTestCase
+class LastnameTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping-address.lastname';
 

@@ -7,7 +7,7 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
     AppArea('frontend'),
@@ -16,7 +16,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
 ]
 // @todo: Test saving to quote
-class CustomerEmailTest extends LokiTestCase
+class CustomerEmailTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.customer.customer_email';
 
