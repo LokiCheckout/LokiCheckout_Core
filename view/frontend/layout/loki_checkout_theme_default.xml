@@ -15,7 +15,7 @@
 
                 <block name="loki-checkout.steps.shipping.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/shipping-customer-fields.phtml"/>
 
-                <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-"/>
+                <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Yireo_LokiFieldComponents::form/button/buttons.phtml" after="-"/>
             </block>
 
             <block name="loki-checkout.steps.billing" as="billing" template="Yireo_LokiCheckout::theme/default/billing-step.phtml">
@@ -25,7 +25,7 @@
 
                 <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/billing-customer-fields.phtml"/>
 
-                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiCheckout::form/button/buttons.phtml" after="-" />
+                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiFieldComponents::form/button/buttons.phtml" after="-" />
             </block>
         </referenceBlock>
 
