@@ -20,10 +20,12 @@ use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\UrlFactory;
+use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 
 class CheckoutContext implements ComponentContextInterface
 {
     public function __construct(
+        private FieldTemplateLocator $fieldTemplateLocator,
         private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
@@ -40,6 +42,11 @@ class CheckoutContext implements ComponentContextInterface
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
     ) {
+    }
+
+    public function getFieldTemplateLocator(): FieldTemplateLocator
+    {
+        return $this->fieldTemplateLocator;
     }
 
     public function getCheckoutSession(): CheckoutSession

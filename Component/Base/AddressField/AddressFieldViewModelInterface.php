@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Component\Base\AddressField;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModelInterface;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldViewModelInterface;
 
 interface AddressFieldViewModelInterface extends FieldViewModelInterface
 {

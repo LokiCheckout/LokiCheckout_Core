@@ -5,7 +5,7 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 
 /** @var Template $block */
@@ -24,7 +24,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         <?= $blockRenderer->html($block, 'loki-checkout.utils.disabled-overlay') ?>
     <?php endif; ?>
 
-    <?= $blockRenderer->html($block, 'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
     <form
         id="shipping-methods"

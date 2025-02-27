@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\ViewModel\OptionModel;
 
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
-
-interface OptionModelInterface
+/**
+ * @deprecated Use \Yireo\LokiFieldComponents\Util\OptionModelInterface
+ */
+interface OptionModelInterface extends \Yireo\LokiFieldComponents\Util\OptionModelInterface
 {
-    public function getOptions(ComponentViewModelInterface $viewModel): array;
 }

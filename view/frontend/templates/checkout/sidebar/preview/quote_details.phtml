@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var CssClass $css */
@@ -16,7 +16,7 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Details') ?></span><br>
     <?= $html ?>
 </div>

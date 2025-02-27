@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
-class ShippingAsBillingViewModel extends FieldViewModel
+class ShippingAsBillingViewModel extends CheckoutViewModel
 {
     public function getFieldLabel(): string
     {

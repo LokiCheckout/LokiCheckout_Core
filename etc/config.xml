@@ -8,7 +8,6 @@
                 <debug>0</debug>
             </general>
             <fields>
-                <use_required_block>1</use_required_block>
                 <enable_same_as_billing>1</enable_same_as_billing>
                 <enable_vat_id_only_for_company>0</enable_vat_id_only_for_company>
                 <hide_region_when_optional>0</hide_region_when_optional>

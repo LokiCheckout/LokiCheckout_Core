@@ -3,12 +3,12 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Quote\Api\Data\PaymentMethodInterface;
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method PaymentMethodsContext getContext()
  */
-class PaymentMethodsViewModel extends FieldViewModel
+class PaymentMethodsViewModel extends CheckoutViewModel
 {
     public function getDefaultPayment(): string
     {

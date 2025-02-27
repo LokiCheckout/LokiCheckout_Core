@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Base\AddressField;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;

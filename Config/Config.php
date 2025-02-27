@@ -60,11 +60,6 @@ class Config implements ArgumentInterface
         return $this->isDebug() && (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/html_hints');
     }
 
-    public function useRequiredBlock(): bool
-    {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/use_required_block');
-    }
-
     public function enableSameAsBilling(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_same_as_billing');

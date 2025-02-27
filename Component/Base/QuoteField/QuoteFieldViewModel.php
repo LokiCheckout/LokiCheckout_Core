@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldContext;
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
- * @method FieldContext getContext()
+ * @method CheckoutContext getContext()
  */
-abstract class QuoteFieldViewModel extends FieldViewModel implements QuoteFieldViewModelInterface
+abstract class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFieldViewModelInterface
 {
     public function getFieldLabel(): string
     {

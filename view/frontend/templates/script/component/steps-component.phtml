@@ -1,10 +1,10 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutSteps', () => ({
-            ...LokiCheckoutBaseComponentType,
+            ...LokiCheckoutComponentType,
             currentStep: 'none',
             initActions: {
-                ...LokiCheckoutBaseComponentType.initActions,
+                ...LokiCheckoutComponentType.initActions,
                 setCurrentStep() {
                     if (this.currentStep !== 'none') {
                         window.location.hash = this.currentStep;

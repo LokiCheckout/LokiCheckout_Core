@@ -2,9 +2,9 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
-class AgreementsViewModel extends FieldViewModel
+class AgreementsViewModel extends CheckoutViewModel
 {
     public function allowRendering(): bool
     {

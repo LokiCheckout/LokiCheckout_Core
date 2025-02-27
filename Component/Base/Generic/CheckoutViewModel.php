@@ -2,52 +2,18 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Generic;
 
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use Yireo\LokiCheckout\Component\Base\Behaviour\StepViewModelBehaviour;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldViewModel;
 
 /**
  * @method CheckoutContext getContext()
  */
-class CheckoutViewModel extends ComponentViewModel implements CheckoutViewModelInterface
+class CheckoutViewModel extends FieldViewModel
 {
-    protected string $step = '';
+    use StepViewModelBehaviour;
 
-    protected bool $lazyLoad = true;
-    protected bool $allowRendering = true;
-
-    /**
-     * @return bool
-     */
-    public function isLazyLoad(): bool
+    public function getFieldLabel(): string
     {
-        return $this->lazyLoad;
-    }
-
-    public function isAllowRendering(): bool
-    {
-        return $this->allowRendering;
-    }
-
-
-    public function setStep(string $step): void
-    {
-        $this->step = $step;
-    }
-
-    public function getStep(): string
-    {
-        if (!empty($this->step)) {
-            return $this->step;
-        }
-
-        $this->step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
-        return $this->step;
-    }
-
-    public function getJsData(): array
-    {
-        return [
-            ...parent::getJsData(),
-            'step' => $this->getStep(),
-        ];
+        return '';
     }
 }

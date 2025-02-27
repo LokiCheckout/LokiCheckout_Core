@@ -3,13 +3,13 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
 
 use Magento\Quote\Api\Data\ShippingMethodInterface;
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method ShippingMethodsContext getContext()
  * @method ShippingMethodsRepository getRepository()
  */
-class ShippingMethodsViewModel extends FieldViewModel
+class ShippingMethodsViewModel extends CheckoutViewModel
 {
     /**
      * @return ShippingMethodInterface[]

@@ -17,7 +17,7 @@ $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div class="<?= $css('card my-2') ?>" x-data="LokiCheckoutToggle">
+<div class="<?= $css('card my-2') ?>" x-data="LokiToggle">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
         (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)

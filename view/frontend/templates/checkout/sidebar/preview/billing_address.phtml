@@ -5,7 +5,7 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress\BillingAddressViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var BillingAddressViewModel $viewModel */
@@ -21,7 +21,7 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
     <address><?= $html ?></address>
     <?php if ($viewModel->isSameAsShipping()): ?>

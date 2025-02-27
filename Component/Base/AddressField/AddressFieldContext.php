@@ -8,7 +8,6 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Yireo\LokiCheckout\Component\Base\Field\FieldContext;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;

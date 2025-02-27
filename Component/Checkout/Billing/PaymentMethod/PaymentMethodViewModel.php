@@ -2,13 +2,13 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethod;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext;
 
 /**
  * @method PaymentMethodsContext getContext()
  */
-class PaymentMethodViewModel extends FieldViewModel
+class PaymentMethodViewModel extends CheckoutViewModel
 {
     public function getFieldLabel(): string
     {

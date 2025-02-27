@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 
 /**

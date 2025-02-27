@@ -6,8 +6,8 @@ use Magento\Payment\Api\Data\PaymentMethodInterface;
 use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\Util\Block\TemplateRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -40,7 +40,7 @@ $showHidden = (bool)$block->getShowHidden(); // @doc
             <div class="<?= $css('flex', 'method') ?>">
                 <?= $templateRenderer->html(
                     $block,
-                    'checkout/payment/payment-methods/icon.phtml', [
+                    'Yireo_LokiCheckout::checkout/payment/payment-methods/icon.phtml', [
                     'alias' => $code,
                     'code' => $code,
                 ]) ?>

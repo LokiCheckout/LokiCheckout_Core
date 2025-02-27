@@ -7,15 +7,15 @@
 
     <group
         name="quoteFields"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
-        context="Yireo\LokiCheckout\Component\Base\Field\FieldContext"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
+        context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext"
         repository="Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldRepository">
         <target name="loki-checkout.sidebar.preview.quote_details"/>
     </group>
 
     <group
         name="shippingAddressFields"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext"
         viewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository">
@@ -26,7 +26,7 @@
 
     <group
         name="billingAddressFields"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldContext"
         viewModel="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel"
         repository="Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository">
@@ -37,7 +37,7 @@
 
     <group
         name="shippingAddressStreetFields"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineRepository">
@@ -48,7 +48,7 @@
 
     <group
         name="billingAddressStreetFields"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineRepository">
@@ -120,7 +120,7 @@
 
     <component
         name="loki-checkout.shipping.methods"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
@@ -150,7 +150,7 @@
 
     <component
         name="loki-checkout.payment.methods"
-        class="Yireo\LokiCheckout\Component\Base\Field\FieldComponent"
+        class="Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent"
         context="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsRepository">
@@ -159,7 +159,7 @@
 
     <component
         name="loki-checkout.sidebar.coupon_code"
-        context="Yireo\LokiCheckout\Component\Base\Field\FieldContext"
+        context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeRepository">
     </component>

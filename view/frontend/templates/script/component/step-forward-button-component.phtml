@@ -1,12 +1,12 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStepForwardButton', () => ({
-            ...LokiCheckoutBaseComponentType,
+            ...LokiCheckoutComponentType,
             redirectUrl: '',
             currentStep: '',
             valid: true,
             initActions: {
-                ...LokiCheckoutBaseComponentType.initActions,
+                ...LokiCheckoutComponentType.initActions,
                 redirectIfNeeded() {
                     if (this.redirectUrl) {
                         document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {

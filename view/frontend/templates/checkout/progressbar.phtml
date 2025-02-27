@@ -4,8 +4,8 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
-use Yireo\LokiCheckout\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiComponents\Util\Block\CssClass;
@@ -28,7 +28,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
     class="<?= $css('hidden md:block card rounded-lg relative') ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <ul class="<?= $css('flex items-center', 'list') ?>">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?= $childRenderer->html($block,'step', ['step' => $step]) ?>

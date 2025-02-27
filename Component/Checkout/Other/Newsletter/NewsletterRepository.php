@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 
 use Magento\Newsletter\Model\Subscriber;
-use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**

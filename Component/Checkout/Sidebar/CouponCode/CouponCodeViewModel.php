@@ -2,14 +2,14 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
 
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method CheckoutContext getContext()
  * @method CouponCodeRepository getRepository()
  */
-class CouponCodeViewModel extends FieldViewModel
+class CouponCodeViewModel extends CheckoutViewModel
 {
     public function getFieldLabel(): string
     {

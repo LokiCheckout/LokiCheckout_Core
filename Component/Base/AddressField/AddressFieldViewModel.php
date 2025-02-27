@@ -3,13 +3,13 @@
 namespace Yireo\LokiCheckout\Component\Base\AddressField;
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Field\FieldViewModel;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
 
 /**
  * @method AddressFieldContext getContext()
  */
-class AddressFieldViewModel extends FieldViewModel implements AddressFieldViewModelInterface
+class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldViewModelInterface
 {
     // @todo: Move this into a trait or a child-class
     public function getFieldLabel(): string

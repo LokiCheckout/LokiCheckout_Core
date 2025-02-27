@@ -6,7 +6,7 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Component\Checkout;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -15,12 +15,12 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= $css('space-y-6 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <?= $block->getChildHtml('progressbar') ?>
 
     <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?>">
         <div class="<?= $css('col-span-2', 'column-steps') ?> relative">
-            <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+            <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
             <?= $block->getChildHtml('steps'); ?>
         </div>
         <?= $block->getChildHtml('sidebar'); ?>

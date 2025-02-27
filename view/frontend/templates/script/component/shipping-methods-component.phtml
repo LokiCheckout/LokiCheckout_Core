@@ -1,7 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingMethods', () => ({
-            ...LokiCheckoutFieldComponentType,
+            ...LokiCheckoutComponentType,
             afterInit() {
                 this.dispatchShippingMethodEvent();
                 this.$watch('value', () => {

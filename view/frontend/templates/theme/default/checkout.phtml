@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout;
 use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var CssClass $css */
@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Util\Block\BlockRenderer;
 
 ?>
 <div class="<?= $css('space-y-6 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-checkout.utils.loader-overlay') ?>
+    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
 
     <?= $block->getChildHtml('progressbar') ?>
 

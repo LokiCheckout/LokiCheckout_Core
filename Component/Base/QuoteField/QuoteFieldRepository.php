@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Base\QuoteField;
 
 use Magento\Quote\Model\Quote;
-use Yireo\LokiCheckout\Component\Base\Field\FieldRepository;
+use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 

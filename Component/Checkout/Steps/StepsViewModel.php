@@ -16,4 +16,9 @@ class StepsViewModel extends ComponentViewModel
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode()
         ];
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiFieldComponent';
+    }
 }

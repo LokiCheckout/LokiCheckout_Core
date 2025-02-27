@@ -2,6 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <update handle="loki_components"/>
+    <update handle="loki_field_components"/>
 
     <!-- Cleanup -->
     <update handle="loki_checkout_clean"/>
@@ -36,41 +37,17 @@
         <block
             name="loki-checkout.generic.title"
             template="Yireo_LokiCheckout::generic/title.phtml"/>
-        <block
-            name="loki-checkout.utils.loader"
-            template="Yireo_LokiCheckout::utils/loader.phtml"/>
 
         <block
-            name="loki-checkout.utils.loader-small"
-            template="Yireo_LokiCheckout::utils/loader-small.phtml">
-            <arguments>
-                <argument name="size" xsi:type="number">20</argument>
-            </arguments>
-        </block>
+            name="loki-checkout.utils.separator"
+            template="Yireo_LokiCheckout::utils/separator.phtml"/>
 
         <block
-            name="loki-checkout.utils.loader-overlay"
-            template="Yireo_LokiCheckout::utils/loader-overlay.phtml">
-            <arguments>
-                <argument name="size" xsi:type="number">50</argument>
-            </arguments>
-        </block>
+            name="loki-checkout.utils.disabled-overlay"
+            template="Yireo_LokiCheckout::utils/disabled-overlay.phtml"/>
 
-        <block name="loki-checkout.utils.disabled-overlay" template="Yireo_LokiCheckout::utils/disabled-overlay.phtml"/>
-        <block name="loki-checkout.utils.required" template="Yireo_LokiCheckout::utils/required.phtml"/>
-        <block name="loki-checkout.utils.separator" template="Yireo_LokiCheckout::utils/separator.phtml"/>
-        <block name="loki-checkout.utils.debug" template="Yireo_LokiCheckout::utils/debug.phtml"/>
-
-        <block name="loki-components.css_classes"/>
-
-        <block name="loki-components.defaults.form.field">
-            <arguments>
-                <argument name="css_classes" xsi:type="array">
-                    <item name="block" xsi:type="array">
-                        <item name="grid" xsi:type="string">col-span-12 md:col-span-6</item>
-                    </item>
-                </argument>
-            </arguments>
-        </block>
+        <block
+            name="loki-checkout.utils.debug"
+            template="Yireo_LokiCheckout::utils/debug.phtml"/>
     </body>
 </page>

@@ -99,7 +99,7 @@
                        showInWebsite="1"
                        showInStore="0">
                     <label>Use required block</label>
-                    <comment>Use block "loki-checkout.utils.required" when a field is required</comment>
+                    <comment>Use block "loki-field-components.utils.required" when a field is required</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/general/enable">1</field>

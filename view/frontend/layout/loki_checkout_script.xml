@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
+        <!-- @todo <referenceContainer name="loki-component-before-body-end"> -->
         <referenceContainer name="after.body.start">
             <block
                 name="loki-checkout.script.logger"
@@ -17,6 +18,7 @@
                 template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>
 
+        <!-- @todo <referenceContainer name="loki-component-before-body-end"> -->
         <referenceContainer name="before.body.end">
             <block
                 name="loki-checkout.script.aria-invalid"
@@ -36,20 +38,14 @@
 
             <referenceContainer name="loki-component-types">
                 <block
-                    name="loki-checkout.script.component-type.base"
-                    template="Yireo_LokiCheckout::script/component-type/base-component-type.phtml"/>
-                <block
-                    name="loki-checkout.script.component-type.field"
-                    template="Yireo_LokiCheckout::script/component-type/field-component-type.phtml"/>
+                    name="loki-checkout.script.component-type.checkout"
+                    template="Yireo_LokiCheckout::script/component-type/checkout-component-type.phtml"/>
             </referenceContainer>
 
             <referenceContainer name="loki-components">
                 <block
-                    name="loki-checkout.script.components.base-component"
-                    template="Yireo_LokiCheckout::script/component/base-component.phtml"/>
-                <block
-                    name="loki-checkout.script.components.field-component"
-                    template="Yireo_LokiCheckout::script/component/field-component.phtml"/>
+                    name="loki-checkout.script.components.checkout-component"
+                    template="Yireo_LokiCheckout::script/component/checkout-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.steps-component"
                     template="Yireo_LokiCheckout::script/component/steps-component.phtml"/>
@@ -81,12 +77,6 @@
                 <block
                     name="loki-checkout.script.components.agreements"
                     template="Yireo_LokiCheckout::script/component/agreements-component.phtml"/>
-                <block
-                    name="loki-checkout.script.components.toggle-component"
-                    template="Yireo_LokiCheckout::script/component/toggle-component.phtml"/>
-                <block
-                    name="loki-checkout.script.components.toggle"
-                    template="Yireo_LokiCheckout::script/component/toggle.phtml"/>
             </referenceContainer>
         </referenceContainer>
     </body>
