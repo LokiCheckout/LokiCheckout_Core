@@ -16,7 +16,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
 
-    protected $themeName = 'loki_checkout_theme_default';
+    protected $themeName = 'loki_checkout_theme_onestep';
 
     protected function setUp(): void
     {

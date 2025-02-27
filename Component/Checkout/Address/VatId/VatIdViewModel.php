@@ -16,9 +16,20 @@ class VatIdViewModel extends AddressFieldViewModel
 
         $company = $this->getAddressState()->load('company');
         if (!empty($company)) {
-            parent::isAllowRendering();
+            return parent::isAllowRendering();
         }
 
         return false;
+    }
+
+    public function isRequired(): bool
+    {
+        $showCompany = (string)$this->getContext()->getScopeConfig()->getValue('customer/address/taxvat_show');
+
+        if ($showCompany === 'req') {
+            return true;
+        }
+
+        return parent::isRequired();
     }
 }

@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\ShippingAddress\Company;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
+use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
@@ -19,31 +20,34 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
     AppArea('frontend'),
 ]
-class FirstnameTest extends LokiCheckoutTestCase
+class CompanyValidationTest extends LokiCheckoutTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.shipping.address.firstname';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.company';
 
-    public function testComponentOnPage()
+    #[Config('customer/address/company_show', 'req')]
+    public function testComponentValidators(): void
     {
-        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentExistsOnPage($component);
+        $this->assertComponentValidators(['required'], $component);
+    }
+
+    #[Config('customer/address/company_show', 'opt')]
+    public function testComponentNoValidators(): void
+    {
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $this->assertComponentNoValidators(['required'], $component);
     }
 
     /**
-     * @param string $value
-     * @param bool $expectedResult
-     * @param array $expectedErrors
-     * @return void
      * @dataProvider getTestData
      */
+    #[Config('customer/address/company_show', 'req')]
     public function testComponentValidation(
         string $value,
         bool $expectedResult,
         array $expectedErrors
-    ) {
-        $component = $this->getComponentWithBlock(self::BLOCK_NAME);
-        $this->assertComponentValidators(['required'], $component);
+    ): void {
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
