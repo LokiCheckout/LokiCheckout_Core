@@ -33,4 +33,13 @@ class LokiCheckoutModules
     {
         return in_array($moduleName, $this->modules);
     }
+
+    public function seemsModule(string $moduleName):bool
+    {
+        if ($this->hasModule($moduleName)) {
+            return true;
+        }
+
+        return str_contains($moduleName, 'LokiCheckout');
+    }
 }

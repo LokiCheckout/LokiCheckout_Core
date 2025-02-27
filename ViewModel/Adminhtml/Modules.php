@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Yireo\LokiCheckout\ViewModel\Adminhtml;
 
 use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Module\ModuleList;
+use Magento\Framework\Module\ModuleList\Loader as ModuleListLoader;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Config\LokiCheckoutModules;
 use Yireo\LokiCheckout\Util\Composer\ComposerPackageFactory;
@@ -14,7 +14,7 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\ModuleFactory;
 class Modules implements ArgumentInterface
 {
     public function __construct(
-        private ModuleList\Loader $moduleListLoader,
+        private ModuleListLoader $moduleListLoader,
         private ComposerPackageFactory $composerPackageFactory,
         private LokiCheckoutModules $lokiCheckoutModules,
         private ModuleFactory $moduleFactory,
