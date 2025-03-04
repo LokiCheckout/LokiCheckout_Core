@@ -11,7 +11,6 @@ use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
     AppIsolation(true),
@@ -37,9 +36,11 @@ class VatIdPageTest extends LokiCheckoutPageTestCase
         $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 
+    #[Config('customer/address/taxvat_show', '')]
     #[Config('customer/address/taxvat_show', '', 'store', 'default')]
     public function testComponentNotOnPage()
     {
+        $this->assertStoreConfigValueEquals('', 'customer/address/taxvat_show');
         $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 }
