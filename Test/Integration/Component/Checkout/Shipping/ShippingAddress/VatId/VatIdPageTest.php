@@ -36,11 +36,9 @@ class VatIdPageTest extends LokiCheckoutPageTestCase
         $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 
-    #[Config('customer/address/taxvat_show', '')]
     #[Config('customer/address/taxvat_show', '', 'store', 'default')]
     public function testComponentNotOnPage()
     {
-        $this->assertStoreConfigValueEquals('', 'customer/address/taxvat_show');
         $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 }

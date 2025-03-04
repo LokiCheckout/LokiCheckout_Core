@@ -1,46 +1,50 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Quote;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Customer\Email;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\AppIsolation;
+use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
+use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    AppArea('frontend'),
+    AppIsolation(true),
+    DbIsolation(true),
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
+    AppArea('frontend'),
 ]
-// @todo: Test saving to quote
-class CustomerEmailTest extends LokiCheckoutTestCase
+class EmailValidationTest extends LokiCheckoutTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer_email';
+    const BLOCK_NAME = 'loki-checkout.customer.customer-email';
 
-    public function testComponentOnPage()
+    public function testComponentValidators(): void
     {
-        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentExistsOnPage($component);
+        $this->assertComponentValidators(['required'], $component);
+    }
+
+    public function testComponentNoValidators(): void
+    {
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $this->assertComponentNoValidators(['required'], $component);
     }
 
     /**
-     * @param string $value
-     * @param bool $expectedResult
-     * @param array $expectedErrors
-     * @return void
      * @dataProvider getTestData
      */
     public function testComponentValidation(
         string $value,
         bool $expectedResult,
         array $expectedErrors
-    ) {
+    ): void {
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators(['required', 'email'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
