@@ -21,7 +21,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 ]
 class EmailPageTest extends LokiCheckoutPageTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-email';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_email';
 
     public function testComponentOnPage(): void
     {

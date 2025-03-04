@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 ]
 class GenderValidationTest extends LokiCheckoutTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-gender';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_gender';
 
     #[Config('customer/address/gender_show', 'req')]
     public function testComponentValidators(): void

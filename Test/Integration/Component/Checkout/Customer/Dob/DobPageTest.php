@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 ]
 class DobPageTest extends LokiCheckoutPageTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-dob';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_dob';
 
     #[Config('customer/address/dob_show', 'opt', 'store', 'default')]
     public function testComponentOnPageIfOptional(): void

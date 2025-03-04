@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 ]
 class GenderPageTest extends LokiCheckoutPageTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-gender';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_gender';
 
     #[Config('customer/address/gender_show', 'opt', 'store', 'default')]
     public function testComponentOnPageIfOptional(): void

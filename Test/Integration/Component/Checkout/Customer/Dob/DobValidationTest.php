@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 ]
 class DobValidationTest extends LokiCheckoutTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-dob';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_dob';
 
     #[Config('customer/address/dob_show', 'req')]
     public function testComponentValidators(): void

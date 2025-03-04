@@ -22,7 +22,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 ]
 class EmailValidationTest extends LokiCheckoutTestCase
 {
-    const BLOCK_NAME = 'loki-checkout.customer.customer-email';
+    const BLOCK_NAME = 'loki-checkout.customer.customer_email';
 
     public function testComponentValidators(): void
     {
