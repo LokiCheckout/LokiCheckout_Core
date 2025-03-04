@@ -58,7 +58,9 @@ class GenderValidationTest extends LokiCheckoutTestCase
     {
         return [
             ['', false, ['Value is required']],
-            ['John', true, []],
+            ['John', false, []],
+            ['male', true, []],
+            ['female', true, []],
         ];
     }
 }
