@@ -9,6 +9,11 @@
         }
     }
 
+
+    [data-type="field-prefix"]:has(+ [data-type="field"][aria-invalid=true]) {
+        @apply border-red-500 bg-red-100;
+    }
+
     [data-type="label"],
     [data-type="field"] {
         &[aria-invalid=true] {
