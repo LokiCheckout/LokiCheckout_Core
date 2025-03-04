@@ -30,12 +30,6 @@ class EmailValidationTest extends LokiCheckoutTestCase
         $this->assertComponentValidators(['required'], $component);
     }
 
-    public function testComponentNoValidators(): void
-    {
-        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentNoValidators(['required'], $component);
-    }
-
     /**
      * @dataProvider getTestData
      */

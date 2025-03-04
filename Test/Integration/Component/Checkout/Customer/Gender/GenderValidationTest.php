@@ -24,6 +24,7 @@ class GenderValidationTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.customer.customer_gender';
 
+    #[Config('customer/address/gender_show', 'req', 'store', 'default')]
     #[Config('customer/address/gender_show', 'req')]
     public function testComponentValidators(): void
     {
@@ -31,6 +32,7 @@ class GenderValidationTest extends LokiCheckoutTestCase
         $this->assertComponentValidators(['required'], $component);
     }
 
+    #[Config('customer/address/gender_show', 'req', 'store', 'default')]
     #[Config('customer/address/gender_show', 'opt')]
     public function testComponentNoValidators(): void
     {
@@ -41,6 +43,7 @@ class GenderValidationTest extends LokiCheckoutTestCase
     /**
      * @dataProvider getTestData
      */
+    #[Config('customer/address/gender_show', 'req', 'store', 'default')]
     #[Config('customer/address/gender_show', 'req')]
     public function testComponentValidation(
         string $value,
