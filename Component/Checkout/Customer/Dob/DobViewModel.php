@@ -30,4 +30,15 @@ class DobViewModel extends QuoteFieldViewModel
     {
         return 'date';
     }
+
+    public function isRequired(): bool
+    {
+        $showCompany = (string)$this->getContext()->getScopeConfig()->getValue('customer/address/dob_show');
+
+        if ($showCompany === 'req') {
+            return true;
+        }
+
+        return parent::isRequired();
+    }
 }
