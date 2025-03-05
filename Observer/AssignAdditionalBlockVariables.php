@@ -10,7 +10,7 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
 /**
- * @deprecated Remove logic based on getComponentName())
+ * @deprecated Remove logic based on getComponentName()
  */
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
