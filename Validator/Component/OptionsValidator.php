@@ -13,6 +13,10 @@ class OptionsValidator implements ValidatorInterface
     public function validate(mixed $value, ?ComponentInterface $component = null): true|array
     {
         $value = trim((string)$value);
+        if (empty($value)) {
+            return true;
+        }
+
         $viewModel = $component->getViewModel();
         if (false === $viewModel instanceof FieldViewModel) {
             return true;
