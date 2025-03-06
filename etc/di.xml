@@ -104,9 +104,9 @@
             <argument name="validators" xsi:type="array">
                 <item name="email_available" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator</item>
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-                <item name="prefix" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PrefixValidator</item>
                 <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
                 <item name="dob" xsi:type="object">Yireo\LokiCheckout\Validator\Component\DobValidator</item>
+                <item name="options" xsi:type="object">Yireo\LokiCheckout\Validator\Component\OptionsValidator</item>
             </argument>
         </arguments>
     </type>

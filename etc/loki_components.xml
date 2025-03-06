@@ -229,6 +229,7 @@
         name="loki-checkout.customer.customer_gender"
         group="quoteFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Gender\GenderViewModel">
+        <validator name="options"/>
     </component>
 
     <component
@@ -237,6 +238,7 @@
         viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Dob\DobViewModel">
         <validator name="date"/>
         <validator name="past_date"/>
+        <validator name="dob"/>
     </component>
 
     <component
@@ -244,7 +246,7 @@
         group="shippingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixRepository">
-        <validator name="prefix"/>
+        <validator name="options"/>
     </component>
 
     <component
@@ -354,8 +356,9 @@
         name="loki-checkout.billing.address.prefix"
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixRepository"
-    />
+        repository="Yireo\LokiCheckout\Component\Checkout\Address\Prefix\PrefixRepository">
+        <validator name="options"/>
+    </component>
 
     <component
         name="loki-checkout.billing.address.firstname"
