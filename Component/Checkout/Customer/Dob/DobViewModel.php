@@ -18,7 +18,12 @@ class DobViewModel extends QuoteFieldViewModel
             return '';
         }
 
-        return date('Y-m-d', strtotime((string)$value));
+        $timestamp = strtotime((string)$value);
+        if (false === $timestamp) {
+            return '';
+        }
+
+        return date('Y-m-d', $timestamp);
     }
 
     public function getFieldLabel(): string
