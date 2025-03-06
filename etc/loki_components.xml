@@ -235,6 +235,8 @@
         name="loki-checkout.customer.customer_dob"
         group="quoteFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Customer\Dob\DobViewModel">
+        <validator name="date"/>
+        <validator name="past_date"/>
     </component>
 
     <component

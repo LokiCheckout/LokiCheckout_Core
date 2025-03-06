@@ -29,7 +29,7 @@ class DobValidationTest extends LokiCheckoutTestCase
     public function testComponentValidators(): void
     {
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators(['required'], $component);
+        $this->assertComponentValidators(['required', 'date', 'past_date'], $component);
     }
 
     #[Config('customer/address/dob_show', 'opt', 'store', 'default')]
@@ -37,6 +37,7 @@ class DobValidationTest extends LokiCheckoutTestCase
     public function testComponentNoValidators(): void
     {
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $this->assertComponentValidators(['date', 'past_date'], $component);
         $this->assertComponentNoValidators(['required'], $component);
     }
 
@@ -58,9 +59,9 @@ class DobValidationTest extends LokiCheckoutTestCase
     {
         return [
             ['', false, ['Value is required']],
-            ['John', false, []],
+            ['foobar', false, ['Invalid date format']],
             ['2017-01-02', true, []],
-            [((int)date('Y') + 12).'-01-02', false, []],
+            [((int)date('Y') + 12).'-01-02', false, ['Date needs to be in the past']],
         ];
     }
 }
