@@ -16,4 +16,9 @@ class CheckoutViewModel extends FieldViewModel
     {
         return '';
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutComponent';
+    }
 }
