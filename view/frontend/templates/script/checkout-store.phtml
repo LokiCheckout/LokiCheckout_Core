@@ -44,7 +44,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponentsByFieldNameAndStep(fieldName, step) {
                 const components = {};
                 this.getComponentArray().forEach(component => {
-                    if (component.field_name === fieldName && component.step === step) {
+                    if (component.fieldName === fieldName && component.step === step) {
                         components[component.id] = component;
                     }
                 });
