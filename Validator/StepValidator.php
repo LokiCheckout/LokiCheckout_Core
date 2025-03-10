@@ -25,7 +25,7 @@ class StepValidator implements ValidatorInterface
         $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();
         $shippingMethod = $shippingAddress->getShippingMethod();
-        if (empty($shippingMethod)) {
+        if (false === $quote->isVirtual() && empty($shippingMethod)) {
             return ['No shipping method found.'];
         }
 
