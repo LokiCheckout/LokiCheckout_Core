@@ -45,6 +45,11 @@ class Config implements ArgumentInterface
         return $theme;
     }
 
+    public function getDefaultGridClasses(): string
+    {
+        return (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/default_grid_class');
+    }
+
     public function isDebug(): bool
     {
         return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/enable');
