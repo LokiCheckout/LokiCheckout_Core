@@ -45,6 +45,16 @@ class Config implements ArgumentInterface
         return $theme;
     }
 
+    public function getGridLayout(): string
+    {
+        $gridLayout = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/grid_layout');
+        if (false === array_key_exists($gridLayout, $this->xmlConfig->getGridLayouts())) {
+            return 'default_grid';
+        }
+
+        return $gridLayout;
+    }
+
     public function getDefaultGridClasses(): string
     {
         return (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/default_grid_class');

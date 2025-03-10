@@ -4,12 +4,14 @@ namespace Yireo\LokiCheckout\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 
 class SortedBlocks implements ArgumentInterface
 {
     public function __construct(
+        private Config $config,
         private XmlConfig $xmlConfig,
     ) {
     }
@@ -17,11 +19,7 @@ class SortedBlocks implements ArgumentInterface
     public function getChildren(
         AbstractBlock $parentBlock
     ): array {
-        $gridLayoutName = (string)$parentBlock->getGridLayout();
-        if (empty($gridLayoutName)) {
-            $gridLayoutName = 'default_grid';
-        }
-
+        $gridLayoutName = (string)$this->config->getGridLayout();
         $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
 
         $childNames = $parentBlock->getChildNames();

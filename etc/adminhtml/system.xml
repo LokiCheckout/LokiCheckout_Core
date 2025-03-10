@@ -33,6 +33,19 @@
                         <field id="*/*/enable">1</field>
                     </depends>
                 </field>
+                <field id="grid_layout"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="0">
+                    <label>Grid Layout</label>
+                    <source_model>Yireo\LokiCheckout\Config\Source\GridLayoutOptions</source_model>
+                    <depends>
+                        <field id="*/*/enable">1</field>
+                    </depends>
+                </field>
                 <field id="license_key"
                        translate="label"
                        type="text"
