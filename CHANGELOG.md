@@ -6,6 +6,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.10] - 11 March 2025
+### Fixed
+- Fix order completion for virtual orders
+- Move GridLayout from XML layout to config
+- Remove default grid class
+- Implement option `yireo_loki_checkout/general/default_grid_class`
+- Dynamically change title of shipping address form
+- Rename `field_name` to `fieldName`
+- Fix client-side validation after refactoring to LokiFieldComponents
+- Fix age verification in test
+- Fix gender validation in test
+- Replace PrefixValidator with more generic OptionsValidator
+- Add proper date validation of date of birth
+- Fix possible error if somebody is spoofing value
+- Make sure gender and DOB are required if set so in config
+- Accessibility fixes
+- Fix styling of country box when there is an error
+- Fix location of buttons
+- Move required block
+- Add module dependencies
+- Huge refactoring to move logic into new LokiFieldComponents
+- System Check for module dependencies
+- Add test for new ViewModel
+- Add button label for quote without payment required
+- Add default responsiveness to all fields
+- Fix name of defaults block
+- Re-enable postcode format validator test
+- Refactor and adjust styling
+- Refactor SystemCheck architecture in admin
+- Check for dev modules not being enabled in Production Mode
+- Move EmailValidatorTest
+- Add missing Dutch translations
+- Move email availability in separate validator `email_available`
+- Rename `loki-checkout.css_classes` to `loki-components.css_classes`
+- Rewrite Alpine.store() APIs
+- Add datetime to module overview
+
 ## [0.1.9] - 25 February 2025
 ### Fixed
 - Standardize JS event names
