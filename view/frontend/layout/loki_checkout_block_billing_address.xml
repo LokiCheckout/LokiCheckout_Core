@@ -45,6 +45,10 @@
             <block
                 name="loki-checkout.billing.address.form" as="form"
                 template="Yireo_LokiCheckout::checkout/billing/address-form.phtml">
+                <arguments>
+                    <argument name="grid" xsi:type="boolean">true</argument>
+                </arguments>
+
                 <block
                     name="loki-checkout.billing.address.prefix" as="prefix"
                     ifconfig="customer/address/prefix_show"

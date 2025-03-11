@@ -44,6 +44,9 @@
             <block
                 name="loki-checkout.shipping.address.form" as="form"
                 template="Yireo_LokiCheckout::checkout/shipping/address-form.phtml">
+                <arguments>
+                    <argument name="grid" xsi:type="boolean">true</argument>
+                </arguments>
 
                 <block
                     name="loki-checkout.shipping.address.prefix" as="prefix"

@@ -24,7 +24,7 @@ class GridClassParser implements CssClassParserInterface
 
         $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig($block);
         if (empty($gridClassesFromXmlConfig)) {
-            $gridClassesFromXmlConfig = $this->getDefaultGridClasses();
+            $gridClassesFromXmlConfig = $this->getDefaultGridClasses($block);
         }
 
         $cssClasses = array_merge_recursive($cssClasses, [
@@ -58,8 +58,17 @@ class GridClassParser implements CssClassParserInterface
         return $block->getGridClass();
     }
 
-    private function getDefaultGridClasses(): string
+    private function getDefaultGridClasses(AbstractBlock $block): string
     {
+        $parentBlock = $block->getParentBlock();
+        if (false === $parentBlock instanceof AbstractBlock) {
+            return '';
+        }
+
+        if (false === (bool)$parentBlock->getGrid()) {
+            return '';
+        }
+
         return $this->config->getDefaultGridClasses();
     }
 }
