@@ -22,6 +22,10 @@ trait StepViewModelBehaviour
             return $this->step;
         }
 
+        if (false === method_exists($this->getContext(), 'getStepProvider')) {
+            throw new \Exception('Component context does not have getStepProvider() method: '.$this->getComponentName());
+        }
+
         $this->step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
         return $this->step;
     }
