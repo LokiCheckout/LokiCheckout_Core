@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiComponents\Util\Block\TemplateRenderer;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var TemplateRenderer $templateRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CheckoutState $checkoutState */
+
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
+
+$title = 'Billing Address';
+
+echo $templateRenderer->html(
+    $block,
+    'Yireo_LokiCheckout::generic/title.phtml',
+    ['title' => $title]
+);
+

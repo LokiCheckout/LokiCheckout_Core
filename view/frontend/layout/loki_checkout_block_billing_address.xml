@@ -42,6 +42,12 @@
             </block>
             -->
 
+
+            <block
+                name="loki-checkout.billing.address.form-title" as="form-title"
+                template="Yireo_LokiCheckout::checkout/billing/address-form-title.phtml"/>
+
+
             <block
                 name="loki-checkout.billing.address.form" as="form"
                 template="Yireo_LokiCheckout::checkout/billing/address-form.phtml">
