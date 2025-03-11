@@ -15,11 +15,13 @@
                 template="Yireo_LokiCheckout::checkout/billing/address-view.phtml">
             </block>
 
-            <!--
-            @todo: Implement this when swapping addresses
             <block
                 name="loki-checkout.billing.address.select" as="select"
                 template="Yireo_LokiCheckout::checkout/billing/address-select.phtml">
+                <arguments>
+                    <argument name="show_empty_select_option" xsi:type="boolean">true</argument>
+                </arguments>
+
                 <block
                     name="loki-checkout.billing.address.select.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
@@ -31,22 +33,11 @@
 
             <block
                 name="loki-checkout.billing.address.toggle-select" as="toggle-select"
-                template="Yireo_LokiCheckout::checkout/billing/toggle-select.phtml"/>
-
-            <block
-                name="loki-checkout.billing.address.form-title" as="form-title"
-                template="Yireo_LokiCheckout::generic/title.phtml">
-                <arguments>
-                    <argument name="title" xsi:type="string">Enter a New Address</argument>
-                </arguments>
-            </block>
-            -->
-
+                template="Yireo_LokiCheckout::checkout/billing/address-toggle-select.phtml"/>
 
             <block
                 name="loki-checkout.billing.address.form-title" as="form-title"
                 template="Yireo_LokiCheckout::checkout/billing/address-form-title.phtml"/>
-
 
             <block
                 name="loki-checkout.billing.address.form" as="form"

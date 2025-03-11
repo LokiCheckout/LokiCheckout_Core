@@ -1,0 +1,49 @@
+<?php declare(strict_types=1);
+
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm;
+
+use Magento\Quote\Api\Data\AddressInterface;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressContext;
+use Yireo\LokiComponents\Component\ComponentInterface;
+
+class AddressFormContext extends AddressContext
+{
+    public function getNewAddressSessionKey(ComponentInterface $component): string
+    {
+        if ($this->isBillingAddressComponent($component)) {
+            return 'loki-checkout.billing.address.is_new';
+        }
+
+        return 'loki-checkout.shipping.address.is_new';
+    }
+
+    public function isBillingAddressComponent(ComponentInterface $component): bool
+    {
+        return (bool)stristr($component->getName(), '.billing.');
+    }
+
+    public function isShippingAddressComponent(ComponentInterface $component): bool
+    {
+        return (bool)stristr($component->getName(), '.shipping.');
+    }
+
+    public function getCurrentAddress(ComponentInterface $component): AddressInterface
+    {
+        $quote = $this->getCheckoutState()->getQuote();
+        if ($this->isBillingAddressComponent($component)) {
+            return $quote->getBillingAddress();
+        }
+
+        return $quote->getShippingAddress();
+    }
+
+    public function isNewAddress(ComponentInterface $component): bool
+    {
+        if (false === $this->getCustomerSession()->isLoggedIn()) {
+            return true;
+        }
+
+        $sessionKey = $this->getNewAddressSessionKey($component);
+        return (bool)$this->getCheckoutSession()->getData($sessionKey);
+    }
+}

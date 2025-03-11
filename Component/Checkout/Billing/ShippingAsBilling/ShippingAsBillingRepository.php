@@ -2,11 +2,11 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling;
 
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
+use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
- * @method ShippingAddressContext getContext()
+ * @method AddressFormContext getContext()
  */
 class ShippingAsBillingRepository extends ComponentRepository
 {

@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddressToggleSelect\BillingAddressToggleSelectViewModel;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var BillingAddressToggleSelectViewModel $viewModel */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+?>
+<div>
+    <button
+        class="<?= $css('btn btn-primary my-4') ?>"
+        x-text="buttonLabel"
+        x-model="value"
+        type="button"
+        @click="toggle"
+    >
+        <?= $viewModel->getButtonLabelNewAddress() ?>
+    </button>
+</div>

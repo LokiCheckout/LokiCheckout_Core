@@ -10,20 +10,23 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var BillingAddressViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-
-$hideTitle = (bool)$block->getHideTitle();
 ?>
 <div class="<?= $css('relative') ?>">
     <?= $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <?php if (false === $hideTitle): ?>
-        <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Billing Address']) ?>
-    <?php endif; ?>
-
     <?= $block->getChildHtml('shipping-as-billing') ?>
+
     <?php if ($viewModel->isSameAddress()): ?>
         <?= $block->getChildHtml('view') ?>
     <?php else: ?>
-        <?= $block->getChildHtml('form') ?>
+        <?php if ($viewModel->showSelectAddress()): ?>
+            <?= $block->getChildHtml('select') ?>
+            <?= $block->getChildHtml('toggle-select') ?>
+        <?php endif; ?>
+
+        <?php if($viewModel->isNewAddress()): ?>
+            <?= $block->getChildHtml('form-title') ?>
+            <?= $block->getChildHtml('form') ?>
+        <?php endif; ?>
     <?php endif; ?>
 </div>

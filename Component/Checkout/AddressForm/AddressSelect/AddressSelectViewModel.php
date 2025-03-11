@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
+use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 
 /**
- * @method ShippingAddressContext getContext()
+ * @method AddressFormContext getContext()
  */
-class ShippingAddressSelectViewModel extends CheckoutViewModel
+class AddressSelectViewModel extends CheckoutViewModel
 {
     public function getAddressLines(): array
     {
@@ -17,12 +17,16 @@ class ShippingAddressSelectViewModel extends CheckoutViewModel
 
     public function getFieldLabel(): string
     {
+        if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+            return 'Select your Billing Address';
+        }
+
         return 'Select your Shipping Address';
     }
 
     public function isDisabled(): bool
     {
-        return (bool)$this->getContext()->isNewAddress();
+        return (bool)$this->getContext()->isNewAddress($this->getComponent());
     }
 
     public function isAllowRendering(): bool

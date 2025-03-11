@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect;
 
 use Magento\Customer\Api\Data\AddressInterface;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
+use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
- * @method ShippingAddressContext getContext()
+ * @method AddressFormContext getContext()
  */
-class ShippingAddressSelectRepository extends ComponentRepository
+class AddressSelectRepository extends ComponentRepository
 {
     public function getValue(): mixed
     {
@@ -22,15 +22,24 @@ class ShippingAddressSelectRepository extends ComponentRepository
             $this->getContext()->getCustomerSession()->getCustomerId()
         );
 
-        $selectedAddressId = (int)$quote->getShippingAddress()->getCustomerAddressId();
+        $address = $this->getContext()->getCurrentAddress($this->getComponent());
+        $selectedAddressId = (int)$address->getCustomerAddressId();
         if (empty($selectedAddressId)) {
-            $selectedAddressId = (int)$customer->getDefaultShipping();
+            if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+                $selectedAddressId = (int)$customer->getDefaultBilling();
+            } else {
+                $selectedAddressId = (int)$customer->getDefaultShipping();
+            }
         }
 
         $sanitizedAddressId = $this->sanitizeSelectedAddressId($selectedAddressId);
 
         if (empty($sanitizedAddressId)) {
-            $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
+            if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+                $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
+            } else {
+                $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
+            }
         }
 
         if ($sanitizedAddressId !== $selectedAddressId) {
@@ -51,15 +60,15 @@ class ShippingAddressSelectRepository extends ComponentRepository
             return;
         }
 
-        $customerShippingAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
-        if (false === $customerShippingAddress instanceof AddressInterface) {
+        $customerAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
+        if (false === $customerAddress instanceof AddressInterface) {
             return;
         }
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-        $shippingAddress->importCustomerAddressData($customerShippingAddress);
-        $shippingAddress->setCustomerAddressId($customerShippingAddress->getId());
+        $address = $this->getContext()->getCurrentAddress($this->getComponent());
+        $address->importCustomerAddressData($customerAddress);
+        $address->setCustomerAddressId($customerAddress->getId());
 
         $this->getContext()->getCartRepository()->save($quote);
     }

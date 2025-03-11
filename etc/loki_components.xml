@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
+<components xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="urn:magento:module:Yireo_LokiComponents:etc/loki_components.xsd">
     <group
         name="checkout"
         context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext"
@@ -80,13 +81,13 @@
 
     <component
         name="loki-checkout.shipping.address"
-        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormViewModel"
     />
 
     <component
         name="loki-checkout.shipping.address.billing-as-shipping"
-        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingRepository">
         <target name="loki-checkout.billing.address"/>
@@ -94,18 +95,18 @@
 
     <component
         name="loki-checkout.shipping.address.toggle-select"
-        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect\ShippingAddressToggleSelectRepository"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect\AddressToggleSelectViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect\AddressToggleSelectRepository"
     >
         <target name="loki-checkout.shipping.address"/>
     </component>
 
     <component
         name="loki-checkout.shipping.address.select"
-        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectViewModel"
-        repository="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressSelect\ShippingAddressSelectRepository">
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectRepository">
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.shipping.address.view"/>
@@ -114,8 +115,8 @@
 
     <component
         name="loki-checkout.shipping.address.view"
-        context="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormViewModel"
     />
 
     <component
@@ -130,22 +131,42 @@
 
     <component
         name="loki-checkout.billing.address"
-        context="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormViewModel"
     />
 
     <component
         name="loki-checkout.billing.address.shipping-as-billing"
-        context="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingRepository">
         <target name="loki-checkout.billing.address"/>
     </component>
 
     <component
+        name="loki-checkout.billing.address.toggle-select"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect\AddressToggleSelectViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect\AddressToggleSelectRepository"
+    >
+        <target name="loki-checkout.billing.address"/>
+    </component>
+
+    <component
+        name="loki-checkout.billing.address.select"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectViewModel"
+        repository="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectRepository">
+        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.sidebar.preview.billing_address"/>
+        <target name="loki-checkout.billing.address.view"/>
+        <target name="loki-checkout.payment.methods"/>
+    </component>
+
+    <component
         name="loki-checkout.billing.address.view"
-        context="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressContext"
-        viewModel="Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressViewModel"
+        context="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormViewModel"
     />
 
     <component

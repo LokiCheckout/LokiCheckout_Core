@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddressToggleSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect;
 
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressContext;
+use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
- * @method ShippingAddressContext getContext()
- * @method ShippingAddressToggleSelectRepository getRepository()
+ * @method AddressFormContext getContext()
+ * @method AddressToggleSelectRepository getRepository()
  */
-class ShippingAddressToggleSelectViewModel extends ComponentViewModel
+class AddressToggleSelectViewModel extends ComponentViewModel
 {
     public function getJsData(): array
     {
@@ -32,6 +32,6 @@ class ShippingAddressToggleSelectViewModel extends ComponentViewModel
 
     public function getJsComponentName(): ?string
     {
-        return 'LokiCheckoutShippingAddress';
+        return 'LokiCheckoutAddress';
     }
 }
