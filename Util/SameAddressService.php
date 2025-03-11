@@ -37,6 +37,11 @@ class SameAddressService
 
     public function copyBillingToShipping(): void
     {
+        if (false === $this->isEnabled()) {
+            return;
+        }
+
+
         // @todo: Detect whether values are the same
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getBillingAddress(), $quote->getShippingAddress());
@@ -45,6 +50,10 @@ class SameAddressService
 
     public function copyShippingToBilling(): void
     {
+        if (false === $this->isEnabled()) {
+            return;
+        }
+
         // @todo: Detect whether values are the same
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getShippingAddress(), $quote->getBillingAddress());
