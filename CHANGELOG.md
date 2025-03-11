@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.11] - 11 March 2025
+### Fixed
+- Fix issue with grid CSS classes
+- Add better exception message when Context::getStepProvider() is missing
+
 ## [0.1.10] - 11 March 2025
 ### Fixed
 - Fix order completion for virtual orders
