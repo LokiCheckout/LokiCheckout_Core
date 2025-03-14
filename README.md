@@ -2,8 +2,6 @@
 
 **This is the main core package of the LokiCheckout.**
 
-Current status: Stable
-
 ## Installation
 Install this package via composer (assuming you have setup the `composer.yireo.com` repository correctly already):
 ```bash
