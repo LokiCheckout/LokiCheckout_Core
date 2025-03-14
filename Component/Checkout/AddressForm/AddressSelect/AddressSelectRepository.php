@@ -17,7 +17,6 @@ class AddressSelectRepository extends ComponentRepository
             return 0;
         }
 
-        $quote = $this->getContext()->getCheckoutState()->getQuote();
         $customer = $this->getContext()->getCustomerRepository()->getById(
             $this->getContext()->getCustomerSession()->getCustomerId()
         );
