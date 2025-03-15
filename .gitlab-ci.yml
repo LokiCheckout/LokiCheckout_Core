@@ -13,11 +13,11 @@ variables:
   ES_SETTING_DISCOVERY_TYPE: "single-node"
   ES_SETTING_XPACK_SECURITY_ENABLED: "false"
 
-#php-8.3-linting:
-#  stage: basic
-#  script:
-#    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
-#    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
+php-8.3-linting:
+  stage: basic
+  script:
+    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
+    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
 
 magento-tests:
   stage: advanced
