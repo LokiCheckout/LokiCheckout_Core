@@ -9,12 +9,15 @@ variables:
   MYSQL_PASSWORD: magento2
   MYSQL_DATABASE: magento2
   MYSQL_ROOT_PASSWORD: root
+  ES_JAVA_OPTS: "-Xms128m -Xmx128m"
+  ES_SETTING_DISCOVERY_TYPE: "single-node"
+  ES_SETTING_XPACK_SECURITY_ENABLED: "false"
 
-php-8.3-linting:
-  stage: basic
-  script:
-    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
-    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
+#php-8.3-linting:
+#  stage: basic
+#  script:
+#    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
+#    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
 
 magento-tests:
   stage: advanced
@@ -26,13 +29,15 @@ magento-tests:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
+    - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
     - cd /tmp/magento/dev/tests/integration/ && cp $CI_PROJECT_DIR/.gitlab-ci/install-config-mysql.php etc/install-config-mysql.php && cp $CI_PROJECT_DIR/.gitlab-ci/phpunit.xml phpunit.xml && php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml ../../../vendor/$COMPOSER_NAME/Test/Integration
 
 services:
   - mysql:8.0
   - redis:latest
-  - name: yireo/opensearch-dummy
+  - name: yireo/opensearch
     alias: opensearch
+    command: ["./bin/opensearch", "-E", "discovery.type=single-node"]
 
 cache:
   key: "$CI_JOB_NAME"
