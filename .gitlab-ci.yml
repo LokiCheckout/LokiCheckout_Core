@@ -30,7 +30,8 @@ magento-unit-tests:
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - cd /tmp/magento/dev/tests/unit/
-    - php ../../../vendor/bin/phpunit -c phpunit.xml.dist ../../../vendor/$COMPOSER_NAME/Test/Unit
+    - php ../../../vendor/bin/phpunit -c phpunit.xml.dist --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 magento-integration-tests:
   stage: advanced
@@ -46,7 +47,8 @@ magento-integration-tests:
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/install-config-mysql.php etc/install-config-mysql.php
     - cp $CI_PROJECT_DIR/.gitlab-ci/phpunit.xml phpunit.xml
-    - php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml ../../../vendor/$COMPOSER_NAME/Test/Integration
+    - php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Integration
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 services:
   - mysql:8.0
