@@ -1,4 +1,10 @@
 {
-    "unit_tests_count": 0,
-    "integration_tests_count": 0
+    "unit_tests_stats": {
+        "tests": 38,
+        "assertions": 87
+    },
+    "integration_tests_stats": {
+        "tests": 68,
+        "assertions": 558
+    }
 }
