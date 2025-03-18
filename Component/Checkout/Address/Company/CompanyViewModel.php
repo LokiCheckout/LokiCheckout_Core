@@ -16,4 +16,13 @@ class CompanyViewModel extends AddressFieldViewModel
 
         return parent::isRequired();
     }
+
+    public function getHelpText(): string
+    {
+        if ($this->getContext()->getModuleConfig()->enableVatIdOnlyForCompany()) {
+            return 'To enter a VAT ID, first enter a company name';
+        }
+
+        return parent::getHelpText();
+    }
 }
