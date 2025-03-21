@@ -36,5 +36,459 @@
             "version": "1.0",
             "status": "v1.0"
         }
+    },
+    "components": {
+        "checkout": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "quoteFields": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "shippingAddressFields": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "billingAddressFields": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "shippingAddressStreetFields": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "billingAddressStreetFields": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "stepButtons": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.progressbar": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.billing-as-shipping": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.toggle-select": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.select": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.view": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.methods": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.shipping-as-billing": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.toggle-select": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.select": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.view": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.payment.methods": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.coupon_code": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.items": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.totals": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.preview.quote_details": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.preview.shipping_details": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.preview.billing_address": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.sidebar.preview.payment_details": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.newsletter": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.agreements": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.shipping": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.billing": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.one": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.customer.customer_email": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.customer.customer_gender": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.customer.customer_dob": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.prefix": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.firstname": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.middlename": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.lastname": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.suffix": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.postcode": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.city": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.region": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.country_id": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.company": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.telephone": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.fax": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.vat_id": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.save_in_address_book": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.prefix": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.firstname": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.middlename": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.lastname": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.suffix": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.postcode": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.city": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.region": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.country_id": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.company": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.telephone": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.fax": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.vat_id": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.save_in_address_book": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.street0": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.street1": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.street2": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.shipping.address.street3": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.street0": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.street1": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.street2": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.billing.address.street3": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.shipping.backward-button": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.shipping.forward-button": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.billing.backward-button": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        },
+        "loki-checkout.steps.billing.forward-button": {
+            "version": "0.1",
+            "status": "complete",
+            "description": ""
+        }
+    },
+    "config": {
+        "yireo_loki_checkout\/general\/enable": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Enable"
+        },
+        "yireo_loki_checkout\/general\/theme": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Theme"
+        },
+        "yireo_loki_checkout\/general\/grid_layout": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Grid Layout"
+        },
+        "yireo_loki_checkout\/general\/license_key": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "License Key"
+        },
+        "yireo_loki_checkout\/debug\/enable": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Enable Debugging"
+        },
+        "yireo_loki_checkout\/debug\/html_hints": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Add Hints to HTML Output"
+        },
+        "yireo_loki_checkout\/debug\/debug_block": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Add Debug Block"
+        },
+        "yireo_loki_checkout\/fields\/use_required_block": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Use required block"
+        },
+        "yireo_loki_checkout\/fields\/enable_same_as_billing": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Enable Same As Billing Checkbox"
+        },
+        "yireo_loki_checkout\/fields\/hide_region_when_optional": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Hide Region When Optional"
+        },
+        "yireo_loki_checkout\/fields\/enable_vat_id_only_for_company": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Enable Vat ID Only For Companies"
+        },
+        "yireo_loki_checkout\/shipping\/select_default_shipping_method": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Select Default Shipping Method"
+        },
+        "yireo_loki_checkout\/billing\/select_default_payment_method": {
+            "version": "0.1",
+            "status": "complete",
+            "description": "Select Default Payment Method"
+        }
     }
 }
