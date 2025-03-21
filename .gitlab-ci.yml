@@ -22,8 +22,8 @@ php-8.3-linting:
 magento-unit-tests:
   stage: basic
   script:
-    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
-    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit
+    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
+    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.local-source path $CI_PROJECT_DIR
@@ -38,8 +38,8 @@ magento-unit-tests:
 magento-integration-tests:
   stage: advanced
   script:
-    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
-    - test -d $CI_PROJECT_DIR/Test/Integration/ || exit
+    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
+    - test -d $CI_PROJECT_DIR/Test/Integration/ || exit 0
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.local-source path $CI_PROJECT_DIR
