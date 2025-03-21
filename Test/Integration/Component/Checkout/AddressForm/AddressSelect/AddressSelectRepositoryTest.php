@@ -13,7 +13,6 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
-use PHPUnit\Framework\TestCase;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
