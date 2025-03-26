@@ -19,13 +19,6 @@
         "Yireo_HyvaThemeAutoRegistration"
     ],
     "components": [
-        "checkout",
-        "quoteFields",
-        "shippingAddressFields",
-        "billingAddressFields",
-        "shippingAddressStreetFields",
-        "billingAddressStreetFields",
-        "stepButtons",
         "loki-checkout.steps",
         "loki-checkout.progressbar",
         "loki-checkout.shipping.address",
