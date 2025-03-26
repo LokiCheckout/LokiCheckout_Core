@@ -5,9 +5,11 @@ namespace Yireo\LokiCheckout\Test\Integration;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\View\LayoutInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+use Yireo\LokiCheckoutAccountType\Test\Integration\Component\Checkout\Address\AccountType\AccountTypePageTest;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
@@ -55,8 +57,13 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function getCart(): CartInterface
     {
+        /** @var CartInterface $cart */
         $cart = $this->fixtures->get('cart');
         $this->assertInstanceOf(CartInterface::class, $cart);
+
+        $cartId = $cart->getId();
+        $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);
+
         $this->assertNotEmpty($cart->getId());
 
         $checkoutState = $this->getObjectManager()->get(CheckoutState::class);
