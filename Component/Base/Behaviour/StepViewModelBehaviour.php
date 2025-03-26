@@ -2,11 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Behaviour;
 
-use Magento\Framework\View\Element\AbstractBlock;
-
-/**
- * @method AbstractBlock getBlock()
- */
 trait StepViewModelBehaviour
 {
     protected string $step = '';
