@@ -3,14 +3,17 @@
 namespace Yireo\LokiCheckout\Test\Integration;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Response\Http;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
+use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
-use Yireo\LokiCheckoutAccountType\Test\Integration\Component\Checkout\Address\AccountType\AccountTypePageTest;
 use Yireo\LokiComponents\Component\ComponentInterface;
+use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
 
@@ -29,18 +32,32 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
     }
 
-    public function getCheckoutComponent(string $blockName): ComponentInterface
+    protected function getQuote(): Quote
+    {
+        return ObjectManager::getInstance()->get(CheckoutState::class)->getQuote();
+    }
+
+    protected function getComponentRepository(string $blockId): ComponentRepositoryInterface
+    {
+        $componentRegistry = ObjectManager::getInstance()->get(ComponentRegistry::class);
+        $component = $componentRegistry->getComponentByName($blockId);
+
+        return $component->getRepository();
+    }
+
+    protected function getCheckoutComponent(string $blockName): ComponentInterface
     {
         return $this->getComponentWithBlock($blockName, ['default', 'loki_components', 'loki_field_components', 'loki_checkout', $this->themeName]);
     }
 
-    public function dispatchToCheckout(?CartInterface $cart = null)
+    protected function dispatchToCheckout(?CartInterface $cart = null)
     {
         if ($cart === null) {
             $cart = $this->getCart();
         }
 
         $this->assertTrue($cart->getItemsCount() > 0);
+
         $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
             'checkout_index_index',
             'loki_checkout',
@@ -75,6 +92,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         return $cart;
     }
 
+    // @todo: Move into trait
     protected function assertRepositorySave(ComponentInterface $component, mixed $value)
     {
         $repository = $component->getRepository();
@@ -82,5 +100,29 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
         $repository->saveValue($value);
         $this->assertSame($value, $repository->getValue());
+    }
+
+    // @todo: Move into trait
+    protected function assertConfigValue(
+        mixed $expectedValue,
+        string $path,
+        string $scopeType = 'default',
+        mixed $scopeValue = null
+    ): void {
+        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $value = $scopeConfig->getValue($path, $scopeType, $scopeValue);
+        $this->assertSame($expectedValue, $value);
+    }
+
+    // @todo: Move into trait
+    protected function assertConfigFlag(
+        bool $expectedValue,
+        string $path,
+        string $scopeType = 'default',
+        mixed $scopeValue = null
+    ): void {
+        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $value = $scopeConfig->isSetFlag($path, $scopeType, $scopeValue);
+        $this->assertSame($expectedValue, $value);
     }
 }

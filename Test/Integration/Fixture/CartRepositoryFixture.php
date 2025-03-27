@@ -18,7 +18,27 @@ class CartRepositoryFixture implements CartRepositoryInterface
         }
 
         $this->quote = ObjectManager::getInstance()->create(Quote::class);
+
         return $this->quote;
+    }
+
+    public function generateQuote(array $data = []): void
+    {
+        $this->quote = ObjectManager::getInstance()->create(Quote::class);
+        $this->quote->setData($data);
+
+        if (isset($data['shipping_address'])) {
+            $this->quote->getShippingAddress()->setData($data['shipping_address']);
+        }
+
+        if (isset($data['billing_address'])) {
+            $this->quote->getBillingAddress()->setData($data['billing_address']);
+        }
+    }
+
+    public function setQuote(Quote $quote): void
+    {
+        $this->quote = $quote;
     }
 
     public function get($cartId)

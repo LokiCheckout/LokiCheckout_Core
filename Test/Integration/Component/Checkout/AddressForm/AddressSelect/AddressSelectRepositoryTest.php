@@ -8,15 +8,11 @@ use Magento\Customer\Model\Session;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
 use Magento\Framework\App\ObjectManager;
 use Magento\TestFramework\Fixture\AppArea;
-use Magento\TestFramework\Fixture\AppIsolation;
 use Magento\TestFramework\Fixture\DataFixture;
-use Magento\TestFramework\Fixture\DbIsolation;
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectRepository;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutRepositoryTestCase;
 
 #[
-    AppIsolation(true),
-    DbIsolation(true),
     DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),
     AppArea('frontend'),
 ]
