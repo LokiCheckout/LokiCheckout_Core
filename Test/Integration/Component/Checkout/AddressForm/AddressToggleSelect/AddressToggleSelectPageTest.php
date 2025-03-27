@@ -29,7 +29,6 @@ final class AddressToggleSelectPageTest extends LokiCheckoutPageTestCase
 
     public const BLOCK_NAME = 'loki-checkout.shipping.address.toggle-select';
 
-    #[ConfigFixture('foo', 'bar', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

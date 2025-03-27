@@ -6,10 +6,10 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\View\LayoutInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
+use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiComponents\Component\ComponentInterface;
@@ -20,8 +20,6 @@ use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
-
-    protected $themeName = 'onestep';
 
     protected function setUp(): void
     {
@@ -47,12 +45,15 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function getCheckoutComponent(string $blockName): ComponentInterface
     {
+        $config = ObjectManager::getInstance()->get(Config::class);
+        $themeName = $config->getTheme();
+
         $handles = [
             'default',
             'loki_components',
             'loki_field_components',
             'loki_checkout',
-            'loki_checkout_theme_'.$this->themeName,
+            'loki_checkout_theme_'.$themeName,
         ];
 
         return $this->getComponentWithBlock($blockName, $handles);
@@ -65,12 +66,6 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         }
 
         $this->assertTrue($cart->getItemsCount() > 0);
-
-        $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
-            'checkout_index_index',
-            'loki_checkout',
-            'loki_checkout_theme_'.$this->themeName,
-        ]);
 
         $this->dispatch('checkout/index/index');
 

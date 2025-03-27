@@ -191,6 +191,7 @@
         viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Items\ItemsViewModel">
     </component>
 
+    <!-- @todo: Remove these as components? -->
     <component name="loki-checkout.sidebar"/>
 
     <component name="loki-checkout.sidebar.totals"/>

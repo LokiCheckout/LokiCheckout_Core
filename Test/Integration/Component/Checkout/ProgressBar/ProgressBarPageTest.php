@@ -21,8 +21,6 @@ final class ProgressBarPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    protected $themeName = 'default';
-
     public const BLOCK_NAME = 'loki-checkout.progressbar';
 
     final public function testComponentOnPage(): void

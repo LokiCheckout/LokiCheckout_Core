@@ -34,9 +34,13 @@ class EnableCheckout implements ObserverInterface
             return;
         }
 
-        $this->layout->getUpdate()->addHandle('loki_checkout');
-        $this->layout->getUpdate()->addHandle('loki_checkout_theme_'.$this->config->getTheme());
+        $theme = $this->config->getTheme();
 
+        $this->layout->getUpdate()->addHandle('loki_checkout');
+        $this->layout->getUpdate()->addHandle('loki_checkout_theme_'.$theme);
+
+        // @todo: Detect Hyva in a different way
+        // @todo: Move this to a separate Hyva module
         if (in_array('hyva_checkout_index_index', $handles)) {
             $this->layout->getUpdate()->addHandle('hyva_loki_checkout');
         }
