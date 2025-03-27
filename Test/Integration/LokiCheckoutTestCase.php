@@ -21,7 +21,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
 
-    protected $themeName = 'loki_checkout_theme_onestep';
+    protected $themeName = 'onestep';
 
     protected function setUp(): void
     {
@@ -47,7 +47,15 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function getCheckoutComponent(string $blockName): ComponentInterface
     {
-        return $this->getComponentWithBlock($blockName, ['default', 'loki_components', 'loki_field_components', 'loki_checkout', $this->themeName]);
+        $handles = [
+            'default',
+            'loki_components',
+            'loki_field_components',
+            'loki_checkout',
+            'loki_checkout_theme_'.$this->themeName,
+        ];
+
+        return $this->getComponentWithBlock($blockName, $handles);
     }
 
     protected function dispatchToCheckout(?CartInterface $cart = null)
@@ -61,7 +69,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->getObjectManager()->get(LayoutInterface::class)->getUpdate()->addHandle([
             'checkout_index_index',
             'loki_checkout',
-            'loki_checkout_theme_onestep',
+            'loki_checkout_theme_'.$this->themeName,
         ]);
 
         $this->dispatch('checkout/index/index');
