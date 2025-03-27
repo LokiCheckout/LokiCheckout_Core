@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Billing;
+namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Billing\ShippingAsBilling;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 
@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     AppArea('frontend'),
@@ -18,7 +18,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])
 ]
-class ShippingAsBillingTest extends LokiCheckoutTestCase
+class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
 {
     const BLOCK_NAME = 'loki-checkout.billing.address.shipping-as-billing';
 
@@ -30,8 +30,6 @@ class ShippingAsBillingTest extends LokiCheckoutTestCase
     ]
     public function testDisabled()
     {
-        $cart = $this->getCart();
-        $this->dispatchToCheckout($cart);
         $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
@@ -41,9 +39,6 @@ class ShippingAsBillingTest extends LokiCheckoutTestCase
     ]
     public function testEnabled()
     {
-        $cart = $this->getCart();
-        $this->dispatchToCheckout($cart);
-        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentExistsOnPage($component);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 }
