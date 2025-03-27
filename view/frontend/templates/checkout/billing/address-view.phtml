@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiCheckout\Component\Checkout\Billing\BillingAddress\BillingAddressViewModel;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 
-/** @var BillingAddressViewModel $viewModel */
+/** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
 $html = $viewModel->getHtml();
 if (empty($html)) {
