@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\Select;
+namespace Yireo\LokiCheckout\Component\Checkout\Address\Select;
 
 use Magento\Customer\Api\Data\AddressInterface;
-use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**

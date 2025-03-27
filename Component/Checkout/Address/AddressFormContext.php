@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm;
+namespace Yireo\LokiCheckout\Component\Checkout\Address;
 
 use Magento\Quote\Api\Data\AddressInterface;
 use Yireo\LokiCheckout\Component\Checkout\Address\AddressContext;
@@ -40,6 +40,11 @@ class AddressFormContext extends AddressContext
     public function isNewAddress(ComponentInterface $component): bool
     {
         if (false === $this->getCustomerSession()->isLoggedIn()) {
+            return true;
+        }
+
+        $addresses = $this->getCustomerSession()->getCustomer()->getAddresses();
+        if (empty($addresses)) {
             return true;
         }
 

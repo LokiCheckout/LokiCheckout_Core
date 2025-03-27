@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm;
+namespace Yireo\LokiCheckout\Component\Checkout\Address;
 
 use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
