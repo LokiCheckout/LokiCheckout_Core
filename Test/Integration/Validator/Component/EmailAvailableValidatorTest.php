@@ -8,7 +8,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
-use Magento\TestFramework\Fixture\Config;
+use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use PHPUnit\Framework\TestCase;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator;
@@ -22,7 +22,7 @@ class EmailAvailableValidatorTest extends TestCase
         $this->assertTrue($validator->validate(null));
     }
 
-    #[Config(AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG, 1, 'website')]
+    #[ConfigFixture(AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG, 1, 'website')]
     public function testWithExistingEmail(): void
     {
         $this->createCustomer('john@example.com');

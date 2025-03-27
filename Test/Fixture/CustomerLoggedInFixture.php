@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Test\Fixture;
 
-use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\DataObject;
@@ -12,13 +11,12 @@ class CustomerLoggedInFixture implements DataFixtureInterface
 {
     public function apply(array $data = []): ?DataObject
     {
-        /** @var CustomerInterface $customer */
-        $customer = $data['customer'];
+        $customerId = (int) $data['customer_id'];
 
         /** @var Session $customerSession */
         $customerSession = ObjectManager::getInstance()->get(Session::class);
         $customerSession->isLoggedIn();
-        $customerSession->setCustomerId($customer->getId());
+        $customerSession->setCustomerId($customerId);
 
         return null;
     }
