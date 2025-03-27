@@ -2,6 +2,7 @@
   "name": "yireo/magento2-loki-checkout",
   "version": "0.1.11",
   "description": "A developer-friendly AlpineJS-based checkout for Magento 2",
+  "keywords": ["loki-core"],
   "type": "magento2-module",
   "homepage": "https://loki-checkout.com/",
   "authors": [
