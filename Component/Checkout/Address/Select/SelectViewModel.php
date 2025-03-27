@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\Select;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 /**
  * @method AddressFormContext getContext()
  */
-class AddressSelectViewModel extends CheckoutViewModel
+class SelectViewModel extends CheckoutViewModel
 {
     public function getAddressLines(): array
     {

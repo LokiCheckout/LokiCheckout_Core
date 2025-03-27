@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\ToggleSelect;
 
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
@@ -8,7 +8,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
 /**
  * @method AddressFormContext getContext()
  */
-class AddressToggleSelectRepository extends ComponentRepository
+class ToggleSelectRepository extends ComponentRepository
 {
     public function getValue(): mixed
     {

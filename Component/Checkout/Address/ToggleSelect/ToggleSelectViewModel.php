@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressToggleSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\ToggleSelect;
 
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentViewModel;
 
 /**
  * @method AddressFormContext getContext()
- * @method AddressToggleSelectRepository getRepository()
+ * @method ToggleSelectRepository getRepository()
  */
-class AddressToggleSelectViewModel extends ComponentViewModel
+class ToggleSelectViewModel extends ComponentViewModel
 {
     public function getJsData(): array
     {

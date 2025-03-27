@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect;
+namespace Yireo\LokiCheckout\Component\Checkout\AddressForm\Select;
 
 use Magento\Customer\Api\Data\AddressInterface;
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
 /**
  * @method AddressFormContext getContext()
  */
-class AddressSelectRepository extends ComponentRepository
+class SelectRepository extends ComponentRepository
 {
     public function getValue(): mixed
     {
