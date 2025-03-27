@@ -3,17 +3,16 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\AddressForm\AddressSelect;
 
-use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Customer\Model\Session;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
-use Magento\Framework\App\ObjectManager;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressSelect\AddressSelectRepository;
+use Yireo\LokiCheckout\Test\Fixture\CustomerLoggedInFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutRepositoryTestCase;
 
 #[
     DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),
+    DataFixture(CustomerLoggedInFixture::class, ['customer' => '$customer$']),
     AppArea('frontend'),
 ]
 class AddressSelectRepositoryTest extends LokiCheckoutRepositoryTestCase
@@ -22,14 +21,6 @@ class AddressSelectRepositoryTest extends LokiCheckoutRepositoryTestCase
 
     public function testGetValue()
     {
-        /** @var CustomerInterface $customer */
-        $customer = $this->fixtures->get('customer');
-
-        /** @var Session $customerSession */
-        $customerSession = ObjectManager::getInstance()->get(Session::class);
-        $customerSession->isLoggedIn();
-        $customerSession->setCustomerId($customer->getId());
-
         $component = $this->getComponent(self::BLOCK_NAME);
 
         /** @var AddressSelectRepository $repository */

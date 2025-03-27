@@ -2,17 +2,16 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingAddress\ShippingAddressViewModel;
+use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ShippingAddressViewModel $viewModel */
+/** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-
 ?>
 <div class="<?= $css('mb-8') ?>">
     <?php if ($viewModel->showSelectAddress()): ?>
