@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiCheckout\ViewModel\ShipmentMethodIcon;
+
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var ShipmentMethodIcon $shipmentMethodIcon */
+/** @var CssClass $css */
+// @doc: Show how to change CSS here
+
+$shipmentMethodCode = $block->getCode();
+$shipmentMethodIcon = $viewModelFactory->create(ShipmentMethodIcon::class);
+$icon = $shipmentMethodIcon->getIcon($shipmentMethodCode);
+if (empty($icon)) {
+    return;
+}
+?>
+<div class="<?= $css('inline-block mr-4 w-8 drop-shadow-2xl') ?>">
+    <?= $shipmentMethodIcon->getIcon($shipmentMethodCode) ?>
+</div>

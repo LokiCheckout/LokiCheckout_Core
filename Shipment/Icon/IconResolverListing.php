@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Payment;
+namespace Yireo\LokiCheckout\Shipment\Icon;
 
-class ShipmentMethodIconResolverListing
+class IconResolverListing
 {
     public function __construct(
         private array $iconResolvers = []
@@ -11,7 +11,7 @@ class ShipmentMethodIconResolverListing
     }
 
     /**
-     * @return PaymentMethodIconResolverInterface[]
+     * @return IconResolverInterface[]
      */
     public function getIconResolvers(): array
     {
