@@ -2,71 +2,37 @@
 
 namespace Yireo\LokiCheckout\ViewModel;
 
-use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Framework\Component\ComponentRegistrar;
-use Magento\Framework\Filesystem;
-use Magento\Framework\Filesystem\DriverInterface;
-use Magento\Framework\Module\Manager as ModuleManager;
-use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Yireo\LokiCheckout\Payment\Icon\IconResolverContext;
+use Yireo\LokiCheckout\Payment\Icon\IconResolverContextFactory;
+use Yireo\LokiCheckout\Payment\Icon\IconResolverListing;
 
 /**
  * @api
  */
 class PaymentMethodIcon implements ArgumentInterface
 {
-    private ?DriverInterface $fileDriver = null;
-
-
     public function __construct(
-        private AssetRepository $assetRepository,
-        private ComponentRegistrar $componentRegistrar,
-        private ModuleManager $moduleManager,
-        Filesystem $filesystem,
+        private IconResolverListing $iconResolverListing,
+        private IconResolverContextFactory $iconResolverContextFactory,
     ) {
-        $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
     }
 
     public function getIcon(string $paymentMethodCode): string
     {
+        $context = $this->getIconResolverContext($paymentMethodCode);
+        foreach ($this->iconResolverListing->getIconResolvers() as $iconResolver) {
+            $icon = $iconResolver->resolve($context);
+            if (is_string($icon)) {
+                return $icon;
+            }
+        }
+
         return '';
     }
 
-    public function getIconPath(string $moduleName, string $path): false|string
+    private function getIconResolverContext(string $paymentMethodCode): IconResolverContext
     {
-        $modulePath = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-        $iconPath = $modulePath . DIRECTORY_SEPARATOR . $path;
-        if ($this->fileDriver->isFile($iconPath)) {
-            return $iconPath;
-        }
-
-        return false;
-    }
-
-    public function getIconOutput(false|string $iconPath, string $iconType): string
-    {
-        if (false === $iconPath) {
-            return '';
-        }
-
-        if (false === file_exists($iconPath)) {
-            return '';
-        }
-
-        if ($iconType === 'svg') {
-            return file_get_contents($iconPath);
-        }
-
-        return '<img src="' . $iconPath . '" />';
-    }
-
-    public function isModuleEnabled(string $moduleName): bool
-    {
-        return $this->moduleManager->isEnabled($moduleName);
-    }
-
-    public function getAssetRepository(): AssetRepository
-    {
-        return $this->assetRepository;
+        return $this->iconResolverContextFactory->create(['paymentMethodCode' => $paymentMethodCode]);
     }
 }
