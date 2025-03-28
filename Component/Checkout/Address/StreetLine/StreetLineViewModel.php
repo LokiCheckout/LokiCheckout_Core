@@ -9,16 +9,10 @@ class StreetLineViewModel extends AddressFieldViewModel
     public function isAllowRendering(): bool
     {
         $streetLines = (int)$this->getContext()->getScopeConfig()->getValue('customer/address/street_lines');
-        echo "Streetlines: ".$streetLines.' / '.$this->getIndex();
 
         if ($this->getIndex() >= $streetLines) {
             return false;
         }
-
-        // 0 = lines 3 = TRUE
-        // 1 = lines 3 = TRUE
-        // 2 = lines 3 = TRUE
-        // 3 = lines 3 = FALSE
 
         return parent::isAllowRendering();
     }
