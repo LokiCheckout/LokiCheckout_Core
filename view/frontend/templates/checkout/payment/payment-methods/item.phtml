@@ -17,38 +17,48 @@ use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 /** @var TemplateRenderer $templateRenderer */
 /** @var PaymentMethodsViewModel $viewModel */
 
+// @todo: Split up in smaller templates
+
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $viewModel = $block->getViewModel();
 $paymentMethod = $block->getMethod();
 $code = $paymentMethod->getCode();
 $isCurrent = $block->getIsCurrent();
 $showHidden = (bool)$block->getShowHidden(); // @doc
+
+$blockClasses = [];
+$blockClasses[] = $isCurrent ? 'active' : 'inactive';
+$blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
 ?>
-<li class="<?= $css('cursor-pointer relative my-4 p-4') ?> <?= $isCurrent ? 'active' : 'inactive' ?>">
-    <div class="<?= $css('flex', 'method') ?>">
+<li class="<?= $css('cursor-pointer relative flex gap-4 my-2 p-3') ?> <?= implode(' ', $blockClasses) ?>">
+    <div class="<?= $css('', 'input-container') ?>">
         <input
             type="radio"
             x-model="value"
             @change="submit"
             name="payment_method"
             value="<?= $code ?>"
-            <?php if ($isCurrent) : ?>checked<?php endif ?>
+            <?= $isCurrent && 'checked' ?>
+            <?= $viewModel->isDisabled() && 'disabled="disabled"' ?>
             id="payment-<?= $code ?>"
-            class="<?= $css('mr-4', 'input') ?>">
-
-        <div>
-            <div class="<?= $css('flex', 'method') ?>">
-                <?= $templateRenderer->html(
-                    $block,
-                    'Yireo_LokiCheckout::checkout/payment/payment-methods/icon.phtml', [
+            class="<?= $css('mr-4', 'input') ?>"
+        >
+    </div>
+    <div class="<?= $css('flex-1', 'details-container') ?>">
+        <div class="<?= $css('flex', 'details') ?>">
+            <?= $templateRenderer->html(
+                $block,
+                'Yireo_LokiCheckout::checkout/payment/payment-methods/icon.phtml',
+                [
                     'alias' => $code,
                     'code' => $code,
-                ]) ?>
+                ]
+            ) ?>
 
-                <label for="payment-<?= $code ?>" class="<?= $css('', 'label') ?>"><?= $paymentMethod->getTitle() ?></label>
-            </div>
+            <label for="payment-<?= $code ?>" class="<?= $css('', 'label') ?>"><?= $paymentMethod->getTitle() ?></label>
+        </div>
 
-            <?php if ($isCurrent || $showHidden) : ?>
+        <?php if ($isCurrent || $showHidden) : ?>
             <div class="<?= $css('my-4', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= $blockRenderer->html(
                     $block,
@@ -63,7 +73,6 @@ $showHidden = (bool)$block->getShowHidden(); // @doc
                 )
                 ?>
             </div>
-            <?php endif; ?>
-        </div>
+        <?php endif; ?>
     </div>
 </li>

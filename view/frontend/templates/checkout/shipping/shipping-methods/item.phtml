@@ -5,63 +5,95 @@ use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Cart\ShippingMethod;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
+use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 
 /** @var Template $block */
 /** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var ShippingMethod $shippingMethod */
 
+$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $viewModel = $block->getViewModel();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
 $isCurrent = $viewModel->getValue() === $code;
+$showHidden = (bool)$block->getShowHidden(); // @doc
 
-$mainClasses = [];
-$mainClasses[] = $isCurrent ? 'active' : 'inactive';
-$mainClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
+$blockClasses = [];
+$blockClasses[] = $isCurrent ? 'active' : 'inactive';
+$blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
 ?>
-<li class="<?= $css('cursor-pointer relative flex') ?> <?= implode(' ', $mainClasses) ?>">
-    <div class="<?= $css('p-4', 'input-container') ?>">
+<li class="<?= $css('cursor-pointer relative flex gap-4 my-2 p-3') ?> <?= implode(' ', $blockClasses) ?>">
+    <div class="<?= $css('', 'input-container') ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
-            <input type="radio"
-                   x-model="value"
-                   name="shipping_method"
-                   value="<?= $code ?>"
-                <?php if ($viewModel->isDisabled()): ?>
-                    disabled="disabled"
-                <?php endif; ?>
-                   id="shipping-<?= $code ?>"
-                <?= $isCurrent ? 'checked' : '' ?>>
+            <input
+                type="radio"
+                x-model="value"
+                @change="submit"
+                name="shipping_method"
+                value="<?= $code ?>"
+                <?= $isCurrent && 'checked' ?>
+                <?= $viewModel->isDisabled() && 'disabled="disabled"' ?>
+                id="shipping-<?= $code ?>"
+                class="<?= $css('mr-4', 'input') ?>"
+            >
         <?php else: ?>
             <input type="radio" id="shipping-<?= $code ?>" disabled/>
         <?php endif; ?>
     </div>
-    <div class="<?= $css('p-4 w-auto font-bold', 'amount-container') ?>">
-        <label for="shipping-<?= $code ?>">
-            <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
-        </label>
-    </div>
-    <div class="<?= $css('p-4 w-auto', 'method-container') ?>">
-        <label for="shipping-<?= $code ?>">
-            <?= $shippingMethod->getMethodTitle() ?>
-        </label>
-    </div>
-    <div class="<?= $css('p-4', 'carrier-container') ?>">
-        <label for="shipping-<?= $code ?>">
-            <?= $shippingMethod->getCarrierTitle() ?>
+    <div class="<?= $css('flex-1', 'details-container') ?>">
+        <div class="<?= $css('flex', 'details') ?>">
+            <?= $templateRenderer->html(
+                $block,
+                'Yireo_LokiCheckout::checkout/shipping/shipping-methods/icon.phtml',
+                [
+                    'alias' => $code,
+                    'code' => $code,
+                ]
+            ) ?>
 
-            <?php if (false === $shippingMethod->getAvailable()) : ?>
-                <?php if ($shippingMethod->getErrorMessage()): ?>
-                    (<?= $shippingMethod->getErrorMessage() ?>)
-                <?php else: ?>
-                    (Not available)
+            <label for="shipping-<?= $code ?>" class="<?= $css('pr-2 font-bold', 'amount-label') ?>">
+                <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
+            </label>
+
+            <label for="shipment-<?= $code ?>"
+                   class="<?= $css('pr-2 ', 'method-label') ?>"><?= $shippingMethod->getMethodTitle() ?></label>
+
+            <label for="shipping-<?= $code ?>" class="<?= $css('pr-2 ', 'carrier-label') ?>">
+                <?= $shippingMethod->getCarrierTitle() ?>
+
+                <?php if (false === $shippingMethod->getAvailable()) : ?>
+                    <?php if ($shippingMethod->getErrorMessage()): ?>
+                        (<?= $shippingMethod->getErrorMessage() ?>)
+                    <?php else: ?>
+                        (Not available)
+                    <?php endif; ?>
                 <?php endif; ?>
-            <?php endif; ?>
-        </label>
+            </label>
+        </div>
+
+        <?php if ($isCurrent || $showHidden) : ?>
+            <div class="<?= $css('my-4', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+                <?= $blockRenderer->html(
+                    $block,
+                    'loki-checkout.shipping.shipping-methods.'.$code.'.form',
+                    ['method' => $code]
+                ) ?>
+
+                <?= $blockRenderer->html(
+                    $block,
+                    'loki-checkout.shipping.shipping-methods.'.$code.'.additional',
+                    ['method' => $code]
+                )
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 </li>
