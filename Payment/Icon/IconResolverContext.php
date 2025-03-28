@@ -54,12 +54,8 @@ class IconResolverContext
         return '<img src="' . $iconPath . '" />';
     }
 
-    /**
-     * @deprecated Is this being used?
-     * @return AssetRepository
-     */
-    public function getAssetRepository(): AssetRepository
+    public function getViewFileUrl(string $imageId): string
     {
-        return $this->assetRepository;
+        return $this->assetRepository->getUrl($imageId);
     }
 }
