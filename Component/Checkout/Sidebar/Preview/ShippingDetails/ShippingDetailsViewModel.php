@@ -48,7 +48,12 @@ class ShippingDetailsViewModel implements ArgumentInterface
 
         $parts = [];
 
-        $carrier = $this->getCarrier($carrierCode);
+        try {
+            $carrier = $this->getCarrier($carrierCode);
+        } catch (InvalidArgumentException $e) {
+            return ''; // @todo: A method like PostNL does not show?
+        }
+
         $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
 
         if (!empty($methodTitle)) {
