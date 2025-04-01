@@ -66,7 +66,7 @@ class ListModulesCommand extends Command
         $data = [];
         foreach ($this->lokiCheckoutModules->getModules() as $module) {
             $data[] = [
-                'module' => $module,
+                'name' => $module,
                 'enabled' => (int)$this->moduleManager->isEnabled($module),
                 'path' => $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $module),
             ];

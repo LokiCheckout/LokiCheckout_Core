@@ -1,0 +1,20 @@
+import {test, expect, type Page} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright'; // 1
+
+test.beforeEach(async ({page, request}) => {
+    const cart = await request.get(`/loki/api/cart?token=` + process.env.TEST_TOKEN);
+    expect(cart.ok()).toBeTruthy();
+
+    await page.goto('/checkout');
+    await expect(page).toHaveTitle(/Checkout/);
+});
+
+test.describe('checkout', () => {
+    test('should not have any automatically detectable accessibility issues', async ({ page }) => {
+        const accessibilityScanResults = await new AxeBuilder({ page })
+            .include('.loki-checkout')
+            .withTags('wcag2a')
+            .analyze();
+        expect(accessibilityScanResults.violations).toEqual([]);
+    });
+});
