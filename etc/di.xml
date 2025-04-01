@@ -10,7 +10,7 @@
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="yireo:loki-checkout:modules:list" xsi:type="object">Yireo\LokiCheckout\Console\Command\ListLokiCheckoutModulesCommand</item>
+                <item name="yireo:loki-checkout:modules:list" xsi:type="object">Yireo\LokiCheckout\Console\Command\ListModulesCommand</item>
             </argument>
         </arguments>
     </type>
