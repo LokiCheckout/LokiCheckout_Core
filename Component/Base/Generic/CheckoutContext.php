@@ -104,6 +104,16 @@ class CheckoutContext implements ComponentContextInterface
         return $this->cartRepository;
     }
 
+    public function getQuote(): CartInterface
+    {
+        return $this->checkoutState->getQuote();
+    }
+
+    public function getCart(): CartInterface
+    {
+        return $this->checkoutState->getQuote();
+    }
+
     public function getGlobalMessageRegistry(): GlobalMessageRegistry
     {
         return $this->globalMessageRegistry;
