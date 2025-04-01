@@ -67,7 +67,7 @@ class AddHtmlAttributes implements ObserverInterface
             return $currentHtml;
         }
 
-        $firstTagHtml = $currentHtml[0];
+        $firstTagHtml = $match[0];
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
