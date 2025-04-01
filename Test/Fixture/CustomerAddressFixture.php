@@ -3,11 +3,8 @@
 namespace Yireo\LokiCheckout\Test\Fixture;
 
 use Magento\Customer\Api\AddressRepositoryInterface;
-use Magento\Customer\Api\Data\AddressInterfaceFactory;
-use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\DataObject;
 use Magento\TestFramework\Fixture\Api\ServiceFactory;
-use Magento\TestFramework\Fixture\DataFixtureInterface;
 use Magento\TestFramework\Fixture\RevertibleDataFixtureInterface;
 
 class CustomerAddressFixture implements RevertibleDataFixtureInterface

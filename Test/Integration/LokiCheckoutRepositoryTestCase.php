@@ -2,21 +2,21 @@
 
 namespace Yireo\LokiCheckout\Test\Integration;
 
-use Yireo\LokiCheckout\Test\Integration\Trait\EnableCartRepositoryFixture;
+use Yireo\LokiCheckout\Test\Integration\Trait\EnableCartRepositoryStub;
 
 class LokiCheckoutRepositoryTestCase extends LokiCheckoutTestCase
 {
-    use EnableCartRepositoryFixture;
+    use EnableCartRepositoryStub;
 
     protected function setUp(): void
     {
-        $this->enableCartRepositoryFixture();
+        $this->enableCartRepositoryStub();
         parent::setUp();
     }
 
     protected function tearDown(): void
     {
-        $this->disableCartRepositoryFixture();
+        $this->disableCartRepositoryStub();
         parent::tearDown();
     }
 }

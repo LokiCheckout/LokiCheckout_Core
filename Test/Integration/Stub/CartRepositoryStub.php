@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Fixture;
+namespace Yireo\LokiCheckout\Test\Integration\Stub;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 
-class CartRepositoryFixture implements CartRepositoryInterface
+class CartRepositoryStub implements CartRepositoryInterface
 {
     private ?Quote $quote = null;
 
