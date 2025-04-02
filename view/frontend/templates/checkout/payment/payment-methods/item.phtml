@@ -40,7 +40,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
             value="<?= $code ?>"
             <?= $isCurrent && 'checked' ?>
             <?= $viewModel->isDisabled() && 'disabled="disabled"' ?>
-            id="payment-<?= $code ?>"
+            id="<?= $viewModel->getFieldIdFromCode($code) ?>"
             class="<?= $css('mr-4', 'input') ?>"
         >
     </div>
