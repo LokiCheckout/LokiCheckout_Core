@@ -41,7 +41,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 value="<?= $code ?>"
                 <?= $isCurrent && 'checked' ?>
                 <?= $viewModel->isDisabled() && 'disabled="disabled"' ?>
-                id="shipping-<?= $code ?>"
+                id="<?= $viewModel->getFieldIdFromCode($code) ?>"
                 class="<?= $css('mr-4', 'input') ?>"
             >
         <?php else: ?>
@@ -59,14 +59,14 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 ]
             ) ?>
 
-            <label for="shipping-<?= $code ?>" class="<?= $css('pr-2 font-bold', 'amount-label') ?>">
+            <label for="<?= $viewModel->getFieldIdFromCode($code) ?>" class="<?= $css('pr-2 font-bold', 'amount-label') ?>">
                 <?= $priceFormatter->format($shippingMethod->getAmount()) ?>
             </label>
 
-            <label for="shipment-<?= $code ?>"
+            <label for="<?= $viewModel->getFieldIdFromCode($code) ?>"
                    class="<?= $css('pr-2 ', 'method-label') ?>"><?= $shippingMethod->getMethodTitle() ?></label>
 
-            <label for="shipping-<?= $code ?>" class="<?= $css('pr-2 ', 'carrier-label') ?>">
+            <label for="<?= $viewModel->getFieldIdFromCode($code) ?>" class="<?= $css('pr-2 ', 'carrier-label') ?>">
                 <?= $shippingMethod->getCarrierTitle() ?>
 
                 <?php if (false === $shippingMethod->getAvailable()) : ?>

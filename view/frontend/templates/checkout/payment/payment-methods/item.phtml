@@ -55,7 +55,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 ]
             ) ?>
 
-            <label for="payment-<?= $code ?>" class="<?= $css('', 'label') ?>"><?= $paymentMethod->getTitle() ?></label>
+            <label for="<?= $viewModel->getFieldIdFromCode($code) ?>" class="<?= $css('', 'label') ?>"><?= $paymentMethod->getTitle() ?></label>
         </div>
 
         <?php if ($isCurrent || $showHidden) : ?>

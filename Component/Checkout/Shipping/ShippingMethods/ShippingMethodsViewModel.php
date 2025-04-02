@@ -47,4 +47,9 @@ class ShippingMethodsViewModel extends CheckoutViewModel
     {
         return $this->getContext()->getCheckoutState()->getQuote()->isVirtual();
     }
+
+    public function getFieldIdFromCode(string $code): string
+    {
+        return $this->getFieldId() . '-' . preg_replace('/([^a-zA-Z0-9\-]+)/', '-', $code);
+    }
 }
