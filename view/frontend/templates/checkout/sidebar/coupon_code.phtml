@@ -41,7 +41,7 @@ $couponCode = $viewModel->getValue();
             <div>
                 <label class="<?= $css('block mb-3', 'label') ?>">
                     <span class="<?= $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
-                    <input name="coupon_code" type="text" x-ref="input" x-model="value" class="<?= $css('form-input w-full', 'input') ?>">
+                    <input autocomplete="off" name="coupon_code" type="text" x-ref="input" x-model="value" class="<?= $css('form-input w-full', 'input') ?>">
                 </label>
                 <button
                     type="button"
