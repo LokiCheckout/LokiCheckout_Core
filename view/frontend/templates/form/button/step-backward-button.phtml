@@ -15,6 +15,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-secondary m-2', 'button') ?>"
             type="button"
+            id="<?= $viewModel->getFieldId() ?>-button"
             :disabled="disabled"
             @click="submit">
         <?= __((string)$block->getButtonLabel()) ?>

@@ -1,17 +1,17 @@
-const {Field} = require(process.cwd() + '/helpers/field');
-const {saveCheckoutConfig} = require(process.cwd() + '/helpers/checkout-config');
-const {test, expect} = require(process.cwd() + '/fixtures/checkout-page');
-
-test.beforeAll(async ({request}) => {
-  await saveCheckoutConfig(request, {
-    config: {
-      'customer/address/middlename_show': 1
-    }
-  });
-});
+const {Field} = require(process.cwd() + '/helpers/checkout-objects');
+const {saveCheckoutConfig} = require(process.cwd() + '/helpers/save-checkout-config');
+const {test} = require(process.cwd() + '/fixtures/checkout-page');
 
 test.describe('Generic checkout test', function () {
-  test('should allow me to go to the checkout', async function ({checkoutPage}) {
+  test('should allow me to go to the checkout', async function ({page,context}) {
+    await saveCheckoutConfig(context, {
+      config: {
+        'customer/address/middlename_show': 1
+      }
+    });
+
+    await page.goto('/checkout');
+
     const fields = {
       'customer.email': 'jane@example.com',
       'shipping.firstname': 'Jane',
@@ -27,7 +27,7 @@ test.describe('Generic checkout test', function () {
     };
 
     for (const [fieldName, fieldValue] of Object.entries(fields)) {
-      const field = new Field(checkoutPage, fieldName);
+      const field = new Field(page, fieldName);
       await field.fill(fieldValue);
       await field.expectValue(fieldValue);
     }

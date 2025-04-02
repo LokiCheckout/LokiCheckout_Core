@@ -19,6 +19,7 @@ $buttonLabel = $stepForwardButtonLabel->getLabel($block);
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
             type="button"
+            id="<?= $viewModel->getFieldId() ?>-button"
             :disabled="disabled"
             @click="submit">
         <?= __((string)$buttonLabel) ?>
