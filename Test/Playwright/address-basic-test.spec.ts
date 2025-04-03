@@ -1,16 +1,14 @@
 const {Field} = require(process.cwd() + '/helpers/checkout-objects');
-const {saveCheckoutConfig} = require(process.cwd() + '/helpers/save-checkout-config');
-const {test} = require(process.cwd() + '/fixtures/checkout-page');
+const {setupCheckout} = require(process.cwd() + '/helpers/setup-checkout');
+const {test} = require(process.cwd() + '/node_modules/@playwright/test');
 
 test.describe('Generic checkout test', function () {
   test('should allow me to go to the checkout', async function ({page,context}) {
-    await saveCheckoutConfig(context, {
+    await setupCheckout(page, context, {
       config: {
         'customer/address/middlename_show': 1
       }
     });
-
-    await page.goto('/checkout');
 
     const fields = {
       'customer.email': 'jane@example.com',

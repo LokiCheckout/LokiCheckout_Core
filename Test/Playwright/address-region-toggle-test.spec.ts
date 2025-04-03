@@ -1,10 +1,10 @@
 const {Field} = require(process.cwd() + '/helpers/checkout-objects');
-const {saveCheckoutConfig} = require(process.cwd() + '/helpers/save-checkout-config');
-const {test, expect} = require(process.cwd() + '/fixtures/checkout-page');
+const {setupCheckout} = require(process.cwd() + '/helpers/setup-checkout');
+const {test, expect} = require(process.cwd() + '/node_modules/@playwright/test');
 
 test.describe('Toggle regions test', function()  {
   test('should switch region field on country change', async function({page, context})  {
-    await saveCheckoutConfig(context, {
+    await setupCheckout(page, context, {
       config: {
         'yireo_loki_checkout/fields/hide_region_when_optional': 0
       }
