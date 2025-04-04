@@ -6,6 +6,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.12] - 04 April 2025
+### Fixed
+- Add Playwright functional tests
+- Move to Mollie-specific DI config to Mollie plugin
+- Allow for specific exceptions to redirect back to checkout/cart
+- Remove specific step button templates in favor of FieldComponents
+- Modify overlay when loading next step
+- Add icons to step button
+- Refactoring of Integration Tests
+- Refactor FinalStep to get rid of legacy OneStep code
+- Disable autocomplete for coupon code
+- Implement better DOM ID for shipments too
+- Add better DOM ID for payment methods
+- Remove `positive_number` filter from telephone and fax
+- Fix issue with duplicate DOM IDs again (but now with test)
+- First draft of pickup locations
+- Resolving of shipping method icons
+- Enhance CSS of method listings
+- Refactor PaymentRedirectUrl plugin to resolver
+- Refactor PaymentMethodIcon plugins into resolvers
+- Enable `hide_region_when_optional` by default
+- Implement LokiCheckoutRepositoryTestCase
+- Enable GitLab CI/CD
+- Add help text depending upon `enable_vat_id_only_for_company`
+- Refactor BillingAddress and ShippingAddress components to generic Address components
+- Use separate template for billing address form title
+- Do not ever copy address if the SameAddress service says no
+
 ## [0.1.11] - 11 March 2025
 ### Fixed
 - Fix issue with grid CSS classes
