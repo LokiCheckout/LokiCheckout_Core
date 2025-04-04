@@ -6,7 +6,9 @@ test.describe('Generic checkout test', function () {
   test('should allow me to go to the checkout', async function ({page,context}) {
     await setupCheckout(page, context, {
       config: {
-        'customer/address/middlename_show': 1
+        'customer/address/middlename_show': 1,
+        'customer/address/fax_show': 'opt',
+        'customer/address/taxvat_show': 'opt',
       }
     });
 
