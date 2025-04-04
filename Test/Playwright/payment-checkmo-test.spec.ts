@@ -1,6 +1,6 @@
-const {PaymentMethod, PlaceOrderButton, SuccessPage} = require(process.cwd() + '/helpers/checkout-objects');
-const {setupCheckout} = require(process.cwd() + '/helpers/setup-checkout');
-const {test} = require(process.cwd() + '/node_modules/@playwright/test');
+import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@helpers/checkout-objects';
+import {setupCheckout} from '@helpers/setup-checkout';
+import {test} from '@playwright/test';
 
 test.describe('checkmo payment test', () => {
   test('should allow me to go to the success page', async ({page, context}) => {

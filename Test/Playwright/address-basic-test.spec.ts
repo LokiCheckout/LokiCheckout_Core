@@ -1,6 +1,6 @@
-const {Field} = require(process.cwd() + '/helpers/checkout-objects');
-const {setupCheckout} = require(process.cwd() + '/helpers/setup-checkout');
-const {test} = require(process.cwd() + '/node_modules/@playwright/test');
+import {Field} from '@helpers/checkout-objects';
+import {setupCheckout} from '@helpers/setup-checkout';
+import {test} from '@playwright/test';
 
 test.describe('Generic checkout test', function () {
   test('should allow me to go to the checkout', async function ({page,context}) {
