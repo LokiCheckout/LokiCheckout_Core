@@ -4,6 +4,7 @@ declare(strict_types=1);
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonViewModel;
 use Yireo\LokiCheckout\ViewModel\StepForwardButtonLabel;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
@@ -14,6 +15,7 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var StepForwardButtonLabel $stepForwardButtonLabel */
 /** @var ImageOutput $imageOutput */
+/** @var ChildRenderer $childRenderer */
 
 $stepForwardButtonLabel = $viewModelFactory->create(StepForwardButtonLabel::class);
 $buttonLabel = $stepForwardButtonLabel->getLabel($block);
@@ -26,15 +28,7 @@ $imageOutput = $viewModelFactory->create(ImageOutput::class);
             id="<?= $viewModel->getFieldId() ?>-button"
             :disabled="disabled"
             @click="submit">
-
-        <span x-show="!loading" class="<?= $css('mr-3 w-4 fill-white', 'icon') ?>">
-        <?= $imageOutput->get('Yireo_LokiFieldComponents::images/arrow-right.svg') ?>
-        </span>
-
-        <span x-cloak x-show="loading" class="<?= $css('mr-3 w-4 animate-spin fill-white', 'icon') ?>">
-        <?= $imageOutput->get('Yireo_LokiFieldComponents::images/spinner.svg') ?>
-        </span>
-
+        <?= $childRenderer->html($block, 'icon'); ?>
         <?= __((string)$buttonLabel) ?>
     </button>
 </div>

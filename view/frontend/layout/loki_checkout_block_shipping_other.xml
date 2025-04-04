@@ -16,6 +16,10 @@
             <arguments>
                 <argument name="button_label" xsi:type="string">Proceed to Review &amp;amp; Payments</argument>
             </arguments>
+
+            <block
+                name="loki-checkout.steps.shipping.forward-button-icon" as="icon"
+                template="Yireo_LokiCheckout::form/button/step-forward-button-icon.phtml"/>
         </block>
     </body>
 </page>
