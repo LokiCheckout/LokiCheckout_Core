@@ -4,11 +4,12 @@ namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use Yireo\LokiFieldComponents\Util\ButtonInterface;
 
 /**
  * @method CheckoutContext getContext()
  */
-class StepForwardButtonViewModel extends CheckoutViewModel
+class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInterface
 {
     public function getJsComponentName(): ?string
     {
@@ -26,5 +27,17 @@ class StepForwardButtonViewModel extends CheckoutViewModel
     public function getStep(): string
     {
         return 'none';
+    }
+
+    public function getButtonLabel(): string
+    {
+        $buttonLabelWithoutPayment = trim((string)$this->getBlock()->getButtonLabelWithoutPayment());
+        $quote = $this->getContext()->getQuote();
+
+        if ($buttonLabelWithoutPayment && false === $quote->getGrandTotal() > 0) {
+            return $buttonLabelWithoutPayment;
+        }
+
+        return $this->getBlock()->getButtonLabel();
     }
 }
