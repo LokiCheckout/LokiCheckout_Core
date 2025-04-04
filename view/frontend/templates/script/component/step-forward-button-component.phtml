@@ -25,13 +25,16 @@
                     this.updateValid();
                 },
                 watchValidForDisabled() {
+                    this.disabled = !this.valid;
                     this.$watch('valid', () => {
                         this.disabled = !this.valid;
                     });
                 },
                 disableAllWhenLoading() {
+                    const container = document.getElementById('loki-checkout');
+                    container.removeAttribute('aria-busy');
+
                     this.$watch('loading', () => {
-                        const container = document.getElementById('loki-checkout');
                         if (this.loading) {
                             container.setAttribute('aria-busy', true);
                         } else {

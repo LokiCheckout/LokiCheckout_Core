@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.14] - 04 April 2025
+### Fixed
+- Remove overlay when reloading StepForwardButton component
+
 ## [0.1.13] - 04 April 2025
 ### Fixed
 - StepBackwardButtonViewModel was missing required method
