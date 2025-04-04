@@ -2,7 +2,7 @@ const {PaymentMethod, PlaceOrderButton, SuccessPage} = require(process.cwd() + '
 const {setupCheckout} = require(process.cwd() + '/helpers/setup-checkout');
 const {test} = require(process.cwd() + '/node_modules/@playwright/test');
 
-test.describe('Check Money Order payment test', () => {
+test.describe('checkmo payment test', () => {
   test('should allow me to go to the success page', async ({page, context}) => {
     await setupCheckout(page, context, {
       profile: 'netherlands',
