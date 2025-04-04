@@ -7,7 +7,8 @@ test.describe('Check Money Order payment test', () => {
     await setupCheckout(page, context, {
       profile: 'netherlands',
       config: {
-        'yireo_loki_checkout/general/theme': 'onestep'
+        'yireo_loki_checkout/general/theme': 'onestep',
+        'payment/checkmo/active': '1',
       }
     });
 
