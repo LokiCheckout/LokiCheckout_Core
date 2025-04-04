@@ -6,15 +6,19 @@ use Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton\StepForwa
 use Yireo\LokiCheckout\ViewModel\StepForwardButtonLabel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
 /** @var Template $block */
 /** @var StepForwardButtonViewModel $viewModel */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var StepForwardButtonLabel $stepForwardButtonLabel */
+/** @var ImageOutput $imageOutput */
 
 $stepForwardButtonLabel = $viewModelFactory->create(StepForwardButtonLabel::class);
 $buttonLabel = $stepForwardButtonLabel->getLabel($block);
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 ?>
 <div class="<?= $css('') ?>">
     <button class="<?= $css('btn btn-primary m-2', 'button') ?>"
@@ -22,6 +26,15 @@ $buttonLabel = $stepForwardButtonLabel->getLabel($block);
             id="<?= $viewModel->getFieldId() ?>-button"
             :disabled="disabled"
             @click="submit">
+
+        <span x-show="!loading" class="<?= $css('mr-3 w-4 fill-white', 'icon') ?>">
+        <?= $imageOutput->get('Yireo_LokiFieldComponents::images/arrow-right.svg') ?>
+        </span>
+
+        <span x-cloak x-show="loading" class="<?= $css('mr-3 w-4 animate-spin fill-white', 'icon') ?>">
+        <?= $imageOutput->get('Yireo_LokiFieldComponents::images/spinner.svg') ?>
+        </span>
+
         <?= __((string)$buttonLabel) ?>
     </button>
 </div>

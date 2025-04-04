@@ -23,10 +23,16 @@
                     });
 
                     this.updateValid();
+                },
+                watchValidForDisabled() {
+                    this.$watch('valid', () => {
+                       if (true === this.valid) {
+                           this.disabled = false;
+                       } else {
+                           this.disabled = true;
+                       }
+                    });
                 }
-            },
-            disabled() {
-                return !this.valid;
             },
             updateValid() {
                 this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.currentStep);
