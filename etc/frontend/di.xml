@@ -8,6 +8,18 @@
         <plugin name="Yireo_LokiCheckout::addCspInlineScripts" type="Yireo\LokiCheckout\Plugin\AddCspInlineScriptsPlugin"/>
     </type>
 
+    <type name="Yireo\LokiComponents\Util\Controller\RepositoryDispatcher">
+        <plugin name="Yireo_LokiCheckout::redirectEmptyQuoteAfterRepositoryDispatch" type="Yireo\LokiCheckout\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin"/>
+    </type>
+
+    <type name="Yireo\LokiCheckout\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin">
+        <arguments>
+            <argument name="allowedExceptionClasses" xsi:type="array">
+                <item name="mollie" xsi:type="string">Mollie\Api\Exceptions\ApiException</item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
         <plugin name="Yireo_LokiCheckout::fixFreeShippingSubtotal" type="Yireo\LokiCheckout\Plugin\FixFreeShippingSubtotalPlugin"/>
     </type>
