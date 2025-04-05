@@ -49,7 +49,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         <?php endif; ?>
     </div>
     <div class="<?= $css('flex-1', 'details-container') ?>">
-        <div class="<?= $css('flex', 'details') ?>">
+        <div class="<?= $css('md:flex', 'details') ?>">
             <?= $templateRenderer->html(
                 $block,
                 'Yireo_LokiCheckout::checkout/shipping/shipping-methods/icon.phtml',

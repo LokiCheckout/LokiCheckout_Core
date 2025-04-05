@@ -16,7 +16,7 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
     <?= $block->getChildHtml('progressbar') ?>
 
-    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?>">
+    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-8', 'grid') ?>">
         <div class="<?= $css('md:col-span-2 relative', 'grid-steps') ?>">
             <?= $block->getChildHtml('steps'); ?>
         </div>
