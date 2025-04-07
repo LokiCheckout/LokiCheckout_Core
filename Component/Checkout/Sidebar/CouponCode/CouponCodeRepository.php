@@ -31,7 +31,15 @@ class CouponCodeRepository extends FieldRepository
         if ($value['task'] === 'apply') {
             $quote->setCouponCode($value['code']);
             $this->getContext()->getCartRepository()->save($quote);
+
+            $couponCode = $this->getValue();
+            if (empty($couponCode)) {
+                $this->getGlobalMessageRegistry()->addWarning('Failed to apply coupon code');
+                return;
+            }
+
             $this->getGlobalMessageRegistry()->addSuccess('Applied coupon code');
+            return;
         }
 
         if ($value['task'] === 'remove') {
