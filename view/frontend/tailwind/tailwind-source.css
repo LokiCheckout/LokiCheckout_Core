@@ -70,7 +70,7 @@
     }
 
     .form-select.loading {
-        background-image: none !important;
+        background-image: none;
     }
 
     /*
