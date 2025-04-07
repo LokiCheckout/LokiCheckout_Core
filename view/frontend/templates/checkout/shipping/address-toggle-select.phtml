@@ -11,13 +11,14 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div>
+<div class="<?= $css('field') ?>">
     <button
         class="<?= $css('btn btn-primary my-4') ?>"
+        x-ref="field"
         x-text="buttonLabel"
         x-model="value"
         type="button"
-        :disabled="buttonDisabled"
+        :disabled="disabled"
         @click="toggle"
     >
         <?= $viewModel->getButtonLabelNewAddress() ?>
