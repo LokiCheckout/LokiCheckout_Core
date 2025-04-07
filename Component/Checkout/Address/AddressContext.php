@@ -25,6 +25,7 @@ use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
+use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 
 class AddressContext implements ComponentContextInterface
 {
@@ -51,6 +52,7 @@ class AddressContext implements ComponentContextInterface
         private readonly AddressConfig $addressConfig,
         private readonly AddressMapper $addressMapper,
         private readonly AddressRenderer $addressRenderer,
+        private readonly FieldTemplateLocator $fieldTemplateLocator
     ) {
     }
 
@@ -162,5 +164,10 @@ class AddressContext implements ComponentContextInterface
     public function getAddressRenderer(): AddressRenderer
     {
         return $this->addressRenderer;
+    }
+
+    public function getFieldTemplateLocator(): FieldTemplateLocator
+    {
+        return $this->fieldTemplateLocator;
     }
 }

@@ -17,18 +17,14 @@
 
             <block
                 name="loki-checkout.billing.address.select" as="select"
-                template="Yireo_LokiCheckout::checkout/billing/address-select.phtml">
+                template="Yireo_LokiFieldComponents::form/field.phtml">
                 <arguments>
+                    <argument name="field_type" xsi:type="string">select</argument>
                     <argument name="show_empty_select_option" xsi:type="boolean">true</argument>
+                    <argument name="option_model" xsi:type="object">
+                        Yireo\LokiCheckout\ViewModel\OptionModel\CustomerAddressOptionModel
+                    </argument>
                 </arguments>
-
-                <block
-                    name="loki-checkout.billing.address.select.title" as="title"
-                    template="Yireo_LokiCheckout::generic/title.phtml">
-                    <arguments>
-                        <argument name="title" xsi:type="string">Select your Billing Address</argument>
-                    </arguments>
-                </block>
             </block>
 
             <block

@@ -3,7 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Select;
 
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormContext;
 
 /**
  * @method AddressFormContext getContext()
