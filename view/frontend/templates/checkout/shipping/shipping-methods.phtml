@@ -26,7 +26,7 @@ $shippingMethods = $viewModel->getShippingMethods();
 
     <?= $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
-    <form
+    <div
         id="shipping-methods"
         data-type="field"
         x-ref="field"
@@ -51,7 +51,7 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?= __('No shipping methods available') ?>
             </div>
         <?php endif; ?>
-    </form>
+    </div>
 
     <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
 
