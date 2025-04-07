@@ -3,6 +3,7 @@
         Alpine.data('LokiCheckoutAddress', () => ({
             ...LokiCheckoutComponentType,
             buttonLabel: '',
+            buttonDisabled: false,
             afterInit() {
                 this.buttonLabel = this.getButtonLabel();
             },
@@ -16,7 +17,10 @@
             toggle() {
                 this.value = !this.value;
                 this.buttonLabel = this.getButtonLabel();
-                this.post();
+                this.submit();
+            },
+            beforeSubmit() {
+                this.buttonDisabled = true;
             }
         }));
     });

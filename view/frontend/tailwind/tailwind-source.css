@@ -69,6 +69,10 @@
         }
     }
 
+    .form-select.loading {
+        background-image: none !important;
+    }
+
     /*
     [aria-busy] {
         --loading-size: 64px;

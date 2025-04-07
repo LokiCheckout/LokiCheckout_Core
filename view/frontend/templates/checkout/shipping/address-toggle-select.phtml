@@ -17,6 +17,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
         x-text="buttonLabel"
         x-model="value"
         type="button"
+        :disabled="buttonDisabled"
         @click="toggle"
     >
         <?= $viewModel->getButtonLabelNewAddress() ?>
