@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.15] - 08 April 2025
+### Fixed
+- Working version of Post NL form with saved values and tab selection
+- Simplify loading state of target components
+- Remove redundant address-select template
+- Remove unneeded important flag
+- Remove select-icon when loading select-field
+- Add warning if coupon code failed to apply
+- Add generic Location, Timeframe and Address classes, fi with Post NL
+- Mobile fixes
+
 ## [0.1.14] - 04 April 2025
 ### Fixed
 - Remove overlay when reloading StepForwardButton component
