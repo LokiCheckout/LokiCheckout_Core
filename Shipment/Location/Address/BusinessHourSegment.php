@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ValueObject\Address;
+namespace Yireo\LokiCheckout\Shipment\Location\Address;
 class BusinessHourSegment
 {
     public function __construct(

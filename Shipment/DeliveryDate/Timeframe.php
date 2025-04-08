@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment;
+namespace Yireo\LokiCheckout\Shipment\DeliveryDate;
 
 use IntlDateFormatter;
 use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
@@ -11,12 +11,27 @@ class Timeframe
     public function __construct(
         private LocaleResolver $localeResolver,
         private TimezoneInterface $timezone,
+        private string $code,
+        private string $id,
+        private string $label,
         private int $fromTimestamp,
         private int $toTimestamp,
-        private string $code,
-        private string $label,
         private float $price = 0
     ) {
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
+    }
+    public function getLabel(): string
+    {
+        return $this->label;
     }
 
     public function getFromDate(): string
@@ -63,16 +78,6 @@ class Timeframe
         return $this->toTimestamp;
     }
 
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
-
-    public function getCode(): string
-    {
-        return $this->code;
-    }
-
     public function getPrice(): float
     {
         return $this->price;
@@ -88,4 +93,6 @@ class Timeframe
             $this->timezone->getDefaultTimezone(),
         );
     }
+
+
 }

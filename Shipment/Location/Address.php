@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ValueObject;
+namespace Yireo\LokiCheckout\Shipment\Location;
 
 class Address
 {

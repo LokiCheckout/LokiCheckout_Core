@@ -3,8 +3,8 @@
 namespace Yireo\LokiCheckout\Shipment;
 
 use Magento\Framework\ObjectManagerInterface;
-use Yireo\LokiCheckout\ValueObject\Address;
-use Yireo\LokiCheckout\ValueObject\Address\BusinessHours;
+use Yireo\LokiCheckout\Shipment\Location\Address;
+use Yireo\LokiCheckout\Shipment\Location\Address\BusinessHours;
 
 class LocationFactory
 {
@@ -14,6 +14,7 @@ class LocationFactory
     }
 
     public function create(
+        string $id,
         string $code,
         string $label,
         int $distance,
@@ -22,6 +23,7 @@ class LocationFactory
     ): Location
     {
         return $this->objectManager->create(Location::class, [
+            'id' => $id,
             'code' => $code,
             'label' => $label,
             'distance' => $distance,

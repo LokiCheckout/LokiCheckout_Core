@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment;
+namespace Yireo\LokiCheckout\Shipment\DeliveryDate;
 
 use Magento\Framework\ObjectManagerInterface;
 
@@ -11,13 +11,20 @@ class TimeframeFactory
     ) {
     }
 
-    public function createFromDates(string $fromDate, string $toDate, string $code, string $label, float $price): Timeframe
-    {
+    public function createFromDates(
+        string $id,
+        string $code,
+        string $label,
+        string $fromDate,
+        string $toDate,
+        float $price
+    ): Timeframe {
         return $this->objectManager->create(Timeframe::class, [
-            'fromTimestamp' => strtotime($fromDate),
-            'toTimestamp' => strtotime($toDate),
+            'id' => $id,
             'code' => $code,
             'label' => $label,
+            'fromTimestamp' => strtotime($fromDate),
+            'toTimestamp' => strtotime($toDate),
             'price' => $price,
         ]);
     }

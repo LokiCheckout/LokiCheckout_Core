@@ -2,18 +2,24 @@
 
 namespace Yireo\LokiCheckout\Shipment;
 
-use Yireo\LokiCheckout\ValueObject\Address;
-use Yireo\LokiCheckout\ValueObject\Address\BusinessHours;
+use Yireo\LokiCheckout\Shipment\Location\Address;
+use Yireo\LokiCheckout\Shipment\Location\Address\BusinessHours;
 
 class Location
 {
     public function __construct(
+        private string $id,
         private string $code,
         private string $label,
         private int $distance,
         private Address $address,
         private ?BusinessHours $businessHours = null,
     ) {
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
     public function getCode(): string
