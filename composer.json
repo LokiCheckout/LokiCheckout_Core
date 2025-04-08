@@ -32,6 +32,7 @@
     "yireo/magento2-hyva-theme-auto-registration": "^1.0",
     "guzzlehttp/guzzle": "^7.0",
     "php": "^8.3",
+    "ext-intl": "*",
     "ext-pcre": "*",
     "ext-json": "*",
     "ext-dom": "*"
