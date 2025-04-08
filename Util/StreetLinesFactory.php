@@ -64,6 +64,9 @@ class StreetLinesFactory
     public function createFromStreet(string $street): StreetLines
     {
         $streetParts = explode("\n", $street);
+        if (count($streetParts) === 1) {
+            $streetParts = explode(" ", $street);
+        }
 
         return $this->createFromStreetParts($streetParts);
     }

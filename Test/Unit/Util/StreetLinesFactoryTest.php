@@ -77,6 +77,7 @@ class StreetLinesFactoryTest extends TestCase
     public function getCreateFromStreetInput(): array
     {
         return [
+            ["Example 1 A B", 'Example', '1', 'A', 'B', 4],
             ["Example\n1\nA\nB", 'Example', '1', 'A', 'B', 4],
             ["Example\n1\nA", 'Example', '1', 'A', null, 3],
             ["Example\n1\nA B", 'Example', '1', 'A', 'B', 3],
