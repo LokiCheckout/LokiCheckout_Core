@@ -199,7 +199,11 @@
 
     <component name="loki-checkout.sidebar.preview.quote_details"/>
 
-    <component name="loki-checkout.sidebar.preview.shipping_details"/>
+    <component
+        name="loki-checkout.sidebar.preview.shipping_details"
+        context="Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails\ShippingDetailsViewModel"
+    />
 
     <component name="loki-checkout.sidebar.preview.billing_address"/>
 

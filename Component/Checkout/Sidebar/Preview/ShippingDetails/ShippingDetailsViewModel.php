@@ -4,14 +4,14 @@ namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 
 use InvalidArgumentException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
+use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiCheckout\Util\AddressRenderer;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 
-class ShippingDetailsViewModel implements ArgumentInterface
+class ShippingDetailsViewModel extends CheckoutViewModel
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,

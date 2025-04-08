@@ -13,7 +13,6 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 
-$viewModel = $viewModelFactory->create(ShippingDetailsViewModel::class);
 $addressHtml = $viewModel->getAddressHtml();
 $methodHtml = $viewModel->getMethodHtml();
 
