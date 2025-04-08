@@ -13,6 +13,7 @@ class Timeframe
         private TimezoneInterface $timezone,
         private int $fromTimestamp,
         private int $toTimestamp,
+        private string $code,
         private string $label,
         private float $price = 0
     ) {
@@ -65,6 +66,11 @@ class Timeframe
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    public function getCode(): string
+    {
+        return $this->code;
     }
 
     public function getPrice(): float

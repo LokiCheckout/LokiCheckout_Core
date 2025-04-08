@@ -19,8 +19,9 @@ use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 /** @var ShippingMethod $shippingMethod */
 
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
-$viewModel = $block->getViewModel();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$viewModel = $block->getViewModel();
+
 $code = $block->getCode();
 $shippingMethod = $block->getMethod();
 $isCurrent = $viewModel->getValue() === $code;

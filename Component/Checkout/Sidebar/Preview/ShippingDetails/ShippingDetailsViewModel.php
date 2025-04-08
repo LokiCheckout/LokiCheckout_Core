@@ -39,6 +39,7 @@ class ShippingDetailsViewModel implements ArgumentInterface
             return '';
         }
 
+
         $shippingMethod = $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
         if (empty($shippingMethod)) {
             return '';

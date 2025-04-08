@@ -11,11 +11,12 @@ class TimeframeFactory
     ) {
     }
 
-    public function createFromDates(string $fromDate, string $toDate, string $label, float $price): Timeframe
+    public function createFromDates(string $fromDate, string $toDate, string $code, string $label, float $price): Timeframe
     {
         return $this->objectManager->create(Timeframe::class, [
             'fromTimestamp' => strtotime($fromDate),
             'toTimestamp' => strtotime($toDate),
+            'code' => $code,
             'label' => $label,
             'price' => $price,
         ]);
