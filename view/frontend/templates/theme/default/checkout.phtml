@@ -11,7 +11,7 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 
 ?>
-<div class="<?= $css('space-y-6 relative') ?>">
+<div class="<?= $css('loki space-y-6 relative') ?>">
     <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
 
     <?= $block->getChildHtml('progressbar') ?>
