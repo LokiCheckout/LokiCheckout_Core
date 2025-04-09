@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.16] - 09 April 2025
+### Fixed
+- Switch from TimezoneInterface to Timezone because of DI arg scopeType issue
+- Allow switching shipping details in sidebar to alternate template
+- Finalize Post NL templating and abstract Shipping classes
+- Add ext/intl requirement
+- If street is 1 line, explode by space
+
 ## [0.1.15] - 08 April 2025
 ### Fixed
 - Working version of Post NL form with saved values and tab selection
