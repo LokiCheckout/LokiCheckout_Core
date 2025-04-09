@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.17] - 09 April 2025
+### Fixed
+- Restructure loki classes for Luma
+- Fix width definition of icon in step button
+
 ## [0.1.16] - 09 April 2025
 ### Fixed
 - Switch from TimezoneInterface to Timezone because of DI arg scopeType issue
