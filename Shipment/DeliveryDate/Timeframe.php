@@ -4,13 +4,13 @@ namespace Yireo\LokiCheckout\Shipment\DeliveryDate;
 
 use IntlDateFormatter;
 use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
-use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
+use Magento\Framework\Stdlib\DateTime\Timezone;
 
 class Timeframe
 {
     public function __construct(
         private LocaleResolver $localeResolver,
-        private TimezoneInterface $timezone,
+        private Timezone $timezone,
         private string $code,
         private string $id,
         private string $label,
