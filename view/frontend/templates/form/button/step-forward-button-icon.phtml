@@ -13,10 +13,10 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
-<span x-show="!loading" class="<?= $css('mr-3 w-4 fill-white', 'icon') ?>">
+<div x-show="!loading" class="<?= $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
     <?= $imageOutput->get('Yireo_LokiFieldComponents::images/arrow-right.svg') ?>
-</span>
+</div>
 
-<span x-cloak x-show="loading" class="<?= $css('mr-3 w-4 animate-spin fill-white', 'icon') ?>">
+<div x-cloak x-show="loading" class="<?= $css('inline-block mr-3 w-4 animate-spin fill-white', 'icon') ?>">
     <?= $imageOutput->get('Yireo_LokiFieldComponents::images/spinner.svg') ?>
-</span>
+</div>
