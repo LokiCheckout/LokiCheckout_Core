@@ -78,5 +78,6 @@ class CheckoutState implements ArgumentInterface
         $response = $this->responseFactory->create();
         $response->setRedirect($redirectUrl);
         $response->sendResponse();
+        exit;
     }
 }
