@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.18] - 10 April 2025
+### Fixed
+- Move dep with "yireo/magento2-hyva-theme-auto-registration" to Hyva module
+- Add yireo:loki-checkout:modules:dump command
+
 ## [0.1.17] - 09 April 2025
 ### Fixed
 - Restructure loki classes for Luma
