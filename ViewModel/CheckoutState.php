@@ -4,12 +4,14 @@ namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\ResponseFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Yireo\LokiComponents\Exception\RedirectException;
+use Yireo\LokiComponents\Util\Ajax;
 
 class CheckoutState implements ArgumentInterface
 {
@@ -17,10 +19,12 @@ class CheckoutState implements ArgumentInterface
     private array $quotes = [];
 
     public function __construct(
-        private CheckoutSession $checkoutSession,
+        private readonly CheckoutSession $checkoutSession,
         private readonly CustomerSession $customerSession,
         private readonly CartRepositoryInterface $cartRepository,
         private readonly UrlFactory $urlFactory,
+        private readonly ResponseFactory $responseFactory,
+        private readonly Ajax $ajax
     ) {
     }
 
@@ -42,8 +46,7 @@ class CheckoutState implements ArgumentInterface
         try {
             $this->quotes[$this->quoteId] = $this->cartRepository->get($this->quoteId);
         } catch (NoSuchEntityException $e) {
-            $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
-            throw new RedirectException($redirectUrl);
+            $this->handleQuoteNotFoundException();
         }
 
         return $this->quotes[$this->quoteId];
@@ -62,5 +65,18 @@ class CheckoutState implements ArgumentInterface
     public function getCustomerSession(): CustomerSession
     {
         return $this->customerSession;
+    }
+
+    private function handleQuoteNotFoundException(): void
+    {
+        $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
+
+        if ($this->ajax->isAjax()) {
+            throw new RedirectException($redirectUrl);
+        }
+
+        $response = $this->responseFactory->create();
+        $response->setRedirect($redirectUrl);
+        $response->sendResponse();
     }
 }
