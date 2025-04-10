@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.19] - 10 April 2025
+### Fixed
+- Use a normal redirect when quote is dead and AJAX is not there
+
 ## [0.1.18] - 10 April 2025
 ### Fixed
 - Move dep with "yireo/magento2-hyva-theme-auto-registration" to Hyva module
