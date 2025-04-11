@@ -16,10 +16,10 @@ class GridLayoutOptions implements OptionSourceInterface
     public function toOptionArray()
     {
         $options = [];
-        foreach($this->xmlConfig->getGridLayouts() as $gridLayoutName => $gridLayout) {
+        foreach($this->xmlConfig->getGridLayouts() as $gridLayout) {
             $options[] = [
-                'value' => $gridLayoutName,
-                'label' => $gridLayoutName,
+                'value' => $gridLayout->getName(),
+                'label' => $gridLayout->getLabel(),
             ];
         }
 

@@ -9,8 +9,10 @@ class GridLayout
 {
     public function __construct(
         private string $name,
-        private int $defaultSortOrder,
-        private string $defaultGridClass,
+        private string $label,
+        private string $countryId = '',
+        private int $defaultSortOrder = 0,
+        private string $defaultGridClass = '',
         private array $blocks = []
     ) {
     }
@@ -18,6 +20,16 @@ class GridLayout
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getLabel(): string
+    {
+        return $this->label;
+    }
+
+    public function getCountryId(): string
+    {
+        return $this->countryId;
     }
 
     public function getDefaultSortOrder(): int

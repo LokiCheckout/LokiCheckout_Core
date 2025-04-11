@@ -62,10 +62,14 @@ class Converter implements ConverterInterface
             }
 
             $gridName = (string)$gridLayoutElement->getAttribute('name');
+            $label = (string)$gridLayoutElement->getAttribute('label');
+            $countryId = (string)$gridLayoutElement->getAttribute('countryId');
             $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
             $defaultGridClass = (string)$gridLayoutElement->getAttribute('defaultGridClass');
 
             $gridLayouts[$gridName] = [
+                'label' => $label,
+                'countryId' => $countryId,
                 'defaultSortOrder' => !empty($defaultSortOrder) ? $defaultSortOrder : 99,
                 'defaultGridClass' => !empty($defaultGridClass) ? $defaultGridClass : 'col-span-6',
                 'blocks' => $blocks,

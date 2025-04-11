@@ -14,6 +14,8 @@ use Yireo\LokiCheckout\Exception\UnknownThemeException;
 
 class XmlConfig extends DataConfig
 {
+    private array $gridLayouts = [];
+
     /**
      * @return Theme[]
      */
@@ -69,11 +71,27 @@ class XmlConfig extends DataConfig
     }
 
     /**
+     * @return array[]
+     */
+    public function getGridLayoutArrays(): array
+    {
+        return $this->get('gridLayouts');
+    }
+
+    /**
      * @return GridLayout[]
      */
     public function getGridLayouts(): array
     {
-        return $this->get('gridLayouts');
+        if (!empty($this->gridLayouts)) {
+            return $this->gridLayouts;
+        }
+
+        foreach ($this->getGridLayoutArrays() as $gridLayoutName => $gridLayoutArray) {
+            $this->gridLayouts[$gridLayoutName] = $this->createGridLayout($gridLayoutName, $gridLayoutArray);
+        }
+
+        return $this->gridLayouts;
     }
 
     /**
@@ -84,7 +102,7 @@ class XmlConfig extends DataConfig
     {
         $gridLayouts = $this->getGridLayouts();
         if (isset($gridLayouts[$name])) {
-            return $this->createGridLayout($name, $gridLayouts[$name]);
+            return $gridLayouts[$name];
         }
 
         throw new RuntimeException((string)__('Unknown grid layout "%1"', $name));
@@ -108,6 +126,8 @@ class XmlConfig extends DataConfig
 
         return new GridLayout(
             $name,
+            (string)$gridData['label'],
+            (string)$gridData['countryId'],
             (int)$gridData['defaultSortOrder'],
             (string)$gridData['defaultGridClass'],
             $blocks
