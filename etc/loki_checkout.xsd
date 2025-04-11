@@ -46,6 +46,7 @@
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="label" type="xs:string" use="required"/>
+    <xs:attribute name="countryId" type="xs:string" use="optional"/>
     <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
     <xs:attribute name="defaultGridClass" type="xs:string" use="optional"/>
   </xs:complexType>
