@@ -15,7 +15,7 @@
     </themes>
 
     <grid_layouts>
-        <grid_layout name="default_grid">
+        <grid_layout name="default_grid" label="Default grid">
             <block alias="prefix" sortOrder="1"/>
             <block alias="firstname" sortOrder="2"/>
             <block alias="middlename" sortOrder="3"/>
