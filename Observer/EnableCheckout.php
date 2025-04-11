@@ -10,6 +10,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\LayoutInterface;
 use Yireo\LokiCheckout\Config\Config;
+use Yireo\LokiCheckout\Util\CurrentTheme;
 
 class EnableCheckout implements ObserverInterface
 {
@@ -19,6 +20,7 @@ class EnableCheckout implements ObserverInterface
         private CheckoutSession $checkoutSession,
         private CustomerSession $customerSession,
         private UrlFactory $urlFactory,
+        private CurrentTheme $currentTheme
     ) {
     }
 
@@ -38,14 +40,35 @@ class EnableCheckout implements ObserverInterface
 
         $this->layout->getUpdate()->addHandle('loki_checkout');
         $this->layout->getUpdate()->addHandle('loki_checkout_theme_'.$theme);
-
-        // @todo: Detect Hyva in a different way
-        // @todo: Move this to a separate Hyva module
-        if (in_array('hyva_checkout_index_index', $handles)) {
-            $this->layout->getUpdate()->addHandle('hyva_loki_checkout');
-        }
+        $this->addThemeHandles();
 
         $this->checkoutSession->setLokiRedirectUrl('');
         $this->customerSession->setBeforeAuthUrl($this->urlFactory->create()->getUrl('checkout/index/index'));
+    }
+
+    private function addThemeHandles(): void
+    {
+        if ($this->currentTheme->isHyva()) {
+            $this->addHandlesByTheme('luma');
+        }
+
+        if ($this->currentTheme->isLuma()) {
+            $this->addHandlesByTheme('luma');
+        }
+
+        if ($this->currentTheme->isBreeze()) {
+            $this->addHandlesByTheme('breeze');
+        }
+    }
+
+    private function addHandlesByTheme(string $theme): void
+    {
+        foreach ($this->layout->getUpdate()->getHandles() as $handle) {
+            if (str_starts_with($handle, $theme.'_')) {
+                continue;
+            }
+
+            $this->layout->getUpdate()->addHandle($theme.'_'.$handle);
+        }
     }
 }

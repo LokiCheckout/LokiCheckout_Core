@@ -2,24 +2,40 @@
 
 namespace Yireo\LokiCheckout\Util;
 
-use Hyva\Theme\Service\CurrentTheme as HyvaCurrentTheme;
-use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\View\DesignInterface;
 
 class CurrentTheme
 {
     public function __construct(
-        private ObjectManagerInterface $objectManager
+        private DesignInterface $design,
     ) {
     }
 
     public function isHyva(): bool
     {
-        // @todo: Double-check that this compiles without Hyva as well
-        $currentTheme = $this->objectManager->get(HyvaCurrentTheme::class);
-        if (empty($currentTheme)) {
-            return false;
+        return $this->isTheme('Hyva/default');
+    }
+
+    public function isLuma(): bool
+    {
+        return $this->isTheme('Luma/blank');
+    }
+
+    public function isBreeze(): bool
+    {
+        return $this->isTheme('Swissup/breeze-blank');
+    }
+
+    private function isTheme(string $themeName): bool
+    {
+        $inheritedThemes = $this->design->getDesignTheme()->getInheritedThemes();
+
+        foreach ($inheritedThemes as $inheritedTheme) {
+            if ($inheritedTheme->getCode() === $themeName) {
+                return true;
+            }
         }
 
-        return $currentTheme->isHyva();
+        return false;
     }
 }
