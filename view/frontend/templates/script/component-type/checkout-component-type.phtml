@@ -2,12 +2,6 @@
     const LokiCheckoutComponentType = {
         ...LokiFieldComponentType,
         step: 'none',
-        validationActions: {
-            ...LokiFieldComponentType.validationActions,
-            lokiCheckoutValidator() {
-                return LokiCheckoutValidator.validate(this);
-            }
-        },
         getDetails() {
             return {
                 ...LokiFieldComponentType.getDetails(),

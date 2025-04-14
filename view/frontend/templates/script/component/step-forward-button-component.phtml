@@ -56,7 +56,7 @@
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
                 Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach((component) => {
-                    LokiCheckoutValidator.validate(component);
+                    LokiComponentValidator.validate(component);
                 });
 
                 if (true === this.updateValid()) {
@@ -68,7 +68,7 @@
                     return true;
                 }
 
-                const firstInvalidElement = LokiCheckoutValidator.findFirstInvalidElement();
+                const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
                 if (firstInvalidElement) {
                     firstInvalidElement.focus();
                 }

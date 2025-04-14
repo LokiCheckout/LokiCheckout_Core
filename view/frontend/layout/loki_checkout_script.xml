@@ -13,9 +13,6 @@
             <block
                 name="loki-checkout.script.component-extender"
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
-            <block
-                name="loki-checkout.script.validator"
-                template="Yireo_LokiCheckout::script/validator.phtml"/>
         </referenceContainer>
 
         <!-- @todo <referenceContainer name="loki-component-before-body-end"> -->
