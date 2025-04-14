@@ -108,6 +108,7 @@
                 <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
                 <item name="dob" xsi:type="object">Yireo\LokiCheckout\Validator\Component\DobValidator</item>
                 <item name="options" xsi:type="object">Yireo\LokiCheckout\Validator\Component\OptionsValidator</item>
+                <item name="password_complexity" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PasswordComplexityValidator</item>
             </argument>
         </arguments>
     </type>
