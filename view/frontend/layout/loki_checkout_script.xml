@@ -15,8 +15,7 @@
                 template="Yireo_LokiCheckout::script/component-extender.phtml"/>
         </referenceContainer>
 
-        <!-- @todo <referenceContainer name="loki-component-before-body-end"> -->
-        <referenceContainer name="before.body.end">
+        <referenceContainer name="loki-scripts">
             <block
                 name="loki-checkout.script.aria-invalid"
                 template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
