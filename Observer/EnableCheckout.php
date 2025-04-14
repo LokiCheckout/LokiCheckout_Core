@@ -49,7 +49,7 @@ class EnableCheckout implements ObserverInterface
     private function addThemeHandles(): void
     {
         if ($this->currentTheme->isHyva()) {
-            $this->addHandlesByTheme('luma');
+            $this->addHandlesByTheme('hyva');
         }
 
         if ($this->currentTheme->isLuma()) {
