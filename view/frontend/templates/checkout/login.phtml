@@ -29,9 +29,9 @@ $logoutUrl = $block->getUrl('customer/account/logout');
         </button>
     <?php endif; ?>
 
-    <dialog x-ref="modal" class="bg-white border border-zinc-400 rounded-lg p-4">
+    <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
         <div>
-            <button @click="toggleModal" class="float-right cursor-pointer w-4">
+            <button @click="toggleModal" class="float-right m-4 cursor-pointer w-4">
                 <?= $imageOutput->get('Yireo_LokiComponents::images/xmark.svg') ?>
             </button>
             <?= $block->getChildHtml('form') ?>
