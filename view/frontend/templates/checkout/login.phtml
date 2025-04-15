@@ -5,27 +5,36 @@ use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-
+/** @var ImageOutput */
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div class="<?= $css('card my-2') ?>" x-data="LokiToggle">
+<div class="<?= $css('card my-2') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
         You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
         (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)
     <?php else: ?>
-        <button @click="toggle"><?= __('Sign In') ?></button>
+        <button @click="toggleModal" :disabled="isModalOpen">
+            <?= __('Sign In') ?>
+        </button>
     <?php endif; ?>
 
-    <div x-cloak x-show="show">
-        <?= $block->getChildHtml('form') ?>
-    </div>
+    <dialog x-ref="modal" class="bg-white border border-zinc-400 rounded-lg p-4">
+        <div>
+            <button @click="toggleModal" class="float-right cursor-pointer w-4">
+                <?= $imageOutput->get('Yireo_LokiComponents::images/xmark.svg') ?>
+            </button>
+            <?= $block->getChildHtml('form') ?>
+        </div>
+    </dialog>
 </div>

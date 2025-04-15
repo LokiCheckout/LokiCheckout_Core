@@ -4,6 +4,9 @@
         <block
             name="loki-checkout.login"
             template="Yireo_LokiCheckout::checkout/login.phtml">
+            <arguments>
+                <argument name="js_component_name" xsi:type="string">LokiModal</argument>
+            </arguments>
 
             <block class="Magento\Customer\Block\Form\Login" name="loki-checkout.login.form" as="form" template="Magento_Customer::form/login.phtml">
                 <arguments>
