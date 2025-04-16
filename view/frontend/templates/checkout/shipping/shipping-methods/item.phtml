@@ -40,8 +40,8 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 @change="submit"
                 name="shipping_method"
                 value="<?= $code ?>"
-                <?= $isCurrent && 'checked' ?>
-                <?= $viewModel->isDisabled() && 'disabled="disabled"' ?>
+                <?= $isCurrent ? 'checked' : '' ?>
+                <?= $viewModel->isDisabled() ? 'disabled="disabled"' : '' ?>
                 id="<?= $viewModel->getFieldIdFromCode($code) ?>"
                 class="<?= $css('mr-4', 'input') ?>"
             >
