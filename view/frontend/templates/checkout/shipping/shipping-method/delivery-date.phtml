@@ -14,11 +14,13 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $deliveryDate = $block->getDeliveryDate();
 ?>
-<div>
-    <h3 class="font-bold"><?= $deliveryDate->getDate() ?></h3>
+<details class="my-4" open>
+    <summary class="font-bold cursor-pointer">
+        <?= $deliveryDate->getDate() ?>
+    </summary>
     <div class="mb-4">
         <?= $childRenderer->html($block, 'timeframes', [
             'timeframes' => $deliveryDate->getTimeframes(),
         ]) ?>
     </div>
-</div>
+</details>

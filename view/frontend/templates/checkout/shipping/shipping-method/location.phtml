@@ -13,8 +13,6 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  * @var Location $location
  */
 $location = $block->getLocation();
-$pickupTime = $block->getPickupTime();
-$pickupDate = $block->getPickupDate();
 ?>
 <div class="flex mb-8 p-4 hover:bg-black/5">
     <?= $childRenderer->html($block, 'location.input', [
@@ -28,8 +26,6 @@ $pickupDate = $block->getPickupDate();
 
         <?= $childRenderer->html($block, 'location.pickup-details', [
             'location' => $location,
-            'pickup_time' => $pickupTime,
-            'pickup_date' => $pickupDate,
         ]) ?>
 
         <?= $childRenderer->html($block, 'location.address', [

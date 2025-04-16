@@ -17,9 +17,7 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
  * @var ImageOutput $imageOutput
  */
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
-$locations = $block->getLocations();
-$pickupTime = $block->getPickupTime();
-$pickupDate = $block->getPickupDate();
+$locations = $block->getLocations();;
 ?>
 <div>
     <?php if (empty($locations)): ?>
@@ -30,8 +28,6 @@ $pickupDate = $block->getPickupDate();
             <div data-location-index="<?= $i ?>" class="hidden">
                 <?= $childRenderer->html($block, 'location', [
                     'location' => $location,
-                    'pickup_time' => $pickupTime,
-                    'pickup_date' => $pickupDate,
                 ]) ?>
             </div>
             <?php $i++; ?>
