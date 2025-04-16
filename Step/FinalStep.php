@@ -37,12 +37,14 @@ class FinalStep
     public function submit(): bool
     {
         $quote = $this->checkoutState->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-        $shippingAddress
-            ->setCollectShippingRates(true)
-            ->collectShippingRates()
-            ->setShippingMethod($shippingAddress->getShippingMethod());
-        $quote->setInventoryProcessed(false);
+        if (!$quote->isVirtual()) {
+            $shippingAddress = $quote->getShippingAddress();
+            $shippingAddress
+                ->setCollectShippingRates(true)
+                ->collectShippingRates()
+                ->setShippingMethod($shippingAddress->getShippingMethod());
+            $quote->setInventoryProcessed(false);
+        }
 
         $this->processGuestCart($quote);
         $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
