@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.21] - 16 April 2025
+### Fixed
+- Always persist chosen customer address ID
+- When creating a new address, also reset the `customer_address_id` on load
+- Change address toggle label on billing step to "Add new billing address"
+- Skip shipping address validation for virtual quotes
+- Fix issue with one-line street being saved earlier
+- Move image from PostNl to core
+- Move common templates from PostNL to core
+- Unify locations and addresses for any maps
+- Turn login into modal popup
+- Add JS password complexity validation
+- Move scripts from "before.body.end" to new "loki-scripts" container
+- Add configurable password complexity
+- Rename LokiCheckoutValidator to LokiComponentValidator
+- Add handle prefixes for Hyva, Luma and Breeze
+- Implement label for gridlayouts
+- Add optional countryId to grid XML
+- Add label to grid
+
 ## [0.1.20] - 10 April 2025
 ### Fixed
 - Exit after redirecting
