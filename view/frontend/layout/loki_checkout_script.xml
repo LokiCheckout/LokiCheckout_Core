@@ -21,13 +21,13 @@
                 template="Yireo_LokiCheckout::script/aria-invalid.phtml"/>
             <block
                 name="loki-checkout.script.validators.email"
-                template="Yireo_LokiCheckout::script/validators/email.phtml"/>
+                template="Yireo_LokiCheckout::script/validator/email.phtml"/>
             <block
                 name="loki-checkout.script.validators.number"
-                template="Yireo_LokiCheckout::script/validators/number.phtml"/>
+                template="Yireo_LokiCheckout::script/validator/number.phtml"/>
             <block
                 name="loki-checkout.script.validators.postcode"
-                template="Yireo_LokiCheckout::script/validators/postcode.phtml"/>
+                template="Yireo_LokiCheckout::script/validator/postcode.phtml"/>
             <block
                 name="loki-checkout.script.hacks"
                 template="Yireo_LokiCheckout::script/hacks.phtml"/>
