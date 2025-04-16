@@ -1,0 +1,47 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var Location $location
+ */
+$location = $block->getLocation();
+$pickupTime = $block->getPickupTime();
+$pickupDate = $block->getPickupDate();
+?>
+<div class="flex mb-8 p-4 hover:bg-black/5">
+    <?= $childRenderer->html($block, 'location.input', [
+        'location' => $location,
+    ]) ?>
+
+    <label for="<?= $location->getId() ?>" class="cursor-pointer flex-1">
+        <?= $childRenderer->html($block, 'location.name', [
+            'location' => $location,
+        ]) ?>
+
+        <?= $childRenderer->html($block, 'location.pickup-details', [
+            'location' => $location,
+            'pickup_time' => $pickupTime,
+            'pickup_date' => $pickupDate,
+        ]) ?>
+
+        <?= $childRenderer->html($block, 'location.address', [
+            'location' => $location,
+        ]) ?>
+
+        <?= $childRenderer->html($block, 'location.business-hours', [
+            'location' => $location,
+        ]) ?>
+
+        <?= $childRenderer->html($block, 'location.additional', [
+            'location' => $location,
+        ]) ?>
+    </label>
+</div>

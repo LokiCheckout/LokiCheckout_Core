@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Timeframe $timeframe
+ */
+$timeframe = $block->getTimeframe();
+?>
+<div class="<?= $css('') ?>">
+    <input
+        type="radio"
+        x-model="value"
+        @change="submit"
+        :disabled="disabled"
+        name="timeframe"
+        value="<?= $timeframe->getCode() ?>"
+        id="<?= $timeframe->getId() ?>"
+        class="<?= $css('mr-4', 'input') ?>"
+    />
+</div>

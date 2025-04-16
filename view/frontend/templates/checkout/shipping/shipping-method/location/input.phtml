@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Location $location
+ */
+$location = $block->getLocation();
+?>
+<div class="<?= $css('') ?>">
+    <input
+        type="radio"
+        x-model="value"
+        @change="submit"
+        :disabled="disabled"
+        name="pickup_location"
+        value="pg|<?= $location->getCode() ?>"
+        id="<?= $location->getId() ?>"
+        class="<?= $css('mr-4', 'input') ?>"
+    />
+</div>

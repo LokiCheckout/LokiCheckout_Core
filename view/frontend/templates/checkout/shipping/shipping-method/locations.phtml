@@ -1,0 +1,45 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var Location[] $locations
+ * @var ViewModelFactory $viewModelFactory
+ * @var ImageOutput $imageOutput
+ */
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+$locations = $block->getLocations();
+$pickupTime = $block->getPickupTime();
+$pickupDate = $block->getPickupDate();
+?>
+<div>
+    <?php if (empty($locations)): ?>
+        <div class="<?= $css('p-2', 'empty') ?>"><?= __('No locations found') ?></div>
+    <?php else: ?>
+        <?php $i = 1; ?>
+        <?php foreach ($locations as $location): ?>
+            <div data-location-index="<?= $i ?>" class="hidden">
+                <?= $childRenderer->html($block, 'location', [
+                    'location' => $location,
+                    'pickup_time' => $pickupTime,
+                    'pickup_date' => $pickupDate,
+                ]) ?>
+            </div>
+            <?php $i++; ?>
+        <?php endforeach; ?>
+
+        <div @click="expandLocations">
+            <div class="inline-block w-4"><?= $imageOutput->get('Yireo_LokiCheckoutPostNl::images/angle-down.svg') ?></div>
+            <span class="text-sm"><?= __('Show more locations') ?></span>
+        </div>
+    <?php endif; ?>
+</div>

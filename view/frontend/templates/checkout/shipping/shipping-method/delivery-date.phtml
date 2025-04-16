@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Shipment\DeliveryDate;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var DeliveryDate $deliveryDate
+ */
+$deliveryDate = $block->getDeliveryDate();
+?>
+<div>
+    <h3 class="font-bold"><?= $deliveryDate->getDate() ?></h3>
+    <div class="mb-4">
+        <?= $childRenderer->html($block, 'timeframes', [
+            'timeframes' => $deliveryDate->getTimeframes(),
+        ]) ?>
+    </div>
+</div>

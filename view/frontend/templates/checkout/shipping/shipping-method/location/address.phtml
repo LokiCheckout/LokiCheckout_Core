@@ -1,0 +1,20 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Location $location
+ */
+$location = $block->getLocation();
+$address = $location->getAddress();
+?>
+<address class="<?= $css('mb-4') ?>">
+    <?= $address->getStreet() ?> <?= $address->getHouseNumber() ?>,
+    <?= $address->getPostcode() ?> <?= $address->getCity() ?>,
+    <?= $address->getCountryId() ?>
+</address>
