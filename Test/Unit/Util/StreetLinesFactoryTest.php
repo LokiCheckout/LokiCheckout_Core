@@ -33,9 +33,9 @@ class StreetLinesFactoryTest extends TestCase
      */
     public function testCreateFromStreet(
         string $street,
-        string $streetName,
-        string $houseNumber,
-        string $houseNumberAddition,
+        string $expectedStreetName,
+        string $expectedHouseNumber,
+        string $expectedHouseNumberAddition,
         ?string $street4 = null,
         int $numberOfStreetlines = 2
     ) {
@@ -46,30 +46,30 @@ class StreetLinesFactoryTest extends TestCase
         $streetLines = $streetLinesFactory->createFromStreet($street);
 
         if ($numberOfStreetlines == 1) {
-            $this->assertSame(trim(implode(' ', [$streetName, $houseNumber, $houseNumberAddition, $street4])), $streetLines->getStreetName());
+            $this->assertSame(trim(implode(' ', [$expectedStreetName, $expectedHouseNumber, $expectedHouseNumberAddition, $street4])), $streetLines->getStreetName());
             $this->assertEmpty($streetLines->getHouseNumber());
             $this->assertEmpty($streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
 
         if ($numberOfStreetlines == 2) {
-            $this->assertSame($streetName, $streetLines->getStreetName());
-            $this->assertSame(trim(implode(' ', [$houseNumber, $houseNumberAddition, $street4])), $streetLines->getHouseNumber());
+            $this->assertSame($expectedStreetName, $streetLines->getStreetName());
+            $this->assertSame(trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])), $streetLines->getHouseNumber());
             $this->assertEmpty($streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
 
         if ($numberOfStreetlines == 3) {
-            $this->assertSame($streetName, $streetLines->getStreetName());
-            $this->assertSame($houseNumber, $streetLines->getHouseNumber());
-            $this->assertSame(trim(implode(' ', [$houseNumberAddition, $street4])), $streetLines->getHouseNumberAddition());
+            $this->assertSame($expectedStreetName, $streetLines->getStreetName());
+            $this->assertSame($expectedHouseNumber, $streetLines->getHouseNumber());
+            $this->assertSame(trim(implode(' ', [$expectedHouseNumberAddition, $street4])), $streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
 
         if ($numberOfStreetlines == 4) {
-            $this->assertSame($streetName, $streetLines->getStreetName());
-            $this->assertSame($houseNumber, $streetLines->getHouseNumber());
-            $this->assertSame($houseNumberAddition, $streetLines->getHouseNumberAddition());
+            $this->assertSame($expectedStreetName, $streetLines->getStreetName());
+            $this->assertSame($expectedHouseNumber, $streetLines->getHouseNumber());
+            $this->assertSame($expectedHouseNumberAddition, $streetLines->getHouseNumberAddition());
             $this->assertSame($street4, $streetLines->getStreet4());
         }
     }
@@ -89,6 +89,31 @@ class StreetLinesFactoryTest extends TestCase
             [" \n \nA\n\n\n", '', '', 'A', null, 3],
             ["12AA", '', '12', 'AA', null, 3],
             ["12\nAA", '', '12', 'AA', null, 3],
+        ];
+    }
+
+    /**
+     * @param string $expectedStreet
+     * @param array $streetParts
+     * @param int $numberOfStreetlines
+     * @return void
+     * @dataProvider getCreateFromStreetPartsInput
+     */
+    public function testCreateFromStreetParts(string $expectedStreet, array $streetParts, int $numberOfStreetlines = 2)
+    {
+        $objectManager = new SimpleObjectManager;
+        $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
+
+        $streetLines = $streetLinesFactory->createFromStreetParts($streetParts);
+        $this->assertEquals($expectedStreet, $streetLines->toString());
+    }
+
+    public function getCreateFromStreetPartsInput(): array
+    {
+        return [
+            ["Example\n42\nC\nhouse", ['Example', '42', 'C', 'house'], 4],
+            ["Example\n42\nA", ['Example 42A', '', ''], 3],
         ];
     }
 

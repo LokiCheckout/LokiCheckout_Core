@@ -35,8 +35,13 @@ class StreetLinesFactory
 
     public function createFromStreetParts(array $streetParts, ?int $maximumNumber = null): StreetLines
     {
+        if (!empty($streetParts[0]) && empty($streetParts[1]) && empty($streetParts[2])) {
+            $streetParts = explode(' ', $streetParts[0]);
+        }
+
         $newStreetParts = [];
         foreach ($streetParts as $streetIndex => $streetPart) {
+            // Street starts with a house number but without a streetname
             if ($streetIndex === 0 && preg_match('/^([0-9]+)/', $streetPart)) {
                 $newStreetParts[] = '';
             }
