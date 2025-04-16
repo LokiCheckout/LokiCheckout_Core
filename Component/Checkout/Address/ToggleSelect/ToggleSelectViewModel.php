@@ -22,6 +22,10 @@ class ToggleSelectViewModel extends ComponentViewModel
 
     public function getButtonLabelNewAddress(): string
     {
+        if (str_contains($this->getComponentName(), 'billing')) {
+            return (string)__('Add new billing address');
+        }
+
         return (string)__('Add new shipping address');
     }
 
