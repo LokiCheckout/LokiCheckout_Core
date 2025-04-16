@@ -41,7 +41,7 @@ class SelectRepository extends ComponentRepository
             }
         }
 
-        if ($sanitizedAddressId !== $selectedAddressId) {
+        if ($sanitizedAddressId > 0) {
             $this->saveValue($sanitizedAddressId);
         }
 
