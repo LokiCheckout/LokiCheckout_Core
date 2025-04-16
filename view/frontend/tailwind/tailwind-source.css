@@ -119,4 +119,14 @@
             @apply text-green-800;
         }
     }
+
+    .scope-tab-buttons {
+        .tab-active {
+            @apply rounded-lg p-2 border-2 border-amber-700 bg-amber-500 hover:bg-amber-700 text-white;
+        }
+
+        .tab-inactive {
+            @apply rounded-lg p-2 border-2 border-zinc-400 bg-zinc-200 hover:bg-zinc-400;
+        }
+    }
 }

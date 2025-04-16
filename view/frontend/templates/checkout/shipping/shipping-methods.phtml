@@ -32,6 +32,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         x-ref="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
+        <?= $block->getChildHtml('before-methods') ?>
         <?php if (!empty($shippingMethods)): ?>
             <ul>
                 <?php foreach ($shippingMethods as $shippingMethod): ?>
@@ -51,6 +52,7 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?= __('No shipping methods available') ?>
             </div>
         <?php endif; ?>
+        <?= $block->getChildHtml('after-methods') ?>
     </div>
 
     <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>

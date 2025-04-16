@@ -4,6 +4,8 @@
         <block
             name="loki-checkout.shipping.methods"
             template="Yireo_LokiCheckout::checkout/shipping/shipping-methods.phtml">
+            <container name="loki-checkout.shipping.methods.before" as="before-methods"/>
+            <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
 
             <block
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
