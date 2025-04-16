@@ -12,10 +12,20 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $location = $block->getLocation();
 $address = $location->getAddress();
+$comment = $address->getComment();
+
+$additionalContent = '';
+if ($comment) {
+    $additionalContent = '<p>'.$address->getComment().'</p>';
+}
+
+if (empty($additionalContent)) {
+    return;
+}
 ?>
 <details>
     <summary><?= __('Additional information') ?></summary>
     <div class="mb-4">
-        <p><?= $address->getComment() ?></p>
+        <?= $additionalContent ?>
     </div>
 </details>
