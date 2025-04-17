@@ -1,0 +1,35 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Location\Address\BusinessHours;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Location $location
+ */
+$location = $block->getLocation();
+$businessHours = $location->getBusinessHours();
+if (false === $businessHours instanceof BusinessHours) {
+    return;
+}
+?>
+<details>
+    <summary><?= __('Show opening hours') ?></summary>
+    <div class="grid grid-cols-2 gap-2 mb-4">
+        <?php foreach ($businessHours->get() as $businessHourSegment): ?>
+            <div><?= __($businessHourSegment->getDay()) ?></div>
+            <div>
+                <?php if ($businessHourSegment->getOpeningHour()): ?>
+                <?= $businessHourSegment->getOpeningHour() ?> - <?= $businessHourSegment->getClosingHour() ?>
+                <?php endif; ?>
+                <?php if ($businessHourSegment->getComment()): ?>
+                <?= __($businessHourSegment->getComment()) ?>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</details>

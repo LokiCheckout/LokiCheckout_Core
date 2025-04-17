@@ -1,0 +1,31 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
+use Yireo\LokiCheckout\ViewModel\PriceFormatter;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Timeframe $timeframe
+ * @var ViewModelFactory $viewModelFactory
+ * @var PriceFormatter $priceFormatter
+ */
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$timeframe = $block->getTimeframe();
+?>
+<div class="<?= $css('') ?>">
+    <div class="float-right text-sm">
+        <?= $timeframe->getLabel() ?>
+        <?php if ($timeframe->getPrice() > 0) : ?>
+            (+ <?= $priceFormatter->format($timeframe->getPrice()) ?>)
+        <?php endif; ?>
+    </div>
+
+    <div>
+        <?= $timeframe->getFromTime() ?> - <?= $timeframe->getToTime() ?>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ */
+?>
+<div class="flex mb-8 p-4 hover:bg-black/5">
+    <?= $childRenderer->html($block, 'location.input') ?>
+
+    <label x-bind:for="location.id" class="cursor-pointer flex-1">
+        <?= $childRenderer->html($block, 'location.name') ?>
+        <?= $childRenderer->html($block, 'location.pickup-details') ?>
+        <?= $childRenderer->html($block, 'location.address') ?>
+        <?= $childRenderer->html($block, 'location.business-hours') ?>
+        <?= $childRenderer->html($block, 'location.additional') ?>
+    </label>
+</div>

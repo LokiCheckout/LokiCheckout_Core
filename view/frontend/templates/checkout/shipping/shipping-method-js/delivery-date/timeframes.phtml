@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var Timeframe[] $timeframes
+ */
+$timeframes = $block->getTimeframes();
+?>
+<div class="<?= $css('') ?>">
+    <?php if (empty($timeframes)): ?>
+        <span><?= __('No timeframes found') ?></span>
+    <?php else: ?>
+        <?php foreach ($timeframes as $timeframe): ?>
+            <?= $childRenderer->html($block, 'timeframe', [
+                'timeframe' => $timeframe,
+            ]) ?>
+        <?php endforeach; ?>
+    <?php endif; ?>
+</div>

@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var ImageOutput $imageOutput
+ */
+?>
+<div>
+    <template x-if="hasNoLocations">
+        <div class="<?= $css('p-2', 'empty') ?>"><?= __('No locations found') ?></div>
+    </template>
+
+    <template x-for="location in locations">
+        <div class="flex mb-8 p-4 hover:bg-black/5">
+            <label x-bind:for="location.id" class="cursor-pointer flex-1">
+            </label>
+        </div>
+    </template>
+
+    <div @click="expandLocations">
+        <div class="inline-block w-4"><?= $imageOutput->get('Yireo_LokiCheckout::images/angle-down.svg') ?></div>
+        <span class="text-sm"><?= __('Show more locations') ?></span>
+    </div>
+</div>

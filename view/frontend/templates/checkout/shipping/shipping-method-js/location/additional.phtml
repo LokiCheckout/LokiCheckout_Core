@@ -1,0 +1,31 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Location\Location;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var CssClass $css
+ * @var Location $location
+ */
+$location = $block->getLocation();
+$address = $location->getAddress();
+$comment = $address->getComment();
+
+$additionalContent = '';
+if ($comment) {
+    $additionalContent = '<p>'.$address->getComment().'</p>';
+}
+
+if (empty($additionalContent)) {
+    return;
+}
+?>
+<details>
+    <summary><?= __('Additional information') ?></summary>
+    <div class="my-4 text-sm">
+        <?= $additionalContent ?>
+    </div>
+</details>

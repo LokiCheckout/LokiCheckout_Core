@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
+use Yireo\LokiComponents\Util\Block\ChildRenderer;
+use Yireo\LokiComponents\Util\Block\CssClass;
+
+/**
+ * @var Template $block
+ * @var ChildRenderer $childRenderer
+ * @var CssClass $css
+ * @var Timeframe[] $timeframes
+ */
+$timeframe = $block->getTimeframe();
+?>
+<div class="flex p-2 hover:bg-black/5">
+    <?= $childRenderer->html($block, 'timeframe.input', [
+        'timeframe' => $timeframe,
+    ]) ?>
+
+    <label for="<?= $timeframe->getId() ?>" class="cursor-pointer flex-1">
+        <?= $childRenderer->html($block, 'timeframe.name', [
+            'timeframe' => $timeframe,
+        ]) ?>
+    </label>
+</div>
