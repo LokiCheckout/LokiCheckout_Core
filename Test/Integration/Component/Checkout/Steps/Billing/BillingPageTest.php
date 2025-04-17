@@ -18,7 +18,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
-#[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
+//#[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
 #[AppArea('frontend')]
 final class BillingPageTest extends LokiCheckoutPageTestCase
 {

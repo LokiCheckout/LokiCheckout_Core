@@ -29,7 +29,7 @@ final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
     #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]
     #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
-    #[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
+    //#[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
     final public function testComponentOnPage(): void
     {
         $this->markTestIncomplete('WIP');
