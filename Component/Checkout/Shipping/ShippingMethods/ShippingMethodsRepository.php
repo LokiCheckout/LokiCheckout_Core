@@ -89,6 +89,7 @@ class ShippingMethodsRepository extends ComponentRepository
             return;
         }
 
+        // @todo: Move this to specific ShippingMethod service
         $shippingAddress->setShippingMethod($shippingMethodCode);
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
