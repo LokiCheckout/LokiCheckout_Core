@@ -32,7 +32,6 @@ class NewsletterContext implements ComponentContextInterface
         private readonly SubscriberFactory $subscriberFactory,
         private readonly StoreManagerInterface $storeManager,
         private AddressStateProvider $addressStateProvider,
-        private FieldTemplateLocator $fieldTemplateLocator,
         private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
@@ -64,11 +63,6 @@ class NewsletterContext implements ComponentContextInterface
     public function getAddressStateProvider(): AddressStateProvider
     {
         return $this->addressStateProvider;
-    }
-
-    public function getFieldTemplateLocator(): FieldTemplateLocator
-    {
-        return $this->fieldTemplateLocator;
     }
 
     public function getCheckoutSession(): CheckoutSession

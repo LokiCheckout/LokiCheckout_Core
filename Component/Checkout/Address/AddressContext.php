@@ -51,7 +51,6 @@ class AddressContext implements ComponentContextInterface
         private readonly AddressConfig $addressConfig,
         private readonly AddressMapper $addressMapper,
         private readonly AddressRenderer $addressRenderer,
-        private readonly FieldTemplateLocator $fieldTemplateLocator
     ) {
     }
 
@@ -158,10 +157,5 @@ class AddressContext implements ComponentContextInterface
     public function getAddressRenderer(): AddressRenderer
     {
         return $this->addressRenderer;
-    }
-
-    public function getFieldTemplateLocator(): FieldTemplateLocator
-    {
-        return $this->fieldTemplateLocator;
     }
 }

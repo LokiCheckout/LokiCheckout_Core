@@ -27,7 +27,6 @@ class PostcodeContext implements ComponentContextInterface
     public function __construct(
         private readonly DirectoryData $directoryData,
         private AddressStateProvider $addressStateProvider,
-        private FieldTemplateLocator $fieldTemplateLocator,
         private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
@@ -53,11 +52,6 @@ class PostcodeContext implements ComponentContextInterface
     public function getAddressStateProvider(): AddressStateProvider
     {
         return $this->addressStateProvider;
-    }
-
-    public function getFieldTemplateLocator(): FieldTemplateLocator
-    {
-        return $this->fieldTemplateLocator;
     }
 
     public function getCheckoutSession(): CheckoutSession
