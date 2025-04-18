@@ -28,7 +28,6 @@ class AgreementsContext implements ComponentContextInterface
         private readonly CheckoutAgreementsListInterface $checkoutAgreementsList,
         private readonly ActiveStoreAgreementsFilter $activeStoreAgreementsFilter,
         private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -58,11 +57,6 @@ class AgreementsContext implements ComponentContextInterface
     public function getSearchCriteriaBuilder(): SearchCriteriaBuilder
     {
         return $this->searchCriteriaBuilder;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

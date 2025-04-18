@@ -14,7 +14,7 @@ class ToggleSelectRepository extends ComponentRepository
     {
         $sessionKey = $this->getContext()->getNewAddressSessionKey($this->getComponent());
 
-        $value = (bool)$this->getContext()->getCheckoutSession()->getData($sessionKey);
+        $value = (bool)$this->getContext()->getCheckoutState()->getCheckoutSession()->getData($sessionKey);
         if ((int)$value > 0) {
             $this->resetCustomerAddressId();
         }
@@ -30,7 +30,7 @@ class ToggleSelectRepository extends ComponentRepository
         }
 
         $sessionKey = $this->getContext()->getNewAddressSessionKey($this->getComponent());
-        $this->getContext()->getCheckoutSession()->setData($sessionKey, (int)$value);
+        $this->getContext()->getCheckoutState()->getCheckoutSession()->setData($sessionKey, (int)$value);
     }
 
     private function resetCustomerAddressId(): void

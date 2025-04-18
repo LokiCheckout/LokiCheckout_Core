@@ -22,7 +22,7 @@ class AgreementsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        $savedAgreements = (array)$this->getContext()->getCheckoutSession()->getAgreementIds();
+        $savedAgreements = (array)$this->getContext()->getCheckoutState()->getCheckoutSession()->getAgreementIds();
 
         $value = [];
         foreach ($this->getCheckoutAgreements() as $agreement) {
@@ -51,6 +51,6 @@ class AgreementsRepository extends ComponentRepository
 
         $savedAgreements = array_unique($savedAgreements);
 
-        $this->getContext()->getCheckoutSession()->setAgreementIds($savedAgreements);
+        $this->getContext()->getCheckoutState()->getCheckoutSession()->setAgreementIds($savedAgreements);
     }
 }

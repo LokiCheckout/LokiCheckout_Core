@@ -24,7 +24,6 @@ class ItemsContext implements ComponentContextInterface
 {
     public function __construct(
         private readonly ItemConvertor $itemConvertor,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -44,11 +43,6 @@ class ItemsContext implements ComponentContextInterface
     public function getItemConvertor(): ItemConvertor
     {
         return $this->itemConvertor;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

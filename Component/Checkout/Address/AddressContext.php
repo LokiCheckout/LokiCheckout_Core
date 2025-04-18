@@ -30,7 +30,6 @@ use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 class AddressContext implements ComponentContextInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -52,11 +51,6 @@ class AddressContext implements ComponentContextInterface
         private readonly AddressMapper $addressMapper,
         private readonly AddressRenderer $addressRenderer,
     ) {
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

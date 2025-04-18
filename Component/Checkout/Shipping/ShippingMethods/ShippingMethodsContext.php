@@ -26,7 +26,6 @@ class ShippingMethodsContext implements ComponentContextInterface
 {
     public function __construct(
         private readonly ShippingMethodManagementInterface $shippingMethodManagement,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -48,11 +47,6 @@ class ShippingMethodsContext implements ComponentContextInterface
     public function getShippingMethodManagement(): ShippingMethodManagementInterface
     {
         return $this->shippingMethodManagement;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

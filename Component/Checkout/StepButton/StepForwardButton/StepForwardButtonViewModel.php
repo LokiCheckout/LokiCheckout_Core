@@ -20,7 +20,7 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
     {
         return [
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
-            'redirectUrl' => $this->getContext()->getCheckoutSession()->getLokiRedirectUrl(),
+            'redirectUrl' => $this->getContext()->getCheckoutState()->getCheckoutSession()->getLokiRedirectUrl(),
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\StreetLine;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
@@ -11,7 +10,6 @@ use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
-use Yireo\LokiCheckout\Util\Component\FieldTemplateLocator;
 use Yireo\LokiCheckout\Util\Component\StepProvider;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\Util\StreetLinesFactory;
@@ -26,8 +24,6 @@ class StreetLineContext implements ComponentContextInterface
     public function __construct(
         private readonly StreetLinesFactory $streetLinesFactory,
         private AddressStateProvider $addressStateProvider,
-        private FieldTemplateLocator $fieldTemplateLocator,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -52,11 +48,6 @@ class StreetLineContext implements ComponentContextInterface
     public function getAddressStateProvider(): AddressStateProvider
     {
         return $this->addressStateProvider;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

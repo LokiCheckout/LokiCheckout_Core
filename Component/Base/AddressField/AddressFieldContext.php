@@ -25,7 +25,6 @@ class AddressFieldContext implements ComponentContextInterface
 {
     public function __construct(
         private AddressStateProvider $addressStateProvider,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -40,11 +39,6 @@ class AddressFieldContext implements ComponentContextInterface
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
     ) {
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

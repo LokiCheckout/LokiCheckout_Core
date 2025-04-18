@@ -24,7 +24,6 @@ class PaymentMethodsContext implements ComponentContextInterface
 {
     public function __construct(
         private readonly PaymentMethodManagementInterface $paymentMethodManagement,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -44,11 +43,6 @@ class PaymentMethodsContext implements ComponentContextInterface
     public function getPaymentMethodManagement(): PaymentMethodManagementInterface
     {
         return $this->paymentMethodManagement;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

@@ -27,7 +27,6 @@ class PostcodeContext implements ComponentContextInterface
     public function __construct(
         private readonly DirectoryData $directoryData,
         private AddressStateProvider $addressStateProvider,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -52,11 +51,6 @@ class PostcodeContext implements ComponentContextInterface
     public function getAddressStateProvider(): AddressStateProvider
     {
         return $this->addressStateProvider;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState

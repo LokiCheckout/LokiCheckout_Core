@@ -24,7 +24,6 @@ class OneStepContext implements ComponentContextInterface
 {
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
-        private CheckoutSession $checkoutSession,
         private CheckoutState $checkoutState,
         private ShippingAddressState $shippingAddressState,
         private BillingAddressState $billingAddressState,
@@ -43,11 +42,6 @@ class OneStepContext implements ComponentContextInterface
     public function getStepValidator(): ValidatorInterface
     {
         return $this->stepValidator;
-    }
-
-    public function getCheckoutSession(): CheckoutSession
-    {
-        return $this->checkoutSession;
     }
 
     public function getCheckoutState(): CheckoutState
