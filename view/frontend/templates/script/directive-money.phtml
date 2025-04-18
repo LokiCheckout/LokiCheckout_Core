@@ -1,0 +1,10 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.directive('money', (el, { value, expression }, { evaluate }) => {
+            if (expression) {
+                const amount = evaluate(expression) / 100;
+                el.textContent = new Intl.NumberFormat().format(amount);
+            }
+        });
+    });
+</script>

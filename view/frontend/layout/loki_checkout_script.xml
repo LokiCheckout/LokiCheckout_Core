@@ -23,6 +23,9 @@
                 name="loki-checkout.script.directive-date"
                 template="Yireo_LokiCheckout::script/directive-date.phtml"/>
             <block
+                name="loki-checkout.script.directive-money"
+                template="Yireo_LokiCheckout::script/directive-money.phtml"/>
+            <block
                 name="loki-checkout.script.validators.email"
                 template="Yireo_LokiCheckout::script/validator/email.phtml"/>
             <block

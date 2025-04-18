@@ -23,7 +23,15 @@
 
         Alpine.directive('time', (el, { value, expression }, { evaluate }) => {
             if (expression) {
-                const date = new Date(evaluate(expression));
+                const time = evaluate(expression);
+                const regex = /([0-9]{2}):([0-9]{2}):([0-9]{2})/;
+                const match = time.toString().match(regex);
+                if (match) {
+                    el.textContent = match[1] + ':' + match[2];
+                    return;
+                }
+
+                const date = new Date(time);
                 el.textContent = date.getHours() + ':' + date.getMinutes().toString().padStart(2, '0');
             }
         });
