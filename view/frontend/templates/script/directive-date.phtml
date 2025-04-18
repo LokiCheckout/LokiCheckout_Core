@@ -1,0 +1,31 @@
+<script>
+    // @todo: Find a different way to override this
+    const LokiCheckoutDateOptions = {
+        weekday: "long",
+        month: "long",
+        day: "numeric",
+    };
+
+    document.addEventListener('alpine:init', () => {
+        Alpine.directive('date', (el, { value, expression }, { evaluate }) => {
+            if (expression) {
+                const date = new Date(evaluate(expression));
+                el.textContent = date.toLocaleString(undefined, LokiCheckoutDateOptions);
+            }
+        });
+
+        Alpine.directive('datetime', (el, { value, expression }, { evaluate }) => {
+            if (expression) {
+                const date = new Date(evaluate(expression));
+                el.textContent = date.toLocaleString(undefined, LokiCheckoutDateOptions) + ', ' + date.toLocaleTimeString();
+            }
+        });
+
+        Alpine.directive('time', (el, { value, expression }, { evaluate }) => {
+            if (expression) {
+                const date = new Date(evaluate(expression));
+                el.textContent = date.getHours() + ':' + date.getMinutes().toString().padStart(2, '0');
+            }
+        });
+    });
+</script>
