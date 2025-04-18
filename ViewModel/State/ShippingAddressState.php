@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote\Address;
 use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -14,7 +13,6 @@ class ShippingAddressState implements AddressStateInterface
         private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig,
         private SameAddressService $sameAddressService,
-        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -34,7 +32,7 @@ class ShippingAddressState implements AddressStateInterface
             $quote->getBillingAddress()->setData($attributeCode, $value);
         }
 
-        $this->cartRepository->save($quote);
+        $this->checkoutState->saveQuote($quote);
     }
     public function getShippingAddress(): Address
     {
@@ -44,7 +42,7 @@ class ShippingAddressState implements AddressStateInterface
         if (!$shippingAddress->getCountryId()) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $shippingAddress->setCountryId($defaultCountryId);
-            $this->cartRepository->save($quote);
+            $this->checkoutState->saveQuote($quote);
         }
 
         return $shippingAddress;

@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\ViewModel\State;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote\Address;
 use Yireo\LokiCheckout\Util\SameAddressService;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -14,7 +13,6 @@ class BillingAddressState implements AddressStateInterface
         private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig,
         private SameAddressService $sameAddressService,
-        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -38,12 +36,13 @@ class BillingAddressState implements AddressStateInterface
 
     public function getBillingAddress(): Address
     {
-        $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
+        $quote = $this->checkoutState->getQuote();
+        $billingAddress = $quote->getBillingAddress();
 
         if (!$billingAddress->getCountryId()) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $billingAddress->setCountryId($defaultCountryId);
-            $this->cartRepository->save($this->checkoutState->getQuote());
+            $this->checkoutState->saveQuote($quote);
         }
 
         return $billingAddress;

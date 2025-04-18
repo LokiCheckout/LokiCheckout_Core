@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Util;
 
 use Magento\Framework\DataObject\Copy;
 use Magento\Framework\Exception\InputException;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\AddressInterface;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
@@ -15,7 +14,6 @@ class SameAddressService
         private readonly Config $config,
         private readonly Copy $copyService,
         private readonly CheckoutState $checkoutState,
-        private readonly CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -45,7 +43,7 @@ class SameAddressService
         // @todo: Detect whether values are the same
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getBillingAddress(), $quote->getShippingAddress());
-        $this->cartRepository->save($quote);
+        $this->checkoutState->saveQuote($quote);
     }
 
     public function copyShippingToBilling(): void
@@ -59,7 +57,7 @@ class SameAddressService
         $this->copy($quote->getShippingAddress(), $quote->getBillingAddress());
 
         try {
-            $this->cartRepository->save($quote);
+            $this->checkoutState->saveQuote($quote);
         } catch (InputException $inputException) {
             // @todo: What to do here?
         }
