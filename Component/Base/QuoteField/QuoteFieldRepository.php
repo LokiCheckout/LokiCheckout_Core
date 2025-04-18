@@ -21,7 +21,7 @@ class QuoteFieldRepository extends FieldRepository
     {
         $quote = $this->getQuote();
         $quote->setData($this->getFieldName(), $value);
-        $this->getContext()->getCartRepository()->save($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
     public function getFieldName(): string

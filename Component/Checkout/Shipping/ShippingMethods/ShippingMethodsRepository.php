@@ -82,7 +82,7 @@ class ShippingMethodsRepository extends ComponentRepository
         if (empty($shippingMethodCode)) {
             $shippingAddress->removeAllShippingRates();
             $shippingAddress->setShippingMethod('');
-            $this->getContext()->getCartRepository()->save($quote);
+            $this->getContext()->getCheckoutState()->saveQuote($quote);
 
             $this->currentShippingMethod = '';
 
@@ -95,10 +95,10 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress->collectShippingRates();
 
         $quote->collectTotals();
-        $this->getContext()->getCartRepository()->save($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
 
         $shippingAddress->setShippingMethod($shippingMethodCode);
-        $this->getContext()->getCartRepository()->save($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
 
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();
     }

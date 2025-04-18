@@ -25,9 +25,10 @@ class ShippingAsBillingRepository extends ComponentRepository
     public function saveValue(mixed $value): void
     {
         $billingAsShipping = (bool)$value;
-        $address = $this->getContext()->getShippingAddressState()->getShippingAddress();
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
+        $address = $quote->getShippingAddress();
         $address->setSameAsBilling((int)$billingAsShipping);
-        $this->getContext()->getCartRepository()->save($this->getContext()->getCheckoutState()->getQuote());
+        $this->getContext()->getCheckoutState()->saveQuote()($quote);
 
         if (true === $billingAsShipping) {
             $sameAddressService = $this->getContext()->getSameAddressService();

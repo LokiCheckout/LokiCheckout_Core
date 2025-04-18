@@ -38,6 +38,6 @@ class ToggleSelectRepository extends ComponentRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $address->setCustomerAddressId(null);
-        $this->getContext()->getCartRepository()->save($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 }

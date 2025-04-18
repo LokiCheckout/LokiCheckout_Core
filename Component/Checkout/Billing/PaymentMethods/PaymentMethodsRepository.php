@@ -52,7 +52,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
         if (empty($value)) {
             $quote->setPaymentMethod($value);
-            $this->getContext()->getCartRepository()->save($quote);
+            $this->getContext()->getCheckoutState()->saveQuote($quote);
             return;
         }
 
@@ -66,7 +66,7 @@ class PaymentMethodsRepository extends ComponentRepository
             return;
         }
 
-        $this->getContext()->getCartRepository()->save($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
         $quote->collectTotals();
     }
 
