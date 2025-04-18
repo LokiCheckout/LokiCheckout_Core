@@ -36,7 +36,7 @@ class GridClassParser implements CssClassParserInterface
 
     private function getGridClassesFromXmlConfig(AbstractBlock $block): string
     {
-        $gridLayoutName = (string)$this->config->getGridLayout();
+        $gridLayoutName = $this->config->getCurrentGridLayoutName();
         $blockAlias = $block->getLayout()->getElementAlias($block->getNameInLayout());
         if (empty($blockAlias)) {
             $blockParts = explode('.', $block->getNameInLayout());

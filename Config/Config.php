@@ -5,10 +5,12 @@ namespace Yireo\LokiCheckout\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class Config implements ArgumentInterface
 {
     public function __construct(
+        private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig,
         private ModuleManager $moduleManager,
         private XmlConfig $xmlConfig
@@ -45,7 +47,7 @@ class Config implements ArgumentInterface
         return $theme;
     }
 
-    public function getGridLayout(): string
+    public function getGridLayoutName(): string
     {
         $gridLayout = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/grid_layout');
         if (false === array_key_exists($gridLayout, $this->xmlConfig->getGridLayouts())) {
@@ -53,6 +55,41 @@ class Config implements ArgumentInterface
         }
 
         return $gridLayout;
+    }
+
+    /**
+     * @return string
+     * @deprecated Use getGridLayoutName() instead
+     */
+    public function getGridLayout(): string
+    {
+        return $this->getGridLayoutName();
+    }
+
+    public function getCurrentGridLayoutName(): string
+    {
+        $gridLayout = $this->getGridLayoutName();
+        $countryId = strtolower($this->getCurrentCountryId());
+        if (str_ends_with($gridLayout, '_'.$countryId)) {
+            return $gridLayout;
+        }
+
+        $countryGridLayout = $gridLayout.'_'.$countryId;
+        if (array_key_exists($countryGridLayout, $this->xmlConfig->getGridLayouts())) {
+            return $countryGridLayout;
+        }
+
+        return $gridLayout;
+    }
+
+    private function getCurrentCountryId(): string
+    {
+        $quote = $this->checkoutState->getQuote();
+        if ($quote->isVirtual()) {
+            return (string)$quote->getBillingAddress()->getCountryId();
+        }
+
+        return (string)$quote->getShippingAddress()->getCountryId();
     }
 
     public function getDefaultGridClasses(): string
