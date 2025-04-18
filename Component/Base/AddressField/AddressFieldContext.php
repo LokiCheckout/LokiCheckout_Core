@@ -36,7 +36,6 @@ class AddressFieldContext implements ComponentContextInterface
         private ModuleConfig $moduleConfig,
         private ScopeConfigInterface $scopeConfig,
         private AttributeProvider $attributeProvider,
-        private CartRepositoryInterface $cartRepository,
         private GlobalMessageRegistry $globalMessageRegistry,
         private CoreMessageManager $coreMessageManager,
         private readonly CustomerSession $customerSession,
@@ -96,11 +95,6 @@ class AddressFieldContext implements ComponentContextInterface
     public function getAttributeProvider(): AttributeProvider
     {
         return $this->attributeProvider;
-    }
-
-    public function getCartRepository(): CartRepositoryInterface
-    {
-        return $this->cartRepository;
     }
 
     public function getGlobalMessageRegistry(): GlobalMessageRegistry
