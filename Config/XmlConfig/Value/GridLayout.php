@@ -12,7 +12,8 @@ class GridLayout
         private string $label,
         private string $countryId = '',
         private int $defaultSortOrder = 0,
-        private string $defaultGridClass = '',
+        private int $defaultColSpan = 6,
+        private int $defaultMdColSpan = 6,
         private array $blocks = []
     ) {
     }
@@ -37,11 +38,6 @@ class GridLayout
         return $this->defaultSortOrder;
     }
 
-    public function getDefaultGridClass(): string
-    {
-        return $this->defaultGridClass;
-    }
-
     /**
      * @return Block[]
      */
@@ -64,5 +60,15 @@ class GridLayout
         }
 
         throw new BlockNotFoundException((string)__('Block with name "%1" not found in grid layout', $blockAlias));
+    }
+
+    public function getDefaultColSpan(): int
+    {
+        return $this->defaultColSpan;
+    }
+
+    public function getDefaultMdColSpan(): int
+    {
+        return $this->defaultMdColSpan;
     }
 }

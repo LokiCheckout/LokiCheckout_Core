@@ -53,25 +53,36 @@ class Converter implements ConverterInterface
 
         foreach ($gridLayoutElements as $gridLayoutElement) {
             $blocks = [];
+            $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
+            $defaultColSpan = (int)$gridLayoutElement->getAttribute('defaultColSpan');
+            if (empty($defaultColSpan)) {
+                $defaultColSpan = 6;
+            }
+
+            $defaultMdColSpan = (int)$gridLayoutElement->getAttribute('defaultMdColSpan');
+
             foreach ($gridLayoutElement->getElementsByTagName('block') as $blockElement) {
+                $colSpan = (int)$blockElement->getAttribute('colSpan');
+
                 $blocks[] = [
                     'alias' => (string)$blockElement->getAttribute('alias'),
                     'sortOrder' => (int)$blockElement->getAttribute('sortOrder'),
-                    'gridClass' => (string)$blockElement->getAttribute('gridClass'),
+                    'colSpan' => !empty($colSpan) ? $colSpan : $defaultColSpan,
+                    'mdColSpan' => (int)$blockElement->getAttribute('mdColSpan') ?? $defaultMdColSpan,
                 ];
             }
 
             $gridName = (string)$gridLayoutElement->getAttribute('name');
             $label = (string)$gridLayoutElement->getAttribute('label');
             $countryId = (string)$gridLayoutElement->getAttribute('countryId');
-            $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
-            $defaultGridClass = (string)$gridLayoutElement->getAttribute('defaultGridClass');
+
 
             $gridLayouts[$gridName] = [
                 'label' => $label,
                 'countryId' => $countryId,
                 'defaultSortOrder' => !empty($defaultSortOrder) ? $defaultSortOrder : 99,
-                'defaultGridClass' => !empty($defaultGridClass) ? $defaultGridClass : 'col-span-6',
+                'defaultColSpan' => $defaultColSpan,
+                'defaultMdColSpan' => !empty($defaultMdColSpan) ? $defaultMdColSpan : 6,
                 'blocks' => $blocks,
             ];
         }

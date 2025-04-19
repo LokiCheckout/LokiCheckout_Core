@@ -7,7 +7,8 @@ class Block
     public function __construct(
         private string $alias,
         private int $sortOrder,
-        private string $gridClass
+        private int $colSpan,
+        private int $mdColSpan,
     ) {
     }
 
@@ -23,6 +24,15 @@ class Block
 
     public function getGridClass(): string
     {
-        return $this->gridClass;
+        if (false === $this->colSpan > 0) {
+            $this->colSpan = 6;
+        }
+
+        $gridClass = 'col-span-'.$this->colSpan;
+        if ($this->mdColSpan > 0) {
+            $gridClass .= ' md:col-span-'.$this->mdColSpan;
+        }
+
+        return $gridClass;
     }
 }

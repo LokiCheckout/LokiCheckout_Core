@@ -120,7 +120,8 @@ class XmlConfig extends DataConfig
             $blocks[] = new Block(
                 $blockData['alias'],
                 $blockData['sortOrder'],
-                $blockData['gridClass']
+                $blockData['colSpan'],
+                $blockData['mdColSpan']
             );
         }
 
@@ -129,7 +130,8 @@ class XmlConfig extends DataConfig
             (string)$gridData['label'],
             (string)$gridData['countryId'],
             (int)$gridData['defaultSortOrder'],
-            (string)$gridData['defaultGridClass'],
+            (int)$gridData['defaultColSpan'],
+            (int)$gridData['defaultMdColSpan'],
             $blocks
         );
     }

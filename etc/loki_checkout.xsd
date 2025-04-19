@@ -48,13 +48,16 @@
     <xs:attribute name="label" type="xs:string" use="required"/>
     <xs:attribute name="countryId" type="xs:string" use="optional"/>
     <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
-    <xs:attribute name="defaultGridClass" type="xs:string" use="optional"/>
+    <xs:attribute name="defaultColSpan" type="xs:int" use="optional"/>
+    <xs:attribute name="defaultMdColSpan" type="xs:int" use="optional"/>
   </xs:complexType>
 
   <xs:complexType name="lokiCheckoutBlockType">
     <xs:attribute name="alias" type="xs:string" use="required"/>
     <xs:attribute name="sortOrder" type="xs:int" use="optional"/>
-    <xs:attribute name="gridClass" type="xs:string" use="optional"/>
+    <xs:attribute name="colSpan" type="xs:int" use="optional"/>
+    <xs:attribute name="mdColSpan" type="xs:int" use="optional"/>
+    <!-- @todo Limit colSpan between 1 and 12 -->
   </xs:complexType>
 
   <!-- @todo Why can't we just re-use this from config.xsd? -->
