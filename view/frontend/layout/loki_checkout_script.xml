@@ -79,6 +79,9 @@
                 <block
                     name="loki-checkout.script.components.agreements"
                     template="Yireo_LokiCheckout::script/component/agreements-component.phtml"/>
+                <block
+                    name="loki-checkout.script.components.grid-component"
+                    template="Yireo_LokiCheckout::script/component/grid.phtml"/>
             </referenceContainer>
         </referenceContainer>
     </body>
