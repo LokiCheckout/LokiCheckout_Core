@@ -35,4 +35,15 @@ class Block
 
         return $gridClass;
     }
+
+    public function getColSpan(): int
+    {
+        return $this->colSpan;
+    }
+
+    public function getMdColSpan(): int
+    {
+        return $this->mdColSpan;
+    }
+
 }

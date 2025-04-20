@@ -169,6 +169,10 @@
                         <argument name="show_field_label" xsi:type="boolean">false</argument>
                     </arguments>
                 </block>
+
+                <block
+                    name="loki-checkout.shipping.address.form.grid-layout" as="grid_layout"
+                    template="Yireo_LokiCheckout::checkout/address/grid-layout.phtml"/>
             </block>
         </block>
 

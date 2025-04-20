@@ -1,0 +1,40 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutGridLayout', () => ({
+            ...LokiComponentType,
+            gridLayout: {},
+            initActions: {
+                ...LokiComponentType.initActions,
+                listenToCountryIdChange() {
+                    this.applyGridClasses();
+                }
+            },
+            applyGridClasses() {
+                const grid = document.getElementById(this.elementId.replace('-grid-layout', ''));
+                this.gridLayout.forEach(block => {
+                    const blockElement = grid.getElementsByClassName(block.alias)[0];
+                    if (!blockElement) {
+                        return;
+                    }
+
+                    const newCssClasses = [];
+                    newCssClasses.push('order-[' + block.sortOrder + ']');
+                    newCssClasses.push('col-span-' + block.colSpan);
+
+                    if (block.mdColSpan) {
+                        newCssClasses.push('md:col-span-' + block.mdColSpan);
+                    }
+
+                    const cssClasses = blockElement.getAttribute('class').split(' ');
+                    cssClasses.forEach(cssClass => {
+                        if (cssClass.match(/col-span-/) || cssClass.match(/^order-/)) {
+                            blockElement.classList.remove(cssClass);
+                        }
+                    });
+
+                    blockElement.classList.add(...newCssClasses);
+                });
+            }
+        }));
+    });
+</script>

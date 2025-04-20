@@ -80,8 +80,8 @@
                     name="loki-checkout.script.components.agreements"
                     template="Yireo_LokiCheckout::script/component/agreements-component.phtml"/>
                 <block
-                    name="loki-checkout.script.components.grid-component"
-                    template="Yireo_LokiCheckout::script/component/grid.phtml"/>
+                    name="loki-checkout.script.components.grid-layout-component"
+                    template="Yireo_LokiCheckout::script/component/grid-layout-component.phtml"/>
             </referenceContainer>
         </referenceContainer>
     </body>

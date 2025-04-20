@@ -11,7 +11,7 @@ class GridLayout
         private string $name,
         private string $label,
         private string $countryId = '',
-        private int $defaultSortOrder = 0,
+        private int $defaultSortOrder = 99,
         private int $defaultColSpan = 6,
         private int $defaultMdColSpan = 6,
         private array $blocks = []

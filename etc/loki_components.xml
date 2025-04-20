@@ -338,6 +338,7 @@
         <target name="loki-checkout.shipping.address.postcode"/>
         <target name="loki-checkout.shipping.address.region"/>
         <target name="loki-checkout.shipping.methods"/>
+        <target name="loki-checkout.shipping.address.form.grid-layout"/>
         <filter name="country_id"/>
     </component>
 
@@ -375,6 +376,11 @@
         group="shippingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\SaveInAddressBook\SaveInAddressBookRepository"
+    />
+
+    <component
+        name="loki-checkout.shipping.address.form.grid-layout"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\GridLayout\GridLayoutViewModel"
     />
 
     <component
@@ -443,8 +449,11 @@
         group="billingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\CountryId\CountryIdRepository">
-        <filter name="country_id"/>
+        <target name="loki-checkout.billing.address.postcode"/>
+        <target name="loki-checkout.billing.address.region"/>
         <target name="loki-checkout.payment.methods"/>
+        <target name="loki-checkout.billing.address.form.grid-layout"/>
+        <filter name="country_id"/>
     </component>
 
     <component
@@ -536,6 +545,11 @@
         group="billingAddressStreetFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3ViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\Street3\Street3Repository"
+    />
+
+    <component
+        name="loki-checkout.billing.address.form.grid-layout"
+        viewModel="Yireo\LokiCheckout\Component\Checkout\GridLayout\GridLayoutViewModel"
     />
 
     <component
