@@ -49,6 +49,6 @@ class AddressFormContext extends AddressContext
         }
 
         $sessionKey = $this->getNewAddressSessionKey($component);
-        return (bool)$this->getCheckoutSession()->getData($sessionKey);
+        return (bool)$this->getCheckoutState()->getCheckoutSession()->getData($sessionKey);
     }
 }
