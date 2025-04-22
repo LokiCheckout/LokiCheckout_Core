@@ -13,7 +13,7 @@ class Config implements ArgumentInterface
         private CheckoutState $checkoutState,
         private ScopeConfigInterface $scopeConfig,
         private ModuleManager $moduleManager,
-        private XmlConfig $xmlConfig
+        private XmlConfig $xmlConfig,
     ) {
     }
 
@@ -84,6 +84,10 @@ class Config implements ArgumentInterface
 
     private function getCurrentCountryId(): string
     {
+        if (false === $this->checkoutState->getCheckoutSession()->getQuoteId() > 0) {
+            return '';
+        }
+
         $quote = $this->checkoutState->getQuote();
         if ($quote->isVirtual()) {
             return (string)$quote->getBillingAddress()->getCountryId();
