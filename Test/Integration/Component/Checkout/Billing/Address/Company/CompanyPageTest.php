@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
-#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
+#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'weight' => 0], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
@@ -26,8 +26,25 @@ final class CompanyPageTest extends LokiCheckoutPageTestCase
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
     #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]
-    final public function testComponentOnPage(): void
+    #[ConfigFixture('customer/address/company_show', 'opt', 'store', 'default')]
+    public function testComponentOnPageIfOptional(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+    }
+
+    #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
+    #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('customer/address/company_show', 'req', 'store', 'default')]
+    public function testComponentOnPageIfRequired(): void
+    {
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME);
+    }
+
+    #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
+    #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('customer/address/company_show', 0, 'store', 'default')]
+    public function testComponentNotOnPage(): void
+    {
+        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 }

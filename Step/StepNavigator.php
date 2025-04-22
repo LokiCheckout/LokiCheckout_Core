@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
@@ -24,7 +25,8 @@ class StepNavigator implements ArgumentInterface
         private readonly CheckoutSession $checkoutSession,
         private readonly FinalStep $finalStep,
         private readonly MessageManager $messageManager,
-        private readonly ComponentRegistry $componentRegistry
+        private readonly ComponentRegistry $componentRegistry,
+        private readonly RequestInterface $request,
     ) {
     }
 
@@ -32,7 +34,7 @@ class StepNavigator implements ArgumentInterface
     {
         if (false === $this->currentStep instanceof StepViewModelInterface) {
             try {
-                $this->setCurrentStepByCode((string)$this->checkoutSession->getCurrentStep());
+                $this->setCurrentStepByCode($this->getRequestedStep());
             } catch (UnknownStepException $unknownStepException) {
             }
         }
@@ -46,6 +48,16 @@ class StepNavigator implements ArgumentInterface
         }
 
         return $this->currentStep;
+    }
+
+    private function getRequestedStep(): string
+    {
+        $step = (string)$this->checkoutSession->getCurrentStep();
+        if (!empty($step)) {
+            return $step;
+        }
+
+        return (string)$this->request->getParam('step');
     }
 
     /**
@@ -138,12 +150,14 @@ class StepNavigator implements ArgumentInterface
     public function getFirstStep(): StepViewModelInterface
     {
         $steps = $this->getSteps();
+
         return array_shift($steps);
     }
 
     public function getLastStep(): StepViewModelInterface
     {
         $steps = $this->getSteps();
+
         return array_pop($steps);
     }
 

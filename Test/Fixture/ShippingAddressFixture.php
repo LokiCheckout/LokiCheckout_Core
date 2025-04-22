@@ -21,6 +21,7 @@ class ShippingAddressFixture implements DataFixtureInterface
         'postcode' => '3743KJ',
         'street' => ['Amalialaan 126'],
         'telephone' => '0123456789',
+        'carrier' => 'flatrate_flatrate',
     ];
 
     public function __construct(
@@ -35,6 +36,10 @@ class ShippingAddressFixture implements DataFixtureInterface
         $cart = $this->cartRepository->get($data['cart_id']);
         $shippingAddress = $cart->getShippingAddress();
         $shippingAddress->addData($data);
+
+        $shippingAddress->setShippingMethod($data['carrier']);
+        $shippingAddress->setSameAsBilling(false);
+        $cart->getBillingAddress()->setSameAsBilling(false);
 
         $this->cartRepository->save($cart);
 

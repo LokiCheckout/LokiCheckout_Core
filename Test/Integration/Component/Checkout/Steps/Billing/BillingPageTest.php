@@ -11,24 +11,26 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
-use Yireo\LokiCheckout\Test\Fixture\CurrentCheckoutStepFixture;
+use Yireo\LokiCheckout\Test\Fixture\ShippingAddressFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
 #[ConfigFixture('yireo_loki_checkout/general/theme', 'default')]
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
-//#[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
+#[DataFixture(ShippingAddressFixture::class, ['cart_id' => '$cart.id$'])]
+
 #[AppArea('frontend')]
 final class BillingPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
+    protected string $stepCode = 'billing';
+
     public const BLOCK_NAME = 'loki-checkout.steps.billing';
 
     final public function testComponentOnPage(): void
     {
-        $this->markTestIncomplete('WIP');
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

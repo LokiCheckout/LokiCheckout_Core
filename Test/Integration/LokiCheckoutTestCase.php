@@ -21,6 +21,8 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
 
+    protected string $stepCode = '';
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -67,7 +69,13 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
         $this->assertTrue($cart->getItemsCount() > 0);
 
-        $this->dispatch('checkout/index/index');
+        $url = 'checkout/index/index';
+
+        if (!empty($this->stepCode)) {
+            $this->getRequest()->setParams(['step' => $this->stepCode]);
+        }
+
+        $this->dispatch($url);
 
         /** @var Http $response */
         $response = $this->getResponse();

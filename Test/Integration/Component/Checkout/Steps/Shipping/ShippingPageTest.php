@@ -12,10 +12,10 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
+#[AppArea('frontend')]
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
-#[AppArea('frontend')]
 final class ShippingPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;

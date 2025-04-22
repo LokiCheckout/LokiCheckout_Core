@@ -48,6 +48,9 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     }
 
     #[
+        DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 0], as: 'product'),
+        DataFixture(GuestCartFixture::class, as: 'cart'),
+        DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
         ConfigFixture('carriers/freeshipping/active', 1, 'store'),
         ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 50),
     ]
