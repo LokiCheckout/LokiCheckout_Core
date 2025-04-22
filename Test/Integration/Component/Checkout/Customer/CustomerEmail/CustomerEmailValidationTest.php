@@ -10,9 +10,9 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
+    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class CustomerEmailValidationTest extends LokiCheckoutTestCase

@@ -23,9 +23,9 @@ use Yireo\LokiCheckout\Test\Integration\Trait\AssertTotalsContainShippingMethod;
 use Yireo\LokiCheckout\Test\Integration\Trait\SaveShippingAddressValues;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product'),
+    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1]),
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class MethodsRepositoryWithTableRatesTest extends LokiCheckoutPageTestCase

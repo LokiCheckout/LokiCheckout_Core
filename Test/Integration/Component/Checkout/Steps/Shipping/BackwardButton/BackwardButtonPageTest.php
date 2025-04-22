@@ -21,18 +21,18 @@ final class BackwardButtonPageTest extends LokiCheckoutPageTestCase
 
     public const BLOCK_NAME = 'loki-checkout.steps.shipping.backward-button';
 
-    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
+    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]
-    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
     #[AppArea('frontend')]
     final public function testComponentNotOnPage(): void
     {
         $this->assertComponentNotExistsOnPage(self::BLOCK_NAME, true);
     }
 
-    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
+    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]
-    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
     #[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
     final public function testComponentOnPage(): void
     {

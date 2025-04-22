@@ -15,9 +15,9 @@ use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use Yireo\LokiCheckout\Test\Fixture\CurrentCheckoutStepFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
-#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
+#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
+#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
 final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
 {
@@ -26,9 +26,9 @@ final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
     public const BLOCK_NAME = 'loki-checkout.steps.billing.forward-button';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'default')]
-    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 100], as: 'product')]
+    #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]
-    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$', 'qty' => 1])]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
     //#[DataFixture(CurrentCheckoutStepFixture::class, ['step' => 'billing'])]
     final public function testComponentOnPage(): void
     {
