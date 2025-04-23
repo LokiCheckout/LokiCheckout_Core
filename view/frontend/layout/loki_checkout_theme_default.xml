@@ -4,7 +4,17 @@
         <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/default/checkout.phtml"/>
 
         <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/default/steps.phtml">
-            <block name="loki-checkout.steps.shipping" as="shipping" template="Yireo_LokiCheckout::theme/default/shipping-step.phtml">
+            <block
+                name="loki-checkout.steps.shipping"
+                as="shipping"
+                template="Yireo_LokiCheckout::theme/default/shipping-step.phtml"
+            >
+                <block
+                    name="loki-checkout.steps.shipping.fast_checkout"
+                    template="Yireo_LokiCheckout::theme/default/fast-checkout.phtml"
+                    before="-"
+                />
+
                 <block
                     name="loki-checkout.steps.shipping.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
@@ -25,13 +35,13 @@
 
                 <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="Yireo_LokiCheckout::theme/default/billing-customer-fields.phtml"/>
 
-                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiFieldComponents::form/button/buttons.phtml" after="-" />
+                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiFieldComponents::form/button/buttons.phtml" after="-"/>
             </block>
         </referenceBlock>
 
         <!-- Shipping step -->
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
-        <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons" />
+        <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons"/>
 
         <move element="loki-checkout.steps.shipping.backward-button" destination="loki-checkout.steps.shipping.buttons" as="backward-button"/>
         <move element="loki-checkout.steps.shipping.forward-button" destination="loki-checkout.steps.shipping.buttons" as="forward-button"/>

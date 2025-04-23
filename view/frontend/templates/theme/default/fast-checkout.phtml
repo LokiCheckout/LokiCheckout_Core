@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiCheckout\Component\Checkout;
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+
+$html = $block->getChildHtml();
+if (empty($html)) {
+    return;
+}
+?>
+<div class="card mb-8">
+    <div class="flex justify-center p-4">
+        <?= $html ?>
+    </div>
+
+    <div class="my-4 text-center text-lg">Or checkout with your details below</div>
+</div>
