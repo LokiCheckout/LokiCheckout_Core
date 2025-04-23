@@ -2,9 +2,8 @@
 
 namespace Yireo\LokiCheckout\Validator\Component;
 
-use Magento\Customer\Model\Address\CompositeValidator;
 use Magento\Customer\Model\AddressFactory as CustomerAddressFactory;
-use Magento\Eav\Model\Validator\Attribute\Backend as EavValidator;
+use Magento\Framework\Phrase;
 use Magento\Framework\Validator\Factory as ValidatorFactory;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Validator\ValidatorInterface;
@@ -14,8 +13,6 @@ class CustomerAddressValidator implements ValidatorInterface
 {
     public function __construct(
         private CustomerAddressFactory $customerAddressFactory,
-        private EavValidator $eavValidator,
-        private CompositeValidator $compositeValidator,
         private ValidatorFactory $validatorFactory
     ) {
     }
@@ -37,8 +34,25 @@ class CustomerAddressValidator implements ValidatorInterface
         $validator = $this->validatorFactory->createValidator('customer_address', 'save');
         $result = $validator->isValid($customerAddress);
 
+        $messages = [];
         if ($result === false) {
-            return $validator->getMessages();
+            foreach ($validator->getMessages() as $validatorMessage) {
+                if (is_string($validatorMessage)) {
+                    $messages[] = $validatorMessage;
+                }
+
+                if ($validatorMessage instanceof Phrase) {
+                    $messages[] = (string)$validatorMessage;
+                }
+
+                if (is_array($validatorMessage)) {
+                    foreach ($validatorMessage as $message) {
+                        $messages[] = (string)$message;
+                    }
+                }
+            }
+
+            return $messages;
         }
 
         return true;
