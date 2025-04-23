@@ -54,7 +54,11 @@ class CheckoutState implements ArgumentInterface
 
     public function saveQuote(Quote $quote)
     {
-        $this->cartRepository->save($quote);
+        try {
+            $this->cartRepository->save($quote);
+        } catch (NoSuchEntityException $e) {
+            $this->handleQuoteNotFoundException();
+        }
     }
 
     public function getCheckoutSession(): CheckoutSession
