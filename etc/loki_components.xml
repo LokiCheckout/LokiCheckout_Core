@@ -319,7 +319,9 @@
         group="shippingAddressFields"
         viewModel="Yireo\LokiCheckout\Component\Checkout\Address\City\CityViewModel"
         repository="Yireo\LokiCheckout\Component\Checkout\Address\City\CityRepository"
-    />
+    >
+        <validator name="customerAddress"/>
+    </component>
 
     <component
         name="loki-checkout.shipping.address.region"

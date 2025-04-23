@@ -103,6 +103,7 @@
     <type name="Yireo\LokiComponents\Validator\ValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
+                <item name="customerAddress" xsi:type="object">Yireo\LokiCheckout\Validator\Component\CustomerAddressValidator</item>
                 <item name="email_available" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator</item>
                 <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
                 <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
