@@ -3,9 +3,11 @@
 namespace Yireo\LokiCheckout\Step;
 
 use Magento\Customer\Api\Data\GroupInterface;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
 use Magento\Quote\Api\CartManagementInterface;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
@@ -21,11 +23,13 @@ class FinalStep
     public function __construct(
         private QuoteValidator $quoteValidator,
         private CheckoutState $checkoutState,
+        private CustomerSession $customerSession,
         private Redirect $redirect,
         private EventManager $eventManager,
         private CartManagementInterface $cartManagement,
         private OrderRepositoryInterface $orderRepository,
-        private OrderSender $orderSender
+        private OrderSender $orderSender,
+        private CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -37,6 +41,7 @@ class FinalStep
     public function submit(): bool
     {
         $quote = $this->checkoutState->getQuote();
+
         if (!$quote->isVirtual()) {
             $shippingAddress = $quote->getShippingAddress();
             $shippingAddress
@@ -47,6 +52,8 @@ class FinalStep
         }
 
         $this->processGuestCart($quote);
+        $this->cartRepository->save($quote);
+
         $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
         $this->updateCheckoutSessionFromCart($quote);
 
@@ -86,14 +93,14 @@ class FinalStep
         );
     }
 
-    private function processGuestCart(CartInterface $cart): void
+    private function processGuestCart(CartInterface $quote): void
     {
-        if (false === (bool)$cart->getCustomerIsGuest()) {
+        if ($this->customerSession->isLoggedIn()) {
             return;
         }
 
-        $cart->setCustomerId(0)
-            ->setCustomerEmail($cart->getBillingAddress()->getEmail())
+        $quote->setCustomerId(0)
+            ->setCustomerEmail($quote->getBillingAddress()->getEmail())
             ->setCustomerIsGuest(true)
             ->setCustomerGroupId(GroupInterface::NOT_LOGGED_IN_ID);
     }
