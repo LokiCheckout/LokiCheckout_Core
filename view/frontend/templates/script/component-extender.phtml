@@ -18,7 +18,7 @@
             }
         },
         getComponentData(component) {
-            return JSON.parse(component.$el.getAttribute('x-init-data'));
+            return JSON.parse(component.$refs.initialData);
         },
         merge(component) {
             const componentData = this.getComponentData(component);
