@@ -68,6 +68,7 @@ class CustomerAddressValidator implements ValidatorInterface
             'postcode' => '3743KJ',
             'country_id' => 'NL',
             'telephone' => '0123456789',
+            'company' => 'Yireo',
         ];
     }
 }
