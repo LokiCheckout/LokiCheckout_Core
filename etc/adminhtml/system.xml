@@ -111,7 +111,7 @@
                        showInDefault="1"
                        showInWebsite="1"
                        showInStore="0">
-                    <label>Use required block</label>
+                    <label>Use Required Block</label>
                     <comment>Use block "loki-field-components.utils.required" when a field is required</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
