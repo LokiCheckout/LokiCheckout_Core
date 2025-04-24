@@ -10,12 +10,6 @@
                 template="Yireo_LokiCheckout::theme/default/shipping-step.phtml"
             >
                 <block
-                    name="loki-checkout.steps.shipping.fast_checkout"
-                    template="Yireo_LokiCheckout::theme/default/fast-checkout.phtml"
-                    before="-"
-                />
-
-                <block
                     name="loki-checkout.steps.shipping.title" as="title"
                     template="Yireo_LokiCheckout::generic/title.phtml">
                     <arguments>
@@ -38,6 +32,8 @@
                 <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Yireo_LokiFieldComponents::form/button/buttons.phtml" after="-"/>
             </block>
         </referenceBlock>
+
+        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.shipping" before="-"/>
 
         <!-- Shipping step -->
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>

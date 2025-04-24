@@ -13,6 +13,7 @@
         </referenceBlock>
 
         <!-- Column 1 -->
+        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.one.col1" before="-"/>
         <move element="loki-checkout.customer" destination="loki-checkout.steps.one.col1" />
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.one.col1" as="shipping-address"/>
         <move element="loki-checkout.billing.address" destination="loki-checkout.steps.one.col1" as="billing-address"/>

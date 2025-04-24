@@ -35,6 +35,10 @@
         </referenceContainer>
 
         <block
+            name="loki-checkout.fast_checkout"
+            template="Yireo_LokiCheckout::checkout/fast-checkout.phtml"/>
+
+        <block
             name="loki-checkout.generic.title"
             template="Yireo_LokiCheckout::generic/title.phtml"/>
 
