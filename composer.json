@@ -40,7 +40,8 @@
     "yireo/magento2-integration-test-helper": "^0.0.15"
   },
   "suggest": {
-    "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout"
+    "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout",
+    "yireo/magento2-loki-checkout-hyva": "Hyvä compatibility for Loki Checkout"
   },
   "license": "OSL-3.0",
   "autoload": {
