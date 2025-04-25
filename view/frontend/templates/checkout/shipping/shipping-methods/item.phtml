@@ -36,10 +36,13 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
                 type="radio"
-                x-model="value"
-                @change="submit"
+                :value="value"
+                @change="submitValue"
                 name="shipping_method"
                 value="<?= $code ?>"
+                <?php if ($viewModel->getValue() === $code): ?>
+                    checked
+                <?php endif; ?>
                 <?= $isCurrent ? 'checked' : '' ?>
                 <?= $viewModel->isDisabled() ? 'disabled="disabled"' : '' ?>
                 id="<?= $viewModel->getFieldIdFromCode($code) ?>"

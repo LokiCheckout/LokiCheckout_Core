@@ -12,12 +12,12 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 <div class="<?= $css('') ?>">
     <input
         type="radio"
-        x-model="value"
-        @change="submit"
-        :disabled="disabled"
         name="pickup_location"
+        :checked="value"
+        :disabled="disabled"
         :value="location.id"
-        x-bind:id="location.id"
+        :id="location.id"
+        @change="submitChecked"
         class="<?= $css('mr-4', 'input') ?>"
     />
 </div>

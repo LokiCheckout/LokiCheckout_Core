@@ -14,8 +14,8 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 <div class="<?= $css('card mb-8') ?>">
     <label for="<?= $viewModel->getElementId() ?>-field" class="<?= $css('', 'label') ?>">
         <input type="checkbox"
-               x-model="value"
-               @change="submit"
+               :checked="value"
+               @change="submitChecked"
                id="<?= $viewModel->getElementId() ?>-field">
         <span class="<?= $css('pl-2', 'span') ?>">
             <?= __('My billing and shipping address are the same') ?>

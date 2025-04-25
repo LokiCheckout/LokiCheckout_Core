@@ -15,8 +15,8 @@ $timeframe = $block->getTimeframe();
 <div class="<?= $css('') ?>">
     <input
         type="radio"
-        x-model="value"
-        @change="submit"
+        :value="value"
+        @change="submitValue"
         :disabled="disabled"
         name="timeframe"
         value="<?= $timeframe->getCode() ?>"

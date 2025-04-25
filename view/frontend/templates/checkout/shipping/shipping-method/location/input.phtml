@@ -15,8 +15,8 @@ $location = $block->getLocation();
 <div class="<?= $css('') ?>">
     <input
         type="radio"
-        x-model="value"
-        @change="submit"
+        :checked="isChecked"
+        @change="submitValue"
         :disabled="disabled"
         name="pickup_location"
         value="pg|<?= $location->getCode() ?>"

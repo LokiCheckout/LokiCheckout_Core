@@ -18,9 +18,9 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
             <input
                 type="checkbox"
                 id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
+                :checked="isChecked"
                 value="<?= $agreement->getAgreementId() ?>"
-                x-model="value.<?= 'a'.$agreement->getAgreementId() ?>"
-                @change="submit"
+                @change="submitChecked"
                 <?php if ($viewModel->getValue() === true): ?>
                     checked
                 <?php endif; ?>
