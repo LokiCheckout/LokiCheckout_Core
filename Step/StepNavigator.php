@@ -90,7 +90,6 @@ class StepNavigator implements ArgumentInterface
         }
 
         foreach ($validationResult as $error) {
-            echo $error;
             $this->messageManager->addErrorMessage($error);
         }
 
