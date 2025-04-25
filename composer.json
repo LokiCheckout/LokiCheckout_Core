@@ -27,7 +27,7 @@
     "magento/module-shipping": "^100.0",
     "magento/module-store": "^101.0",
     "yireo/magento2-loki-components": "~0.0 | ^1.0",
-    "yireo/magento2-loki-field-components": "~0.0",
+    "yireo/magento2-loki-field-components": "~0.0 | ^1.0",
     "yireo/magento2-csp-utilities": "^1.0",
     "guzzlehttp/guzzle": "^7.0",
     "php": "^8.3",
