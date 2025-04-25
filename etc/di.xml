@@ -117,6 +117,9 @@
         <arguments>
             <argument name="modulePrefixes" xsi:type="array">
                 <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
+                <item name="Yireo_LokiFieldComponents" xsi:type="string">Yireo_LokiFieldComponents</item>
+                <item name="Yireo_LokiMapComponents" xsi:type="string">Yireo_LokiMapComponents</item>
+                <item name="Yireo_LokiComponents" xsi:type="string">Yireo_LokiComponents</item>
             </argument>
         </arguments>
     </type>
