@@ -13,7 +13,7 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
-<div x-show="!loading" class="<?= $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
+<div x-show="notLoading" class="<?= $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
     <?= $imageOutput->get('Yireo_LokiFieldComponents::images/arrow-right.svg') ?>
 </div>
 
