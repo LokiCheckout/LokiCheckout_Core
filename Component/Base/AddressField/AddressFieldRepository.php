@@ -32,6 +32,10 @@ class AddressFieldRepository extends FieldRepository
 
     public function saveValue(mixed $value): void
     {
+        if ($value === null) {
+            return;
+        }
+
         $this->getAddressState()->save($this->getFieldName(), $value);
     }
 
