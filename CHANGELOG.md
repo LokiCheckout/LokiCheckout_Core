@@ -6,6 +6,40 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 25 April 2025
+### Fixed
+- Allow upgrading to LokiFieldComponents and LokiComponents 1.0
+- Remove `x-model` because of CSP compliance
+- Fix wrong saveQuote call
+- Failsave for null values in repositories
+- CSP fixes
+- Add additional Loki modules to Hyva Theme autoregistration
+- Add composer suggest
+- Customize backdrop of modal dialog
+- Draft of fast checkout option for PSPs
+- Consolidate vault access in core module
+- Intercept unwanted exceptions while rendering
+- Optimize guest checkout flags
+- Move from `x-init-data` to separate `text/x-loki-init` script to prevent escaping issues
+- Implement core customer address validation
+- Move Mollie fixture from core to Mollie module
+- Fix possible issue when LokiCheckout config is used outside of checkout
+- Add lazyloading to cart image
+- Finish grid layout JS switching
+- Add LokiCheckoutGrid component
+- Add empty grid for later usage
+- Remove gridClass, add colSpan and mdColSpan in grid layouts
+- Allow switching of grid layout per country ID
+- Add new Alpine directives x-time, x-datetime, x-date
+- Remove CheckoutSession from context
+- Remove FieldTemplateLocator from context
+- Remove CartRepository from all contexts
+- Rewrite `getCartRepository()->save()` to `getCheckoutState()->saveQuote()`
+- Reduce dependencies with CheckoutState::saveQuote()
+- Make loader icon in fields depend on Alpine and activate only after configurable timeout
+- Rename JS validators/ folder to validator/
+- Fix invalid HTML in shipping method input
+
 ## [0.1.21] - 16 April 2025
 ### Fixed
 - Always persist chosen customer address ID
