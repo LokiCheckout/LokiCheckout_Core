@@ -12,7 +12,7 @@ use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
-use Yireo\LokiCheckout\Util\Component\FieldTemplateLocator;
+use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 use Yireo\LokiCheckout\Util\Component\StepProvider;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
