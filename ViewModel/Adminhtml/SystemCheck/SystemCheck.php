@@ -29,8 +29,7 @@ abstract class SystemCheck implements SystemCheckInterface
         mixed $value,
         bool $valid,
         string $recommendation
-    ): void
-    {
+    ): void {
         $this->checkResultCollection->add(
             new CheckResult(
                 $label,

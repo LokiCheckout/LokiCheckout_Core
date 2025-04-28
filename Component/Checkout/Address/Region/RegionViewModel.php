@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Component\Checkout\Address\Region;
 
 use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
 
-
 class RegionViewModel extends AddressFieldViewModel
 {
     public function isAllowRendering(): bool

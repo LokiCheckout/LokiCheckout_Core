@@ -8,6 +8,7 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use Yireo\LokiCheckout\Config\Config;
@@ -17,7 +18,6 @@ use Yireo\LokiCheckout\Test\Integration\Trait\AssertAddressHasShippingMethod;
 use Yireo\LokiCheckout\Test\Integration\Trait\AssertShippingMethodAvailable;
 use Yireo\LokiCheckout\Test\Integration\Trait\AssertTotalsContainShippingMethod;
 use Yireo\LokiCheckout\Test\Integration\Trait\SaveShippingAddressValues;
-use Magento\TestFramework\Fixture\Config as ConfigFixture;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
@@ -63,7 +63,6 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
         $shippingMethods = $repository->getShippingMethods();
         $this->assertShippingMethodAvailable('freeshipping_freeshipping', $shippingMethods);
     }
-
 
     #[
         ConfigFixture('carriers/instore/active', 1, 'store'),

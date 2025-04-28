@@ -20,7 +20,7 @@ trait AssertAddressContainsRate
             }
         }
 
-        $debugMsg = 'Rate "'.$rateMethod.'" not found: '.implode(', ', $foundRateMethods);
+        $debugMsg = 'Rate "' . $rateMethod . '" not found: ' . implode(', ', $foundRateMethods);
         $this->assertTrue($found, $debugMsg);
     }
 }

@@ -39,7 +39,7 @@ class PostcodeFormatValidator implements ValidatorInterface
         $examples = [];
         foreach ($patterns as $pattern) {
             $examples[] = $pattern['example'];
-            preg_match('/'.(string)$pattern['pattern'].'/', $postcode, $matches);
+            preg_match('/' . (string)$pattern['pattern'] . '/', $postcode, $matches);
             if ($matches !== []) {
                 return true;
             }

@@ -39,7 +39,6 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return '';
         }
 
-
         $shippingMethod = $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
         if (empty($shippingMethod)) {
             return '';
@@ -62,7 +61,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         }
 
         $carrierTitle = trim($this->scopeConfig->getValue(
-            'carriers/'.$carrierCode.'/title',
+            'carriers/' . $carrierCode . '/title',
         ));
 
         if ($carrierTitle !== '' && $carrierTitle !== '0') {
@@ -80,7 +79,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             }
         }
 
-        throw new InvalidArgumentException('Carrier not found: '.$carrierCode);
+        throw new InvalidArgumentException('Carrier not found: ' . $carrierCode);
     }
 
     private function getMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string

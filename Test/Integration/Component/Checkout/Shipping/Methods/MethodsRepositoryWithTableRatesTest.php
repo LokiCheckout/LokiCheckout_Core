@@ -11,10 +11,10 @@ use Magento\OfflineShipping\Model\ResourceModel\Carrier\Tablerate\Collection as 
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
-use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Yireo\LokiCheckout\Test\Integration\Trait\AssertAddressContainsRate;
 use Yireo\LokiCheckout\Test\Integration\Trait\AssertAddressHasShippingMethod;
 use Yireo\LokiCheckout\Test\Integration\Trait\AssertCarrierIsActive;
@@ -67,7 +67,7 @@ class MethodsRepositoryWithTableRatesTest extends LokiCheckoutPageTestCase
     {
         $resourceConnection = ObjectManager::getInstance()->create(ResourceConnection::class);
         $table = $resourceConnection->getTableName('shipping_tablerate');
-        $resourceConnection->getConnection()->query('DELETE FROM '.$table);
+        $resourceConnection->getConnection()->query('DELETE FROM ' . $table);
     }
 
     private function createTablerate(

@@ -3,8 +3,8 @@
 namespace Yireo\LokiCheckout\Test\Unit\Step;
 
 use Magento\Checkout\Model\Session;
-use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\App\RequestInterface;
+use Magento\Framework\Message\ManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
 use Yireo\LokiCheckout\Config\Config;

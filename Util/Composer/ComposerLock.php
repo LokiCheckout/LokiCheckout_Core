@@ -18,7 +18,7 @@ class ComposerLock
             return $composerLockData;
         }
 
-        $composerLockFile = $this->directoryList->getRoot().'/composer.lock';
+        $composerLockFile = $this->directoryList->getRoot() . '/composer.lock';
         $composerLockData = json_decode(file_get_contents($composerLockFile), true);
 
         return $composerLockData;

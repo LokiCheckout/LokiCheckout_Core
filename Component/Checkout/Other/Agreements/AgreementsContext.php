@@ -122,5 +122,4 @@ class AgreementsContext implements ComponentContextInterface
         return $this->urlFactory;
     }
 
-
 }

@@ -29,4 +29,3 @@ class AttributeProvider
         throw new \RuntimeException('Unable to load attribute "' . $fieldName . '"');
     }
 }
-

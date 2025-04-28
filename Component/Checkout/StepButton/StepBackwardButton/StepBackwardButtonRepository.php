@@ -16,7 +16,7 @@ class StepBackwardButtonRepository extends ComponentRepository
     public function getValue(): mixed
     {
         try {
-        return $this->getStepNavigator()->getPreviousStep()->getCode();
+            return $this->getStepNavigator()->getPreviousStep()->getCode();
         } catch (UnknownStepException $e) {
             return null;
         }

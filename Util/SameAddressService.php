@@ -39,7 +39,6 @@ class SameAddressService
             return;
         }
 
-
         // @todo: Detect whether values are the same
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getBillingAddress(), $quote->getShippingAddress());

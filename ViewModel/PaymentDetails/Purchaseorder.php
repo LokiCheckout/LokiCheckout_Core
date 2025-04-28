@@ -9,7 +9,7 @@ class Purchaseorder implements ArgumentInterface
 {
     public function __construct(
         private readonly CheckoutState $checkoutState
-    ){
+    ) {
     }
 
     public function getPoNumber(): string

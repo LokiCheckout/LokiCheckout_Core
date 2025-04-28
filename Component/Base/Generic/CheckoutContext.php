@@ -2,8 +2,10 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Generic;
 
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
+use Magento\Framework\UrlFactory;
 use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
@@ -16,8 +18,6 @@ use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
-use Magento\Customer\Model\Session as CustomerSession;
-use Magento\Framework\UrlFactory;
 
 class CheckoutContext implements ComponentContextInterface
 {

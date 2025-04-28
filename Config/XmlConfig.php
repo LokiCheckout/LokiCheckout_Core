@@ -22,7 +22,7 @@ class XmlConfig extends DataConfig
     {
         $themes = [];
         $themesData = $this->get('themes');
-        foreach($themesData as $themeData) {
+        foreach ($themesData as $themeData) {
             $themeName = $themeData['name'];
             $themes[$themeName] = $this->createTheme($themeData);
         }

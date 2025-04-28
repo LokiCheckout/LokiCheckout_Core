@@ -62,7 +62,7 @@ class StreetLinesFactory
             $newStreetParts[1] ?? '',
             $newStreetParts[2] ?? '',
             $newStreetParts[3] ?? '',
-                $maximumNumber
+            $maximumNumber
         );
     }
 

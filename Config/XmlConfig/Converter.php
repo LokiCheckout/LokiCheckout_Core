@@ -77,7 +77,6 @@ class Converter implements ConverterInterface
             $label = (string)$gridLayoutElement->getAttribute('label');
             $countryId = (string)$gridLayoutElement->getAttribute('countryId');
 
-
             $gridLayouts[$gridName] = [
                 'label' => $label,
                 'countryId' => $countryId,

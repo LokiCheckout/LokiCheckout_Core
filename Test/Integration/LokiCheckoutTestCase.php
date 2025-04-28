@@ -10,8 +10,8 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
+use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
 use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
@@ -55,7 +55,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
             'loki_components',
             'loki_field_components',
             'loki_checkout',
-            'loki_checkout_theme_'.$themeName,
+            'loki_checkout_theme_' . $themeName,
         ];
 
         return $this->getComponentWithBlock($blockName, $handles);

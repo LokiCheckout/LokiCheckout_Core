@@ -12,8 +12,8 @@ trait AssertShippingMethodAvailable
         $shippingMethodCodes = [];
         foreach ($availableShippingMethods as $availableShippingMethod) {
             $shippingMethodCodes[] = $availableShippingMethod->getCarrierCode()
-                .'_'
-                .$availableShippingMethod->getMethodCode();
+                . '_'
+                . $availableShippingMethod->getMethodCode();
         }
 
         $debugMsg = 'Available shipping rates: ';

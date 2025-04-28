@@ -14,8 +14,7 @@ class DeliveryDateFactory
     public function create(
         int $timestamp,
         array $timeframes = []
-    ): DeliveryDate
-    {
+    ): DeliveryDate {
         return $this->objectManager->create(DeliveryDate::class, [
             'timestamp' => $timestamp,
             'timeframes' => $timeframes,

@@ -27,7 +27,7 @@ class AgreementsRepository extends ComponentRepository
         $value = [];
         foreach ($this->getCheckoutAgreements() as $agreement) {
             $agreementId = $agreement->getAgreementId();
-            $value['a'.$agreementId] = in_array($agreementId, $savedAgreements);
+            $value['a' . $agreementId] = in_array($agreementId, $savedAgreements);
         }
 
         return $value;

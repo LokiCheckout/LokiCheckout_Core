@@ -3,8 +3,8 @@
 namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Framework\Stdlib\DateTime\DateTime;
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
+use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class QuoteDetails implements ArgumentInterface
 {

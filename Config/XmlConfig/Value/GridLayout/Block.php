@@ -28,9 +28,9 @@ class Block
             $this->colSpan = 6;
         }
 
-        $gridClass = 'col-span-'.$this->colSpan;
+        $gridClass = 'col-span-' . $this->colSpan;
         if ($this->mdColSpan > 0) {
-            $gridClass .= ' md:col-span-'.$this->mdColSpan;
+            $gridClass .= ' md:col-span-' . $this->mdColSpan;
         }
 
         return $gridClass;

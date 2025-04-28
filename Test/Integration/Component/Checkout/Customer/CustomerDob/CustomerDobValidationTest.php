@@ -57,8 +57,8 @@ class CustomerDobValidationTest extends LokiCheckoutTestCase
             ['', false, ['Value is required']],
             ['foobar', false, ['Invalid date format']],
             ['1978-01-02', true, []],
-            [((int)date('Y') - 1).'-01-02', false, ['You need to be at least 10 years old']],
-            [((int)date('Y') + 12).'-01-02', false, ['Date needs to be in the past']],
+            [((int)date('Y') - 1) . '-01-02', false, ['You need to be at least 10 years old']],
+            [((int)date('Y') + 12) . '-01-02', false, ['Date needs to be in the past']],
         ];
     }
 }

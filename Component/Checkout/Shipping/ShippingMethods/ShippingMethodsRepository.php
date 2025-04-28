@@ -46,7 +46,7 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         foreach ($availableMethods as $shippingMethod) {
-            $shippingMethodCode = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode();
+            $shippingMethodCode = $shippingMethod->getCarrierCode() . '_' . $shippingMethod->getMethodCode();
             $this->shippingMethods[$shippingMethodCode] = $shippingMethod;
         }
 

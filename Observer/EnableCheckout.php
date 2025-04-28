@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Observer;
 
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\UrlFactory;
@@ -39,7 +39,7 @@ class EnableCheckout implements ObserverInterface
         $theme = $this->config->getTheme();
 
         $this->layout->getUpdate()->addHandle('loki_checkout');
-        $this->layout->getUpdate()->addHandle('loki_checkout_theme_'.$theme);
+        $this->layout->getUpdate()->addHandle('loki_checkout_theme_' . $theme);
         $this->addThemeHandles();
 
         $this->checkoutSession->setLokiRedirectUrl('');
@@ -64,11 +64,11 @@ class EnableCheckout implements ObserverInterface
     private function addHandlesByTheme(string $theme): void
     {
         foreach ($this->layout->getUpdate()->getHandles() as $handle) {
-            if (str_starts_with($handle, $theme.'_')) {
+            if (str_starts_with($handle, $theme . '_')) {
                 continue;
             }
 
-            $this->layout->getUpdate()->addHandle($theme.'_'.$handle);
+            $this->layout->getUpdate()->addHandle($theme . '_' . $handle);
         }
     }
 }

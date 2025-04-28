@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Util;
 
-use Magento\Quote\Api\Data\AddressInterface;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
+use Magento\Quote\Api\Data\AddressInterface;
 
 class RegionProvider
 {

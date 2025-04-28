@@ -65,4 +65,3 @@ class AddressFormViewModel extends CheckoutViewModel
         return $this->getContext()->getCheckoutState()->getQuote();
     }
 }
-

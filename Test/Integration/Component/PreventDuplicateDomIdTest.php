@@ -22,7 +22,7 @@ class PreventDuplicateDomIdTest extends LokiCheckoutPageTestCase
         $body = $this->getResponse()->getBody();
         $this->assertStringContainsString(self::TEST_DOM_ID, $body);
 
-        $idAttribute = 'id="'.self::TEST_DOM_ID.'"';
+        $idAttribute = 'id="' . self::TEST_DOM_ID . '"';
         $this->assertStringContainsString($idAttribute, $body);
         $this->assertEquals(1, substr_count($body, $idAttribute));
     }

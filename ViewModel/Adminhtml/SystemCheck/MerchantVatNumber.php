@@ -9,7 +9,6 @@ class MerchantVatNumber extends ScopeConfigValue
         return 'general/store_information/merchant_vat_number';
     }
 
-
     protected function isValid($value): bool
     {
         return !empty($value);

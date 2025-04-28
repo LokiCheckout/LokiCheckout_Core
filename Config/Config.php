@@ -70,11 +70,11 @@ class Config implements ArgumentInterface
     {
         $gridLayout = $this->getGridLayoutName();
         $countryId = strtolower($this->getCurrentCountryId());
-        if (str_ends_with($gridLayout, '_'.$countryId)) {
+        if (str_ends_with($gridLayout, '_' . $countryId)) {
             return $gridLayout;
         }
 
-        $countryGridLayout = $gridLayout.'_'.$countryId;
+        $countryGridLayout = $gridLayout . '_' . $countryId;
         if (array_key_exists($countryGridLayout, $this->xmlConfig->getGridLayouts())) {
             return $countryGridLayout;
         }

@@ -81,7 +81,7 @@ class NewsletterRepository extends FieldRepository
             ->select()
             ->from($this->getContext()->getResourceConnection()->getTableName('newsletter_subscriber'))
             ->where('store_id IN (?)', $storeIds)
-            ->where('customer_id = '.$customerId)
+            ->where('customer_id = ' . $customerId)
             ->where('subscriber_status = 1')
             ->limit(1);
 

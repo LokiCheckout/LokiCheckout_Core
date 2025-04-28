@@ -33,4 +33,3 @@ class CartTotals implements ArgumentInterface
         return $totals->getTotalSegments();
     }
 }
-

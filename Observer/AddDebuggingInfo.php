@@ -31,7 +31,7 @@ class AddDebuggingInfo implements ObserverInterface
 
         $prefixMatch = false;
         foreach ($this->blockPrefixes as $prefix) {
-            if (preg_match('/^'.$prefix.'/', (string)$block->getNameInLayout())) {
+            if (preg_match('/^' . $prefix . '/', (string)$block->getNameInLayout())) {
                 $prefixMatch = true;
             }
         }
@@ -68,7 +68,7 @@ class AddDebuggingInfo implements ObserverInterface
             $debugHtml = '<!-- LOKI_DEBUG ';
             $debugLines = $this->getDebugLines($block);
             foreach ($debugLines as $debugLineName => $debugLineValue) {
-                $debugHtml .= $debugLineName.' = '.$debugLineValue.', ';
+                $debugHtml .= $debugLineName . ' = ' . $debugLineValue . ', ';
             }
             $debugHtml .= ' -->';
 

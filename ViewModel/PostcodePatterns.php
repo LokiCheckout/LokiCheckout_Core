@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\ViewModel;
 
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
+use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class PostcodePatterns implements ArgumentInterface
 {
@@ -16,7 +16,7 @@ class PostcodePatterns implements ArgumentInterface
     {
         return $this->postcodeConfig->getPostCodes();
         foreach ($postcodePatterns as $countryCode => $patterns) {
-            foreach ($patterns as $patternName => $patternData){
+            foreach ($patterns as $patternName => $patternData) {
                 $patterns[$patternName]['pattern'] = $this->fromPhpRegexToJsRegex($patternData['pattern']);
             }
         }

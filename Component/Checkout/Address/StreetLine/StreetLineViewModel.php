@@ -17,7 +17,6 @@ class StreetLineViewModel extends AddressFieldViewModel
         return parent::isAllowRendering();
     }
 
-
     public function isRequired(): bool
     {
         if ($this->getIndex() === 0) {

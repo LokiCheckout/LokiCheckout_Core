@@ -18,7 +18,7 @@ trait AssertCarrierIsActive
         $this->assertContains(
             $carrierCode,
             $activeCarrierCodes,
-            'Active carriers: '.implode(', ', $activeCarrierCodes)
+            'Active carriers: ' . implode(', ', $activeCarrierCodes)
         );
     }
 }

@@ -12,8 +12,8 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use Yireo\LokiCheckout\Test\Fixture\CustomerAddressFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 use Yireo\LokiCheckout\Test\Fixture\CustomerLoggedInFixture;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
 #[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
 #[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]

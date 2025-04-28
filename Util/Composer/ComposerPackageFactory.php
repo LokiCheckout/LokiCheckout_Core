@@ -32,18 +32,18 @@ class ComposerPackageFactory
 
     private function getComposerFileFromPath(string $path): string
     {
-        if (is_file($path.'/composer.json')) {
-            return $path.'/composer.json';
+        if (is_file($path . '/composer.json')) {
+            return $path . '/composer.json';
         }
 
-        if (is_file($path.'/../composer.json')) {
-            return $path.'/../composer.json';
+        if (is_file($path . '/../composer.json')) {
+            return $path . '/../composer.json';
         }
 
-        if (is_file($path.'/../../composer.json')) {
-            return $path.'/../../composer.json';
+        if (is_file($path . '/../../composer.json')) {
+            return $path . '/../../composer.json';
         }
 
-        throw new RuntimeException('Could not find composer.json for path "'.$path.'"');
+        throw new RuntimeException('Could not find composer.json for path "' . $path . '"');
     }
 }

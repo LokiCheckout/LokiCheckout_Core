@@ -57,7 +57,7 @@ class ModulesEnabled extends SystemCheck
                 $moduleDependency,
                 $isEnabled ? 'Enabled' : 'Disabled',
                 $isEnabled,
-                (string)__('The following modules depend on module %1 to be enabled', $moduleDependency).': '. implode(', ', $moduleNames)
+                (string)__('The following modules depend on module %1 to be enabled', $moduleDependency) . ': ' . implode(', ', $moduleNames)
             );
         }
     }
@@ -65,7 +65,7 @@ class ModulesEnabled extends SystemCheck
     private function getModuleConfig(string $moduleName): array
     {
         $moduleFolder = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-        $moduleXml = $moduleFolder.'/etc/module.xml';
+        $moduleXml = $moduleFolder . '/etc/module.xml';
         $contents = $this->filesystemDriver->fileGetContents($moduleXml);
 
         $parser = $this->parserFactory->create();

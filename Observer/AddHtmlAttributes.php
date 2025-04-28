@@ -71,7 +71,7 @@ class AddHtmlAttributes implements ObserverInterface
 
         $htmlAttribute = '';
         foreach ($attributes as $attributeName => $attributeValue) {
-            if (str_contains($firstTagHtml, ' '.$attributeName.'="')) {
+            if (str_contains($firstTagHtml, ' ' . $attributeName . '="')) {
                 continue;
             }
 

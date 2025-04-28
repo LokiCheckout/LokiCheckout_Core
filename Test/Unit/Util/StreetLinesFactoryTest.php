@@ -12,7 +12,7 @@ class StreetLinesFactoryTest extends TestCase
 {
     public function testCreate()
     {
-        $objectManager = new SimpleObjectManager;
+        $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig(4);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 
@@ -39,7 +39,7 @@ class StreetLinesFactoryTest extends TestCase
         ?string $street4 = null,
         int $numberOfStreetlines = 2
     ) {
-        $objectManager = new SimpleObjectManager;
+        $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 
@@ -101,7 +101,7 @@ class StreetLinesFactoryTest extends TestCase
      */
     public function testCreateFromStreetParts(string $expectedStreet, array $streetParts, int $numberOfStreetlines = 2)
     {
-        $objectManager = new SimpleObjectManager;
+        $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 

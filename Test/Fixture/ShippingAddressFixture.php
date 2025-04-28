@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Test\Fixture;
 
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Framework\DataObject;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\TestFramework\Fixture\RevertibleDataFixtureInterface;
 
 class ShippingAddressFixture implements RevertibleDataFixtureInterface

@@ -67,7 +67,6 @@ class StreetLines
         return '';
     }
 
-
     public function getStreet4(): string
     {
         if ($this->maximumNumber === 4) {

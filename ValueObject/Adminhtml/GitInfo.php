@@ -47,10 +47,10 @@ class GitInfo
     private function getHeadFile(): string
     {
         $path = $this->path;
-        if (file_exists($path.'/.git/FETCH_HEAD')) {
-            return $path.'/.git/FETCH_HEAD';
+        if (file_exists($path . '/.git/FETCH_HEAD')) {
+            return $path . '/.git/FETCH_HEAD';
         }
 
-        return dirname($path).'/.git/FETCH_HEAD';
+        return dirname($path) . '/.git/FETCH_HEAD';
     }
 }

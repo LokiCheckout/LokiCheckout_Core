@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Controller\Adminhtml\Check;
 
+use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory as ResultPageFactory;
-use Magento\Backend\App\Action;
 
 class Index extends Action
 {

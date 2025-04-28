@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Test\Integration\Component\Validator;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
+use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Customer\Model\AccountManagement;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Exception\LocalizedException;
@@ -10,7 +11,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use PHPUnit\Framework\TestCase;
-use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator;
 
 #[AppArea('frontend')]

@@ -16,7 +16,7 @@ class ThemeOptions implements OptionSourceInterface
     public function toOptionArray()
     {
         $options = [];
-        foreach($this->xmlConfig->getThemes() as $theme) {
+        foreach ($this->xmlConfig->getThemes() as $theme) {
             $options[] = [
                 'value' => $theme->getName(),
                 'label' => $theme->getLabel(),

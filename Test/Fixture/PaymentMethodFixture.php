@@ -2,8 +2,8 @@
 
 namespace Yireo\LokiCheckout\Test\Fixture;
 
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Framework\DataObject;
+use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\TestFramework\Fixture\DataFixtureInterface;
 

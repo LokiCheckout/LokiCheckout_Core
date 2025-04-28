@@ -15,7 +15,7 @@ class DeliveryDate
         private readonly int $timestamp,
         private array $timeframes = [],
         private readonly string $datePattern = 'EEEE, MMMM dd', // @doc
-    ){
+    ) {
     }
 
     public function getTimestamp(): int

@@ -13,7 +13,7 @@ trait AssertTotalsContainShippingMethod
     {
         $shippingMethodLabel = '';
         foreach ($this->getRepository()->getShippingMethods() as $shippingMethod) {
-            if (str_starts_with($shippingMethodCode, $shippingMethod->getMethodCode().'_')) {
+            if (str_starts_with($shippingMethodCode, $shippingMethod->getMethodCode() . '_')) {
                 $shippingMethodLabel = $shippingMethod->getMethodTitle();
             }
         }
