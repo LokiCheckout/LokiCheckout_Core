@@ -46,7 +46,8 @@ magento-integration-tests:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config minimum-stability dev
     - composer config prefer-stable true
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - composer require --prefer-source -- $COMPOSER_NAME:dev-master
+    - ls -al /tmp/magento/vendor/yireo/
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
     - cd /tmp/magento/dev/tests/integration/
