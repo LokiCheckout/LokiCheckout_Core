@@ -9,9 +9,6 @@ use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\CamelCaseConvertor;
 
-/**
- * @deprecated Remove logic based on getComponentName()
- */
 class AssignAdditionalBlockVariables implements ObserverInterface
 {
     public function __construct(
