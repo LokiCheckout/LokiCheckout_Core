@@ -41,14 +41,12 @@ magento-integration-tests:
     - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
     - test -d $CI_PROJECT_DIR/Test/Integration/ || exit 0
     - cd /tmp/magento
-    - echo $CI_PROJECT_DIR
-    - ls $CI_PROJECT_DIR
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config minimum-stability dev
     - composer config prefer-stable true
-    - composer require --prefer-source -- $COMPOSER_NAME:dev-master
+    - composer require --prefer-source -- $COMPOSER_NAME
     - ls -al /tmp/magento/vendor/yireo/
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
