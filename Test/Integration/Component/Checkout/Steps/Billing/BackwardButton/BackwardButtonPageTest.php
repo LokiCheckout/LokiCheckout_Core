@@ -18,7 +18,7 @@ final class BackwardButtonPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    protected string $stepCode = 'billing';
+    protected ?string $stepCode = 'billing';
 
     public const BLOCK_NAME = 'loki-checkout.steps.billing.backward-button';
 
