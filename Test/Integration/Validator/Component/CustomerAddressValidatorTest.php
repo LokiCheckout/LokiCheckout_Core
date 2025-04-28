@@ -34,7 +34,7 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
 
         if ($expectedResult === false) {
             $this->assertIsArray($result, 'Expected value "' . $city . '" to be invalid."');
-            $message = array_pop($result[0]);
+            $message = array_pop($result);
             $this->assertStringContainsString($errorMessage, $message, var_export($result, true));
         }
     }

@@ -37,7 +37,7 @@ class CityValidationTest extends LokiCheckoutTestCase
         return [
             ['', false, ['Value is required']],
             ['Sin City', true, []],
-            ['Sin City #', false, ['Invalid city']],
+            ['Sin City #', false, ['Invalid City:']],
         ];
     }
 }
