@@ -4,11 +4,7 @@ namespace Yireo\LokiCheckout\Test\Fixture;
 
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Framework\DataObject;
-use Magento\TestFramework\Fixture\DataFixtureInterface;
 use Magento\TestFramework\Fixture\RevertibleDataFixtureInterface;
-use Magento\TestFramework\Helper\Bootstrap;
-use Mollie\Payment\Plugin\Quote\Api\PaymentMethodManagementPlugin;
-use Yireo\LokiCheckoutMollie\Test\Integration\Stub\PaymentMethodManagementPluginStub;
 
 class ShippingAddressFixture implements RevertibleDataFixtureInterface
 {
