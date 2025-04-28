@@ -9,7 +9,7 @@ use Yireo\LokiCheckout\Config\XmlConfig;
 class GridLayoutOptions implements OptionSourceInterface
 {
     public function __construct(
-        private XmlConfig $xmlConfig,
+        private readonly XmlConfig $xmlConfig,
     ) {
     }
 

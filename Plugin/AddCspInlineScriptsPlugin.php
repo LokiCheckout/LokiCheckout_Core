@@ -7,7 +7,7 @@ use Yireo\CspUtilities\Util\ReplaceInlineScripts;
 
 class AddCspInlineScriptsPlugin
 {
-    private ReplaceInlineScripts $replaceInlineScripts;
+    private readonly ReplaceInlineScripts $replaceInlineScripts;
 
     public function __construct(
         ReplaceInlineScripts $replaceInlineScripts

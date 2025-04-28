@@ -5,8 +5,8 @@ namespace Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 class Step
 {
     public function __construct(
-        private string $name,
-        private string $blockName
+        private readonly string $name,
+        private readonly string $blockName
     ) {
     }
 

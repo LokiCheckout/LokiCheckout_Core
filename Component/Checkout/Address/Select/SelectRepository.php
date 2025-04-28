@@ -23,7 +23,7 @@ class SelectRepository extends ComponentRepository
 
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $selectedAddressId = (int)$address->getCustomerAddressId();
-        if (empty($selectedAddressId)) {
+        if ($selectedAddressId === 0) {
             if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
                 $selectedAddressId = (int)$customer->getDefaultBilling();
             } else {
@@ -33,7 +33,7 @@ class SelectRepository extends ComponentRepository
 
         $sanitizedAddressId = $this->sanitizeSelectedAddressId($selectedAddressId);
 
-        if (empty($sanitizedAddressId)) {
+        if ($sanitizedAddressId === 0) {
             if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
                 $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
             } else {

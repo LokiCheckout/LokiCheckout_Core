@@ -35,7 +35,7 @@ class CheckoutState implements ArgumentInterface
 
     public function getQuote(): Quote
     {
-        if (empty($this->quoteId)) {
+        if ($this->quoteId === 0) {
             $this->quoteId = (int)$this->checkoutSession->getQuote()->getId();
         }
 

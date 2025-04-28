@@ -28,7 +28,7 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
         $validator = ObjectManager::getInstance()->get(CustomerAddressValidator::class);
         $result = $validator->validate($city, $component);
 
-        if ($expectedResult === true) {
+        if ($expectedResult) {
             $this->assertTrue($result);
         }
 

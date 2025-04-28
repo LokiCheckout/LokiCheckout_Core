@@ -22,7 +22,7 @@ class CustomerAddressFixture implements RevertibleDataFixtureInterface
     ];
 
     public function __construct(
-        private ServiceFactory $serviceFactory,
+        private readonly ServiceFactory $serviceFactory,
     ) {
     }
 

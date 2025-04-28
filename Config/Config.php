@@ -10,10 +10,10 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 class Config implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
-        private ScopeConfigInterface $scopeConfig,
-        private ModuleManager $moduleManager,
-        private XmlConfig $xmlConfig,
+        private readonly CheckoutState $checkoutState,
+        private readonly ScopeConfigInterface $scopeConfig,
+        private readonly ModuleManager $moduleManager,
+        private readonly XmlConfig $xmlConfig,
     ) {
     }
 

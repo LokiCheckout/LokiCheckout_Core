@@ -8,14 +8,14 @@ use Yireo\LokiCheckout\Step\FinalStep\RedirectContext;
 class SessionRedirectResolver implements RedirectResolverInterface
 {
     public function __construct(
-        private CheckoutSession $checkoutSession,
+        private readonly CheckoutSession $checkoutSession,
     ) {
     }
 
     public function resolve(RedirectContext $redirectContext): false|string
     {
         $redirectUrl = (string)$this->checkoutSession->getRedirectUrl();
-        if (!empty($redirectUrl)) {
+        if ($redirectUrl !== '' && $redirectUrl !== '0') {
             return $redirectUrl;
         }
 

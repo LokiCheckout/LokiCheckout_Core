@@ -14,10 +14,10 @@ use Yireo\LokiCheckout\Config\LokiCheckoutModules;
 class DumpModulesCommand extends Command
 {
     public function __construct(
-        private LokiCheckoutModules $lokiCheckoutModules,
-        private ComponentRegistrar $componentRegistrar,
-        private ModuleManager $moduleManager,
-        private Filesystem $filesystem,
+        private readonly LokiCheckoutModules $lokiCheckoutModules,
+        private readonly ComponentRegistrar $componentRegistrar,
+        private readonly ModuleManager $moduleManager,
+        private readonly Filesystem $filesystem,
         ?string $name = null
     ) {
         parent::__construct($name);

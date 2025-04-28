@@ -10,8 +10,8 @@ use Yireo\LokiComponents\Validator\ValidatorInterface;
 class PostcodeFormatValidator implements ValidatorInterface
 {
     public function __construct(
-        private ConfigInterface $postcodeConfig,
-        private AddressStateProvider $addressStateProvider
+        private readonly ConfigInterface $postcodeConfig,
+        private readonly AddressStateProvider $addressStateProvider
     ) {
     }
 
@@ -21,7 +21,7 @@ class PostcodeFormatValidator implements ValidatorInterface
         $countryId = $addressState->load('country_id');
         $postcode = (string)$value;
 
-        if (empty($postcode)) {
+        if ($postcode === '' || $postcode === '0') {
             return true;
         }
 
@@ -40,7 +40,7 @@ class PostcodeFormatValidator implements ValidatorInterface
         foreach ($patterns as $pattern) {
             $examples[] = $pattern['example'];
             preg_match('/'.(string)$pattern['pattern'].'/', $postcode, $matches);
-            if (count($matches)) {
+            if ($matches !== []) {
                 return true;
             }
         }
@@ -50,7 +50,7 @@ class PostcodeFormatValidator implements ValidatorInterface
 
     private function getErrorMessageFromExamples(string $postcode, array $examples): string
     {
-        if (empty($examples)) {
+        if ($examples === []) {
             return (string)__('Postcode "%1" has invalid format', $postcode);
         }
 

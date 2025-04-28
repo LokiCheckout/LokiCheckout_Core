@@ -57,7 +57,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
 
         $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
 
-        if (!empty($methodTitle)) {
+        if ($methodTitle !== '' && $methodTitle !== '0') {
             $parts[] = $methodTitle;
         }
 
@@ -65,7 +65,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             'carriers/'.$carrierCode.'/title',
         ));
 
-        if (!empty($carrierTitle)) {
+        if ($carrierTitle !== '' && $carrierTitle !== '0') {
             $parts[] = $carrierTitle;
         }
 

@@ -22,7 +22,7 @@ class ShippingAddressFixture implements RevertibleDataFixtureInterface
     ];
 
     public function __construct(
-        private CartRepositoryInterface $cartRepository,
+        private readonly CartRepositoryInterface $cartRepository,
     ) {
     }
 

@@ -35,11 +35,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
     public function isAccessable(): bool
     {
         // @todo: Move this logic to step navigator itself
-        if ($this->getContext()->getStepNavigator()->isCurrentStep($this)) {
-            return true;
-        }
-
-        return false;
+        return $this->getContext()->getStepNavigator()->isCurrentStep($this);
     }
 
     public function isVisible(): bool

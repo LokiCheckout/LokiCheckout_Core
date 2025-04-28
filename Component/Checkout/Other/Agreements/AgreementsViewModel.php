@@ -8,7 +8,7 @@ class AgreementsViewModel extends CheckoutViewModel
 {
     public function allowRendering(): bool
     {
-        return count($this->getCheckoutAgreements()) > 0;
+        return $this->getCheckoutAgreements() !== [];
     }
 
     public function getCheckoutAgreements(): array

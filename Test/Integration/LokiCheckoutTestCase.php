@@ -63,7 +63,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function dispatchToCheckout(?CartInterface $cart = null)
     {
-        if ($cart === null) {
+        if (!$cart instanceof \Magento\Quote\Api\Data\CartInterface) {
             $cart = $this->getCart();
         }
 
@@ -71,7 +71,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
         $url = 'checkout/index/index';
 
-        if (!empty($this->stepCode)) {
+        if ($this->stepCode !== '' && $this->stepCode !== '0') {
             $this->getRequest()->setParams(['step' => $this->stepCode]);
         }
 

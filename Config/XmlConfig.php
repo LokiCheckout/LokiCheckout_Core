@@ -82,7 +82,7 @@ class XmlConfig extends DataConfig
      */
     public function getGridLayouts(): array
     {
-        if (!empty($this->gridLayouts)) {
+        if ($this->gridLayouts !== []) {
             return $this->gridLayouts;
         }
 

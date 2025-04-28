@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
 abstract class SystemCheck implements SystemCheckInterface
 {
-    private CheckResultCollection $checkResultCollection;
+    private readonly CheckResultCollection $checkResultCollection;
 
     public function __construct(
         CheckResultCollectionFactory $checkResultCollectionFactory,

@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 class Purchaseorder implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState
+        private readonly CheckoutState $checkoutState
     ){
     }
 

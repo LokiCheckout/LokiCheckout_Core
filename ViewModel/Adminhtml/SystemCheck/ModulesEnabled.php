@@ -14,13 +14,13 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
 class ModulesEnabled extends SystemCheck
 {
     public function __construct(
-        private ComponentRegistrar $componentRegistrar,
-        private ModuleList $moduleList,
-        private ModuleManager $moduleManager,
-        private FilesystemDriver $filesystemDriver,
-        private ParserFactory $parserFactory,
-        private DomConvertor $domConvertor,
-        private LokiCheckoutModules $lokiCheckoutModules,
+        private readonly ComponentRegistrar $componentRegistrar,
+        private readonly ModuleList $moduleList,
+        private readonly ModuleManager $moduleManager,
+        private readonly FilesystemDriver $filesystemDriver,
+        private readonly ParserFactory $parserFactory,
+        private readonly DomConvertor $domConvertor,
+        private readonly LokiCheckoutModules $lokiCheckoutModules,
         CheckResultCollectionFactory $checkResultCollectionFactory
     ) {
         parent::__construct($checkResultCollectionFactory);

@@ -55,7 +55,7 @@ class Converter implements ConverterInterface
             $blocks = [];
             $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
             $defaultColSpan = (int)$gridLayoutElement->getAttribute('defaultColSpan');
-            if (empty($defaultColSpan)) {
+            if ($defaultColSpan === 0) {
                 $defaultColSpan = 6;
             }
 
@@ -67,8 +67,8 @@ class Converter implements ConverterInterface
 
                 $blocks[] = [
                     'alias' => (string)$blockElement->getAttribute('alias'),
-                    'sortOrder' => !empty($sortOrder) ? $sortOrder : 99,
-                    'colSpan' => !empty($colSpan) ? $colSpan : $defaultColSpan,
+                    'sortOrder' => $sortOrder === 0 ? 99 : $sortOrder,
+                    'colSpan' => $colSpan === 0 ? $defaultColSpan : $colSpan,
                     'mdColSpan' => (int)$blockElement->getAttribute('mdColSpan') ?? $defaultMdColSpan,
                 ];
             }
@@ -81,9 +81,9 @@ class Converter implements ConverterInterface
             $gridLayouts[$gridName] = [
                 'label' => $label,
                 'countryId' => $countryId,
-                'defaultSortOrder' => !empty($defaultSortOrder) ? $defaultSortOrder : 99,
+                'defaultSortOrder' => $defaultSortOrder === 0 ? 99 : $defaultSortOrder,
                 'defaultColSpan' => $defaultColSpan,
-                'defaultMdColSpan' => !empty($defaultMdColSpan) ? $defaultMdColSpan : 6,
+                'defaultMdColSpan' => $defaultMdColSpan === 0 ? 6 : $defaultMdColSpan,
                 'blocks' => $blocks,
             ];
         }

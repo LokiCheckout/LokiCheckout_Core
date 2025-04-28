@@ -17,14 +17,7 @@ class AddressFormViewModel extends CheckoutViewModel
             return $this->getContext()->getCheckoutState()->getQuote()->getGrandTotal() > 0;
             // @todo: Check how this goes
         }
-
-        if ($this->getContext()->isShippingAddressComponent($this->getComponent())) {
-            if ($this->getQuote()->isVirtual()) {
-                return false;
-            }
-        }
-
-        return true;
+        return !($this->getContext()->isShippingAddressComponent($this->getComponent()) && $this->getQuote()->isVirtual());
     }
 
     public function isAllowRendering(): bool
@@ -48,7 +41,7 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function showSelectAddress(): bool
     {
-        return count($this->getAddresses()) > 0;
+        return $this->getAddresses() !== [];
     }
 
     public function getAddresses(): array

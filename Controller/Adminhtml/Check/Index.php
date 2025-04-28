@@ -12,7 +12,7 @@ class Index extends Action
     const ADMIN_RESOURCE = 'Yireo_LokiCheckout::check';
 
     public function __construct(
-        private ResultPageFactory $resultPageFactory,
+        private readonly ResultPageFactory $resultPageFactory,
         Context $context
     ) {
         parent::__construct($context);

@@ -8,7 +8,7 @@ use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 class PostcodePatterns implements ArgumentInterface
 {
     public function __construct(
-        private ConfigInterface $postcodeConfig,
+        private readonly ConfigInterface $postcodeConfig,
     ) {
     }
 

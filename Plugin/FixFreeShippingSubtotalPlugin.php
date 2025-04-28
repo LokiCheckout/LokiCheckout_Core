@@ -9,8 +9,8 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 class FixFreeShippingSubtotalPlugin
 {
     public function __construct(
-        private ScopeConfigInterface $scopeConfig,
-        private CheckoutState $checkoutState
+        private readonly ScopeConfigInterface $scopeConfig,
+        private readonly CheckoutState $checkoutState
     ) {
     }
 
@@ -33,7 +33,7 @@ class FixFreeShippingSubtotalPlugin
 
             $subtotal = $quote->getSubtotal();
             if ($taxIncluding && isset($totals['tax'])) {
-                $subtotal = $subtotal + $totals['tax'];
+                $subtotal += $totals['tax'];
             }
 
             if ($subtotal > $freeShippingSubtotal) {

@@ -17,10 +17,10 @@ class EnableCheckout implements ObserverInterface
     public function __construct(
         private readonly Config $config,
         private readonly LayoutInterface $layout,
-        private CheckoutSession $checkoutSession,
-        private CustomerSession $customerSession,
-        private UrlFactory $urlFactory,
-        private CurrentTheme $currentTheme
+        private readonly CheckoutSession $checkoutSession,
+        private readonly CustomerSession $customerSession,
+        private readonly UrlFactory $urlFactory,
+        private readonly CurrentTheme $currentTheme
     ) {
     }
 

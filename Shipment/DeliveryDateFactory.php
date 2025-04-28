@@ -7,7 +7,7 @@ use Magento\Framework\ObjectManagerInterface;
 class DeliveryDateFactory
 {
     public function __construct(
-        private ObjectManagerInterface $objectManager
+        private readonly ObjectManagerInterface $objectManager
     ) {
     }
 

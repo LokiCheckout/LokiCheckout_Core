@@ -14,10 +14,10 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\ModuleFactory;
 class Modules implements ArgumentInterface
 {
     public function __construct(
-        private ModuleListLoader $moduleListLoader,
-        private ComposerPackageFactory $composerPackageFactory,
-        private LokiCheckoutModules $lokiCheckoutModules,
-        private ModuleFactory $moduleFactory,
+        private readonly ModuleListLoader $moduleListLoader,
+        private readonly ComposerPackageFactory $composerPackageFactory,
+        private readonly LokiCheckoutModules $lokiCheckoutModules,
+        private readonly ModuleFactory $moduleFactory,
     ) {
     }
 
@@ -48,14 +48,14 @@ class Modules implements ArgumentInterface
     public function getLatestModuleVersion(Module $module): string
     {
         if ($module->isDevVersion()) {
-            if ($module->getLatestCommit()) {
+            if ($module->getLatestCommit() !== '' && $module->getLatestCommit() !== '0') {
                 return $this->shortenGitCommit($module->getLatestCommit());
             }
 
             return 'unknown';
         }
 
-        if (!empty($module->getLatestComposerVersion())) {
+        if (!in_array($module->getLatestComposerVersion(), ['', '0'], true)) {
             return $module->getLatestComposerVersion();
         }
 

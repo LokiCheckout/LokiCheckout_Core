@@ -19,7 +19,7 @@ class PaymentMethodsRepository extends ComponentRepository
     public function getDefaultPayment(): string
     {
         $paymentMethods = $this->getPaymentMethods();
-        if (empty($paymentMethods)) {
+        if ($paymentMethods === []) {
             return '';
         }
 
@@ -50,7 +50,7 @@ class PaymentMethodsRepository extends ComponentRepository
         $value = $this->sanitizePaymentMethod((string)$value);
         $quote = $this->getQuote();
 
-        if (empty($value)) {
+        if ($value === '' || $value === '0') {
             $quote->setPaymentMethod($value);
             $this->getContext()->getCheckoutState()->saveQuote($quote);
             return;
@@ -77,7 +77,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
     protected function sanitizePaymentMethod(string $paymentMethod): string
     {
-        if (empty($paymentMethod)) {
+        if ($paymentMethod === '' || $paymentMethod === '0') {
             return $this->getDefaultPayment();
         }
 

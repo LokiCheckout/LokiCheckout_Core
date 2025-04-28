@@ -10,11 +10,11 @@ use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
 class DeliveryDate
 {
     public function __construct(
-        private LocaleResolver $localeResolver,
-        private Timezone $timezone,
-        private int $timestamp,
+        private readonly LocaleResolver $localeResolver,
+        private readonly Timezone $timezone,
+        private readonly int $timestamp,
         private array $timeframes = [],
-        private string $datePattern = 'EEEE, MMMM dd', // @doc
+        private readonly string $datePattern = 'EEEE, MMMM dd', // @doc
     ){
     }
 

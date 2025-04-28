@@ -13,10 +13,10 @@ class IconResolverContext
     private ?DriverInterface $fileDriver = null;
 
     public function __construct(
-        private ComponentRegistrar $componentRegistrar,
+        private readonly ComponentRegistrar $componentRegistrar,
         Filesystem $filesystem,
-        private AssetRepository $assetRepository,
-        private string $paymentMethodCode
+        private readonly AssetRepository $assetRepository,
+        private readonly string $paymentMethodCode
     ) {
         $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
     }

@@ -13,8 +13,8 @@ use Yireo\LokiComponents\Util\IdConvertor;
 class AddHtmlAttributes implements ObserverInterface
 {
     public function __construct(
-        private CamelCaseConvertor $camelCaseConvertor,
-        private IdConvertor $idConvertor
+        private readonly CamelCaseConvertor $camelCaseConvertor,
+        private readonly IdConvertor $idConvertor
     ) {
     }
 
@@ -44,12 +44,12 @@ class AddHtmlAttributes implements ObserverInterface
         }
 
         $htmlTag = $match[1];
-        if (true === in_array($htmlTag, ['script'])) {
+        if ($htmlTag === 'script') {
             return;
         }
 
         $htmlAttributes = $this->getHtmlAttributes($block, $html);
-        if (empty($htmlAttributes)) {
+        if ($htmlAttributes === '' || $htmlAttributes === '0') {
             return;
         }
 

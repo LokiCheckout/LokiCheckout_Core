@@ -9,8 +9,8 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
 class DevModules extends SystemCheck
 {
     public function __construct(
-        private ModuleManager $moduleManager,
-        private AppState $appState,
+        private readonly ModuleManager $moduleManager,
+        private readonly AppState $appState,
         CheckResultCollectionFactory $checkResultCollectionFactory
     ) {
         parent::__construct($checkResultCollectionFactory);

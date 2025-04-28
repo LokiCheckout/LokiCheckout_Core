@@ -26,10 +26,6 @@ class RegionViewModel extends AddressFieldViewModel
 
         $countriesWithStateRequired = $this->getContext()->getScopeConfig()->getValue('general/region/state_required');
         $countriesWithStateRequired = explode(',', $countriesWithStateRequired);
-        if (in_array($countryId, $countriesWithStateRequired)) {
-            return true;
-        }
-
-        return false;
+        return in_array($countryId, $countriesWithStateRequired);
     }
 }

@@ -5,10 +5,10 @@ namespace Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
 class Block
 {
     public function __construct(
-        private string $alias,
-        private int $sortOrder,
+        private readonly string $alias,
+        private readonly int $sortOrder,
         private int $colSpan,
-        private int $mdColSpan,
+        private readonly int $mdColSpan,
     ) {
     }
 

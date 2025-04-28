@@ -30,7 +30,7 @@ class ShippingAsBillingRepository extends ComponentRepository
         $address->setSameAsBilling((int)$billingAsShipping);
         $this->getContext()->getCheckoutState()->saveQuote($quote);
 
-        if (true === $billingAsShipping) {
+        if ($billingAsShipping) {
             $sameAddressService = $this->getContext()->getSameAddressService();
             $sameAddressService->copyShippingToBilling();
         }

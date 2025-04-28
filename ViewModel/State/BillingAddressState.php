@@ -10,9 +10,9 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 class BillingAddressState implements AddressStateInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
-        private ScopeConfigInterface $scopeConfig,
-        private SameAddressService $sameAddressService,
+        private readonly CheckoutState $checkoutState,
+        private readonly ScopeConfigInterface $scopeConfig,
+        private readonly SameAddressService $sameAddressService,
     ) {
     }
 

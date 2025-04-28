@@ -12,7 +12,7 @@ class OptionsValidator implements ValidatorInterface
     public function validate(mixed $value, ?ComponentInterface $component = null): true|array
     {
         $value = trim((string)$value);
-        if (empty($value)) {
+        if ($value === '' || $value === '0') {
             return true;
         }
 
@@ -27,7 +27,7 @@ class OptionsValidator implements ValidatorInterface
         }
 
         $options = $optionModel->getOptions($viewModel);
-        if (empty($options)) {
+        if ($options === []) {
             return true;
         }
 

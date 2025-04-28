@@ -11,13 +11,13 @@ use Yireo\LokiCheckout\Util\Composer\ComposerPackage;
 class Module
 {
     public function __construct(
-        private ComponentRegistrar $componentRegistrar,
-        private ModuleManager $moduleManager,
-        private LokiCheckoutModules $lokiCheckoutModules,
-        private GitInfoFactory $gitInfoFactory,
-        private ComposerApi $composerApi,
-        private string $moduleName,
-        private ComposerPackage $composerPackage,
+        private readonly ComponentRegistrar $componentRegistrar,
+        private readonly ModuleManager $moduleManager,
+        private readonly LokiCheckoutModules $lokiCheckoutModules,
+        private readonly GitInfoFactory $gitInfoFactory,
+        private readonly ComposerApi $composerApi,
+        private readonly string $moduleName,
+        private readonly ComposerPackage $composerPackage,
     ) {
     }
 

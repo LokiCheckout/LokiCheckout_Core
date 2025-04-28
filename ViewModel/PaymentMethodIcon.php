@@ -13,8 +13,8 @@ use Yireo\LokiCheckout\Payment\Icon\IconResolverListing;
 class PaymentMethodIcon implements ArgumentInterface
 {
     public function __construct(
-        private IconResolverListing $iconResolverListing,
-        private IconResolverContextFactory $iconResolverContextFactory,
+        private readonly IconResolverListing $iconResolverListing,
+        private readonly IconResolverContextFactory $iconResolverContextFactory,
     ) {
     }
 

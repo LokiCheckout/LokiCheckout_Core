@@ -41,11 +41,6 @@ class AssignAdditionalBlockVariables implements ObserverInterface
         if (preg_match('/^loki-checkout/', (string)$block->getNameInLayout())) {
             return true;
         }
-
-        if (preg_match('/^loki-components/', (string)$block->getNameInLayout())) {
-            return true;
-        }
-
-        return false;
+        return (bool) preg_match('/^loki-components/', (string)$block->getNameInLayout());
     }
 }

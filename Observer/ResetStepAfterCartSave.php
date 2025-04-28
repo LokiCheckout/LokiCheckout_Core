@@ -11,9 +11,9 @@ use Yireo\LokiCheckout\Step\StepNavigator;
 class ResetStepAfterCartSave implements ObserverInterface
 {
     public function __construct(
-        private StepNavigator $stepNavigator,
-        private MessageManager $messageManager,
-        private Config $config
+        private readonly StepNavigator $stepNavigator,
+        private readonly MessageManager $messageManager,
+        private readonly Config $config
     ) {
     }
 

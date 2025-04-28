@@ -20,7 +20,7 @@ class ShippingMethodsRepository extends ComponentRepository
      */
     public function getShippingMethods(): array
     {
-        if (!empty($this->shippingMethods)) {
+        if ($this->shippingMethods !== []) {
             return $this->shippingMethods;
         }
 
@@ -55,7 +55,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        if (!empty($this->currentShippingMethod)) {
+        if ($this->currentShippingMethod !== '' && $this->currentShippingMethod !== '0') {
             return $this->currentShippingMethod;
         }
 
@@ -79,7 +79,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $shippingAddress = $quote->getShippingAddress();
 
-        if (empty($shippingMethodCode)) {
+        if ($shippingMethodCode === '' || $shippingMethodCode === '0') {
             $shippingAddress->removeAllShippingRates();
             $shippingAddress->setShippingMethod('');
             $this->getContext()->getCheckoutState()->saveQuote($quote);
@@ -105,12 +105,12 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
-        if (empty($shippingMethodCode)) {
+        if ($shippingMethodCode === '' || $shippingMethodCode === '0') {
             return $this->getDefaultShippingMethod();
         }
 
         $shippingMethods = $this->getShippingMethods();
-        if (empty($shippingMethods)) {
+        if ($shippingMethods === []) {
             $this->component->getLocalMessageRegistry()->addError('No shipping methods available');
 
             return '';
@@ -136,7 +136,7 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         $shippingMethods = $this->getShippingMethods();
-        if (empty($shippingMethods)) {
+        if ($shippingMethods === []) {
             return '';
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Yireo\LokiCheckout\Test\Unit\Util;
 
 use PHPUnit\Framework\TestCase;

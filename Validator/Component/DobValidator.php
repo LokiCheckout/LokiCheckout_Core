@@ -8,7 +8,7 @@ use Yireo\LokiComponents\Validator\ValidatorInterface;
 class DobValidator implements ValidatorInterface
 {
     public function __construct(
-        private int $minimumYears = 10
+        private readonly int $minimumYears = 10
     ) {
     }
 

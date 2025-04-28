@@ -22,17 +22,17 @@ use Magento\Framework\UrlFactory;
 class CheckoutContext implements ComponentContextInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
-        private ShippingAddressState $shippingAddressState,
-        private BillingAddressState $billingAddressState,
-        private CustomerProvider $customerProvider,
-        private StepProvider $stepProvider,
-        private StepNavigator $stepNavigator,
-        private ModuleConfig $moduleConfig,
-        private ScopeConfigInterface $scopeConfig,
-        private AttributeProvider $attributeProvider,
-        private GlobalMessageRegistry $globalMessageRegistry,
-        private CoreMessageManager $coreMessageManager,
+        private readonly CheckoutState $checkoutState,
+        private readonly ShippingAddressState $shippingAddressState,
+        private readonly BillingAddressState $billingAddressState,
+        private readonly CustomerProvider $customerProvider,
+        private readonly StepProvider $stepProvider,
+        private readonly StepNavigator $stepNavigator,
+        private readonly ModuleConfig $moduleConfig,
+        private readonly ScopeConfigInterface $scopeConfig,
+        private readonly AttributeProvider $attributeProvider,
+        private readonly GlobalMessageRegistry $globalMessageRegistry,
+        private readonly CoreMessageManager $coreMessageManager,
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
     ) {

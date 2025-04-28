@@ -12,11 +12,11 @@ use Magento\Vault\Api\PaymentTokenRepositoryInterface;
 class PaymentTokenProvider
 {
     public function __construct(
-        private SearchCriteriaBuilder $searchCriteriaBuilder,
-        private PaymentTokenRepositoryInterface $paymentTokenRepository,
-        private SerializerInterface $serializer,
-        private Session $customerSession,
-        private NormalizedPaymentTokenFactory $normalizedPaymentTokenFactory
+        private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
+        private readonly PaymentTokenRepositoryInterface $paymentTokenRepository,
+        private readonly SerializerInterface $serializer,
+        private readonly Session $customerSession,
+        private readonly NormalizedPaymentTokenFactory $normalizedPaymentTokenFactory
     ) {
     }
 
@@ -73,7 +73,7 @@ class PaymentTokenProvider
             $this->customerSession->getCustomerId()
         );
 
-        if ($paymentMethodCode) {
+        if ($paymentMethodCode !== '' && $paymentMethodCode !== '0') {
             $this->searchCriteriaBuilder->addFilter(
                 PaymentTokenInterface::PAYMENT_METHOD_CODE,
                 $paymentMethodCode

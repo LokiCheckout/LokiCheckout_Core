@@ -6,7 +6,7 @@ namespace Yireo\LokiCheckout\Shipment\Icon;
 class IconResolverListing
 {
     public function __construct(
-        private array $iconResolvers = []
+        private readonly array $iconResolvers = []
     ) {
     }
 

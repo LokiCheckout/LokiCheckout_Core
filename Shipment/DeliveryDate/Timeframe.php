@@ -9,14 +9,14 @@ use Magento\Framework\Stdlib\DateTime\Timezone;
 class Timeframe
 {
     public function __construct(
-        private LocaleResolver $localeResolver,
-        private Timezone $timezone,
-        private string $code,
-        private string $id,
-        private string $label,
-        private int $fromTimestamp,
-        private int $toTimestamp,
-        private float $price = 0
+        private readonly LocaleResolver $localeResolver,
+        private readonly Timezone $timezone,
+        private readonly string $code,
+        private readonly string $id,
+        private readonly string $label,
+        private readonly int $fromTimestamp,
+        private readonly int $toTimestamp,
+        private readonly float $price = 0
     ) {
     }
 

@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\ValueObject\Adminhtml;
 class GitInfo
 {
     public function __construct(
-        private string $path = ''
+        private readonly string $path = ''
     ) {
     }
 

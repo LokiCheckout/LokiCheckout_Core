@@ -30,7 +30,7 @@ class StepValidator implements ValidatorInterface
         }
 
         $errors = [];
-        if (empty($this->validationRules)) {
+        if ($this->validationRules === []) {
             $errors[] = 'No validators found';
         }
 
@@ -40,7 +40,7 @@ class StepValidator implements ValidatorInterface
             }
 
             $validationResults = $validationRule->validate($quote);
-            if (empty($validationResults)) {
+            if ($validationResults === []) {
                 continue;
             }
 
@@ -49,7 +49,7 @@ class StepValidator implements ValidatorInterface
             }
         }
 
-        if (empty($errors)) {
+        if ($errors === []) {
             return true;
         }
 

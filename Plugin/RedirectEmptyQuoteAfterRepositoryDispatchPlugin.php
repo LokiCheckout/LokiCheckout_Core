@@ -12,9 +12,9 @@ use Yireo\LokiComponents\Util\Controller\RepositoryDispatcher;
 class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
 {
     public function __construct(
-        private UrlFactory $urlFactory,
-        private ManagerInterface $messageManager,
-        private array $allowedExceptionClasses = []
+        private readonly UrlFactory $urlFactory,
+        private readonly ManagerInterface $messageManager,
+        private readonly array $allowedExceptionClasses = []
     ) {
     }
 

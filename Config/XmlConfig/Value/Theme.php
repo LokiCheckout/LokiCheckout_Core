@@ -9,9 +9,9 @@ use Yireo\LokiCheckout\Exception\StepNotFoundException;
 class Theme
 {
     public function __construct(
-        private string $name,
-        private string $label,
-        private array $steps = []
+        private readonly string $name,
+        private readonly string $label,
+        private readonly array $steps = []
     ) {
     }
 

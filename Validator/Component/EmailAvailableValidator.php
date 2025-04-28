@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Validator\ValidatorInterface;
 class EmailAvailableValidator implements ValidatorInterface
 {
     public function __construct(
-        private AccountManagementInterface $accountManagement,
+        private readonly AccountManagementInterface $accountManagement,
     ) {
     }
 
@@ -17,7 +17,7 @@ class EmailAvailableValidator implements ValidatorInterface
     {
         $email = trim((string)$value);
 
-        if (empty($email)) {
+        if ($email === '' || $email === '0') {
             return true;
         }
 

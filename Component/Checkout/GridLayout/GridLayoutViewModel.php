@@ -10,8 +10,8 @@ use Yireo\LokiComponents\Component\ComponentViewModel;
 class GridLayoutViewModel extends ComponentViewModel
 {
     public function __construct(
-        private Config $config,
-        private XmlConfig $xmlConfig
+        private readonly Config $config,
+        private readonly XmlConfig $xmlConfig
     ) {
     }
 

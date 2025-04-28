@@ -21,15 +21,15 @@ use Yireo\LokiComponents\Exception\RedirectException;
 class FinalStep
 {
     public function __construct(
-        private QuoteValidator $quoteValidator,
-        private CheckoutState $checkoutState,
-        private CustomerSession $customerSession,
-        private Redirect $redirect,
-        private EventManager $eventManager,
-        private CartManagementInterface $cartManagement,
-        private OrderRepositoryInterface $orderRepository,
-        private OrderSender $orderSender,
-        private CartRepositoryInterface $cartRepository
+        private readonly QuoteValidator $quoteValidator,
+        private readonly CheckoutState $checkoutState,
+        private readonly CustomerSession $customerSession,
+        private readonly Redirect $redirect,
+        private readonly EventManager $eventManager,
+        private readonly CartManagementInterface $cartManagement,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly OrderSender $orderSender,
+        private readonly CartRepositoryInterface $cartRepository
     ) {
     }
 
@@ -57,7 +57,7 @@ class FinalStep
         $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
         $this->updateCheckoutSessionFromCart($quote);
 
-        if ($orderId) {
+        if ($orderId !== 0) {
             $order = $this->orderRepository->get($orderId);
             $this->dispatchCheckoutTypeOnepageSaveOrderAfter($order);
             $this->updateCheckoutSessionFromOrder($order);

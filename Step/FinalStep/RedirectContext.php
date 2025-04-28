@@ -13,9 +13,9 @@ use Magento\Sales\Api\OrderRepositoryInterface;
 class RedirectContext
 {
     public function __construct(
-        private OrderRepositoryInterface $orderRepository,
-        private PaymentHelper $paymentHelper,
-        private CheckoutSession $checkoutSession,
+        private readonly OrderRepositoryInterface $orderRepository,
+        private readonly PaymentHelper $paymentHelper,
+        private readonly CheckoutSession $checkoutSession,
     ) {
     }
 

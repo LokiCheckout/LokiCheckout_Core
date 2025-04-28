@@ -26,7 +26,7 @@ class ShippingMethodsViewModel extends CheckoutViewModel
 
     public function isRequired(): bool
     {
-        return $this->isVirtualQuote() ? false : true;
+        return !$this->isVirtualQuote();
     }
 
     public function isAllowRendering(): bool

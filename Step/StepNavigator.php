@@ -53,7 +53,7 @@ class StepNavigator implements ArgumentInterface
     private function getRequestedStep(): string
     {
         $step = (string)$this->checkoutSession->getCurrentStep();
-        if (!empty($step)) {
+        if ($step !== '' && $step !== '0') {
             return $step;
         }
 
@@ -172,7 +172,7 @@ class StepNavigator implements ArgumentInterface
      */
     public function getSteps(): array
     {
-        if (!empty($this->steps)) {
+        if ($this->steps !== []) {
             return $this->steps;
         }
 
@@ -200,7 +200,7 @@ class StepNavigator implements ArgumentInterface
             $this->steps[$stepViewModel->getCode()] = $stepViewModel;
         }
 
-        if (empty($this->steps)) {
+        if ($this->steps === []) {
             throw new StepNotFoundException('No steps defined');
         }
 

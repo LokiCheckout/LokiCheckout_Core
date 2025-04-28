@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Validator\ValidatorInterface;
 class GenderValidator implements ValidatorInterface
 {
     public function __construct(
-        private GenderOptionModel $genderOptionModel,
+        private readonly GenderOptionModel $genderOptionModel,
     ) {
     }
 
@@ -17,12 +17,12 @@ class GenderValidator implements ValidatorInterface
     {
         $gender = trim((string)$value);
 
-        if (empty($gender)) {
+        if ($gender === '' || $gender === '0') {
             return true;
         }
 
         $genderOptions = $this->genderOptionModel->getOptions($component->getViewModel());
-        if (empty($genderOptions)) {
+        if ($genderOptions === []) {
             return true;
         }
 

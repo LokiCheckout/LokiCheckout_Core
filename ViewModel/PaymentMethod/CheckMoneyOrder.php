@@ -11,7 +11,7 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 class CheckMoneyOrder implements ArgumentInterface
 {
     public function __construct(
-        private ScopeConfigInterface $scopeConfig,
+        private readonly ScopeConfigInterface $scopeConfig,
     ) {
     }
 

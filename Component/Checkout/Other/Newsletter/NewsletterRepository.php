@@ -13,7 +13,7 @@ class NewsletterRepository extends FieldRepository
     public function getValue(): mixed
     {
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if (empty($email)) {
+        if ($email === '' || $email === '0') {
             return false;
         }
 
@@ -27,7 +27,7 @@ class NewsletterRepository extends FieldRepository
     public function saveValue(mixed $value): void
     {
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if (true === (bool)$value) {
+        if ((bool)$value) {
             $this->subscribeEmail($email);
             $this->getGlobalMessageRegistry()->addNotice('You have been subscribed to the newsletter');
 
@@ -90,7 +90,7 @@ class NewsletterRepository extends FieldRepository
 
     private function isGuestSubscribed(string $email): bool
     {
-        if (empty($email)) {
+        if ($email === '' || $email === '0') {
             return false;
         }
 

@@ -15,7 +15,7 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
-        if (!empty($fieldLabel)) {
+        if ($fieldLabel !== '' && $fieldLabel !== '0') {
             return $fieldLabel;
         }
 
@@ -36,7 +36,7 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
         }
 
         $fieldLabel = (string)$block->getFieldLabel();
-        if (empty($fieldLabel)) {
+        if ($fieldLabel === '' || $fieldLabel === '0') {
             return '';
         }
 

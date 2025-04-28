@@ -8,7 +8,7 @@ use Magento\Vault\Api\Data\PaymentTokenInterface;
 class NormalizedPaymentTokenFactory
 {
     public function __construct(
-        private ObjectManagerInterface $objectManager,
+        private readonly ObjectManagerInterface $objectManager,
     ) {
     }
 

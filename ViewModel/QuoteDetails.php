@@ -9,8 +9,8 @@ use Magento\Framework\Stdlib\DateTime\DateTimeFactory;
 class QuoteDetails implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
-        private DateTimeFactory $dateTimeFactory
+        private readonly CheckoutState $checkoutState,
+        private readonly DateTimeFactory $dateTimeFactory
     ) {
     }
 
@@ -27,7 +27,7 @@ class QuoteDetails implements ArgumentInterface
     public function getDob(): string
     {
         $dob =(string)$this->checkoutState->getQuote()->getCustomerDob();
-        if (empty($dob)) {
+        if ($dob === '' || $dob === '0') {
             return '';
         }
 

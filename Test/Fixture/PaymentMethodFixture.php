@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\DataFixtureInterface;
 class PaymentMethodFixture implements DataFixtureInterface
 {
     public function __construct(
-        private CartRepositoryInterface $cartRepository,
+        private readonly CartRepositoryInterface $cartRepository,
     ) {
     }
 

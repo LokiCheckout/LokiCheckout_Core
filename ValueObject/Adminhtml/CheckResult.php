@@ -5,10 +5,10 @@ namespace Yireo\LokiCheckout\ValueObject\Adminhtml;
 class CheckResult
 {
     public function __construct(
-        private string $label,
-        private mixed $value,
-        private bool $valid,
-        private string $recommendation
+        private readonly string $label,
+        private readonly mixed $value,
+        private readonly bool $valid,
+        private readonly string $recommendation
     ) {
     }
 

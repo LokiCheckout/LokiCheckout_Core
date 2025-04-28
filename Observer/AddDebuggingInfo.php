@@ -18,7 +18,7 @@ class AddDebuggingInfo implements ObserverInterface
     public function __construct(
         private readonly ComponentRegistry $componentRegistry,
         private readonly Config $config,
-        private array $blockPrefixes = [],
+        private readonly array $blockPrefixes = [],
     ) {
     }
 
@@ -47,7 +47,7 @@ class AddDebuggingInfo implements ObserverInterface
 
         $transport = $observer->getEvent()->getTransport();
         $html = trim((string)$transport->getHtml());
-        if (empty($html)) {
+        if ($html === '' || $html === '0') {
             return;
         }
 
@@ -56,7 +56,7 @@ class AddDebuggingInfo implements ObserverInterface
             return;
         }
 
-        if (true === $this->config->addDebugBlock()) {
+        if ($this->config->addDebugBlock()) {
             $html .= $debugBlock->setData([
                 'ancestor_block' => $block,
                 'component' => $block->getComponent(),
@@ -64,7 +64,7 @@ class AddDebuggingInfo implements ObserverInterface
         }
 
         $html = trim($html);
-        if (true === $this->config->addHtmlHints()) {
+        if ($this->config->addHtmlHints()) {
             $debugHtml = '<!-- LOKI_DEBUG ';
             $debugLines = $this->getDebugLines($block);
             foreach ($debugLines as $debugLineName => $debugLineValue) {
@@ -72,7 +72,7 @@ class AddDebuggingInfo implements ObserverInterface
             }
             $debugHtml .= ' -->';
 
-            $html = $html.$debugHtml;
+            $html .= $debugHtml;
         }
 
         $transport->setHtml($html);
@@ -92,12 +92,12 @@ class AddDebuggingInfo implements ObserverInterface
         }
 
         $validators = $component->getValidators();
-        if (!empty($validators)) {
+        if ($validators !== []) {
             $debugLines['validators'] = implode('|', $validators);
         }
 
         $filters = $component->getFilters();
-        if (!empty($filters)) {
+        if ($filters !== []) {
             $debugLines['filters'] = implode('|', $filters);
         }
 

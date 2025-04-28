@@ -8,9 +8,9 @@ use Yireo\LokiCheckout\Payment\Redirect\RedirectResolverListing;
 class Redirect
 {
     public function __construct(
-        private RedirectResolverListing $redirectResolverListing,
-        private UrlFactory $urlFactory,
-        private RedirectContext $redirectContext,
+        private readonly RedirectResolverListing $redirectResolverListing,
+        private readonly UrlFactory $urlFactory,
+        private readonly RedirectContext $redirectContext,
     ) {
     }
 

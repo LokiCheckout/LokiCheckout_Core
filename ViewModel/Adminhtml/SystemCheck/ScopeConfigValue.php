@@ -8,7 +8,7 @@ use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
 abstract class ScopeConfigValue extends SystemCheck
 {
     public function __construct(
-        private ScopeConfigInterface $scopeConfig,
+        private readonly ScopeConfigInterface $scopeConfig,
         CheckResultCollectionFactory $checkResultCollectionFactory,
     ) {
         parent::__construct($checkResultCollectionFactory);

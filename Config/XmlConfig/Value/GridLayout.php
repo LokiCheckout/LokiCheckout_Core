@@ -8,13 +8,13 @@ use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 class GridLayout
 {
     public function __construct(
-        private string $name,
-        private string $label,
-        private string $countryId = '',
-        private int $defaultSortOrder = 99,
-        private int $defaultColSpan = 6,
-        private int $defaultMdColSpan = 6,
-        private array $blocks = []
+        private readonly string $name,
+        private readonly string $label,
+        private readonly string $countryId = '',
+        private readonly int $defaultSortOrder = 99,
+        private readonly int $defaultColSpan = 6,
+        private readonly int $defaultMdColSpan = 6,
+        private readonly array $blocks = []
     ) {
     }
 

@@ -7,8 +7,8 @@ use Magento\Framework\Module\Manager as ModuleManager;
 class LokiCheckoutModules
 {
     public function __construct(
-        private ModuleManager $moduleManager,
-        private array $modules = []
+        private readonly ModuleManager $moduleManager,
+        private readonly array $modules = []
     ) {
     }
 

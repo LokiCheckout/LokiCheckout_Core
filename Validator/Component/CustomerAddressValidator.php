@@ -12,8 +12,8 @@ use Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent;
 class CustomerAddressValidator implements ValidatorInterface
 {
     public function __construct(
-        private CustomerAddressFactory $customerAddressFactory,
-        private ValidatorFactory $validatorFactory
+        private readonly CustomerAddressFactory $customerAddressFactory,
+        private readonly ValidatorFactory $validatorFactory
     ) {
     }
 

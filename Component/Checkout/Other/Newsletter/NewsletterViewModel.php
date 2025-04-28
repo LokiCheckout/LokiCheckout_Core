@@ -19,10 +19,6 @@ class NewsletterViewModel extends CheckoutViewModel
     public function isDisabled(): bool
     {
         $email = $this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if (empty($email)) {
-            return true;
-        }
-
-        return false;
+        return empty($email);
     }
 }
