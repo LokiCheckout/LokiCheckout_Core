@@ -2,18 +2,15 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Postcode;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Directory\Helper\Data as DirectoryData;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
-use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 use Yireo\LokiCheckout\Util\Component\StepProvider;
 use Yireo\LokiCheckout\Util\CustomerProvider;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;

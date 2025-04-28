@@ -2,7 +2,6 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Address;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
@@ -12,7 +11,6 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\AddressRenderer;
@@ -25,7 +23,6 @@ use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
 use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
 use Yireo\LokiComponents\Component\ComponentContextInterface;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
-use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 
 class AddressContext implements ComponentContextInterface
 {

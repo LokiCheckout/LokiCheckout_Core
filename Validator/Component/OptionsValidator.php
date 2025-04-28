@@ -3,7 +3,6 @@
 namespace Yireo\LokiCheckout\Validator\Component;
 
 use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 use Yireo\LokiComponents\Validator\ValidatorInterface;
 use Yireo\LokiFieldComponents\Component\Base\Field\FieldViewModel;
 use Yireo\LokiFieldComponents\Util\OptionModelInterface;

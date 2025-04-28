@@ -7,7 +7,6 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiComponents\Util\Block\CssClass;
 
 class CssClassTest extends TestCase

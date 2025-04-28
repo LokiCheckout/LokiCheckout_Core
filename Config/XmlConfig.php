@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace Yireo\LokiCheckout\Config;
 
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Config\Data as DataConfig;
 use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;

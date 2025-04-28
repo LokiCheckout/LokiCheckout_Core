@@ -3,9 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Base\Generic;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
@@ -20,7 +18,6 @@ use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\UrlFactory;
-use Yireo\LokiFieldComponents\Util\Component\FieldTemplateLocator;
 
 class CheckoutContext implements ComponentContextInterface
 {

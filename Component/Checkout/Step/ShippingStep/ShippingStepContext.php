@@ -2,12 +2,10 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
-use Magento\Quote\Api\CartRepositoryInterface;
 use Yireo\LokiCheckout\Config\Config as ModuleConfig;
 use Yireo\LokiCheckout\Step\StepNavigator;
 use Yireo\LokiCheckout\Util\Component\AttributeProvider;
