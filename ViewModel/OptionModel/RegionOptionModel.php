@@ -7,6 +7,7 @@ use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionColl
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+use Yireo\LokiFieldComponents\Util\OptionModelInterface;
 
 class RegionOptionModel implements ArgumentInterface, OptionModelInterface
 {

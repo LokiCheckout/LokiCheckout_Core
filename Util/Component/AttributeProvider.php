@@ -16,7 +16,7 @@ class AttributeProvider
 
     public function getAttribute(string $fieldName): AbstractAttribute
     {
-        if (empty($fieldName)) {
+        if ($fieldName === '' || $fieldName === '0') {
             throw new \RuntimeException('No field name defined for class "' . get_class($this) . '"');
         }
 

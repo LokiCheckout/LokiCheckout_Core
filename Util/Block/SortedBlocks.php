@@ -11,8 +11,8 @@ use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 class SortedBlocks implements ArgumentInterface
 {
     public function __construct(
-        private Config $config,
-        private XmlConfig $xmlConfig,
+        private readonly Config $config,
+        private readonly XmlConfig $xmlConfig,
     ) {
     }
 

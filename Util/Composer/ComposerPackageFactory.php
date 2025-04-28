@@ -8,8 +8,8 @@ use RuntimeException;
 class ComposerPackageFactory
 {
     public function __construct(
-        private ComponentRegistrar $componentRegistrar,
-        private ComposerLock $composerLock,
+        private readonly ComponentRegistrar $componentRegistrar,
+        private readonly ComposerLock $composerLock,
     ) {
     }
 

@@ -42,13 +42,13 @@ class StreetLinesFactory
         $newStreetParts = [];
         foreach ($streetParts as $streetIndex => $streetPart) {
             // Street starts with a house number but without a streetname
-            if ($streetIndex === 0 && preg_match('/^([0-9]+)/', $streetPart)) {
+            if ($streetIndex === 0 && preg_match('/^(\d+)/', $streetPart)) {
                 $newStreetParts[] = '';
             }
 
-            if (preg_match('/^([0-9]+)(.*)$/', $streetPart, $match)) {
+            if (preg_match('/^(\d+)(.*)$/', $streetPart, $match)) {
                 $newStreetParts[] = $match[1];
-                if (!empty($match[2])) {
+                if (isset($match[2]) && ($match[2] !== '' && $match[2] !== '0')) {
                     $newStreetParts[] = $match[2];
                 }
                 continue;

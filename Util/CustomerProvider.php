@@ -14,12 +14,12 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
 class CustomerProvider
 {
     public function __construct(
-        private CustomerSession $customerSession,
-        private CustomerRepositoryInterface $customerRepository,
-        private CustomerAddressRepository $customerAddressRepository,
-        private SearchCriteriaBuilder $searchCriteriaBuilder,
-        private AddressConfig $addressConfig,
-        private AddressMapper $addressMapper,
+        private readonly CustomerSession $customerSession,
+        private readonly CustomerRepositoryInterface $customerRepository,
+        private readonly CustomerAddressRepository $customerAddressRepository,
+        private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
+        private readonly AddressConfig $addressConfig,
+        private readonly AddressMapper $addressMapper,
     ) {
     }
 

@@ -7,7 +7,7 @@ use Magento\Framework\Filesystem\DirectoryList;
 class ComposerLock
 {
     public function __construct(
-        private DirectoryList $directoryList
+        private readonly DirectoryList $directoryList
     ) {
     }
 

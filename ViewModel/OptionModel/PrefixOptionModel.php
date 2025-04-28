@@ -6,6 +6,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
 use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+use Yireo\LokiFieldComponents\Util\OptionModelInterface;
 
 class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
 {

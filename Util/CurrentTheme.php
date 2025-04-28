@@ -7,7 +7,7 @@ use Magento\Framework\View\DesignInterface;
 class CurrentTheme
 {
     public function __construct(
-        private DesignInterface $design,
+        private readonly DesignInterface $design,
     ) {
     }
 

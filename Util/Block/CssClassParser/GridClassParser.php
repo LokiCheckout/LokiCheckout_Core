@@ -11,8 +11,8 @@ use Yireo\LokiComponents\Util\Block\CssClassParser\CssClassParserInterface;
 class GridClassParser implements CssClassParserInterface
 {
     public function __construct(
-        private Config $config,
-        private XmlConfig $xmlConfig,
+        private readonly Config $config,
+        private readonly XmlConfig $xmlConfig,
     ) {
     }
 
@@ -23,7 +23,7 @@ class GridClassParser implements CssClassParserInterface
         }
 
         $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig($block);
-        if (empty($gridClassesFromXmlConfig)) {
+        if ($gridClassesFromXmlConfig === '' || $gridClassesFromXmlConfig === '0') {
             $gridClassesFromXmlConfig = $this->getDefaultGridClasses($block);
         }
 

@@ -11,10 +11,10 @@ use Yireo\LokiComponents\Util\Ajax;
 class CartTotals implements ArgumentInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
-        private TotalsInformationManagementInterface $totalsInformationManagement,
-        private TotalsInformationInterfaceFactory $totalsInformationFactory,
-        private Ajax $ajax
+        private readonly CheckoutState $checkoutState,
+        private readonly TotalsInformationManagementInterface $totalsInformationManagement,
+        private readonly TotalsInformationInterfaceFactory $totalsInformationFactory,
+        private readonly Ajax $ajax
     ) {
     }
 

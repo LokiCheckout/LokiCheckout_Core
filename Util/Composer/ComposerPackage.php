@@ -5,10 +5,10 @@ namespace Yireo\LokiCheckout\Util\Composer;
 class ComposerPackage
 {
     public function __construct(
-        private string $moduleName,
-        private string $composerName,
-        private string $composerVersion,
-        private string $composerDate,
+        private readonly string $moduleName,
+        private readonly string $composerName,
+        private readonly string $composerVersion,
+        private readonly string $composerDate,
     ) {
     }
 

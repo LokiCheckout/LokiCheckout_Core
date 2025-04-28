@@ -18,7 +18,7 @@ class StepProvider
     public function getStep(AbstractBlock $block): string
     {
         $singleStep = $this->getSingleStep();
-        if (!empty($singleStep)) {
+        if ($singleStep !== null && $singleStep !== '' && $singleStep !== '0') {
             return $singleStep;
         }
 

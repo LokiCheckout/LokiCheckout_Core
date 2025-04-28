@@ -38,7 +38,7 @@ class AddressRenderer
                 $fieldValue = trim($fieldValue);
             }
 
-            if (is_array($fieldValue) && count($fieldValue) === 1 && empty(trim((string)$fieldValue[0]))) {
+            if (is_array($fieldValue) && count($fieldValue) === 1 && in_array(trim((string)$fieldValue[0]), ['', '0'], true)) {
                 continue;
             }
 

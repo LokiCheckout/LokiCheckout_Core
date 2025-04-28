@@ -66,7 +66,7 @@ class ComposerApi
             $versions[] = $package['version'];
         }
 
-        if (empty($versions)) {
+        if ($versions === []) {
             return $devCommit;
         }
 
