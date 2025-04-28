@@ -39,13 +39,15 @@ magento-integration-tests:
   stage: advanced
   script:
     - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
-    - test -d $CI_PROJECT_DIR/Test/Integration/ || exit 0
+    - test -d Test/Integration/ || exit 0
+    - echo $CI_COMMIT_SHA
+    - git log -n 1
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config minimum-stability dev
-    - composer config prefer-stable true
+    - composer config prefer-stable false
     - composer require --prefer-source -- $COMPOSER_NAME
     - ls -al /tmp/magento/vendor/yireo/
     - rm -rf vendor/$COMPOSER_NAME
