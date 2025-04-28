@@ -18,7 +18,7 @@ class CurrentTheme
 
     public function isLuma(): bool
     {
-        return $this->isTheme('Luma/blank');
+        return $this->isTheme('Magento/blank');
     }
 
     public function isBreeze(): bool
