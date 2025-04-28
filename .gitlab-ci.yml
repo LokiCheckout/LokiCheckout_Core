@@ -40,8 +40,6 @@ magento-integration-tests:
   script:
     - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
     - test -d Test/Integration/ || exit 0
-    - echo $CI_COMMIT_SHA
-    - git log -n 1
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.local-source path $CI_PROJECT_DIR
@@ -49,18 +47,19 @@ magento-integration-tests:
     - composer config minimum-stability dev
     - composer config prefer-stable false
     - composer require --prefer-source -- $COMPOSER_NAME
-    - ls -al /tmp/magento/vendor/yireo/
     - rm -rf vendor/$COMPOSER_NAME
     - mkdir -p vendor/yireo/
     - ln -s $CI_PROJECT_DIR vendor/$COMPOSER_NAME
     - ls -al /tmp/magento/vendor/yireo/
-    - ls -al /tmp/magento/vendor/$COMPOSER_NAME
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
+    - cd vendor/$COMPOSER_NAME
+    - git log -n 
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/install-config-mysql.php etc/install-config-mysql.php
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit.xml phpunit.xml
-    - php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Integration
+    - php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml ../../../vendor/$COMPOSER_NAME/Test/Integration
+    #- php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Integration
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 services:
