@@ -21,7 +21,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     use CartFixture;
 
-    protected null|string $stepCode = '';
+    protected ?string $stepCode = null;
 
     protected function setUp(): void
     {
