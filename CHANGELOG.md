@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 28 April 2025
+### Fixed
+- Apply Rector fixes
+- Loosen support for magento/module-catalog
+- Remove unused imports
+- Remove deprecated classes
+- Update composer and module deps
+
 ## [1.0.0] - 25 April 2025
 ### Fixed
 - Allow upgrading to LokiFieldComponents and LokiComponents 1.0
