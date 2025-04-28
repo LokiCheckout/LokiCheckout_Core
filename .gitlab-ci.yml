@@ -52,6 +52,7 @@ magento-integration-tests:
     - mkdir -p vendor/yireo/
     - ln -s $CI_PROJECT_DIR vendor/$COMPOSER_NAME
     - ls -al /tmp/magento/vendor/yireo/
+    - ls -al /tmp/magento/vendor/$COMPOSER_NAME
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
     - cd /tmp/magento/dev/tests/integration/
