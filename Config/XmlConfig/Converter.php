@@ -62,14 +62,26 @@ class Converter implements ConverterInterface
             $defaultMdColSpan = (int)$gridLayoutElement->getAttribute('defaultMdColSpan');
 
             foreach ($gridLayoutElement->getElementsByTagName('block') as $blockElement) {
-                $sortOrder = (int)$blockElement->getAttribute('sortOrder');
-                $colSpan = (int)$blockElement->getAttribute('colSpan');
+                $sortOrder = $defaultSortOrder;
+                if ($blockElement->hasAttribute('sortOrder')) {
+                    $sortOrder = (int)$blockElement->getAttribute('sortOrder');
+                }
+
+                $colSpan = $defaultColSpan;
+                if ($blockElement->hasAttribute('colSpan')) {
+                    $colSpan = (int)$blockElement->getAttribute('colSpan');
+                }
+
+                $mdColSpan = $defaultMdColSpan;
+                if ($blockElement->hasAttribute('mdColSpan')) {
+                    $mdColSpan = (int)$blockElement->getAttribute('mdColSpan');
+                }
 
                 $blocks[] = [
                     'alias' => (string)$blockElement->getAttribute('alias'),
-                    'sortOrder' => $sortOrder === 0 ? 99 : $sortOrder,
-                    'colSpan' => $colSpan === 0 ? $defaultColSpan : $colSpan,
-                    'mdColSpan' => (int)$blockElement->getAttribute('mdColSpan') ?? $defaultMdColSpan,
+                    'sortOrder' => $sortOrder,
+                    'colSpan' => $colSpan,
+                    'mdColSpan' => $mdColSpan,
                 ];
             }
 
