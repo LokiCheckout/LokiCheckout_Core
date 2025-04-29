@@ -13,7 +13,7 @@ class CurrentTheme
 
     public function isHyva(): bool
     {
-        return $this->isTheme('Hyva/default');
+        return $this->isTheme('Hyva/default') || $this->isTheme('Hyva/default-csp');
     }
 
     public function isLuma(): bool
