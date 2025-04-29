@@ -63,7 +63,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function dispatchToCheckout(?CartInterface $cart = null)
     {
-        if (!$cart instanceof CartInterface) {
+        if (false === $cart instanceof CartInterface) {
             $cart = $this->getCart();
         }
 
