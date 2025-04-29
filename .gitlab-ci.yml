@@ -1,7 +1,5 @@
-image: yireo/magento2installed:2.4.7-p4
-
 stages:
-#  - basic
+  - basic
   - advanced
 
 variables:
@@ -13,59 +11,50 @@ variables:
   ES_SETTING_DISCOVERY_TYPE: "single-node"
   ES_SETTING_XPACK_SECURITY_ENABLED: "false"
 
-#php-8.3-linting:
-#  stage: basic
-#  script:
-#    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit
-#    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
-#
-#magento-unit-tests:
-#  stage: basic
-#  script:
-#    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
-#    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
-#    - cd /tmp/magento
-#    - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
-#    - composer config repositories.local-source path $CI_PROJECT_DIR
-#    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-#    - composer require --prefer-source -- $COMPOSER_NAME:@dev
-#    - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
-#    - cd /tmp/magento/dev/tests/unit/
-#    - cp $CI_PROJECT_DIR/.gitlab-ci/unit-tests/phpunit.xml phpunit.xml
-#    - php ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
-#  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
-
-magento-integration-tests:
-  stage: advanced
+php-8.3-linting:
+  image: yireo/magento2base:8.3
+  stage: basic
   script:
-    - source .module.ini && echo $PHP_VERSIONS | grep 8.3 || exit 0
-    - test -d Test/Integration/ || exit 0
+    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.3 || exit
+    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
+
+magento-unit-tests:
+  image: yireo/magento2installed:2.4.7-p4
+  stage: basic
+  script:
+    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.3 || exit 0
+    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
-    - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-    - composer config minimum-stability dev
-    - composer config prefer-stable false
-    - composer require --prefer-source -- $COMPOSER_NAME
-    #- rm -rf vendor/$COMPOSER_NAME
-    #- mkdir -p vendor/yireo/
-    #- ln -s $CI_PROJECT_DIR vendor/$COMPOSER_NAME
-    #- ls -al /tmp/magento/vendor/yireo/
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
-    - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
+    - cd /tmp/magento/dev/tests/unit/
+    - cp $CI_PROJECT_DIR/.gitlab-ci/unit-tests/phpunit.xml phpunit.xml
+    - php ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
+  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+
+magento-integration-tests:
+  image: yireo/magento2installed:2.4.7-p4
+  stage: advanced
+  script:
+    - test -d Test/Integration/ || exit 0
+    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.3 || exit 0
+    - cd /tmp/magento
+    - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/install-config-mysql.php etc/install-config-mysql.php
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit.xml phpunit.xml
-    - php -d memory_limit=4G -d display_errors=1 ../../../vendor/bin/phpunit -c phpunit.xml ../../../vendor/$COMPOSER_NAME/Test/Integration/Validator
-    #- php -d memory_limit=4G ../../../vendor/bin/phpunit -c phpunit.xml --coverage-text --colors=never ../../../vendor/$COMPOSER_NAME/Test/Integration
+    - php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/Validator
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
-
-services:
-  - mysql:8.0
-  - redis:latest
-  - name: yireo/opensearch
-    alias: opensearch
-    command: ["./bin/opensearch", "-E", "discovery.type=single-node"]
+  services:
+    - mysql:8.0
+    - redis:latest
 
 cache:
   key: "$CI_JOB_NAME"
