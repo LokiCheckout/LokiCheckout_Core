@@ -4,7 +4,7 @@ namespace Yireo\LokiCheckout\Test\Integration;
 
 class LokiCheckoutPageTestCase extends LokiCheckoutTestCase
 {
-    protected true|null $skipDispatchToCheckout = null;
+    protected bool $skipDispatchToCheckout = false;
 
     protected function setUp(): void
     {
