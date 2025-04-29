@@ -17,7 +17,7 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
     <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <?= $block->getChildHtml('progressbar') ?>
 
-    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 gap-8', 'grid') ?>">
+    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid') ?>">
         <div class="<?= $css('col-span-2', 'column-steps') ?> relative">
             <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
             <?= $block->getChildHtml('steps'); ?>
