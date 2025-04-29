@@ -19,6 +19,4 @@ return (new InstallConfig())
     ->setDisableModules($disableModules)
     ->addDb('mysql', 'magento2', 'magento2', 'magento2')
     ->addRedis('redis')
-    #->addElasticSearch('lmysql', 'opensearch', 9200)
-    #->addElasticSearch('opensearch', 'opensearch', 9200)
     ->get();
