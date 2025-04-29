@@ -9,10 +9,12 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
-#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
-#[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
-#[AppArea('frontend')]
+#[
+    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(GuestCartFixture::class, as: 'cart'),
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
+    AppArea('frontend')
+]
 class PreventDuplicateDomIdTest extends LokiCheckoutPageTestCase
 {
     const TEST_DOM_ID = 'loki-checkout-steps-shipping';
