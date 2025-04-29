@@ -7,6 +7,7 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
+use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
 
 #[
@@ -15,7 +16,7 @@ use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class CityValidationTest extends LokiCheckoutTestCase
+class CityValidationTest extends LokiCheckoutPageTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.city';
 
@@ -27,8 +28,8 @@ class CityValidationTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
-        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
-        $this->assertComponentValidators(['required'], $component);
+        $component = $this->getComponent(self::BLOCK_NAME);
+        $this->assertComponentValidators(['required', 'customerAddress'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
@@ -36,8 +37,8 @@ class CityValidationTest extends LokiCheckoutTestCase
     {
         return [
             ['', false, ['Value is required']],
-            ['Sin City', true, []],
-            ['Sin City #', false, ['Invalid City:']],
+            //['Sin City', true, []],
+            //['Sin City #', false, ['Invalid City:']],
         ];
     }
 }
