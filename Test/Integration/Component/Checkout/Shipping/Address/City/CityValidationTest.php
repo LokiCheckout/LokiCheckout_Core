@@ -37,8 +37,9 @@ class CityValidationTest extends LokiCheckoutPageTestCase
     {
         return [
             ['', false, ['Value is required']],
-            //['Sin City', true, []],
-            //['Sin City #', false, ['Invalid City:']],
+            ['Sin City', true, []],
+            ['Sin City #', false, ['Invalid City:']],
+            ['Sin City 2', false, ['Invalid City:']],
         ];
     }
 }

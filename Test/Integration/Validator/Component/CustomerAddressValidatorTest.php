@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Validator;
+namespace Yireo\LokiCheckout\Test\Integration\Validator\Component;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\TestFramework\Fixture\AppArea;
@@ -33,7 +33,7 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
         }
 
         if ($expectedResult === false) {
-            $this->assertFalse($result, 'Expected value "' . $city . '" to be invalid."');
+            $this->assertIsArray($result, 'Expected value "' . $city . '" to be invalid."');
             $message = array_pop($result);
             $this->assertStringContainsString($errorMessage, $message, var_export($result, true));
         }
@@ -43,7 +43,7 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
     {
         return [
             ['Sin City', true, ''],
-            ['Sin City 2', true, ''],
+            ['Sin City 2', false, 'Invalid City:'],
         ];
     }
 }
