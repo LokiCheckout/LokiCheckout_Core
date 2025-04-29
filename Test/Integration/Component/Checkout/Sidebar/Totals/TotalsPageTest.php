@@ -23,7 +23,6 @@ final class TotalsPageTest extends LokiCheckoutPageTestCase
 
     public const BLOCK_NAME = 'loki-checkout.sidebar.totals';
 
-    #[ConfigFixture('foo', 'bar', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

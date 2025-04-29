@@ -23,7 +23,6 @@ final class TelephonePageTest extends LokiCheckoutPageTestCase
 
     public const BLOCK_NAME = 'loki-checkout.shipping.address.telephone';
 
-    #[ConfigFixture('foo', 'bar', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

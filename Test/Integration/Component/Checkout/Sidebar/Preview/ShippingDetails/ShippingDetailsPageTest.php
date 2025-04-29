@@ -23,7 +23,6 @@ final class ShippingDetailsPageTest extends LokiCheckoutPageTestCase
 
     public const BLOCK_NAME = 'loki-checkout.sidebar.preview.shipping_details';
 
-    #[ConfigFixture('foo', 'bar', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
