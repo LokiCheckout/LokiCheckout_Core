@@ -21,7 +21,7 @@ final class CountryIdPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.country_id';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.country_id';
 
     final public function testComponentOnPage(): void
     {

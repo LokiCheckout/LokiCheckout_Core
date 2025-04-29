@@ -20,7 +20,7 @@ final class NewsletterPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.newsletter';
+    const BLOCK_NAME = 'loki-checkout.newsletter';
 
     final public function testComponentOnPage(): void
     {

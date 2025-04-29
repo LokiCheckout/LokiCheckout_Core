@@ -20,7 +20,7 @@ final class ShippingPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.steps.shipping';
+    const BLOCK_NAME = 'loki-checkout.steps.shipping';
 
     final public function testComponentOnPage(): void
     {

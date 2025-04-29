@@ -20,7 +20,7 @@ final class ItemsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar.items';
+    const BLOCK_NAME = 'loki-checkout.sidebar.items';
 
     final public function testComponentOnPage(): void
     {

@@ -22,7 +22,7 @@ final class OnePageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.steps.one';
+    const BLOCK_NAME = 'loki-checkout.steps.one';
 
     final public function testComponentOnPage(): void
     {

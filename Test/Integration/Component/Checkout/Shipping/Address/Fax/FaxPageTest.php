@@ -21,7 +21,7 @@ final class FaxPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.fax';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.fax';
 
     #[ConfigFixture('customer/address/fax_show', '1', 'store', 'default')]
     final public function testComponentOnPage(): void

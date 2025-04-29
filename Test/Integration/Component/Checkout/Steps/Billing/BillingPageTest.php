@@ -27,7 +27,7 @@ final class BillingPageTest extends LokiCheckoutPageTestCase
 
     protected ?string $stepCode = 'billing';
 
-    public const BLOCK_NAME = 'loki-checkout.steps.billing';
+    const BLOCK_NAME = 'loki-checkout.steps.billing';
 
     final public function testComponentOnPage(): void
     {

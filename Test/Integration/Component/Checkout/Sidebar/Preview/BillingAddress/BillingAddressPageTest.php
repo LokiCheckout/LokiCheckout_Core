@@ -21,7 +21,7 @@ final class BillingAddressPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar.preview.billing_address';
+    const BLOCK_NAME = 'loki-checkout.sidebar.preview.billing_address';
 
     final public function testComponentOnPage(): void
     {

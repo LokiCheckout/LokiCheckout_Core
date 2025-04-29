@@ -21,7 +21,7 @@ final class TelephonePageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.telephone';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.telephone';
 
     final public function testComponentOnPage(): void
     {

@@ -21,7 +21,7 @@ final class SuffixPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.suffix';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.suffix';
 
     #[ConfigFixture('customer/address/suffix_show', '1', 'store', 'default')]
     final public function testComponentOnPage(): void

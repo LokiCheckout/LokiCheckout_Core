@@ -22,7 +22,7 @@ final class MethodsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.payment.methods';
+    const BLOCK_NAME = 'loki-checkout.payment.methods';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
     #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]

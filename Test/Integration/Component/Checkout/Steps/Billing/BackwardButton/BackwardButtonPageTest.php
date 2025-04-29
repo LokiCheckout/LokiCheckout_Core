@@ -20,7 +20,7 @@ final class BackwardButtonPageTest extends LokiCheckoutPageTestCase
 
     protected ?string $stepCode = 'billing';
 
-    public const BLOCK_NAME = 'loki-checkout.steps.billing.backward-button';
+    const BLOCK_NAME = 'loki-checkout.steps.billing.backward-button';
 
     #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]

@@ -21,7 +21,7 @@ final class MethodsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.methods';
+    const BLOCK_NAME = 'loki-checkout.shipping.methods';
 
     final public function testComponentOnPage(): void
     {

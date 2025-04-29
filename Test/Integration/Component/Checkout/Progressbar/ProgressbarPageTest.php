@@ -20,7 +20,7 @@ final class ProgressbarPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.progressbar';
+    const BLOCK_NAME = 'loki-checkout.progressbar';
 
     final public function testComponentOnPage(): void
     {

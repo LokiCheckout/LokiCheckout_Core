@@ -21,7 +21,7 @@ final class Street1PageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.street1';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.street1';
 
     #[ConfigFixture('customer/address/street_lines', '2')]
     final public function testComponentOnPage(): void

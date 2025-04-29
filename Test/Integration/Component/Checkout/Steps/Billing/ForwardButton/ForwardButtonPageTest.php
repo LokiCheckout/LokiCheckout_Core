@@ -21,7 +21,7 @@ final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
 
     protected ?string $stepCode = 'billing';
 
-    public const BLOCK_NAME = 'loki-checkout.steps.billing.forward-button';
+    const BLOCK_NAME = 'loki-checkout.steps.billing.forward-button';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'default')]
     #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]

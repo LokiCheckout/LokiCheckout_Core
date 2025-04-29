@@ -21,7 +21,7 @@ final class ShippingDetailsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar.preview.shipping_details';
+    const BLOCK_NAME = 'loki-checkout.sidebar.preview.shipping_details';
 
     final public function testComponentOnPage(): void
     {

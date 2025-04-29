@@ -21,7 +21,7 @@ final class AgreementsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.agreements';
+    const BLOCK_NAME = 'loki-checkout.agreements';
 
     #[ConfigFixture('checkout/options/enable_agreements', '0', 'store', 'default')]
     final public function testComponentNotOnPage(): void

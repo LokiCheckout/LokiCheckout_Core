@@ -24,7 +24,7 @@ final class SaveInAddressBookPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.save_in_address_book';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.save_in_address_book';
 
     final public function testComponentOnPage(): void
     {

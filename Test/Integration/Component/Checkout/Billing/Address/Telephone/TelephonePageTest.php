@@ -21,7 +21,7 @@ final class TelephonePageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.billing.address.telephone';
+    const BLOCK_NAME = 'loki-checkout.billing.address.telephone';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
     #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]

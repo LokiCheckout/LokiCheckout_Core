@@ -21,7 +21,7 @@ final class VatIdPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.billing.address.vat_id';
+    const BLOCK_NAME = 'loki-checkout.billing.address.vat_id';
 
     #[ConfigFixture('customer/address/taxvat_show', '1', 'store', 'default')]
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]

@@ -17,7 +17,7 @@ final class BackwardButtonPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.steps.shipping.backward-button';
+    const BLOCK_NAME = 'loki-checkout.steps.shipping.backward-button';
 
     #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]

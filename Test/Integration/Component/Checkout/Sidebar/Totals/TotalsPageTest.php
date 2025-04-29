@@ -21,7 +21,7 @@ final class TotalsPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar.totals';
+    const BLOCK_NAME = 'loki-checkout.sidebar.totals';
 
     final public function testComponentOnPage(): void
     {

@@ -21,7 +21,7 @@ final class SidebarPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar';
+    const BLOCK_NAME = 'loki-checkout.sidebar';
 
     final public function testComponentOnPage(): void
     {

@@ -26,7 +26,7 @@ final class ToggleSelectPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.shipping.address.toggle-select';
+    const BLOCK_NAME = 'loki-checkout.shipping.address.toggle-select';
 
     final public function testComponentOnPage(): void
     {

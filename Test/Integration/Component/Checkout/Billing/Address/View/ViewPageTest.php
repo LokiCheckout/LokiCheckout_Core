@@ -27,7 +27,7 @@ final class ViewPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.billing.address.view';
+    const BLOCK_NAME = 'loki-checkout.billing.address.view';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
     #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '1')]

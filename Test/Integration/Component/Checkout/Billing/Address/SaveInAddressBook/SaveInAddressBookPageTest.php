@@ -25,7 +25,7 @@ final class SaveInAddressBookPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.billing.address.save_in_address_book';
+    const BLOCK_NAME = 'loki-checkout.billing.address.save_in_address_book';
 
     #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
     #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]

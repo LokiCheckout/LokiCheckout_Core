@@ -21,7 +21,7 @@ final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.steps.shipping.forward-button';
+    const BLOCK_NAME = 'loki-checkout.steps.shipping.forward-button';
 
     final public function testComponentOnPage(): void
     {

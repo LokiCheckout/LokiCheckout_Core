@@ -20,7 +20,7 @@ final class CouponCodePageTest extends LokiCheckoutPageTestCase
 {
     use GetObjectManager;
 
-    public const BLOCK_NAME = 'loki-checkout.sidebar.coupon_code';
+    const BLOCK_NAME = 'loki-checkout.sidebar.coupon_code';
 
     final public function testComponentOnPage(): void
     {
