@@ -51,7 +51,7 @@ magento-integration-tests:
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/install-config-mysql.php etc/install-config-mysql.php
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit10.xml phpunit.xml
     - php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/
-  coverage: '/^\s*Lines:\s*\d+.\d+\%/'
+  #coverage: '/^\s*Lines:\s*\d+.\d+\%/'
   services:
     - mysql:8.1
     - redis:latest
