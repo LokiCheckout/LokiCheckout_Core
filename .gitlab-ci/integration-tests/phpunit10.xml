@@ -6,14 +6,6 @@
          bootstrap="./framework/bootstrap.php"
          stderr="true"
 >
-    <coverage>
-        <include>
-            <directory suffix=".php">../../../vendor/yireo/magento2-loki-checkout/*</directory>
-        </include>
-        <exclude>
-            <directory>../../../vendor/yireo/magento2-loki-checkout/Test/*</directory>
-        </exclude>
-    </coverage>
     <testsuites>
         <testsuite name="Yireo_LokiCheckout">
             <directory>../../../vendor/yireo/magento2-loki-checkout/Test/Unit</directory>
