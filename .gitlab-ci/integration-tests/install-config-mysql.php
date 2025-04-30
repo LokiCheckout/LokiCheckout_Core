@@ -11,6 +11,7 @@ $disableModules = (new DisableModules(__DIR__.'/../../../../'))
     ->disableByPattern('Elasticsearch')
     ->disableByPattern('Opensearch')
     ->disableByPattern('Magento_TestModule')
+    ->disableByPattern('ReCaptcha')
     ->disableMagentoInventory()
     ->disableGraphQl()
     ->enableByMagentoModuleEnv();
