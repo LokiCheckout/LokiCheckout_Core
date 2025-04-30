@@ -19,7 +19,7 @@ php-8.3-linting:
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
 
 magento-unit-tests:
-  image: yireo/magento2installed:2.8
+  image: yireo/magento2installed:2.4.8
   stage: basic
   script:
     - source .module.ini && echo $PHP_VERSIONS | grep -q 8.4 || exit 0
@@ -46,11 +46,10 @@ magento-integration-tests:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
-    - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/install-config-mysql.php etc/install-config-mysql.php
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit10.xml phpunit.xml
-    - php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/
+    - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/
   #coverage: '/^\s*Lines:\s*\d+.\d+\%/'
   services:
     - mysql:8.1
