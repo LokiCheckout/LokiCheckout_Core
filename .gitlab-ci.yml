@@ -36,11 +36,11 @@ magento-unit-tests:
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
 
 magento-integration-tests:
-  image: yireo/magento2installed:2.4.7-p4
+  image: yireo/magento2installed:2.4.8
   stage: advanced
   script:
     - test -d Test/Integration/ || exit 0
-    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.3 || exit 0
+    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.4 || exit 0
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
@@ -49,11 +49,11 @@ magento-integration-tests:
     - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/install-config-mysql.php etc/install-config-mysql.php
-    - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit.xml phpunit.xml
+    - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit10.xml phpunit.xml
     - php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/
   coverage: '/^\s*Lines:\s*\d+.\d+\%/'
   services:
-    - mysql:8.0
+    - mysql:8.1
     - redis:latest
 
 cache:
