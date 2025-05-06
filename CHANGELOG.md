@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Prevent error with only optional regions (@RikWillems)
+
 ## [1.0.1] - 28 April 2025
 ### Fixed
 - Apply Rector fixes
