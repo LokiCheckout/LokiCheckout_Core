@@ -2,8 +2,10 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingMethods', () => ({
             ...LokiCheckoutComponentType,
-            afterInit() {
+            initShippingMethodEvent() {
                 this.dispatchShippingMethodEvent();
+            },
+            initWatchShippingMethod() {
                 this.$watch('value', () => {
                     this.submit();
                 });

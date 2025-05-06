@@ -2,7 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
             ...LokiCheckoutComponentType,
-            afterInit() {
+            initScrollTo() {
                 window.scrollTo(0, 0);
             }
         }));

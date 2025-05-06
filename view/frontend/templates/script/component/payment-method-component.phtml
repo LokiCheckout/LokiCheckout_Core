@@ -2,7 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutPaymentMethod', () => ({
             ...LokiCheckoutComponentType,
-            afterInit() {
+            initDispatchPaymentMethodEvent() {
                 this.dispatchPaymentMethodEvent();
             },
             dispatchPaymentMethodEvent() {

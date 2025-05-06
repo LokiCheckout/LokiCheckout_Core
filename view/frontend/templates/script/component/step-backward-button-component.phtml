@@ -3,15 +3,6 @@
         Alpine.data('LokiCheckoutStepBackwardButton', () => ({
             ...LokiCheckoutComponentType,
             valid: true,
-            afterInit() {
-                document.addEventListener('@todo', () => {
-                    this.valid = false;
-                });
-
-                document.addEventListener('@todo', () => {
-                    this.valid = true;
-                });
-            },
             disabled() {
                 return !this.valid;
             },

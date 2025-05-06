@@ -2,7 +2,7 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutComponentType,
-            afterInit() {
+            initCouponCode() {
                 if (this.$refs.details) {
                     this.$refs.details.addEventListener('toggle', event => {
                         if (this.$refs.details.open && this.$refs.input) {
