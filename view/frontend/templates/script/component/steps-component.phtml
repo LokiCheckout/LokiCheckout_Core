@@ -3,13 +3,10 @@
         Alpine.data('LokiCheckoutSteps', () => ({
             ...LokiCheckoutComponentType,
             currentStep: 'none',
-            initActions: {
-                ...LokiCheckoutComponentType.initActions,
-                setCurrentStep() {
-                    if (this.currentStep !== 'none') {
-                        window.location.hash = this.currentStep;
-                        Alpine.store('checkout').currentStep = this.currentStep;
-                    }
+            initCurrentStep() {
+                if (this.currentStep !== 'none') {
+                    window.location.hash = this.currentStep;
+                    Alpine.store('checkout').currentStep = this.currentStep;
                 }
             },
             submit(event) {

@@ -5,43 +5,40 @@
             redirectUrl: '',
             currentStep: '',
             valid: true,
-            initActions: {
-                ...LokiCheckoutComponentType.initActions,
-                redirectIfNeeded() {
-                    if (this.redirectUrl) {
-                        document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
-                            component: this,
-                            redirectUrl: this.redirectUrl
-                        }));
+            initRedirectIfNeeded() {
+                if (this.redirectUrl) {
+                    document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
+                        component: this,
+                        redirectUrl: this.redirectUrl
+                    }));
 
-                        window.location.replace(this.redirectUrl);
-                    }
-                },
-                updateValid() {
-                    document.addEventListener('loki-components.component.update', () => {
-                        this.updateValid();
-                    });
-
-                    this.updateValid();
-                },
-                watchValidForDisabled() {
-                    this.disabled = !this.valid;
-                    this.$watch('valid', () => {
-                        this.disabled = !this.valid;
-                    });
-                },
-                disableAllWhenLoading() {
-                    const container = document.getElementById('loki-checkout');
-                    container.removeAttribute('aria-busy');
-
-                    this.$watch('loading', () => {
-                        if (this.loading) {
-                            container.setAttribute('aria-busy', true);
-                        } else {
-                            container.removeAttribute('aria-busy');
-                        }
-                    });
+                    window.location.replace(this.redirectUrl);
                 }
+            },
+            initUpdateValid() {
+                document.addEventListener('loki-components.component.update', () => {
+                    this.updateValid();
+                });
+
+                this.updateValid();
+            },
+            initWatchValidForDisabled() {
+                this.disabled = !this.valid;
+                this.$watch('valid', () => {
+                    this.disabled = !this.valid;
+                });
+            },
+            initDisableAllWhenLoading() {
+                const container = document.getElementById('loki-checkout');
+                container.removeAttribute('aria-busy');
+
+                this.$watch('loading', () => {
+                    if (this.loading) {
+                        container.setAttribute('aria-busy', true);
+                    } else {
+                        container.removeAttribute('aria-busy');
+                    }
+                });
             },
             updateValid() {
                 this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.currentStep);

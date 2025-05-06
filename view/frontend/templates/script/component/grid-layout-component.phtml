@@ -3,11 +3,8 @@
         Alpine.data('LokiCheckoutGridLayout', () => ({
             ...LokiComponentType,
             gridLayout: {},
-            initActions: {
-                ...LokiComponentType.initActions,
-                listenToCountryIdChange() {
-                    this.applyGridClasses();
-                }
+            initGridClasses() {
+                this.applyGridClasses();
             },
             applyGridClasses() {
                 const grid = document.getElementById(this.elementId.replace('-grid-layout', ''));
