@@ -2,6 +2,8 @@
 
 namespace Yireo\LokiCheckout\Component\Base\Behaviour;
 
+use Exception;
+
 trait StepViewModelBehaviour
 {
     protected string $step = '';
@@ -18,7 +20,7 @@ trait StepViewModelBehaviour
         }
 
         if (false === method_exists($this->getContext(), 'getStepProvider')) {
-            throw new \Exception('Component context does not have getStepProvider() method: ' . $this->getComponentName());
+            throw new Exception('Component context does not have getStepProvider() method: ' . $this->getComponentName());
         }
 
         $this->step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
