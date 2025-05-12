@@ -21,8 +21,12 @@ class XmlConfig extends DataConfig
     public function getThemes(): array
     {
         $themes = [];
-        $themesData = $this->get('themes');
+        $themesData = (array)$this->get('themes');
         foreach ($themesData as $themeData) {
+            if (empty($themeData)) {
+                continue;
+            }
+
             $themeName = $themeData['name'];
             $themes[$themeName] = $this->createTheme($themeData);
         }
@@ -74,7 +78,7 @@ class XmlConfig extends DataConfig
      */
     public function getGridLayoutArrays(): array
     {
-        return $this->get('gridLayouts');
+        return (array)$this->get('gridLayouts');
     }
 
     /**
