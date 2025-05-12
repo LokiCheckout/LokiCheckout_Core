@@ -24,7 +24,7 @@ class CheckoutState implements ArgumentInterface
         private readonly CartRepositoryInterface $cartRepository,
         private readonly UrlFactory $urlFactory,
         private readonly ResponseFactory $responseFactory,
-        private readonly Ajax $ajax
+        private readonly Ajax $ajax,
     ) {
     }
 
@@ -37,6 +37,14 @@ class CheckoutState implements ArgumentInterface
     {
         if ($this->quoteId === 0) {
             $this->quoteId = (int)$this->checkoutSession->getQuote()->getId();
+        }
+
+        if ($this->quoteId === 0) {
+            $this->quoteId = (int)$this->checkoutSession->getQuoteId();
+        }
+
+        if (empty($this->quoteId)) {
+            $this->handleQuoteNotFoundException();
         }
 
         if (isset($this->quotes[$this->quoteId]) && $this->quotes[$this->quoteId] instanceof Quote) {
