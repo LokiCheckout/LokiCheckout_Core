@@ -2,13 +2,15 @@
 
 namespace Yireo\LokiCheckout\Config;
 
+use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\Manager as ModuleManager;
 
 class LokiCheckoutModules
 {
     public function __construct(
         private readonly ModuleManager $moduleManager,
-        private readonly array $modules = []
+        private readonly ComponentRegistrar $componentRegistrar,
+        private array $modules = []
     ) {
     }
 
@@ -17,6 +19,13 @@ class LokiCheckoutModules
      */
     public function getModules(): array
     {
+        $paths = $this->componentRegistrar->getPaths(ComponentRegistrar::MODULE);
+        foreach ($paths as $moduleName => $modulePath) {
+            if (str_contains($moduleName, 'LokiCheckout') && false === in_array($moduleName, $this->modules)) {
+                $this->modules[] = $moduleName;
+            }
+        }
+
         return $this->modules;
     }
 
