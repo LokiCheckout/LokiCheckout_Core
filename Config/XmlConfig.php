@@ -118,9 +118,9 @@ class XmlConfig extends DataConfig
         foreach ($gridData['blocks'] as $blockData) {
             $blocks[] = new Block(
                 (string) $blockData['alias'],
-                (int) $blockData['sortOrder'],
-                (int) $blockData['colSpan'],
-                (int) $blockData['mdColSpan']
+                isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 99,
+                isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 12,
+                isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 6,
             );
         }
 
