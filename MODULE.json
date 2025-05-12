@@ -13,6 +13,7 @@
         "Magento_Sales",
         "Magento_Shipping",
         "Magento_Store",
+        "Magento_Vault",
         "Yireo_LokiComponents",
         "Yireo_LokiFieldComponents",
         "Yireo_CspUtilities",
@@ -63,6 +64,7 @@
         "loki-checkout.shipping.address.fax",
         "loki-checkout.shipping.address.vat_id",
         "loki-checkout.shipping.address.save_in_address_book",
+        "loki-checkout.shipping.address.form.grid-layout",
         "loki-checkout.billing.address.prefix",
         "loki-checkout.billing.address.firstname",
         "loki-checkout.billing.address.middlename",
@@ -85,6 +87,7 @@
         "loki-checkout.billing.address.street1",
         "loki-checkout.billing.address.street2",
         "loki-checkout.billing.address.street3",
+        "loki-checkout.billing.address.form.grid-layout",
         "loki-checkout.steps.shipping.backward-button",
         "loki-checkout.steps.shipping.forward-button",
         "loki-checkout.steps.billing.backward-button",
@@ -98,11 +101,16 @@
         "yireo_loki_checkout\/debug\/enable": "Enable Debugging",
         "yireo_loki_checkout\/debug\/html_hints": "Add Hints to HTML Output",
         "yireo_loki_checkout\/debug\/debug_block": "Add Debug Block",
-        "yireo_loki_checkout\/fields\/use_required_block": "Use required block",
+        "yireo_loki_checkout\/fields\/use_required_block": "Use Required Block",
         "yireo_loki_checkout\/fields\/enable_same_as_billing": "Enable Same As Billing Checkbox",
         "yireo_loki_checkout\/fields\/hide_region_when_optional": "Hide Region When Optional",
         "yireo_loki_checkout\/fields\/enable_vat_id_only_for_company": "Enable Vat ID Only For Companies",
         "yireo_loki_checkout\/shipping\/select_default_shipping_method": "Select Default Shipping Method",
         "yireo_loki_checkout\/billing\/select_default_payment_method": "Select Default Payment Method"
+    },
+    "tests": {
+        "unit": 6,
+        "integration": 88,
+        "functional": 6
     }
 }
