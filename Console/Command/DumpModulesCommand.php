@@ -32,7 +32,7 @@ class DumpModulesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $data = [];
-        foreach ($this->lokiCheckoutModules->getModules() as $module) {
+        foreach ($this->lokiCheckoutModules->getActiveModules() as $module) {
             $data[] = [
                 'name' => $module,
                 'enabled' => (int)$this->moduleManager->isEnabled($module),
