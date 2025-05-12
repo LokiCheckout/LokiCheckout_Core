@@ -117,10 +117,10 @@ class XmlConfig extends DataConfig
         $blocks = [];
         foreach ($gridData['blocks'] as $blockData) {
             $blocks[] = new Block(
-                $blockData['alias'],
-                $blockData['sortOrder'],
-                $blockData['colSpan'],
-                $blockData['mdColSpan']
+                (string) $blockData['alias'],
+                (int) $blockData['sortOrder'],
+                (int) $blockData['colSpan'],
+                (int) $blockData['mdColSpan']
             );
         }
 

@@ -7,7 +7,7 @@ class Block
     public function __construct(
         private readonly string $alias,
         private readonly int $sortOrder,
-        private int $colSpan,
+        private readonly int $colSpan,
         private readonly int $mdColSpan,
     ) {
     }
