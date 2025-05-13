@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 13 May 2025
+### Fixed
+- Fix possible error
+- Only dump active modules to loki-checkout.json
+- Make sure to include empty modules as well for module dump
+- Refactor mechanism to fetch tests from folders
+- Fix additional runs of Playwright tests
+- Fix warning when array keys are not matched
+- Rewrite all beforeInit and afterInit into new initMethod structure
+- Rewrite Alpine from initActions object to methods starting with init
+- Allow PHP 8.4 in CI
+- Remove lines on ES config
+- Fix issue with LokiCheckoutMollie DI type overriding core validators
+- Do not make BLOCK constant public
+- Rewrite integration test flag $skipDispatchToCheckout
+- Mobile fixes
+- Fix default md:col-span-x
+- Fix detection of Hyva/default-csp theme
+- Fix type error when no states are required whatsoever
+- Luma layout prefix was depending on Luma/blank not Magento/blank, typo
 - Prevent error with only optional regions (@RikWillems)
 
 ## [1.0.1] - 28 April 2025
