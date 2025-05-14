@@ -25,7 +25,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
         class="<?= $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
-            <ul>
+	    <ul class="<?= $css('', 'list') ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= $blockRenderer->html(
                         $block,
