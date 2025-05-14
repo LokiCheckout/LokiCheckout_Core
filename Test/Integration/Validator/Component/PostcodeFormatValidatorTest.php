@@ -51,6 +51,7 @@ class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
         return [
             ['1111 AA', 'NL', true],
             ['111AA', 'NL', 'needs to be in one of the following formats'],
+            ['2222', 'NL', 'needs to be in one of the following formats'],
             ['11111', 'US', true],
             ['1111', 'US', 'needs to be in one of the following formats'],
         ];
