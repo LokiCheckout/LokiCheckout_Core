@@ -132,7 +132,7 @@
         {
             "path": "yireo_loki_checkout\/fields\/use_required_block",
             "label": "Field settings > Use Required Block",
-            "description": "Each required field could be styled with an additional required block. In Luma, this is nice. In Hyv\u00e4, this is not needed because the styling is done via CSS."
+            "description": "Each required field could be styled with an additional required block. In Luma, this is nice. In Hyv\u00e4, this is not needed because the styling is done via CSS. This settings adds the block <code>loki-field-components.utils.required<\/code> when a field is required"
         },
         {
             "path": "yireo_loki_checkout\/fields\/enable_same_as_billing",

@@ -119,8 +119,7 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                        showInWebsite="1"
                        showInStore="0">
                     <label>Use Required Block</label>
-                    <tooltip>Each required field could be styled with an additional required block. In Luma, this is nice. In Hyvä, this is not needed because the styling is done via CSS.</tooltip>
-                    <comment>Use block "loki-field-components.utils.required" when a field is required</comment>
+                    <tooltip><![CDATA[Each required field could be styled with an additional required block. In Luma, this is nice. In Hyvä, this is not needed because the styling is done via CSS. This settings adds the block <code>loki-field-components.utils.required</code> when a field is required]]></tooltip>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/general/enable">1</field>
