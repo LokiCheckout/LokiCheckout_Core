@@ -4,7 +4,8 @@ namespace Yireo\LokiCheckout\Test\Integration;
 
 use Yireo\LokiCheckout\Test\Integration\Trait\EnableCartRepositoryStub;
 
-class LokiCheckoutRepositoryTestCase extends LokiCheckoutTestCase
+// WARNING: As yet, this test case is not working, thus marked as "final" to prevent usage
+final class LokiCheckoutRepositoryTestCase extends LokiCheckoutTestCase
 {
     use EnableCartRepositoryStub;
 
