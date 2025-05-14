@@ -130,11 +130,6 @@
             "description": "Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
         },
         {
-            "path": "yireo_loki_checkout\/fields\/use_required_block",
-            "label": "Field settings > Use Required Block",
-            "description": "Each required field could be styled with an additional required block. In Luma, this is nice. In Hyv\u00e4, this is not needed because the styling is done via CSS. This settings adds the block <code>loki-field-components.utils.required<\/code> when a field is required"
-        },
-        {
             "path": "yireo_loki_checkout\/fields\/enable_same_as_billing",
             "label": "Field settings > Enable Same As Billing Checkbox",
             "description": "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
