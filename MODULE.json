@@ -156,8 +156,8 @@
         }
     ],
     "tests": {
-        "unit": 6,
-        "integration": 88,
+        "unit": 15,
+        "integration": 126,
         "functional": 6
     }
 }
