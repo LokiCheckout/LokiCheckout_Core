@@ -32,7 +32,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
                 const components = {};
                 this.getComponentArray().forEach(component => {
-                    if (component.step === step) {
+                    if (this.exists(component) && component.step === step) {
                         components[component.id] = component;
                     }
                 });
@@ -57,17 +57,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return this.getComponentArrayByFieldNameAndStep(fieldName, step).find(() => true);
             },
             removeInvisibleComponents() {
-                const invisibleComponents = [];
-                this.getComponentArray().forEach(component => {
-                    if (!document.getElementById(component.elementId)) {
-                        delete this.components[component.id];
-                        invisibleComponents.push(component.id);
-                    }
-                });
-
-                if (invisibleComponents.length > 0) {
-                    LokiCheckoutLogger.notice('Removing invisible components from store', invisibleComponents);
-                }
+                return Alpine.store('components').removeInvisibleComponents();
+            },
+            exists(component) {
+                return Alpine.store('components').exists(component);
             },
             add(component) {
                 return Alpine.store('components').add(component);
