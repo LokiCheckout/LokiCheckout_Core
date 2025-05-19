@@ -29,7 +29,7 @@ class IconResolverContext
     public function getIconPath(string $moduleName, string $path): false|string
     {
         $modulePath = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-        $iconPath = $modulePath . DIRECTORY_SEPARATOR . $path;
+        $iconPath = $modulePath.DIRECTORY_SEPARATOR.$path;
         if ($this->fileDriver->isFile($iconPath)) {
             return $iconPath;
         }
@@ -43,19 +43,38 @@ class IconResolverContext
             return '';
         }
 
-        if (false === file_exists($iconPath)) {
+        if (false === $this->fileDriver->isFile($iconPath)) {
             return '';
         }
 
         if ($iconType === 'svg') {
-            return file_get_contents($iconPath);
+            return $this->fileDriver->fileGetContents($iconPath);
         }
 
-        return '<img src="' . $iconPath . '" />';
+        return '<img src="'.$iconPath.'" />';
     }
 
     public function getViewFileUrl(string $imageId): string
     {
         return $this->assetRepository->getUrl($imageId);
+    }
+
+    public function isValidViewFileUrl(string $imageId): bool
+    {
+        [$moduleName, $imagePath] = explode('::', $imageId);
+        $modulePath = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
+        $webPaths = [
+            'view/frontend/web',
+            'view/base/web',
+        ];
+
+        foreach ($webPaths as $webPath) {
+            $path = $modulePath.'/'.$webPath.'/'.$imagePath;
+            if ($this->fileDriver->isFile($path)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
