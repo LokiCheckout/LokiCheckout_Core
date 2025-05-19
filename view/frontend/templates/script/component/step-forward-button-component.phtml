@@ -45,6 +45,7 @@
                 if (!this.valid) {
                     const components = Alpine.store('checkout').getInvalidComponentIds(this.currentStep);
                     LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
+                    this.disabled = true;
                 }
 
                 return this.valid;
@@ -56,19 +57,30 @@
                     LokiComponentValidator.validate(component);
                 });
 
-                if (true === this.updateValid()) {
-                    document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
-                        component: this
-                    }));
+                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach(component => {
+                    if (component.beforePostNextStep) {
+                        component.beforePostNextStep();
+                    }
+                });
 
-                    this.post();
-                    return true;
-                }
+                this.$nextTick(() => {
+                    this.updateValid();
+                    if (true === this.valid) {
+                        document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
+                            component: this
+                        }));
 
-                const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
-                if (firstInvalidElement) {
-                    firstInvalidElement.focus();
-                }
+                        this.post();
+                        return true;
+                    }
+
+                    const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
+                    if (firstInvalidElement) {
+                        firstInvalidElement.focus();
+                    }
+
+                    return false;
+                });
 
                 return false;
             }
