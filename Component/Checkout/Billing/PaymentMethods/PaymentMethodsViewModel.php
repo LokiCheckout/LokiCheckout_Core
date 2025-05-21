@@ -42,4 +42,9 @@ class PaymentMethodsViewModel extends CheckoutViewModel
     {
         return $this->getFieldId() . '-' . preg_replace('/([^a-zA-Z0-9\-]+)/', '-', $code);
     }
+
+    public function getPaymentInstructions(string $code): string
+    {
+        return '';
+    }
 }
