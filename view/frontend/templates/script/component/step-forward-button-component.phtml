@@ -57,9 +57,9 @@
                     LokiComponentValidator.validate(component);
                 });
 
-                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach(component => {
+                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach(async component => {
                     if (component.beforePostNextStep) {
-                        component.beforePostNextStep();
+                        await component.beforePostNextStep();
                     }
                 });
 
@@ -71,6 +71,7 @@
                         }));
 
                         this.post();
+
                         return true;
                     }
 
