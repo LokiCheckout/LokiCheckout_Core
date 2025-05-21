@@ -11,6 +11,9 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\MaskedQuoteIdToQuoteId;
 
+/**
+ * @deprecated Use PHP Attributes instead
+ */
 trait CartFixture
 {
     /**
