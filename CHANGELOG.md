@@ -6,6 +6,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 22 May 2025
+### Fixed
+- Register `Yireo_LokiFieldComponents` as a checkout module
+- Easier support for image output
+- Add label title of payment method code
+- Add assertion for usage in PSP integration tests
+- Ignore redirect URLs with no length
+- Make sure to wait for beforePostNextStep calls before proceeding to next step
+- Add proper support for payment instruction text
+- Additional checks for final button and component validation
+- Trigger component-update event after selecting payment methtod
+- Move remove invisible components to LokiComponents
+- Double-check if image exists before returning payment icon
+- iImprove mechanism to detect tests
+- Remove deprecated `use_required_block` setting (which is in FieldComponents now)
+- Fix core issue with postcode 1234 allowed by core
+- Double-check integration test for postcode validation
+- Add CSS wrapper
+- Update admin settings with tooltip and regenerate new MODULE.json
+- Add tooltip to config values
+
 ## [1.0.2] - 13 May 2025
 ### Fixed
 - Fix possible error
