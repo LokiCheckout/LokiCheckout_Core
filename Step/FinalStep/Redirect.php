@@ -22,7 +22,7 @@ class Redirect
 
         foreach ($this->redirectResolverListing->getRedirectResolvers() as $redirectResolver) {
             $redirectUrl = $redirectResolver->resolve($this->redirectContext);
-            if (false !== $redirectUrl) {
+            if (strlen($redirectUrl) > 0) {
                 return $redirectUrl;
             }
         }
