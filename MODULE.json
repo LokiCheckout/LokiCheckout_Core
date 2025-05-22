@@ -4,6 +4,7 @@
         "Magento_Catalog",
         "Magento_Checkout",
         "Magento_CheckoutAgreements",
+        "Magento_Config",
         "Magento_Customer",
         "Magento_Directory",
         "Magento_Eav",
@@ -17,7 +18,8 @@
         "Yireo_LokiComponents",
         "Yireo_LokiFieldComponents",
         "Yireo_CspUtilities",
-        "Yireo_HyvaThemeAutoRegistration"
+        "Yireo_HyvaThemeAutoRegistration",
+        "Yireo_IntegrationTestHelper"
     ],
     "components": [
         "loki-checkout.steps",
