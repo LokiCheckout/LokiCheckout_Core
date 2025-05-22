@@ -40,6 +40,7 @@
         <arguments>
             <argument name="modules" xsi:type="array">
                 <item name="Yireo_LokiComponents" xsi:type="string">Yireo_LokiComponents</item>
+                <item name="Yireo_LokiFieldComponents" xsi:type="string">Yireo_LokiFieldComponents</item>
                 <item name="Yireo_LokiComponentsDebugger" xsi:type="string">Yireo_LokiComponentsDebugger</item>
                 <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
             </argument>
