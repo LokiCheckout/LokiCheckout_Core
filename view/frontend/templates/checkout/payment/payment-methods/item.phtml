@@ -60,6 +60,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
 
             <label
                 for="<?= $viewModel->getFieldIdFromCode($code) ?>"
+                title="<?= $paymentMethod->getCode() ?>"
                 class="<?= $css('', 'label') ?>">
                 <?= $paymentMethod->getTitle() ?>
             </label>
