@@ -13,7 +13,7 @@ class IconResolverListing
      * @param IconResolverInterface[] $iconResolvers
      */
     public function __construct(
-        array $iconResolvers = []
+        array $iconResolvers = [],
     ) {
         foreach ($iconResolvers as $iconResolver) {
             if (false === $iconResolver instanceof IconResolverInterface) {

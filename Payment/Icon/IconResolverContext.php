@@ -7,6 +7,7 @@ use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
+use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
 class IconResolverContext
 {
@@ -14,9 +15,9 @@ class IconResolverContext
 
     public function __construct(
         private readonly ComponentRegistrar $componentRegistrar,
-        Filesystem $filesystem,
         private readonly AssetRepository $assetRepository,
-        private readonly string $paymentMethodCode
+        private readonly string $paymentMethodCode,
+        Filesystem $filesystem,
     ) {
         $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
     }
@@ -37,7 +38,7 @@ class IconResolverContext
         return false;
     }
 
-    public function getIconOutput(false|string $iconPath, string $iconType): string
+    public function getIconOutput(false|string $iconPath, string $iconType = ''): string
     {
         if (false === $iconPath) {
             return '';
@@ -51,7 +52,7 @@ class IconResolverContext
             return $this->fileDriver->fileGetContents($iconPath);
         }
 
-        return '<img src="'.$iconPath.'" />';
+       return '';
     }
 
     public function getViewFileUrl(string $imageId): string
