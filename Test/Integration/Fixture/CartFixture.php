@@ -40,30 +40,4 @@ trait CartFixture
 
         return $cart;
     }
-
-    /*
-    public function getCustomerCart(int $customerId): CartInterface
-    {
-        static $cart = null;
-        if ($cart instanceof CartInterface) {
-            return $cart;
-        }
-
-        $customerRepository = $this->getObjectManager()->get(CustomerRepositoryInterface::class);
-        $customer = $customerRepository->getById($customerId);
-
-        $cartManagement = $this->getObjectManager()->get(CartManagementInterface::class);
-        $maskedQuoteIdToQuoteId = $this->getObjectManager()->get(MaskedQuoteIdToQuoteId::class);
-        $cartRepository = $this->getObjectManager()->get(CartRepositoryInterface::class);
-
-        $maskId = $cartManagement->createEmptyCartForCustomer($customerId);
-        $cartId = $maskedQuoteIdToQuoteId->execute((string)$maskId);
-
-        $checkoutSession = $this->getObjectManager()->get(Session::class);
-        $checkoutSession->setQuoteId($cartId);
-        $checkoutSession->setCustomerData($customer);
-
-        return $cartRepository->get($cartId);
-    }
-    */
 }
