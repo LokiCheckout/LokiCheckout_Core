@@ -10,7 +10,6 @@ use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Test\Integration\Fixture\CartFixture;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 use Yireo\LokiComponents\Component\ComponentInterface;
 use Yireo\LokiComponents\Component\ComponentRegistry;
@@ -19,8 +18,6 @@ use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
-    use CartFixture;
-
     protected ?string $stepCode = null;
 
     protected function setUp(): void
