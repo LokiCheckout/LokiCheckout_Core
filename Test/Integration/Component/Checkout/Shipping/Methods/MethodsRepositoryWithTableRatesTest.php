@@ -30,7 +30,7 @@ use Yireo\LokiCheckout\Test\Integration\Trait\SaveShippingAddressValues;
 ]
 class MethodsRepositoryWithTableRatesTest extends LokiCheckoutPageTestCase
 {
-    protected bool $skipDispatchToCheckout = true;
+    protected ?bool $skipDispatchToCheckout = true;
 
     const COMPONENT_NAME = 'loki-checkout.shipping.methods';
 
