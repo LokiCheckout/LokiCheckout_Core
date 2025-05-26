@@ -22,12 +22,13 @@ class Redirect
 
         foreach ($this->redirectResolverListing->getRedirectResolvers() as $redirectResolver) {
             $redirectUrl = $redirectResolver->resolve($this->redirectContext);
+
             if (strlen($redirectUrl) > 0) {
                 return $redirectUrl;
             }
         }
 
-        return $this->getSuccessUrl();
+        return (string)$this->getSuccessUrl();
     }
 
     private function getSuccessUrl(): string
