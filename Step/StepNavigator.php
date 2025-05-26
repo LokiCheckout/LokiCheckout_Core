@@ -104,7 +104,14 @@ class StepNavigator implements ArgumentInterface
         }
 
         if ($this->isLastStep($currentStep)) {
-            $this->finalStep->validate();
+            $rt = $this->finalStep->validate();
+            if (is_array($rt)) {
+                foreach ($rt as $error) {
+                    $this->messageManager->addErrorMessage($error);
+                }
+
+                return false;
+            }
 
             return $this->finalStep->submit();
         }
