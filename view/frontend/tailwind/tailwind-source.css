@@ -118,12 +118,35 @@
     }
 
     .scope-tab-buttons {
+        .tab {
+            @apply rounded-lg p-1 border-2;
+        }
+
         .tab-active {
-            @apply rounded-lg p-1 border-2 border-amber-700 bg-amber-500 hover:bg-amber-700 text-white;
+            @apply border-amber-700 bg-amber-500 hover:bg-amber-700 text-white;
         }
 
         .tab-inactive {
-            @apply rounded-lg p-1 border-2 border-zinc-400 bg-zinc-200 hover:bg-zinc-400;
+            @apply border-zinc-400 bg-zinc-200 hover:bg-zinc-400;
+        }
+
+        .btn-group {
+            .tab:first-child {
+                border-right: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            .tab:last-child {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        .btn-single {
+            .tab {
+                @apply w-full;
+            }
         }
     }
 }

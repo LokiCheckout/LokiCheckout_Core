@@ -1,0 +1,38 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
+use Yireo\LokiMapComponents\Component\Base\Map\MapViewModel;
+use Yireo\LokiMapComponents\Map\Marker;
+use Yireo\LokiMapComponents\Map\MarkerFactory;
+
+/** @var Template $block */
+/** @var MapViewModel $viewModel */
+/** @var BlockRenderer $blockRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var MarkerFactory $markerFactory */
+/** @var Marker[] $markers */
+
+$locations = $block->getLocations();
+$markers = [];
+$markerFactory = $viewModelFactory->create(MarkerFactory::class);
+foreach ($locations as $location) {
+    $markers[] = $markerFactory->createFromLocation($location);
+}
+?>
+<div>
+    <div class="flex max-h-96">
+        <?= $blockRenderer->html($block, 'loki-map-components.map-container', []) ?>
+        <div class="w-1/4 px-4 grid gap-4 overflow-auto">
+            <?php foreach ($markers as $marker) : ?>
+                <a href="#" class="bg-white p-2 hover:bg-amber-100" @click="jumpTo" <?= $marker->getHtmlAttributes() ?>>
+                    <strong><?= $marker->getTitle() ?></strong><br/>
+                    <?= $marker->getAddress()->render() ?><br/>
+                    <button class="btn btn-primary btn-small" @click="saveMarker" data-value="<?= $marker->getId() ?>">Select</button>
+                </a>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
