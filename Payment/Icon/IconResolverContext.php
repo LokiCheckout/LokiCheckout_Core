@@ -52,7 +52,7 @@ class IconResolverContext
             return $this->fileDriver->fileGetContents($iconPath);
         }
 
-       return '';
+        return '';
     }
 
     public function getViewFileUrl(string $imageId): string
