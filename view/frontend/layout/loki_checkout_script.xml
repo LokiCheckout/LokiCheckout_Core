@@ -38,10 +38,20 @@
                 name="loki-checkout.script.hacks"
                 template="Yireo_LokiCheckout::script/hacks.phtml"/>
 
+            <referenceContainer name="loki-component-partials">
+                <block
+                    name="loki-checkout.script.component-partial.apple-pay"
+                    template="Yireo_LokiCheckout::script/component-partial/apple-pay-component-partial.phtml"/>
+            </referenceContainer>
+
             <referenceContainer name="loki-component-types">
                 <block
                     name="loki-checkout.script.component-type.checkout"
                     template="Yireo_LokiCheckout::script/component-type/checkout-component-type.phtml"/>
+
+                <block
+                    name="loki-checkout.script.component-type.apple-pay"
+                    template="Yireo_LokiCheckout::script/component-type/apple-pay-component-type.phtml"/>
             </referenceContainer>
 
             <referenceContainer name="loki-components">

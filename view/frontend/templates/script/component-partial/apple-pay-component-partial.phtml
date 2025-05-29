@@ -1,0 +1,37 @@
+<?php
+// @todo: https://developer.apple.com/documentation/applepayontheweb/checking-for-apple-pay-availability
+?>
+
+<script>
+    const LokiCheckoutApplePayComponentPartial = {
+        applePayRequest: {},
+        applePayVersion: 0,
+        isApplePaySupported() {
+            if (!window.ApplePaySession) {
+                return false;
+            }
+
+            if (!window.ApplePaySession.canMakePayments()) {
+                return false;
+            }
+
+            return true;
+        },
+        createApplePaySession() {
+            var session = new ApplePaySession(this.applePayVersion, this.applePayRequest);
+
+            session.onvalidatemerchant = function (event) {
+                const sessionData = this.post({
+                    task: 'onValidateMerchant',
+                    validationUrl: event.validationUrl,
+                    originDomain: window.location.hostname,
+                });
+
+                session.completeMerchantValidation(sessionData);
+            };
+
+            session.begin();
+
+        }
+    }
+</script>
