@@ -1,5 +1,5 @@
-import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@helpers/checkout-objects';
-import {setupCheckout} from '@helpers/setup-checkout';
+import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki/checkout-objects';
+import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@playwright/test';
 
 test.describe('checkmo payment test', () => {

@@ -1,5 +1,5 @@
-import {Field} from '@helpers/checkout-objects';
-import {setupCheckout} from '@helpers/setup-checkout';
+import {Field} from '@loki/checkout-objects';
+import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@playwright/test';
 
 test.describe('Toggle regions test', function()  {

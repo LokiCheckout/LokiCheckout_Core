@@ -1,5 +1,5 @@
-import {Field} from '@helpers/checkout-objects';
-import {setupCheckout} from '@helpers/setup-checkout';
+import {Field} from '@loki/checkout-objects';
+import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@playwright/test';
 
 test.describe('Generic checkout test', function () {
