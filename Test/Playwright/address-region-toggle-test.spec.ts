@@ -1,6 +1,6 @@
 import {Field} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
-import {test, expect} from '@playwright/test';
+import {test, expect} from '@loki/test';
 
 test.describe('Toggle regions test', function()  {
   test('should switch region field on country change', async function({page, context})  {

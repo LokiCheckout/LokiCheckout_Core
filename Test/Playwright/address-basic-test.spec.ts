@@ -1,6 +1,6 @@
 import {Field} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
-import {test} from '@playwright/test';
+import {test} from '@loki/test';
 
 test.describe('Generic checkout test', function () {
   test('should allow me to go to the checkout', async function ({page,context}) {

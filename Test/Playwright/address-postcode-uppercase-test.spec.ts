@@ -1,6 +1,6 @@
 import {Field} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
-import {test, expect} from '@playwright/test';
+import {test, expect} from '@loki/test';
 
 test.describe('Postcode uppercase test', function()  {
   test('should turn postcode into uppercase', async function({page, context})  {
