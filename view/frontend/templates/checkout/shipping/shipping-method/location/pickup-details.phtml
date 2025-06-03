@@ -14,6 +14,6 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= $css('') ?>">
-    <?= __('From') ?> <?= $location->getPickupFrom() ?>
+<div class="<?= /* @noEscape */ $css('') ?>">
+    <?= $escaper->escapeHtml(__('From')) ?> <?= $escaper->escapeHtml($location->getPickupFrom()) ?>
 </div>

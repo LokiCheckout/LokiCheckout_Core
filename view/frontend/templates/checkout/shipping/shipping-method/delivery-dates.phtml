@@ -14,12 +14,12 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $deliveryDates = $block->getDeliveryDates();
 ?>
-<div class="<?= $css('py-4') ?>">
+<div class="<?= /* @noEscape */ $css('py-4') ?>">
     <?php if (empty($deliveryDates)): ?>
-        <div class="<?= $css('', 'empty') ?>"><?= __('No delivery dates found') ?></div>
+        <div class="<?= /* @noEscape */ $css('', 'empty') ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
     <?php else: ?>
         <?php foreach ($deliveryDates as $deliveryDate): ?>
-            <?= $childRenderer->html($block, 'delivery-date', [
+            <?= /* @noEscape */ $childRenderer->html($block, 'delivery-date', [
                 'delivery_date' => $deliveryDate,
             ]) ?>
         <?php endforeach; ?>

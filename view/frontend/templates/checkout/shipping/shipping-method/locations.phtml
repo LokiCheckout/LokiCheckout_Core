@@ -21,12 +21,12 @@ $locations = $block->getLocations();
 ?>
 <div>
     <?php if (empty($locations)): ?>
-        <div class="<?= $css('p-2', 'empty') ?>"><?= __('No locations found') ?></div>
+        <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
     <?php else: ?>
         <?php $i = 1; ?>
         <?php foreach ($locations as $location): ?>
-            <div data-location-index="<?= $i ?>" class="hidden">
-                <?= $childRenderer->html($block, 'location', [
+            <div data-location-index="<?= $escaper->escapeHtml($i) ?>" class="hidden">
+                <?= /* @noEscape */ $childRenderer->html($block, 'location', [
                     'location' => $location,
                 ]) ?>
             </div>
@@ -34,8 +34,8 @@ $locations = $block->getLocations();
         <?php endforeach; ?>
 
         <div @click="expandLocations">
-            <div class="inline-block w-4"><?= $imageOutput->get('Yireo_LokiCheckout::images/angle-down.svg') ?></div>
-            <span class="text-sm"><?= __('Show more options') ?></span>
+            <div class="inline-block w-4"><?= $escaper->escapeHtml($imageOutput->get('Yireo_LokiCheckout::images/angle-down.svg')) ?></div>
+            <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>
     <?php endif; ?>
 </div>

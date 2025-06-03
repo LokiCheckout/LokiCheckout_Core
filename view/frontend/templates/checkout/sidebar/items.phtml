@@ -18,14 +18,14 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 ?>
-<div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-    <?= $block->getChildHtml('before') ?>
+<div class="<?= /* @noEscape */ $css('relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <ul role="list">
         <?php foreach ($viewModel->getItems() as $item) : ?>
             <li>
-                <?= $childRenderer->html($block,'item', [
+                <?= /* @noEscape */ $childRenderer->html($block,'item', [
                     'alias' => 'item',
                     'item' => $item,
                 ]) ?>
@@ -33,5 +33,5 @@ $childRenderer = $viewModelFactory->create(ChildRenderer::class);
         <?php endforeach; ?>
     </ul>
 
-    <?= $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>

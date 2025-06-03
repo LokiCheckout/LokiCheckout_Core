@@ -20,11 +20,11 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-    <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Billing Address') ?></span><br>
-    <address><?= $html ?></address>
+<div class="<?= /* @noEscape */ $css('mb-4 relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Billing Address')) ?></span><br>
+    <address><?= /* @noEscape */ $html ?></address>
     <?php if ($viewModel->isSameAsShipping()): ?>
-        <small class="<?= $css('', 'notice') ?>"><?= __('Same as shipping address') ?></small>
+        <small class="<?= /* @noEscape */ $css('', 'notice') ?>"><?= $escaper->escapeHtml(__('Same as shipping address')) ?></small>
     <?php endif; ?>
 </div>

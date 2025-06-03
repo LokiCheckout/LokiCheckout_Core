@@ -1,7 +1,7 @@
 <script>
     LokiComponentValidator.validators.number = function (component) {
         if (/^-?\d+$/.test(component.value) === false) {
-            component.messages.push({type:'error', text: '<?= __('Value must contain numbers only') ?>'});
+            component.messages.push({type:'error', text: '<?= $escaper->escapeHtml(__('Value must contain numbers only')) ?>'});
             return false;
         }
 

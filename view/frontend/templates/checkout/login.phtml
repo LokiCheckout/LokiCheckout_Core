@@ -19,22 +19,22 @@ $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div class="<?= $css('card my-2') ?>" x-data="LokiModal">
+<div class="<?= /* @noEscape */ $css('card my-2') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
-        You are logged in as: <?= $customerSession->getCustomer()->getName() ?>
-        (<a href="<?= $logoutUrl ?>"><?= __('Sign Out') ?></a>)
+        You are logged in as: <?= $escaper->escapeHtml($customerSession->getCustomer()->getName()) ?>
+        (<a href="<?= $escaper->escapeHtml($logoutUrl) ?>"><?= $escaper->escapeHtml(__('Sign Out')) ?></a>)
     <?php else: ?>
         <button @click="toggleModal" :disabled="isModalOpen">
-            <?= __('Sign In') ?>
+            <?= $escaper->escapeHtml(__('Sign In')) ?>
         </button>
     <?php endif; ?>
 
     <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
         <div>
             <button @click="toggleModal" class="float-right m-4 cursor-pointer w-4">
-                <?= $imageOutput->get('Yireo_LokiComponents::images/xmark.svg') ?>
+                <?= $escaper->escapeHtml($imageOutput->get('Yireo_LokiComponents::images/xmark.svg')) ?>
             </button>
-            <?= $block->getChildHtml('form') ?>
+            <?= /* @noEscape */ $block->getChildHtml('form') ?>
         </div>
     </dialog>
 </div>

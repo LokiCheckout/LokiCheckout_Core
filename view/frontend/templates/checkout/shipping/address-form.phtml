@@ -13,8 +13,8 @@ use Yireo\LokiCheckout\Util\Block\SortedBlocks;
 
 $sortedBlocks = $viewModelFactory->create(SortedBlocks::class);
 ?>
-<div class="<?= $css('md:grid md:grid-cols-12 md:gap-8 mb-8') ?>">
+<div class="<?= /* @noEscape */ $css('md:grid md:grid-cols-12 md:gap-8 mb-8') ?>">
     <?php foreach ($sortedBlocks->getChildren($block) as $childBlock): ?>
-        <?= $childBlock->toHtml() ?>
+        <?= /* @noEscape */ $childBlock->toHtml() ?>
     <?php endforeach; ?>
 </div>

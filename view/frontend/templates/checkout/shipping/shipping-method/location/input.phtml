@@ -12,15 +12,15 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <input
         type="radio"
         :checked="isChecked"
         @change="submitValue"
         :disabled="disabled"
         name="pickup_location"
-        value="pg|<?= $location->getCode() ?>"
-        id="<?= $location->getId() ?>"
-        class="<?= $css('mr-4', 'input') ?>"
+        value="pg|<?= $escaper->escapeHtml($location->getCode()) ?>"
+        id="<?= $escaper->escapeHtml($location->getId()) ?>"
+        class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
     />
 </div>

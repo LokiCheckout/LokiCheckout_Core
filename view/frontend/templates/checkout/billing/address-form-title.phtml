@@ -17,7 +17,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 
 $title = 'Billing Address';
 
-echo $templateRenderer->html(
+echo /* @noEscape */ $templateRenderer->html(
     $block,
     'Yireo_LokiCheckout::generic/title.phtml',
     ['title' => $title]

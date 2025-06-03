@@ -15,12 +15,13 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 $timeframe = $block->getTimeframe();
 ?>
 <div class="flex p-2 hover:bg-black/5">
-    <?= $childRenderer->html($block, 'timeframe.input', [
+    <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.input', [
         'timeframe' => $timeframe,
     ]) ?>
 
-    <label for="<?= $timeframe->getId() ?>" class="cursor-pointer flex-1">
-        <?= $childRenderer->html($block, 'timeframe.name', [
+    <label for="<?= $escaper->escapeHtml($timeframe->getId()) ?>" class="cursor-pointer flex-1">
+        <?= /* @noEscape */
+    $childRenderer->html($block, 'timeframe.name', [
             'timeframe' => $timeframe,
         ]) ?>
     </label>

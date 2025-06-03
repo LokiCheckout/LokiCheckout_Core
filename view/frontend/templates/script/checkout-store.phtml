@@ -14,7 +14,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.store('checkout', {
-            currentStep: '<?= $stepNavigator->getCurrentStep()->getCode() ?>',
+            currentStep: '<?= $escaper->escapeHtml($stepNavigator->getCurrentStep()->getCode()) ?>',
             getComponentIds() {
                 return Alpine.store('components').getComponentIds();
             },

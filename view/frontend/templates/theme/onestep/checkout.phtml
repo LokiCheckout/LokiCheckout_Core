@@ -13,15 +13,15 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $css('loki space-y-6 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-    <?= $block->getChildHtml('progressbar') ?>
+<div class="<?= /* @noEscape */ $css('loki space-y-6 relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $block->getChildHtml('progressbar') ?>
 
-    <div class="<?= $css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid') ?>">
-        <div class="<?= $css('col-span-2', 'column-steps') ?> relative">
-            <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-            <?= $block->getChildHtml('steps'); ?>
+    <div class="<?= /* @noEscape */ $css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid') ?>">
+        <div class="<?= /* @noEscape */ $css('col-span-2', 'column-steps') ?> relative">
+            <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+            <?= /* @noEscape */ $block->getChildHtml('steps'); ?>
         </div>
-        <?= $block->getChildHtml('sidebar'); ?>
+        <?= /* @noEscape */ $block->getChildHtml('sidebar'); ?>
     </div>
 </div>

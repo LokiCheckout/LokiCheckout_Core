@@ -12,9 +12,9 @@ use Yireo\LokiCheckout\ViewModel\PaymentMethod\CashOnDelivery;
 /** @var CashOnDelivery $configuration */
 $configuration = $viewModelFactory->create(CashOnDelivery::class);
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <?php if ($configuration->getInstructions()): ?>
-        <?= __('Instructions') ?>:<br/>
-        <?= $configuration->getInstructions() ?>
+        <?= $escaper->escapeHtml(__('Instructions')) ?>:<br/>
+        <?= $escaper->escapeHtml($configuration->getInstructions()) ?>
     <?php endif; ?>
 </div>

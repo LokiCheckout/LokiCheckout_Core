@@ -12,15 +12,15 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $timeframe = $block->getTimeframe();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <input
         type="radio"
         :checked="isChecked"
         @change="submitValue"
         :disabled="disabled"
         name="timeframe"
-        value="<?= $timeframe->getCode() ?>"
-        id="<?= $timeframe->getId() ?>"
-        class="<?= $css('mr-4', 'input') ?>"
+        value="<?= $escaper->escapeHtml($timeframe->getCode()) ?>"
+        id="<?= $escaper->escapeHtml($timeframe->getId()) ?>"
+        class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
     />
 </div>

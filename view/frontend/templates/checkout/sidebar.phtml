@@ -7,7 +7,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<aside class="<?= $css('my-2 order-2') ?>">
-    <?= $block->getChildHtml(); ?>
+<aside class="<?= /* @noEscape */ $css('my-2 order-2') ?>">
+    <?= /* @noEscape */ $block->getChildHtml(); ?>
 </aside>
 

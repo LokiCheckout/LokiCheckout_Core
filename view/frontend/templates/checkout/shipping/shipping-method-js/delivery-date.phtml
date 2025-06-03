@@ -16,10 +16,10 @@ $deliveryDate = $block->getDeliveryDate();
 ?>
 <details class="my-4" open>
     <summary class="font-bold cursor-pointer">
-        <?= $deliveryDate->getDate() ?>
+        <?= $escaper->escapeHtml($deliveryDate->getDate()) ?>
     </summary>
     <div class="mb-4">
-        <?= $childRenderer->html($block, 'timeframes', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'timeframes', [
             'timeframes' => $deliveryDate->getTimeframes(),
         ]) ?>
     </div>

@@ -25,13 +25,13 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 ?>
 <nav
-    class="<?= $css('hidden md:block card rounded-lg relative') ?>"
-    aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
+    class="<?= /* @noEscape */ $css('hidden md:block card rounded-lg relative') ?>"
+    aria-label="<?= /* @noEscape */ $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-    <ul class="<?= $css('flex items-center', 'list') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <ul class="<?= /* @noEscape */ $css('flex items-center', 'list') ?>">
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
-            <?= $childRenderer->html($block,'step', ['step' => $step]) ?>
+            <?= /* @noEscape */ $childRenderer->html($block,'step', ['step' => $step]) ?>
         <?php endforeach; ?>
     </ul>
 </nav>

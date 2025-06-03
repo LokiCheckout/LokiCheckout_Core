@@ -7,6 +7,6 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<div class="<?= $css('') ?>">
-    <?= $block->getChildHtml(); ?>
+<div class="<?= /* @noEscape */ $css('') ?>">
+    <?= /* @noEscape */ $block->getChildHtml(); ?>
 </div>

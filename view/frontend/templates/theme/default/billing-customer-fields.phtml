@@ -16,4 +16,4 @@ if (false === $checkoutState->getQuote()->isVirtual()) {
     return;
 }
 
-echo $block->getBlockHtml('loki-checkout.customer');
+echo /* @noEscape */ $block->getBlockHtml('loki-checkout.customer');

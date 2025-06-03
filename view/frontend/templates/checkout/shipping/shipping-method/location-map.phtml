@@ -24,13 +24,13 @@ foreach ($locations as $location) {
 ?>
 <div>
     <div class="flex max-h-96">
-        <?= $blockRenderer->html($block, 'loki-map-components.map-container', []) ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-map-components.map-container', []) ?>
         <div class="w-1/4 px-4 grid gap-4 overflow-auto">
             <?php foreach ($markers as $marker) : ?>
-                <a href="#" class="bg-white p-2 hover:bg-amber-100" @click="jumpTo" <?= $marker->getHtmlAttributes() ?>>
-                    <strong><?= $marker->getTitle() ?></strong><br/>
-                    <?= $marker->getAddress()->render() ?><br/>
-                    <button class="btn btn-primary btn-small" @click="saveMarker" data-value="<?= $marker->getId() ?>">Select</button>
+                <a href="#" class="bg-white p-2 hover:bg-amber-100" @click="jumpTo" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
+                    <strong><?= $escaper->escapeHtml($marker->getTitle()) ?></strong><br/>
+                    <?= $escaper->escapeHtml($marker->getAddress()->render()) ?><br/>
+                    <button class="btn btn-primary btn-small" @click="saveMarker" data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">Select</button>
                 </a>
             <?php endforeach; ?>
         </div>

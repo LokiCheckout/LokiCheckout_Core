@@ -7,7 +7,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<div class="<?= $css(' grid grid-cols-1 lg:grid-cols-2 md:gap-8', 'grid') ?>">
-    <?= $block->getChildHtml('col1') ?>
-    <?= $block->getChildHtml('col2') ?>
+<div class="<?= /* @noEscape */ $css(' grid grid-cols-1 lg:grid-cols-2 md:gap-8', 'grid') ?>">
+    <?= /* @noEscape */ $block->getChildHtml('col1') ?>
+    <?= /* @noEscape */ $block->getChildHtml('col2') ?>
 </div>

@@ -14,12 +14,12 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $timeframes = $block->getTimeframes();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <?php if (empty($timeframes)): ?>
-        <span><?= __('No timeframes found') ?></span>
+        <span><?= $escaper->escapeHtml(__('No timeframes found')) ?></span>
     <?php else: ?>
         <?php foreach ($timeframes as $timeframe): ?>
-            <?= $childRenderer->html($block, 'timeframe', [
+            <?= /* @noEscape */ $childRenderer->html($block, 'timeframe', [
                 'timeframe' => $timeframe,
             ]) ?>
         <?php endforeach; ?>

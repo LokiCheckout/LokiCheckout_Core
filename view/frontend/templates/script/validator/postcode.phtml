@@ -13,9 +13,9 @@ $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
 <script>
     const postcodePatterns = {};
     <?php foreach($postcodePatterns->getConfiguration() as $countryCode => $patterns) : ?>
-    postcodePatterns['<?= $countryCode ?>'] = [];
+    postcodePatterns['<?= $escaper->escapeHtml($countryCode) ?>'] = [];
     <?php foreach($patterns as $patternName => $pattern): ?>
-    postcodePatterns['<?= $countryCode ?>'].push({
+    postcodePatterns['<?= $escaper->escapeHtml($countryCode) ?>'].push({
         example: '<?= $pattern['example'] ?>',
         pattern: /<?= $pattern['pattern'] ?>/
     });
@@ -45,7 +45,7 @@ $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
         }
 
         if (!found) {
-            component.messages.push({type:'error', text: '<?= __('Not a valid postcode') ?>'});
+            component.messages.push({type:'error', text: '<?= $escaper->escapeHtml(__('Not a valid postcode')) ?>'});
             return false;
         }
 

@@ -15,28 +15,33 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 $location = $block->getLocation();
 ?>
 <div class="flex mb-8 p-4 hover:bg-black/5">
-    <?= $childRenderer->html($block, 'location.input', [
+    <?= /* @noEscape */ $childRenderer->html($block, 'location.input', [
         'location' => $location,
     ]) ?>
 
-    <label for="<?= $location->getId() ?>" class="cursor-pointer flex-1">
-        <?= $childRenderer->html($block, 'location.name', [
+    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="cursor-pointer flex-1">
+        <?= /* @noEscape */
+    $childRenderer->html($block, 'location.name', [
             'location' => $location,
         ]) ?>
 
-        <?= $childRenderer->html($block, 'location.pickup-details', [
+        <?= /* @noEscape */
+        $childRenderer->html($block, 'location.pickup-details', [
             'location' => $location,
         ]) ?>
 
-        <?= $childRenderer->html($block, 'location.address', [
+        <?= /* @noEscape */
+        $childRenderer->html($block, 'location.address', [
             'location' => $location,
         ]) ?>
 
-        <?= $childRenderer->html($block, 'location.business-hours', [
+        <?= /* @noEscape */
+        $childRenderer->html($block, 'location.business-hours', [
             'location' => $location,
         ]) ?>
 
-        <?= $childRenderer->html($block, 'location.additional', [
+        <?= /* @noEscape */
+        $childRenderer->html($block, 'location.additional', [
             'location' => $location,
         ]) ?>
     </label>

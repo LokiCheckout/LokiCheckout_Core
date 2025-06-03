@@ -17,15 +17,15 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $timeframe = $block->getTimeframe();
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <div class="float-right text-sm">
-        <?= $timeframe->getLabel() ?>
+        <?= $escaper->escapeHtml($timeframe->getLabel()) ?>
         <?php if ($timeframe->getPrice() > 0) : ?>
-            (+ <?= $priceFormatter->format($timeframe->getPrice()) ?>)
+            (+ <?= $escaper->escapeHtml($priceFormatter->format($timeframe->getPrice())) ?>)
         <?php endif; ?>
     </div>
 
     <div>
-        <?= $timeframe->getFromTime() ?> - <?= $timeframe->getToTime() ?>
+        <?= $escaper->escapeHtml($timeframe->getFromTime()) ?> - <?= $escaper->escapeHtml($timeframe->getToTime()) ?>
     </div>
 </div>

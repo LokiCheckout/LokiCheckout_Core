@@ -11,6 +11,6 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= $css('card mb-4') ?>">
-    <address><?= $html ?></address>
+<div class="<?= /* @noEscape */ $css('card mb-4') ?>">
+    <address><?= /* @noEscape */ $html ?></address>
 </div>

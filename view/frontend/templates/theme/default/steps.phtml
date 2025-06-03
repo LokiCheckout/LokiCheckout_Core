@@ -16,7 +16,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep()->getCode();
 ?>
-<div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
-    <?= $block->getChildHtml($currentStep) ?>
+<div class="<?= /* @noEscape */ $css('relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $block->getChildHtml($currentStep) ?>
 </div>

@@ -1,7 +1,7 @@
 <script>
     LokiComponentValidator.validators.email = function (component) {
         if (/\S+@\S+\.\S+/.test(component.value) === false) {
-            component.messages.push({type:'error', text: '<?= __('Invalid email') ?>'});
+            component.messages.push({type:'error', text: '<?= $escaper->escapeHtml(__('Invalid email')) ?>'});
             return false;
         }
 

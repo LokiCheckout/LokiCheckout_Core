@@ -13,14 +13,14 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $css('mb-8') ?>">
+<div class="<?= /* @noEscape */ $css('mb-8') ?>">
     <?php if ($viewModel->showSelectAddress()): ?>
-        <?= $block->getChildHtml('select') ?>
-        <?= $block->getChildHtml('toggle-select') ?>
+        <?= /* @noEscape */ $block->getChildHtml('select') ?>
+        <?= /* @noEscape */ $block->getChildHtml('toggle-select') ?>
     <?php endif; ?>
 
     <?php if($viewModel->isNewAddress()): ?>
-        <?= $block->getChildHtml('form-title') ?>
-        <?= $block->getChildHtml('form') ?>
+        <?= /* @noEscape */ $block->getChildHtml('form-title') ?>
+        <?= /* @noEscape */ $block->getChildHtml('form') ?>
     <?php endif; ?>
 </div>

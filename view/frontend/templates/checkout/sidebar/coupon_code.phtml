@@ -14,33 +14,33 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 // @todo: Separate in smaller templates
 $couponCode = $viewModel->getValue();
 ?>
-<div class="<?= $css('border-b border-gray-200') ?>">
+<div class="<?= /* @noEscape */ $css('border-b border-gray-200') ?>">
     <?php if (!empty($couponCode)): ?>
-        <p class="<?= $css('mb-4', 'current') ?>">
-            <span><?= $escaper->escapeHtml(__('Coupon code')) ?>: </span>
-            <strong><?= $couponCode ?></strong>
+        <p class="<?= /* @noEscape */ $css('mb-4', 'current') ?>">
+            <span><?= /* @noEscape */ $escaper->escapeHtml(__('Coupon code')) ?>: </span>
+            <strong><?= $escaper->escapeHtml($couponCode) ?></strong>
         </p>
         <button
             type="button"
-            class="<?= $css('btn btn-secondary', 'button-remove') ?>"
+            class="<?= /* @noEscape */ $css('btn btn-secondary', 'button-remove') ?>"
             @click="removeCouponCode"
-        ><?= __('Remove coupon code') ?></button>
+        ><?= $escaper->escapeHtml(__('Remove coupon code')) ?></button>
     <?php else: ?>
-        <details x-ref="details" :open="isOpen" class="<?= $css('group', 'details' ) ?>">
-            <summary class="<?= $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
-                <span><?= __('Apply Discount Code') ?></span>
+        <details x-ref="details" :open="isOpen" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
+            <summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
+                <span><?= $escaper->escapeHtml(__('Apply Discount Code')) ?></span>
                 <img
-                    alt="<?= __('Expand') ?>"
-                    src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
-                    class="<?= $css('inline-block group-open:rotate-180 transition-transform') ?>"
+                    alt="<?= $escaper->escapeHtml(__('Expand')) ?>"
+                    src="<?= /* @noEscape */ $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
+                    class="<?= /* @noEscape */ $css('inline-block group-open:rotate-180 transition-transform') ?>"
                     width="20"
                     height="20"
                 >
             </summary>
 
             <div>
-                <label class="<?= $css('block mb-3', 'label') ?>">
-                    <span class="<?= $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
+                <label class="<?= /* @noEscape */ $css('block mb-3', 'label') ?>">
+                    <span class="<?= /* @noEscape */ $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
                     <input
                         autocomplete="off"
                         name="coupon_code"
@@ -48,16 +48,16 @@ $couponCode = $viewModel->getValue();
                         x-ref="input"
                         :value="value"
                         @change="setValue"
-                        class="<?= $css('form-input w-full', 'input') ?>">
+                        class="<?= /* @noEscape */ $css('form-input w-full', 'input') ?>">
                 </label>
                 <button
                     type="button"
-                    class="<?= $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
+                    class="<?= /* @noEscape */ $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
                     @click="applyCouponCode"
-                ><?= __('Apply') ?></button>
+                ><?= $escaper->escapeHtml(__('Apply')) ?></button>
             </div>
         </details>
     <?php endif; ?>
 
-    <?= $block->getChildHtml('script') ?>
+    <?= /* @noEscape */ $block->getChildHtml('script') ?>
 </div>

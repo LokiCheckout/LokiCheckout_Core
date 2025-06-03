@@ -20,7 +20,7 @@ if ($checkoutState->getCustomerSession()->isLoggedIn()) {
     $title = 'Enter a New Address';
 }
 
-echo $templateRenderer->html(
+echo /* @noEscape */ $templateRenderer->html(
     $block,
     'Yireo_LokiCheckout::generic/title.phtml',
     ['title' => $title]

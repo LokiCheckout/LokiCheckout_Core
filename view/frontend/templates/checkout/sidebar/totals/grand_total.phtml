@@ -16,9 +16,9 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $total = $block->getTotal();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<dt class="total label <?= $css('font-bold', $total->getCode() . '-label') ?>">
-    <?= __(trim($total->getTitle())) ?>
+<dt class="total label <?= /* @noEscape */ $css('font-bold', $total->getCode() . '-label') ?>">
+    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
 </dt>
-<dd class="total value <?= $css('text-right', $total->getCode() . '-value') ?>">
-    <?= $priceFormatter->format($total->getValue()) ?>
+<dd class="total value <?= /* @noEscape */ $css('text-right', $total->getCode() . '-value') ?>">
+    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
 </dd>

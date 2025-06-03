@@ -8,8 +8,8 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var CssClass $css */
 ?>
 <img
-    src="<?= $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-right.svg'); ?>"
-    class="<?= $css('inline-block') ?>"
+    src="<?= /* @noEscape */ $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-right.svg'); ?>"
+    class="<?= /* @noEscape */ $css('inline-block') ?>"
     width="18"
     height="18"
     alt=""

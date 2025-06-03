@@ -15,19 +15,19 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
-<div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Payment Methods']) ?>
+<div class="<?= /* @noEscape */ $css('relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Payment Methods']) ?>
 
     <form
         data-type="field"
         x-ref="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
-        class="<?= $css('border border-transparent', 'container') ?>">
+        class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
-	    <ul class="<?= $css('', 'list') ?>">
+	    <ul class="<?= /* @noEscape */ $css('', 'list') ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
-                    <?= $blockRenderer->html(
+                    <?= /* @noEscape */ $blockRenderer->html(
                         $block,
                         'loki-checkout.payment.payment-methods.item',
                         [
@@ -38,11 +38,13 @@ $paymentMethods = $viewModel->getPaymentMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <div class="<?= $css('p-4', 'no-items') ?>">
-                <?= __('No payment methods available') ?>
+            <div class="<?= /* @noEscape */
+                    $css('p-4', 'no-items') ?>">
+                <?= $escaper->escapeHtml(__('No payment methods available')) ?>
             </div>
         <?php endif; ?>
     </form>
 
-    <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */
+                    $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
 </div>

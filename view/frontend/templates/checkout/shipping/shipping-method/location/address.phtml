@@ -13,8 +13,8 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 $location = $block->getLocation();
 $address = $location->getAddress();
 ?>
-<address class="<?= $css('mb-4') ?>">
-    <?= $address->getStreet() ?> <?= $address->getHouseNumber() ?>,
-    <?= $address->getPostcode() ?> <?= $address->getCity() ?>,
-    <?= $address->getCountryId() ?>
+<address class="<?= /* @noEscape */ $css('mb-4') ?>">
+    <?= $escaper->escapeHtml($address->getStreet()) ?> <?= $escaper->escapeHtml($address->getHouseNumber()) ?>,
+    <?= $escaper->escapeHtml($address->getPostcode()) ?> <?= $escaper->escapeHtml($address->getCity()) ?>,
+    <?= $escaper->escapeHtml($address->getCountryId()) ?>
 </address>

@@ -19,25 +19,25 @@ use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $viewModel->getShippingMethods();
 ?>
-<div class="<?= $css('relative w-full mb-8') ?>">
+<div class="<?= /* @noEscape */ $css('relative w-full mb-8') ?>">
     <?php if ($viewModel->isDisabled()) : ?>
-        <?= $blockRenderer->html($block, 'loki-checkout.utils.disabled-overlay') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.utils.disabled-overlay') ?>
     <?php endif; ?>
 
-    <?= $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
     <div
         id="shipping-methods"
         data-type="field"
         x-ref="field"
         aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
-        class="<?= $css('border border-transparent', 'container') ?>">
-        <?= $block->getChildHtml('before-methods') ?>
+        class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
+        <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
         <?php if (!empty($shippingMethods)): ?>
             <ul>
                 <?php foreach ($shippingMethods as $shippingMethod): ?>
                     <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
-                    <?= $blockRenderer->html(
+                    <?= /* @noEscape */ $blockRenderer->html(
                         $block,
                         'loki-checkout.shipping.shipping-methods.item',
                         [
@@ -49,13 +49,16 @@ $shippingMethods = $viewModel->getShippingMethods();
             </ul>
         <?php else: ?>
             <div class="p-4">
-                <?= __('No shipping methods available') ?>
+                <?= $escaper->escapeHtml(__('No shipping methods available')) ?>
             </div>
         <?php endif; ?>
-        <?= $block->getChildHtml('after-methods') ?>
+        <?= /* @noEscape */
+                    $block->getChildHtml('after-methods') ?>
     </div>
 
-    <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */
+                    $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
 
-    <?= $block->getChildHtml('script') ?>
+    <?= /* @noEscape */
+                    $block->getChildHtml('script') ?>
 </div>

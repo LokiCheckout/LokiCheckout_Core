@@ -19,25 +19,25 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $cartTotals = $viewModelFactory->create(CartTotals::class);
 $totals = $cartTotals->getTotals();
 ?>
-<div class="<?= $css('relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+<div class="<?= /* @noEscape */ $css('relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
 
-    <dl class="<?= $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
-        <?= $block->getChildHtml('before') ?>
+    <dl class="<?= /* @noEscape */ $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
+        <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
         <?php foreach ($totals as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
             <?php if ($childBlock) : ?>
-                <?= $childBlock->setData(['total' => $total])->toHtml() ?>
+                <?= /* @noEscape */ $childBlock->setData(['total' => $total])->toHtml() ?>
             <?php else: ?>
-                <dt class="<?= $css('font-medium', $total->getCode() . '-label') ?>">
-                    <?= __(trim($total->getTitle())) ?>
+                <dt class="<?= /* @noEscape */ $css('font-medium', $total->getCode() . '-label') ?>">
+                    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
                 </dt>
-                <dd class="<?= $css('text-right', $total->getCode() . '-value') ?>">
-                    <?= $priceFormatter->format($total->getValue()) ?>
+                <dd class="<?= /* @noEscape */ $css('text-right', $total->getCode() . '-value') ?>">
+                    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>
         <?php endforeach; ?>
-        <?= $block->getChildHtml('after') ?>
+        <?= /* @noEscape */ $block->getChildHtml('after') ?>
     </dl>
 </div>

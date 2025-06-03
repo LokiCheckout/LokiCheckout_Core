@@ -9,7 +9,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  * @var CssClass $css
  */
 ?>
-<div class="<?= $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>">
     <input
         type="radio"
         name="pickup_location"
@@ -18,6 +18,6 @@ use Yireo\LokiComponents\Util\Block\CssClass;
         :value="location.id"
         :id="location.id"
         @change="submitChecked"
-        class="<?= $css('mr-4', 'input') ?>"
+        class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
     />
 </div>

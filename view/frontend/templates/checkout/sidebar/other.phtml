@@ -13,6 +13,6 @@ if (empty($childHtml)) {
     return;
 }
 ?>
-<div class="<?= $css('loki-checkout-sidebar-other card p-8 my-4') ?>">
-    <?= $block->getChildHtml() ?>
+<div class="<?= /* @noEscape */ $css('loki-checkout-sidebar-other card p-8 my-4') ?>">
+    <?= /* @noEscape */ $block->getChildHtml() ?>
 </div>

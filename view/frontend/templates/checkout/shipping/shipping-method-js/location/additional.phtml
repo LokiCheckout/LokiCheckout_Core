@@ -24,8 +24,8 @@ if (empty($additionalContent)) {
 }
 ?>
 <details>
-    <summary><?= __('Additional information') ?></summary>
+    <summary><?= $escaper->escapeHtml(__('Additional information')) ?></summary>
     <div class="my-4 text-sm">
-        <?= $additionalContent ?>
+        <?= $escaper->escapeHtml($additionalContent) ?>
     </div>
 </details>

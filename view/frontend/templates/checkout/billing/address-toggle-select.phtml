@@ -13,11 +13,11 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 ?>
 <div>
     <button
-        class="<?= $css('btn btn-primary my-4') ?>"
+        class="<?= /* @noEscape */ $css('btn btn-primary my-4') ?>"
         x-text="buttonLabel"
         type="button"
         @click="toggle"
     >
-        <?= $viewModel->getButtonLabelNewAddress() ?>
+        <?= $escaper->escapeHtml($viewModel->getButtonLabelNewAddress()) ?>
     </button>
 </div>

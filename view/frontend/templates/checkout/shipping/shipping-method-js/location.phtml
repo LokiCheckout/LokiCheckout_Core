@@ -12,13 +12,13 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 ?>
 <div class="flex mb-8 p-4 hover:bg-black/5">
-    <?= $childRenderer->html($block, 'location.input') ?>
+    <?= /* @noEscape */ $childRenderer->html($block, 'location.input') ?>
 
     <label x-bind:for="location.id" class="cursor-pointer flex-1">
-        <?= $childRenderer->html($block, 'location.name') ?>
-        <?= $childRenderer->html($block, 'location.pickup-details') ?>
-        <?= $childRenderer->html($block, 'location.address') ?>
-        <?= $childRenderer->html($block, 'location.business-hours') ?>
-        <?= $childRenderer->html($block, 'location.additional') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.name') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.pickup-details') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.address') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.business-hours') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.additional') ?>
     </label>
 </div>

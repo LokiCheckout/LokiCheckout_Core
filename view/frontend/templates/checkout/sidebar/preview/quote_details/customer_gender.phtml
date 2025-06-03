@@ -15,7 +15,7 @@ if (empty($gender)) {
 }
 ?>
 <div>
-    <span><?= __('Gender') ?></span>:
-    <?= $gender ?>
+    <span><?= $escaper->escapeHtml(__('Gender')) ?></span>:
+    <?= $escaper->escapeHtml($gender) ?>
 </div>
 

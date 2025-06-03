@@ -16,7 +16,7 @@ if (empty($email)) {
 
 ?>
 <div>
-    <span><?= __('Email') ?></span>:
-    <?= $email ?>
+    <span><?= $escaper->escapeHtml(__('Email')) ?></span>:
+    <?= $escaper->escapeHtml($email) ?>
 </div>
 

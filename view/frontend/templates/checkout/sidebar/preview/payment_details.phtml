@@ -20,11 +20,11 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= $css('mb-4 relative') ?>">
-    <?= $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+<div class="<?= /* @noEscape */ $css('mb-4 relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
 
-    <span class="<?= $css('text-xl font-bold', 'title') ?>"><?= __('Payment Method') ?></span><br>
-    <?= $html ?>
-    <?= $block->getChildHtml() ?>
-    <!-- <?= $viewModel->getPaymentCode() ?> -->
+    <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
+    <?= /* @noEscape */ $html ?>
+    <?= /* @noEscape */ $block->getChildHtml() ?>
+    <!-- <?= $escaper->escapeHtml($viewModel->getPaymentCode()) ?> -->
 </div>

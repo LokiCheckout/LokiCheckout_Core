@@ -12,14 +12,14 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
 /** @var ViewModelFactory $viewModelFactory */
 
 ?>
-<div class="<?= $css('p-2') ?>">
+<div class="<?= /* @noEscape */ $css('p-2') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <div class="<?= $css('pb-2', 'item') ?>">
+        <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
             <input
                 type="checkbox"
                 id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
                 :checked="isChecked"
-                value="<?= $agreement->getAgreementId() ?>"
+                value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
                 @change="submitChecked"
                 <?php if ($viewModel->getValue() === true): ?>
                     checked
@@ -27,18 +27,18 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
                 <?php if ($viewModel->isDisabled()): ?>
                     disabled="disabled"
                 <?php endif ?>
-                class="<?= $css('form-checkbox mt-2 float-left disabled:bg-zinc-100', 'input') ?>"
+                class="<?= /* @noEscape */ $css('form-checkbox mt-2 float-left disabled:bg-zinc-100', 'input') ?>"
             />
 
-            <div class="<?= $css('inline-block pl-4', 'label-block') ?>">
+            <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
                 <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
-                       class="<?= $css('', 'label') ?>">
-                    <?= $agreement->getCheckboxText() ?>
+                       class="<?= /* @noEscape */ $css('', 'label') ?>">
+                    <?= $escaper->escapeHtml($agreement->getCheckboxText()) ?>
                 </label>
                 <br/>
 
-                <span class="<?= $css('italic', 'content') ?>">
-                    <?= $agreement->getContent() ?>
+                <span class="<?= /* @noEscape */ $css('italic', 'content') ?>">
+                    <?= $escaper->escapeHtml($agreement->getContent()) ?>
                 </span>
             </div>
         </div>

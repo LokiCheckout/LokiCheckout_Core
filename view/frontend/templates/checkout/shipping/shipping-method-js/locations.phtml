@@ -15,7 +15,7 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 ?>
 <div>
     <template x-if="hasNoLocations">
-        <div class="<?= $css('p-2', 'empty') ?>"><?= __('No locations found') ?></div>
+        <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
     </template>
 
     <template x-for="location in locations">
@@ -26,7 +26,7 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
     </template>
 
     <div @click="expandLocations">
-        <div class="inline-block w-4"><?= $imageOutput->get('Yireo_LokiCheckout::images/angle-down.svg') ?></div>
-        <span class="text-sm"><?= __('Show more locations') ?></span>
+        <div class="inline-block w-4"><?= $escaper->escapeHtml($imageOutput->get('Yireo_LokiCheckout::images/angle-down.svg')) ?></div>
+        <span class="text-sm"><?= $escaper->escapeHtml(__('Show more locations')) ?></span>
     </div>
 </div>

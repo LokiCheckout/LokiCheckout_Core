@@ -15,7 +15,7 @@ if (empty($dob)) {
 }
 ?>
 <div>
-    <span><?= __('Date of Birth') ?></span>:
-    <?= $dob ?>
+    <span><?= $escaper->escapeHtml(__('Date of Birth')) ?></span>:
+    <?= $escaper->escapeHtml($dob) ?>
 </div>
 
