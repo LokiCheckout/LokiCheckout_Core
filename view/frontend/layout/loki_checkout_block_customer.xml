@@ -15,6 +15,7 @@
                 template="Yireo_LokiFieldComponents::form/field.phtml">
                 <arguments>
                     <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
+                    <argument name="autocomplete" xsi:type="string">email</argument>
                 </arguments>
             </block>
 
@@ -27,13 +28,18 @@
                     <argument name="option_model" xsi:type="object">
                         Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel
                     </argument>
+                    <argument name="autocomplete" xsi:type="string">sex</argument>
                 </arguments>
             </block>
 
             <block
                 name="loki-checkout.customer.customer_dob" as="customer_dob"
                 ifconfig="customer/address/dob_show"
-                template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                template="Yireo_LokiFieldComponents::form/field.phtml">
+                <arguments>
+                    <argument name="autocomplete" xsi:type="string">bday</argument>
+                </arguments>
+            </block>
         </block>
     </body>
 </page>

@@ -54,32 +54,50 @@
                             Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
                         <argument name="max_length" xsi:type="number">6</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping honorific-prefix</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.shipping.address.firstname" as="firstname"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping given-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.middlename" as="middlename"
                     ifconfig="customer/address/middlename_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping additional-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.lastname" as="lastname"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping family-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.suffix" as="suffix"
                     ifconfig="customer/address/suffix_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping honorific-suffix</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.street0" as="street0"
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">Street</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping address-line1</argument>
                     </arguments>
                 </block>
 
@@ -88,6 +106,7 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping address-line2</argument>
                     </arguments>
                 </block>
 
@@ -96,6 +115,7 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping address-line3</argument>
                     </arguments>
                 </block>
 
@@ -104,6 +124,7 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping address-line4</argument>
                     </arguments>
                 </block>
 
@@ -112,12 +133,17 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="is_required" xsi:type="boolean">true</argument>
+                        <argument name="autocomplete" xsi:type="string">shipping postal-code</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.shipping.address.city" as="city"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping address-level2</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.region" as="region"
@@ -127,6 +153,7 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
                         </argument>
+                        <argument name="autocomplete" xsi:type="string">shipping address-level1</argument>
                     </arguments>
                 </block>
 
@@ -138,18 +165,27 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
                         </argument>
+                        <argument name="autocomplete" xsi:type="string">shipping country</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.shipping.address.company" as="company"
                     ifconfig="customer/address/company_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping organization</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.telephone" as="telephone"
                     ifconfig="customer/address/telephone_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">shipping tel</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.address.fax" as="fax"
