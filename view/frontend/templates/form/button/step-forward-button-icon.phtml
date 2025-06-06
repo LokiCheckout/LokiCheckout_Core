@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
