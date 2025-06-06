@@ -51,33 +51,50 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
+                        <argument name="autocomplete" xsi:type="string">billing honorific-prefix</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing.address.firstname" as="firstname"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing given-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.middlename" as="middlename"
                     ifconfig="customer/address/middlename_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
-
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing additional-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.lastname" as="lastname"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing family-name</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.suffix" as="suffix"
                     ifconfig="customer/address/suffix_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing honorific-suffix</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.street0" as="street0"
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">Street</argument>
+                        <argument name="autocomplete" xsi:type="string">billing address-line1</argument>
                     </arguments>
                 </block>
 
@@ -86,6 +103,7 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">billing address-line2</argument>
                     </arguments>
                 </block>
 
@@ -94,6 +112,7 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">billing address-line3</argument>
                     </arguments>
                 </block>
 
@@ -102,16 +121,26 @@
                     template="Yireo_LokiFieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
+                        <argument name="autocomplete" xsi:type="string">billing address-line4</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing.address.postcode" as="postcode"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="is_required" xsi:type="boolean">true</argument>
+                        <argument name="autocomplete" xsi:type="string">billing postal-code</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.city" as="city"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing address-level2</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.region" as="region"
@@ -121,6 +150,7 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\RegionOptionModel
                         </argument>
+                        <argument name="autocomplete" xsi:type="string">billing address-level1</argument>
                     </arguments>
                 </block>
 
@@ -132,18 +162,27 @@
                         <argument name="option_model" xsi:type="object">
                             Yireo\LokiCheckout\ViewModel\OptionModel\CountryOptionModel
                         </argument>
+                        <argument name="autocomplete" xsi:type="string">billing country</argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing.address.company" as="company"
                     ifconfig="customer/address/company_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing organization</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.telephone" as="telephone"
                     ifconfig="customer/address/telephone_show"
-                    template="Yireo_LokiFieldComponents::form/field.phtml"/>
+                    template="Yireo_LokiFieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="autocomplete" xsi:type="string">billing tel</argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.fax" as="fax"
