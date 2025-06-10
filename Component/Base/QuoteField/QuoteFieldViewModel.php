@@ -13,11 +13,9 @@ abstract class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFie
     public function getFieldLabel(): string
     {
         $parentBlock = $this->getBlock();
-        if ($parentBlock) {
-            $fieldLabel = (string)$parentBlock->getFieldLabel();
-            if ($fieldLabel !== '' && $fieldLabel !== '0') {
-                return $fieldLabel;
-            }
+        $fieldLabel = (string)$parentBlock->getFieldLabel();
+        if ($fieldLabel !== '' && $fieldLabel !== '0') {
+            return $fieldLabel;
         }
 
         $attributeLabel = $this->getContext()->getAttributeProvider()->getAttributeLabel($this->getFieldName());

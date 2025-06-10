@@ -6,6 +6,7 @@ namespace Yireo\LokiCheckout\Util\Component;
 use Magento\Eav\Model\Config as EavConfig;
 use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magento\Framework\App\ObjectManager;
+use RuntimeException;
 
 class AttributeProvider
 {
@@ -17,7 +18,7 @@ class AttributeProvider
     public function getAttribute(string $fieldName): AbstractAttribute
     {
         if ($fieldName === '' || $fieldName === '0') {
-            throw new \RuntimeException('No field name defined for class "' . get_class($this) . '"');
+            throw new RuntimeException('No field name defined for class "' . get_class($this) . '"');
         }
 
         $eavConfig = ObjectManager::getInstance()->get(EavConfig::class);
@@ -26,6 +27,7 @@ class AttributeProvider
             return $attribute;
         }
 
-        throw new \RuntimeException('Unable to load attribute "' . $fieldName . '"');
+        // @phpstan-ignore deadCode.unreachable
+        throw new RuntimeException('Unable to load attribute "' . $fieldName . '"');
     }
 }

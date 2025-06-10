@@ -48,7 +48,7 @@ class StreetLinesFactory
 
             if (preg_match('/^(\d+)(.*)$/', $streetPart, $match)) {
                 $newStreetParts[] = $match[1];
-                if (isset($match[2]) && ($match[2] !== '' && $match[2] !== '0')) {
+                if (isset($match[2]) && ($match[2] !== '' && $match[2] !== '0')) { // @phpstan-ignore isset.offset
                     $newStreetParts[] = $match[2];
                 }
                 continue;

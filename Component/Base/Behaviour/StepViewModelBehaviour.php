@@ -3,7 +3,11 @@
 namespace Yireo\LokiCheckout\Component\Base\Behaviour;
 
 use Exception;
+use Yireo\LokiComponents\Component\ComponentViewModelInterface;
 
+/**
+ * @method ComponentViewModelInterface getContext()
+ */
 trait StepViewModelBehaviour
 {
     protected string $step = '';

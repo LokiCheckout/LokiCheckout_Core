@@ -61,10 +61,6 @@ class SelectRepository extends ComponentRepository
         }
 
         $customerAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
-        if (false === $customerAddress instanceof AddressInterface) {
-            return;
-        }
-
         $quote = $this->getContext()->getCheckoutState()->getQuote();
 
         /** @var Address $address */

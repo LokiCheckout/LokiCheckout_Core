@@ -15,6 +15,7 @@ class PostcodePatterns implements ArgumentInterface
     public function getConfiguration(): array
     {
         return $this->postcodeConfig->getPostCodes();
+        // @todo: Why is this commented out?
         foreach ($postcodePatterns as $countryCode => $patterns) {
             foreach ($patterns as $patternName => $patternData) {
                 $patterns[$patternName]['pattern'] = $this->fromPhpRegexToJsRegex($patternData['pattern']);

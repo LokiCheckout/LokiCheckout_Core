@@ -122,11 +122,7 @@ class ShippingMethodsRepository extends ComponentRepository
             return $this->getDefaultShippingMethod();
         }
 
-        if (strlen($shippingMethodCode) > 0) {
-            return $shippingMethodCode;
-        }
-
-        return $this->getDefaultShippingMethod();
+        return $shippingMethodCode;
     }
 
     private function getDefaultShippingMethod(): string
