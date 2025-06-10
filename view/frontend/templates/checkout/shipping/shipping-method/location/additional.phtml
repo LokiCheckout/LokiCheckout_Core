@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
+
+/** @var CssClass $css */
+/** @var Template $block */
+/** @var Escaper $escaper */
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Location\Location;
 use Yireo\LokiComponents\Util\Block\CssClass;
@@ -23,9 +28,14 @@ if (empty($additionalContent)) {
     return;
 }
 ?>
-<details>
-    <summary><?= $escaper->escapeHtml(__('Additional information')) ?></summary>
-    <div class="my-4 text-sm">
+<details class="<?= /* @noEscape */
+$css('') ?>">
+    <summary class="<?= /* @noEscape */
+$css('', 'summary') ?>">
+        <?= $escaper->escapeHtml(__('Additional information')) ?>
+    </summary>
+    <div class="<?= /* @noEscape */
+$css('my-4 text-sm', 'content') ?>">
         <?= $escaper->escapeHtml($additionalContent) ?>
     </div>
 </details>

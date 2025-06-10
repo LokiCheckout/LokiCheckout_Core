@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Cart\ShippingMethod;
 use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
@@ -10,6 +11,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */

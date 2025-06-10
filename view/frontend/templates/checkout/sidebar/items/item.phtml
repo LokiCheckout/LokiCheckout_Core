@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
@@ -9,6 +10,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiCheckout\ViewModel\PriceFormatter;
 use Yireo\LokiCheckout\ViewModel\ProductImage;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ChildRenderer $childRenderer */

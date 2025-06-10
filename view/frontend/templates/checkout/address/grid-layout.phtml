@@ -1,8 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Yireo\LokiComponents\Util\Block\CssClass;
 use Magento\Framework\View\Element\Template;
 
+/** @var CssClass $css */
 /** @var Template $block */
 ?>
-<div class="hidden"></div>
+<div class="<?= /* @noEscape */
+$css('hidden') ?>"></div>

@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Yireo\LokiComponents\Util\Block\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\BlockRenderer;
@@ -8,6 +10,8 @@ use Yireo\LokiMapComponents\Component\Base\Map\MapViewModel;
 use Yireo\LokiMapComponents\Map\Marker;
 use Yireo\LokiMapComponents\Map\MarkerFactory;
 
+/** @var CssClass $css */
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var MapViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
@@ -22,15 +26,20 @@ foreach ($locations as $location) {
     $markers[] = $markerFactory->createFromLocation($location);
 }
 ?>
-<div>
-    <div class="flex max-h-96">
+<div class="<?= /* @noEscape */
+$css('') ?>">
+    <div class="<?= /* @noEscape */
+$css('flex max-h-96', 'inner') ?>">
         <?= /* @noEscape */ $blockRenderer->html($block, 'loki-map-components.map-container', []) ?>
-        <div class="w-1/4 px-4 grid gap-4 overflow-auto">
+        <div class="<?= /* @noEscape */
+$css('w-1/4 px-4 grid gap-4 overflow-auto', 'grid') ?>">
             <?php foreach ($markers as $marker) : ?>
-                <a href="#" class="bg-white p-2 hover:bg-amber-100" @click="jumpTo" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
+                <a href="#" class="<?= /* @noEscape */
+$css('bg-white p-2 hover:bg-amber-100', 'anchor') ?>" @click="jumpTo" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
                     <strong><?= $escaper->escapeHtml($marker->getTitle()) ?></strong><br/>
                     <?= $escaper->escapeHtml($marker->getAddress()->render()) ?><br/>
-                    <button class="btn btn-primary btn-small" @click="saveMarker" data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">Select</button>
+                    <button class="<?= /* @noEscape */
+$css('btn btn-primary btn-small', 'button') ?>" @click="saveMarker" data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">Select</button>
                 </a>
             <?php endforeach; ?>
         </div>

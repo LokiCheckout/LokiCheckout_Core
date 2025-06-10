@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Payment\Api\Data\PaymentMethodInterface;
 use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
@@ -9,6 +10,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var BlockRenderer $blockRenderer */
@@ -63,7 +65,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 title="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
                 class="<?= /* @noEscape */
             $css('', 'label') ?>">
-                <?= $escaper->escapeHtml($paymentMethod->getTitle()) ?>
+                <?= /* @noEscape */ $paymentMethod->getTitle() ?>
             </label>
         </div>
 
@@ -84,7 +86,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                     ['method' => $code]
                 ) ?>
 
-                <?= $escaper->escapeHtml($viewModel->getPaymentInstructions($code)) ?>
+                <?= /* @noEscape */ $viewModel->getPaymentInstructions($code) ?>
             </div>
         <?php endif; ?>
     </div>

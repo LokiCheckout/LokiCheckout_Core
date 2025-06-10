@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\BillingAddress\BillingAddressViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Util\Block\BlockRenderer;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var BillingAddressViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */

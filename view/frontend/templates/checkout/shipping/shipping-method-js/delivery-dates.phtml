@@ -1,17 +1,18 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Shipment\DeliveryDate;
 use Yireo\LokiComponents\Util\Block\ChildRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 
-/**
- * @var Template $block
- * @var ChildRenderer $childRenderer
- * @var CssClass $css
- * @var DeliveryDate[] $deliveryDates
- */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+/** @var DeliveryDate[] $deliveryDates */
+
 $deliveryDates = $block->getDeliveryDates();
 ?>
 <div class="<?= /* @noEscape */ $css('py-4') ?>">

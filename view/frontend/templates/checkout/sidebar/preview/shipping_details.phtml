@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails\ShippingDetailsViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ShippingDetailsViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */

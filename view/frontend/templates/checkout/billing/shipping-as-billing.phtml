@@ -1,11 +1,13 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ShippingAsBillingViewModel $viewModel */

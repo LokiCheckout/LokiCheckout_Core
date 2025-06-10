@@ -1,17 +1,17 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Util\Block\ChildRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
-/**
- * @var Template $block
- * @var ChildRenderer $childRenderer
- * @var CssClass $css
- * @var ImageOutput $imageOutput
- */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+/** @var ImageOutput $imageOutput */
 ?>
 <div>
     <template x-if="hasNoLocations">

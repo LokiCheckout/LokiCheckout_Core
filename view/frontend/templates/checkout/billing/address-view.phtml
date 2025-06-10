@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormViewModel;
 use Yireo\LokiComponents\Util\Block\CssClass;
 
+/** @var Template $block */
 /** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
 $html = $viewModel->getHtml();

@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
+
+/** @var CssClass $css */
+/** @var Template $block */
+/** @var Escaper $escaper */
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Location\Location;
 use Yireo\LokiComponents\Location\Address\BusinessHours;
@@ -17,9 +22,14 @@ if (false === $businessHours instanceof BusinessHours) {
     return;
 }
 ?>
-<details>
-    <summary><?= $escaper->escapeHtml(__('Show opening hours')) ?></summary>
-    <div class="grid grid-cols-2 gap-2 mb-4">
+<details class="<?= /* @noEscape */
+$css('') ?>">
+    <summary class="<?= /* @noEscape */
+$css('', 'summary') ?> ?>">
+        <?= $escaper->escapeHtml(__('Show opening hours')) ?>
+    </summary>
+    <div class="<?= /* @noEscape */
+$css('grid grid-cols-2 gap-2 mb-4', 'content') ?>">
         <?php foreach ($businessHours->get() as $businessHourSegment): ?>
             <div><?= $escaper->escapeHtml(__($businessHourSegment->getDay())) ?></div>
             <div>

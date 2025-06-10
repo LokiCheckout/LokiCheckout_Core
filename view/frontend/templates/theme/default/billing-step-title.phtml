@@ -17,5 +17,4 @@ if ($checkoutState->getQuote()->isVirtual()) {
     return;
 }
 
-echo
-$templateRenderer->html($block, 'Yireo_LokiCheckout::generic/title.phtml', ['title' => 'Billing']);
+echo /* @noEscape */ $templateRenderer->html($block, 'Yireo_LokiCheckout::generic/title.phtml', ['title' => 'Billing']);

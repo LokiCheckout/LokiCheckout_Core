@@ -1,12 +1,13 @@
 <?php declare(strict_types=1);
 
+use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Config\Config;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 
-/**
- * @var ViewModelFactory $viewModelFactory
- * @var Config $config
- */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory **/
+/** @var Config $config **/
+
 $config = $viewModelFactory->create(Config::class);
 ?>
 <script>

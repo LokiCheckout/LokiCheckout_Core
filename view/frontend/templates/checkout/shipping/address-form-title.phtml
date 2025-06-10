@@ -12,8 +12,8 @@ use Yireo\LokiComponents\Util\Block\TemplateRenderer;
 /** @var TemplateRenderer $templateRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
 
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
 $title = 'Enter your Shipping Address';
 
 if ($checkoutState->getCustomerSession()->isLoggedIn()) {

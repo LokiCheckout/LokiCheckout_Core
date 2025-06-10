@@ -20,5 +20,5 @@ if (empty($icon)) {
 }
 ?>
 <div class="<?= /* @noEscape */ $css('inline-block mr-2 w-8 drop-shadow-2xl') ?>">
-    <?= $escaper->escapeHtml($paymentMethodIcon->getIcon($paymentMethodCode)) ?>
+    <?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode) ?>
 </div>

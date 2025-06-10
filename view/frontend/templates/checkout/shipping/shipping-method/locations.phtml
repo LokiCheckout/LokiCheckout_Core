@@ -2,20 +2,21 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
 use Yireo\LokiComponents\Location\Location;
 use Yireo\LokiComponents\Factory\ViewModelFactory;
 use Yireo\LokiComponents\Util\Block\ChildRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 
-/**
- * @var Template $block
- * @var ChildRenderer $childRenderer
- * @var CssClass $css
- * @var Location[] $locations
- * @var ViewModelFactory $viewModelFactory
- * @var ImageOutput $imageOutput
- */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Location[] $locations */
+/** @var ImageOutput $imageOutput */
+
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 $locations = $block->getLocations();
 ?>

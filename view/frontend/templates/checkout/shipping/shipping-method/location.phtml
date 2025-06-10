@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiComponents\Location\Location;
 use Yireo\LokiComponents\Util\Block\ChildRenderer;
@@ -14,12 +18,14 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $location = $block->getLocation();
 ?>
-<div class="flex mb-8 p-4 hover:bg-black/5">
+<div class="<?= /* @noEscape */
+$css('flex mb-8 p-4 hover:bg-black/5') ?>">
     <?= /* @noEscape */ $childRenderer->html($block, 'location.input', [
         'location' => $location,
     ]) ?>
 
-    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="cursor-pointer flex-1">
+    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= /* @noEscape */
+    $css('cursor-pointer flex-1', 'label') ?>">
         <?= /* @noEscape */
     $childRenderer->html($block, 'location.name', [
             'location' => $location,
