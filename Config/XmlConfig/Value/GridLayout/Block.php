@@ -24,11 +24,8 @@ class Block
 
     public function getGridClass(): string
     {
-        if (false === $this->colSpan > 0) {
-            $this->colSpan = 6;
-        }
-
-        $gridClass = 'col-span-' . $this->colSpan;
+        $colSpan = $this->getColSpan();
+        $gridClass = 'col-span-' . $colSpan;
         if ($this->mdColSpan > 0) {
             $gridClass .= ' md:col-span-' . $this->mdColSpan;
         }
@@ -38,6 +35,10 @@ class Block
 
     public function getColSpan(): int
     {
+        if (false === $this->colSpan > 0) {
+            return 6;
+        }
+
         return $this->colSpan;
     }
 
@@ -45,5 +46,4 @@ class Block
     {
         return $this->mdColSpan;
     }
-
 }
