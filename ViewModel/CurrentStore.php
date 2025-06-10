@@ -16,12 +16,16 @@ class CurrentStore implements ArgumentInterface
     public function getLocale(): string
     {
         /** @var Store $store */
-        $store =$this->storeManager->getStore();
+        $store = $this->storeManager->getStore();
+
         return $store->getLocaleCode();
     }
 
     public function getCurrency(): string
     {
-        return $this->storeManager->getStore()->getCurrentCurrency()->getCode();
+        /** @var Store $store */
+        $store = $this->storeManager->getStore();
+
+        return $store->getCurrentCurrency()->getCode();
     }
 }
