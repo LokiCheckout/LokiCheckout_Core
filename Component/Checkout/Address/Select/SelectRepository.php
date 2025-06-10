@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Address\Select;
 
 use Magento\Customer\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
@@ -65,6 +66,8 @@ class SelectRepository extends ComponentRepository
         }
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
+
+        /** @var Address $address */
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $address->importCustomerAddressData($customerAddress);
         $address->setCustomerAddressId($customerAddress->getId());

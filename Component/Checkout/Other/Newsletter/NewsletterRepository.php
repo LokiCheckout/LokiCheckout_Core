@@ -3,6 +3,7 @@
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
 
 use Magento\Newsletter\Model\Subscriber;
+use Magento\Store\Model\Website;
 use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
 
 /**
@@ -74,7 +75,9 @@ class NewsletterRepository extends FieldRepository
 
     private function isCustomerSubscribed(): bool
     {
-        $storeIds = $this->getContext()->getStoreManager()->getWebsite()->getStoreIds();
+        /** @var Website $website */
+        $website = $this->getContext()->getStoreManager()->getWebsite();
+        $storeIds = $website->getStoreIds();
         $connection = $this->getContext()->getResourceConnection()->getConnection();
         $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
         $select = $connection
@@ -94,7 +97,9 @@ class NewsletterRepository extends FieldRepository
             return false;
         }
 
-        $storeIds = $this->getContext()->getStoreManager()->getWebsite()->getStoreIds();
+        /** @var Website $website */
+        $website = $this->getContext()->getStoreManager()->getWebsite();
+        $storeIds = $website->getStoreIds();
         $connection = $this->getContext()->getResourceConnection()->getConnection();
         $select = $connection
             ->select()

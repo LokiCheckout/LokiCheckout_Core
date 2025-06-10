@@ -49,7 +49,6 @@ class XmlConfig extends DataConfig
     }
 
     /**
-     * @param string $themeName
      * @param array $themeData
      * @return Theme
      */

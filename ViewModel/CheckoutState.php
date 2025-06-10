@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\ViewModel;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\UrlFactory;
@@ -87,6 +88,7 @@ class CheckoutState implements ArgumentInterface
             throw new RedirectException($redirectUrl);
         }
 
+        /** @var HttpResponse $response */
         $response = $this->responseFactory->create();
         $response->setRedirect($redirectUrl);
         $response->sendResponse();

@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton;
 
+use Magento\Quote\Model\Quote;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 use Yireo\LokiFieldComponents\Util\ButtonInterface;
@@ -32,6 +33,8 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
     public function getButtonLabel(): string
     {
         $buttonLabelWithoutPayment = trim((string)$this->getBlock()->getButtonLabelWithoutPayment());
+
+        /** @var Quote $quote */
         $quote = $this->getContext()->getQuote();
 
         if ($buttonLabelWithoutPayment && false === $quote->getGrandTotal() > 0) {

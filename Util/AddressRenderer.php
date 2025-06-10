@@ -5,7 +5,7 @@ namespace Yireo\LokiCheckout\Util;
 use Magento\Customer\Block\Address\Renderer\RendererInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
-use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 
 class AddressRenderer
 {
@@ -15,7 +15,7 @@ class AddressRenderer
     ) {
     }
 
-    public function getHtml(AddressInterface $address): string
+    public function getHtml(Address $address): string
     {
         $address = $address->getDataModel(0, 0);
         $addressData = $this->addressMapper->toFlatArray($address);

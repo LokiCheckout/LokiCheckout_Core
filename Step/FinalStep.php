@@ -6,9 +6,13 @@ use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Validator\Exception;
 use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
+use Magento\Quote\Model\Quote;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
@@ -33,6 +37,11 @@ class FinalStep
     ) {
     }
 
+    /**
+     * @throws LocalizedException
+     * @throws NoSuchEntityException
+     * @throws Exception
+     */
     public function validate(): true|array
     {
         return $this->quoteValidator->validate();
@@ -58,6 +67,7 @@ class FinalStep
         $this->updateCheckoutSessionFromCart($quote);
 
         if ($orderId !== 0) {
+            /** @var Order $order */
             $order = $this->orderRepository->get($orderId);
             $this->dispatchCheckoutTypeOnepageSaveOrderAfter($order);
             $this->updateCheckoutSessionFromOrder($order);
@@ -100,6 +110,7 @@ class FinalStep
             return;
         }
 
+        /** @var Quote $quote */
         $quote->setCustomerId(0)
             ->setCustomerEmail($quote->getBillingAddress()->getEmail())
             ->setCustomerIsGuest(true)
@@ -115,7 +126,7 @@ class FinalStep
             ->clearHelperData();
     }
 
-    private function updateCheckoutSessionFromOrder(OrderInterface $order): void
+    private function updateCheckoutSessionFromOrder(Order $order): void
     {
         $quote = $this->checkoutState->getQuote();
         $redirectUrl = $quote->getPayment()->getOrderPlaceRedirectUrl();
@@ -127,7 +138,7 @@ class FinalStep
             ->setLastOrderStatus($order->getStatus());
     }
 
-    private function sendMail(OrderInterface $order): void
+    private function sendMail(Order $order): void
     {
         $quote = $this->checkoutState->getQuote();
         $redirectUrl = $quote->getPayment()->getOrderPlaceRedirectUrl();

@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
 
 use InvalidArgumentException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\DataObject;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
@@ -84,6 +85,10 @@ class ShippingDetailsViewModel extends CheckoutViewModel
 
     private function getMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string
     {
+        if (false === $carrier instanceof DataObject) {
+            return '';
+        }
+
         $carrierMethods = $carrier->getAllowedMethods();
         foreach ($carrierMethods as $carrierCode => $carrierLabel) {
             if ($carrierMethod === $carrierCode) {

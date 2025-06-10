@@ -2,7 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Shipping\BillingAsShipping;
 
-use Yireo\LokiCheckout\Component\Checkout\AddressForm\AddressFormContext;
+use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormContext;
 use Yireo\LokiComponents\Component\ComponentRepository;
 
 /**
@@ -28,7 +28,7 @@ class BillingAsShippingRepository extends ComponentRepository
         $billingAsShipping = (bool)$value;
         $address = $quote->getShippingAddress();
         $address->setSameAsBilling((int)$billingAsShipping);
-        $this->getContext()->getCheckoutState()->saveQuote()($quote);
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
 
         if ($billingAsShipping) {
             $sameAddressService = $this->getContext()->getSameAddressService();

@@ -4,9 +4,11 @@ namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
 
 /**
  * @method PaymentMethodsContext getContext()
+ * @method PaymentMethodsRepository getRepository()
  */
 class PaymentMethodsViewModel extends CheckoutViewModel
 {
