@@ -4,17 +4,20 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
+use Yireo\LokiComponents\Util\Block\BlockRenderer;
 use Yireo\LokiComponents\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var CouponCodeViewModel $viewModel */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var BlockRenderer $blockRenderer */
 
 // @todo: Separate in smaller templates
 $couponCode = $viewModel->getValue();
 ?>
-<div class="<?= /* @noEscape */ $css('border-b border-gray-200') ?>">
+<div class="<?= /* @noEscape */ $css('border-b border-gray-200 relative') ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <?php if (!empty($couponCode)): ?>
         <p class="<?= /* @noEscape */ $css('mb-4', 'current') ?>">
             <span><?= /* @noEscape */ $escaper->escapeHtml(__('Coupon code')) ?>: </span>
