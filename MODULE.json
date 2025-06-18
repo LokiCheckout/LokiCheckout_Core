@@ -15,11 +15,12 @@
         "Magento_Shipping",
         "Magento_Store",
         "Magento_Vault",
-        "Yireo_LokiComponents",
-        "Yireo_LokiFieldComponents",
         "Yireo_CspUtilities",
         "Yireo_HyvaThemeAutoRegistration",
-        "Yireo_IntegrationTestHelper"
+        "Yireo_IntegrationTestHelper",
+        "Yireo_LokiComponents",
+        "Yireo_LokiFieldComponents",
+        "Yireo_LokiMapComponents"
     ],
     "components": [
         "loki-checkout.steps",
