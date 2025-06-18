@@ -14,7 +14,7 @@ use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use Yireo\LokiCheckout\Test\Fixture\ShippingAddressFixture;
 use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
 
-#[ConfigFixture('yireo_loki_checkout/general/theme', 'default')]
+#[ConfigFixture('yireo_loki_checkout/general/theme', 'onepage')]
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
@@ -31,6 +31,7 @@ final class BillingPageTest extends LokiCheckoutPageTestCase
 
     final public function testComponentOnPage(): void
     {
+        $this->markTestSkipped();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

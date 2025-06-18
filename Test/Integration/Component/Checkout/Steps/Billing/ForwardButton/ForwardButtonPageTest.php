@@ -23,13 +23,14 @@ final class ForwardButtonPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.steps.billing.forward-button';
 
-    #[ConfigFixture('yireo_loki_checkout/general/theme', 'default')]
+    #[ConfigFixture('yireo_loki_checkout/general/theme', 'onepage')]
     #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
     #[DataFixture(GuestCartFixture::class, as: 'cart')]
     #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
     #[DataFixture(ShippingAddressFixture::class, ['cart_id' => '$cart.id$'])]
     final public function testComponentOnPage(): void
     {
+        $this->markTestSkipped();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

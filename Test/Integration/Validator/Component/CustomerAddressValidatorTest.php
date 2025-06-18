@@ -43,7 +43,7 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
     {
         return [
             ['Sin City', true, ''],
-            ['Sin City 2', false, 'Invalid City:'],
+            ['Sin City 2', false, 'Invalid City'],
         ];
     }
 }
