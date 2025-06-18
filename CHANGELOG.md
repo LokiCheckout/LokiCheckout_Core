@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.4] - 18 June 2025
+### Fixed
+- Add loader to coupon code box
+- Fixes for Phpstan level 4
+- Add escaping of variables
+- Move debug icon to SVG file
+- Autocomplete fixes for street, region and city
+- Use Loki test-case in Playwright to detect JS errors automatically
+- Rewrite @helpers to @loki in Playwright tests
+- Draft of ApplePay behaviour
+- Make sure success URL is a string
+- Enhance workflow of errors during final stage
+- PHPUnit behaving strange with skipDispatchToCheckout protected variable
+- Remove old deprecated trait
+- Remove old commented function
+
 ## [1.0.3] - 22 May 2025
 ### Fixed
 - Register `Yireo_LokiFieldComponents` as a checkout module
