@@ -2,19 +2,17 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
 
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
-use Yireo\LokiCheckout\Exception\BlockNotFoundException;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
 
 class GridLayout
 {
     public function __construct(
         private readonly string $name,
         private readonly string $label,
-        private readonly string $countryId = '',
         private readonly int $defaultSortOrder = 99,
         private readonly int $defaultColSpan = 6,
         private readonly int $defaultMdColSpan = 6,
-        private readonly array $blocks = []
+        private readonly array $grids = []
     ) {
     }
 
@@ -28,38 +26,47 @@ class GridLayout
         return $this->label;
     }
 
-    public function getCountryId(): string
-    {
-        return $this->countryId;
-    }
-
     public function getDefaultSortOrder(): int
     {
         return $this->defaultSortOrder;
     }
 
     /**
-     * @return Block[]
+     * @return Grid[]
      */
-    public function getBlocks(): array
+    public function getGrids(): array
     {
-        return $this->blocks;
+        return $this->grids;
     }
 
-    /**
-     * @param string $blockAlias
-     * @return Block
-     * @throws BlockNotFoundException
-     */
-    public function getBlock(string $blockAlias): Block
+    public function getGridByName(string $name): Grid
     {
-        foreach ($this->getBlocks() as $block) {
-            if ($block->getAlias() === $blockAlias) {
-                return $block;
+        if (empty($name)) {
+            throw new \RuntimeException('Grid not found');
+        }
+
+        foreach ($this->grids as $grid) {
+            if ($grid->getName() === $name) {
+                return $grid;
             }
         }
 
-        throw new BlockNotFoundException((string)__('Block with name "%1" not found in grid layout', $blockAlias));
+        throw new \RuntimeException('Grid not found');
+    }
+
+    public function getGridByCountryId(string $countryId): Grid
+    {
+        if (empty($countryId)) {
+            throw new \RuntimeException('Grid not found');
+        }
+
+        foreach ($this->grids as $grid) {
+            if ($grid->getCountryId() === $countryId) {
+                return $grid;
+            }
+        }
+
+        throw new \RuntimeException('Grid not found');
     }
 
     public function getDefaultColSpan(): int

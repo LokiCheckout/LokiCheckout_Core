@@ -5,6 +5,9 @@ namespace Yireo\LokiCheckout\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use RuntimeException;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
 use Yireo\LokiCheckout\ViewModel\CheckoutState;
 
 class Config implements ArgumentInterface
@@ -57,29 +60,27 @@ class Config implements ArgumentInterface
         return $gridLayout;
     }
 
-    /**
-     * @return string
-     * @deprecated Use getGridLayoutName() instead
-     */
-    public function getGridLayout(): string
+    public function getCurrentGridLayout(): GridLayout
     {
-        return $this->getGridLayoutName();
+        return $this->xmlConfig->getGridLayout($this->getGridLayoutName());
     }
 
-    public function getCurrentGridLayoutName(): string
+    public function getCurrentGrid(): Grid
     {
-        $gridLayout = $this->getGridLayoutName();
+        $gridLayout = $this->xmlConfig->getGridLayout($this->getGridLayoutName());
         $countryId = strtolower($this->getCurrentCountryId());
-        if (str_ends_with($gridLayout, '_' . $countryId)) {
-            return $gridLayout;
+        try {
+            return $gridLayout->getGridByCountryId($countryId);
+        } catch(RuntimeException $e) {
         }
 
-        $countryGridLayout = $gridLayout . '_' . $countryId;
-        if (array_key_exists($countryGridLayout, $this->xmlConfig->getGridLayouts())) {
-            return $countryGridLayout;
+        try {
+            return $gridLayout->getGridByName('default');
+        } catch(RuntimeException $e) {
         }
 
-        return $gridLayout;
+        $grids = $gridLayout->getGrids();
+        return array_shift($grids);
     }
 
     private function getCurrentCountryId(): string

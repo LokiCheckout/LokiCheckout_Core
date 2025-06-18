@@ -42,10 +42,20 @@
 
   <xs:complexType name="lokiCheckoutGridLayoutType">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="block" type="lokiCheckoutBlockType"/>
+      <xs:element name="grid" type="lokiCheckoutGridType"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="label" type="xs:string" use="required"/>
+    <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
+    <xs:attribute name="defaultColSpan" type="xs:int" use="optional"/>
+    <xs:attribute name="defaultMdColSpan" type="xs:int" use="optional"/>
+  </xs:complexType>
+
+  <xs:complexType name="lokiCheckoutGridType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="block" type="lokiCheckoutBlockType"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="countryId" type="xs:string" use="optional"/>
     <xs:attribute name="defaultSortOrder" type="xs:int" use="optional"/>
     <xs:attribute name="defaultColSpan" type="xs:int" use="optional"/>

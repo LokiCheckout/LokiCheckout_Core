@@ -16,60 +16,60 @@
 
     <grid_layouts>
         <grid_layout name="default_grid" label="Default grid" defaultColSpan="12" defaultMdColSpan="6">
-            <block alias="prefix" sortOrder="1" />
-            <block alias="firstname" sortOrder="2" />
-            <block alias="middlename" sortOrder="3" />
-            <block alias="lastname" sortOrder="4" />
-            <block alias="street0" sortOrder="5" />
-            <block alias="street1" sortOrder="6" />
-            <block alias="street2" sortOrder="7" />
-            <block alias="street3" sortOrder="8" />
-            <block alias="postcode" sortOrder="9" />
-            <block alias="city" sortOrder="10" />
-            <block alias="region" sortOrder="11" />
-            <block alias="country_id" sortOrder="12" />
-            <block alias="telephone" sortOrder="13" />
-            <block alias="fax" sortOrder="14" />
-            <block alias="company" sortOrder="15" />
-            <block alias="vat_id" sortOrder="16" />
-        </grid_layout>
-
-        <grid_layout name="default_grid_nl" label="Default grid (NL)" countryId="NL" defaultColSpan="12" defaultMdColSpan="6">
-            <block alias="prefix" sortOrder="1"/>
-            <block alias="firstname" sortOrder="2"/>
-            <block alias="middlename" sortOrder="3"/>
-            <block alias="lastname" sortOrder="4"/>
-            <block alias="street0" sortOrder="5"/>
-            <block alias="street1" sortOrder="6" colSpan="3"/>
-            <block alias="street2" sortOrder="7" colSpan="3"/>
-            <block alias="street3" sortOrder="8"/>
-            <block alias="postcode" sortOrder="9"/>
-            <block alias="city" sortOrder="10"/>
-            <block alias="region" sortOrder="11"/>
-            <block alias="country_id" sortOrder="12" colSpan="12"/>
-            <block alias="telephone" sortOrder="13"/>
-            <block alias="fax" sortOrder="14"/>
-            <block alias="company" sortOrder="15"/>
-            <block alias="vat_id" sortOrder="16"/>
-        </grid_layout>
-
-        <grid_layout name="default_grid_be" label="Default grid (BE)" countryId="BE">
-            <block alias="prefix" sortOrder="1"/>
-            <block alias="firstname" sortOrder="2"/>
-            <block alias="middlename" sortOrder="3"/>
-            <block alias="lastname" sortOrder="4"/>
-            <block alias="postcode" sortOrder="5" colSpan="3"/>
-            <block alias="city" sortOrder="6" colSpan="9"/>
-            <block alias="street0" sortOrder="7"/>
-            <block alias="street1" sortOrder="8" colSpan="3"/>
-            <block alias="street2" sortOrder="9" colSpan="3"/>
-            <block alias="street3" sortOrder="10"/>
-            <block alias="region" sortOrder="11"/>
-            <block alias="country_id" sortOrder="12" colSpan="12"/>
-            <block alias="telephone" sortOrder="13"/>
-            <block alias="fax" sortOrder="14"/>
-            <block alias="company" sortOrder="15"/>
-            <block alias="vat_id" sortOrder="16"/>
+            <grid name="default">
+                <block alias="prefix" sortOrder="1" />
+                <block alias="firstname" sortOrder="2" />
+                <block alias="middlename" sortOrder="3" />
+                <block alias="lastname" sortOrder="4" />
+                <block alias="street0" sortOrder="5" />
+                <block alias="street1" sortOrder="6" />
+                <block alias="street2" sortOrder="7" />
+                <block alias="street3" sortOrder="8" />
+                <block alias="postcode" sortOrder="9" />
+                <block alias="city" sortOrder="10" />
+                <block alias="region" sortOrder="11" />
+                <block alias="country_id" sortOrder="12" />
+                <block alias="telephone" sortOrder="13" />
+                <block alias="fax" sortOrder="14" />
+                <block alias="company" sortOrder="15" />
+                <block alias="vat_id" sortOrder="16" />
+            </grid>
+            <grid name="NL" countryId="NL">
+                <block alias="prefix" sortOrder="1"/>
+                <block alias="firstname" sortOrder="2"/>
+                <block alias="middlename" sortOrder="3"/>
+                <block alias="lastname" sortOrder="4"/>
+                <block alias="street0" sortOrder="5"/>
+                <block alias="street1" sortOrder="6" colSpan="3"/>
+                <block alias="street2" sortOrder="7" colSpan="3"/>
+                <block alias="street3" sortOrder="8"/>
+                <block alias="postcode" sortOrder="9"/>
+                <block alias="city" sortOrder="10"/>
+                <block alias="region" sortOrder="11"/>
+                <block alias="country_id" sortOrder="12" colSpan="12"/>
+                <block alias="telephone" sortOrder="13"/>
+                <block alias="fax" sortOrder="14"/>
+                <block alias="company" sortOrder="15"/>
+                <block alias="vat_id" sortOrder="16"/>
+            </grid>
+            <grid name="BE" countryId="BE">
+                <block alias="prefix" sortOrder="1"/>
+                <block alias="firstname" sortOrder="2"/>
+                <block alias="middlename" sortOrder="3"/>
+                <block alias="lastname" sortOrder="4"/>
+                <block alias="postcode" sortOrder="5" colSpan="3"/>
+                <block alias="city" sortOrder="6" colSpan="9"/>
+                <block alias="street0" sortOrder="7"/>
+                <block alias="street1" sortOrder="8" colSpan="3"/>
+                <block alias="street2" sortOrder="9" colSpan="3"/>
+                <block alias="street3" sortOrder="10"/>
+                <block alias="region" sortOrder="11"/>
+                <block alias="country_id" sortOrder="12" colSpan="12"/>
+                <block alias="telephone" sortOrder="13"/>
+                <block alias="fax" sortOrder="14"/>
+                <block alias="company" sortOrder="15"/>
+                <block alias="vat_id" sortOrder="16"/>
+            </grid>
         </grid_layout>
     </grid_layouts>
 </config>

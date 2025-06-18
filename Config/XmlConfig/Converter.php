@@ -61,27 +61,36 @@ class Converter implements ConverterInterface
 
             $defaultMdColSpan = (int)$gridLayoutElement->getAttribute('defaultMdColSpan');
 
-            foreach ($gridLayoutElement->getElementsByTagName('block') as $blockElement) {
-                $sortOrder = $defaultSortOrder;
-                if ($blockElement->hasAttribute('sortOrder')) {
-                    $sortOrder = (int)$blockElement->getAttribute('sortOrder');
+            foreach ($gridLayoutElement->getElementsByTagName('grid') as $gridElement) {
+                $blocks = [];
+                foreach ($gridElement->getElementsByTagName('block') as $blockElement) {
+                    $sortOrder = $defaultSortOrder;
+                    if ($blockElement->hasAttribute('sortOrder')) {
+                        $sortOrder = (int)$blockElement->getAttribute('sortOrder');
+                    }
+
+                    $colSpan = $defaultColSpan;
+                    if ($blockElement->hasAttribute('colSpan')) {
+                        $colSpan = (int)$blockElement->getAttribute('colSpan');
+                    }
+
+                    $mdColSpan = $defaultMdColSpan;
+                    if ($blockElement->hasAttribute('mdColSpan')) {
+                        $mdColSpan = (int)$blockElement->getAttribute('mdColSpan');
+                    }
+
+                    $blocks[] = [
+                        'alias' => (string)$blockElement->getAttribute('alias'),
+                        'sortOrder' => $sortOrder,
+                        'colSpan' => $colSpan,
+                        'mdColSpan' => $mdColSpan,
+                    ];
                 }
 
-                $colSpan = $defaultColSpan;
-                if ($blockElement->hasAttribute('colSpan')) {
-                    $colSpan = (int)$blockElement->getAttribute('colSpan');
-                }
-
-                $mdColSpan = $defaultMdColSpan;
-                if ($blockElement->hasAttribute('mdColSpan')) {
-                    $mdColSpan = (int)$blockElement->getAttribute('mdColSpan');
-                }
-
-                $blocks[] = [
-                    'alias' => (string)$blockElement->getAttribute('alias'),
-                    'sortOrder' => $sortOrder,
-                    'colSpan' => $colSpan,
-                    'mdColSpan' => $mdColSpan,
+                $grids[] = [
+                    'name' => (string)$gridElement->getAttribute('name'),
+                    'countryId' => (string)$gridElement->getAttribute('countryId'),
+                    'blocks' => $blocks,
                 ];
             }
 
@@ -95,7 +104,7 @@ class Converter implements ConverterInterface
                 'defaultSortOrder' => $defaultSortOrder === 0 ? 99 : $defaultSortOrder,
                 'defaultColSpan' => $defaultColSpan,
                 'defaultMdColSpan' => $defaultMdColSpan === 0 ? 6 : $defaultMdColSpan,
-                'blocks' => $blocks,
+                'grids' => $grids,
             ];
         }
 

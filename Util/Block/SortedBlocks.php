@@ -12,15 +12,14 @@ class SortedBlocks implements ArgumentInterface
 {
     public function __construct(
         private readonly Config $config,
-        private readonly XmlConfig $xmlConfig,
     ) {
     }
 
     public function getChildren(
         AbstractBlock $parentBlock
     ): array {
-        $gridLayoutName = (string)$this->config->getGridLayout();
-        $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
+        $grid = $this->config->getCurrentGrid();
+        $gridLayout = $this->config->getCurrentGridLayout();
 
         $childNames = $parentBlock->getChildNames();
         $children = [];
@@ -33,7 +32,7 @@ class SortedBlocks implements ArgumentInterface
 
             $childAlias = $childBlock->getLayout()->getElementAlias($childName);
             try {
-                $block = $gridLayout->getBlock($childAlias);
+                $block = $grid->getBlock($childAlias);
                 $sortOrder = $block->getSortOrder();
             } catch (BlockNotFoundException $exception) {
                 $sortOrder = $gridLayout->getDefaultSortOrder();

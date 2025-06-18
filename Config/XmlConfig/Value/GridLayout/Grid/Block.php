@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
+namespace Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
 
 class Block
 {

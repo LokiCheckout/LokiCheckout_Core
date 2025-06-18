@@ -30,11 +30,10 @@ class GridLayoutViewModel extends ComponentViewModel
 
     private function getGridLayoutData(): array
     {
-        $gridLayoutName = $this->config->getCurrentGridLayoutName();
-        $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
+        $grid = $this->config->getCurrentGrid();
 
         $gridLayoutData = [];
-        foreach ($gridLayout->getBlocks() as $block) {
+        foreach ($grid->getBlocks() as $block) {
             $gridLayoutData[] = [
                 'alias' => $block->getAlias(),
                 'colSpan' => $block->getColSpan(),

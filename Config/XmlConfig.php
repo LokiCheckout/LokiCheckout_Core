@@ -6,7 +6,8 @@ namespace Yireo\LokiCheckout\Config;
 use Magento\Framework\Config\Data as DataConfig;
 use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Block;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
+use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid\Block;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme\Step;
 use Yireo\LokiCheckout\Exception\UnknownThemeException;
@@ -112,13 +113,36 @@ class XmlConfig extends DataConfig
 
     /**
      * @param string $name
-     * @param array $gridData
+     * @param array $gridLayoutData
      * @return GridLayout
      */
-    private function createGridLayout(string $name, array $gridData): GridLayout
+    private function createGridLayout(string $name, array $gridLayoutData): GridLayout
+    {
+        $grids = [];
+        foreach ($gridLayoutData['grids'] as $gridData) {
+            $grids[] = $this->createGrid($gridData);
+        }
+
+        return new GridLayout(
+            $name,
+            (string)$gridLayoutData['label'],
+            (int)$gridData['defaultSortOrder'],
+            (int)$gridData['defaultColSpan'],
+            (int)$gridData['defaultMdColSpan'],
+            $grids
+        );
+    }
+
+    /**
+     * @param string $name
+     * @param array $gridData
+     * @return Grid
+     */
+    private function createGrid(array $gridData): Grid
     {
         $blocks = [];
         foreach ($gridData['blocks'] as $blockData) {
+            // @todo: Move to createBlock method
             $blocks[] = new Block(
                 (string) $blockData['alias'],
                 isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 99,
@@ -127,13 +151,9 @@ class XmlConfig extends DataConfig
             );
         }
 
-        return new GridLayout(
-            $name,
-            (string)$gridData['label'],
+        return new Grid(
+            (string)$gridData['name'],
             (string)$gridData['countryId'],
-            (int)$gridData['defaultSortOrder'],
-            (int)$gridData['defaultColSpan'],
-            (int)$gridData['defaultMdColSpan'],
             $blocks
         );
     }
