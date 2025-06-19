@@ -68,7 +68,8 @@ class Config implements ArgumentInterface
     public function getCurrentGrid(): Grid
     {
         $gridLayout = $this->xmlConfig->getGridLayout($this->getGridLayoutName());
-        $countryId = strtolower($this->getCurrentCountryId());
+        $countryId = $this->getCurrentCountryId();
+
         try {
             return $gridLayout->getGridByCountryId($countryId);
         } catch(RuntimeException $e) {
