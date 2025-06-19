@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] - 19 June 2025
+### Fixed
+- Disable jumpto for now
+- Finish new loki-checkout.xml structure
+- Rewrite grid layouts to include sub-entity grid
+
 ## [1.0.4] - 18 June 2025
 ### Fixed
 - Add loader to coupon code box
