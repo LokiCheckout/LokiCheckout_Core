@@ -44,6 +44,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         /*
+        // @tood: When should this be used?
         $result = $this->currentStep->validate();
         if (is_array($result)) {
             foreach ($result as $error) {
