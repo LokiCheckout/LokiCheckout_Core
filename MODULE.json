@@ -160,7 +160,7 @@
     ],
     "tests": {
         "unit": 15,
-        "integration": 126,
+        "integration": 142,
         "functional": 6
     }
 }
