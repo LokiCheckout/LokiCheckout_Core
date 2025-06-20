@@ -21,7 +21,7 @@ class SchemaLocator implements SchemaLocatorInterface
 
     public function getSchema()
     {
-        if ($this->schema === '' || $this->schema === '0') {
+        if (false === strlen($this->schema) > 0) {
             $this->schema = $this->getModuleEtcFolder() . '/' . self::CONFIG_FILE_SCHEMA;
         }
 
@@ -30,7 +30,7 @@ class SchemaLocator implements SchemaLocatorInterface
 
     public function getPerFileSchema()
     {
-        if ($this->perFileSchema === '' || $this->perFileSchema === '0') {
+        if (false === strlen($this->perFileSchema) > 0) {
             $this->perFileSchema = $this->getModuleEtcFolder() . '/' . self::CONFIG_FILE_SCHEMA;
         }
 

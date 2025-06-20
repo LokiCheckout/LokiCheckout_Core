@@ -147,9 +147,8 @@
 
     <virtualType name="Yireo\LokiCheckout\Config\XmlConfig\VirtualFileReader" type="Magento\Framework\Config\Reader\Filesystem">
         <arguments>
-            <argument name="converter" xsi:type="object">\Yireo\LokiCheckout\Config\XmlConfig\Converter</argument>
-            <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator
-            </argument>
+            <argument name="converter" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator</argument>
             <argument name="fileName" xsi:type="string">loki_checkout.xml</argument>
             <argument name="idAttributes" xsi:type="array">
                 <item name="/config/themes/theme" xsi:type="array">
@@ -161,7 +160,10 @@
                 <item name="/config/grid_layouts/grid_layout" xsi:type="array">
                     <item name="name" xsi:type="string">name</item>
                 </item>
-                <item name="/config/grid_layouts/grid_layout/block" xsi:type="array">
+                <item name="/config/grid_layouts/grid_layout/grid" xsi:type="array">
+                    <item name="name" xsi:type="string">name</item>
+                </item>
+                <item name="/config/grid_layouts/grid_layout/grid/block" xsi:type="array">
                     <item name="alias" xsi:type="string">alias</item>
                 </item>
             </argument>
@@ -171,7 +173,7 @@
     <type name="Yireo\LokiCheckout\Config\XmlConfig">
         <arguments>
             <argument name="reader" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\VirtualFileReader</argument>
-            <argument name="cacheId" xsi:type="string">yireo_loki_checkout</argument>
+            <argument name="cacheId" xsi:type="string">loki_checkout</argument>
         </arguments>
     </type>
 
