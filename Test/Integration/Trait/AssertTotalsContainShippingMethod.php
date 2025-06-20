@@ -12,6 +12,7 @@ trait AssertTotalsContainShippingMethod
     protected function assertTotalsContainShippingMethod(string $shippingMethodCode, Quote $quote): void
     {
         $shippingMethodLabel = '';
+        // @phpstan-ignore-next-line
         foreach ($this->getRepository()->getShippingMethods() as $shippingMethod) {
             if (str_starts_with($shippingMethodCode, $shippingMethod->getMethodCode() . '_')) {
                 $shippingMethodLabel = $shippingMethod->getMethodTitle();

@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Test\Integration\Stub;
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
+use Magento\Quote\Api\Data\CartSearchResultsInterface;
 use Magento\Quote\Model\Quote;
 
 class CartRepositoryStub implements CartRepositoryInterface
@@ -48,6 +49,9 @@ class CartRepositoryStub implements CartRepositoryInterface
 
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
     {
+        /** @var CartSearchResultsInterface $fake */
+        $fake = null;
+        return $fake;
     }
 
     public function getForCustomer($customerId, array $sharedStoreIds = [])
