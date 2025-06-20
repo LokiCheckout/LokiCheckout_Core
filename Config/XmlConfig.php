@@ -14,8 +14,6 @@ use Yireo\LokiCheckout\Exception\UnknownThemeException;
 
 class XmlConfig extends DataConfig
 {
-    private array $gridLayouts = [];
-
     /**
      * @return Theme[]
      */
@@ -86,15 +84,12 @@ class XmlConfig extends DataConfig
      */
     public function getGridLayouts(): array
     {
-        if ($this->gridLayouts !== []) {
-            return $this->gridLayouts;
-        }
-
+        $gridLayouts = [];
         foreach ($this->getGridLayoutArrays() as $gridLayoutName => $gridLayoutArray) {
-            $this->gridLayouts[$gridLayoutName] = $this->createGridLayout($gridLayoutName, $gridLayoutArray);
+            $gridLayouts[$gridLayoutName] = $this->createGridLayout($gridLayoutName, $gridLayoutArray);
         }
 
-        return $this->gridLayouts;
+        return $gridLayouts;
     }
 
     /**
@@ -134,7 +129,6 @@ class XmlConfig extends DataConfig
     }
 
     /**
-     * @param string $name
      * @param array $gridData
      * @return Grid
      */
@@ -142,19 +136,27 @@ class XmlConfig extends DataConfig
     {
         $blocks = [];
         foreach ($gridData['blocks'] as $blockData) {
-            // @todo: Move to createBlock method
-            $blocks[] = new Block(
-                (string) $blockData['alias'],
-                isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 99,
-                isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 12,
-                isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 6,
-            );
+            $blocks[] = $this->createBlock($blockData);
         }
 
         return new Grid(
             (string)$gridData['name'],
             (string)$gridData['countryId'],
             $blocks
+        );
+    }
+
+    /**
+     * @param array $blockData
+     * @return Block
+     */
+    private function createBlock(array $blockData): Block
+    {
+        return new Block(
+            (string) $blockData['alias'],
+            isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 99,
+            isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 12,
+            isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 6,
         );
     }
 }

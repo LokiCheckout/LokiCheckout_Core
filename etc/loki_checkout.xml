@@ -34,14 +34,14 @@
                 <block alias="company" sortOrder="15" />
                 <block alias="vat_id" sortOrder="16" />
             </grid>
-            <grid name="NL" countryId="NL">
+            <grid name="netherlands" countryId="NL">
                 <block alias="prefix" sortOrder="1"/>
                 <block alias="firstname" sortOrder="2"/>
                 <block alias="middlename" sortOrder="3"/>
                 <block alias="lastname" sortOrder="4"/>
                 <block alias="street0" sortOrder="5"/>
-                <block alias="street1" sortOrder="6" mdColSpan="3"/>
-                <block alias="street2" sortOrder="7" mdColSpan="3"/>
+                <block alias="street1" sortOrder="6" />
+                <block alias="street2" sortOrder="7" />
                 <block alias="street3" sortOrder="8"/>
                 <block alias="postcode" sortOrder="9"/>
                 <block alias="city" sortOrder="10"/>
@@ -52,7 +52,7 @@
                 <block alias="company" sortOrder="15"/>
                 <block alias="vat_id" sortOrder="16"/>
             </grid>
-            <grid name="BE" countryId="BE">
+            <grid name="belgium" countryId="BE">
                 <block alias="prefix" sortOrder="1"/>
                 <block alias="firstname" sortOrder="2"/>
                 <block alias="middlename" sortOrder="3"/>

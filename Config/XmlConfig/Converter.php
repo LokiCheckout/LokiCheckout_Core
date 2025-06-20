@@ -52,14 +52,17 @@ class Converter implements ConverterInterface
         $gridLayoutElements = $source->getElementsByTagName('grid_layout');
 
         foreach ($gridLayoutElements as $gridLayoutElement) {
-            $blocks = [];
+            $grids = [];
             $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
             $defaultColSpan = (int)$gridLayoutElement->getAttribute('defaultColSpan');
             if ($defaultColSpan === 0) {
-                $defaultColSpan = 6;
+                $defaultColSpan = 12;
             }
 
             $defaultMdColSpan = (int)$gridLayoutElement->getAttribute('defaultMdColSpan');
+            if ($defaultMdColSpan === 0) {
+                $defaultMdColSpan = 6;
+            }
 
             foreach ($gridLayoutElement->getElementsByTagName('grid') as $gridElement) {
                 $blocks = [];
