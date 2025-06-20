@@ -43,10 +43,14 @@ class StepNavigator implements ArgumentInterface
             $this->currentStep = $this->getFirstStep();
         }
 
+        /*
         $result = $this->currentStep->validate();
         if (is_array($result)) {
-            $this->currentStep = $this->getFirstStep();
+            foreach ($result as $error) {
+                $this->messageManager->addErrorMessage($error);
+            }
         }
+        */
 
         return $this->currentStep;
     }
@@ -54,7 +58,7 @@ class StepNavigator implements ArgumentInterface
     private function getRequestedStep(): string
     {
         $step = (string)$this->checkoutSession->getCurrentStep();
-        if ($step !== '' && $step !== '0') {
+        if (strlen($step) > 0) {
             return $step;
         }
 
@@ -62,17 +66,27 @@ class StepNavigator implements ArgumentInterface
     }
 
     /**
+     * @param StepViewModelInterface $step
+     * @return void
+     * @throws UnknownStepException
+     */
+    public function setCurrentStep(StepViewModelInterface $step): void
+    {
+        $this->currentStep = $step;
+        $this->checkoutSession->setCurrentStep($step->getCode());
+    }
+
+    /**
      * @param string $stepCode
      * @return void
      * @throws UnknownStepException
      */
-    public function setCurrentStepByCode(string $stepCode)
+    public function setCurrentStepByCode(string $stepCode): void
     {
-        $this->currentStep = $this->getStepByCode($stepCode);
-        $this->checkoutSession->setCurrentStep($this->currentStep->getCode());
+        $this->setCurrentStep($this->getStepByCode($stepCode));
     }
 
-    public function setPreviousStep()
+    public function setPreviousStep(): void
     {
         $currentStep = $this->getCurrentStep();
         if ($this->isFirstStep($currentStep)) {
@@ -118,7 +132,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         $nextStep = $this->getNextStep($currentStep);
-        $this->setCurrentStepByCode($nextStep->getCode());
+        $this->setCurrentStep($nextStep);
 
         return true;
     }
