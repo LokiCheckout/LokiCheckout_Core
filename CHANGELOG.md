@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.7] - 20 June 2025
+### Fixed
+- Finalize new grid settings
+- Properly allow overriding and merging of `loki_checkout.xml`
+- Add Dutch translations
+
 ## [1.0.6] - 20 June 2025
 ### Fixed
 - Undo validation of current step on load
