@@ -10,6 +10,7 @@ class Grid
     public function __construct(
         private readonly string $name,
         private readonly string $countryId,
+        private readonly string $parent,
         private readonly array $blocks = []
     ) {
     }
@@ -22,6 +23,11 @@ class Grid
     public function getCountryId(): string
     {
         return $this->countryId;
+    }
+
+    public function getParent(): string
+    {
+        return $this->parent;
     }
 
     /**

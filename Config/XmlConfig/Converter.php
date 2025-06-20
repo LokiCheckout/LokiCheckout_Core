@@ -4,6 +4,7 @@ namespace Yireo\LokiCheckout\Config\XmlConfig;
 
 use DOMDocument;
 use Magento\Framework\Config\ConverterInterface;
+use RuntimeException;
 
 class Converter implements ConverterInterface
 {
@@ -15,7 +16,7 @@ class Converter implements ConverterInterface
     {
         return [
             'themes' => $this->getThemes($source),
-            'gridLayouts' => $this->getGridLayouts($source)
+            'gridLayouts' => $this->getGridLayouts($source),
         ];
     }
 
@@ -82,19 +83,35 @@ class Converter implements ConverterInterface
                         $mdColSpan = (int)$blockElement->getAttribute('mdColSpan');
                     }
 
-                    $blocks[] = [
-                        'alias' => (string)$blockElement->getAttribute('alias'),
+                    $blockAlias = (string)$blockElement->getAttribute('alias');
+                    $blocks[$blockAlias] = [
+                        'alias' => $blockAlias,
                         'sortOrder' => $sortOrder,
                         'colSpan' => $colSpan,
                         'mdColSpan' => $mdColSpan,
                     ];
                 }
 
-                $grids[] = [
-                    'name' => (string)$gridElement->getAttribute('name'),
+                $gridName = (string)$gridElement->getAttribute('name');
+                $grids[$gridName] = [
+                    'name' => $gridName,
                     'countryId' => (string)$gridElement->getAttribute('countryId'),
+                    'parent' => (string)$gridElement->getAttribute('parent'),
                     'blocks' => $blocks,
                 ];
+            }
+
+            foreach ($grids as $gridName => $grid) {
+                if (empty($grid['parent'])) {
+                    continue;
+                }
+
+                if (false === array_key_exists($grid['parent'], $grids)) {
+                    throw new RuntimeException('Grid uses parent "'.$grid['parent'].'" which does not exist');
+                }
+
+                $gridParent = $grids[$grid['parent']];
+                $grids[$gridName] = $this->merge($grid, $gridParent);
             }
 
             $gridName = (string)$gridLayoutElement->getAttribute('name');
@@ -112,5 +129,27 @@ class Converter implements ConverterInterface
         }
 
         return $gridLayouts;
+    }
+
+    private function merge(array $child, array $parent): array
+    {
+        foreach ($parent as $propertyName => $propertyValue) {
+            if (false === array_key_exists($propertyName, $child)) {
+                $child[$propertyName] = $propertyValue;
+                continue;
+            }
+
+            if (is_array($propertyValue)) {
+                $propertyValue = $this->merge($child[$propertyName], $parent[$propertyName]);
+                $child[$propertyName] = $propertyValue;
+                continue;
+            }
+
+            if (empty($child[$propertyName])) {
+                $child[$propertyName] = $propertyValue;
+            }
+        }
+
+        return $child;
     }
 }

@@ -142,6 +142,7 @@ class XmlConfig extends DataConfig
         return new Grid(
             (string)$gridData['name'],
             (string)$gridData['countryId'],
+            (string)$gridData['parent'],
             $blocks
         );
     }
@@ -154,9 +155,9 @@ class XmlConfig extends DataConfig
     {
         return new Block(
             (string) $blockData['alias'],
-            isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 99,
-            isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 12,
-            isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 6,
+            isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 0,
+            isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 0,
+            isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 0,
         );
     }
 }

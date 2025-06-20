@@ -34,29 +34,10 @@
                 <block alias="company" sortOrder="150" />
                 <block alias="vat_id" sortOrder="160" />
             </grid>
-            <grid name="netherlands" countryId="NL">
-                <block alias="prefix" sortOrder="10"/>
-                <block alias="firstname" sortOrder="20"/>
-                <block alias="middlename" sortOrder="30"/>
-                <block alias="lastname" sortOrder="40"/>
-                <block alias="street0" sortOrder="50"/>
-                <block alias="street1" sortOrder="60" />
-                <block alias="street2" sortOrder="70" />
-                <block alias="street3" sortOrder="80"/>
-                <block alias="postcode" sortOrder="90"/>
-                <block alias="city" sortOrder="100"/>
-                <block alias="region" sortOrder="110"/>
-                <block alias="country_id" sortOrder="120" mdColSpan="12"/>
-                <block alias="telephone" sortOrder="130"/>
-                <block alias="fax" sortOrder="140"/>
-                <block alias="company" sortOrder="150"/>
-                <block alias="vat_id" sortOrder="160"/>
+            <grid name="netherlands" countryId="NL" parent="default">
+                <block alias="country_id" mdColSpan="12"/>
             </grid>
-            <grid name="belgium" countryId="BE">
-                <block alias="prefix" sortOrder="10"/>
-                <block alias="firstname" sortOrder="20"/>
-                <block alias="middlename" sortOrder="30"/>
-                <block alias="lastname" sortOrder="40"/>
+            <grid name="belgium" countryId="BE" parent="default">
                 <block alias="postcode" sortOrder="50" mdColSpan="3"/>
                 <block alias="city" sortOrder="60" mdColSpan="9"/>
                 <block alias="street0" sortOrder="70"/>
@@ -65,10 +46,6 @@
                 <block alias="street3" sortOrder="100"/>
                 <block alias="region" sortOrder="110"/>
                 <block alias="country_id" sortOrder="120" mdColSpan="12"/>
-                <block alias="telephone" sortOrder="130"/>
-                <block alias="fax" sortOrder="140"/>
-                <block alias="company" sortOrder="150"/>
-                <block alias="vat_id" sortOrder="160"/>
             </grid>
         </grid_layout>
     </grid_layouts>

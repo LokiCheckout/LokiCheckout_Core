@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
 
+use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
 
 class GridLayout
@@ -42,7 +43,7 @@ class GridLayout
     public function getGridByName(string $name): Grid
     {
         if (empty($name)) {
-            throw new \RuntimeException('Grid not found');
+            throw new RuntimeException('Grid not found');
         }
 
         foreach ($this->grids as $grid) {
@@ -51,13 +52,13 @@ class GridLayout
             }
         }
 
-        throw new \RuntimeException('Grid not found');
+        throw new RuntimeException('Grid not found');
     }
 
     public function getGridByCountryId(string $countryId): Grid
     {
         if (empty($countryId)) {
-            throw new \RuntimeException('Grid not found');
+            throw new RuntimeException('Grid not found');
         }
 
         foreach ($this->grids as $grid) {
@@ -66,7 +67,7 @@ class GridLayout
             }
         }
 
-        throw new \RuntimeException('Grid not found');
+        throw new RuntimeException('Grid not found');
     }
 
     public function getDefaultColSpan(): int

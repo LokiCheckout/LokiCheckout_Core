@@ -5,6 +5,7 @@ namespace Yireo\LokiCheckout\Test\Integration\Config\XmlConfig\Value\GridLayout;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\TestFramework\Fixture\Cache;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig;
@@ -15,6 +16,7 @@ class GridTest extends TestCase
      * @return void
      * @dataProvider getTestGridBlockArguments
      */
+    #[Cache('config', false)]
     public function testGridBlock(string $gridName, string $blockAlias, int $colSpan, int $mdColspan)
     {
         $xmlConfig = $this->getObjectManager()->get(XmlConfig::class);
