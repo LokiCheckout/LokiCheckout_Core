@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] - 20 June 2025
+### Fixed
+- Undo validation of current step on load
+
 ## [1.0.5] - 20 June 2025
 ### Fixed
 - Disable jumpto for now
