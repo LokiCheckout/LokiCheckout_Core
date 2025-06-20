@@ -27,7 +27,6 @@ class AttributeProvider
             return $attribute;
         }
 
-        // @phpstan-ignore deadCode.unreachable
         throw new RuntimeException('Unable to load attribute "' . $fieldName . '"');
     }
 }

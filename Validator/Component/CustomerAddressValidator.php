@@ -37,15 +37,15 @@ class CustomerAddressValidator implements ValidatorInterface
         $messages = [];
         if ($result === false) {
             foreach ($validator->getMessages() as $validatorMessage) {
-                if (is_string($validatorMessage)) { // @phpstan-ignore function.alreadyNarrowedType
+                if (is_string($validatorMessage)) {
                     $messages[] = $validatorMessage;
                 }
 
-                if ($validatorMessage instanceof Phrase) { // @phpstan-ignore instanceof.alwaysFalse
+                if ($validatorMessage instanceof Phrase) {
                     $messages[] = (string)$validatorMessage;
                 }
 
-                if (is_array($validatorMessage)) { // @phpstan-ignore function.impossibleType
+                if (is_array($validatorMessage)) {
                     foreach ($validatorMessage as $message) {
                         $messages[] = (string)$message;
                     }
