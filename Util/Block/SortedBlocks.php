@@ -31,8 +31,8 @@ class SortedBlocks implements ArgumentInterface
 
             $childAlias = $childBlock->getLayout()->getElementAlias($childName);
             try {
-                $block = $grid->getBlock($childAlias);
-                $sortOrder = $block->getSortOrder();
+                $gridBlock = $grid->getBlock($childAlias);
+                $sortOrder = $gridBlock->getSortOrder();
             } catch (BlockNotFoundException $exception) {
                 $sortOrder = $gridLayout->getDefaultSortOrder();
             }

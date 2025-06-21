@@ -155,9 +155,9 @@ class XmlConfig extends DataConfig
     {
         return new Block(
             (string) $blockData['alias'],
-            isset($blockData['sortOrder']) ? (int)$blockData['sortOrder']: 0,
-            isset($blockData['colSpan']) ? (int)$blockData['colSpan'] : 0,
-            isset($blockData['mdColSpan']) ? (int)$blockData['mdColSpan'] : 0,
+            (int)$blockData['sortOrder'],
+            (int)$blockData['colSpan'],
+            (int)$blockData['mdColSpan'],
         );
     }
 }
