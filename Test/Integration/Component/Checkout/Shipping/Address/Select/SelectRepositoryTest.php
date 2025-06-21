@@ -32,6 +32,6 @@ class SelectRepositoryTest extends LokiCheckoutPageTestCase
         /** @var SelectRepository $repository */
         $repository = $component->getRepository();
         $value = $repository->getValue();
-        $this->assertSame('', $value);
+        $this->assertSame(0, $value);
     }
 }

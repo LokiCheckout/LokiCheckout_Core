@@ -6,7 +6,6 @@ namespace Yireo\LokiCheckout\Test\Integration\Config\XmlConfig\Value;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\TestCase;
-use RuntimeException;
 use Yireo\LokiCheckout\Config\XmlConfig;
 
 class GridLayoutTest extends TestCase
@@ -17,10 +16,10 @@ class GridLayoutTest extends TestCase
         $gridLayout = $xmlConfig->getGridLayout('default_grid');
 
         $grid = $gridLayout->getGridByCountryId('BE');
-        $this->assertEquals('BE', $grid->getName());
+        $this->assertEquals('belgium', $grid->getName());
 
         $grid = $gridLayout->getGridByCountryId('NL');
-        $this->assertEquals('NL', $grid->getName());
+        $this->assertEquals('netherlands', $grid->getName());
     }
 
     /**

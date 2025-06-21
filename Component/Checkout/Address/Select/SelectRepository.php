@@ -12,7 +12,7 @@ use Yireo\LokiComponents\Component\ComponentRepository;
  */
 class SelectRepository extends ComponentRepository
 {
-    public function getValue(): mixed
+    public function getValue(): int
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
             return 0;
