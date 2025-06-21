@@ -134,6 +134,10 @@ class ConfigTest extends TestCase
         return $this->getObjectManager()->get(Config::class);
     }
 
+    /**
+     * @return ObjectManagerInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function getObjectManager(): ObjectManagerInterface
     {
         return ObjectManager::getInstance();

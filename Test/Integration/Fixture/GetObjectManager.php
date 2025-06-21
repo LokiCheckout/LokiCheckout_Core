@@ -6,6 +6,10 @@ use Magento\Framework\App\ObjectManager;
 
 trait GetObjectManager
 {
+    /**
+     * @return ObjectManager
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     protected function getObjectManager(): ObjectManager
     {
         return ObjectManager::getInstance();

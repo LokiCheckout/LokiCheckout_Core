@@ -12,7 +12,11 @@ use Yireo\LokiCheckout\Test\Integration\Stub\CartRepositoryStub;
  */
 trait EnableCartRepositoryStub
 {
-    public function enableCartRepositoryStub()
+    /**
+     * @return void
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    public function enableCartRepositoryStub(): void
     {
         $objectManager = ObjectManager::getInstance();
         $objectManager->configure([
@@ -27,7 +31,11 @@ trait EnableCartRepositoryStub
         );
     }
 
-    public function disableCartRepositoryStub()
+    /**
+     * @return void
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
+    public function disableCartRepositoryStub(): void
     {
         $objectManager = ObjectManager::getInstance();
         $objectManager->configure([

@@ -23,6 +23,10 @@ class GridLayoutTest extends TestCase
         $this->assertEquals('NL', $grid->getName());
     }
 
+    /**
+     * @return ObjectManagerInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function getObjectManager(): ObjectManagerInterface
     {
         return ObjectManager::getInstance();

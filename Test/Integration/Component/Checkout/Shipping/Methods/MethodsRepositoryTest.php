@@ -83,10 +83,6 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     public function testGetShippingMethodsWithTableRatesAndFreeShipping()
     {
         $this->markTestSkipped();
-        return;
-        $address->setFreeShipping(true);
-        $item->setFreeShipping(true);
-        $item->setFreeShippingMethod('tablerate_bestway');
     }
 
     public function testSaveValueWithExistingShippingMethod()

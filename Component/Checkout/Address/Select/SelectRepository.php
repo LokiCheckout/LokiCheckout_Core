@@ -18,29 +18,8 @@ class SelectRepository extends ComponentRepository
             return 0;
         }
 
-        $customer = $this->getContext()->getCustomerRepository()->getById(
-            $this->getContext()->getCustomerSession()->getCustomerId()
-        );
-
-        $address = $this->getContext()->getCurrentAddress($this->getComponent());
-        $selectedAddressId = (int)$address->getCustomerAddressId();
-        if ($selectedAddressId === 0) {
-            if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
-                $selectedAddressId = (int)$customer->getDefaultBilling();
-            } else {
-                $selectedAddressId = (int)$customer->getDefaultShipping();
-            }
-        }
-
-        $sanitizedAddressId = $this->sanitizeSelectedAddressId($selectedAddressId);
-
-        if ($sanitizedAddressId === 0) {
-            if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
-                $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
-            } else {
-                $sanitizedAddressId = $this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
-            }
-        }
+        $selectedAddressId = $this->getSelectedAddressId();
+        $sanitizedAddressId = $this->getSanitizedAddressId($selectedAddressId);
 
         if ($sanitizedAddressId > 0) {
             $this->saveValue($sanitizedAddressId);
@@ -84,5 +63,38 @@ class SelectRepository extends ComponentRepository
         }
 
         return 0;
+    }
+
+    private function getSelectedAddressId(): int
+    {
+        $address = $this->getContext()->getCurrentAddress($this->getComponent());
+        $selectedAddressId = (int)$address->getCustomerAddressId();
+        if ($selectedAddressId > 0) {
+            return $selectedAddressId;
+        }
+
+        $customer = $this->getContext()->getCustomerRepository()->getById(
+            $this->getContext()->getCustomerSession()->getCustomerId()
+        );
+
+        if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+            return (int)$customer->getDefaultBilling();
+        }
+
+        return (int)$customer->getDefaultShipping();
+    }
+
+    private function getSanitizedAddressId(int $selectedAddressId): int
+    {
+        $sanitizedAddressId = $this->sanitizeSelectedAddressId($selectedAddressId);
+        if ($sanitizedAddressId > 0) {
+            return $sanitizedAddressId;
+        }
+
+        if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+            return (int)$this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
+        }
+
+        return (int)$this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
     }
 }

@@ -25,6 +25,10 @@ class XmlConfigTest extends TestCase
         $xmlConfig->getGridLayout('non_existing');
     }
 
+    /**
+     * @return ObjectManagerInterface
+     * @SuppressWarnings(PHPMD.StaticAccess)
+     */
     private function getObjectManager(): ObjectManagerInterface
     {
         return ObjectManager::getInstance();
