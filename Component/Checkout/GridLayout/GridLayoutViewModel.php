@@ -30,7 +30,7 @@ class GridLayoutViewModel extends ComponentViewModel
 
     private function getGridLayoutData(): array
     {
-        $grid = $this->config->getCurrentGrid();
+        $grid = $this->config->getGrid();
 
         $gridLayoutData = [];
         foreach ($grid->getBlocks() as $block) {

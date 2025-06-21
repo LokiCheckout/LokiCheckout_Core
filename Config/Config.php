@@ -65,16 +65,6 @@ class Config implements ArgumentInterface
         return $this->xmlConfig->getGridLayout($this->getGridLayoutName());
     }
 
-    /**
-     * @return GridLayout
-     * @deprecated Use getGridLayout()
-     */
-    public function getCurrentGridLayout(): GridLayout
-    {
-        return $this->getGridLayout();
-    }
-
-
     public function getGrid(): Grid
     {
         $gridLayout = $this->xmlConfig->getGridLayout($this->getGridLayoutName());
@@ -93,15 +83,6 @@ class Config implements ArgumentInterface
         $grids = $gridLayout->getGrids();
 
         return array_shift($grids);
-    }
-
-    /**
-     * @return Grid
-     * @deprecated Use getGrid()
-     */
-    public function getCurrentGrid(): Grid
-    {
-        return $this->getGrid();
     }
 
     private function getCurrentCountryId(): string
