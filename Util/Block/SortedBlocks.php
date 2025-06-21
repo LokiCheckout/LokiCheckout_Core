@@ -5,7 +5,6 @@ namespace Yireo\LokiCheckout\Util\Block;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 
 class SortedBlocks implements ArgumentInterface
@@ -42,9 +41,7 @@ class SortedBlocks implements ArgumentInterface
             $children[] = $childBlock;
         }
 
-        $sortedChildren = $this->sortBlocks($children);
-
-        return $sortedChildren;
+        return $this->sortBlocks($children);
     }
 
     private function sortBlocks(array $blocks): array

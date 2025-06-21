@@ -4,7 +4,6 @@ namespace Yireo\LokiCheckout\Util\Block\CssClassParser;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Config\XmlConfig;
 use Yireo\LokiCheckout\Exception\BlockNotFoundException;
 use Yireo\LokiComponents\Util\Block\CssClassParser\CssClassParserInterface;
 
@@ -12,7 +11,6 @@ class GridClassParser implements CssClassParserInterface
 {
     public function __construct(
         private readonly Config $config,
-        private readonly XmlConfig $xmlConfig,
     ) {
     }
 
@@ -27,8 +25,15 @@ class GridClassParser implements CssClassParserInterface
             $gridClassesFromXmlConfig = $this->getDefaultGridClasses($block);
         }
 
+        $sortOrder = $block->getSortOrder();
+        $sortOrderClass = '';
+        if ($sortOrder) {
+            $sortOrderClass = ' order-[' . $sortOrder.']';
+        }
+
         $cssClasses = array_merge_recursive($cssClasses, [
             'grid' => $gridClassesFromXmlConfig,
+            'sortOrder' => $sortOrderClass,
         ]);
 
         return $cssClasses;
