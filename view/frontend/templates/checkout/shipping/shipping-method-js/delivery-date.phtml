@@ -15,14 +15,11 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 
 $deliveryDate = $block->getDeliveryDate();
 ?>
-<details class="<?= /* @noEscape */
-$css('my-4') ?>" open>
-    <summary class="<?= /* @noEscape */
-$css('font-bold cursor-pointer', 'summary') ?>">
+<details class="<?= /* @noEscape */ $css('my-4') ?>" open>
+    <summary class="<?= /* @noEscape */ $css('font-bold cursor-pointer', 'summary') ?>">
         <?= $escaper->escapeHtml($deliveryDate->getDate()) ?>
     </summary>
-    <div class="<?= /* @noEscape */
-$css('mb-4', 'content') ?>">
+    <div class="<?= /* @noEscape */ $css('mb-4', 'content') ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'timeframes', [
             'timeframes' => $deliveryDate->getTimeframes(),
         ]) ?>

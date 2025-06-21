@@ -18,8 +18,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= /* @noEscape */
-$css('flex mb-8 p-4 hover:bg-black/5') ?>">
+<div class="<?= /* @noEscape */ $css('flex mb-8 p-4 hover:bg-black/5') ?>">
     <?= /* @noEscape */ $childRenderer->html($block, 'location.input', [
         'location' => $location,
     ]) ?>

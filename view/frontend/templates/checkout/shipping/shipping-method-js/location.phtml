@@ -9,12 +9,10 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 /** @var ChildRenderer $childRenderer */
 /** @var CssClass $css */
 ?>
-<div class="<?= /* @noEscape */
-$css('flex mb-8 p-4 hover:bg-black/5') ?>">
+<div class="<?= /* @noEscape */ $css('flex mb-8 p-4 hover:bg-black/5') ?>">
     <?= /* @noEscape */ $childRenderer->html($block, 'location.input') ?>
 
-    <label x-bind:for="location.id" class="<?= /* @noEscape */
-$css('cursor-pointer flex-1', 'label') ?>">
+    <label x-bind:for="location.id" class="<?= /* @noEscape */ $css('cursor-pointer flex-1', 'label') ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'location.name') ?>
         <?= /* @noEscape */ $childRenderer->html($block, 'location.pickup-details') ?>
         <?= /* @noEscape */ $childRenderer->html($block, 'location.address') ?>

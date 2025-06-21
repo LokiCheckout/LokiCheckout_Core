@@ -28,14 +28,11 @@ if (empty($additionalContent)) {
     return;
 }
 ?>
-<details class="<?= /* @noEscape */
-$css('') ?>">
-    <summary class="<?= /* @noEscape */
-$css('', 'summary') ?>">
+<details class="<?= /* @noEscape */ $css('') ?>">
+    <summary class="<?= /* @noEscape */ $css('', 'summary') ?>">
         <?= $escaper->escapeHtml(__('Additional information')) ?>
     </summary>
-    <div class="<?= /* @noEscape */
-$css('my-4 text-sm', 'content') ?>">
+    <div class="<?= /* @noEscape */ $css('my-4 text-sm', 'content') ?>">
         <?= $escaper->escapeHtml($additionalContent) ?>
     </div>
 </details>

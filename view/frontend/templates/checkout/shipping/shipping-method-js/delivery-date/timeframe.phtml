@@ -15,8 +15,7 @@ use Yireo\LokiComponents\Util\Block\CssClass;
 
 $timeframe = $block->getTimeframe();
 ?>
-<div class="<?= /* @noEscape */
-$css('flex p-2 hover:bg-black/5') ?>">
+<div class="<?= /* @noEscape */ $css('flex p-2 hover:bg-black/5') ?>">
     <?= /* @noEscape */
     $childRenderer->html($block, 'timeframe.input', [
         'timeframe' => $timeframe,
