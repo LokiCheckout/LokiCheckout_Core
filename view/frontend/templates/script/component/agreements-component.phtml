@@ -2,6 +2,18 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
             ...LokiCheckoutComponentType,
+            toggleAgreement(event) {
+                const agreementId = event.target.getAttribute('data-id');
+                this.agreements[agreementId] = event.target.checked;
+                this.post(this.agreements);
+            },
+            isAgreementChecked(element) {
+                const agreementId = this.$el.getAttribute('data-id');
+                return this.agreements[agreementId];
+            },
+            beforeSubmit() {
+                this.valid = false;
+            }
         }));
     });
 </script>

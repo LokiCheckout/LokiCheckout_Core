@@ -2,6 +2,7 @@
 
 namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
 
+use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
 
 /**
@@ -14,6 +15,9 @@ class AgreementsViewModel extends CheckoutViewModel
         return $this->getCheckoutAgreements() !== [];
     }
 
+    /**
+     * @return AgreementInterface[]
+     */
     public function getCheckoutAgreements(): array
     {
         return $this->getRepository()->getCheckoutAgreements();
@@ -31,14 +35,17 @@ class AgreementsViewModel extends CheckoutViewModel
 
     public function getJsData(): array
     {
-        $agreementIds = [];
+        $savedAgreements = (array)$this->getContext()->getCheckoutState()->getCheckoutSession()->getAgreementIds();
+
+        $agreements = [];
         foreach ($this->getCheckoutAgreements() as $agreement) {
-            $agreementIds[] = $agreement->getId();
+            $isSaved = in_array($agreement->getId(), $savedAgreements);
+            $agreements[$agreement->getId()] = $isSaved;
         }
 
         return [
             ...parent::getJsData(),
-            'agreements' => []
+            'agreements' => $agreements
         ];
     }
 }

@@ -35,18 +35,17 @@ class AgreementsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        if (empty($value)) {
+        if (empty($value) || false === is_array($value)) {
             return;
         }
 
         $savedAgreements = [];
-        foreach ((array)$value as $agreementId => $agreed) {
+        foreach ($value as $agreementId => $agreed) {
             if ($agreed === false) {
                 continue;
             }
 
-            $agreementId = (int)str_replace('a', '', $agreementId);
-            $savedAgreements[] = $agreementId;
+            $savedAgreements[] = (int)$agreementId;
         }
 
         $savedAgreements = array_unique($savedAgreements);

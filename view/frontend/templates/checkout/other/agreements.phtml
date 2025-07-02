@@ -19,11 +19,12 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
         <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
             <input
                 type="checkbox"
-                id="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
-                :checked="isChecked"
+                data-id="<?= $agreement->getAgreementId() ?>"
+                id="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
+                :checked="isAgreementChecked"
                 value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
-                @change="submitChecked"
-                <?php if ($viewModel->getValue() === true): ?>
+                @change="toggleAgreement"
+                <?php if ($agreement->getIsActive() === true): ?>
                     checked
                 <?php endif; ?>
                 <?php if ($viewModel->isDisabled()): ?>
