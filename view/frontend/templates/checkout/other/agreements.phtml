@@ -35,12 +35,12 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
             <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
                 <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
                        class="<?= /* @noEscape */ $css('', 'label') ?>">
-                    <?= $escaper->escapeHtml($agreement->getCheckboxText()) ?>
+                    <?= /* @noEscape */ $agreement->getCheckboxText() ?>
                 </label>
                 <br/>
 
                 <span class="<?= /* @noEscape */ $css('italic', 'content') ?>">
-                    <?= $escaper->escapeHtml($agreement->getContent()) ?>
+                    <?= /* @noEscape */ $agreement->getContent() ?>
                 </span>
             </div>
         </div>
