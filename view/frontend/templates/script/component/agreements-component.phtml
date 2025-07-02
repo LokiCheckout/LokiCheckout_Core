@@ -1,6 +1,7 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
+            agreements: [],
             ...LokiCheckoutComponentType,
             toggleAgreement(event) {
                 const agreementId = event.target.getAttribute('data-id');
@@ -12,7 +13,9 @@
                 return this.agreements[agreementId];
             },
             beforePostNextStep() {
-                this.valid = false;
+                if (Object.values(this.agreements).includes(false)) {
+                    this.valid = false;
+                }
             }
         }));
     });

@@ -41,7 +41,8 @@
                 });
             },
             updateValid() {
-                this.valid = Alpine.store('checkout').hasOnlyValidComponents(this.currentStep);
+                this.valid = Alpine.store('checkout').hasOnlyValidComponents([this.currentStep, 'any']);
+
                 if (!this.valid) {
                     const components = Alpine.store('checkout').getInvalidComponentIds(this.currentStep);
                     LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
@@ -53,11 +54,11 @@
             submit() {
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
-                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach((component) => {
+                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
                     LokiComponentValidator.validate(component);
                 });
 
-                Alpine.store('checkout').getComponentArrayByStep(this.currentStep).forEach(async component => {
+                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach(async component => {
                     if (component.beforePostNextStep) {
                         await component.beforePostNextStep();
                     }

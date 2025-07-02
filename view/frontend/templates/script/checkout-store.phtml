@@ -34,7 +34,8 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
                 const components = {};
                 this.getComponentArray().forEach(component => {
-                    if (this.exists(component) && component.step === step) {
+                    const matchStep = component.step === step || (step.includes(component.step));
+                    if (this.exists(component) && matchStep) {
                         components[component.id] = component;
                     }
                 });

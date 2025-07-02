@@ -15,6 +15,11 @@ class AgreementsViewModel extends CheckoutViewModel
         return $this->getCheckoutAgreements() !== [];
     }
 
+    public function getStep(): string
+    {
+        return 'any';
+    }
+
     /**
      * @return AgreementInterface[]
      */
