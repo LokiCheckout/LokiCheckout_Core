@@ -11,7 +11,7 @@
                 const agreementId = this.$el.getAttribute('data-id');
                 return this.agreements[agreementId];
             },
-            beforeSubmit() {
+            beforePostNextStep() {
                 this.valid = false;
             }
         }));
