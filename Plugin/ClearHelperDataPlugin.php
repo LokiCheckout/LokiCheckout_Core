@@ -39,5 +39,6 @@ class ClearHelperDataPlugin
     {
         $checkoutSession->setCurrentStep(null);
         $checkoutSession->setCustomerAccountType(null);
+        $checkoutSession->setAgreementIds(null);
     }
 }
