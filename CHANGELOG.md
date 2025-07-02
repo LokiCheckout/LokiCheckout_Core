@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.8] - 02 July 2025
+### Fixed
+- Reset agreements after checkout completion
+- Properly disabled proceed button if agreements are still unchecked
+- Fix final step error when there is no redirect
+- Fix Fatal Error with checkout agreements
+- Allow HTML in agreements box
+- Fixes for block sorting
+- Add order-[] class to grid blocks on load
+- Remove deprecated getCurrentGrid method
+- Remove newline
+- Fix PHPMD issues
+
 ## [1.0.7] - 20 June 2025
 ### Fixed
 - Finalize new grid settings
