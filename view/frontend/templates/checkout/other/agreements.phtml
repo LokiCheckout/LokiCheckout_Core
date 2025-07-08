@@ -27,6 +27,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
                 <?php if ($agreement->getIsActive() === true): ?>
                     checked
                 <?php endif; ?>
+                aria-required="true"
                 <?php if ($viewModel->isDisabled()): ?>
                     disabled="disabled"
                 <?php endif ?>
@@ -34,7 +35,7 @@ use Yireo\LokiComponents\Factory\ViewModelFactory;
             />
 
             <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
-                <label for="<?= $viewModel->getElementId().$agreement->getAgreementId() ?>"
+                <label for="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
                        class="<?= /* @noEscape */ $css('', 'label') ?>">
                     <?= /* @noEscape */ $agreement->getCheckboxText() ?>
                 </label>
