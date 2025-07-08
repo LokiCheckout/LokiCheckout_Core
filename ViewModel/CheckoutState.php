@@ -11,6 +11,7 @@ use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Yireo\LokiComponents\Exception\RedirectException;
 use Yireo\LokiComponents\Util\Ajax;
 
@@ -23,6 +24,7 @@ class CheckoutState implements ArgumentInterface
         private readonly CheckoutSession $checkoutSession,
         private readonly CustomerSession $customerSession,
         private readonly CartRepositoryInterface $cartRepository,
+        private readonly QuoteIdToMaskedQuoteIdInterface $quoteIdToMaskedQuoteId,
         private readonly UrlFactory $urlFactory,
         private readonly ResponseFactory $responseFactory,
         private readonly Ajax $ajax,
@@ -32,6 +34,11 @@ class CheckoutState implements ArgumentInterface
     public function setQuoteId(int $quoteId): void
     {
         $this->quoteId = $quoteId;
+    }
+
+    public function getMaskedQuoteId(): string
+    {
+        return $this->quoteIdToMaskedQuoteId->execute((int)$this->getQuote()->getId());
     }
 
     public function getQuote(): Quote
