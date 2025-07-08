@@ -7,5 +7,7 @@
 
         <!-- @todo: Make this optional -->
         <referenceBlock name="topmenu_generic" remove="true"/>
+
+        <referenceBlock name="cart-drawer" remove="true"/>
     </body>
 </page>
