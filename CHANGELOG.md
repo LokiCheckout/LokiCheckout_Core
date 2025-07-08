@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.9] - 08 July 2025
+### Fixed
+- Remove escaping from SVG output
+- Show `error_text` from layout when agreements are not checked yet
+- Add `aria-required` to agreements
+- Allow retrieving masked quote ID from CheckoutState
+- Allow LokiCheckout prefixed modules to be working with Hyva automatically
+- Remove the cart drawer from Hyva Themes
+
 ## [1.0.8] - 02 July 2025
 ### Fixed
 - Reset agreements after checkout completion
