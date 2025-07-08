@@ -50,7 +50,8 @@ class AgreementsViewModel extends CheckoutViewModel
 
         return [
             ...parent::getJsData(),
-            'agreements' => $agreements
+            'agreements' => $agreements,
+            'errorText' => $this->getBlock()->getErrorText()
         ];
     }
 }
