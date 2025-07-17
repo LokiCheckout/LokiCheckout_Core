@@ -137,6 +137,8 @@
     <type name="Yireo\HyvaThemeAutoRegistration\Observer\RegisterModuleForHyvaConfig">
         <arguments>
             <argument name="modulePrefixes" xsi:type="array">
+                <item name="LokiCheckout_" xsi:type="string">LokiCheckout_</item>
+                <item name="Loki_" xsi:type="string">Loki_</item>
                 <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
                 <item name="Yireo_LokiFieldComponents" xsi:type="string">Yireo_LokiFieldComponents</item>
                 <item name="Yireo_LokiMapComponents" xsi:type="string">Yireo_LokiMapComponents</item>
