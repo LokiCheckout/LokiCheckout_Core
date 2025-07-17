@@ -4,6 +4,15 @@
         <block
             name="loki-checkout.payment.methods"
             template="Yireo_LokiCheckout::checkout/payment/payment-methods.phtml">
+
+            <block
+                name="loki-checkout.payment.methods.title" as="title"
+                template="Yireo_LokiCheckout::generic/title.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string">Payment Methods</argument>
+                </arguments>
+            </block>
+
             <block
                 name="loki-checkout.payment.payment-methods.item" as="item"
                 template="Yireo_LokiCheckout::checkout/payment/payment-methods/item.phtml"/>

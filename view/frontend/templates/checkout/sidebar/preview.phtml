@@ -10,6 +10,5 @@ use Yireo\LokiComponents\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= /* @noEscape */ $css('loki-checkout-sidebar-preview card p-8 my-4') ?>">
-    <?= /* @noEscape */ $blockRenderer->html($block,'loki-checkout.generic.title', ['title' => 'Order Preview']) ?>
     <?= /* @noEscape */ $block->getChildHtml() ?>
 </div>

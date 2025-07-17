@@ -27,7 +27,7 @@ $shippingMethods = $viewModel->getShippingMethods();
     <?php endif; ?>
 
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Shipping Methods']) ?>
+    <?= /* @noEscape */ $block->getChildHtml('title') ?>
     <div
         id="shipping-methods"
         data-type="field"

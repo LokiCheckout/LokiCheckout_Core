@@ -4,6 +4,14 @@
         <block name="loki-checkout.sidebar" template="Yireo_LokiCheckout::checkout/sidebar.phtml">
 
             <block name="loki-checkout.sidebar.summary" as="summary" template="Yireo_LokiCheckout::checkout/sidebar/summary.phtml">
+                <block
+                    name="loki-checkout.sidebar.title" as="title"
+                    template="Yireo_LokiCheckout::generic/title.phtml" before="-">
+                    <arguments>
+                        <argument name="title" xsi:type="string">Order Summary</argument>
+                    </arguments>
+                </block>
+
                 <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="Yireo_LokiCheckout::checkout/sidebar/coupon_code.phtml"/>
 
                 <block name="loki-checkout.sidebar.items" as="items" template="Yireo_LokiCheckout::checkout/sidebar/items.phtml">
@@ -18,6 +26,14 @@
             </block>
 
             <block name="loki-checkout.sidebar.preview" as="preview" template="Yireo_LokiCheckout::checkout/sidebar/preview.phtml">
+                <block
+                    name="loki-checkout.sidebar.preview.title" as="title"
+                    template="Yireo_LokiCheckout::generic/title.phtml" before="-">
+                    <arguments>
+                        <argument name="title" xsi:type="string">Order Preview</argument>
+                    </arguments>
+                </block>
+
                 <block name="loki-checkout.sidebar.preview.quote_details" as="quote_details" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details.phtml">
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_email" as="customer_email" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_email.phtml"/>
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_gender" as="customer_gender" template="Yireo_LokiCheckout::checkout/sidebar/preview/quote_details/customer_gender.phtml"/>

@@ -10,6 +10,7 @@ use Yireo\LokiCheckout\ViewModel\CheckoutState;
 /** @var TemplateRenderer $templateRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
+// @todo Move this logic to PHP class instead, perhaps a DI plugin?
 
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);

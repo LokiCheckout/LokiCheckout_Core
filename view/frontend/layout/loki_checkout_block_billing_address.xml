@@ -33,7 +33,11 @@
 
             <block
                 name="loki-checkout.billing.address.form-title" as="form-title"
-                template="Yireo_LokiCheckout::checkout/billing/address-form-title.phtml"/>
+                template="Yireo_LokiCheckout::generic/title.phtml">
+                <arguments>
+                    <argument name="title" xsi:type="string">Billing Address</argument>
+                </arguments>
+            </block>
 
             <block
                 name="loki-checkout.billing.address.form" as="form"

@@ -19,7 +19,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.generic.title', ['title' => 'Payment Methods']) ?>
+    <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
     <form
         data-type="field"
