@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.10] - 17 July 2025
+### Fixed
+- Move title logic from template to XML layout
+
 ## [1.0.9] - 08 July 2025
 ### Fixed
 - Remove escaping from SVG output
