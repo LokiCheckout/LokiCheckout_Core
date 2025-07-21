@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\Source;
+namespace LokiCheckout\Core\Config\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
-use Yireo\LokiCheckout\Config\XmlConfig;
+use LokiCheckout\Core\Config\XmlConfig;
 
 class GridLayoutOptions implements OptionSourceInterface
 {

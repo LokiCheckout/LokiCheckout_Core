@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment\Icon;
+namespace LokiCheckout\Core\Shipment\Icon;
 
 class IconResolverListing
 {

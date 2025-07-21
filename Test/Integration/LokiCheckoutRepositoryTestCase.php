@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration;
+namespace LokiCheckout\Core\Test\Integration;
 
-use Yireo\LokiCheckout\Test\Integration\Trait\EnableCartRepositoryStub;
+use LokiCheckout\Core\Test\Integration\Trait\EnableCartRepositoryStub;
 
 // WARNING: As yet, this test case is not working, thus marked as "final" to prevent usage
 final class LokiCheckoutRepositoryTestCase extends LokiCheckoutTestCase

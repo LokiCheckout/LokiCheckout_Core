@@ -1,14 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config;
+namespace LokiCheckout\Core\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use RuntimeException;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class Config implements ArgumentInterface
 {
@@ -29,20 +29,20 @@ class Config implements ArgumentInterface
 
     public function isEnabled(): bool
     {
-        if (false === $this->moduleManager->isEnabled('Yireo_LokiComponents')) {
+        if (false === $this->moduleManager->isEnabled('Loki_Components')) {
             return false;
         }
 
-        if (false === $this->moduleManager->isEnabled('Yireo_LokiCheckout')) {
+        if (false === $this->moduleManager->isEnabled('LokiCheckout_Core')) {
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/general/enable');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/general/enable');
     }
 
     public function getTheme(): string
     {
-        $theme = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/theme');
+        $theme = (string)$this->scopeConfig->getValue('loki_checkout/general/theme');
         if (false === array_key_exists($theme, $this->xmlConfig->getThemes())) {
             return 'default';
         }
@@ -52,7 +52,7 @@ class Config implements ArgumentInterface
 
     public function getGridLayoutName(): string
     {
-        $gridLayout = (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/grid_layout');
+        $gridLayout = (string)$this->scopeConfig->getValue('loki_checkout/general/grid_layout');
         if (false === array_key_exists($gridLayout, $this->xmlConfig->getGridLayouts())) {
             return 'default_grid';
         }
@@ -101,46 +101,46 @@ class Config implements ArgumentInterface
 
     public function getDefaultGridClasses(): string
     {
-        return (string)$this->scopeConfig->getValue('yireo_loki_checkout/general/default_grid_class');
+        return (string)$this->scopeConfig->getValue('loki_checkout/general/default_grid_class');
     }
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/enable');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/debug/enable');
     }
 
     public function addDebugBlock(): bool
     {
-        return $this->isDebug() && (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/debug_block');
+        return $this->isDebug() && (bool)$this->scopeConfig->getValue('loki_checkout/debug/debug_block');
     }
 
     public function addHtmlHints(): bool
     {
-        return $this->isDebug() && (bool)$this->scopeConfig->getValue('yireo_loki_checkout/debug/html_hints');
+        return $this->isDebug() && (bool)$this->scopeConfig->getValue('loki_checkout/debug/html_hints');
     }
 
     public function enableSameAsBilling(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_same_as_billing');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/enable_same_as_billing');
     }
 
     public function enableVatIdOnlyForCompany(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/enable_vat_id_only_for_company');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/enable_vat_id_only_for_company');
     }
 
     public function hideRegionWhenOptional(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/fields/hide_region_when_optional');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/hide_region_when_optional');
     }
 
     public function selectDefaultShippingMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/shipping/select_default_shipping_method');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/shipping/select_default_shipping_method');
     }
 
     public function selectDefaultPaymentMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue('yireo_loki_checkout/billing/select_default_payment_method');
+        return (bool)$this->scopeConfig->getValue('loki_checkout/billing/select_default_payment_method');
     }
 }

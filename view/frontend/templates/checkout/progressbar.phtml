@@ -3,13 +3,13 @@ declare(strict_types=1);
 
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\ProgressBar\ProgressBarViewModel;
-use Yireo\LokiComponents\Util\Block\BlockRenderer;
-use Yireo\LokiComponents\Util\Block\ChildRenderer;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarViewModel;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\ChildRenderer;
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\Step\StepNavigator;
+use Loki\Components\Util\Block\CssClass;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 /** @var Template $block */
 /** @var Escaper $escaper */

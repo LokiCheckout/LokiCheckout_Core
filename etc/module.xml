@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Yireo_LokiCheckout">
+    <module name="LokiCheckout_Core">
         <sequence>
             <module name="Magento_Backend"/>
             <module name="Magento_Catalog"/>
@@ -20,9 +20,9 @@
             <module name="Yireo_CspUtilities"/>
             <module name="Yireo_HyvaThemeAutoRegistration"/>
             <module name="Yireo_IntegrationTestHelper"/>
-            <module name="Yireo_LokiComponents"/>
-            <module name="Yireo_LokiFieldComponents"/>
-            <module name="Yireo_LokiMapComponents"/>
+            <module name="Loki_Components"/>
+            <module name="Loki_FieldComponents"/>
+            <module name="Loki_MapComponents"/>
 
         </sequence>
     </module>

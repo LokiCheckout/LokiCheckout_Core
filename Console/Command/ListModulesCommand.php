@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Console\Command;
+namespace LokiCheckout\Core\Console\Command;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\Manager as ModuleManager;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yireo\LokiCheckout\Config\LokiCheckoutModules;
+use LokiCheckout\Core\Config\LokiCheckoutModules;
 
 class ListModulesCommand extends Command
 {
@@ -24,7 +24,7 @@ class ListModulesCommand extends Command
 
     protected function configure()
     {
-        $this->setName('yireo:loki-checkout:modules:list');
+        $this->setName('loki-checkout:modules:list');
         $this->setDescription('Show a listing of all registered Loki Checkout modules.');
         $this->addOption('format', null, InputOption::VALUE_OPTIONAL, 'Format', 'table');
     }

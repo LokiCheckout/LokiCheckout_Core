@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Payment;
+namespace LokiCheckout\Core\Payment;
 
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class ApplePayRequest
 {

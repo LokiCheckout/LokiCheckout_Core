@@ -3,14 +3,14 @@ declare(strict_types=1);
 
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiComponents\Util\Block\CssClass;
+use Loki\Components\Util\Block\CssClass;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
 <img alt="<?= $escaper->escapeHtml(__('Trash')) ?>"
-     src="<?= /* @noEscape */ $block->getViewFileUrl('Yireo_LokiCheckout::images/trash.svg'); ?>"
+     src="<?= /* @noEscape */ $block->getViewFileUrl('LokiCheckout_Core::images/trash.svg'); ?>"
      class="<?= /* @noEscape */ $css('trash') ?>"
      width="18"
      height="18">

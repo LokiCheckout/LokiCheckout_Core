@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollection;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollection;
 
 interface SystemCheckInterface
 {

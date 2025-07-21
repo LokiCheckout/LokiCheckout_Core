@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\AddressField;
+namespace LokiCheckout\Core\Component\Base\AddressField;
 
-use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
-use Yireo\LokiCheckout\Util\SameAddressService;
-use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
-use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
+use LokiCheckout\Core\Util\Component\AddressStateProvider;
+use LokiCheckout\Core\Util\SameAddressService;
+use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
+use Loki\Field\Component\Base\Field\FieldRepository;
 
 /**
  * @method AddressFieldContext getContext()

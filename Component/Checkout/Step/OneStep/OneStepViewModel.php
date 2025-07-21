@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Step\OneStep;
+namespace LokiCheckout\Core\Component\Checkout\Step\OneStep;
 
-use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
+use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
 
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use Loki\Components\Component\ComponentViewModel;
 
 /**
  * @method OneStepContext getContext()

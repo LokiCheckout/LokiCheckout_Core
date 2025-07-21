@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\GridLayout;
+namespace LokiCheckout\Core\Component\Checkout\GridLayout;
 
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Config\XmlConfig;
+use Loki\Components\Component\ComponentViewModel;
 
 class GridLayoutViewModel extends ComponentViewModel
 {

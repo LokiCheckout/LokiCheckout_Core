@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment;
+namespace LokiCheckout\Core\Shipment;
 
 use Magento\Framework\ObjectManagerInterface;
 

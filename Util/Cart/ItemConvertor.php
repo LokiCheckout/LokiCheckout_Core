@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Cart;
+namespace LokiCheckout\Core\Util\Cart;
 
 use Magento\Quote\Model\Quote\Item;
 

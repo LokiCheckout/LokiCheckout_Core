@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Component;
+namespace LokiCheckout\Core\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
-use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
+use LokiCheckout\Core\ViewModel\State\BillingAddressState;
+use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 
 class AddressStateProvider
 {

@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\AddressField;
+namespace LokiCheckout\Core\Component\Base\AddressField;
 
-use Yireo\LokiFieldComponents\Component\Base\Field\FieldViewModelInterface;
+use Loki\Field\Component\Base\Field\FieldViewModelInterface;
 
 interface AddressFieldViewModelInterface extends FieldViewModelInterface
 {

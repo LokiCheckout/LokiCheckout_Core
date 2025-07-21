@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Cart;
+namespace LokiCheckout\Core\Util\Cart;
 
 use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
 use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Util\Ajax;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Components\Util\Ajax;
 
 class CartTotals implements ArgumentInterface
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Payment\Icon;
+namespace LokiCheckout\Core\Payment\Icon;
 
 use InvalidArgumentException;
 

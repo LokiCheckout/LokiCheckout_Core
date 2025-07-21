@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Observer;
+namespace LokiCheckout\Core\Observer;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -9,8 +9,8 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\LayoutInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Util\CurrentTheme;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Util\CurrentTheme;
 
 class EnableCheckout implements ObserverInterface
 {

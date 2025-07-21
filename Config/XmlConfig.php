@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config;
+namespace LokiCheckout\Core\Config;
 
 use Magento\Framework\Config\Data as DataConfig;
 use RuntimeException;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid\Block;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme\Step;
-use Yireo\LokiCheckout\Exception\UnknownThemeException;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
+use LokiCheckout\Core\Config\XmlConfig\Value\Theme;
+use LokiCheckout\Core\Config\XmlConfig\Value\Theme\Step;
+use LokiCheckout\Core\Exception\UnknownThemeException;
 
 class XmlConfig extends DataConfig
 {

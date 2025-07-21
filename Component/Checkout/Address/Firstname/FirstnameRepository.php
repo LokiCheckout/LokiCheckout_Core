@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Firstname;
+namespace LokiCheckout\Core\Component\Checkout\Address\Firstname;
 
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldRepository;
 
 class FirstnameRepository extends AddressFieldRepository
 {

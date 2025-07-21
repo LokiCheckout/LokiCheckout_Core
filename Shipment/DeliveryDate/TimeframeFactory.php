@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment\DeliveryDate;
+namespace LokiCheckout\Core\Shipment\DeliveryDate;
 
 use Magento\Framework\ObjectManagerInterface;
 

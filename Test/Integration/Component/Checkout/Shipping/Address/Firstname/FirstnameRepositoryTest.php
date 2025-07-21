@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Address\Firstname;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Firstname;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
@@ -8,8 +8,8 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
-use Yireo\LokiComponents\Component\ComponentRegistry;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
+use Loki\Components\Component\ComponentRegistry;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),

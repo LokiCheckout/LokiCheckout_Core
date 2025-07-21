@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util;
+namespace LokiCheckout\Core\Util;
 
 use Magento\Framework\View\DesignInterface;
 

@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address;
+namespace LokiCheckout\Core\Component\Checkout\Address;
 
 use Magento\Quote\Model\Quote;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method AddressFormContext getContext()

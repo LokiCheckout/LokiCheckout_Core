@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\AddressField;
+namespace LokiCheckout\Core\Component\Base\AddressField;
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\ViewModel\State\AddressStateInterface;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
 
 /**
  * @method AddressFieldContext getContext()

@@ -3,19 +3,19 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd"
 >
     <event name="layout_load_before">
-        <observer name="Yireo_LokiCheckout::enableCheckout" instance="Yireo\LokiCheckout\Observer\EnableCheckout"/>
+        <observer name="LokiCheckout_Core::enableCheckout" instance="LokiCheckout\Core\Observer\EnableCheckout"/>
     </event>
 
     <event name="view_block_abstract_to_html_before">
-        <observer name="Yireo_LokiCheckout::assignAdditionalBlockVariables" instance="Yireo\LokiCheckout\Observer\AssignAdditionalBlockVariables"/>
+        <observer name="LokiCheckout_Core::assignAdditionalBlockVariables" instance="LokiCheckout\Core\Observer\AssignAdditionalBlockVariables"/>
     </event>
 
     <event name="view_block_abstract_to_html_after">
-        <observer name="Yireo_LokiCheckout::addHtmlAttributes" instance="Yireo\LokiCheckout\Observer\AddHtmlAttributes"/>
-        <observer name="Yireo_LokiCheckout::addDebuggingInfo" instance="Yireo\LokiCheckout\Observer\AddDebuggingInfo"/>
+        <observer name="LokiCheckout_Core::addHtmlAttributes" instance="LokiCheckout\Core\Observer\AddHtmlAttributes"/>
+        <observer name="LokiCheckout_Core::addDebuggingInfo" instance="LokiCheckout\Core\Observer\AddDebuggingInfo"/>
     </event>
 
     <event name="checkout_cart_save_after">
-        <observer name="Yireo_LokiCheckout::resetStepAfterCartSave" instance="Yireo\LokiCheckout\Observer\ResetStepAfterCartSave"/>
+        <observer name="LokiCheckout_Core::resetStepAfterCartSave" instance="LokiCheckout\Core\Observer\ResetStepAfterCartSave"/>
     </event>
 </config>

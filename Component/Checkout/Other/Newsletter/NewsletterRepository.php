@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
+namespace LokiCheckout\Core\Component\Checkout\Other\Newsletter;
 
 use Magento\Newsletter\Model\Subscriber;
 use Magento\Store\Model\Website;
-use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
+use Loki\Field\Component\Base\Field\FieldRepository;
 
 /**
  * @method NewsletterContext getContext()

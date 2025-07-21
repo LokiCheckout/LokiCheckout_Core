@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Validator\Quote\ValidationRule;
+namespace LokiCheckout\Core\Validator\Quote\ValidationRule;
 
 use Magento\Framework\Validation\ValidationResultFactory;
 use Magento\Quote\Model\Quote;

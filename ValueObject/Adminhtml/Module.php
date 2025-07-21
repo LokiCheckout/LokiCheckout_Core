@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ValueObject\Adminhtml;
+namespace LokiCheckout\Core\ValueObject\Adminhtml;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\Manager as ModuleManager;
-use Yireo\LokiCheckout\Config\LokiCheckoutModules;
-use Yireo\LokiCheckout\Util\Composer\ComposerApi;
-use Yireo\LokiCheckout\Util\Composer\ComposerPackage;
+use LokiCheckout\Core\Config\LokiCheckoutModules;
+use LokiCheckout\Core\Util\Composer\ComposerApi;
+use LokiCheckout\Core\Util\Composer\ComposerPackage;
 
 class Module
 {

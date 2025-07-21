@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Street2;
+namespace LokiCheckout\Core\Component\Checkout\Address\Street2;
 
-use Yireo\LokiCheckout\Component\Checkout\Address\StreetLine\StreetLineRepository;
+use LokiCheckout\Core\Component\Checkout\Address\StreetLine\StreetLineRepository;
 
 class Street2Repository extends StreetLineRepository
 {

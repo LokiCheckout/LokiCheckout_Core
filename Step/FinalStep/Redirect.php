@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Step\FinalStep;
+namespace LokiCheckout\Core\Step\FinalStep;
 
 use Magento\Framework\UrlFactory;
-use Yireo\LokiCheckout\Payment\Redirect\RedirectResolverListing;
+use LokiCheckout\Core\Payment\Redirect\RedirectResolverListing;
 
 class Redirect
 {

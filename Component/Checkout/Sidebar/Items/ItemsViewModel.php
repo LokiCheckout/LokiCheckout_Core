@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Items;
+namespace LokiCheckout\Core\Component\Checkout\Sidebar\Items;
 
 use Magento\Quote\Api\Data\CartItemInterface;
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use Loki\Components\Component\ComponentViewModel;
 
 /**
  * @method ItemsContext getContext()

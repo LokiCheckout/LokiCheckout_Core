@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Util;
+namespace LokiCheckout\Core\Test\Unit\Util;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Test\Unit\Stub\SimpleObjectManager;
-use Yireo\LokiCheckout\Util\StreetLinesFactory;
+use LokiCheckout\Core\Test\Unit\Stub\SimpleObjectManager;
+use LokiCheckout\Core\Util\StreetLinesFactory;
 
 class StreetLinesFactoryTest extends TestCase
 {

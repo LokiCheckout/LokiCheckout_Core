@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Config\XmlConfig\Value\GridLayout;
+namespace LokiCheckout\Core\Test\Integration\Config\XmlConfig\Value\GridLayout;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Fixture\Cache;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Yireo\LokiCheckout\Config\XmlConfig;
+use LokiCheckout\Core\Config\XmlConfig;
 
 class GridTest extends TestCase
 {

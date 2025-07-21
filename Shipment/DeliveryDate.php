@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Shipment;
+namespace LokiCheckout\Core\Shipment;
 
 use IntlDateFormatter;
 use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
 use Magento\Framework\Stdlib\DateTime\Timezone;
-use Yireo\LokiCheckout\Shipment\DeliveryDate\Timeframe;
+use LokiCheckout\Core\Shipment\DeliveryDate\Timeframe;
 
 class DeliveryDate
 {

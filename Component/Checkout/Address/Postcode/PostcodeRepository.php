@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Postcode;
+namespace LokiCheckout\Core\Component\Checkout\Address\Postcode;
 
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldRepository;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldRepository;
 
 /**
  * @method PostcodeContext getContext()

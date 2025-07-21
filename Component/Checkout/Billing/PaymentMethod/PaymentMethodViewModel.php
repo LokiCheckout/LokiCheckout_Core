@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethod;
+namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethod;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods\PaymentMethodsContext;
 
 /**
  * @method PaymentMethodsContext getContext()

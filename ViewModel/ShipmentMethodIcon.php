@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel;
+namespace LokiCheckout\Core\ViewModel;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Shipment\Icon\IconResolverContext;
-use Yireo\LokiCheckout\Shipment\Icon\IconResolverContextFactory;
-use Yireo\LokiCheckout\Shipment\Icon\IconResolverListing;
+use LokiCheckout\Core\Shipment\Icon\IconResolverContext;
+use LokiCheckout\Core\Shipment\Icon\IconResolverContextFactory;
+use LokiCheckout\Core\Shipment\Icon\IconResolverListing;
 
 /**
  * @api

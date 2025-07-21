@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Prefix;
+namespace LokiCheckout\Core\Component\Checkout\Address\Prefix;
 
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
 
 class PrefixViewModel extends AddressFieldViewModel
 {

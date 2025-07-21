@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Yireo_LokiCheckout::index" title="Yireo Loki Checkout" translate="title" module="Yireo_LokiCheckout" sortOrder="45" parent="Magento_Backend::system" resource="Yireo_LokiCheckout::index"/>
+        <add id="LokiCheckout_Core::index" title="LokiCheckout" translate="title" module="LokiCheckout_Core" sortOrder="45" parent="Magento_Backend::system" resource="LokiCheckout_Core::index"/>
 
-        <add id="Yireo_LokiCheckout::modules" title="Module Overview" translate="title" module="Yireo_LokiCheckout" sortOrder="10" parent="Yireo_LokiCheckout::index" action="loki_checkout/modules/index/" resource="Yireo_LokiCheckout::modules"/>
+        <add id="LokiCheckout_Core::modules" title="Module Overview" translate="title" module="LokiCheckout_Core" sortOrder="10" parent="LokiCheckout_Core::index" action="loki_checkout/modules/index/" resource="LokiCheckout_Core::modules"/>
 
-        <add id="Yireo_LokiCheckout::check" title="System Check" translate="title" module="Yireo_LokiCheckout" sortOrder="10" parent="Yireo_LokiCheckout::index" action="loki_checkout/check/index/" resource="Yireo_LokiCheckout::check"/>
+        <add id="LokiCheckout_Core::check" title="System Check" translate="title" module="LokiCheckout_Core" sortOrder="10" parent="LokiCheckout_Core::index" action="loki_checkout/check/index/" resource="LokiCheckout_Core::check"/>
     </menu>
 </config>

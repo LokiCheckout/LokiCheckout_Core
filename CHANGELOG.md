@@ -66,7 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.3] - 22 May 2025
 ### Fixed
-- Register `Yireo_LokiFieldComponents` as a checkout module
+- Register `Loki_FieldComponents` as a checkout module
 - Easier support for image output
 - Add label title of payment method code
 - Add assertion for usage in PSP integration tests
@@ -252,7 +252,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix order completion for virtual orders
 - Move GridLayout from XML layout to config
 - Remove default grid class
-- Implement option `yireo_loki_checkout/general/default_grid_class`
+- Implement option `loki_checkout/general/default_grid_class`
 - Dynamically change title of shipping address form
 - Rename `field_name` to `fieldName`
 - Fix client-side validation after refactoring to LokiFieldComponents

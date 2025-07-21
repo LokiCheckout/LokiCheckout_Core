@@ -3,11 +3,11 @@
     <body>
         <block
             name="loki-checkout.payment.methods"
-            template="Yireo_LokiCheckout::checkout/payment/payment-methods.phtml">
+            template="LokiCheckout_Core::checkout/payment/payment-methods.phtml">
 
             <block
                 name="loki-checkout.payment.methods.title" as="title"
-                template="Yireo_LokiCheckout::generic/title.phtml">
+                template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
                     <argument name="title" xsi:type="string">Payment Methods</argument>
                 </arguments>
@@ -15,26 +15,26 @@
 
             <block
                 name="loki-checkout.payment.payment-methods.item" as="item"
-                template="Yireo_LokiCheckout::checkout/payment/payment-methods/item.phtml"/>
+                template="LokiCheckout_Core::checkout/payment/payment-methods/item.phtml"/>
         </block>
 
         <block
             name="loki-checkout.payment.payment-methods.banktransfer.additional"
-            template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/banktransfer.phtml">
+            template="LokiCheckout_Core::checkout/payment/payment-method-additional/banktransfer.phtml">
         </block>
 
         <block
             name="loki-checkout.payment.payment-methods.cashondelivery.additional"
-            template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/cashondelivery.phtml">
+            template="LokiCheckout_Core::checkout/payment/payment-method-additional/cashondelivery.phtml">
         </block>
 
         <block name="loki-checkout.payment.payment-methods.checkmo.additional"
-               template="Yireo_LokiCheckout::checkout/payment/payment-method-additional/checkmo.phtml">
+               template="LokiCheckout_Core::checkout/payment/payment-method-additional/checkmo.phtml">
         </block>
 
         <referenceContainer name="loki-components">
             <block name="loki-checkout.script.components.payment-methods-component"
-                   template="Yireo_LokiCheckout::script/component/payment-methods-component.phtml"/>
+                   template="LokiCheckout_Core::script/component/payment-methods-component.phtml"/>
         </referenceContainer>
     </body>
 </page>

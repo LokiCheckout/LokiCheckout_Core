@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
+namespace LokiCheckout\Core\Component\Checkout\Other\Newsletter;
 
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -10,17 +10,17 @@ use Magento\Framework\UrlFactory;
 use Magento\Newsletter\Model\SubscriberFactory;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
 use Magento\Store\Model\StoreManagerInterface;
-use Yireo\LokiCheckout\Config\Config as ModuleConfig;
-use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiCheckout\Util\Component\AddressStateProvider;
-use Yireo\LokiCheckout\Util\Component\AttributeProvider;
-use Yireo\LokiCheckout\Util\Component\StepProvider;
-use Yireo\LokiCheckout\Util\CustomerProvider;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiCheckout\ViewModel\State\BillingAddressState;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
-use Yireo\LokiComponents\Component\ComponentContextInterface;
-use Yireo\LokiComponents\Messages\GlobalMessageRegistry;
+use LokiCheckout\Core\Config\Config as ModuleConfig;
+use LokiCheckout\Core\Step\StepNavigator;
+use LokiCheckout\Core\Util\Component\AddressStateProvider;
+use LokiCheckout\Core\Util\Component\AttributeProvider;
+use LokiCheckout\Core\Util\Component\StepProvider;
+use LokiCheckout\Core\Util\CustomerProvider;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\State\BillingAddressState;
+use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
+use Loki\Components\Component\ComponentContextInterface;
+use Loki\Components\Messages\GlobalMessageRegistry;
 
 class NewsletterContext implements ComponentContextInterface
 {

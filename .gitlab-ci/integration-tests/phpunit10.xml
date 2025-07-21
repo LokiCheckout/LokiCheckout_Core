@@ -7,8 +7,8 @@
          stderr="true"
 >
     <testsuites>
-        <testsuite name="Yireo_LokiCheckout">
-            <directory>../../../vendor/yireo/magento2-loki-checkout/Test/Unit</directory>
+        <testsuite name="LokiCheckout_Core">
+            <directory>../../../vendor/loki-checkout/magento2-core/Test/Unit</directory>
         </testsuite>
     </testsuites>
     <php>

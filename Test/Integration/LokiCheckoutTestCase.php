@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration;
+namespace LokiCheckout\Core\Test\Integration;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -9,12 +9,12 @@ use Magento\Framework\App\Response\Http;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Component\ComponentRegistry;
-use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
-use Yireo\LokiComponents\Test\Integration\LokiComponentsTestCase;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Components\Component\ComponentInterface;
+use Loki\Components\Component\ComponentRegistry;
+use Loki\Components\Component\ComponentRepositoryInterface;
+use Loki\Components\Test\Integration\LokiComponentsTestCase;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
@@ -24,9 +24,9 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     {
         parent::setUp();
 
-        $this->assertModuleIsEnabled('Yireo_LokiCheckout');
-        $this->assertModuleIsEnabled('Yireo_LokiFieldComponents');
-        $this->assertStoreConfigValueEquals(1, 'yireo_loki_checkout/general/enable');
+        $this->assertModuleIsEnabled('LokiCheckout_Core');
+        $this->assertModuleIsEnabled('Loki_FieldComponents');
+        $this->assertStoreConfigValueEquals(1, 'loki_checkout/general/enable');
     }
 
     protected function getQuote(): Quote

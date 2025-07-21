@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Validator;
+namespace LokiCheckout\Core\Validator;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Quote\Model\ValidationRules\QuoteValidationRuleInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class StepValidator implements ValidatorInterface
 {

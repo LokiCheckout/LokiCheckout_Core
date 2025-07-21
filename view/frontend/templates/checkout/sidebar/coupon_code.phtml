@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
-use Yireo\LokiComponents\Util\Block\BlockRenderer;
-use Yireo\LokiComponents\Util\Block\CssClass;
+use LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\CssClass;
 
 /** @var Template $block */
 /** @var CouponCodeViewModel $viewModel */
@@ -34,7 +34,7 @@ $couponCode = $viewModel->getValue();
                 <span><?= $escaper->escapeHtml(__('Apply Discount Code')) ?></span>
                 <img
                     alt="<?= $escaper->escapeHtml(__('Expand')) ?>"
-                    src="<?= /* @noEscape */ $block->getViewFileUrl('Yireo_LokiCheckout::images/chevron-down.svg'); ?>"
+                    src="<?= /* @noEscape */ $block->getViewFileUrl('LokiCheckout_Core::images/chevron-down.svg'); ?>"
                     class="<?= /* @noEscape */ $css('inline-block group-open:rotate-180 transition-transform') ?>"
                     width="20"
                     height="20"

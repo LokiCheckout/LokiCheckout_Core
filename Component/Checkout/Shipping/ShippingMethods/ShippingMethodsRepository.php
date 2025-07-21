@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
+namespace LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods;
 
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
-use Yireo\LokiComponents\Component\ComponentRepository;
+use Loki\Components\Component\ComponentRepository;
 
 /**
  * @method ShippingMethodsContext getContext()

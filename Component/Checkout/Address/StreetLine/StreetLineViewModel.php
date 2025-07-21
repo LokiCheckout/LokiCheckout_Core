@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\StreetLine;
+namespace LokiCheckout\Core\Component\Checkout\Address\StreetLine;
 
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
 
 class StreetLineViewModel extends AddressFieldViewModel
 {

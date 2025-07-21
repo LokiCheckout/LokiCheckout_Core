@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Payment\Redirect;
+namespace LokiCheckout\Core\Payment\Redirect;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
-use Yireo\LokiCheckout\Step\FinalStep\RedirectContext;
+use LokiCheckout\Core\Step\FinalStep\RedirectContext;
 
 class SessionRedirectResolver implements RedirectResolverInterface
 {

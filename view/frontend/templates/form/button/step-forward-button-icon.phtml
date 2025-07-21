@@ -2,9 +2,9 @@
 declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
+use Loki\Components\Util\Block\CssClass;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Field\ViewModel\ImageOutput;
 
 /** @var Template $block */
 /** @var CssClass $css */
@@ -14,9 +14,9 @@ use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
 <div x-show="notLoading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->get('Yireo_LokiFieldComponents::images/arrow-right.svg') ?>
+    <?= /* @noEscape */ $imageOutput->get('Loki_FieldComponents::images/arrow-right.svg') ?>
 </div>
 
 <div x-cloak x-show="loading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 animate-spin fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->get('Yireo_LokiFieldComponents::images/spinner.svg') ?>
+    <?= /* @noEscape */ $imageOutput->get('Loki_FieldComponents::images/spinner.svg') ?>
 </div>

@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\Payment\ApplePay;
+namespace LokiCheckout\Core\Component\Base\Payment\ApplePay;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Payment\ApplePayRequest;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Payment\ApplePayRequest;
 
 abstract class ApplePayViewModel extends CheckoutViewModel
 {

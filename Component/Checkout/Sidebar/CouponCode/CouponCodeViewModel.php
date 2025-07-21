@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\CouponCode;
+namespace LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method CheckoutContext getContext()

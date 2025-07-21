@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util;
+namespace LokiCheckout\Core\Util;
 
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 use Magento\Quote\Api\Data\AddressInterface;

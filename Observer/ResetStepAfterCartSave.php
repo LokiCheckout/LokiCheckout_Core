@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Observer;
+namespace LokiCheckout\Core\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Message\Manager as MessageManager;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Step\StepNavigator;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Step\StepNavigator;
 
 class ResetStepAfterCartSave implements ObserverInterface
 {

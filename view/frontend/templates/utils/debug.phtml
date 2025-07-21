@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use Yireo\LokiComponents\Factory\ViewModelFactory;
+use Loki\Components\Factory\ViewModelFactory;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
-use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
+use Loki\Components\Util\Block\CssClass;
+use Loki\Components\Component\ComponentInterface;
+use Loki\Field\ViewModel\ImageOutput;
 
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Escaper $escaper */
@@ -23,7 +23,7 @@ $ancestorBlock = $block->getAncestorBlock();
 ?>
 <div x-data="{open:false}" class="<?= /* @noEscape */ $css('absolute top-0 left-0') ?>">
     <button @click="open = ! open">
-        <?= /* @noEscape */ $imageOutput->get('Yireo_LokiCheckout::images/debug.svg'); ?>
+        <?= /* @noEscape */ $imageOutput->get('LokiCheckout_Core::images/debug.svg'); ?>
     </button>
     <div x-cloak x-show="open" class="<?= /* @noEscape */ $css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal') ?>">
         Component: <?= ($viewModel instanceof ComponentInterface) ? $escaper->escapeHtml(get_class($viewModel)) : 'none' ?><br>

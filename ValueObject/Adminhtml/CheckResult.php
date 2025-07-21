@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ValueObject\Adminhtml;
+namespace LokiCheckout\Core\ValueObject\Adminhtml;
 
 class CheckResult
 {

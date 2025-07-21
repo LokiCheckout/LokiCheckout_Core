@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton;
+namespace LokiCheckout\Core\Component\Checkout\StepButton\StepForwardButton;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiCheckout\Exception\UnknownStepException;
-use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Component\ComponentRepository;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use LokiCheckout\Core\Exception\UnknownStepException;
+use LokiCheckout\Core\Step\StepNavigator;
+use Loki\Components\Component\ComponentRepository;
 
 /**
  * @method CheckoutContext getContext()

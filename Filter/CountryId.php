@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Filter;
+namespace LokiCheckout\Core\Filter;
 
-use Yireo\LokiComponents\Filter\FilterInterface;
+use Loki\Components\Filter\FilterInterface;
 
 class CountryId implements FilterInterface
 {

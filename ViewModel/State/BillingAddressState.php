@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\State;
+namespace LokiCheckout\Core\ViewModel\State;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address;
-use Yireo\LokiCheckout\Util\SameAddressService;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\Util\SameAddressService;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class BillingAddressState implements AddressStateInterface
 {

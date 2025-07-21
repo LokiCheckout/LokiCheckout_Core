@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Step;
+namespace LokiCheckout\Core\Step;
 
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -17,10 +17,10 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
-use Yireo\LokiCheckout\Step\FinalStep\Redirect;
-use Yireo\LokiCheckout\Validator\QuoteValidator;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiComponents\Exception\RedirectException;
+use LokiCheckout\Core\Step\FinalStep\Redirect;
+use LokiCheckout\Core\Validator\QuoteValidator;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Components\Exception\RedirectException;
 
 class FinalStep
 {

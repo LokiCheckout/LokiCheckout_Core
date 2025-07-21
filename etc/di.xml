@@ -1,57 +1,57 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\ShippingStep\ShippingStepContext">
+    <type name="LokiCheckout\Core\Component\Checkout\Step\ShippingStep\ShippingStepContext">
         <arguments>
-            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualShippingStepValidator</argument>
+            <argument name="stepValidator" xsi:type="object">LokiCheckout\Core\Validator\VirtualShippingStepValidator</argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Logger\Debugger">
+    <type name="LokiCheckout\Core\Logger\Debugger">
         <arguments>
-            <argument name="logger" xsi:type="object">Yireo\LokiCheckout\Logger\VirtualLogger</argument>
+            <argument name="logger" xsi:type="object">LokiCheckout\Core\Logger\VirtualLogger</argument>
         </arguments>
     </type>
 
-    <virtualType type="Magento\Framework\Logger\Monolog" name="Yireo\LokiCheckout\Logger\VirtualLogger">
+    <virtualType type="Magento\Framework\Logger\Monolog" name="LokiCheckout\Core\Logger\VirtualLogger">
         <arguments>
             <argument name="handlers"  xsi:type="array">
-                <item name="system" xsi:type="object">Yireo\LokiCheckout\Logger\VirtualLogHandler</item>
+                <item name="system" xsi:type="object">LokiCheckout\Core\Logger\VirtualLogHandler</item>
             </argument>
         </arguments>
     </virtualType>
 
-    <virtualType type="Magento\Framework\Logger\Handler\Base" name="Yireo\LokiCheckout\Logger\VirtualLogHandler">
+    <virtualType type="Magento\Framework\Logger\Handler\Base" name="LokiCheckout\Core\Logger\VirtualLogHandler">
         <arguments>
-            <argument name="fileName" xsi:type="string">var/log/yireo_lokicheckout.log</argument>
+            <argument name="fileName" xsi:type="string">var/log/loki_checkout.log</argument>
         </arguments>
     </virtualType>
 
     <type name="Magento\Framework\Console\CommandList">
         <arguments>
             <argument name="commands" xsi:type="array">
-                <item name="yireo:loki-checkout:modules:list" xsi:type="object">Yireo\LokiCheckout\Console\Command\ListModulesCommand</item>
-                <item name="yireo:loki-checkout:modules:dump" xsi:type="object">Yireo\LokiCheckout\Console\Command\DumpModulesCommand</item>
+                <item name="loki-checkout:modules:list" xsi:type="object">LokiCheckout\Core\Console\Command\ListModulesCommand</item>
+                <item name="loki-checkout:modules:dump" xsi:type="object">LokiCheckout\Core\Console\Command\DumpModulesCommand</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiCheckout\Config\LokiCheckoutModules">
+    <type name="LokiCheckout\Core\Config\LokiCheckoutModules">
         <arguments>
             <argument name="modules" xsi:type="array">
-                <item name="Yireo_LokiComponents" xsi:type="string">Yireo_LokiComponents</item>
-                <item name="Yireo_LokiFieldComponents" xsi:type="string">Yireo_LokiFieldComponents</item>
-                <item name="Yireo_LokiComponentsDebugger" xsi:type="string">Yireo_LokiComponentsDebugger</item>
-                <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
+                <item name="Loki_Components" xsi:type="string">Loki_Components</item>
+                <item name="Loki_FieldComponents" xsi:type="string">Loki_FieldComponents</item>
+                <item name="Loki_Debugger" xsi:type="string">Loki_Debugger</item>
+                <item name="LokiCheckout_Core" xsi:type="string">LokiCheckout_Core</item>
             </argument>
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualShippingStepValidator">
+    <virtualType type="LokiCheckout\Core\Validator\StepValidator" name="LokiCheckout\Core\Validator\VirtualShippingStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
                 <item name="emailValidationRule" xsi:type="object">
-                    Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email
+                    LokiCheckout\Core\Validator\Quote\ValidationRule\Email
                 </item>
                 <item name="shippingAddressValidationRule" xsi:type="object">
                     Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule
@@ -63,13 +63,13 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\BillingStep\BillingStepContext">
+    <type name="LokiCheckout\Core\Component\Checkout\Step\BillingStep\BillingStepContext">
         <arguments>
-            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualBillingStepValidator</argument>
+            <argument name="stepValidator" xsi:type="object">LokiCheckout\Core\Validator\VirtualBillingStepValidator</argument>
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualBillingStepValidator">
+    <virtualType type="LokiCheckout\Core\Validator\StepValidator" name="LokiCheckout\Core\Validator\VirtualBillingStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
                 <item name="billingAddressValidationRule" xsi:type="object">
@@ -82,17 +82,17 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Step\OneStep\OneStepContext">
+    <type name="LokiCheckout\Core\Component\Checkout\Step\OneStep\OneStepContext">
         <arguments>
-            <argument name="stepValidator" xsi:type="object">Yireo\LokiCheckout\Validator\VirtualOneStepValidator</argument>
+            <argument name="stepValidator" xsi:type="object">LokiCheckout\Core\Validator\VirtualOneStepValidator</argument>
         </arguments>
     </type>
 
-    <virtualType type="Yireo\LokiCheckout\Validator\StepValidator" name="Yireo\LokiCheckout\Validator\VirtualOneStepValidator">
+    <virtualType type="LokiCheckout\Core\Validator\StepValidator" name="LokiCheckout\Core\Validator\VirtualOneStepValidator">
         <arguments>
             <argument name="validationRules" xsi:type="array">
                 <item name="emailValidationRule" xsi:type="object">
-                    Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email
+                    LokiCheckout\Core\Validator\Quote\ValidationRule\Email
                 </item>
                 <item name="shippingAddressValidationRule" xsi:type="object">
                     Magento\Quote\Model\ValidationRules\ShippingAddressValidationRule
@@ -107,29 +107,29 @@
     <type name="Magento\Quote\Model\ValidationRules\QuoteValidationComposite">
         <arguments>
             <argument name="validationRules" xsi:type="array">
-                <item name="emailValidationRule" xsi:type="object">Yireo\LokiCheckout\Validator\Quote\ValidationRule\Email</item>
+                <item name="emailValidationRule" xsi:type="object">LokiCheckout\Core\Validator\Quote\ValidationRule\Email</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiComponents\Filter\FilterRegistry">
+    <type name="Loki\Components\Filter\FilterRegistry">
         <arguments>
             <argument name="filters" xsi:type="array">
-                <item name="country_id" xsi:type="object">Yireo\LokiCheckout\Filter\CountryId</item>
-                <item name="vat_id" xsi:type="object">Yireo\LokiCheckout\Filter\VatId</item>
+                <item name="country_id" xsi:type="object">LokiCheckout\Core\Filter\CountryId</item>
+                <item name="vat_id" xsi:type="object">LokiCheckout\Core\Filter\VatId</item>
             </argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiComponents\Validator\ValidatorRegistry">
+    <type name="Loki\Components\Validator\ValidatorRegistry">
         <arguments>
             <argument name="validators" xsi:type="array">
-                <item name="customerAddress" xsi:type="object">Yireo\LokiCheckout\Validator\Component\CustomerAddressValidator</item>
-                <item name="email_available" xsi:type="object">Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator</item>
-                <item name="postcode" xsi:type="object">Yireo\LokiCheckout\Validator\Component\PostcodeFormatValidator</item>
-                <item name="gender" xsi:type="object">Yireo\LokiCheckout\Validator\Component\GenderValidator</item>
-                <item name="dob" xsi:type="object">Yireo\LokiCheckout\Validator\Component\DobValidator</item>
-                <item name="options" xsi:type="object">Yireo\LokiCheckout\Validator\Component\OptionsValidator</item>
+                <item name="customerAddress" xsi:type="object">LokiCheckout\Core\Validator\Component\CustomerAddressValidator</item>
+                <item name="email_available" xsi:type="object">LokiCheckout\Core\Validator\Component\EmailAvailableValidator</item>
+                <item name="postcode" xsi:type="object">LokiCheckout\Core\Validator\Component\PostcodeFormatValidator</item>
+                <item name="gender" xsi:type="object">LokiCheckout\Core\Validator\Component\GenderValidator</item>
+                <item name="dob" xsi:type="object">LokiCheckout\Core\Validator\Component\DobValidator</item>
+                <item name="options" xsi:type="object">LokiCheckout\Core\Validator\Component\OptionsValidator</item>
             </argument>
         </arguments>
     </type>
@@ -138,19 +138,17 @@
         <arguments>
             <argument name="modulePrefixes" xsi:type="array">
                 <item name="LokiCheckout_" xsi:type="string">LokiCheckout_</item>
-                <item name="Loki_" xsi:type="string">Loki_</item>
-                <item name="Yireo_LokiCheckout" xsi:type="string">Yireo_LokiCheckout</item>
-                <item name="Yireo_LokiFieldComponents" xsi:type="string">Yireo_LokiFieldComponents</item>
-                <item name="Yireo_LokiMapComponents" xsi:type="string">Yireo_LokiMapComponents</item>
-                <item name="Yireo_LokiComponents" xsi:type="string">Yireo_LokiComponents</item>
+                <item name="Loki_FieldComponents" xsi:type="string">Loki_FieldComponents</item>
+                <item name="Loki_MapComponents" xsi:type="string">Loki_MapComponents</item>
+                <item name="Loki_Components" xsi:type="string">Loki_Components</item>
             </argument>
         </arguments>
     </type>
 
-    <virtualType name="Yireo\LokiCheckout\Config\XmlConfig\VirtualFileReader" type="Magento\Framework\Config\Reader\Filesystem">
+    <virtualType name="LokiCheckout\Core\Config\XmlConfig\VirtualFileReader" type="Magento\Framework\Config\Reader\Filesystem">
         <arguments>
-            <argument name="converter" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\Converter</argument>
-            <argument name="schemaLocator" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\SchemaLocator</argument>
+            <argument name="converter" xsi:type="object">LokiCheckout\Core\Config\XmlConfig\Converter</argument>
+            <argument name="schemaLocator" xsi:type="object">LokiCheckout\Core\Config\XmlConfig\SchemaLocator</argument>
             <argument name="fileName" xsi:type="string">loki_checkout.xml</argument>
             <argument name="idAttributes" xsi:type="array">
                 <item name="/config/themes/theme" xsi:type="array">
@@ -172,17 +170,17 @@
         </arguments>
     </virtualType>
 
-    <type name="Yireo\LokiCheckout\Config\XmlConfig">
+    <type name="LokiCheckout\Core\Config\XmlConfig">
         <arguments>
-            <argument name="reader" xsi:type="object">Yireo\LokiCheckout\Config\XmlConfig\VirtualFileReader</argument>
+            <argument name="reader" xsi:type="object">LokiCheckout\Core\Config\XmlConfig\VirtualFileReader</argument>
             <argument name="cacheId" xsi:type="string">loki_checkout</argument>
         </arguments>
     </type>
 
-    <type name="Yireo\LokiComponents\Util\Block\CssClass">
+    <type name="Loki\Components\Util\Block\CssClass">
         <arguments>
             <argument name="cssClassParsers" xsi:type="array">
-                <item name="grid-class" xsi:type="object">Yireo\LokiCheckout\Util\Block\CssClassParser\GridClassParser</item>
+                <item name="grid-class" xsi:type="object">LokiCheckout\Core\Util\Block\CssClassParser\GridClassParser</item>
             </argument>
         </arguments>
     </type>

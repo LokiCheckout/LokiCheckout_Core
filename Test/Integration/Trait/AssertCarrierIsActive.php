@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Trait;
+namespace LokiCheckout\Core\Test\Integration\Trait;
 
 use Magento\Framework\App\ObjectManager;
 

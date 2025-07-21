@@ -4,12 +4,12 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Cart\ShippingMethod;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiComponents\Util\Block\BlockRenderer;
-use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiCheckout\ViewModel\PriceFormatter;
-use Yireo\LokiComponents\Util\Block\TemplateRenderer;
+use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\CssClass;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+use Loki\Components\Util\Block\TemplateRenderer;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
@@ -58,7 +58,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         <div class="<?= /* @noEscape */ $css('md:flex', 'details') ?>">
             <?= /* @noEscape */ $templateRenderer->html(
                 $block,
-                'Yireo_LokiCheckout::checkout/shipping/shipping-methods/icon.phtml',
+                'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
                 [
                     'alias' => $code,
                     'code' => $code,

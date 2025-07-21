@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Util;
+namespace LokiCheckout\Core\Test\Unit\Util;
 
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Util\StreetLines;
+use LokiCheckout\Core\Util\StreetLines;
 
 class StreetLinesTest extends TestCase
 {

@@ -4,7 +4,7 @@
         <block
             name="loki-checkout.agreements"
             ifconfig="checkout/options/enable_agreements"
-            template="Yireo_LokiCheckout::checkout/other/agreements.phtml">
+            template="LokiCheckout_Core::checkout/other/agreements.phtml">
             <arguments>
                 <argument name="error_text" xsi:type="string">Please agree to all the terms and conditions before placing the order.</argument>
             </arguments>
@@ -13,7 +13,7 @@
         <block
             name="loki-checkout.newsletter" as="newsletter"
             ifconfig="newsletter/general/active"
-            template="Yireo_LokiFieldComponents::form/field.phtml">
+            template="Loki_FieldComponents::form/field.phtml">
             <arguments>
                 <argument name="field_type" xsi:type="string">checkbox</argument>
                 <argument name="show_field_label" xsi:type="boolean">false</argument>

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Billing\Address\SaveInAddressBook;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Billing\Address\SaveInAddressBook;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
@@ -12,8 +12,8 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
-use Yireo\LokiCheckout\Test\Fixture\CustomerLoggedInFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
 #[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]
@@ -27,8 +27,8 @@ final class SaveInAddressBookPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.save_in_address_book';
 
-    #[ConfigFixture('yireo_loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

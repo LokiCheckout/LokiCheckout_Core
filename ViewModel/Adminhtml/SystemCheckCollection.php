@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml;
+namespace LokiCheckout\Core\ViewModel\Adminhtml;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck\SystemCheckInterface;
+use LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck\SystemCheckInterface;
 
 class SystemCheckCollection implements ArgumentInterface
 {

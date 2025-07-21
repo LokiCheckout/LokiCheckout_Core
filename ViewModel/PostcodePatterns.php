@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel;
+namespace LokiCheckout\Core\ViewModel;
 
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;

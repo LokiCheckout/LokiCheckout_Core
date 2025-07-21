@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
+use LokiCheckout\Core\Config\Config;
+use Loki\Components\Factory\ViewModelFactory;
 
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory **/
@@ -14,6 +14,6 @@ $config = $viewModelFactory->create(Config::class);
     const LokiCheckoutLogger = {
         ...LokiComponentsLogger,
         allowDebugging: <?= $config->isDebug() ? 'true' : 'false' ?>,
-        prefix: 'Yireo_LokiCheckout',
+        prefix: 'LokiCheckout_Core',
     };
 </script>

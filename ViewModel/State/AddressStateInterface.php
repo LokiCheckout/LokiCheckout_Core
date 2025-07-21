@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\State;
+namespace LokiCheckout\Core\ViewModel\State;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 

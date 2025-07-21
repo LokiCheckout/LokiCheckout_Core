@@ -6,7 +6,7 @@ test.describe('Toggle regions test', function()  {
   test('should switch region field on country change', async function({page, context})  {
     await setupCheckout(page, context, {
       config: {
-        'yireo_loki_checkout/fields/hide_region_when_optional': 0
+        'loki_checkout/fields/hide_region_when_optional': 0
       }
     });
 

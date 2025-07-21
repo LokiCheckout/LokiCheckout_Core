@@ -1,22 +1,22 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Model\Session">
-        <plugin name="Yireo_LokiCheckout::clearHelperData" type="Yireo\LokiCheckout\Plugin\ClearHelperDataPlugin"/>
+        <plugin name="LokiCheckout_Core::clearHelperData" type="LokiCheckout\Core\Plugin\ClearHelperDataPlugin"/>
     </type>
 
     <type name="Magento\Framework\View\Element\Template">
-        <plugin name="Yireo_LokiCheckout::addCspInlineScripts" type="Yireo\LokiCheckout\Plugin\AddCspInlineScriptsPlugin"/>
+        <plugin name="LokiCheckout_Core::addCspInlineScripts" type="LokiCheckout\Core\Plugin\AddCspInlineScriptsPlugin"/>
     </type>
 
-    <type name="Yireo\LokiComponents\Util\Controller\RepositoryDispatcher">
-        <plugin name="Yireo_LokiCheckout::redirectEmptyQuoteAfterRepositoryDispatch" type="Yireo\LokiCheckout\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin"/>
+    <type name="Loki\Components\Util\Controller\RepositoryDispatcher">
+        <plugin name="LokiCheckout_Core::redirectEmptyQuoteAfterRepositoryDispatch" type="LokiCheckout\Core\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin"/>
     </type>
 
-    <type name="Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
-        <plugin name="Yireo_LokiCheckout::fixFreeShippingSubtotal" type="Yireo\LokiCheckout\Plugin\FixFreeShippingSubtotalPlugin"/>
+    <type name="LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
+        <plugin name="LokiCheckout_Core::fixFreeShippingSubtotal" type="LokiCheckout\Core\Plugin\FixFreeShippingSubtotalPlugin"/>
     </type>
 
-    <type name="Yireo\LokiCheckout\Observer\AddDebuggingInfo">
+    <type name="LokiCheckout\Core\Observer\AddDebuggingInfo">
         <arguments>
             <argument name="blockPrefixes" xsi:type="array">
                 <item name="loki-checkout" xsi:type="string">loki-checkout</item>

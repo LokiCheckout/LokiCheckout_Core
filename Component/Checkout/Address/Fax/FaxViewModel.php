@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Fax;
+namespace LokiCheckout\Core\Component\Checkout\Address\Fax;
 
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
 
 class FaxViewModel extends AddressFieldViewModel
 {

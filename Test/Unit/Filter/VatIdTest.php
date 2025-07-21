@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Filter;
+namespace LokiCheckout\Core\Test\Unit\Filter;
 
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Filter\VatId;
+use LokiCheckout\Core\Filter\VatId;
 
 class VatIdTest extends TestCase
 {

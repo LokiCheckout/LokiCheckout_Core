@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
+namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote;
-use Yireo\LokiComponents\Component\ComponentRepository;
+use Loki\Components\Component\ComponentRepository;
 
 /**
  * @method PaymentMethodsContext getContext()

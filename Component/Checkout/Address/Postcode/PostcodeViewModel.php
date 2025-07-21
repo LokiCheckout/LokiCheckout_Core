@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Postcode;
+namespace LokiCheckout\Core\Component\Checkout\Address\Postcode;
 
 use Override;
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
 
 /**
  * @method PostcodeContext getContext()

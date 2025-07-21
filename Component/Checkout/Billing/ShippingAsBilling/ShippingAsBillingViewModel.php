@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Billing\ShippingAsBilling;
+namespace LokiCheckout\Core\Component\Checkout\Billing\ShippingAsBilling;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 class ShippingAsBillingViewModel extends CheckoutViewModel
 {

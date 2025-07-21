@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
 abstract class ScopeConfigValue extends SystemCheck
 {

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\QuoteField;
+namespace LokiCheckout\Core\Component\Base\QuoteField;
 
 interface QuoteFieldViewModelInterface
 {

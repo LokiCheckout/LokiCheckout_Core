@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\OptionModel;
+namespace LokiCheckout\Core\ViewModel\OptionModel;
 
 use Magento\Directory\Model\Region;
 use Magento\Directory\Model\ResourceModel\Region\CollectionFactory as RegionCollectionFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Base\AddressField\AddressFieldViewModel;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
-use Yireo\LokiFieldComponents\Util\OptionModelInterface;
+use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
+use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\Field\Util\OptionModelInterface;
 
 class RegionOptionModel implements ArgumentInterface, OptionModelInterface
 {

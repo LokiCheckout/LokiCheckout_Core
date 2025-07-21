@@ -4,7 +4,7 @@
 
         <block
             name="loki-checkout.steps.shipping.backward-button"
-            template="Yireo_LokiFieldComponents::form/button/button.phtml">
+            template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
                 <argument name="button_label" xsi:type="string">Back to previous step</argument>
             </arguments>
@@ -12,7 +12,7 @@
 
         <block
             name="loki-checkout.steps.shipping.forward-button"
-            template="Yireo_LokiFieldComponents::form/button/button.phtml">
+            template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
                 <argument name="button_label" xsi:type="string">Proceed to Review &amp;amp; Payments</argument>
                 <argument name="css_classes" xsi:type="array">
@@ -24,7 +24,7 @@
 
             <block
                 name="loki-checkout.steps.shipping.forward-button-icon" as="icon"
-                template="Yireo_LokiCheckout::form/button/step-forward-button-icon.phtml"/>
+                template="LokiCheckout_Core::form/button/step-forward-button-icon.phtml"/>
         </block>
     </body>
 </page>

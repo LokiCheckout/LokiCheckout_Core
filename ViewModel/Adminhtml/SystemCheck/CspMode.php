@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
 class CspMode extends ScopeConfigValue
 {

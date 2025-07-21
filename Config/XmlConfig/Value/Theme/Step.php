@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig\Value\Theme;
+namespace LokiCheckout\Core\Config\XmlConfig\Value\Theme;
 
 class Step
 {

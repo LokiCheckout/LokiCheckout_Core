@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Validator\Component;
+namespace LokiCheckout\Core\Validator\Component;
 
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Validator\ValidatorInterface;
+use Loki\Components\Component\ComponentInterface;
+use Loki\Components\Validator\ValidatorInterface;
 
 class DobValidator implements ValidatorInterface
 {

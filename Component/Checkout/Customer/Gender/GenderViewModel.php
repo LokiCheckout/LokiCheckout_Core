@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Customer\Gender;
+namespace LokiCheckout\Core\Component\Checkout\Customer\Gender;
 
-use Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldViewModel;
+use LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldViewModel;
 
 class GenderViewModel extends QuoteFieldViewModel
 {

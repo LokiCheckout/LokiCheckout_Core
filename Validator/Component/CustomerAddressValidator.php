@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Validator\Component;
+namespace LokiCheckout\Core\Validator\Component;
 
 use Magento\Customer\Model\AddressFactory as CustomerAddressFactory;
 use Magento\Framework\Phrase;
 use Magento\Framework\Validator\Factory as ValidatorFactory;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Validator\ValidatorInterface;
-use Yireo\LokiFieldComponents\Component\Base\Field\FieldComponent;
+use Loki\Components\Component\ComponentInterface;
+use Loki\Components\Validator\ValidatorInterface;
+use Loki\Field\Component\Base\Field\FieldComponent;
 
 class CustomerAddressValidator implements ValidatorInterface
 {

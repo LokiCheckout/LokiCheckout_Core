@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\QuoteField;
+namespace LokiCheckout\Core\Component\Base\QuoteField;
 
 use Magento\Quote\Model\Quote;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiFieldComponents\Component\Base\Field\FieldRepository;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use Loki\Field\Component\Base\Field\FieldRepository;
 
 /**
  * @method CheckoutContext getContext()

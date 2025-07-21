@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Fixture;
+namespace LokiCheckout\Core\Test\Integration\Fixture;
 
 use Magento\Framework\App\ObjectManager;
 

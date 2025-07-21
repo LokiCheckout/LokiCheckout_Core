@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Address\Select;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Select;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
@@ -9,9 +9,9 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Component\Checkout\Address\Select\SelectRepository;
-use Yireo\LokiCheckout\Test\Fixture\CustomerLoggedInFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Component\Checkout\Address\Select\SelectRepository;
+use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),

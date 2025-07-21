@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel;
+namespace LokiCheckout\Core\ViewModel;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -12,8 +12,8 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
-use Yireo\LokiComponents\Exception\RedirectException;
-use Yireo\LokiComponents\Util\Ajax;
+use Loki\Components\Exception\RedirectException;
+use Loki\Components\Util\Ajax;
 
 class CheckoutState implements ArgumentInterface
 {

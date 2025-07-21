@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Validator\Component;
+namespace LokiCheckout\Core\Test\Integration\Validator\Component;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
@@ -11,7 +11,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Validator\Component\EmailAvailableValidator;
+use LokiCheckout\Core\Validator\Component\EmailAvailableValidator;
 
 #[AppArea('frontend')]
 class EmailAvailableValidatorTest extends TestCase

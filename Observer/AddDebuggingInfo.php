@@ -1,15 +1,15 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Observer;
+namespace LokiCheckout\Core\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiComponents\Component\ComponentRegistry;
-use Yireo\LokiComponents\Exception\NoComponentFoundException;
+use LokiCheckout\Core\Config\Config;
+use Loki\Components\Component\ComponentRegistry;
+use Loki\Components\Exception\NoComponentFoundException;
 
 class AddDebuggingInfo implements ObserverInterface
 {

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Other\Newsletter;
+namespace LokiCheckout\Core\Component\Checkout\Other\Newsletter;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 class NewsletterViewModel extends CheckoutViewModel
 {

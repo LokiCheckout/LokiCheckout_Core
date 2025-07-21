@@ -3,7 +3,7 @@
     <body>
         <block
             name="loki-checkout.login"
-            template="Yireo_LokiCheckout::checkout/login.phtml">
+            template="LokiCheckout_Core::checkout/login.phtml">
             <arguments>
                 <argument name="js_component_name" xsi:type="string">LokiModal</argument>
             </arguments>

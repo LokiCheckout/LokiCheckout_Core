@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Fixture;
+namespace LokiCheckout\Core\Test\Fixture;
 
 use Magento\Framework\DataObject;
 use Magento\Quote\Api\CartRepositoryInterface;

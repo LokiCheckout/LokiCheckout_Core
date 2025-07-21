@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\ShippingDetails;
+namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails;
 
 use InvalidArgumentException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Util\AddressRenderer;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
-use Yireo\LokiCheckout\ViewModel\State\ShippingAddressState;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Util\AddressRenderer;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 
 class ShippingDetailsViewModel extends CheckoutViewModel
 {

@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Validator\Component;
+namespace LokiCheckout\Core\Validator\Component;
 
-use Yireo\LokiCheckout\ViewModel\OptionModel\GenderOptionModel;
-use Yireo\LokiComponents\Component\ComponentInterface;
-use Yireo\LokiComponents\Validator\ValidatorInterface;
+use LokiCheckout\Core\ViewModel\OptionModel\GenderOptionModel;
+use Loki\Components\Component\ComponentInterface;
+use Loki\Components\Validator\ValidatorInterface;
 
 class GenderValidator implements ValidatorInterface
 {

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Block;
+namespace LokiCheckout\Core\Util\Block;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Exception\BlockNotFoundException;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Exception\BlockNotFoundException;
 
 class SortedBlocks implements ArgumentInterface
 {

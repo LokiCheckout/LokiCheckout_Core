@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
+namespace LokiCheckout\Core\Config\XmlConfig\Value;
 
-use Yireo\LokiCheckout\Config\XmlConfig\Value\Theme\Step;
-use Yireo\LokiCheckout\Exception\StepNotFoundException;
-use Yireo\LokiCheckout\Exception\UnknownStepException;
+use LokiCheckout\Core\Config\XmlConfig\Value\Theme\Step;
+use LokiCheckout\Core\Exception\StepNotFoundException;
+use LokiCheckout\Core\Exception\UnknownStepException;
 
 class Theme
 {

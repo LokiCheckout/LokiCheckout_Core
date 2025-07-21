@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Component;
+namespace LokiCheckout\Core\Util\Component;
 
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\LayoutInterface;
-use Yireo\LokiCheckout\Step\StepNavigator;
+use LokiCheckout\Core\Step\StepNavigator;
 
 class StepProvider
 {

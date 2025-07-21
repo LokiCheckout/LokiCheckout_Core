@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\ProgressBar;
+namespace LokiCheckout\Core\Component\Checkout\ProgressBar;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use Loki\Components\Component\ComponentViewModel;
 
 /**
  * @method CheckoutContext getContext()

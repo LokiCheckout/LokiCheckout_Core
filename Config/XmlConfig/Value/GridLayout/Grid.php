@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout;
+namespace LokiCheckout\Core\Config\XmlConfig\Value\GridLayout;
 
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid\Block;
-use Yireo\LokiCheckout\Exception\BlockNotFoundException;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
+use LokiCheckout\Core\Exception\BlockNotFoundException;
 
 class Grid
 {

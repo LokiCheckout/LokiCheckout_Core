@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\Payment\ApplePay;
+namespace LokiCheckout\Core\Component\Base\Payment\ApplePay;
 
-use Yireo\LokiComponents\Component\ComponentRepository;
+use Loki\Components\Component\ComponentRepository;
 
 abstract class ApplePayRepository extends ComponentRepository
 {

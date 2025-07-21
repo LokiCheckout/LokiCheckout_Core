@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util\Composer;
+namespace LokiCheckout\Core\Util\Composer;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;

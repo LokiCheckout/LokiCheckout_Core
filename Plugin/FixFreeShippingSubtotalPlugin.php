@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Plugin;
+namespace LokiCheckout\Core\Plugin;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class FixFreeShippingSubtotalPlugin
 {

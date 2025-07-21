@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <yireo_loki_checkout>
+        <loki_checkout>
             <general>
                 <enable>1</enable>
                 <theme>default</theme>
@@ -14,6 +14,6 @@
                 <enable_vat_id_only_for_company>0</enable_vat_id_only_for_company>
                 <hide_region_when_optional>1</hide_region_when_optional>
             </fields>
-        </yireo_loki_checkout>
+        </loki_checkout>
     </default>
 </config>

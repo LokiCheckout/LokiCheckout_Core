@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Plugin;
+namespace LokiCheckout\Core\Plugin;
 
 use Exception;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\AbstractBlock;
-use Yireo\LokiComponents\Exception\RedirectException;
-use Yireo\LokiComponents\Util\Controller\RepositoryDispatcher;
+use Loki\Components\Exception\RedirectException;
+use Loki\Components\Util\Controller\RepositoryDispatcher;
 
 class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
 {

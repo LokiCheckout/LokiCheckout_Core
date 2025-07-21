@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address;
+namespace LokiCheckout\Core\Component\Checkout\Address;
 
 use Magento\Quote\Api\Data\AddressInterface;
-use Yireo\LokiComponents\Component\ComponentInterface;
+use Loki\Components\Component\ComponentInterface;
 
 class AddressFormContext extends AddressContext
 {

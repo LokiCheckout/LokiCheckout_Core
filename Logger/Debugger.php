@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Logger;
+namespace LokiCheckout\Core\Logger;
 
 use Psr\Log\LoggerInterface;
-use Yireo\LokiCheckout\Config\Config;
+use LokiCheckout\Core\Config\Config;
 
 class Debugger
 {

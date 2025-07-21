@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
 use Magento\Framework\App\State as AppState;
 use Magento\Framework\Module\Manager as ModuleManager;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
 class DevModules extends SystemCheck
 {
@@ -21,11 +21,11 @@ class DevModules extends SystemCheck
         $isProductionMode = $this->appState->getMode() === AppState::MODE_PRODUCTION;
 
         $devModules = [
-            'Yireo_LokiCheckoutBundle',
-            'Yireo_LokiCheckoutDevTools',
-            'Yireo_LokiCheckoutFunctionalTests',
-            'Yireo_LokiCheckoutMollieDevTools',
-            'Yireo_LokiComponentsDebugger',
+            'LokiCheckout_Bundle',
+            'LokiCheckout_DevTools',
+            'LokiCheckout_FunctionalTests',
+            'LokiCheckout_MollieDevTools',
+            'Loki_Debugger',
         ];
 
         foreach ($devModules as $devModule) {

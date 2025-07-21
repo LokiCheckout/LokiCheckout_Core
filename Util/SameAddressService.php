@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Util;
+namespace LokiCheckout\Core\Util;
 
 use Magento\Framework\DataObject\Copy;
 use Magento\Framework\Exception\InputException;
 use Magento\Quote\Api\Data\AddressInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class SameAddressService
 {

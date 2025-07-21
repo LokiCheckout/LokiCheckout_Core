@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Payment\Vault;
+namespace LokiCheckout\Core\Payment\Vault;
 
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Vault\Api\Data\PaymentTokenInterface;

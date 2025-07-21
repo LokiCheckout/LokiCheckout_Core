@@ -4,9 +4,9 @@
         <referenceBlock name="loki-checkout.progressbar" remove="true"/>
 
         <!-- Theme layout -->
-        <referenceBlock name="loki-checkout" template="Yireo_LokiCheckout::theme/onestep/checkout.phtml"/>
-        <referenceBlock name="loki-checkout.steps" template="Yireo_LokiCheckout::theme/onestep/steps.phtml">
-            <block name="loki-checkout.steps.one" as="one" template="Yireo_LokiCheckout::theme/onestep/one-step.phtml">
+        <referenceBlock name="loki-checkout" template="LokiCheckout_Core::theme/onestep/checkout.phtml"/>
+        <referenceBlock name="loki-checkout.steps" template="LokiCheckout_Core::theme/onestep/steps.phtml">
+            <block name="loki-checkout.steps.one" as="one" template="LokiCheckout_Core::theme/onestep/one-step.phtml">
                 <container name="loki-checkout.steps.one.col1" as="col1" htmlTag="div" htmlClass="col1"/>
                 <container name="loki-checkout.steps.one.col2" as="col2" htmlTag="div" htmlClass="col2"/>
             </block>

@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Console\Command;
+namespace LokiCheckout\Core\Console\Command;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Component\ComponentRegistrar;
@@ -9,7 +9,7 @@ use Magento\Framework\Module\Manager as ModuleManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Yireo\LokiCheckout\Config\LokiCheckoutModules;
+use LokiCheckout\Core\Config\LokiCheckoutModules;
 
 class DumpModulesCommand extends Command
 {
@@ -25,7 +25,7 @@ class DumpModulesCommand extends Command
 
     protected function configure()
     {
-        $this->setName('yireo:loki-checkout:modules:dump');
+        $this->setName('loki-checkout:modules:dump');
         $this->setDescription('Dump all registered Loki Checkout modules to app/etc/loki-checkout.json.');
     }
 

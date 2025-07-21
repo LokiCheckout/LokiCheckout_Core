@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Customer\Dob;
+namespace LokiCheckout\Core\Component\Checkout\Customer\Dob;
 
-use Yireo\LokiCheckout\Component\Base\QuoteField\QuoteFieldViewModel;
+use LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldViewModel;
 
 class DobViewModel extends QuoteFieldViewModel
 {

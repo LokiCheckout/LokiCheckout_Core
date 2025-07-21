@@ -1,12 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\OptionModel;
+namespace LokiCheckout\Core\ViewModel\OptionModel;
 
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Checkout\Address\Select\SelectViewModel;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
-use Yireo\LokiFieldComponents\Util\OptionModelInterface;
+use LokiCheckout\Core\Component\Checkout\Address\Select\SelectViewModel;
+use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\Field\Util\OptionModelInterface;
 
 class CustomerAddressOptionModel implements ArgumentInterface, OptionModelInterface
 {

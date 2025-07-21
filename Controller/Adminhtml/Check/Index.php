@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Controller\Adminhtml\Check;
+namespace LokiCheckout\Core\Controller\Adminhtml\Check;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -9,7 +9,7 @@ use Magento\Framework\View\Result\PageFactory as ResultPageFactory;
 
 class Index extends Action
 {
-    const ADMIN_RESOURCE = 'Yireo_LokiCheckout::check';
+    const ADMIN_RESOURCE = 'LokiCheckout_Core::check';
 
     public function __construct(
         private readonly ResultPageFactory $resultPageFactory,
@@ -21,7 +21,7 @@ class Index extends Action
     public function execute()
     {
         $resultPage = $this->resultPageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('Yireo LokiCheckout - System Check'));
+        $resultPage->getConfig()->getTitle()->prepend(__('LokiCheckout - System Check'));
         return $resultPage;
     }
 

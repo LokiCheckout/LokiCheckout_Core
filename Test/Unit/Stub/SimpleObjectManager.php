@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Stub;
+namespace LokiCheckout\Core\Test\Unit\Stub;
 
 use Magento\Framework\ObjectManagerInterface;
 

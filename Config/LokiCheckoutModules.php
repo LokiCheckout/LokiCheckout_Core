@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config;
+namespace LokiCheckout\Core\Config;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Module\Manager as ModuleManager;

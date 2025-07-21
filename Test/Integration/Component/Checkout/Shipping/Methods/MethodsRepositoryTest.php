@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Methods;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Methods;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
@@ -10,14 +10,14 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
-use Yireo\LokiCheckout\Test\Integration\Trait\AssertAddressContainsRate;
-use Yireo\LokiCheckout\Test\Integration\Trait\AssertAddressHasShippingMethod;
-use Yireo\LokiCheckout\Test\Integration\Trait\AssertShippingMethodAvailable;
-use Yireo\LokiCheckout\Test\Integration\Trait\AssertTotalsContainShippingMethod;
-use Yireo\LokiCheckout\Test\Integration\Trait\SaveShippingAddressValues;
+use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Test\Integration\Trait\AssertAddressContainsRate;
+use LokiCheckout\Core\Test\Integration\Trait\AssertAddressHasShippingMethod;
+use LokiCheckout\Core\Test\Integration\Trait\AssertShippingMethodAvailable;
+use LokiCheckout\Core\Test\Integration\Trait\AssertTotalsContainShippingMethod;
+use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
@@ -115,7 +115,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
 
     #[
         ConfigFixture('carriers/flatrate/active', 1),
-        ConfigFixture('yireo_loki_checkout/shipping/select_default_shipping_method', 1),
+        ConfigFixture('loki_checkout/shipping/select_default_shipping_method', 1),
     ]
     public function testSaveValueWithDefaultShippingMethod()
     {

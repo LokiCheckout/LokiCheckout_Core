@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig;
+namespace LokiCheckout\Core\Config\XmlConfig;
 
 use DOMDocument;
 use Magento\Framework\Config\ConverterInterface;

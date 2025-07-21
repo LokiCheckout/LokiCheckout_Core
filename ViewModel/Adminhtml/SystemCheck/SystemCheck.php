@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResult;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollection;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResult;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollection;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
 abstract class SystemCheck implements SystemCheckInterface
 {

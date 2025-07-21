@@ -3,10 +3,10 @@
     <body>
         <block
             name="loki-checkout.utils.save"
-            template="Yireo_LokiCheckout::utils/save.phtml"/>
+            template="LokiCheckout_Core::utils/save.phtml"/>
 
         <block
             name="loki-checkout.utils.trash"
-            template="Yireo_LokiCheckout::utils/trash.phtml"/>
+            template="LokiCheckout_Core::utils/trash.phtml"/>
     </body>
 </page>

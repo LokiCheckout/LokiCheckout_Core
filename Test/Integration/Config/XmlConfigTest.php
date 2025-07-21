@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Config;
+namespace LokiCheckout\Core\Test\Integration\Config;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
-use Yireo\LokiCheckout\Config\XmlConfig;
+use LokiCheckout\Core\Config\XmlConfig;
 
 class XmlConfigTest extends TestCase
 {

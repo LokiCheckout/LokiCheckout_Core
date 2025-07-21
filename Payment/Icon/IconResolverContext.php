@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Payment\Icon;
+namespace LokiCheckout\Core\Payment\Icon;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
-use Yireo\LokiFieldComponents\ViewModel\ImageOutput;
+use Loki\Field\ViewModel\ImageOutput;
 
 class IconResolverContext
 {

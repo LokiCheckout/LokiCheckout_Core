@@ -7,7 +7,7 @@ test.describe('checkmo payment test', () => {
     await setupCheckout(page, context, {
       profile: 'netherlands',
       config: {
-        'yireo_loki_checkout/general/theme': 'onestep',
+        'loki_checkout/general/theme': 'onestep',
         'payment/checkmo/active': '1',
       }
     });

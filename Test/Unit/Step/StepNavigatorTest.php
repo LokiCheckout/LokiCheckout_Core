@@ -1,17 +1,17 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Step;
+namespace LokiCheckout\Core\Test\Unit\Step;
 
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiCheckout\Step\FinalStep;
-use Yireo\LokiCheckout\Step\StepNavigator;
-use Yireo\LokiComponents\Component\ComponentRegistry;
+use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Config\XmlConfig;
+use LokiCheckout\Core\Step\FinalStep;
+use LokiCheckout\Core\Step\StepNavigator;
+use Loki\Components\Component\ComponentRegistry;
 
 class StepNavigatorTest extends TestCase
 {

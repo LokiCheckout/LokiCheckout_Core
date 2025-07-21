@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Steps;
+namespace LokiCheckout\Core\Component\Checkout\Steps;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiComponents\Component\ComponentViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use Loki\Components\Component\ComponentViewModel;
 
 /**
  * @method CheckoutContext getContext()

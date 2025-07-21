@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Observer;
+namespace LokiCheckout\Core\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Template;
-use Yireo\LokiComponents\Util\CamelCaseConvertor;
+use Loki\Components\Util\CamelCaseConvertor;
 
 class AssignAdditionalBlockVariables implements ObserverInterface
 {

@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\StepButton\StepForwardButton;
+namespace LokiCheckout\Core\Component\Checkout\StepButton\StepForwardButton;
 
 use Magento\Quote\Model\Quote;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutContext;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiFieldComponents\Util\ButtonInterface;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use Loki\Field\Util\ButtonInterface;
 
 /**
  * @method CheckoutContext getContext()

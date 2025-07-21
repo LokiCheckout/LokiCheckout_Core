@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\Adminhtml\SystemCheck;
+namespace LokiCheckout\Core\ViewModel\Adminhtml\SystemCheck;
 
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem\Driver\File as FilesystemDriver;
@@ -8,8 +8,8 @@ use Magento\Framework\Module\Declaration\Converter\Dom as DomConvertor;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Framework\Module\ModuleList;
 use Magento\Framework\Xml\ParserFactory;
-use Yireo\LokiCheckout\Config\LokiCheckoutModules;
-use Yireo\LokiCheckout\ValueObject\Adminhtml\CheckResultCollectionFactory;
+use LokiCheckout\Core\Config\LokiCheckoutModules;
+use LokiCheckout\Core\ValueObject\Adminhtml\CheckResultCollectionFactory;
 
 class ModulesEnabled extends SystemCheck
 {

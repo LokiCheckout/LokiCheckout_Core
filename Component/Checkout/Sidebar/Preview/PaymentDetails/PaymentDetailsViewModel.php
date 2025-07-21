@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Sidebar\Preview\PaymentDetails;
+namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\PaymentDetails;
 
 use Exception;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class PaymentDetailsViewModel implements ArgumentInterface
 {

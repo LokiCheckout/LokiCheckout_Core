@@ -4,11 +4,11 @@ declare(strict_types=1);
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Payment\Api\Data\PaymentMethodInterface;
-use Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
-use Yireo\LokiComponents\Factory\ViewModelFactory;
-use Yireo\LokiComponents\Util\Block\CssClass;
-use Yireo\LokiComponents\Util\Block\BlockRenderer;
-use Yireo\LokiComponents\Util\Block\TemplateRenderer;
+use LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods\PaymentMethodsViewModel;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\CssClass;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\TemplateRenderer;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
@@ -53,7 +53,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         <div class="<?= /* @noEscape */ $css('flex', 'details') ?>">
             <?= /* @noEscape */ $templateRenderer->html(
                 $block,
-                'Yireo_LokiCheckout::checkout/payment/payment-methods/icon.phtml',
+                'LokiCheckout_Core::checkout/payment/payment-methods/icon.phtml',
                 [
                     'alias' => $code,
                     'code' => $code,

@@ -36,22 +36,22 @@
 
         <block
             name="loki-checkout.fast_checkout"
-            template="Yireo_LokiCheckout::checkout/fast-checkout.phtml"/>
+            template="LokiCheckout_Core::checkout/fast-checkout.phtml"/>
 
         <block
             name="loki-checkout.generic.title"
-            template="Yireo_LokiCheckout::generic/title.phtml"/>
+            template="LokiCheckout_Core::generic/title.phtml"/>
 
         <block
             name="loki-checkout.utils.separator"
-            template="Yireo_LokiCheckout::utils/separator.phtml"/>
+            template="LokiCheckout_Core::utils/separator.phtml"/>
 
         <block
             name="loki-checkout.utils.disabled-overlay"
-            template="Yireo_LokiCheckout::utils/disabled-overlay.phtml"/>
+            template="LokiCheckout_Core::utils/disabled-overlay.phtml"/>
 
         <block
             name="loki-checkout.utils.debug"
-            template="Yireo_LokiCheckout::utils/debug.phtml"/>
+            template="LokiCheckout_Core::utils/debug.phtml"/>
     </body>
 </page>

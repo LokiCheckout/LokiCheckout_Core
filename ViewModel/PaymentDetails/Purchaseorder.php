@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\PaymentDetails;
+namespace LokiCheckout\Core\ViewModel\PaymentDetails;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class Purchaseorder implements ArgumentInterface
 {

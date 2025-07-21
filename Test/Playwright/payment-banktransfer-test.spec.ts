@@ -7,7 +7,7 @@ test.describe('banktransfer payment test', () => {
     await setupCheckout(page, context, {
       profile: 'netherlands',
       config: {
-        'yireo_loki_checkout/general/theme': 'onestep',
+        'loki_checkout/general/theme': 'onestep',
         'payment/banktransfer/active': '1',
       }
     });

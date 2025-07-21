@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Plugin;
+namespace LokiCheckout\Core\Plugin;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 

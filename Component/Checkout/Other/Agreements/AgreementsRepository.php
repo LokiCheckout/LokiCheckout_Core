@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Other\Agreements;
+namespace LokiCheckout\Core\Component\Checkout\Other\Agreements;
 
 use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
-use Yireo\LokiComponents\Component\ComponentRepository;
+use Loki\Components\Component\ComponentRepository;
 
 /**
  * @method AgreementsContext getContext()

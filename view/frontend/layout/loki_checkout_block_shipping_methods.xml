@@ -3,13 +3,13 @@
     <body>
         <block
             name="loki-checkout.shipping.methods"
-            template="Yireo_LokiCheckout::checkout/shipping/shipping-methods.phtml">
+            template="LokiCheckout_Core::checkout/shipping/shipping-methods.phtml">
             <container name="loki-checkout.shipping.methods.before" as="before-methods"/>
             <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
 
             <block
                 name="loki-checkout.shipping.shipping-methods.title" as="title"
-                template="Yireo_LokiCheckout::generic/title.phtml">
+                template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
                     <argument name="title" xsi:type="string">Shipping Methods</argument>
                 </arguments>
@@ -17,12 +17,12 @@
 
             <block
                 name="loki-checkout.shipping.shipping-methods.item" as="item"
-                template="Yireo_LokiCheckout::checkout/shipping/shipping-methods/item.phtml"/>
+                template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
         </block>
 
         <referenceContainer name="loki-checkout.script.alpine-components">
             <block name="loki-checkout.script.components.shipping-methods-component"
-                   template="Yireo_LokiCheckout::script/component/shipping-methods-component.phtml" />
+                   template="LokiCheckout_Core::script/component/shipping-methods-component.phtml" />
         </referenceContainer>
     </body>
 </page>

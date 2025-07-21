@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration;
+namespace LokiCheckout\Core\Test\Integration;
 
 class LokiCheckoutPageTestCase extends LokiCheckoutTestCase
 {

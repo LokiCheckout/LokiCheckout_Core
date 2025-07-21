@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Shipping\Address\Lastname;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Lastname;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),

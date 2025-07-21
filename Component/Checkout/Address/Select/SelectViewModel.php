@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Address\Select;
+namespace LokiCheckout\Core\Component\Checkout\Address\Select;
 
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiCheckout\Component\Checkout\Address\AddressFormContext;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Checkout\Address\AddressFormContext;
 
 /**
  * @method AddressFormContext getContext()

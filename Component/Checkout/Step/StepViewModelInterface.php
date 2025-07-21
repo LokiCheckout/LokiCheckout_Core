@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Step;
+namespace LokiCheckout\Core\Component\Checkout\Step;
 
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+use Loki\Components\Component\ComponentViewModelInterface;
 
 interface StepViewModelInterface extends ComponentViewModelInterface
 {

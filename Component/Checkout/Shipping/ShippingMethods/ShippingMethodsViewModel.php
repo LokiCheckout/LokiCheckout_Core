@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Shipping\ShippingMethods;
+namespace LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods;
 
 use Magento\Quote\Api\Data\ShippingMethodInterface;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 /**
  * @method ShippingMethodsContext getContext()

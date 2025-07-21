@@ -1,18 +1,18 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Step;
+namespace LokiCheckout\Core\Step;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiCheckout\Component\Checkout\Step\StepViewModelInterface;
-use Yireo\LokiCheckout\Config\Config;
-use Yireo\LokiCheckout\Config\XmlConfig;
-use Yireo\LokiCheckout\Exception\StepNotFoundException;
-use Yireo\LokiCheckout\Exception\UnknownStepException;
-use Yireo\LokiCheckout\Exception\UnknownThemeException;
-use Yireo\LokiComponents\Component\ComponentRegistry;
+use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Config\XmlConfig;
+use LokiCheckout\Core\Exception\StepNotFoundException;
+use LokiCheckout\Core\Exception\UnknownStepException;
+use LokiCheckout\Core\Exception\UnknownThemeException;
+use Loki\Components\Component\ComponentRegistry;
 
 class StepNavigator implements ArgumentInterface
 {

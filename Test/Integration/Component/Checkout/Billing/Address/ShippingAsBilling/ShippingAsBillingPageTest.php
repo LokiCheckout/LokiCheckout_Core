@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Component\Checkout\Billing\Address\ShippingAsBilling;
+namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Billing\Address\ShippingAsBilling;
 
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 
@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     AppArea('frontend'),
@@ -25,8 +25,8 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     use AssertStoreConfigValueEquals;
 
     #[
-        ConfigFixture('yireo_loki_checkout/general/theme', 'onestep'),
-        ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', 0, 'store', 'default')
+        ConfigFixture('loki_checkout/general/theme', 'onestep'),
+        ConfigFixture('loki_checkout/fields/enable_same_as_billing', 0, 'store', 'default')
     ]
     public function testDisabled()
     {
@@ -34,8 +34,8 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     }
 
     #[
-        ConfigFixture('yireo_loki_checkout/general/theme', 'onestep'),
-        ConfigFixture('yireo_loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')
+        ConfigFixture('loki_checkout/general/theme', 'onestep'),
+        ConfigFixture('loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')
     ]
     public function testEnabled()
     {

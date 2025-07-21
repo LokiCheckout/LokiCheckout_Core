@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig;
+namespace LokiCheckout\Core\Config\XmlConfig;
 
 use Magento\Framework\Config\SchemaLocatorInterface;
 use Magento\Framework\Module\Dir;
@@ -39,6 +39,6 @@ class SchemaLocator implements SchemaLocatorInterface
 
     private function getModuleEtcFolder(): string
     {
-        return $this->moduleReader->getModuleDir(Dir::MODULE_ETC_DIR, 'Yireo_LokiCheckout');
+        return $this->moduleReader->getModuleDir(Dir::MODULE_ETC_DIR, 'LokiCheckout_Core');
     }
 }

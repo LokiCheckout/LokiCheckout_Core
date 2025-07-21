@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Config\XmlConfig\Value;
+namespace LokiCheckout\Core\Config\XmlConfig\Value;
 
 use RuntimeException;
-use Yireo\LokiCheckout\Config\XmlConfig\Value\GridLayout\Grid;
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
 
 class GridLayout
 {

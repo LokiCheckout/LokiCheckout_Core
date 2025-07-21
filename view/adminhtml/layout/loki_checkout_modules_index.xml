@@ -3,7 +3,7 @@
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
-            <block name="loki-checkout.modules" template="Yireo_LokiCheckout::modules.phtml"/>
+            <block name="loki-checkout.modules" template="LokiCheckout_Core::modules.phtml"/>
         </referenceContainer>
     </body>
 </page>

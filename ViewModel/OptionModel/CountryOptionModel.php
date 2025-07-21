@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\ViewModel\OptionModel;
+namespace LokiCheckout\Core\ViewModel\OptionModel;
 
 use Magento\Directory\Helper\Data as DirectoryHelper;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
-use Yireo\LokiFieldComponents\Util\OptionModelInterface;
+use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\Field\Util\OptionModelInterface;
 
 class CountryOptionModel implements ArgumentInterface, OptionModelInterface
 {

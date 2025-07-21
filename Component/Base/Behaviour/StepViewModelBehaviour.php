@@ -1,9 +1,9 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Base\Behaviour;
+namespace LokiCheckout\Core\Component\Base\Behaviour;
 
 use Exception;
-use Yireo\LokiComponents\Component\ComponentViewModelInterface;
+use Loki\Components\Component\ComponentViewModelInterface;
 
 /**
  * @method ComponentViewModelInterface getContext()

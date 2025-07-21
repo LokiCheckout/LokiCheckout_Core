@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Component\Checkout\Billing\PaymentMethods;
+namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Quote\Api\Data\PaymentMethodInterface;
-use Yireo\LokiCheckout\Component\Base\Generic\CheckoutViewModel;
-use Yireo\LokiComponents\Component\ComponentRepositoryInterface;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use Loki\Components\Component\ComponentRepositoryInterface;
 
 /**
  * @method PaymentMethodsContext getContext()

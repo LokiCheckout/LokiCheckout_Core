@@ -1,11 +1,11 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Validator\Component;
+namespace LokiCheckout\Core\Test\Integration\Validator\Component;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\TestFramework\Fixture\AppArea;
-use Yireo\LokiCheckout\Test\Integration\LokiCheckoutTestCase;
-use Yireo\LokiCheckout\Validator\Component\CustomerAddressValidator;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
+use LokiCheckout\Core\Validator\Component\CustomerAddressValidator;
 
 #[AppArea('frontend')]
 class CustomerAddressValidatorTest extends LokiCheckoutTestCase

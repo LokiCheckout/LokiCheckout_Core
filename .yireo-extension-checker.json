@@ -1,6 +1,6 @@
 {
   "ignore": [
-    "Yireo_LokiMapComponents",
-    "yireo/magento2-loki-map-components"
+    "Loki_MapComponents",
+    "loki/magento2-map-components"
   ]
 }

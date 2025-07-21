@@ -1,13 +1,13 @@
 <?php declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Unit\Util\Block;
+namespace LokiCheckout\Core\Test\Unit\Util\Block;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiComponents\Util\Block\CssClass;
+use Loki\Components\Util\Block\CssClass;
 
 class CssClassTest extends TestCase
 {

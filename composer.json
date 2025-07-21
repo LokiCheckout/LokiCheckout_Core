@@ -1,5 +1,5 @@
 {
-  "name": "yireo/magento2-loki-checkout",
+  "name": "loki-checkout/magento2-core",
   "version": "1.0.10",
   "description": "A developer-friendly AlpineJS-based checkout for Magento 2",
   "keywords": ["loki-core"],
@@ -29,9 +29,9 @@
     "magento/module-store": "^101.0",
     "magento/module-vault": "^101.0",
     "yireo/magento2-hyva-theme-auto-registration": "^1.0",
-    "yireo/magento2-loki-components": "^1.0",
-    "yireo/magento2-loki-field-components": "~0.0 | ^1.0",
-    "yireo/magento2-loki-map-components": "~0.0.1",
+    "loki/magento2-components": "^1.0",
+    "loki/magento2-field-components": "~0.0 | ^1.0",
+    "loki/magento2-map-components": "~0.0.1",
     "yireo/magento2-csp-utilities": "^1.0",
     "psr/log": "^3.0",
     "guzzlehttp/guzzle": "^7.0",
@@ -46,8 +46,8 @@
     "yireo/magento2-integration-test-helper": "^0.0.15"
   },
   "suggest": {
-    "yireo/magento2-loki-checkout-luma": "Luma compatibility for Loki Checkout",
-    "yireo/magento2-loki-checkout-hyva": "Hyvä compatibility for Loki Checkout"
+    "loki-checkout/magento2-luma": "Luma compatibility for Loki Checkout",
+    "loki-checkout/magento2-hyva": "Hyvä compatibility for Loki Checkout"
   },
   "license": "OSL-3.0",
   "autoload": {
@@ -55,7 +55,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "Yireo\\LokiCheckout\\": ""
+      "LokiCheckout\Core\\Core\\": ""
     }
   }
 }

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace Yireo\LokiCheckout\Test\Integration\Config\XmlConfig\Value;
+namespace LokiCheckout\Core\Test\Integration\Config\XmlConfig\Value;
 
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\TestCase;
-use Yireo\LokiCheckout\Config\XmlConfig;
+use LokiCheckout\Core\Config\XmlConfig;
 
 class GridLayoutTest extends TestCase
 {
