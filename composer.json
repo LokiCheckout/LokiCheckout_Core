@@ -30,7 +30,7 @@
     "magento/module-vault": "^101.0",
     "yireo/magento2-hyva-theme-auto-registration": "^1.0",
     "loki/magento2-components": "^1.0",
-    "loki/magento2-field-components": "~0.0 | ^1.0",
+    "loki/magento2-field-components": "^2.0",
     "loki/magento2-map-components": "~0.0.1",
     "yireo/magento2-csp-utilities": "^1.0",
     "psr/log": "^3.0",
