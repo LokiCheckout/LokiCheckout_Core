@@ -27,15 +27,6 @@
         </arguments>
     </virtualType>
 
-    <type name="Magento\Framework\Console\CommandList">
-        <arguments>
-            <argument name="commands" xsi:type="array">
-                <item name="loki-checkout:modules:list" xsi:type="object">LokiCheckout\Core\Console\Command\ListModulesCommand</item>
-                <item name="loki-checkout:modules:dump" xsi:type="object">LokiCheckout\Core\Console\Command\DumpModulesCommand</item>
-            </argument>
-        </arguments>
-    </type>
-
     <type name="LokiCheckout\Core\Config\LokiCheckoutModules">
         <arguments>
             <argument name="modules" xsi:type="array">

@@ -4,8 +4,6 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="LokiCheckout_Core::configuration" title="LokiCheckout" sortOrder="1"/>
-                <resource id="LokiCheckout_Core::modules" title="LokiCheckout Module Overview" sortOrder="1"/>
-                <resource id="LokiCheckout_Core::check" title="LokiCheckout System Check" sortOrder="1"/>
             </resource>
         </resources>
     </acl>
