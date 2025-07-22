@@ -211,11 +211,5 @@
                     template="LokiCheckout_Core::checkout/address/grid-layout.phtml"/>
             </block>
         </block>
-
-        <referenceContainer name="loki-checkout.script.alpine-components">
-            <block
-                name="loki-checkout.script.components.shipping-address-component"
-                template="LokiCheckout_Core::script/component/shipping-address-component.phtml"/>
-        </referenceContainer>
     </body>
 </page>
