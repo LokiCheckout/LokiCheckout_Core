@@ -29,7 +29,7 @@ class RenameConfigurationPaths implements DataPatchInterface
         $select = $connection->select()->from($table)->where('path LIKE "yireo_loki_checkout/%"');
         $rows = $connection->fetchAll($select);
         if (empty($rows)) {
-            return;
+            return $this;
         }
 
         foreach ($rows as $row) {
@@ -37,5 +37,7 @@ class RenameConfigurationPaths implements DataPatchInterface
             $newPath = str_replace('yireo_loki_checkout/', 'loki_checkout/', $oldPath);
             $connection->update($table, ['path' => $newPath], 'path = "' . $oldPath . '"');
         }
+
+        return $this;
     }
 }
