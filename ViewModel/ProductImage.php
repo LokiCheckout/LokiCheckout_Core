@@ -30,7 +30,7 @@ class ProductImage implements ArgumentInterface
             ->keepAspectRatio(true)
             ->keepTransparency(true)
             ->keepFrame(false)
-            ->resize($width, $width)
+            ->resize($width)
             ->getUrl();
     }
 }

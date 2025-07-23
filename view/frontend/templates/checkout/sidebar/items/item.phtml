@@ -32,12 +32,11 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
     <img
         src="<?= $escaper->escapeHtml($productImageUrl) ?>"
         width="<?= $escaper->escapeHtml($width) ?>"
-        height="<?= $escaper->escapeHtml($width) ?>"
-        alt=""
+        alt="<?= $item->getName() ?>"
         loading="lazy"
-        class="<?= /* @noEscape */ $css('hidden md:block shrink-0', 'image') ?>"
+        class="<?= /* @noEscape */ $css('hidden md:block grow-0 shrink-0 h-full', 'image') ?>"
     >
-    <div class="<?= /* @noEscape */ $css('', 'outer') ?>">
+    <div class="<?= /* @noEscape */ $css('', 'outer grow') ?>">
         <div class="<?= /* @noEscape */ $css('grow', 'inner') ?>">
             <p><strong><?= $escaper->escapeHtml($item->getName()) ?><br></strong></p>
             <dl class="<?= /* @noEscape */ $css('text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2', 'list') ?>">
