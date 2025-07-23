@@ -34,7 +34,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
         width="<?= $escaper->escapeHtml($width) ?>"
         alt="<?= $item->getName() ?>"
         loading="lazy"
-        class="<?= /* @noEscape */ $css('hidden md:block grow-0 shrink-0 h-full', 'image') ?>"
+        class="<?= /* @noEscape */ $css('hidden md:block h-full', 'image') ?>"
     >
     <div class="<?= /* @noEscape */ $css('', 'outer grow') ?>">
         <div class="<?= /* @noEscape */ $css('grow', 'inner') ?>">
