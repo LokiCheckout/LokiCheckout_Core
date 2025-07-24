@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
@@ -12,7 +14,10 @@ use Loki\Components\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var BlockRenderer $blockRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var ImageOutput $imageOutput */
 
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
 // @todo: Separate in smaller templates
 $couponCode = $viewModel->getValue();
 ?>
@@ -29,16 +34,15 @@ $couponCode = $viewModel->getValue();
             @click="removeCouponCode"
         ><?= $escaper->escapeHtml(__('Remove coupon code')) ?></button>
     <?php else: ?>
-        <details x-ref="details" :open="isOpen" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
-            <summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
-                <span><?= $escaper->escapeHtml(__('Apply Discount Code')) ?></span>
-                <img
-                    alt="<?= $escaper->escapeHtml(__('Expand')) ?>"
-                    src="<?= /* @noEscape */ $block->getViewFileUrl('LokiCheckout_Core::images/chevron-down.svg'); ?>"
-                    class="<?= /* @noEscape */ $css('inline-block group-open:rotate-180 transition-transform') ?>"
-                    width="20"
-                    height="20"
-                >
+        <details x-ref="details" :open="hasCouponCode" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
+            <summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden', 'summary') ?>'">
+                <span class="cursor-pointer"><?= $escaper->escapeHtml(__('Apply Discount Code')) ?></span>
+                <div class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailClosed">
+                    <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
+                </div>
+                <div class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailOpen">
+                    <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
+                </div>
             </summary>
 
             <div>

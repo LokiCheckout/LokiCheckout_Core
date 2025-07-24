@@ -2,17 +2,25 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutComponentType,
+            detailOpen: false,
             initCouponCode() {
                 if (this.$refs.details) {
-                    this.$refs.details.addEventListener('toggle', event => {
+                    this.$refs.details.addEventListener('toggle', () => {
+                        this.detailOpen = this.$refs.details.open;
                         if (this.$refs.details.open && this.$refs.input) {
                             this.$refs.input.focus();
                         }
                     })
                 }
             },
-            isOpen() {
+            hasCouponCode() {
                 return this.value.length > 0;
+            },
+            isDetailOpen() {
+                return this.detailOpen;
+            },
+            isDetailClosed() {
+                return !this.detailOpen;
             },
             removeCouponCode() {
                 this.value = '';
