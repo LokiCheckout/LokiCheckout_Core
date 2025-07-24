@@ -9,9 +9,12 @@
                 this.agreements[agreementId] = event.target.checked;
                 this.post(this.agreements);
             },
-            isAgreementChecked(element) {
+            isAgreementChecked() {
                 const agreementId = this.$el.getAttribute('data-id');
                 return this.agreements[agreementId];
+            },
+            isAgreementNotChecked() {
+                return !this.isAgreementChecked();
             },
             beforePostNextStep() {
                 if (Object.values(this.agreements).includes(false)) {

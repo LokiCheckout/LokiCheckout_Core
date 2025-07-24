@@ -40,7 +40,7 @@ class AgreementsViewModel extends CheckoutViewModel
 
     public function getJsData(): array
     {
-        $savedAgreements = (array)$this->getContext()->getCheckoutState()->getCheckoutSession()->getAgreementIds();
+        $savedAgreements = $this->getSavedAgreements();
 
         $agreements = [];
         foreach ($this->getCheckoutAgreements() as $agreement) {
@@ -53,5 +53,28 @@ class AgreementsViewModel extends CheckoutViewModel
             'agreements' => $agreements,
             'errorText' => $this->getBlock()->getErrorText()
         ];
+    }
+
+    public function isValid(): bool
+    {
+        $savedAgreements = $this->getSavedAgreements();
+        $availableAgreements = $this->getCheckoutAgreementIds();
+        return count(array_intersect($savedAgreements, $availableAgreements)) === count($availableAgreements);
+    }
+
+    private function getCheckoutAgreementIds(): array
+    {
+        $checkoutAgreementIds = [];
+        $checkoutAgreements = $this->getCheckoutAgreements();
+        foreach ($checkoutAgreements as $checkoutAgreement) {
+            $checkoutAgreementIds[] = $checkoutAgreement->getId();
+        }
+
+        return $checkoutAgreementIds;
+    }
+
+    private function getSavedAgreements(): array
+    {
+        return (array)$this->getContext()->getCheckoutState()->getCheckoutSession()->getAgreementIds();
     }
 }

@@ -14,19 +14,22 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var ViewModelFactory $viewModelFactory */
 
 ?>
-<div class="<?= /* @noEscape */ $css('p-2') ?>">
+<div class="<?= /* @noEscape */ $css('field required p-2') ?>" aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
             <input
                 type="checkbox"
+                data-type="field"
                 data-id="<?= $agreement->getAgreementId() ?>"
                 id="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
                 :checked="isAgreementChecked"
+                :aria-invalid="isAgreementNotChecked"
                 value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
                 @change="toggleAgreement"
                 <?php if ($agreement->getIsActive() === true): ?>
                     checked
                 <?php endif; ?>
+                required
                 aria-required="true"
                 <?php if ($viewModel->isDisabled()): ?>
                     disabled="disabled"
