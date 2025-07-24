@@ -13,7 +13,8 @@ use Loki\Field\ViewModel\ImageOutput;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
-/** @var ImageOutput */
+/** @var ImageOutput $imageOutput */
+
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
