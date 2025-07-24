@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 24 July 2025
+### Fixed
+- Add `aria-invalid` attribute to agreement checkboxes
+- Add `required` attribute to agreement checkboxes 
+- Set `h-full` instead of flex utils, to prevent resizing image in picture-tag
+- Only resize image to width, not width and height
+- Rename `jumpTo` to `jumpToMarker`
+- Remove obsolete component scripts
+
 ## [2.0.0] - 22 July 2025
 ### Fixed
 - Rename PHP namespace from `Yireo_Loki*` to `Loki*`
