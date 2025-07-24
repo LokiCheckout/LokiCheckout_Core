@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 24 July 2025
+### Fixed
+- Split up `coupon_code.phtml` into child templates
+- Enhance toggling of coupon code
+- Fix var definition in comments of `login.phtml`
+
 ## [2.0.1] - 24 July 2025
 ### Fixed
 - Add `aria-invalid` attribute to agreement checkboxes
