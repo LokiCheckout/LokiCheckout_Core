@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+
+$couponCode = $block->getCouponCode();
+?>
+<div class="<?= /* @noEscape */ $css('mb-4') ?>">
+    <p class="<?= /* @noEscape */ $css('mb-4', 'value') ?>">
+        <span>
+            <?= /* @noEscape */ $escaper->escapeHtml(__('Coupon code')) ?>:
+        </span>
+        <strong><?= $escaper->escapeHtml($couponCode) ?></strong>
+    </p>
+    <button
+        type="button"
+        class="<?= /* @noEscape */ $css('btn btn-secondary', 'button-remove') ?>"
+        @click="removeCouponCode">
+        <?= $escaper->escapeHtml(__('Remove coupon code')) ?>
+    </button>
+</div>

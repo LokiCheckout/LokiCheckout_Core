@@ -1,0 +1,31 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Field\ViewModel\ImageOutput;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var ImageOutput $imageOutput */
+
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+?>
+
+<summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden', 'summary') ?>'">
+    <span class="cursor-pointer">
+        <?= $escaper->escapeHtml(__('Apply Discount Code')) ?>
+    </span>
+
+    <span class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailClosed">
+        <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
+    </span>
+
+    <span class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailOpen">
+        <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
+    </span>
+</summary>

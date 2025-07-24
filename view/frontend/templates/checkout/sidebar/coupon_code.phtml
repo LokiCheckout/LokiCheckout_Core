@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -14,55 +15,22 @@ use Loki\Components\Util\Block\CssClass;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var BlockRenderer $blockRenderer */
+/** @var ChildRenderer $childRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ImageOutput $imageOutput */
 
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
-// @todo: Separate in smaller templates
 $couponCode = $viewModel->getValue();
 ?>
 <div class="<?= /* @noEscape */ $css('border-b border-gray-200 relative') ?>">
     <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <?php if (!empty($couponCode)): ?>
-        <p class="<?= /* @noEscape */ $css('mb-4', 'current') ?>">
-            <span><?= /* @noEscape */ $escaper->escapeHtml(__('Coupon code')) ?>: </span>
-            <strong><?= $escaper->escapeHtml($couponCode) ?></strong>
-        </p>
-        <button
-            type="button"
-            class="<?= /* @noEscape */ $css('btn btn-secondary', 'button-remove') ?>"
-            @click="removeCouponCode"
-        ><?= $escaper->escapeHtml(__('Remove coupon code')) ?></button>
+        <?= $childRenderer->html($block, 'value', ['coupon_code' => $viewModel->getValue()]) ?>
+
     <?php else: ?>
         <details x-ref="details" :open="hasCouponCode" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
-            <summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden', 'summary') ?>'">
-                <span class="cursor-pointer"><?= $escaper->escapeHtml(__('Apply Discount Code')) ?></span>
-                <div class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailClosed">
-                    <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
-                </div>
-                <div class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailOpen">
-                    <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
-                </div>
-            </summary>
-
-            <div>
-                <label class="<?= /* @noEscape */ $css('block mb-3', 'label') ?>">
-                    <span class="<?= /* @noEscape */ $css('sr-only', 'label-inner') ?>"><?php __('Discount Code') ?></span>
-                    <input
-                        autocomplete="off"
-                        name="coupon_code"
-                        type="text"
-                        x-ref="input"
-                        :value="value"
-                        @change="setValue"
-                        class="<?= /* @noEscape */ $css('form-input w-full', 'input') ?>">
-                </label>
-                <button
-                    type="button"
-                    class="<?= /* @noEscape */ $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
-                    @click="applyCouponCode"
-                ><?= $escaper->escapeHtml(__('Apply')) ?></button>
-            </div>
+            <?= $childRenderer->html($block, 'summary') ?>
+            <?= $childRenderer->html($block, 'form') ?>
         </details>
     <?php endif; ?>
 

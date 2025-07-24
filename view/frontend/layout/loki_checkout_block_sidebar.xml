@@ -12,7 +12,11 @@
                     </arguments>
                 </block>
 
-                <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="LokiCheckout_Core::checkout/sidebar/coupon_code.phtml"/>
+                <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="LokiCheckout_Core::checkout/sidebar/coupon_code.phtml">
+                    <block name="loki-checkout.sidebar.coupon_code.value" as="value" template="LokiCheckout_Core::checkout/sidebar/coupon_code/value.phtml"/>
+                    <block name="loki-checkout.sidebar.coupon_code.summary" as="summary" template="LokiCheckout_Core::checkout/sidebar/coupon_code/summary.phtml"/>
+                    <block name="loki-checkout.sidebar.coupon_code.form" as="form" template="LokiCheckout_Core::checkout/sidebar/coupon_code/form.phtml"/>
+                </block>
 
                 <block name="loki-checkout.sidebar.items" as="items" template="LokiCheckout_Core::checkout/sidebar/items.phtml">
                     <container name="loki-checkout.sidebar.items.before" as="before"/>
