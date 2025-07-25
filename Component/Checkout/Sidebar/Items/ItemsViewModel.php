@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Sidebar\Items;
 
+use LokiCheckout\Core\Config\Config;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Loki\Components\Component\ComponentViewModel;
 
@@ -10,11 +11,17 @@ use Loki\Components\Component\ComponentViewModel;
  */
 class ItemsViewModel extends ComponentViewModel
 {
+    public function __construct(
+        private Config $config
+    ) {
+    }
+
     /**
      * @return CartItemInterface[]
      */
     public function getItems(): array
     {
-        return $this->getContext()->getCheckoutState()->getQuote()->getItems();
+        $items = $this->getContext()->getCheckoutState()->getQuote()->getItems();
+        return array_slice($items, 0, $this->config->getMaxCartItemsToDisplay());
     }
 }

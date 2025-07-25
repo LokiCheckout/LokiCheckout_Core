@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Config;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\ScopeInterface;
 use RuntimeException;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
@@ -37,12 +38,18 @@ class Config implements ArgumentInterface
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue('loki_checkout/general/enable');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/general/enable',
+        );
     }
 
     public function getTheme(): string
     {
-        $theme = (string)$this->scopeConfig->getValue('loki_checkout/general/theme');
+        $theme = (string)$this->scopeConfig->getValue(
+            'loki_checkout/general/theme',
+            ScopeInterface::SCOPE_STORE
+        );
+
         if (false === array_key_exists($theme, $this->xmlConfig->getThemes())) {
             return 'default';
         }
@@ -101,46 +108,88 @@ class Config implements ArgumentInterface
 
     public function getDefaultGridClasses(): string
     {
-        return (string)$this->scopeConfig->getValue('loki_checkout/general/default_grid_class');
+        return (string)$this->scopeConfig->getValue(
+            'loki_checkout/general/default_grid_class',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/debug/enable');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/debug/enable',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function addDebugBlock(): bool
     {
-        return $this->isDebug() && (bool)$this->scopeConfig->getValue('loki_checkout/debug/debug_block');
+        if (false === $this->isDebug()) {
+            return false;
+        }
+
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/debug/debug_block',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function addHtmlHints(): bool
     {
-        return $this->isDebug() && (bool)$this->scopeConfig->getValue('loki_checkout/debug/html_hints');
+        if (false === $this->isDebug()) {
+            return false;
+        }
+
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/debug/html_hints',
+        );
     }
 
     public function enableSameAsBilling(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/enable_same_as_billing');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/fields/enable_same_as_billing',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function enableVatIdOnlyForCompany(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/enable_vat_id_only_for_company');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/fields/enable_vat_id_only_for_company',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function hideRegionWhenOptional(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/fields/hide_region_when_optional');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/fields/hide_region_when_optional',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function selectDefaultShippingMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/shipping/select_default_shipping_method');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/shipping/select_default_shipping_method',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 
     public function selectDefaultPaymentMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue('loki_checkout/billing/select_default_payment_method');
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/billing/select_default_payment_method',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    public function getMaxCartItemsToDisplay(): int
+    {
+        return (int)$this->scopeConfig->getValue(
+            'checkout/options/max_items_display_count',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }
