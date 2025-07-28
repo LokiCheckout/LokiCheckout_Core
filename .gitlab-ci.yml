@@ -52,7 +52,7 @@ magento-integration-tests:
     - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit --coverage-text ../../../vendor/$COMPOSER_NAME/Test/Integration/
   #coverage: '/^\s*Lines:\s*\d+.\d+\%/'
   services:
-    - mariadb:11.4
+    - mysql:8.0
     - redis:latest
 
 cache:
