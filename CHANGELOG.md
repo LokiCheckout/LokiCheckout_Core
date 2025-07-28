@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.3] - 28 July 2025
+### Fixed
+- Support for `checkout/options/max_items_display_count`
+
 ## [2.0.2] - 24 July 2025
 ### Fixed
 - Split up `coupon_code.phtml` into child templates
