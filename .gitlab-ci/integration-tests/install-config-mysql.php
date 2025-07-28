@@ -17,6 +17,6 @@ $disableModules = (new DisableModules(__DIR__.'/../../../../'))
 
 return (new InstallConfig())
     ->setDisableModules($disableModules)
-    ->addDb('mysql', 'magento2', 'magento2', 'magento2')
+    ->addDb('mysql', 'magento2', 'root', 'root')
     ->addRedis('redis')
     ->get();
