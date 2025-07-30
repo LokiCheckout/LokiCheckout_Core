@@ -11,11 +11,13 @@
                 }
             },
             initHashChangeListener() {
-                window.onhashchange = function(event) {
-                    const newHash = (new URL(event.newURL)).hash;
-                    console.log('onhashchange', newHash);
-                    //this.value = newHash;
-                    //this.post();
+                window.onhashchange = (event) => {
+                    let newStep = (new URL(event.newURL)).hash.replace('#', '');
+                    if (!this.steps.includes(newStep)) {
+                        newStep = this.steps[0];
+                    }
+
+                    this.post(newStep);
                 };
             },
             submit(event) {
