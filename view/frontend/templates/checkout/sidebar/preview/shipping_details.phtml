@@ -30,13 +30,17 @@ if (empty($addressHtml)) {
 
     <div class="<?= /* @noEscape */ $css('mb-4', 'address') ?>">
         <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Shipping Address')) ?></span><br>
-        <address><?= /* @noEscape */ $addressHtml ?></address>
+        <address>
+            <?= /* @noEscape */ $addressHtml ?>
+            <?= /* @noEscape */ $block->getChildHtml('additional_address_info') ?>
+        </address>
     </div>
 
     <?php if (!empty($methodHtml)): ?>
         <div class="<?= /* @noEscape */ $css('mb-4', 'method') ?>">
             <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Shipping Method')) ?></span><br>
             <?= $escaper->escapeHtml($methodHtml) ?>
+            <?= /* @noEscape */ $block->getChildHtml('additional_method_info') ?>
         </div>
     <?php endif; ?>
 </div>

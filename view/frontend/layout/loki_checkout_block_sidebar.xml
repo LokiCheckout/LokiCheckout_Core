@@ -44,9 +44,14 @@
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_dob" as="customer_dob" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details/customer_dob.phtml"/>
                 </block>
 
-                <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="LokiCheckout_Core::checkout/sidebar/preview/shipping_details.phtml"/>
+                <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="LokiCheckout_Core::checkout/sidebar/preview/shipping_details.phtml">
+                    <container name="loki-checkout.sidebar.preview.shipping_details.additional_address_info" as="additional_address_info"/>
+                    <container name="loki-checkout.sidebar.preview.shipping_details.additional_method_info" as="additional_method_info"/>
+                </block>
 
-                <block name="loki-checkout.sidebar.preview.billing_address" as="billing_address" template="LokiCheckout_Core::checkout/sidebar/preview/billing_address.phtml"/>
+                <block name="loki-checkout.sidebar.preview.billing_address" as="billing_address" template="LokiCheckout_Core::checkout/sidebar/preview/billing_address.phtml">
+                    <container name="loki-checkout.sidebar.preview.billing_address.additional_address_info" as="additional_address_info"/>
+                </block>
 
                 <block name="loki-checkout.sidebar.preview.payment_details" as="payment_details" template="LokiCheckout_Core::checkout/sidebar/preview/payment_details.phtml"/>
             </block>
