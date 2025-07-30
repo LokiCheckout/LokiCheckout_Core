@@ -14,11 +14,15 @@ use Loki\Components\Util\Block\BlockRenderer;
 $html = $block->getChildHtml();
 if (empty($html)) {
     echo '<div></div>';
+
     return;
 }
 ?>
 <div class="<?= /* @noEscape */ $css('mb-4 relative') ?>">
-    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Details')) ?></span><br>
-    <?= /* @noEscape */ $html ?>
+    <output>
+        <?= /* @noEscape */
+        $html ?>
+    </output>
 </div>
