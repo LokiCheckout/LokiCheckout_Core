@@ -59,8 +59,8 @@
                     name="loki-checkout.script.components.checkout-component"
                     template="LokiCheckout_Core::script/component/checkout-component.phtml"/>
                 <block
-                    name="loki-checkout.script.components.steps-component"
-                    template="LokiCheckout_Core::script/component/steps-component.phtml"/>
+                    name="loki-checkout.script.components.progress-bar-component"
+                    template="LokiCheckout_Core::script/component/progress-bar-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.step-component"
                     template="LokiCheckout_Core::script/component/step-component.phtml"/>

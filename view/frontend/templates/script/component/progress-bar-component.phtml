@@ -1,13 +1,22 @@
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.data('LokiCheckoutSteps', () => ({
+        Alpine.data('LokiCheckoutProgressBar', () => ({
             ...LokiCheckoutComponentType,
             currentStep: 'none',
+            steps: [],
             initCurrentStep() {
                 if (this.currentStep !== 'none') {
                     window.location.hash = this.currentStep;
                     Alpine.store('checkout').currentStep = this.currentStep;
                 }
+            },
+            initHashChangeListener() {
+                window.onhashchange = function(event) {
+                    const newHash = (new URL(event.newURL)).hash;
+                    console.log('onhashchange', newHash);
+                    //this.value = newHash;
+                    //this.post();
+                };
             },
             submit(event) {
                 const step = event.target.getAttribute('data-step');

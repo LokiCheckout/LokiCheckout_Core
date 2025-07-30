@@ -190,6 +190,14 @@ class StepNavigator implements ArgumentInterface
     }
 
     /**
+     * @return string[]
+     */
+    public function getStepCodes(): array
+    {
+        return array_keys($this->steps);
+    }
+
+    /**
      * @return StepViewModelInterface[]
      * @throws StepNotFoundException
      */

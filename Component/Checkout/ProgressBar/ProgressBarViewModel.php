@@ -12,7 +12,7 @@ class ProgressBarViewModel extends ComponentViewModel
 {
     public function getJsComponentName(): ?string
     {
-        return 'LokiCheckoutSteps';
+        return 'LokiCheckoutProgressBar';
     }
 
     public function getStep(): string
@@ -24,6 +24,7 @@ class ProgressBarViewModel extends ComponentViewModel
     {
         return [
             'step' => $this->getStep(),
+            'steps' => $this->getContext()->getStepNavigator()->getStepCodes(),
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
         ];
     }
