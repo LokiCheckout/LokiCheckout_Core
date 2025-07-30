@@ -13,7 +13,7 @@
                     name="loki-checkout.steps.shipping.title" as="title"
                     template="LokiCheckout_Core::generic/title.phtml">
                     <arguments>
-                        <argument name="title" xsi:type="string">Shipping</argument>
+                        <argument name="title" xsi:type="string" translate="true">Shipping</argument>
                     </arguments>
                 </block>
 

@@ -5,7 +5,7 @@
             name="loki-checkout.steps.billing.backward-button"
             template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
-                <argument name="button_label" xsi:type="string">Back to shipping</argument>
+                <argument name="button_label" xsi:type="string" translate="true">Back to shipping</argument>
             </arguments>
         </block>
 
@@ -13,8 +13,8 @@
             name="loki-checkout.steps.billing.forward-button"
             template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
-                <argument name="button_label" xsi:type="string">Pay &amp;amp; Place Order</argument>
-                <argument name="button_label_without_payment" xsi:type="string">Place Order</argument>
+                <argument name="button_label" xsi:type="string" translate="true">Pay &amp;amp; Place Order</argument>
+                <argument name="button_label_without_payment" xsi:type="string" translate="true">Place Order</argument>
                 <argument name="css_classes" xsi:type="array">
                     <item name="button" xsi:type="array">
                         <item name="default" xsi:type="string">btn btn-primary m-2</item>

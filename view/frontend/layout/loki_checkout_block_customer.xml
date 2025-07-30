@@ -14,7 +14,7 @@
                 name="loki-checkout.customer.customer_email" as="customer_email"
                 template="Loki_FieldComponents::form/field.phtml">
                 <arguments>
-                    <argument name="placeholder" xsi:type="string">Enter your emailaddress</argument>
+                    <argument name="placeholder" xsi:type="string" translate="true">Enter your emailaddress</argument>
                     <argument name="autocomplete" xsi:type="string">email</argument>
                 </arguments>
             </block>

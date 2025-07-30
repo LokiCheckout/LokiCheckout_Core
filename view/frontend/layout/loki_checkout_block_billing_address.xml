@@ -35,7 +35,7 @@
                 name="loki-checkout.billing.address.form-title" as="form-title"
                 template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
-                    <argument name="title" xsi:type="string">Billing Address</argument>
+                    <argument name="title" xsi:type="string" translate="true">Billing Address</argument>
                 </arguments>
             </block>
 

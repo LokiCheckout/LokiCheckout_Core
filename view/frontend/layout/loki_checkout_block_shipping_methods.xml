@@ -11,7 +11,7 @@
                 name="loki-checkout.shipping.shipping-methods.title" as="title"
                 template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
-                    <argument name="title" xsi:type="string">Shipping Methods</argument>
+                    <argument name="title" xsi:type="string" translate="true">Shipping Methods</argument>
                 </arguments>
             </block>
 

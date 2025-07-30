@@ -8,7 +8,7 @@
                     name="loki-checkout.sidebar.title" as="title"
                     template="LokiCheckout_Core::generic/title.phtml" before="-">
                     <arguments>
-                        <argument name="title" xsi:type="string">Order Summary</argument>
+                        <argument name="title" xsi:type="string" translate="true">Order Summary</argument>
                     </arguments>
                 </block>
 
@@ -34,7 +34,7 @@
                     name="loki-checkout.sidebar.preview.title" as="title"
                     template="LokiCheckout_Core::generic/title.phtml" before="-">
                     <arguments>
-                        <argument name="title" xsi:type="string">Order Preview</argument>
+                        <argument name="title" xsi:type="string" translate="true">Order Preview</argument>
                     </arguments>
                 </block>
 
