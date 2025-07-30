@@ -1,4 +1,4 @@
-# LokiCheckout_
+# LokiCheckout_Core
 
 **This is the main core package of the LokiCheckout.**
 
@@ -10,8 +10,8 @@ composer require loki-checkout/magento2-core
 
 Next, enable this module:
 ```bash
-bin/magento module:enable LokiCheckout_
+bin/magento module:enable LokiCheckout_Core
 ```
 
 ## Settings
-In the Magento Admin Panel, you can navigate to **Store > Configuration > Yireo > Yireo LokiCheckout** for various settings.
+In the Magento Admin Panel, you can navigate to **Store > Configuration > Yireo > LokiCheckout** for various settings.
