@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.4] - 30 July 2025
+### Fixed
+- Make errorText of agreements translatable
+- Make agreement text and content translatable in PHTML
+- Add ARIA labels
+- Allow translating step labels
+- Enhance translations when adding and removing items
+- Additional child renders in sidebar
+- Only add payment method code to sidebar in Developer Mode
+- Add output HTML element
+- Reload step when hash changes
+- Rename LokiCheckoutSteps component to LokiCheckoutProgressbar
+- Various fixes in GitLab CI config
+
 ## [2.0.3] - 28 July 2025
 ### Fixed
 - Support for `checkout/options/max_items_display_count`
