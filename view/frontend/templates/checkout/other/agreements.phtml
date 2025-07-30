@@ -40,12 +40,12 @@ use Loki\Components\Factory\ViewModelFactory;
             <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
                 <label for="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
                        class="<?= /* @noEscape */ $css('', 'label') ?>">
-                    <?= /* @noEscape */ $agreement->getCheckboxText() ?>
+                    <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
                 </label>
                 <br/>
 
                 <span class="<?= /* @noEscape */ $css('italic', 'content') ?>">
-                    <?= /* @noEscape */ $agreement->getContent() ?>
+                    <?= /* @noEscape */ __($agreement->getContent()) ?>
                 </span>
             </div>
         </div>
