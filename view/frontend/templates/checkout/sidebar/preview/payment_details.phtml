@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use LokiCheckout\Core\ViewModel\ApplicationMode;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Sidebar\Preview\PaymentDetails\PaymentDetailsViewModel;
@@ -12,9 +13,11 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentDetailsViewModel $viewModel */
+/** @var ApplicationMode $applicationMode */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 
+$applicationMode = $viewModelFactory->create(ApplicationMode::class);
 $viewModel = $viewModelFactory->create(PaymentDetailsViewModel::class);
 $html = $viewModel->getHtml();
 if (empty($html)) {
@@ -28,5 +31,8 @@ if (empty($html)) {
     <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
     <?= /* @noEscape */ $html ?>
     <?= /* @noEscape */ $block->getChildHtml() ?>
+
+    <?php if ($viewModel->isDeveloperMode()): ?>
     <!-- <?= $escaper->escapeHtml($viewModel->getPaymentCode()) ?> -->
+    <?php endif; ?>
 </div>
