@@ -33,15 +33,15 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 >
     <?php if (false === $step->isEnabled()): ?>
         <span class="<?= /* @noEscape */ $css('opacity-60 cursor-not-allowed', 'disabled') ?>">
-             <?= $escaper->escapeHtml($step->getLabel()) ?>
+             <?= __($escaper->escapeHtml($step->getLabel())) ?>
         </span>
     <?php elseif (false === $step->isAccessable()): ?>
         <span class="<?= /* @noEscape */ $css('', 'enabled') ?>">
-             <?= $escaper->escapeHtml($step->getLabel()) ?>
+             <?= __($escaper->escapeHtml($step->getLabel())) ?>
         </span>
     <?php else: ?>
         <button @click="submit" data-step="<?= $escaper->escapeHtml($step->getCode()) ?>">
-            <?= $escaper->escapeHtml(__($step->getLabel())) ?>
+            <?= __($escaper->escapeHtml(__($step->getLabel()))) ?>
         </button>
     <?php endif; ?>
 
