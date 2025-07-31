@@ -32,7 +32,7 @@ if (empty($html)) {
     <?= /* @noEscape */ $html ?>
     <?= /* @noEscape */ $block->getChildHtml() ?>
 
-    <?php if ($viewModel->isDeveloperMode()): ?>
+    <?php if ($applicationMode->isDeveloperMode()): ?>
     <!-- <?= $escaper->escapeHtml($viewModel->getPaymentCode()) ?> -->
     <?php endif; ?>
 </div>
