@@ -8,6 +8,7 @@ use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
 use Loki\Field\ViewModel\ImageOutput;
+use Magento\Framework\View\Asset\Source as AssetSource;
 
 class IconResolverContext
 {
@@ -16,7 +17,9 @@ class IconResolverContext
     public function __construct(
         private readonly ComponentRegistrar $componentRegistrar,
         private readonly AssetRepository $assetRepository,
+        private readonly AssetSource $assetSource,
         private readonly string $paymentMethodCode,
+        private readonly ImageOutput $imageOutput,
         Filesystem $filesystem,
     ) {
         $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
@@ -25,6 +28,27 @@ class IconResolverContext
     public function getPaymentMethodCode(): string
     {
         return $this->paymentMethodCode;
+    }
+
+    public function getIconAsset(string $assetId, array $suffixes = ['png', 'svg']): false|string
+    {
+        foreach ($suffixes as $suffix) {
+            $asset = $this->assetRepository->createAsset($assetId.'.'.$suffix);
+            $assetSource = $this->assetSource->findSource($asset);
+            if ($assetSource) {
+                break;
+            }
+        }
+
+        if (false === $assetSource) {
+            return false;
+        }
+
+        if (str_ends_with($assetSource, '.svg')) {
+            return $this->getIconOutput($assetSource, 'svg');
+        }
+
+        return $this->imageOutput->getByUrl($asset->getUrl());
     }
 
     public function getIconPath(string $moduleName, string $path): false|string
