@@ -23,6 +23,5 @@ if (empty($html)) {
     <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Details')) ?></span><br>
     <output>
         <?= /* @noEscape */ $html ?>
-        <?= /* @noEscape */ $block->getChildHtml() ?>
     </output>
 </div>
