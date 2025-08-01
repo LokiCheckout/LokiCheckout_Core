@@ -2,7 +2,6 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
             ...LokiCheckoutComponentType,
-            ...LokiModalComponentPartial,
             agreements: [],
             errorText: '',
             toggleAgreement(event) {
