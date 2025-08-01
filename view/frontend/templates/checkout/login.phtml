@@ -34,7 +34,7 @@ $logoutUrl = $block->getUrl('customer/account/logout');
         </button>
     <?php endif; ?>
 
-    <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
+    <dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg', 'dialog') ?>">
         <div>
             <?= $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
