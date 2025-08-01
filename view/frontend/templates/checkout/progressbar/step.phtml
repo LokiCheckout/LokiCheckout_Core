@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarViewModel;
@@ -17,37 +18,35 @@ use Loki\Components\Util\Block\CssClass;
 /** @var StepNavigator $stepNavigator */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var ChildRenderer $childRenderer */
 /** @var StepViewModelInterface $step */
 
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+$childRenderer = $viewModelFactory->create(ChildRenderer::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $step = $block->getStep();
 $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
-$skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
+
+$innerHtml = $childRenderer->html($block, 'inner', ['step' => $step, 'is_active' => $isActive]);
 ?>
 <li
     class="<?= /* @noEscape */ $css('step flex items-center aria-[current=step]:font-bold') ?>"
-    <?php if ($isActive): ?>
-        aria-current="step"
-    <?php endif; ?>
+    <?php if ($isActive): ?>aria-current="step"<?php endif; ?>
 >
     <?php if (false === $step->isEnabled()): ?>
         <span class="<?= /* @noEscape */ $css('opacity-60 cursor-not-allowed', 'disabled') ?>">
-             <?= __($escaper->escapeHtml($step->getLabel())) ?>
+            <?= /* @noEscape */ $innerHtml ?>
         </span>
     <?php elseif (false === $step->isAccessable()): ?>
         <span class="<?= /* @noEscape */ $css('', 'enabled') ?>">
-             <?= __($escaper->escapeHtml($step->getLabel())) ?>
+             <?= /* @noEscape */ $innerHtml ?>
         </span>
     <?php else: ?>
-        <button @click="submit" data-step="<?= $escaper->escapeHtml($step->getCode()) ?>">
-            <?= __($escaper->escapeHtml(__($step->getLabel()))) ?>
+        <button
+            @click="submit"
+            data-step="<?= $escaper->escapeHtml($step->getCode()) ?>"
+            class="<?= $css('w-full h-auto', 'button') ?>">
+            <?= /* @noEscape */ $innerHtml ?>
         </button>
-    <?php endif; ?>
-
-    <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
-        <span class="<?= /* @noEscape */ $css('inline-flex justify-center items-center px-2', 'separator') ?>" aria-hidden="true">
-             <?= /* @noEscape */ $blockRenderer->html($block,'loki-checkout.utils.separator') ?>
-        </span>
     <?php endif; ?>
 </li>

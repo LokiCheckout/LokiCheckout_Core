@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\CssClass;
+use Loki\Field\ViewModel\ImageOutput;
+use LokiCheckout\Core\Step\StepNavigator;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var StepViewModelInterface $step */
+/** @var CssClass $css */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var ImageOutput $imageOutput */
+
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
+$step = $block->getStep();
+$isActive = (bool)$block->getIsActive();
+$inactiveClass = $block->getInactiveClass();
+$activeClass = $block->getActiveClass();
+
+$iconHtml = $imageOutput->get('LokiCheckout_Core::images/'.$step->getCode().'.svg');
+?>
+<div
+    class="<?= $css('w-6') ?> <?= $isActive ? $activeClass : $inactiveClass ?>"
+    title="<?= __($escaper->escapeHtml($step->getLabel())) ?>">
+    <?= /** @noEscape  */ $iconHtml ?>
+</div>

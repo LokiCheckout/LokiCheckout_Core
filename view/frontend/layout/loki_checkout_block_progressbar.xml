@@ -1,17 +1,28 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <block name="loki-checkout.progressbar" template="LokiCheckout_Core::checkout/progressbar.phtml">
-            <block name="loki-checkout.progressbar.step" as="step" template="LokiCheckout_Core::checkout/progressbar/step.phtml"/>
+        <block
+            name="loki-checkout.progressbar.separator"
+            template="LokiCheckout_Core::checkout/progressbar/separator.phtml"
+        />
 
-            <!--
-            @todo
-            <arguments>
-                <argument name="css">
-                    <item name="block" xsi:type="string">hidden md:block card rounded-lg relative</item>
-                </argument>
-            </arguments>
-            -->
+        <block
+            name="loki-checkout.progressbar" as="progressbar"
+            template="LokiCheckout_Core::checkout/progressbar.phtml"
+        >
+            <container name="loki-checkout.progressbar.before" as="before"/>
+
+            <block
+                name="loki-checkout.progressbar.step" as="step"
+                template="LokiCheckout_Core::checkout/progressbar/step.phtml">
+                <block
+                    name="loki-checkout.progressbar.step.inner" as="inner"
+                    template="LokiCheckout_Core::checkout/progressbar/step/label.phtml"
+                />
+            </block>
+
+            <container name="loki-checkout.progressbar.after" as="after"/>
         </block>
     </body>
 </page>

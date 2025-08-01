@@ -1,0 +1,18 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\CssClass;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+/** @var BlockRenderer $blockRenderer */
+?>
+<li
+    class="<?= /* @noEscape */ $css('inline-flex justify-center items-center px-2') ?>"
+    aria-hidden="true">
+    <?= /* @noEscape */ $blockRenderer->html($block,'loki-checkout.utils.separator') ?>
+</li>

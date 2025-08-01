@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var StepViewModelInterface $step */
+
+$step = $block->getStep();
+?>
+<?= __($escaper->escapeHtml($step->getLabel())) ?>

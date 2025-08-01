@@ -23,6 +23,7 @@ use LokiCheckout\Core\ViewModel\CheckoutState;
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
+$skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 ?>
 <nav
     class="<?= /* @noEscape */ $css('hidden md:block card rounded-lg relative') ?>"
@@ -30,8 +31,13 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 >
     <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <ul class="<?= /* @noEscape */ $css('flex items-center', 'list') ?>">
+        <?= /* @noEscape */ $block->getChildHtml('before') ?>
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?= /* @noEscape */ $childRenderer->html($block,'step', ['step' => $step]) ?>
+            <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
+                <?= /** @noEscape  */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
+            <?php endif; ?>
         <?php endforeach; ?>
+        <?= $block->getChildHtml('after') ?>
     </ul>
 </nav>
