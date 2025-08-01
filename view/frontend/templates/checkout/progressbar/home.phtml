@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 use Loki\Components\Util\Block\ChildRenderer;
 use Loki\Field\ViewModel\ImageOutput;
-use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarViewModel;
 use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
@@ -13,7 +12,6 @@ use Loki\Components\Util\Block\BlockRenderer;
 use Loki\Components\Util\Block\CssClass;
 
 /** @var Template $block */
-/** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ProgressBarViewModel $viewModel */
 /** @var StepNavigator $stepNavigator */
