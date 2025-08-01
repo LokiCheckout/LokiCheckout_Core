@@ -32,7 +32,7 @@ $iconHtml = $imageOutput->get('LokiCheckout_Core::images/home.svg');
         class="<?= $css('w-full h-auto', 'button') ?>">
         <div
             class="<?= $css('w-6') ?>"
-            title="<?= __('Home') ?>">
+            title="<?= $escaper->escapeHtml(__('Home')) ?>">
             <?= /** @noEscape */ $iconHtml ?>
         </div>
     </a>
