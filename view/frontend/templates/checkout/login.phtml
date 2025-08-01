@@ -24,7 +24,7 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= /* @noEscape */ $css('card my-2') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
-        You are logged in as: <?= $escaper->escapeHtml($customerSession->getCustomer()->getName()) ?>
+        <?= __('You are logged in as %1', $escaper->escapeHtml($customerSession->getCustomer()->getName())) ?>
         (<a href="<?= $escaper->escapeHtml($logoutUrl) ?>"><?= $escaper->escapeHtml(__('Sign Out')) ?></a>)
     <?php else: ?>
         <button @click="toggleModal" :disabled="isModalOpen">

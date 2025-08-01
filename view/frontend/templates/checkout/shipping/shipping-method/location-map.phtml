@@ -34,7 +34,12 @@ foreach ($locations as $location) {
                 <a href="#" class="<?= /* @noEscape */ $css('bg-white p-2 hover:bg-amber-100', 'anchor') ?>" @click="jumpToMarker" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
                     <strong><?= $escaper->escapeHtml($marker->getTitle()) ?></strong><br/>
                     <?= $escaper->escapeHtml($marker->getAddress()->render()) ?><br/>
-                    <button class="<?= /* @noEscape */ $css('btn btn-primary btn-small', 'button') ?>" @click="saveMarker" data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">Select</button>
+                    <button
+                        class="<?= /* @noEscape */ $css('btn btn-primary btn-small', 'button') ?>"
+                        @click="saveMarker"
+                        data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">
+                        <?= __('Select') ?>
+                    </button>
                 </a>
             <?php endforeach; ?>
         </div>
