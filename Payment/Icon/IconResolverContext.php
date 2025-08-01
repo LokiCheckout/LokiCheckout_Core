@@ -33,6 +33,7 @@ class IconResolverContext
     public function getIconAsset(string $assetId, array $suffixes = ['png', 'svg']): false|string
     {
         $assetSource = false;
+        $asset = false;
         foreach ($suffixes as $suffix) {
             $asset = $this->assetRepository->createAsset($assetId.'.'.$suffix);
             $assetSource = $this->assetSource->findSource($asset);
@@ -41,7 +42,7 @@ class IconResolverContext
             }
         }
 
-        if (false === $assetSource) {
+        if (false === $asset || false === $assetSource) {
             return false;
         }
 
