@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
+use Loki\Components\Util\Block\CssClass;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var AgreementsViewModel $viewModel */
+/** @var AgreementInterface $agreement */
+
+$viewModel = $block->getViewModel();
+$agreement = $block->getAgreement();
+?>
+<input
+    type="checkbox"
+    data-type="field"
+    data-id="<?= $agreement->getAgreementId() ?>"
+    id="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
+    :checked="isAgreementChecked"
+    :aria-invalid="isAgreementNotChecked"
+    value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
+    @change="toggleAgreement"
+    <?php if ($agreement->getIsActive() === true): ?>checked<?php endif; ?>
+    required
+    aria-required="true"
+    <?php if ($viewModel->isDisabled()): ?>disabled="disabled"<?php endif ?>
+    class="<?= /* @noEscape */ $css('form-checkbox mt-2 float-left disabled:bg-zinc-100', 'input') ?>"
+/>

@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
+use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
@@ -12,41 +14,43 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var CssClass $css */
 /** @var AgreementsViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
+/** @var ImageOutput $imageOutput */
+/** @var ChildRenderer $childRenderer */
 
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
-<div class="<?= /* @noEscape */ $css('field required p-2') ?>" aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>">
+<div
+    class="<?= /* @noEscape */ $css('field required p-2') ?>"
+    aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
-            <input
-                type="checkbox"
-                data-type="field"
-                data-id="<?= $agreement->getAgreementId() ?>"
-                id="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
-                :checked="isAgreementChecked"
-                :aria-invalid="isAgreementNotChecked"
-                value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
-                @change="toggleAgreement"
-                <?php if ($agreement->getIsActive() === true): ?>
-                    checked
-                <?php endif; ?>
-                required
-                aria-required="true"
-                <?php if ($viewModel->isDisabled()): ?>
-                    disabled="disabled"
-                <?php endif ?>
-                class="<?= /* @noEscape */ $css('form-checkbox mt-2 float-left disabled:bg-zinc-100', 'input') ?>"
-            />
+            <?= $childRenderer->html($block, 'input', [
+                'agreement' => $agreement,
+            ]) ?>
 
             <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
                 <label for="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
                        class="<?= /* @noEscape */ $css('', 'label') ?>">
-                    <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
+                    <a href="#" @click.prevent="toggleModal" :disabled="isModalOpen">
+                        <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
+                    </a>
                 </label>
-                <br/>
 
-                <span class="<?= /* @noEscape */ $css('italic', 'content') ?>">
-                    <?= /* @noEscape */ __($agreement->getContent()) ?>
-                </span>
+                <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
+                    <div>
+                        <button
+                            aria-label="<?= __('Close') ?>"
+                            @click="toggleModal"
+                            class="float-right m-4 cursor-pointer w-4">
+                            <?= /** @noEscape */
+                            $imageOutput->get('Loki_Components::images/xmark.svg') ?>
+                        </button>
+                        <?= $childRenderer->html($block, 'content', [
+                            'agreement' => $agreement,
+                            'view_model' => $viewModel,
+                        ]) ?>
+                    </div>
+                </dialog>
             </div>
         </div>
     <?php endforeach; ?>

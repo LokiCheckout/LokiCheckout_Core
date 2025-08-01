@@ -1,9 +1,10 @@
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
+            ...LokiCheckoutComponentType,
+            ...LokiModalComponentPartial,
             agreements: [],
             errorText: '',
-            ...LokiCheckoutComponentType,
             toggleAgreement(event) {
                 const agreementId = event.target.getAttribute('data-id');
                 this.agreements[agreementId] = event.target.checked;
