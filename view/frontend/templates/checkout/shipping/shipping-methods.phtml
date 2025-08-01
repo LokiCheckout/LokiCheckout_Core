@@ -54,13 +54,10 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?= $escaper->escapeHtml(__('No shipping methods available')) ?>
             </div>
         <?php endif; ?>
-        <?= /* @noEscape */
-                    $block->getChildHtml('after-methods') ?>
+        <?= /* @noEscape */ $block->getChildHtml('after-methods') ?>
     </div>
 
-    <?= /* @noEscape */
-                    $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
 
-    <?= /* @noEscape */
-                    $block->getChildHtml('script') ?>
+    <?= /* @noEscape */ $block->getChildHtml('script') ?>
 </div>

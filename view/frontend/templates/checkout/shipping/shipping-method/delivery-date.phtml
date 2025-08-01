@@ -20,8 +20,7 @@ $deliveryDate = $block->getDeliveryDate();
         <?= $escaper->escapeHtml($deliveryDate->getDate()) ?>
     </summary>
     <div class="<?= /* @noEscape */ $css('mb-4', 'content') ?>">
-        <?= /* @noEscape */
-        $childRenderer->html($block, 'timeframes', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'timeframes', [
             'timeframes' => $deliveryDate->getTimeframes(),
         ]) ?>
     </div>

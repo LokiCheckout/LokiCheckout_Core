@@ -23,30 +23,24 @@ $location = $block->getLocation();
         'location' => $location,
     ]) ?>
 
-    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= /* @noEscape */
-    $css('cursor-pointer flex-1', 'label') ?>">
-        <?= /* @noEscape */
-    $childRenderer->html($block, 'location.name', [
+    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= /* @noEscape */ $css('cursor-pointer flex-1', 'label') ?>">
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.name', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */
-        $childRenderer->html($block, 'location.pickup-details', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.pickup-details', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */
-        $childRenderer->html($block, 'location.address', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.address', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */
-        $childRenderer->html($block, 'location.business-hours', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.business-hours', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */
-        $childRenderer->html($block, 'location.additional', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'location.additional', [
             'location' => $location,
         ]) ?>
     </label>

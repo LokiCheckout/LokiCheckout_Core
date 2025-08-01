@@ -20,10 +20,8 @@ $timeframe = $block->getTimeframe();
         'timeframe' => $timeframe,
     ]) ?>
 
-    <label for="<?= $escaper->escapeHtml($timeframe->getId()) ?>" class="<?= /* @noEscape */
-    $css('cursor-pointer flex-1', 'label') ?>">
-        <?= /* @noEscape */
-    $childRenderer->html($block, 'timeframe.name', [
+    <label for="<?= $escaper->escapeHtml($timeframe->getId()) ?>" class="<?= /* @noEscape */ $css('cursor-pointer flex-1', 'label') ?>">
+        <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.name', [
             'timeframe' => $timeframe,
         ]) ?>
     </label>

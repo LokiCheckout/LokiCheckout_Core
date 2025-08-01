@@ -40,8 +40,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <div class="<?= /* @noEscape */
-                    $css('p-4', 'no-items') ?>">
+            <div class="<?= /* @noEscape */ $css('p-4', 'no-items') ?>">
                 <?= $escaper->escapeHtml(__('No payment methods available')) ?>
             </div>
         <?php endif; ?>

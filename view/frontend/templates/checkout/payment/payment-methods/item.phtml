@@ -63,24 +63,20 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
             <label
                 for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
                 title="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
-                class="<?= /* @noEscape */
-            $css('', 'label') ?>">
+                class="<?= /* @noEscape */ $css('', 'label') ?>">
                 <?= /* @noEscape */ $paymentMethod->getTitle() ?>
             </label>
         </div>
 
         <?php if ($isCurrent || $showHidden) : ?>
-            <div class="<?= /* @noEscape */
-            $css('', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
-                <?= /* @noEscape */
-            $blockRenderer->html(
+            <div class="<?= /* @noEscape */ $css('', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+                <?= /* @noEscape */ $blockRenderer->html(
                     $block,
                     'loki-checkout.payment.payment-methods.'.$code.'.form',
                     ['method' => $code]
                 ) ?>
 
-                <?= /* @noEscape */
-                $blockRenderer->html(
+                <?= /* @noEscape */ $blockRenderer->html(
                     $block,
                     'loki-checkout.payment.payment-methods.'.$code.'.additional',
                     ['method' => $code]
