@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.5] - 01 August 2025
+### Fixed
+- Rewrite progress for easier adjustments like additional links and icons
+- Add missing `$css` wrapper
+- Finalize new structure of agreements
+- Move modal close button into separate PHTML
+- Implement modal for agreements; Implement child templates in agreements.phtml
+- Make strings translatable
+- Add method IconResolverContext::getIconAsset()
+- Wrong ViewModel reference leads to Fatal Error
+- Remove duplicate child HTML
+- Fix broken module name in README
+- Add translate attribute to various XML layout arguments
+
 ## [2.0.4] - 30 July 2025
 ### Fixed
 - Make errorText of agreements translatable
