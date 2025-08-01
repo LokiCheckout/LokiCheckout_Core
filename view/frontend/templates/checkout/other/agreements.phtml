@@ -21,12 +21,12 @@ use Loki\Components\Util\Block\CssClass;
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div x-data="LokiModal">
             <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
-                <?= $childRenderer->html($block, 'input', [
+                <?= /* @noEscape */ $childRenderer->html($block, 'input', [
                     'agreement' => $agreement,
                 ]) ?>
 
                 <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
-                    <label for="<?= $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
+                    <label for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
                            class="<?= /* @noEscape */ $css('', 'label') ?>">
                         <a href="#" @click.prevent="toggleModal" :disabled="isModalOpen">
                             <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
@@ -37,8 +37,10 @@ use Loki\Components\Util\Block\CssClass;
 
             <dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg w-1/2 max-h-[90vh]', 'dialog') ?>">
                 <div class="<?= /* @noEscape */ $css('p-5', 'dialog-inner') ?>">
-                    <?= $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
-                    <?= $childRenderer->html($block, 'content', [
+                    <?= /* @noEscape */
+                $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
+                    <?= /* @noEscape */
+                $childRenderer->html($block, 'content', [
                         'agreement' => $agreement,
                         'view_model' => $viewModel,
                     ]) ?>

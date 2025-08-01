@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Loki\Components\Util\Block\ChildRenderer;
 use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\View\Element\Template;
@@ -11,6 +12,7 @@ use LokiCheckout\Core\Step\StepNavigator;
 use Loki\Components\Util\Block\BlockRenderer;
 use Loki\Components\Util\Block\CssClass;
 
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ProgressBarViewModel $viewModel */
@@ -26,10 +28,10 @@ $iconHtml = $imageOutput->get('LokiCheckout_Core::images/home.svg');
 ?>
 <li class="<?= /* @noEscape */ $css('step flex items-center') ?>">
     <a
-        href="<?= $block->getBaseUrl() ?>"
-        class="<?= $css('w-full h-auto', 'button') ?>">
+        href="<?= /* @noEscape */ $block->getBaseUrl() ?>"
+        class="<?= /* @noEscape */ $css('w-full h-auto', 'button') ?>">
         <div
-            class="<?= $css('w-6') ?>"
+            class="<?= /* @noEscape */ $css('w-6') ?>"
             title="<?= $escaper->escapeHtml(__('Home')) ?>">
             <?= /** @noEscape */ $iconHtml ?>
         </div>

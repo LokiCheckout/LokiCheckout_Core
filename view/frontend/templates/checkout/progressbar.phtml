@@ -38,6 +38,6 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
                 <?= /** @noEscape  */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
             <?php endif; ?>
         <?php endforeach; ?>
-        <?= $block->getChildHtml('after') ?>
+        <?= /* @noEscape */ $block->getChildHtml('after') ?>
     </ul>
 </nav>

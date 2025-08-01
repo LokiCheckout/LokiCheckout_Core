@@ -45,7 +45,7 @@ $innerHtml = $childRenderer->html($block, 'inner', ['step' => $step, 'is_active'
         <button
             @click="submit"
             data-step="<?= $escaper->escapeHtml($step->getCode()) ?>"
-            class="<?= $css('w-full h-auto', 'button') ?>">
+            class="<?= /* @noEscape */ $css('w-full h-auto', 'button') ?>">
             <?= /* @noEscape */ $innerHtml ?>
         </button>
     <?php endif; ?>

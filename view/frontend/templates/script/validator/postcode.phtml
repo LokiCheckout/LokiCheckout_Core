@@ -18,8 +18,8 @@ $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
     postcodePatterns['<?= $escaper->escapeHtml($countryCode) ?>'] = [];
     <?php foreach($patterns as $patternName => $pattern): ?>
     postcodePatterns['<?= $escaper->escapeHtml($countryCode) ?>'].push({
-        example: '<?= $pattern['example'] ?>',
-        pattern: /<?= $pattern['pattern'] ?>/
+        example: '<?= $escaper->escapeHtml($pattern['example']) ?>',
+        pattern: /<?= $escaper->escapeHtml($pattern['pattern']) ?>/
     });
     <?php endforeach; ?>
     <?php endforeach; ?>

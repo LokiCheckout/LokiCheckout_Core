@@ -32,7 +32,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
     <img
         src="<?= $escaper->escapeHtml($productImageUrl) ?>"
         width="<?= $escaper->escapeHtml($width) ?>"
-        alt="<?= $item->getName() ?>"
+        alt="<?= $escaper->escapeHtml($item->getName()) ?>"
         loading="lazy"
         class="<?= /* @noEscape */ $css('hidden md:block h-full', 'image') ?>"
     >

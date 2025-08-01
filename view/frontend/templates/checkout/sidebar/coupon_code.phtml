@@ -25,12 +25,12 @@ $couponCode = $viewModel->getValue();
 <div class="<?= /* @noEscape */ $css('border-b border-gray-200 relative') ?>">
     <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
     <?php if (!empty($couponCode)): ?>
-        <?= $childRenderer->html($block, 'value', ['coupon_code' => $viewModel->getValue()]) ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'value', ['coupon_code' => $viewModel->getValue()]) ?>
 
     <?php else: ?>
         <details x-ref="details" :open="hasCouponCode" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
-            <?= $childRenderer->html($block, 'summary') ?>
-            <?= $childRenderer->html($block, 'form') ?>
+            <?= /* @noEscape */ $childRenderer->html($block, 'summary') ?>
+            <?= /* @noEscape */ $childRenderer->html($block, 'form') ?>
         </details>
     <?php endif; ?>
 

@@ -11,4 +11,4 @@ use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
 
 $step = $block->getStep();
 ?>
-<?= __($escaper->escapeHtml($step->getLabel())) ?>
+<?= $escaper->escapeHtml(__($escaper->escapeHtml($step->getLabel()))) ?>

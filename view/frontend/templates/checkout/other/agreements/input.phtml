@@ -19,8 +19,8 @@ $agreement = $block->getAgreement();
 <input
     type="checkbox"
     data-type="field"
-    data-id="<?= $agreement->getAgreementId() ?>"
-    id="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
+    data-id="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
+    id="<?= /* @noEscape */$viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
     :checked="isAgreementChecked"
     :aria-invalid="isAgreementNotChecked"
     value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"

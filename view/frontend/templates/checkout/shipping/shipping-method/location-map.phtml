@@ -38,7 +38,7 @@ foreach ($locations as $location) {
                         class="<?= /* @noEscape */ $css('btn btn-primary btn-small', 'button') ?>"
                         @click="saveMarker"
                         data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">
-                        <?= __('Select') ?>
+                        <?= $escaper->escapeHtml(__('Select')) ?>
                     </button>
                 </a>
             <?php endforeach; ?>
