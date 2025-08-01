@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\Components\Util\Block\ChildRenderer;
+use Loki\Components\Util\Block\TemplateRenderer;
 use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -16,42 +17,45 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ImageOutput $imageOutput */
 /** @var ChildRenderer $childRenderer */
+/** @var TemplateRenderer $templateRenderer */
 
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
 <div
-    class="<?= /* @noEscape */ $css('field required p-2') ?>"
+    class="<?= /* @noEscape */
+    $css('field required p-2') ?>"
     aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
+        <div class="<?= /* @noEscape */
+        $css('pb-2', 'item') ?>">
             <?= $childRenderer->html($block, 'input', [
                 'agreement' => $agreement,
             ]) ?>
 
-            <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
+            <div class="<?= /* @noEscape */
+            $css('inline-block pl-4', 'label-block') ?>">
                 <label for="<?= $viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
-                       class="<?= /* @noEscape */ $css('', 'label') ?>">
+                       class="<?= /* @noEscape */
+                       $css('', 'label') ?>">
                     <a href="#" @click.prevent="toggleModal" :disabled="isModalOpen">
-                        <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
+                        <?= /* @noEscape */
+                        __($agreement->getCheckboxText()) ?>
                     </a>
                 </label>
 
-                <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
-                    <div>
-                        <button
-                            aria-label="<?= __('Close') ?>"
-                            @click="toggleModal"
-                            class="float-right m-4 cursor-pointer w-4">
-                            <?= /** @noEscape */
-                            $imageOutput->get('Loki_Components::images/xmark.svg') ?>
-                        </button>
-                        <?= $childRenderer->html($block, 'content', [
-                            'agreement' => $agreement,
-                            'view_model' => $viewModel,
-                        ]) ?>
-                    </div>
-                </dialog>
+
             </div>
         </div>
+
+        <dialog x-ref="modal" class="border border-zinc-200 rounded-lg shadow-lg">
+            <div>
+                <?= $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
+
+                <?= $childRenderer->html($block, 'content', [
+                    'agreement' => $agreement,
+                    'view_model' => $viewModel,
+                ]) ?>
+            </div>
+        </dialog>
     <?php endforeach; ?>
 </div>
