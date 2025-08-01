@@ -32,6 +32,7 @@ class IconResolverContext
 
     public function getIconAsset(string $assetId, array $suffixes = ['png', 'svg']): false|string
     {
+        $assetSource = false;
         foreach ($suffixes as $suffix) {
             $asset = $this->assetRepository->createAsset($assetId.'.'.$suffix);
             $assetSource = $this->assetSource->findSource($asset);
