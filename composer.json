@@ -35,7 +35,7 @@
     "yireo/magento2-csp-utilities": "^1.0",
     "psr/log": "^3.0",
     "guzzlehttp/guzzle": "^7.0",
-    "php": "^8.3",
+    "php": "^8.2",
     "ext-intl": "*",
     "ext-pcre": "*",
     "ext-json": "*",
