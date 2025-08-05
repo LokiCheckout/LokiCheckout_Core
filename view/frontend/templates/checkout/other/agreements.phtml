@@ -15,11 +15,9 @@ use Loki\Components\Util\Block\CssClass;
 /** @var ChildRenderer $childRenderer */
 /** @var TemplateRenderer $templateRenderer */
 ?>
-<div
-    class="<?= /* @noEscape */ $css('field required p-2') ?>"
-    aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>">
+<div class="<?= /* @noEscape */ $css('field required p-2') ?>">
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <div x-data="LokiModal">
+        <div x-data="LokiCheckoutAgreementComponent" x-title="LokiCheckoutAgreement<?=$agreement->getAgreementId() ?>">
             <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
                 <?= /* @noEscape */ $childRenderer->html($block, 'input', [
                     'agreement' => $agreement,

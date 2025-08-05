@@ -1,0 +1,11 @@
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutAgreementComponent', () => ({
+            ...LokiModalComponentPartial,
+            valid() {
+                const agreementId = this.$el.getAttribute('data-id');
+                return this.agreements[agreementId];
+            }
+        }));
+    });
+</script>

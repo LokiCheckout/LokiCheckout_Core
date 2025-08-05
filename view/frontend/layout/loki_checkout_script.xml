@@ -90,6 +90,9 @@
                     name="loki-checkout.script.components.agreements"
                     template="LokiCheckout_Core::script/component/agreements-component.phtml"/>
                 <block
+                    name="loki-checkout.script.components.agreement"
+                    template="LokiCheckout_Core::script/component/agreement-component.phtml"/>
+                <block
                     name="loki-checkout.script.components.grid-layout-component"
                     template="LokiCheckout_Core::script/component/grid-layout-component.phtml"/>
             </referenceContainer>
