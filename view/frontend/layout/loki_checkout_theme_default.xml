@@ -36,6 +36,7 @@
         <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.shipping" before="-"/>
 
         <!-- Shipping step -->
+        <move element="loki-checkout.customer" destination="loki-checkout.steps.steps.shipping" />
         <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
         <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons"/>
 

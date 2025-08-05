@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Component\Base\QuoteField;
 
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 
 /**
  * @method CheckoutContext getContext()
@@ -33,6 +34,17 @@ abstract class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFie
 
     public function getStep(): string
     {
-        return $this->getContext()->getStepProvider()->getStep($this->getBlock());
+        $step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
+        if ($step !== 'none') {
+            return $step;
+        }
+
+        // @todo: Also check for single step checkout
+
+        if ($this->getContext()->getQuote()->isVirtual()) {
+            return 'billing';
+        }
+
+        return 'shipping';
     }
 }

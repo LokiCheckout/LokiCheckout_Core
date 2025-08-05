@@ -55,6 +55,7 @@
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
                 Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
+                    component.submitted = true;
                     LokiComponentValidator.validate(component);
                 });
 
