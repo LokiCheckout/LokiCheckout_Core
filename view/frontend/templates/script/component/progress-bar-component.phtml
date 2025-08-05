@@ -17,6 +17,11 @@
                         newStep = this.steps[0];
                     }
 
+                    if (this.currentStep === newStep) {
+                        window.location.hash = this.currentStep;
+                        return;
+                    }
+
                     this.post(newStep);
                 };
             },
