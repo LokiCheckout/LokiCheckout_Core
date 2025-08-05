@@ -56,6 +56,9 @@
 
                 Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
                     component.submitted = true;
+                });
+
+                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
                     LokiComponentValidator.validate(component);
                 });
 
