@@ -2,9 +2,19 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementComponent', () => ({
             ...LokiModalComponentPartial,
-            valid() {
-                const agreementId = this.$el.getAttribute('data-id');
-                return this.agreements[agreementId];
+            name: 'LokiCheckoutAgreementComponent',
+            id: '',
+            submitted: false,
+            valid: false,
+            init() {
+                this.id = this.name + this.$refs.field.getAttribute('data-id');
+                Alpine.store('components').add(this);
+                this.valid = this.$refs.field.checked;
+            },
+            isAriaInvalid() {
+                return !this.$refs.field.checked && this.submitted;
+            },
+            beforePostNextStep() {
             }
         }));
     });

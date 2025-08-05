@@ -10,16 +10,18 @@
                 this.post(this.agreements);
             },
             isAgreementChecked() {
-                const agreementId = this.$el.getAttribute('data-id');
-                return this.agreements[agreementId];
+                return this.agreements[this.$el.getAttribute('data-id')];
             },
             isAgreementNotChecked() {
                 return !this.isAgreementChecked();
             },
             beforePostNextStep() {
                 if (Object.values(this.agreements).includes(false)) {
-                    this.addGlobalError(this.errorText);
                     this.valid = false;
+                }
+
+                if (false === this.valid) {
+                    this.addGlobalError(this.errorText);
                 }
             }
         }));

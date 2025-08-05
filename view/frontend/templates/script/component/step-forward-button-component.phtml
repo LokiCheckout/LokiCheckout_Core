@@ -5,6 +5,8 @@
             redirectUrl: '',
             currentStep: '',
             valid: true,
+            validateTrueTimeout: 2000, // @todo Make this configurable
+            validateTrueTimer: null,
             initRedirectIfNeeded() {
                 if (this.redirectUrl) {
                     document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
@@ -20,7 +22,9 @@
                     this.updateValid();
                 });
 
-                this.updateValid();
+                this.$nextTick(() => {
+                    this.updateValid();
+                });
             },
             initWatchValidForDisabled() {
                 this.disabled = !this.valid;
@@ -42,12 +46,21 @@
             },
             updateValid() {
                 this.valid = Alpine.store('checkout').hasOnlyValidComponents([this.currentStep, 'any']);
-
-                if (!this.valid) {
-                    const components = Alpine.store('checkout').getInvalidComponentIds(this.currentStep);
-                    LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
-                    this.disabled = true;
+                if (this.valid) {
+                    return this.valid;
                 }
+
+                const components = Alpine.store('checkout').getInvalidComponentIds([this.currentStep, 'any']);
+                LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
+
+                if (this.validateTrueTimer) {
+                    window.clearTimeout(this.validateTrueTimer);
+                }
+
+                this.validateTrueTimer = window.setTimeout(() => {
+                    this.valid = true;
+                    this.disabled = false;
+                }, this.validateTrueTimeout);
 
                 return this.valid;
             },
@@ -81,6 +94,7 @@
                     }
 
                     const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
+                    console.log('firstInvalidElemet', firstInvalidElement);
                     if (firstInvalidElement) {
                         firstInvalidElement.focus();
                     }
