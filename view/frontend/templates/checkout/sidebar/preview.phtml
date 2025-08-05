@@ -8,7 +8,11 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+$html = $block->getChildHtml();
+if (empty($html)) {
+    return;
+}
 ?>
 <div class="<?= /* @noEscape */ $css('loki-checkout-sidebar-preview card p-8 my-4') ?>">
-    <?= /* @noEscape */ $block->getChildHtml() ?>
+    <?= /* @noEscape */ $html ?>
 </div>
