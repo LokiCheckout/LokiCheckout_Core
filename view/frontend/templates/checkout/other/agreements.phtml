@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\Components\Util\Block\ChildRenderer;
 use Loki\Components\Util\Block\TemplateRenderer;
 use Magento\Framework\Escaper;
@@ -14,8 +15,11 @@ use Loki\Components\Util\Block\CssClass;
 /** @var AgreementsViewModel $viewModel */
 /** @var ChildRenderer $childRenderer */
 /** @var TemplateRenderer $templateRenderer */
+/** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= /* @noEscape */ $css('field required p-2') ?>">
+    <?= $block->getChildHtml('before') ?>
+
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div x-data="LokiCheckoutAgreementComponent" x-title="LokiCheckoutAgreement<?=$agreement->getAgreementId() ?>">
             <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
@@ -44,4 +48,7 @@ use Loki\Components\Util\Block\CssClass;
             </dialog>
         </div>
     <?php endforeach; ?>
+
+    <?= $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= $block->getChildHtml('after') ?>
 </div>
