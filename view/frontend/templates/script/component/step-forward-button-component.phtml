@@ -69,12 +69,12 @@
             submit() {
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
-                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
+                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach(component => {
                     component.submitted = true;
                 });
 
-                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach((component) => {
-                    LokiComponentValidator.validate(component);
+                Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach(async component => {
+                    await LokiComponentValidator.validate(component);
                 });
 
                 Alpine.store('checkout').getComponentArrayByStep([this.currentStep, 'any']).forEach(async component => {

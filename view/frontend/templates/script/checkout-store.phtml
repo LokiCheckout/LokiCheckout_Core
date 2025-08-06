@@ -20,6 +20,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponentIds() {
                 return Alpine.store('components').getComponentIds();
             },
+            getComponentIdsByStep(step) {
+                return Object.keys(Alpine.store('checkout').getComponentsByStep(step));
+            },
             getComponents() {
                 return Alpine.store('components').getComponents();
             },
@@ -74,7 +77,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 const components = {};
                 this.getComponentArrayByStep(step).forEach(component => {
-                    if (component.valid === false) {
+                    if (false === component.valid) {
                         components[component.id] = component;
                     }
                 });
