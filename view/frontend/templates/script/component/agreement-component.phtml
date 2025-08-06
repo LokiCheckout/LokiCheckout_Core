@@ -9,9 +9,21 @@
             init() {
                 this.id = this.name + this.$refs.field.getAttribute('data-id');
                 Alpine.store('components').add(this);
-                this.valid = this.$refs.field.checked;
+                this.valid = this.agreements[this.id];
             },
-            isAriaInvalid() {
+            toggle(event) {
+                const agreementId = event.target.getAttribute('data-id');
+                this.valid =  event.target.checked;
+                this.agreements[agreementId] = this.valid;
+                this.post(this.agreements);
+            },
+            isChecked() {
+                return this.agreements[this.$el.getAttribute('data-id')];
+            },
+            isNotChecked() {
+                return !this.isAgreementChecked();
+            },
+            invalid() {
                 return !this.$refs.field.checked && this.submitted;
             },
             beforePostNextStep() {

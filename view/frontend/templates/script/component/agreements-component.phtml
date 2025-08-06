@@ -4,17 +4,6 @@
             ...LokiCheckoutComponentType,
             agreements: [],
             errorText: '',
-            toggleAgreement(event) {
-                const agreementId = event.target.getAttribute('data-id');
-                this.agreements[agreementId] = event.target.checked;
-                this.post(this.agreements);
-            },
-            isAgreementChecked() {
-                return this.agreements[this.$el.getAttribute('data-id')];
-            },
-            isAgreementNotChecked() {
-                return !this.isAgreementChecked();
-            },
             beforePostNextStep() {
                 if (Object.values(this.agreements).includes(false)) {
                     this.valid = false;

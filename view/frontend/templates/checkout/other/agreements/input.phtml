@@ -22,10 +22,10 @@ $agreement = $block->getAgreement();
     x-ref="field"
     data-id="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
     id="<?= /* @noEscape */$viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
-    :checked="isAgreementChecked"
-    :aria-invalid="isAriaInvalid"
+    :checked="isChecked"
+    :aria-invalid="invalid"
     value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
-    @change="toggleAgreement"
+    @change="toggle"
     <?php if ($agreement->getIsActive() === true): ?>checked<?php endif; ?>
     required
     aria-required="true"

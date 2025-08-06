@@ -5,7 +5,7 @@
             redirectUrl: '',
             currentStep: '',
             valid: true,
-            validateTrueTimeout: 2000, // @todo Make this configurable
+            validateTrueTimeout: 4000, // @todo Make this configurable
             validateTrueTimer: null,
             initRedirectIfNeeded() {
                 if (this.redirectUrl) {
@@ -53,6 +53,8 @@
                 const components = Alpine.store('checkout').getInvalidComponentIds([this.currentStep, 'any']);
                 LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
 
+                // @todo: Also add scroll event (and make it configurable
+
                 if (this.validateTrueTimer) {
                     window.clearTimeout(this.validateTrueTimer);
                 }
@@ -94,7 +96,6 @@
                     }
 
                     const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
-                    console.log('firstInvalidElemet', firstInvalidElement);
                     if (firstInvalidElement) {
                         firstInvalidElement.focus();
                     }
