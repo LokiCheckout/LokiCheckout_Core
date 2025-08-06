@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.6] - 06 August 2025
+### Fixed
+- Allow XML layout to set message area to make component messages global or local
+- Add before/after container to local messages container
+- Make sure agreement child-component is working properly with all step-logic
+- Better way to handle step validation and aria-invalid
+- Prevent re-post when step-hash is not shown in URL yet
+- Set submitted component-flag via step-forward button
+- Add submitted flag to all components; Fix step-detection for customer fields
+- Turn each agreement into separate Alpine component
+- Only render sidebar if HTML not empty
+- Lower PHP to 8.2
+- Remove unwanted newline after noEscape
+- Implement escaping in templates
+- Remove legacy code
+- Use aria-label instead of title in step-icon
+
 ## [2.0.5] - 01 August 2025
 ### Fixed
 - Rewrite progress for easier adjustments like additional links and icons
