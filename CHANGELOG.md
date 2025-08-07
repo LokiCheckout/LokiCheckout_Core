@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.7] - 07 August 2025
+### Fixed
+- Remove obsolete todo
+- Remove obsolete todo
+- Allow overriding LokiCheckoutDateOptions via XML layout
+- Jump to top when switching steps
+- DDo not trigger dispatchPaymentMethodEvent when payment is still empty
+- Allow configuration of reactivateTimeout via XML layout
+
 ## [2.0.6] - 06 August 2025
 ### Fixed
 - Allow XML layout to set message area to make component messages global or local
