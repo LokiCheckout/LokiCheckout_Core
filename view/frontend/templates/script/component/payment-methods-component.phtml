@@ -15,8 +15,6 @@
                 }));
 
                 document.dispatchEvent(new CustomEvent('loki-components.component.update', {}))
-
-                // @todo: Trigger an event "checkout:payment:method-deactivate"
             },
             beforeSubmit() {
                 this.validators = ['required', this.value]; // @todo: Doesn't this stick when switching value?
