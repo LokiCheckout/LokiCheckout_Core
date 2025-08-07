@@ -1,10 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+$options = (array)$block->getOptions();
+if (!isset($options['weekday'])) {
+    $options['weekday'] = 'long';
+}
+
+if (!isset($options['month'])) {
+    $options['month'] = 'long';
+}
+
+if (!isset($options['day'])) {
+    $options['day'] = 'numeric';
+}
+?>
 <script>
-    // @todo: Find a different way to override this
-    const LokiCheckoutDateOptions = {
-        weekday: "long",
-        month: "long",
-        day: "numeric",
-    };
+    const LokiCheckoutDateOptions = JSON.parse('<?= json_encode($options) ?>');
 
     document.addEventListener('alpine:init', () => {
         Alpine.directive('date', (el, { value, expression }, { evaluate }) => {
