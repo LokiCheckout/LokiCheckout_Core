@@ -6,7 +6,10 @@
                 this.dispatchPaymentMethodEvent();
             },
             dispatchPaymentMethodEvent() {
-                // @todo: Is this also fired when the value is empty?
+                if (!this.value) {
+                    return;
+                }
+
                 document.dispatchEvent(new CustomEvent('loki-checkout.payment.method-activate', {
                     detail: {method: this.value}
                 }));
