@@ -14,11 +14,8 @@ class NormalizedPaymentTokenFactory
 
     public function create(PaymentTokenInterface $paymentToken): NormalizedPaymentToken
     {
-        /** @var NormalizedPaymentToken $normalizedPaymentToken */
-        $normalizedPaymentToken = $this->objectManager->create(NormalizedPaymentToken::class, [
+        return $this->objectManager->create(NormalizedPaymentToken::class, [
             'paymentToken' => $paymentToken,
         ]);
-
-        return $normalizedPaymentToken;
     }
 }

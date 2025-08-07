@@ -5,8 +5,8 @@
             redirectUrl: '',
             currentStep: '',
             valid: true,
-            validateTrueTimeout: 4000, // @todo Make this configurable
-            validateTrueTimer: null,
+            reactivateTimeout: 0,
+            reactivateTimer: null,
             initRedirectIfNeeded() {
                 if (this.redirectUrl) {
                     document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
@@ -55,14 +55,14 @@
 
                 // @todo: Also add scroll event (and make it configurable
 
-                if (this.validateTrueTimer) {
-                    window.clearTimeout(this.validateTrueTimer);
+                if (this.reactivateTimer) {
+                    window.clearTimeout(this.reactivateTimer);
                 }
 
-                this.validateTrueTimer = window.setTimeout(() => {
+                this.reactivateTimeer = window.setTimeout(() => {
                     this.valid = true;
                     this.disabled = false;
-                }, this.validateTrueTimeout);
+                }, this.reactivateTimeout);
 
                 return this.valid;
             },

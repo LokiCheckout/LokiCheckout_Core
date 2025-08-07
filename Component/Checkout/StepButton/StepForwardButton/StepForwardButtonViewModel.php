@@ -22,6 +22,7 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
         return [
             'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode(),
             'redirectUrl' => $this->getContext()->getCheckoutState()->getCheckoutSession()->getLokiRedirectUrl(),
+            'reactivateTimeout' => $this->getReactivateTimeout(),
         ];
     }
 
@@ -42,5 +43,15 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
         }
 
         return $this->getBlock()->getButtonLabel();
+    }
+
+    private function getReactivateTimeout(): int
+    {
+        $timeout = (int)$this->getBlock()->getReactivateTimeout();
+        if ($timeout > 0) {
+            return $timeout;
+        }
+
+        return 10000;
     }
 }
