@@ -2,8 +2,12 @@
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutStep', () => ({
             ...LokiCheckoutComponentType,
+            step: null,
             initScrollTo() {
-                window.scrollTo(0, 0);
+                if (!this.step) {
+                    this.step = Alpine.store('checkout').currentStep;
+                    window.scrollTo(0, 0);
+                }
             }
         }));
     });
