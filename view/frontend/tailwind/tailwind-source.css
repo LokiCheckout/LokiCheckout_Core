@@ -58,9 +58,6 @@
         }
     }
      */
-    [aria-busy] > .loader-overlay {
-        display: flex;
-    }
 
     [aria-busy] > .loader {
         display: block;
