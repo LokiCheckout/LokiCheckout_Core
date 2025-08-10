@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.8] - 10 August 2025
+### Fixed
+- Allow toggling loader overlay via showLoader property
+- Prevent jump to top
+
 ## [2.0.7] - 07 August 2025
 ### Fixed
 - Remove obsolete todo
