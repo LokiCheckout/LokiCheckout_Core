@@ -35,7 +35,7 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?= /* @noEscape */ $childRenderer->html($block,'step', ['step' => $step]) ?>
             <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
-                <?= /** @noEscape  */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
+                <?= /* @noEscape  */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
             <?php endif; ?>
         <?php endforeach; ?>
         <?= /* @noEscape */ $block->getChildHtml('after') ?>
