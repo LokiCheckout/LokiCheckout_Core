@@ -1,6 +1,6 @@
 {
   "name": "loki-checkout/magento2-core",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "description": "A developer-friendly AlpineJS-based checkout for Magento 2",
   "keywords": ["loki-core"],
   "type": "magento2-module",

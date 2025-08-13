@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.9] - 13 August 2025
+### Fixed
+- Move Tailwind `order-x` classes into custom CSS rules to reduce CSS size
+- Add `data-valid` attribute to fields
+- Fix potential JS error when coupon code component has no value
+- Prevent module without composer.json from causing error in backend module overview
+- Update totals when applying discount via coupon code
+- Fix escaping in template
+
 ## [2.0.8] - 10 August 2025
 ### Fixed
 - Allow toggling loader overlay via showLoader property
