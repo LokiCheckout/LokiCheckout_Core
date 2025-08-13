@@ -35,7 +35,7 @@
                 <block alias="vat_id" sortOrder="160" />
             </grid>
             <grid name="netherlands" countryId="NL" parent="default">
-                <block alias="country_id" mdColSpan="12"/>
+                <block alias="country_id" mdColSpan="12" />
             </grid>
             <grid name="belgium" countryId="BE" parent="default">
                 <block alias="postcode" sortOrder="50" mdColSpan="3"/>
