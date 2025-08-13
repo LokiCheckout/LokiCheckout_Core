@@ -28,7 +28,8 @@ class GridClassParser implements CssClassParserInterface
         $sortOrder = $block->getSortOrder();
         $sortOrderClass = '';
         if ($sortOrder) {
-            $sortOrderClass = ' order-[' . $sortOrder.']';
+            //$sortOrderClass = ' order-[--checkout-field-order-' . $sortOrder.']';
+            $sortOrderClass = ' order-[' . $sortOrder.']'; // @todo: sortOrder
         }
 
         $cssClasses = array_merge_recursive($cssClasses, [
