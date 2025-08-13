@@ -16,7 +16,17 @@ class ComposerPackageFactory
     public function createByModuleName(string $moduleName): ComposerPackage
     {
         $modulePath = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
-        $composerFile = $this->getComposerFileFromPath($modulePath);
+        try {
+            $composerFile = $this->getComposerFileFromPath($modulePath);
+        } catch (RuntimeException $e) {
+            return new ComposerPackage(
+                $moduleName,
+                '',
+                '',
+                ''
+            );
+        }
+
         $composerData = json_decode(file_get_contents($composerFile), true);
         $composerName = $composerData['name'];
         $composerVersion = $this->composerLock->getComposerVersion($composerName);
