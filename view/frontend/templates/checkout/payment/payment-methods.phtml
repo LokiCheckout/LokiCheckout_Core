@@ -24,7 +24,8 @@ $paymentMethods = $viewModel->getPaymentMethods();
     <form
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
+        :aria-invalid="isAriaInvalid"
+        :data-valid="isValid"
         class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
         <?php if (!empty($paymentMethods)): ?>
 	    <ul class="<?= /* @noEscape */ $css('', 'list') ?>">

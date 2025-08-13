@@ -27,7 +27,7 @@
 
         /*
         @doc
-        &[aria-invalid=false] {
+        &:valid {
             @apply border-green-500;
         }
         */

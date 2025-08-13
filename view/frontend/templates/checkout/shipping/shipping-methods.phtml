@@ -32,7 +32,8 @@ $shippingMethods = $viewModel->getShippingMethods();
         id="shipping-methods"
         data-type="field"
         x-ref="field"
-        aria-invalid="<?= $viewModel->isValid() ? 'false' : 'true' ?>"
+        :aria-invalid="isAriaInvalid"
+        :data-valid="isValid"
         class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
         <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
         <?php if (!empty($shippingMethods)): ?>

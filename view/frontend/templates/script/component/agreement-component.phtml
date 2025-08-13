@@ -23,8 +23,11 @@
             isNotChecked() {
                 return !this.isAgreementChecked();
             },
-            invalid() {
+            isAriaInvalid() {
                 return !this.$refs.field.checked && this.submitted;
+            },
+            isValid() {
+                return this.$refs.field.checked && this.submitted;
             },
             beforePostNextStep() {
             }

@@ -23,7 +23,8 @@ $agreement = $block->getAgreement();
     data-id="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
     id="<?= /* @noEscape */$viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
     :checked="isChecked"
-    :aria-invalid="invalid"
+    :aria-invalid="isAriaInvalid"
+    :data-valid="isValid"
     value="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
     @change="toggle"
     <?php if ($agreement->getIsActive() === true): ?>checked<?php endif; ?>
