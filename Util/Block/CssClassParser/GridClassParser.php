@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Util\Block\CssClassParser;
 
+use LokiCheckout\Core\ViewModel\CssVariables;
 use Magento\Framework\View\Element\AbstractBlock;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Exception\BlockNotFoundException;
@@ -11,6 +12,7 @@ class GridClassParser implements CssClassParserInterface
 {
     public function __construct(
         private readonly Config $config,
+        private readonly CssVariables $cssVariables,
     ) {
     }
 
@@ -28,8 +30,9 @@ class GridClassParser implements CssClassParserInterface
         $sortOrder = $block->getSortOrder();
         $sortOrderClass = '';
         if ($sortOrder) {
-            //$sortOrderClass = ' order-[--checkout-field-order-' . $sortOrder.']';
-            $sortOrderClass = ' order-[' . $sortOrder.']'; // @todo: sortOrder
+            $sortOrderClass = 'checkout-field-order-' . $sortOrder;
+            $this->cssVariables->set('checkout-field-order-' . $sortOrder, 'order: '.$sortOrder);
+            //$sortOrderClass = ' order-[' . $sortOrder.']'; // @todo: sortOrder
         }
 
         $cssClasses = array_merge_recursive($cssClasses, [

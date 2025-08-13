@@ -1,0 +1,16 @@
+<?php
+declare(strict_types=1);
+
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CssVariables $cssVariables */
+
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\CssVariables;
+
+$cssVariables = $viewModelFactory->create(CssVariables::class);
+?>
+<style>
+    <?php foreach ($cssVariables->get() as $cssVariable) : ?>
+        .<?= $cssVariable->getName() ?> { <?= $cssVariable->getValue() ?>; }
+    <?php endforeach; ?>
+</style>

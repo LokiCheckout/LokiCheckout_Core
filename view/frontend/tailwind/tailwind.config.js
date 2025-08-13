@@ -1,20 +1,7 @@
 module.exports = {
     safelist: [
-        {
-            pattern: /col-span-\d/
-        },
-        {
-            pattern: /order-\d/
-        },
-        ...[...Array(200).keys()].flatMap(i => [`order-[${i}]`])
+        {pattern: /col-span-\d/}
     ],
-    theme: {
-        extend: {
-            order: {
-
-            }
-        }
-    },
     content: [
         "../../../etc/loki_checkout.xml",
         "../layout/*.xml",

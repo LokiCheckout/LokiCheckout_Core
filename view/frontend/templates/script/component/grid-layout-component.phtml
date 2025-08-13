@@ -15,7 +15,7 @@
                     }
 
                     const newCssClasses = [];
-                    newCssClasses.push('order-[' + block.sortOrder + ']'); // @todo: sortOrder
+                    newCssClasses.push('checkout-field-order-' + block.sortOrder); // @todo: sortOrder
                     newCssClasses.push('col-span-' + block.colSpan);
 
                     if (block.mdColSpan) {
@@ -24,7 +24,7 @@
 
                     const cssClasses = blockElement.getAttribute('class').split(' ');
                     cssClasses.forEach(cssClass => {
-                        if (cssClass.match(/col-span-/) || cssClass.match(/^order-/)) {
+                        if (cssClass.match(/col-span-/) || cssClass.match(/^checkout-field-order-/)) {
                             blockElement.classList.remove(cssClass);
                         }
                     });

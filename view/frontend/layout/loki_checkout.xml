@@ -53,5 +53,11 @@
         <block
             name="loki-checkout.utils.debug"
             template="LokiCheckout_Core::utils/debug.phtml"/>
+
+        <referenceContainer name="before.body.end">
+            <block
+                name="loki-checkout.utils.css-variables"
+                template="LokiCheckout_Core::utils/css-variables.phtml"/>
+        </referenceContainer>
     </body>
 </page>
