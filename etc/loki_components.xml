@@ -184,6 +184,7 @@
         context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext"
         viewModel="LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeRepository">
+        <target name="loki-checkout.sidebar.totals"/>
     </component>
 
     <component
