@@ -185,6 +185,14 @@ class Config implements ArgumentInterface
         );
     }
 
+    public function isNewsletterCheckedByDefault(): bool
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/newsletter/default_value',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getMaxCartItemsToDisplay(): int
     {
         return (int)$this->scopeConfig->getValue(

@@ -189,6 +189,23 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                     </depends>
                 </field>
             </group>
+            <group id="newsletter" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Newsletter settings</label>
+                <field id="default_value"
+                       translate="label"
+                       type="select"
+                       sortOrder="1"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Subscribe by default</label>
+                    <tooltip>With this option enabled, the customer is subscribed by default.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enable">1</field>
+                    </depends>
+                </field>
+            </group>
         </section>
     </system>
 </config>
