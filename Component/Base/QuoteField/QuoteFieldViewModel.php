@@ -39,7 +39,10 @@ abstract class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFie
             return $step;
         }
 
-        // @todo: Also check for single step checkout
+        $stepCodes = $this->getContext()->getStepNavigator()->getStepCodes();
+        if (count($stepCodes) === 1) {
+            return array_shift($stepCodes);
+        }
 
         if ($this->getContext()->getQuote()->isVirtual()) {
             return 'billing';
