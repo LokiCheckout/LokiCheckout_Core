@@ -52,7 +52,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         try {
             $carrier = $this->getCarrier($carrierCode);
         } catch (InvalidArgumentException $e) {
-            return ''; // @todo: A method like PostNL does not show?
+            return '';
         }
 
         $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
