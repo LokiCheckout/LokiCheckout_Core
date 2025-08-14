@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.11] - 14 August 2025
+### Fixed
+- Allow default sort order, col-span and md:col-span to be configured via DI type
+- Rename tab in Store Config from "Yireo" to "Loki"
+- When step-value in component is empty and there is only 1 step in total, use that step
+- Fix re-ordering bug of field blocks after AJAX update
+
 ## [2.0.10] - 14 August 2025
 ### Fixed
 - Fix integration tests with ConfigFixture scope
