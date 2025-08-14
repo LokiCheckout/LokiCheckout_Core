@@ -23,8 +23,8 @@ final class MiddlenamePageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.middlename';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/middlename_show', 1, 'store', 'default')]
     final public function testComponentOnPage(): void
     {

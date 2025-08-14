@@ -23,24 +23,24 @@ final class CompanyPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.company';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/company_show', 'opt', 'store', 'default')]
     public function testComponentOnPageIfOptional(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/company_show', 'req', 'store', 'default')]
     public function testComponentOnPageIfRequired(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/company_show', 0, 'store', 'default')]
     public function testComponentNotOnPage(): void
     {

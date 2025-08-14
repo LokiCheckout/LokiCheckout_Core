@@ -24,7 +24,7 @@ final class MethodsPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.payment.methods';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
     #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
     #[ConfigFixture('payment/banktransfer/active', 1, 'store', 'default')]
     final public function testComponentOnPage(): void

@@ -22,7 +22,7 @@ class ConfigTest extends TestCase
         $this->assertTrue($config->isLokiCheckout());
     }
 
-    #[ConfigFixture('loki_checkout/general/enable', 1)]
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
     public function testIsEnabled()
     {
         $config = $this->getConfig();
@@ -30,42 +30,42 @@ class ConfigTest extends TestCase
     }
 
 
-    #[ConfigFixture('loki_checkout/general/enable', 0)]
+    #[ConfigFixture('loki_checkout/general/enable', 0, 'store', 'default')]
     public function testIsNotEnabled()
     {
         $config = $this->getConfig();
         $this->assertFalse($config->isEnabled());
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'default')]
+    #[ConfigFixture('loki_checkout/general/theme', 'default', 'store', 'default')]
     public function testGetDefaultTheme()
     {
         $config = $this->getConfig();
         $this->assertEquals('default', $config->getTheme());
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
     public function testGetOneStepTheme()
     {
         $config = $this->getConfig();
         $this->assertEquals('onestep', $config->getTheme());
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'nonexisting')]
+    #[ConfigFixture('loki_checkout/general/theme', 'nonexisting', 'store', 'default')]
     public function testGetNonExistingTheme()
     {
         $config = $this->getConfig();
         $this->assertEquals('default', $config->getTheme());
     }
 
-    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid')]
+    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid', 'store', 'default')]
     public function testGetDefaultGridLayoutName()
     {
         $config = $this->getConfig();
         $this->assertEquals('default_grid', $config->getGridLayoutName());
     }
 
-    #[ConfigFixture('loki_checkout/general/grid_layout', 'nonexisting')]
+    #[ConfigFixture('loki_checkout/general/grid_layout', 'nonexisting', 'store', 'default')]
     public function testGetNonExistingGridLayoutName()
     {
         $config = $this->getConfig();
@@ -73,14 +73,14 @@ class ConfigTest extends TestCase
     }
 
 
-    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid')]
+    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid', 'store', 'default')]
     public function testGetDefaultGridLayout()
     {
         $config = $this->getConfig();
         $this->assertEquals('default_grid', $config->getGridLayout()->getName());
     }
 
-    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid')]
+    #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid', 'store', 'default')]
     /**
      * @dataProvider getTestGetGridArguments
      */
@@ -114,7 +114,7 @@ class ConfigTest extends TestCase
         ];
     }
 
-    #[ConfigFixture('loki_checkout/debug/enable', 1)]
+    #[ConfigFixture('loki_checkout/debug/enable', 1, 'store', 'default')]
     public function testIsDebug()
     {
         $config = $this->getConfig();
@@ -122,7 +122,7 @@ class ConfigTest extends TestCase
     }
 
 
-    #[ConfigFixture('loki_checkout/debug/enable', 0)]
+    #[ConfigFixture('loki_checkout/debug/enable', 0, 'store', 'default')]
     public function testIsNotDebug()
     {
         $config = $this->getConfig();

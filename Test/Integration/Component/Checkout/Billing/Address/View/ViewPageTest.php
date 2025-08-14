@@ -29,8 +29,8 @@ final class ViewPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.view';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '1')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '1', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

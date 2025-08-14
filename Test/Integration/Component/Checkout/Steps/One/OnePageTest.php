@@ -16,7 +16,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
-#[ConfigFixture('loki_checkout/general/theme', 'onestep')]
+#[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
 #[AppArea('frontend')]
 final class OnePageTest extends LokiCheckoutPageTestCase
 {

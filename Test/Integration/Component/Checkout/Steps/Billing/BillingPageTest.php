@@ -14,7 +14,7 @@ use Yireo\IntegrationTestHelper\Test\Integration\Traits\GetObjectManager;
 use LokiCheckout\Core\Test\Fixture\ShippingAddressFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
-#[ConfigFixture('loki_checkout/general/theme', 'onepage')]
+#[ConfigFixture('loki_checkout/general/theme', 'onepage', 'store', 'default')]
 #[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]

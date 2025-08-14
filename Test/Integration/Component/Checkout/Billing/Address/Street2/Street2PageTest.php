@@ -23,16 +23,16 @@ final class Street2PageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.street2';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/street_lines', '3')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     #[ConfigFixture('customer/address/street_lines', '2')]
     final public function testComponentNotOnPage(): void
     {

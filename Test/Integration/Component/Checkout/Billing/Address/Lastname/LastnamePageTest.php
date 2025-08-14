@@ -23,8 +23,8 @@ final class LastnamePageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.billing.address.lastname';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep')]
-    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0')]
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '0', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);

@@ -25,7 +25,7 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     use AssertStoreConfigValueEquals;
 
     #[
-        ConfigFixture('loki_checkout/general/theme', 'onestep'),
+        ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default'),
         ConfigFixture('loki_checkout/fields/enable_same_as_billing', 0, 'store', 'default')
     ]
     public function testDisabled()
@@ -34,7 +34,7 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     }
 
     #[
-        ConfigFixture('loki_checkout/general/theme', 'onestep'),
+        ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default'),
         ConfigFixture('loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')
     ]
     public function testEnabled()
