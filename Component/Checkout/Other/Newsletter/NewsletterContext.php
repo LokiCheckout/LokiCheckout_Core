@@ -21,6 +21,7 @@ use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Loki\Components\Component\ComponentContextInterface;
 use Loki\Components\Messages\GlobalMessageRegistry;
+use LokiCheckout\Core\Repository\NewsletterRepository;
 
 class NewsletterContext implements ComponentContextInterface
 {
@@ -42,7 +43,8 @@ class NewsletterContext implements ComponentContextInterface
         private readonly CoreMessageManager $coreMessageManager,
         private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
-        private readonly ResourceConnection $resourceConnection
+        private readonly ResourceConnection $resourceConnection,
+        private readonly NewsletterRepository $newsletterRepository,
     ) {
     }
 
@@ -134,5 +136,10 @@ class NewsletterContext implements ComponentContextInterface
     public function getResourceConnection(): ResourceConnection
     {
         return $this->resourceConnection;
+    }
+
+    public function getNewsletterRepository(): NewsletterRepository
+    {
+        return $this->newsletterRepository;
     }
 }

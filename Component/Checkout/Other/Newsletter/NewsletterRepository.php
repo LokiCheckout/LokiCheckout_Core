@@ -3,7 +3,6 @@
 namespace LokiCheckout\Core\Component\Checkout\Other\Newsletter;
 
 use Magento\Newsletter\Model\Subscriber;
-use Magento\Store\Model\Website;
 use Loki\Field\Component\Base\Field\FieldRepository;
 
 /**
@@ -18,6 +17,23 @@ class NewsletterRepository extends FieldRepository
             return false;
         }
 
+        $isSubscribed = $this->isSubscribed($email);
+        if ($isSubscribed) {
+            return $isSubscribed;
+        }
+
+        if ($this->getContext()->getModuleConfig()->isNewsletterCheckedByDefault()) {
+            $this->subscribeEmail($email);
+            $this->getGlobalMessageRegistry()->addNotice('You have been subscribed to the newsletter');
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private function isSubscribed(string $email): bool
+    {
         if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
             return $this->isCustomerSubscribed();
         }
@@ -75,41 +91,12 @@ class NewsletterRepository extends FieldRepository
 
     private function isCustomerSubscribed(): bool
     {
-        /** @var Website $website */
-        $website = $this->getContext()->getStoreManager()->getWebsite();
-        $storeIds = $website->getStoreIds();
-        $connection = $this->getContext()->getResourceConnection()->getConnection();
         $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
-        $select = $connection
-            ->select()
-            ->from($this->getContext()->getResourceConnection()->getTableName('newsletter_subscriber'))
-            ->where('store_id IN (?)', $storeIds)
-            ->where('customer_id = ' . $customerId)
-            ->where('subscriber_status = 1')
-            ->limit(1);
-
-        return (bool)$connection->fetchOne($select);
+        return $this->getContext()->getNewsletterRepository()->isCustomerIdSubscribed($customerId);
     }
 
     private function isGuestSubscribed(string $email): bool
     {
-        if ($email === '' || $email === '0') {
-            return false;
-        }
-
-        /** @var Website $website */
-        $website = $this->getContext()->getStoreManager()->getWebsite();
-        $storeIds = $website->getStoreIds();
-        $connection = $this->getContext()->getResourceConnection()->getConnection();
-        $select = $connection
-            ->select()
-            ->from($this->getContext()->getResourceConnection()->getTableName('newsletter_subscriber'))
-            ->where('subscriber_email = ?', $email)
-            ->where('store_id IN (?)', $storeIds)
-            ->where('customer_id = 0')
-            ->where('subscriber_status = 1')
-            ->limit(1);
-
-        return (bool)$connection->fetchOne($select);
+        return $this->getContext()->getNewsletterRepository()->isGuestEmailSubscribed($email);
     }
 }

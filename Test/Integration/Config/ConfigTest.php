@@ -129,6 +129,20 @@ class ConfigTest extends TestCase
         $this->assertFalse($config->isDebug());
     }
 
+    #[ConfigFixture('loki_checkout/newsletter/default_value', 1)]
+    public function testIsNewsletterCheckedByDefault()
+    {
+        $config = $this->getConfig();
+        $this->assertTrue($config->isNewsletterCheckedByDefault());
+    }
+
+    #[ConfigFixture('loki_checkout/newsletter/default_value', 0)]
+    public function testIsNewsletterNotCheckedByDefault()
+    {
+        $config = $this->getConfig();
+        $this->assertFalse($config->isNewsletterCheckedByDefault());
+    }
+
     private function getConfig(): Config
     {
         return $this->getObjectManager()->get(Config::class);
