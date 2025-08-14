@@ -11,6 +11,6 @@ $cssVariables = $viewModelFactory->create(CssVariables::class);
 ?>
 <style>
     <?php foreach ($cssVariables->get() as $cssVariable) : ?>
-        .<?= $cssVariable->getName() ?> { <?= $cssVariable->getValue() ?>; }
+        .<?= /* @noEscape */ $cssVariable->getName() ?> { <?= /* @noEscape */ $cssVariable->getValue() ?>; }
     <?php endforeach; ?>
 </style>
