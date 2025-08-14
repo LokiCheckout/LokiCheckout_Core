@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Util\Block\CssClassParser;
 
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
 use LokiCheckout\Core\ViewModel\CssVariables;
 use Magento\Framework\View\Element\AbstractBlock;
 use LokiCheckout\Core\Config\Config;
@@ -22,28 +23,44 @@ class GridClassParser implements CssClassParserInterface
             return $cssClasses;
         }
 
-        $gridClassesFromXmlConfig = $this->getGridClassesFromXmlConfig($block);
-        if ($gridClassesFromXmlConfig === '' || $gridClassesFromXmlConfig === '0') {
-            $gridClassesFromXmlConfig = $this->getDefaultGridClasses($block);
+        $gridClasses = $this->getGridClassesFromXmlConfig($block);
+        if ($gridClasses === '') {
+            $gridClasses = $this->getDefaultGridClasses($block);
         }
 
-        $sortOrder = $block->getSortOrder();
-        $sortOrderClass = '';
-        if ($sortOrder) {
-            $sortOrderClass = 'checkout-field-order-' . $sortOrder;
-            $this->cssVariables->set('checkout-field-order-' . $sortOrder, 'order: '.$sortOrder);
-            //$sortOrderClass = ' order-[' . $sortOrder.']'; // @todo: sortOrder
-        }
+        $sortOrder = $this->getSortOrderFromXmlConfig($block);
+        $sortOrderClass = 'checkout-field-order-'.$sortOrder;
+        $this->cssVariables->set('checkout-field-order-'.$sortOrder, 'order: '.$sortOrder);
 
         $cssClasses = array_merge_recursive($cssClasses, [
-            'grid' => $gridClassesFromXmlConfig,
+            'grid' => $gridClasses,
             'sortOrder' => $sortOrderClass,
         ]);
 
         return $cssClasses;
     }
 
+    private function getSortOrderFromXmlConfig(AbstractBlock $block): int
+    {
+        $blockDefinition = $this->getBlockDefinitionByBlock($block);
+        if (false === $blockDefinition instanceof Block) {
+            return 99;
+        }
+
+        return $blockDefinition->getSortOrder();
+    }
+
     private function getGridClassesFromXmlConfig(AbstractBlock $block): string
+    {
+        $blockDefinition = $this->getBlockDefinitionByBlock($block);
+        if (false === $blockDefinition instanceof Block) {
+            return '';
+        }
+
+        return $blockDefinition->getGridClass();
+    }
+
+    private function getBlockDefinitionByBlock(AbstractBlock $block): false|Block
     {
         $grid = $this->config->getGrid();
         $blockAlias = $block->getLayout()->getElementAlias($block->getNameInLayout());
@@ -53,16 +70,14 @@ class GridClassParser implements CssClassParserInterface
         }
 
         if (empty($blockAlias)) {
-            return '';
+            return false;
         }
 
         try {
-            $block = $grid->getBlock($blockAlias);
-        } catch (BlockNotFoundException $exception) {
-            return '';
+            return $grid->getBlock($blockAlias);
+        } catch (BlockNotFoundException) {
+            return false;
         }
-
-        return $block->getGridClass();
     }
 
     private function getDefaultGridClasses(AbstractBlock $block): string
