@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <!-- @todo <referenceContainer name="loki-component-before-body-end"> -->
         <referenceContainer name="after.body.start">
             <block
                 name="loki-checkout.script.logger"
@@ -76,7 +75,6 @@
                 <block
                     name="loki-checkout.script.components.payment-methods"
                     template="LokiCheckout_Core::script/component/payment-methods-component.phtml"/>
-                <!-- @todo: Only load this on the page if this is actually needed -->
                 <block
                     name="loki-checkout.script.components.payment-method"
                     template="LokiCheckout_Core::script/component/payment-method-component.phtml"/>
