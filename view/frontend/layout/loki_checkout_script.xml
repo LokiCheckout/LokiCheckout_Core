@@ -34,9 +34,6 @@
             <block
                 name="loki-checkout.script.validators.postcode"
                 template="LokiCheckout_Core::script/validator/postcode.phtml"/>
-            <block
-                name="loki-checkout.script.hacks"
-                template="LokiCheckout_Core::script/hacks.phtml"/>
 
             <referenceContainer name="loki-component-partials">
                 <block
