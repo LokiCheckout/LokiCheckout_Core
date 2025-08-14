@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.10] - 14 August 2025
+### Fixed
+- Fix integration tests with ConfigFixture scope
+- Draft of subscribing to newsletter by default
+- Add config option to subscribe to newsletter by default
+
 ## [2.0.9] - 13 August 2025
 ### Fixed
 - Move Tailwind `order-x` classes into custom CSS rules to reduce CSS size
