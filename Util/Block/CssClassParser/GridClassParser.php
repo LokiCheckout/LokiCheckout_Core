@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Util\Block\CssClassParser;
 
+use LokiCheckout\Core\Config\XmlConfig\Defaults;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
 use LokiCheckout\Core\ViewModel\CssVariables;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -14,6 +15,7 @@ class GridClassParser implements CssClassParserInterface
     public function __construct(
         private readonly Config $config,
         private readonly CssVariables $cssVariables,
+        private Defaults $defaults
     ) {
     }
 
@@ -44,7 +46,7 @@ class GridClassParser implements CssClassParserInterface
     {
         $blockDefinition = $this->getBlockDefinitionByBlock($block);
         if (false === $blockDefinition instanceof Block) {
-            return 99;
+            return $this->defaults->getSortOrder();
         }
 
         return $blockDefinition->getSortOrder();

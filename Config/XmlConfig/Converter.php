@@ -8,6 +8,11 @@ use RuntimeException;
 
 class Converter implements ConverterInterface
 {
+    public function __construct(
+        private Defaults $defaults
+    ) {
+    }
+
     /**
      * @param DOMDocument $source
      * @return array
@@ -57,12 +62,12 @@ class Converter implements ConverterInterface
             $defaultSortOrder = (int)$gridLayoutElement->getAttribute('defaultSortOrder');
             $defaultColSpan = (int)$gridLayoutElement->getAttribute('defaultColSpan');
             if ($defaultColSpan === 0) {
-                $defaultColSpan = 12;
+                $defaultColSpan = $this->defaults->getColSpan();
             }
 
             $defaultMdColSpan = (int)$gridLayoutElement->getAttribute('defaultMdColSpan');
             if ($defaultMdColSpan === 0) {
-                $defaultMdColSpan = 6;
+                $defaultMdColSpan = $this->defaults->getMdColSpan();
             }
 
             foreach ($gridLayoutElement->getElementsByTagName('grid') as $gridElement) {
@@ -121,9 +126,9 @@ class Converter implements ConverterInterface
             $gridLayouts[$gridName] = [
                 'label' => $label,
                 'countryId' => $countryId,
-                'defaultSortOrder' => $defaultSortOrder === 0 ? 99 : $defaultSortOrder,
+                'defaultSortOrder' => $defaultSortOrder === 0 ? $this->defaults->getSortOrder() : $defaultSortOrder,
                 'defaultColSpan' => $defaultColSpan,
-                'defaultMdColSpan' => $defaultMdColSpan === 0 ? 6 : $defaultMdColSpan,
+                'defaultMdColSpan' => $defaultMdColSpan === 0 ? $this->defaults->getMdColSpan() : $defaultMdColSpan,
                 'grids' => $grids,
             ];
         }
