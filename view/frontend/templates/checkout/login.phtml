@@ -26,18 +26,8 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= /* @noEscape */ $css('card my-2') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
-        <?= $escaper->escapeHtml(__('You are logged in as %1', $escaper->escapeHtml($customerSession->getCustomer()->getName()))) ?>
-        (<a href="<?= $escaper->escapeHtml($logoutUrl) ?>"><?= $escaper->escapeHtml(__('Sign Out')) ?></a>)
+        <?= $block->getChildHtml('logged-in') ?>
     <?php else: ?>
-        <button @click="toggleModal" :disabled="isModalOpen">
-            <?= $escaper->escapeHtml(__('Sign In')) ?>
-        </button>
+        <?= $block->getChildHtml('form-container') ?>
     <?php endif; ?>
-
-    <dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg', 'dialog') ?>">
-        <div>
-            <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
-            <?= /* @noEscape */ $block->getChildHtml('form') ?>
-        </div>
-    </dialog>
 </div>

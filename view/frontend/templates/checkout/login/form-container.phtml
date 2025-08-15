@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Util\Block\TemplateRenderer;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\CssClass;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Field\ViewModel\ImageOutput;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CheckoutState $checkoutState */
+/** @var CssClass $css */
+/** @var ImageOutput $imageOutput */
+/** @var TemplateRenderer $templateRenderer */
+
+?>
+<div class="<?= /* @noEscape */ $css() ?>">
+<button @click="toggleModal" :disabled="isModalOpen" class="<?= /* @noEscape */ $css('', 'button') ?>">
+    <?= $escaper->escapeHtml(__('Sign In')) ?>
+</button>
+
+<dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg', 'dialog') ?>">
+    <div>
+        <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
+        <?= /* @noEscape */ $block->getChildHtml('form') ?>
+    </div>
+</dialog>
+</div>

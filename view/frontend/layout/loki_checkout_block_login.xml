@@ -8,12 +8,25 @@
                 <argument name="js_component_name" xsi:type="string">LokiModal</argument>
             </arguments>
 
+            <block
+                name="loki-checkout.login.logged-in" as="logged-in"
+                template="LokiCheckout_Core::checkout/login/logged-in.phtml">
+                <arguments>
+                    <argument name="show_customer_email" xsi:type="boolean">false</argument>
+                    <argument name="show_logout_link" xsi:type="boolean">true</argument>
+                </arguments>
+            </block>
+
+        <block
+            name="loki-checkout.login.form-container" as="form-container"
+            template="LokiCheckout_Core::checkout/login/form-container.phtml">
             <block class="Magento\Customer\Block\Form\Login" name="loki-checkout.login.form" as="form" template="Magento_Customer::form/login.phtml">
                 <arguments>
                     <argument name="button_lock_manager" xsi:type="object">Magento\Framework\View\Element\ButtonLockManager</argument>
                 </arguments>
 
                 <container name="form.additional.info" as="form_additional_info"/>
+            </block>
             </block>
         </block>
     </body>
