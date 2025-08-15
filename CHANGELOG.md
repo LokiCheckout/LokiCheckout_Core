@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.13] - 15 August 2025
+### Fixed
+- Split up login in sidebar into child templates
+- Prevent non-grid child blocks from getting grid classes
+- Fix issue with billing address being shown even though same-as-billing is checked
+
 ## [2.0.12] - 15 August 2025
 ### Fixed
 - Implement new CSS class `loki-col-span` properly
