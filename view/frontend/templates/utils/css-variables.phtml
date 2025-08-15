@@ -10,7 +10,8 @@ use LokiCheckout\Core\ViewModel\CssVariables;
 $cssVariables = $viewModelFactory->create(CssVariables::class);
 ?>
 <style>
-    <?php foreach ($cssVariables->get() as $cssVariable) : ?>
-        .<?= /* @noEscape */ $cssVariable->getName() ?> { <?= /* @noEscape */ $cssVariable->getValue() ?>; }
+    :root {
+    <?php foreach ($cssVariables->get() as $cssVariable) : ?> -- <?= /* @noEscape */ $cssVariable->getName() ?>: <?= /* @noEscape */ $cssVariable->getValue() ?>;
     <?php endforeach; ?>
+    }
 </style>
