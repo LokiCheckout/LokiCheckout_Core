@@ -193,6 +193,14 @@ class Config implements ArgumentInterface
         );
     }
 
+    public function getMaxCartItemsToShow(): int
+    {
+        return (int)$this->scopeConfig->getValue(
+            'loki_checkout/cart/max_items_visible_count',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getMaxCartItemsToDisplay(): int
     {
         return (int)$this->scopeConfig->getValue(
