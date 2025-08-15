@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.12] - 15 August 2025
+### Fixed
+- Implement new CSS class `loki-col-span` properly
+- Set col span via CSS properties instead of too many Tailwind classes
+- Convert option for inline CSS styles to CSS properties
+- Add new `loki_checkout/cart/max_items_visible_count` option to Config class
+- Move `netherlands` grid of `default_grid` to `LokiCheckout_Nl` module
+- Formatting
+
 ## [2.0.11] - 14 August 2025
 ### Fixed
 - Allow default sort order, col-span and md:col-span to be configured via DI type
