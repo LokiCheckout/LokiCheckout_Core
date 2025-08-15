@@ -13,6 +13,15 @@ class GridClassParser implements CssClassParserInterface
             return $cssClasses;
         }
 
+        $parentBlock = $block->getParentBlock();
+        if (false === $parentBlock instanceof AbstractBlock) {
+            return $cssClasses;
+        }
+
+        if (true !== $parentBlock->getGrid()) {
+            return $cssClasses;
+        }
+
         return array_merge_recursive($cssClasses, [
             'grid' => 'loki-col-span',
             'sortOrder' => 'order-[--loki-order]',
