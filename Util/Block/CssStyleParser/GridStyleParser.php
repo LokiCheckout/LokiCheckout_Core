@@ -19,6 +19,10 @@ class GridStyleParser implements CssStyleParserInterface
     {
         $blockDefinition = $this->getBlockDefinitionByBlock($block);
         if (false === $blockDefinition instanceof Block) {
+            $cssStyles['--loki-order'] = $this->config->getGridLayout()->getDefaultSortOrder();
+            $cssStyles['--loki-col-span'] = $this->config->getGridLayout()->getDefaultColSpan();
+            $cssStyles['--loki-md-col-span'] = $this->config->getGridLayout()->getDefaultMdColSpan();
+
             return $cssStyles;
         }
 
