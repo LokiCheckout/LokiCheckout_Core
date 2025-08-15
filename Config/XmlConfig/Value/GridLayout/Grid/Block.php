@@ -22,17 +22,6 @@ class Block
         return $this->sortOrder;
     }
 
-    public function getGridClass(): string
-    {
-        $colSpan = $this->getColSpan();
-        $gridClass = 'col-span-' . $colSpan;
-        if ($this->mdColSpan > 0) {
-            $gridClass .= ' md:col-span-' . $this->mdColSpan;
-        }
-
-        return $gridClass;
-    }
-
     public function getColSpan(): int
     {
         if (false === $this->colSpan > 0) {

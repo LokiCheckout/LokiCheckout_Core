@@ -14,22 +14,9 @@
                         return;
                     }
 
-                    const newCssClasses = [];
-                    newCssClasses.push('checkout-field-order-' + block.sortOrder);
-                    newCssClasses.push('col-span-' + block.colSpan);
-
-                    if (block.mdColSpan) {
-                        newCssClasses.push('md:col-span-' + block.mdColSpan);
-                    }
-
-                    const cssClasses = blockElement.getAttribute('class').split(' ');
-                    cssClasses.forEach(cssClass => {
-                        if (cssClass.match(/col-span-/) || cssClass.match(/^checkout-field-order-/)) {
-                            blockElement.classList.remove(cssClass);
-                        }
-                    });
-
-                    blockElement.classList.add(...newCssClasses);
+                    blockElement.style.setProperty('--loki-order', block.sortOrder);
+                    blockElement.style.setProperty('--loki-col-span', block.colSpan);
+                    blockElement.style.setProperty('--loki-md-col-span', block.mdColSpan);
                 });
             }
         }));

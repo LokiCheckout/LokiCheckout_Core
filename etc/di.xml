@@ -168,6 +168,15 @@
         </arguments>
     </type>
 
+
+    <type name="Loki\Components\Util\Block\CssStyle">
+        <arguments>
+            <argument name="cssStyleParsers" xsi:type="array">
+                <item name="grid-style" xsi:type="object">LokiCheckout\Core\Util\Block\CssStyleParser\GridStyleParser</item>
+            </argument>
+        </arguments>
+    </type>
+
     <type name="Loki\Components\Util\Block\CssClass">
         <arguments>
             <argument name="cssClassParsers" xsi:type="array">

@@ -1,3 +1,6 @@
+@layer utilities {
+}
+
 @layer components {
     ::backdrop {
         background-color: black;
@@ -144,6 +147,17 @@
             .tab {
                 @apply w-full;
             }
+        }
+    }
+
+    .loki-col-span {
+        --_col: var(--loki-col-span);
+        grid-column: span var(--_col) / span var(--_col);
+    }
+
+    @screen md {
+        .loki-col-span {
+            --_col: var(--loki-md-col-span);
         }
     }
 }

@@ -1,0 +1,51 @@
+<?php declare(strict_types=1);
+
+namespace LokiCheckout\Core\Util\Block\CssStyleParser;
+
+use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
+use Magento\Framework\View\Element\AbstractBlock;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Exception\BlockNotFoundException;
+use Loki\Components\Util\Block\CssStyleParser\CssStyleParserInterface;
+
+class GridStyleParser implements CssStyleParserInterface
+{
+    public function __construct(
+        private readonly Config $config,
+    ) {
+    }
+
+    public function parse(array $cssStyles, AbstractBlock $block): array
+    {
+        $blockDefinition = $this->getBlockDefinitionByBlock($block);
+        if (false === $blockDefinition instanceof Block) {
+            return $cssStyles;
+        }
+
+        $cssStyles['--loki-order'] = $blockDefinition->getSortOrder();
+        $cssStyles['--loki-col-span'] = $blockDefinition->getColSpan();
+        $cssStyles['--loki-md-col-span'] = $blockDefinition->getMdColSpan();
+
+        return $cssStyles;
+    }
+
+    private function getBlockDefinitionByBlock(AbstractBlock $block): false|Block
+    {
+        $grid = $this->config->getGrid();
+        $blockAlias = $block->getLayout()->getElementAlias($block->getNameInLayout());
+        if (empty($blockAlias)) {
+            $blockParts = explode('.', $block->getNameInLayout());
+            $blockAlias = array_pop($blockParts);
+        }
+
+        if (empty($blockAlias)) {
+            return false;
+        }
+
+        try {
+            return $grid->getBlock($blockAlias);
+        } catch (BlockNotFoundException) {
+            return false;
+        }
+    }
+}
