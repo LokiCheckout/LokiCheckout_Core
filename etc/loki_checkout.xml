@@ -7,6 +7,7 @@
                 <step name="billing" blockName="loki-checkout.steps.billing"/>
             </steps>
         </theme>
+
         <theme name="onestep" label="One Step Checkout">
             <steps>
                 <step name="one" blockName="loki-checkout.steps.one"/>
