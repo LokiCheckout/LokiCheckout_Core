@@ -17,16 +17,16 @@
                 </arguments>
             </block>
 
-        <block
-            name="loki-checkout.login.form-container" as="form-container"
-            template="LokiCheckout_Core::checkout/login/form-container.phtml">
-            <block class="Magento\Customer\Block\Form\Login" name="loki-checkout.login.form" as="form" template="Magento_Customer::form/login.phtml">
-                <arguments>
-                    <argument name="button_lock_manager" xsi:type="object">Magento\Framework\View\Element\ButtonLockManager</argument>
-                </arguments>
+            <block
+                name="loki-checkout.login.form-container" as="form-container"
+                template="LokiCheckout_Core::checkout/login/form-container.phtml">
+                <block class="Magento\Customer\Block\Form\Login" name="loki-checkout.login.form" as="form" template="Magento_Customer::form/login.phtml">
+                    <arguments>
+                        <argument name="button_lock_manager" xsi:type="object">Magento\Framework\View\Element\ButtonLockManager</argument>
+                    </arguments>
 
-                <container name="form.additional.info" as="form_additional_info"/>
-            </block>
+                    <container name="form.additional.info" as="form_additional_info"/>
+                </block>
             </block>
         </block>
     </body>
