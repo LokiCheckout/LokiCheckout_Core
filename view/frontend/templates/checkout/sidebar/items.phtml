@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Sidebar\Items\ItemsViewModel;
 use Loki\Components\Factory\ViewModelFactory;
@@ -14,24 +15,49 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
+/** @var Escaper $escaper */
 
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
+
+$allItems = $viewModel->getItems();
+$visibleItems = array_slice($allItems, 0, $viewModel->getVisibleCount());
+$hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
-    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
-    <ul role="list">
-        <?php foreach ($viewModel->getItems() as $item) : ?>
-            <li>
-                <?= /* @noEscape */ $childRenderer->html($block,'item', [
-                    'alias' => 'item',
-                    'item' => $item,
-                ]) ?>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+    <div x-data="LokiToggle">
+        <ul role="list">
+            <?php foreach ($visibleItems as $item) : ?>
+                <li>
+                    <?= /* @noEscape */
+                    $childRenderer->html($block, 'item', [
+                        'alias' => 'item',
+                        'item' => $item,
+                    ]) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
 
-    <?= /* @noEscape */ $block->getChildHtml('after') ?>
+        <button @click="toggle" x-show="hidden"><?= $escaper->escapeHtml(__('Show all items')) ?></button>
+
+        <ul role="list" x-show="shown">
+            <?php foreach ($hiddenItems as $item) : ?>
+                <li>
+                    <?= /* @noEscape */
+                    $childRenderer->html($block, 'item', [
+                        'alias' => 'item',
+                        'item' => $item,
+                    ]) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+
+        <button @click="toggle" x-show="shown"><?= $escaper->escapeHtml(__('Do not show all items')) ?></button>
+    </div>
+
+    <?= /* @noEscape */
+    $block->getChildHtml('after') ?>
 </div>
