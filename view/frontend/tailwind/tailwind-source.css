@@ -1,6 +1,3 @@
-@layer utilities {
-}
-
 @layer components {
     ::backdrop {
         background-color: black;
@@ -151,13 +148,12 @@
     }
 
     .loki-col-span {
+        --loki-col-span: 12;
         --_col: var(--loki-col-span);
         grid-column: span var(--_col) / span var(--_col);
-    }
 
-    @screen md {
-        .loki-col-span {
-            --_col: var(--loki-md-col-span);
+        @screen md {
+            --_col: var(--loki-md-col-span, var(--loki-col-span));
         }
     }
 }
