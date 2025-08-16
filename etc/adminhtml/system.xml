@@ -200,7 +200,7 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                        showInWebsite="1"
                        showInStore="1">
                     <label>Maximum items visible</label>
-                    <tooltip>This number determines are shown directly. When there are more items, the entire list can be expanded.</tooltip>
+                    <tooltip>This number determines how many products are shown in the sidebar. When there are more items, the entire list can be expanded.</tooltip>
                     <depends>
                         <field id="*/general/enable">1</field>
                     </depends>
