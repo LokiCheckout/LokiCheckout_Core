@@ -32,8 +32,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         <ul role="list">
             <?php foreach ($visibleItems as $item) : ?>
                 <li>
-                    <?= /* @noEscape */
-                    $childRenderer->html($block, 'item', [
+                    <?= /* @noEscape */ $childRenderer->html($block, 'item', [
                         'alias' => 'item',
                         'item' => $item,
                     ]) ?>
@@ -46,8 +45,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         <ul role="list" x-show="shown">
             <?php foreach ($hiddenItems as $item) : ?>
                 <li>
-                    <?= /* @noEscape */
-                    $childRenderer->html($block, 'item', [
+                    <?= /* @noEscape */ $childRenderer->html($block, 'item', [
                         'alias' => 'item',
                         'item' => $item,
                     ]) ?>
@@ -58,6 +56,5 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         <button @click="toggle" x-show="shown"><?= $escaper->escapeHtml(__('Do not show all items')) ?></button>
     </div>
 
-    <?= /* @noEscape */
-    $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>
