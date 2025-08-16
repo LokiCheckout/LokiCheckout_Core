@@ -17,6 +17,9 @@
             <newsletter>
                 <default_value>0</default_value>
             </newsletter>
+            <cart>
+                <max_items_visible_count>3</max_items_visible_count>
+            </cart>
         </loki_checkout>
     </default>
 </config>

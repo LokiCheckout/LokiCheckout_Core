@@ -194,14 +194,13 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                 <label>Cart settings</label>
                 <field id="max_items_visible_count"
                        translate="label"
-                       type="select"
+                       type="text"
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
                        showInStore="1">
                     <label>Maximum items visible</label>
                     <tooltip>This number determines are shown directly. When there are more items, the entire list can be expanded.</tooltip>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <depends>
                         <field id="*/general/enable">1</field>
                     </depends>
