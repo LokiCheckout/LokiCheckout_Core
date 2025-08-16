@@ -1,8 +1,5 @@
 @import "./form-switch.css";
 
-@layer utilities {
-}
-
 @layer components {
     ::backdrop {
         background-color: black;
@@ -19,14 +16,13 @@
         }
     }
 
-
-    [data-type="field-prefix"]:has(+ [data-type="field"][aria-invalid=true]) {
+    [data-type="field-prefix"]:has(+ [data-type="field"][aria-invalid="true"]) {
         @apply border-red-500 bg-red-100;
     }
 
     [data-type="label"],
     [data-type="field"] {
-        &[aria-invalid=true] {
+        &[aria-invalid="true"] {
             @apply border-red-500;
         }
 
@@ -153,13 +149,12 @@
     }
 
     .loki-col-span {
+        --loki-col-span: 12;
         --_col: var(--loki-col-span);
         grid-column: span var(--_col) / span var(--_col);
-    }
 
-    @screen md {
-        .loki-col-span {
-            --_col: var(--loki-md-col-span);
+        @screen md {
+            --_col: var(--loki-md-col-span, var(--loki-col-span));
         }
     }
 }
