@@ -21,7 +21,10 @@ use Loki\Components\Util\Block\CssClass;
     <?= $block->getChildHtml('before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <div x-data="LokiCheckoutAgreementComponent" x-title="LokiCheckoutAgreement<?= /* @noEscape */ $agreement->getAgreementId() ?>">
+        <div
+            x-data="LokiCheckoutAgreementComponent"
+            x-title="LokiCheckoutAgreement<?= /* @noEscape */ $agreement->getAgreementId() ?>"
+        >
             <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
                 <?= /* @noEscape */ $childRenderer->html($block, 'input', [
                     'agreement' => $agreement,
@@ -30,9 +33,12 @@ use Loki\Components\Util\Block\CssClass;
                 <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
                     <label for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
                            class="<?= /* @noEscape */ $css('', 'label') ?>">
-                        <a href="#" @click.prevent="toggleModal" :disabled="isModalOpen">
+                        <button
+                            type="button"
+                            @click="toggleModal"
+                            :disabled="isModalOpen">
                             <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
-                        </a>
+                        </button>
                     </label>
                 </div>
             </div>
