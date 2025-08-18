@@ -14,7 +14,7 @@
                 }
             },
             hasCouponCode() {
-                return this.value && this.value.length > 0;
+                return !!this.value;
             },
             isDetailOpen() {
                 return this.detailOpen;
