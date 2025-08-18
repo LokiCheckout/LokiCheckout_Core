@@ -18,8 +18,7 @@ use Loki\Field\ViewModel\ImageOutput;
 /** @var TemplateRenderer $templateRenderer */
 
 ?>
-<div class="<?= /* @noEscape */
-$css() ?>">
+<div class="<?= /* @noEscape */ $css() ?>">
     <?= $block->getChildHtml('before') ?>
     <button
         @click="toggleModal"
@@ -34,8 +33,7 @@ $css() ?>">
         class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg', 'dialog') ?>"
     >
         <div>
-            <?= /* @noEscape */
-            $templateRenderer->html(
+            <?= /* @noEscape */ $templateRenderer->html(
                 $block,
                 'Loki_Components::component/modal/close.phtml'
             ); ?>
