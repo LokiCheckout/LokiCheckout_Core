@@ -20,7 +20,7 @@ class StepValidator implements ValidatorInterface
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    public function validate(): array|true
+    public function validate(): bool|array
     {
         $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();
