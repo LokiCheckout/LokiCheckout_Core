@@ -34,7 +34,7 @@ $customerEmail = $escaper->escapeHtml($customerSession->getCustomer()->getEmail(
 
     <?php if ($showCustomerEmail) : ?>
         <em class="<?= /* @noEscape */ $css('', 'email') ?>">
-            (<?= $customerEmail ?>)
+            (<?= $escaper->escapeHtml($customerEmail) ?>)
         </em>
     <?php endif; ?>
 

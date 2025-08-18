@@ -13,10 +13,10 @@ $fieldId = $block->getFieldId();
 ?>
 <div>
     <label
-        for="<?= $fieldId ?>"
+        for="<?= $escaper->escapeHtml($fieldId) ?>"
         class="<?= /* @noEscape */ $css('block mb-3', 'label') ?>">
         <span class="<?= /* @noEscape */ $css('sr-only', 'label-inner') ?>">
-            <?= __('Discount Code') ?>
+            <?= $escaper->escapeHtml(__('Discount Code')) ?>
         </span>
     </label>
 
@@ -27,8 +27,8 @@ $fieldId = $block->getFieldId();
         x-ref="input"
         :value="value"
         @change="setValue"
-        id="<?= $fieldId ?>"
-        aria-label="<?= __('Discount Code') ?>"
+        id="<?= $escaper->escapeHtml($fieldId) ?>"
+        aria-label="<?= $escaper->escapeHtml(__('Discount Code')) ?>"
         class="<?= /* @noEscape */ $css('form-input w-full mb-3', 'input') ?>">
 
     <button
