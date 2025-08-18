@@ -1,0 +1,26 @@
+/* @doc: See step.phtml
+@layer components {
+    .loki-checkout-progressbar {
+        .step {
+            position:relative;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .step:first-child {
+            margin-left: 0;
+            margin-right: 10px;
+        }
+
+        .step:after {
+            content:"|";
+            position:absolute;
+            left: -10px;
+        }
+
+        .step:first-child:after {
+            content:"";
+        }
+    }
+}
+*/

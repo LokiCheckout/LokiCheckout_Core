@@ -1,0 +1,19 @@
+@layer components {
+    .loki-components-messages {
+        .error {
+            @apply text-red-800;
+        }
+
+        .warning {
+            @apply text-orange-700;
+        }
+
+        .notice {
+            @apply text-blue-800;
+        }
+
+        .success {
+            @apply text-green-800;
+        }
+    }
+}
