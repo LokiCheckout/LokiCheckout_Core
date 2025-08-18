@@ -8,21 +8,29 @@ use Loki\Components\Util\Block\CssClass;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+
+$fieldId = $block->getFieldId();
 ?>
 <div>
-    <label class="<?= /* @noEscape */ $css('block mb-3', 'label') ?>">
+    <label
+        for="<?= $fieldId ?>"
+        class="<?= /* @noEscape */ $css('block mb-3', 'label') ?>">
         <span class="<?= /* @noEscape */ $css('sr-only', 'label-inner') ?>">
-            <?php __('Discount Code') ?>
+            <?= __('Discount Code') ?>
         </span>
-        <input
-            autocomplete="off"
-            name="coupon_code"
-            type="text"
-            x-ref="input"
-            :value="value"
-            @change="setValue"
-            class="<?= /* @noEscape */ $css('form-input w-full', 'input') ?>">
     </label>
+
+    <input
+        autocomplete="off"
+        name="coupon_code"
+        type="text"
+        x-ref="input"
+        :value="value"
+        @change="setValue"
+        id="<?= $fieldId ?>"
+        aria-label="<?= __('Discount Code') ?>"
+        class="<?= /* @noEscape */ $css('form-input w-full mb-3', 'input') ?>">
+
     <button
         type="button"
         class="<?= /* @noEscape */ $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
