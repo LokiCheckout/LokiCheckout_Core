@@ -29,21 +29,14 @@ $showLogoutLink = (bool)$block->getShowLogoutLink();
 $customerName = $escaper->escapeHtml($customerSession->getCustomer()->getName());
 $customerEmail = $escaper->escapeHtml($customerSession->getCustomer()->getEmail());
 ?>
-<div class="<?= /* @noEscape */ $css('flex') ?>">
-    <div class="<?= /* @noEscape */ $css('mr-1', 'message') ?>">
-        <?= $escaper->escapeHtml(__('You are logged in as %1', $customerName)) ?>
-    </div>
+<div class="<?= /* @noEscape */ $css('') ?>">
+    <?= $escaper->escapeHtml(__('You are logged in as %1', $customerName)) ?>
+
     <?php if ($showCustomerEmail) : ?>
-        <div class="<?= /* @noEscape */ $css('mr-1', 'email') ?>">
+        <em class="<?= /* @noEscape */ $css('', 'email') ?>">
             (<?= $customerEmail ?>)
-        </div>
+        </em>
     <?php endif; ?>
 
-    <?php if ($showLogoutLink) : ?>
-        <div class="<?= /* @noEscape */ $css('mr-1', 'logout') ?>">
-            <a href="<?= $escaper->escapeHtml($logoutUrl) ?>">
-                (<?= $escaper->escapeHtml(__('Sign Out')) ?>)
-            </a>
-        </div>
-    <?php endif; ?>
+    <?= $block->getChildHtml('logout') ?>
 </div>

@@ -24,10 +24,10 @@ $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div class="<?= /* @noEscape */ $css('card my-2') ?>" x-data="LokiModal">
+<div class="<?= /* @noEscape */ $css('card') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
         <?= $block->getChildHtml('logged-in') ?>
     <?php else: ?>
-        <?= $block->getChildHtml('form-container') ?>
+        <?= $block->getChildHtml('form') ?>
     <?php endif; ?>
 </div>

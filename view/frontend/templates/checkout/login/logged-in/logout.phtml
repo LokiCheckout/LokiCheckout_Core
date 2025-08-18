@@ -1,0 +1,19 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Util\Block\CssClass;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CssClass $css */
+
+$showLogoutLink = (bool)$block->getShowLogoutLink();
+$logoutUrl = $block->getUrl('customer/account/logout');
+?>
+<?php if ($showLogoutLink) : ?>
+    <a href="<?= $escaper->escapeHtml($logoutUrl) ?>">
+        (<?= $escaper->escapeHtml(__('Sign Out')) ?>)
+    </a>
+<?php endif; ?>
