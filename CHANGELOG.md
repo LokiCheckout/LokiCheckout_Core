@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.14] - 18 August 2025
+### Fixed
+- Allow for PHP 8.1 compatibility
+- Lower requirements to PHP 8.1
+- Split up login.phtml into smaller more configurable templates
+- Coupon code was always open
+- A11Y fixes for coupon code label
+- IMP: changed a to button
+- Add icons to toggle buttons for cart item
+- Fix newlines after comments
+- IMP: move all code in to there own file
+- IMP: col fallback
+- Option to limit cart items in sidebar but collapse to entire list
+- Enhance text for config option
+- Fix item to be number
+- Add admin config for `max_items_visible_count`
+
 ## [2.0.13] - 15 August 2025
 ### Fixed
 - Split up login in sidebar into child templates
