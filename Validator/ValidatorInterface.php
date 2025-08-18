@@ -4,5 +4,5 @@ namespace LokiCheckout\Core\Validator;
 
 interface ValidatorInterface
 {
-    public function validate(): true|array;
+    public function validate(): bool|array;
 }

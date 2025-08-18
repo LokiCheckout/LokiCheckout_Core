@@ -31,7 +31,7 @@ class OneStepViewModel extends ComponentViewModel implements StepViewModelInterf
         return true;
     }
 
-    public function validate(): true|array
+    public function validate(): bool|array
     {
         return $this->getContext()->getStepValidator()->validate();
     }

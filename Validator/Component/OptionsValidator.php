@@ -9,7 +9,7 @@ use Loki\Field\Util\OptionModelInterface;
 
 class OptionsValidator implements ValidatorInterface
 {
-    public function validate(mixed $value, ?ComponentInterface $component = null): true|array
+    public function validate(mixed $value, ?ComponentInterface $component = null): bool|array
     {
         $value = trim((string)$value);
         if ($value === '' || $value === '0') {

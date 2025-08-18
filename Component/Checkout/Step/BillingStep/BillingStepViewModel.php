@@ -43,7 +43,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
         return $this->getContext()->getStepNavigator()->isCurrentStep($this);
     }
 
-    public function validate(): true|array
+    public function validate(): bool|array
     {
         return $this->getContext()->getStepValidator()->validate();
     }

@@ -17,12 +17,12 @@ class QuoteValidator implements ValidatorInterface
     }
 
     /**
-     * @return true|array
+     * @return bool|array
      * @throws Exception
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */
-    public function validate(): true|array
+    public function validate(): bool|array
     {
         $quote = $this->checkoutState->getQuote();
         $this->quoteValidator->validateBeforeSubmit($quote);

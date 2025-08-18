@@ -16,7 +16,7 @@ class StepValidator implements ValidatorInterface
     }
 
     /**
-     * @return true|array
+     * @return bool|array
      * @throws LocalizedException
      * @throws NoSuchEntityException
      */

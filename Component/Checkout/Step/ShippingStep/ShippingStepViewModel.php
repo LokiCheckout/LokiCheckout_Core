@@ -35,7 +35,7 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
         return $this->getContext()->getStepNavigator()->isCurrentStep($this);
     }
 
-    public function validate(): true|array
+    public function validate(): bool|array
     {
         return $this->getContext()->getStepValidator()->validate();
     }

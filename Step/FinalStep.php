@@ -42,7 +42,7 @@ class FinalStep
      * @throws NoSuchEntityException
      * @throws Exception
      */
-    public function validate(): true|array
+    public function validate(): bool|array
     {
         return $this->quoteValidator->validate();
     }
