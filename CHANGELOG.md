@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.15] - 19 August 2025
+### Fixed
+- Change heading from h3 to h2 because of SEO-purpose
+- Document latest version of template
+- Add missing `declare(strict_types)`
+
 ## [2.0.14] - 18 August 2025
 ### Fixed
 - Allow for PHP 8.1 compatibility
