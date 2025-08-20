@@ -21,8 +21,7 @@ use Loki\Components\Util\Block\CssClass;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= /* @noEscape */ $css('field required p-2') ?>">
-    <?= /* @noEscape */
-$block->getChildHtml('before') ?>
+    <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div
@@ -59,8 +58,6 @@ $block->getChildHtml('before') ?>
         </div>
     <?php endforeach; ?>
 
-    <?= /* @noEscape */
-                    $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
-    <?= /* @noEscape */
-                    $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>
