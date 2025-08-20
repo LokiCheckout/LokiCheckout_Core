@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\View\LayoutInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Loki\Components\Util\Block\CssClass;
+use Loki\CssUtils\Util\CssClass;
 
 class CssClassTest extends TestCase
 {
