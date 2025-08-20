@@ -33,7 +33,8 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
-    <div x-data="LokiToggle" class="<?= $css('', 'inner') ?>">
+    <div x-data="LokiToggle" class="<?= /* @noEscape */
+$css('', 'inner') ?>">
         <ul role="list">
             <?php foreach ($visibleItems as $item) : ?>
                 <li>
@@ -46,8 +47,10 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         </ul>
 
         <?php if (count($hiddenItems) > 0): ?>
-            <button @click="toggle" x-show="hidden" class="<?= $css('flex', 'button-down') ?>">
-                <span class="<?= $css('w-6 h-2', 'button-down-span') ?>">
+            <button @click="toggle" x-show="hidden" class="<?= /* @noEscape */
+                    $css('flex', 'button-down') ?>">
+                <span class="<?= /* @noEscape */
+                    $css('w-6 h-2', 'button-down-span') ?>">
                     <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Show all items')) ?>
@@ -64,8 +67,10 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
                 <?php endforeach; ?>
             </ul>
 
-            <button @click="toggle" x-cloak x-show="shown" class="<?= $css('flex', 'button-up') ?>">
-                <span class="<?= $css('w-6 h-2', 'button-up-span') ?>">
+            <button @click="toggle" x-cloak x-show="shown" class="<?= /* @noEscape */
+                        $css('flex', 'button-up') ?>">
+                <span class="<?= /* @noEscape */
+                        $css('w-6 h-2', 'button-up-span') ?>">
                     <?= /** @noEscape */
                     $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
                 </span>

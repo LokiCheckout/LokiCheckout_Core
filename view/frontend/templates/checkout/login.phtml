@@ -28,8 +28,10 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= /* @noEscape */ $css('card') ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
-        <?= $block->getChildHtml('logged-in') ?>
+        <?= /* @noEscape */
+$block->getChildHtml('logged-in') ?>
     <?php else: ?>
-        <?= $block->getChildHtml('form') ?>
+        <?= /* @noEscape */
+$block->getChildHtml('form') ?>
     <?php endif; ?>
 </div>

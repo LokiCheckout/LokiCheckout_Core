@@ -40,5 +40,6 @@ $customerEmail = $escaper->escapeHtml($customerSession->getCustomer()->getEmail(
         </em>
     <?php endif; ?>
 
-    <?= $block->getChildHtml('logout') ?>
+    <?= /* @noEscape */
+$block->getChildHtml('logout') ?>
 </div>
