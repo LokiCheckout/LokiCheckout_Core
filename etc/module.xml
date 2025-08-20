@@ -20,6 +20,7 @@
             <module name="Yireo_CspUtilities"/>
             <module name="Yireo_HyvaThemeAutoRegistration"/>
             <module name="Yireo_IntegrationTestHelper"/>
+            <module name="Loki_CssUtils"/>
             <module name="Loki_Components"/>
             <module name="Loki_FieldComponents"/>
             <module name="Loki_MapComponents"/>

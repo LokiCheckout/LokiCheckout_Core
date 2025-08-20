@@ -29,6 +29,7 @@
     "magento/module-store": "^101.0",
     "magento/module-vault": "^101.0",
     "yireo/magento2-hyva-theme-auto-registration": "^1.0",
+    "loki/magento2-css-utils": "^1.0",
     "loki/magento2-components": "^2.0",
     "loki/magento2-field-components": "^2.0",
     "loki/magento2-map-components": "^0.1",
