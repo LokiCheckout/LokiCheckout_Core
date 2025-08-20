@@ -11,7 +11,7 @@ use Magento\Framework\View\Element\Template;
             ...LokiCheckoutComponentType,
             step: null,
             initScrollTo() {
-                if (!this.step) {
+                if (this.step !== Alpine.store('checkout').currentStep) {
                     this.step = Alpine.store('checkout').currentStep;
                     window.scrollTo(0, 0);
                 }
