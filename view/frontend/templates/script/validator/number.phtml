@@ -1,5 +1,11 @@
 <?php
 declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Escaper;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
 ?>
 <script>
     LokiComponentValidator.validators.number = function (component) {
