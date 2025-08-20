@@ -6,7 +6,7 @@ use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
 use Magento\Framework\View\Element\AbstractBlock;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Exception\BlockNotFoundException;
-use Loki\Components\Util\Block\CssStyleParser\CssStyleParserInterface;
+use Loki\CssUtils\Util\CssStyleParser\CssStyleParserInterface;
 
 class GridStyleParser implements CssStyleParserInterface
 {
