@@ -3,7 +3,7 @@
 namespace LokiCheckout\Core\Util\Block\CssClassParser;
 
 use Magento\Framework\View\Element\AbstractBlock;
-use Loki\Components\Util\Block\CssClassParser\CssClassParserInterface;
+use Loki\CssUtils\Util\CssClassParser\CssClassParserInterface;
 
 class GridClassParser implements CssClassParserInterface
 {

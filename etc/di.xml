@@ -177,7 +177,7 @@
         </arguments>
     </type>
 
-    <type name="Loki\Components\Util\Block\CssClass">
+    <type name="Loki\CssUtils\Util\CssClass">
         <arguments>
             <argument name="cssClassParsers" xsi:type="array">
                 <item name="grid-class" xsi:type="object">LokiCheckout\Core\Util\Block\CssClassParser\GridClassParser</item>
