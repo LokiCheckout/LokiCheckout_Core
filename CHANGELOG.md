@@ -6,6 +6,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.16] - 21 August 2025
+### Fixed
+- b Jump to top when switching steps
+- 8 Disable component-extender logic in XML layout because it is unfinished
+- 4 Move scripts from top of body to bottom of body
+- c Add dependency with loki/magento2-css-utils
+- 9 Refactor GridStyleParser to use new LokiCssUtilsUtilCssStyle
+- f Refactor GridClassParser to use new LokiCssUtilsUtilCssClass
+- 7 Re-ordering blocks
+- 7 Fix duplicate import
+- 7 Replace LokiComponentsUtilBlockCssClass with LokiCssUtilsUtilCssClass
+- f Fix newlines after comments
+- d Declare used PHP namespaces
+- a Add escaping of template code
+- e Document latest version of template
+- f Add missing strict_types declaration
+- 7 Add missing `$css()`
+
 ## [2.0.15] - 19 August 2025
 ### Fixed
 - Change heading from h3 to h2 because of SEO-purpose
