@@ -15,6 +15,7 @@ use Magento\Framework\View\Element\Template;
                 if (this.currentStep !== 'none') {
                     window.location.hash = this.currentStep;
                     Alpine.store('checkout').currentStep = this.currentStep;
+                    window.scrollTo(0, 0);
                 }
             },
             initHashChangeListener() {
