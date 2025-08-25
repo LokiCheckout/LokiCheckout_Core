@@ -18,7 +18,7 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 /** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('field required p-2') ?>">
+<div class="<?= /* @noEscape */ $css('field required') ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
