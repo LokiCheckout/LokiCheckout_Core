@@ -8,7 +8,7 @@ use Loki\Components\Validator\ValidatorInterface;
 class DobValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly int $minimumYears = 10
+        private readonly int $minimumYears = 18
     ) {
     }
 
