@@ -120,6 +120,7 @@
                 <item name="postcode" xsi:type="object">LokiCheckout\Core\Validator\Component\PostcodeFormatValidator</item>
                 <item name="gender" xsi:type="object">LokiCheckout\Core\Validator\Component\GenderValidator</item>
                 <item name="dob" xsi:type="object">LokiCheckout\Core\Validator\Component\DobValidator</item>
+                <item name="iban" xsi:type="object">LokiCheckout\Core\Validator\Component\IbanValidator</item>
                 <item name="options" xsi:type="object">LokiCheckout\Core\Validator\Component\OptionsValidator</item>
             </argument>
         </arguments>
