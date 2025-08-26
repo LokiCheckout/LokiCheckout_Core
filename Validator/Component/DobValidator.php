@@ -8,7 +8,7 @@ use Loki\Components\Validator\ValidatorInterface;
 class DobValidator implements ValidatorInterface
 {
     public function __construct(
-        private readonly int $minimumYears = 18
+        private readonly int $minimumAge = 10
     ) {
     }
 
@@ -19,16 +19,29 @@ class DobValidator implements ValidatorInterface
         }
 
         $dob = strtotime($value);
+        $minimumAge = $this->getMinimumAge($component);
 
         if ($dob > time()) {
-            return [__('You can not be from the future', $this->minimumYears)];
+            return [__('Please enter a valid date of birth', $minimumAge)];
         }
 
-        $minimumAge = $this->minimumYears * 365 * 24 * 60 * 60;
-        if (time() - $dob < $minimumAge) {
-            return [__('You need to be at least %1 years old', $this->minimumYears)];
+        $minimumAgeTimestamp = $minimumAge * 365 * 24 * 60 * 60;
+        if (time() - $dob < $minimumAgeTimestamp) {
+            return [__('You need to be at least %1 years old', $minimumAge)];
         }
 
         return true;
+    }
+
+    private function getMinimumAge(?ComponentInterface $component = null): int
+    {
+        if ($component instanceof ComponentInterface) {
+            $minimumAge = (int)$component->getBlock()->getMinimumAge();
+            if ($minimumAge > 0) {
+                return $minimumAge;
+            }
+        }
+
+        return $this->minimumAge;
     }
 }
