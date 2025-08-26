@@ -20,13 +20,13 @@ abstract class AdditionalInformationRepository extends FieldRepository
         $this->saveProperty((string)$value);
     }
 
-    protected function getPropertyName(): string
+    public function getPropertyName(): string
     {
         $parts = explode('.', $this->getComponentName());
         return end($parts);
     }
 
-    protected function getPropertyValue(mixed $defaultValue = null): mixed
+    public function getPropertyValue(mixed $defaultValue = null): mixed
     {
         $propertyName = $this->getPropertyName();
         $additionalInformation = $this->getAdditionalPaymentInformation();
@@ -44,12 +44,13 @@ abstract class AdditionalInformationRepository extends FieldRepository
 
         $additionalInformation = $quote->getPayment()->getAdditionalInformation();
         $additionalInformation[$propertyName] = $propertyValue;
+
         $quote->getPayment()->setAdditionalInformation($additionalInformation);
 
         $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
-    protected function getAdditionalPaymentInformation(): array
+    public function getAdditionalPaymentInformation(): array
     {
         return $this->getContext()->getCheckoutState()->getQuote()->getPayment()->getAdditionalInformation();
     }
