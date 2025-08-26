@@ -24,7 +24,7 @@ class IbanValidator implements ValidatorInterface
         }
 
         if (false === $this->validateIban($iban)) {
-            return [__('Your IBAN number does not have the right length')];
+            return [__('Your IBAN number is incorrect')];
         }
 
         return true;
