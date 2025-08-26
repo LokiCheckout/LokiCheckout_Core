@@ -22,7 +22,7 @@ class EmailAvailableValidator implements ValidatorInterface
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return ['Invalid email'];
+            return ['Invalid email address'];
         }
 
         // Mental note, this only triggers if `checkout/options/enable_guest_checkout_login` is enabled
