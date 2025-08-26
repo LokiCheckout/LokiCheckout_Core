@@ -15,14 +15,15 @@ php-8.3-linting:
   image: yireo/magento2base:8.3
   stage: basic
   script:
-    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.3 || exit
+    - cat .module.ini | grep PHP_VERSIONS | grep -q 8.3 || exit 0
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
 
 magento-unit-tests:
   image: yireo/magento2installed:2.4.8
   stage: basic
   script:
-    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.4 || exit 0
+    - cat .module.ini | grep PHP_VERSIONS | grep -q 8.4 || exit 0
+    - source .module.ini
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
@@ -40,7 +41,8 @@ magento-integration-tests:
   stage: advanced
   script:
     - test -d Test/Integration/ || exit 0
-    - source .module.ini && echo $PHP_VERSIONS | grep -q 8.4 || exit 0
+    - cat .module.ini | grep PHP_VERSIONS | grep -q 8.4 || exit 0
+    - source .module.ini
     - cd /tmp/magento
     - composer config gitlab-token.gitlab.yireo.com gitlab-ci-token $CI_JOB_TOKEN
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
