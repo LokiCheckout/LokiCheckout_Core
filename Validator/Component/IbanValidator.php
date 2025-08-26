@@ -13,7 +13,7 @@ class IbanValidator implements ValidatorInterface
             return true;
         }
 
-        $iban = strtoupper(preg_replace('/[^A-Z0-9]/', '', $value ?? ''));
+        $iban = strtoupper(preg_replace('/[^A-Z0-9]/', '', $value));
 
         if (!preg_match('/^([A-Z]{2})/', $iban)) {
             return [__('Your IBAN number needs to start with a country prefix')];
