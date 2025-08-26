@@ -39,7 +39,7 @@ class IbanValidatorTest extends TestCase
             ['GB82WEST12345698765432', true],
             ['DE44500105175407324931', true],
             ['NL91ABNA0417164300', true],
-            ['GB82WEST12345698765433', false, 'Your IBAN number does not have the right length'],
+            ['GB82WEST12345698765433', false, 'Your IBAN number is incorrect'],
         ];
     }
 }
