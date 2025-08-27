@@ -12,11 +12,6 @@ class CheckoutViewModel extends FieldViewModel
 {
     use StepViewModelBehaviour;
 
-    public function getFieldLabel(): string
-    {
-        return '';
-    }
-
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutComponent';

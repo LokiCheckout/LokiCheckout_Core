@@ -2,8 +2,8 @@
 
 namespace LokiCheckout\Core\Component\Base\Payment\AdditionalInformation;
 
-use Loki\Field\Component\Base\Field\FieldViewModel;
+use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
-abstract class AdditionalInformationViewModel extends FieldViewModel
+abstract class AdditionalInformationViewModel extends CheckoutViewModel
 {
 }

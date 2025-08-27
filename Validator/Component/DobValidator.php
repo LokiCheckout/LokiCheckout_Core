@@ -22,7 +22,7 @@ class DobValidator implements ValidatorInterface
         $minimumAge = $this->getMinimumAge($component);
 
         if ($dob > time()) {
-            return [__('Please enter a valid date of birth', $minimumAge)];
+            return [__('Please enter a valid date of birth')];
         }
 
         $minimumAgeTimestamp = $minimumAge * 365 * 24 * 60 * 60;
