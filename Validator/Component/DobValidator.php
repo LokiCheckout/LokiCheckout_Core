@@ -19,6 +19,10 @@ class DobValidator implements ValidatorInterface
         }
 
         $dob = strtotime($value);
+        if (false === $dob) {
+            return [__('Please enter a valid date')];
+        }
+
         $minimumAge = $this->getMinimumAge($component);
 
         if ($dob > time()) {
