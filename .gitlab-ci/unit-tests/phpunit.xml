@@ -5,19 +5,6 @@
          columns="max"
          beStrictAboutTestsThatDoNotTestAnything="false"
          bootstrap="./framework/bootstrap.php">
-    <coverage>
-        <include>
-            <directory suffix=".php">../../../vendor/loki-checkout/magento2-core/*</directory>
-        </include>
-        <exclude>
-            <directory>../../../vendor/loki-checkout/magento2-core/Test/*</directory>
-        </exclude>
-    </coverage>
-    <testsuites>
-        <testsuite name="LokiCheckout_Core">
-           <directory>../../../vendor/loki-checkout/magento2-core/Test/Unit</directory>
-        </testsuite>
-    </testsuites>
     <php>
         <includePath>.</includePath>
         <ini name="memory_limit" value="-1"/>

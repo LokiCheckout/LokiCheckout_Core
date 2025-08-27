@@ -1,4 +1,5 @@
 <?php // phpcs:ignoreFile
+declare(strict_types=1);
 
 use Yireo\IntegrationTestHelper\Utilities\DisableModules;
 use Yireo\IntegrationTestHelper\Utilities\InstallConfig;
@@ -8,15 +9,13 @@ $disableModules = (new DisableModules(__DIR__.'/../../../../'))
     ->enableMagento()
     ->disableByPattern('SampleData')
     ->disableByPattern('Magento_TestModule')
-    ->disableByPattern('Elasticsearch')
-    ->disableByPattern('Opensearch')
-    ->disableByPattern('Magento_TestModule')
     ->disableMagentoInventory()
     ->disableGraphQl()
     ->enableByMagentoModuleEnv();
 
 return (new InstallConfig())
     ->setDisableModules($disableModules)
-    ->addDb('mysql', 'magento2', 'root', 'root')
+    ->addDb('mysql', 'magento2', 'magento2', 'magento2')
     ->addRedis('redis')
+    ->addElasticSearch('opensearch', 'opensearch', 9200)
     ->get();
