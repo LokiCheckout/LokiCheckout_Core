@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.18] - 27 August 2025
+### Fixed
+- Add CI files
+- Throw validation error if dob is validated with non-sense value
+- Cleanup
+- Fix PHP check in Gitlab CI/CD
+
 ## [2.0.17] - 26 August 2025
 ### Fixed
 - Additional translations
