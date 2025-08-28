@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.19] - 28 August 2025
+### Fixed
+- Empty flag for "Save in addressbook" causes PHP type error (sometimes)
+- Set a maximum age for dob
+
 ## [2.0.18] - 27 August 2025
 ### Fixed
 - Add CI files
