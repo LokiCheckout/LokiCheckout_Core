@@ -36,7 +36,7 @@ class AddressFieldRepository extends FieldRepository
             return;
         }
 
-        $this->getAddressState()->save($this->getFieldName(), $value);
+        $this->getAddressState()->save($this->getFieldName(), (string)$value);
     }
 
     protected function getAddressState(): AddressStateInterface
