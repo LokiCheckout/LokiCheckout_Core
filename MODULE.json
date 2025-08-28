@@ -18,6 +18,7 @@
         "Yireo_CspUtilities",
         "Yireo_HyvaThemeAutoRegistration",
         "Yireo_IntegrationTestHelper",
+        "Loki_CssUtils",
         "Loki_Components",
         "Loki_FieldComponents",
         "Loki_MapComponents"
@@ -156,11 +157,21 @@
             "path": "loki_checkout\/billing\/select_default_payment_method",
             "label": "Billing settings > Select Default Payment Method",
             "description": "With this option enabled, the first payment method is automatically selected."
+        },
+        {
+            "path": "loki_checkout\/cart\/max_items_visible_count",
+            "label": "Cart settings > Maximum items visible",
+            "description": "This number determines how many products are shown in the sidebar. When there are more items, the entire list can be expanded."
+        },
+        {
+            "path": "loki_checkout\/newsletter\/default_value",
+            "label": "Newsletter settings > Subscribe by default",
+            "description": "With this option enabled, the customer is subscribed by default."
         }
     ],
     "tests": {
-        "unit": 15,
-        "integration": 142,
+        "unit": 16,
+        "integration": 146,
         "functional": 6
     }
 }
