@@ -1,11 +1,14 @@
 import {Field} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@loki/test';
+import coreConfig from '@loki/config';
 
 test.describe('Toggle regions test', function()  {
   test('should switch region field on country change', async function({page, context})  {
     await setupCheckout(page, context, {
+      ...coreConfig,
       config: {
+        ...coreConfig.config,
         'loki_checkout/fields/hide_region_when_optional': 0
       }
     });

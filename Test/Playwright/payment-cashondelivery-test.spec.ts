@@ -1,13 +1,14 @@
 import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
+import coreConfig from '@loki/config';
 
 test.describe('cashondelivery payment test', () => {
   test('should allow me to go to the success page', async ({page, context}) => {
     await setupCheckout(page, context, {
-      profile: 'netherlands',
+      ...coreConfig,
       config: {
-        'loki_checkout/general/theme': 'onestep',
+        ...coreConfig.config,
         'payment/cashondelivery/active': '1',
       }
     });
