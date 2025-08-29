@@ -92,7 +92,7 @@ class PaymentMethodsRepository extends ComponentRepository
     {
         foreach ($this->getPaymentMethods() as $paymentMethod) {
             if ($paymentMethod->getCode() === $code) {
-                return true;
+                return $paymentMethod->isAvailable();
             }
         }
 
