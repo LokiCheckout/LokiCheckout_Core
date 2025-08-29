@@ -52,6 +52,8 @@ class PaymentMethodsRepository extends ComponentRepository
 
         if ($value === '' || $value === '0') {
             $quote->setPaymentMethod($value);
+            $quote->getPayment()->setMethod('');
+            $quote->getPayment()->setAdditionalInformation([]);
             $this->getContext()->getCheckoutState()->saveQuote($quote);
             return;
         }
