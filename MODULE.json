@@ -17,7 +17,6 @@
         "Magento_Vault",
         "Yireo_CspUtilities",
         "Yireo_HyvaThemeAutoRegistration",
-        "Yireo_IntegrationTestHelper",
         "Loki_CssUtils",
         "Loki_Components",
         "Loki_FieldComponents",
