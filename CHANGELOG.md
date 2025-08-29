@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.20] - 29 August 2025
+### Fixed
+- Propertly clean payment method additional data if no longer available
+- Enhance check for active payment method with quote arg
+- Double-check that saved payment method is indeed available
+- Add recurring setup to check for modules to enable
+
 ## [2.0.19] - 28 August 2025
 ### Fixed
 - Empty flag for "Save in addressbook" causes PHP type error (sometimes)
