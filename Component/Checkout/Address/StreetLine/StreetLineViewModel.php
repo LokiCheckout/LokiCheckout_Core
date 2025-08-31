@@ -26,6 +26,15 @@ class StreetLineViewModel extends AddressFieldViewModel
         return parent::isRequired();
     }
 
+    public function showFieldLabel(): bool
+    {
+        if ($this->getFieldLabel() && $this->getIndex() > 0) {
+            return false;
+        }
+
+        return parent::showFieldLabel();
+    }
+
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
@@ -33,11 +42,7 @@ class StreetLineViewModel extends AddressFieldViewModel
             return $fieldLabel;
         }
 
-        if ($this->getIndex() > 0) {
-            return '';
-        }
-
-        return $this->getFieldName();
+        return ucfirst($this->getFieldName());
     }
 
     private function getIndex(): int
