@@ -27,6 +27,10 @@
     <update handle="loki_checkout_script"/>
     <update handle="loki_checkout_misc"/>
 
+    <head>
+        <meta name="description" content="Complete your order"/>
+    </head>
+
     <body>
         <referenceContainer name="content">
             <block name="loki-checkout" cacheable="false">
