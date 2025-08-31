@@ -32,13 +32,14 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
                 ]) ?>
 
                 <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
-                    <label for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
-                           class="<?= /* @noEscape */ $css('', 'label') ?>">
+                    <label
+                        for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
+                        class="<?= /* @noEscape */ $css('', 'label') ?>">
                         <button
                             type="button"
                             @click="toggleModal"
                             :disabled="isModalOpen">
-                            <?= /* @noEscape */ __($agreement->getCheckboxText()) ?>
+                            <?= $escaper->escapeHtml(__($agreement->getCheckboxText())) ?>
                         </button>
                     </label>
                 </div>
