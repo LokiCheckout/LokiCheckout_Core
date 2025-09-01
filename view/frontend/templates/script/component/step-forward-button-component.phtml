@@ -68,7 +68,7 @@ use Magento\Framework\View\Element\Template;
                     window.clearTimeout(this.reactivateTimer);
                 }
 
-                this.reactivateTimeer = window.setTimeout(() => {
+                this.reactivateTimer = window.setTimeout(() => {
                     this.valid = true;
                     this.disabled = false;
                 }, this.reactivateTimeout);
@@ -113,6 +113,11 @@ use Magento\Framework\View\Element\Template;
                 });
 
                 return false;
+            },
+            destroyReactivateTimer() {
+                if (this.reactivateTimer) {
+                    window.clearTimeout(this.reactivateTimer);
+                }
             }
         }));
     });
