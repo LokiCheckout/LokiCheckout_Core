@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.22] - 02 September 2025
+### Fixed
+- Fix bug in disappearing field labels for street1 or higher
+- Add StoreView scope to config parameters
+
 ## [2.0.21] - 02 September 2025
 ### Fixed
 - Change loki-checkout.payment.payment-methods to loki-checkout.payment.methods
