@@ -73,13 +73,13 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
             <div class="<?= /* @noEscape */ $css('', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= /* @noEscape */ $blockRenderer->html(
                     $block,
-                    'loki-checkout.payment.payment-methods.'.$code.'.form',
+                    'loki-checkout.payment.methods.'.$code.'.form',
                     ['method' => $code]
                 ) ?>
 
                 <?= /* @noEscape */ $blockRenderer->html(
                     $block,
-                    'loki-checkout.payment.payment-methods.'.$code.'.additional',
+                    'loki-checkout.payment.methods.'.$code.'.additional',
                     ['method' => $code]
                 ) ?>
 

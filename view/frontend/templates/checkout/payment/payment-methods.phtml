@@ -33,7 +33,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= /* @noEscape */ $blockRenderer->html(
                         $block,
-                        'loki-checkout.payment.payment-methods.item',
+                        'loki-checkout.payment.methods.item',
                         [
                             'method' => $paymentMethod,
                             'is_current' => $paymentMethod->getCode() === $viewModel->getValue(),

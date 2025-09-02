@@ -14,21 +14,21 @@
             </block>
 
             <block
-                name="loki-checkout.payment.payment-methods.item" as="item"
+                name="loki-checkout.payment.methods.item" as="item"
                 template="LokiCheckout_Core::checkout/payment/payment-methods/item.phtml"/>
         </block>
 
         <block
-            name="loki-checkout.payment.payment-methods.banktransfer.additional"
+            name="loki-checkout.payment.methods.banktransfer.additional"
             template="LokiCheckout_Core::checkout/payment/payment-method-additional/banktransfer.phtml">
         </block>
 
         <block
-            name="loki-checkout.payment.payment-methods.cashondelivery.additional"
+            name="loki-checkout.payment.methods.cashondelivery.additional"
             template="LokiCheckout_Core::checkout/payment/payment-method-additional/cashondelivery.phtml">
         </block>
 
-        <block name="loki-checkout.payment.payment-methods.checkmo.additional"
+        <block name="loki-checkout.payment.methods.checkmo.additional"
                template="LokiCheckout_Core::checkout/payment/payment-method-additional/checkmo.phtml">
         </block>
 
