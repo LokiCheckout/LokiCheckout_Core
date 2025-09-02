@@ -31,7 +31,7 @@ class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
     /**
      * @dataProvider getValues
      */
-    public function testValidateWithValues(string $postcode, string $countryId, true|string $expectedResult): void
+    public function testValidateWithValues(string $postcode, string $countryId, bool|string $expectedResult): void
     {
         $component = $this->getPostcodeComponent();
         $postcodeFormatValidator = $this->getPostcodeFormatValidator($countryId);
