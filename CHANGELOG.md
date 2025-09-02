@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.21] - 02 September 2025
+### Fixed
+- Change loki-checkout.payment.payment-methods to loki-checkout.payment.methods
+- Cleanup event listener for performance
+- Add translations
+- Add meta description
+- Do not allow HTML in agreements title
+- Always have a field label, but just hide it sometimes
+- Refactor Loki-library location in Playwright tests
+
 ## [2.0.20] - 29 August 2025
 ### Fixed
 - Propertly clean payment method additional data if no longer available
