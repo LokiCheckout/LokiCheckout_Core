@@ -40,6 +40,7 @@ class Config implements ArgumentInterface
 
         return (bool)$this->scopeConfig->getValue(
             'loki_checkout/general/enable',
+            ScopeInterface::SCOPE_STORE
         );
     }
 
