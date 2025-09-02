@@ -28,7 +28,7 @@ class StreetLineViewModel extends AddressFieldViewModel
 
     public function showFieldLabel(): bool
     {
-        if ($this->getFieldLabel() && $this->getIndex() > 0) {
+        if (strlen($this->getFieldLabel()) < 1 && $this->getIndex() > 0) {
             return false;
         }
 
@@ -38,7 +38,7 @@ class StreetLineViewModel extends AddressFieldViewModel
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
-        if ($fieldLabel !== '' && $fieldLabel !== '0') {
+        if (strlen($fieldLabel) > 0) {
             return $fieldLabel;
         }
 

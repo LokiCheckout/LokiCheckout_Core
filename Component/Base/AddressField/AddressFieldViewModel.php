@@ -36,7 +36,7 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
         }
 
         $fieldLabel = (string)$block->getFieldLabel();
-        if ($fieldLabel === '' || $fieldLabel === '0') {
+        if (strlen($fieldLabel) < 1) {
             return '';
         }
 
