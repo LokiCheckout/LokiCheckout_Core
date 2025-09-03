@@ -36,7 +36,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     use SaveShippingAddressValues;
 
     #[
-        ConfigFixture('carriers/flatrate/active', 1),
+        ConfigFixture('carriers/flatrate/active', 1, 'store', 'default'),
     ]
     public function testGetShippingMethodsWithFlatRate()
     {
@@ -51,8 +51,8 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
         DataFixture(ProductFixture::class, ['sku' => 'simple-product-001', 'price' => 0], as: 'product'),
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
-        ConfigFixture('carriers/freeshipping/active', 1, 'store'),
-        ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 50),
+        ConfigFixture('carriers/freeshipping/active', 1, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 50, 'store', 'default'),
     ]
     public function testGetShippingMethodsWithFreeShipping()
     {
@@ -65,7 +65,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     }
 
     #[
-        ConfigFixture('carriers/instore/active', 1, 'store'),
+        ConfigFixture('carriers/instore/active', 1, 'store', 'default'),
     ]
     // @todo: Not detected by Shipping::collectRates - is this replaced by MSI?
     public function testGetShippingMethodsWithInStoreShipping()
@@ -115,7 +115,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
 
     #[
         ConfigFixture('carriers/flatrate/active', 1),
-        ConfigFixture('loki_checkout/shipping/select_default_shipping_method', 1),
+        ConfigFixture('loki_checkout/shipping/select_default_shipping_method', 1, 'store', 'default'),
     ]
     public function testSaveValueWithDefaultShippingMethod()
     {
