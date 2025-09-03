@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\Config\XmlConfig\Value;
 
-use RuntimeException;
+use LokiCheckout\Core\Exception\GridNotFoundException;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
 
 class GridLayout
@@ -40,10 +40,23 @@ class GridLayout
         return $this->grids;
     }
 
+    /**
+     * @return array
+     */
+    public function getGridNames(): array
+    {
+        $gridNames = [];
+        foreach ($this->grids as $grid) {
+            $gridNames[] = $grid->getName();
+        }
+
+        return $gridNames;
+    }
+
     public function getGridByName(string $name): Grid
     {
         if (empty($name)) {
-            throw new RuntimeException('Grid not found');
+            throw new GridNotFoundException('Grid not found');
         }
 
         foreach ($this->grids as $grid) {
@@ -52,13 +65,13 @@ class GridLayout
             }
         }
 
-        throw new RuntimeException('Grid not found');
+        throw new GridNotFoundException('Grid not found');
     }
 
     public function getGridByCountryId(string $countryId): Grid
     {
         if (empty($countryId)) {
-            throw new RuntimeException('Grid not found');
+            throw new GridNotFoundException('Grid not found');
         }
 
         foreach ($this->grids as $grid) {
@@ -67,7 +80,7 @@ class GridLayout
             }
         }
 
-        throw new RuntimeException('Grid not found');
+        throw new GridNotFoundException('Grid not found');
     }
 
     public function getDefaultColSpan(): int

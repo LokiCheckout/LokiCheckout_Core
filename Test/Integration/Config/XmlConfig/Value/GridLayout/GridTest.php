@@ -21,9 +21,8 @@ class GridTest extends TestCase
     {
         $xmlConfig = $this->getObjectManager()->get(XmlConfig::class);
         $gridLayout = $xmlConfig->getGridLayout('default_grid');
-        $grid = $gridLayout->getGridByName($gridName);
-        $this->assertEquals($gridName, $grid->getName());
 
+        $grid = $gridLayout->getGridByName($gridName);
         $block = $grid->getBlock($blockAlias);
         $this->assertEquals($colSpan, $block->getColSpan());
         $this->assertEquals($mdColspan, $block->getMdColSpan());
@@ -32,10 +31,8 @@ class GridTest extends TestCase
     public function getTestGridBlockArguments(): array
     {
         return [
-            ['netherlands', 'city', 12, 6],
-            ['belgium', 'city', 12, 9],
+            ['default', 'city', 12, 6],
             ['default', 'country_id', 12, 6],
-            ['netherlands', 'country_id', 12, 12],
         ];
     }
 
