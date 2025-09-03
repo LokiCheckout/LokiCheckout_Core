@@ -21,28 +21,32 @@ class NewsletterRepository
     public function hasCustomerIdRecord(int $customerId): bool
     {
         $select = $this->getCustomerIdSelect($customerId);
-        return (bool)($this->getConnection()->fetchAll($select) > 0);
+        return (bool)count($this->getConnection()->fetchAll($select)) > 0;
     }
 
     public function isCustomerIdSubscribed(int $customerId): bool
     {
         $select = $this->getCustomerIdSelect($customerId);
+        $select->where('subscriber_status = 1');
+
         return (bool)$this->getConnection()->fetchOne($select);
     }
 
     public function hasGuestEmailRecord(string $email): bool
     {
         $select = $this->getGuestEmailSelect($email);
-        return (bool)($this->getConnection()->fetchAll($select) > 0);
+        return (bool)count($this->getConnection()->fetchAll($select)) > 0;
     }
 
     public function isGuestEmailSubscribed(string $email): bool
     {
-        if ($email === '' || $email === '0') {
+        if (empty($email)) {
             return false;
         }
 
         $select = $this->getGuestEmailSelect($email);
+        $select->where('subscriber_status = 1');
+
         return (bool)$this->getConnection()->fetchOne($select);
     }
 
@@ -53,7 +57,6 @@ class NewsletterRepository
             ->from($this->resourceConnection->getTableName('newsletter_subscriber'))
             ->where('store_id IN (?)', $this->getStoreIds())
             ->where('customer_id = '.$customerId)
-            ->where('subscriber_status = 1')
             ->limit(1);
     }
 
@@ -65,8 +68,19 @@ class NewsletterRepository
             ->where('subscriber_email = ?', $email)
             ->where('store_id IN (?)', $this->getStoreIds())
             ->where('customer_id = 0')
-            ->where('subscriber_status = 1')
             ->limit(1);
+    }
+
+    public function getConfirmationCode(string $email): string
+    {
+        $select = $this->getConnection()
+            ->select()
+            ->from($this->resourceConnection->getTableName('newsletter_subscriber'), 'subscriber_confirm_code')
+            ->where('subscriber_email = ?', $email)
+            ->where('store_id IN (?)', $this->getStoreIds())
+            ->limit(1);
+
+        return (string)$this->getConnection()->fetchOne($select);
     }
 
     /**
