@@ -54,7 +54,7 @@ class CustomerDobValidationTest extends LokiCheckoutTestCase
     public function getTestData(): array
     {
         return [
-            ['', false, ['Value is required']],
+            ['', false, ['Please enter a valid date']],
             ['foobar', false, ['Invalid date format']],
             ['1978-01-02', true, []],
             [((int)date('Y') - 1) . '-01-02', false, ['You need to be at least 10 years old']],
