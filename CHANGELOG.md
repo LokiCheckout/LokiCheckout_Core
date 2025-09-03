@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.23] - 03 September 2025
+### Fixed
+- Make sure to add grid styles to relevant grid block
+- PHP 8.1 fix
+- Copy generic CI/CD files
+
 ## [2.0.22] - 02 September 2025
 ### Fixed
 - Fix bug in disappearing field labels for street1 or higher
