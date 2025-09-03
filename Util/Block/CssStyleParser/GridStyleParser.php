@@ -17,6 +17,15 @@ class GridStyleParser implements CssStyleParserInterface
 
     public function parse(array $cssStyles, AbstractBlock $block): array
     {
+        $parentBlock = $block->getParentBlock();
+        if (false === $parentBlock instanceof AbstractBlock) {
+            return $cssStyles;
+        }
+
+        if (true !== $parentBlock->getGrid()) {
+            return $cssStyles;
+        }
+
         $blockDefinition = $this->getBlockDefinitionByBlock($block);
         if (false === $blockDefinition instanceof Block) {
             $cssStyles['--loki-order'] = $this->config->getGridLayout()->getDefaultSortOrder();
