@@ -13,7 +13,7 @@ class NewsletterRepository extends FieldRepository
     public function getValue(): mixed
     {
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if ($email === '' || $email === '0') {
+        if (strlen($email) < 1) {
             return false;
         }
 
