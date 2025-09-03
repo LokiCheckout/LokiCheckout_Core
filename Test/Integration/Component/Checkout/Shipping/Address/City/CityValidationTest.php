@@ -2,7 +2,9 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\City;
 
+use Loki\Components\Util\MagentoVersion;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
@@ -38,8 +40,14 @@ class CityValidationTest extends LokiCheckoutPageTestCase
         return [
             ['', false, ['Value is required']],
             ['Sin City', true, []],
-            ['Sin City #', true, ['Invalid City']],
-            ['Sin City 2', true, ['Invalid City']],
+            ['Sin City #', $this->hasCityValidationFix(), ['Invalid City']],
+            ['Sin City 2', $this->hasCityValidationFix(), ['Invalid City']],
         ];
+    }
+
+    private function hasCityValidationFix(): bool
+    {
+        $magentoVersion = ObjectManager::getInstance()->get(MagentoVersion::class);
+        return $magentoVersion->isMagentoVersion('2.4.8-p2', 'ge') || $magentoVersion->isMageOSVersion('1.3.0', 'ge');
     }
 }
