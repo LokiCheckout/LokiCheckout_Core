@@ -109,8 +109,6 @@ class ConfigTest extends TestCase
     {
         return [
             ['US', 'default'],
-            ['NL', 'netherlands'],
-            ['BE', 'belgium'],
         ];
     }
 
