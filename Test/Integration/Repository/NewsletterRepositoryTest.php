@@ -4,31 +4,41 @@ declare(strict_types=1);
 namespace LokiCheckout\Core\Test\Integration\Repository;
 
 use LokiCheckout\Core\Repository\NewsletterRepository;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
+use Magento\TestFramework\Annotation\ConfigFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use PHPUnit\Framework\TestCase;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
 
-#[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
-#[AppArea('frontend')]
+#[
+    ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default'),
+    DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),
+    AppArea('frontend')
+]
 class NewsletterRepositoryTest extends TestCase
 {
     public function testsWithCustomerId()
     {
+        $customerRepository = ObjectManager::getInstance()->get(CustomerRepositoryInterface::class);
+        $customer = $customerRepository->get('info@example.com');
+        $customerId = (int)$customer->getId();
+
+        /** @var NewsletterRepository $newsletterRepository */
         $newsletterRepository = ObjectManager::getInstance()->get(NewsletterRepository::class);
-        $this->assertFalse($newsletterRepository->hasCustomerIdRecord(1));
-        $this->assertFalse($newsletterRepository->isCustomerIdSubscribed(1));
+        $this->assertFalse($newsletterRepository->hasCustomerIdRecord($customerId));
+        $this->assertFalse($newsletterRepository->isCustomerIdSubscribed($customerId));
 
         $subscriptionManager = ObjectManager::getInstance()->get(SubscriptionManagerInterface::class);
-        $subscriptionManager->subscribeCustomer(1, 1);
-        $this->assertTrue($newsletterRepository->hasCustomerIdRecord(1));
-        $this->assertTrue($newsletterRepository->isCustomerIdSubscribed(1));
+        $subscriptionManager->subscribeCustomer($customerId, 1);
+        $this->assertTrue($newsletterRepository->hasCustomerIdRecord($customerId));
+        $this->assertTrue($newsletterRepository->isCustomerIdSubscribed($customerId));
 
-        $subscriptionManager->unsubscribeCustomer(1, 1);
-        $this->assertTrue($newsletterRepository->hasCustomerIdRecord(1));
-        $this->assertFalse($newsletterRepository->isCustomerIdSubscribed(1));
+        $subscriptionManager->unsubscribeCustomer($customerId, 1);
+        $this->assertTrue($newsletterRepository->hasCustomerIdRecord($customerId));
+        $this->assertFalse($newsletterRepository->isCustomerIdSubscribed($customerId));
     }
 
     public function testsWithGuestEmail()
@@ -42,7 +52,9 @@ class NewsletterRepositoryTest extends TestCase
         $subscriptionManager->subscribe($email, 1);
         $this->assertTrue($newsletterRepository->hasGuestEmailRecord($email));
 
-        $subscriptionManager->unsubscribe($email, 1, '');
+        $confirmationCode = $newsletterRepository->getConfirmationCode($email);
+        $subscriptionManager->unsubscribe($email, 1, $confirmationCode);
+
         $this->assertTrue($newsletterRepository->hasGuestEmailRecord($email));
         $this->assertFalse($newsletterRepository->isGuestEmailSubscribed($email));
     }
