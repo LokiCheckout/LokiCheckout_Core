@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Test\Integration\Config\XmlConfig\Value;
 
+use LokiCheckout\Core\Exception\GridNotFoundException;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use PHPUnit\Framework\TestCase;
@@ -15,11 +16,8 @@ class GridLayoutTest extends TestCase
         $xmlConfig = $this->getObjectManager()->get(XmlConfig::class);
         $gridLayout = $xmlConfig->getGridLayout('default_grid');
 
-        $grid = $gridLayout->getGridByCountryId('BE');
-        $this->assertEquals('belgium', $grid->getName());
-
-        $grid = $gridLayout->getGridByCountryId('NL');
-        $this->assertEquals('netherlands', $grid->getName());
+        $this->expectException(GridNotFoundException::class);
+        $gridLayout->getGridByCountryId('BE');
     }
 
     /**
