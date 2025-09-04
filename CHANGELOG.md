@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.24] - 04 September 2025
+### Fixed
+- Allow overriding propertyName in AdditionalInformationRepository
+- Fix integration tests
+- Improve logic for detecting existing newsletter subcribers
+
 ## [2.0.23] - 03 September 2025
 ### Fixed
 - Make sure to add grid styles to relevant grid block
