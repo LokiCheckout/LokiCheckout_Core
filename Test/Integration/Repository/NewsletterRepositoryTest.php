@@ -7,7 +7,7 @@ use LokiCheckout\Core\Repository\NewsletterRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Newsletter\Model\SubscriptionManagerInterface;
-use Magento\TestFramework\Annotation\ConfigFixture;
+use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use PHPUnit\Framework\TestCase;
