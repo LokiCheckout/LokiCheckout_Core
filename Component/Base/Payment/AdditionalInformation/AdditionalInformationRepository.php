@@ -26,9 +26,12 @@ abstract class AdditionalInformationRepository extends FieldRepository
         return end($parts);
     }
 
-    public function getPropertyValue(mixed $defaultValue = null): mixed
+    public function getPropertyValue(mixed $defaultValue = null, ?string $propertyName = null): mixed
     {
-        $propertyName = $this->getPropertyName();
+        if ($propertyName === null) {
+            $propertyName = $this->getPropertyName();
+        }
+
         $additionalInformation = $this->getAdditionalPaymentInformation();
         if (array_key_exists($propertyName, $additionalInformation)) {
             return $additionalInformation[$propertyName];
@@ -37,9 +40,12 @@ abstract class AdditionalInformationRepository extends FieldRepository
         return $defaultValue;
     }
 
-    protected function saveProperty(mixed $propertyValue): void
+    protected function saveProperty(mixed $propertyValue, ?string $propertyName = null): void
     {
-        $propertyName = $this->getPropertyName();
+        if ($propertyName === null) {
+            $propertyName = $this->getPropertyName();
+        }
+
         $quote = $this->getContext()->getCheckoutState()->getQuote();
 
         $additionalInformation = $quote->getPayment()->getAdditionalInformation();
