@@ -9,13 +9,14 @@
         }
     }
 
-    .scope-tab-buttons {
+    .tab-buttons {
         .tab {
             @apply rounded-lg p-1 border-2;
         }
 
+        /* @todo: Replace colors with bg-primary */
         .tab-active {
-            @apply border-amber-700 bg-amber-500 hover:bg-amber-700 text-white;
+            @apply border-blue-700 bg-blue-500 hover:bg-blue-700 text-white;
         }
 
         .tab-inactive {

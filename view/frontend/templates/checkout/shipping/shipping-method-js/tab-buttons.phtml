@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CssClass $css */
+
+$buttons = (array)$block->getButtons();
+?>
+<div class="<?= /* @noEscape */ $css('tab-buttons grid grid-cols-2 gap-4 mb-4') ?>">
+    <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
+        <button
+            @click="toggleTabs"
+            data-tab-id="<?= /* @noEscape */ $buttonId ?>"
+            class="<?= /* @noEscape */ $css('tab-inactive p-4', 'button') ?>"
+        >
+            <?= $escaper->escapeHtml(__($buttonLabel)); ?>
+        </button>
+    <?php endforeach; ?>
+</div>
+
