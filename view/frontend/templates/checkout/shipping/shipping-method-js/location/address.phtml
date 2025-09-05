@@ -4,19 +4,10 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Loki\Components\Location\Location;
 
 /** @version 2.0.24 */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
-/** @var Location $location */
-
-$location = $block->getLocation();
-$address = $location->getAddress();
 ?>
-<address class="<?= /* @noEscape */ $css('mb-4') ?>">
-    <?= $escaper->escapeHtml($address->getStreet()) ?> <?= $escaper->escapeHtml($address->getHouseNumber()) ?>,
-    <?= $escaper->escapeHtml($address->getPostcode()) ?> <?= $escaper->escapeHtml($address->getCity()) ?>,
-    <?= $escaper->escapeHtml($address->getCountryId()) ?>
-</address>
+<address class="<?= /* @noEscape */ $css('mb-4') ?>" x-html="location.addressHtml"></address>

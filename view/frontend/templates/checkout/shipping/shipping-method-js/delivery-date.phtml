@@ -1,28 +1,25 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate;
 use Loki\Components\Util\Block\ChildRenderer;
 
 /** @version 2.0.24 */
 /** @var Template $block */
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
-/** @var DeliveryDate $deliveryDate */
+/** @var BlockRenderer $blockRenderer */
 
-$deliveryDate = $block->getDeliveryDate();
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
-<details class="<?= /* @noEscape */ $css('my-4') ?>" open>
-    <summary class="<?= /* @noEscape */ $css('font-bold cursor-pointer', 'summary') ?>">
-        <?= $escaper->escapeHtml($deliveryDate->getDate()) ?>
-    </summary>
-    <div class="<?= /* @noEscape */ $css('mb-4', 'content') ?>">
-        <?= /* @noEscape */ $childRenderer->html($block, 'timeframes', [
-            'timeframes' => $deliveryDate->getTimeframes(),
-        ]) ?>
-    </div>
-</details>
+<div class="<?= /* @noEscape */ $css('mb-4') ?>">
+    <div class="uppercase font-bold mb-4" x-date="deliveryDay.date"></div>
+
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date.timeframes') ?>
+</div>

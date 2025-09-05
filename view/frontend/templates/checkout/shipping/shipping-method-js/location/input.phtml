@@ -8,15 +8,13 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
-    <input
-        type="radio"
-        name="pickup_location"
-        :checked="value"
-        :disabled="disabled"
-        :value="location.id"
-        :id="location.id"
-        @change="submitChecked"
-        class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
-    />
-</div>
+<input
+    type="radio"
+    name="pickup_location"
+    @change="saveLocation"
+    :disabled="disabled"
+    :id="location.id"
+    :value="location.id"
+    :checked="location.current"
+    class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
+/>

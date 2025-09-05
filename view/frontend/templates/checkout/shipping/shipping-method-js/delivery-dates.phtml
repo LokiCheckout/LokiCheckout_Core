@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Loki\Field\ViewModel\ImageOutput;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate;
 use Loki\Components\Util\Block\ChildRenderer;
 
 /** @version 2.0.24 */
@@ -12,18 +14,33 @@ use Loki\Components\Util\Block\ChildRenderer;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
-/** @var DeliveryDate[] $deliveryDates */
+/** @var BlockRenderer $blockRenderer */
+/** @var ViewModelFactory $viewModelFactory */
 
-$deliveryDates = $block->getDeliveryDates();
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
+$tabId = $block->getTabId();
 ?>
-<div class="<?= /* @noEscape */ $css('py-4') ?>">
-    <?php if (empty($deliveryDates)): ?>
-        <div class="<?= /* @noEscape */ $css('', 'empty') ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
-    <?php else: ?>
-        <?php foreach ($deliveryDates as $deliveryDate): ?>
-            <?= /* @noEscape */ $childRenderer->html($block, 'delivery-date', [
-                'delivery_date' => $deliveryDate,
-            ]) ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
+<div data-tab-content="<?= $tabId ?>" class="<?= /* @noEscape */ $css('hidden', 'timeframes-container') ?>">
+    <div x-show="showLoader" :aria-busy="showLoader"
+         class="<?= /* @noEscape */ $css('absolute top-0 left-0 right-0 bottom-0', 'loader') ?>">
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    </div>
+
+    <div>
+        <div x-cloak x-show="hasNoDeliveries" class="<?= /* @noEscape */ $css('p-2', 'empty') ?>">
+            <?= $escaper->escapeHtml(__('No delivery options found')) ?>
+        </div>
+
+        <template x-for="deliveryDay in getVisibleDeliveryDays" :key="deliveryDay.date">
+            <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date') ?>
+        </template>
+
+        <div @click="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
+            <div class="inline-block w-4">
+                <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/angle-down.svg') ?>
+            </div>
+            <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
+        </div>
+    </div>
 </div>

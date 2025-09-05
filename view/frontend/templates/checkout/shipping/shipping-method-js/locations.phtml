@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -12,22 +14,33 @@ use Loki\Field\ViewModel\ImageOutput;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
+/** @var BlockRenderer $blockRenderer */
+/** @var ViewModelFactory $viewModelFactory */
 /** @var ImageOutput $imageOutput */
+
+$imageOutput = $viewModelFactory->create(ImageOutput::class);
+$tabId = $block->getTabId();
 ?>
-<div>
-    <template x-if="hasNoLocations">
-        <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
-    </template>
+<div data-tab-content="<?= $tabId ?>" class="<?= /* @noEscape */ $css('hidden relative', 'locations-container') ?>">
+    <div x-show="showLoader" :aria-busy="showLoader"
+         class="<?= /* @noEscape */ $css('absolute top-0 left-0 right-0 bottom-0', 'loader') ?>">
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    </div>
 
-    <template x-for="location in locations">
-        <div class="flex mb-8 p-4 hover:bg-black/5">
-            <label x-bind:for="location.id" class="cursor-pointer flex-1">
-            </label>
+    <div>
+        <template x-if="hasNoLocations">
+            <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+        </template>
+
+        <template x-for="location in getVisibleLocations" :key="location.id">
+            <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.location') ?>
+        </template>
+
+        <div @click="expandLocations" x-cloak x-show="showExpandLocations">
+            <div class="inline-block w-4">
+                <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/angle-down.svg') ?>
+            </div>
+            <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>
-    </template>
-
-    <div @click="expandLocations">
-        <div class="inline-block w-4"><?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/angle-down.svg') ?></div>
-        <span class="text-sm"><?= $escaper->escapeHtml(__('Show more locations')) ?></span>
     </div>
 </div>

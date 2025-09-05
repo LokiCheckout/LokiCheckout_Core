@@ -1,33 +1,15 @@
 <?php
 declare(strict_types=1);
 
-use Loki\CssUtils\Util\CssClass;
+use Loki\Components\Util\Block\BlockRenderer;
 use Magento\Framework\Escaper;
-
-/** @var Template $block */
-/** @var CssClass $css */
-/** @var Escaper $escaper */
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate\Timeframe;
-use Loki\Components\Util\Block\ChildRenderer;
 
 /** @version 2.0.24 */
-/**
- * @var Template $block
- * @var ChildRenderer $childRenderer
- * @var CssClass $css
- * @var Timeframe[] $timeframes
- */
-$timeframes = $block->getTimeframes();
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
-    <?php if (empty($timeframes)): ?>
-        <span><?= $escaper->escapeHtml(__('No timeframes found')) ?></span>
-    <?php else: ?>
-        <?php foreach ($timeframes as $timeframe): ?>
-            <?= /* @noEscape */ $childRenderer->html($block, 'timeframe', [
-                'timeframe' => $timeframe,
-            ]) ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
-</div>
+<template x-for="timeframe in deliveryDay.timeframes">
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date.timeframe') ?>
+</template>
