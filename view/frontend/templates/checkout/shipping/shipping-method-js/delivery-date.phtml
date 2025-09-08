@@ -19,7 +19,7 @@ use Loki\Components\Util\Block\ChildRenderer;
 $blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 ?>
 <div class="<?= /* @noEscape */ $css('mb-4') ?>">
-    <div class="uppercase font-bold mb-4" x-date="deliveryDay.date"></div>
+    <div class="uppercase font-bold mb-4" x-date="deliveryDate.date"></div>
 
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date.timeframes') ?>
 </div>

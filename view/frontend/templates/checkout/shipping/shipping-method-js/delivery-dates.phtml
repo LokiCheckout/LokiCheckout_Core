@@ -28,11 +28,11 @@ $tabId = $block->getTabId();
     </div>
 
     <div>
-        <div x-cloak x-show="hasNoDeliveries" class="<?= /* @noEscape */ $css('p-2', 'empty') ?>">
+        <div x-cloak x-show="hasNoDeliveryDates" class="<?= /* @noEscape */ $css('p-2', 'empty') ?>">
             <?= $escaper->escapeHtml(__('No delivery options found')) ?>
         </div>
 
-        <template x-for="deliveryDay in getVisibleDeliveryDays" :key="deliveryDay.date">
+        <template x-for="deliveryDate in getVisibleDeliveryDates" :key="deliveryDate.date">
             <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date') ?>
         </template>
 
