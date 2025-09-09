@@ -143,7 +143,7 @@
         },
         {
             "path": "loki_checkout/general/grid_layout",
-            "label": "General > Grid Layout",
+            "label": "General > Address Grid Layout",
             "description": " All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid\nLayout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
         },
         {

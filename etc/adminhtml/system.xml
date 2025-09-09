@@ -43,7 +43,7 @@
                        showInDefault="1"
                        showInWebsite="1"
                        showInStore="0">
-                    <label>Grid Layout</label>
+                    <label>Address Grid Layout</label>
                     <tooltip><![CDATA[ All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
 Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.]]></tooltip>
                     <source_model>LokiCheckout\Core\Config\Source\GridLayoutOptions</source_model>
