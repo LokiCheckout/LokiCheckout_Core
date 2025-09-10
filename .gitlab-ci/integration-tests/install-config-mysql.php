@@ -10,12 +10,11 @@ $disableModules = (new DisableModules(__DIR__.'/../../../../'))
     ->disableByPattern('SampleData')
     ->disableByPattern('Magento_TestModule')
     ->disableMagentoInventory()
-    ->disableGraphQl()
-    ->enableByMagentoModuleEnv();
+    ->disableGraphQl();
 
 return (new InstallConfig())
     ->setDisableModules($disableModules)
     ->addDb('mysql', 'magento2', 'magento2', 'magento2')
     ->addRedis('redis')
-    ->addElasticSearch('opensearch', 'opensearch', 9200)
+    ->addSearchEngine('opensearch', 'opensearch', 9200)
     ->get();

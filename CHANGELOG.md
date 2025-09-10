@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.25] - 10 September 2025
+### Fixed
+- Remove minicart
+- Change label of grid_layout to Address Grid Layout
+- Add escaping
+- Update MODULE.json with PHPCS severity 9
+- Reorganize scripts and Alpine.data
+- Add PHPStan levels
+- Divide shipping JS templates into small templates
+- Create generic PHTML template for tab-buttons
+
 ## [2.0.24] - 04 September 2025
 ### Fixed
 - Allow overriding propertyName in AdditionalInformationRepository
