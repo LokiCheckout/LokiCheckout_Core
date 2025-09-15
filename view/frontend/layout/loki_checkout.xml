@@ -32,6 +32,8 @@
     </head>
 
     <body>
+        <referenceContainer name="page.messages" remove="false"/>
+
         <referenceContainer name="content">
             <block name="loki-checkout" cacheable="false">
                 <block name="loki-checkout.steps" as="steps"/>

@@ -19,6 +19,7 @@
             <module name="Magento_Vault"/>
             <module name="Yireo_CspUtilities"/>
             <module name="Yireo_HyvaThemeAutoRegistration"/>
+            <module name="Loki_Base"/>
             <module name="Loki_CssUtils"/>
             <module name="Loki_Components"/>
             <module name="Loki_FieldComponents"/>
