@@ -8,7 +8,7 @@
             <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
 
             <block
-                name="loki-checkout.shipping.shipping-methods.title" as="title"
+                name="loki-checkout.shipping.methods.title" as="title"
                 template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
                     <argument name="title" xsi:type="string" translate="true">Shipping Methods</argument>
@@ -16,7 +16,7 @@
             </block>
 
             <block
-                name="loki-checkout.shipping.shipping-methods.item" as="item"
+                name="loki-checkout.shipping.methods.item" as="item"
                 template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
         </block>
     </body>

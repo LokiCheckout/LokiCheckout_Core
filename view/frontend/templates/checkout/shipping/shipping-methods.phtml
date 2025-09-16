@@ -43,7 +43,7 @@ $shippingMethods = $viewModel->getShippingMethods();
                     <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
                     <?= /* @noEscape */ $blockRenderer->html(
                         $block,
-                        'loki-checkout.shipping.shipping-methods.item',
+                        'loki-checkout.shipping.methods.item',
                         [
                             'method' => $shippingMethod,
                             'code' => $code,
