@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.26] - 16 September 2025
+### Fixed
+- Rename shipping.shipping-methods to shipping.methods
+- Move page messages to fixed position in Luma
+- Add deps
+
 ## [2.0.25] - 10 September 2025
 ### Fixed
 - Remove minicart
