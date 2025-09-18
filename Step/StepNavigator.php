@@ -44,6 +44,12 @@ class StepNavigator implements ArgumentInterface
         }
 
         /*
+        if (false === $this->currentStep->isEnabled() || false === $this->currentStep->isAccessable()) {
+            $this->currentStep = $this->getFirstStep();
+        }
+        */
+
+        /*
         // @tood: When should this be used?
         $result = $this->currentStep->validate();
         if (is_array($result)) {
@@ -241,6 +247,10 @@ class StepNavigator implements ArgumentInterface
     public function getSteps(): array
     {
         $steps = $this->getUnsortedSteps();
+
+        $steps = array_filter($steps, function (StepViewModelInterface $step) {
+            return $step->isEnabled();
+        });
 
         usort($steps, function (StepViewModelInterface $stepA, StepViewModelInterface $stepB) {
             if (false === $stepA->hasBlock() || false === $stepB->hasBlock()) {
