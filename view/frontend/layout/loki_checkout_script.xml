@@ -50,7 +50,7 @@
                     template="LokiCheckout_Core::script/component-type/apple-pay-component-type.phtml"/>
             </referenceContainer>
 
-            <referenceContainer name="loki-components">
+            <referenceContainer name="loki.components">
                 <block
                     name="loki-checkout.script.components.checkout-component"
                     template="LokiCheckout_Core::script/component/checkout-component.phtml"/>

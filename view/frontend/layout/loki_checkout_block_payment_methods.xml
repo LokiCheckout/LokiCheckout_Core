@@ -32,7 +32,7 @@
                template="LokiCheckout_Core::checkout/payment/payment-method-additional/checkmo.phtml">
         </block>
 
-        <referenceContainer name="loki-components">
+        <referenceContainer name="loki.components">
             <block name="loki-checkout.script.components.payment-methods-component"
                    template="LokiCheckout_Core::script/component/payment-methods-component.phtml"/>
         </referenceContainer>
