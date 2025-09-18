@@ -18,12 +18,7 @@
             <block
                 name="loki-checkout.script.aria-invalid"
                 template="LokiCheckout_Core::script/aria-invalid.phtml"/>
-            <block
-                name="loki-checkout.script.directive-date"
-                template="LokiCheckout_Core::script/directive-date.phtml"/>
-            <block
-                name="loki-checkout.script.directive-money"
-                template="LokiCheckout_Core::script/directive-money.phtml"/>
+
             <block
                 name="loki-checkout.script.validators.email"
                 template="LokiCheckout_Core::script/validator/email.phtml"/>
@@ -91,6 +86,16 @@
                     name="loki-checkout.script.components.grid-layout-component"
                     template="LokiCheckout_Core::script/component/grid-layout-component.phtml"/>
             </referenceContainer>
+        </referenceContainer>
+
+        <referenceContainer name="loki.script.directive">
+            <block
+                name="loki-checkout.script.directive.date"
+                template="LokiCheckout_Core::script/directive-date.phtml"/>
+
+            <block
+                name="loki-checkout.script.directive.money"
+                template="LokiCheckout_Core::script/directive-money.phtml"/>
         </referenceContainer>
     </body>
 </page>
