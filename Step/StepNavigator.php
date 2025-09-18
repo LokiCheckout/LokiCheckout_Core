@@ -32,22 +32,22 @@ class StepNavigator implements ArgumentInterface
 
     public function getCurrentStep(): StepViewModelInterface
     {
-        if (false === $this->currentStep instanceof StepViewModelInterface) {
-            try {
-                $this->setCurrentStepByCode($this->getRequestedStep());
-            } catch (UnknownStepException $unknownStepException) {
+        if ($this->currentStep instanceof StepViewModelInterface) {
+            return $this->currentStep;
+        }
+
+        $requestedStepCode = $this->getRequestedStep();
+        $requestedStep = $this->getStepByCode($requestedStepCode);
+        if ($requestedStep->isEnabled() && $requestedStep->isAccessable()) {
+            $this->currentStep = $requestedStep;
+            return $this->currentStep;
+        }
+
+        foreach ($this->getSteps() as $step) {
+            if ($step->isEnabled() && $step->isAccessable()) {
+                return $step;
             }
         }
-
-        if (false === $this->currentStep instanceof StepViewModelInterface) {
-            $this->currentStep = $this->getFirstStep();
-        }
-
-        /*
-        if (false === $this->currentStep->isEnabled() || false === $this->currentStep->isAccessable()) {
-            $this->currentStep = $this->getFirstStep();
-        }
-        */
 
         /*
         // @tood: When should this be used?
@@ -59,7 +59,7 @@ class StepNavigator implements ArgumentInterface
         }
         */
 
-        return $this->currentStep;
+        throw new UnknownStepException('Requested step "'.$requestedStepCode.'" leads to no usable step');
     }
 
     private function getRequestedStep(): string
@@ -79,6 +79,10 @@ class StepNavigator implements ArgumentInterface
      */
     public function setCurrentStep(StepViewModelInterface $step): void
     {
+        if (false === $step->isEnabled() || false === $step->isAccessable()) {
+            return;
+        }
+
         $this->currentStep = $step;
         $this->checkoutSession->setCurrentStep($step->getCode());
     }
@@ -90,7 +94,8 @@ class StepNavigator implements ArgumentInterface
      */
     public function setCurrentStepByCode(string $stepCode): void
     {
-        $this->setCurrentStep($this->getStepByCode($stepCode));
+        $step = $this->getStepByCode($stepCode);
+        $this->setCurrentStep($step);
     }
 
     public function setPreviousStep(): void
@@ -247,10 +252,6 @@ class StepNavigator implements ArgumentInterface
     public function getSteps(): array
     {
         $steps = $this->getUnsortedSteps();
-
-        $steps = array_filter($steps, function (StepViewModelInterface $step) {
-            return $step->isEnabled();
-        });
 
         usort($steps, function (StepViewModelInterface $stepA, StepViewModelInterface $stepB) {
             if (false === $stepA->hasBlock() || false === $stepB->hasBlock()) {

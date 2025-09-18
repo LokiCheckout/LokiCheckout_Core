@@ -27,15 +27,12 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
 
     public function isEnabled(): bool
     {
-        // @todo: Return false if only free products
-
         return true;
     }
 
     public function isAccessable(): bool
     {
-        // @todo: Move this logic to step navigator itself
-        return $this->getContext()->getStepNavigator()->isCurrentStep($this);
+        return true;
     }
 
     public function isVisible(): bool
