@@ -35,7 +35,7 @@
                     template="LokiCheckout_Core::script/component-partial/apple-pay-component-partial.phtml"/>
             </referenceContainer>
 
-            <referenceContainer name="loki-component-types">
+            <referenceContainer name="loki.script.component-type">
                 <block
                     name="loki-checkout.script.component-type.checkout"
                     template="LokiCheckout_Core::script/component-type/checkout-component-type.phtml"/>
