@@ -7,6 +7,9 @@
                 after="loki-components.script.logger"
                 template="LokiCheckout_Core::script/logger.phtml"/>
             <block
+                name="loki-checkout.script.checkout-config"
+                template="LokiCheckout_Core::script/checkout-config.phtml"/>
+            <block
                 name="loki-checkout.script.checkout-store"
                 template="LokiCheckout_Core::script/checkout-store.phtml"/>
             <!--<block
