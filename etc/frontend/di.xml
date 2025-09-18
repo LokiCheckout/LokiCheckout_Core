@@ -23,4 +23,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="loki-checkout" xsi:type="string">LokiCheckout\Core\CustomerData\Checkout</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
