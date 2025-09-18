@@ -243,6 +243,10 @@ class StepNavigator implements ArgumentInterface
         $steps = $this->getUnsortedSteps();
 
         usort($steps, function (StepViewModelInterface $stepA, StepViewModelInterface $stepB) {
+            if (false === $stepA->hasBlock() || false === $stepB->hasBlock()) {
+                return 0;
+            }
+
             return (int)$stepA->getBlock()->getSortOrder() <=> (int)$stepB->getBlock()->getSortOrder();
         });
 
