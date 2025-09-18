@@ -29,7 +29,7 @@
                 name="loki-checkout.script.validators.postcode"
                 template="LokiCheckout_Core::script/validator/postcode.phtml"/>
 
-            <referenceContainer name="loki-component-partials">
+            <referenceContainer name="loki.script.component-partial">
                 <block
                     name="loki-checkout.script.component-partial.apple-pay"
                     template="LokiCheckout_Core::script/component-partial/apple-pay-component-partial.phtml"/>
