@@ -194,14 +194,14 @@ class StepNavigator implements ArgumentInterface
      */
     public function getStepCodes(): array
     {
-        return array_keys($this->steps);
+        return array_keys($this->getUnsortedSteps());
     }
 
     /**
      * @return StepViewModelInterface[]
      * @throws StepNotFoundException
      */
-    public function getSteps(): array
+    public function getUnsortedSteps(): array
     {
         if ($this->steps !== []) {
             return $this->steps;
@@ -236,6 +236,17 @@ class StepNavigator implements ArgumentInterface
         }
 
         return $this->steps;
+    }
+
+    public function getSteps(): array
+    {
+        $steps = $this->getUnsortedSteps();
+
+        usort($steps, function (StepViewModelInterface $stepA, StepViewModelInterface $stepB) {
+            return (int)$stepA->getBlock()->getSortOrder() <=> (int)$stepB->getBlock()->getSortOrder();
+        });
+
+        return $steps;
     }
 
     public function getNextStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
