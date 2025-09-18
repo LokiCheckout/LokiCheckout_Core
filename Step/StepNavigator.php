@@ -231,7 +231,7 @@ class StepNavigator implements ArgumentInterface
             $this->steps[$stepViewModel->getCode()] = $stepViewModel;
         }
 
-        if ($this->steps === []) {
+        if (count($this->steps) === 0) {
             throw new StepNotFoundException('No steps defined');
         }
 
