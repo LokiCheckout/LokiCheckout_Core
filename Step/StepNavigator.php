@@ -44,7 +44,7 @@ class StepNavigator implements ArgumentInterface
                 $this->currentStep = $requestedStep;
                 return $this->currentStep;
             }
-        } catch(UnknownStepException $e) {
+        } catch (UnknownStepException $e) {
         }
 
         $this->reset();
@@ -64,7 +64,7 @@ class StepNavigator implements ArgumentInterface
         }
         */
 
-        throw new StepNotFoundException('No step found with request "'.$requestedStepCode.'"');
+        throw new StepNotFoundException('No step found with request "' . $requestedStepCode . '"');
     }
 
     private function getRequestedStepCode(): string
@@ -79,6 +79,7 @@ class StepNavigator implements ArgumentInterface
 
     /**
      * @param StepViewModelInterface $step
+     *
      * @return void
      * @throws UnknownStepException
      */
@@ -94,6 +95,7 @@ class StepNavigator implements ArgumentInterface
 
     /**
      * @param string $stepCode
+     *
      * @return void
      * @throws UnknownStepException
      */
@@ -168,7 +170,7 @@ class StepNavigator implements ArgumentInterface
             }
         }
 
-        throw new UnknownStepException('Unknown step code "'.$stepCode.'"');
+        throw new UnknownStepException('Unknown step code "' . $stepCode . '"');
     }
 
     public function isCurrentStep(StepViewModelInterface $step): bool
@@ -286,7 +288,7 @@ class StepNavigator implements ArgumentInterface
             }
         }
 
-        throw new UnknownStepException('No next step to "'.$currentStep->getCode().'"');
+        throw new UnknownStepException('No next step to "' . $currentStep->getCode() . '"');
     }
 
     public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
@@ -305,7 +307,7 @@ class StepNavigator implements ArgumentInterface
             $previous = $step;
         }
 
-        throw new UnknownStepException('No previous step to "'.$currentStep->getCode().'"');
+        throw new UnknownStepException('No previous step to "' . $currentStep->getCode() . '"');
     }
 
     public function getFinalStep(): FinalStep
