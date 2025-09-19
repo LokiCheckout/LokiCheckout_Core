@@ -17,7 +17,7 @@ use Loki\Components\Component\ComponentRegistry;
 class StepNavigator implements ArgumentInterface
 {
     private StepViewModelInterface|false $currentStep = false;
-    private array $steps = [];
+    private ?array $steps = null;
 
     public function __construct(
         private readonly XmlConfig $xmlConfig,
@@ -36,13 +36,18 @@ class StepNavigator implements ArgumentInterface
             return $this->currentStep;
         }
 
-        $requestedStepCode = $this->getRequestedStep();
-        $requestedStep = $this->getStepByCode($requestedStepCode);
-        if ($requestedStep->isEnabled() && $requestedStep->isAccessable()) {
-            $this->currentStep = $requestedStep;
-            return $this->currentStep;
+        $requestedStepCode = $this->getRequestedStepCode();
+
+        try {
+            $requestedStep = $this->getStepByCode($requestedStepCode);
+            if ($requestedStep->isEnabled() && $requestedStep->isAccessable()) {
+                $this->currentStep = $requestedStep;
+                return $this->currentStep;
+            }
+        } catch(UnknownStepException $e) {
         }
 
+        $this->reset();
         foreach ($this->getSteps() as $step) {
             if ($step->isEnabled() && $step->isAccessable()) {
                 return $step;
@@ -59,10 +64,10 @@ class StepNavigator implements ArgumentInterface
         }
         */
 
-        throw new UnknownStepException('Requested step "'.$requestedStepCode.'" leads to no usable step');
+        throw new StepNotFoundException('No step found with request "'.$requestedStepCode.'". Available steps: '.implode(',' , array_keys($this->getUnsortedSteps())));
     }
 
-    private function getRequestedStep(): string
+    private function getRequestedStepCode(): string
     {
         $step = (string)$this->checkoutSession->getCurrentStep();
         if (strlen($step) > 0) {
@@ -214,7 +219,7 @@ class StepNavigator implements ArgumentInterface
      */
     public function getUnsortedSteps(): array
     {
-        if ($this->steps !== []) {
+        if (is_array($this->steps) && !empty($steps)) {
             return $this->steps;
         }
 
@@ -310,7 +315,7 @@ class StepNavigator implements ArgumentInterface
 
     public function reset(): void
     {
-        $this->steps = [];
+        $this->steps = null;
         $this->currentStep = false;
     }
 }
