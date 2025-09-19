@@ -20,7 +20,7 @@
       <xs:element name="steps" type="lokiCheckoutStepsType"/>
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
-    <xs:attribute name="label" type="xs:string" use="optional"/>
+    <xs:attribute name="label" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="lokiCheckoutStepsType">
@@ -32,6 +32,7 @@
   <xs:complexType name="lokiCheckoutStepType">
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="blockName" type="xs:string" use="required"/>
+    <xs:attribute name="sortOrder" type="xs:string" />
   </xs:complexType>
 
   <xs:complexType name="lokiCheckoutGridLayoutsType">

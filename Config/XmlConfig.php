@@ -58,6 +58,7 @@ class XmlConfig extends DataConfig
             $steps[] = new Step(
                 $stepData['name'],
                 $stepData['blockName'],
+                $stepData['sortOrder'],
             );
         }
 

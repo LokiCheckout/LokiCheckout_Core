@@ -18,6 +18,8 @@ class StepNavigator implements ArgumentInterface
 {
     private StepViewModelInterface|false $currentStep = false;
     private ?array $steps = null;
+    private ?array $unsortedSteps = null;
+    private array $stepDefinitions = [];
 
     public function __construct(
         private readonly XmlConfig $xmlConfig,
@@ -47,22 +49,11 @@ class StepNavigator implements ArgumentInterface
         } catch (UnknownStepException $e) {
         }
 
-        $this->reset();
         foreach ($this->getSteps() as $step) {
             if ($step->isEnabled() && $step->isAccessable()) {
                 return $step;
             }
         }
-
-        /*
-        // @tood: When should this be used?
-        $result = $this->currentStep->validate();
-        if (is_array($result)) {
-            foreach ($result as $error) {
-                $this->messageManager->addErrorMessage($error);
-            }
-        }
-        */
 
         throw new StepNotFoundException('No step found with request "' . $requestedStepCode . '"');
     }
@@ -221,8 +212,8 @@ class StepNavigator implements ArgumentInterface
      */
     public function getUnsortedSteps(): array
     {
-        if (is_array($this->steps) && !empty($steps)) {
-            return $this->steps;
+        if (is_array($this->unsortedSteps) && !empty($this->unsortedSteps)) {
+            return $this->unsortedSteps;
         }
 
         $currentThemeName = $this->config->getTheme();
@@ -233,9 +224,11 @@ class StepNavigator implements ArgumentInterface
             $theme = $this->xmlConfig->getTheme('default');
         }
 
-        $steps = $theme->getSteps();
-        foreach ($steps as $step) {
-            $stepComponent = $this->componentRegistry->getComponentByName($step->getBlockName());
+        $stepDefinitions = $theme->getSteps();
+        foreach ($stepDefinitions as $stepDefinition) {
+            $this->stepDefinitions[$stepDefinition->getBlockName()] = $stepDefinition;
+
+            $stepComponent = $this->componentRegistry->getComponentByName($stepDefinition->getBlockName());
             $stepViewModel = $stepComponent->getViewModel();
 
             if (false === $stepViewModel instanceof StepViewModelInterface) {
@@ -246,29 +239,36 @@ class StepNavigator implements ArgumentInterface
                 continue;
             }
 
-            $this->steps[$stepViewModel->getCode()] = $stepViewModel;
+            $this->unsortedSteps[$stepViewModel->getCode()] = $stepViewModel;
         }
 
-        if (count($this->steps) === 0) {
+        if (count($this->stepDefinitions) === 0) {
+            throw new StepNotFoundException('No step definitions found');
+        }
+
+        if (count($this->unsortedSteps) === 0) {
             throw new StepNotFoundException('No steps defined');
         }
 
-        return $this->steps;
+        return $this->unsortedSteps;
     }
 
     public function getSteps(): array
     {
+        if (is_array($this->steps) && !empty($this->steps)) {
+            return $this->steps;
+        }
+
         $steps = $this->getUnsortedSteps();
 
-        usort($steps, function (StepViewModelInterface $stepA, StepViewModelInterface $stepB) {
-            if (false === $stepA->hasBlock() || false === $stepB->hasBlock()) {
-                return 0;
-            }
-
-            return (int)$stepA->getBlock()->getSortOrder() <=> (int)$stepB->getBlock()->getSortOrder();
+        usort($steps, function (StepViewModelInterface $stepViewModelA, StepViewModelInterface $stepViewModelB) {
+            $stepA = $this->getStepDefinition($stepViewModelA->getComponentName());
+            $stepB = $this->getStepDefinition($stepViewModelB->getComponentName());
+            return (int)$stepA->getSortOrder() <=> (int)$stepB->getSortOrder();
         });
 
-        return $steps;
+        $this->steps = $steps;
+        return $this->steps;
     }
 
     public function getNextStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
@@ -328,5 +328,14 @@ class StepNavigator implements ArgumentInterface
     {
         $this->steps = null;
         $this->currentStep = false;
+    }
+
+    private function getStepDefinition(string $blockName): XmlConfig\Value\Theme\Step
+    {
+        if (isset($this->stepDefinitions[$blockName])) {
+            return $this->stepDefinitions[$blockName];
+        }
+
+        throw new StepNotFoundException('Step definition not found: '. $blockName);
     }
 }

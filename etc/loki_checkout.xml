@@ -3,8 +3,8 @@
     <themes>
         <theme name="default" label="Multi Step Checkout (default)">
             <steps>
-                <step name="shipping" blockName="loki-checkout.steps.shipping" />
-                <step name="billing" blockName="loki-checkout.steps.billing" />
+                <step name="shipping" blockName="loki-checkout.steps.shipping" sortOrder="10" />
+                <step name="billing" blockName="loki-checkout.steps.billing" sortOrder="20" />
             </steps>
         </theme>
 

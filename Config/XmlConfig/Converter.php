@@ -36,6 +36,7 @@ class Converter implements ConverterInterface
                 $steps[] = [
                     'name' => (string)$stepElement->getAttribute('name'),
                     'blockName' => (string)$stepElement->getAttribute('blockName'),
+                    'sortOrder' => (int)$stepElement->getAttribute('sortOrder'),
                 ];
             }
 
