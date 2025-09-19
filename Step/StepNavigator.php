@@ -64,7 +64,7 @@ class StepNavigator implements ArgumentInterface
         }
         */
 
-        throw new StepNotFoundException('No step found with request "'.$requestedStepCode.'". Available steps: '.implode(',' , array_keys($this->getUnsortedSteps())));
+        throw new StepNotFoundException('No step found with request "'.$requestedStepCode.'"');
     }
 
     private function getRequestedStepCode(): string
