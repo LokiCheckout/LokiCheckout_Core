@@ -1,19 +1,33 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <type name="Magento\Checkout\Model\Session">
-        <plugin name="LokiCheckout_Core::clearHelperData" type="LokiCheckout\Core\Plugin\ClearHelperDataPlugin"/>
+        <plugin
+            name="LokiCheckout_Core::clearHelperData"
+            type="LokiCheckout\Core\Plugin\ClearHelperDataPlugin"/>
     </type>
 
     <type name="Magento\Framework\View\Element\Template">
-        <plugin name="LokiCheckout_Core::addCspInlineScripts" type="LokiCheckout\Core\Plugin\AddCspInlineScriptsPlugin"/>
+        <plugin
+            name="LokiCheckout_Core::addCspInlineScripts"
+            type="LokiCheckout\Core\Plugin\AddCspInlineScriptsPlugin"/>
     </type>
 
     <type name="Loki\Components\Util\Controller\RepositoryDispatcher">
-        <plugin name="LokiCheckout_Core::redirectEmptyQuoteAfterRepositoryDispatch" type="LokiCheckout\Core\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin"/>
+        <plugin
+            name="LokiCheckout_Core::redirectEmptyQuoteAfterRepositoryDispatch"
+            type="LokiCheckout\Core\Plugin\RedirectEmptyQuoteAfterRepositoryDispatchPlugin"/>
     </type>
 
     <type name="LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
-        <plugin name="LokiCheckout_Core::fixFreeShippingSubtotal" type="LokiCheckout\Core\Plugin\FixFreeShippingSubtotalPlugin"/>
+        <plugin
+            name="LokiCheckout_Core::fixFreeShippingSubtotal"
+            type="LokiCheckout\Core\Plugin\FixFreeShippingSubtotalPlugin"/>
+    </type>
+
+    <type name="Loki\Components\Component\Component">
+        <plugin
+            name="LokiCheckout_Core::appendCheckoutTargets"
+            type="LokiCheckout\Core\Plugin\AppendCheckoutTargetsPlugin"/>
     </type>
 
     <type name="LokiCheckout\Core\Observer\AddDebuggingInfo">
