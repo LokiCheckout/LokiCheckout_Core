@@ -47,6 +47,13 @@ class Checkout implements SectionSourceInterface
     public function getQuoteSectionData(): array
     {
         return [
+            'customer_id'  => $this->checkoutState->getQuote()->getCustomerId(),
+            'customer_firstname'  => $this->checkoutState->getQuote()->getCustomerFirstname(),
+            'customer_middlename'  => $this->checkoutState->getQuote()->getCustomerMiddlename(),
+            'customer_lastname'  => $this->checkoutState->getQuote()->getCustomerLastname(),
+            'customer_email'  => $this->checkoutState->getQuote()->getCustomerEmail(),
+            'customer_dob'  => $this->checkoutState->getQuote()->getCustomerDob(),
+            'customer_gender'  => $this->checkoutState->getQuote()->getCustomerGender(),
             'currency_code'  => $this->checkoutState->getQuote()->getQuoteCurrencyCode(),
             'grand_total'    => $this->checkoutState->getQuote()->getGrandTotal(),
             'sub_total'      => $this->checkoutState->getQuote()->getSubtotal(),
