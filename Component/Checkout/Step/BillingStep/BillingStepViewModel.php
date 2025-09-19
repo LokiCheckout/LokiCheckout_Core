@@ -32,6 +32,18 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
 
     public function isAccessable(): bool
     {
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
+        if ($quote->hasVirtualItems()) {
+            return true;
+        }
+
+        $stepNavigator = $this->getContext()->getStepNavigator();
+        foreach($stepNavigator->getPreviousSteps($this) as $previousStep) {
+            if (true !== $previousStep->validate()) {
+                return false;
+            }
+        }
+
         return true;
     }
 

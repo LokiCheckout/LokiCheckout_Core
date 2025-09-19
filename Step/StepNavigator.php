@@ -291,20 +291,29 @@ class StepNavigator implements ArgumentInterface
         throw new UnknownStepException('No next step to "' . $currentStep->getCode() . '"');
     }
 
-    public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
+    public function getPreviousSteps(?StepViewModelInterface $currentStep = null): array
     {
         if (false === $currentStep instanceof StepViewModelInterface) {
             $currentStep = $this->getCurrentStep();
         }
 
-        $previous = false;
-        $steps = $this->getSteps();
-        foreach ($steps as $step) {
-            if ($step->getCode() === $currentStep->getCode() && $previous instanceof StepViewModelInterface) {
-                return $previous;
+        $previousSteps = [];
+        foreach ($this->getSteps() as $step) {
+            if ($step->getCode() === $currentStep->getCode()) {
+                break;
             }
 
-            $previous = $step;
+            $previousSteps[] = $step;
+        }
+
+        return $previousSteps;
+    }
+
+    public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
+    {
+        $previousSteps = $this->getPreviousSteps($currentStep);
+        if (count($previousSteps) > 0) {
+            return array_pop($previousSteps);
         }
 
         throw new UnknownStepException('No previous step to "' . $currentStep->getCode() . '"');

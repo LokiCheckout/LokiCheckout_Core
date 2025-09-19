@@ -27,6 +27,13 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
 
     public function isAccessable(): bool
     {
+        $stepNavigator = $this->getContext()->getStepNavigator();
+        foreach($stepNavigator->getPreviousSteps($this) as $previousStep) {
+            if (true !== $previousStep->validate()) {
+                return false;
+            }
+        }
+
         return true;
     }
 
