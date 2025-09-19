@@ -47,6 +47,9 @@
 
             <referenceContainer name="loki.script.component">
                 <block
+                    name="loki-checkout.script.components.private-data-component"
+                    template="LokiCheckout_Core::script/component/private-data-component.phtml"/>
+                <block
                     name="loki-checkout.script.components.checkout-component"
                     template="LokiCheckout_Core::script/component/checkout-component.phtml"/>
                 <block

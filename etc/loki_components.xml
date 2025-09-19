@@ -3,8 +3,9 @@
             xsi:noNamespaceSchemaLocation="urn:magento:module:Loki_Components:etc/loki_components.xsd">
     <group
         name="checkout"
-        context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext"
-    />
+        context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext">
+        <target name="loki-checkout.utils.private-data" />
+    </group>
 
     <group
         name="quoteFields"
@@ -12,6 +13,7 @@
         context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext"
         repository="LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldRepository">
         <target name="loki-checkout.sidebar.preview.quote_details"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <group
@@ -23,6 +25,7 @@
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.billing.address.view"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <group
@@ -34,6 +37,7 @@
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.shipping.address.view"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <group
@@ -45,6 +49,7 @@
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.billing.address.view"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <group
@@ -56,6 +61,7 @@
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.shipping.address.view"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <group
@@ -63,6 +69,7 @@
         context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext">
         <target name="loki-checkout.steps"/>
         <target name="loki-checkout.progressbar"/>
+        <target name="loki-checkout.utils.private-data" />
     </group>
 
     <component
@@ -581,5 +588,10 @@
         group="stepButtons"
         viewModel="LokiCheckout\Core\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonViewModel"
         repository="LokiCheckout\Core\Component\Checkout\StepButton\StepForwardButton\StepForwardButtonRepository"
+    />
+
+    <component
+        name="loki-checkout.utils.private-data"
+        viewModel="LokiCheckout\Core\Component\Util\PrivateData\PrivateDataViewModel"
     />
 </components>

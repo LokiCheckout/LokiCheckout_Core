@@ -63,6 +63,10 @@
 
         <referenceContainer name="before.body.end">
             <block
+                name="loki-checkout.utils.private-data"
+                template="LokiCheckout_Core::utils/private-data.phtml"/>
+
+            <block
                 name="loki-checkout.utils.css-variables"
                 template="LokiCheckout_Core::utils/css-variables.phtml"/>
         </referenceContainer>
