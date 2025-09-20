@@ -41,6 +41,15 @@ class CheckoutState implements ArgumentInterface
         return $this->quoteIdToMaskedQuoteId->execute((int)$this->getQuote()->getId());
     }
 
+    public function hasQuote(): bool
+    {
+        if (!$this->checkoutSession->getQuote()->getId()) {
+            return false;
+        }
+
+        return true;
+    }
+
     public function getQuote(): Quote
     {
         if ($this->quoteId === 0) {
