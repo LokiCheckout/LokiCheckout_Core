@@ -17,6 +17,10 @@ class Checkout implements SectionSourceInterface
 
     public function getSectionData()
     {
+        if (false === (bool)$this->checkoutState->getQuote()->getIsActive()) {
+            return [];
+        }
+
         return [
             ...$this->getQuoteSectionData(),
             'customer'         => $this->getCustomerSectionData(),
