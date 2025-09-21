@@ -22,16 +22,16 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
             },
             getComponentIds() {
-                return Alpine.store('components').getComponentIds();
+                return Alpine.store('LokiComponents').getComponentIds();
             },
             getComponentIdsByStep(step) {
-                return Object.keys(Alpine.store('checkout').getComponentsByStep(step));
+                return Object.keys(Alpine.store('LokiCheckout').getComponentsByStep(step));
             },
             getComponents() {
-                return Alpine.store('components').getComponents();
+                return Alpine.store('LokiComponents').getComponents();
             },
             getComponentArray() {
-                return Alpine.store('components').getComponentArray();
+                return Alpine.store('LokiComponents').getComponentArray();
             },
             getComponentsByStep(step) {
                 if (!step) {
@@ -67,16 +67,16 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return this.getComponentArrayByFieldNameAndStep(fieldName, step).find(() => true);
             },
             removeInvisibleComponents() {
-                return Alpine.store('components').removeInvisibleComponents();
+                return Alpine.store('LokiComponents').removeInvisibleComponents();
             },
             exists(component) {
-                return Alpine.store('components').exists(component);
+                return Alpine.store('LokiComponents').exists(component);
             },
             add(component) {
-                return Alpine.store('components').add(component);
+                return Alpine.store('LokiComponents').add(component);
             },
             get(componentId) {
-                return Alpine.store('components').get(componentId);
+                return Alpine.store('LokiComponents').get(componentId);
             },
             getInvalidComponents(step) {
                 const components = {};
@@ -124,7 +124,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 
         // @doc
         document.addEventListener('loki-checkout.checkout-store.remove-invisible', () => {
-            Alpine.store('checkout').removeInvisibleComponents();
+            Alpine.store('LokiCheckout').removeInvisibleComponents();
         });
     });
 </script>

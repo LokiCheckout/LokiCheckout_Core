@@ -17,7 +17,7 @@ use Magento\Framework\View\Element\Template;
             valid: false,
             init() {
                 this.id = this.name + this.$refs.field.getAttribute('data-id');
-                Alpine.store('components').add(this);
+                Alpine.store('LokiComponents').add(this);
                 this.valid = this.agreements[this.id];
             },
             toggle(event) {

@@ -16,7 +16,7 @@ use Magento\Framework\View\Element\Template;
             initCurrentStep() {
                 if (this.currentStep !== 'none') {
                     window.location.hash = this.currentStep;
-                    Alpine.store('checkout').currentStep = this.currentStep;
+                    Alpine.store('LokiCheckout').currentStep = this.currentStep;
                     window.scrollTo(0, 0);
                 }
             },

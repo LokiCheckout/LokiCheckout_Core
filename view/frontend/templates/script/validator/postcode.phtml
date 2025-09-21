@@ -26,7 +26,7 @@ $postcodePatterns = $viewModelFactory->create(PostcodePatterns::class);
     <?php endforeach; ?>
 
     LokiComponentValidator.validators.postcode = function (component) {
-        const countryComponent = Alpine.store('checkout').getComponentByFieldNameAndStep('country_id', component.step);
+        const countryComponent = Alpine.store('LokiCheckout').getComponentByFieldNameAndStep('country_id', component.step);
         if (!countryComponent || !countryComponent.id) {
             return true;
         }
