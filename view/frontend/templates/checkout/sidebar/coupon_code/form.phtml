@@ -35,7 +35,7 @@ $fieldId = $block->getFieldId();
     <button
         type="button"
         class="<?= /* @noEscape */ $css('btn btn-secondary w-full justify-center text-center', 'button-apply') ?>"
-        @click="applyCouponCode">
+        @click.prevent="applyCouponCode">
         <?= $escaper->escapeHtml(__('Apply')) ?>
     </button>
 </div>

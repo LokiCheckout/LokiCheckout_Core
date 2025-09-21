@@ -21,7 +21,7 @@ use Loki\Components\Util\Block\BlockRenderer;
         x-text="buttonLabel"
         type="button"
         :disabled="disabled"
-        @click="toggle"
+        @click.prevent="toggle"
     >
         <?= $escaper->escapeHtml($viewModel->getButtonLabelNewAddress()) ?>
     </button>

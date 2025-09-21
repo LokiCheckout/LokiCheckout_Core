@@ -22,7 +22,7 @@ use Loki\Field\ViewModel\ImageOutput;
 <div class="<?= /* @noEscape */ $css() ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
     <button
-        @click="toggleModal"
+        @click.prevent="toggleModal"
         :disabled="isModalOpen"
         class="<?= /* @noEscape */ $css('', 'button') ?>"
     >

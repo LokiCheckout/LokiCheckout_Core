@@ -36,7 +36,7 @@ $tabId = $block->getTabId();
             <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date') ?>
         </template>
 
-        <div @click="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
+        <div @click.prevent="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
             <div class="inline-block w-4">
                 <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/angle-down.svg') ?>
             </div>

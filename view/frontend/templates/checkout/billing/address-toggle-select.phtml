@@ -19,7 +19,7 @@ use Loki\Components\Util\Block\BlockRenderer;
         class="<?= /* @noEscape */ $css('btn btn-primary my-4') ?>"
         x-text="buttonLabel"
         type="button"
-        @click="toggle"
+        @click.prevent="toggle"
     >
         <?= $escaper->escapeHtml($viewModel->getButtonLabelNewAddress()) ?>
     </button>

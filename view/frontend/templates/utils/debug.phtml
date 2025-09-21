@@ -23,7 +23,7 @@ $imageOutput = $viewModelFactory->create(ImageOutput::class);
 $ancestorBlock = $block->getAncestorBlock();
 ?>
 <div x-data="{open:false}" class="<?= /* @noEscape */ $css('absolute top-0 left-0') ?>">
-    <button @click="open = ! open">
+    <button @click.prevent="open = ! open">
         <?= /* @noEscape */ $imageOutput->get('LokiCheckout_Core::images/debug.svg'); ?>
     </button>
     <div x-cloak x-show="open" class="<?= /* @noEscape */ $css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal') ?>">

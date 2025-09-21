@@ -22,7 +22,7 @@ $couponCode = $block->getCouponCode();
     <button
         type="button"
         class="<?= /* @noEscape */ $css('btn btn-secondary', 'button-remove') ?>"
-        @click="removeCouponCode">
+        @click.prevent="removeCouponCode">
         <?= $escaper->escapeHtml(__('Remove coupon code')) ?>
     </button>
 </div>

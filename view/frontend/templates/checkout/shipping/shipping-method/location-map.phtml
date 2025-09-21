@@ -32,12 +32,12 @@ foreach ($locations as $location) {
         <?= /* @noEscape */ $blockRenderer->html($block, 'loki-map-components.map-container', []) ?>
         <div class="<?= /* @noEscape */ $css('w-1/4 px-4 grid gap-4 overflow-auto', 'grid') ?>">
             <?php foreach ($markers as $marker) : ?>
-                <a href="#" class="<?= /* @noEscape */ $css('bg-white p-2 hover:bg-amber-100', 'anchor') ?>" @click="jumpToMarker" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
+                <a href="#" class="<?= /* @noEscape */ $css('bg-white p-2 hover:bg-amber-100', 'anchor') ?>" @click.prevent="jumpToMarker" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
                     <strong><?= $escaper->escapeHtml($marker->getTitle()) ?></strong><br/>
                     <?= $escaper->escapeHtml($marker->getAddress()->render()) ?><br/>
                     <button
                         class="<?= /* @noEscape */ $css('btn btn-primary btn-small', 'button') ?>"
-                        @click="saveMarker"
+                        @click.prevent="saveMarker"
                         data-value="<?= $escaper->escapeHtml($marker->getId()) ?>">
                         <?= $escaper->escapeHtml(__('Select')) ?>
                     </button>

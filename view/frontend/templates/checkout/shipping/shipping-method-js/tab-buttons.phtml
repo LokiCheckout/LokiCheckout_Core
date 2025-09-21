@@ -16,7 +16,7 @@ $buttons = (array)$block->getButtons();
 <div class="<?= /* @noEscape */ $css('tab-buttons grid grid-cols-2 gap-4 mb-4') ?>">
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
-            @click="toggleTabs"
+            @click.prevent="toggleTabs"
             data-tab-id="<?= /* @noEscape */ $buttonId ?>"
             class="<?= /* @noEscape */ $css('tab-inactive p-4', 'button') ?>"
         >
