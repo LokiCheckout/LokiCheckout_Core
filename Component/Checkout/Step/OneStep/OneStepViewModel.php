@@ -21,6 +21,9 @@ class OneStepViewModel extends AbstractStepViewModel
 
     public function validate(): bool|array
     {
-        return $this->getContext()->getStepValidator()->validate();
+        $result = $this->getContext()->getStepValidator()->validate();
+        $this->valid = true === $result;
+
+        return $result;
     }
 }

@@ -12,6 +12,7 @@ use LokiCheckout\Core\Step\StepNavigator;
  */
 abstract class AbstractStepViewModel extends ComponentViewModel implements StepViewModelInterface
 {
+    protected bool $valid = true;
     public function __construct(
         private readonly StepNavigator $stepNavigator,
     ) {
@@ -45,6 +46,11 @@ abstract class AbstractStepViewModel extends ComponentViewModel implements StepV
     public function validate(): bool|array
     {
         return true;
+    }
+
+    public function isValid(): bool
+    {
+        return $this->valid;
     }
 
     public function getJsComponentName(): ?string
