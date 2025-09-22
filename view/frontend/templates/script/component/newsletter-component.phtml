@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @var Template $block */
+/** @var Escaper $escaper */
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
@@ -14,7 +16,7 @@ use Magento\Framework\View\Element\Template;
                     if (this.disabled) {
                         this.messages = [{
                             type: 'warning',
-                            text: 'Please enter a valid email first',
+                            text: '<?= $escaper->escapeHtml(__('Please enter a valid email first')) ?>',
                         }];
                     }
                 })
