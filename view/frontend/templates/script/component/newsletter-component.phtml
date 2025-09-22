@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutNewsletterComponent', () => ({
+            ...LokiCheckoutComponentType,
+            initListenToDisabledClicks() {
+                this.$el.addEventListener('click', (e) => {
+                    if (this.disabled) {
+                        this.messages = [{
+                            type: 'warning',
+                            text: 'Please enter a valid email first',
+                        }];
+                    }
+                })
+            }
+        }));
+    });
+</script>

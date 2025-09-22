@@ -21,4 +21,9 @@ class NewsletterViewModel extends CheckoutViewModel
         $email = $this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
         return empty($email);
     }
+
+    public function getJsComponentName(): ?string
+    {
+        return 'LokiCheckoutNewsletterComponent';
+    }
 }
