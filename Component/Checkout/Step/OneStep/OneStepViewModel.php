@@ -2,14 +2,12 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Step\OneStep;
 
-use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
-
-use Loki\Components\Component\ComponentViewModel;
+use LokiCheckout\Core\Component\Checkout\Step\AbstractStepViewModel;
 
 /**
  * @method OneStepContext getContext()
  */
-class OneStepViewModel extends ComponentViewModel implements StepViewModelInterface
+class OneStepViewModel extends AbstractStepViewModel
 {
     public function getCode(): string
     {
@@ -21,30 +19,8 @@ class OneStepViewModel extends ComponentViewModel implements StepViewModelInterf
         return 'One Step';
     }
 
-    public function isEnabled(): bool
-    {
-        return true;
-    }
-
-    public function isAccessable(): bool
-    {
-        return true;
-    }
-
     public function validate(): bool|array
     {
         return $this->getContext()->getStepValidator()->validate();
-    }
-
-    public function getJsData(): array
-    {
-        return [
-            'step' => $this->getStep(),
-        ];
-    }
-
-    public function getStep(): string
-    {
-        return 'none';
     }
 }

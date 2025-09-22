@@ -2,13 +2,12 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Step\ShippingStep;
 
-use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
-use Loki\Components\Component\ComponentViewModel;
+use LokiCheckout\Core\Component\Checkout\Step\AbstractStepViewModel;
 
 /**
  * @method ShippingStepContext getContext()
  */
-class ShippingStepViewModel extends ComponentViewModel implements StepViewModelInterface
+class ShippingStepViewModel extends AbstractStepViewModel
 {
     public function getCode(): string
     {
@@ -25,43 +24,8 @@ class ShippingStepViewModel extends ComponentViewModel implements StepViewModelI
         return !(bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual();
     }
 
-    public function isAccessable(): bool
-    {
-        $stepNavigator = $this->getContext()->getStepNavigator();
-        foreach($stepNavigator->getPreviousSteps($this) as $previousStep) {
-            if (true !== $previousStep->validate()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    public function isVisible(): bool
-    {
-        return $this->getContext()->getStepNavigator()->isCurrentStep($this);
-    }
-
     public function validate(): bool|array
     {
         return $this->getContext()->getStepValidator()->validate();
-    }
-
-    public function getJsComponentName(): ?string
-    {
-        return 'LokiCheckoutStep';
-    }
-
-    public function getJsData(): array
-    {
-        return [
-            'visible' => $this->isVisible(),
-            'step' => $this->getStep(),
-        ];
-    }
-
-    public function getStep(): string
-    {
-        return 'none';
     }
 }
