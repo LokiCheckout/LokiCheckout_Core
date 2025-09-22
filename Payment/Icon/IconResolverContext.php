@@ -7,7 +7,7 @@ use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
-use Loki\Field\ViewModel\ImageOutput;
+use Loki\Components\Util\ImageOutput;
 use Magento\Framework\View\Asset\Source as AssetSource;
 
 class IconResolverContext
@@ -18,9 +18,10 @@ class IconResolverContext
         private readonly ComponentRegistrar $componentRegistrar,
         private readonly AssetRepository $assetRepository,
         private readonly AssetSource $assetSource,
-        private readonly string $paymentMethodCode,
         private readonly ImageOutput $imageOutput,
         Filesystem $filesystem,
+        private readonly string $paymentMethodCode,
+        private readonly array $attributes = [],
     ) {
         $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
     }
@@ -50,7 +51,7 @@ class IconResolverContext
             return $this->getIconOutput($assetSource, 'svg');
         }
 
-        return $this->imageOutput->getByUrl($asset->getUrl());
+        return $this->imageOutput->getByUrl($asset->getUrl(), $this->attributes);
     }
 
     public function getIconPath(string $moduleName, string $path): false|string
@@ -74,7 +75,10 @@ class IconResolverContext
             return '';
         }
 
+        $this->imageOutput->get($iconPath, 'svg');
+
         if ($iconType === 'svg') {
+            //return $this->imageOutput->get($iconPath, 'svg');
             return $this->fileDriver->fileGetContents($iconPath);
         }
 
@@ -103,5 +107,10 @@ class IconResolverContext
         }
 
         return false;
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }
