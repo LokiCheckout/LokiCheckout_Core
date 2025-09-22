@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
     <body>
-        <referenceContainer name="loki.script">
+        <referenceBlock name="loki.script">
             <block
                 name="loki-checkout.script.logger"
                 after="loki-components.script.logger"
@@ -92,7 +92,7 @@
                     name="loki-checkout.script.components.grid-layout-component"
                     template="LokiCheckout_Core::script/component/grid-layout-component.phtml"/>
             </referenceBlock>
-        </referenceContainer>
+        </referenceBlock>
 
         <referenceContainer name="loki.script.directive">
             <block
