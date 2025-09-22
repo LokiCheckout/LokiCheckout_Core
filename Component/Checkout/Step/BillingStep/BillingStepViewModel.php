@@ -38,7 +38,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
         }
 
         $stepNavigator = $this->getContext()->getStepNavigator();
-        foreach($stepNavigator->getPreviousSteps($this) as $previousStep) {
+        foreach ($stepNavigator->getPreviousSteps($this) as $previousStep) {
             if (true !== $previousStep->validate()) {
                 return false;
             }
@@ -66,7 +66,7 @@ class BillingStepViewModel extends ComponentViewModel implements StepViewModelIn
     {
         return [
             'visible' => $this->isVisible(),
-            'step' => $this->getStep(),
+            'step'    => $this->getStep(),
         ];
     }
 
