@@ -17,16 +17,16 @@ use Magento\Framework\View\Element\Template;
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
 
-<summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden', 'summary') ?>'">
-    <span class="cursor-pointer">
+<summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
+    <span class="<?= /* @noEscape */ $css('', 'label') ?>">
         <?= $escaper->escapeHtml(__('Apply Discount Code')) ?>
     </span>
 
-    <span class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailClosed">
+    <span class="<?= /* @noEscape */ $css('w-6 h-2', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
         <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
     </span>
 
-    <span class="cursor-pointer w-6 h-2" x-cloak x-show="isDetailOpen">
+    <span class="<?= /* @noEscape */ $css('w-6 h-2', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
         <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
     </span>
 </summary>
