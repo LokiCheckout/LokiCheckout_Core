@@ -29,13 +29,13 @@
                 name="loki-checkout.script.validators.postcode"
                 template="LokiCheckout_Core::script/validator/postcode.phtml"/>
 
-            <referenceContainer name="loki.script.component-partial">
+            <referenceBlock name="loki.script.component-partial">
                 <block
                     name="loki-checkout.script.component-partial.apple-pay"
                     template="LokiCheckout_Core::script/component-partial/apple-pay-component-partial.phtml"/>
-            </referenceContainer>
+            </referenceBlock>
 
-            <referenceContainer name="loki.script.component-type">
+            <referenceBlock name="loki.script.component-type">
                 <block
                     name="loki-checkout.script.component-type.checkout"
                     template="LokiCheckout_Core::script/component-type/checkout-component-type.phtml"/>
@@ -43,9 +43,9 @@
                 <block
                     name="loki-checkout.script.component-type.apple-pay"
                     template="LokiCheckout_Core::script/component-type/apple-pay-component-type.phtml"/>
-            </referenceContainer>
+            </referenceBlock>
 
-            <referenceContainer name="loki.script.component">
+            <referenceBlock name="loki.script.component">
                 <block
                     name="loki-checkout.script.components.private-data-component"
                     template="LokiCheckout_Core::script/component/private-data-component.phtml"/>
@@ -91,7 +91,7 @@
                 <block
                     name="loki-checkout.script.components.grid-layout-component"
                     template="LokiCheckout_Core::script/component/grid-layout-component.phtml"/>
-            </referenceContainer>
+            </referenceBlock>
         </referenceContainer>
 
         <referenceContainer name="loki.script.directive">
