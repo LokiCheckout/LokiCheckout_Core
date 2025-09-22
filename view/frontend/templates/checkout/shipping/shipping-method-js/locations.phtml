@@ -37,8 +37,8 @@ $tabId = $block->getTabId();
         </template>
 
         <div @click.prevent="expandLocations" x-cloak x-show="showExpandLocations">
-            <div class="inline-block w-4">
-                <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/angle-down.svg') ?>
+            <div class="inline-block">
+                <?= /** @noEscape */ $imageOutput->icon('angle-down', $block) ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

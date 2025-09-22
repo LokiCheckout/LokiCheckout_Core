@@ -46,8 +46,8 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
 
         <?php if (count($hiddenItems) > 0): ?>
             <button @click.prevent="toggle" x-show="hidden" class="<?= /* @noEscape */ $css('flex', 'button-down') ?>">
-                <span class="<?= /* @noEscape */ $css('w-6 h-2', 'button-down-span') ?>">
-                    <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
+                <span class="<?= /* @noEscape */ $css('', 'button-down-span') ?>">
+                    <?= /** @noEscape */ $imageOutput->icon('chevron-down', $block) ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Show all items')) ?>
             </button>
@@ -66,7 +66,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
             <button @click.prevent="toggle" x-cloak x-show="shown" class="<?= /* @noEscape */ $css('flex', 'button-up') ?>">
                 <span class="<?= /* @noEscape */ $css('w-6 h-2', 'button-up-span') ?>">
                     <?= /** @noEscape */
-                    $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
+                    $imageOutput->icon('chevron-up', $block) ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Do not show all items')) ?>
             </button>

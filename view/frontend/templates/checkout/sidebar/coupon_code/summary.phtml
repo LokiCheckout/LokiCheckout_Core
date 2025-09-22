@@ -22,11 +22,11 @@ $imageOutput = $viewModelFactory->create(ImageOutput::class);
         <?= $escaper->escapeHtml(__('Apply Discount Code')) ?>
     </span>
 
-    <span class="<?= /* @noEscape */ $css('w-6 h-2', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
-        <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-down.svg') ?>
+    <span class="<?= /* @noEscape */ $css('', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
+        <?= /** @noEscape */ $imageOutput->icon('chevron-down', $block) ?>
     </span>
 
-    <span class="<?= /* @noEscape */ $css('w-6 h-2', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
-        <?= /** @noEscape */ $imageOutput->get('LokiCheckout_Core::images/chevron-up.svg') ?>
+    <span class="<?= /* @noEscape */ $css('', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
+        <?= /** @noEscape */ $imageOutput->icon('chevron-up', $block) ?>
     </span>
 </summary>

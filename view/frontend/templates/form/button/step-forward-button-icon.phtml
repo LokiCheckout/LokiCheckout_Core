@@ -15,9 +15,9 @@ use Loki\Components\Util\ImageOutput;
 $imageOutput = $viewModelFactory->create(ImageOutput::class);
 ?>
 <div x-show="notLoading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->get('Loki_FieldComponents::images/arrow-right.svg') ?>
+    <?= /* @noEscape */ $imageOutput->icon('arrow-right', $block) ?>
 </div>
 
 <div x-cloak x-show="loading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 animate-spin fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->get('Loki_FieldComponents::images/spinner.svg') ?>
+    <?= /* @noEscape */ $imageOutput->icon('spinner', $block) ?>
 </div>

@@ -51,7 +51,7 @@ class IconResolverContext
             return $this->getIconOutput($assetSource, 'svg');
         }
 
-        return $this->imageOutput->getByUrl($asset->getUrl(), $this->attributes);
+        return $this->imageOutput->get($asset->getUrl(), $this->attributes);
     }
 
     public function getIconPath(string $moduleName, string $path): false|string
@@ -75,7 +75,7 @@ class IconResolverContext
             return '';
         }
 
-        $this->imageOutput->get($iconPath, 'svg');
+        $this->imageOutput->get($iconPath);
 
         if ($iconType === 'svg') {
             //return $this->imageOutput->get($iconPath, 'svg');
