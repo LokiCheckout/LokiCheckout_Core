@@ -583,6 +583,16 @@
     />
 
     <component
+        name="loki-checkout.login.form.inner"
+        context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext"
+        repository="LokiCheckout\Core\Component\Customer\LoginForm\LoginFormRepository"
+        viewModel="LokiCheckout\Core\Component\Customer\LoginForm\LoginFormViewModel">
+        <target name="loki-checkout.steps"/>
+        <target name="loki-checkout.progressbar"/>
+        <target name="loki-checkout.sidebar"/>
+    </component>
+
+    <component
         name="loki-checkout.utils.private-data"
         viewModel="LokiCheckout\Core\Component\Util\PrivateData\PrivateDataViewModel"
     />

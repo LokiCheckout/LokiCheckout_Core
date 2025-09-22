@@ -31,14 +31,14 @@ use Loki\Field\ViewModel\ImageOutput;
 
     <dialog
         x-ref="modal"
-        class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg', 'dialog') ?>"
+        class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog') ?>"
     >
-        <div>
-            <?= /* @noEscape */ $templateRenderer->html(
-                $block,
-                'Loki_Components::component/modal/close.phtml'
-            ); ?>
+        <?= /* @noEscape */ $templateRenderer->html(
+            $block,
+            'Loki_Components::component/modal/close.phtml'
+        ); ?>
 
+        <div class="<?= /* @noEscape */ $css('p-8', 'dialog-inner') ?>">
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
         </div>
     </dialog>
