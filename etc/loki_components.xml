@@ -9,6 +9,7 @@
         name="quoteFields"
         class="Loki\Field\Component\Base\Field\FieldComponent"
         context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext"
+        viewModel="LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldViewModel"
         repository="LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldRepository">
         <target name="loki-checkout.sidebar.preview.quote_details"/>
     </group>

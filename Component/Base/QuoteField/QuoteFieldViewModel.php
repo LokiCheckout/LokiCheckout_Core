@@ -9,7 +9,7 @@ use LokiCheckout\Core\ViewModel\CheckoutState;
 /**
  * @method CheckoutContext getContext()
  */
-abstract class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFieldViewModelInterface
+class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFieldViewModelInterface
 {
     public function getFieldLabel(): string
     {
