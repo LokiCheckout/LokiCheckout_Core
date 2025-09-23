@@ -30,7 +30,7 @@ class Checkout implements SectionSourceInterface
         ];
     }
 
-    public function getCustomerSectionData(): array
+    private function getCustomerSectionData(): array
     {
         $customerId = (int)$this->checkoutState->getCustomerSession()->getCustomerId();
 
@@ -47,7 +47,7 @@ class Checkout implements SectionSourceInterface
         return $data;
     }
 
-    public function getQuoteSectionData(): array
+    private function getQuoteSectionData(): array
     {
         return [
             'customer_id'         => $this->checkoutState->getQuote()->getCustomerId(),
@@ -66,7 +66,7 @@ class Checkout implements SectionSourceInterface
         ];
     }
 
-    public function getCartItemsSectionData(): array
+    private function getCartItemsSectionData(): array
     {
         $items = [];
         foreach ($this->checkoutState->getQuote()->getAllItems() as $item) {
@@ -84,7 +84,7 @@ class Checkout implements SectionSourceInterface
         return $items;
     }
 
-    public function getShippingAddressSectionData(): array
+    private function getShippingAddressSectionData(): array
     {
         $shippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
 
@@ -108,7 +108,7 @@ class Checkout implements SectionSourceInterface
         ];
     }
 
-    public function getBillingAddressSectionData(): array
+    private function getBillingAddressSectionData(): array
     {
         $billingAddress = $this->checkoutState->getQuote()->getBillingAddress();
 
