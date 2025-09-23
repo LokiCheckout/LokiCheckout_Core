@@ -24,10 +24,10 @@ $shippingMethods = $viewModel->getShippingMethods();
 ?>
 <div class="<?= /* @noEscape */ $css('relative w-full mb-8') ?>">
     <?php if ($viewModel->isDisabled()) : ?>
-        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.utils.disabled-overlay') ?>
+        <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.utils.disabled-overlay') ?>
     <?php endif; ?>
 
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
     <div
         id="shipping-methods"
@@ -42,7 +42,6 @@ $shippingMethods = $viewModel->getShippingMethods();
                 <?php foreach ($shippingMethods as $shippingMethod): ?>
                     <?php $code = $shippingMethod->getCarrierCode().'_'.$shippingMethod->getMethodCode(); ?>
                     <?= /* @noEscape */ $blockRenderer->html(
-                        $block,
                         'loki-checkout.shipping.methods.item',
                         [
                             'method' => $shippingMethod,
@@ -59,7 +58,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         <?= /* @noEscape */ $block->getChildHtml('after-methods') ?>
     </div>
 
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-components.utils.local-messages') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('script') ?>
 </div>

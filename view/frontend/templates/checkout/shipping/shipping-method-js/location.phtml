@@ -15,7 +15,7 @@ use Magento\Framework\View\Element\Template;
 <div class="loki-checkout-shipping-shipping-methods-item flex mb-4 p-4 hover:bg-black/5"
      :class="location.cssClass">
 
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.location.input') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.location.input') ?>
 
     <label :for="location.id" class="cursor-pointer flex-1">
         <div class="<?= /* @noEscape */ $css('mb-4') ?>">
@@ -33,7 +33,7 @@ use Magento\Framework\View\Element\Template;
             <?= $escaper->escapeHtml(__('From')) ?> <span x-time="location.start_time"></span>
         </div>
 
-        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.location.address') ?>
-        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.location.business-hours') ?>
+        <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.location.address') ?>
+        <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.location.business-hours') ?>
     </label>
 </div>

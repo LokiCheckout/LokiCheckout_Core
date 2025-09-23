@@ -27,7 +27,7 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= /* @noEscape */ $css('mb-4 relative') ?>">
-    <?= /* @noEscape */ $blockRenderer->html($block,'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html('loki-field-components.utils.loader-overlay') ?>
 
     <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
     <?= /* @noEscape */ $html ?>

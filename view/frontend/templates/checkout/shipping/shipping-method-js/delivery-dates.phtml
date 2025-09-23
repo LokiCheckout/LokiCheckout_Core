@@ -23,7 +23,7 @@ $tabId = $block->getTabId();
 <div data-tab-content="<?= /* @noEscape */ $tabId ?>" class="<?= /* @noEscape */ $css('hidden', 'timeframes-container') ?>">
     <div x-show="showLoader" :aria-busy="showLoader"
          class="<?= /* @noEscape */ $css('absolute top-0 left-0 right-0 bottom-0', 'loader') ?>">
-        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+        <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
     </div>
 
     <div>
@@ -32,7 +32,7 @@ $tabId = $block->getTabId();
         </div>
 
         <template x-for="deliveryDate in getVisibleDeliveryDates" :key="deliveryDate.date">
-            <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.js.delivery-date') ?>
+            <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.delivery-date') ?>
         </template>
 
         <div @click.prevent="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">

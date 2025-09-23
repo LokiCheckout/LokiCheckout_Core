@@ -22,7 +22,7 @@ $timeframes = $block->getTimeframes();
         <span><?= $escaper->escapeHtml(__('No timeframes found')) ?></span>
     <?php else: ?>
         <?php foreach ($timeframes as $timeframe): ?>
-            <?= /* @noEscape */ $childRenderer->html($block, 'timeframe', [
+            <?= /* @noEscape */ $childRenderer->html('timeframe', [
                 'timeframe' => $timeframe,
             ]) ?>
         <?php endforeach; ?>

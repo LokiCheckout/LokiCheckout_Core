@@ -19,7 +19,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
     <form
@@ -32,7 +32,6 @@ $paymentMethods = $viewModel->getPaymentMethods();
 	    <ul class="<?= /* @noEscape */ $css('', 'list') ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= /* @noEscape */ $blockRenderer->html(
-                        $block,
                         'loki-checkout.payment.methods.item',
                         [
                             'method' => $paymentMethod,
@@ -48,5 +47,5 @@ $paymentMethods = $viewModel->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-components.utils.local-messages') ?>
 </div>

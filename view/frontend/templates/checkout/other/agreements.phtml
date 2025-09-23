@@ -27,7 +27,7 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
             x-title="LokiCheckoutAgreement<?= /* @noEscape */ $agreement->getAgreementId() ?>"
         >
             <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
-                <?= /* @noEscape */ $childRenderer->html($block, 'input', [
+                <?= /* @noEscape */ $childRenderer->html('input', [
                     'agreement' => $agreement,
                 ]) ?>
 
@@ -57,6 +57,6 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
         </div>
     <?php endforeach; ?>
 
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $childRenderer->html( 'loki-components.utils.local-messages') ?>
     <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>

@@ -20,28 +20,28 @@ use Loki\Components\Util\Block\ChildRenderer;
 $location = $block->getLocation();
 ?>
 <div class="<?= /* @noEscape */ $css('flex mb-8 p-4 hover:bg-black/5') ?>">
-    <?= /* @noEscape */ $childRenderer->html($block, 'location.input', [
+    <?= /* @noEscape */ $childRenderer->html('location.input', [
         'location' => $location,
     ]) ?>
 
     <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= /* @noEscape */ $css('cursor-pointer flex-1', 'label') ?>">
-        <?= /* @noEscape */ $childRenderer->html($block, 'location.name', [
+        <?= /* @noEscape */ $childRenderer->html('location.name', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */ $childRenderer->html($block, 'location.pickup-details', [
+        <?= /* @noEscape */ $childRenderer->html('location.pickup-details', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */ $childRenderer->html($block, 'location.address', [
+        <?= /* @noEscape */ $childRenderer->html('location.address', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */ $childRenderer->html($block, 'location.business-hours', [
+        <?= /* @noEscape */ $childRenderer->html('location.business-hours', [
             'location' => $location,
         ]) ?>
 
-        <?= /* @noEscape */ $childRenderer->html($block, 'location.additional', [
+        <?= /* @noEscape */ $childRenderer->html('location.additional', [
             'location' => $location,
         ]) ?>
     </label>

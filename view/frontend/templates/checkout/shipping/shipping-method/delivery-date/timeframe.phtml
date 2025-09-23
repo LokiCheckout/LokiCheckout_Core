@@ -17,12 +17,12 @@ use Loki\Components\Util\Block\ChildRenderer;
 $timeframe = $block->getTimeframe();
 ?>
 <div class="<?= /* @noEscape */ $css('flex p-2 hover:bg-black/5') ?>">
-    <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.input', [
+    <?= /* @noEscape */ $childRenderer->html('timeframe.input', [
         'timeframe' => $timeframe,
     ]) ?>
 
     <label for="<?= $escaper->escapeHtml($timeframe->getId()) ?>" class="<?= /* @noEscape */ $css('cursor-pointer flex-1', 'label') ?>">
-        <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.name', [
+        <?= /* @noEscape */ $childRenderer->html('timeframe.name', [
             'timeframe' => $timeframe,
         ]) ?>
     </label>

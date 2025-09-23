@@ -25,7 +25,7 @@ $deliveryDates = $block->getDeliveryDates();
         <div class="<?= /* @noEscape */ $css('', 'empty') ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
     <?php else: ?>
         <?php foreach ($deliveryDates as $deliveryDate): ?>
-            <?= /* @noEscape */ $childRenderer->html($block, 'delivery-date', [
+            <?= /* @noEscape */ $childRenderer->html('delivery-date', [
                 'delivery_date' => $deliveryDate,
             ]) ?>
         <?php endforeach; ?>
