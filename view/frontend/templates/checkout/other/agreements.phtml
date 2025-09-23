@@ -47,8 +47,8 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 
             <dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg w-1/2 max-h-[90vh]', 'dialog') ?>">
                 <div class="<?= /* @noEscape */ $css('p-5', 'dialog-inner') ?>">
-                    <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
-                    <?= /* @noEscape */ $childRenderer->html($block, 'content', [
+                    <?= /* @noEscape */ $templateRenderer->html('Loki_Components::component/modal/close.phtml'); ?>
+                    <?= /* @noEscape */ $childRenderer->html('content', [
                         'agreement' => $agreement,
                         'view_model' => $viewModel,
                     ]) ?>

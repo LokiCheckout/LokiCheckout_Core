@@ -58,7 +58,6 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
     <div class="<?= /* @noEscape */ $css('flex-1', 'details-container') ?>">
         <div class="<?= /* @noEscape */ $css('md:flex', 'details') ?>">
             <?= /* @noEscape */ $templateRenderer->html(
-                $block,
                 'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
                 [
                     'alias' => $code,

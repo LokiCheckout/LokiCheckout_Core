@@ -18,4 +18,4 @@ if ($checkoutState->getQuote()->isVirtual()) {
     return;
 }
 
-echo /* @noEscape */ $templateRenderer->html($block, 'LokiCheckout_Core::generic/title.phtml', ['title' => 'Billing']);
+echo /* @noEscape */ $templateRenderer->html('LokiCheckout_Core::generic/title.phtml', ['title' => 'Billing']);

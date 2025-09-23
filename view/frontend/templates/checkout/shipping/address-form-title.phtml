@@ -22,7 +22,6 @@ if ($checkoutState->getCustomerSession()->isLoggedIn()) {
 }
 
 echo /* @noEscape */ $templateRenderer->html(
-    $block,
     'LokiCheckout_Core::generic/title.phtml',
     ['title' => $title]
 );
