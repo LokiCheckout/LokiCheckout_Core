@@ -16,9 +16,9 @@ use Magento\Framework\View\Element\Template;
     class="loki-checkout-shipping-shipping-methods-item block mb-2 p-2 hover:bg-black/5"
     :class="timeframe.cssClass">
 
-    <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.delivery-date.timeframe.image') ?>
-    <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.delivery-date.timeframe.price') ?>
-    <?= /* @noEscape */ $childRenderer->html( 'loki-checkout.shipping.js.delivery-date.timeframe.input') ?>
+    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-checkout.shipping.js.delivery-date.timeframe.image') ?>
+    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-checkout.shipping.js.delivery-date.timeframe.price') ?>
+    <?= /* @noEscape */ $childRenderer->html($block,  'loki-checkout.shipping.js.delivery-date.timeframe.input') ?>
 
     <div class="inline-block cursor-pointer">
         <span x-time="timeframe.start"></span> -

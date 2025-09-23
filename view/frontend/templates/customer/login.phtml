@@ -19,7 +19,7 @@ use Magento\Framework\View\Element\Template;
 ?>
 <div class="<?= /* @noEscape */
 $css('grid grid-2-cols gap-4 relative') ?>">
-    <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <div class="<?= /* @noEscape */
     $css('field email required', 'field-container') ?>">

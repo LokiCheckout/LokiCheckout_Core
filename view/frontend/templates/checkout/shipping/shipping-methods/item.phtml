@@ -16,12 +16,12 @@ use Loki\Components\Util\Block\TemplateRenderer;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var TemplateRenderer $templateRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PriceFormatter $priceFormatter */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var ShippingMethod $shippingMethod */
 
-$templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $viewModel = $block->getViewModel();
 
@@ -58,6 +58,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
     <div class="<?= /* @noEscape */ $css('flex-1', 'details-container') ?>">
         <div class="<?= /* @noEscape */ $css('md:flex', 'details') ?>">
             <?= /* @noEscape */ $templateRenderer->html(
+                $block,
                 'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
                 [
                     'alias' => $code,
@@ -88,11 +89,13 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         <?php if ($isCurrent || $showHidden) : ?>
             <div class="<?= /* @noEscape */ $css('my-4', 'other') ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= /* @noEscape */ $blockRenderer->html(
+                    $block,
                     'loki-checkout.shipping.methods.'.$code.'.form',
                     ['method' => $code]
                 ) ?>
 
                 <?= /* @noEscape */ $blockRenderer->html(
+                    $block,
                     'loki-checkout.shipping.methods.'.$code.'.additional',
                     ['method' => $code]
                 )

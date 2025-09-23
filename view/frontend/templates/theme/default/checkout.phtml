@@ -15,7 +15,7 @@ use Loki\Components\Util\Block\BlockRenderer;
     class="<?= /* @noEscape */ $css('loki space-y-6 relative') ?>"
     x-data="LokiLoader"
     x-title="LokiCheckout">
-    <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('progressbar') ?>
     <?= /* @noEscape */ $block->getChildHtml('steps-before') ?>

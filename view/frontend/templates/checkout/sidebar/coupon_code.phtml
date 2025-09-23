@@ -24,16 +24,16 @@ use Loki\Components\Util\Block\BlockRenderer;
 $couponCode = $viewModel->getValue();
 ?>
 <div class="<?= /* @noEscape */ $css('border-b border-gray-200 relative') ?>">
-    <?= /* @noEscape */ $childRenderer->html('loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?php if (!empty($couponCode)): ?>
-        <?= /* @noEscape */ $childRenderer->html('value', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'value', [
             'coupon_code' => $viewModel->getValue()
         ]) ?>
 
     <?php else: ?>
         <details x-ref="details" :open="hasCouponCode" class="<?= /* @noEscape */ $css('group', 'details' ) ?>">
-            <?= /* @noEscape */ $childRenderer->html('summary') ?>
-            <?= /* @noEscape */ $childRenderer->html('form', [
+            <?= /* @noEscape */ $childRenderer->html($block, 'summary') ?>
+            <?= /* @noEscape */ $childRenderer->html($block, 'form', [
                 'field_id' => $viewModel->getFieldId(),
             ]) ?>
         </details>

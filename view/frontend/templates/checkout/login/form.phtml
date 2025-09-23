@@ -33,7 +33,7 @@ use Loki\Components\Util\Block\ImageRenderer;
         x-ref="modal"
         class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog') ?>"
     >
-        <?= /* @noEscape */ $templateRenderer->html('Loki_Components::component/modal/close.phtml'); ?>
+        <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
 
         <div class="<?= /* @noEscape */ $css('p-8', 'dialog-inner') ?>">
             <?= /* @noEscape */ $block->getChildHtml('form') ?>

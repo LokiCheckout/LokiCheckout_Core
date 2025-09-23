@@ -28,7 +28,7 @@ $locations = $block->getLocations();
         <?php $i = 1; ?>
         <?php foreach ($locations as $location): ?>
             <div data-location-index="<?= $escaper->escapeHtml($i) ?>" class="hidden">
-                <?= /* @noEscape */ $childRenderer->html('location', [
+                <?= /* @noEscape */ $childRenderer->html($block, 'location', [
                     'location' => $location,
                 ]) ?>
             </div>

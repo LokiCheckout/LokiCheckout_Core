@@ -23,7 +23,7 @@ $cartTotals = $viewModelFactory->create(CartTotals::class);
 $totals = $cartTotals->getTotals();
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
-    <?= /* @noEscape */ $childRenderer->html('loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <dl class="<?= /* @noEscape */ $css('grid grid-cols-2 gap-y-1', 'grid') ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>

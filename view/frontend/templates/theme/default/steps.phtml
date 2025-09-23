@@ -18,6 +18,6 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep()->getCode();
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
-    <?= /* @noEscape */ $childRenderer->html('loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml($currentStep) ?>
 </div>

@@ -32,6 +32,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
 	    <ul class="<?= /* @noEscape */ $css('', 'list') ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= /* @noEscape */ $blockRenderer->html(
+                        $block,
                         'loki-checkout.payment.methods.item',
                         [
                             'method' => $paymentMethod,
@@ -47,5 +48,5 @@ $paymentMethods = $viewModel->getPaymentMethods();
         <?php endif; ?>
     </form>
 
-    <?= /* @noEscape */ $childRenderer->html( 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $childRenderer->html($block,  'loki-components.utils.local-messages') ?>
 </div>

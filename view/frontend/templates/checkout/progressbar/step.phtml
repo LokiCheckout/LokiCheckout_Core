@@ -26,7 +26,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $step = $block->getStep();
 $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
 
-$innerHtml = $childRenderer->html('inner', ['step' => $step, 'is_active' => $isActive]);
+$innerHtml = $childRenderer->html($block, 'inner', ['step' => $step, 'is_active' => $isActive]);
 ?>
 <li
     class="<?= /* @noEscape */ $css('step flex items-center aria-[current=step]:font-bold') ?>"
