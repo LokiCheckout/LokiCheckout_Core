@@ -57,6 +57,6 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
         </div>
     <?php endforeach; ?>
 
-    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-components.utils.local-messages') ?>
     <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>
