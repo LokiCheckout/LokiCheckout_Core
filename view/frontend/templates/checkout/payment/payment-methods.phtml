@@ -19,7 +19,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= /* @noEscape */ $css('relative') ?>">
-    <?= /* @noEscape */ $childRenderer->html( 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $childRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
     <form
