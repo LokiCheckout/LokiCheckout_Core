@@ -25,7 +25,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var ImageRenderer $imageRenderer */
 
 
-$iconHtml = $imageRenderer->icon('home');
+$iconHtml = $imageRenderer->icon($block, 'home');
 ?>
 <li class="<?= /* @noEscape */ $css('step flex items-center') ?>">
     <a

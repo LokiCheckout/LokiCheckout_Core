@@ -38,7 +38,7 @@ $tabId = $block->getTabId();
 
         <div @click.prevent="expandLocations" x-cloak x-show="showExpandLocations">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageRenderer->icon('angle-down') ?>
+                <?= /** @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

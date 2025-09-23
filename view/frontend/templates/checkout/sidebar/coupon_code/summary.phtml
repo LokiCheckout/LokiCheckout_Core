@@ -23,10 +23,10 @@ use Magento\Framework\View\Element\Template;
     </span>
 
     <span class="<?= /* @noEscape */ $css('', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
-        <?= /** @noEscape */ $imageRenderer->icon('chevron-down') ?>
+        <?= /** @noEscape */ $imageRenderer->icon($block, 'chevron-down') ?>
     </span>
 
     <span class="<?= /* @noEscape */ $css('', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
-        <?= /** @noEscape */ $imageRenderer->icon('chevron-up') ?>
+        <?= /** @noEscape */ $imageRenderer->icon($block, 'chevron-up') ?>
     </span>
 </summary>

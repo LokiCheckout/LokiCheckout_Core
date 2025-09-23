@@ -74,13 +74,13 @@ $css('grid grid-2-cols gap-4 relative') ?>">
                 class="<?= /* @noEscape */ $css('px-4 py-3', 'button') ?>">
                 <template x-if="passwordVisible">
                     <div class="<?= /* @noEscape */ $css('', 'password-icon') ?>">
-                    <?= /* @noEscape */ $imageRenderer->icon('eye') ?>
+                    <?= /* @noEscape */ $imageRenderer->icon($block, 'eye') ?>
                     </div>
                 </template>
 
                 <template x-if="passwordNotVisible">
                     <div class="<?= /* @noEscape */ $css('', 'password-icon') ?>">
-                    <?= /* @noEscape */ $imageRenderer->icon('eye-slash') ?>
+                    <?= /* @noEscape */ $imageRenderer->icon($block, 'eye-slash') ?>
                     </div>
                 </template>
             </button>
