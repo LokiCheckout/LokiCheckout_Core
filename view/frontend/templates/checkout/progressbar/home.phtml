@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Loki\Components\Util\Block\ChildRenderer;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarViewModel;
 use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
@@ -22,10 +22,10 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 /** @var StepViewModelInterface $step */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
-$iconHtml = $imageOutput->icon('home', $block);
+
+$iconHtml = $imageRenderer->icon('home');
 ?>
 <li class="<?= /* @noEscape */ $css('step flex items-center') ?>">
     <a

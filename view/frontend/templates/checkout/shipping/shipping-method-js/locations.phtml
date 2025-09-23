@@ -7,7 +7,7 @@ use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\ChildRenderer;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 
 /** @version 2.0.26 */
 /** @var Template $block */
@@ -16,9 +16,9 @@ use Loki\Components\Util\ImageOutput;
 /** @var ChildRenderer $childRenderer */
 /** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 $tabId = $block->getTabId();
 ?>
 <div data-tab-content="<?= /* @noEscape */ $tabId ?>" class="<?= /* @noEscape */ $css('hidden relative', 'locations-container') ?>">
@@ -38,7 +38,7 @@ $tabId = $block->getTabId();
 
         <div @click.prevent="expandLocations" x-cloak x-show="showExpandLocations">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageOutput->icon('angle-down', $block) ?>
+                <?= /** @noEscape */ $imageRenderer->icon('angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

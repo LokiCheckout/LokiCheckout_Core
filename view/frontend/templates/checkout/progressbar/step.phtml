@@ -22,8 +22,6 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var ChildRenderer $childRenderer */
 /** @var StepViewModelInterface $step */
 
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
-$childRenderer = $viewModelFactory->create(ChildRenderer::class);
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $step = $block->getStep();
 $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();

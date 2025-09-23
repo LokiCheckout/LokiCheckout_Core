@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\ChildRenderer;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
@@ -18,9 +18,9 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 $couponCode = $viewModel->getValue();
 ?>
 <div class="<?= /* @noEscape */ $css('border-b border-gray-200 relative') ?>">

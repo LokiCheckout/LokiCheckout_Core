@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Factory\ViewModelFactory;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
@@ -12,9 +12,9 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 ?>
 
 <summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
@@ -23,10 +23,10 @@ $imageOutput = $viewModelFactory->create(ImageOutput::class);
     </span>
 
     <span class="<?= /* @noEscape */ $css('', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
-        <?= /** @noEscape */ $imageOutput->icon('chevron-down', $block) ?>
+        <?= /** @noEscape */ $imageRenderer->icon('chevron-down') ?>
     </span>
 
     <span class="<?= /* @noEscape */ $css('', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
-        <?= /** @noEscape */ $imageOutput->icon('chevron-up', $block) ?>
+        <?= /** @noEscape */ $imageRenderer->icon('chevron-up') ?>
     </span>
 </summary>

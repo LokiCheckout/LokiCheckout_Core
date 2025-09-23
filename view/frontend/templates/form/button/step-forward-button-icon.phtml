@@ -4,20 +4,20 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 
 /** @version 2.0.26 */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 ?>
 <div x-show="notLoading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->icon('arrow-right', $block) ?>
+    <?= /* @noEscape */ $imageRenderer->icon('arrow-right') ?>
 </div>
 
 <div x-cloak x-show="loading" class="<?= /* @noEscape */ $css('inline-block mr-3 w-4 animate-spin fill-white', 'icon') ?>">
-    <?= /* @noEscape */ $imageOutput->icon('spinner', $block) ?>
+    <?= /* @noEscape */ $imageRenderer->icon('spinner') ?>
 </div>

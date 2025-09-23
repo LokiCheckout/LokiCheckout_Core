@@ -7,7 +7,7 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel;
 use Loki\Components\Component\ComponentInterface;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 
 /** @version 2.0.26 */
 /** @var ViewModelFactory $viewModelFactory */
@@ -16,15 +16,15 @@ use Loki\Components\Util\ImageOutput;
 /** @var CssClass $css */
 /** @var ComponentInterface|null $viewModel */
 /** @var Template $ancestorBlock */
-/** @var ImageOutput $imageOutput */
+/** @var ImageRenderer $imageRenderer */
 
 $viewModel = $block->getViewModel();
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+
 $ancestorBlock = $block->getAncestorBlock();
 ?>
 <div x-data="{open:false}" class="<?= /* @noEscape */ $css('absolute top-0 left-0') ?>">
     <button @click.prevent="open = ! open">
-        <?= /* @noEscape */ $imageOutput->icon('debug', $block); ?>
+        <?= /* @noEscape */ $imageRenderer->icon('debug'); ?>
     </button>
     <div x-cloak x-show="open" class="<?= /* @noEscape */ $css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal') ?>">
         Component: <?= ($viewModel instanceof ComponentInterface) ? $escaper->escapeHtml(get_class($viewModel)) : 'none' ?><br>

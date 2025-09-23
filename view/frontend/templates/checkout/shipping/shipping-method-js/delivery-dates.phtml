@@ -4,7 +4,7 @@ declare(strict_types=1);
 use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\ChildRenderer;
@@ -15,10 +15,9 @@ use Loki\Components\Util\Block\ChildRenderer;
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
 /** @var BlockRenderer $blockRenderer */
+/** @var ImageRenderer $imageRenderer */
 /** @var ViewModelFactory $viewModelFactory */
 
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
 $tabId = $block->getTabId();
 ?>
 <div data-tab-content="<?= /* @noEscape */ $tabId ?>" class="<?= /* @noEscape */ $css('hidden', 'timeframes-container') ?>">
@@ -38,7 +37,7 @@ $tabId = $block->getTabId();
 
         <div @click.prevent="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageOutput->icon('angle-down', $block) ?>
+                <?= /** @noEscape */ $imageRenderer->icon('angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
-use Loki\Components\Util\ImageOutput;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Sidebar\Items\ItemsViewModel;
@@ -18,11 +18,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 /** @var Escaper $escaper */
-/** @var ImageOutput $imageOutput */
-
-$blockRenderer = $viewModelFactory->create(BlockRenderer::class);
-$childRenderer = $viewModelFactory->create(ChildRenderer::class);
-$imageOutput = $viewModelFactory->create(ImageOutput::class);
+/** @var ImageRenderer $imageRenderer */
 
 $allItems = $viewModel->getItems();
 $visibleItems = array_slice($allItems, 0, $viewModel->getVisibleCount());
@@ -47,7 +43,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         <?php if (count($hiddenItems) > 0): ?>
             <button @click.prevent="toggle" x-show="hidden" class="<?= /* @noEscape */ $css('flex', 'button-down') ?>">
                 <span class="<?= /* @noEscape */ $css('', 'button-down-span') ?>">
-                    <?= /** @noEscape */ $imageOutput->icon('chevron-down', $block) ?>
+                    <?= /** @noEscape */ $imageRenderer->icon('chevron-down') ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Show all items')) ?>
             </button>
@@ -66,7 +62,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
             <button @click.prevent="toggle" x-cloak x-show="shown" class="<?= /* @noEscape */ $css('flex', 'button-up') ?>">
                 <span class="<?= /* @noEscape */ $css('w-6 h-2', 'button-up-span') ?>">
                     <?= /** @noEscape */
-                    $imageOutput->icon('chevron-up', $block) ?>
+                    $imageRenderer->icon('chevron-up') ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Do not show all items')) ?>
             </button>
