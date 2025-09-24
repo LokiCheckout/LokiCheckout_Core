@@ -87,6 +87,7 @@
         "loki-checkout.customer.customer_dob",
         "loki-checkout.customer.customer_email",
         "loki-checkout.customer.customer_gender",
+        "loki-checkout.login.form.inner",
         "loki-checkout.newsletter",
         "loki-checkout.payment.methods",
         "loki-checkout.progressbar",
@@ -130,7 +131,8 @@
         "loki-checkout.steps.one",
         "loki-checkout.steps.shipping",
         "loki-checkout.steps.shipping.backward-button",
-        "loki-checkout.steps.shipping.forward-button"
+        "loki-checkout.steps.shipping.forward-button",
+        "loki-checkout.utils.private-data"
     ],
     "config": [
         {
