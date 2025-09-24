@@ -17,23 +17,18 @@ use Magento\Framework\View\Element\Template;
 
 
 ?>
-<div class="<?= /* @noEscape */
-$css('grid grid-2-cols gap-4 relative') ?>">
+<div class="<?= /* @noEscape */ $css('grid grid-2-cols gap-4 relative') ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <div class="<?= /* @noEscape */
-    $css('field email required', 'field-container') ?>">
-        <label class="<?= /* @noEscape */
-        $css('label', 'label') ?>" for="<?= /* @noEscape */ $viewModel->getElementId() ?>-email">
+    <div class="<?= /* @noEscape */ $css('field email required', 'field-container') ?>">
+        <label class="<?= /* @noEscape */ $css('label', 'label') ?>" for="<?= /* @noEscape */ $viewModel->getElementId() ?>-email">
             <span><?= /* @noEscape */
                 __('Email') ?></span>
         </label>
-        <div class="<?= /* @noEscape */
-        $css('control', 'field-control') ?>">
+        <div class="<?= /* @noEscape */ $css('control', 'field-control') ?>">
             <input
                 name="login[email]"
-                class="<?= /* @noEscape */
-                $css('form-input w-full', 'field-input') ?>"
+                class="<?= /* @noEscape */ $css('form-input w-full', 'field-input') ?>"
                 required
                 :value="email"
                 @change="setEmail"
@@ -45,19 +40,15 @@ $css('grid grid-2-cols gap-4 relative') ?>">
         </div>
     </div>
 
-    <div class="<?= /* @noEscape */
-    $css('field password required', 'field-container') ?>">
-        <label class="<?= /* @noEscape */
-        $css('label', 'label') ?>" for="<?= /* @noEscape */ $viewModel->getElementId() ?>-password">
+    <div class="<?= /* @noEscape */ $css('field password required', 'field-container') ?>">
+        <label class="<?= /* @noEscape */ $css('label', 'label') ?>" for="<?= /* @noEscape */ $viewModel->getElementId() ?>-password">
             <span><?= /* @noEscape */
                 __('Password') ?></span>
         </label>
-        <div class="<?= /* @noEscape */
-        $css('control flex items-center', 'field-control') ?>">
+        <div class="<?= /* @noEscape */ $css('control flex items-center', 'field-control') ?>">
             <input
                 name="login[password]"
-                class="<?= /* @noEscape */
-                $css('form-input w-full', 'field-input') ?>"
+                class="<?= /* @noEscape */ $css('form-input w-full', 'field-input') ?>"
                 required
                 :value="password"
                 @change="setPassword"

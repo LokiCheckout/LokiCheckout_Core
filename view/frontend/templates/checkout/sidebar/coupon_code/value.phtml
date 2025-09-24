@@ -15,7 +15,7 @@ $couponCode = $block->getCouponCode();
 <div class="<?= /* @noEscape */ $css('mb-4') ?>">
     <p class="<?= /* @noEscape */ $css('mb-4', 'value') ?>">
         <span>
-            <?= /* @noEscape */ $escaper->escapeHtml(__('Coupon code')) ?>:
+            <?= $escaper->escapeHtml(__('Coupon code')) ?>:
         </span>
         <strong><?= $escaper->escapeHtml($couponCode) ?></strong>
     </p>
