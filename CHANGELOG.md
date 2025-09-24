@@ -6,6 +6,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 24 September 2025
+### Added
+- Allow LokiCheckoutCoreComponentBaseQuoteFieldQuoteFieldViewModel to be used directly
+- Implement new imageRenderer
+- Implement isValid() method in step ViewModels properly
+- Clean up step ViewModel code with new AbstractStepViewModel
+- Move new login component to `LokiCheckout_Core` and beautify
+- Move sort order of steps from XML layout into `loki_checkout.xml`
+- Add custom newsletter component to give local error when checkbox is still disabled
+- Add loki-checkout customerData section
+- Add window.checkoutConfig to page
+
+### Fixed
+- Make only required method of section class public, rest is private
+- Remove redundant CSS classes from icon containers
+- Rename loki.script from container to block to allow caching
+- Change containers into blocks to allow for caching
+- Add `.prevent` modifier to `@click` event handler
+- Rename Alpine store checkout to LokiCheckout, components to LokiComponents
+- Better way to check if checkout session has a quote or not via CheckoutState::hasQuote()
+- Prevent empty quote from sending back wrong section data of loki-checkout
+- Implement proper validation of previous steps when proceeding to next step
+- Reset steps properly when switching theme
+- Automatically append target for private data for checkout components
+- Add new component for private data syncing after component updates
+- Extend loki-checkout section with quote customer details
+- Make sure invalid step can not be set
+- Make sure only enabled steps are returned by StepNavigator
+- Allow steps to have no block yet (outside of checkout)
+- Allow for sorting steps via layout argument `sort_order`
+
 ## [2.0.26] - 16 September 2025
 ### Fixed
 - Rename shipping.shipping-methods to shipping.methods
