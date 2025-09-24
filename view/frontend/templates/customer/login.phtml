@@ -88,13 +88,13 @@ use Magento\Framework\View\Element\Template;
             :disabled="isButtonDisabled"
             @click="submit"
             class="<?= /* @noEscape */ $css('btn btn-primary disabled:opacity-75', 'toolbar-button') ?>">
-            <span><?= __('Sign In') ?></span>
+            <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>
         </button>
 
         <a
             class="<?= /* @noEscape */ $css('underline text-secondary', 'forgot-password-link') ?>"
-            href="<?= __($block->getUrl('customer/account/forgotpassword')) ?>">
-            <span><?= __('Forgot Your Password?') ?></span>
+            href="<?= $escaper->escapeHtml(__($block->getUrl('customer/account/forgotpassword'))) ?>">
+            <span><?= $escaper->escapeHtml(__('Forgot Your Password?')) ?></span>
         </a>
     </div>
 </div>
