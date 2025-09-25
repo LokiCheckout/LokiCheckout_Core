@@ -19,7 +19,7 @@ if (!isset($options['day'])) {
 }
 ?>
 <script>
-    const LokiCheckoutDateOptions = JSON.parse('<?= $escaper->escapeHtml(json_encode($options)) ?>');
+    const LokiCheckoutDateOptions = JSON.parse('<?= /* @noEscape */ json_encode($options) ?>');
 
     document.addEventListener('alpine:init', () => {
         Alpine.directive('date', (el, { value, expression }, { evaluate }) => {
