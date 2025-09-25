@@ -23,7 +23,7 @@ $timeframe = $block->getTimeframe();
     <div class="float-right text-sm">
         <?= $escaper->escapeHtml($timeframe->getLabel()) ?>
         <?php if ($timeframe->getPrice() > 0) : ?>
-            (+ <?= $escaper->escapeHtml($priceFormatter->format($timeframe->getPrice())) ?>)
+            (+ <?= /* @noEscape */ $priceFormatter->format($timeframe->getPrice()) ?>)
         <?php endif; ?>
     </div>
 

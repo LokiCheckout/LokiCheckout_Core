@@ -67,7 +67,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
             ) ?>
 
             <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtmlAttr($css('pr-2 font-bold cursor-pointer', 'amount-label')) ?>">
-                <?= $escaper->escapeHtml($priceFormatter->format($shippingMethod->getAmount())) ?>
+                <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
             </label>
 
             <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
