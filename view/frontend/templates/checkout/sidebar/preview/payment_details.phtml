@@ -26,11 +26,11 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= /* @noEscape */ $css('mb-4 relative') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('mb-4 relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <span class="<?= /* @noEscape */ $css('text-xl font-bold', 'title') ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
-    <?= /* @noEscape */ $html ?>
+    <span class="<?= $escaper->escapeHtmlAttr($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
+    <?= $escaper->escapeHtml($html) ?>
     <?= /* @noEscape */ $block->getChildHtml() ?>
 
     <?php if ($applicationMode->isDeveloperMode()): ?>

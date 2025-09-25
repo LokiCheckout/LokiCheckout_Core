@@ -17,7 +17,7 @@ use LokiCheckout\Core\Step\StepNavigator;
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep()->getCode();
 ?>
-<div class="<?= /* @noEscape */ $css('relative') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml($currentStep) ?>
 </div>

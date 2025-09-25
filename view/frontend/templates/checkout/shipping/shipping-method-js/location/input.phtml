@@ -16,5 +16,5 @@ use Magento\Framework\View\Element\Template;
     :id="location.id"
     :value="location.id"
     :checked="location.current"
-    class="<?= /* @noEscape */ $css('mr-4', 'input') ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
 />

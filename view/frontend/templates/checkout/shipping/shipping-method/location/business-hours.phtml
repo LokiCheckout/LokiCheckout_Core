@@ -23,11 +23,11 @@ if (false === $businessHours instanceof BusinessHours) {
     return;
 }
 ?>
-<details class="<?= /* @noEscape */ $css('') ?>">
-    <summary class="<?= /* @noEscape */ $css('', 'summary') ?> ?>">
+<details class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+    <summary class="<?= $escaper->escapeHtmlAttr($css('', 'summary')) ?> ?>">
         <?= $escaper->escapeHtml(__('Show opening hours')) ?>
     </summary>
-    <div class="<?= /* @noEscape */ $css('grid grid-cols-2 gap-2 mb-4', 'content') ?>">
+    <div class="<?= $escaper->escapeHtmlAttr($css('grid grid-cols-2 gap-2 mb-4', 'content')) ?>">
         <?php foreach ($businessHours->get() as $businessHourSegment): ?>
             <div><?= $escaper->escapeHtml(__($businessHourSegment->getDay())) ?></div>
             <div>

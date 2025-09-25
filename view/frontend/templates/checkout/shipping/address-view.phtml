@@ -15,6 +15,6 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= /* @noEscape */ $css('mb-4') ?>">
-    <address><?= /* @noEscape */ $html ?></address>
+<div class="<?= $escaper->escapeHtmlAttr($css('mb-4')) ?>">
+    <address><?= $escaper->escapeHtml($html) ?></address>
 </div>

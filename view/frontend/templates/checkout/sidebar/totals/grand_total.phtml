@@ -19,9 +19,9 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 $total = $block->getTotal();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
-<dt class="total label <?= /* @noEscape */ $css('font-bold', $total->getCode() . '-label') ?>">
+<dt class="total label <?= $escaper->escapeHtmlAttr($css('font-bold', $total->getCode() . '-label')) ?>">
     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
 </dt>
-<dd class="total value <?= /* @noEscape */ $css('text-right', $total->getCode() . '-value') ?>">
-    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
+<dd class="total value <?= $escaper->escapeHtmlAttr($css('text-right', $total->getCode() . '-value')) ?>">
+    <?= $escaper->escapeHtml($priceFormatter->format($total->getValue())) ?>
 </dd>

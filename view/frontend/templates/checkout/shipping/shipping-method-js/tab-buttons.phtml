@@ -13,12 +13,12 @@ use Magento\Framework\View\Element\Template;
 
 $buttons = (array)$block->getButtons();
 ?>
-<div class="<?= /* @noEscape */ $css('tab-buttons grid grid-cols-2 gap-4 mb-4') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>">
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
             @click.prevent="toggleTabs"
-            data-tab-id="<?= /* @noEscape */ $buttonId ?>"
-            class="<?= /* @noEscape */ $css('tab-inactive p-4', 'button') ?>"
+            data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
+            class="<?= $escaper->escapeHtmlAttr($css('tab-inactive p-4', 'button')) ?>"
         >
             <?= $escaper->escapeHtml(__($buttonLabel)); ?>
         </button>

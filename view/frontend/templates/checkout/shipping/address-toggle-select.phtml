@@ -14,9 +14,9 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('field') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('field')) ?>">
     <button
-        class="<?= /* @noEscape */ $css('btn btn-primary my-4') ?>"
+        class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary my-4')) ?>"
         x-ref="field"
         x-text="buttonLabel"
         type="button"

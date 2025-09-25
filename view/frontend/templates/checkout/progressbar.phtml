@@ -27,16 +27,16 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 ?>
 <nav
-    class="<?= /* @noEscape */ $css('hidden md:block card rounded-lg relative') ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('hidden md:block card rounded-lg relative')) ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <ul class="<?= /* @noEscape */ $css('flex items-center', 'list') ?>">
+    <ul class="<?= $escaper->escapeHtmlAttr($css('flex items-center', 'list')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
             <?= /* @noEscape */ $childRenderer->html($block, 'step', ['step' => $step]) ?>
             <?php if (false === $skipSeparator && false === $stepNavigator->isLastStep($step)): ?>
-                <?= /* @noEscape  */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
+                <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.progressbar.separator') ?>
             <?php endif; ?>
         <?php endforeach; ?>
         <?= /* @noEscape */ $block->getChildHtml('after') ?>

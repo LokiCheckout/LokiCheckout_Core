@@ -23,7 +23,7 @@ $locations = $block->getLocations();
 ?>
 <div>
     <?php if (empty($locations)): ?>
-        <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+        <div class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
     <?php else: ?>
         <?php $i = 1; ?>
         <?php foreach ($locations as $location): ?>
@@ -37,7 +37,7 @@ $locations = $block->getLocations();
 
         <div @click.prevent="expandLocations">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
+                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

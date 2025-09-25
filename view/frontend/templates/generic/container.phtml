@@ -8,6 +8,6 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
     <?= /* @noEscape */ $block->getChildHtml(); ?>
 </div>

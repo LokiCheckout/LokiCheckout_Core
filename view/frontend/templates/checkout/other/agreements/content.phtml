@@ -14,10 +14,10 @@ use Magento\Framework\View\Element\Template;
 
 $agreement = $block->getAgreement();
 ?>
-<span class="<?= /* @noEscape */ $css('italic', 'content') ?>">
+<span class="<?= $escaper->escapeHtmlAttr($css('italic', 'content')) ?>">
     <?php if ($agreement->getIsHtml()): ?>
-        <?= /* @noEscape */ $agreement->getContent() ?>
+        <?= $escaper->escapeHtml($agreement->getContent()) ?>
     <?php else: ?>
-        <pre><?= /* @noEscape */ $agreement->getContent() ?></pre>
+        <pre><?= $escaper->escapeHtml($agreement->getContent()) ?></pre>
     <?php endif; ?>
 </span>

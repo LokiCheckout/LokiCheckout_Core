@@ -14,6 +14,6 @@ use Loki\Components\Location\Location;
 
 $location = $block->getLocation();
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
     <?= $escaper->escapeHtml(__('From')) ?> <?= $escaper->escapeHtml($location->getPickupFrom()) ?>
 </div>

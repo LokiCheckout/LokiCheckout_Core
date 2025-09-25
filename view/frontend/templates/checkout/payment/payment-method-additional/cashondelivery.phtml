@@ -15,7 +15,7 @@ use LokiCheckout\Core\ViewModel\PaymentMethod\CashOnDelivery;
 /** @var CashOnDelivery $configuration */
 $configuration = $viewModelFactory->create(CashOnDelivery::class);
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
     <?php if ($configuration->getInstructions()): ?>
         <?= $escaper->escapeHtml(__('Instructions')) ?>:<br/>
         <?= $escaper->escapeHtml($configuration->getInstructions()) ?>

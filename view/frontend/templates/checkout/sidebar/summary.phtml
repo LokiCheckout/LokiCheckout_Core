@@ -10,8 +10,8 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('loki-checkout-sidebar-summary card p-8 mb-8') ?>">
-    <div class="<?= /* @noEscape */ $css('space-y-8', 'inner') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('loki-checkout-sidebar-summary card p-8 mb-8')) ?>">
+    <div class="<?= $escaper->escapeHtmlAttr($css('space-y-8', 'inner')) ?>">
         <?= /* @noEscape */ $block->getChildHtml() ?>
     </div>
 </div>

@@ -18,23 +18,23 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 /** @var TemplateRenderer $templateRenderer */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('field required') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('field required')) ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <div
             x-data="LokiCheckoutAgreementComponent"
-            x-title="LokiCheckoutAgreement<?= /* @noEscape */ $agreement->getAgreementId() ?>"
+            x-title="LokiCheckoutAgreement<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
         >
-            <div class="<?= /* @noEscape */ $css('pb-2', 'item') ?>">
+            <div class="<?= $escaper->escapeHtmlAttr($css('pb-2', 'item')) ?>">
                 <?= /* @noEscape */ $childRenderer->html($block, 'input', [
                     'agreement' => $agreement,
                 ]) ?>
 
-                <div class="<?= /* @noEscape */ $css('inline-block pl-4', 'label-block') ?>">
+                <div class="<?= $escaper->escapeHtmlAttr($css('inline-block pl-4', 'label-block')) ?>">
                     <label
                         for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
-                        class="<?= /* @noEscape */ $css('', 'label') ?>">
+                        class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
                         <button
                             type="button"
                             @click.prevent="toggleModal"
@@ -45,8 +45,8 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
                 </div>
             </div>
 
-            <dialog x-ref="modal" class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg w-1/2 max-h-[90vh]', 'dialog') ?>">
-                <div class="<?= /* @noEscape */ $css('p-5', 'dialog-inner') ?>">
+            <dialog x-ref="modal" class="<?= $escaper->escapeHtmlAttr($css('border border-zinc-200 rounded-lg shadow-lg w-1/2 max-h-[90vh]', 'dialog')) ?>">
+                <div class="<?= $escaper->escapeHtmlAttr($css('p-5', 'dialog-inner')) ?>">
                     <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
                     <?= /* @noEscape */ $childRenderer->html($block, 'content', [
                         'agreement' => $agreement,

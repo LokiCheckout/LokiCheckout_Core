@@ -10,4 +10,4 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 ?>
-<address class="<?= /* @noEscape */ $css('mb-4') ?>" x-html="location.addressHtml"></address>
+<address class="<?= $escaper->escapeHtmlAttr($css('mb-4')) ?>" x-html="location.addressHtml"></address>

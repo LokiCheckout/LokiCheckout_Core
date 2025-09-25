@@ -17,16 +17,16 @@ use Magento\Framework\View\Element\Template;
 
 ?>
 
-<summary class="<?= /* @noEscape */ $css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary') ?>'">
-    <span class="<?= /* @noEscape */ $css('', 'label') ?>">
+<summary class="<?= $escaper->escapeHtmlAttr($css('flex gap-2 justify-between items-center w-full py-3 font-medium [&::-webkit-details-marker]:hidden cursor-pointer', 'summary')) ?>'">
+    <span class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
         <?= $escaper->escapeHtml(__('Apply Discount Code')) ?>
     </span>
 
-    <span class="<?= /* @noEscape */ $css('', 'icon-open') ?>" x-cloak x-show="isDetailClosed">
-        <?= /** @noEscape */ $imageRenderer->icon($block, 'chevron-down') ?>
+    <span class="<?= $escaper->escapeHtmlAttr($css('', 'icon-open')) ?>" x-cloak x-show="isDetailClosed">
+        <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-down') ?>
     </span>
 
-    <span class="<?= /* @noEscape */ $css('', 'icon-close') ?>" x-cloak x-show="isDetailOpen">
-        <?= /** @noEscape */ $imageRenderer->icon($block, 'chevron-up') ?>
+    <span class="<?= $escaper->escapeHtmlAttr($css('', 'icon-close')) ?>" x-cloak x-show="isDetailOpen">
+        <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-up') ?>
     </span>
 </summary>

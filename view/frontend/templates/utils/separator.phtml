@@ -9,8 +9,8 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 ?>
 <img
-    src="<?= /* @noEscape */ $block->getViewFileUrl('LokiCheckout_Core::images/chevron-right.svg'); ?>"
-    class="<?= /* @noEscape */ $css('inline-block') ?>"
+    src="<?= $escaper->escapeUrl($block->getViewFileUrl('LokiCheckout_Core::images/chevron-right.svg')); ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('inline-block')) ?>"
     width="18"
     height="18"
     alt=""

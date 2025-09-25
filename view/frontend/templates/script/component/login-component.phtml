@@ -37,10 +37,10 @@ use Magento\Framework\View\Element\Template;
             },
             buttonAriaLabel() {
                 if (this.passwordFieldType === 'text') {
-                    return '<?= /* @noEscape */ __('Hide password') ?>';
+                    return '<?= $escaper->escapeHtml(__('Hide password')) ?>';
                 }
 
-                return '<?= /* @noEscape */ __('Show password') ?>';
+                return '<?= $escaper->escapeHtml(__('Show password')) ?>';
             },
             passwordVisible() {
                 return this.passwordFieldType === 'text';

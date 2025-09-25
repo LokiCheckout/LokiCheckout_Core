@@ -19,23 +19,23 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var TemplateRenderer $templateRenderer */
 
 ?>
-<div class="<?= /* @noEscape */ $css() ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css()) ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
     <button
         @click.prevent="toggleModal"
         :disabled="isModalOpen"
-        class="<?= /* @noEscape */ $css('', 'button') ?>"
+        class="<?= $escaper->escapeHtmlAttr($css('', 'button')) ?>"
     >
         <?= $escaper->escapeHtml(__($block->getButtonLabel())) ?>
     </button>
 
     <dialog
         x-ref="modal"
-        class="<?= /* @noEscape */ $css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog') ?>"
+        class="<?= $escaper->escapeHtmlAttr($css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog')) ?>"
     >
         <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
 
-        <div class="<?= /* @noEscape */ $css('p-8', 'dialog-inner') ?>">
+        <div class="<?= $escaper->escapeHtmlAttr($css('p-8', 'dialog-inner')) ?>">
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
         </div>
     </dialog>

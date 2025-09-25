@@ -18,7 +18,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
-<div class="<?= /* @noEscape */ $css('relative') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
@@ -27,9 +27,9 @@ $paymentMethods = $viewModel->getPaymentMethods();
         x-ref="field"
         :aria-invalid="isAriaInvalid"
         :data-valid="isValid"
-        class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
+        class="<?= $escaper->escapeHtmlAttr($css('border border-transparent', 'container')) ?>">
         <?php if (!empty($paymentMethods)): ?>
-	    <ul class="<?= /* @noEscape */ $css('', 'list') ?>">
+	    <ul class="<?= $escaper->escapeHtmlAttr($css('', 'list')) ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= /* @noEscape */ $blockRenderer->html(
                         $block,
@@ -42,7 +42,7 @@ $paymentMethods = $viewModel->getPaymentMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
-            <div class="<?= /* @noEscape */ $css('p-4', 'no-items') ?>">
+            <div class="<?= $escaper->escapeHtmlAttr($css('p-4', 'no-items')) ?>">
                 <?= $escaper->escapeHtml(__('No payment methods available')) ?>
             </div>
         <?php endif; ?>

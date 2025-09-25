@@ -14,13 +14,13 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var ShippingAsBillingViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 ?>
-<div class="<?= /* @noEscape */ $css('card mb-8') ?>">
-    <label for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field" class="<?= /* @noEscape */ $css('', 'label') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('card mb-8')) ?>">
+    <label for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field" class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
         <input type="checkbox"
                :checked="value"
                @change="submitChecked"
                id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field">
-        <span class="<?= /* @noEscape */ $css('pl-2', 'span') ?>">
+        <span class="<?= $escaper->escapeHtmlAttr($css('pl-2', 'span')) ?>">
             <?= $escaper->escapeHtml(__('My billing and shipping address are the same')) ?>
                 </span>
     </label>

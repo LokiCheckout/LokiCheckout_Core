@@ -15,7 +15,7 @@ use LokiCheckout\Core\ViewModel\PaymentMethod\Banktransfer;
 /** @var Banktransfer $configuration */
 $configuration = $viewModelFactory->create(Banktransfer::class);
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
     <?php if ($configuration->getInstructions()): ?>
         <?= $escaper->escapeHtml(__('Instructions')) ?>:<br/>
         <?= $escaper->escapeHtml($configuration->getInstructions()) ?>

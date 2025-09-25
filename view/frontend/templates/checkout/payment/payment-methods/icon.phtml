@@ -25,6 +25,6 @@ if (empty($width)) {
     $width = 25;
 }
 ?>
-<div class="<?= /* @noEscape */ $css('inline-block mr-2 drop-shadow-2xl') ?>">
-    <?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, ['width' => $width]) ?>
+<div class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-2 drop-shadow-2xl')) ?>">
+    <?= $escaper->escapeHtml($paymentMethodIcon->getIcon($paymentMethodCode, ['width' => $width])) ?>
 </div>

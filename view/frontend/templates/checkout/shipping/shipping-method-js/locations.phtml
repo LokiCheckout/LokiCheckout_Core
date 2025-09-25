@@ -21,15 +21,15 @@ use Loki\Components\Util\Block\ImageRenderer;
 
 $tabId = $block->getTabId();
 ?>
-<div data-tab-content="<?= /* @noEscape */ $tabId ?>" class="<?= /* @noEscape */ $css('hidden relative', 'locations-container') ?>">
+<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtmlAttr($css('hidden relative', 'locations-container')) ?>">
     <div x-show="showLoader" :aria-busy="showLoader"
-         class="<?= /* @noEscape */ $css('absolute top-0 left-0 right-0 bottom-0', 'loader') ?>">
+         class="<?= $escaper->escapeHtmlAttr($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
         <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     </div>
 
     <div>
         <template x-if="hasNoLocations">
-            <div class="<?= /* @noEscape */ $css('p-2', 'empty') ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+            <div class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
         </template>
 
         <template x-for="location in getVisibleLocations" :key="location.id">
@@ -38,7 +38,7 @@ $tabId = $block->getTabId();
 
         <div @click.prevent="expandLocations" x-cloak x-show="showExpandLocations">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
+                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

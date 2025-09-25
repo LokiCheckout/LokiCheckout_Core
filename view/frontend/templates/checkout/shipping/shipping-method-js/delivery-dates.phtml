@@ -20,14 +20,14 @@ use Loki\Components\Util\Block\ChildRenderer;
 
 $tabId = $block->getTabId();
 ?>
-<div data-tab-content="<?= /* @noEscape */ $tabId ?>" class="<?= /* @noEscape */ $css('hidden', 'timeframes-container') ?>">
+<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtmlAttr($css('hidden', 'timeframes-container')) ?>">
     <div x-show="showLoader" :aria-busy="showLoader"
-         class="<?= /* @noEscape */ $css('absolute top-0 left-0 right-0 bottom-0', 'loader') ?>">
+         class="<?= $escaper->escapeHtmlAttr($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
         <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     </div>
 
     <div>
-        <div x-cloak x-show="hasNoDeliveryDates" class="<?= /* @noEscape */ $css('p-2', 'empty') ?>">
+        <div x-cloak x-show="hasNoDeliveryDates" class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>">
             <?= $escaper->escapeHtml(__('No delivery options found')) ?>
         </div>
 
@@ -37,7 +37,7 @@ $tabId = $block->getTabId();
 
         <div @click.prevent="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
             <div class="inline-block">
-                <?= /** @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
+                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
         </div>

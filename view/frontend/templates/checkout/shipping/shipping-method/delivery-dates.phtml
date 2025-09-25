@@ -20,9 +20,9 @@ use Loki\Components\Util\Block\ChildRenderer;
  */
 $deliveryDates = $block->getDeliveryDates();
 ?>
-<div class="<?= /* @noEscape */ $css('py-4') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('py-4')) ?>">
     <?php if (empty($deliveryDates)): ?>
-        <div class="<?= /* @noEscape */ $css('', 'empty') ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
+        <div class="<?= $escaper->escapeHtmlAttr($css('', 'empty')) ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
     <?php else: ?>
         <?php foreach ($deliveryDates as $deliveryDate): ?>
             <?= /* @noEscape */ $childRenderer->html($block, 'delivery-date', [

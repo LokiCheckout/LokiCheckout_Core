@@ -8,7 +8,7 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<aside class="<?= /* @noEscape */ $css('my-2 order-2') ?>">
+<aside class="<?= $escaper->escapeHtmlAttr($css('my-2 order-2')) ?>">
     <?= /* @noEscape */ $block->getChildHtml(); ?>
 </aside>
 

@@ -15,7 +15,7 @@ use LokiCheckout\Core\ViewModel\PaymentMethod\CheckMoneyOrder;
 /** @var CheckMoneyOrder $configuration */
 $configuration = $viewModelFactory->create(CheckMoneyOrder::class);
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
     <?php if ($configuration->getPayableTo()): ?>
         <p><?= $escaper->escapeHtml(__('Make Check Payable to')) ?>: <?= $escaper->escapeHtml($configuration->getPayableTo()) ?></p>
     <?php endif; ?>

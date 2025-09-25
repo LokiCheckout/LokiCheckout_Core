@@ -27,15 +27,15 @@ use Loki\Components\Util\Block\BlockRenderer;
 
 $iconHtml = $imageRenderer->icon($block, 'home');
 ?>
-<li class="<?= /* @noEscape */ $css('step flex items-center') ?>">
+<li class="<?= $escaper->escapeHtmlAttr($css('step flex items-center')) ?>">
     <a
-        href="<?= /* @noEscape */ $block->getBaseUrl() ?>"
-        class="<?= /* @noEscape */ $css('w-full h-auto', 'button') ?>">
+        href="<?= $escaper->escapeUrl($block->getBaseUrl()) ?>"
+        class="<?= $escaper->escapeHtmlAttr($css('w-full h-auto', 'button')) ?>">
         <div
-            class="<?= /* @noEscape */ $css('') ?>"
+            class="<?= $escaper->escapeHtmlAttr($css('')) ?>"
             title="<?= $escaper->escapeHtml(__('Home')) ?>">
-            <?= /** @noEscape */ $iconHtml ?>
+            <?= $escaper->escapeHtml($iconHtml) ?>
         </div>
     </a>
 </li>
-<?= /** @noEscape */ $blockRenderer->html( $block, 'loki-checkout.progressbar.separator') ?>
+<?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.progressbar.separator') ?>

@@ -24,7 +24,7 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $shippingMethods = $viewModel->getShippingMethods();
 ?>
-<div class="<?= /* @noEscape */ $css('relative w-full mb-8') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('relative w-full mb-8')) ?>">
     <?php if ($viewModel->isDisabled()) : ?>
         <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.utils.disabled-overlay') ?>
     <?php endif; ?>
@@ -38,7 +38,7 @@ $shippingMethods = $viewModel->getShippingMethods();
         x-ref="field"
         :aria-invalid="isAriaInvalid"
         :data-valid="isValid"
-        class="<?= /* @noEscape */ $css('border border-transparent', 'container') ?>">
+        class="<?= $escaper->escapeHtmlAttr($css('border border-transparent', 'container')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
         <?php if (!empty($shippingMethods)): ?>
             <ul>

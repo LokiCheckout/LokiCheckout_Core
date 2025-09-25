@@ -29,23 +29,23 @@ $isActive = $step->getCode() === $stepNavigator->getCurrentStep()?->getCode();
 $innerHtml = $childRenderer->html($block, 'inner', ['step' => $step, 'is_active' => $isActive]);
 ?>
 <li
-    class="<?= /* @noEscape */ $css('step flex items-center aria-[current=step]:font-bold') ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('step flex items-center aria-[current=step]:font-bold')) ?>"
     <?php if ($isActive): ?>aria-current="step"<?php endif; ?>
 >
     <?php if (false === $step->isEnabled()): ?>
-        <span class="<?= /* @noEscape */ $css('opacity-60 cursor-not-allowed', 'disabled') ?>">
-            <?= /* @noEscape */ $innerHtml ?>
+        <span class="<?= $escaper->escapeHtmlAttr($css('opacity-60 cursor-not-allowed', 'disabled')) ?>">
+            <?= $escaper->escapeHtml($innerHtml) ?>
         </span>
     <?php elseif (false === $step->isAccessable()): ?>
-        <span class="<?= /* @noEscape */ $css('', 'enabled') ?>">
-             <?= /* @noEscape */ $innerHtml ?>
+        <span class="<?= $escaper->escapeHtmlAttr($css('', 'enabled')) ?>">
+             <?= $escaper->escapeHtml($innerHtml) ?>
         </span>
     <?php else: ?>
         <button
             @click.prevent="submit"
             data-step="<?= $escaper->escapeHtml($step->getCode()) ?>"
-            class="<?= /* @noEscape */ $css('w-full h-auto', 'button') ?>">
-            <?= /* @noEscape */ $innerHtml ?>
+            class="<?= $escaper->escapeHtmlAttr($css('w-full h-auto', 'button')) ?>">
+            <?= $escaper->escapeHtml($innerHtml) ?>
         </button>
     <?php endif; ?>
 </li>

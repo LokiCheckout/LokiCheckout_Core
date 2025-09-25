@@ -15,5 +15,5 @@ use Magento\Framework\View\Element\Template;
     :disabled="disabled"
     :value="timeframe.id"
     :checked="timeframe.current"
-    class="<?= /* @noEscape */ $css('mr-2', 'input') ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('mr-2', 'input')) ?>"
 />

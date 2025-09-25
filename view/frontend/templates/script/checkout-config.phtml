@@ -17,5 +17,5 @@ $checkoutConfig = $viewModelFactory->create(CheckoutConfig::class);
 $jsonCheckoutConfig = $checkoutConfig->getJsonConfig();
 ?>
 <script>
-    window.checkoutConfig = <?= /* @noEscape */ $jsonCheckoutConfig ?>;
+    window.checkoutConfig = <?= $escaper->escapeHtml($jsonCheckoutConfig) ?>;
 </script>

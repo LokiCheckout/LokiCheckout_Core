@@ -19,7 +19,7 @@ use Loki\Components\Location\Location;
 $location = $block->getLocation();
 $address = $location->getAddress();
 ?>
-<address class="<?= /* @noEscape */ $css('mb-4') ?>">
+<address class="<?= $escaper->escapeHtmlAttr($css('mb-4')) ?>">
     <?= $escaper->escapeHtml($address->getStreet()) ?> <?= $escaper->escapeHtml($address->getHouseNumber()) ?>,
     <?= $escaper->escapeHtml($address->getPostcode()) ?> <?= $escaper->escapeHtml($address->getCity()) ?>,
     <?= $escaper->escapeHtml($address->getCountryId()) ?>

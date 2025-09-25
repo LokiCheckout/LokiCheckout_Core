@@ -12,7 +12,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= /* @noEscape */ $css('relative') ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('shipping-as-billing') ?>

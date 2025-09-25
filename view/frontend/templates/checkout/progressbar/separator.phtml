@@ -13,7 +13,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <li
-    class="<?= /* @noEscape */ $css('inline-flex justify-center items-center px-2') ?>"
+    class="<?= $escaper->escapeHtmlAttr($css('inline-flex justify-center items-center px-2')) ?>"
     aria-hidden="true">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.utils.separator') ?>
 </li>
