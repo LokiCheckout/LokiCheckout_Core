@@ -37,7 +37,7 @@ $totals = $cartTotals->getTotals();
                     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
                 </dt>
                 <dd class="<?= $escaper->escapeHtmlAttr($css('text-right', $total->getCode() . '-value')) ?>">
-                    <?= $escaper->escapeHtml($priceFormatter->format($total->getValue())) ?>
+                    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>
         <?php endforeach; ?>

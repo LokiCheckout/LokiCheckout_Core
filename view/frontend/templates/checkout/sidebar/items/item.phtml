@@ -45,7 +45,7 @@ $productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $wi
                     <?= $escaper->escapeHtml(__('Price')) ?>:
                 </dt>
                 <dd class="<?= $escaper->escapeHtmlAttr($css('', 'price-value')) ?>">
-                    <?= $escaper->escapeHtml($priceFormatterViewModel->format($item->getPriceInclTax())) ?>
+                    <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPriceInclTax()) ?>
                 </dd>
                 <dt class="<?= $escaper->escapeHtmlAttr($css('font-medium', 'qty-label')) ?>">
                     <?= $escaper->escapeHtml(__('Quantity')) ?>:

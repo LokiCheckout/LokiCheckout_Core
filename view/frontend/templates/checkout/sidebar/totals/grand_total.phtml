@@ -23,5 +23,5 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
 </dt>
 <dd class="total value <?= $escaper->escapeHtmlAttr($css('text-right', $total->getCode() . '-value')) ?>">
-    <?= $escaper->escapeHtml($priceFormatter->format($total->getValue())) ?>
+    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
 </dd>
