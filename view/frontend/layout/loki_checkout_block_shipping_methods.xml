@@ -19,5 +19,54 @@
                 name="loki-checkout.shipping.methods.item" as="item"
                 template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
         </block>
+
+        <block name="loki-checkout.shipping.js.buttons" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/tab-buttons.phtml">
+            <arguments>
+                <argument name="buttons" xsi:type="array">
+                    <item name="delivery-dates" xsi:type="string">Delivery</item>
+                    <item name="locations" xsi:type="string">Pickup</item>
+                </argument>
+            </arguments>
+        </block>
+
+        <block name="loki-checkout.shipping.js.delivery-dates" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-dates.phtml">
+            <arguments>
+                <argument name="tab_id" xsi:type="string">delivery-dates</argument>
+            </arguments>
+        </block>
+
+        <block name="loki-checkout.shipping.js.delivery-date" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframes" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframes.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframe" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframe.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframe.input" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframe/input.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframe.image" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframe/image.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframe.name" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframe/name.phtml"/>
+
+        <block name="loki-checkout.shipping.js.delivery-date.timeframe.price" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date/timeframe/price.phtml"/>
+
+        <block name="loki-checkout.shipping.js.locations" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/locations.phtml">
+            <arguments>
+                <argument name="tab_id" xsi:type="string">locations</argument>
+            </arguments>
+        </block>
+
+        <block name="loki-checkout.shipping.js.location" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.additional" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/additional.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.address" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/address.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.business-hours" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/business-hours.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.input" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/input.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.name" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/name.phtml"/>
+
+        <block name="loki-checkout.shipping.js.location.pickup-details" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location/pickup-details.phtml"/>
     </body>
 </page>
