@@ -17,9 +17,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.store('LokiCheckout', {
+            locations: [],
+            deliveryDates: [],
             currentStep: '<?= $escaper->escapeHtml($stepNavigator->getCurrentStep()->getCode()) ?>',
             init() {
-
             },
             getComponentIds() {
                 return Alpine.store('LokiComponents').getComponentIds();
