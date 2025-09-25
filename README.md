@@ -1,9 +1,9 @@
 # LokiCheckout_Core
 
-**This is the main core package of the LokiCheckout.**
+**This is the main core package of the LokiCheckout. It replaces the regular checkout with its own, based on Loki Components, Loki Field Components and much more. All other Loki Checkout module are extending this core module. With only this core module, you already have a working checkout.**
 
 ## Installation
-Install this package via composer (assuming you have setup the `composer.yireo.com` repository correctly already):
+Install this package via composer:
 ```bash
 composer require loki-checkout/magento2-core
 ```
