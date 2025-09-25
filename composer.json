@@ -32,7 +32,7 @@
     "loki/magento2-css-utils": "^1.0",
     "loki/magento2-components": "^2.0",
     "loki/magento2-field-components": "^2.0",
-    "loki/magento2-map-components": "^0.1",
+    "loki/magento2-map-components": "~0.1",
     "yireo/magento2-csp-utilities": "^1.0",
     "psr/log": "^3.0",
     "guzzlehttp/guzzle": "^7.0",
