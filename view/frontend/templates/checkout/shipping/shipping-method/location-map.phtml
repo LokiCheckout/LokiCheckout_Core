@@ -34,7 +34,7 @@ foreach ($locations as $location) {
             <?php foreach ($markers as $marker) : ?>
                 <a href="#" class="<?= $escaper->escapeHtmlAttr($css('bg-white p-2 hover:bg-amber-100', 'anchor')) ?>" @click.prevent="jumpToMarker" <?= /* @noEscape */ $marker->getHtmlAttributes() ?>>
                     <strong><?= $escaper->escapeHtml($marker->getTitle()) ?></strong><br/>
-                    <?= $escaper->escapeHtml($marker->getAddress()->render()) ?><br/>
+                    <?= /* @noEscape */ $marker->getAddress()->render() ?><br/>
                     <button
                         class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary btn-small', 'button')) ?>"
                         @click.prevent="saveMarker"

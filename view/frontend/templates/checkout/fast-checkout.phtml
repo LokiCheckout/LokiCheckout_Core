@@ -17,6 +17,6 @@ if (empty($html)) {
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('card mb-8')) ?>">
     <div class="<?= $escaper->escapeHtmlAttr($css('flex justify-center p-4', 'inner')) ?>">
-        <?= $escaper->escapeHtml($html) ?>
+        <?= /* @noEscape */ $html ?>
     </div>
 </div>

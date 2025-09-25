@@ -15,5 +15,5 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('card mb-4')) ?>">
-    <address><?= $escaper->escapeHtml($html) ?></address>
+    <address><?= /* @noEscape */ $html ?></address>
 </div>

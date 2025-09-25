@@ -30,7 +30,7 @@ if (empty($html)) {
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <span class="<?= $escaper->escapeHtmlAttr($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
-    <?= $escaper->escapeHtml($html) ?>
+    <?= /* @noEscape */ $html ?>
     <?= /* @noEscape */ $block->getChildHtml() ?>
 
     <?php if ($applicationMode->isDeveloperMode()): ?>

@@ -23,6 +23,6 @@ if (empty($html)) {
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     <span class="<?= $escaper->escapeHtmlAttr($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Details')) ?></span><br>
     <output>
-        <?= $escaper->escapeHtml($html) ?>
+        <?= /* @noEscape */ $html ?>
     </output>
 </div>

@@ -18,6 +18,6 @@ $agreement = $block->getAgreement();
     <?php if ($agreement->getIsHtml()): ?>
         <?= $escaper->escapeHtml($agreement->getContent()) ?>
     <?php else: ?>
-        <pre><?= $escaper->escapeHtml($agreement->getContent()) ?></pre>
+        <pre><?= /* @noEscape */ $agreement->getContent() ?></pre>
     <?php endif; ?>
 </span>

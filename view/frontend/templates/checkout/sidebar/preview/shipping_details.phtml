@@ -32,7 +32,7 @@ if (empty($addressHtml)) {
     <div class="<?= $escaper->escapeHtmlAttr($css('mb-4', 'address')) ?>">
         <span class="<?= $escaper->escapeHtmlAttr($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Address')) ?></span><br>
         <address>
-            <?= $escaper->escapeHtml($addressHtml) ?>
+            <?= /* @noEscape */ $addressHtml ?>
             <?= /* @noEscape */ $block->getChildHtml('additional_address_info') ?>
         </address>
     </div>
@@ -40,7 +40,7 @@ if (empty($addressHtml)) {
     <?php if (!empty($methodHtml)): ?>
         <div class="<?= $escaper->escapeHtmlAttr($css('mb-4', 'method')) ?>">
             <span class="<?= $escaper->escapeHtmlAttr($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Method')) ?></span><br>
-            <?= $escaper->escapeHtml($methodHtml) ?>
+            <?= /* @noEscape */ $methodHtml ?>
             <?= /* @noEscape */ $block->getChildHtml('additional_method_info') ?>
         </div>
     <?php endif; ?>
