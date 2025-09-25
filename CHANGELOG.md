@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.1] - 25 September 2025
+### Fixed
+- Fix dependency with Map Components
+- Move deliveryDates and locations to LokiCheckout Alpine store
+- Move generic shipping blocks from MyParcelNl to core
+
 ## [2.1.0] - 24 September 2025
 ### Added
 - Allow LokiCheckoutCoreComponentBaseQuoteFieldQuoteFieldViewModel to be used directly
