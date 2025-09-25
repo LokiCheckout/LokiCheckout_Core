@@ -2,6 +2,11 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="LokiCheckout_Core">
         <sequence>
+            <module name="Loki_Base"/>
+            <module name="Loki_Components"/>
+            <module name="Loki_CssUtils"/>
+            <module name="Loki_FieldComponents"/>
+            <module name="Loki_MapComponents"/>
             <module name="Magento_Backend"/>
             <module name="Magento_Catalog"/>
             <module name="Magento_Checkout"/>
@@ -19,11 +24,6 @@
             <module name="Magento_Vault"/>
             <module name="Yireo_CspUtilities"/>
             <module name="Yireo_HyvaThemeAutoRegistration"/>
-            <module name="Loki_Base"/>
-            <module name="Loki_CssUtils"/>
-            <module name="Loki_Components"/>
-            <module name="Loki_FieldComponents"/>
-            <module name="Loki_MapComponents"/>
         </sequence>
     </module>
 </config>
