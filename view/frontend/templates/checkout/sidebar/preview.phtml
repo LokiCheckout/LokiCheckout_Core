@@ -15,5 +15,5 @@ if (empty($html)) {
 }
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('loki-checkout-sidebar-preview card p-8 my-4')) ?>">
-    <?= /* @noEscape */ $html ?>
+    <?= $escaper->escapeHtml($html) ?>
 </div>
