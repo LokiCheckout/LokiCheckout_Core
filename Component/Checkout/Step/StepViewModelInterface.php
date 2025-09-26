@@ -12,4 +12,5 @@ interface StepViewModelInterface extends ComponentViewModelInterface
     public function isEnabled(): bool;
     public function isAccessable(): bool;
     public function validate():  bool|array;
+    public function isValid(): bool;
 }
