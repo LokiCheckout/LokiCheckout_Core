@@ -34,7 +34,7 @@ $iconHtml = $imageRenderer->icon($block, 'home');
         <div
             class="<?= $escaper->escapeHtmlAttr($css('')) ?>"
             title="<?= $escaper->escapeHtml(__('Home')) ?>">
-            <?= $escaper->escapeHtml($iconHtml) ?>
+            <?= /* @noEscape */ $iconHtml ?>
         </div>
     </a>
 </li>

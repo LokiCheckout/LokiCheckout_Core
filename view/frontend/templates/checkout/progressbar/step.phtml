@@ -34,18 +34,18 @@ $innerHtml = $childRenderer->html($block, 'inner', ['step' => $step, 'is_active'
 >
     <?php if (false === $step->isEnabled()): ?>
         <span class="<?= $escaper->escapeHtmlAttr($css('opacity-60 cursor-not-allowed', 'disabled')) ?>">
-            <?= $escaper->escapeHtml($innerHtml) ?>
+            <?= /* @noEscape */ $innerHtml ?>
         </span>
     <?php elseif (false === $step->isAccessable()): ?>
         <span class="<?= $escaper->escapeHtmlAttr($css('', 'enabled')) ?>">
-             <?= $escaper->escapeHtml($innerHtml) ?>
+             <?= /* @noEscape */ $innerHtml ?>
         </span>
     <?php else: ?>
         <button
             @click.prevent="submit"
             data-step="<?= $escaper->escapeHtml($step->getCode()) ?>"
             class="<?= $escaper->escapeHtmlAttr($css('w-full h-auto', 'button')) ?>">
-            <?= $escaper->escapeHtml($innerHtml) ?>
+            <?= /* @noEscape */ $innerHtml ?>
         </button>
     <?php endif; ?>
 </li>
