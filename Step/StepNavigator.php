@@ -49,13 +49,16 @@ class StepNavigator implements ArgumentInterface
         } catch (UnknownStepException $e) {
         }
 
+        $availableSteps = [];
         foreach ($this->getSteps() as $step) {
+            $availableSteps[] = $step->getCode();
             if ($step->isEnabled() && $step->isAccessable()) {
                 return $step;
             }
         }
 
-        throw new StepNotFoundException('No step found with request "' . $requestedStepCode . '"');
+        $msg = __('No step found with request "%1"', $requestedStepCode);
+        throw new StepNotFoundException($msg . ': '.implode(', ', $availableSteps));
     }
 
     private function getRequestedStepCode(): string
@@ -65,7 +68,12 @@ class StepNavigator implements ArgumentInterface
             return $step;
         }
 
-        return (string)$this->request->getParam('step');
+        $step = (string)$this->request->getParam('step');
+        if (strlen($step) > 0) {
+            return $step;
+        }
+
+        return $this->getFirstStep()->getCode();
     }
 
     /**
