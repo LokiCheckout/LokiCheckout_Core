@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.3] - 27 September 2025
+### Fixed
+- Enforce isValid() method in StepViewModels
+- Enhance error messaging with Step Navigator
+- Fix wrong escaping
+
 ## [2.1.2] - 25 September 2025
 ### Fixed
 - Fix wrong escaping
