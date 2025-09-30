@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.5] - 30 September 2025
+### Fixed
+- Add create account button
+- Fix issues with payment and shipping methods not being displayed properly
+- Do not show gender in sidebar if field is not shown either
+
 ## [2.1.4] - 30 September 2025
 ### Fixed
 - Render progress bar with overlay without loader icon
