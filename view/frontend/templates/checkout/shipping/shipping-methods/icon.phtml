@@ -23,5 +23,5 @@ if (empty($icon)) {
 }
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-4 w-8 drop-shadow-2xl')) ?>">
-    <?= $escaper->escapeHtml($shipmentMethodIcon->getIcon($shipmentMethodCode)) ?>
+    <?= /* @noEscape */ $shipmentMethodIcon->getIcon($shipmentMethodCode) ?>
 </div>

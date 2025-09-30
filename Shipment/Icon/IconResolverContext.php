@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Shipment\Icon;
 
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Component\ComponentRegistrar;
 use Magento\Framework\Filesystem;
@@ -14,6 +15,7 @@ class IconResolverContext
 
     public function __construct(
         private readonly ComponentRegistrar $componentRegistrar,
+        private readonly ImageRenderer $imageRenderer,
         Filesystem $filesystem,
         private readonly AssetRepository $assetRepository,
         private readonly string $shipmentMethodCode
@@ -43,15 +45,15 @@ class IconResolverContext
             return '';
         }
 
-        if (false === file_exists($iconPath)) {
+        if (false === $this->fileDriver->isFile($iconPath)) {
             return '';
         }
 
         if ($iconType === 'svg') {
-            return file_get_contents($iconPath);
+            return $this->imageRenderer->getIconOutput($iconPath);
         }
 
-        return '<img src="' . $iconPath . '" />';
+        return '';
     }
 
     public function getViewFileUrl(string $imageId): string

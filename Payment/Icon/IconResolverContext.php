@@ -75,11 +75,8 @@ class IconResolverContext
             return '';
         }
 
-        $this->imageRenderer->get($iconPath);
-
         if ($iconType === 'svg') {
-            //return $this->imageRenderer->get($iconPath, 'svg');
-            return $this->fileDriver->fileGetContents($iconPath);
+            return $this->imageRenderer->getIconOutput($iconPath);
         }
 
         return '';
