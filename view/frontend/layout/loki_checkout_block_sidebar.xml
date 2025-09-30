@@ -39,7 +39,7 @@
 
                 <block name="loki-checkout.sidebar.preview.quote_details" as="quote_details" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details.phtml">
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_email" as="customer_email" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details/customer_email.phtml"/>
-                    <block name="loki-checkout.sidebar.preview.quote_details.customer_gender" as="customer_gender" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details/customer_gender.phtml"/>
+                    <block ifconfig="customer/address/gender_show" name="loki-checkout.sidebar.preview.quote_details.customer_gender" as="customer_gender" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details/customer_gender.phtml"/>
                     <block name="loki-checkout.sidebar.preview.quote_details.customer_dob" as="customer_dob" template="LokiCheckout_Core::checkout/sidebar/preview/quote_details/customer_dob.phtml"/>
                 </block>
 
