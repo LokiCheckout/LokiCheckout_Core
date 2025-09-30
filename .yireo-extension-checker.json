@@ -1,5 +1,6 @@
 {
   "ignore": [
+    "Loki_Base",
     "Loki_MapComponents",
     "loki/magento2-map-components"
   ]
