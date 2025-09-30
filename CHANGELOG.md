@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.4] - 30 September 2025
+### Fixed
+- Render progress bar with overlay without loader icon
+- Do not move messages to top
+- Make sure max items to display in sidebar is never 0
+- With login-component, only refresh sectionData completely after AJAX is done
+- Add x-cloak to conditional loader for shipping method templates
+- Fix gitlab being overwritten
+
 ## [2.1.3] - 27 September 2025
 ### Fixed
 - Enforce isValid() method in StepViewModels
