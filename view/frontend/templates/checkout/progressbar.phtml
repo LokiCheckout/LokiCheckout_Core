@@ -30,7 +30,7 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
     class="<?= $escaper->escapeHtmlAttr($css('hidden md:block card rounded-lg relative')) ?>"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
 >
-    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.overlay') ?>
     <ul class="<?= $escaper->escapeHtmlAttr($css('flex items-center', 'list')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>
         <?php foreach ($stepNavigator->getSteps() as $step): ?>
