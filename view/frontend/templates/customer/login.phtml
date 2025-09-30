@@ -88,6 +88,12 @@ use Magento\Framework\View\Element\Template;
         </button>
 
         <a
+            href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>"
+            class="<?= $escaper->escapeHtmlAttr($css('btn btn-secondary', 'toolbar-button')) ?>">
+            <span><?= $escaper->escapeHtml(__('Create An Account')) ?></span>
+        </a>
+
+        <a
             class="<?= $escaper->escapeHtmlAttr($css('underline text-secondary', 'forgot-password-link')) ?>"
             href="<?= $escaper->escapeHtml(__($block->getUrl('customer/account/forgotpassword'))) ?>">
             <span><?= $escaper->escapeHtml(__('Forgot Your Password?')) ?></span>
