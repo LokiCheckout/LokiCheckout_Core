@@ -71,15 +71,15 @@ class IconResolverContext
             return '';
         }
 
-        if (false === $this->fileDriver->isFile($iconPath)) {
-            return '';
-        }
-
-        if ($iconType === 'svg') {
+        if ($this->fileDriver->isFile($iconPath) && $iconType === 'svg') {
             return $this->imageRenderer->getIconOutput($iconPath);
         }
 
-        return '';
+        if ($this->fileDriver->isFile($iconPath)) {
+            return $this->imageRenderer->getByFile($iconPath);
+        }
+
+        return $this->imageRenderer->getByUrl($iconPath, $this->getAttributes());
     }
 
     public function getViewFileUrl(string $imageId): string

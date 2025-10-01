@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\ViewModel\PaymentMethodIcon;
@@ -11,6 +12,7 @@ use LokiCheckout\Core\ViewModel\PaymentMethodIcon;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var PaymentMethodIcon $paymentMethodIcon */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
 // @doc: Show how to change CSS here
 
 $paymentMethodCode = $block->getCode();
@@ -24,6 +26,7 @@ $width = (int)$block->getWidth();
 if (empty($width)) {
     $width = 25;
 }
+
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-2 drop-shadow-2xl')) ?>">
     <?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, ['width' => $width]) ?>
