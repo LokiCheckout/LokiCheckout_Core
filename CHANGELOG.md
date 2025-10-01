@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.6] - 01 October 2025
+### Fixed
+- Improve image rendering
+
 ## [2.1.5] - 30 September 2025
 ### Fixed
 - Add create account button
