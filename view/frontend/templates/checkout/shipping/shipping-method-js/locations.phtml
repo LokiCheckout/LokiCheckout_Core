@@ -36,11 +36,11 @@ $tabId = $block->getTabId();
             <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.js.location') ?>
         </template>
 
-        <div @click.prevent="expandLocations" x-cloak x-show="showExpandLocations">
+        <button @click.prevent="expandLocations" x-cloak x-show="showExpandLocations" class="cursor-pointer">
             <div class="inline-block">
                 <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
             </div>
             <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
-        </div>
+        </button>
     </div>
 </div>
