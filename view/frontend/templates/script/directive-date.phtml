@@ -39,6 +39,10 @@ if (!isset($options['day'])) {
         Alpine.directive('time', (el, { value, expression }, { evaluate }) => {
             if (expression) {
                 const time = evaluate(expression);
+                if (!time) {
+                    return;
+                }
+
                 const match = time.toString().match(/^([0-9]{2}):([0-9]{2})(?::([0-9]{2}))?$/);
                 if (match) {
                     el.textContent = match[1] + ':' + match[2];
