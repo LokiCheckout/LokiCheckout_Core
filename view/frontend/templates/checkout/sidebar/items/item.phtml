@@ -27,16 +27,11 @@ if (empty($width)) {
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
-$productImageUrl = $productImageViewModel->getImageUrlBySku($item->getSku(), $width);
+$productImageHtml = $productImageViewModel->getImage($item, $width);
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 my-8')) ?>" data-item-id="<?= (int)$item->getItemId() ?>" data-item-qty="<?= (float)$item->getQty() ?>">
-    <img
-        src="<?= $escaper->escapeHtml($productImageUrl) ?>"
-        width="<?= $escaper->escapeHtml($width) ?>"
-        alt="<?= $escaper->escapeHtml($item->getName()) ?>"
-        loading="lazy"
-        class="<?= $escaper->escapeHtmlAttr($css('hidden md:block h-full', 'image')) ?>"
-    >
+<div class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 my-8 justify-between')) ?>" data-item-id="<?= (int)$item->getItemId() ?>" data-item-qty="<?= (float)$item->getQty() ?>">
+    <?= /* @noEscape */ $productImageHtml ?>
+
     <div class="<?= $escaper->escapeHtmlAttr($css('', 'outer grow')) ?>">
         <div class="<?= $escaper->escapeHtmlAttr($css('grow', 'inner')) ?>">
             <p><strong><?= $escaper->escapeHtml($item->getName()) ?><br></strong></p>
