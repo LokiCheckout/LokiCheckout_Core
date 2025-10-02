@@ -2,10 +2,12 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @version 2.1.6 */
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var CssClass $css */
 ?>
 <input
@@ -15,6 +17,7 @@ use Magento\Framework\View\Element\Template;
     :disabled="disabled"
     :id="location.id"
     :value="location.id"
-    :checked="location.current"
+    :checked="isCurrentLocation"
+    :data-id="location.id"
     class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
 />

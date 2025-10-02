@@ -2,10 +2,12 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @version 2.1.6 */
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var CssClass $css */
 ?>
 <input
@@ -14,6 +16,7 @@ use Magento\Framework\View\Element\Template;
     @change="submitTimeframe"
     :disabled="disabled"
     :value="timeframe.id"
-    :checked="timeframe.current"
+    :checked="isCurrentTimeframe"
+    :data-id="timeframe.id"
     class="<?= $escaper->escapeHtmlAttr($css('mr-2', 'input')) ?>"
 />
