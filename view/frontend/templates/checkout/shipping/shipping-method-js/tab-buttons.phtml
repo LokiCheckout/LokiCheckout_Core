@@ -12,13 +12,16 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 
 $buttons = (array)$block->getButtons();
+
+// TODO: this should be a Radio Group for better A11Y
+// Visually it still can be a styled as a button
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>">
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
             @click.prevent="toggleTabs"
             data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
-            class="<?= $escaper->escapeHtmlAttr($css('tab-inactive p-4', 'button')) ?>"
+            class="<?= $escaper->escapeHtmlAttr($css('tab-inactive btn p-4', 'button')) ?>"
         >
             <?= $escaper->escapeHtml(__($buttonLabel)); ?>
         </button>
