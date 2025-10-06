@@ -15,7 +15,7 @@ use Magento\Framework\View\Element\Template;
 $agreement = $block->getAgreement();
 ?>
 <span class="<?= $escaper->escapeHtmlAttr($css('italic', 'content')) ?>">
-    <?php if ($agreement->getIsHtml()): ?>
+    <?php if (false === $agreement->getIsHtml()): ?>
         <?= $escaper->escapeHtml($agreement->getContent()) ?>
     <?php else: ?>
         <pre><?= /* @noEscape */ $agreement->getContent() ?></pre>
