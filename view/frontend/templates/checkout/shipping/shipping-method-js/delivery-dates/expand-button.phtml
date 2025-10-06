@@ -17,11 +17,11 @@ use Magento\Framework\View\Element\Template;
 <button
     @click="expandTimeframes"
     x-cloak x-show="showExpandDeliveryDates"
-    class="<?= $css('cursor-pointer') ?>">
-    <div class="<?= $css('inline-block', 'icon') ?>">
+    class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer')) ?>">
+    <div class="<?= $escaper->escapeHtmlAttr($css('inline-block', 'icon')) ?>">
         <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
     </div>
-    <span class="<?= $css('text-sm', 'span') ?>">
+    <span class="<?= $escaper->escapeHtmlAttr($css('text-sm', 'span')) ?>">
         <?= $escaper->escapeHtml(__('Show more options')) ?>
     </span>
 </button>

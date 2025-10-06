@@ -40,7 +40,7 @@ $tabId = $block->getTabId();
             <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.js.location') ?>
         </template>
 
-        <?= $block->getChildHtml('expand-button') ?>
-        <?= $block->getChildHtml('expand-all-button') ?>
+        <?= /* @noEscape */ $block->getChildHtml('expand-button') ?>
+        <?= /* @noEscape */ $block->getChildHtml('expand-all-button') ?>
     </div>
 </div>
