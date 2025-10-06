@@ -29,10 +29,24 @@
             </arguments>
         </block>
 
-        <block name="loki-checkout.shipping.js.delivery-dates" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-dates.phtml">
+        <block
+            name="loki-checkout.shipping.js.delivery-dates"
+            template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-dates.phtml">
             <arguments>
                 <argument name="tab_id" xsi:type="string">delivery-dates</argument>
             </arguments>
+
+            <block
+                name="loki-checkout.shipping.js.delivery-dates.expand-button"
+                as="expand-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-dates/expand-button.phtml"
+            />
+
+            <block
+                name="loki-checkout.shipping.js.delivery-dates.expand-all-button"
+                as="expand-all-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-dates/expand-all-button.phtml"
+            />
         </block>
 
         <block name="loki-checkout.shipping.js.delivery-date" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/delivery-date.phtml"/>
@@ -53,6 +67,18 @@
             <arguments>
                 <argument name="tab_id" xsi:type="string">locations</argument>
             </arguments>
+
+            <block
+                name="loki-checkout.shipping.js.locations.expand-button"
+                as="expand-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method-js/locations/expand-button.phtml"
+            />
+
+            <block
+                name="loki-checkout.shipping.js.locations.expand-all-button"
+                as="expand-all-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method-js/locations/expand-all-button.phtml"
+            />
         </block>
 
         <block name="loki-checkout.shipping.js.location" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/location.phtml"/>

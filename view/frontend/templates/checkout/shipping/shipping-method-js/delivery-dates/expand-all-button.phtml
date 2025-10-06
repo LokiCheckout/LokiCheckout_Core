@@ -1,0 +1,25 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Loki\Components\Util\Block\ImageRenderer;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ImageRenderer $imageRenderer */
+
+?>
+<button
+    @click="expandAllTimeframes"
+    x-cloak x-show="showExpandDeliveryDates"
+    class="<?= $css('cursor-pointer') ?>">
+    <div class="<?= $css('inline-block', 'icon') ?>">
+        <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
+    </div>
+    <span class="<?= $css('text-sm', 'span') ?>">
+        <?= $escaper->escapeHtml(__('Show all options')) ?>
+    </span>
+</button>

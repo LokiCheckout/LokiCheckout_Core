@@ -35,18 +35,7 @@ $tabId = $block->getTabId();
             <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.js.delivery-date') ?>
         </template>
 
-        <button @click="expandTimeframes" x-cloak x-show="showExpandDeliveryDates">
-            <div class="inline-block">
-                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
-            </div>
-            <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
-        </button>
-
-        <button @click="expandAllTimeframes" x-cloak x-show="showExpandDeliveryDates">
-            <div class="inline-block">
-                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
-            </div>
-            <span class="text-sm"><?= $escaper->escapeHtml(__('Show all options')) ?></span>
-        </button>
+        <?= $block->getChildHtml('expand-button') ?>
+        <?= $block->getChildHtml('expand-all-button') ?>
     </div>
 </div>
