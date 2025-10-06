@@ -1,0 +1,23 @@
+<?php declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\Config\Config;
+use Loki\Components\Factory\ViewModelFactory;
+
+/** @version 2.1.7 */
+/** @var Template $block */
+
+$translations = json_encode((array)$block->getTranslations());
+?>
+<script>
+    const LokiCheckoutTranslations = JSON.parse('<?= /* @noEscape */ $translations ?>');
+    const LokiTranslate = {
+        __(text) {
+            if (LokiCheckoutTranslations.hasOwnProperty(text)) {
+                return LokiCheckoutTranslations[text];
+            }
+
+            return text;
+        }
+    };
+</script>

@@ -19,8 +19,7 @@ use Magento\Framework\View\Element\Template;
                 <div x-html="day" class="day capitalize"></div>
                 <template x-for="hour in hours">
                     <div>
-                        <span x-time="hour.start"></span> -
-                        <span x-time="hour.end"></span>
+                        <span x-html="hour"></span>
                     </div>
                 </template>
             </div>
