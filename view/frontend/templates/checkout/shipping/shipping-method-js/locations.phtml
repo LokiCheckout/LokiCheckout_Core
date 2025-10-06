@@ -28,7 +28,11 @@ $tabId = $block->getTabId();
     </div>
 
     <div>
-        <template x-if="hasNoLocations">
+        <template x-if="showLoadingLocations">
+            <div class="<?= $escaper->escapeHtmlAttr($css('p-2', 'loading')) ?>"><?= $escaper->escapeHtml(__('Loading locations')) ?></div>
+        </template>
+
+        <template x-if="showNoLocations">
             <div class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
         </template>
 

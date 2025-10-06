@@ -27,7 +27,11 @@ $tabId = $block->getTabId();
     </div>
 
     <div>
-        <div x-cloak x-show="hasNoDeliveryDates" class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>">
+        <div x-cloak x-show="showLoadingDeliveryDates" class="<?= $escaper->escapeHtmlAttr($css('p-2', 'loading')) ?>">
+            <?= $escaper->escapeHtml(__('Loading delivery options')) ?>
+        </div>
+
+        <div x-cloak x-show="showNoDeliveryDates" class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>">
             <?= $escaper->escapeHtml(__('No delivery options found')) ?>
         </div>
 
