@@ -25,14 +25,14 @@ if (!isset($options['day'])) {
         Alpine.directive('date', (el, { value, expression }, { evaluate }) => {
             if (expression) {
                 const date = new Date(evaluate(expression));
-                el.textContent = date.toLocaleString(undefined, LokiCheckoutDateOptions);
+                el.textContent = date.toLocaleString(LOKI_LOCALE, LokiCheckoutDateOptions);
             }
         });
 
         Alpine.directive('datetime', (el, { value, expression }, { evaluate }) => {
             if (expression) {
                 const date = new Date(evaluate(expression));
-                el.textContent = date.toLocaleString(undefined, LokiCheckoutDateOptions) + ', ' + date.toLocaleTimeString();
+                el.textContent = date.toLocaleString(LOKI_LOCALE, LokiCheckoutDateOptions) + ', ' + date.toLocaleTimeString();
             }
         });
 
