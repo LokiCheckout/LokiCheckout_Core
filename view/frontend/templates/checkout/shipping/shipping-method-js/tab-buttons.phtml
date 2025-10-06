@@ -19,7 +19,7 @@ $buttons = (array)$block->getButtons();
 <div class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>">
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
-            @click.prevent="toggleTabs"
+            @click="toggleTabs"
             data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
             class="<?= $escaper->escapeHtmlAttr($css('tab-inactive btn p-4', 'button')) ?>"
         >
