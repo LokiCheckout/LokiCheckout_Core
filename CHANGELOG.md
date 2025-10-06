@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.7] - 06 October 2025
+### Fixed
+- Show loader when no items
+- Move expand buttons for Alpine shipping methods into child-templates
+- Remove prevent-modified from buttons
+- Option to show all available locations or deliveryDates
+- Make parent element of entire location block a label
+- Fix hickup in locations and delivery dates with shipping methods in JS
+- Fix selection of current shipping method location in Alpine
+- Prevent null value to break x-time directive
+- Turn expandLocations link into button
+- Standardize time slots with start and end property
+- Allow x-time to match both 00:00:00 and 00:00
+- Make sure to use cart item renderer for product image in sidebar
+- Add btn class as default to various buttons
+- Refresh shipping methods when changing shipping address postcode, street, region, city or country
+
 ## [2.1.6] - 01 October 2025
 ### Fixed
 - Improve image rendering
