@@ -13,8 +13,9 @@ use Magento\Framework\View\Element\Template;
 
 $buttons = (array)$block->getButtons();
 
-// TODO: this should be a Radio Group for better A11Y
-// Visually it still can be a styled as a button
+/*
+ * @todo this should be a Radio Group for better A11Y. Visually it still can be a styled as a button
+ */
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>">
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
