@@ -4,8 +4,6 @@
         <block
             name="loki-checkout.shipping.methods"
             template="LokiCheckout_Core::checkout/shipping/shipping-methods.phtml">
-            <container name="loki-checkout.shipping.methods.before" as="before-methods"/>
-            <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
 
             <block
                 name="loki-checkout.shipping.methods.title" as="title"
@@ -16,8 +14,16 @@
             </block>
 
             <block
-                name="loki-checkout.shipping.methods.item" as="item"
-                template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
+                name="loki-checkout.shipping.methods.list"
+                as="list"
+                template="LokiCheckout_Core::checkout/shipping/shipping-methods/list.phtml">
+                <container name="loki-checkout.shipping.methods.before" as="before-methods"/>
+                <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
+
+                <block
+                    name="loki-checkout.shipping.methods.item" as="item"
+                    template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
+            </block>
         </block>
 
         <block name="loki-checkout.shipping.js.buttons" template="LokiCheckout_Core::checkout/shipping/shipping-method-js/tab-buttons.phtml">

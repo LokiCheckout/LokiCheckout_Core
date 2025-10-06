@@ -1,0 +1,47 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
+use Loki\Components\Util\Block\BlockRenderer;
+
+/** @version 2.1.7 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var ShippingMethodsViewModel $viewModel */
+/** @var BlockRenderer $blockRenderer */
+
+$viewModel = $block->getViewModel();
+$shippingMethods = $viewModel->getShippingMethods();
+?>
+<div
+    data-type="field"
+    x-ref="field"
+    :aria-invalid="isAriaInvalid"
+    :data-valid="isValid"
+    class="<?= $escaper->escapeHtmlAttr($css('border border-transparent', 'container')) ?>">
+    <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
+    <?php if (!empty($shippingMethods)): ?>
+        <ul>
+            <?php foreach ($shippingMethods as $shippingMethod): ?>
+                <?php $code = $shippingMethod->getCarrierCode() . '_' . $shippingMethod->getMethodCode(); ?>
+                <?= /* @noEscape */ $blockRenderer->html(
+                    $block,
+                    'loki-checkout.shipping.methods.item',
+                    [
+                        'method' => $shippingMethod,
+                        'code'   => $code,
+                    ]
+                ) ?>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <div class="p-4">
+            <?= $escaper->escapeHtml(__('No shipping methods available')) ?>
+        </div>
+    <?php endif; ?>
+    <?= /* @noEscape */ $block->getChildHtml('after-methods') ?>
+</div>
