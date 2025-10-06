@@ -15,8 +15,7 @@ use Magento\Framework\View\Element\Template;
     name="delivery"
     @change="submitTimeframe"
     :disabled="disabled"
-    :value="timeframe.id"
+    :value="timeframe.json"
     :checked="isCurrentTimeframe"
-    :data-id="timeframe.id"
     class="<?= $escaper->escapeHtmlAttr($css('mr-2', 'input')) ?>"
 />

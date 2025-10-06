@@ -15,8 +15,7 @@ use Magento\Framework\View\Element\Template;
     name="pickup_location"
     @change="saveLocation"
     :disabled="disabled"
-    :id="location.id"
-    :value="location.id"
+    :value="location.json"
     :checked="isCurrentLocation"
     class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
 />
