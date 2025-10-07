@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.8] - 07 October 2025
+### Fixed
+- Refactor address state logic to allow reset after certaing changes, like country change
+- When switching country, wipe out street, postcode, city and region
+- Split up empty-message of shipping methods in separate template
+- HTML content of agreement wrongly escaped
+- Add new list-block under neath shipping methods
+- Add JS translations
+- Allow for JS translations of dates
+
 ## [2.1.7] - 06 October 2025
 ### Fixed
 - Show loader when no items
