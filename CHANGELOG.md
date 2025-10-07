@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.9] - 07 October 2025
+### Fixed
+- Remove redundant width and fill-color from step forward button icons
+
 ## [2.1.8] - 07 October 2025
 ### Fixed
 - Refactor address state logic to allow reset after certaing changes, like country change
