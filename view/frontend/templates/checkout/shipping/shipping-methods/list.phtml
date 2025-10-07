@@ -39,9 +39,8 @@ $shippingMethods = $viewModel->getShippingMethods();
             <?php endforeach; ?>
         </ul>
     <?php else: ?>
-        <div class="p-4">
-            <?= $escaper->escapeHtml(__('No shipping methods available')) ?>
-        </div>
+        <?= /* @noEscape */ $block->getChildHtml('empty') ?>
     <?php endif; ?>
+
     <?= /* @noEscape */ $block->getChildHtml('after-methods') ?>
 </div>

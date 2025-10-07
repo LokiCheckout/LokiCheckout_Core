@@ -6,23 +6,17 @@ use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
-use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\BlockRenderer;
-use LokiCheckout\Core\ViewModel\PriceFormatter;
 
 /** @version 2.1.7 */
 /** @var Escaper $escaper */
 /** @var Template $block */
-/** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var bool $debug */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
-/** @var PriceFormatter $priceFormatter */
 
-$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
-$shippingMethods = $viewModel->getShippingMethods();
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('relative w-full mb-8')) ?>">
     <?php if ($viewModel->isDisabled()) : ?>

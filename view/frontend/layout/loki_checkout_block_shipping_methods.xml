@@ -23,6 +23,10 @@
                 <block
                     name="loki-checkout.shipping.methods.item" as="item"
                     template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
+
+                <block
+                    name="loki-checkout.shipping.methods.empty" as="empty"
+                    template="LokiCheckout_Core::checkout/shipping/shipping-methods/empty.phtml"/>
             </block>
         </block>
 
