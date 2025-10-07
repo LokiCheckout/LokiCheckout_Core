@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\ImageRenderer;
@@ -11,13 +12,13 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ImageRenderer $imageRenderer */
-
+/** @var Escaper $escaper */
 
 ?>
-<div x-show="notLoading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3 w-4 fill-white', 'icon')) ?>">
+<div x-show="notLoading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, 'arrow-right') ?>
 </div>
 
-<div x-cloak x-show="loading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3 w-4 animate-spin fill-white', 'icon')) ?>">
+<div x-cloak x-show="loading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3 animate-spin', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, 'spinner') ?>
 </div>
