@@ -18,7 +18,7 @@ class ShippingAddressState implements AddressStateInterface
 
     public function load(string $attributeCode): mixed
     {
-        return $this->getShippingAddress()->getData($attributeCode);
+        return $this->getAddress()->getData($attributeCode);
     }
 
     public function save(string $attributeCode, string|bool|int $value): void
@@ -34,7 +34,8 @@ class ShippingAddressState implements AddressStateInterface
 
         $this->checkoutState->saveQuote($quote);
     }
-    public function getShippingAddress(): Address
+
+    public function getAddress(): Address
     {
         $quote = $this->checkoutState->getQuote();
         $shippingAddress = $quote->getShippingAddress();

@@ -6,6 +6,10 @@ use LokiCheckout\Core\Util\Component\AddressStateProvider;
 use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
 use Loki\Field\Component\Base\Field\FieldRepository;
+use LokiCheckout\Core\ViewModel\State\BillingAddressState;
+use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
+use Magento\Framework\Event\Manager as EventManager;
+use Magento\Quote\Model\Quote\Address;
 
 /**
  * @method AddressFieldContext getContext()
@@ -14,7 +18,8 @@ class AddressFieldRepository extends FieldRepository
 {
     public function __construct(
         protected AddressStateProvider $addressStateProvider,
-        protected SameAddressService $sameAddressService
+        protected SameAddressService $sameAddressService,
+        protected EventManager $eventManager
     ) {
     }
 
@@ -36,7 +41,25 @@ class AddressFieldRepository extends FieldRepository
             return;
         }
 
-        $this->getAddressState()->save($this->getFieldName(), (string)$value);
+        $previousValue = $this->getAddressState()->load($this->getFieldName());
+        if ($previousValue === $value) {
+            return;
+        }
+
+        /** @var Address $address */
+        $address = $this->getAddressState()->getAddress();
+        $address->setData($this->getFieldName(), (string)$value);
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
+
+        $this->eventManager->dispatch('loki_checkout_address_field_save_after', [
+            'field_name' => $this->getFieldName(),
+            'value' => $value,
+            'address' => $address,
+            'address_type' => $this->getAddressState() instanceof ShippingAddressState ? 'shipping' : 'billing',
+            'quote' => $quote,
+        ]);
+
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
     protected function getAddressState(): AddressStateInterface

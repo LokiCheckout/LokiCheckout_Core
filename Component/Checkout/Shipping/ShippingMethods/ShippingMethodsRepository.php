@@ -59,7 +59,7 @@ class ShippingMethodsRepository extends ComponentRepository
             return $this->currentShippingMethod;
         }
 
-        $shippingAddress = $this->getContext()->getShippingAddressState()->getShippingAddress();
+        $shippingAddress = $this->getContext()->getShippingAddressState()->getAddress();
 
         $currentShippingMethod = (string)$shippingAddress->getShippingMethod();
         $sanitizedShippingMethod = $this->sanitizeShippingMethod($currentShippingMethod);

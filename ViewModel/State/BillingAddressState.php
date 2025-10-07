@@ -18,12 +18,12 @@ class BillingAddressState implements AddressStateInterface
 
     public function load(string $attributeCode): mixed
     {
-        return $this->getBillingAddress()->getData($attributeCode);
+        return $this->getAddress()->getData($attributeCode);
     }
 
     public function save(string $attributeCode, string $value): void
     {
-        $billingAddress = $this->getBillingAddress();
+        $billingAddress = $this->getAddress();
         $billingAddress->setData($attributeCode, $value);
 
         if ($this->sameAddressService->isEnabled()) {
@@ -34,7 +34,7 @@ class BillingAddressState implements AddressStateInterface
         $this->checkoutState->saveQuote($this->checkoutState->getQuote());
     }
 
-    public function getBillingAddress(): Address
+    public function getAddress(): Address
     {
         $quote = $this->checkoutState->getQuote();
         $billingAddress = $quote->getBillingAddress();

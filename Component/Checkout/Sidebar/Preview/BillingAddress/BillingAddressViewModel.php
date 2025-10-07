@@ -18,7 +18,7 @@ class BillingAddressViewModel implements ArgumentInterface
 
     public function isSameAsShipping(): bool
     {
-        return $this->billingAddressState->getBillingAddress()->getSameAsBilling() || $this->shippingAddressState->getShippingAddress()->getSameAsBilling();
+        return $this->billingAddressState->getAddress()->getSameAsBilling() || $this->shippingAddressState->getAddress()->getSameAsBilling();
     }
 
     public function getHtml(): string
@@ -27,7 +27,7 @@ class BillingAddressViewModel implements ArgumentInterface
             return '';
         }
 
-        $address = $this->billingAddressState->getBillingAddress();
+        $address = $this->billingAddressState->getAddress();
         return $this->addressRenderer->getHtml($address);
     }
 }

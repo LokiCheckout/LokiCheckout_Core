@@ -29,7 +29,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return '';
         }
 
-        $address = $this->shippingAddressState->getShippingAddress();
+        $address = $this->shippingAddressState->getAddress();
 
         return $this->addressRenderer->getHtml($address);
     }
