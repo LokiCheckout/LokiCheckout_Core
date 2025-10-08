@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.11] - 08 October 2025
+### Fixed
+- Allow sorting of children via block argument "sort_order"
+- Apply flexbox and gap to address and sidebar
+- Improve spacing of blocks within steps
+
 ## [2.1.10] - 08 October 2025
 ### Fixed
 - Allow changing button classes
