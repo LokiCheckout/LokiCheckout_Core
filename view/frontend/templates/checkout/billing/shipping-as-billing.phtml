@@ -14,7 +14,7 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var ShippingAsBillingViewModel $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('card mb-8')) ?>">
+<div class="<?= $escaper->escapeHtmlAttr($css('card')) ?>">
     <label for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field" class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
         <input type="checkbox"
                :checked="value"

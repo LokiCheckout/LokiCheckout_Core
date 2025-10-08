@@ -10,6 +10,6 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<h2 class="<?= $escaper->escapeHtmlAttr($css('title text-2xl font-medium border-b border-gray-200 mb-4 pb-2')) ?>">
+<h2 class="<?= $escaper->escapeHtmlAttr($css('title text-2xl font-medium border-b border-gray-200')) ?>">
     <?= $escaper->escapeHtml(__($block->getTitle())) ?>
 </h2>
