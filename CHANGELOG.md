@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.10] - 08 October 2025
+### Fixed
+- Allow changing button classes
+- Set fill:white for SVG within btn-primary
+- Always enable the step-forward button, just change its appearance
+- When there are no shipping methods, mark LokiCheckoutShippingMethods component as valid
+
 ## [2.1.9] - 07 October 2025
 ### Fixed
 - Remove redundant width and fill-color from step forward button icons
