@@ -14,8 +14,10 @@ use Magento\Framework\View\Element\Template;
             redirectUrl: '',
             currentStep: '',
             valid: true,
+            cssClassActive: 'btn-primary',
+            cssClassInactive: 'btn-secondary',
             cssClass() {
-                return this.valid ? 'btn-primary' : 'btn-secondary';
+                return this.valid ? this.cssClassActive : this.cssClassInactive;
             },
             initRedirectIfNeeded() {
                 if (this.redirectUrl) {
