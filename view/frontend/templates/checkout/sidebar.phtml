@@ -2,13 +2,15 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @version 2.1.10 */
 /** @var Template $block */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
 ?>
-<aside class="<?= $escaper->escapeHtmlAttr($css('my-2 order-2')) ?>">
+<aside class="<?= $escaper->escapeHtmlAttr($css('flex flex-col gap-4 my-2 order-2')) ?>">
     <?= /* @noEscape */ $block->getChildHtml(); ?>
 </aside>
 
