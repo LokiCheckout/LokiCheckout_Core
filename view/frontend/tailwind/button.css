@@ -9,6 +9,12 @@
         }
     }
 
+    .btn-primary {
+        svg {
+            fill: white;
+        }
+    }
+
     .tab-buttons {
         .tab {
             @apply rounded-lg p-1 border-2;
