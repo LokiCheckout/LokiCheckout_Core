@@ -14,8 +14,9 @@ use Magento\Framework\View\Element\Template;
             redirectUrl: '',
             currentStep: '',
             valid: true,
-            reactivateTimeout: 0,
-            reactivateTimer: null,
+            cssClass() {
+                return this.valid ? 'btn-primary' : 'btn-secondary';
+            },
             initRedirectIfNeeded() {
                 if (this.redirectUrl) {
                     document.dispatchEvent(new CustomEvent('loki-checkout.before-redirect', {
@@ -33,12 +34,6 @@ use Magento\Framework\View\Element\Template;
 
                 this.$nextTick(() => {
                     this.updateValid();
-                });
-            },
-            initWatchValidForDisabled() {
-                this.disabled = !this.valid;
-                this.$watch('valid', () => {
-                    this.disabled = !this.valid;
                 });
             },
             initDisableAllWhenLoading() {
@@ -63,15 +58,6 @@ use Magento\Framework\View\Element\Template;
                 LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
 
                 // @todo: Also add scroll event (and make it configurable
-
-                if (this.reactivateTimer) {
-                    window.clearTimeout(this.reactivateTimer);
-                }
-
-                this.reactivateTimer = window.setTimeout(() => {
-                    this.valid = true;
-                    this.disabled = false;
-                }, this.reactivateTimeout);
 
                 return this.valid;
             },
@@ -113,11 +99,6 @@ use Magento\Framework\View\Element\Template;
                 });
 
                 return false;
-            },
-            destroyReactivateTimer() {
-                if (this.reactivateTimer) {
-                    window.clearTimeout(this.reactivateTimer);
-                }
             }
         }));
     });
