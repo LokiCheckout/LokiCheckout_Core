@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.12] - 08 October 2025
+### Fixed
+- Fix styling of agreements
+- Turn margins into gaps
+- Fix password field styling under Luma
+
 ## [2.1.11] - 08 October 2025
 ### Fixed
 - Allow sorting of children via block argument "sort_order"
