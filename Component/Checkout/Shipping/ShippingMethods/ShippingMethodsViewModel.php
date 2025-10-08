@@ -43,6 +43,14 @@ class ShippingMethodsViewModel extends CheckoutViewModel
         return 'LokiCheckoutShippingMethods';
     }
 
+    public function getJsData(): array
+    {
+        return [
+            ...parent::getJsData(),
+            'shippingMethodCount' => count($this->getShippingMethods()),
+        ];
+    }
+
     private function isVirtualQuote(): bool
     {
         return $this->getContext()->getCheckoutState()->getQuote()->isVirtual();

@@ -11,8 +11,25 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutShippingMethods', () => ({
             ...LokiCheckoutComponentType,
+            shippingMethodCount: 0,
             initShippingMethodEvent() {
                 this.dispatchShippingMethodEvent();
+            },
+            initValidStateWithNoShippingMethods() {
+                if (this.shippingMethodCount === 0) {
+                    this.valid = true;
+                }
+            },
+            isValid() {
+                if (this.shippingMethodCount === 0) {
+                    return true;
+                }
+
+                if (this.valid && this.value && this.value.length > 0) {
+                    return true;
+                }
+
+                return this.valid && this.isSubmitted();
             },
             initWatchShippingMethod() {
                 this.$watch('value', () => {
