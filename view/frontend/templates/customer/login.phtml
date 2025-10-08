@@ -78,12 +78,12 @@ use Magento\Framework\View\Element\Template;
         <?= /* @noEscape */ $block->getChildHtml('form_additional_info') ?>
     </div>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('actions-toolbar flex gap-8', 'toolbar')) ?>">
+    <div class="<?= $escaper->escapeHtmlAttr($css('flex flex-wrap gap-2', 'toolbar')) ?>">
         <button
             type="button"
             :disabled="isButtonDisabled"
             @click="submit"
-            class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary disabled:opacity-75', 'toolbar-button')) ?>">
+            class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>
         </button>
 
@@ -94,7 +94,7 @@ use Magento\Framework\View\Element\Template;
         </a>
 
         <a
-            class="<?= $escaper->escapeHtmlAttr($css('underline text-secondary', 'forgot-password-link')) ?>"
+            class="<?= $escaper->escapeHtmlAttr($css('basis-full underline text-secondary', 'forgot-password-link')) ?>"
             href="<?= $escaper->escapeHtml(__($block->getUrl('customer/account/forgotpassword'))) ?>">
             <span><?= $escaper->escapeHtml(__('Forgot Your Password?')) ?></span>
         </a>
