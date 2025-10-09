@@ -14,6 +14,11 @@ class CheckoutViewModel extends FieldViewModel
 
     public function getJsComponentName(): ?string
     {
+        $jsComponentName = $this->getBlock()->getJsComponentName();
+        if (!empty($jsComponentName)) {
+            return $jsComponentName;
+        }
+
         return 'LokiCheckoutComponent';
     }
 }
