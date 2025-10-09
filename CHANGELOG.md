@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.13] - 09 October 2025
+### Fixed
+- Reset localStorage of cart and loki-checkout right before finishing everything
+- Add my-8 to address forms
+
 ## [2.1.12] - 08 October 2025
 ### Fixed
 - Fix styling of agreements
