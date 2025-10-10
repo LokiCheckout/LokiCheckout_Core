@@ -126,17 +126,6 @@
         </arguments>
     </type>
 
-    <type name="Yireo\HyvaThemeAutoRegistration\Observer\RegisterModuleForHyvaConfig">
-        <arguments>
-            <argument name="modulePrefixes" xsi:type="array">
-                <item name="LokiCheckout_" xsi:type="string">LokiCheckout_</item>
-                <item name="Loki_FieldComponents" xsi:type="string">Loki_FieldComponents</item>
-                <item name="Loki_MapComponents" xsi:type="string">Loki_MapComponents</item>
-                <item name="Loki_Components" xsi:type="string">Loki_Components</item>
-            </argument>
-        </arguments>
-    </type>
-
     <virtualType name="LokiCheckout\Core\Config\XmlConfig\VirtualFileReader" type="Magento\Framework\Config\Reader\Filesystem">
         <arguments>
             <argument name="converter" xsi:type="object">LokiCheckout\Core\Config\XmlConfig\Converter</argument>
