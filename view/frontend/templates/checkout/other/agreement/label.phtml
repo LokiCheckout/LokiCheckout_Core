@@ -13,16 +13,36 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 
 $viewModel = $block->getViewModel();
 $agreement = $block->getAgreement();
+$labelText = $agreement->getCheckboxText();
+
+$hasLink = str_contains($labelText, '<a>');
+$linkClasses = $block->getLinkClasses() ?? 'underline cursor-pointer';
+
+if ($hasLink) {
+    $labelText = str_replace('<a>', '<a @click="toggleModal" class="'.$linkClasses.'">', $labelText);
+}
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('inline-block pl-4', 'label-block')) ?>">
     <label
+        <?php if (!$hasLink): ?>
         for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
+        <?php endif; ?>
         class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
-        <button
-            type="button"
-            @click.prevent="toggleModal"
-            :disabled="isModalOpen">
-            <?= $escaper->escapeHtml(__($agreement->getCheckboxText())) ?>
-        </button>
+
+        <span class="<?= $escaper->escapeHtmlAttr('cursor-pointer', 'label-span') ?>">
+            <?= /* @noEscape */
+            __($labelText) ?>
+        </span>
+
+        <?php if (!$hasLink): ?>
+            <a
+                type="button"
+                @click.prevent="toggleModal"
+                :disabled="isModalOpen"
+                class="<?= $linkClasses ?>"
+            >
+                <?= $escaper->escapeHtml(__('View')) ?>
+            </a>
+        <?php endif; ?>
     </label>
 </div>
