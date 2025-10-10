@@ -101,11 +101,11 @@
         <referenceContainer name="loki.script.directive">
             <block
                 name="loki-checkout.script.directive.date"
-                template="LokiCheckout_Core::script/directive-date.phtml"/>
+                template="LokiCheckout_Core::script/directive/date-directive.phtml"/>
 
             <block
                 name="loki-checkout.script.directive.money"
-                template="LokiCheckout_Core::script/directive-money.phtml"/>
+                template="LokiCheckout_Core::script/directive/money-directive.phtml"/>
 
             <block
                 name="loki-checkout.script.directive.tooltip"
