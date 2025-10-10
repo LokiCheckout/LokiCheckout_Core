@@ -3,9 +3,15 @@
 namespace LokiCheckout\Core\Component\Checkout\Customer\Dob;
 
 use LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldViewModel;
+use LokiCheckout\Core\Validator\Component\DobValidator;
 
 class DobViewModel extends QuoteFieldViewModel
 {
+    public function __construct(
+        private DobValidator $dobValidator
+    ) {
+    }
+
     public function getMax(): string
     {
         return date('Y-m-d', time());
@@ -45,5 +51,17 @@ class DobViewModel extends QuoteFieldViewModel
         }
 
         return parent::isRequired();
+    }
+
+    public function getFieldAttributes(array $customAttributes = []): array
+    {
+        $minTimestamp = time() - 60 * 60 * 24 * 365 * $this->dobValidator->getMaximumAge($this->getComponent());
+        $maxTimestamp = time() - 60 * 60 * 24 * 365 * $this->dobValidator->getMinimumAge($this->getComponent());
+
+        return [
+            ...parent::getFieldAttributes($customAttributes),
+            'min' => date('Y-m-d', $minTimestamp),
+            'max' => date('Y-m-d', $maxTimestamp),
+        ];
     }
 }

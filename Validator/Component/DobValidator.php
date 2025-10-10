@@ -9,7 +9,7 @@ class DobValidator implements ValidatorInterface
 {
     public function __construct(
         private readonly int $minimumAge = 10,
-        private readonly int $maximumAge = 125
+        private readonly int $maximumAge = 150
     ) {
     }
 
@@ -43,7 +43,7 @@ class DobValidator implements ValidatorInterface
         return true;
     }
 
-    private function getMinimumAge(?ComponentInterface $component = null): int
+    public function getMinimumAge(?ComponentInterface $component = null): int
     {
         if ($component instanceof ComponentInterface) {
             $minimumAge = (int)$component->getBlock()->getMinimumAge();
@@ -55,7 +55,7 @@ class DobValidator implements ValidatorInterface
         return $this->minimumAge;
     }
 
-    private function getMaximumAge(?ComponentInterface $component = null): int
+    public function getMaximumAge(?ComponentInterface $component = null): int
     {
         if ($component instanceof ComponentInterface) {
             $maximumAge = (int)$component->getBlock()->getMaximumAge();
