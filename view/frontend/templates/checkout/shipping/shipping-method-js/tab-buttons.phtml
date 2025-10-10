@@ -17,9 +17,13 @@ $buttons = (array)$block->getButtons();
  * @todo this should be a Radio Group for better A11Y. Visually it still can be a styled as a button
  */
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>">
+<div
+    role="tablist"
+    class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>"
+>
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
+            role="tab"
             @click="toggleTabs"
             data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
             class="<?= $escaper->escapeHtmlAttr($css('tab-inactive btn p-4', 'button')) ?>"
