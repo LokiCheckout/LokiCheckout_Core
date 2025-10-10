@@ -15,7 +15,7 @@ class DobValidator implements ValidatorInterface
 
     public function validate(mixed $value, ?ComponentInterface $component = null): bool|array
     {
-        if (false === is_string($value)) {
+        if (false === is_string($value) || empty($value)) {
             return true;
         }
 
