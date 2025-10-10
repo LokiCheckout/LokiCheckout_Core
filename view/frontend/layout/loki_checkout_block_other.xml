@@ -12,11 +12,24 @@
             </arguments>
 
             <block
-                name="loki-checkout.agreements.input" as="input"
-                template="LokiCheckout_Core::checkout/other/agreements/input.phtml"/>
-            <block
-                name="loki-checkout.agreements.content" as="content"
-                template="LokiCheckout_Core::checkout/other/agreements/content.phtml"/>
+                name="loki-checkout.agreements.agreement" as="agreement"
+                template="LokiCheckout_Core::checkout/other/agreement.phtml">
+                <block
+                    name="loki-checkout.agreements.agreement.input" as="input"
+                    template="LokiCheckout_Core::checkout/other/agreement/input.phtml"/>
+
+                <block
+                    name="loki-checkout.agreements.agreement.label" as="label"
+                    template="LokiCheckout_Core::checkout/other/agreement/label.phtml"/>
+
+                <block
+                    name="loki-checkout.agreements.agreement.modal" as="modal"
+                    template="LokiCheckout_Core::checkout/other/agreement/modal.phtml">
+                    <block
+                        name="loki-checkout.agreements.agreement.modal.content" as="content"
+                        template="LokiCheckout_Core::checkout/other/agreement/modal/content.phtml"/>
+                </block>
+            </block>
         </block>
 
         <block
