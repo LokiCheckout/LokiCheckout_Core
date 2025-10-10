@@ -53,11 +53,12 @@ use Magento\Framework\View\Element\Template;
             updateValid() {
                 this.valid = Alpine.store('LokiCheckout').hasOnlyValidComponents([this.currentStep, 'any']);
 
-                console.log('button', this.$refs.button);
-                if (this.valid) {
-                    this.$refs.button.removeAttribute('aria-disabled');
-                } else {
-                    this.$refs.button.setAttribute('aria-disabled', 'true');
+                if (this.$refs.button) {
+                    if (this.valid) {
+                        this.$refs.button.removeAttribute('aria-disabled');
+                    } else {
+                        this.$refs.button.setAttribute('aria-disabled', 'true');
+                    }
                 }
 
                 if (this.valid) {
