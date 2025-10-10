@@ -6,6 +6,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.14] - 10 October 2025
+### Fixed
+- Add better styling of agreement pre-tag
+- Add translation for "View terms"
+- Allow agreement checkbox text to contain magic <a> tag
+- Restructure agreement template into smaller templates
+- Move Alpine directive templates in specific directive-folder
+- Implement new x-tooltip directive
+- Failsafe if button-reference is not found (when switching steps fi)
+- Add Dutch translations
+- Hint to complete address details before selecting shipping address
+- Set aria-disabled=true on step-forward-button if not valid
+- Add button hint to step-forward button
+- Change button color to match WCAG 2.2 AAA
+- Fix button color of inactive button
+- Apply proper ARIA attributes to tab components
+- Move dependency with `Yireo_HyvaThemeAutoRegistration` from core to Hyva-module
+- Move `HyvaThemeAutoRegistration` from `LokiCheckout_Core` to `LokiCheckout_Hyva`
+- Allow overriding `js_component_name` via XML layout
+
 ## [2.1.13] - 09 October 2025
 ### Fixed
 - Reset localStorage of cart and loki-checkout right before finishing everything
