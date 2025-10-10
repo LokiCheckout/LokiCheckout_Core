@@ -15,6 +15,7 @@
             template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
                 <argument name="button_label" xsi:type="string" translate="true">Proceed to Review &amp;amp; Payments</argument>
+                <argument name="button_hint" xsi:type="string" translate="true">Please fill in all required fields before proceeding</argument>
                 <argument name="css_classes" xsi:type="array">
                     <item name="button" xsi:type="array">
                         <item name="default" xsi:type="string">btn btn-primary m-2</item>
