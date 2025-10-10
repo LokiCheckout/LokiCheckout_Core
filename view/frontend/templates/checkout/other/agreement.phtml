@@ -30,12 +30,12 @@ $agreement = $block->getAgreement();
             'agreement' => $agreement,
         ]) ?>
 
-        <?= $childRenderer->html($block, 'label', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'label', [
             'agreement' => $agreement,
         ]) ?>
     </div>
 
-    <?= $childRenderer->html($block, 'modal', [
+    <?= /* @noEscape */ $childRenderer->html($block, 'modal', [
         'agreement' => $agreement,
     ]) ?>
 </div>

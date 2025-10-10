@@ -20,7 +20,7 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
-        <?= $childRenderer->html($block, 'agreement', [
+        <?= /* @noEscape */ $childRenderer->html($block, 'agreement', [
             'agreement' => $agreement,
         ]) ?>
     <?php endforeach; ?>

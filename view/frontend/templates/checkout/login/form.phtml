@@ -28,9 +28,9 @@ $tooltipElement = $block->getTooltipElement();
         @click.prevent="toggleModal"
         :disabled="isModalOpen"
         <?php if ($tooltipElement): ?>
-        x-tooltip="<?= $tooltipElement ?>"
+        x-tooltip="<?= $escaper->escapeHtml($tooltipElement) ?>"
         <?php endif; ?>
-        id="<?= $blockName ?>-button"
+        id="<?= $escaper->escapeHtml($blockName) ?>-button"
         class="<?= $escaper->escapeHtmlAttr($css('', 'button')) ?>"
     >
         <?= $escaper->escapeHtml(__($block->getButtonLabel())) ?>

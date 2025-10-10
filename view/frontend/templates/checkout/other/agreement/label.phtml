@@ -41,7 +41,7 @@ if ($hasLink) {
                 type="button"
                 @click.prevent="toggleModal"
                 :disabled="isModalOpen"
-                class="<?= $linkClasses ?>"
+                class="<?= $escaper->escapeHtml($linkClasses) ?>"
             >
                 <?= $escaper->escapeHtml(__('View terms')) ?>
             </a>
