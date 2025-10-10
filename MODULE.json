@@ -20,8 +20,7 @@
         "Magento_Shipping",
         "Magento_Store",
         "Magento_Vault",
-        "Yireo_CspUtilities",
-        "Yireo_HyvaThemeAutoRegistration"
+        "Yireo_CspUtilities"
     ],
     "modules": [
         "Loki_Base",
@@ -55,8 +54,7 @@
         "Magento_User",
         "Magento_Vault",
         "Magento_Widget",
-        "Yireo_CspUtilities",
-        "Yireo_HyvaThemeAutoRegistration"
+        "Yireo_CspUtilities"
     ],
     "components": [
         "loki-checkout.agreements",
