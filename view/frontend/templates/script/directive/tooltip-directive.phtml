@@ -1,0 +1,31 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.directive('tooltip', (el, { value, expression }, { evaluate }) => {
+            if (expression) {
+                const tooltipElement = document.getElementById(expression);
+                if (!tooltipElement) {
+                    return;
+                }
+
+                el.style.position = 'relative';
+                el.parentNode.style.position = 'relative';
+
+                el.addEventListener('mouseover', () => {
+                    tooltipElement.style.display = 'block';
+                });
+
+                el.addEventListener('mouseout', () => {
+                    tooltipElement.style.display = 'none';
+                });
+            }
+        });
+    });
+</script>

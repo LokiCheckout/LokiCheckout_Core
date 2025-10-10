@@ -18,12 +18,19 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var ImageRenderer $imageRenderer */
 /** @var TemplateRenderer $templateRenderer */
 
+$blockName = str_replace('.', '-', $block->getNameInLayout());
+$tooltipElement = $block->getTooltipElement();
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css()) ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
+
     <button
         @click.prevent="toggleModal"
         :disabled="isModalOpen"
+        <?php if ($tooltipElement): ?>
+        x-tooltip="<?= $tooltipElement ?>"
+        <?php endif; ?>
+        id="<?= $blockName ?>-button"
         class="<?= $escaper->escapeHtmlAttr($css('', 'button')) ?>"
     >
         <?= $escaper->escapeHtml(__($block->getButtonLabel())) ?>
@@ -39,4 +46,6 @@ use Loki\Components\Util\Block\ImageRenderer;
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
         </div>
     </dialog>
+
+    <?= /* @noEscape */ $block->getChildHtml('after') ?>
 </div>

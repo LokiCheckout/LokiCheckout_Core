@@ -31,11 +31,19 @@
                     <argument name="button_label" xsi:type="string">Sign In</argument>
                 </arguments>
 
+                <container
+                    name="loki-checkout.login.form.before"
+                    as="before"/>
+
                 <block
                     name="loki-checkout.login.form.inner" as="form"
                     template="LokiCheckout_Core::customer/login.phtml">
                     <container name="form.additional.info" as="form_additional_info"/>
                 </block>
+
+                <container
+                    name="loki-checkout.login.form.after"
+                    as="after"/>
             </block>
         </block>
 
