@@ -17,6 +17,8 @@ $agreement = $block->getAgreement();
     <?php if (false === $agreement->getIsHtml()): ?>
         <?= $escaper->escapeHtml($agreement->getContent()) ?>
     <?php else: ?>
-        <pre><?= /* @noEscape */ $agreement->getContent() ?></pre>
+        <pre class="<?= $escaper->escapeHtmlAttr($css('text-wrap whitespace-pre-line', '')) ?>">
+            <?= /* @noEscape */ $agreement->getContent() ?>
+        </pre>
     <?php endif; ?>
 </span>

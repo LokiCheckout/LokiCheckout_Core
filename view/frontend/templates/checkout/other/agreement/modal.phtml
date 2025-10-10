@@ -24,7 +24,7 @@ $agreement = $block->getAgreement();
 >
     <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('p-5', 'dialog-inner')) ?>">
+    <div class="<?= $escaper->escapeHtmlAttr($css('p-8', 'dialog-inner')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'content', [
             'agreement' => $agreement,
         ]) ?>
