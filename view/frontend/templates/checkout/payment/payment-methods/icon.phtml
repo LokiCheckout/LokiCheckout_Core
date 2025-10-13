@@ -22,12 +22,12 @@ if (empty($icon)) {
     return;
 }
 
-$width = (int)$block->getWidth();
-if (empty($width)) {
-    $width = 25;
-}
+$size = (int)$block->getSize() ?? 25;
+$width = (int)$block->getWidth() ?? $size;
+$height = (int)$block->getHeight() ?? $size;
 
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-2 drop-shadow-2xl')) ?>">
-    <?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, ['width' => $width]) ?>
-</div>
+<?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, [
+    'width'  => $width,
+    'height' => $height,
+]) ?>

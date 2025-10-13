@@ -32,59 +32,69 @@ $showHidden = (bool)$block->getShowHidden(); // @doc
 $blockClasses = [];
 $blockClasses[] = $isCurrent ? 'active' : 'inactive';
 $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
+
+$paymentIcon = $templateRenderer->html(
+    $block,
+    'LokiCheckout_Core::checkout/payment/payment-methods/icon.phtml',
+    [
+        'alias' => $code,
+        'code'  => $code,
+    ]
+);
 ?>
-<li class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
-    <div class="<?= $escaper->escapeHtmlAttr($css('', 'input-container')) ?>">
-        <input
-            type="radio"
-            :value="value"
-            @change="submitValue"
-            name="payment_method"
-            value="<?= $escaper->escapeHtml($code) ?>"
+<li class="<?= $escaper->escapeHtmlAttr(
+    $css('cursor-pointer relative flex gap-4 my-2 p-3')
+) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
+    <label
+        data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
+        class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
+    >
+        <span class="shrink-0">
+            <input
+                type="radio"
+                :value="value"
+                @change="submitValue"
+                name="payment_method"
+                value="<?= $escaper->escapeHtml($code) ?>"
             <?php if ($viewModel->getValue() === $code): ?>
                 checked
             <?php endif; ?>
-            <?= /* @noEscape */ $isCurrent && 'checked' ?>
-            <?= /* @noEscape */ $viewModel->isDisabled() && 'disabled="disabled"' ?>
-            id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-            class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
-        >
-    </div>
-    <div class="<?= $escaper->escapeHtmlAttr($css('flex-1', 'details-container')) ?>">
-        <div class="<?= $escaper->escapeHtmlAttr($css('flex', 'details')) ?>">
-            <?= /* @noEscape */ $templateRenderer->html(
+                <?= /* @noEscape */
+                $isCurrent && 'checked' ?>
+                <?= /* @noEscape */
+                $viewModel->isDisabled() && 'disabled="disabled"' ?>
+                id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
+                class="<?= $escaper->escapeHtmlAttr($css($paymentIcon ? 'sr-only' : '', 'input')) ?>"
+            >
+            <?= /* @noEscape */
+            $paymentIcon ?>
+        </span>
+
+        <span
+            class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
+            <?= $escaper->escapeHtml($paymentMethod->getTitle()) ?>
+        </span>
+    </label>
+
+    <?php if ($isCurrent || $showHidden) : ?>
+        <div class="<?= $escaper->escapeHtmlAttr(
+            $css('', 'other')
+        ) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+            <?= /* @noEscape */
+            $blockRenderer->html(
                 $block,
-                'LokiCheckout_Core::checkout/payment/payment-methods/icon.phtml',
-                [
-                    'alias' => $code,
-                    'code' => $code,
-                ]
+                'loki-checkout.payment.methods.' . $code . '.form',
+                ['method' => $code]
             ) ?>
 
-            <label
-                for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                title="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
-                class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
-                <?= $escaper->escapeHtml($paymentMethod->getTitle()) ?>
-            </label>
+            <?= /* @noEscape */
+            $blockRenderer->html(
+                $block,
+                'loki-checkout.payment.methods.' . $code . '.additional',
+                ['method' => $code]
+            ) ?>
+
+            <?= $escaper->escapeHtml($viewModel->getPaymentInstructions($code)) ?>
         </div>
-
-        <?php if ($isCurrent || $showHidden) : ?>
-            <div class="<?= $escaper->escapeHtmlAttr($css('', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
-                <?= /* @noEscape */ $blockRenderer->html(
-                    $block,
-                    'loki-checkout.payment.methods.'.$code.'.form',
-                    ['method' => $code]
-                ) ?>
-
-                <?= /* @noEscape */ $blockRenderer->html(
-                    $block,
-                    'loki-checkout.payment.methods.'.$code.'.additional',
-                    ['method' => $code]
-                ) ?>
-
-                <?= $escaper->escapeHtml($viewModel->getPaymentInstructions($code)) ?>
-            </div>
-        <?php endif; ?>
-    </div>
+    <?php endif; ?>
 </li>
