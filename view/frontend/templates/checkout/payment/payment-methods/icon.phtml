@@ -22,9 +22,9 @@ if (empty($icon)) {
     return;
 }
 
-$size = (int)$block->getSize() ?? 25;
-$width = (int)$block->getWidth() ?? $size;
-$height = (int)$block->getHeight() ?? $size;
+$size = $block->getSize() ?? 25;
+$width = $block->getWidth() ?? $size;
+$height = $block->getHeight() ?? $size;
 
 ?>
 <?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, [

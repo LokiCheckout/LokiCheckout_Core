@@ -3,17 +3,11 @@ declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\View\Element\Template;
-use Loki\Components\Util\Block\BlockRenderer;
 
 /** @version 2.1.14 */
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var BlockRenderer $blockRenderer */
 
-$size = (int)$block->getSize();
-if (empty($size)) {
-    $size = 50;
-}
 ?>
 <div
     class="<?= $escaper->escapeHtmlAttr($css('disabled-overlay z-30 absolute top-0 left-0 right-0 bottom-0 inset-0 bg-white/60')) ?>">

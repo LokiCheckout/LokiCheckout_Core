@@ -19,15 +19,14 @@ use LokiCheckout\Core\ViewModel\ProductImage;
 /** @var CssClass $css */
 
 $item = $block->getItem();
-$width = (int)$block->getWidth();
-if (empty($width)) {
-    $width = 75;
-}
+$size = $block->getSize() ?? 125;
+$width = $block->getWidth() ?? $size;
+$height = $block->getHeight() ?? $size;
 
 $childRenderer = $viewModelFactory->create(ChildRenderer::class);
 $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
 $productImageViewModel = $viewModelFactory->create(ProductImage::class);
-$productImageHtml = $productImageViewModel->getImage($item, $width);
+$productImageHtml = $productImageViewModel->getImage($item, $width, $height);
 ?>
 <div class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 my-8 justify-between')) ?>" data-item-id="<?= (int)$item->getItemId() ?>" data-item-qty="<?= (float)$item->getQty() ?>">
     <?= /* @noEscape */ $productImageHtml ?>

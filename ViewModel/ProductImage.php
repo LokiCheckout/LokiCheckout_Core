@@ -20,7 +20,7 @@ class ProductImage implements ArgumentInterface
     ) {
     }
 
-    public function getImage(CartItemInterface $item, int $width = 75): string
+    public function getImage(CartItemInterface $item, int $width = 75, int $height = 75): string
     {
         /** @var RendererList $rendererList */
         $rendererList = $this->layout->getBlock('checkout.cart.item.renderers');
@@ -30,6 +30,8 @@ class ProductImage implements ArgumentInterface
 
             return $renderer->getImage($renderer->getProductForThumbnail(), 'cart_page_product_thumbnail')
                 ->setTemplate('Magento_Catalog::product/image.phtml')
+                ->setWidth($width.'px')
+                ->setHeight($height.'px')
                 ->toHtml();
         }
 
