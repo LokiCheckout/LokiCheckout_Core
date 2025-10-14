@@ -64,10 +64,8 @@ if ($paymentIcon) {
             <?php if ($viewModel->getValue() === $code): ?>
                 checked
             <?php endif; ?>
-                <?= /* @noEscape */
-                $isCurrent && 'checked' ?>
-                <?= /* @noEscape */
-                $viewModel->isDisabled() && 'disabled="disabled"' ?>
+                <?= /* @noEscape */ $isCurrent && 'checked' ?>
+                <?= /* @noEscape */ $viewModel->isDisabled() && 'disabled="disabled"' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
                 class="<?= $escaper->escapeHtmlAttr($inputCss) ?>"
             >
@@ -84,15 +82,13 @@ if ($paymentIcon) {
         <div class="<?= $escaper->escapeHtmlAttr(
             $css('', 'other')
         ) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
-            <?= /* @noEscape */
-            $blockRenderer->html(
+            <?= /* @noEscape */ $blockRenderer->html(
                 $block,
                 'loki-checkout.payment.methods.' . $code . '.form',
                 ['method' => $code]
             ) ?>
 
-            <?= /* @noEscape */
-            $blockRenderer->html(
+            <?= /* @noEscape */ $blockRenderer->html(
                 $block,
                 'loki-checkout.payment.methods.' . $code . '.additional',
                 ['method' => $code]
