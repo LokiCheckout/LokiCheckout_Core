@@ -71,7 +71,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return Alpine.store('LokiComponents').removeInvisibleComponents();
             },
             exists(component) {
-                return Alpine.store('LokiComponents').exists(component);
+                return Alpine.store('LokiComponents').exists(component) && document.getElementById(component.elementId);
             },
             add(component) {
                 return Alpine.store('LokiComponents').add(component);
@@ -82,7 +82,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 const components = {};
                 this.getComponentArrayByStep(step).forEach(component => {
-                    if (this.exists(component) && false === component.valid) {
+                    if (this.exists(component) && false === component.valid && component.visible) {
                         components[component.id] = component;
                     }
                 });
