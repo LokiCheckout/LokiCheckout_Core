@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
+use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote;
 use Loki\Components\Component\ComponentRepository;
@@ -11,6 +12,11 @@ use Loki\Components\Component\ComponentRepository;
  */
 class PaymentMethodsRepository extends ComponentRepository
 {
+    public function __construct(
+        private ManagerInterface $eventManager,
+    ) {
+    }
+
     public function getPaymentMethods(): array
     {
         return $this->getContext()->getPaymentMethodManagement()->getList($this->getQuote()->getId());
@@ -67,6 +73,10 @@ class PaymentMethodsRepository extends ComponentRepository
             $this->getGlobalMessageRegistry()->addError($e->getMessage());
             return;
         }
+
+        $this->eventManager->dispatch('loki_checkout_payment_before_save_quote', [
+            'quote' => $quote,
+        ]);
 
         $this->getContext()->getCheckoutState()->saveQuote($quote);
         $quote->collectTotals();
