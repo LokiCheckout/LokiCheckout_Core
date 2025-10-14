@@ -41,6 +41,11 @@ $paymentIcon = $templateRenderer->html(
         'code'  => $code,
     ]
 );
+
+$inputCss = $css('', 'input');
+if ($paymentIcon) {
+    $inputCss = $css('', 'input-with-icon'); // @doc: sr-only
+}
 ?>
 <li class="<?= $escaper->escapeHtmlAttr(
     $css('cursor-pointer relative flex gap-4 my-2 p-3')
@@ -49,7 +54,7 @@ $paymentIcon = $templateRenderer->html(
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
         class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
     >
-        <span class="shrink-0">
+        <span class="shrink-0 flex gap-4">
             <input
                 type="radio"
                 :value="value"
@@ -64,10 +69,9 @@ $paymentIcon = $templateRenderer->html(
                 <?= /* @noEscape */
                 $viewModel->isDisabled() && 'disabled="disabled"' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                class="<?= $escaper->escapeHtmlAttr($css($paymentIcon ? 'sr-only' : '', 'input')) ?>"
+                class="<?= $escaper->escapeHtmlAttr($inputCss) ?>"
             >
-            <?= /* @noEscape */
-            $paymentIcon ?>
+            <?= /* @noEscape */ $paymentIcon ?>
         </span>
 
         <span
