@@ -82,7 +82,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 const components = {};
                 this.getComponentArrayByStep(step).forEach(component => {
-                    if (false === component.valid) {
+                    if (this.exists(component) && false === component.valid) {
                         components[component.id] = component;
                     }
                 });
