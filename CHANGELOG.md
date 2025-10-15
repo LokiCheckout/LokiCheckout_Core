@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.15] - 15 October 2025
+### Fixed
+- Split-up customer section "loki-checkout" in subclasses
+- Cleanup image templates with width, height and size
+- Improve HTML structure of payment methods
+- WIP
+- Do not check invalid DOB if still empty
+- Set DOB min and max properly
+
 ## [2.1.14] - 10 October 2025
 ### Fixed
 - Add better styling of agreement pre-tag
