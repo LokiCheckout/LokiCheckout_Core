@@ -6,18 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.1.15] - 14 October 2025
+## [2.1.15] - 15 October 2025
 ### Fixed
-- Skip invalid components that are not visible
-- Add loki_checkout_payment_before_save_quote event for additional information
-- When collecting invalid components, explicitly remove components that are gone
-- Make change to input optional
 - Split-up customer section "loki-checkout" in subclasses
 - Cleanup image templates with width, height and size
 - Improve HTML structure of payment methods
 - WIP
 - Do not check invalid DOB if still empty
 - Set DOB min and max properly
+
+## [2.1.15] - 14 October 2025
+### Fixed
+- Skip invalid components that are not visible
+- Add loki_checkout_payment_before_save_quote event for additional information
+- When collecting invalid components, explicitly remove components that are gone
+- Make change to input optional
 
 ## [2.1.14] - 10 October 2025
 ### Fixed

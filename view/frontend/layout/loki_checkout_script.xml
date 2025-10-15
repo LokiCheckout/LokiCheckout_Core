@@ -20,6 +20,9 @@
                 name="loki-checkout.script.component-extender"
                 template="LokiCheckout_Core::script/component-extender.phtml"/>-->
             <block
+                name="loki-checkout.script.html-updater"
+                template="LokiCheckout_Core::script/html-updater.phtml"/>
+            <block
                 name="loki-checkout.script.aria-invalid"
                 template="LokiCheckout_Core::script/aria-invalid.phtml"/>
 
