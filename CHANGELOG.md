@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.16] - 17 October 2025
+### Fixed
+- Move LokiHtmlUpdater from LokiCheckout to Loki_Components
+- Document latest version of template
+- Fix newlines after comments
+- Copy generic CI/CD files
+- Update MODULE.json
+- Skip invalid components that are not visible
+- Add loki_checkout_payment_before_save_quote event for additional information
+- When collecting invalid components, explicitly remove components that are gone
+- Make change to input optional
+
 ## [2.1.15] - 15 October 2025
 ### Fixed
 - Split-up customer section "loki-checkout" in subclasses
