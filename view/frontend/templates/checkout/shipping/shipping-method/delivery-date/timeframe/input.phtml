@@ -14,7 +14,7 @@ use LokiCheckout\Core\Shipment\DeliveryDate\Timeframe;
 
 $timeframe = $block->getTimeframe();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>">
     <input
         type="radio"
         :checked="isChecked"
@@ -23,6 +23,6 @@ $timeframe = $block->getTimeframe();
         name="timeframe"
         value="<?= $escaper->escapeHtml($timeframe->getCode()) ?>"
         id="<?= $escaper->escapeHtml($timeframe->getId()) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
+        class="<?= $escaper->escapeHtml($css('mr-4', 'input')) ?>"
     />
 </div>

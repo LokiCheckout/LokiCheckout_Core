@@ -15,11 +15,11 @@ use Magento\Framework\View\Element\Template;
 
 $agreement = $block->getAgreement();
 ?>
-<span class="<?= $escaper->escapeHtmlAttr($css('italic', 'content')) ?>">
+<span class="<?= $escaper->escapeHtml($css('italic', 'content')) ?>">
     <?php if (false === $agreement->getIsHtml()): ?>
         <?= $escaper->escapeHtml($agreement->getContent()) ?>
     <?php else: ?>
-        <pre class="<?= $escaper->escapeHtmlAttr($css('text-wrap whitespace-pre-line', '')) ?>">
+        <pre class="<?= $escaper->escapeHtml($css('text-wrap whitespace-pre-line', '')) ?>">
             <?= /* @noEscape */ $agreement->getContent() ?>
         </pre>
     <?php endif; ?>

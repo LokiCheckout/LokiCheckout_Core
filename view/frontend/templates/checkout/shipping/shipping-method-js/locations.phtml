@@ -21,23 +21,23 @@ use Loki\Components\Util\Block\ImageRenderer;
 
 $tabId = $block->getTabId();
 ?>
-<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtmlAttr($css('hidden relative', 'locations-container')) ?>">
+<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtml($css('hidden relative', 'locations-container')) ?>">
     <div x-cloak x-show="showLoader" :aria-busy="showLoader"
-         class="<?= $escaper->escapeHtmlAttr($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
+         class="<?= $escaper->escapeHtml($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
         <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     </div>
 
     <div>
         <template x-if="isInvalidShippingAddress">
-            <div class="<?= $escaper->escapeHtmlAttr($css('', 'invalid-address')) ?>"><?= $escaper->escapeHtml(__('Please enter your address details first')) ?></div>
+            <div class="<?= $escaper->escapeHtml($css('', 'invalid-address')) ?>"><?= $escaper->escapeHtml(__('Please enter your address details first')) ?></div>
         </template>
 
         <template x-if="showLoadingLocations">
-            <div class="<?= $escaper->escapeHtmlAttr($css('', 'loading')) ?>"><?= $escaper->escapeHtml(__('Loading locations')) ?></div>
+            <div class="<?= $escaper->escapeHtml($css('', 'loading')) ?>"><?= $escaper->escapeHtml(__('Loading locations')) ?></div>
         </template>
 
         <template x-if="showNoLocations">
-            <div class="<?= $escaper->escapeHtmlAttr($css('', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+            <div class="<?= $escaper->escapeHtml($css('', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
         </template>
 
         <template x-for="location in getVisibleLocations" :key="location.id">

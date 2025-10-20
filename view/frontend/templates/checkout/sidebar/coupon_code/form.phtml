@@ -15,8 +15,8 @@ $fieldId = $block->getFieldId();
 <div>
     <label
         for="<?= $escaper->escapeHtml($fieldId) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('block mb-3', 'label')) ?>">
-        <span class="<?= $escaper->escapeHtmlAttr($css('sr-only', 'label-inner')) ?>">
+        class="<?= $escaper->escapeHtml($css('block mb-3', 'label')) ?>">
+        <span class="<?= $escaper->escapeHtml($css('sr-only', 'label-inner')) ?>">
             <?= $escaper->escapeHtml(__('Discount Code')) ?>
         </span>
     </label>
@@ -30,11 +30,11 @@ $fieldId = $block->getFieldId();
         @change="setValue"
         id="<?= $escaper->escapeHtml($fieldId) ?>"
         aria-label="<?= $escaper->escapeHtml(__('Discount Code')) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('form-input w-full mb-3', 'input')) ?>">
+        class="<?= $escaper->escapeHtml($css('form-input w-full mb-3', 'input')) ?>">
 
     <button
         type="button"
-        class="<?= $escaper->escapeHtmlAttr($css('btn btn-secondary w-full justify-center text-center', 'button-apply')) ?>"
+        class="<?= $escaper->escapeHtml($css('btn btn-secondary w-full justify-center text-center', 'button-apply')) ?>"
         @click.prevent="applyCouponCode">
         <?= $escaper->escapeHtml(__('Apply')) ?>
     </button>

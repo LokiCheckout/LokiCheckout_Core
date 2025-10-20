@@ -14,7 +14,7 @@ use Loki\Components\Location\Location;
 
 $location = $block->getLocation();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('mb-4')) ?>">
+<div class="<?= $escaper->escapeHtml($css('mb-4')) ?>">
     <div class="float-right text-sm">
         <?= $escaper->escapeHtml($location->getDistance()) ?>m
     </div>

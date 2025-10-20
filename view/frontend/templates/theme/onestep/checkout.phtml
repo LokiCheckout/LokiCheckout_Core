@@ -15,14 +15,14 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div
-    class="<?= $escaper->escapeHtmlAttr($css('loki space-y-6 relative')) ?>"
+    class="<?= $escaper->escapeHtml($css('loki space-y-6 relative')) ?>"
     x-data="LokiLoader"
     x-title="LokiCheckout">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('progressbar') ?>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid')) ?>">
-        <div class="<?= $escaper->escapeHtmlAttr($css('col-span-2', 'column-steps')) ?> relative">
+    <div class="<?= $escaper->escapeHtml($css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid')) ?>">
+        <div class="<?= $escaper->escapeHtml($css('col-span-2', 'column-steps')) ?> relative">
             <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
             <?= /* @noEscape */ $block->getChildHtml('steps'); ?>
         </div>

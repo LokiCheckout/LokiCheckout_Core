@@ -23,7 +23,7 @@ $locations = $block->getLocations();
 ?>
 <div>
     <?php if (empty($locations)): ?>
-        <div class="<?= $escaper->escapeHtmlAttr($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+        <div class="<?= $escaper->escapeHtml($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
     <?php else: ?>
         <?php $i = 1; ?>
         <?php foreach ($locations as $location): ?>

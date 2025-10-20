@@ -19,17 +19,17 @@ use Magento\Framework\View\Element\Template;
 
 
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('grid grid-2-cols gap-4 relative')) ?>">
+<div class="<?= $escaper->escapeHtml($css('grid grid-2-cols gap-4 relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('field email required', 'field-container')) ?>">
-        <label class="<?= $escaper->escapeHtmlAttr($css('label', 'label')) ?>" for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-email">
+    <div class="<?= $escaper->escapeHtml($css('field email required', 'field-container')) ?>">
+        <label class="<?= $escaper->escapeHtml($css('label', 'label')) ?>" for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-email">
             <span><?= $escaper->escapeHtml(__('Email')) ?></span>
         </label>
-        <div class="<?= $escaper->escapeHtmlAttr($css('control', 'field-control')) ?>">
+        <div class="<?= $escaper->escapeHtml($css('control', 'field-control')) ?>">
             <input
                 name="login[email]"
-                class="<?= $escaper->escapeHtmlAttr($css('form-input w-full', 'field-input')) ?>"
+                class="<?= $escaper->escapeHtml($css('form-input w-full', 'field-input')) ?>"
                 required
                 :value="email"
                 @change="setEmail"
@@ -40,14 +40,14 @@ use Magento\Framework\View\Element\Template;
         </div>
     </div>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('field password required', 'field-container')) ?>">
-        <label class="<?= $escaper->escapeHtmlAttr($css('label', 'label')) ?>" for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-password">
+    <div class="<?= $escaper->escapeHtml($css('field password required', 'field-container')) ?>">
+        <label class="<?= $escaper->escapeHtml($css('label', 'label')) ?>" for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-password">
             <span><?= $escaper->escapeHtml(__('Password')) ?></span>
         </label>
-        <div class="<?= $escaper->escapeHtmlAttr($css('control flex items-center', 'field-control')) ?>">
+        <div class="<?= $escaper->escapeHtml($css('control flex items-center', 'field-control')) ?>">
             <input
                 name="login[password]"
-                class="<?= $escaper->escapeHtmlAttr($css('form-input w-full', 'field-input')) ?>"
+                class="<?= $escaper->escapeHtml($css('form-input w-full', 'field-input')) ?>"
                 required
                 :value="password"
                 @change="setPassword"
@@ -60,15 +60,15 @@ use Magento\Framework\View\Element\Template;
                 type="button"
                 @click="togglePasswordFieldType"
                 :aria-label="buttonAriaLabel"
-                class="<?= $escaper->escapeHtmlAttr($css('px-4 py-3', 'button')) ?>">
+                class="<?= $escaper->escapeHtml($css('px-4 py-3', 'button')) ?>">
                 <template x-if="passwordVisible">
-                    <div class="<?= $escaper->escapeHtmlAttr($css('', 'password-icon')) ?>">
+                    <div class="<?= $escaper->escapeHtml($css('', 'password-icon')) ?>">
                     <?= /* @noEscape */ $imageRenderer->icon($block, 'eye') ?>
                     </div>
                 </template>
 
                 <template x-if="passwordNotVisible">
-                    <div class="<?= $escaper->escapeHtmlAttr($css('', 'password-icon')) ?>">
+                    <div class="<?= $escaper->escapeHtml($css('', 'password-icon')) ?>">
                     <?= /* @noEscape */ $imageRenderer->icon($block, 'eye-slash') ?>
                     </div>
                 </template>
@@ -78,23 +78,23 @@ use Magento\Framework\View\Element\Template;
         <?= /* @noEscape */ $block->getChildHtml('form_additional_info') ?>
     </div>
 
-    <div class="<?= $escaper->escapeHtmlAttr($css('flex flex-wrap gap-2', 'toolbar')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('flex flex-wrap gap-2', 'toolbar')) ?>">
         <button
             type="button"
             :disabled="isButtonDisabled"
             @click="submit"
-            class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
+            class="<?= $escaper->escapeHtml($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>
         </button>
 
         <a
             href="<?= $escaper->escapeUrl($block->getUrl('customer/account/create')) ?>"
-            class="<?= $escaper->escapeHtmlAttr($css('btn btn-secondary', 'toolbar-button')) ?>">
+            class="<?= $escaper->escapeHtml($css('btn btn-secondary', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Create An Account')) ?></span>
         </a>
 
         <a
-            class="<?= $escaper->escapeHtmlAttr($css('basis-full underline text-secondary', 'forgot-password-link')) ?>"
+            class="<?= $escaper->escapeHtml($css('basis-full underline text-secondary', 'forgot-password-link')) ?>"
             href="<?= $escaper->escapeHtml(__($block->getUrl('customer/account/forgotpassword'))) ?>">
             <span><?= $escaper->escapeHtml(__('Forgot Your Password?')) ?></span>
         </a>

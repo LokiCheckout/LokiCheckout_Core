@@ -32,5 +32,5 @@ $agreement = $block->getAgreement();
     required
     aria-required="true"
     <?php if ($viewModel->isDisabled()): ?>disabled="disabled"<?php endif ?>
-    class="<?= $escaper->escapeHtmlAttr($css('form-checkbox mt-2 float-left', 'input')) ?>"
+    class="<?= $escaper->escapeHtml($css('form-checkbox mt-2 float-left', 'input')) ?>"
 />

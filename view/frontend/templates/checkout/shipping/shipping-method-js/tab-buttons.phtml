@@ -19,14 +19,14 @@ $buttons = (array)$block->getButtons();
 ?>
 <div
     role="tablist"
-    class="<?= $escaper->escapeHtmlAttr($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>"
+    class="<?= $escaper->escapeHtml($css('tab-buttons grid grid-cols-2 gap-4 mb-4')) ?>"
 >
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
             role="tab"
             @click="toggleTabs"
             data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
-            class="<?= $escaper->escapeHtmlAttr($css('tab-inactive btn p-4', 'button')) ?>"
+            class="<?= $escaper->escapeHtml($css('tab-inactive btn p-4', 'button')) ?>"
         >
             <?= $escaper->escapeHtml(__($buttonLabel)); ?>
         </button>

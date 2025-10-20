@@ -26,7 +26,7 @@ $activeClass = $block->getActiveClass();
 $iconHtml = $imageRenderer->get('LokiCheckout_Core::images/'.$step->getCode().'.svg');
 ?>
 <div
-    class="<?= $escaper->escapeHtmlAttr($css('w-6')) ?> <?= $isActive ? $escaper->escapeHtml($activeClass) : $escaper->escapeHtml($inactiveClass) ?>"
+    class="<?= $escaper->escapeHtml($css('w-6')) ?> <?= $isActive ? $escaper->escapeHtml($activeClass) : $escaper->escapeHtml($inactiveClass) ?>"
     aria-label="<?= $escaper->escapeHtml(__($escaper->escapeHtml($step->getLabel()))) ?>">
     <?= /* @noEscape */ $iconHtml ?>
 </div>

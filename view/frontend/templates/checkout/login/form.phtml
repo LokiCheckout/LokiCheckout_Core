@@ -21,7 +21,7 @@ use Loki\Components\Util\Block\ImageRenderer;
 $blockName = str_replace('.', '-', $block->getNameInLayout());
 $tooltipElement = $block->getTooltipElement();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css()) ?>">
+<div class="<?= $escaper->escapeHtml($css()) ?>">
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
     <button
@@ -31,18 +31,18 @@ $tooltipElement = $block->getTooltipElement();
         x-tooltip="<?= $escaper->escapeHtml($tooltipElement) ?>"
         <?php endif; ?>
         id="<?= $escaper->escapeHtml($blockName) ?>-button"
-        class="<?= $escaper->escapeHtmlAttr($css('', 'button')) ?>"
+        class="<?= $escaper->escapeHtml($css('', 'button')) ?>"
     >
         <?= $escaper->escapeHtml(__($block->getButtonLabel())) ?>
     </button>
 
     <dialog
         x-ref="modal"
-        class="<?= $escaper->escapeHtmlAttr($css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog')) ?>"
+        class="<?= $escaper->escapeHtml($css('border border-zinc-200 rounded-lg shadow-lg p-4', 'dialog')) ?>"
     >
         <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
 
-        <div class="<?= $escaper->escapeHtmlAttr($css('p-8', 'dialog-inner')) ?>">
+        <div class="<?= $escaper->escapeHtml($css('p-8', 'dialog-inner')) ?>">
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
         </div>
     </dialog>

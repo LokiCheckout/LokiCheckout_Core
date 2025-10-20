@@ -26,10 +26,10 @@ if (empty($additionalContent)) {
 }
 ?>
 <details>
-    <summary class="<?= $escaper->escapeHtmlAttr($css('', 'summary')) ?>">
+    <summary class="<?= $escaper->escapeHtml($css('', 'summary')) ?>">
         <?= $escaper->escapeHtml(__('Additional information')) ?>
     </summary>
-    <div class="<?= $escaper->escapeHtmlAttr($css('my-4 text-sm', 'content')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('my-4 text-sm', 'content')) ?>">
         <?= $escaper->escapeHtml($additionalContent) ?>
     </div>
 </details>

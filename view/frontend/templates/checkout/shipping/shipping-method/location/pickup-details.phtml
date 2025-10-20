@@ -20,6 +20,6 @@ use Loki\Components\Util\Block\ChildRenderer;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>">
     <?= $escaper->escapeHtml(__('From')) ?> <?= $escaper->escapeHtml($location->getPickupFrom()) ?>
 </div>

@@ -25,7 +25,7 @@ $isLoggedIn = $customerSession->isLoggedIn();
 
 $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('card')) ?>" x-data="LokiModal">
+<div class="<?= $escaper->escapeHtml($css('card')) ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
         <?= /* @noEscape */ $block->getChildHtml('logged-in') ?>
     <?php else: ?>

@@ -15,10 +15,10 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var Escaper $escaper */
 
 ?>
-<div x-show="notLoading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3', 'icon')) ?>">
+<div x-show="notLoading" class="<?= $escaper->escapeHtml($css('inline-block mr-3', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, 'arrow-right') ?>
 </div>
 
-<div x-cloak x-show="loading" class="<?= $escaper->escapeHtmlAttr($css('inline-block mr-3 animate-spin', 'icon')) ?>">
+<div x-cloak x-show="loading" class="<?= $escaper->escapeHtml($css('inline-block mr-3 animate-spin', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, 'spinner') ?>
 </div>

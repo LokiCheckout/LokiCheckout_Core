@@ -27,12 +27,12 @@ use Loki\Components\Util\Block\BlockRenderer;
 
 $iconHtml = $imageRenderer->icon($block, 'home');
 ?>
-<li class="<?= $escaper->escapeHtmlAttr($css('step flex items-center')) ?>">
+<li class="<?= $escaper->escapeHtml($css('step flex items-center')) ?>">
     <a
         href="<?= $escaper->escapeUrl($block->getBaseUrl()) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('w-full h-auto', 'button')) ?>">
+        class="<?= $escaper->escapeHtml($css('w-full h-auto', 'button')) ?>">
         <div
-            class="<?= $escaper->escapeHtmlAttr($css('')) ?>"
+            class="<?= $escaper->escapeHtml($css('')) ?>"
             title="<?= $escaper->escapeHtml(__('Home')) ?>">
             <?= /* @noEscape */ $iconHtml ?>
         </div>

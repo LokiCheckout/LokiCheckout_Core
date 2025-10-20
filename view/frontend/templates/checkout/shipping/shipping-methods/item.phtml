@@ -34,8 +34,8 @@ $blockClasses = [];
 $blockClasses[] = $isCurrent ? 'active' : 'inactive';
 $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
 ?>
-<li class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
-    <div class="<?= $escaper->escapeHtmlAttr($css('', 'input-container')) ?>">
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
+    <div class="<?= $escaper->escapeHtml($css('', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
                 type="radio"
@@ -49,14 +49,14 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 <?= $isCurrent ? 'checked' : '' ?>
                 <?= $viewModel->isDisabled() ? 'disabled="disabled"' : '' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
+                class="<?= $escaper->escapeHtml($css('mr-4', 'input')) ?>"
             >
         <?php else: ?>
             <input type="radio" id="shipping-<?= $escaper->escapeHtml($code) ?>" disabled/>
         <?php endif; ?>
     </div>
-    <div class="<?= $escaper->escapeHtmlAttr($css('flex-1', 'details-container')) ?>">
-        <div class="<?= $escaper->escapeHtmlAttr($css('md:flex', 'details')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('flex-1', 'details-container')) ?>">
+        <div class="<?= $escaper->escapeHtml($css('md:flex', 'details')) ?>">
             <?= /* @noEscape */ $templateRenderer->html(
                 $block,
                 'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
@@ -66,14 +66,14 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
                 ]
             ) ?>
 
-            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtmlAttr($css('pr-2 font-bold cursor-pointer', 'amount-label')) ?>">
+            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtml($css('pr-2 font-bold cursor-pointer', 'amount-label')) ?>">
                 <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
             </label>
 
             <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                   class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer pr-2 ', 'method-label')) ?>"><?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?></label>
+                   class="<?= $escaper->escapeHtml($css('cursor-pointer pr-2 ', 'method-label')) ?>"><?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?></label>
 
-            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer pr-2 ', 'carrier-label')) ?>">
+            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtml($css('cursor-pointer pr-2 ', 'carrier-label')) ?>">
                 <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?>
 
                 <?php if (false === $shippingMethod->getAvailable()) : ?>
@@ -87,7 +87,7 @@ $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
         </div>
 
         <?php if ($isCurrent || $showHidden) : ?>
-            <div class="<?= $escaper->escapeHtmlAttr($css('my-4', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+            <div class="<?= $escaper->escapeHtml($css('my-4', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= /* @noEscape */ $blockRenderer->html(
                     $block,
                     'loki-checkout.shipping.methods.'.$code.'.form',

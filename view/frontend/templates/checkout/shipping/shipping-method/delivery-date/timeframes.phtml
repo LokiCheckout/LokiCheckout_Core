@@ -17,7 +17,7 @@ use Loki\Components\Util\Block\ChildRenderer;
 
 $timeframes = $block->getTimeframes();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>">
     <?php if (empty($timeframes)): ?>
         <span><?= $escaper->escapeHtml(__('No timeframes found')) ?></span>
     <?php else: ?>

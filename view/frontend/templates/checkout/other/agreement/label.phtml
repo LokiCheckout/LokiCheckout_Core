@@ -24,12 +24,12 @@ if ($hasLink) {
     $labelText = str_replace('<a>', '<a @click="toggleModal" class="'.$linkClasses.'">', $labelText);
 }
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('inline-block pl-4', 'label-block')) ?>">
+<div class="<?= $escaper->escapeHtml($css('inline-block pl-4', 'label-block')) ?>">
     <label
         <?php if (!$hasLink): ?>
         for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
         <?php endif; ?>
-        class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
+        class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
 
         <span class="<?= $escaper->escapeHtmlAttr('cursor-pointer', 'label-span') ?>">
             <?= /* @noEscape */

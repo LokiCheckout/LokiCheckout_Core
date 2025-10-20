@@ -22,10 +22,10 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $cartTotals = $viewModelFactory->create(CartTotals::class);
 $totals = $cartTotals->getTotals();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('relative')) ?>">
+<div class="<?= $escaper->escapeHtml($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <dl class="<?= $escaper->escapeHtmlAttr($css('grid grid-cols-2 gap-y-1', 'grid')) ?>">
+    <dl class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-y-1', 'grid')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
         <?php foreach ($totals as $total) : ?>
@@ -33,10 +33,10 @@ $totals = $cartTotals->getTotals();
             <?php if ($childBlock) : ?>
                 <?= /* @noEscape */ $childBlock->setData(['total' => $total])->toHtml() ?>
             <?php else: ?>
-                <dt class="<?= $escaper->escapeHtmlAttr($css('font-medium', $total->getCode() . '-label')) ?>">
+                <dt class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>">
                     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
                 </dt>
-                <dd class="<?= $escaper->escapeHtmlAttr($css('text-right', $total->getCode() . '-value')) ?>">
+                <dd class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>">
                     <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>

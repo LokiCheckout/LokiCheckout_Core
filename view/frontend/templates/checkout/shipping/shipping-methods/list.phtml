@@ -22,7 +22,7 @@ $shippingMethods = $viewModel->getShippingMethods();
     x-ref="field"
     :aria-invalid="isAriaInvalid"
     :data-valid="isValid"
-    class="<?= $escaper->escapeHtmlAttr($css('border border-transparent', 'container')) ?>">
+    class="<?= $escaper->escapeHtml($css('border border-transparent', 'container')) ?>">
     <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
     <?php if (!empty($shippingMethods)): ?>
         <ul>

@@ -12,8 +12,8 @@ use Magento\Framework\View\Element\Template;
 
 $couponCode = $block->getCouponCode();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('mb-4')) ?>">
-    <p class="<?= $escaper->escapeHtmlAttr($css('mb-4', 'value')) ?>">
+<div class="<?= $escaper->escapeHtml($css('mb-4')) ?>">
+    <p class="<?= $escaper->escapeHtml($css('mb-4', 'value')) ?>">
         <span>
             <?= $escaper->escapeHtml(__('Coupon code')) ?>:
         </span>
@@ -21,7 +21,7 @@ $couponCode = $block->getCouponCode();
     </p>
     <button
         type="button"
-        class="<?= $escaper->escapeHtmlAttr($css('btn btn-secondary', 'button-remove')) ?>"
+        class="<?= $escaper->escapeHtml($css('btn btn-secondary', 'button-remove')) ?>"
         @click.prevent="removeCouponCode">
         <?= $escaper->escapeHtml(__('Remove coupon code')) ?>
     </button>

@@ -14,7 +14,7 @@ use LokiCheckout\Core\Util\Block\SortedBlocks;
 
 $sortedBlocks = $viewModelFactory->create(SortedBlocks::class);
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('grid md:grid-cols-12 my-8 gap-4 md:gap-8')) ?>">
+<div class="<?= $escaper->escapeHtml($css('grid md:grid-cols-12 my-8 gap-4 md:gap-8')) ?>">
     <?php foreach ($sortedBlocks->getChildren($block) as $childBlock): ?>
         <?= /* @noEscape */ $childBlock->toHtml() ?>
     <?php endforeach; ?>

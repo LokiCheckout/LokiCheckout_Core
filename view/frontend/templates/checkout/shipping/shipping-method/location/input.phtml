@@ -18,7 +18,7 @@ use Loki\Components\Location\Location;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>">
     <input
         type="radio"
         :checked="isChecked"
@@ -27,6 +27,6 @@ $location = $block->getLocation();
         name="pickup_location"
         value="pg|<?= $escaper->escapeHtml($location->getCode()) ?>"
         id="<?= $escaper->escapeHtml($location->getId()) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('mr-4', 'input')) ?>"
+        class="<?= $escaper->escapeHtml($css('mr-4', 'input')) ?>"
     />
 </div>

@@ -19,12 +19,12 @@ use Loki\Components\Util\Block\ChildRenderer;
  */
 $location = $block->getLocation();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('flex mb-8 p-4 hover:bg-black/5')) ?>">
+<div class="<?= $escaper->escapeHtml($css('flex mb-8 p-4 hover:bg-black/5')) ?>">
     <?= /* @noEscape */ $childRenderer->html($block, 'location.input', [
         'location' => $location,
     ]) ?>
 
-    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer flex-1', 'label')) ?>">
+    <label for="<?= $escaper->escapeHtml($location->getId()) ?>" class="<?= $escaper->escapeHtml($css('cursor-pointer flex-1', 'label')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'location.name', [
             'location' => $location,
         ]) ?>

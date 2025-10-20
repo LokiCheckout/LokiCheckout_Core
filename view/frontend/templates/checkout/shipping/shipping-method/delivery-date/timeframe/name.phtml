@@ -19,7 +19,7 @@ use Loki\Components\Factory\ViewModelFactory;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $timeframe = $block->getTimeframe();
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>">
     <div class="float-right text-sm">
         <?= $escaper->escapeHtml($timeframe->getLabel()) ?>
         <?php if ($timeframe->getPrice() > 0) : ?>

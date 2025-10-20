@@ -52,7 +52,7 @@ if ($paymentIcon) {
 ) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
     <label
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
-        class="<?= $escaper->escapeHtmlAttr($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
+        class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
     >
         <span class="shrink-0 flex gap-4">
             <input
@@ -73,7 +73,7 @@ if ($paymentIcon) {
         </span>
 
         <span
-            class="<?= $escaper->escapeHtmlAttr($css('', 'label')) ?>">
+            class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
             <?= $escaper->escapeHtml($paymentMethod->getTitle()) ?>
         </span>
     </label>

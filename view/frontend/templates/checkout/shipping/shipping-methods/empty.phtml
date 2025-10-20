@@ -12,6 +12,6 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('p-4', 'empty-message')) ?>">
+<div class="<?= $escaper->escapeHtml($css('p-4', 'empty-message')) ?>">
     <?= $escaper->escapeHtml(__('No shipping methods available')) ?>
 </div>

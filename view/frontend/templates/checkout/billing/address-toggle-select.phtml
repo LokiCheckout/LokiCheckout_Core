@@ -16,7 +16,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 ?>
 <div>
     <button
-        class="<?= $escaper->escapeHtmlAttr($css('btn btn-primary my-4')) ?>"
+        class="<?= $escaper->escapeHtml($css('btn btn-primary my-4')) ?>"
         x-text="buttonLabel"
         type="button"
         @click.prevent="toggle"

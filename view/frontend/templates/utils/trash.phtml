@@ -12,6 +12,6 @@ use Magento\Framework\View\Element\Template;
 ?>
 <img alt="<?= $escaper->escapeHtml(__('Trash')) ?>"
      src="<?= $escaper->escapeUrl($block->getViewFileUrl('LokiCheckout_Core::images/trash.svg')); ?>"
-     class="<?= $escaper->escapeHtmlAttr($css('trash')) ?>"
+     class="<?= $escaper->escapeHtml($css('trash')) ?>"
      width="18"
      height="18">

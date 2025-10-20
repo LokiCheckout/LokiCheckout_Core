@@ -24,11 +24,11 @@ $allItems = $viewModel->getItems();
 $visibleItems = array_slice($allItems, 0, $viewModel->getVisibleCount());
 $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('relative')) ?>">
+<div class="<?= $escaper->escapeHtml($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
-    <div x-data="LokiToggle" class="<?= $escaper->escapeHtmlAttr($css('', 'inner')) ?>">
+    <div x-data="LokiToggle" class="<?= $escaper->escapeHtml($css('', 'inner')) ?>">
         <ul role="list">
             <?php foreach ($visibleItems as $item) : ?>
                 <li>
@@ -42,8 +42,8 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         </ul>
 
         <?php if (count($hiddenItems) > 0): ?>
-            <button @click.prevent="toggle" x-show="hidden" class="<?= $escaper->escapeHtmlAttr($css('flex', 'button-down')) ?>">
-                <span class="<?= $escaper->escapeHtmlAttr($css('', 'button-down-span')) ?>">
+            <button @click.prevent="toggle" x-show="hidden" class="<?= $escaper->escapeHtml($css('flex', 'button-down')) ?>">
+                <span class="<?= $escaper->escapeHtml($css('', 'button-down-span')) ?>">
                     <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-down') ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Show all items')) ?>
@@ -60,8 +60,8 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
                 <?php endforeach; ?>
             </ul>
 
-            <button @click.prevent="toggle" x-cloak x-show="shown" class="<?= $escaper->escapeHtmlAttr($css('flex', 'button-up')) ?>">
-                <span class="<?= $escaper->escapeHtmlAttr($css('w-6 h-2', 'button-up-span')) ?>">
+            <button @click.prevent="toggle" x-cloak x-show="shown" class="<?= $escaper->escapeHtml($css('flex', 'button-up')) ?>">
+                <span class="<?= $escaper->escapeHtml($css('w-6 h-2', 'button-up-span')) ?>">
                     <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-up') ?>
                 </span>
                 <?= $escaper->escapeHtml(__('Do not show all items')) ?>

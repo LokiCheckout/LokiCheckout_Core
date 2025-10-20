@@ -14,7 +14,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('mb-8')) ?>">
+<div class="<?= $escaper->escapeHtml($css('mb-8')) ?>">
     <?php if ($viewModel->showSelectAddress()): ?>
         <?= /* @noEscape */ $block->getChildHtml('select') ?>
         <?= /* @noEscape */ $block->getChildHtml('toggle-select') ?>

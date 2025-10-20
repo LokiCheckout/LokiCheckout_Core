@@ -22,11 +22,11 @@ $viewModel = $block->getViewModel();
 
 $ancestorBlock = $block->getAncestorBlock();
 ?>
-<div x-data="{open:false}" class="<?= $escaper->escapeHtmlAttr($css('absolute top-0 left-0')) ?>">
+<div x-data="{open:false}" class="<?= $escaper->escapeHtml($css('absolute top-0 left-0')) ?>">
     <button @click.prevent="open = ! open">
         <?= /* @noEscape */ $imageRenderer->icon($block, 'debug'); ?>
     </button>
-    <div x-cloak x-show="open" class="<?= $escaper->escapeHtmlAttr($css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal')) ?>">
+    <div x-cloak x-show="open" class="<?= $escaper->escapeHtml($css('absolute z-50 w-auto text-sm bg-orange-100 border-2 border-orange-400 p-2', 'modal')) ?>">
         Component: <?= ($viewModel instanceof ComponentInterface) ? $escaper->escapeHtml(get_class($viewModel)) : 'none' ?><br>
         Block: <?= $escaper->escapeHtml(get_class($ancestorBlock)) ?><br>
         Name in layout: <?= $escaper->escapeHtml($ancestorBlock->getNameInLayout()) ?><br>

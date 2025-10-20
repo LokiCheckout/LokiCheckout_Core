@@ -16,11 +16,11 @@ use Loki\Components\Util\Block\ChildRenderer;
 
 $deliveryDate = $block->getDeliveryDate();
 ?>
-<details class="<?= $escaper->escapeHtmlAttr($css('my-4')) ?>" open>
-    <summary class="<?= $escaper->escapeHtmlAttr($css('font-bold cursor-pointer', 'summary')) ?>">
+<details class="<?= $escaper->escapeHtml($css('my-4')) ?>" open>
+    <summary class="<?= $escaper->escapeHtml($css('font-bold cursor-pointer', 'summary')) ?>">
         <?= $escaper->escapeHtml($deliveryDate->getDate()) ?>
     </summary>
-    <div class="<?= $escaper->escapeHtmlAttr($css('mb-4', 'content')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('mb-4', 'content')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'timeframes', [
             'timeframes' => $deliveryDate->getTimeframes(),
         ]) ?>

@@ -13,6 +13,6 @@ use Magento\Framework\View\Element\Template;
 /** @var ChildRenderer $childRenderer */
 
 ?>
-<div class="<?= $escaper->escapeHtmlAttr($css('flex flex-col gap-8')) ?>">
+<div class="<?= $escaper->escapeHtml($css('flex flex-col gap-8')) ?>">
     <?= /* @noEscape */ $childRenderer->all($block) ?>
 </div>
