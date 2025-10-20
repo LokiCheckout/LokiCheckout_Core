@@ -16,9 +16,7 @@
             <block
                 name="loki-checkout.script.checkout-store"
                 template="LokiCheckout_Core::script/checkout-store.phtml"/>
-            <!--<block
-                name="loki-checkout.script.component-extender"
-                template="LokiCheckout_Core::script/component-extender.phtml"/>-->
+
             <block
                 name="loki-checkout.script.aria-invalid"
                 template="LokiCheckout_Core::script/aria-invalid.phtml"/>
