@@ -14,7 +14,8 @@ class StreetLineRepository extends AddressFieldRepository
         $numberOfStreetLines = (int)$this->getContext()->getScopeConfig()->getValue('customer/address/street_lines');
 
         $street = (string)$this->getAddressState()->load('street');
-        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);
+        $countryId = (string)$this->getAddressState()->load('country_id');
+        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street, $countryId);
         if ($this->getIndex() + 1 < $numberOfStreetLines) {
             return $streetLines->getLineByIndex($this->getIndex());
         }
@@ -28,7 +29,8 @@ class StreetLineRepository extends AddressFieldRepository
     public function saveValue(mixed $value): void
     {
         $street = (string)$this->getAddressState()->load('street');
-        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street);
+        $countryId = (string)$this->getAddressState()->load('country_id');
+        $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street, $countryId);
         $streetLines = $streetLines->setLineByIndex($this->getIndex(), $value);
         $this->getAddressState()->save('street', $streetLines->toString());
     }
