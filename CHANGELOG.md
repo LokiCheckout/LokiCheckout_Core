@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.17] - 22 October 2025
+### Fixed
+- Implement new method createFromStreet with countryId argument
+- Make street lines parser only available for configured countries (NL, BE)
+- Require countryId for usage of StreetLines
+- Allow psr/log 1 and 2 besides 3 as well
+- Do not escape `$css()` with `escapeHtmlAttr()` but `escapeHtml()`
+- Add LokiComponentExtender for mixins and other modifications
+
 ## [2.1.16] - 17 October 2025
 ### Fixed
 - Move LokiHtmlUpdater from LokiCheckout to Loki_Components
