@@ -8,6 +8,7 @@ class StreetLines
         private string $streetName = '',
         private string $houseNumber = '',
         private string $houseNumberAddition = '',
+        private string $countryId = '',
         private readonly string $street4 = '',
         private readonly int $maximumNumber = 2,
     ) {

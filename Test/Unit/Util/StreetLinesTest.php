@@ -17,9 +17,18 @@ class StreetLinesTest extends TestCase
         string $street,
         string $streetName,
         string $houseNumber,
-        string $houseNumberAddition
+        string $houseNumberAddition,
+        string $countryId
     ) {
-        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition, '', 3);
+        $streetLines = new StreetLines(
+            $streetName,
+            $houseNumber,
+            $houseNumberAddition,
+            $countryId,
+            '',
+            3
+        );
+
         $this->assertSame($streetName, $streetLines->getStreetName());
         $this->assertSame($houseNumber, $streetLines->getHouseNumber());
         $this->assertSame($houseNumberAddition, $streetLines->getHouseNumberAddition());
@@ -29,9 +38,22 @@ class StreetLinesTest extends TestCase
      * @return void
      * @dataProvider getTestArguments
      */
-    public function testGetLines(string $street, string $streetName, string $houseNumber, string $houseNumberAddition)
-    {
-        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition, '', 3);
+    public function testGetLines(
+        string $street,
+        string $streetName,
+        string $houseNumber,
+        string $houseNumberAddition,
+        string $countryId
+    ) {
+        $streetLines = new StreetLines(
+            $streetName,
+            $houseNumber,
+            $houseNumberAddition,
+            $countryId,
+            '',
+            3
+        );
+
         $lines = $streetLines->getLines();
         $this->assertSame($streetName, $lines[0], var_export($lines, true));
         $this->assertSame($houseNumber, $lines[1], var_export($lines, true));
@@ -42,18 +64,30 @@ class StreetLinesTest extends TestCase
      * @return void
      * @dataProvider getTestArguments
      */
-    public function testToString(string $street, string $streetName, string $houseNumber, string $houseNumberAddition)
-    {
-        $streetLines = new StreetLines($streetName, $houseNumber, $houseNumberAddition, '', 3);
+    public function testToString(
+        string $street,
+        string $streetName,
+        string $houseNumber,
+        string $houseNumberAddition,
+        string $countryId
+    ) {
+        $streetLines = new StreetLines(
+            $streetName,
+            $houseNumber,
+            $houseNumberAddition,
+            $countryId,
+            '',
+            3
+        );
         $this->assertSame($street, $streetLines->toString());
     }
 
     public function getTestArguments(): array
     {
         return [
-            ["Example\n1\nA", 'Example', '1', 'A'],
-            ["Example\n\nA", 'Example', '', 'A'],
-            ["A", '', '', 'A'],
+            ["Example\n1\nA", 'Example', '1', 'A', 'NL'],
+            ["Example\n\nA", 'Example', '', 'A', 'NL'],
+            ["A", '', '', 'A', 'NL'],
         ];
     }
 }

@@ -16,7 +16,13 @@ class StreetLinesFactoryTest extends TestCase
         $scopeConfig = $this->getScopeConfig(4);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 
-        $streetLines = $streetLinesFactory->create('Example', '1', 'A');
+        $streetLines = $streetLinesFactory->create(
+            'Example',
+            '1',
+            'A',
+            countryId: 'NL'
+        );
+
         $this->assertSame('Example', $streetLines->getStreetName());
         $this->assertSame('1', $streetLines->getHouseNumber());
         $this->assertSame('A', $streetLines->getHouseNumberAddition());
@@ -27,7 +33,8 @@ class StreetLinesFactoryTest extends TestCase
      * @param string $streetName
      * @param string $streetNumber
      * @param string $streetNumberAddition
-     * @param int $numberOfStreetlines
+     * @param int    $numberOfStreetlines
+     *
      * @return void
      * @dataProvider getCreateFromStreetInput
      */
@@ -37,16 +44,20 @@ class StreetLinesFactoryTest extends TestCase
         string $expectedHouseNumber,
         string $expectedHouseNumberAddition,
         ?string $street4 = null,
+        string $countryId = '',
         int $numberOfStreetlines = 2
     ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 
-        $streetLines = $streetLinesFactory->createFromStreet($street);
+        $streetLines = $streetLinesFactory->createFromStreet($street, $countryId);
 
         if ($numberOfStreetlines == 1) {
-            $this->assertSame(trim(implode(' ', [$expectedStreetName, $expectedHouseNumber, $expectedHouseNumberAddition, $street4])), $streetLines->getStreetName());
+            $this->assertSame(
+                trim(implode(' ', [$expectedStreetName, $expectedHouseNumber, $expectedHouseNumberAddition, $street4])),
+                $streetLines->getStreetName()
+            );
             $this->assertEmpty($streetLines->getHouseNumber());
             $this->assertEmpty($streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
@@ -54,7 +65,8 @@ class StreetLinesFactoryTest extends TestCase
 
         if ($numberOfStreetlines == 2) {
             $this->assertSame($expectedStreetName, $streetLines->getStreetName());
-            $this->assertSame(trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])), $streetLines->getHouseNumber());
+            $this->assertSame(trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])),
+                $streetLines->getHouseNumber());
             $this->assertEmpty($streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
@@ -62,7 +74,8 @@ class StreetLinesFactoryTest extends TestCase
         if ($numberOfStreetlines == 3) {
             $this->assertSame($expectedStreetName, $streetLines->getStreetName());
             $this->assertSame($expectedHouseNumber, $streetLines->getHouseNumber());
-            $this->assertSame(trim(implode(' ', [$expectedHouseNumberAddition, $street4])), $streetLines->getHouseNumberAddition());
+            $this->assertSame(trim(implode(' ', [$expectedHouseNumberAddition, $street4])),
+                $streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
 
@@ -77,43 +90,48 @@ class StreetLinesFactoryTest extends TestCase
     public function getCreateFromStreetInput(): array
     {
         return [
-            ["Example 1 A B", 'Example', '1', 'A', 'B', 4],
-            ["Example\n1\nA\nB", 'Example', '1', 'A', 'B', 4],
-            ["Example\n1\nA", 'Example', '1', 'A', null, 3],
-            ["Example\n1\nA B", 'Example', '1', 'A', 'B', 3],
-            ["Example\n1 A", 'Example', '1', 'A', null, 2],
-            ["Example 1 A", 'Example', '1', 'A', null, 1],
-            ["\n1\nA", '', '1', 'A', null, 3],
-            ["\n\nA", '', '', 'A', null, 3],
-            [" \n \nA", '', '', 'A', null, 3],
-            [" \n \nA\n\n\n", '', '', 'A', null, 3],
-            ["12AA", '', '12', 'AA', null, 3],
-            ["12\nAA", '', '12', 'AA', null, 3],
+            ["Example 1 A B", 'Example', '1', 'A', 'B', 'NL', 4],
+            ["Example\n1\nA\nB", 'Example', '1', 'A', 'B', 'NL', 4],
+            ["Example\n1\nA", 'Example', '1', 'A', null, 'NL', 3],
+            ["Example\n1\nA B", 'Example', '1', 'A', 'B', 'NL', 3],
+            ["Example\n1 A", 'Example', '1', 'A', null, 'NL', 2],
+            ["Example 1 A", 'Example', '1', 'A', null, 'NL', 1],
+            ["\n1\nA", '', '1', 'A', null, 'NL', 3],
+            ["\n\nA", '', '', 'A', null, 'NL', 3],
+            [" \n \nA", '', '', 'A', null, 'NL', 3],
+            [" \n \nA\n\n\n", '', '', 'A', null, 'NL', 3],
+            ["12AA", '', '12', 'AA', null, 'NL', 3],
+            ["12\nAA", '', '12', 'AA', null, 'NL', 3],
         ];
     }
 
     /**
      * @param string $expectedStreet
-     * @param array $streetParts
-     * @param int $numberOfStreetlines
+     * @param array  $streetParts
+     * @param int    $numberOfStreetlines
+     *
      * @return void
      * @dataProvider getCreateFromStreetPartsInput
      */
-    public function testCreateFromStreetParts(string $expectedStreet, array $streetParts, int $numberOfStreetlines = 2)
-    {
+    public function testCreateFromStreetParts(
+        string $expectedStreet,
+        array $streetParts,
+        string $countryId,
+        int $numberOfStreetlines = 2
+    ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
 
-        $streetLines = $streetLinesFactory->createFromStreetParts($streetParts);
+        $streetLines = $streetLinesFactory->createFromStreetParts($streetParts, $countryId);
         $this->assertEquals($expectedStreet, $streetLines->toString());
     }
 
     public function getCreateFromStreetPartsInput(): array
     {
         return [
-            ["Example\n42\nC\nhouse", ['Example', '42', 'C', 'house'], 4],
-            ["Example\n42\nA", ['Example 42A', '', ''], 3],
+            ["Example\n42\nC\nhouse", ['Example', '42', 'C', 'house'], 'NL', 4],
+            ["Example\n42\nA", ['Example 42A', '', ''], 'NL', 3],
         ];
     }
 
