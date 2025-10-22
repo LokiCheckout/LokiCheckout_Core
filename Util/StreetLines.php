@@ -114,6 +114,7 @@ class StreetLines
             $houseNumber,
             $houseNumberAddition,
             $street4,
+            $this->getCountryId(),
             $this->maximumNumber
         );
     }
@@ -126,5 +127,10 @@ class StreetLines
         }
 
         return trim($string);
+    }
+
+    public function getCountryId(): string
+    {
+        return $this->countryId;
     }
 }

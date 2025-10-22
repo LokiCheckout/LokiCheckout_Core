@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Test\Unit\Util;
 
+use LokiCheckout\Core\Util\StreetLinesParser\StreetLinesParser;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use PHPUnit\Framework\TestCase;
 use LokiCheckout\Core\Test\Unit\Stub\SimpleObjectManager;
@@ -13,8 +14,9 @@ class StreetLinesFactoryTest extends TestCase
     public function testCreate()
     {
         $objectManager = new SimpleObjectManager();
+        $streetLinesParser = new StreetLinesParser();
         $scopeConfig = $this->getScopeConfig(4);
-        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->create(
             'Example',
@@ -49,7 +51,8 @@ class StreetLinesFactoryTest extends TestCase
     ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
-        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
+        $streetLinesParser = new StreetLinesParser();
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreet($street, $countryId);
 
@@ -65,8 +68,7 @@ class StreetLinesFactoryTest extends TestCase
 
         if ($numberOfStreetlines == 2) {
             $this->assertSame($expectedStreetName, $streetLines->getStreetName());
-            $this->assertSame(trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])),
-                $streetLines->getHouseNumber());
+            $this->assertSame(trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])),$streetLines->getHouseNumber());
             $this->assertEmpty($streetLines->getHouseNumberAddition());
             $this->assertEmpty($streetLines->getStreet4());
         }
@@ -102,6 +104,8 @@ class StreetLinesFactoryTest extends TestCase
             [" \n \nA\n\n\n", '', '', 'A', null, 'NL', 3],
             ["12AA", '', '12', 'AA', null, 'NL', 3],
             ["12\nAA", '', '12', 'AA', null, 'NL', 3],
+            ["12 Example Street", '12 Example Street', '', '', null, 'US', 2],
+            ["12 Example\nApartment 1", '12 Example', 'Apartment 1', '', null, 'US', 2],
         ];
     }
 
@@ -121,7 +125,8 @@ class StreetLinesFactoryTest extends TestCase
     ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
-        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig);
+        $streetLinesParser = new StreetLinesParser();
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreetParts($streetParts, $countryId);
         $this->assertEquals($expectedStreet, $streetLines->toString());
@@ -132,6 +137,8 @@ class StreetLinesFactoryTest extends TestCase
         return [
             ["Example\n42\nC\nhouse", ['Example', '42', 'C', 'house'], 'NL', 4],
             ["Example\n42\nA", ['Example 42A', '', ''], 'NL', 3],
+            ["22 Example\nApartment 1", ['22 Example', 'Apartment 1', ''], 'US', 2],
+            ["22 Example Apartment 1", ['22 Example', 'Apartment 1', ''], 'US', 1],
         ];
     }
 
