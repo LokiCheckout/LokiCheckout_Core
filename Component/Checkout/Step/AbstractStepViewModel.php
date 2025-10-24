@@ -3,7 +3,6 @@
 namespace LokiCheckout\Core\Component\Checkout\Step;
 
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
-use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
 use Loki\Components\Component\ComponentViewModel;
 use LokiCheckout\Core\Step\StepNavigator;
 
