@@ -45,14 +45,14 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return '';
         }
 
-        list($carrierCode, $carrierMethod) = explode('_', $shippingMethod);
+        list($carrierCode, $carrierMethod) = explode('_', $shippingMethod, 2);
 
         $parts = [];
 
         try {
             $carrier = $this->getCarrier($carrierCode);
         } catch (InvalidArgumentException $e) {
-            return '';
+            return (string)__($carrierMethod) . ' / ' . __($carrierCode);
         }
 
         $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
@@ -86,7 +86,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
     private function getMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string
     {
         if (false === $carrier instanceof DataObject) {
-            return '';
+            return (string)__($carrierMethod);
         }
 
         $carrierMethods = $carrier->getAllowedMethods();
@@ -96,6 +96,6 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             }
         }
 
-        return '';
+        return (string)__($carrierMethod);
     }
 }
