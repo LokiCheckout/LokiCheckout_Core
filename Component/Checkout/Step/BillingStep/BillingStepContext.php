@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Step\BillingStep;
 
+use LokiCheckout\Core\Component\Checkout\Step\StepContextInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
@@ -15,10 +16,9 @@ use LokiCheckout\Core\Validator\ValidatorInterface;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
-use Loki\Components\Component\ComponentContextInterface;
 use Loki\Components\Messages\GlobalMessageRegistry;
 
-class BillingStepContext implements ComponentContextInterface
+class BillingStepContext implements StepContextInterface
 {
     public function __construct(
         private readonly ValidatorInterface $stepValidator,
