@@ -41,15 +41,14 @@ class StreetLinesFactory
         array $streetParts,
         string $countryId,
         ?int $maximumNumber = null
-    ): StreetLines
-    {
+    ): StreetLines {
         $streetParts = $this->streetLinesParser->parseStreetParts($streetParts, $countryId);
 
         return $this->create(
             $streetParts[0] ?? '',
-                $streetParts[1] ?? '',
-                $streetParts[2] ?? '',
-                $streetParts[3] ?? '',
+            $streetParts[1] ?? '',
+            $streetParts[2] ?? '',
+            $streetParts[3] ?? '',
             $countryId,
             $maximumNumber
         );
@@ -58,6 +57,7 @@ class StreetLinesFactory
     public function createFromStreet(string $street, string $countryId): StreetLines
     {
         $streetParts = explode("\n", $street);
+
         return $this->createFromStreetParts($streetParts, $countryId);
     }
 

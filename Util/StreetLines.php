@@ -27,7 +27,12 @@ class StreetLines
             case 2:
                 return trim($this->streetName);
             case 1:
-                return $this->concatenate([$this->streetName,$this->houseNumber,$this->houseNumberAddition,$this->street4]);
+                return $this->concatenate([
+                    $this->streetName,
+                    $this->houseNumber,
+                    $this->houseNumberAddition,
+                    $this->street4
+                ]);
         }
 
         return '';
