@@ -21,7 +21,7 @@ class LokiCheckoutModules
     {
         $paths = $this->componentRegistrar->getPaths(ComponentRegistrar::MODULE);
         foreach ($paths as $moduleName => $modulePath) {
-            if (str_contains($moduleName, 'LokiCheckout') && false === in_array($moduleName, $this->modules)) {
+            if (str_contains($moduleName, 'LokiCheckout') && false === $this->hasModule($moduleName)) {
                 $this->modules[] = $moduleName;
             }
         }
@@ -40,7 +40,7 @@ class LokiCheckoutModules
 
     public function hasModule(string $moduleName): bool
     {
-        return in_array($moduleName, $this->modules);
+        return in_array($moduleName, $this->modules, true);
     }
 
     public function seemsModule(string $moduleName):bool

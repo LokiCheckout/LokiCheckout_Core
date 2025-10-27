@@ -23,7 +23,7 @@ final class QuoteDetailsPageTest extends LokiCheckoutPageTestCase
 
     const BLOCK_NAME = 'loki-checkout.sidebar.preview.quote_details';
 
-    final public function testComponentOnPage(): void
+    public function testComponentOnPage(): void
     {
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
