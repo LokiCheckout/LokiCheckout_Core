@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Plugin;
 
 use Exception;
+use Loki\Components\Component\ComponentInterface;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -21,11 +22,11 @@ class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
     public function aroundDispatch(
         RepositoryDispatcher $repositoryDispatcher,
         callable $proceed,
-        AbstractBlock $block,
+        ComponentInterface $component,
         mixed $componentData
     ): void {
         try {
-            $proceed($block, $componentData);
+            $proceed($component, $componentData);
         } catch (Exception $e) {
             $this->handleException($e);
         }

@@ -6,4 +6,8 @@ use LokiCheckout\Core\Component\Base\AddressField\AddressFieldRepository;
 
 class CountryIdRepository extends AddressFieldRepository
 {
+    public function getPriority(): int
+    {
+        return -1;
+    }
 }
