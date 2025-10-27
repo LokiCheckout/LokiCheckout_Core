@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\ViewModel;
 
+use Magento\Directory\Model\AllowedCountries;
 use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
@@ -9,12 +10,34 @@ class PostcodePatterns implements ArgumentInterface
 {
     public function __construct(
         private readonly ConfigInterface $postcodeConfig,
+        private readonly AllowedCountries $allowedCountries
     ) {
     }
 
     public function getConfiguration(): array
     {
-        return $this->postcodeConfig->getPostCodes();
+        $postcodes =  $this->postcodeConfig->getPostCodes();
+        foreach ($postcodes as $countryId => $postcode) {
+            if (false === $this->isCountryEnabled($countryId)) {
+                unset($postcodes[$countryId]);
+            }
+        }
+
+        return $postcodes;
+    }
+
+    private function isCountryEnabled(string $countryId): bool
+    {
+        static $allowedCountries = null;
+        if (null === $allowedCountries){
+            $allowedCountries = $this->allowedCountries->getAllowedCountries();
+        }
+
+        if (false === in_array($countryId, $allowedCountries)) {
+            return false;
+        }
+
+        return true;
     }
 
     private function fromPhpRegexToJsRegex(string $regex): string
