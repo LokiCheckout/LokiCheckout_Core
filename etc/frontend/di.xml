@@ -45,4 +45,10 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <plugin
+            name="LokiCheckout_Core::cleanCompositeConfigProvider"
+            type="LokiCheckout\Core\Plugin\CleanCompositeConfigProviderPlugin"/>
+    </type>
 </config>
