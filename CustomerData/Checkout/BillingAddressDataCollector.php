@@ -18,6 +18,7 @@ class BillingAddressDataCollector
             'street'     => $billingAddress->getStreet(),
             'postcode'   => $billingAddress->getPostcode(),
             'region'     => $billingAddress->getRegion(),
+            'region_id'  => $billingAddress->getRegionId(),
             'city'       => $billingAddress->getCity(),
             'country'    => $billingAddress->getCountry(),
             'tax_amount' => $billingAddress->getTaxAmount(),

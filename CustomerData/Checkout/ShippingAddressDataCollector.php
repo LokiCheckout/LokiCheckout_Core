@@ -18,6 +18,7 @@ class ShippingAddressDataCollector
             'street'     => $shippingAddress->getStreet(),
             'postcode'   => $shippingAddress->getPostcode(),
             'region'     => $shippingAddress->getRegion(),
+            'region_id'  => $shippingAddress->getRegionId(),
             'city'       => $shippingAddress->getCity(),
             'country'    => $shippingAddress->getCountry(),
             'tax_amount' => $shippingAddress->getTaxAmount(),
