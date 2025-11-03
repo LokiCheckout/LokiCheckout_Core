@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.18] - 03 November 2025
+### Fixed
+- Update composer keywords
+- Allow for `region_id` in customerData section output
+- Add component repository repository so when bulking, country is saved first
+- Cleanup postCodes from `window.checkoutConfig`
+- Remove postcode validations for countries that are not allowed
+- Fix issue with country ID being appended to housenumber after StreetLines refactor
+- In shipping preview, use codes if actual method could not be found
+- Add optional StepContextInterface
+
 ## [2.1.17] - 22 October 2025
 ### Fixed
 - Implement new method createFromStreet with countryId argument
@@ -17,13 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.16] - 17 October 2025
 ### Fixed
-- Move LokiHtmlUpdater from LokiCheckout to Loki_Components
+- Move LokiHtmlUpdater from LokiCheckout to `Loki_Components`
 - Document latest version of template
 - Fix newlines after comments
 - Copy generic CI/CD files
 - Update MODULE.json
 - Skip invalid components that are not visible
-- Add loki_checkout_payment_before_save_quote event for additional information
+- Add `loki_checkout_payment_before_save_quote` event for additional information
 - When collecting invalid components, explicitly remove components that are gone
 - Make change to input optional
 
@@ -39,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.1.15] - 14 October 2025
 ### Fixed
 - Skip invalid components that are not visible
-- Add loki_checkout_payment_before_save_quote event for additional information
+- Add `loki_checkout_payment_before_save_quote` event for additional information
 - When collecting invalid components, explicitly remove components that are gone
 - Make change to input optional
 
