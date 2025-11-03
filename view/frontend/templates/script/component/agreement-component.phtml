@@ -14,6 +14,7 @@ use Magento\Framework\View\Element\Template;
             name: 'LokiCheckoutAgreementComponent',
             id: '',
             submitted: false,
+            visible: true,
             valid: false,
             init() {
                 this.id = this.name + this.$refs.field.getAttribute('data-id');
@@ -21,16 +22,16 @@ use Magento\Framework\View\Element\Template;
                 this.valid = this.agreements[this.id];
             },
             toggle(event) {
-                const agreementId = event.target.getAttribute('data-id');
+                const agreementId = this.name + event.target.getAttribute('data-id');
                 this.valid =  event.target.checked;
-                this.agreements[agreementId] = this.valid;
+                this.agreements[agreementId] = event.target.checked;
                 this.post(this.agreements);
             },
             isChecked() {
-                return this.agreements[this.$el.getAttribute('data-id')];
+                return this.agreements[this.id] === true;
             },
             isNotChecked() {
-                return !this.isAgreementChecked();
+                return !this.isChecked();
             },
             isAriaInvalid() {
                 return !this.$refs.field.checked && this.submitted;

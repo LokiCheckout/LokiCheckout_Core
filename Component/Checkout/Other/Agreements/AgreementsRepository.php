@@ -45,7 +45,7 @@ class AgreementsRepository extends ComponentRepository
                 continue;
             }
 
-            $savedAgreements[] = (int)$agreementId;
+            $savedAgreements[] = str_replace('LokiCheckoutAgreementComponent', '', $agreementId);
         }
 
         $savedAgreements = array_unique($savedAgreements);

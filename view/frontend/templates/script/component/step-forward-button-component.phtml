@@ -97,19 +97,14 @@ use Magento\Framework\View\Element\Template;
                         Alpine.store('LokiLocalStorage').reset(['cart', 'loki-checkout']);
 
                         this.post();
-
-                        return true;
+                        return;
                     }
 
                     const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
                     if (firstInvalidElement) {
                         firstInvalidElement.focus();
                     }
-
-                    return false;
                 });
-
-                return false;
             }
         }));
     });

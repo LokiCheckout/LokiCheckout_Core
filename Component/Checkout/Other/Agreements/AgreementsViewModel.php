@@ -45,7 +45,7 @@ class AgreementsViewModel extends CheckoutViewModel
         $agreements = [];
         foreach ($this->getCheckoutAgreements() as $agreement) {
             $isSaved = in_array($agreement->getId(), $savedAgreements);
-            $agreements[$agreement->getId()] = $isSaved;
+            $agreements['LokiCheckoutAgreementComponent'.$agreement->getId()] = $isSaved;
         }
 
         return [

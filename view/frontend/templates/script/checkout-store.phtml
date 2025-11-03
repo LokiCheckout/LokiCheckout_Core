@@ -47,6 +47,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                         components[component.id] = component;
                     }
                 });
+
                 return components;
             },
             getComponentArrayByStep(step) {
@@ -59,6 +60,7 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                         components[component.id] = component;
                     }
                 });
+
                 return components;
             },
             getComponentArrayByFieldNameAndStep(fieldName, step) {
