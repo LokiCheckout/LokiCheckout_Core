@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.18] - 03 November 2025
 ### Fixed
+- Fix agreements validation if in final step
 - Update composer keywords
 - Allow for `region_id` in customerData section output
 - Add component repository repository so when bulking, country is saved first
