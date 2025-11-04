@@ -55,7 +55,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        if ($this->currentShippingMethod !== '' && $this->currentShippingMethod !== '0') {
+        if (strlen($this->currentShippingMethod) > 0) {
             return $this->currentShippingMethod;
         }
 
@@ -79,7 +79,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $shippingAddress = $quote->getShippingAddress();
 
-        if ($shippingMethodCode === '' || $shippingMethodCode === '0') {
+        if (strlen($shippingMethodCode) === 0) {
             $shippingAddress->removeAllShippingRates();
             $shippingAddress->setShippingMethod('');
             $this->getContext()->getCheckoutState()->saveQuote($quote);
@@ -105,7 +105,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
-        if ($shippingMethodCode === '' || $shippingMethodCode === '0') {
+        if (strlen($shippingMethodCode) === 0) {
             return $this->getDefaultShippingMethod();
         }
 
