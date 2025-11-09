@@ -13,16 +13,17 @@ use Magento\Framework\View\Element\Template;
             ...LokiCheckoutComponentType,
             agreements: [],
             errorText: '',
-            beforePostNextStep() {
-                if (Object.values(this.agreements).includes(false)) {
-                    this.valid = false;
-                }
+            initWatchAgreements() {
+                this.$watch('agreements', () => {
+                    this.valid = !Object.values(this.agreements).includes(false);
+                });
 
+                this.valid = !Object.values(this.agreements).includes(false);
+            },
+            beforePostNextStep() {
                 if (false === this.valid) {
                     this.addError(this.errorText);
                 }
-
-                this.valid = false;
             }
         }));
     });
