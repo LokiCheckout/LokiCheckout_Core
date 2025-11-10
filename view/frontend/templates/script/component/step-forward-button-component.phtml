@@ -94,7 +94,7 @@ use Magento\Framework\View\Element\Template;
                             component: this
                         }));
 
-                        Alpine.store('LokiLocalStorage').reset(['cart', 'loki-checkout']);
+                        Alpine.store('LocalStorage').reset(['cart', 'loki-checkout']);
 
                         this.post();
                         return;

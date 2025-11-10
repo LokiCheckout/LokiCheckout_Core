@@ -34,7 +34,7 @@ use Magento\Framework\View\Element\Template;
                 });
             },
             afterPostFinally() {
-                Alpine.store('LokiLocalStorage').refresh('customer');
+                Alpine.store('LocalStorage').refresh('customer');
             },
             buttonAriaLabel() {
                 if (this.passwordFieldType === 'text') {

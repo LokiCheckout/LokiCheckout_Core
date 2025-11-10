@@ -14,7 +14,7 @@ use Magento\Framework\View\Element\Template;
             privateData: {},
             init() {
                 this.loadData();
-                Alpine.store('LokiLocalStorage').set('loki-checkout', this.privateData);
+                Alpine.store('LocalStorage').set('loki-checkout', this.privateData);
             }
         }));
     });
