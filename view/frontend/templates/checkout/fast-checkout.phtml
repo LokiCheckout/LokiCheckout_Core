@@ -15,8 +15,8 @@ if (empty($html)) {
     return;
 }
 ?>
-<div class="<?= $escaper->escapeHtml($css('card mb-8')) ?>">
-    <div class="<?= $escaper->escapeHtml($css('flex justify-center p-4', 'inner')) ?>">
+<div class="<?= $escaper->escapeHtml($css('card mb-8 text-center')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('inline-flex flex-wrap gap-4', 'inner')) ?>">
         <?= /* @noEscape */ $html ?>
     </div>
 </div>
