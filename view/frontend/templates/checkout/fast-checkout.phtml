@@ -14,8 +14,13 @@ $html = $block->getChildHtml();
 if (empty($html)) {
     return;
 }
+
+$title = $block->getTitle() ?: __('Pay faster with');
 ?>
 <div class="<?= $escaper->escapeHtml($css('card mb-8 text-center')) ?>">
+    <p class="<?= $escaper->escapeHtml($css('mb-4', 'title')) ?>">
+        <strong><?= $escaper->escapeHtml($title) ?></strong>:
+    </p>
     <div class="<?= $escaper->escapeHtml($css('inline-flex flex-wrap gap-4', 'inner')) ?>">
         <?= /* @noEscape */ $html ?>
     </div>
