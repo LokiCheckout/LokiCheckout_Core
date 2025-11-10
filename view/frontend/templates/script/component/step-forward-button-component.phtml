@@ -61,12 +61,10 @@ use Magento\Framework\View\Element\Template;
                     }
                 }
 
-                if (this.valid) {
-                    return this.valid;
+                if (!this.valid) {
+                    const components = Alpine.store('LokiCheckout').getInvalidComponentIds([this.currentStep, 'any']);
+                    LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
                 }
-
-                const components = Alpine.store('LokiCheckout').getInvalidComponentIds([this.currentStep, 'any']);
-                LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
 
                 return this.valid;
             },
@@ -88,7 +86,7 @@ use Magento\Framework\View\Element\Template;
                 });
 
                 this.$nextTick(() => {
-                    this.updateValid();
+                    this.valid = this.updateValid();
                     if (true === this.valid) {
                         document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
                             component: this

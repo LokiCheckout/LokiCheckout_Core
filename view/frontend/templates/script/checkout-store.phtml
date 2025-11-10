@@ -84,9 +84,19 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 const components = {};
                 this.getComponentArrayByStep(step).forEach(component => {
-                    if (this.exists(component) && false === component.valid && component.visible) {
-                        components[component.id] = component;
+                    if (!this.exists(component)) {
+                        return;
                     }
+
+                    if (component.valid) {
+                        return;
+                    }
+
+                    if (!component.visible) {
+                        return;
+                    }
+
+                    components[component.id] = component;
                 });
 
                 return components;
@@ -106,6 +116,14 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             lock(component) {
                 this.components[component.id].locked = true;
                 document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
+            },
+            componentIds(components) {
+                const ids = [];
+                Object.values(components).forEach(component => {
+                    ids.push(component.id);
+                });
+
+                return ids;
             },
             unlock(component) {
                 this.components[component.id].locked = false;

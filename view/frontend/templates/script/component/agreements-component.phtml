@@ -11,6 +11,7 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
             ...LokiCheckoutComponentType,
+            visible: false,
             agreements: [],
             errorText: '',
             initWatchAgreements() {

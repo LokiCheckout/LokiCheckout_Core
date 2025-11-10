@@ -18,8 +18,8 @@ use Magento\Framework\View\Element\Template;
             valid: false,
             init() {
                 this.id = this.name + this.$refs.field.getAttribute('data-id');
-                Alpine.store('LokiCheckout').add(this);
                 this.valid = this.agreements[this.id];
+                Alpine.store('LokiCheckout').add(this);
             },
             toggle(event) {
                 const agreementId = this.name + event.target.getAttribute('data-id');
@@ -37,9 +37,10 @@ use Magento\Framework\View\Element\Template;
                 return !this.$refs.field.checked && this.submitted;
             },
             isValid() {
-                return this.$refs.field.checked && this.submitted;
+                return this.valid;
             },
             beforePostNextStep() {
+                this.valid = this.agreements[this.id];
             }
         }));
     });
