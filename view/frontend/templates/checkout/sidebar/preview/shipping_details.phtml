@@ -40,7 +40,7 @@ if (empty($addressHtml)) {
     <?php if (!empty($methodHtml)): ?>
         <div
             class="<?= $escaper->escapeHtml($css('mb-4', 'method')) ?>"
-            data-method="<?= $escaper->escapeHtml($viewModel->getMethod()) ?>"
+            title="<?= $escaper->escapeHtml($viewModel->getMethod()) ?>"
         >
             <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Method')) ?></span><br>
             <?= /* @noEscape */ $methodHtml ?>
