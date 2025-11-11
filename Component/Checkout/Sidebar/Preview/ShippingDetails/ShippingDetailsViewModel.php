@@ -34,13 +34,18 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         return $this->addressRenderer->getHtml($address);
     }
 
+    public function getMethod(): string
+    {
+        return $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
+    }
+
     public function getMethodHtml(): string
     {
         if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
 
-        $shippingMethod = $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
+        $shippingMethod = $this->getMethod();
         if (empty($shippingMethod)) {
             return '';
         }
