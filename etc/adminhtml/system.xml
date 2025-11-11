@@ -17,7 +17,7 @@
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
-                       showInStore="0">
+                       showInStore="1">
                     <label>Enable</label>
                     <tooltip>Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.</tooltip>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -28,7 +28,7 @@
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
-                       showInStore="0">
+                       showInStore="1">
                     <label>Theme</label>
                     <tooltip>Change the complete layout of the checkout by using a specific theme.</tooltip>
                     <source_model>LokiCheckout\Core\Config\Source\ThemeOptions</source_model>
@@ -42,7 +42,7 @@
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
-                       showInStore="0">
+                       showInStore="1">
                     <label>Address Grid Layout</label>
                     <tooltip><![CDATA[ All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
 Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.]]></tooltip>
@@ -118,7 +118,7 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
-                       showInStore="0">
+                       showInStore="1">
                     <label>Enable Same As Billing Checkbox</label>
                     <tooltip>The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.</tooltip>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -132,7 +132,7 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                        sortOrder="1"
                        showInDefault="1"
                        showInWebsite="1"
-                       showInStore="0">
+                       showInStore="1">
                     <label>Hide Region When Optional</label>
                     <tooltip>With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.</tooltip>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
