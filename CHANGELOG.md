@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.21] - 12 November 2025
+### Fixed
+- Fix typo in totals loop
+
 ## [2.1.20] - 12 November 2025
 ### Fixed
 - Display shipping totals in sidebar with or without tax
