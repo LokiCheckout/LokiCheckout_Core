@@ -2,12 +2,9 @@ stages:
   - linting
   - unit
   - integration
-  - e2e
+  - playwright
 
 variables:
-  ES_JAVA_OPTS: "-Xms128m -Xmx512m"
-  ES_SETTING_DISCOVERY_TYPE: "single-node"
-  ES_SETTING_XPACK_SECURITY_ENABLED: "false"
   MAGENTO_BASE_URL: "http://127.0.0.1:8888/"
   MAGENTO_BACKEND_FRONTNAME: "admin"
   MAGENTO_ADMIN_FIRSTNAME: "CI"
@@ -28,8 +25,9 @@ variables:
   MYSQL_DATABASE: magento2
   MYSQL_ROOT_PASSWORD: root
   MYSQL_PORT: "3306"
-  ES_HOST: "opensearch-dummy"
-  ES_PORT: "9200"
+  OPENSEARCH_HOST: "opensearch"
+  OPENSEARCH_PORT: "9200"
+  OPENSEARCH_JAVA_OPTS: "-Xms128m -Xmx128m"
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
@@ -85,8 +83,11 @@ magento-integration-tests:
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8
-  stage: e2e
+  stage: playwright
   before_script:
+    - cd $CI_PROJECT_DIR
+    - ls -al
+    - test -d Test/Playwright/ || exit 0
     - |
       echo "Waiting for MySQL "
       for i in {1..60}; do
@@ -102,16 +103,20 @@ magento-playwright:
       mysql -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%'; FLUSH PRIVILEGES;"
 
       echo "Waiting for OpenSearch "
-      result=0
-      for i in {1..60}; do
-        if curl -s "http://${ES_HOST}:${ES_PORT}" | grep -q '"tagline"'; then
-          echo "OK"; result=1; break
+      ready=0
+      for i in {1..120}; do
+        if curl -s "http://${OPENSEARCH_HOST}:${OPENSEARCH_PORT}" | grep -q '"tagline"'; then
+          echo "OK"
+          ready=1
+          break
         fi
         echo -n "."
         sleep 1
       done
-      echo "NOT OK"
-      #test $result -eq 0 && echo "Not available" && exit 1
+      if [ "${ready:-0}" -ne 1 ]; then
+        echo "OpenSearch NOT OK"
+        exit 1
+      fi
 
       cd /tmp/magento
       php -dmemory_limit=-1 bin/magento setup:install \
@@ -131,16 +136,16 @@ magento-playwright:
         --timezone="${MAGENTO_TIMEZONE}" \
         --use-rewrites="${MAGENTO_USE_REWRITES}" \
         --search-engine="${MAGENTO_SEARCH_ENGINE}" \
-        --elasticsearch-host="${ES_HOST}" \
-        --elasticsearch-port="${ES_PORT}" \
+        --opensearch-host="${OPENSEARCH_HOST}" \
+        --opensearch-port="${OPENSEARCH_PORT}" \
         --session-save=redis \
         --session-save-redis-host=redis \
         --session-save-redis-port=6379 \
         --cache-backend-redis-server=redis \
         --cache-backend-redis-port=6379 \
 
-      #php -dmemory_limit=-1 bin/magento setup:di:compile
-      #php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
+      php -dmemory_limit=-1 bin/magento setup:di:compile
+      php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
 
       cd /tmp/magento/pub/
       nohup php -S 0.0.0.0:8888 >/tmp/php-server.log 2>&1 &
@@ -149,16 +154,15 @@ magento-playwright:
       result=0
       for i in {1..60}; do
         if curl -s "${MAGENTO_BASE_URL}" 2>1 >/dev/null; then
-          echo "OK"; result=1; break
+          echo " OK, available"
+          result=1
+          break
         fi
         echo -n "."
         sleep 1
       done
       test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
   script:
-    - cd $CI_PROJECT_DIR
-    - ls -al
-    - test -d Test/Playwright/ || exit 0
     - source .module.ini
     - cd /tmp/magento
     - composer config --global gitlab-token.gitlab.yireo.com $CI_JOB_TOKEN
@@ -166,7 +170,7 @@ magento-playwright:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:enable:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME}
+    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - bin/magento setup:upgrade
     - bin/magento config:set loki_functional_tests/general/token loki
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
@@ -181,8 +185,6 @@ magento-playwright:
       alias: mysql
     - name: redis:latest
       alias: redis
-    - name: yireo/opensearch-dummy
-      alias: opensearch-dummy
     - name: yireo/opensearch
       alias: opensearch
 

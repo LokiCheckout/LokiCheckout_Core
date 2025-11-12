@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.19] - 12 November 2025
+### Fixed
+- Allow various settings to be set on the store-level as well
+- Add shipping method code as data-method in sidebar preview
+- Fix agreements being invalid but not stopping forward button
+- Rename LokiLocalStorage to LocalStorage
+- Improve agreements not being checked
+- Add plan-trial keyword to composer file
+
 ## [2.1.18] - 03 November 2025
 ### Fixed
 - Fix agreements validation if in final step
