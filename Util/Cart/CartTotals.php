@@ -26,8 +26,17 @@ class CartTotals implements ArgumentInterface
             $quote->setTotalsCollectedFlag(false);
         }
 
+        $shippingAddress = $quote->getShippingAddress();
         $totalsInformation = $this->totalsInformationFactory->create();
-        $totalsInformation->setAddress($quote->getShippingAddress());
+        $totalsInformation->setAddress($shippingAddress);
+
+        $parts = explode('_', $shippingAddress->getShippingMethod());
+        if (!empty($parts)) {
+            $carrierCode = array_shift($parts);
+            $methodCode = implode("_", $parts);
+            $totalsInformation->setShippingMethodCode($methodCode);
+            $totalsInformation->setShippingCarrierCode($carrierCode);
+        }
 
         $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
         return $totals->getTotalSegments();
