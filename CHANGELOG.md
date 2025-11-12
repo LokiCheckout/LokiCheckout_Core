@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.20] - 12 November 2025
+### Fixed
+- Display shipping totals in sidebar with or without tax
+- Pass totals-argument to each totals child block
+- Add separate shipping totals
+- Include shipping method and carrier properly in totals calculation
+
 ## [2.1.19] - 12 November 2025
 ### Fixed
 - Allow various settings to be set on the store-level as well
