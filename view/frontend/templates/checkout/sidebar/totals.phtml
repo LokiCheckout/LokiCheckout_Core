@@ -29,7 +29,7 @@ $totalSegments = $totals->getTotalSegments();
     <dl class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-y-1', 'grid')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
-        <?php foreach ($totals as $total) : ?>
+        <?php foreach ($totalSegments as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
             <?php if ($childBlock) : ?>
                 <?= /* @noEscape */ $childBlock->setData(['total' => $total, 'totals' => $totals])->toHtml() ?>
