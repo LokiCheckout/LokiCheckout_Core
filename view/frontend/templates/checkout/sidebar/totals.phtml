@@ -31,12 +31,17 @@ $totals = $cartTotals->getTotals();
         <?php foreach ($totals as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
             <?php if ($childBlock) : ?>
-                <?= /* @noEscape */ $childBlock->setData(['total' => $total])->toHtml() ?>
+                <?= /* @noEscape */ $childBlock->setData(['total' => $total, 'totals' => $totals])->toHtml() ?>
             <?php else: ?>
-                <dt class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>">
+                <dt
+                    class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>"
+                >
                     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
                 </dt>
-                <dd class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>">
+                <dd
+                    class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>"
+                    data-code="<?= $escaper->escapeHtml($total->getCode()) ?>"
+                >
                     <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>
