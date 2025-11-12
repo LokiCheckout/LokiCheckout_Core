@@ -21,6 +21,7 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $cartTotals = $viewModelFactory->create(CartTotals::class);
 $totals = $cartTotals->getTotals();
+$totalSegments = $totals->getTotalSegments();
 ?>
 <div class="<?= $escaper->escapeHtml($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
