@@ -49,8 +49,8 @@ class AddressFieldRepository extends FieldRepository
         /** @var Address $address */
         $address = $this->getAddressState()->getAddress();
         $address->setData($this->getFieldName(), (string)$value);
-        $quote = $this->getContext()->getCheckoutState()->getQuote();
 
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
         $this->eventManager->dispatch('loki_checkout_address_field_save_after', [
             'field_name' => $this->getFieldName(),
             'value' => $value,
@@ -59,7 +59,7 @@ class AddressFieldRepository extends FieldRepository
             'quote' => $quote,
         ]);
 
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
+        $address->save();
     }
 
     protected function getAddressState(): AddressStateInterface
