@@ -36,7 +36,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
 
     public function getMethod(): string
     {
-        return $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
+        return (string)$this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
     }
 
     public function getMethodHtml(): string
