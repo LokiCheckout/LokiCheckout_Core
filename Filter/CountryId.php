@@ -2,12 +2,12 @@
 
 namespace LokiCheckout\Core\Filter;
 
-use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Filter\FilterInterface;
+use Loki\Components\Filter\FilterScope;
 
 class CountryId implements FilterInterface
 {
-    public function filter(mixed $value, ?ComponentInterface $component = null, ?string $scope = null): mixed
+    public function filter(mixed $value, FilterScope $scope): mixed
     {
         $value = strtoupper((string)$value);
         $value = preg_replace('/([^A-Z]+)/', '', $value);
