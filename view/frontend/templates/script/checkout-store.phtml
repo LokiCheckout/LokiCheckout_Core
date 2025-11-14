@@ -73,7 +73,20 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return Alpine.store('LokiComponents').removeInvisibleComponents();
             },
             exists(component) {
-                return Alpine.store('LokiComponents').exists(component) && document.getElementById(component.elementId);
+                if (!Alpine.store('LokiComponents').exists(component)) {
+                    return false;
+                }
+
+                const element = document.getElementById(component.elementId);
+                if (!element) {
+                    return false;
+                }
+
+                if (element.children.length === 0) {
+                    return false;
+                }
+
+                return true;
             },
             add(component) {
                 return Alpine.store('LokiComponents').add(component);
