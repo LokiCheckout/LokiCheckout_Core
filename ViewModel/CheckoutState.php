@@ -80,7 +80,8 @@ class CheckoutState implements ArgumentInterface
     public function saveQuote(Quote $quote)
     {
         try {
-            $this->cartRepository->save($quote);
+            //$this->cartRepository->save($quote); // @todo: Magento 2 #38950
+            $quote->save();
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException();
         }
