@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+?>
+<script>
+    document.addEventListener('toggle-cart', function(event) {
+        if (event.detail.isOpen) {
+            window.location.href = '<?= $block->getUrl('checkout/cart') ?>';
+        }
+    });
+</script>
