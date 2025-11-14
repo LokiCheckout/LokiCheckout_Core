@@ -31,6 +31,11 @@ class CheckoutState implements ArgumentInterface
     ) {
     }
 
+    public function reset(): void
+    {
+        $this->quotes = [];
+    }
+
     public function setQuoteId(int $quoteId): void
     {
         $this->quoteId = $quoteId;

@@ -19,6 +19,10 @@ use LokiCheckout\Core\ViewModel\ProductImage;
 /** @var CssClass $css */
 
 $item = $block->getItem();
+if (empty($item)) {
+    return;
+}
+
 $size = $block->getSize() ?? 125;
 $width = $block->getWidth() ?? $size;
 $height = $block->getHeight() ?? $size;
