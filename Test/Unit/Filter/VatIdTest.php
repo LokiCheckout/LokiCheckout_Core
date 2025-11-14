@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Unit\Filter;
 
+use Loki\Components\Filter\FilterScope;
 use PHPUnit\Framework\TestCase;
 use LokiCheckout\Core\Filter\VatId;
 
@@ -15,7 +16,8 @@ class VatIdTest extends TestCase
     public function testFilter(string $vatId, string $expectedValue)
     {
         $filter = new VatId();
-        $this->assertEquals($expectedValue, $filter->filter($vatId));
+        $filterScope = new FilterScope();
+        $this->assertEquals($expectedValue, $filter->filter($vatId, $filterScope));
     }
 
     public function getValues(): array
