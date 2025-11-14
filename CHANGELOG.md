@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.24] - 14 November 2025
+### Fixed
+- Properly update same-as-billing with every field save
+- When checking if component exists, return false if component element has no children
+- Fix broken unit tests after refactoring
+
 ## [2.1.23] - 14 November 2025
 ### Fixed
 - Fix old quote being stuck, after updating quote items
