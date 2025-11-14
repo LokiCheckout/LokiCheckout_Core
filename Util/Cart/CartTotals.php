@@ -31,7 +31,7 @@ class CartTotals implements ArgumentInterface
         $totalsInformation = $this->totalsInformationFactory->create();
         $totalsInformation->setAddress($shippingAddress);
 
-        $parts = explode('_', $shippingAddress->getShippingMethod());
+        $parts = explode('_', (string)$shippingAddress->getShippingMethod());
         if (!empty($parts)) {
             $carrierCode = array_shift($parts);
             $methodCode = implode("_", $parts);
