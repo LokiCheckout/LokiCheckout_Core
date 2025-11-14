@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.22] - 14 November 2025
+### Fixed
+- Fix possible type error
+- Add new RegionRepository which is not in the core
+- Directly save address, not via quote to make things a tiny bit faster
+- Add FilterScope to every Filter
+- Add component and scope args to FilterInterface::filter()
+- Prevent duplicate mail from being sent
+
 ## [2.1.21] - 12 November 2025
 ### Fixed
 - Fix typo in totals loop
