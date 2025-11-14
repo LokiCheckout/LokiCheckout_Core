@@ -60,6 +60,10 @@ class AddressFieldRepository extends FieldRepository
         ]);
 
         $address->save();
+
+        if ($this->sameAddressService->isEnabled()) {
+            $this->sameAddressService->copyAddressToAddress($address);
+        }
     }
 
     protected function getAddressState(): AddressStateInterface
