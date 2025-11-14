@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.23] - 14 November 2025
+### Fixed
+- Fix old quote being stuck, after updating quote items
+- Switch from CartRepository::save() to Quote::save() because of Magento issue 38950
+- Fix Hyva minicart toggle to be redirect to cart page
+- Fix x-money directive to properly output with right currency and locale
+
 ## [2.1.22] - 14 November 2025
 ### Fixed
 - Fix possible type error
