@@ -10,7 +10,6 @@ use Magento\Framework\View\Element\Template;
 ?>
 <template x-if="timeframe.price.amount">
     <div class="float-right cursor-pointer text-sm pl-2">
-        + <span x-html="timeframe.price.currency"></span>
-        <span x-money="timeframe.price.amount"></span>
+        + <span x-money="timeframe.price.amount"></span>
     </div>
 </template>
