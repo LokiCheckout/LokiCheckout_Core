@@ -11,6 +11,12 @@
 
         @screen md {
             --_col: var(--loki-md-col-span, var(--loki-col-span));
+            grid-column: span var(--_col) / span var(--_col);
+        }
+
+        @variant md {
+            --_col: var(--loki-md-col-span, var(--loki-col-span));
+            grid-column: span var(--_col) / span var(--_col);
         }
     }
 
