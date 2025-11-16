@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -9,8 +10,8 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
 ?>
 <aside class="<?= $escaper->escapeHtml($css('flex flex-col gap-4 my-2 order-2')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml(); ?>
+    <?= /* @noEscape */ $childRenderer->all($block); ?>
 </aside>
-

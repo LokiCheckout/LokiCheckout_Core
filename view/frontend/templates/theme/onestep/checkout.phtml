@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Component\ComponentViewModel;
 use Loki\Components\Factory\ViewModelFactory;
@@ -13,6 +14,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var ComponentViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var Escaper $escaper */
 ?>
 <div
     class="<?= $escaper->escapeHtml($css('loki space-y-6 relative')) ?>"

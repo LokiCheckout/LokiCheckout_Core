@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\BlockRenderer;
 
@@ -9,11 +11,14 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-$childHtml = $block->getChildHtml();
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+
+$childHtml = $childRenderer->all($block);
 if (empty($childHtml)) {
     return;
 }
 ?>
 <div class="<?= $escaper->escapeHtml($css('loki-checkout-sidebar-other card p-8 my-4')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml() ?>
+    <?= /* @noEscape */ $childHtml ?>
 </div>

@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use LokiCheckout\Core\ViewModel\ApplicationMode;
 use Magento\Framework\Escaper;
@@ -17,6 +18,7 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var ApplicationMode $applicationMode */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var ChildRenderer $childRenderer */
 
 $applicationMode = $viewModelFactory->create(ApplicationMode::class);
 $viewModel = $viewModelFactory->create(PaymentDetailsViewModel::class);
@@ -31,7 +33,7 @@ if (empty($html)) {
 
     <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Payment Method')) ?></span><br>
     <?= /* @noEscape */ $html ?>
-    <?= /* @noEscape */ $block->getChildHtml() ?>
+    <?= /* @noEscape */ $childRenderer->all($block) ?>
 
     <?php if ($applicationMode->isDeveloperMode()): ?>
     <!-- <?= $escaper->escapeHtml($viewModel->getPaymentCode()) ?> -->
