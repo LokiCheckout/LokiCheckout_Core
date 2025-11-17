@@ -84,7 +84,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     {
         /** @var CartInterface $cart */
         $cart = $this->fixtures->get('cart');
-        $this->assertInstanceOf(CartInterface::class, $cart);
+        $this->assertInstanceOf(CartInterface::class, $cart, 'Cart fixture is empty');
 
         $cartId = $cart->getId();
         $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);
