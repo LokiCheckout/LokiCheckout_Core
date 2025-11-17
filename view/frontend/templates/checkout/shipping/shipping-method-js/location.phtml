@@ -23,10 +23,10 @@ use Magento\Framework\View\Element\Template;
                 <div class="pb-2 w-16">
                     <img :src="location.carrierImage" :title="location.carrier"/>
                 </div>
-                <div class="sm"><span x-html="location.distance"></span>m</div>
+                <div class="sm"><span x-text="location.distance"></span>m</div>
             </div>
 
-            <span class="uppercase font-bold" x-html="location.label"></span>
+            <span class="uppercase font-bold" x-text="location.label"></span>
         </div>
 
         <div x-show="location.start_time">
