@@ -2,16 +2,9 @@
 
 namespace LokiCheckout\Core\Test\Integration;
 
+/**
+ * @deprecated Just use LokiCheckoutTestCase directly
+ */
 class LokiCheckoutPageTestCase extends LokiCheckoutTestCase
 {
-    protected ?bool $skipDispatchToCheckout = false;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        if (true !== $this->skipDispatchToCheckout) {
-            $this->dispatchToCheckout();
-        }
-    }
 }
