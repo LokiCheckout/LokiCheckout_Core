@@ -86,9 +86,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     protected function getCart(): CartInterface
     {
         /** @var CartInterface $cart */
-        //$cart = $this->fixtures->get('cart');
-        $fixtures = DataFixtureStorageManager::getStorage();
-        $cart = $fixtures->get('cart');
+        $cart = $this->fixtures->get('cart');
 
         $this->assertInstanceOf(CartInterface::class, $cart, 'Cart fixture is empty');
 
@@ -98,6 +96,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->assertNotEmpty($cart->getId());
 
         $checkoutState = $this->getObjectManager()->get(CheckoutState::class);
+        $checkoutState->setQuote($cart);
         $checkoutState->setQuoteId((int)$cart->getId());
 
         $checkoutSession = $this->getObjectManager()->get(CheckoutSession::class);

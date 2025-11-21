@@ -82,6 +82,11 @@ class CheckoutState implements ArgumentInterface
         return $this->quotes[$this->quoteId];
     }
 
+    public function setQuote(Quote $quote): void
+    {
+        $this->quotes[$quote->getId()] = $quote;
+    }
+
     public function saveQuote(Quote $quote)
     {
         try {
