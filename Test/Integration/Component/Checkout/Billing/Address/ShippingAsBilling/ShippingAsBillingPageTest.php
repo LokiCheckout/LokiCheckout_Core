@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Billing\Address\ShippingAsBilling;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -10,7 +11,6 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use Yireo\IntegrationTestHelper\Test\Integration\Traits\AssertStoreConfigValueEquals;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     AppArea('frontend'),
@@ -18,7 +18,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])
 ]
-class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
+class ShippingAsBillingPageTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.billing.address.shipping-as-billing';
 
@@ -30,6 +30,7 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     ]
     public function testDisabled()
     {
+        $this->dispatchToCheckout();
         $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
     }
 
@@ -39,6 +40,7 @@ class ShippingAsBillingPageTest extends LokiCheckoutPageTestCase
     ]
     public function testEnabled()
     {
+        $this->dispatchToCheckout();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME);
     }
 }

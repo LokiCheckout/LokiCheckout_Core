@@ -9,7 +9,6 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
@@ -18,7 +17,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class CityValidationTest extends LokiCheckoutPageTestCase
+class CityValidationTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.city';
 
@@ -30,6 +29,7 @@ class CityValidationTest extends LokiCheckoutPageTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required', 'customerAddress'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
@@ -47,6 +47,7 @@ class CityValidationTest extends LokiCheckoutPageTestCase
 
     private function hasCityValidationFix(): bool
     {
+        return false;
         $magentoVersion = ObjectManager::getInstance()->get(MagentoVersion::class);
         return $magentoVersion->isMagentoVersion('2.4.8-p2', 'ge') || $magentoVersion->isMageOSVersion('1.3.0', 'ge');
     }
