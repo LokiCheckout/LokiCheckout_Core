@@ -6,6 +6,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.25] - 21 November 2025
+### Fixed
+- Add XML layout comment for changing agreements messages to global messages
+- Trigger error message of agreements when hitting StepForwardButton
+- Fix wrong assumption on integration test with Customer DOB
+- Remove deprecated LokiCheckoutPageTestCase in integration tests
+- Standardize usage of ObjectManager in Integration Tests
+- Move fixture usage away from setUp (requires test rewrite)
+- Use rate titles for shipping method preview in sidebar
+- Migrate from SortedBlocks class to ChildRenderer::all() in address forms
+- Deprecated SortedBlocks class in favor of ChildRenderer::all()
+- Remove x-html in favor of x-text to anticipate Alpine CSP changes
+- Improve message on failed fixture in test
+- Replace `$block->getChildHtml()` with `$childRenderer->all()` to allow for better sorting
+- Add @variant instead of @screen for Tailwind 4 support
+
 ## [2.1.24] - 14 November 2025
 ### Fixed
 - Properly update same-as-billing with every field save
