@@ -14,7 +14,6 @@ use Magento\Framework\View\Element\Template;
             visible: false,
             agreements: [],
             errorText: '',
-            messageArea: 'global',
             initWatchAgreements() {
                 this.$watch('agreements', () => {
                     this.valid = !Object.values(this.agreements).includes(false);
