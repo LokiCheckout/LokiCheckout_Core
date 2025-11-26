@@ -79,9 +79,7 @@ if ($paymentIcon) {
     </label>
 
     <?php if ($isCurrent || $showHidden) : ?>
-        <div class="<?= $escaper->escapeHtmlAttr(
-            $css('', 'other')
-        ) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+        <div class="<?= $escaper->escapeHtml($css('', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
             <?= /* @noEscape */ $blockRenderer->html(
                 $block,
                 'loki-checkout.payment.methods.' . $code . '.form',
