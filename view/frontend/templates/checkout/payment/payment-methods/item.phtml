@@ -47,7 +47,7 @@ if ($paymentIcon) {
     $inputCss = $css('', 'input-with-icon'); // @doc: sr-only
 }
 ?>
-<li class="<?= $escaper->escapeHtmlAttr($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
     <label
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
@@ -65,7 +65,7 @@ if ($paymentIcon) {
                 <?= /* @noEscape */ $isCurrent && 'checked' ?>
                 <?= /* @noEscape */ $viewModel->isDisabled() && 'disabled="disabled"' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                class="<?= $escaper->escapeHtmlAttr($inputCss) ?>"
+                class="<?= $escaper->escapeHtml($inputCss) ?>"
             >
             <?= /* @noEscape */ $paymentIcon ?>
         </span>

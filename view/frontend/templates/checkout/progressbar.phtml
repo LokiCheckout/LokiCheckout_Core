@@ -28,7 +28,7 @@ $skipSeparator = (bool)$block->getSkipSeparator(); // @doc skip_separator = true
 ?>
 <nav
     class="<?= $escaper->escapeHtml($css('hidden md:block card rounded-lg relative')) ?>"
-    aria-label="<?= $escaper->escapeHtmlAttr(__('Pagination')) ?>"
+    aria-label="<?= $escaper->escapeHtml(__('Pagination')) ?>"
 >
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.overlay') ?>
     <ul class="<?= $escaper->escapeHtml($css('flex items-center', 'list')) ?>">
