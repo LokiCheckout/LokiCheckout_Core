@@ -83,13 +83,19 @@ if ($paymentIcon) {
             <?= /* @noEscape */ $blockRenderer->html(
                 $block,
                 'loki-checkout.payment.methods.' . $code . '.form',
-                ['method' => $code]
+                [
+                    'uniq' => $code.'-form',
+                    'method' => $code
+                ]
             ) ?>
 
             <?= /* @noEscape */ $blockRenderer->html(
                 $block,
                 'loki-checkout.payment.methods.' . $code . '.additional',
-                ['method' => $code]
+                [
+                    'uniq' => $code.'-additional',
+                    'method' => $code
+                ]
             ) ?>
 
             <?= $escaper->escapeHtml($viewModel->getPaymentInstructions($code)) ?>
