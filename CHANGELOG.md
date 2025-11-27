@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.26] - 27 November 2025
+### Fixed
+- Do not escape `$css()` with `escapeHtmlAttr()` but `escapeHtml()`
+- Fix styling of payment method subform alignment
+- Add uniq ID to payment method container and form
+- Fix wrong escaping via escapeHtmlAttr
+
 ## [2.1.25] - 21 November 2025
 ### Fixed
 - Add XML layout comment for changing agreements messages to global messages
