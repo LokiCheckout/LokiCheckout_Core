@@ -32,7 +32,7 @@ class CartTotals implements ArgumentInterface
         $totalsInformation->setAddress($shippingAddress);
 
         $parts = explode('_', (string)$shippingAddress->getShippingMethod());
-        if (!empty($parts)) {
+        if (count($parts) > 1) {
             $carrierCode = array_shift($parts);
             $methodCode = implode("_", $parts);
             $totalsInformation->setShippingMethodCode($methodCode);
