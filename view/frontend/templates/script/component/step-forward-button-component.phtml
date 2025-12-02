@@ -69,6 +69,7 @@ use Magento\Framework\View\Element\Template;
                 return this.valid;
             },
             submit() {
+                this.loading = true;
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
                 Alpine.store('LokiCheckout').getComponentArrayByStep([this.currentStep, 'any']).forEach(component => {
@@ -87,6 +88,8 @@ use Magento\Framework\View\Element\Template;
 
                 this.$nextTick(() => {
                     this.valid = this.updateValid();
+                    this.loading = false;
+
                     if (true === this.valid) {
                         document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
                             component: this
