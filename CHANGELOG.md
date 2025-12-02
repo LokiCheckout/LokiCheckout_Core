@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.27] - 02 December 2025
+### Fixed
+- Fix loader icon of step-forward button
+- Prevent notice error
+- Fix loki-md-col-span when empty
+- Allow checkout-access even though disabled, when passing license
+
 ## [2.1.26] - 27 November 2025
 ### Fixed
 - Do not escape `$css()` with `escapeHtmlAttr()` but `escapeHtml()`
