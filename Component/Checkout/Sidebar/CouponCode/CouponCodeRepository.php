@@ -30,7 +30,7 @@ class CouponCodeRepository extends FieldRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
             $quote->setCouponCode($value['code']);
-            $this->getContext()->getCheckoutState()->saveQuote($quote);
+            $this->getContext()->getCheckoutState()->saveQuote($quote, true);
 
             $couponCode = $this->getValue();
             if (empty($couponCode)) {
