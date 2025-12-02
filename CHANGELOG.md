@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.28] - 02 December 2025
+### Fixed
+- Save coupon via repository to allow proper validation
+- Allow quote save via repository with additional flag
+- Make coupon code messages translatable
+- Add Dutch translation
+
 ## [2.1.27] - 02 December 2025
 ### Fixed
 - Fix loader icon of step-forward button
