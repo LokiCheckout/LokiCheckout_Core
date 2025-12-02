@@ -34,18 +34,19 @@ class CouponCodeRepository extends FieldRepository
 
             $couponCode = $this->getValue();
             if (empty($couponCode)) {
-                $this->getGlobalMessageRegistry()->addWarning('Failed to apply coupon code');
+                $this->getGlobalMessageRegistry()->addWarning((string)__('Failed to apply coupon code'));
                 return;
             }
 
-            $this->getGlobalMessageRegistry()->addSuccess('Applied coupon code');
+            $this->getGlobalMessageRegistry()->addSuccess((string)__('Applied coupon code'));
             return;
         }
 
         if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
             $this->getContext()->getCheckoutState()->saveQuote($quote);
-            $this->getGlobalMessageRegistry()->addSuccess('Removed coupon code');
+            $this->getGlobalMessageRegistry()->addSuccess((string)__('Removed coupon code'));
         }
     }
 }
+
