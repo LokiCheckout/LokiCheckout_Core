@@ -19,8 +19,8 @@ class AllowCheckoutAccess
             return true;
         }
 
-        $requestedLicense = $this->request->getParam('license');
-        $configuredLicense = $this->config->getLicenseKey();
+        $requestedLicense = (string)$this->request->getParam('license');
+        $configuredLicense = (string)$this->config->getLicenseKey();
         if (strlen($requestedLicense) > 10 && $requestedLicense === $configuredLicense) {
             return true;
         }
