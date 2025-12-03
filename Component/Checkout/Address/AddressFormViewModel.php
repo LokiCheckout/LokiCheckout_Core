@@ -31,7 +31,8 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function isSameAddress(): bool
     {
-        return $this->getContext()->getSameAddressService()->isEnabled();
+        $address = $this->getContext()->getCurrentAddress($this->getComponent());
+        return $this->getContext()->getSameAddressService()->isSame($address);
     }
 
     public function isNewAddress(): bool
