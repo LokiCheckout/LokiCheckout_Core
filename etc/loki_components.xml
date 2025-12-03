@@ -466,8 +466,9 @@
         name="loki-checkout.billing.address.company"
         group="billingAddressFields"
         viewModel="LokiCheckout\Core\Component\Checkout\Address\Company\CompanyViewModel"
-        repository="LokiCheckout\Core\Component\Checkout\Address\Company\CompanyRepository"
-    />
+        repository="LokiCheckout\Core\Component\Checkout\Address\Company\CompanyRepository">
+        <target name="loki-checkout.billing.address.vat_id"/>
+    </component>
 
     <component
         name="loki-checkout.billing.address.telephone"
