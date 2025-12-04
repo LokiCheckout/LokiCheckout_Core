@@ -4,35 +4,32 @@ namespace LokiCheckout\Core\Component\Checkout\Address;
 
 use Magento\Quote\Model\Quote;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use Magento\Quote\Model\Quote\Address;
 
 /**
  * @method AddressFormContext getContext()
  */
 class AddressFormViewModel extends CheckoutViewModel
 {
-    // @todo: Should this not be isAllowedRendering?
-    public function isEnabled(): bool
-    {
-        if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
-            return $this->getContext()->getCheckoutState()->getQuote()->getGrandTotal() > 0;
-            // @todo: Check how this goes
-        }
-        return !($this->getContext()->isShippingAddressComponent($this->getComponent()) && $this->getQuote()->isVirtual());
-    }
-
     public function isAllowRendering(): bool
     {
-        if ($this->getQuote()->isVirtual() && $this->getContext()->isShippingAddressComponent($this->getComponent())) {
+        if ($this->isBillingAddressComponent()
+            && $this->getContext()->getCheckoutState()->getQuote()->getGrandTotal() <= 0
+        ) {
+            // @todo: Check this for free orders
+            return false;
+        }
+
+        if ($this->isShippingAddressComponent() && $this->getQuote()->isVirtual()) {
             return false;
         }
 
         return parent::isAllowRendering();
     }
 
-    public function isSameAddress(): bool
+    public function isSame(): bool
     {
-        $address = $this->getContext()->getCurrentAddress($this->getComponent());
-        return $this->getContext()->getSameAddressService()->isSame($address);
+        return $this->getContext()->getSameAddressService()->isSame();
     }
 
     public function isNewAddress(): bool
@@ -64,5 +61,15 @@ class AddressFormViewModel extends CheckoutViewModel
     private function getQuote(): Quote
     {
         return $this->getContext()->getCheckoutState()->getQuote();
+    }
+
+    private function isBillingAddressComponent(): bool
+    {
+        return $this->getContext()->isBillingAddressComponent($this->getComponent());
+    }
+
+    private function isShippingAddressComponent(): bool
+    {
+        return $this->getContext()->isShippingAddressComponent($this->getComponent());
     }
 }

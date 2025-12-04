@@ -2,10 +2,7 @@
 
 namespace LokiCheckout\Core\Util;
 
-use Loki\Components\Component\ComponentInterface;
-use LokiCheckout\Core\Util\Component\AddressStateProvider;
 use Magento\Framework\DataObject\Copy;
-use Magento\Framework\Exception\InputException;
 use Magento\Quote\Api\Data\AddressInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\ViewModel\CheckoutState;
@@ -20,18 +17,9 @@ class SameAddressService
     ) {
     }
 
-    public function isSame(Address $address): bool
+    public function isSame(): bool
     {
-        if (false === $this->config->enableSameAsBilling()) {
-            return false;
-        }
-
-        return (bool)$address->getSameAsBilling();
-    }
-
-    public function isEnabled(): bool
-    {
-        if (false === $this->config->enableSameAsBilling()) {
+        if (false === $this->isEnabled()) {
             return false;
         }
 
@@ -40,15 +28,19 @@ class SameAddressService
             return true;
         }
 
-        $address = $quote->getShippingAddress();
-        return (bool)$address->getSameAsBilling();
+        return (bool)$quote->getShippingAddress()->getSameAsBilling();
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->config->enableSameAsBilling();
     }
 
     public function copyAddressToAddress(Address $address): void
     {
-        $this->copyBillingToShipping();
         if ($address->getIsBilling()) {
             $this->copyBillingToShipping();
+            return;
         }
 
         if ($address->getIsShipping()) {
@@ -58,32 +50,22 @@ class SameAddressService
 
     public function copyBillingToShipping(): void
     {
-        if (false === $this->isEnabled()) {
+        if (false === $this->isSame()) {
             return;
         }
 
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getBillingAddress(), $quote->getShippingAddress());
-
-        try {
-            $this->checkoutState->saveQuote($quote);
-        } catch (InputException $inputException) {
-        }
     }
 
     public function copyShippingToBilling(): void
     {
-        if (false === $this->isEnabled()) {
+        if (false === $this->isSame()) {
             return;
         }
 
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getShippingAddress(), $quote->getBillingAddress());
-
-        try {
-            $this->checkoutState->saveQuote($quote);
-        } catch (InputException $inputException) {
-        }
     }
 
     private function copy(AddressInterface $fromAddress, AddressInterface $toAddress): void

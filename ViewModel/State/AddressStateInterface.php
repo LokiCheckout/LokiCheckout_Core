@@ -7,9 +7,9 @@ use Magento\Quote\Model\Quote\Address;
 
 interface AddressStateInterface extends ArgumentInterface
 {
-    public function load(string $attributeCode): mixed;
+    public function get(string $attributeCode): mixed;
 
-    public function save(string $attributeCode, string $value): void;
+    public function set(string $attributeCode, string $value): void;
 
     public function getAddress(): Address;
 }

@@ -13,7 +13,7 @@ class ShippingAsBillingRepository extends ComponentRepository
     public function getValue(): mixed
     {
         $sameAddressService = $this->getContext()->getSameAddressService();
-        $useSameAddress = $sameAddressService->isEnabled();
+        $useSameAddress = $sameAddressService->isSame();
 
         if (true === $useSameAddress) {
             $sameAddressService->copyShippingToBilling();

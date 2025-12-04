@@ -6,11 +6,6 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 class BillingAsShippingViewModel extends CheckoutViewModel
 {
-    public function getValue(): mixed
-    {
-        return parent::getValue();
-    }
-
     public function getFieldLabel(): string
     {
         return 'Shipping as Billing';

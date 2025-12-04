@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel;
 use Loki\Components\Util\Block\BlockRenderer;
@@ -11,13 +12,14 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var Escaper $escaper */
 ?>
 <div class="<?= $escaper->escapeHtml($css('flex flex-col gap-8 relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('shipping-as-billing') ?>
 
-    <?php if ($viewModel->isSameAddress()): ?>
+    <?php if ($viewModel->isSame()): ?>
         <?= /* @noEscape */ $block->getChildHtml('view') ?>
     <?php else: ?>
         <?php if ($viewModel->showSelectAddress()): ?>

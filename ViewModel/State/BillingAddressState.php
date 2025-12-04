@@ -16,22 +16,41 @@ class BillingAddressState implements AddressStateInterface
     ) {
     }
 
+    /**
+     * @deprecated Use get() instead
+     * @param string $attributeCode
+     *
+     * @return mixed
+     */
     public function load(string $attributeCode): mixed
+    {
+        return $this->get($attributeCode);
+    }
+
+    public function get(string $attributeCode): mixed
     {
         return $this->getAddress()->getData($attributeCode);
     }
 
+    /**
+     * @deprecated Use set() instead
+     * @param string $attributeCode
+     * @param string $value
+     *
+     * @return void
+     */
     public function save(string $attributeCode, string $value): void
     {
-        $billingAddress = $this->getAddress();
-        $billingAddress->setData($attributeCode, $value);
+        $this->set($attributeCode, $value);
+    }
+
+    public function set(string $attributeCode, string $value): void
+    {
+        $this->getAddress()->setData($attributeCode, $value);
 
         if ($this->sameAddressService->isEnabled()) {
-            $shippingAddress = $this->checkoutState->getQuote()->getShippingAddress();
-            $shippingAddress->setData($attributeCode, $value);
+            $this->checkoutState->getQuote()->getShippingAddress()->setData($attributeCode, $value);
         }
-
-        $this->checkoutState->saveQuote($this->checkoutState->getQuote());
     }
 
     public function getAddress(): Address
@@ -42,7 +61,6 @@ class BillingAddressState implements AddressStateInterface
         if (!$billingAddress->getCountryId()) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $billingAddress->setCountryId($defaultCountryId);
-            $this->checkoutState->saveQuote($quote);
         }
 
         $billingAddress->setIsShipping(false);

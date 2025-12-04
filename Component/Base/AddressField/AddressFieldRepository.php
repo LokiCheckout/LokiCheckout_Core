@@ -50,7 +50,7 @@ class AddressFieldRepository extends FieldRepository
         $address->setData($this->getFieldName(), (string)$value);
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $this->eventManager->dispatch('loki_checkout_address_field_save_after', [
+        $this->eventManager->dispatch('loki_checkout_address_field_set_after', [
             'field_name' => $this->getFieldName(),
             'value' => $value,
             'address' => $address,
@@ -58,9 +58,7 @@ class AddressFieldRepository extends FieldRepository
             'quote' => $quote,
         ]);
 
-        $address->save(); // @phpstan-ignore-line
-
-        if ($this->sameAddressService->isEnabled()) {
+        if ($this->sameAddressService->isSame()) {
             $this->sameAddressService->copyAddressToAddress($address);
         }
     }
