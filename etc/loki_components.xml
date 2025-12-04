@@ -143,6 +143,8 @@
         viewModel="LokiCheckout\Core\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingRepository">
         <target name="loki-checkout.billing.address"/>
+        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.sidebar.preview.billing_address"/>
     </component>
 
     <component
