@@ -19,7 +19,7 @@
         <observer name="LokiCheckout_Core::resetStepAfterCartSave" instance="LokiCheckout\Core\Observer\ResetStepAfterCartSave"/>
     </event>
 
-    <event name="loki_checkout_address_field_save_after">
+    <event name="loki_checkout_address_field_set_after">
         <observer name="LokiCheckout_Core::cleanAfterAddressChange" instance="LokiCheckout\Core\Observer\CleanAfterAddressChange"/>
     </event>
 </config>
