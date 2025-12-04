@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\BillingAddress;
 
+use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\Util\AddressRenderer;
@@ -11,14 +12,14 @@ class BillingAddressViewModel implements ArgumentInterface
 {
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
-        private readonly ShippingAddressState $shippingAddressState,
-        private readonly AddressRenderer $addressRenderer
+        private readonly AddressRenderer $addressRenderer,
+        private readonly SameAddressService $sameAddressService
     ) {
     }
 
     public function isSameAsShipping(): bool
     {
-        return $this->billingAddressState->getAddress()->getSameAsBilling() || $this->shippingAddressState->getAddress()->getSameAsBilling();
+        return $this->sameAddressService->isSame();
     }
 
     public function getHtml(): string

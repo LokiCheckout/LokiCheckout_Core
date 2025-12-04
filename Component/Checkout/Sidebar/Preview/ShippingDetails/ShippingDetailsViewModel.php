@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails;
 
 use InvalidArgumentException;
+use LokiCheckout\Core\Util\SameAddressService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject;
 use Magento\Quote\Model\Quote\Address\Rate;
@@ -21,8 +22,18 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly ShippingAddressState $shippingAddressState,
         private readonly AddressRenderer $addressRenderer,
+        private readonly SameAddressService $sameAddressService,
         private string $separator = ' - '
     ) {
+    }
+
+    public function getAddressLabel(): string
+    {
+        if ($this->sameAddressService->isSame()) {
+            return 'Billing and Shipping Address';
+        }
+
+        return 'Shipping Address';
     }
 
     public function getAddressHtml(): string

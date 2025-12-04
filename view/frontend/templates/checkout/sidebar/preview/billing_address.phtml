@@ -31,8 +31,4 @@ if (empty($html)) {
         <?= /* @noEscape */ $html ?>
         <?= /* @noEscape */ $block->getChildHtml('additional_address_info') ?>
     </address>
-
-    <?php if ($viewModel->isSameAsShipping()): ?>
-        <small class="<?= $escaper->escapeHtml($css('', 'notice')) ?>"><?= $escaper->escapeHtml(__('Same as shipping address')) ?></small>
-    <?php endif; ?>
 </div>

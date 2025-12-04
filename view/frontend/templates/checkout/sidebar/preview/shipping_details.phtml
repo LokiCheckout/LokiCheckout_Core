@@ -30,7 +30,9 @@ if (empty($addressHtml)) {
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <div class="<?= $escaper->escapeHtml($css('mb-4', 'address')) ?>">
-        <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Address')) ?></span><br>
+        <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>">
+            <?= $escaper->escapeHtml(__($viewModel->getAddressLabel())) ?>
+        </span><br>
         <address>
             <?= /* @noEscape */ $addressHtml ?>
             <?= /* @noEscape */ $block->getChildHtml('additional_address_info') ?>
