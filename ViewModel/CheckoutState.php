@@ -48,14 +48,10 @@ class CheckoutState implements ArgumentInterface
 
     public function hasQuote(): bool
     {
-        if (!$this->checkoutSession->getQuote()->getId()) {
-            return false;
-        }
-
-        return true;
+        return $this->getQuoteId() > 0;
     }
 
-    public function getQuote(): Quote
+    public function getQuoteId(): int
     {
         if ($this->quoteId === 0) {
             $this->quoteId = (int)$this->checkoutSession->getQuote()->getId();
@@ -65,21 +61,39 @@ class CheckoutState implements ArgumentInterface
             $this->quoteId = (int)$this->checkoutSession->getQuoteId();
         }
 
-        if (empty($this->quoteId)) {
-            $this->handleQuoteNotFoundException();
+        return $this->quoteId;
+    }
+
+    /**
+     * @throws NoSuchEntityException
+     */
+    public function getPersistedQuote(): Quote
+    {
+        /** @var Quote $quote */
+        $quote = $this->cartRepository->get($this->getQuoteId());
+        return $quote;
+    }
+
+    public function getQuote(): Quote
+    {
+        $quoteId = $this->getQuoteId();
+        if (isset($this->quotes[$quoteId]) && $this->quotes[$quoteId] instanceof Quote) {
+            return $this->quotes[$quoteId];
         }
 
-        if (isset($this->quotes[$this->quoteId]) && $this->quotes[$this->quoteId] instanceof Quote) {
-            return $this->quotes[$this->quoteId];
+        $quoteFromSession = $this->checkoutSession->getQuote();
+        if ($quoteFromSession instanceof Quote) {
+            $this->quotes[$quoteId] = $quoteFromSession;
+            return $this->quotes[$quoteId];
         }
 
         try {
-            $this->quotes[$this->quoteId] = $this->cartRepository->get($this->quoteId);
+            $this->quotes[$quoteId] = $this->getPersistedQuote();
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException();
         }
 
-        return $this->quotes[$this->quoteId];
+        return $this->quotes[$quoteId];
     }
 
     public function setQuote(Quote $quote): void
@@ -87,8 +101,12 @@ class CheckoutState implements ArgumentInterface
         $this->quotes[$quote->getId()] = $quote;
     }
 
-    public function saveQuote(Quote $quote, bool $useRepository = false)
+    public function saveQuote(?Quote $quote = null, bool $useRepository = false)
     {
+        if (false === $quote instanceof Quote) {
+            $quote = $this->getQuote();
+        }
+
         try {
             if ($useRepository) {
                 $this->cartRepository->save($quote); // @todo: Magento 2 #38950
@@ -112,6 +130,8 @@ class CheckoutState implements ArgumentInterface
 
     private function handleQuoteNotFoundException(): void
     {
+        debug_print_backtrace();
+        exit;
         $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
 
         if ($this->ajax->isAjax()) {
