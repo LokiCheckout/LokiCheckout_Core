@@ -14,6 +14,10 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
     // @todo: Move this into a trait or a child-class
     public function getFieldLabel(): string
     {
+        if (false === $this->showFieldLabel()) {
+            return '';
+        }
+
         $fieldLabel = $this->getFieldLabelFromLayout();
         if ($fieldLabel !== '' && $fieldLabel !== '0') {
             return $fieldLabel;

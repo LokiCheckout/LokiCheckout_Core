@@ -15,6 +15,11 @@ class SaveInAddressBookViewModel extends AddressFieldViewModel
         return parent::isAllowRendering();
     }
 
+    public function showFieldLabel(): bool
+    {
+        return false;
+    }
+
     public function getInputLabel(): string
     {
         return 'Save in address book';
