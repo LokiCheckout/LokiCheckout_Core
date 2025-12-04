@@ -2,13 +2,12 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Firstname;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
-use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 use Loki\Components\Component\ComponentRegistry;
 
 #[
@@ -17,13 +16,15 @@ use Loki\Components\Component\ComponentRegistry;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class FirstnameRepositoryTest extends LokiCheckoutPageTestCase
+class FirstnameRepositoryTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.firstname';
 
     public function testSaveToQuote(): void
     {
-        $componentRegistry = ObjectManager::getInstance()->get(ComponentRegistry::class);
+        $this->dispatchToCheckout();
+
+        $componentRegistry = $this->getObjectManager()->get(ComponentRegistry::class);
         $component = $componentRegistry->getComponentByName(self::BLOCK_NAME);
         $this->assertRepositorySave($component, 'John');
 

@@ -9,7 +9,7 @@ use LokiCheckout\Core\Util\Cart\CartTotals;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\ViewModel\PriceFormatter;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -21,6 +21,7 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $cartTotals = $viewModelFactory->create(CartTotals::class);
 $totals = $cartTotals->getTotals();
+$totalSegments = $totals->getTotalSegments();
 ?>
 <div class="<?= $escaper->escapeHtml($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
@@ -28,15 +29,20 @@ $totals = $cartTotals->getTotals();
     <dl class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-y-1', 'grid')) ?>">
         <?= /* @noEscape */ $block->getChildHtml('before') ?>
 
-        <?php foreach ($totals as $total) : ?>
+        <?php foreach ($totalSegments as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
             <?php if ($childBlock) : ?>
-                <?= /* @noEscape */ $childBlock->setData(['total' => $total])->toHtml() ?>
+                <?= /* @noEscape */ $childBlock->setData(['total' => $total, 'totals' => $totals])->toHtml() ?>
             <?php else: ?>
-                <dt class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>">
+                <dt
+                    class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>"
+                >
                     <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
                 </dt>
-                <dd class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>">
+                <dd
+                    class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>"
+                    data-code="<?= $escaper->escapeHtml($total->getCode()) ?>"
+                >
                     <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
                 </dd>
             <?php endif; ?>

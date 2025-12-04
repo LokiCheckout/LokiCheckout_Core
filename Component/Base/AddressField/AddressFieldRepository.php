@@ -6,7 +6,6 @@ use LokiCheckout\Core\Util\Component\AddressStateProvider;
 use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
 use Loki\Field\Component\Base\Field\FieldRepository;
-use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Magento\Framework\Event\Manager as EventManager;
 use Magento\Quote\Model\Quote\Address;
@@ -49,8 +48,8 @@ class AddressFieldRepository extends FieldRepository
         /** @var Address $address */
         $address = $this->getAddressState()->getAddress();
         $address->setData($this->getFieldName(), (string)$value);
-        $quote = $this->getContext()->getCheckoutState()->getQuote();
 
+        $quote = $this->getContext()->getCheckoutState()->getQuote();
         $this->eventManager->dispatch('loki_checkout_address_field_save_after', [
             'field_name' => $this->getFieldName(),
             'value' => $value,
@@ -59,7 +58,11 @@ class AddressFieldRepository extends FieldRepository
             'quote' => $quote,
         ]);
 
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
+        $address->save(); // @phpstan-ignore-line
+
+        if ($this->sameAddressService->isEnabled()) {
+            $this->sameAddressService->copyAddressToAddress($address);
+        }
     }
 
     protected function getAddressState(): AddressStateInterface

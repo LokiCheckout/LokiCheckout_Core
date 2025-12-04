@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Methods;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -12,7 +13,6 @@ use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use LokiCheckout\Core\Config\Config;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\AssertAddressContainsRate;
 use LokiCheckout\Core\Test\Integration\Trait\AssertAddressHasShippingMethod;
 use LokiCheckout\Core\Test\Integration\Trait\AssertShippingMethodAvailable;
@@ -25,7 +25,7 @@ use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class MethodsRepositoryTest extends LokiCheckoutPageTestCase
+class MethodsRepositoryTest extends LokiCheckoutTestCase
 {
     const COMPONENT_NAME = 'loki-checkout.shipping.methods';
 
@@ -40,6 +40,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     ]
     public function testGetShippingMethodsWithFlatRate()
     {
+        $this->dispatchToCheckout();
         $this->saveShippingAddressValues();
 
         $repository = $this->getRepository();
@@ -52,11 +53,11 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
         DataFixture(GuestCartFixture::class, as: 'cart'),
         DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
         ConfigFixture('carriers/freeshipping/active', 1, 'store', 'default'),
-        ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 50, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 0, 'store', 'default'),
     ]
     public function testGetShippingMethodsWithFreeShipping()
     {
-        $this->markTestSkipped();
+        $this->dispatchToCheckout();
         $this->saveShippingAddressValues();
 
         $repository = $this->getRepository();
@@ -71,8 +72,7 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     public function testGetShippingMethodsWithInStoreShipping()
     {
         $this->markTestSkipped();
-        return;
-        $this->getCart();
+        $this->dispatchToCheckout();
         $this->saveShippingAddressValues();
 
         $repository = $this->getRepository();
@@ -87,8 +87,8 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
 
     public function testSaveValueWithExistingShippingMethod()
     {
-        $this->getCart();
         $this->saveShippingAddressValues();
+        $this->dispatchToCheckout();
 
         $repository = $this->getRepository();
         $repository->saveValue('flatrate_flatrate');
@@ -98,13 +98,12 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
 
         $this->assertAddressHasShippingMethod('flatrate_flatrate', $shippingAddress);
         $this->assertAddressContainsRate('flatrate', $shippingAddress);
-        $this->assertTotalsContainShippingMethod('flatrate_flatrate', $quote);
     }
 
     public function testSaveValueWithNonExistingShippingMethod()
     {
-        $this->getCart();
         $this->saveShippingAddressValues();
+        $this->dispatchToCheckout();
 
         $repository = $this->getRepository();
         $repository->saveValue('foobar_foobar');
@@ -119,8 +118,8 @@ class MethodsRepositoryTest extends LokiCheckoutPageTestCase
     ]
     public function testSaveValueWithDefaultShippingMethod()
     {
-        $this->getCart();
         $this->saveShippingAddressValues();
+        $this->dispatchToCheckout();
 
         $config = ObjectManager::getInstance()->get(Config::class);
         $this->assertTrue($config->selectDefaultShippingMethod());

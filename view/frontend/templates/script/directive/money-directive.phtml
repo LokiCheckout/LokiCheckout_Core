@@ -1,18 +1,29 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.1.18 */
-
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\CurrentStore;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
+/** @version 2.1.28 */
 /** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CurrentStore $currentStore */
+$currentStore = $viewModelFactory->create(CurrentStore::class);
+$currency = $currentStore->getCurrency();
+$locale = str_replace('_', '-', $currentStore->getLocale());
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.directive('money', (el, { value, expression }, { evaluate }) => {
             if (expression) {
                 const amount = evaluate(expression) / 100;
-                el.textContent = new Intl.NumberFormat().format(amount);
+                el.textContent = new Intl.NumberFormat(
+                    '<?= $escaper->escapeHtml($locale); ?>',
+                    { style: 'currency', currency: "<?= $escaper->escapeHtml($currency) ?>" }
+                ).format(amount);
             }
         });
     });

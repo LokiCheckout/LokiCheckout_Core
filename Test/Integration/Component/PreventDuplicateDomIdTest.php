@@ -2,12 +2,12 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
@@ -15,12 +15,13 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend')
 ]
-class PreventDuplicateDomIdTest extends LokiCheckoutPageTestCase
+class PreventDuplicateDomIdTest extends LokiCheckoutTestCase
 {
     const TEST_DOM_ID = 'loki-checkout-steps-shipping';
 
     public function testForDuplicateDomIds()
     {
+        $this->dispatchToCheckout();
         $body = $this->getResponse()->getBody();
         $this->assertStringContainsString(self::TEST_DOM_ID, $body);
 

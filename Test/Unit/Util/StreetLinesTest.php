@@ -24,8 +24,8 @@ class StreetLinesTest extends TestCase
             $streetName,
             $houseNumber,
             $houseNumberAddition,
-            $countryId,
             '',
+            $countryId,
             3
         );
 
@@ -49,8 +49,8 @@ class StreetLinesTest extends TestCase
             $streetName,
             $houseNumber,
             $houseNumberAddition,
-            $countryId,
             '',
+            $countryId,
             3
         );
 
@@ -75,8 +75,8 @@ class StreetLinesTest extends TestCase
             $streetName,
             $houseNumber,
             $houseNumberAddition,
-            $countryId,
             '',
+            $countryId,
             3
         );
         $this->assertSame($street, $streetLines->toString());

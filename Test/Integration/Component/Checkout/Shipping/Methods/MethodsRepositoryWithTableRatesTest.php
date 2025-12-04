@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Methods;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\ResourceConnection;
@@ -14,7 +15,6 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\AssertAddressContainsRate;
 use LokiCheckout\Core\Test\Integration\Trait\AssertAddressHasShippingMethod;
 use LokiCheckout\Core\Test\Integration\Trait\AssertCarrierIsActive;
@@ -28,10 +28,8 @@ use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class MethodsRepositoryWithTableRatesTest extends LokiCheckoutPageTestCase
+class MethodsRepositoryWithTableRatesTest extends LokiCheckoutTestCase
 {
-    protected ?bool $skipDispatchToCheckout = true;
-
     const COMPONENT_NAME = 'loki-checkout.shipping.methods';
 
     use AssertAddressHasShippingMethod;
@@ -51,7 +49,6 @@ class MethodsRepositoryWithTableRatesTest extends LokiCheckoutPageTestCase
         $this->createTablerate('NL', '*', '*', 0, 1, 'package_qty', '1');
 
         $this->assertCarrierIsActive('tablerate');
-        $this->getCart();
 
         $this->saveShippingAddressValues();
 

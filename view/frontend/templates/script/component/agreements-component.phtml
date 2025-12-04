@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 
 use Magento\Framework\View\Element\Template;
 
@@ -11,6 +11,7 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutAgreementsComponent', () => ({
             ...LokiCheckoutComponentType,
+            visible: false,
             agreements: [],
             errorText: '',
             initWatchAgreements() {
@@ -21,6 +22,7 @@ use Magento\Framework\View\Element\Template;
                 this.valid = !Object.values(this.agreements).includes(false);
             },
             beforePostNextStep() {
+                this.valid = !Object.values(this.agreements).includes(false);
                 if (false === this.valid) {
                     this.addError(this.errorText);
                 }

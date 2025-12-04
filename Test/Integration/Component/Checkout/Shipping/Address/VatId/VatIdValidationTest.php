@@ -8,7 +8,7 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
@@ -16,7 +16,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
-class VatIdValidationTest extends LokiCheckoutPageTestCase
+class VatIdValidationTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.vat_id';
 
@@ -30,6 +30,7 @@ class VatIdValidationTest extends LokiCheckoutPageTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);

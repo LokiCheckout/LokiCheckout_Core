@@ -10,7 +10,15 @@
         grid-column: span var(--_col) / span var(--_col);
 
         @screen md {
+            --loki-md-col-span: 12;
             --_col: var(--loki-md-col-span, var(--loki-col-span));
+            grid-column: span var(--_col) / span var(--_col);
+        }
+
+        @variant md {
+            --loki-md-col-span: 12;
+            --_col: var(--loki-md-col-span, var(--loki-col-span));
+            grid-column: span var(--_col) / span var(--_col);
         }
     }
 

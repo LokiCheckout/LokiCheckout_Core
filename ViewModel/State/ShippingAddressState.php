@@ -46,6 +46,9 @@ class ShippingAddressState implements AddressStateInterface
             $this->checkoutState->saveQuote($quote);
         }
 
+        $shippingAddress->setIsShipping(true);
+        $shippingAddress->setIsBilling(false);
+
         return $shippingAddress;
     }
 }

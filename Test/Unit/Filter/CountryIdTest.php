@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Unit\Filter;
 
+use Loki\Components\Filter\FilterScope;
 use PHPUnit\Framework\TestCase;
 use LokiCheckout\Core\Filter\CountryId;
 
@@ -15,7 +16,8 @@ class CountryIdTest extends TestCase
     public function testFilter(string $countryId, string $expectedValue)
     {
         $filter = new CountryId();
-        $this->assertEquals($expectedValue, $filter->filter($countryId));
+        $filterScope = new FilterScope();
+        $this->assertEquals($expectedValue, $filter->filter($countryId, $filterScope));
     }
 
     public function getValues(): array

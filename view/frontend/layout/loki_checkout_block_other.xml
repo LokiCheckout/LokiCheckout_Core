@@ -6,6 +6,7 @@
             ifconfig="checkout/options/enable_agreements"
             template="LokiCheckout_Core::checkout/other/agreements.phtml">
             <arguments>
+                <!--<argument name="message_area" xsi:type="string">global</argument>-->
                 <argument name="error_text" xsi:type="string" translate="true">
                     Please agree to all the terms and conditions before placing the order.
                 </argument>
@@ -14,6 +15,7 @@
             <block
                 name="loki-checkout.agreements.agreement" as="agreement"
                 template="LokiCheckout_Core::checkout/other/agreement.phtml">
+
                 <block
                     name="loki-checkout.agreements.agreement.input" as="input"
                     template="LokiCheckout_Core::checkout/other/agreement/input.phtml"/>

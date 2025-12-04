@@ -6,6 +6,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.28] - 02 December 2025
+### Fixed
+- Save coupon via repository to allow proper validation
+- Allow quote save via repository with additional flag
+- Make coupon code messages translatable
+- Add Dutch translation
+
+## [2.1.27] - 02 December 2025
+### Fixed
+- Fix loader icon of step-forward button
+- Prevent notice error
+- Fix loki-md-col-span when empty
+- Allow checkout-access even though disabled, when passing license
+
+## [2.1.26] - 27 November 2025
+### Fixed
+- Do not escape `$css()` with `escapeHtmlAttr()` but `escapeHtml()`
+- Fix styling of payment method subform alignment
+- Add uniq ID to payment method container and form
+- Fix wrong escaping via escapeHtmlAttr
+
+## [2.1.25] - 21 November 2025
+### Fixed
+- Add XML layout comment for changing agreements messages to global messages
+- Trigger error message of agreements when hitting StepForwardButton
+- Fix wrong assumption on integration test with Customer DOB
+- Remove deprecated LokiCheckoutPageTestCase in integration tests
+- Standardize usage of ObjectManager in Integration Tests
+- Move fixture usage away from setUp (requires test rewrite)
+- Use rate titles for shipping method preview in sidebar
+- Migrate from SortedBlocks class to ChildRenderer::all() in address forms
+- Deprecated SortedBlocks class in favor of ChildRenderer::all()
+- Remove x-html in favor of x-text to anticipate Alpine CSP changes
+- Improve message on failed fixture in test
+- Replace `$block->getChildHtml()` with `$childRenderer->all()` to allow for better sorting
+- Add @variant instead of @screen for Tailwind 4 support
+
+## [2.1.24] - 14 November 2025
+### Fixed
+- Properly update same-as-billing with every field save
+- When checking if component exists, return false if component element has no children
+- Fix broken unit tests after refactoring
+
+## [2.1.23] - 14 November 2025
+### Fixed
+- Fix old quote being stuck, after updating quote items
+- Switch from CartRepository::save() to Quote::save() because of Magento issue 38950
+- Fix Hyva minicart toggle to be redirect to cart page
+- Fix x-money directive to properly output with right currency and locale
+
+## [2.1.22] - 14 November 2025
+### Fixed
+- Fix possible type error
+- Add new RegionRepository which is not in the core
+- Directly save address, not via quote to make things a tiny bit faster
+- Add FilterScope to every Filter
+- Add component and scope args to FilterInterface::filter()
+- Prevent duplicate mail from being sent
+
+## [2.1.21] - 12 November 2025
+### Fixed
+- Fix typo in totals loop
+
+## [2.1.20] - 12 November 2025
+### Fixed
+- Display shipping totals in sidebar with or without tax
+- Pass totals-argument to each totals child block
+- Add separate shipping totals
+- Include shipping method and carrier properly in totals calculation
+
+## [2.1.19] - 12 November 2025
+### Fixed
+- Allow various settings to be set on the store-level as well
+- Add shipping method code as data-method in sidebar preview
+- Fix agreements being invalid but not stopping forward button
+- Rename LokiLocalStorage to LocalStorage
+- Improve agreements not being checked
+- Add plan-trial keyword to composer file
+
 ## [2.1.18] - 03 November 2025
 ### Fixed
 - Fix agreements validation if in final step

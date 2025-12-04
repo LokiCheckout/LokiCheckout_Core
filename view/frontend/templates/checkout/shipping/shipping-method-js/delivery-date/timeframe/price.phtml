@@ -4,13 +4,12 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
 <template x-if="timeframe.price.amount">
     <div class="float-right cursor-pointer text-sm pl-2">
-        + <span x-html="timeframe.price.currency"></span>
-        <span x-money="timeframe.price.amount"></span>
+        + <span x-money="timeframe.price.amount"></span>
     </div>
 </template>

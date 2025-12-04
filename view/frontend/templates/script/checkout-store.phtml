@@ -6,7 +6,7 @@ use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\Step\StepNavigator;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
@@ -73,7 +73,20 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                 return Alpine.store('LokiComponents').removeInvisibleComponents();
             },
             exists(component) {
-                return Alpine.store('LokiComponents').exists(component) && document.getElementById(component.elementId);
+                if (!Alpine.store('LokiComponents').exists(component)) {
+                    return false;
+                }
+
+                const element = document.getElementById(component.elementId);
+                if (!element) {
+                    return false;
+                }
+
+                if (element.children.length === 0) {
+                    return false;
+                }
+
+                return true;
             },
             add(component) {
                 return Alpine.store('LokiComponents').add(component);
@@ -84,9 +97,19 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getInvalidComponents(step) {
                 const components = {};
                 this.getComponentArrayByStep(step).forEach(component => {
-                    if (this.exists(component) && false === component.valid && component.visible) {
-                        components[component.id] = component;
+                    if (!this.exists(component)) {
+                        return;
                     }
+
+                    if (component.valid) {
+                        return;
+                    }
+
+                    if (!component.visible) {
+                        return;
+                    }
+
+                    components[component.id] = component;
                 });
 
                 return components;
@@ -106,6 +129,14 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             lock(component) {
                 this.components[component.id].locked = true;
                 document.dispatchEvent(new CustomEvent('loki-components.component.update', {detail: {component}}));
+            },
+            componentIds(components) {
+                const ids = [];
+                Object.values(components).forEach(component => {
+                    ids.push(component.id);
+                });
+
+                return ids;
             },
             unlock(component) {
                 this.components[component.id].locked = false;

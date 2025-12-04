@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails;
 use InvalidArgumentException;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject;
+use Magento\Quote\Model\Quote\Address\Rate;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
@@ -19,7 +20,8 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         private readonly ShippingConfig $shippingConfig,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly ShippingAddressState $shippingAddressState,
-        private readonly AddressRenderer $addressRenderer
+        private readonly AddressRenderer $addressRenderer,
+        private string $separator = ' - '
     ) {
     }
 
@@ -34,13 +36,23 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         return $this->addressRenderer->getHtml($address);
     }
 
+    public function getMethod(): string
+    {
+        return (string)$this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
+    }
+
     public function getMethodHtml(): string
     {
         if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
 
-        $shippingMethod = $this->checkoutState->getQuote()->getShippingAddress()?->getShippingMethod();
+        $rate = $this->checkoutState->getQuote()->getShippingAddress()->getShippingRateByCode($this->getMethod());
+        if ($rate instanceof Rate) {
+            return $rate->getCarrierTitle() . $this->separator . $rate->getMethodTitle();
+        }
+
+        $shippingMethod = $this->getMethod();
         if (empty($shippingMethod)) {
             return '';
         }
@@ -52,7 +64,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         try {
             $carrier = $this->getCarrier($carrierCode);
         } catch (InvalidArgumentException $e) {
-            return (string)__($carrierMethod) . ' / ' . __($carrierCode);
+            return (string)__($carrierMethod) . $this->separator . __($carrierCode);
         }
 
         $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
@@ -61,15 +73,17 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             $parts[] = $methodTitle;
         }
 
-        $carrierTitle = trim($this->scopeConfig->getValue(
-            'carriers/' . $carrierCode . '/title',
-        ));
+        $carrierTitle = trim(
+            $this->scopeConfig->getValue(
+                'carriers/' . $carrierCode . '/title',
+            )
+        );
 
         if ($carrierTitle !== '' && $carrierTitle !== '0') {
             $parts[] = $carrierTitle;
         }
 
-        return implode(' / ', $parts);
+        return implode($this->separator, $parts);
     }
 
     private function getCarrier(string $carrierCode): AbstractCarrierInterface

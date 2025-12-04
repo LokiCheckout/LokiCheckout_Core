@@ -1,16 +1,20 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\BlockRenderer;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
 
-$html = $block->getChildHtml();
+$html = $childRenderer->all($block);
 if (empty($html)) {
     return;
 }

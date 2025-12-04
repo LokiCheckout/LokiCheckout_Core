@@ -2,17 +2,19 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\BlockRenderer;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\Step\StepNavigator;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var StepNavigator $stepNavigator */
 /** @var BlockRenderer $blockRenderer */
+/** @var Escaper $escaper */
 
 $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $currentStep = $stepNavigator->getCurrentStep()->getCode();

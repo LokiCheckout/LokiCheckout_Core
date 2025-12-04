@@ -7,6 +7,7 @@ use Magento\Framework\Exception\InputException;
 use Magento\Quote\Api\Data\AddressInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\ViewModel\CheckoutState;
+use Magento\Quote\Model\Quote\Address;
 
 class SameAddressService
 {
@@ -31,6 +32,17 @@ class SameAddressService
         $address = $quote->getShippingAddress();
 
         return (bool)$address->getSameAsBilling();
+    }
+
+    public function copyAddressToAddress(Address $address): void
+    {
+        if ($address->getIsBilling()) {
+            $this->copyBillingToShipping();
+        }
+
+        if ($address->getIsShipping()) {
+            $this->copyShippingToBilling();
+        }
     }
 
     public function copyBillingToShipping(): void

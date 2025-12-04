@@ -1,13 +1,17 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Template $block */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
 ?>
 <div class="<?= $escaper->escapeHtml($css('')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml(); ?>
+    <?= /* @noEscape */ $childRenderer->all($block); ?>
 </div>

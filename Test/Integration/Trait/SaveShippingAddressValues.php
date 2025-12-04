@@ -2,14 +2,16 @@
 
 namespace LokiCheckout\Core\Test\Integration\Trait;
 
-use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\Quote;
 
 trait SaveShippingAddressValues
 {
     protected function saveShippingAddressValues(array $values = []): void
     {
-        $quote = $this->getQuote();
+        /** @var Quote $quote */
+        $quote = $this->getCart();
+        $this->assertInstanceOf(Quote::class, $quote);
         $this->assertFalse($quote->isVirtual());
 
         $shippingAddress = $quote->getShippingAddress();
@@ -24,7 +26,7 @@ trait SaveShippingAddressValues
 
         $this->assertNotEmpty($shippingAddress->getWeight());
 
-        $cartRepository = ObjectManager::getInstance()->get(CartRepositoryInterface::class);
+        $cartRepository = $this->getObjectManager()->get(CartRepositoryInterface::class);
         $cartRepository->save($quote);
     }
 }

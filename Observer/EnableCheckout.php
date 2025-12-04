@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Observer;
 
+use LokiCheckout\Core\Util\Checkout\AllowCheckoutAccess;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Event\Observer;
@@ -15,6 +16,7 @@ use LokiCheckout\Core\Util\CurrentTheme;
 class EnableCheckout implements ObserverInterface
 {
     public function __construct(
+        private readonly AllowCheckoutAccess $allowCheckoutAccess,
         private readonly Config $config,
         private readonly LayoutInterface $layout,
         private readonly CheckoutSession $checkoutSession,
@@ -26,11 +28,10 @@ class EnableCheckout implements ObserverInterface
 
     public function execute(Observer $observer)
     {
-        if (false === $this->config->isEnabled()) {
+        if (false === $this->allowCheckoutAccess->allow()) {
             return;
         }
 
-        // @todo: Better check for this?
         $handles = $this->layout->getUpdate()->getHandles();
         if (false === in_array('checkout_index_index', $handles)) {
             return;

@@ -30,22 +30,23 @@ class CouponCodeRepository extends FieldRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
             $quote->setCouponCode($value['code']);
-            $this->getContext()->getCheckoutState()->saveQuote($quote);
+            $this->getContext()->getCheckoutState()->saveQuote($quote, true);
 
             $couponCode = $this->getValue();
             if (empty($couponCode)) {
-                $this->getGlobalMessageRegistry()->addWarning('Failed to apply coupon code');
+                $this->getGlobalMessageRegistry()->addWarning((string)__('Failed to apply coupon code'));
                 return;
             }
 
-            $this->getGlobalMessageRegistry()->addSuccess('Applied coupon code');
+            $this->getGlobalMessageRegistry()->addSuccess((string)__('Applied coupon code'));
             return;
         }
 
         if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
             $this->getContext()->getCheckoutState()->saveQuote($quote);
-            $this->getGlobalMessageRegistry()->addSuccess('Removed coupon code');
+            $this->getGlobalMessageRegistry()->addSuccess((string)__('Removed coupon code'));
         }
     }
 }
+

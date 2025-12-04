@@ -1,0 +1,30 @@
+<?php
+declare(strict_types=1);
+
+/** @version 2.1.28 */
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+use LokiCheckout\Core\ViewModel\ShippingAmount;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var DataObject $total */
+/** @var CssClass $css */
+
+$total = $block->getTotal();
+$totals = $block->getTotals();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$shippingAmount = $viewModelFactory->create(ShippingAmount::class);
+?>
+<dt class="total label <?= $escaper->escapeHtml($css('font-bold', $total->getCode() . '-label')) ?>">
+    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+</dt>
+<dd class="total value <?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>">
+    <?= /* @noEscape */ $priceFormatter->format($shippingAmount->get($totals)) ?>
+</dd>

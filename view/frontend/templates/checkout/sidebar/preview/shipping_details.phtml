@@ -8,7 +8,7 @@ use LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails\Shippin
 use Loki\Components\Util\Block\BlockRenderer;
 use Loki\Components\Factory\ViewModelFactory;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ShippingDetailsViewModel $viewModel */
@@ -38,7 +38,10 @@ if (empty($addressHtml)) {
     </div>
 
     <?php if (!empty($methodHtml)): ?>
-        <div class="<?= $escaper->escapeHtml($css('mb-4', 'method')) ?>">
+        <div
+            class="<?= $escaper->escapeHtml($css('mb-4', 'method')) ?>"
+            title="<?= $escaper->escapeHtml($viewModel->getMethod()) ?>"
+        >
             <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Method')) ?></span><br>
             <?= /* @noEscape */ $methodHtml ?>
             <?= /* @noEscape */ $block->getChildHtml('additional_method_info') ?>

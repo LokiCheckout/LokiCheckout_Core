@@ -5,7 +5,7 @@ use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var CssClass $css */
 /** @var Template $block */
 /** @var Escaper $escaper */
@@ -16,10 +16,10 @@ use Magento\Framework\View\Element\Template;
     <div class="py-8">
         <template x-for="(hours, day) in location.openingHours" :key="day">
             <div class="grid grid-cols-2 gap-2">
-                <div x-html="day" class="day capitalize"></div>
+                <div x-text="day" class="day capitalize"></div>
                 <template x-for="hour in hours">
                     <div>
-                        <span x-html="hour"></span>
+                        <span x-text="hour"></span>
                     </div>
                 </template>
             </div>

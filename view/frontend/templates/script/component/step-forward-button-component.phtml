@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 
 use Magento\Framework\View\Element\Template;
 
@@ -61,16 +61,15 @@ use Magento\Framework\View\Element\Template;
                     }
                 }
 
-                if (this.valid) {
-                    return this.valid;
+                if (!this.valid) {
+                    const components = Alpine.store('LokiCheckout').getInvalidComponentIds([this.currentStep, 'any']);
+                    LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
                 }
-
-                const components = Alpine.store('LokiCheckout').getInvalidComponentIds([this.currentStep, 'any']);
-                LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
 
                 return this.valid;
             },
             submit() {
+                this.loading = true;
                 document.dispatchEvent(new CustomEvent('clear-messages'));
 
                 Alpine.store('LokiCheckout').getComponentArrayByStep([this.currentStep, 'any']).forEach(component => {
@@ -88,13 +87,15 @@ use Magento\Framework\View\Element\Template;
                 });
 
                 this.$nextTick(() => {
-                    this.updateValid();
+                    this.valid = this.updateValid();
+                    this.loading = false;
+
                     if (true === this.valid) {
                         document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
                             component: this
                         }));
 
-                        Alpine.store('LokiLocalStorage').reset(['cart', 'loki-checkout']);
+                        Alpine.store('LocalStorage').reset(['cart', 'loki-checkout']);
 
                         this.post();
                         return;

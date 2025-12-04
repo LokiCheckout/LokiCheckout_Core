@@ -1,21 +1,20 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
-use LokiCheckout\Core\Util\Block\SortedBlocks;
 
-/** @version 2.1.18 */
+/** @version 2.1.28 */
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
-/** @var SortedBlocks $sortedBlocks */
+/** @var ChildRenderer $childRenderer */
 
-$sortedBlocks = $viewModelFactory->create(SortedBlocks::class);
 ?>
 <div class="<?= $escaper->escapeHtml($css('grid md:grid-cols-12 my-8 gap-4 md:gap-8')) ?>">
-    <?php foreach ($sortedBlocks->getChildren($block) as $childBlock): ?>
-        <?= /* @noEscape */ $childBlock->toHtml() ?>
-    <?php endforeach; ?>
+    <?= /* @noEscape */ $childRenderer->all($block) ?>
 </div>

@@ -44,6 +44,14 @@ class Config implements ArgumentInterface
         );
     }
 
+    public function getLicenseKey(): string
+    {
+        return (string)$this->scopeConfig->getValue(
+            'loki_checkout/general/license_key',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function getTheme(): string
     {
         $theme = (string)$this->scopeConfig->getValue(

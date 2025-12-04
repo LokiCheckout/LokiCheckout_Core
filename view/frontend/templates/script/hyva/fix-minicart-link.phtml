@@ -1,0 +1,17 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.1.28 */
+/** @var Template $block */
+/** @var Escaper $escaper */
+?>
+<script>
+    document.addEventListener('toggle-cart', function(event) {
+        if (event.detail.isOpen) {
+            window.location.href = '<?= $escaper->escapeUrl($block->getUrl('checkout/cart')) ?>';
+        }
+    });
+</script>

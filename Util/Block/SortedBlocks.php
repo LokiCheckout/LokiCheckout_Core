@@ -7,6 +7,9 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Exception\BlockNotFoundException;
 
+/**
+ * @deprecated Use ChildRenderer::all() instead
+ */
 class SortedBlocks implements ArgumentInterface
 {
     public function __construct(

@@ -6,6 +6,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Response\Http;
+use Magento\Framework\ObjectManagerInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
@@ -15,15 +16,14 @@ use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Component\ComponentRegistry;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Loki\Components\Test\Integration\LokiComponentsTestCase;
+use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
     protected ?string $stepCode = null;
 
-    protected function setUp(): void
+    protected function assertLokiCheckoutIsEnabled(): void
     {
-        parent::setUp();
-
         $this->assertModuleIsEnabled('LokiCheckout_Core');
         $this->assertModuleIsEnabled('Loki_FieldComponents');
         $this->assertStoreConfigValueEquals(1, 'loki_checkout/general/enable');
@@ -31,12 +31,12 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function getQuote(): Quote
     {
-        return ObjectManager::getInstance()->get(CheckoutState::class)->getQuote();
+        return $this->getObjectManager()->get(CheckoutState::class)->getQuote();
     }
 
     protected function getComponentRepository(string $blockId): ComponentRepositoryInterface
     {
-        $componentRegistry = ObjectManager::getInstance()->get(ComponentRegistry::class);
+        $componentRegistry = $this->getObjectManager()->get(ComponentRegistry::class);
         $component = $componentRegistry->getComponentByName($blockId);
 
         return $component->getRepository();
@@ -44,7 +44,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function getCheckoutComponent(string $blockName): ComponentInterface
     {
-        $config = ObjectManager::getInstance()->get(Config::class);
+        $config = $this->getObjectManager()->get(Config::class);
         $themeName = $config->getTheme();
 
         $handles = [
@@ -60,6 +60,9 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
 
     protected function dispatchToCheckout(?CartInterface $cart = null)
     {
+        $this->assertLokiComponentsIsEnabled();
+        $this->assertLokiCheckoutIsEnabled();
+
         if (false === $cart instanceof CartInterface) {
             $cart = $this->getCart();
         }
@@ -84,7 +87,8 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     {
         /** @var CartInterface $cart */
         $cart = $this->fixtures->get('cart');
-        $this->assertInstanceOf(CartInterface::class, $cart);
+
+        $this->assertInstanceOf(CartInterface::class, $cart, 'Cart fixture is empty');
 
         $cartId = $cart->getId();
         $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);
@@ -92,6 +96,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->assertNotEmpty($cart->getId());
 
         $checkoutState = $this->getObjectManager()->get(CheckoutState::class);
+        $checkoutState->setQuote($cart);
         $checkoutState->setQuoteId((int)$cart->getId());
 
         $checkoutSession = $this->getObjectManager()->get(CheckoutSession::class);
@@ -117,7 +122,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         string $scopeType = 'default',
         mixed $scopeValue = null
     ): void {
-        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $scopeConfig = $this->getObjectManager()->get(ScopeConfigInterface::class);
         $value = $scopeConfig->getValue($path, $scopeType, $scopeValue);
         $this->assertSame($expectedValue, $value);
     }
@@ -129,7 +134,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         string $scopeType = 'default',
         mixed $scopeValue = null
     ): void {
-        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $scopeConfig = $this->getObjectManager()->get(ScopeConfigInterface::class);
         $value = $scopeConfig->isSetFlag($path, $scopeType, $scopeValue);
         $this->assertSame($expectedValue, $value);
     }

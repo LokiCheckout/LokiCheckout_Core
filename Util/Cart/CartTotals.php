@@ -7,6 +7,7 @@ use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Loki\Components\Util\Ajax;
+use Magento\Quote\Api\Data\TotalsInterface;
 
 class CartTotals implements ArgumentInterface
 {
@@ -18,7 +19,7 @@ class CartTotals implements ArgumentInterface
     ) {
     }
 
-    public function getTotals()
+    public function getTotals(): TotalsInterface
     {
         $quote = $this->checkoutState->getQuote();
 
@@ -26,10 +27,18 @@ class CartTotals implements ArgumentInterface
             $quote->setTotalsCollectedFlag(false);
         }
 
+        $shippingAddress = $quote->getShippingAddress();
         $totalsInformation = $this->totalsInformationFactory->create();
-        $totalsInformation->setAddress($quote->getShippingAddress());
+        $totalsInformation->setAddress($shippingAddress);
 
-        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
-        return $totals->getTotalSegments();
+        $parts = explode('_', (string)$shippingAddress->getShippingMethod());
+        if (count($parts) > 1) {
+            $carrierCode = array_shift($parts);
+            $methodCode = implode("_", $parts);
+            $totalsInformation->setShippingMethodCode($methodCode);
+            $totalsInformation->setShippingCarrierCode($carrierCode);
+        }
+
+        return $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
     }
 }

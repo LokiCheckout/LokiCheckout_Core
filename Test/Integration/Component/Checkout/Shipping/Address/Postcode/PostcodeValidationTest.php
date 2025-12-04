@@ -2,13 +2,13 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Postcode;
 
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Fixture\ShippingAddressFixture;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
 
 #[
     DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
@@ -17,7 +17,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutPageTestCase;
     DataFixture(ShippingAddressFixture::class, ['cart_id' => '$cart.id$', 'country_id' => 'NL']),
     AppArea('frontend'),
 ]
-class PostcodeValidationTest extends LokiCheckoutPageTestCase
+class PostcodeValidationTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.postcode';
 
@@ -29,6 +29,7 @@ class PostcodeValidationTest extends LokiCheckoutPageTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);

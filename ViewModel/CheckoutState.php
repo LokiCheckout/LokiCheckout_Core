@@ -31,6 +31,11 @@ class CheckoutState implements ArgumentInterface
     ) {
     }
 
+    public function reset(): void
+    {
+        $this->quotes = [];
+    }
+
     public function setQuoteId(int $quoteId): void
     {
         $this->quoteId = $quoteId;
@@ -77,10 +82,19 @@ class CheckoutState implements ArgumentInterface
         return $this->quotes[$this->quoteId];
     }
 
-    public function saveQuote(Quote $quote)
+    public function setQuote(Quote $quote): void
+    {
+        $this->quotes[$quote->getId()] = $quote;
+    }
+
+    public function saveQuote(Quote $quote, bool $useRepository = false)
     {
         try {
-            $this->cartRepository->save($quote);
+            if ($useRepository) {
+                $this->cartRepository->save($quote); // @todo: Magento 2 #38950
+            } else {
+                $quote->save(); // @phpstan-ignore-line
+            }
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException();
         }
