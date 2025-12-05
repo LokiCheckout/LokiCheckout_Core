@@ -12,9 +12,7 @@ class ToggleSelectRepository extends ComponentRepository
 {
     public function getValue(): mixed
     {
-        $sessionKey = $this->getContext()->getNewAddressSessionKey($this->getComponent());
-
-        $value = (bool)$this->getContext()->getCheckoutState()->getCheckoutSession()->getData($sessionKey);
+        $value = (bool)$this->getContext()->isNewAddress($this->getComponent());
         if ((int)$value > 0) {
             $this->resetCustomerAddressId();
         }
@@ -24,7 +22,6 @@ class ToggleSelectRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-
         if ((int)$value > 0) {
             $this->resetCustomerAddressId();
         }

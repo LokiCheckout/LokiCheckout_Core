@@ -41,7 +41,6 @@ class ShippingMethodsRepository extends ComponentRepository
             $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
         } catch (StateException|NoSuchEntityException $e) {
             $this->getGlobalMessageRegistry()->addError($e->getMessage());
-
             return [];
         }
 
@@ -75,6 +74,7 @@ class ShippingMethodsRepository extends ComponentRepository
     {
         $shippingMethodCode = (string)$value;
         $shippingMethodCode = $this->sanitizeShippingMethod($shippingMethodCode);
+        echo 'Current shipping method: ' . $shippingMethodCode."\n";
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $shippingAddress = $quote->getShippingAddress();
@@ -91,9 +91,10 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingAddress->setShippingMethod($shippingMethodCode);
         $shippingAddress->setCollectShippingRates(true);
         $shippingAddress->collectShippingRates();
+        //$this->getContext()->getCheckoutState()->saveQuote($quote);
 
         $quote->collectTotals();
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
+        //$this->getContext()->getCheckoutState()->saveQuote($quote);
 
         $shippingAddress->setShippingMethod($shippingMethodCode);
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();

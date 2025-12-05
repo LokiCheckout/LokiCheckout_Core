@@ -18,6 +18,10 @@ class SelectRepository extends ComponentRepository
             return 0;
         }
 
+        if ($this->getContext()->isNewAddress($this->getComponent())) {
+            return 0;
+        }
+
         $selectedAddressId = $this->getSelectedAddressId();
         $sanitizedAddressId = $this->getSanitizedAddressId($selectedAddressId);
 
@@ -31,6 +35,10 @@ class SelectRepository extends ComponentRepository
     public function saveValue(mixed $value): void
     {
         if (false === $this->getContext()->getCustomerProvider()->isLoggedIn()) {
+            return;
+        }
+
+        if ($this->getContext()->isNewAddress($this->getComponent())) {
             return;
         }
 
@@ -65,6 +73,10 @@ class SelectRepository extends ComponentRepository
 
     private function getSelectedAddressId(): int
     {
+        if ($this->getContext()->isNewAddress($this->getComponent())) {
+            return 0;
+        }
+
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $selectedAddressId = (int)$address->getCustomerAddressId();
         if ($selectedAddressId > 0) {

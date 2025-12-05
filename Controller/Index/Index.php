@@ -31,7 +31,6 @@ class Index implements HttpGetActionInterface
 
     public function execute()
     {
-        $this->checkoutState->initialize();
         if (false === $this->checkoutState->hasQuote()) {
             return $this->redirectResultFactory->create()->setPath('checkout/cart');
         }
