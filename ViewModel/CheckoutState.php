@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\ViewModel;
 
+use LokiCheckout\Core\Util\Checkout\SaveCart;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Response\Http as HttpResponse;
@@ -14,6 +15,7 @@ use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Loki\Components\Exception\RedirectException;
 use Loki\Components\Util\Ajax;
+use Magento\Quote\Model\ResourceModel\Quote\Address as QuoteAddressResourceModel;
 
 class CheckoutState implements ArgumentInterface
 {
@@ -28,12 +30,8 @@ class CheckoutState implements ArgumentInterface
         private readonly UrlFactory $urlFactory,
         private readonly ResponseFactory $responseFactory,
         private readonly Ajax $ajax,
+        private readonly SaveCart $saveCart
     ) {
-    }
-
-    public function initialize(): void
-    {
-
     }
 
     public function reset(): void
@@ -122,11 +120,7 @@ class CheckoutState implements ArgumentInterface
         }
 
         try {
-            if ($useRepository) {
-                $this->cartRepository->save($quote); // @todo: Magento 2 #38950
-            } else {
-                $quote->save(); // @phpstan-ignore-line
-            }
+            $this->saveCart->execute($quote, $useRepository);
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException();
         }
@@ -144,8 +138,6 @@ class CheckoutState implements ArgumentInterface
 
     private function handleQuoteNotFoundException(): void
     {
-        //debug_print_backtrace();
-        //exit;
         $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
 
         if ($this->ajax->isAjax()) {
