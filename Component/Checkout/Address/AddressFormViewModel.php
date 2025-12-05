@@ -53,6 +53,7 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function getHtml(): string
     {
+        /** @var Address $address */
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
 
         return $this->getContext()->getAddressRenderer()->getHtml($address);
