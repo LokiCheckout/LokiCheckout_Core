@@ -1,0 +1,21 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Quote\Api\Data\CartItemInterface;
+
+/** @version 2.1.28 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CartItemInterface $item */
+/** @var CssClass $css */
+
+$item = $block->getItem();
+?>
+<p class="<?= $css() ?>">
+    <strong class="<?= $css('', 'inner') ?>">
+        <?= $escaper->escapeHtml($item->getName()) ?>
+    </strong>
+</p>

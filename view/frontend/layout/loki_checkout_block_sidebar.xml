@@ -23,7 +23,11 @@
 
                 <block name="loki-checkout.sidebar.items" as="items" template="LokiCheckout_Core::checkout/sidebar/items.phtml">
                     <container name="loki-checkout.sidebar.items.before" as="before"/>
-                    <block name="loki-checkout.sidebar.items.item" as="item" template="LokiCheckout_Core::checkout/sidebar/items/item.phtml"/>
+                    <block name="loki-checkout.sidebar.items.item" as="item" template="LokiCheckout_Core::checkout/sidebar/items/item.phtml">
+                        <block name="loki-checkout.sidebar.items.item.title" as="title" template="LokiCheckout_Core::checkout/sidebar/items/item/title.phtml"/>
+                        <block name="loki-checkout.sidebar.items.item.values" as="values" template="LokiCheckout_Core::checkout/sidebar/items/item/values.phtml"/>
+                        <block name="loki-checkout.sidebar.items.item.product-options" as="product-options" template="LokiCheckout_Core::checkout/sidebar/items/item/product-options.phtml"/>
+                    </block>
                     <container name="loki-checkout.sidebar.items.after" as="after"/>
                 </block>
 
