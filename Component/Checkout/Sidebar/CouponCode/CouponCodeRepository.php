@@ -14,11 +14,7 @@ class CouponCodeRepository extends FieldRepository
     {
         // @todo: Double-check that this matches Magento core logic
         // @todo: Move this into a filter "coupon_code"
-        return preg_replace(
-            '/([^a-zA-Z0-9\-\_]+)/',
-            '',
-            (string)$this->getContext()->getCheckoutState()->getQuote()->getCouponCode()
-        );
+        return $this->filter((string)$this->getContext()->getCheckoutState()->getQuote()->getCouponCode());
     }
 
     public function saveValue(mixed $value): void
@@ -29,10 +25,13 @@ class CouponCodeRepository extends FieldRepository
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
-            $quote->setCouponCode($value['code']);
+            $couponCode = $this->filter($value['code']);
+            $quote->setCouponCode($couponCode);
+            $quote->getShippingAddress()->setCollectShippingRates(true);
+            $quote->collectTotals();
 
-            $couponCode = $this->getValue();
-            if (empty($couponCode)) {
+            $actualCouponCode = $this->getValue();
+            if ($couponCode !== $actualCouponCode) {
                 $this->getGlobalMessageRegistry()->addWarning((string)__('Failed to apply coupon code'));
                 return;
             }
@@ -45,6 +44,15 @@ class CouponCodeRepository extends FieldRepository
             $quote->setCouponCode('');
             $this->getGlobalMessageRegistry()->addSuccess((string)__('Removed coupon code'));
         }
+    }
+
+    private function filter(string $couponCode): string
+    {
+        return preg_replace(
+            '/([^a-zA-Z0-9\-_]+)/',
+            '',
+            (string)$couponCode
+        );
     }
 }
 
