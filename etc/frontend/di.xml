@@ -51,4 +51,16 @@
             name="LokiCheckout_Core::cleanCompositeConfigProvider"
             type="LokiCheckout\Core\Plugin\CleanCompositeConfigProviderPlugin"/>
     </type>
+
+    <type name="Magento\Framework\App\RouterList">
+        <arguments>
+            <argument name="routerList" xsi:type="array">
+                <item name="loki-checkout" xsi:type="array">
+                    <item name="class" xsi:type="string">LokiCheckout\Core\Router\LokiCheckoutRouter</item>
+                    <item name="disable" xsi:type="boolean">false</item>
+                    <item name="sortOrder" xsi:type="string">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>
