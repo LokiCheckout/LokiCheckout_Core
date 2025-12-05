@@ -16,6 +16,11 @@ class CountryOptionModel implements ArgumentInterface, OptionModelInterface
 
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
+        static $countries = false;
+        if (is_array($countries)) {
+            return $countries;
+        }
+
         $countries = [];
         foreach ($this->directoryHelper->getCountryCollection() as $country) {
             $countries[$country->getCountryId()] = $country->getName();
