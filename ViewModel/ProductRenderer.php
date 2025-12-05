@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\ViewModel;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Catalog\Helper\Image as ImageHelper;
+use Magento\Catalog\Helper\Product\Configuration;
 use Magento\Catalog\Model\Product;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -18,6 +19,8 @@ class ProductRenderer implements ArgumentInterface
         private readonly ProductRepositoryInterface $productRepository,
         private readonly LayoutInterface $layout,
         private readonly ImageHelper $imageHelper,
+        private readonly Configuration $productConfigurationHelper,
+        private readonly array $productOptionParams = []
     ) {
     }
 
@@ -32,6 +35,19 @@ class ProductRenderer implements ArgumentInterface
         $renderer = $rendererList->getRenderer($item->getProductType());
         $renderer->setItem($item);
         return $renderer;
+    }
+
+    public function getProductOptions(CartItemInterface $item): array
+    {
+        $params = $this->productOptionParams;
+
+        $formattedOptions = [];
+        foreach ($this->productConfigurationHelper->getOptions($item) as $option) {
+            $option['formatted'] = $this->productConfigurationHelper->getFormattedOptionValue($option, $params);
+            $formattedOptions[] = $option;
+        }
+
+        return $formattedOptions;
     }
 
     public function getImage(CartItemInterface $item, int $width = 75, int $height = 75): string
