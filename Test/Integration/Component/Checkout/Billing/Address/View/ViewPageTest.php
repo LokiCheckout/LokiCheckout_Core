@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Billing\Address\View;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
+use LokiCheckout\Core\Util\SameAddressService;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -30,6 +31,7 @@ final class ViewPageTest extends LokiCheckoutTestCase
     #[ConfigFixture('loki_checkout/fields/enable_same_as_billing', '1', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
+        $this->assertTrue($this->objectManager->get(SameAddressService::class)->isEnabled());
         $this->dispatchToCheckout();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
