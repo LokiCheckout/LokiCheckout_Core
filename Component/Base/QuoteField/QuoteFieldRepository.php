@@ -20,7 +20,6 @@ class QuoteFieldRepository extends FieldRepository
     {
         $quote = $this->getQuote();
         $quote->setData($this->getFieldName(), $value);
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
     public function getFieldName(): string

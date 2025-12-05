@@ -28,7 +28,6 @@ class ShippingAsBillingRepository extends ComponentRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $address = $quote->getShippingAddress();
         $address->setSameAsBilling((int)$billingAsShipping);
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
 
         if ($billingAsShipping) {
             $sameAddressService = $this->getContext()->getSameAddressService();

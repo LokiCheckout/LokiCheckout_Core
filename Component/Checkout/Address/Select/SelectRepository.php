@@ -46,8 +46,6 @@ class SelectRepository extends ComponentRepository
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $address->importCustomerAddressData($customerAddress);
         $address->setCustomerAddressId($customerAddress->getId());
-
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int

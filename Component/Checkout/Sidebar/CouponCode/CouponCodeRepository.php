@@ -30,7 +30,6 @@ class CouponCodeRepository extends FieldRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
             $quote->setCouponCode($value['code']);
-            $this->getContext()->getCheckoutState()->saveQuote($quote, true);
 
             $couponCode = $this->getValue();
             if (empty($couponCode)) {
@@ -44,7 +43,6 @@ class CouponCodeRepository extends FieldRepository
 
         if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
-            $this->getContext()->getCheckoutState()->saveQuote($quote);
             $this->getGlobalMessageRegistry()->addSuccess((string)__('Removed coupon code'));
         }
     }

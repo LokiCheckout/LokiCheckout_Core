@@ -60,7 +60,6 @@ class PaymentMethodsRepository extends ComponentRepository
             $quote->setPaymentMethod($value);
             $quote->getPayment()->setMethod('');
             $quote->getPayment()->setAdditionalInformation([]);
-            $this->getContext()->getCheckoutState()->saveQuote($quote);
             return;
         }
 
@@ -78,7 +77,6 @@ class PaymentMethodsRepository extends ComponentRepository
             'quote' => $quote,
         ]);
 
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
         $quote->collectTotals();
     }
 

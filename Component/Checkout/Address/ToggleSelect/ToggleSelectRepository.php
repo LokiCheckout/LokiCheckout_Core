@@ -42,7 +42,5 @@ class ToggleSelectRepository extends ComponentRepository
         if ($quote->isVirtual()) {
             $quote->getShippingAddress()->setCustomerAddressId(null);
         }
-
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 }
