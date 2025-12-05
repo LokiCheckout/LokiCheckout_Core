@@ -70,7 +70,7 @@ class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
     private function getPostcodeFormatValidator(string $countryId): PostcodeFormatValidator
     {
         $addressState = $this->createMock(AddressStateInterface::class);
-        $addressState->method('load')->willReturn($countryId);
+        $addressState->method('get')->willReturn($countryId);
 
         $addressStateProvider = $this->createMock(AddressStateProvider::class);
         $addressStateProvider->method('getAddressState')->willReturn($addressState);
