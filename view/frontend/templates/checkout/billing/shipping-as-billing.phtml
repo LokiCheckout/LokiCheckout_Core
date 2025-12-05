@@ -17,6 +17,7 @@ use Loki\Components\Factory\ViewModelFactory;
 <div class="<?= $escaper->escapeHtml($css('card')) ?>">
     <label for="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field" class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
         <input type="checkbox"
+               <?= $viewModel->getValue() === true ? 'checked' : '' ?>
                :checked="value"
                @change="submitChecked"
                id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-field">
