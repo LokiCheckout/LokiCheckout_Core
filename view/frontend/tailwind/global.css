@@ -30,6 +30,12 @@
         background-image: none;
     }
 
+    .loki-checkout-sidebar-items-item {
+        img.product-image-photo {
+            height: fit-content;
+        }
+    }
+
     /*
     [aria-busy] {
         --loading-size: 64px;
