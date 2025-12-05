@@ -28,6 +28,7 @@ variables:
   OPENSEARCH_HOST: "opensearch"
   OPENSEARCH_PORT: "9200"
   OPENSEARCH_JAVA_OPTS: "-Xms128m -Xmx128m"
+  OPENSEARCH_INITIAL_ADMIN_PASSWORD: "admin"
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
@@ -40,14 +41,15 @@ php-linting:
       - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4']
 
 magento-unit-tests:
-  image: yireo/magento2installed:2.4.8
+  image: yireo/magento2installed:2.4.8-p3
   stage: unit
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q 8.4 || exit 0
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
     - cd /tmp/magento
-    - composer config --global gitlab-token.gitlab.yireo.com $CI_JOB_TOKEN
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
@@ -57,14 +59,15 @@ magento-unit-tests:
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
 
 magento-integration-tests:
-  image: yireo/magento2installed:2.4.8
+  image: yireo/magento2installed:2.4.8-p3
   stage: integration
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q 8.4 || exit 0
     - test -d Test/Integration/ || exit 0
     - source .module.ini
     - cd /tmp/magento
-    - composer config --global gitlab-token.gitlab.yireo.com $CI_JOB_TOKEN
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-integration-test-helper
@@ -82,15 +85,14 @@ magento-integration-tests:
       alias: opensearch
 
 magento-playwright:
-  image: yireo/magento2installed:2.4.8
+  image: yireo/magento2installed:2.4.8-p3
   stage: playwright
   before_script:
     - cd $CI_PROJECT_DIR
-    - ls -al
     - test -d Test/Playwright/ || exit 0
     - |
-      echo "Waiting for MySQL "
-      for i in {1..60}; do
+      echo "Waiting for MySQL (${MYSQL_HOST}:${MYSQL_PORT})"
+      for i in {1..30}; do
         if mysqladmin ping -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" --silent; then
           echo "OK"; break
         fi
@@ -102,9 +104,9 @@ magento-playwright:
       mysql -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
       mysql -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%'; FLUSH PRIVILEGES;"
 
-      echo "Waiting for OpenSearch "
+      echo "Waiting for OpenSearch (${OPENSEARCH_HOST}:${OPENSEARCH_PORT})"
       ready=0
-      for i in {1..120}; do
+      for i in {1..60}; do
         if curl -s "http://${OPENSEARCH_HOST}:${OPENSEARCH_PORT}" | grep -q '"tagline"'; then
           echo "OK"
           ready=1
@@ -114,7 +116,7 @@ magento-playwright:
         sleep 1
       done
       if [ "${ready:-0}" -ne 1 ]; then
-        echo "OpenSearch NOT OK"
+        echo "OpenSearch NOT OK, exiting"
         exit 1
       fi
 
@@ -144,8 +146,8 @@ magento-playwright:
         --cache-backend-redis-server=redis \
         --cache-backend-redis-port=6379 \
 
-      php -dmemory_limit=-1 bin/magento setup:di:compile
-      php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
+      #php -dmemory_limit=-1 bin/magento setup:di:compile
+      #php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
 
       cd /tmp/magento/pub/
       nohup php -S 0.0.0.0:8888 >/tmp/php-server.log 2>&1 &
@@ -154,25 +156,26 @@ magento-playwright:
       result=0
       for i in {1..60}; do
         if curl -s "${MAGENTO_BASE_URL}" 2>1 >/dev/null; then
-          echo " OK, available"
-          result=1
-          break
+          echo " OK, available"; result=1; break;
         fi
         echo -n "."
         sleep 1
       done
       test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
   script:
+    - cd $CI_PROJECT_DIR
     - source .module.ini
     - cd /tmp/magento
-    - composer config --global gitlab-token.gitlab.yireo.com $CI_JOB_TOKEN
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME}
+    - bin/magento module:sequence LokiCheckout_FunctionalTests
+    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
     - bin/magento setup:upgrade
-    - bin/magento config:set loki_functional_tests/general/token loki
+    - magerun2 config:store:set loki_functional_tests/general/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
     - npx playwright install
