@@ -19,6 +19,8 @@ class CustomerAddressFixture implements RevertibleDataFixtureInterface
         'postcode' => '3743KJ',
         'street' => ['Amalialaan 126'],
         'telephone' => '0123456789',
+        'default_shipping' => 1,
+        'default_billing' => 1,
     ];
 
     public function __construct(
