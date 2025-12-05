@@ -15,7 +15,7 @@ class AllowCheckoutAccess
 
     public function allow(): bool
     {
-        if (true === $this->config->isEnabled()) {
+        if ($this->config->isEnabled()) {
             return true;
         }
 
