@@ -31,6 +31,11 @@ class CheckoutState implements ArgumentInterface
     ) {
     }
 
+    public function initialize(): void
+    {
+
+    }
+
     public function reset(): void
     {
         $this->quotes = [];
@@ -48,7 +53,16 @@ class CheckoutState implements ArgumentInterface
 
     public function hasQuote(): bool
     {
-        return $this->getQuoteId() > 0;
+        if(false === $this->getQuoteId() > 0) {
+            return false;
+        }
+
+        $quote = $this->getQuote();
+        if (!$quote->hasItems() || $quote->getHasError() || !$quote->validateMinimumAmount()) {
+            return false;
+        }
+
+        return true;
     }
 
     public function getQuoteId(): int
@@ -130,8 +144,8 @@ class CheckoutState implements ArgumentInterface
 
     private function handleQuoteNotFoundException(): void
     {
-        debug_print_backtrace();
-        exit;
+        //debug_print_backtrace();
+        //exit;
         $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
 
         if ($this->ajax->isAjax()) {
