@@ -66,10 +66,11 @@ magento-integration-tests:
     - test -d Test/Integration/ || exit 0
     - source .module.ini
     - cd /tmp/magento
+    - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer config repositories.local-source path /tmp/magento/local-source
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-integration-test-helper
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
     - cd /tmp/magento/dev/tests/integration/
@@ -81,7 +82,7 @@ magento-integration-tests:
       alias: mysql
     - name: redis:latest
       alias: redis
-    - name: yireo/opensearch-dummy
+    - name: yireo/opensearch
       alias: opensearch
 
 magento-playwright:

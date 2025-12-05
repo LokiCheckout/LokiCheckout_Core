@@ -2,11 +2,7 @@
 
 namespace LokiCheckout\Core\ViewModel;
 
-use Magento\Catalog\Api\ProductRepositoryInterface;
-use Magento\Catalog\Helper\Image as ImageHelper;
 use Magento\Catalog\Helper\Product\Configuration;
-use Magento\Catalog\Model\Product;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\RendererList;
@@ -16,9 +12,7 @@ use Magento\Quote\Api\Data\CartItemInterface;
 class ProductRenderer implements ArgumentInterface
 {
     public function __construct(
-        private readonly ProductRepositoryInterface $productRepository,
         private readonly LayoutInterface $layout,
-        private readonly ImageHelper $imageHelper,
         private readonly Configuration $productConfigurationHelper,
         private readonly array $productOptionParams = []
     ) {
@@ -62,38 +56,5 @@ class ProductRenderer implements ArgumentInterface
         }
 
         return 'unknown';
-    }
-
-    /**
-     * @param string $sku
-     * @param int    $width
-     *
-     * @return string
-     * @deprecated Use getImage() instead
-     */
-    public function getImageUrlBySku(string $sku, int $width = 75): string
-    {
-        try {
-            $product = $this->productRepository->get($sku);
-        } catch (NoSuchEntityException $e) {
-            return '';
-        }
-
-        /** @var RendererList $rendererList */
-        $rendererList = $this->layout->getBlock('checkout.cart.item.renderers');
-        if ($rendererList instanceof RendererList) {
-            $renderer = $rendererList->getRenderer($product->getTypeId());
-            $renderer->setProduct($product);
-            return $renderer->toHtml();
-        }
-
-        /** @var Product $product */
-        return $this->imageHelper->init($product, 'product_base_image')
-            ->constrainOnly(true)
-            ->keepAspectRatio(true)
-            ->keepTransparency(true)
-            ->keepFrame(false)
-            ->resize($width)
-            ->getUrl();
     }
 }
