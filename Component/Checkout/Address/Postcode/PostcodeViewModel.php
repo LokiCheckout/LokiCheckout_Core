@@ -19,7 +19,7 @@ class PostcodeViewModel extends AddressFieldViewModel
         }
 
         $countries = $this->getContext()->getDirectoryData()->getCountriesWithOptionalZip();
-        $countryId = $this->getAddressState()->load('country_id');
+        $countryId = $this->getAddressState()->get('country_id');
 
         return false === in_array($countryId, $countries);
     }
@@ -27,7 +27,7 @@ class PostcodeViewModel extends AddressFieldViewModel
     #[Override]
     public function getFieldLabel(): string
     {
-        if ($this->getAddressState()->load('country_id') === 'US') {
+        if ($this->getAddressState()->get('country_id') === 'US') {
             return (string)__('Zipcode');
         }
 

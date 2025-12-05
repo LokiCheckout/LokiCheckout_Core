@@ -14,7 +14,7 @@ class VatIdViewModel extends AddressFieldViewModel
             return parent::isAllowRendering();
         }
 
-        $company = $this->getAddressState()->load('company');
+        $company = $this->getAddressState()->get('company');
         if (!empty($company)) {
             return parent::isAllowRendering();
         }

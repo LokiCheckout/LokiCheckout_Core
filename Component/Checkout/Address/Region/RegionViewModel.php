@@ -18,7 +18,7 @@ class RegionViewModel extends AddressFieldViewModel
 
     public function isRequired(): bool
     {
-        $countryId = $this->getAddressState()->load('country_id');
+        $countryId = $this->getAddressState()->get('country_id');
         if (empty($countryId)) {
             return true;
         }

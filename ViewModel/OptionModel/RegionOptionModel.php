@@ -20,7 +20,7 @@ class RegionOptionModel implements ArgumentInterface, OptionModelInterface
     {
         /** @var AddressFieldViewModel $viewModel */
         $addressState = $viewModel->getContext()->getAddressStateProvider()->getAddressState($viewModel->getBlock());
-        $countryId = $addressState->load('country_id');
+        $countryId = $addressState->get('country_id');
         if (empty($countryId)) {
             return [];
         }

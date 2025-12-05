@@ -31,7 +31,7 @@ class AddressFieldRepository extends FieldRepository
 
     public function getValue(): mixed
     {
-        return $this->getAddressState()->load($this->getFieldName());
+        return $this->getAddressState()->get($this->getFieldName());
     }
 
     public function saveValue(mixed $value): void
@@ -40,7 +40,7 @@ class AddressFieldRepository extends FieldRepository
             return;
         }
 
-        $previousValue = $this->getAddressState()->load($this->getFieldName());
+        $previousValue = $this->getAddressState()->get($this->getFieldName());
         if ($previousValue === $value) {
             return;
         }

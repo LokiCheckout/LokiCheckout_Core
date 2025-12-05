@@ -18,7 +18,7 @@ class PostcodeFormatValidator implements ValidatorInterface
     public function validate(mixed $value, ?ComponentInterface $component = null): bool|array
     {
         $addressState = $this->addressStateProvider->getAddressState($component->getBlock());
-        $countryId = $addressState->load('country_id');
+        $countryId = $addressState->get('country_id');
         $postcode = (string)$value;
 
         if ($postcode === '' || $postcode === '0') {

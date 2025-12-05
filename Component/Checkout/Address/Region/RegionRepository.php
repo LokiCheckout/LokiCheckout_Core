@@ -8,20 +8,20 @@ class RegionRepository extends AddressFieldRepository
 {
     public function getValue(): mixed
     {
-        $regionId = (string)$this->getAddressState()->load('region_id');
+        $regionId = (string)$this->getAddressState()->get('region_id');
         if (is_numeric($regionId) && $regionId > 0) {
             return $regionId;
         }
 
-        return (string)$this->getAddressState()->load('region');
+        return (string)$this->getAddressState()->get('region');
     }
 
     public function saveValue(mixed $value): void
     {
         if (is_numeric($value)) {
-            $this->getAddressState()->save('region_id', $value);
+            $this->getAddressState()->set('region_id', $value);
         }
 
-        $this->getAddressState()->save('region', $value);
+        $this->getAddressState()->set('region', $value);
     }
 }
