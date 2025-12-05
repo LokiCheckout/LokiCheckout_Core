@@ -5,11 +5,12 @@
 
         <!-- @todo: Find an alternative for this -->
         <referenceBlock name="checkout.root" remove="true" />
+
+        <!-- @todo: Move this to Hyva module only -->
         <referenceBlock name="fallback.module.missing" remove="true"/>
+        <referenceBlock name="cart-drawer" remove="true"/>
 
         <!-- @todo: Make this optional -->
         <referenceBlock name="topmenu_generic" remove="true"/>
-
-        <referenceBlock name="cart-drawer" remove="true"/>
     </body>
 </page>
