@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel;
 
@@ -9,6 +10,8 @@ use LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel;
 /** @var Template $block */
 /** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
+
 $html = $viewModel->getHtml();
 if (empty($html)) {
     return;
