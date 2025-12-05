@@ -74,7 +74,6 @@ class ShippingMethodsRepository extends ComponentRepository
     {
         $shippingMethodCode = (string)$value;
         $shippingMethodCode = $this->sanitizeShippingMethod($shippingMethodCode);
-        echo 'Current shipping method: ' . $shippingMethodCode."\n";
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $shippingAddress = $quote->getShippingAddress();
