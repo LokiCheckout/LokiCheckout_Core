@@ -12,7 +12,11 @@
                 template="LokiCheckout_Core::script/translations.phtml"/>
             <block
                 name="loki-checkout.script.checkout-config"
-                template="LokiCheckout_Core::script/checkout-config.phtml"/>
+                template="LokiCheckout_Core::script/checkout-config.phtml">
+                <arguments>
+                    <argument name="enabled" xsi:type="boolean">false</argument>
+                </arguments>
+            </block>
             <block
                 name="loki-checkout.script.checkout-store"
                 template="LokiCheckout_Core::script/checkout-store.phtml"/>

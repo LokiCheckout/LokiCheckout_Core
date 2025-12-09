@@ -1,17 +1,20 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.1.28 */
-
 use LokiCheckout\Core\ViewModel\CheckoutConfig;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
 
+/** @version 2.1.28 */
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutConfig $checkoutConfig */
+
+if (false === (bool)$block->getEnabled()) {
+    return;
+}
 
 $checkoutConfig = $viewModelFactory->create(CheckoutConfig::class);
 $jsonCheckoutConfig = $checkoutConfig->getJsonConfig();
