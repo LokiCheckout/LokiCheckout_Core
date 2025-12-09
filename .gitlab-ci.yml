@@ -171,10 +171,11 @@ magento-playwright:
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev loki-checkout/magento2-dev-tools:@dev yireo/magento2-enable-module-sequence
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests
-    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
+    - bin/magento module:sequence LokiCheckout_DevTools
+    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - bin/magento setup:upgrade
     - bin/magento loki-checkout:modules:dump
     - cp app/etc/loki-checkout.json vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
