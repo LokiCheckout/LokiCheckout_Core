@@ -66,6 +66,7 @@ class SameAddressService
 
         $quote = $this->checkoutState->getQuote();
         $this->copy($quote->getShippingAddress(), $quote->getBillingAddress());
+        $this->checkoutState->saveQuote($quote);
     }
 
     private function copy(AddressInterface $fromAddress, AddressInterface $toAddress): void
