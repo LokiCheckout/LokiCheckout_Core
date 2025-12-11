@@ -3,7 +3,6 @@
 namespace LokiCheckout\Core\Component\Base\AddressField;
 
 use LokiCheckout\Core\Util\Component\AddressStateProvider;
-use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
 use Loki\Field\Component\Base\Field\FieldRepository;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
@@ -16,9 +15,8 @@ use Magento\Quote\Model\Quote\Address;
 class AddressFieldRepository extends FieldRepository
 {
     public function __construct(
-        protected AddressStateProvider $addressStateProvider,
-        protected SameAddressService $sameAddressService,
-        protected EventManager $eventManager
+        protected readonly AddressStateProvider $addressStateProvider,
+        protected readonly EventManager $eventManager
     ) {
     }
 
@@ -57,10 +55,6 @@ class AddressFieldRepository extends FieldRepository
             'address_type' => $this->getAddressState() instanceof ShippingAddressState ? 'shipping' : 'billing',
             'quote' => $quote,
         ]);
-
-        //if ($this->sameAddressService->isSame()) {
-        //    $this->sameAddressService->copyAddressToAddress($address);
-        //}
     }
 
     protected function getAddressState(): AddressStateInterface
