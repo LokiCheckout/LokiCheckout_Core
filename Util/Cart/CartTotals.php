@@ -6,7 +6,6 @@ use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
 use Magento\Checkout\Api\TotalsInformationManagementInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\ViewModel\CheckoutState;
-use Loki\Components\Util\Ajax;
 use Magento\Quote\Api\Data\TotalsInterface;
 
 class CartTotals implements ArgumentInterface
@@ -15,17 +14,12 @@ class CartTotals implements ArgumentInterface
         private readonly CheckoutState $checkoutState,
         private readonly TotalsInformationManagementInterface $totalsInformationManagement,
         private readonly TotalsInformationInterfaceFactory $totalsInformationFactory,
-        private readonly Ajax $ajax
     ) {
     }
 
     public function getTotals(): TotalsInterface
     {
         $quote = $this->checkoutState->getQuote();
-
-        if ($this->ajax->isAjax()) {
-            $quote->setTotalsCollectedFlag(false);
-        }
 
         $shippingAddress = $quote->getShippingAddress();
         $totalsInformation = $this->totalsInformationFactory->create();
