@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\Observer;
 
-use Loki\Components\Util\Controller\ComponentUpdate;
+use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
@@ -11,6 +11,7 @@ use Magento\Framework\View\LayoutInterface;
 class SaveAfterRepositoryDispatch implements ObserverInterface
 {
     public function __construct(
+        protected SameAddressService $sameAddressService,
         private readonly CheckoutState $checkoutState,
     ) {
     }
@@ -21,6 +22,10 @@ class SaveAfterRepositoryDispatch implements ObserverInterface
         $layout = $observer->getLayout();
         if (false === in_array('loki_checkout', $layout->getUpdate()->getHandles())) {
             return;
+        }
+
+        if ($this->sameAddressService->isSame()) {
+            $this->sameAddressService->copyShippingToBilling();
         }
 
         $this->checkoutState->saveQuote();

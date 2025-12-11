@@ -58,9 +58,9 @@ class AddressFieldRepository extends FieldRepository
             'quote' => $quote,
         ]);
 
-        if ($this->sameAddressService->isSame()) {
-            $this->sameAddressService->copyAddressToAddress($address);
-        }
+        //if ($this->sameAddressService->isSame()) {
+        //    $this->sameAddressService->copyAddressToAddress($address);
+        //}
     }
 
     protected function getAddressState(): AddressStateInterface
