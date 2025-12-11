@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods;
 
+use LokiCheckout\Core\Util\Checkout\UpdateShippingMethod;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
@@ -14,6 +15,11 @@ class ShippingMethodsRepository extends ComponentRepository
 {
     private string $currentShippingMethod = '';
     private array $shippingMethods = [];
+
+    public function __construct(
+        private readonly UpdateShippingMethod $updateShippingMethod,
+    ) {
+    }
 
     /**
      * @return ShippingMethodInterface[]
@@ -76,26 +82,7 @@ class ShippingMethodsRepository extends ComponentRepository
         $shippingMethodCode = $this->sanitizeShippingMethod($shippingMethodCode);
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-
-        if (strlen($shippingMethodCode) === 0) {
-            $shippingAddress->removeAllShippingRates();
-            $shippingAddress->setShippingMethod('');
-            $this->currentShippingMethod = '';
-
-            return;
-        }
-
-        // @todo: Move this to specific ShippingMethod service
-        $shippingAddress->setShippingMethod($shippingMethodCode);
-        $shippingAddress->setCollectShippingRates(true);
-        $shippingAddress->collectShippingRates();
-        //$this->getContext()->getCheckoutState()->saveQuote($quote);
-
-        $quote->collectTotals();
-        //$this->getContext()->getCheckoutState()->saveQuote($quote);
-
-        $shippingAddress->setShippingMethod($shippingMethodCode);
+        $this->updateShippingMethod->execute($shippingMethodCode);
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();
     }
 
