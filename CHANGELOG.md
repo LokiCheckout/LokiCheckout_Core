@@ -6,6 +6,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.29] - 11 December 2025
+### Fixed
+- Scope TailwindCSS additions to `.loki-checkout`
+- Cleanup
+- Autofill address did not copy all fields from shipping to billing
+- Remove obsolete script child from coupon_code.phtml
+- Remove obsolete script block from shipping-methods.phtml
+- Default shipping method should recalculate totals in sidebar
+- Move shipping method update to separate service UpdateShippingMethod
+- Make sure to save quote when copying shipping to billing
+- Add LokiCheckout_CoreCli to GitLab CI Playwright
+- Disable window.checkoutConfig by default
+- Add LokiCheckout_DevTools to CI
+- FIX: typo in translation
+- Copy JSON file
+- Chop cart-item templates up in smaller pieces
+- Fix product-image-photo height from auto to fit-content
+- Remove debug message
+- Remove deprecated ProductImage::getImageUrlBySku() method
+- Render product options of cart items in sidebar
+- Allow reusing original product renderer in sidebar
+- Fix PostcodeFormatValidatorTest integration test
+- Add HTML input checked to avoid Alpine glitch
+- Add escaper variable
+- Fix ViewPageTest integration test
+- Add PHP class hint
+- Create CustomerAddressFixture as default billing and shipping
+- Rename deprecated AddressState::save/load to set/get
+- Fix existing address of logged-in customer overriding custom address
+- Move save-cart logic into separate class
+- Formatting
+- Make regex of coupon code configurable
+- Rewrite coupon code validation logic
+- iRemove redundant quote save
+- Add singleton to optimize country-loading
+- Optimize quote handling
+- Cleanup
+- Move enable-logic from observer to router and helper classes
+- Add custom router for replacing original checkout-controller entirely
+- Pending changes
+- Reduce number of quote saves when updating components
+- Remove field label from "Save in address book"
+- Cleanup CheckoutState
+- Only save in quote when layout handle contains `loki_checkout`
+- Automatically save quote after all repository updates
+- Dynamically change preview address title depending on same_as_billing flag
+- When toggling same-as-billing, refresh address in sidebar too
+- Rename loki_checkout_address_field_save_after to loki_checkout_address_field_set_after
+- Enhance same_as_billing copying
+- When quote is virtual and newAddress, nullify shipping address as well
+- Add circle-exclamation.svg
+- Set target billing.vat_id when billing.company changes
+- Always refresh target "loki-checkout.sidebar.totals" when shipping address changes
+- ADD: title
+- IMP: allow wrapping
+
 ## [2.1.28] - 02 December 2025
 ### Fixed
 - Save coupon via repository to allow proper validation
