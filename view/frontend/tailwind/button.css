@@ -1,49 +1,51 @@
 @layer components {
-    .btn {
-        &:disabled {
-            @apply bg-zinc-500 text-white shadow-md;
+    .loki-checkout {
+        .btn {
+            &:disabled {
+                @apply bg-zinc-500 text-white shadow-md;
 
-            &:hover {
-                @apply bg-zinc-400 text-white shadow-lg;
-            }
-        }
-    }
-
-    .btn-primary {
-        svg {
-            fill: white;
-        }
-    }
-
-    .tab-buttons {
-        .tab {
-            @apply rounded-lg p-1 border-2;
-        }
-
-        .tab-active {
-            @apply border-blue-950 bg-blue-800 hover:bg-blue-900 text-white;
-        }
-
-        .tab-inactive {
-            @apply border-zinc-400 bg-zinc-200 hover:bg-zinc-400 text-inherit;
-        }
-
-        .btn-group {
-            .tab:first-child {
-                border-right: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-
-            .tab:last-child {
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
+                &:hover {
+                    @apply bg-zinc-400 text-white shadow-lg;
+                }
             }
         }
 
-        .btn-single {
+        .btn-primary {
+            svg {
+                fill: white;
+            }
+        }
+
+        .tab-buttons {
             .tab {
-                @apply w-full;
+                @apply rounded-lg p-1 border-2;
+            }
+
+            .tab-active {
+                @apply border-blue-950 bg-blue-800 hover:bg-blue-900 text-white;
+            }
+
+            .tab-inactive {
+                @apply border-zinc-400 bg-zinc-200 hover:bg-zinc-400 text-inherit;
+            }
+
+            .btn-group {
+                .tab:first-child {
+                    border-right: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                .tab:last-child {
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+
+            .btn-single {
+                .tab {
+                    @apply w-full;
+                }
             }
         }
     }
