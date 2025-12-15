@@ -4,14 +4,12 @@ declare(strict_types=1);
 namespace LokiCheckout\Core\Component\Checkout\GridLayout;
 
 use LokiCheckout\Core\Config\Config;
-use LokiCheckout\Core\Config\XmlConfig;
 use Loki\Components\Component\ComponentViewModel;
 
 class GridLayoutViewModel extends ComponentViewModel
 {
     public function __construct(
         private readonly Config $config,
-        private readonly XmlConfig $xmlConfig
     ) {
     }
 
