@@ -32,6 +32,10 @@
                 </block>
 
                 <block name="loki-checkout.sidebar.totals" as="totals" template="LokiCheckout_Core::checkout/sidebar/totals.phtml">
+                    <arguments>
+                        <argument name="render_order" xsi:type="number">10</argument>
+                    </arguments>
+
                     <block name="loki-checkout.sidebar.totals.shipping" as="shipping" template="LokiCheckout_Core::checkout/sidebar/totals/shipping.phtml"/>
                     <block name="loki-checkout.sidebar.totals.grand_total" as="grand_total" template="LokiCheckout_Core::checkout/sidebar/totals/grand_total.phtml"/>
                 </block>
