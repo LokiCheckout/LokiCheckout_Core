@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.30] - 15 December 2025
+### Fixed
+- Set `render_order` of sidebar totals high
+- Set sortorder of all blocks
+
 ## [2.1.29] - 11 December 2025
 ### Fixed
 - Scope TailwindCSS additions to `.loki-checkout`
