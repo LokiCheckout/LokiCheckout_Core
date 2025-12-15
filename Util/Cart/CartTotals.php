@@ -20,8 +20,8 @@ class CartTotals implements ArgumentInterface
     public function getTotals(): TotalsInterface
     {
         $quote = $this->checkoutState->getQuote();
-
         $shippingAddress = $quote->getShippingAddress();
+
         $totalsInformation = $this->totalsInformationFactory->create();
         $totalsInformation->setAddress($shippingAddress);
 
