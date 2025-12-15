@@ -8,6 +8,7 @@
 
     <event name="view_block_abstract_to_html_before">
         <observer name="LokiCheckout_Core::assignAdditionalBlockVariables" instance="LokiCheckout\Core\Observer\AssignAdditionalBlockVariables"/>
+        <observer name="LokiCheckout_Core::setSortOrder" instance="LokiCheckout\Core\Observer\SetSortOrder"/>
     </event>
 
     <event name="view_block_abstract_to_html_after">
