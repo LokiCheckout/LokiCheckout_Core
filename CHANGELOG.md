@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.31] - 17 December 2025
+### Fixed
+- Set $isRequiredByDefault = true for Payment/AdditionalInformationViewModel
+- Add tsconfig.json that extends LokiCheckout_FunctionalTests
+
 ## [2.1.30] - 15 December 2025
 ### Fixed
 - Set `render_order` of sidebar totals high
