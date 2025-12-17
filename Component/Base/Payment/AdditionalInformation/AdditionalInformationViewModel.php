@@ -6,4 +6,5 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 abstract class AdditionalInformationViewModel extends CheckoutViewModel
 {
+    protected bool $isRequiredByDefault = true;
 }
