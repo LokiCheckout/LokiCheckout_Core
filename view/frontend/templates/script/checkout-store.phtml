@@ -105,6 +105,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
                         return;
                     }
 
+                    if (component.skipValidation) {
+                        return;
+                    }
+
                     if (!component.visible) {
                         return;
                     }

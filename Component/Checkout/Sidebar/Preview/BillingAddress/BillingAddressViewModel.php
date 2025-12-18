@@ -10,6 +10,7 @@ use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 
 class BillingAddressViewModel implements ArgumentInterface
 {
+    protected bool $skipValidation = true;
     public function __construct(
         private readonly BillingAddressState $billingAddressState,
         private readonly AddressRenderer $addressRenderer,

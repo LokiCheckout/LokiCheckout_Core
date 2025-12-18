@@ -8,6 +8,7 @@ use LokiCheckout\Core\ViewModel\CheckoutState;
 
 class PaymentDetailsViewModel implements ArgumentInterface
 {
+    protected bool $skipValidation = true;
     public function __construct(
         private readonly CheckoutState $checkoutState,
     ) {

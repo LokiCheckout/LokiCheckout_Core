@@ -16,6 +16,8 @@ use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 
 class ShippingDetailsViewModel extends CheckoutViewModel
 {
+    protected bool $skipValidation = true;
+
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly ShippingConfig $shippingConfig,

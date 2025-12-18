@@ -11,6 +11,8 @@ use Magento\Quote\Model\Quote\Address;
  */
 class AddressFormViewModel extends CheckoutViewModel
 {
+    protected bool $skipValidation = true;
+
     public function isAllowRendering(): bool
     {
         if ($this->isBillingAddressComponent()

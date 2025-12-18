@@ -11,6 +11,8 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
  */
 class CouponCodeViewModel extends CheckoutViewModel
 {
+    protected bool $skipValidation = true;
+
     public function getFieldLabel(): string
     {
         return 'Coupon code';
