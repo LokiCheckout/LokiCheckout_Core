@@ -12,7 +12,20 @@ abstract class AdditionalInformationRepository extends FieldRepository
 {
     public function getValue(): mixed
     {
-        return (string)$this->getPropertyValue();
+        $value = trim((string)$this->getPropertyValue());
+        if (!empty($value)) {
+            return $value;
+        }
+
+        $defaultValue = trim((string)$this->getDefaultValue());
+        if ($value === $defaultValue) {
+            return $defaultValue;
+        }
+
+        $this->saveValue($defaultValue);
+        $this->getContext()->getCheckoutState()->saveQuote();
+
+        return $defaultValue;
     }
 
     public function saveValue(mixed $value): void
@@ -23,6 +36,7 @@ abstract class AdditionalInformationRepository extends FieldRepository
     public function getPropertyName(): string
     {
         $parts = explode('.', $this->getComponentName());
+
         return end($parts);
     }
 
