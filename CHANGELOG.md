@@ -6,10 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.32] - 19 December 2025
+### Fixed
+- When selecting customer address from select, re-render totals
+- Add skipValidation flag for read-only components
+- Make sure step-forward-button toggles aria-disabled when toggling valid
+- When default value is not empty, save it in payment additional information
+
 ## [2.1.31] - 17 December 2025
 ### Fixed
 - Set $isRequiredByDefault = true for Payment/AdditionalInformationViewModel
-- Add tsconfig.json that extends LokiCheckout_FunctionalTests
+- Add tsconfig.json that extends `LokiCheckout_FunctionalTests`
 
 ## [2.1.30] - 15 December 2025
 ### Fixed
