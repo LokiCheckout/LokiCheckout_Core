@@ -21,7 +21,7 @@ class ItemsViewModel extends ComponentViewModel
      */
     public function getItems(): array
     {
-        $items = $this->getContext()->getCheckoutState()->getQuote()->getItems();
+        $items = $this->getContext()->getCheckoutState()->getQuote()->getAllVisibleItems();
         return array_slice($items, 0, $this->config->getMaxCartItemsToDisplay());
     }
 
