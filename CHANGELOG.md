@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.33] - 24 December 2025
+### Fixed
+- Only display visible items in sidebar
+
 ## [2.1.32] - 19 December 2025
 ### Fixed
 - When selecting customer address from select, re-render totals
