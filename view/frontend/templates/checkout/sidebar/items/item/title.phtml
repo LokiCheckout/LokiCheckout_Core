@@ -14,8 +14,8 @@ use Magento\Quote\Api\Data\CartItemInterface;
 
 $item = $block->getItem();
 ?>
-<p class="<?= $css() ?>">
-    <strong class="<?= $css('', 'inner') ?>">
+<p class="<?= $escaper->escapeHtml($css()) ?>">
+    <strong class="<?= $escaper->escapeHtml($css('', 'inner')) ?>">
         <?= $escaper->escapeHtml($item->getName()) ?>
     </strong>
 </p>

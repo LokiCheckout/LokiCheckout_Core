@@ -30,7 +30,7 @@ $useOriginalRenderer = (bool)$block->getUseOriginalRenderer() ?? false;
 
 $productRendererViewModel = $viewModelFactory->create(ProductRenderer::class);
 if ($useOriginalRenderer) {
-    echo $productRendererViewModel->getRenderer($item)->toHtml();
+    echo /* @noEscape */ $productRendererViewModel->getRenderer($item)->toHtml();
     return;
 }
 
@@ -43,11 +43,11 @@ $productImageHtml = $productRendererViewModel->getImage($item, $width, $height);
 
     <div class="<?= $escaper->escapeHtml($css('', 'outer grow')) ?>">
         <div class="<?= $escaper->escapeHtml($css('grow', 'inner mb-2')) ?>">
-            <?= $childRenderer->html($block, 'title', ['item' => $item]) ?>
+            <?= /* @noEscape */ $childRenderer->html($block, 'title', ['item' => $item]) ?>
 
             <dl class="<?= $escaper->escapeHtml($css('text-sm grid grid-cols-2 sm:grid-cols-[auto_minmax(0px,1fr)] gap-x-2', 'list')) ?>">
-                <?= $childRenderer->html($block, 'values', ['item' => $item]) ?>
-                <?= $childRenderer->html($block, 'product-options', ['item' => $item]) ?>
+                <?= /* @noEscape */ $childRenderer->html($block, 'values', ['item' => $item]) ?>
+                <?= /* @noEscape */ $childRenderer->html($block, 'product-options', ['item' => $item]) ?>
             </dl>
         </div>
 
