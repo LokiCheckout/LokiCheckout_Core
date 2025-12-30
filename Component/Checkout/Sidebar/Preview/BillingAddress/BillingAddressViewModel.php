@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\BillingAddress;
 
 use LokiCheckout\Core\Util\SameAddressService;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\Util\AddressRenderer;
@@ -12,6 +13,7 @@ class BillingAddressViewModel implements ArgumentInterface
 {
     protected bool $skipValidation = true;
     public function __construct(
+        private readonly CheckoutState $checkoutState,
         private readonly BillingAddressState $billingAddressState,
         private readonly AddressRenderer $addressRenderer,
         private readonly SameAddressService $sameAddressService
@@ -25,7 +27,7 @@ class BillingAddressViewModel implements ArgumentInterface
 
     public function getHtml(): string
     {
-        if ($this->isSameAsShipping()) {
+        if ($this->isSameAsShipping() && false === $this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
 
