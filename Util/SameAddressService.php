@@ -14,6 +14,7 @@ class SameAddressService
         private readonly Config $config,
         private readonly Copy $copyService,
         private readonly CheckoutState $checkoutState,
+        private bool $shippingFirst = true,
     ) {
     }
 
@@ -36,16 +37,14 @@ class SameAddressService
         return $this->config->enableSameAsBilling();
     }
 
-    public function copyAddressToAddress(Address $address): void
+    public function copyAddressToAddress(): void
     {
-        if ($address->getIsBilling()) {
+        if (false === $this->shippingFirst) {
             $this->copyBillingToShipping();
             return;
         }
 
-        if ($address->getIsShipping()) {
-            $this->copyShippingToBilling();
-        }
+        $this->copyShippingToBilling();
     }
 
     public function copyBillingToShipping(): void
@@ -78,8 +77,10 @@ class SameAddressService
             $toAddress
         );
 
-        if ($fromAddress->getCustomerAddressId()) {
+        if ($fromAddress->getCustomerAddressId() > 0) {
             $toAddress->setCustomerAddressId($fromAddress->getCustomerAddressId());
+        } else {
+            $toAddress->setCustomerAddressId(null);
         }
     }
 }

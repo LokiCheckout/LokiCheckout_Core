@@ -67,6 +67,9 @@ class SelectRepository extends ComponentRepository
             $shippingAddress->importCustomerAddressData($customerAddress);
             $shippingAddress->setCustomerAddressId($customerAddress->getId());
         }
+
+        $address->save();
+        $shippingAddress->save();
     }
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int

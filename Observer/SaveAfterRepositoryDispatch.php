@@ -25,7 +25,7 @@ class SaveAfterRepositoryDispatch implements ObserverInterface
         }
 
         if ($this->sameAddressService->isSame()) {
-            $this->sameAddressService->copyShippingToBilling();
+            $this->sameAddressService->copyAddressToAddress();
         }
 
         $this->checkoutState->saveQuote();
