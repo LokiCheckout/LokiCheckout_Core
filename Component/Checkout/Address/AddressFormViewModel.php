@@ -34,6 +34,12 @@ class AddressFormViewModel extends CheckoutViewModel
         return $this->getContext()->getSameAddressService()->isSame();
     }
 
+    public function isQuoteVirtual(): bool
+    {
+        return false;
+        return (bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual();
+    }
+
     public function isNewAddress(): bool
     {
         return $this->getContext()->isNewAddress($this->getComponent());

@@ -64,7 +64,7 @@ class LoginFormRepository extends ComponentRepository
         } catch (AuthenticationException $e) {
             $this->messageManager->addErrorMessage(__(
                 'The account sign-in was incorrect or your account is disabled temporarily. '
-                . 'Please wait and try again later.'
+                . 'Please wait and try again later: '.$e->getMessage()
             ));
 
         } catch (LocalizedException $e) {
