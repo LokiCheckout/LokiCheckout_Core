@@ -36,7 +36,6 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function isQuoteVirtual(): bool
     {
-        return false;
         return (bool)$this->getContext()->getCheckoutState()->getQuote()->isVirtual();
     }
 
