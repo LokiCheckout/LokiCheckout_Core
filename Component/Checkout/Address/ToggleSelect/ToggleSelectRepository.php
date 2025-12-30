@@ -36,8 +36,16 @@ class ToggleSelectRepository extends ComponentRepository
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $address->setCustomerAddressId(null);
 
+        $shippingAddress = $quote->getShippingAddress();
+        $billingAddress = $quote->getBillingAddress();
+
         if ($quote->isVirtual()) {
-            $quote->getShippingAddress()->setCustomerAddressId(null);
+            $shippingAddress->setCustomerAddressId(null);
+        }
+
+        if ($shippingAddress->getSameAsBilling()) {
+            $shippingAddress->setCustomerAddressId(null);
+            $billingAddress->setCustomerAddressId(null);
         }
     }
 }
