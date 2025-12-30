@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.34] - 30 December 2025
+### Fixed
+- Properly render billing address in sidebar when quote is virtual and customer is logged in
+- When quote is virtual, copy all details from billing to shipping
+- Consider address empty is all is empty but `customer_id`
+- When customer is logged in and quote is virtual, autofill shipping address ID as well
+- When quote is virtual, never show billing address view
+
 ## [2.1.33] - 24 December 2025
 ### Fixed
 - Only display visible items in sidebar
