@@ -19,7 +19,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 
     <?= /* @noEscape */ $block->getChildHtml('shipping-as-billing') ?>
 
-    <?php if ($viewModel->isSame() && false === $viewModel->isQuoteVirtual()): ?>
+    <?php if ($viewModel->showView()): ?>
         <?= /* @noEscape */ $block->getChildHtml('view') ?>
     <?php else: ?>
         <?php if ($viewModel->showSelectAddress()): ?>

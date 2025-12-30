@@ -5,14 +5,6 @@
             name="loki-checkout.shipping.address"
             template="LokiCheckout_Core::checkout/shipping/address.phtml">
 
-            <!--
-            @todo: Implement this when swapping addresses
-            <block
-                ifconfig="loki_checkout/fields/enable_same_as_billing"
-                name="loki-checkout.shipping.address.billing-as-shipping" as="billing-as-shipping"
-                template="LokiCheckout_Core::checkout/shipping/billing-as-shipping.phtml"/>
-            -->
-
             <block
                 name="loki-checkout.shipping.address.view" as="view"
                 template="LokiCheckout_Core::checkout/shipping/address-view.phtml"/>

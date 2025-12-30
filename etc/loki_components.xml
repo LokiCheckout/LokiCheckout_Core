@@ -164,7 +164,11 @@
         repository="LokiCheckout\Core\Component\Checkout\Address\Select\SelectRepository">
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
+        <target name="loki-checkout.billing.address.toggle-select"/>
         <target name="loki-checkout.billing.address.view"/>
+        <target name="loki-checkout.sidebar.totals"/>
+        <target name="loki-checkout.shipping.address.view"/>
+        <target name="loki-checkout.shipping.methods"/>
         <target name="loki-checkout.payment.methods"/>
     </component>
 

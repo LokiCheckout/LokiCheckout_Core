@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel;
 use Loki\Components\Factory\ViewModelFactory;
@@ -9,19 +10,28 @@ use Loki\Components\Util\Block\BlockRenderer;
 
 /** @version 2.1.34 */
 /** @var Template $block */
+/** @var Escaper $escaper */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $escaper->escapeHtml($css('mb-8')) ?>">
-    <?php if ($viewModel->showSelectAddress()): ?>
-        <?= /* @noEscape */ $block->getChildHtml('select') ?>
-        <?= /* @noEscape */ $block->getChildHtml('toggle-select') ?>
-    <?php endif; ?>
+<div class="<?= $escaper->escapeHtml($css('flex flex-col gap-8 relative')) ?>">
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
-    <?php if($viewModel->isNewAddress()): ?>
-        <?= /* @noEscape */ $block->getChildHtml('form-title') ?>
-        <?= /* @noEscape */ $block->getChildHtml('form') ?>
+    <?= /* @noEscape */ $block->getChildHtml('billing-as-shipping') ?>
+
+    <?php if ($viewModel->showView()): ?>
+        <?= /* @noEscape */ $block->getChildHtml('view') ?>
+    <?php else: ?>
+        <?php if ($viewModel->showSelectAddress()): ?>
+            <?= /* @noEscape */ $block->getChildHtml('select') ?>
+            <?= /* @noEscape */ $block->getChildHtml('toggle-select') ?>
+        <?php endif; ?>
+
+        <?php if ($viewModel->isNewAddress()): ?>
+            <?= /* @noEscape */ $block->getChildHtml('form-title') ?>
+            <?= /* @noEscape */ $block->getChildHtml('form') ?>
+        <?php endif; ?>
     <?php endif; ?>
 </div>

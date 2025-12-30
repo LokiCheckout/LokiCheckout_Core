@@ -29,6 +29,17 @@ class AddressFormViewModel extends CheckoutViewModel
         return parent::isAllowRendering();
     }
 
+    public function showView(): bool
+    {
+        if ($this->isBillingAddressComponent()) {
+            if ($this->isSame() && false === $this->isQuoteVirtual()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function isSame(): bool
     {
         return $this->getContext()->getSameAddressService()->isSame();
