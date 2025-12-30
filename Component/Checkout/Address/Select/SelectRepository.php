@@ -48,12 +48,19 @@ class SelectRepository extends ComponentRepository
         }
 
         $customerAddress = $this->getContext()->getCustomerAddressRepository()->getById($selectedAddressId);
+
         $quote = $this->getContext()->getCheckoutState()->getQuote();
 
         /** @var Address $address */
         $address = $this->getContext()->getCurrentAddress($this->getComponent());
         $address->importCustomerAddressData($customerAddress);
         $address->setCustomerAddressId($customerAddress->getId());
+
+        if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
+            if ($quote->isVirtual()) {
+                $quote->getShippingAddress()->setCustomerAddressId($customerAddress->getId());
+            }
+        }
     }
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int
