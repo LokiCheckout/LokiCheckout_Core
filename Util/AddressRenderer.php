@@ -26,7 +26,11 @@ class AddressRenderer
         /** @var RendererInterface $renderer */
         $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
         $html = $renderer->renderArray($addressData);
-        $html = preg_replace('/^<br(\s+)\/>$/msi', '', $html);
+        print_r($addressData);exit;
+        $html = preg_replace('/^<br(\s+)\/>$/msi', '', $html); // Remove empty lines
+
+        print_r($html);exit;
+
         return $html;
     }
 
@@ -44,7 +48,7 @@ class AddressRenderer
                 continue;
             }
 
-            if (in_array($fieldName, ['id', 'country_id', 'vat_id', 'gender', 'suffix', 'prefix'])) {
+            if (in_array($fieldName, ['id', 'customer_id', 'country_id', 'vat_id', 'gender', 'suffix', 'prefix'])) {
                 continue;
             }
 
