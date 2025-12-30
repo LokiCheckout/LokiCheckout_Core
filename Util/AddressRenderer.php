@@ -26,10 +26,7 @@ class AddressRenderer
         /** @var RendererInterface $renderer */
         $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
         $html = $renderer->renderArray($addressData);
-        print_r($addressData);exit;
         $html = preg_replace('/^<br(\s+)\/>$/msi', '', $html); // Remove empty lines
-
-        print_r($html);exit;
 
         return $html;
     }
