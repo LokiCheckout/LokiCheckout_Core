@@ -48,6 +48,11 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
+        static $paymentMethod = false;
+        if (is_string($paymentMethod)) {
+            return $paymentMethod;
+        }
+
         $quote = $this->getQuote();
         $currentPaymentMethod = (string)$quote->getPayment()->getMethod();
 
@@ -56,6 +61,7 @@ class PaymentMethodsRepository extends ComponentRepository
             $this->saveValue($sanitizedPaymentMethod);
         }
 
+        $paymentMethod = $sanitizedPaymentMethod;
         return $sanitizedPaymentMethod;
     }
 
@@ -68,11 +74,12 @@ class PaymentMethodsRepository extends ComponentRepository
             $quote->setPaymentMethod($value);
             $quote->getPayment()->setMethod('');
             $quote->getPayment()->setAdditionalInformation([]);
+            $this->getContext()->getCheckoutState()->saveQuote($quote);
             return;
         }
 
         if ($quote->getPaymentMethod() !== $value) {
-            //$quote->getPayment()->setAdditionalInformation([]);
+            $quote->getPayment()->setAdditionalInformation([]);
         }
 
         $quote->setPaymentMethod($value);
@@ -81,6 +88,7 @@ class PaymentMethodsRepository extends ComponentRepository
         try {
             $quote->getPayment()->importData(['method' => $value]);
         } catch (LocalizedException $e) {
+
             $this->getGlobalMessageRegistry()->addError($e->getMessage());
             return;
         }
@@ -89,8 +97,9 @@ class PaymentMethodsRepository extends ComponentRepository
             'quote' => $quote,
         ]);
 
-        //$quote->setTotalsCollectedFlag(false);
+        $quote->setTotalsCollectedFlag(false);
         $quote->collectTotals();
+        $this->getContext()->getCheckoutState()->saveQuote($quote);
     }
 
     protected function getQuote(): Quote
