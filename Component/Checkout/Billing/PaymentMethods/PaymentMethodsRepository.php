@@ -24,27 +24,35 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function getDefaultPayment(): string
     {
+        static $defaultPayment = false;
+        if (is_string($defaultPayment)) {
+            return $defaultPayment;
+        }
+
         $paymentMethods = $this->getPaymentMethods();
         if ($paymentMethods === []) {
-            return '';
+            $defaultPayment = '';
+            return $defaultPayment;
         }
 
         if (false === $this->getContext()->getModuleConfig()->selectDefaultPaymentMethod()) {
-            return '';
+            $defaultPayment = '';
+            return $defaultPayment;
         }
 
         $firstPaymentMethod = array_shift($paymentMethods);
 
-        return (string)$firstPaymentMethod->getCode();
+        $defaultPayment = (string)$firstPaymentMethod->getCode();
+        return $defaultPayment;
     }
 
     public function getValue(): mixed
     {
         $quote = $this->getQuote();
-        $paymentMethod = (string)$quote->getPayment()->getMethod();
+        $currentPaymentMethod = (string)$quote->getPayment()->getMethod();
 
-        $sanitizedPaymentMethod = $this->sanitizePaymentMethod($paymentMethod);
-        if ($paymentMethod !== $sanitizedPaymentMethod) {
+        $sanitizedPaymentMethod = $this->sanitizePaymentMethod($currentPaymentMethod);
+        if ($currentPaymentMethod !== $sanitizedPaymentMethod) {
             $this->saveValue($sanitizedPaymentMethod);
         }
 
@@ -63,6 +71,10 @@ class PaymentMethodsRepository extends ComponentRepository
             return;
         }
 
+        if ($quote->getPaymentMethod() !== $value) {
+            //$quote->getPayment()->setAdditionalInformation([]);
+        }
+
         $quote->setPaymentMethod($value);
         $quote->setInventoryProcessed(false);
 
@@ -77,6 +89,7 @@ class PaymentMethodsRepository extends ComponentRepository
             'quote' => $quote,
         ]);
 
+        //$quote->setTotalsCollectedFlag(false);
         $quote->collectTotals();
     }
 
