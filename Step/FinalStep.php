@@ -13,6 +13,7 @@ use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
+use Magento\Quote\Model\QuoteIdMutex;
 use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
@@ -28,6 +29,7 @@ class FinalStep
         private readonly QuoteValidator $quoteValidator,
         private readonly CheckoutState $checkoutState,
         private readonly CustomerSession $customerSession,
+        private readonly QuoteIdMutex $quoteIdMutex,
         private readonly Redirect $redirect,
         private readonly EventManager $eventManager,
         private readonly CartManagementInterface $cartManagement,
@@ -63,7 +65,10 @@ class FinalStep
         $this->processGuestCart($quote);
         $this->cartRepository->save($quote);
 
-        $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
+        $orderId = $this->quoteIdMutex->execute([$quote->getId()], function () use ($quote): int {
+            return (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
+        });
+
         $this->updateCheckoutSessionFromCart($quote);
 
         if ($orderId !== 0) {
