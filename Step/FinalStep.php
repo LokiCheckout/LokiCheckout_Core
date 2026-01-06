@@ -71,7 +71,6 @@ class FinalStep
             $order = $this->orderRepository->get($orderId);
             $this->dispatchCheckoutTypeOnepageSaveOrderAfter($order);
             $this->updateCheckoutSessionFromOrder($order);
-            //$this->sendMail($order); // @todo: Is still needed?
         }
 
         $this->dispatchSaveOrderEvent();
