@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.35] - 06 January 2026
+### Fixed
+- Make sure payment method is properly saved on-load when different
+- Micro-optimization of quote loading
+- Only fetch default payment method once (for performance)
+- Use QuoteIdMutex to lock quote while placing order
+- Configure same-address service better for which step goes first
+- Toggle feature resets wrongly with billing-first
+- When logged in, same-as-billing is true, set shipping equal to billing automatically
+- Improve billing-first behaviour
+
 ## [2.1.34] - 30 December 2025
 ### Fixed
 - Properly render billing address in sidebar when quote is virtual and customer is logged in
