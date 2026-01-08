@@ -97,7 +97,7 @@ magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   rules:
-    - if: '$CI_PROJECT_NAME !== "LokiCheckout_Core"'
+    - if: '$CI_PROJECT_NAME != "LokiCheckout_Core"'
       when: on_success
     - when: manual
   script:
