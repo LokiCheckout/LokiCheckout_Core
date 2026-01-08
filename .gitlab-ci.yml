@@ -82,6 +82,8 @@ magento-integration-tests:
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/etc/* etc/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit${PHPUNIT_VERSION}.xml phpunit.xml
+    - cat /tmp/magento/dev/tests/integration/framework/Magento/TestFramework/Db/Mysql.php
+    - cat /tmp/magento/dev/tests/integration/etc/mysql-client-config.php
     - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit ../../../vendor/$COMPOSER_NAME/Test/Integration/
   services:
     - name: yireo/mysql:8.0
