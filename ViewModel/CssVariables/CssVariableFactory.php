@@ -1,7 +1,4 @@
 <?php 
-
-/** @phpstan-ignore-file */
-
 declare(strict_types=1);
 
 namespace LokiCheckout\Core\ViewModel\CssVariables;
@@ -15,8 +12,10 @@ class CssVariableFactory
     ) {
     }
 
+    // @phpstan-ignore-next-line
     public function create(string $name, string $value): CssVariable
     {
+        // @phpstan-ignore-next-line
         return $this->objectManager->create(CssVariable::class, [
             'name' => $name,
             'value' => $value,
