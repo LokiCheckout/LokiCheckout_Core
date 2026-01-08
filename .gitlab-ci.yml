@@ -47,11 +47,6 @@ magento-phpcs:
     - export PHPCS_LEVEL=$(jq -r '.phpcs_severity // 10' MODULE.json)
     - echo "Testing for PHPCS severity $PHPCS_LEVEL"
     - cd /tmp/magento
-    #- composer config gitlab-domains gitlab.yireo.com
-    #- composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
-    #- composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-    #- composer config repositories.local-source path $CI_PROJECT_DIR
-    #- composer require --prefer-source -- $COMPOSER_NAME:@dev
     - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
@@ -101,6 +96,10 @@ magento-unit-tests:
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
+  rules:
+    - if: '$CI_PROJECT_NAME !== "LokiCheckout_Core"'
+      when: on_success
+    - when: manual
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
@@ -131,7 +130,6 @@ magento-integration-tests:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p3']
         PHP_VERSION: ['8.4']
-        PHPUNIT_VERSION: ['10']
 
 magento-compile:
   image: yireo/magento2installed:$MAGENTO_VERSION
@@ -212,7 +210,6 @@ magento-compile:
     - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
     - php -dmemory_limit=-1 bin/magento setup:upgrade
     - php -dmemory_limit=-1 bin/magento setup:di:compile
-    - php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
   services:
     - name: yireo/mariadb:10
       alias: mysql
@@ -222,7 +219,8 @@ magento-compile:
       alias: opensearch
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.8-p3']
+      #- MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
@@ -292,9 +290,6 @@ magento-playwright:
         --session-save-redis-port=6379 \
         --cache-backend-redis-server=redis \
         --cache-backend-redis-port=6379
-
-      #php -dmemory_limit=-1 bin/magento setup:di:compile
-      #php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
 
       cd /tmp/magento/pub/
       nohup php -S 0.0.0.0:8888 >/tmp/php-server.log 2>&1 &
