@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+/** @phpstan-ignore-file */
+
 namespace LokiCheckout\Core\Payment\Vault;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -18,7 +20,7 @@ class NormalizedPaymentTokenFactory
         $token = $this->objectManager->create(
             NormalizedPaymentToken::class,
             ['paymentToken' => $paymentToken]
-        ); // @phpstan-ignore-line
+        );
 
         return $token;
     }

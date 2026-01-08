@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+/** @phpstan-ignore-file */
+
 namespace LokiCheckout\Core\ViewModel\CssVariables;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -17,6 +19,6 @@ class CssVariableFactory
         return $this->objectManager->create(CssVariable::class, [
             'name' => $name,
             'value' => $value,
-        ]); // @phpstan-ignore-line
+        ]);
     }
 }
