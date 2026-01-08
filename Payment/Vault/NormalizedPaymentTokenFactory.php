@@ -14,11 +14,9 @@ class NormalizedPaymentTokenFactory
     ) {
     }
 
-    // @phpstan-ignore-next-line
     public function create(PaymentTokenInterface $paymentToken): NormalizedPaymentToken
     {
         /** @var NormalizedPaymentToken $token */
-        // @phpstan-ignore-next-line
         $token = $this->objectManager->create(
             NormalizedPaymentToken::class,
             ['paymentToken' => $paymentToken]

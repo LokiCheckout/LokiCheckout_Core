@@ -72,7 +72,6 @@ magento-phpstan:
     - composer config --no-plugins allow-plugins true
     - composer require --dev --prefer-source -- phpstan/phpstan bitexpert/phpstan-magento phpstan/extension-installer
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-integration-test-helper
-    - ls -al vendor/loki-checkout
     - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
     - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL $CI_PROJECT_DIR
   parallel:
