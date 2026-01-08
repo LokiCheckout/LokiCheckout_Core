@@ -74,7 +74,7 @@ magento-phpstan:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer config --no-plugins allow-plugins true
     - composer require --dev --prefer-source -- phpstan/phpstan bitexpert/phpstan-magento phpstan/extension-installer
-    - composer require --dev --prefer-source -- $COMPOSER_NAME:@dev
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-integration-test-helper
     - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
     - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL vendor/$COMPOSER_NAME/
   parallel:
