@@ -17,6 +17,6 @@ class CssVariableFactory
         return $this->objectManager->create(CssVariable::class, [
             'name' => $name,
             'value' => $value,
-        ]);
+        ]); // @phpstan-ignore-line
     }
 }

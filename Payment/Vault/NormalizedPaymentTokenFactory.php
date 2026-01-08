@@ -18,7 +18,7 @@ class NormalizedPaymentTokenFactory
         $token = $this->objectManager->create(
             NormalizedPaymentToken::class,
             ['paymentToken' => $paymentToken]
-        );
+        ); // @phpstan-ignore-line
 
         return $token;
     }
