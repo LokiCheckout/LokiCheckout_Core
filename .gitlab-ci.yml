@@ -2,8 +2,8 @@ stages:
   - linting
   - unit
   - integration
-  #- compile
-  #- playwright
+  - compile
+  - playwright
 
 variables:
   MAGENTO_BASE_URL: "http://127.0.0.1:8888/"
