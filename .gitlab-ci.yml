@@ -122,7 +122,7 @@ magento-integration-tests:
     - mariadb-dump --defaults-file=/tmp/magento/dev/tests/integration/etc/my.cnf --host=mysql --port=3306 --no-tablespaces magento2 > dummy.sql
     - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit ../../../vendor/$COMPOSER_NAME/Test/Integration/
   services:
-    - name: yireo/mysql:8.0
+    - name: yireo/mariadb:10
       alias: mysql
     - name: redis:latest
       alias: redis
@@ -214,7 +214,7 @@ magento-compile:
     - php -dmemory_limit=-1 bin/magento setup:di:compile
     - php -dmemory_limit=-1 bin/magento setup:static-content:deploy -f
   services:
-    - name: yireo/mysql:8.0
+    - name: yireo/mariadb:10
       alias: mysql
     - name: redis:latest
       alias: redis
@@ -329,7 +329,7 @@ magento-playwright:
     - echo "TEST_TOKEN=loki" >> .env
     - npx playwright test --project=LokiCheckout_Core
   services:
-    - name: yireo/mysql:8.0
+    - name: yireo/mariadb:10
       alias: mysql
     - name: redis:latest
       alias: redis
