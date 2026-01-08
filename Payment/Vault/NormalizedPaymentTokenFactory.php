@@ -1,6 +1,5 @@
-<?php declare(strict_types=1);
-
-/** @phpstan-ignore-file */
+<?php /** @phpstan-ignore-file */
+declare(strict_types=1);
 
 namespace LokiCheckout\Core\Payment\Vault;
 
