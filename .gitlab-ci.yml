@@ -1,11 +1,7 @@
 stages:
-  - linting
-  - phpcs
-  - phpstan
-  - unit
-  - integration
-  - compile
-  - playwright
+  - basic
+  - testing
+  - advanced
 
 variables:
   MAGENTO_BASE_URL: "http://127.0.0.1:8888/"
@@ -35,7 +31,7 @@ variables:
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
-  stage: linting
+  stage: basic
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
@@ -45,7 +41,7 @@ php-linting:
 
 magento-phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: phpcs
+  stage: basic
   script:
     - source .module.ini
     - cd /tmp/magento
@@ -63,7 +59,7 @@ magento-phpcs:
 
 magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: phpstan
+  stage: basic
   script:
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
@@ -85,7 +81,7 @@ magento-phpstan:
 
 magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: unit
+  stage: testing
   script:
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
@@ -105,7 +101,7 @@ magento-unit-tests:
 
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: integration
+  stage: testing
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
@@ -141,7 +137,7 @@ magento-integration-tests:
 
 magento-compile:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: compile
+  stage: testing
   before_script:
     - cd $CI_PROJECT_DIR
     - |
@@ -226,7 +222,7 @@ magento-compile:
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
-  stage: playwright
+  stage: advanced
   before_script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Playwright/ || exit 0
