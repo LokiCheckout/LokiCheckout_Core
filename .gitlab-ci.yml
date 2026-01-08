@@ -72,6 +72,7 @@ magento-phpstan:
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer config --no-plugins allow-plugins true
     - composer require --dev --prefer-source -- phpstan/phpstan bitexpert/phpstan-magento phpstan/extension-installer
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
