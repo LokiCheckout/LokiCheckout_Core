@@ -1,5 +1,7 @@
 stages:
   - linting
+  - phpcs
+  - phpstan
   - unit
   - integration
   - compile
@@ -41,11 +43,47 @@ php-linting:
     matrix:
       - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4']
 
+magento-phpcs:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: phpcs
+  script:
+    - source .module.ini
+    - cd /tmp/magento
+    - export PHPCS_LEVEL=$(jq -r '.phpcs_severity // 10' MODULE.json)
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - php vendor/bin/phpcs --standard=Magento2 --extensions=php,phtml --severity=$PHPCS_LEVEL vendor/$COMPOSER_NAME/
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p3']
+
+magento-phpstan:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: phpstan
+  script:
+    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
+    - source .module.ini
+    - export PHPSTAN_LEVEL=$(jq -r '.phpstan_level // 1' MODULE.json)
+    - cd /tmp/magento
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer require --dev --prefer-source -- phpstan/phpstan bitexpert/phpstan-magento phpstan/extension-installer
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
+    - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL vendor/$COMPOSER_NAME/
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p3']
+
 magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: unit
   script:
-    - cat .module.ini | grep PHP_VERSIONS | grep -q 8.4 || exit 0
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
     - cd /tmp/magento
@@ -81,9 +119,9 @@ magento-integration-tests:
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
     - cd /tmp/magento/dev/tests/integration/
     - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/etc/* etc/
-    - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit${PHPUNIT_VERSION}.xml phpunit.xml
-    - cat /tmp/magento/dev/tests/integration/framework/Magento/TestFramework/Db/Mysql.php
-    - cat /tmp/magento/dev/tests/integration/etc/mysql-client-config.php
+    - php /tmp/magento/vendor/bin/phpunit --atleast-version 9 && cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit9.xml phpunit.xml
+    - php /tmp/magento/vendor/bin/phpunit --atleast-version 10 && cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit10.xml phpunit.xml
+    - mariadb-dump --defaults-file=/tmp/magento/dev/tests/integration/etc/my.cnf --host=mysql --port=3306 --no-tablespaces magento2 > dummy.sql
     - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit ../../../vendor/$COMPOSER_NAME/Test/Integration/
   services:
     - name: yireo/mysql:8.0
