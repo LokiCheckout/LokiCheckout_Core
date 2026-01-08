@@ -149,10 +149,10 @@ magento-compile:
         sleep 1
       done
 
-     cat <<EOF > ~/.my.cnf
-[client-mariadb]
-disable-ssl
-EOF
+      cat <<EOF > ~/.my.cnf
+      [client-mariadb]
+      disable-ssl
+      EOF
 
       mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
       mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
@@ -240,10 +240,10 @@ magento-playwright:
         sleep 1
       done
 
-     cat <<EOF > ~/.my.cnf
-[client-mariadb]
-disable-ssl
-EOF
+      cat <<EOF > ~/.my.cnf
+      [client-mariadb]
+      disable-ssl
+      EOF
 
       mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
       mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
