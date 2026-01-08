@@ -1,4 +1,5 @@
-<?php /** @phpstan-ignore-file */
+<?php 
+/** @phpstan-ignore-file */
 declare(strict_types=1);
 
 namespace LokiCheckout\Core\ViewModel\CssVariables;

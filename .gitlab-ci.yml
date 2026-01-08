@@ -52,7 +52,7 @@ magento-phpcs:
     #- composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     #- composer config repositories.local-source path $CI_PROJECT_DIR
     #- composer require --prefer-source -- $COMPOSER_NAME:@dev
-    - php vendor/bin/phpcs --standard=Magento2 --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
+    - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p3']
