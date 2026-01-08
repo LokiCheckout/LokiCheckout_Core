@@ -68,8 +68,8 @@ class SelectRepository extends ComponentRepository
             $shippingAddress->setCustomerAddressId($customerAddress->getId());
         }
 
-        $address->save();
-        $shippingAddress->save();
+        $address->save(); // @phpstan-ignore-line
+        $shippingAddress->save(); // @phpstan-ignore-line
     }
 
     protected function sanitizeSelectedAddressId(int $selectedAddressId): int
