@@ -44,15 +44,15 @@ magento-phpcs:
   stage: basic
   script:
     - source .module.ini
-    - cd /tmp/magento
     - export PHPCS_LEVEL=$(jq -r '.phpcs_severity // 10' MODULE.json)
-    - composer config gitlab-domains gitlab.yireo.com
-    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
-    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-    - composer config repositories.local-source path $CI_PROJECT_DIR
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - echo "Testing for PHPCS severity $PHPCS_LEVEL"
-    - php vendor/bin/phpcs --standard=Magento2 --extensions=php,phtml --severity=$PHPCS_LEVEL vendor/$COMPOSER_NAME/
+    - cd /tmp/magento
+    #- composer config gitlab-domains gitlab.yireo.com
+    #- composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    #- composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    #- composer config repositories.local-source path $CI_PROJECT_DIR
+    #- composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - php vendor/bin/phpcs --standard=Magento2 --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p3']
@@ -61,9 +61,9 @@ magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: basic
   script:
-    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
     - export PHPSTAN_LEVEL=$(jq -r '.phpstan_level // 1' MODULE.json)
+    - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
     - cd /tmp/magento
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
@@ -72,9 +72,9 @@ magento-phpstan:
     - composer config --no-plugins allow-plugins true
     - composer require --dev --prefer-source -- phpstan/phpstan bitexpert/phpstan-magento phpstan/extension-installer
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-integration-test-helper
+    - ls -al vendor/loki-checkout
     - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
-    - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
-    - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL vendor/$COMPOSER_NAME/
+    - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p3']
