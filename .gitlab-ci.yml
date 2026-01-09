@@ -45,6 +45,7 @@ magento-phpcs:
   script:
     - source .module.ini
     - export PHPCS_LEVEL=$(jq -r '.phpcs_severity // 10' MODULE.json)
+    - test -z "$PHPCS_LEVEL" && PHPCS_LEVEL=10
     - echo "Testing for PHPCS severity $PHPCS_LEVEL"
     - cd /tmp/magento
     - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
@@ -58,6 +59,7 @@ magento-phpstan:
   script:
     - source .module.ini
     - export PHPSTAN_LEVEL=$(jq -r '.phpstan_level // 1' MODULE.json)
+    - test -z "$PHPSTAN_LEVEL" && PHPSTAN_LEVEL=1
     - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
     - cd /tmp/magento
     - composer config gitlab-domains gitlab.yireo.com
@@ -97,9 +99,9 @@ magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   rules:
-    - if: '$CI_PROJECT_NAME != "LokiCheckout_Core"'
-      when: on_success
-    - when: manual
+    - if: '$CI_PROJECT_NAME == "LokiCheckout_Core" && $CI_PIPELINE_SOURCE != "schedule"'
+      when: manual
+    - when: on_success
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
@@ -134,70 +136,7 @@ magento-integration-tests:
 magento-compile:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
-  before_script:
-    - cd $CI_PROJECT_DIR
-    - |
-      echo "Waiting for MySQL (${MYSQL_HOST}:${MYSQL_PORT})"
-      for i in {1..30}; do
-        if mariadb-admin ping -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" --silent; then
-          echo "OK"; break
-        fi
-        echo -n "."
-        sleep 1
-      done
-
-      cat <<EOF > ~/.my.cnf
-      [client-mariadb]
-      disable-ssl
-      EOF
-
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%'; FLUSH PRIVILEGES;"
-
-      echo "Waiting for OpenSearch (${OPENSEARCH_HOST}:${OPENSEARCH_PORT})"
-      ready=0
-      for i in {1..60}; do
-        if curl -s "http://${OPENSEARCH_HOST}:${OPENSEARCH_PORT}" | grep -q '"tagline"'; then
-          echo "OK"
-          ready=1
-          break
-        fi
-        echo -n "."
-        sleep 1
-      done
-      if [ "${ready:-0}" -ne 1 ]; then
-        echo "OpenSearch NOT OK, exiting"
-        exit 1
-      fi
-
   script:
-    - cd /tmp/magento
-    - |
-        php -dmemory_limit=-1 bin/magento setup:install \
-          --base-url="${MAGENTO_BASE_URL}" \
-          --db-host="${MYSQL_HOST}" \
-          --db-name="${MYSQL_DATABASE}" \
-          --db-user="${MYSQL_USER}" \
-          --db-password="${MYSQL_PASSWORD}" \
-          --backend-frontname="${MAGENTO_BACKEND_FRONTNAME}" \
-          --admin-firstname="${MAGENTO_ADMIN_FIRSTNAME}" \
-          --admin-lastname="${MAGENTO_ADMIN_LASTNAME}" \
-          --admin-email="${MAGENTO_ADMIN_EMAIL}" \
-          --admin-user="${MAGENTO_ADMIN_USER}" \
-          --admin-password="${MAGENTO_ADMIN_PASSWORD}" \
-          --language="${MAGENTO_LANGUAGE}" \
-          --currency="${MAGENTO_CURRENCY}" \
-          --timezone="${MAGENTO_TIMEZONE}" \
-          --use-rewrites="${MAGENTO_USE_REWRITES}" \
-          --search-engine="${MAGENTO_SEARCH_ENGINE}" \
-          --opensearch-host="${OPENSEARCH_HOST}" \
-          --opensearch-port="${OPENSEARCH_PORT}" \
-          --session-save=redis \
-          --session-save-redis-host=redis \
-          --session-save-redis-port=6379 \
-          --cache-backend-redis-server=redis \
-          --cache-backend-redis-port=6379
     - cd $CI_PROJECT_DIR
     - source .module.ini
     - cd /tmp/magento
@@ -206,26 +145,17 @@ magento-compile:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
-    - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
-    - php -dmemory_limit=-1 bin/magento setup:upgrade
+    - bin/magento module:enable --all
     - php -dmemory_limit=-1 bin/magento setup:di:compile
-  services:
-    - name: yireo/mariadb:10
-      alias: mysql
-    - name: redis:latest
-      alias: redis
-    - name: yireo/opensearch
-      alias: opensearch
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.8-p3']
-      #- MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
   stage: advanced
-  when: manual
+  rules:
+    - when: never
   allow_failure: true
   before_script:
     - cd $CI_PROJECT_DIR
