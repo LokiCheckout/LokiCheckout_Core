@@ -156,8 +156,8 @@ magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
   stage: advanced
   rules:
-    - when: never
-  allow_failure: true
+    - when: manual
+      allow_failure: true
   before_script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Playwright/ || exit 0

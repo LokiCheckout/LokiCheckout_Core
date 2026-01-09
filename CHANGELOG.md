@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.36] - 09 January 2026
+### Fixed
+- Allow failure of integration tests being set to manual
+- Fix failing ForwardButtonPageTest test
+- Fix DI compile in tests
+- Undo wrapping of quote placement in quote mutex because of pre-2.4.8 issues
+
 ## [2.1.35] - 06 January 2026
 ### Fixed
 - Make sure payment method is properly saved on-load when different
