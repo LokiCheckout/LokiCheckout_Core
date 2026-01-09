@@ -101,6 +101,7 @@ magento-integration-tests:
   rules:
     - if: '$CI_PROJECT_NAME == "LokiCheckout_Core" && $CI_PIPELINE_SOURCE != "schedule"'
       when: manual
+      allow_failure: true
     - when: on_success
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
