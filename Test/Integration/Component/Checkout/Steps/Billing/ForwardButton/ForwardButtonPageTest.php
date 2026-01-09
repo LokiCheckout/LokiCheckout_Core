@@ -28,7 +28,7 @@ final class ForwardButtonPageTest extends LokiCheckoutTestCase
     final public function testComponentOnPage(): void
     {
         $this->markTestSkipped();
-        $this->dispatchToCheckout();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        //$this->dispatchToCheckout();
+        //$this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }
