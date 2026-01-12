@@ -6,7 +6,6 @@ use Magento\Framework\DataObject\Copy;
 use Magento\Quote\Api\Data\AddressInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\ViewModel\CheckoutState;
-use Magento\Quote\Model\Quote\Address;
 
 class SameAddressService
 {
@@ -14,8 +13,12 @@ class SameAddressService
         private readonly Config $config,
         private readonly Copy $copyService,
         private readonly CheckoutState $checkoutState,
-        private bool $shippingFirst = true,
     ) {
+    }
+
+    public function isShippingFirst(): bool
+    {
+        return true;
     }
 
     public function isSame(): bool
@@ -39,7 +42,7 @@ class SameAddressService
 
     public function copyAddressToAddress(): void
     {
-        if (false === $this->shippingFirst) {
+        if (false === $this->isShippingFirst()) {
             $this->copyBillingToShipping();
             return;
         }
