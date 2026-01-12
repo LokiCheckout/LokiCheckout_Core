@@ -22,18 +22,12 @@ class StepValidator implements ValidatorInterface
      */
     public function validate(): bool|array
     {
-        $quote = $this->checkoutState->getQuote();
-        $shippingAddress = $quote->getShippingAddress();
-        $shippingMethod = $shippingAddress->getShippingMethod();
-        if (false === $quote->isVirtual() && empty($shippingMethod)) {
-            return ['No shipping method found.'];
-        }
-
         $errors = [];
         if ($this->validationRules === []) {
             $errors[] = 'No validators found';
         }
 
+        $quote = $this->checkoutState->getQuote();
         foreach ($this->validationRules as $validationRule) {
             if (false === $validationRule instanceof QuoteValidationRuleInterface) {
                 continue;
