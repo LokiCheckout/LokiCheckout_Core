@@ -50,6 +50,7 @@ use Magento\Framework\View\Element\Template;
                 required
                 :value="password"
                 @change="setPassword"
+                @keydown.enter.prevent="submit"
                 autocomplete="off"
                 id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-password"
                 :type="passwordFieldType"
@@ -81,7 +82,7 @@ use Magento\Framework\View\Element\Template;
         <button
             type="button"
             :disabled="isButtonDisabled"
-            @click="submit"
+            @click.prevent="submit"
             class="<?= $escaper->escapeHtml($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>
         </button>
