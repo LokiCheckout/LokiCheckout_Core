@@ -16,6 +16,12 @@ class ShippingStepViewModel extends AbstractStepViewModel
 
     public function getLabel(): string
     {
+        $titleBlock = $this->getBlock()->getLayout()->getBlock('loki-checkout.steps.shipping.title');
+        $title = $titleBlock->getTitle();
+        if (!empty($title)) {
+            return $title;
+        }
+
         return 'Shipping';
     }
 

@@ -12,10 +12,16 @@ use LokiCheckout\Core\ViewModel\CheckoutState;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 
+
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 if ($checkoutState->getQuote()->isVirtual()) {
     return;
 }
 
-echo /* @noEscape */ $templateRenderer->html($block, 'LokiCheckout_Core::generic/title.phtml', ['title' => 'Billing']);
+$title = $block->getTitle();
+if (empty($title)) {
+    $title = 'Billing';
+}
+
+echo /* @noEscape */ $templateRenderer->html($block, 'LokiCheckout_Core::generic/title.phtml', ['title' => $title]);

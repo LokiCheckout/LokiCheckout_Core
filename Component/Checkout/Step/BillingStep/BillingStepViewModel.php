@@ -21,6 +21,12 @@ class BillingStepViewModel extends AbstractStepViewModel
             return 'Review'; // @todo: Test for this
         }
 
+        $titleBlock = $this->getBlock()->getLayout()->getBlock('loki-checkout.steps.billing.title');
+        $title = $titleBlock->getTitle();
+        if (!empty($title)) {
+            return $title;
+        }
+
         return 'Review & Payments';
     }
 
