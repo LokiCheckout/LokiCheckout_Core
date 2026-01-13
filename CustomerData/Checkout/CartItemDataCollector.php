@@ -9,11 +9,11 @@ class CartItemDataCollector
     public function getData(CartItemInterface $item): array
     {
         return [
-            'item_id'      => $item->getItemId(),
-            'name'         => $item->getName(),
-            'price'        => $item->getPrice(),
-            'qty'          => $item->getQty(),
-            'sku'          => $item->getSku(),
+            'item_id' => $item->getItemId(),
+            'name' => $item->getName(),
+            'price' => $item->getPrice(),
+            'qty' => $item->getQty(),
+            'sku' => $item->getSku(),
             'product_type' => $item->getProductType(),
         ];
     }
