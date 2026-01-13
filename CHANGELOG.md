@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.37] - 13 January 2026
+### Fixed
+- Properly copy addresses when logged in and when virtual quote
+- Allow overriding step title in navigation via XML layout
+- Configure first step in SameAddressService via interceptable method, not constructor argument
+- Remove duplicate shipping method validator
+- Allow enter to submit login form
+
 ## [2.1.36] - 09 January 2026
 ### Fixed
 - Allow failure of integration tests being set to manual
