@@ -47,6 +47,12 @@ class SameAddressService
             return;
         }
 
+        $quote = $this->checkoutState->getQuote();
+        if ($quote->isVirtual()) {
+            $this->copyBillingToShipping();
+            return;
+        }
+
         $this->copyShippingToBilling();
     }
 
