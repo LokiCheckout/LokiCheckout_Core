@@ -61,7 +61,7 @@ magento-phpstan:
     - export PHPSTAN_LEVEL=$(jq -r '.phpstan_level // 1' MODULE.json)
     - test -z "$PHPSTAN_LEVEL" && PHPSTAN_LEVEL=1
     - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("\\s+"; ""))") | join(" ")' composer.json`
+    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - composer config gitlab-domains gitlab.yireo.com
@@ -87,7 +87,7 @@ magento-unit-tests:
     - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
     - source .module.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value)") | join(" ")' composer.json`
+    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - composer config gitlab-domains gitlab.yireo.com
@@ -118,7 +118,7 @@ magento-integration-tests:
     - test -d Test/Integration/ || exit 0
     - source .module.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value)") | join(" ")' composer.json`
+    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
@@ -156,7 +156,7 @@ magento-compile:
     - cd $CI_PROJECT_DIR
     - source .module.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value)") | join(" ")' composer.json`
+    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - composer config gitlab-domains gitlab.yireo.com
