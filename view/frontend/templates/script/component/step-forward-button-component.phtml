@@ -30,6 +30,7 @@ use Magento\Framework\View\Element\Template;
                 }
             },
             initUpdateValid() {
+                this.updateValid();
                 document.addEventListener('loki-components.component.update', () => {
                     this.updateValid();
                 });
