@@ -4,7 +4,6 @@ namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Quote\Api\Data\PaymentMethodInterface;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
-use Loki\Components\Component\ComponentRepositoryInterface;
 
 /**
  * @method PaymentMethodsContext getContext()
@@ -48,5 +47,10 @@ class PaymentMethodsViewModel extends CheckoutViewModel
     public function getPaymentInstructions(string $code): string
     {
         return '';
+    }
+
+    public function getHtmlAttributes(): array
+    {
+        $htmlAttributes = [];
     }
 }

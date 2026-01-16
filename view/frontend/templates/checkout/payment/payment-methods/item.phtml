@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\ApplicationMode;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Payment\Api\Data\PaymentMethodInterface;
@@ -19,10 +20,12 @@ use Loki\Components\Util\Block\TemplateRenderer;
 /** @var PaymentMethodInterface $paymentMethod */
 /** @var TemplateRenderer $templateRenderer */
 /** @var PaymentMethodsViewModel $viewModel */
+/** @var ApplicationMode $applicationMode */
 
 // @todo: Split up in smaller templates
 
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
+$applicationMode = $viewModelFactory->create(ApplicationMode::class);
 $viewModel = $block->getViewModel();
 $paymentMethod = $block->getMethod();
 $code = $paymentMethod->getCode();
@@ -46,8 +49,14 @@ $inputCss = $css('', 'input');
 if ($paymentIcon) {
     $inputCss = $css('', 'input-with-icon'); // @doc: sr-only
 }
+
+$htmlAttributes = '';
+if ($applicationMode->isDeveloperMode()) {
+    $htmlAttributes = 'title="' . $escaper->escapeHtml($code) . '"';
+}
+
 ?>
-<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= $htmlAttributes ?>>
     <label
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
