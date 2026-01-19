@@ -15,13 +15,6 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function isAllowRendering(): bool
     {
-        if ($this->isBillingAddressComponent()
-            && $this->getContext()->getCheckoutState()->getQuote()->getGrandTotal() <= 0
-        ) {
-            // @todo: Check this for free orders
-            return false;
-        }
-
         if ($this->isShippingAddressComponent() && $this->getQuote()->isVirtual()) {
             return false;
         }
