@@ -46,7 +46,7 @@
                             LokiCheckout\Core\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
                         <argument name="max_length" xsi:type="number">6</argument>
-                        <argument name="lazy_update" xsi:type="boolean">false</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">shipping honorific-prefix</argument>
                     </arguments>
                 </block>
@@ -55,7 +55,7 @@
                     name="loki-checkout.shipping.address.firstname" as="firstname"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
-                        <argument name="lazy_update" xsi:type="boolean">false</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">shipping given-name</argument>
                     </arguments>
                 </block>
@@ -65,7 +65,7 @@
                     ifconfig="customer/address/middlename_show"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
-                        <argument name="lazy_update" xsi:type="boolean">false</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">shipping additional-name</argument>
                     </arguments>
                 </block>
@@ -74,7 +74,7 @@
                     name="loki-checkout.shipping.address.lastname" as="lastname"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
-                        <argument name="lazy_update" xsi:type="boolean">false</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">shipping family-name</argument>
                     </arguments>
                 </block>
@@ -84,7 +84,7 @@
                     ifconfig="customer/address/suffix_show"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
-                        <argument name="lazy_update" xsi:type="boolean">false</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">shipping honorific-suffix</argument>
                     </arguments>
                 </block>
