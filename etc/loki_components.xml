@@ -348,6 +348,11 @@
         group="shippingAddressFields"
         viewModel="LokiCheckout\Core\Component\Checkout\Address\CountryId\CountryIdViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Address\CountryId\CountryIdRepository">
+        <target name="loki-checkout.shipping.address.street0"/>
+        <target name="loki-checkout.shipping.address.street1"/>
+        <target name="loki-checkout.shipping.address.street2"/>
+        <target name="loki-checkout.shipping.address.street3"/>
+        <target name="loki-checkout.shipping.address.city"/>
         <target name="loki-checkout.shipping.address.postcode"/>
         <target name="loki-checkout.shipping.address.region"/>
         <target name="loki-checkout.shipping.methods"/>
@@ -462,6 +467,11 @@
         group="billingAddressFields"
         viewModel="LokiCheckout\Core\Component\Checkout\Address\CountryId\CountryIdViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Address\CountryId\CountryIdRepository">
+        <target name="loki-checkout.billing.address.street0"/>
+        <target name="loki-checkout.billing.address.street1"/>
+        <target name="loki-checkout.billing.address.street2"/>
+        <target name="loki-checkout.billing.address.street3"/>
+        <target name="loki-checkout.billing.address.city"/>
         <target name="loki-checkout.billing.address.postcode"/>
         <target name="loki-checkout.billing.address.region"/>
         <target name="loki-checkout.payment.methods"/>
