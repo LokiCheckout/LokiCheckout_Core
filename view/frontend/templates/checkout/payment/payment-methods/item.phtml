@@ -56,7 +56,7 @@ if ($applicationMode->isDeveloperMode()) {
 }
 
 ?>
-<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= $htmlAttributes ?>>
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
     <label
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"

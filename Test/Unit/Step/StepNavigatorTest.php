@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Unit\Step;
 
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Checkout\Model\Session;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface;
@@ -78,7 +79,7 @@ class StepNavigatorTest extends TestCase
         return new StepNavigator(
             $this->createMock(XmlConfig::class),
             $this->createMock(Config::class),
-            $this->createMock(Session::class),
+            $this->createMock(CheckoutState::class),
             $this->createMock(FinalStep::class),
             $this->createMock(ManagerInterface::class),
             $this->createMock(ComponentRegistry::class),
