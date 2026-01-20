@@ -4,6 +4,9 @@
         <block
             name="loki-checkout.shipping.methods"
             template="LokiCheckout_Core::checkout/shipping/shipping-methods.phtml">
+            <arguments>
+                <argument name="render_order" xsi:type="number">-1</argument>
+            </arguments>
 
             <block
                 name="loki-checkout.shipping.methods.title" as="title"
@@ -17,6 +20,7 @@
                 name="loki-checkout.shipping.methods.list"
                 as="list"
                 template="LokiCheckout_Core::checkout/shipping/shipping-methods/list.phtml">
+
                 <container name="loki-checkout.shipping.methods.before" as="before-methods"/>
                 <container name="loki-checkout.shipping.methods.after" as="after-methods"/>
 
