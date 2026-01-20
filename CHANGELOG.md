@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 20 January 2026
+### Added
+- Implement proxies for customer and checkout session
+- Implement `lazy_update` as component property
+
+### Fixed
+- Wait for 30ms to validate postcode with changed country ID
+- Properly refresh all street-parts and city when switching country
+- Add `render_order` of -1 to `loki-checkout.shipping.methods`
+- Do not billing address for free virtual products
+- Add payment code as title-attribute to method in dev mode
+- Unify element IDs based on block
+
 ## [2.1.37] - 13 January 2026
 ### Fixed
 - Properly copy addresses when logged in and when virtual quote
