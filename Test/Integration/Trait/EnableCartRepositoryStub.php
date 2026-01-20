@@ -14,7 +14,7 @@ trait EnableCartRepositoryStub
 {
     /**
      * @return void
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings StaticAccess
      */
     public function enableCartRepositoryStub(): void
     {
@@ -33,7 +33,7 @@ trait EnableCartRepositoryStub
 
     /**
      * @return void
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings StaticAccess
      */
     public function disableCartRepositoryStub(): void
     {

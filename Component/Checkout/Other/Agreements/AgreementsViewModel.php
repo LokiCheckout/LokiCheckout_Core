@@ -2,8 +2,8 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Other\Agreements;
 
-use Magento\CheckoutAgreements\Api\Data\AgreementInterface;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use Magento\CheckoutAgreements\Model\Agreement;
 
 /**
  * @method AgreementsRepository getRepository()
@@ -21,7 +21,7 @@ class AgreementsViewModel extends CheckoutViewModel
     }
 
     /**
-     * @return AgreementInterface[]
+     * @return Agreement[]
      */
     public function getCheckoutAgreements(): array
     {

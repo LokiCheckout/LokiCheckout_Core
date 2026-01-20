@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Step\ShippingStep;
 
 use LokiCheckout\Core\Component\Checkout\Step\AbstractStepViewModel;
+use Magento\Framework\View\Element\AbstractBlock;
 
 /**
  * @method ShippingStepContext getContext()
@@ -17,9 +18,12 @@ class ShippingStepViewModel extends AbstractStepViewModel
     public function getLabel(): string
     {
         $titleBlock = $this->getBlock()->getLayout()->getBlock('loki-checkout.steps.shipping.title');
-        $title = $titleBlock->getTitle();
-        if (!empty($title)) {
-            return $title;
+
+        if ($titleBlock instanceof AbstractBlock) {
+            $title = $titleBlock->getTitle();
+            if (!empty($title)) {
+                return $title;
+            }
         }
 
         return 'Shipping';

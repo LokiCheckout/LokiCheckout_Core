@@ -31,13 +31,6 @@ class StreetLinesFactoryTest extends TestCase
     }
 
     /**
-     * @param string $street
-     * @param string $streetName
-     * @param string $streetNumber
-     * @param string $streetNumberAddition
-     * @param int    $numberOfStreetlines
-     *
-     * @return void
      * @dataProvider getCreateFromStreetInput
      */
     public function testCreateFromStreet(

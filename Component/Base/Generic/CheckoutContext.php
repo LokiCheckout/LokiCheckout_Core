@@ -6,7 +6,6 @@ use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Message\ManagerInterface as CoreMessageManager;
 use Magento\Framework\UrlFactory;
-use Magento\Quote\Api\Data\CartInterface;
 use LokiCheckout\Core\Config\Config as ModuleConfig;
 use LokiCheckout\Core\Step\StepNavigator;
 use LokiCheckout\Core\Util\Component\AttributeProvider;
@@ -18,6 +17,7 @@ use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Loki\Components\Component\ComponentContextInterface;
 use Loki\Components\Exception\RedirectException;
 use Loki\Components\Messages\GlobalMessageRegistry;
+use Magento\Quote\Model\Quote;
 
 class CheckoutContext implements ComponentContextInterface
 {
@@ -92,7 +92,7 @@ class CheckoutContext implements ComponentContextInterface
         return $this->coreMessageManager;
     }
 
-    public function getQuote(): CartInterface
+    public function getQuote(): Quote
     {
         $quote = $this->checkoutState->getQuote();
         $this->redirectIfNoCartItems();

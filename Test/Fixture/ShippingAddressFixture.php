@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Test\Fixture;
 
 use Magento\Framework\DataObject;
 use Magento\Quote\Api\CartRepositoryInterface;
+use Magento\Quote\Model\Quote;
 use Magento\TestFramework\Fixture\RevertibleDataFixtureInterface;
 
 class ShippingAddressFixture implements RevertibleDataFixtureInterface
@@ -30,7 +31,12 @@ class ShippingAddressFixture implements RevertibleDataFixtureInterface
     {
         $data = array_merge($this->defaultData, $data);
 
+        /** @var Quote $cart */
         $cart = $this->cartRepository->get($data['cart_id']);
+        if ($cart instanceof Quote === false) {
+            return null;
+        }
+
         $shippingAddress = $cart->getShippingAddress();
         $shippingAddress->addData($data);
 
@@ -45,6 +51,10 @@ class ShippingAddressFixture implements RevertibleDataFixtureInterface
     public function revert(DataObject $data): void
     {
         $cart = $this->cartRepository->get($data['cart_id']);
+        if ($cart instanceof Quote === false) {
+            return;
+        }
+
         $shippingAddress = $cart->getShippingAddress();
         $shippingAddress->setData([]);
 

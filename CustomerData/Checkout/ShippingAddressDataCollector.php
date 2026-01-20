@@ -2,11 +2,11 @@
 
 namespace LokiCheckout\Core\CustomerData\Checkout;
 
-use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 
 class ShippingAddressDataCollector
 {
-    public function getData(AddressInterface $shippingAddress): array
+    public function getData(Address $shippingAddress): array
     {
         return [
             'email'      => $shippingAddress->getEmail(),

@@ -2,11 +2,11 @@
 
 namespace LokiCheckout\Core\CustomerData\Checkout;
 
-use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 
 class BillingAddressDataCollector
 {
-    public function getData(AddressInterface $billingAddress): array
+    public function getData(Address $billingAddress): array
     {
         return [
             'email'      => $billingAddress->getEmail(),

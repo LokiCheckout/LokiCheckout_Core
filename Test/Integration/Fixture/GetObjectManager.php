@@ -8,7 +8,7 @@ trait GetObjectManager
 {
     /**
      * @return ObjectManager
-     * @SuppressWarnings(PHPMD.StaticAccess)
+     * @SuppressWarnings StaticAccess
      */
     protected function getObjectManager(): ObjectManager
     {

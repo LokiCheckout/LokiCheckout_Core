@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Step\BillingStep;
 
 use LokiCheckout\Core\Component\Checkout\Step\AbstractStepViewModel;
+use Magento\Framework\View\Element\AbstractBlock;
 
 /**
  * @method BillingStepContext getContext()
@@ -22,9 +23,11 @@ class BillingStepViewModel extends AbstractStepViewModel
         }
 
         $titleBlock = $this->getBlock()->getLayout()->getBlock('loki-checkout.steps.billing.title');
-        $title = $titleBlock->getTitle();
-        if (!empty($title)) {
-            return $title;
+        if ($titleBlock instanceof AbstractBlock) {
+            $title = $titleBlock->getTitle();
+            if (!empty($title)) {
+                return $title;
+            }
         }
 
         return 'Review & Payments';

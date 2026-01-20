@@ -4,11 +4,8 @@ namespace LokiCheckout\Core\Test\Integration;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Response\Http;
-use Magento\Framework\ObjectManagerInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Quote\Api\Data\CartInterface;
 use Magento\Quote\Model\Quote;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\ViewModel\CheckoutState;
@@ -16,7 +13,6 @@ use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Component\ComponentRegistry;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Loki\Components\Test\Integration\LokiComponentsTestCase;
-use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
@@ -58,12 +54,12 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         return $this->getComponentWithBlock($blockName, $handles);
     }
 
-    protected function dispatchToCheckout(?CartInterface $cart = null)
+    protected function dispatchToCheckout(?Quote $cart = null)
     {
         $this->assertLokiComponentsIsEnabled();
         $this->assertLokiCheckoutIsEnabled();
 
-        if (false === $cart instanceof CartInterface) {
+        if (false === $cart instanceof Quote) {
             $cart = $this->getCart();
         }
 
@@ -83,12 +79,12 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $this->assertNotEmpty($response->getBody(), 'No body');
     }
 
-    protected function getCart(): CartInterface
+    protected function getCart(): Quote
     {
-        /** @var CartInterface $cart */
+        /** @var Quote $cart */
         $cart = $this->fixtures->get('cart');
 
-        $this->assertInstanceOf(CartInterface::class, $cart, 'Cart fixture is empty');
+        $this->assertInstanceOf(Quote::class, $cart, 'Cart fixture is empty');
 
         $cartId = $cart->getId();
         $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);

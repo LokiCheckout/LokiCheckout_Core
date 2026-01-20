@@ -2,11 +2,11 @@
 
 namespace LokiCheckout\Core\Test\Integration\Trait;
 
-use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 
 trait AssertAddressHasShippingMethod
 {
-    protected function assertAddressHasShippingMethod(string $expectedMethod, AddressInterface $address): void
+    protected function assertAddressHasShippingMethod(string $expectedMethod, Address $address): void
     {
         $this->assertSame($expectedMethod, $address->getShippingMethod());
     }

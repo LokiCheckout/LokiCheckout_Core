@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\ViewModel;
 
 use Magento\Catalog\Helper\Product\Configuration;
+use Magento\Checkout\Block\Cart\Item\Renderer;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\RendererList;
@@ -47,7 +48,8 @@ class ProductRenderer implements ArgumentInterface
     public function getImage(CartItemInterface $item, int $width = 75, int $height = 75): string
     {
         $renderer = $this->getRenderer($item);
-        if ($renderer instanceof AbstractBlock) {
+        if ($renderer instanceof Renderer) {
+            // @phpstan-ignore-next-line
             return $renderer->getImage($renderer->getProductForThumbnail(), 'cart_page_product_thumbnail')
                 ->setTemplate('Magento_Catalog::product/image.phtml')
                 ->setWidth($width.'px')

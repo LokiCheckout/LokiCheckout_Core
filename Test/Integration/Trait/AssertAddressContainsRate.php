@@ -2,12 +2,12 @@
 
 namespace LokiCheckout\Core\Test\Integration\Trait;
 
-use Magento\Quote\Api\Data\AddressInterface;
+use Magento\Quote\Model\Quote\Address;
 use Magento\Quote\Model\Quote\Address\Rate;
 
 trait AssertAddressContainsRate
 {
-    protected function assertAddressContainsRate(string $rateMethod, AddressInterface $address): void
+    protected function assertAddressContainsRate(string $rateMethod, Address $address): void
     {
         $found = false;
         $foundRateMethods = [];

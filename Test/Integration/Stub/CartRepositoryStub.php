@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Integration\Stub;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Api\Data\CartInterface;
@@ -47,10 +48,10 @@ class CartRepositoryStub implements CartRepositoryInterface
         return $this->getQuote();
     }
 
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
+    public function getList(SearchCriteriaInterface $searchCriteria)
     {
         /** @var CartSearchResultsInterface $fake */
-        $fake = null;
+        $fake = ObjectManager::getInstance()->create(CartSearchResultsInterface::class);
         return $fake;
     }
 
