@@ -41,7 +41,6 @@ class NewsletterContext implements ComponentContextInterface
         private readonly AttributeProvider $attributeProvider,
         private readonly GlobalMessageRegistry $globalMessageRegistry,
         private readonly CoreMessageManager $coreMessageManager,
-        private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
         private readonly ResourceConnection $resourceConnection,
         private readonly NewsletterRepository $newsletterRepository,
@@ -120,7 +119,7 @@ class NewsletterContext implements ComponentContextInterface
 
     public function getCustomerSession(): CustomerSession
     {
-        return $this->customerSession;
+        return $this->getCheckoutState()->getCustomerSession();
     }
 
     public function getUrlFactory(): UrlFactory

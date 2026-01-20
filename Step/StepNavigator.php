@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\Step;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
@@ -24,7 +24,7 @@ class StepNavigator implements ArgumentInterface
     public function __construct(
         private readonly XmlConfig $xmlConfig,
         private readonly Config $config,
-        private readonly CheckoutSession $checkoutSession,
+        private readonly CheckoutState $checkoutState,
         private readonly FinalStep $finalStep,
         private readonly MessageManager $messageManager,
         private readonly ComponentRegistry $componentRegistry,
@@ -63,7 +63,7 @@ class StepNavigator implements ArgumentInterface
 
     private function getRequestedStepCode(): string
     {
-        $step = (string)$this->checkoutSession->getCurrentStep();
+        $step = (string)$this->checkoutState->getCheckoutSession()->getCurrentStep();
         if (strlen($step) > 0) {
             return $step;
         }
@@ -89,7 +89,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         $this->currentStep = $step;
-        $this->checkoutSession->setCurrentStep($step->getCode());
+        $this->checkoutState->getCheckoutSession()->setCurrentStep($step->getCode());
     }
 
     /**

@@ -20,8 +20,6 @@ class Index implements HttpGetActionInterface
         private readonly CheckoutState $checkoutState,
         private readonly PageResultFactory $pageResultFactory,
         private readonly RedirectResultFactory $redirectResultFactory,
-        private readonly CustomerSession $customerSession,
-        private readonly CheckoutSession $checkoutSession,
         private readonly Data $checkoutHelper,
         private readonly Manager $messageManager,
         private readonly AccountManagementInterface $accountManagement,
@@ -36,15 +34,15 @@ class Index implements HttpGetActionInterface
         }
 
         $quote = $this->checkoutState->getQuote();
-        if (!$this->customerSession->isLoggedIn() && !$this->checkoutHelper->isAllowedGuestCheckout($quote)) {
+        if (!$this->getCustomerSession()->isLoggedIn() && !$this->checkoutHelper->isAllowedGuestCheckout($quote)) {
             $this->messageManager->addErrorMessage(__('Guest checkout is disabled.'));
             return $this->redirectResultFactory->create()->setPath('checkout/cart');
         }
 
-        $this->customerSession->regenerateId();
-        $this->checkoutSession->setCartWasUpdated(false);
-        $this->checkoutSession->setLokiRedirectUrl('');
-        $this->customerSession->setBeforeAuthUrl(
+        $this->getCustomerSession()->regenerateId();
+        $this->getCheckoutSession()->setCartWasUpdated(false);
+        $this->getCheckoutSession()->setLokiRedirectUrl('');
+        $this->getCustomerSession()->setBeforeAuthUrl(
             $this->urlFactory->create()->getUrl('checkout/index/index')
         );
 
@@ -65,11 +63,11 @@ class Index implements HttpGetActionInterface
 
     private function validateCustomer(): RedirectResult|bool
     {
-        if (!$this->customerSession->isLoggedIn()) {
+        if (!$this->getCustomerSession()->isLoggedIn()) {
             return true;
         }
 
-        $customer = $this->customerSession->getCustomerData();
+        $customer = $this->getCustomerSession()->getCustomerData();
         if (!$customer) {
             return true;
         }
@@ -88,11 +86,11 @@ class Index implements HttpGetActionInterface
 
     private function assignCustomerToQuote(): void
     {
-        if (!$this->customerSession->isLoggedIn()) {
+        if (!$this->getCustomerSession()->isLoggedIn()) {
             return;
         }
 
-        $customer = $this->customerSession->getCustomerData();
+        $customer = $this->getCustomerSession()->getCustomerData();
         if (!$customer) {
             return;
         }
@@ -103,5 +101,15 @@ class Index implements HttpGetActionInterface
             $quote->getBillingAddress(),
             $quote->getShippingAddress(),
         );
+    }
+
+    private function getCustomerSession(): CustomerSession
+    {
+        return $this->checkoutState->getCustomerSession();
+    }
+
+    private function getCheckoutSession(): CheckoutSession
+    {
+        return $this->checkoutState->getCheckoutSession();
     }
 }

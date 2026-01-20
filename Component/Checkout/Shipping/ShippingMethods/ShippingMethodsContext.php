@@ -36,7 +36,6 @@ class ShippingMethodsContext implements ComponentContextInterface
         private readonly GlobalMessageRegistry $globalMessageRegistry,
         private readonly CoreMessageManager $coreMessageManager,
         private readonly RateFactory $rateFactory,
-        private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
         private readonly TotalsCollector $totalsCollector
     ) {
@@ -104,7 +103,7 @@ class ShippingMethodsContext implements ComponentContextInterface
 
     public function getCustomerSession(): CustomerSession
     {
-        return $this->customerSession;
+        return $this->getCheckoutState()->getCustomerSession();
     }
 
     public function getUrlFactory(): UrlFactory

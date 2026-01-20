@@ -2,27 +2,26 @@
 
 namespace LokiCheckout\Core\Payment\Vault;
 
-use Magento\Customer\Model\Session;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\NotFoundException;
-use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Vault\Api\Data\PaymentTokenInterface;
 use Magento\Vault\Api\PaymentTokenRepositoryInterface;
 
 class PaymentTokenProvider
 {
     public function __construct(
+        private readonly CheckoutState $checkoutState,
         private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
         private readonly PaymentTokenRepositoryInterface $paymentTokenRepository,
-        private readonly SerializerInterface $serializer,
-        private readonly Session $customerSession,
         private readonly NormalizedPaymentTokenFactory $normalizedPaymentTokenFactory
     ) {
     }
 
     public function getByHash(string $publicHash): NormalizedPaymentToken
     {
-        if (!$this->customerSession->isLoggedIn()) {
+        if (!$this->getCustomerSession()->isLoggedIn()) {
             throw new NotFoundException(__('No payment token for guests'));
         }
 
@@ -32,7 +31,7 @@ class PaymentTokenProvider
 
         $this->searchCriteriaBuilder->addFilter(
             PaymentTokenInterface::CUSTOMER_ID,
-            $this->customerSession->getCustomerId()
+            $this->getCustomerSession()->getCustomerId()
         );
 
         $searchResults = $this->paymentTokenRepository->getList($this->searchCriteriaBuilder->create());
@@ -62,7 +61,7 @@ class PaymentTokenProvider
      */
     public function getAll(string $paymentMethodCode = ''): array
     {
-        if (!$this->customerSession->isLoggedIn()) {
+        if (!$this->getCustomerSession()->isLoggedIn()) {
             return [];
         }
 
@@ -70,7 +69,7 @@ class PaymentTokenProvider
         $this->searchCriteriaBuilder->addFilter(PaymentTokenInterface::IS_ACTIVE, 1);
         $this->searchCriteriaBuilder->addFilter(
             PaymentTokenInterface::CUSTOMER_ID,
-            $this->customerSession->getCustomerId()
+            $this->getCustomerSession()->getCustomerId()
         );
 
         if ($paymentMethodCode !== '' && $paymentMethodCode !== '0') {
@@ -97,5 +96,10 @@ class PaymentTokenProvider
         }
 
         return $normalizedPaymentTokens;
+    }
+
+    private function getCustomerSession(): CustomerSession
+    {
+        return $this->checkoutState->getCustomerSession();
     }
 }

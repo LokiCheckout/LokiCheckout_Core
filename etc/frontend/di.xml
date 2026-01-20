@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="LokiCheckout\Core\ViewModel\CheckoutState">
+        <arguments>
+            <argument xsi:type="object" name="checkoutSession">Magento\Checkout\Model\Session\Proxy</argument>
+            <argument xsi:type="object" name="customerSession">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
     <type name="Magento\Checkout\Model\Session">
         <plugin
             name="LokiCheckout_Core::clearHelperData"

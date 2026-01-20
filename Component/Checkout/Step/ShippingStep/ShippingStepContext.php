@@ -33,7 +33,6 @@ class ShippingStepContext implements StepContextInterface
         private readonly AttributeProvider $attributeProvider,
         private readonly GlobalMessageRegistry $globalMessageRegistry,
         private readonly CoreMessageManager $coreMessageManager,
-        private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
     ) {
     }
@@ -100,7 +99,7 @@ class ShippingStepContext implements StepContextInterface
 
     public function getCustomerSession(): CustomerSession
     {
-        return $this->customerSession;
+        return $this->getCheckoutState()->getCustomerSession();
     }
 
     public function getUrlFactory(): UrlFactory

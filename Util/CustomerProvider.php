@@ -2,19 +2,19 @@
 
 namespace LokiCheckout\Core\Util;
 
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\AddressInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
 use Magento\Customer\Model\Address\Mapper as AddressMapper;
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 
 class CustomerProvider
 {
     public function __construct(
-        private readonly CustomerSession $customerSession,
+        private readonly CheckoutState $checkoutState,
         private readonly CustomerRepositoryInterface $customerRepository,
         private readonly CustomerAddressRepository $customerAddressRepository,
         private readonly SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -25,7 +25,7 @@ class CustomerProvider
 
     public function isLoggedIn(): bool
     {
-        return $this->customerSession->isLoggedIn();
+        return $this->checkoutState->getCustomerSession()->isLoggedIn();
     }
 
     public function getAddresses(): array
@@ -67,7 +67,8 @@ class CustomerProvider
 
     private function getCustomer(): CustomerInterface
     {
-        return $this->customerRepository->getById($this->customerSession->getCustomerId());
+        $customerId = $this->checkoutState->getCustomerSession()->getCustomerId();
+        return $this->customerRepository->getById((int)$customerId);
     }
 
     private function getAddressInline(AddressInterface $address): string

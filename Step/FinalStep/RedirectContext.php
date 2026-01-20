@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\Step\FinalStep;
 
-use Magento\Checkout\Model\Session as CheckoutSession;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Payment\Helper\Data as PaymentHelper;
 use Magento\Payment\Model\MethodInterface;
@@ -15,7 +15,7 @@ class RedirectContext
     public function __construct(
         private readonly OrderRepositoryInterface $orderRepository,
         private readonly PaymentHelper $paymentHelper,
-        private readonly CheckoutSession $checkoutSession,
+        private readonly CheckoutState $checkoutState,
     ) {
     }
 
@@ -45,7 +45,7 @@ class RedirectContext
 
     public function getOrder(): false|OrderInterface
     {
-        $lastOrderId = $this->checkoutSession->getLastOrderId();
+        $lastOrderId = $this->checkoutState->getCheckoutSession()->getLastOrderId();
         if (empty($lastOrderId)) {
             return false;
         }

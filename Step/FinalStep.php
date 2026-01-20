@@ -3,7 +3,6 @@
 namespace LokiCheckout\Core\Step;
 
 use Magento\Customer\Api\Data\GroupInterface;
-use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
 use Magento\Framework\Exception\LocalizedException;
@@ -27,7 +26,6 @@ class FinalStep
     public function __construct(
         private readonly QuoteValidator $quoteValidator,
         private readonly CheckoutState $checkoutState,
-        private readonly CustomerSession $customerSession,
         private readonly Redirect $redirect,
         private readonly EventManager $eventManager,
         private readonly CartManagementInterface $cartManagement,
@@ -109,7 +107,7 @@ class FinalStep
 
     private function processGuestCart(CartInterface $quote): void
     {
-        if ($this->customerSession->isLoggedIn()) {
+        if ($this->checkoutState->getCustomerSession()->isLoggedIn()) {
             return;
         }
 

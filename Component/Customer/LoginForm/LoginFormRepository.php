@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Component\Customer\LoginForm;
 
 use Loki\Components\Component\ComponentRepository;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Customer\Model\Url as CustomerUrl;
@@ -20,8 +21,8 @@ use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 class LoginFormRepository extends ComponentRepository
 {
     public function __construct(
+        private readonly CheckoutState $checkoutState,
         private readonly AccountManagementInterface $accountManagement,
-        private readonly CustomerSession $customerSession,
         private readonly PhpCookieManager $cookieManager,
         private readonly CookieMetadataFactory $cookieMetadataFactory,
         private readonly Manager $messageManager,
@@ -31,7 +32,7 @@ class LoginFormRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        return $this->customerSession->isLoggedIn();
+        return $this->getCustomerSession()->isLoggedIn();
     }
 
     public function saveValue(mixed $value): void
@@ -47,7 +48,7 @@ class LoginFormRepository extends ComponentRepository
         try {
             $customer = $this->accountManagement->authenticate($value['email'], $value['password']);
 
-            $this->customerSession->setCustomerDataAsLoggedIn($customer);
+            $this->getCustomerSession()->setCustomerDataAsLoggedIn($customer);
             $this->getGlobalMessageRegistry()->addSuccess('You have logged in'); // @todo: Check right translation
 
             if ($this->cookieManager->getCookie('mage-cache-sessid')) {
@@ -77,5 +78,10 @@ class LoginFormRepository extends ComponentRepository
         }
 
         // @todo: Prevent reloading all targets in case of an error
+    }
+
+    private function getCustomerSession(): CustomerSession
+    {
+        return $this->checkoutState->getCustomerSession();
     }
 }

@@ -38,7 +38,6 @@ class AddressContext implements ComponentContextInterface
         private readonly AttributeProvider $attributeProvider,
         private readonly GlobalMessageRegistry $globalMessageRegistry,
         private readonly CoreMessageManager $coreMessageManager,
-        private readonly CustomerSession $customerSession,
         private readonly UrlFactory $urlFactory,
         private readonly SameAddressService $sameAddressService,
         private readonly CustomerRepositoryInterface $customerRepository,
@@ -107,7 +106,7 @@ class AddressContext implements ComponentContextInterface
 
     public function getCustomerSession(): CustomerSession
     {
-        return $this->customerSession;
+        return $this->getCheckoutState()->getCustomerSession();
     }
 
     public function getUrlFactory(): UrlFactory

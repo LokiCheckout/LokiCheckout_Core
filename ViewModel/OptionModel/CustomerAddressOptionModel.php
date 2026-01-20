@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\ViewModel\OptionModel;
 
-use Magento\Customer\Model\Session as CustomerSession;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\Component\Checkout\Address\Select\SelectViewModel;
 use Loki\Components\Component\ComponentViewModelInterface;
@@ -11,13 +11,13 @@ use Loki\Field\Util\OptionModelInterface;
 class CustomerAddressOptionModel implements ArgumentInterface, OptionModelInterface
 {
     public function __construct(
-        private readonly CustomerSession $customerSession
+        private readonly CheckoutState $checkoutState
     ) {
     }
 
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
-        if (false === $this->customerSession->isLoggedIn()) {
+        if (false === $this->checkoutState->getCustomerSession()->isLoggedIn()) {
             return [];
         }
 
