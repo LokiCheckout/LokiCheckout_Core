@@ -52,5 +52,6 @@ class PaymentMethodsViewModel extends CheckoutViewModel
     public function getHtmlAttributes(): array
     {
         $htmlAttributes = [];
+        return $htmlAttributes;
     }
 }
