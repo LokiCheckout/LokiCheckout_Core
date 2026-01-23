@@ -18,10 +18,6 @@ abstract class AdditionalInformationRepository extends FieldRepository
         }
 
         $defaultValue = trim((string)$this->getDefaultValue());
-        if ($value === $defaultValue) {
-            return $defaultValue;
-        }
-
         $this->saveValue($defaultValue);
         $this->getContext()->getCheckoutState()->saveQuote();
 
