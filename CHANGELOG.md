@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.2] - 23 January 2026
+### Fixed
+- Do not make newsletter required
+- Properly set additional information in payment
+
 ## [2.2.1] - 23 January 2026
 ### Fixed
 - Always save default value of AdditionalInformationRepository
