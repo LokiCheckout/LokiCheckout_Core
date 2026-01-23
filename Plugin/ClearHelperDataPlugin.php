@@ -8,7 +8,6 @@ class ClearHelperDataPlugin
 {
     public function afterClearQuote(CheckoutSession $checkoutSession): CheckoutSession
     {
-        $checkoutSession->_resetState();
         $this->resetLokiCheckout($checkoutSession);
         return $checkoutSession;
     }
