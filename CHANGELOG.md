@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 23 January 2026
+### Fixed
+- Always save default value of AdditionalInformationRepository
+
 ## [2.2.0] - 20 January 2026
 ### Added
 - Implement proxies for customer and checkout session
