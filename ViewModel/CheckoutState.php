@@ -15,7 +15,6 @@ use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
 use Loki\Components\Exception\RedirectException;
 use Loki\Components\Util\Ajax;
-use Magento\Quote\Model\ResourceModel\Quote\Address as QuoteAddressResourceModel;
 
 class CheckoutState implements ArgumentInterface
 {
@@ -92,6 +91,10 @@ class CheckoutState implements ArgumentInterface
 
     public function getQuote(): Quote
     {
+        if (false === $this->getQuoteId() > 0) {
+            $this->handleQuoteNotFoundException();
+        }
+
         $quoteId = $this->getQuoteId();
         if (isset($this->quotes[$quoteId]) && $this->quotes[$quoteId] instanceof Quote) {
             return $this->quotes[$quoteId];

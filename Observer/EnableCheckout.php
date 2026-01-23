@@ -13,7 +13,7 @@ class EnableCheckout implements ObserverInterface
 {
     public function __construct(
         private readonly AllowCheckoutAccess $allowCheckoutAccess,
-        private readonly AddLayoutHandles $addLayoutHandles
+        private readonly AddLayoutHandles $addLayoutHandles,
     ) {
     }
 
