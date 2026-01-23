@@ -14,12 +14,12 @@ abstract class AdditionalInformationRepository extends FieldRepository
     {
         $value = trim((string)$this->getPropertyValue());
         if (!empty($value)) {
+            $this->saveValue($value);
             return $value;
         }
 
         $defaultValue = trim((string)$this->getDefaultValue());
         $this->saveValue($defaultValue);
-        $this->getContext()->getCheckoutState()->saveQuote();
 
         return $defaultValue;
     }
@@ -57,11 +57,8 @@ abstract class AdditionalInformationRepository extends FieldRepository
         }
 
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-
-        $additionalInformation = $quote->getPayment()->getAdditionalInformation();
-        $additionalInformation[$propertyName] = $propertyValue;
-
-        $quote->getPayment()->setAdditionalInformation($additionalInformation);
+        $quote->getPayment()->setAdditionalInformation($propertyName, (string)$propertyValue);
+        $this->getContext()->getCheckoutState()->saveQuote($quote, true);
     }
 
     public function getAdditionalPaymentInformation(): array
