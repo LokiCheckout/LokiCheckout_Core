@@ -56,6 +56,10 @@ class CheckoutState implements ArgumentInterface
         }
 
         $quote = $this->getQuote();
+        if (!$quote) {
+            return false;
+        }
+
         if (!$quote->hasItems() || $quote->getHasError() || !$quote->validateMinimumAmount()) {
             return false;
         }
@@ -70,7 +74,7 @@ class CheckoutState implements ArgumentInterface
         }
 
         if ($this->quoteId === 0) {
-            $this->quoteId = (int)$this->checkoutSession->getQuote()->getId();
+            $this->quoteId = (int)$this->checkoutSession->getQuote()?->getId();
         }
 
         return $this->quoteId;
