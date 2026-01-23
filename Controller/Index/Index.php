@@ -23,7 +23,7 @@ class Index implements HttpGetActionInterface
         private readonly Data $checkoutHelper,
         private readonly Manager $messageManager,
         private readonly AccountManagementInterface $accountManagement,
-        private readonly UrlFactory $urlFactory
+        private readonly UrlFactory $urlFactory,
     ) {
     }
 
@@ -34,6 +34,7 @@ class Index implements HttpGetActionInterface
         }
 
         $quote = $this->checkoutState->getQuote();
+
         if (!$this->getCustomerSession()->isLoggedIn() && !$this->checkoutHelper->isAllowedGuestCheckout($quote)) {
             $this->messageManager->addErrorMessage(__('Guest checkout is disabled.'));
             return $this->redirectResultFactory->create()->setPath('checkout/cart');
