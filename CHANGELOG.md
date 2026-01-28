@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.3] - 28 January 2026
+### Fixed
+- Improve resolving step from given block
+- Block arg `sort_order` should allow to override `loki_checkout.xml` sortOrder
+- Allowg resolving promises with beforePostNextStep
+
 ## [2.2.2] - 23 January 2026
 ### Fixed
 - Do not make newsletter required
