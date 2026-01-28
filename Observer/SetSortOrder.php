@@ -36,6 +36,11 @@ public function __construct(
                 continue;
             }
 
+            $layoutSortOrder = $childBlock->getSortOrder();
+            if (is_numeric($layoutSortOrder)) {
+                continue;
+            }
+
             $childBlock->setSortOrder($blockDefinition->getSortOrder());
         }
     }
