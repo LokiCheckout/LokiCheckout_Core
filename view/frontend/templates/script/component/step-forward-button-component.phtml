@@ -83,32 +83,58 @@ use Magento\Framework\View\Element\Template;
                     await LokiComponentValidator.validate(component);
                 });
 
+                const beforePostNextStepPromises = [];
                 Alpine.store('LokiCheckout').getComponentArrayByStep([this.currentStep, 'any']).forEach(async component => {
                     if (component.beforePostNextStep) {
-                        await component.beforePostNextStep();
+                        const beforePostNextStep = component.beforePostNextStep();
+                        if (this.isPromise(beforePostNextStep)) {
+                            beforePostNextStepPromises.push(beforePostNextStep);
+                        }
                     }
                 });
 
-                this.$nextTick(() => {
-                    this.valid = this.updateValid();
-                    this.loading = false;
+                if (beforePostNextStepPromises.length > 0) {
+                    Promise.all(beforePostNextStepPromises)
+                        .then(() => {
+                            this.moveToNextStep();
+                        })
+                        .catch(error => {
+                            LokiCheckoutLogger.debug('Failed to resolve beforePostNextStepPromises', error);
+                            this.loading = false;
+                            this.valid = false;
+                        });
+                } else {
+                    this.$nextTick(() => {
+                        this.moveToNextStep();
+                    });
+                }
+            },
+            moveToNextStep() {
+                this.valid = this.updateValid();
+                this.loading = false;
 
-                    if (true === this.valid) {
-                        document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
-                            component: this
-                        }));
+                if (true === this.valid) {
+                    document.dispatchEvent(new CustomEvent('loki-checkout.step-forward.before-post', {
+                        component: this
+                    }));
 
-                        Alpine.store('LocalStorage').reset(['cart', 'loki-checkout']);
+                    Alpine.store('LocalStorage').reset(['cart', 'loki-checkout']);
 
-                        this.post();
-                        return;
-                    }
+                    this.post();
+                    return;
+                }
 
-                    const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
-                    if (firstInvalidElement) {
-                        firstInvalidElement.focus();
-                    }
-                });
+                const firstInvalidElement = LokiComponentValidator.findFirstInvalidElement();
+                if (firstInvalidElement) {
+                    firstInvalidElement.focus();
+                }
+            },
+            isPromise(value) {
+                return (
+                    value !== null &&
+                    typeof value === "object" &&
+                    typeof value.then === "function"
+                );
             }
         }));
     });
