@@ -34,14 +34,9 @@ class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFieldViewMod
 
     public function getStep(): string
     {
-        $step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
+        $step = parent::getStep();
         if ($step !== 'none') {
             return $step;
-        }
-
-        $stepCodes = $this->getContext()->getStepNavigator()->getStepCodes();
-        if (count($stepCodes) === 1) {
-            return array_shift($stepCodes);
         }
 
         if ($this->getContext()->getQuote()->isVirtual()) {

@@ -17,6 +17,11 @@ class AgreementsViewModel extends CheckoutViewModel
 
     public function getStep(): string
     {
+        $step = parent::getStep();
+        if ($step !== 'none') {
+            return $step;
+        }
+
         return 'any';
     }
 
