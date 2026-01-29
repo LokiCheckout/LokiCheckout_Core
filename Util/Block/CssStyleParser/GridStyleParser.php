@@ -26,18 +26,42 @@ class GridStyleParser implements CssStyleParserInterface
             return $cssStyles;
         }
 
+        $cssStyles = array_merge($cssStyles, $this->getDefaultCssStyles());
+
         $blockDefinition = $this->getBlockDefinitionByBlock($block);
         if (false === $blockDefinition instanceof Block) {
-            $cssStyles['--loki-order'] = $this->config->getGridLayout()->getDefaultSortOrder();
-            $cssStyles['--loki-col-span'] = $this->config->getGridLayout()->getDefaultColSpan();
-            $cssStyles['--loki-md-col-span'] = $this->config->getGridLayout()->getDefaultMdColSpan();
-
-            return $cssStyles;
+            $cssStyles = array_merge($cssStyles, $this->getCssStylesFromBlockDefinition($blockDefinition));
         }
 
-        $cssStyles['--loki-order'] = $blockDefinition->getSortOrder();
-        $cssStyles['--loki-col-span'] = $blockDefinition->getColSpan();
-        $cssStyles['--loki-md-col-span'] = $blockDefinition->getMdColSpan();
+        $cssStyles = array_merge($cssStyles, $this->getCssStylesFromBlock($block));
+
+        return $cssStyles;
+    }
+
+    private function getDefaultCssStyles(): array
+    {
+        return [
+            '--loki-order' => $this->config->getGridLayout()->getDefaultSortOrder(),
+            '--loki-col-span' => $this->config->getGridLayout()->getDefaultColSpan(),
+            '--loki-md-col-span' => $this->config->getGridLayout()->getDefaultMdColSpan(),
+        ];
+    }
+
+    private function getCssStylesFromBlockDefinition(Block $blockDefinition): array
+    {
+        return [
+            '--loki-order' => $blockDefinition->getSortOrder(),
+            '--loki-col-span' => $blockDefinition->getColSpan(),
+            '--loki-md-col-span' => $blockDefinition->getMdColSpan(),
+        ];
+    }
+
+    private function getCssStylesFromBlock(AbstractBlock $block): array
+    {
+        $cssStyles = [];
+        if ($block->getSortOrder()) {
+            $cssStyles['--loki-order'] = $block->getSortOrder();
+        }
 
         return $cssStyles;
     }
@@ -45,10 +69,10 @@ class GridStyleParser implements CssStyleParserInterface
     private function getBlockDefinitionByBlock(AbstractBlock $block): false|Block
     {
         $grid = $this->config->getGrid();
-        $blockAlias = (string) $block->getLayout()->getElementAlias($block->getNameInLayout());
+        $blockAlias = (string)$block->getLayout()->getElementAlias($block->getNameInLayout());
         if (strlen($blockAlias) === 0) {
             $blockParts = explode('.', $block->getNameInLayout());
-            $blockAlias = (string) array_pop($blockParts);
+            $blockAlias = (string)array_pop($blockParts);
         }
 
         if (strlen($blockAlias) === 0) {
