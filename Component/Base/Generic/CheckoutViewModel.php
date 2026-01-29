@@ -21,4 +21,12 @@ class CheckoutViewModel extends FieldViewModel
 
         return 'LokiCheckoutComponent';
     }
+
+    public function getJsData(): array
+    {
+        return [
+            ...parent::getJsData(),
+            'step' => $this->getStep(),
+        ];
+    }
 }

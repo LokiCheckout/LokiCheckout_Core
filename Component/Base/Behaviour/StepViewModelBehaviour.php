@@ -30,12 +30,4 @@ trait StepViewModelBehaviour
         $this->step = $this->getContext()->getStepProvider()->getStep($this->getBlock());
         return $this->step;
     }
-
-    public function getJsData(): array
-    {
-        return [
-            ...parent::getJsData(),
-            'step' => $this->getStep(),
-        ];
-    }
 }
