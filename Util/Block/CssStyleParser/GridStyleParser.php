@@ -41,7 +41,7 @@ class GridStyleParser implements CssStyleParserInterface
     private function getDefaultCssStyles(): array
     {
         return [
-            '--loki-order' => $this->config->getGridLayout()->getDefaultSortOrder(),
+            '--loki-sort-order' => $this->config->getGridLayout()->getDefaultSortOrder(),
             '--loki-col-span' => $this->config->getGridLayout()->getDefaultColSpan(),
             '--loki-md-col-span' => $this->config->getGridLayout()->getDefaultMdColSpan(),
         ];
@@ -50,7 +50,7 @@ class GridStyleParser implements CssStyleParserInterface
     private function getCssStylesFromBlockDefinition(Block $blockDefinition): array
     {
         return [
-            '--loki-order' => $blockDefinition->getSortOrder(),
+            '--loki-sort-order' => $blockDefinition->getSortOrder(),
             '--loki-col-span' => $blockDefinition->getColSpan(),
             '--loki-md-col-span' => $blockDefinition->getMdColSpan(),
         ];
@@ -60,7 +60,7 @@ class GridStyleParser implements CssStyleParserInterface
     {
         $cssStyles = [];
         if ($block->getSortOrder()) {
-            $cssStyles['--loki-order'] = $block->getSortOrder();
+            $cssStyles['--loki-sort-order'] = $block->getSortOrder();
         }
 
         return $cssStyles;
