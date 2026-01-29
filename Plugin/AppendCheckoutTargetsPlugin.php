@@ -14,6 +14,7 @@ class AppendCheckoutTargetsPlugin
      */
     public function afterGetTargets(Component $subject, array $result): array
     {
+        // Refresh the private data when updating any checkout component
         if (str_contains($subject->getName(), 'loki-checkout')) {
             $result[] = 'loki-checkout.utils.private-data';
         }
