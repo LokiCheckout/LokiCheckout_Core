@@ -10,11 +10,11 @@ use Magento\Framework\View\LayoutInterface;
 
 class SetSortOrder implements ObserverInterface
 {
-public function __construct(
-    private readonly Config $config,
-    private LayoutInterface $layout
-) {
-}
+    public function __construct(
+        private readonly Config $config,
+        private LayoutInterface $layout
+    ) {
+    }
 
     public function execute(Observer $observer)
     {
