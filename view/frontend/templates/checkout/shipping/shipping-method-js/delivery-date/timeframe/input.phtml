@@ -13,7 +13,7 @@ use Magento\Framework\View\Element\Template;
 <input
     type="radio"
     name="delivery"
-    @change="submitTimeframe"
+    @change="saveTimeframe"
     :disabled="disabled"
     :value="timeframe.json"
     :checked="isCurrentTimeframe"
