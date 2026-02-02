@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Address;
 
+use Loki\Components\Component\AbstractComponentContext;
 use Magento\Customer\Api\AddressRepositoryInterface as CustomerAddressRepository;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Model\Address\Config as AddressConfig;
@@ -21,10 +22,9 @@ use LokiCheckout\Core\Util\SameAddressService;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
-use Loki\Components\Component\ComponentContextInterface;
 use Loki\Components\Messages\GlobalMessageRegistry;
 
-class AddressContext implements ComponentContextInterface
+class AddressContext extends AbstractComponentContext
 {
     public function __construct(
         private readonly CheckoutState $checkoutState,
@@ -46,7 +46,9 @@ class AddressContext implements ComponentContextInterface
         private readonly AddressConfig $addressConfig,
         private readonly AddressMapper $addressMapper,
         private readonly AddressRenderer $addressRenderer,
+        protected array $dependencies = []
     ) {
+        parent::__construct($dependencies);
     }
 
     public function getCheckoutState(): CheckoutState

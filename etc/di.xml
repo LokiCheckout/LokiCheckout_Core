@@ -158,7 +158,6 @@
         </arguments>
     </type>
 
-
     <type name="Loki\CssUtils\Util\CssStyle">
         <arguments>
             <argument name="cssStyleParsers" xsi:type="array">
@@ -171,6 +170,54 @@
         <arguments>
             <argument name="cssClassParsers" xsi:type="array">
                 <item name="grid-class" xsi:type="object">LokiCheckout\Core\Util\Block\CssClassParser\GridClassParser</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Base\Generic\CheckoutContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="urlFactory" xsi:type="object">Magento\Framework\UrlFactory\Proxy</item>
+                <item name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</item>
+                <item name="addressStateProvider" xsi:type="object">LokiCheckout\Core\Util\Component\AddressStateProvider\Proxy</item>
+                <item name="checkoutState" xsi:type="object">LokiCheckout\Core\ViewModel\CheckoutState\Proxy</item>
+                <item name="shippingAddressState" xsi:type="object">LokiCheckout\Core\ViewModel\State\ShippingAddressState\Proxy</item>
+                <item name="billingAddressState" xsi:type="object">LokiCheckout\Core\ViewModel\State\BillingAddressState\Proxy</item>
+                <item name="messageManager" xsi:type="object">Magento\Framework\Message\ManagerInterface\Proxy</item>
+                <item name="customerProvider" xsi:type="object">LokiCheckout\Core\Util\CustomerProvider\Proxy</item>
+                <item name="attributeProvider" xsi:type="object">LokiCheckout\Core\Util\Component\AttributeProvider\Proxy</item>
+                <item name="stepProvider" xsi:type="object">LokiCheckout\Core\Util\Component\StepProvider\Proxy</item>
+                <item name="stepNavigator" xsi:type="object">LokiCheckout\Core\Step\StepNavigator\Proxy</item>
+                <item name="moduleConfig" xsi:type="object">LokiCheckout\Core\Config\Config\Proxy</item>
+                <item name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Base\AddressField\AddressFieldContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Sidebar\Items\ItemsContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+                <item name="itemConvertor" xsi:type="object">LokiCheckout\Core\Util\Cart\ItemConvertor\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+                <item name="searchCriteriaBuilder" xsi:type="object">Magento\Framework\Api\SearchCriteriaBuilder\Proxy</item>
+                <item name="activeStoreAgreementsFilter" xsi:type="object">Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter\Proxy</item>
+                <item name="checkoutAgreementsList" xsi:type="object">Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface\Proxy</item>
             </argument>
         </arguments>
     </type>
