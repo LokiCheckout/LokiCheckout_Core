@@ -1,7 +1,7 @@
 @layer components {
     .loki-checkout {
         [role="group"][aria-invalid="true"] {
-            @apply border-red-500 bg-red-100;
+            @apply ring ring-red-500 ring-offset-4;
         }
 
         [data-type="field-prefix"]:has(+ [data-type="field"][aria-invalid="true"]) {
