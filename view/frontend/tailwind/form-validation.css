@@ -1,6 +1,6 @@
 @layer components {
     .loki-checkout {
-        [role="group"][aria-invalid="true"]) {
+        [role="group"][aria-invalid="true"] {
             @apply border-red-500 bg-red-100;
         }
 
