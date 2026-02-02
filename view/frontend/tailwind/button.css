@@ -1,4 +1,4 @@
-@layer components {
+@layer utilities {
     .loki-checkout {
         .btn {
             &:disabled {
@@ -17,15 +17,15 @@
         }
 
         .tab-buttons {
-            .tab {
+            .btn.tab {
                 @apply rounded-lg p-1 border-2;
             }
 
-            .tab-active {
+            .btn.tab-active {
                 @apply border-blue-950 bg-blue-800 hover:bg-blue-900 text-white;
             }
 
-            .tab-inactive {
+            .btn.tab-inactive {
                 @apply border-zinc-400 bg-zinc-200 hover:bg-zinc-400 text-inherit;
             }
 
