@@ -14,8 +14,8 @@ use Magento\Framework\View\Element\Template;
     type="radio"
     name="delivery"
     @change="saveTimeframe"
-    :disabled="disabled"
+    :disabled="timeframe.disabled"
     :value="timeframe.json"
-    :checked="isCurrentTimeframe"
+    :checked="timeframe.isCurrentTimeframe"
     class="<?= $escaper->escapeHtml($css('mr-2', 'input')) ?>"
 />
