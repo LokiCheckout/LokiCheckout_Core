@@ -1,5 +1,9 @@
 @layer components {
     .loki-checkout {
+        [role="group"][aria-invalid="true"]) {
+            @apply border-red-500 bg-red-100;
+        }
+
         [data-type="field-prefix"]:has(+ [data-type="field"][aria-invalid="true"]) {
             @apply border-red-500 bg-red-100;
         }
@@ -9,13 +13,6 @@
             &[aria-invalid="true"] {
                 @apply border-red-500;
             }
-
-            /*
-            @doc
-            &:valid {
-                @apply border-green-500;
-            }
-            */
         }
     }
 }
