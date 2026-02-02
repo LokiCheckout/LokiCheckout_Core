@@ -18,7 +18,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
-<div class="<?= $escaper->escapeHtml($css('relative')) ?>">
+<div class="<?= $escaper->escapeHtml($css('relative')) ?>" role="group">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
