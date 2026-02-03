@@ -28,6 +28,9 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
             getComponentIdsByStep(step) {
                 return Object.keys(this.getComponentsByStep(step));
             },
+            getComponentByName(componentName) {
+                return this.getComponentArray().find(component => component.name === componentName);
+            },
             getComponents() {
                 return Alpine.store('LokiComponents').getComponents();
             },
