@@ -17,9 +17,13 @@ $locale = str_replace('_', '-', $currentStore->getLocale());
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
-        Alpine.directive('money', (el, { value, expression }, { evaluate }) => {
+        Alpine.directive('money', (el, { modifiers, value, expression }, { evaluate }) => {
             if (expression) {
-                const amount = evaluate(expression) / 100;
+                let amount = evaluate(expression);
+                if (!modifiers.includes('cents')) {
+                    amount = amount / 100;
+                }
+
                 el.textContent = new Intl.NumberFormat(
                     '<?= $escaper->escapeHtml($locale); ?>',
                     { style: 'currency', currency: "<?= $escaper->escapeHtml($currency) ?>" }
