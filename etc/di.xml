@@ -190,6 +190,8 @@
                 <item name="stepNavigator" xsi:type="object">LokiCheckout\Core\Step\StepNavigator\Proxy</item>
                 <item name="moduleConfig" xsi:type="object">LokiCheckout\Core\Config\Config\Proxy</item>
                 <item name="scopeConfig" xsi:type="object">Magento\Framework\App\Config\ScopeConfigInterface\Proxy</item>
+                <item name="localeResolver" xsi:type="object">Magento\Framework\Locale\ResolverInterface\Proxy</item>
+                <item name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface\Proxy</item>
             </argument>
         </arguments>
     </type>

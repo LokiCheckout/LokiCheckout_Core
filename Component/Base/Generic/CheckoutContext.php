@@ -4,21 +4,37 @@ namespace LokiCheckout\Core\Component\Base\Generic;
 
 use Loki\Components\Component\AbstractComponentContext;
 use Loki\Components\Exception\RedirectException;
+use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Step\StepNavigator;
+use LokiCheckout\Core\Util\Component\AttributeProvider;
+use LokiCheckout\Core\Util\Component\StepProvider;
+use LokiCheckout\Core\Util\CustomerProvider;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use LokiCheckout\Core\ViewModel\State\BillingAddressState;
+use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
+use Magento\Customer\Model\Session;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Locale\ResolverInterface;
+use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\UrlFactory;
 use Magento\Quote\Model\Quote;
+use Magento\Store\Model\StoreManagerInterface;
 
 /**
- * @method \LokiCheckout\Core\ViewModel\CheckoutState getCheckoutState()
- * @method \Magento\Customer\Model\Session getCustomerSession()
- * @method \Magento\Framework\UrlFactory getUrlFactory()
- * @method \LokiCheckout\Core\ViewModel\State\ShippingAddressState getShippingAddressState()
- * @method \LokiCheckout\Core\ViewModel\State\BillingAddressState getBillingAddressState()
- * @method \Magento\Framework\Message\ManagerInterface getMessageManager()
- * @method \LokiCheckout\Core\Util\CustomerProvider getCustomerProvider()
- * @method \LokiCheckout\Core\Util\Component\StepProvider getStepProvider()
- * @method \LokiCheckout\Core\Step\StepNavigator getStepNavigator()
- * @method \LokiCheckout\Core\Config\Config getModuleConfig()
- * @method \Magento\Framework\App\Config\ScopeConfigInterface getScopeConfig()
- * @method \LokiCheckout\Core\Util\Component\AttributeProvider getAttributeProvider()
+ * @method CheckoutState getCheckoutState()
+ * @method Session getCustomerSession()
+ * @method UrlFactory getUrlFactory()
+ * @method ShippingAddressState getShippingAddressState()
+ * @method BillingAddressState getBillingAddressState()
+ * @method ManagerInterface getMessageManager()
+ * @method CustomerProvider getCustomerProvider()
+ * @method StepProvider getStepProvider()
+ * @method StepNavigator getStepNavigator()
+ * @method Config getModuleConfig()
+ * @method ScopeConfigInterface getScopeConfig()
+ * @method AttributeProvider getAttributeProvider()
+ * @method ResolverInterface getLocaleResolver()
+ * @method StoreManagerInterface getStoreManager()
  */
 class CheckoutContext extends AbstractComponentContext
 {
