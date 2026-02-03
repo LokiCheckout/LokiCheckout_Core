@@ -34,6 +34,7 @@
                 <block alias="fax" sortOrder="140" />
                 <block alias="company" sortOrder="150" />
                 <block alias="vat_id" sortOrder="160" />
+                <block alias="save_in_address_book" sortOrder="400" />
             </grid>
         </grid_layout>
     </grid_layouts>
