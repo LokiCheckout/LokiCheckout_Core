@@ -45,7 +45,7 @@ class FinalStep
         return $this->quoteValidator->validate();
     }
 
-    public function submit(): bool
+    public function submit(bool $redirect = true): bool
     {
         $quote = $this->checkoutState->getQuote();
 
@@ -77,9 +77,13 @@ class FinalStep
 
         $this->dispatchSaveOrderEvent();
 
-        $redirectUrl = $this->redirect->get();
+        if ($redirect) {
+            $redirectUrl = $this->redirect->get();
 
-        throw new RedirectException($redirectUrl);
+            throw new RedirectException($redirectUrl);
+        }
+
+        return true;
     }
 
     private function dispatchCheckoutTypeOnepageSaveOrderAfter(OrderInterface $order): void
