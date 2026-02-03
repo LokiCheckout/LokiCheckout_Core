@@ -6,6 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 03 February 2026
+### Added
+- Add Tailwind 4 CSS support
+- Add `x-money.cents` modifier
+- Rewrite to composable AbstractComponentContext
+
+### Fixed
+- Set `sortOrder=400` for field `save_in_address_book` by default
+- Make sure timeframe props are always valid
+- Move `btn` CSS from `components-layer` to `utilities-layer`
+- Add `role=group` to payment methods and shipping methods
+- Allow for better styling of error message around `[role=group]`
+- Additional styling of `[role=group][aria-invalid=true]`
+- Rename `submitTimeframe()` to `saveTimeframe()`
+- Move `getJsData` from trait to parent class
+- Rename `--loki-order` to `--loki-sort-order`
+
 ## [2.2.3] - 28 January 2026
 ### Fixed
 - Improve resolving step from given block
