@@ -1,0 +1,5 @@
+@source "../templates/**/*.phtml";
+@source "../layout/*.xml";
+@source "../../../etc/loki-checkout.xml";
+
+@source inline('loki-col-span');
