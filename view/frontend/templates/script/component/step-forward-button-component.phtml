@@ -99,6 +99,7 @@ use Magento\Framework\View\Element\Template;
                             this.moveToNextStep();
                         })
                         .catch(error => {
+                            console.log('Failed to resolve beforePostNextStepPromises', error); // @todo
                             LokiCheckoutLogger.debug('Failed to resolve beforePostNextStepPromises', error);
                             this.loading = false;
                             this.valid = false;
