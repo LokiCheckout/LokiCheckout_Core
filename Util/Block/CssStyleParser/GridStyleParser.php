@@ -29,7 +29,7 @@ class GridStyleParser implements CssStyleParserInterface
         $cssStyles = array_merge($cssStyles, $this->getDefaultCssStyles());
 
         $blockDefinition = $this->getBlockDefinitionByBlock($block);
-        if (false === $blockDefinition instanceof Block) {
+        if ($blockDefinition instanceof Block) {
             $cssStyles = array_merge($cssStyles, $this->getCssStylesFromBlockDefinition($blockDefinition));
         }
 
