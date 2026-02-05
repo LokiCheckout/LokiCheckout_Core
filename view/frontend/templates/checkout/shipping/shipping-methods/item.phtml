@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\ApplicationMode;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Cart\ShippingMethod;
@@ -21,6 +22,7 @@ use Loki\Components\Util\Block\TemplateRenderer;
 /** @var PriceFormatter $priceFormatter */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var ShippingMethod $shippingMethod */
+/** @var ApplicationMode $applicationMode */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $viewModel = $block->getViewModel();
@@ -33,8 +35,14 @@ $showHidden = (bool)$block->getShowHidden(); // @doc
 $blockClasses = [];
 $blockClasses[] = $isCurrent ? 'active' : 'inactive';
 $blockClasses[] = $viewModel->isDisabled() ? 'disabled' : 'enabled';
+
+$htmlAttributes = '';
+$applicationMode = $viewModelFactory->create(ApplicationMode::class);
+if ($applicationMode->isDeveloperMode()) {
+    $htmlAttributes = 'title="' . $escaper->escapeHtml($code) . '"';
+}
 ?>
-<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>">
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
     <div class="<?= $escaper->escapeHtml($css('', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
