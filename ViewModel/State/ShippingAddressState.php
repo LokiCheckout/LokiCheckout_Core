@@ -63,6 +63,10 @@ class ShippingAddressState implements AddressStateInterface
             $shippingAddress->setCountryId($defaultCountryId);
         }
 
+        if (!$this->checkoutState->getCustomerSession()->isLoggedIn()) {
+            $shippingAddress->setCustomerAddressId(null);
+        }
+
         $shippingAddress->setIsShipping(true);
         $shippingAddress->setIsBilling(false);
 

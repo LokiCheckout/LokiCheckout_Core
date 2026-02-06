@@ -63,6 +63,10 @@ class BillingAddressState implements AddressStateInterface
             $billingAddress->setCountryId($defaultCountryId);
         }
 
+        if (!$this->checkoutState->getCustomerSession()->isLoggedIn()) {
+            $billingAddress->setCustomerAddressId(null);
+        }
+
         $billingAddress->setIsShipping(false);
         $billingAddress->setIsBilling(true);
 
