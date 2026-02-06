@@ -223,4 +223,28 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Address\AddressContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+                <item name="customerProvider" xsi:type="object">LokiCheckout\Core\Util\CustomerProvider\Proxy</item>
+                <item name="sameAddressService" xsi:type="object">LokiCheckout\Core\Util\SameAddressService\Proxy</item>
+                <item name="customerRepository" xsi:type="object">Magento\Customer\Api\CustomerRepositoryInterface\Proxy</item>
+                <item name="customerAddressRepository" xsi:type="object">Magento\Customer\Api\AddressRepositoryInterface\Proxy</item>
+                <item name="searchCriteriaBuilder" xsi:type="object">Magento\Framework\Api\SearchCriteriaBuilder\Proxy</item>
+                <item name="addressConfig" xsi:type="object">Magento\Customer\Model\Address\Config\Proxy</item>
+                <item name="addressRenderer" xsi:type="object">LokiCheckout\Core\Util\AddressRenderer\Proxy</item>
+                <item name="addressMapper" xsi:type="object">Magento\Customer\Model\Address\Mapper\Proxy</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Address\AddressFormContext">
+        <arguments>
+            <argument name="dependencies" xsi:type="array">
+                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Checkout\Address\AddressContext</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

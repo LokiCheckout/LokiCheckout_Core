@@ -2,10 +2,14 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Address;
 
+use Loki\Components\Component\AbstractComponentContext;
 use Magento\Quote\Api\Data\AddressInterface;
 use Loki\Components\Component\ComponentInterface;
 
-class AddressFormContext extends AddressContext
+/*
+* @mixin \LokiCheckout\Core\Component\Checkout\Address\AddressContext
+*/
+class AddressFormContext extends AbstractComponentContext
 {
     public function getNewAddressSessionKey(ComponentInterface $component): string
     {
