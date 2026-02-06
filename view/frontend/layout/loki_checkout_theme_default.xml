@@ -33,7 +33,7 @@
             </block>
         </referenceBlock>
 
-        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.shipping" before="-"/>
+        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.billing" before="-"/>
 
         <!-- Shipping step -->
         <move element="loki-checkout.customer" destination="loki-checkout.steps.steps.shipping" />
