@@ -15,6 +15,7 @@ use Magento\Customer\Model\Address\Mapper as AddressMapper;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Message\Manager as MessageManager;
+use Magento\Framework\UrlFactory;
 
 class CustomerProvider
 {
@@ -28,6 +29,7 @@ class CustomerProvider
         private readonly OptionFactory $optionFactory,
         private MessageManager $messageManager,
         private CustomerAddressValidator $customerAddressValidator,
+        private UrlFactory $urlFactory
     ) {
     }
 
@@ -70,26 +72,24 @@ class CustomerProvider
             return $addressLines;
         }
 
-        $errors = [];
         $addressLines = [];
         foreach ($this->getAddresses() as $address) {
             $validationResult = $this->customerAddressValidator->validate($address);
-            if (is_array($validationResult)) {
-                $errors = array_merge($errors, $validationResult);
-            }
 
             $addressLines[] = $this->optionFactory->create(
                 (int)$address->getId(),
                 $this->getAddressInline($address),
                 $validationResult !== true
             );
-        }
 
-        if (count($errors) > 0) {
-            $this->messageManager->addErrorMessage(__('One of your saved addresses is invalid.'));
-
-            foreach ($errors as $error) {
-                $this->messageManager->addErrorMessage($error);
+            if (is_array($validationResult)) {
+                $url = $this->urlFactory->create()->getUrl('customer/address/edit', ['id' => $address->getId()]);
+                $this->messageManager->addComplexErrorMessage(
+                    'invalid_customer_address',
+                    [
+                        'address_url' => $url
+                    ]
+                );
             }
         }
 

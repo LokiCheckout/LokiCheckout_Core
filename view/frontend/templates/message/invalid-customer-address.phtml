@@ -1,0 +1,14 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+?>
+<?= $block->escapeHtml(
+    __(
+        'One of your saved addresses is invalid and is skipped. Fix it in <a href="%1">your address book</a>.',
+        $escaper->escapeUrl((string)$block->getAddressUrl()
+        )), ['a']) ?>
