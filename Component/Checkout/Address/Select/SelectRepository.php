@@ -79,9 +79,15 @@ class SelectRepository extends ComponentRepository
                 continue;
             }
 
-            if ((int)$address->getId() === $selectedAddressId) {
-                return $selectedAddressId;
+            if ((int)$address->getId() !== $selectedAddressId) {
+                continue;
             }
+
+            if ($this->getContext()->getCustomerAddressValidator()->validate($address) !== true) {
+                continue;
+            }
+
+            return $selectedAddressId;
         }
 
         return 0;

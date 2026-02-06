@@ -70,4 +70,22 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\View\Element\Message\MessageConfigurationsPool">
+        <arguments>
+            <argument name="configurationsMap" xsi:type="array">
+                <item name="invalid_customer_address" xsi:type="array">
+                    <item name="renderer" xsi:type="const">
+                        \Magento\Framework\View\Element\Message\Renderer\BlockRenderer::CODE
+                    </item>
+                    <item name="data" xsi:type="array">
+                        <item name="template" xsi:type="string">
+                            LokiCheckout_Core::message/invalid-customer-address.phtml
+                        </item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
 </config>
