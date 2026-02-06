@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Address\Select;
 
+use Loki\Field\Util\OptionInterface;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormContext;
 
@@ -10,6 +11,9 @@ use LokiCheckout\Core\Component\Checkout\Address\AddressFormContext;
  */
 class SelectViewModel extends CheckoutViewModel
 {
+    /**
+     * @return OptionInterface[]
+     */
     public function getAddressLines(): array
     {
         return $this->getContext()->getCustomerProvider()->getAddressLines();

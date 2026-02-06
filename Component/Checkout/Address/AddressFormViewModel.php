@@ -50,7 +50,7 @@ class AddressFormViewModel extends CheckoutViewModel
 
     public function showSelectAddress(): bool
     {
-        return $this->getAddresses() !== [];
+        return count($this->getAddresses()) > 0;
     }
 
     public function getAddresses(): array

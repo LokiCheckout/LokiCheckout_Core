@@ -31,8 +31,8 @@ class CustomerAddressOptionModel implements ArgumentInterface, OptionModelInterf
             $options[0] = $emptySelectOptionLabel;
         }
 
-        foreach ($viewModel->getAddressLines() as $addressId => $addressLine) {
-            $options[$addressId] = $addressLine;
+        foreach ($viewModel->getAddressLines() as $addressLine) {
+            $options[] = $addressLine;
         }
 
         return $options;
