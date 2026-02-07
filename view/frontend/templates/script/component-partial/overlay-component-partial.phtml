@@ -1,0 +1,36 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+?>
+<script>
+    const LokiCheckoutOverlayComponentPartial = {
+        showOverlay() {
+            if (document.getElementById("js-overlay")) return;
+
+            const overlay = document.createElement("div");
+            overlay.id = "js-overlay";
+
+            Object.assign(overlay.style, {
+                position: "fixed",
+                inset: "0",
+                background: "rgba(0,0,0,.5)",
+                zIndex: "9999"
+            });
+
+            document.body.appendChild(overlay);
+            document.body.style.overflow = "hidden";
+
+            return overlay;
+        },
+        hideOverlay() {
+            const overlay = document.getElementById("js-overlay");
+            if (!overlay) return;
+
+            overlay.remove();
+            document.body.style.overflow = "";
+        },
+    }
+</script>
