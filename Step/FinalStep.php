@@ -61,9 +61,6 @@ class FinalStep
         $this->processGuestCart($quote);
         $this->cartRepository->save($quote);
 
-        /*$orderId = $this->quoteIdMutex->execute([$quote->getId()], function () use ($quote): int {
-            return (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
-        });*/
         $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
 
         $this->updateCheckoutSessionFromCart($quote);
