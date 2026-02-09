@@ -74,7 +74,7 @@ class FinalStep
 
         $this->dispatchSaveOrderEvent();
 
-        if ($redirect) {
+        if (true === $redirect) {
             $redirectUrl = $this->redirect->get();
 
             throw new RedirectException($redirectUrl);
