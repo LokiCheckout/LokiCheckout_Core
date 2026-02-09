@@ -6,6 +6,8 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 class BillingAsShippingViewModel extends CheckoutViewModel
 {
+    protected bool $skipValidation = true;
+
     public function getFieldLabel(): string
     {
         return 'Shipping as Billing';
