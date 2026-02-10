@@ -22,6 +22,21 @@ class QuoteDataCollector
             'coupon_code'         => $quote->getCouponCode(),
             'payment_method'      => $quote->getPayment()->getMethod(),
             'shipping_method'     => $quote->getShippingAddress()->getShippingMethod(),
+            'customer_name'   => $this->getCustomerName($quote),
         ];
+    }
+
+    private function getCustomerName(Quote $quote): string
+    {
+        $parts = [];
+        $parts[] = $quote->getCustomerFirstname();
+
+        if ($quote->getCustomerMiddlename()) {
+            $parts[] = $quote->getCustomerMiddlename();
+        }
+
+        $parts[] = $quote->getCustomerLastname();
+
+        return implode(' ', $parts);
     }
 }
