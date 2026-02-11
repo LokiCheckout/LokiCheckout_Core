@@ -6,7 +6,7 @@ import coreConfig from '@loki/config';
 test.describe('Postcode uppercase test', function()  {
   test('should turn postcode into uppercase', async function({page, context})  {
     await setupCheckout(page, context, {
-      config: coreConfig
+      ...coreConfig
     });
 
     const field = new Field(page, 'shipping.postcode');
