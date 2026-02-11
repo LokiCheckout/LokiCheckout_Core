@@ -124,9 +124,25 @@ class SelectRepository extends ComponentRepository
         }
 
         if ($this->getContext()->isBillingAddressComponent($this->getComponent())) {
-            return (int)$this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
+            $defaultAddressId = (int)$this->getContext()->getCustomerProvider()->getDefaultBillingAddressId();
+            if ($defaultAddressId > 0) {
+                return $defaultAddressId;
+            }
         }
 
-        return (int)$this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
+        if ($this->getContext()->isShippingAddressComponent($this->getComponent())) {
+            $defaultAddressId = (int)$this->getContext()->getCustomerProvider()->getDefaultShippingAddressId();
+            if ($defaultAddressId > 0) {
+                return $defaultAddressId;
+            }
+        }
+
+        $addresses = $this->getContext()->getCustomerProvider()->getAddresses();
+        if (count($addresses) > 0) {
+            $firstAddress = reset($addresses);
+            return (int)$firstAddress->getId();
+        }
+
+        return 0;
     }
 }
