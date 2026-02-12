@@ -61,7 +61,7 @@ if ($applicationMode->isDeveloperMode()) {
         data-code="<?= $escaper->escapeHtml($paymentMethod->getCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'input-container')) ?>"
     >
-        <span class="shrink-0 flex gap-4">
+        <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
             <input
                 type="radio"
                 :value="value"
