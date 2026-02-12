@@ -40,7 +40,7 @@ $paymentIcon = $templateRenderer->html(
     $block,
     'LokiCheckout_Core::checkout/payment/payment-methods/icon.phtml',
     [
-        'alias' => $code,
+        'alias' => $code.'.icon',
         'code'  => $code,
     ]
 );
