@@ -68,7 +68,11 @@ class Config implements ArgumentInterface
 
     public function getGridLayoutName(): string
     {
-        $gridLayout = (string)$this->scopeConfig->getValue('loki_checkout/general/grid_layout');
+        $gridLayout = (string)$this->scopeConfig->getValue(
+            'loki_checkout/general/grid_layout',
+            ScopeInterface::SCOPE_STORE
+        );
+
         if (false === array_key_exists($gridLayout, $this->xmlConfig->getGridLayouts())) {
             return 'default_grid';
         }
