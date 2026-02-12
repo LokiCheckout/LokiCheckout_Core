@@ -17,17 +17,18 @@ use LokiCheckout\Core\ViewModel\PaymentMethodIcon;
 
 $paymentMethodCode = $block->getCode();
 $paymentMethodIcon = $viewModelFactory->create(PaymentMethodIcon::class);
-$icon = $paymentMethodIcon->getIcon($paymentMethodCode);
-if (empty($icon)) {
-    return;
-}
 
 $size = $block->getSize() ?? 25;
 $width = $block->getWidth() ?? $size;
 $height = $block->getHeight() ?? $size;
-
-?>
-<?= /* @noEscape */ $paymentMethodIcon->getIcon($paymentMethodCode, [
+$attributes = [
     'width'  => $width,
     'height' => $height,
-]) ?>
+];
+
+$icon = $paymentMethodIcon->getIcon($paymentMethodCode, $attributes);
+if (empty($icon)) {
+    return;
+}
+?>
+<?= /* @noEscape */ $icon ?>
