@@ -15,11 +15,11 @@ class IconResolverContext
     private ?DriverInterface $fileDriver = null;
 
     public function __construct(
+        Filesystem $filesystem,
         private readonly ComponentRegistrar $componentRegistrar,
         private readonly AssetRepository $assetRepository,
         private readonly AssetSource $assetSource,
         private readonly ImageRenderer $imageRenderer,
-        Filesystem $filesystem,
         private readonly string $paymentMethodCode,
         private readonly array $attributes = [],
     ) {
@@ -72,7 +72,7 @@ class IconResolverContext
         }
 
         if ($this->fileDriver->isFile($iconPath) && $iconType === 'svg') {
-            return $this->imageRenderer->getIconOutput($iconPath);
+            return $this->imageRenderer->getIconOutput($iconPath, $this->getAttributes());
         }
 
         if ($this->fileDriver->isFile($iconPath)) {

@@ -2,10 +2,10 @@
 
 namespace LokiCheckout\Core\ViewModel;
 
-use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\Payment\Icon\IconResolverContext;
 use LokiCheckout\Core\Payment\Icon\IconResolverContextFactory;
 use LokiCheckout\Core\Payment\Icon\IconResolverListing;
+use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 /**
  * @api
