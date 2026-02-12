@@ -6,6 +6,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 12 February 2026
+### Fixed
+- Cleanup duplicate logic in payment method icon
+- Make sure payment icon has block name with `.icon` suffix
+- Wrap CSS class with `$css()`
+- Allow PHP Config to read from current store level
+- If no address in addressbook is marked as default, just use the first one
+- Add `customer_name` to localStorage section `loki-checkout`
+- Add proper Hyva Tailwind 4 support
+- Mark same-as checkbox as component that does not need validation
+- Add overlay component partial for possible future usage
+- Remove quote mutex approach because it is automatically called anyway
+- Guarantee that customerAddressId is never set on guest addresses
+- Deselect chosen customer address if invalid
+- Add message on fixing invalid address via addressbook link
+- Migrate AddressContext and AddressFormContext to new context-style
+- Set invalid customer address as disabled in the select-box
+- Move fast checkout buttons in multistep checkout to billing step
+- Add new finalize controller method for JS PSPs
+- Add shipping method code as hint while in Dev Mode
+- New Alpine checkout-store method getComponentByName()
+- Allow skipping redirect of final step
+- Simplify logic of StepViewModelBehaviour
+- Add StoreManager and LocaleResolver to checkout context
+
+### Test
+- Re-enable Playwright for WCAG 2.2 AAA
+- Simple Playwright test for logged in customer
+- Fix broken Playwright postcode test
+
 ## [2.3.0] - 03 February 2026
 ### Added
 - Add Tailwind 4 CSS support

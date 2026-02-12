@@ -136,72 +136,72 @@
     ],
     "config": [
         {
-            "path": "loki_checkout/general/enable",
+            "path": "loki_checkout\/general\/enable",
             "label": "General > Enable",
             "description": "Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
         },
         {
-            "path": "loki_checkout/general/theme",
+            "path": "loki_checkout\/general\/theme",
             "label": "General > Theme",
             "description": "Change the complete layout of the checkout by using a specific theme."
         },
         {
-            "path": "loki_checkout/general/grid_layout",
+            "path": "loki_checkout\/general\/grid_layout",
             "label": "General > Address Grid Layout",
-            "description": " All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid\nLayout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
+            "description": " All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid\nLayout (created via a file <code>etc\/loki_checkout.xml<\/code>). This setting configures the default grid."
         },
         {
-            "path": "loki_checkout/general/license_key",
+            "path": "loki_checkout\/general\/license_key",
             "label": "General > License Key",
             "description": "Enter your LokiCheckout license key as found in our Yireo shop under \"My Licenses\". The license key is also used as composer key to download packages."
         },
         {
-            "path": "loki_checkout/debug/enable",
+            "path": "loki_checkout\/debug\/enable",
             "label": "Debugging > Enable Debugging",
             "description": "With debugging enabled, further details are added through the checkout, ideal for development."
         },
         {
-            "path": "loki_checkout/debug/html_hints",
+            "path": "loki_checkout\/debug\/html_hints",
             "label": "Debugging > Add Hints to HTML Output",
             "description": "Adds an HTML comment in each LokiComponent for reviewing via your browser."
         },
         {
-            "path": "loki_checkout/debug/debug_block",
+            "path": "loki_checkout\/debug\/debug_block",
             "label": "Debugging > Add Debug Block",
             "description": "Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
         },
         {
-            "path": "loki_checkout/fields/enable_same_as_billing",
+            "path": "loki_checkout\/fields\/enable_same_as_billing",
             "label": "Field settings > Enable Same As Billing Checkbox",
             "description": "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
         },
         {
-            "path": "loki_checkout/fields/hide_region_when_optional",
+            "path": "loki_checkout\/fields\/hide_region_when_optional",
             "label": "Field settings > Hide Region When Optional",
             "description": "With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country."
         },
         {
-            "path": "loki_checkout/fields/enable_vat_id_only_for_company",
+            "path": "loki_checkout\/fields\/enable_vat_id_only_for_company",
             "label": "Field settings > Enable Vat ID Only For Companies",
             "description": "With this option enabled, the VAT ID field is hidden if there is no value for the company given."
         },
         {
-            "path": "loki_checkout/shipping/select_default_shipping_method",
+            "path": "loki_checkout\/shipping\/select_default_shipping_method",
             "label": "Shipping settings > Select Default Shipping Method",
             "description": "With this option enabled, the first shipping method is automatically selected."
         },
         {
-            "path": "loki_checkout/billing/select_default_payment_method",
+            "path": "loki_checkout\/billing\/select_default_payment_method",
             "label": "Billing settings > Select Default Payment Method",
             "description": "With this option enabled, the first payment method is automatically selected."
         },
         {
-            "path": "loki_checkout/cart/max_items_visible_count",
+            "path": "loki_checkout\/cart\/max_items_visible_count",
             "label": "Cart settings > Maximum items visible",
             "description": "This number determines how many products are shown in the sidebar. When there are more items, the entire list can be expanded."
         },
         {
-            "path": "loki_checkout/newsletter/default_value",
+            "path": "loki_checkout\/newsletter\/default_value",
             "label": "Newsletter settings > Subscribe by default",
             "description": "With this option enabled, the customer is subscribed by default."
         }
@@ -209,7 +209,6 @@
     "tests": {
         "unit": 17,
         "integration": 146,
-        "functional": 6
-    },
-    "phpcs_severity": "9"
+        "functional": 8
+    }
 }
