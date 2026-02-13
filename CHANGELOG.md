@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.2] - 13 February 2026
+### Fixed
+- New component-types LokiCheckoutPaymentMethodComponentType and LokiCheckoutShippingMethodComponentType
+
 ## [2.3.1] - 12 February 2026
 ### Fixed
 - Cleanup duplicate logic in payment method icon
