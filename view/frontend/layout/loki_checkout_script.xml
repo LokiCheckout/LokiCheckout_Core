@@ -47,6 +47,14 @@
                     template="LokiCheckout_Core::script/component-type/checkout-component-type.phtml"/>
 
                 <block
+                    name="loki-checkout.script.component-type.shipping-method"
+                    template="LokiCheckout_Core::script/component-type/shipping-method-component-type.phtml"/>
+
+                <block
+                    name="loki-checkout.script.component-type.payment-method"
+                    template="LokiCheckout_Core::script/component-type/payment-method-component-type.phtml"/>
+
+                <block
                     name="loki-checkout.script.component-type.apple-pay"
                     template="LokiCheckout_Core::script/component-type/apple-pay-component-type.phtml"/>
             </referenceBlock>
