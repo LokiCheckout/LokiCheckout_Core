@@ -198,16 +198,18 @@
 
     <type name="LokiCheckout\Core\Component\Base\AddressField\AddressFieldContext">
         <arguments>
-            <argument name="dependencies" xsi:type="array">
-                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
             </argument>
         </arguments>
     </type>
 
     <type name="LokiCheckout\Core\Component\Checkout\Sidebar\Items\ItemsContext">
         <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
             <argument name="dependencies" xsi:type="array">
-                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
                 <item name="itemConvertor" xsi:type="object">LokiCheckout\Core\Util\Cart\ItemConvertor\Proxy</item>
             </argument>
         </arguments>
@@ -215,8 +217,10 @@
 
     <type name="LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsContext">
         <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
             <argument name="dependencies" xsi:type="array">
-                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
                 <item name="searchCriteriaBuilder" xsi:type="object">Magento\Framework\Api\SearchCriteriaBuilder\Proxy</item>
                 <item name="activeStoreAgreementsFilter" xsi:type="object">Magento\CheckoutAgreements\Model\Api\SearchCriteria\ActiveStoreAgreementsFilter\Proxy</item>
                 <item name="checkoutAgreementsList" xsi:type="object">Magento\CheckoutAgreements\Api\CheckoutAgreementsListInterface\Proxy</item>
@@ -226,8 +230,10 @@
 
     <type name="LokiCheckout\Core\Component\Checkout\Address\AddressContext">
         <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
             <argument name="dependencies" xsi:type="array">
-                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
                 <item name="customerProvider" xsi:type="object">LokiCheckout\Core\Util\CustomerProvider\Proxy</item>
                 <item name="sameAddressService" xsi:type="object">LokiCheckout\Core\Util\SameAddressService\Proxy</item>
                 <item name="customerRepository" xsi:type="object">Magento\Customer\Api\CustomerRepositoryInterface\Proxy</item>
@@ -243,8 +249,8 @@
 
     <type name="LokiCheckout\Core\Component\Checkout\Address\AddressFormContext">
         <arguments>
-            <argument name="dependencies" xsi:type="array">
-                <item name="parentContext" xsi:type="object">LokiCheckout\Core\Component\Checkout\Address\AddressContext</item>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="address" xsi:type="object">LokiCheckout\Core\Component\Checkout\Address\AddressContext</item>
             </argument>
         </arguments>
     </type>
