@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.4] - 16 February 2026
+### Fixed
+- Issue when streetname contained spaces
+- Enhance streetlines test
+
 ## [2.3.3] - 16 February 2026
 ### Fixed
 - Move component context parentContexts outside of deps
