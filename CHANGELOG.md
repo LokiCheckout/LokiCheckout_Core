@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.3] - 16 February 2026
+### Fixed
+- Move component context parentContexts outside of deps
+
 ## [2.3.2] - 13 February 2026
 ### Fixed
 - New component-types LokiCheckoutPaymentMethodComponentType and LokiCheckoutShippingMethodComponentType
