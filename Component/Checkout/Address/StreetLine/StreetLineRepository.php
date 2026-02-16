@@ -31,7 +31,7 @@ class StreetLineRepository extends AddressFieldRepository
         $street = (string)$this->getAddressState()->get('street');
         $countryId = (string)$this->getAddressState()->get('country_id');
         $streetLines = $this->getContext()->getStreetLinesFactory()->createFromStreet($street, $countryId);
-        $streetLines = $streetLines->setLineByIndex($this->getIndex(), $value);
+        $streetLines = $streetLines->setLineByIndex($this->getIndex(), (string)$value);
         $this->getAddressState()->set('street', $streetLines->toString());
     }
 
