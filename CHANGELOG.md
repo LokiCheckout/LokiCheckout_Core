@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.5] - 17 February 2026
+### Fixed
+- Issue with Tailwind 4 `order-(--loki-sort-order)`
+- Make sure login form can be submitted with ENTER
+
 ## [2.3.4] - 16 February 2026
 ### Fixed
 - Issue when streetname contained spaces
