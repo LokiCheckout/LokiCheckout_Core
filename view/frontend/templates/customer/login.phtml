@@ -8,6 +8,7 @@ use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Util\Block\ImageRenderer;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @var Template $block */
@@ -16,9 +17,10 @@ use Magento\Framework\View\Element\Template;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ImageRenderer $imageRenderer */
 /** @var BlockRenderer $blockRenderer */
+/** @var Escaper $escaper */
 
 ?>
-<div class="<?= $escaper->escapeHtml($css('grid grid-2-cols gap-4 relative')) ?>">
+<form class="<?= $escaper->escapeHtml($css('grid grid-2-cols gap-4 relative')) ?>" @keydown.enter.prevent="submit">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <div class="<?= $escaper->escapeHtml($css('field email required', 'field-container')) ?>">
@@ -31,7 +33,7 @@ use Magento\Framework\View\Element\Template;
                 class="<?= $escaper->escapeHtml($css('form-input w-full', 'field-input')) ?>"
                 required
                 :value="email"
-                @change="setEmail"
+                @input="setEmail"
                 autocomplete="off"
                 id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-email"
                 type="email"
@@ -49,8 +51,7 @@ use Magento\Framework\View\Element\Template;
                 class="<?= $escaper->escapeHtml($css('form-input w-full', 'field-input')) ?>"
                 required
                 :value="password"
-                @change="setPassword"
-                @keydown.enter.prevent="submit"
+                @input="setPassword"
                 autocomplete="off"
                 id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-password"
                 :type="passwordFieldType"
@@ -99,4 +100,4 @@ use Magento\Framework\View\Element\Template;
             <span><?= $escaper->escapeHtml(__('Forgot Your Password?')) ?></span>
         </a>
     </div>
-</div>
+</form>
