@@ -14,4 +14,4 @@ bin/magento module:enable LokiCheckout_Core
 ```
 
 ## Settings
-In the Magento Admin Panel, you can navigate to **Store > Configuration > Yireo > LokiCheckout** for various settings.
+In the Magento Admin Panel, you can navigate to **Store > Configuration > Loki > LokiCheckout** for various settings.
