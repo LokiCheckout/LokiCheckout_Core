@@ -2,5 +2,6 @@
 @source "../layout/*.xml";
 @source "../../../etc/loki-checkout.xml";
 
-/*@source inline('loki-col-span');*/
+@source inline('loki-col-span');
+@source inline('order-(--loki-sort-order)');
 @import './tailwind-source.css';

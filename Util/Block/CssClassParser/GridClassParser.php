@@ -24,7 +24,7 @@ class GridClassParser implements CssClassParserInterface
 
         return array_merge_recursive($cssClasses, [
             'grid' => 'loki-col-span',
-            'sortOrder' => 'order-[--loki-sort-order]',
+            'sortOrder' => 'order-[--loki-sort-order] order-(--loki-sort-order)',
         ]);
     }
 }
