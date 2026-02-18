@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.6] - 18 February 2026
+### Fixed
+- Set `skipValidation=false` for any component by default
+- Temporarily disable commit-versioning in Admin module listing
+- Do not show required-errors if address is reset after country change
+- Remove `@method` in trait because it produces a false negative in PHPStan
+- Make newsletter notifications optional via XML layout
+- Make sure banktransfer config is loaded with per-scope option
+- Change admin location in README
+
 ## [2.3.5] - 17 February 2026
 ### Fixed
 - Issue with Tailwind 4 `order-(--loki-sort-order)`
