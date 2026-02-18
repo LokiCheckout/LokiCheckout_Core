@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\ViewModel\PaymentMethod;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\ScopeInterface;
 
 /**
  * @api
@@ -17,6 +18,9 @@ class Banktransfer implements ArgumentInterface
 
     public function getInstructions(): string
     {
-        return (string)$this->scopeConfig->getValue('payment/banktransfer/instructions');
+        return (string)$this->scopeConfig->getValue(
+            'payment/banktransfer/instructions',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }
