@@ -2,12 +2,33 @@
 
 namespace LokiCheckout\Core\Util\Composer;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 
 class ComposerApi
 {
-    const URL = 'https://composer.yireo.com/packages.json';
+    const PACKAGES_URL = 'https://composer.yireo.com/packages.json';
+
+    const PROJECTS_URL = 'https://composer.yireo.com/projects.json';
+
+    /**
+     * @return array[]
+     * @throws GuzzleException
+     */
+    public function getProjects(): array
+    {
+        static $projects = null;
+        if (is_array($projects)) {
+            return $projects;
+        }
+
+        $client = new Client();
+        $response = $client->get(self::PROJECTS_URL);
+        $data = json_decode($response->getBody()->getContents(), true);
+        $projects = $data['projects'];
+        return $projects;
+    }
 
     /**
      * @return array[]
@@ -21,7 +42,7 @@ class ComposerApi
         }
 
         $client = new Client();
-        $response = $client->get(self::URL);
+        $response = $client->get(self::PACKAGES_URL);
         $data = json_decode($response->getBody()->getContents(), true);
         $packages = $data['packages'];
         return $packages;
@@ -33,7 +54,7 @@ class ComposerApi
         $availableVersion = $this->getAvailableVersion($composerName);
 
         if (!isset($packages[$composerName][$availableVersion])) {
-            return 'n/a';
+            return 'n/a '.$availableVersion;
         }
 
         $package = $packages[$composerName][$availableVersion];
@@ -48,25 +69,80 @@ class ComposerApi
         return 'n/a';
     }
 
-    public function getAvailableVersion(string $composerName): string
+    private function getPackage(string $composerName): array
     {
         $packages = $this->getPackages();
         if (!isset($packages[$composerName])) {
-            return '';
+            throw new Exception('Package not found: ' . $composerName);
         }
 
+        return $packages[$composerName];
+    }
+
+    private function getProject(string $composerName): array
+    {
+        $projects = $this->getProjects();
+        foreach ($projects as $project) {
+            if ($project['composer_name'] === $composerName) {
+                return $project;
+            }
+        }
+
+        throw new Exception('Project not found: ' . $composerName);
+    }
+
+    public function getAvailableVersion(string $composerName): string
+    {
+        try {
+            $package = $this->getPackage($composerName);
+            return $this->getAvailableVersionFromPackage($package);
+        } catch (Exception $e) {
+        }
+
+        try {
+            $project = $this->getProject($composerName);
+            return $this->getAvailableVersionFromProject($project);
+        } catch (Exception $e) {
+        }
+
+        return '';
+    }
+
+    private function getAvailableVersionFromProject(array $project): string
+    {
         $versions = [];
         $devCommit = '';
-        foreach ($packages[$composerName] as $package) {
-            if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $package['version'], $match)) {
+        foreach (array_keys($project['versions']) as $version) {
+            if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $version, $match)) {
                 $devCommit = $match[2];
                 continue;
             }
 
-            $versions[] = $package['version'];
+            $versions[] = $version;
         }
 
-        if ($versions === []) {
+        if (empty($versions)) {
+            return $devCommit;
+        }
+
+        usort($versions, 'version_compare');
+        return array_pop($versions);
+    }
+
+    private function getAvailableVersionFromPackage(array $package): string
+    {
+        $versions = [];
+        $devCommit = '';
+        foreach ($package as $packageRelease) {
+            if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $packageRelease['version'], $match)) {
+                $devCommit = $match[2];
+                continue;
+            }
+
+            $versions[] = $packageRelease['version'];
+        }
+
+        if (empty($versions)) {
             return $devCommit;
         }
 
@@ -76,13 +152,19 @@ class ComposerApi
 
     public function getLatestCommit(string $composerName): string
     {
-        $packages = $this->getPackages();
-        if (!isset($packages[$composerName])) {
+        try {
+            $packages = $this->getPackages();
+        } catch (GuzzleException $e) {
+            return '';
+        }
+
+        if (false === array_key_exists($composerName, $packages)) {
             return '';
         }
 
         foreach ($packages[$composerName] as $package) {
             if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $package['version'], $match)) {
+                // @todo: Bug: Any dev versions are removed from the composer API
                 return $match[2];
             }
         }
