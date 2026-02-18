@@ -8,6 +8,8 @@ use Loki\Components\Component\ComponentViewModel;
 
 class GridLayoutViewModel extends ComponentViewModel
 {
+    protected bool $skipValidation = true;
+
     public function __construct(
         private readonly Config $config,
     ) {
