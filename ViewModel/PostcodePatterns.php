@@ -43,11 +43,11 @@ class PostcodePatterns implements ArgumentInterface
     private function fromPhpRegexToJsRegex(string $regex): string
     {
         if (str_starts_with($regex, '^')) {
-            //$regex = ltrim($regex, '^');
+            //$regex = ltrim($regex, '^'); // @todo
         }
 
         if (str_ends_with($regex, '$')) {
-            //$regex = rtrim($regex, '$');
+            //$regex = rtrim($regex, '$'); // @todo
         }
 
         $regex = '/' . $regex . '/';

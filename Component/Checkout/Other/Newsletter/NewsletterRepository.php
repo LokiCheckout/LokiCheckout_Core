@@ -24,21 +24,15 @@ class NewsletterRepository extends FieldRepository
 
         if ($this->getContext()->getModuleConfig()->isNewsletterCheckedByDefault()) {
             $this->subscribeEmail($email);
-            $this->getGlobalMessageRegistry()->addNotice('You have been subscribed to the newsletter');
+            if ($this->showNotifications()) {
+                $message = __('You have been subscribed to the newsletter');
+                $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
+            }
+
             return true;
         }
 
         return false;
-    }
-
-
-    private function isSubscribed(string $email): bool
-    {
-        if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
-            return $this->isCustomerSubscribed();
-        }
-
-        return $this->isGuestSubscribed($email);
     }
 
     public function saveValue(mixed $value): void
@@ -46,7 +40,10 @@ class NewsletterRepository extends FieldRepository
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
         if ((bool)$value) {
             $this->subscribeEmail($email);
-            $this->getGlobalMessageRegistry()->addNotice('You have been subscribed to the newsletter');
+            if ($this->showNotifications()) {
+                $message = __('You have been subscribed to the newsletter');
+                $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
+            }
 
             return;
         }
@@ -64,7 +61,20 @@ class NewsletterRepository extends FieldRepository
         }
 
         $this->unsubscribeEmail($email, $subscriber);
-        $this->getGlobalMessageRegistry()->addNotice('You have been unsubscribed from the newsletter');
+
+        if ($this->showNotifications()) {
+            $message = __('You have been unsubscribed from the newsletter');
+            $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
+        }
+    }
+
+    private function isSubscribed(string $email): bool
+    {
+        if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
+            return $this->isCustomerSubscribed();
+        }
+
+        return $this->isGuestSubscribed($email);
     }
 
     private function subscribeEmail(string $email)
@@ -98,5 +108,15 @@ class NewsletterRepository extends FieldRepository
     private function isGuestSubscribed(string $email): bool
     {
         return $this->getContext()->getNewsletterRepository()->isGuestEmailSubscribed($email);
+    }
+
+    private function showNotifications(): bool
+    {
+        $showModifications = $this->getViewModel()->getBlock()->getDisableNotifications();
+        if (is_bool($showModifications)) {
+            return $showModifications;
+        }
+
+        return true;
     }
 }
