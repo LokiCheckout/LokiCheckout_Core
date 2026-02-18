@@ -2,11 +2,6 @@
 
 namespace LokiCheckout\Core\Component\Base\Behaviour;
 
-use Loki\Components\Component\ComponentContextInterface;
-
-/**
- * @method ComponentContextInterface getContext()
- */
 trait StepViewModelBehaviour
 {
     protected string $step = '';
