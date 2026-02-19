@@ -13,7 +13,7 @@ test.describe('logged-in customer', function()  {
       }
     });
 
-    await expect(page.locator('#loki-checkout-login-form')).toContainText('You are logged in as');
+    await expect(page.locator('#loki-checkout-login')).toContainText('You are logged in as');
   });
 
   test('modal login', async function({page, context})  {
@@ -23,11 +23,16 @@ test.describe('logged-in customer', function()  {
 
     await page.locator('#loki-checkout-login-form-button').click();
 
+    const modal = page.locator('#loki-checkout-login-form-modal');
+    await expect(modal).toBeVisible();
+
     await page.locator('#loki-checkout-login-form-inner-email').fill('playwright@loki-checkout.com');
     await page.locator('#loki-checkout-login-form-inner-password').fill('P@ssw0rd1234');
 
-    await page.getByLabel('Sign In').click();
+    const button = page.locator('#loki-checkout-login-form-inner-button');
+    await expect(button).toBeEnabled();
+    await button.click();
 
-    await expect(page.locator('#loki-checkout-login-form')).toContainText('You are logged in as');
+    await expect(page.locator('#loki-checkout-login')).toContainText('You are logged in as');
   });
 });
