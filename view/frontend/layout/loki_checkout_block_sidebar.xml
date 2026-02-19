@@ -57,7 +57,9 @@
                 </block>
 
                 <block name="loki-checkout.sidebar.preview.shipping_details" as="shipping_details" template="LokiCheckout_Core::checkout/sidebar/preview/shipping_details.phtml">
+                    <block name="loki-checkout.sidebar.preview.shipping_details.address_info" as="address_info" template="LokiCheckout_Core::checkout/sidebar/preview/shipping_details/address_info.phtml"/>
                     <container name="loki-checkout.sidebar.preview.shipping_details.additional_address_info" as="additional_address_info"/>
+                    <block name="loki-checkout.sidebar.preview.shipping_details.method_info" as="method_info" template="LokiCheckout_Core::checkout/sidebar/preview/shipping_details/method_info.phtml"/>
                     <container name="loki-checkout.sidebar.preview.shipping_details.additional_method_info" as="additional_method_info"/>
                 </block>
 

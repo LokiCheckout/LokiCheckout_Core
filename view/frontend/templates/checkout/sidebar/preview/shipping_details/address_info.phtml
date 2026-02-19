@@ -1,0 +1,11 @@
+<?php
+declare(strict_types=1);
+
+use LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails\ShippingDetailsViewModel;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var ShippingDetailsViewModel $viewModel */
+
+$viewModel = $block->getViewModel();
+echo $viewModel->getAddressHtml();
