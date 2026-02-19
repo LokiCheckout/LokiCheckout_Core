@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.8] - 19 February 2026
+### Fixed
+- Enhance Playwright tests
+- Include failed email value in error message
+- Fix logged-in customer test
+- Add additional IDs to customer login form
+
 ## [2.3.7] - 19 February 2026
 ### Fixed
 - Field Components are not required by default
