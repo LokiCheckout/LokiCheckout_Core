@@ -6,8 +6,6 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 
 class NewsletterViewModel extends CheckoutViewModel
 {
-    protected bool $isRequiredByDefault = false;
-
     public function getFieldLabel(): string
     {
         return 'Newsletter';
