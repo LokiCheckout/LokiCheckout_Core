@@ -3,8 +3,8 @@ import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
 import coreConfig from '@loki/config';
 
-test.describe('Generic checkout test', function () {
-  test('should allow me to go to the checkout', async function ({page,context}) {
+test.describe('basic address', function () {
+  test('should allow me to fill all fields', async function ({page,context}) {
     await setupCheckout(page, context, {
       ...coreConfig,
       config: {
