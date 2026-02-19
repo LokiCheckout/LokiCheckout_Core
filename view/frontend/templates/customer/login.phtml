@@ -61,6 +61,7 @@ use Magento\Framework\View\Element\Template;
                 type="button"
                 @click="togglePasswordFieldType"
                 :aria-label="buttonAriaLabel"
+                id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-visibility"
                 class="<?= $escaper->escapeHtml($css('px-4 py-3', 'button')) ?>">
                 <template x-if="passwordVisible">
                     <div class="<?= $escaper->escapeHtml($css('', 'password-icon')) ?>">
@@ -84,6 +85,7 @@ use Magento\Framework\View\Element\Template;
             type="button"
             :disabled="isButtonDisabled"
             @click.prevent="submit"
+            id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-button"
             class="<?= $escaper->escapeHtml($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>
         </button>
