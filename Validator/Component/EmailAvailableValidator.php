@@ -27,7 +27,7 @@ class EmailAvailableValidator implements ValidatorInterface
 
         // Mental note, this only triggers if `checkout/options/enable_guest_checkout_login` is enabled
         if (false === $this->accountManagement->isEmailAvailable($email)) {
-            return ['This email address is not available'];
+            return [(string)__('The email address %1 is not available', $email)];
         }
 
         return true;

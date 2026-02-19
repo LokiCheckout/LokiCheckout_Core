@@ -32,7 +32,7 @@ class EmailAvailableValidatorTest extends TestCase
         $result = $validator->validate($email);
 
         $this->assertNotTrue($result);
-        $this->assertContains('This email address is not available', $result);
+        $this->assertContains('is not available', $result);
     }
 
     private function createCustomer(string $email)
