@@ -209,6 +209,6 @@
     "tests": {
         "unit": 18,
         "integration": 146,
-        "functional": 8
+        "functional": 9
     }
 }

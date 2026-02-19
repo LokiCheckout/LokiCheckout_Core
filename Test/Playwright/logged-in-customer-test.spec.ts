@@ -3,8 +3,8 @@ import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@loki/test';
 import coreConfig from '@loki/config';
 
-test.describe('Logged in customer test', function()  {
-  test('should turn postcode into uppercase', async function({page, context})  {
+test.describe('logged-in customer', function()  {
+  test('login via AJAX', async function({page, context})  {
     await setupCheckout(page, context, {
       ...coreConfig,
       customer: {
@@ -13,12 +13,21 @@ test.describe('Logged in customer test', function()  {
       }
     });
 
-    const paymentMethod = new PaymentMethod(page, 'checkmo');
-    await paymentMethod.select();
+    await expect(page.locator('#loki-checkout-login-form')).toContainText('You are logged in as');
+  });
 
-    const placeOrderButton = new PlaceOrderButton(page);
-    await placeOrderButton.click();
+  test('modal login', async function({page, context})  {
+    await setupCheckout(page, context, {
+      ...coreConfig
+    });
 
-    await new SuccessPage(page).expectToBeLoaded();
+    await page.locator('#loki-checkout-login-form-button').click();
+
+    await page.locator('#loki-checkout-login-form-inner-email').fill('playwright@loki-checkout.com');
+    await page.locator('#loki-checkout-login-form-inner-password').fill('P@ssw0rd1234');
+
+    await page.getByLabel('Sign In').click();
+
+    await expect(page.locator('#loki-checkout-login-form')).toContainText('You are logged in as');
   });
 });
