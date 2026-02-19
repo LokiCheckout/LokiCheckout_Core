@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.9] - 19 February 2026
+### Fixed
+- Move shipping address and method HTML of sidebar in child blocks
+
 ## [2.3.8] - 19 February 2026
 ### Fixed
 - Enhance Playwright tests
