@@ -254,4 +254,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="LokiCheckout\Core\Step\FinalStep\TaskListing">
+        <arguments>
+            <argument name="tasks" xsi:type="array">
+                <item name="saveInAddressBook" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\SaveInAddressBookTask</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
