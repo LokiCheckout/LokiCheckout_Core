@@ -66,6 +66,7 @@ magento-phpstan:
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
@@ -92,6 +93,7 @@ magento-unit-tests:
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
@@ -123,6 +125,7 @@ magento-integration-tests:
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
@@ -161,6 +164,7 @@ magento-compile:
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
@@ -262,6 +266,7 @@ magento-playwright:
     - source .module.ini
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
