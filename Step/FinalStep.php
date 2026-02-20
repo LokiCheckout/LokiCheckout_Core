@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Step;
 
+use LokiCheckout\Core\Step\FinalStep\TaskListing;
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
@@ -31,7 +32,8 @@ class FinalStep
         private readonly CartManagementInterface $cartManagement,
         private readonly OrderRepositoryInterface $orderRepository,
         private readonly OrderSender $orderSender,
-        private readonly CartRepositoryInterface $cartRepository
+        private readonly CartRepositoryInterface $cartRepository,
+        private readonly TaskListing $taskListing,
     ) {
     }
 
@@ -59,9 +61,17 @@ class FinalStep
         }
 
         $this->processGuestCart($quote);
-        $this->cartRepository->save($quote);
 
+        foreach ($this->taskListing->getTasks() as $task) {
+            $task->beforePlaceOrder($quote);
+        }
+
+        $this->cartRepository->save($quote);
         $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
+
+        foreach ($this->taskListing->getTasks() as $task) {
+            $task->afterPlaceOrder($orderId);
+        }
 
         $this->updateCheckoutSessionFromCart($quote);
 
@@ -140,6 +150,7 @@ class FinalStep
             ->setLastOrderStatus($order->getStatus());
     }
 
+    // @todo: Remove this when ready
     private function sendMail(Order $order): void
     {
         $quote = $this->checkoutState->getQuote();
