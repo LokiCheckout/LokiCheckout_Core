@@ -14,6 +14,7 @@ use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
 use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Request\Http;
 use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\UrlFactory;
@@ -35,6 +36,7 @@ use Magento\Store\Model\StoreManagerInterface;
  * @method AttributeProvider getAttributeProvider()
  * @method ResolverInterface getLocaleResolver()
  * @method StoreManagerInterface getStoreManager()
+ * @method Http getRequest()
  */
 class CheckoutContext extends AbstractComponentContext
 {

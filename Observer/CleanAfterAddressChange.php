@@ -32,7 +32,7 @@ class CleanAfterAddressChange implements ObserverInterface
                 $address->setShippingMethod('');
             }
 
-            $this->httpRequest->setParam('address_reset', true);
+            $this->httpRequest->setParam('skip_validation', true); // @todo: Set this flag in an internal place only
         }
     }
 }
