@@ -255,7 +255,8 @@
     <component
         name="loki-checkout.customer.customer_email"
         group="quoteFields"
-        viewModel="LokiCheckout\Core\Component\Checkout\Customer\Email\EmailViewModel">
+        viewModel="LokiCheckout\Core\Component\Checkout\Customer\Email\EmailViewModel"
+        repository="LokiCheckout\Core\Component\Checkout\Customer\Email\EmailRepository">
         <validator name="email"/>
         <validator name="email_available"/>
         <target name="loki-checkout.newsletter"/>
