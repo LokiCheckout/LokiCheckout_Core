@@ -1,57 +1,16 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.3.9 */
-
 use Magento\Framework\View\Element\Template;
 
+/** @version 2.3.9 */
 /** @var Template */
 ?>
 <script>
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutLoginComponent', () => ({
             ...LokiComponentType,
-            email: '',
-            password: '',
-            passwordFieldType: 'password',
-            setEmail() {
-                this.email = this.$el.value;
-            },
-            setPassword() {
-                this.password = this.$el.value;
-            },
-            isButtonDisabled() {
-                if (this.disabled) {
-                    return true;
-                }
-
-                return !this.email || !this.password;
-            },
-            submit() {
-                this.post({
-                    email: this.email,
-                    password: this.password,
-                });
-            },
-            afterPostFinally() {
-                Alpine.store('LocalStorage').refresh('customer');
-            },
-            buttonAriaLabel() {
-                if (this.passwordFieldType === 'text') {
-                    return '<?= $escaper->escapeHtml(__('Hide password')) ?>';
-                }
-
-                return '<?= $escaper->escapeHtml(__('Show password')) ?>';
-            },
-            passwordVisible() {
-                return this.passwordFieldType === 'text';
-            },
-            passwordNotVisible() {
-                return this.passwordFieldType === 'password';
-            },
-            togglePasswordFieldType() {
-                this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-            }
+            ...LokiCheckoutLoginComponentPartial,
         }));
     });
 </script>

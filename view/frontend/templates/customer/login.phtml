@@ -84,7 +84,7 @@ use Magento\Framework\View\Element\Template;
         <button
             type="button"
             :disabled="isButtonDisabled"
-            @click.prevent="submit"
+            @click.prevent="submitLogin"
             id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-button"
             class="<?= $escaper->escapeHtml($css('btn btn-primary cursor-pointer hover:no-underline disabled:opacity-75', 'toolbar-button')) ?>">
             <span><?= $escaper->escapeHtml(__('Sign In')) ?></span>

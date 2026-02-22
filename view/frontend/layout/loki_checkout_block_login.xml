@@ -47,6 +47,12 @@
             </block>
         </block>
 
+        <referenceBlock name="loki.script.component-partial">
+            <block
+                name="loki-checkout.script.component-partial.login-component"
+                template="LokiCheckout_Core::script/component-partial/login-component-partial.phtml"/>
+        </referenceBlock>
+
         <referenceBlock name="loki.script.component">
             <block
                 name="loki-checkout.script.component.login-component"
