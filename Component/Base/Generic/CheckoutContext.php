@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Component\Base\Generic;
 use Loki\Components\Component\AbstractComponentContext;
 use Loki\Components\Exception\RedirectException;
 use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\Config\XmlConfig;
 use LokiCheckout\Core\Step\StepNavigator;
 use LokiCheckout\Core\Util\Component\AttributeProvider;
 use LokiCheckout\Core\Util\Component\StepProvider;
@@ -12,7 +13,8 @@ use LokiCheckout\Core\Util\CustomerProvider;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
-use Magento\Customer\Model\Session;
+use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Locale\ResolverInterface;
@@ -23,7 +25,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 /**
  * @method CheckoutState getCheckoutState()
- * @method Session getCustomerSession()
+ * @method CheckoutSession getCheckoutSession()
+ * @method CustomerSession getCustomerSession()
  * @method UrlFactory getUrlFactory()
  * @method ShippingAddressState getShippingAddressState()
  * @method BillingAddressState getBillingAddressState()
@@ -32,6 +35,7 @@ use Magento\Store\Model\StoreManagerInterface;
  * @method StepProvider getStepProvider()
  * @method StepNavigator getStepNavigator()
  * @method Config getModuleConfig()
+ * @method XmlConfig getXmlConfig()
  * @method ScopeConfigInterface getScopeConfig()
  * @method AttributeProvider getAttributeProvider()
  * @method ResolverInterface getLocaleResolver()
