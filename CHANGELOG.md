@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.10] - 24 February 2026
+### Fixed
+- Add checkoutSession and xmlConfig to checkout context
+- Declare customer email component with its repository class
+- Move login-logic from LoginFormRepository into re-usable LoginCustomer class
+- Move login-component logic into login-component-partial for reusage
+- Surpress required-errors on next step
+- Fix "Save in Addressbook" functionality after removing Onepage-logic
+- Allow for handling configurable tasks at final step
+- Add translations
+- Trial 2.4.5-p14 build without global patch, but individual patches
+
 ## [2.3.9] - 19 February 2026
 ### Fixed
 - Move shipping address and method HTML of sidebar in child blocks
