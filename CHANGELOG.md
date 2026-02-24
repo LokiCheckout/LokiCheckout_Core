@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.11] - 24 February 2026
+### Fixed
+- Make `@dataProvider` methods in tests static
+- Make sure single numeric value is treated as housenumber directly
+
 ## [2.3.10] - 24 February 2026
 ### Fixed
 - Add checkoutSession and xmlConfig to checkout context

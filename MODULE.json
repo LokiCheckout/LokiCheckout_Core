@@ -206,5 +206,9 @@
             "description": "With this option enabled, the customer is subscribed by default."
         }
     ],
-    "tests": []
+    "tests": {
+        "unit": 18,
+        "integration": 146,
+        "functional": 10
+    }
 }
