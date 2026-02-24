@@ -13,7 +13,7 @@ use Magento\Customer\CustomerData\SectionSourceInterface;
 class Checkout implements SectionSourceInterface
 {
     public function __construct(
-        private CheckoutState $checkoutState,
+        private readonly CheckoutState $checkoutState,
         private QuoteDataCollector $quoteDataCollector,
         private CustomerDataCollector $customerDataCollector,
         private ShippingAddressDataCollector $shippingAddressDataCollector,
