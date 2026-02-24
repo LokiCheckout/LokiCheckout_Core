@@ -17,7 +17,7 @@ class PushHtmlAttributesTest extends TestCase
         $this->assertEquals($expectedHtml, $pushHtmlAttributes->execute($html, $attributes));
     }
 
-    public function getTestValues(): array
+    public static function getTestValues(): array
     {
         return [
             ['', '', ['id' => 'foobar']],

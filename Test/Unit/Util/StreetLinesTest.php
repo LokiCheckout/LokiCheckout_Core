@@ -82,7 +82,7 @@ class StreetLinesTest extends TestCase
         $this->assertSame($street, $streetLines->toString());
     }
 
-    public function getTestArguments(): array
+    public static function getTestArguments(): array
     {
         return [
             ["Example\n1\nA", 'Example', '1', 'A', 'NL'],

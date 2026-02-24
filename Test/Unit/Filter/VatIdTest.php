@@ -20,7 +20,7 @@ class VatIdTest extends TestCase
         $this->assertEquals($expectedValue, $filter->filter($vatId, $filterScope));
     }
 
-    public function getValues(): array
+    public static function getValues(): array
     {
         return [
             ['NL12341234', 'NL12341234'],

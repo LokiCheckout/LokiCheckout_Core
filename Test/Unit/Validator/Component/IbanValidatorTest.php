@@ -33,7 +33,7 @@ class IbanValidatorTest extends TestCase
         $this->assertContains($expectedMessage, $messages);
     }
 
-    public function getTestValues()
+    public static function getTestValues()
     {
         return [
             ['GB82WEST12345698765432', true],

@@ -18,7 +18,7 @@ class StreetLinesParserTest extends TestCase
         $this->assertEquals($expectedNewStreetParts, $newStreetParts);
     }
 
-    public function getTestArguments(): array
+    public static function getTestArguments(): array
     {
         return [
             ['NL', ['Amalialaan 126 D A'], ['Amalialaan', '126', 'D', 'A']],
