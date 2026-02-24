@@ -53,6 +53,10 @@ class StreetLinesParser
     private function parseSingleStreetLine(string $streetLine): array
     {
         $trimmedLine = trim($streetLine);
+        if (is_numeric($trimmedLine)) {
+            return ['', $trimmedLine];
+        }
+
         if (preg_match('/^(\d+)([a-zA-Z]{1,4})(.*)$/', $trimmedLine, $matches)) {
             throw new StreetLineParserException();
         }
