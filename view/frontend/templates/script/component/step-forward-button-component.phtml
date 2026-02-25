@@ -31,6 +31,11 @@ use Magento\Framework\View\Element\Template;
             },
             initUpdateValid() {
                 this.updateValid();
+
+                document.addEventListener('loki-components.ajax.loading', (event) => {
+                    this.disabled = event.detail;
+                });
+
                 document.addEventListener('loki-components.component.update', () => {
                     this.updateValid();
                 });
