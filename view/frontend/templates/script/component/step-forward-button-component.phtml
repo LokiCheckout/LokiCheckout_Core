@@ -33,7 +33,7 @@ use Magento\Framework\View\Element\Template;
                 this.updateValid();
 
                 document.addEventListener('loki-components.ajax.loading', (event) => {
-                    this.disabled = event.detail;
+                    this.disabled = !!event.detail;
                 });
 
                 document.addEventListener('loki-components.component.update', () => {
@@ -57,18 +57,6 @@ use Magento\Framework\View\Element\Template;
                         container.removeAttribute('aria-busy');
                     }
                 });
-
-                this.$watch('valid', () => {
-                    if (!this.$refs.button) {
-                        return;
-                    }
-
-                    if (this.valid) {
-                        this.$refs.button.removeAttribute('aria-disabled');
-                    } else {
-                        this.$refs.button.setAttribute('aria-disabled', 'true');
-                    }
-                });
             },
             updateValid() {
                 this.valid = Alpine.store('LokiCheckout').hasOnlyValidComponents([this.currentStep, 'any']);
@@ -76,6 +64,14 @@ use Magento\Framework\View\Element\Template;
                 if (!this.valid) {
                     const components = Alpine.store('LokiCheckout').getInvalidComponentIds([this.currentStep, 'any']);
                     LokiCheckoutLogger.debug('Invalid components for step "' + this.currentStep + '"', components);
+                }
+
+                if (this.$refs.button) {
+                    if (this.valid) {
+                        this.$refs.button.removeAttribute('aria-disabled');
+                    } else {
+                        this.$refs.button.setAttribute('aria-disabled', 'true');
+                    }
                 }
 
                 return this.valid;
