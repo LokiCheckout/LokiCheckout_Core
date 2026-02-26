@@ -11,6 +11,7 @@ class ShippingAddressDataCollector
         return [
             'email'      => $shippingAddress->getEmail(),
             'prefix'     => $shippingAddress->getPrefix(),
+            'fullname'       => $this->getCustomerFullname($shippingAddress),
             'firstname'  => $shippingAddress->getFirstname(),
             'middlename' => $shippingAddress->getMiddlename(),
             'lastname'   => $shippingAddress->getLastname(),
@@ -27,5 +28,19 @@ class ShippingAddressDataCollector
             'fax'        => $shippingAddress->getFax(),
             'company'    => $shippingAddress->getCompany(),
         ];
+    }
+
+    private function getCustomerFullname(Address $address): string
+    {
+        $parts = [];
+        $parts[] = $address->getFirstname();
+
+        if ($address->getMiddlename()) {
+            $parts[] = $address->getMiddlename();
+        }
+
+        $parts[] = $address->getLastname();
+
+        return implode(' ', $parts);
     }
 }

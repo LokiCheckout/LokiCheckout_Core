@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\CustomerData\Checkout;
 
+use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Address;
 
 class BillingAddressDataCollector
@@ -11,6 +12,7 @@ class BillingAddressDataCollector
         return [
             'email'      => $billingAddress->getEmail(),
             'prefix'     => $billingAddress->getPrefix(),
+            'fullname'       => $this->getCustomerFullname($billingAddress),
             'firstname'  => $billingAddress->getFirstname(),
             'middlename' => $billingAddress->getMiddlename(),
             'lastname'   => $billingAddress->getLastname(),
@@ -27,5 +29,19 @@ class BillingAddressDataCollector
             'fax'        => $billingAddress->getFax(),
             'company'    => $billingAddress->getCompany(),
         ];
+    }
+
+    private function getCustomerFullname(Address $address): string
+    {
+        $parts = [];
+        $parts[] = $address->getFirstname();
+
+        if ($address->getMiddlename()) {
+            $parts[] = $address->getMiddlename();
+        }
+
+        $parts[] = $address->getLastname();
+
+        return implode(' ', $parts);
     }
 }

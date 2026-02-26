@@ -22,11 +22,11 @@ class QuoteDataCollector
             'coupon_code'         => $quote->getCouponCode(),
             'payment_method'      => $quote->getPayment()->getMethod(),
             'shipping_method'     => $quote->getShippingAddress()->getShippingMethod(),
-            'customer_name'   => $this->getCustomerName($quote),
+            'customer_fullname'       => $this->getCustomerFullname($quote),
         ];
     }
 
-    private function getCustomerName(Quote $quote): string
+    private function getCustomerFullname(Quote $quote): string
     {
         $parts = [];
         $parts[] = $quote->getCustomerFirstname();
