@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.12] - 02 March 2026
+### Fixed
+- Refactor finalize-controller to be inline with final component
+- Add `fullname` to `customerData` section
+- Set step-forward button as disabled by default
+- Set `aria-disabled` on step-forward button on every change of `valid`
+- Monitor `loki-components.ajax.loading` to disable step-forward temporarily
+- Disable step-button while loading
+- Allow matching components with all steps
+- Do not start IBAN validation if value is still empty
+
 ## [2.3.11] - 24 February 2026
 ### Fixed
 - Make `@dataProvider` methods in tests static
