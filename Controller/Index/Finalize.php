@@ -33,7 +33,7 @@ class Finalize implements HttpGetActionInterface
         }
 
         $redirectUrl = '';
-        
+
         try {
             $this->finalStep->submit();
         } catch (RedirectException $e) {
