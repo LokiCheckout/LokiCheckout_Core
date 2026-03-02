@@ -6,6 +6,7 @@ use LokiCheckout\Core\Step\FinalStep\TaskListing;
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
+use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validator\Exception;
@@ -47,6 +48,13 @@ class FinalStep
         return $this->quoteValidator->validate();
     }
 
+    /**
+     * @param bool $redirect
+     *
+     * @return bool
+     * @throws CouldNotSaveException
+     * @throws RedirectException
+     */
     public function submit(bool $redirect = true): bool
     {
         $quote = $this->checkoutState->getQuote();
