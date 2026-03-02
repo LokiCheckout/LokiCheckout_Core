@@ -32,12 +32,12 @@ class Finalize implements HttpGetActionInterface
             throw new RuntimeException('Invalid form key.');
         }
 
-        if (empty($redirectUrl)) {
-            try {
-                $this->finalStep->submit();
-            } catch (RedirectException $e) {
-                $redirectUrl = $e->getMessage();
-            }
+        $redirectUrl = '';
+        
+        try {
+            $this->finalStep->submit();
+        } catch (RedirectException $e) {
+            $redirectUrl = $e->getMessage();
         }
 
         $result = $this->resultRedirectFactory->create();
