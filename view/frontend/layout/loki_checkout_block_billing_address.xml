@@ -55,6 +55,8 @@
                         <argument name="option_model" xsi:type="object">
                             LokiCheckout\Core\ViewModel\OptionModel\PrefixOptionModel
                         </argument>
+                        <argument name="max_length" xsi:type="number">6</argument>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing honorific-prefix</argument>
                     </arguments>
                 </block>
@@ -72,6 +74,7 @@
                     ifconfig="customer/address/middlename_show"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing additional-name</argument>
                     </arguments>
                 </block>
@@ -89,6 +92,7 @@
                     ifconfig="customer/address/suffix_show"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing honorific-suffix</argument>
                     </arguments>
                 </block>
