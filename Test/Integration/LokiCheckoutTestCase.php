@@ -13,6 +13,7 @@ use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Component\ComponentRegistry;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Loki\Components\Test\Integration\LokiComponentsTestCase;
+use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
@@ -84,7 +85,10 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         /** @var Quote $cart */
         $cart = $this->fixtures->get('cart');
 
-        $this->assertInstanceOf(Quote::class, $cart, 'Cart fixture is empty');
+        $fixtures = DataFixtureStorageManager::getStorage();
+        $existingKeys = implode(', ', array_keys($fixtures->getAll()));
+
+        $this->assertInstanceOf(Quote::class, $cart, 'Cart fixture is empty. Existing keys: '.$existingKeys);
 
         $cartId = $cart->getId();
         $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);
