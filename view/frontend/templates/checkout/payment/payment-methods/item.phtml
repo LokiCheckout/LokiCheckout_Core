@@ -65,6 +65,7 @@ if ($applicationMode->isDeveloperMode()) {
             <input
                 type="radio"
                 :value="value"
+                :disabled="loading"
                 @change="submitValue"
                 name="payment_method"
                 value="<?= $escaper->escapeHtml($code) ?>"

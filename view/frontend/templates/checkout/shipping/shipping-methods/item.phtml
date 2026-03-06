@@ -48,6 +48,7 @@ if ($applicationMode->isDeveloperMode()) {
             <input
                 type="radio"
                 :value="value"
+                :disabled="loading"
                 @change="submitValue"
                 name="shipping_method"
                 value="<?= $escaper->escapeHtml($code) ?>"
