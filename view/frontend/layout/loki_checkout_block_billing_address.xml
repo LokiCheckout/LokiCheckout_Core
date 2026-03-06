@@ -195,7 +195,9 @@
                 <block
                     name="loki-checkout.billing.address.fax" as="fax"
                     ifconfig="customer/address/fax_show"
-                    template="Loki_FieldComponents::form/field.phtml"/>
+                    template="Loki_FieldComponents::form/field.phtml">
+                    <argument name="lazy_update" xsi:type="boolean">true</argument>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.vat_id" as="vat_id"
