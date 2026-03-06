@@ -95,7 +95,7 @@ if ($applicationMode->isDeveloperMode()) {
         </div>
 
         <?php if ($isCurrent || $showHidden) : ?>
-            <div class="<?= $escaper->escapeHtml($css('my-4', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+            <div class="<?= $escaper->escapeHtml($css('', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
                 <?= /* @noEscape */ $blockRenderer->html(
                     $block,
                     'loki-checkout.shipping.methods.'.$code.'.form',
