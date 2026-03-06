@@ -188,7 +188,9 @@
                     name="loki-checkout.shipping.address.fax" as="fax"
                     ifconfig="customer/address/fax_show"
                     template="Loki_FieldComponents::form/field.phtml">
-                    <argument name="lazy_update" xsi:type="boolean">true</argument>
+                    <arguments>
+                        <argument name="lazy_update" xsi:type="boolean">true</argument>
+                    </arguments>
                 </block>
 
                 <block
