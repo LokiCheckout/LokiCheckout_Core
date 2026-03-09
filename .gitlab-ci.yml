@@ -107,16 +107,16 @@ magento-unit-tests:
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p2', '2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p3', '2.4.9-alpha3']
 
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
-  rules:
-    - if: '$CI_PROJECT_NAME == "LokiCheckout_Core" && $CI_PIPELINE_SOURCE != "schedule"'
-      when: manual
-      allow_failure: true
-    - when: on_success
+  #rules:
+  #  - if: '$CI_PROJECT_NAME == "LokiCheckout_Core" && $CI_PIPELINE_SOURCE != "schedule"'
+  #    when: manual
+  #    allow_failure: true
+  #  - when: on_success
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
@@ -151,7 +151,7 @@ magento-integration-tests:
       alias: opensearch
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p3', '2.4.9-alpha3']
         PHP_VERSION: ['8.4']
 
 magento-compile:
@@ -176,7 +176,7 @@ magento-compile:
     - php -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3', '2.4.9-alpha3']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
