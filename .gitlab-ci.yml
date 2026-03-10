@@ -172,12 +172,21 @@ magento-compile:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
+    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
     - bin/magento module:enable --all
     - php -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      #- MAGENTO_VERSION: ['2.4.9-alpha3']
-      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.9-alpha3']
+      #- MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+  services:
+    - name: yireo/mariadb:10
+      alias: mysql
+    - name: redis:latest
+      alias: redis
+    - name: yireo/opensearch
+      alias: opensearch
+
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
