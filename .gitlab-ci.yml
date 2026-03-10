@@ -160,6 +160,7 @@ magento-compile:
   script:
     - cd $CI_PROJECT_DIR
     - source .module.ini
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
@@ -172,21 +173,13 @@ magento-compile:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
-    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
+    - composer dump-autoload -o
     - bin/magento module:enable --all
     - php -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.9-alpha3']
-      #- MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
-  services:
-    - name: yireo/mariadb:10
-      alias: mysql
-    - name: redis:latest
-      alias: redis
-    - name: yireo/opensearch
-      alias: opensearch
-
+      #- MAGENTO_VERSION: ['2.4.9-alpha3']
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3
@@ -194,83 +187,6 @@ magento-playwright:
   rules:
     - when: manual
       allow_failure: true
-  before_script:
-    - cd $CI_PROJECT_DIR
-    - test -d Test/Playwright/ || exit 0
-    - |
-      echo "Waiting for MySQL (${MYSQL_HOST}:${MYSQL_PORT})"
-      for i in {1..30}; do
-        if mariadb-admin ping -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" --silent; then
-          echo "OK"; break
-        fi
-        echo -n "."
-        sleep 1
-      done
-
-      cat <<EOF > ~/.my.cnf
-      [client-mariadb]
-      disable-ssl
-      EOF
-
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} /*\!40100 DEFAULT CHARACTER SET utf8 */;"
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-      mariadb -h"${MYSQL_HOST}" -P"${MYSQL_PORT}" -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%'; FLUSH PRIVILEGES;"
-
-      echo "Waiting for OpenSearch (${OPENSEARCH_HOST}:${OPENSEARCH_PORT})"
-      ready=0
-      for i in {1..60}; do
-        if curl -s "http://${OPENSEARCH_HOST}:${OPENSEARCH_PORT}" | grep -q '"tagline"'; then
-          echo "OK"
-          ready=1
-          break
-        fi
-        echo -n "."
-        sleep 1
-      done
-      if [ "${ready:-0}" -ne 1 ]; then
-        echo "OpenSearch NOT OK, exiting"
-        exit 1
-      fi
-
-      cd /tmp/magento
-      php -dmemory_limit=-1 bin/magento setup:install \
-        --base-url="${MAGENTO_BASE_URL}" \
-        --db-host="${MYSQL_HOST}" \
-        --db-name="${MYSQL_DATABASE}" \
-        --db-user="${MYSQL_USER}" \
-        --db-password="${MYSQL_PASSWORD}" \
-        --backend-frontname="${MAGENTO_BACKEND_FRONTNAME}" \
-        --admin-firstname="${MAGENTO_ADMIN_FIRSTNAME}" \
-        --admin-lastname="${MAGENTO_ADMIN_LASTNAME}" \
-        --admin-email="${MAGENTO_ADMIN_EMAIL}" \
-        --admin-user="${MAGENTO_ADMIN_USER}" \
-        --admin-password="${MAGENTO_ADMIN_PASSWORD}" \
-        --language="${MAGENTO_LANGUAGE}" \
-        --currency="${MAGENTO_CURRENCY}" \
-        --timezone="${MAGENTO_TIMEZONE}" \
-        --use-rewrites="${MAGENTO_USE_REWRITES}" \
-        --search-engine="${MAGENTO_SEARCH_ENGINE}" \
-        --opensearch-host="${OPENSEARCH_HOST}" \
-        --opensearch-port="${OPENSEARCH_PORT}" \
-        --session-save=redis \
-        --session-save-redis-host=redis \
-        --session-save-redis-port=6379 \
-        --cache-backend-redis-server=redis \
-        --cache-backend-redis-port=6379
-
-      cd /tmp/magento/pub/
-      nohup php -S 0.0.0.0:8888 >/tmp/php-server.log 2>&1 &
-
-      echo "Waiting for Magento front to become reachable"; break
-      result=0
-      for i in {1..60}; do
-        if curl -s "${MAGENTO_BASE_URL}" 2>1 >/dev/null; then
-          echo " OK, available"; result=1; break;
-        fi
-        echo -n "."
-        sleep 1
-      done
-      test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
   script:
     - cd $CI_PROJECT_DIR
     - source .module.ini
@@ -283,6 +199,7 @@ magento-playwright:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
+    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests
     - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
