@@ -91,7 +91,9 @@
         context="LokiCheckout\Core\Component\Checkout\Address\AddressFormContext"
         viewModel="LokiCheckout\Core\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Shipping\BillingAsShipping\BillingAsShippingRepository">
-        <target name="loki-checkout.billing.address"/>
+        <target name="loki-checkout.shipping.address"/>
+        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.sidebar.preview.billing_address"/>
     </component>
 
     <component
