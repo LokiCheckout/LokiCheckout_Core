@@ -14,9 +14,12 @@ use Loki\Components\Util\Block\TemplateRenderer;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 
-$checkoutState = $viewModelFactory->create(CheckoutState::class);
-$title = 'Enter your Shipping Address';
+$title = $block->getTitle();
+if (empty($title)) {
+    $title = 'Enter your Shipping Address';
+}
 
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
 if ($checkoutState->getCustomerSession()->isLoggedIn()) {
     $title = 'Enter a New Address';
 }
