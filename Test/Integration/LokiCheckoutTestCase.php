@@ -84,11 +84,7 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     {
         /** @var Quote $cart */
         $cart = $this->fixtures->get('cart');
-
-        $fixtures = DataFixtureStorageManager::getStorage();
-        $existingKeys = implode(', ', array_keys($fixtures->getAll()));
-
-        $this->assertInstanceOf(Quote::class, $cart, 'Cart fixture is empty. Existing keys: '.$existingKeys);
+        $this->assertInstanceOf(Quote::class, $cart, 'Cart fixture is empty');
 
         $cartId = $cart->getId();
         $cart = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($cartId);
