@@ -10,6 +10,10 @@ use Magento\Framework\Escaper;
 ?>
 <script>
     LokiComponentValidator.validators.email = function (component) {
+        if (!component.value) {
+            return true;
+        }
+
         if (/\S+@\S+\.\S+/.test(component.value) === false) {
             component.messages.push({type:'error', text: '<?= $escaper->escapeHtml(__('Invalid email')) ?>'});
             return false;
