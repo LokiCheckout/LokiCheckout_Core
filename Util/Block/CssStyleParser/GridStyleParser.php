@@ -68,7 +68,12 @@ class GridStyleParser implements CssStyleParserInterface
 
     private function getBlockDefinitionByBlock(AbstractBlock $block): false|Block
     {
-        $grid = $this->config->getGrid();
+        $parentBlock = $block->getParentBlock();
+        if (false === $parentBlock instanceof AbstractBlock) {
+            return false;
+        }
+
+        $grid = $this->config->getGrid($parentBlock);
         $blockAlias = (string)$block->getLayout()->getElementAlias($block->getNameInLayout());
         if (strlen($blockAlias) === 0) {
             $blockParts = explode('.', $block->getNameInLayout());

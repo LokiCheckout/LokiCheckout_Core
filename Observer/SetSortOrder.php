@@ -29,7 +29,8 @@ class SetSortOrder implements ObserverInterface
             return;
         }
 
-        $grid = $this->config->getGrid();
+        $grid = $this->config->getGrid($parentBlock);
+
         foreach ($grid->getBlocks() as $blockDefinition) {
             $childBlock = $this->layout->getChildBlock($parentBlock->getNameInLayout(), $blockDefinition->getAlias());
             if (false === $childBlock instanceof AbstractBlock) {

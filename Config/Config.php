@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Module\Manager as ModuleManager;
+use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Store\Model\ScopeInterface;
 use RuntimeException;
@@ -85,9 +86,15 @@ class Config implements ArgumentInterface
         return $this->xmlConfig->getGridLayout($this->getGridLayoutName());
     }
 
-    public function getGrid(): Grid
+    public function getGrid(AbstractBlock $block): Grid
     {
-        $gridLayout = $this->xmlConfig->getGridLayout($this->getGridLayoutName());
+        $gridLayoutName = (string)$block->getGridLayout();
+
+        if (empty($gridLayoutName)) {
+            $gridLayoutName = $this->getGridLayoutName();
+        }
+
+        $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
         $countryId = $this->getCurrentCountryId();
 
         try {
