@@ -26,6 +26,7 @@ class CouponCodeRepository extends FieldRepository
             return;
         }
 
+        $messageManager = $this->getContext()->getMessageManager();
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
             $couponCode = $this->filter($value['code']);
@@ -35,11 +36,11 @@ class CouponCodeRepository extends FieldRepository
 
             $actualCouponCode = $this->getValue();
             if ($couponCode !== $actualCouponCode) {
-                $this->getGlobalMessageRegistry()->addWarning((string)__('Failed to apply coupon code'));
+                $messageManager->addWarningMessage((string)__('Failed to apply coupon code'));
                 return;
             }
 
-            $this->getGlobalMessageRegistry()->addSuccess((string)__('Applied coupon code'));
+            $messageManager->addSuccessMessage((string)__('Applied coupon code'));
             return;
         }
 

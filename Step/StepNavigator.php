@@ -123,7 +123,7 @@ class StepNavigator implements ArgumentInterface
         }
 
         foreach ($validationResult as $error) {
-            $this->messageManager->addErrorMessage($error);
+            $this->messageManager->addErrorMessage(__($error));
         }
 
         return false;
@@ -140,7 +140,7 @@ class StepNavigator implements ArgumentInterface
             $rt = $this->finalStep->validate();
             if (is_array($rt)) {
                 foreach ($rt as $error) {
-                    $this->messageManager->addErrorMessage($error);
+                    $this->messageManager->addErrorMessage(__($error));
                 }
 
                 return false;

@@ -31,7 +31,7 @@ class LoginCustomer
             $customer = $this->accountManagement->authenticate($email, $password);
 
             $this->customerSession->setCustomerDataAsLoggedIn($customer);
-            $this->messageManager->addSuccessMessage('You have logged in'); // @todo: Check right translation
+            $this->messageManager->addSuccessMessage(__('You have logged in'));
 
             if ($this->cookieManager->getCookie('mage-cache-sessid')) {
                 $metadata = $this->cookieMetadataFactory->createCookieMetadata();
@@ -45,10 +45,14 @@ class LoginCustomer
             );
 
         } catch (AuthenticationException $e) {
-            $this->messageManager->addErrorMessage(__(
+            $message = __(
                 'The account sign-in was incorrect or your account is disabled temporarily. '
-                . 'Please wait and try again later: '.$e->getMessage()
-            ));
+                . 'Please wait and try again later.'
+            );
+
+            $message .= ' '.$e->getMessage();
+
+            $this->messageManager->addErrorMessage($message);
 
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());

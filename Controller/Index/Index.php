@@ -79,7 +79,7 @@ class Index implements HttpGetActionInterface
         }
 
         foreach ($validationResult->getMessages() as $error) {
-            $this->messageManager->addErrorMessage($error);
+            $this->messageManager->addErrorMessage(__($error));
         }
 
         return $this->redirectResultFactory->create()->setPath('checkout/cart');

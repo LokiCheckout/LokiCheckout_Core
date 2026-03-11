@@ -59,7 +59,7 @@ class CheckoutContext extends AbstractComponentContext
             return;
         }
 
-        $this->getMessageManager()->addWarningMessage('No items in cart');
+        $this->getMessageManager()->addWarningMessage(__('No items in cart'));
         $url = $this->getUrlFactory()->create()->getUrl('checkout/cart');
         throw new RedirectException($url);
     }
