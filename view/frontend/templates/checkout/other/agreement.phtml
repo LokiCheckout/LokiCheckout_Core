@@ -25,15 +25,17 @@ $agreement = $block->getAgreement();
     x-data="LokiCheckoutAgreementComponent"
     x-title="LokiCheckoutAgreement<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
 >
-    <div class="<?= $escaper->escapeHtml($css('pb-2', 'item')) ?>">
+    <label class="<?= $escaper->escapeHtml($css('pb-2', 'item')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'input', [
             'agreement' => $agreement,
         ]) ?>
 
+        Modal: <span x-text="modalOpen"></span>
+
         <?= /* @noEscape */ $childRenderer->html($block, 'label', [
             'agreement' => $agreement,
         ]) ?>
-    </div>
+    </label>
 
     <?= /* @noEscape */ $childRenderer->html($block, 'modal', [
         'agreement' => $agreement,

@@ -22,7 +22,6 @@ $agreement = $block->getAgreement();
     data-type="field"
     x-ref="field"
     data-id="<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
-    id="<?= /* @noEscape */$viewModel->getElementId().'-'.$agreement->getAgreementId() ?>"
     :checked="isChecked"
     :aria-invalid="isAriaInvalid"
     :data-valid="isValid"

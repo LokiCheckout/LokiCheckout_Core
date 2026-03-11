@@ -25,10 +25,7 @@ if ($hasLink) {
 }
 ?>
 <div class="<?= $escaper->escapeHtml($css('inline-block pl-4', 'label-block')) ?>">
-    <label
-        <?php if (!$hasLink): ?>
-        for="<?= /* @noEscape */ $viewModel->getElementId() . '-' . $agreement->getAgreementId() ?>"
-        <?php endif; ?>
+    <div
         class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
 
         <span class="<?= $escaper->escapeHtml('cursor-pointer', 'label-span') ?>">
@@ -46,5 +43,5 @@ if ($hasLink) {
                 <?= $escaper->escapeHtml(__('View terms')) ?>
             </a>
         <?php endif; ?>
-    </label>
+    </div>
 </div>
