@@ -48,7 +48,7 @@ class ShippingAddressState implements AddressStateInterface
     {
         $this->getAddress()->setData($attributeCode, $value);
 
-        if ($this->sameAddressService->isEnabled()) {
+        if ($this->sameAddressService->isSame()) {
             $this->checkoutState->getQuote()->getBillingAddress()->setData($attributeCode, $value);
         }
     }
