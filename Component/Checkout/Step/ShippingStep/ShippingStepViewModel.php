@@ -26,6 +26,11 @@ class ShippingStepViewModel extends AbstractStepViewModel
             }
         }
 
+        $title = $this->getBlock()->getTitle();
+        if (!empty($title)) {
+            return $title;
+        }
+
         return 'Shipping';
     }
 
