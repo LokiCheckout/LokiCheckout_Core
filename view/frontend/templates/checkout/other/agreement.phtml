@@ -25,7 +25,7 @@ $agreement = $block->getAgreement();
     x-data="LokiCheckoutAgreementComponent"
     x-title="LokiCheckoutAgreement<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
 >
-    <label class="<?= $escaper->escapeHtml($css('pb-2', 'item')) ?>">
+    <label class="<?= $escaper->escapeHtml($css('flex pb-2', 'item')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'input', [
             'agreement' => $agreement,
         ]) ?>
