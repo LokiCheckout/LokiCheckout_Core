@@ -46,7 +46,7 @@ class CouponCodeRepository extends FieldRepository
 
         if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
-            $this->getGlobalMessageRegistry()->addSuccess((string)__('Removed coupon code'));
+            $messageManager->addSuccessMessage((string)__('Removed coupon code'));
         }
     }
 
