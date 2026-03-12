@@ -28,6 +28,7 @@ $fieldId = $block->getFieldId();
         x-ref="input"
         :value="value"
         @change="setValue"
+        @keyup.enter.prevent="applyCouponCode"
         id="<?= $escaper->escapeHtml($fieldId) ?>"
         aria-label="<?= $escaper->escapeHtml(__('Discount Code')) ?>"
         class="<?= $escaper->escapeHtml($css('form-input w-full mb-3', 'input')) ?>">
