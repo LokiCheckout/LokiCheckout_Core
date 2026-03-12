@@ -9,7 +9,7 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 
-/** @version 2.3.12 */
+/** @version 2.3.14 */
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
@@ -25,12 +25,10 @@ $agreement = $block->getAgreement();
     x-data="LokiCheckoutAgreementComponent"
     x-title="LokiCheckoutAgreement<?= $escaper->escapeHtml($agreement->getAgreementId()) ?>"
 >
-    <label class="<?= $escaper->escapeHtml($css('pb-2', 'item')) ?>">
+    <label class="<?= $escaper->escapeHtml($css('flex pb-2', 'item')) ?>">
         <?= /* @noEscape */ $childRenderer->html($block, 'input', [
             'agreement' => $agreement,
         ]) ?>
-
-        Modal: <span x-text="modalOpen"></span>
 
         <?= /* @noEscape */ $childRenderer->html($block, 'label', [
             'agreement' => $agreement,

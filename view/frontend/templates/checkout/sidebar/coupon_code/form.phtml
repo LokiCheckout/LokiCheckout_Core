@@ -5,7 +5,7 @@ use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.3.12 */
+/** @version 2.3.14 */
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
@@ -28,6 +28,7 @@ $fieldId = $block->getFieldId();
         x-ref="input"
         :value="value"
         @change="setValue"
+        @keyup.enter.prevent="applyCouponCode"
         id="<?= $escaper->escapeHtml($fieldId) ?>"
         aria-label="<?= $escaper->escapeHtml(__('Discount Code')) ?>"
         class="<?= $escaper->escapeHtml($css('form-input w-full mb-3', 'input')) ?>">

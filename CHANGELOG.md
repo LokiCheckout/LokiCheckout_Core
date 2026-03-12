@@ -6,6 +6,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.14] - 12 March 2026
+### Fixed
+- Align label and checkbox of agreement properly
+- Allow submitting coupon code by hitting enter
+- Add title to login-button
+- Add Dutch translations
+- Translate "Remove coupon code" properly
+
+## [2.3.13] - 12 March 2026
+### Fixed
+- Allow for `Loki_MapComponents` 1.0
+- Agreement modal was no longer working properly with button
+- Restructure label for agreement for accessibility
+- Allow for more translations
+- Allow setting shipping step label also via shipping step block itself
+- Allow changing shipping method title via XML layout
+- Block argument `grid_layout` was no longer working
+- Make sure AddressState-classes depend on `isSame` not `isEnabled`
+- Allow empty email to pass JS email validation
+- Fix targets of `loki-checkout.shipping.address.billing-as-shipping` component
+- Disable radioboxes for methods when loading
+- Set fax field to lazy update
+- Remove spacing between shipping methods when additional block is empty anyway
+- Apply lazyupdate to billing address prefix and suffix
+
 ## [2.3.12] - 02 March 2026
 ### Fixed
 - Refactor finalize-controller to be inline with final component

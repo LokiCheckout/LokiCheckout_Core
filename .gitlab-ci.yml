@@ -39,7 +39,7 @@ php-linting:
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
   parallel:
     matrix:
-      - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4']
+      - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4', '8.5']
 
 magento-phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
@@ -120,6 +120,7 @@ magento-integration-tests:
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - source .module.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
@@ -134,6 +135,7 @@ magento-integration-tests:
     - composer config repositories.local-source path /tmp/magento/local-source
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - composer dump-autoload -o
     - cd /tmp/magento && curl -fsSL https://patch-diff.githubusercontent.com/raw/magento/magento2/pull/39216.diff | git apply
     - cd /tmp/magento && curl -fsSL https://patch-diff.githubusercontent.com/raw/magento/magento2/pull/40410.diff | git apply
     - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
@@ -160,7 +162,6 @@ magento-compile:
   script:
     - cd $CI_PROJECT_DIR
     - source .module.ini
-    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
     - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
@@ -178,8 +179,8 @@ magento-compile:
     - php -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      #- MAGENTO_VERSION: ['2.4.9-alpha3']
       - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+      #- MAGENTO_VERSION: ['2.4.9-alpha3']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p3

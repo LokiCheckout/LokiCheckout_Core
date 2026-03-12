@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-/** @version 2.3.12 */
+/** @version 2.3.14 */
 
 use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\Components\Factory\ViewModelFactory;
@@ -61,6 +61,7 @@ use Magento\Framework\View\Element\Template;
                 type="button"
                 @click="togglePasswordFieldType"
                 :aria-label="buttonAriaLabel"
+                :title="buttonAriaLabel"
                 id="<?= $escaper->escapeHtml($viewModel->getElementId()) ?>-visibility"
                 class="<?= $escaper->escapeHtml($css('px-4 py-3', 'button')) ?>">
                 <template x-if="passwordVisible">
