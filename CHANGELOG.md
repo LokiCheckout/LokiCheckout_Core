@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.14] - 12 March 2026
+### Fixed
+- Align label and checkbox of agreement properly
+- Allow submitting coupon code by hitting enter
+- Add title to login-button
+- Add Dutch translations
+- Translate "Remove coupon code" properly
+
 ## [2.3.13] - 12 March 2026
 ### Fixed
 - Allow for `Loki_MapComponents` 1.0
