@@ -38,7 +38,7 @@ class SaveCart
         $billingAddress = $quote->getBillingAddress();
         if ($billingAddress->hasDataChanges()) {
             $billingAddress->setUpdatedAt((new DateTime())->format('Y-m-d H:i:s'));
-            $this->quoteAddressResourceModel->save($shippingAddress);
+            $this->quoteAddressResourceModel->save($billingAddress);
         }
 
         if ($quote->hasDataChanges()) {
