@@ -10,6 +10,7 @@ class EmailAvailableValidator implements ValidatorInterface
 {
     public function __construct(
         private readonly AccountManagementInterface $accountManagement,
+        private readonly bool $showEmailInMessage = false
     ) {
     }
 
@@ -27,9 +28,18 @@ class EmailAvailableValidator implements ValidatorInterface
 
         // Mental note, this only triggers if `checkout/options/enable_guest_checkout_login` is enabled
         if (false === $this->accountManagement->isEmailAvailable($email)) {
-            return [(string)__('The email address %1 is not available', $email)];
+            return [$this->getErrorMessage($email)];
         }
 
         return true;
+    }
+
+    private function getErrorMessage(string $email): string
+    {
+        if ($this->showEmailInMessage) {
+            return (string)__('The email address %1 is not available', $email);
+        }
+
+        return (string)__('The email address is not available');
     }
 }
