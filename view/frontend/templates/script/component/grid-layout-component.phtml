@@ -17,8 +17,15 @@ use Magento\Framework\View\Element\Template;
             },
             applyGridClasses() {
                 const grid = document.getElementById(this.elementId.replace('-grid-layout', ''));
+                if (!grid || !Array.isArray(this.gridLayout)) {
+                    return;
+                }
+
+                const positionedElements = [];
+
                 this.gridLayout.forEach(block => {
                     const blockElement = grid.getElementsByClassName(block.alias)[0];
+
                     if (!blockElement) {
                         return;
                     }
@@ -26,7 +33,22 @@ use Magento\Framework\View\Element\Template;
                     blockElement.style.setProperty('--loki-sort-order', block.sortOrder);
                     blockElement.style.setProperty('--loki-col-span', block.colSpan);
                     blockElement.style.setProperty('--loki-md-col-span', block.mdColSpan);
+
+                    positionedElements.push({
+                        element: blockElement,
+                        sortOrder: Number(block.sortOrder) || 0
+                    });
                 });
+
+                positionedElements
+                    .sort((a, b) => a.sortOrder - b.sortOrder)
+                    .forEach((item, index) => {
+                        const currentChildAtIndex = grid.children[index];
+
+                        if (currentChildAtIndex !== item.element) {
+                            grid.insertBefore(item.element, currentChildAtIndex || null);
+                        }
+                    });
             }
         }));
     });
