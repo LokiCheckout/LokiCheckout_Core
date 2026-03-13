@@ -20,7 +20,7 @@ use Magento\Framework\View\Element\Template;
 /** @var Escaper $escaper */
 
 ?>
-<form class="<?= $escaper->escapeHtml($css('grid grid-2-cols gap-4 relative')) ?>" @keydown.enter.prevent="submit">
+<form class="<?= $escaper->escapeHtml($css('grid grid-2-cols gap-4 relative')) ?>" @keydown.enter.prevent="submitLogin">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
 
     <div class="<?= $escaper->escapeHtml($css('field email required', 'field-container')) ?>">
