@@ -2,14 +2,12 @@
 
 namespace LokiCheckout\Core\Payment\Vault;
 
-use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Vault\Api\Data\PaymentTokenInterface;
 
 class NormalizedPaymentToken
 {
     public function __construct(
         private readonly PaymentTokenInterface $paymentToken,
-        private readonly SerializerInterface $serializer,
     ) {
     }
 
@@ -35,6 +33,6 @@ class NormalizedPaymentToken
 
     private function getTokenDetails(): array
     {
-        return $this->serializer->unserialize($this->paymentToken->getTokenDetails());
+        return json_decode($this->paymentToken->getTokenDetails(), true);
     }
 }
