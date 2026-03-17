@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.15] - 17 March 2026
+### Fixed
+- `ENTER` with customer login form submitted wrong method
+- Make sure to match `order` with actual HTML ordering
+- Directly use `json_decode` in payment token deserialization to bypass potential exploits
+- Hide email address in email available error message by default
+- Fix wrong saving of billing address details when repository is bypassed
+
 ## [2.3.14] - 12 March 2026
 ### Fixed
 - Align label and checkbox of agreement properly
