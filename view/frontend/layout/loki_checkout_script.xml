@@ -39,6 +39,10 @@
                 <block
                     name="loki-checkout.script.component-partial.apple-pay"
                     template="LokiCheckout_Core::script/component-partial/apple-pay-component-partial.phtml"/>
+
+                <block
+                    name="loki-checkout.script.component-partial.shipping"
+                    template="LokiCheckout_Core::script/component-partial/shipping-component-partial.phtml"/>
             </referenceBlock>
 
             <referenceBlock name="loki.script.component-type">

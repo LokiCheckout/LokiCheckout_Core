@@ -1,0 +1,108 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+?>
+<script>
+    const LokiCheckoutShippingComponentPartial = {
+        ...LokiTabComponentPartial,
+        ...LokiModalComponentPartial,
+        activeTabId: '',
+        visibleDeliveryCount: 3,
+        expandDeliveryCount: 3,
+        visibleLocationCount: 3,
+        expandLocationCount: 3,
+        isValidShippingAddress: true,
+        showLoader: false,
+        locations: [],
+        deliveryDates: [],
+        isInvalidShippingAddress() {
+            return !this.isValidShippingAddress;
+        },
+        getVisibleDeliveryDates() {
+            if (!this.hasDeliveryDates()) {
+                return [];
+            }
+
+            return this.deliveryDates.slice(0, this.visibleDeliveryCount);
+        },
+        hasDeliveryDates() {
+            return this.deliveryDates.length > 0;
+        },
+        showNoDeliveryDates() {
+            return !this.hasDeliveryDates() && !this.showLoader && this.isValidShippingAddress;
+        },
+        showLoadingDeliveryDates() {
+            return !this.hasDeliveryDates() && this.showLoader;
+        },
+        expandAllTimeframes() {
+            this.visibleDeliveryCount = this.deliveryDates.length;
+        },
+        expandTimeframes() {
+            this.visibleDeliveryCount += this.expandDeliveryCount;
+        },
+        getVisibleLocations() {
+            return this.getSortedLocations().slice(0, this.visibleLocationCount);
+        },
+        hasLocations() {
+            return this.locations.length > 0;
+        },
+        hasNoLocations() {
+            return !this.hasLocations();
+        },
+        showNoLocations() {
+            return !this.hasLocations() && !this.showLoader && this.isValidShippingAddress;
+        },
+        showLoadingLocations() {
+            return !this.hasLocations() && this.showLoader;
+        },
+        expandAllLocations() {
+            this.visibleLocationCount = this.locations.length;
+        },
+        expandLocations() {
+            this.visibleLocationCount += this.expandLocationCount;
+        },
+        getSortedLocations() {
+            return this.locations.sort((a, b) => {
+                if (this.isCurrentLocationId(a.id)) {
+                    return -1; // @todo: Make this optional
+                }
+
+                if (parseInt(a.distance) < parseInt(b.distance)) {
+                    return -1;
+                }
+
+                if (parseInt(a.distance) > parseInt(b.distance)) {
+                    return 1;
+                }
+
+                return 0;
+            });
+        },
+        saveLocation(event) {
+            this.post({type: 'location', id: event.target.value});
+        },
+        saveTimeframe(event) {
+            this.post({type: 'timeframe', id: event.target.value});
+        },
+        isCurrentLocation() {
+            const id = this.$el.getAttribute('value');
+            return this.isCurrentLocationId(id);
+        },
+        isCurrentLocationId(locationId) {
+            if (!locationId || !this.value || this.value.deliveryType !== 'pickup') {
+                return false;
+            }
+
+            return locationId === this.value.pickupLocation.location_code;
+        },
+        showExpandDeliveryDates() {
+            return this.deliveryDates.length > this.visibleDeliveryCount;
+        },
+        showExpandLocations() {
+            return this.locations.length > this.visibleLocationCount;
+        }
+    }
+</script>

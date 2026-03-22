@@ -10,6 +10,6 @@ use Magento\Framework\View\Element\Template;
 /** @var Escaper $escaper */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<template x-for="timeframe in deliveryDate.timeframes">
+<template x-for="timeframe in deliveryDate.timeframes" :key="timeframe.label">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.js.delivery-date.timeframe') ?>
 </template>

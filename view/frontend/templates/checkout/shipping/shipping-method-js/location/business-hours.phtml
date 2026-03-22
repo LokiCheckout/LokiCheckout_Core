@@ -17,7 +17,7 @@ use Magento\Framework\View\Element\Template;
         <template x-for="(hours, day) in location.openingHours" :key="day">
             <div class="grid grid-cols-2 gap-2">
                 <div x-text="day" class="day capitalize"></div>
-                <template x-for="hour in hours">
+                <template x-for="hour in hours" :key="hour">
                     <div>
                         <span x-text="hour"></span>
                     </div>

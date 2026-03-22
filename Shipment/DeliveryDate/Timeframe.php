@@ -3,10 +3,11 @@
 namespace LokiCheckout\Core\Shipment\DeliveryDate;
 
 use IntlDateFormatter;
+use JsonSerializable;
 use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 
-class Timeframe
+class Timeframe implements JsonSerializable
 {
     public function __construct(
         private readonly LocaleResolver $localeResolver,
@@ -94,4 +95,19 @@ class Timeframe
         );
     }
 
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'code' => $this->getCode(),
+            'id' => $this->getId(),
+            'label' => $this->getLabel(),
+            'price' => $this->getPrice(),
+            'fromTimestamp' => $this->getFromTimestamp(),
+            'fromDay' => $this->getFromDay(),
+            'fromTime' => $this->getFromTime(),
+            'toTimestamp' => $this->getToTimestamp(),
+            'toDay' => $this->getToDay(),
+            'toTime' => $this->getToTime(),
+        ];
+    }
 }
