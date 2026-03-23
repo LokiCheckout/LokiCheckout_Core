@@ -13,15 +13,20 @@ class DeliveryDate implements JsonSerializable
     public function __construct(
         private readonly LocaleResolver $localeResolver,
         private readonly Timezone $timezone,
+        private readonly string $id,
         private readonly int $timestamp,
         private array $timeframes = [],
         private readonly string $datePattern = 'EEEE, MMMM dd', // @doc
     ) {
     }
 
-    public function getTimestamp(): int
+    public function getId(): string
     {
-        return $this->timestamp;
+        if (!empty($this->id)) {
+            return $this->id;
+        }
+
+        return (string)$this->getTimestamp();
     }
 
     public function getDate(): string
@@ -29,6 +34,11 @@ class DeliveryDate implements JsonSerializable
         $formatter = $this->getDateFormatter();
         $formatter->setPattern($this->datePattern);
         return $formatter->format($this->getTimestamp());
+    }
+
+    public function getTimestamp(): int
+    {
+        return $this->timestamp;
     }
 
     public function getTimeframes(): array
@@ -55,6 +65,7 @@ class DeliveryDate implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
+            'id' => $this->getId(),
             'date' => $this->getDate(),
             'timestamp' => $this->getTimestamp(),
             'timeframes' => $this->getTimeframes(),
