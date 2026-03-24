@@ -2,10 +2,10 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\BlockRenderer;
-use LokiCheckout\Core\Util\Cart\CartTotals;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\ViewModel\PriceFormatter;
 
@@ -16,11 +16,11 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 /** @var PriceFormatter $priceFormatter */
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
-/** @var CartTotals $cartTotals */
+/** @var CheckoutState $checkoutState */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
-$cartTotals = $viewModelFactory->create(CartTotals::class);
-$totals = $cartTotals->getTotals();
+$checkoutState = $viewModelFactory->create(CheckoutState::class);
+$totals = $checkoutState->calculateTotals();
 $totalSegments = $totals->getTotalSegments();
 ?>
 <div class="<?= $escaper->escapeHtml($css('relative')) ?>">
