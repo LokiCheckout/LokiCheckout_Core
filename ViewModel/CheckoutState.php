@@ -13,6 +13,9 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\QuoteIdToMaskedQuoteIdInterface;
+use Magento\Checkout\Api\Data\TotalsInformationInterfaceFactory;
+use Magento\Checkout\Api\TotalsInformationManagementInterface;
+use Magento\Quote\Api\Data\TotalsInterface;
 use Loki\Components\Exception\RedirectException;
 use Loki\Components\Util\Ajax;
 
@@ -29,7 +32,9 @@ class CheckoutState implements ArgumentInterface
         private readonly UrlFactory $urlFactory,
         private readonly ResponseFactory $responseFactory,
         private readonly Ajax $ajax,
-        private readonly SaveCart $saveCart
+        private readonly SaveCart $saveCart,
+        private readonly TotalsInformationManagementInterface $totalsInformationManagement,
+        private readonly TotalsInformationInterfaceFactory $totalsInformationFactory,
     ) {
     }
 
@@ -128,9 +133,35 @@ class CheckoutState implements ArgumentInterface
 
         try {
             $this->saveCart->execute($quote, $useRepository);
+            $this->calculateTotals();
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException();
         }
+    }
+
+    public function calculateTotals(): TotalsInterface
+    {
+        static $totals = false;
+        if ($totals instanceof TotalsInterface) {
+            return $totals;
+        }
+
+        $quote = $this->getQuote();
+        $shippingAddress = $quote->getShippingAddress();
+
+        $totalsInformation = $this->totalsInformationFactory->create();
+        $totalsInformation->setAddress($shippingAddress);
+
+        $parts = explode('_', (string)$shippingAddress->getShippingMethod());
+        if (count($parts) > 1) {
+            $carrierCode = array_shift($parts);
+            $methodCode = implode("_", $parts);
+            $totalsInformation->setShippingMethodCode($methodCode);
+            $totalsInformation->setShippingCarrierCode($carrierCode);
+        }
+
+        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
+        return $totals;
     }
 
     public function getCheckoutSession(): CheckoutSession
