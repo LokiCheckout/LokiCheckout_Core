@@ -114,6 +114,10 @@
 
         <referenceContainer name="loki.script.directive">
             <block
+                name="loki-checkout.script.directive.data-json"
+                template="LokiCheckout_Core::script/directive/data-json-directive.phtml"/>
+
+            <block
                 name="loki-checkout.script.directive.date"
                 template="LokiCheckout_Core::script/directive/date-directive.phtml"/>
 
