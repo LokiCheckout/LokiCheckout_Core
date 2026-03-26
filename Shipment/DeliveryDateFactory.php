@@ -12,10 +12,12 @@ class DeliveryDateFactory
     }
 
     public function create(
+        string $id,
         int $timestamp,
         array $timeframes = []
     ): DeliveryDate {
         return $this->objectManager->create(DeliveryDate::class, [
+            'id' => $id,
             'timestamp' => $timestamp,
             'timeframes' => $timeframes,
         ]);

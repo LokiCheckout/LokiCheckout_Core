@@ -41,6 +41,9 @@ class DeliveryDate implements JsonSerializable
         return $this->timestamp;
     }
 
+    /**
+     * @return Timeframe[]
+     */
     public function getTimeframes(): array
     {
         return $this->timeframes;

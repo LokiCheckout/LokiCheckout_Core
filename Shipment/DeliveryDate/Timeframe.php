@@ -7,17 +7,21 @@ use JsonSerializable;
 use Magento\Framework\Locale\ResolverInterface as LocaleResolver;
 use Magento\Framework\Stdlib\DateTime\Timezone;
 
+// @todo Move date formatting to separate class DateFormatter
 class Timeframe implements JsonSerializable
 {
     public function __construct(
         private readonly LocaleResolver $localeResolver,
         private readonly Timezone $timezone,
-        private readonly string $code,
         private readonly string $id,
+        private readonly array $value,
         private readonly string $label,
         private readonly int $fromTimestamp,
         private readonly int $toTimestamp,
-        private readonly float $price = 0
+        private readonly float $price = 0,
+        private readonly bool $disabled = false,
+        private readonly string $carrier = '',
+        private readonly string $carrierImage = '',
     ) {
     }
 
@@ -26,13 +30,9 @@ class Timeframe implements JsonSerializable
         return $this->id;
     }
 
-    public function getCode(): string
-    {
-        return $this->code;
-    }
     public function getLabel(): string
     {
-        return $this->label;
+        return (string)__($this->label);
     }
 
     public function getFromDate(): string
@@ -49,6 +49,7 @@ class Timeframe implements JsonSerializable
     {
         $formatter = $this->getDateFormatter();
         $formatter->setPattern('EEEE');
+
         return $formatter->format($this->fromTimestamp);
     }
 
@@ -56,6 +57,7 @@ class Timeframe implements JsonSerializable
     {
         $formatter = $this->getDateFormatter();
         $formatter->setPattern('EEEE');
+
         return $formatter->format($this->toTimestamp);
     }
 
@@ -84,9 +86,15 @@ class Timeframe implements JsonSerializable
         return $this->price;
     }
 
+    public function isDisabled(): bool
+    {
+        return $this->disabled;
+    }
+
     private function getDateFormatter(): IntlDateFormatter
     {
         $currentLocale = $this->localeResolver->getLocale();
+
         return datefmt_create(
             $currentLocale,
             IntlDateFormatter::NONE,
@@ -98,16 +106,32 @@ class Timeframe implements JsonSerializable
     public function jsonSerialize(): mixed
     {
         return [
-            'code' => $this->getCode(),
             'id' => $this->getId(),
             'label' => $this->getLabel(),
+            'value' => $this->getValue(),
             'price' => $this->getPrice(),
-            'fromTimestamp' => $this->getFromTimestamp(),
             'fromDay' => $this->getFromDay(),
             'fromTime' => $this->getFromTime(),
-            'toTimestamp' => $this->getToTimestamp(),
             'toDay' => $this->getToDay(),
             'toTime' => $this->getToTime(),
+            'disabled' => $this->isDisabled(),
+            'carrier' => $this->getCarrier(),
+            'carrierImage' => $this->getCarrierImage(),
         ];
+    }
+
+    public function getCarrier(): string
+    {
+        return $this->carrier;
+    }
+
+    public function getCarrierImage(): string
+    {
+        return $this->carrierImage;
+    }
+
+    public function getValue(): array
+    {
+        return $this->value;
     }
 }
