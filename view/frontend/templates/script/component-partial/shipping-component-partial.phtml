@@ -9,7 +9,9 @@ use Magento\Framework\View\Element\Template;
     const LokiCheckoutShippingComponentPartial = {
         ...LokiTabComponentPartial,
         ...LokiModalComponentPartial,
-        activeTabId: '',
+        valid: false,
+        required: true,
+        activeTabId: 'delivery-dates',
         visibleDeliveryCount: 3,
         expandDeliveryCount: 3,
         visibleLocationCount: 3,
@@ -17,7 +19,21 @@ use Magento\Framework\View\Element\Template;
         isValidShippingAddress: true,
         showLoader: false,
         locations: [],
+        deliveryEnabled: false,
         deliveryDates: [],
+        initActiveTab() {
+            if (this.deliveryEnabled && this.activeTabId !== 'locations') {
+                this.activeTabId = 'delivery-dates';
+            }
+
+            this.showActiveTab();
+        },
+        initLocations() {
+            this.showLocations();
+        },
+        isDeliveryEnabled() {
+            return this.deliveryEnabled;
+        },
         isInvalidShippingAddress() {
             return !this.isValidShippingAddress;
         },
@@ -43,6 +59,9 @@ use Magento\Framework\View\Element\Template;
         expandTimeframes() {
             this.visibleDeliveryCount += this.expandDeliveryCount;
         },
+        isCurrentValue(value) {
+            return JSON.stringify(value) === JSON.stringify(this.value);
+        },
         getVisibleLocations() {
             return this.getSortedLocations().slice(0, this.visibleLocationCount);
         },
@@ -63,10 +82,11 @@ use Magento\Framework\View\Element\Template;
         },
         expandLocations() {
             this.visibleLocationCount += this.expandLocationCount;
+            this.showLocations();
         },
         getSortedLocations() {
             return this.locations.sort((a, b) => {
-                if (this.isCurrentLocationId(a.id)) {
+                if (this.isCurrentLocationValue(a.value)) {
                     return -1; // @todo: Make this optional
                 }
 
@@ -82,16 +102,21 @@ use Magento\Framework\View\Element\Template;
             });
         },
         saveLocation(event) {
-            this.post({type: 'location', id: event.target.value});
+            const data = JSON.parse(event.target.getAttribute('data-json'));
+            this.post(data);
         },
         saveTimeframe(event) {
-            this.post({type: 'timeframe', id: event.target.value});
+            const data = JSON.parse(event.target.getAttribute('data-json'));
+            this.post(data);
         },
         isCurrentLocation() {
             const id = this.$el.getAttribute('value');
-            return this.isCurrentLocationId(id);
+
+            return this.isCurrentLocationValue(id);
         },
-        isCurrentLocationId(locationId) {
+        isCurrentLocationValue(locationId) {
+            //console.log('isCurrentLocationValue', locationId, this.value);
+
             if (!locationId || !this.value || this.value.deliveryType !== 'pickup') {
                 return false;
             }
@@ -103,6 +128,11 @@ use Magento\Framework\View\Element\Template;
         },
         showExpandLocations() {
             return this.locations.length > this.visibleLocationCount;
-        }
+        },
+        toggleMaps() {
+            this.activeTabId = 'locations';
+            this.toggleTab('locations');
+            this.toggleModal();
+        },
     }
 </script>

@@ -1,29 +1,23 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate\Timeframe;
-use Loki\Components\Util\Block\ChildRenderer;
 
 /** @version 2.3.15 */
 /** @var Template $block */
 /** @var Escaper $escaper */
-/** @var ChildRenderer $childRenderer */
+/** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
-/** @var Timeframe[] $timeframes */
-
-$timeframe = $block->getTimeframe();
 ?>
-<div class="<?= $escaper->escapeHtml($css('flex p-2 hover:bg-black/5')) ?>">
-    <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.input', [
-        'timeframe' => $timeframe,
-    ]) ?>
-
-    <label for="<?= $escaper->escapeHtml($timeframe->getId()) ?>" class="<?= $escaper->escapeHtml($css('cursor-pointer flex-1', 'label')) ?>">
-        <?= /* @noEscape */ $childRenderer->html($block, 'timeframe.name', [
-            'timeframe' => $timeframe,
-        ]) ?>
-    </label>
-</div>
+<label
+    class="loki-checkout-shipping-shipping-methods-item block mb-2 p-2 hover:bg-black/5"
+    :class="timeframe.cssClass">
+    <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date.timeframe.image') ?>
+    <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date.timeframe.price') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block,  'loki-checkout.shipping.delivery-date.timeframe.input') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block,  'loki-checkout.shipping.delivery-date.timeframe.times') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block,  'loki-checkout.shipping.delivery-date.timeframe.label') ?>
+</label>

@@ -3,41 +3,29 @@ declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
 
+/** @version 2.3.15 */
 /** @var CssClass $css */
 /** @var Template $block */
 /** @var Escaper $escaper */
-use Magento\Framework\View\Element\Template;
-use Loki\Components\Location\Location;
-use Loki\Components\Location\Address\BusinessHours;
 
-/** @version 2.3.15 */
-/**
- * @var Template $block
- * @var CssClass $css
- * @var Location $location
- */
-$location = $block->getLocation();
-$businessHours = $location->getBusinessHours();
-if (false === $businessHours instanceof BusinessHours) {
-    return;
-}
 ?>
-<details class="<?= $escaper->escapeHtml($css('')) ?>">
-    <summary class="<?= $escaper->escapeHtml($css('', 'summary')) ?> ?>">
-        <?= $escaper->escapeHtml(__('Show opening hours')) ?>
-    </summary>
-    <div class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-2 mb-4', 'content')) ?>">
-        <?php foreach ($businessHours->get() as $businessHourSegment): ?>
-            <div><?= $escaper->escapeHtml(__($businessHourSegment->getDay())) ?></div>
-            <div>
-                <?php if ($businessHourSegment->getOpeningHour()): ?>
-                <?= $escaper->escapeHtml($businessHourSegment->getOpeningHour()) ?> - <?= $escaper->escapeHtml($businessHourSegment->getClosingHour()) ?>
-                <?php endif; ?>
-                <?php if ($businessHourSegment->getComment()): ?>
-                <?= $escaper->escapeHtml(__($businessHourSegment->getComment())) ?>
-                <?php endif; ?>
+<details x-show="location.businessHours">
+    <summary><?= $escaper->escapeHtml(__('Show opening hours')) ?></summary>
+    <div class="py-8">
+        <template x-for="day in location.businessHours.days" :key="day.id">
+            <div class="grid grid-cols-2 gap-2">
+                <div x-text="day.label" class="day capitalize"></div>
+                <template x-for="dayPart in day.dayParts" :key="dayPart.id">
+                    <div>
+                        <span x-text="dayPart.openingHour"></span> - <span x-text="dayPart.closingHour"></span>
+                    </div>
+                </template>
+                <template x-if="day.comment">
+                    <div x-text="day.comment"></div>
+                </template>
             </div>
-        <?php endforeach; ?>
+        </template>
     </div>
 </details>

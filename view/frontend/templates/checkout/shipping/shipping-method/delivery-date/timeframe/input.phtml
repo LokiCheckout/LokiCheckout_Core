@@ -4,25 +4,18 @@ declare(strict_types=1);
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate\Timeframe;
 
 /** @version 2.3.15 */
 /** @var Template $block */
-/** @var CssClass $css */
 /** @var Escaper $escaper */
-/** @var Timeframe $timeframe */
-
-$timeframe = $block->getTimeframe();
+/** @var CssClass $css */
 ?>
-<div class="<?= $escaper->escapeHtml($css('')) ?>">
-    <input
-        type="radio"
-        :checked="isChecked"
-        @change="submitValue"
-        :disabled="disabled"
-        name="timeframe"
-        value="<?= $escaper->escapeHtml($timeframe->getCode()) ?>"
-        id="<?= $escaper->escapeHtml($timeframe->getId()) ?>"
-        class="<?= $escaper->escapeHtml($css('mr-4', 'input')) ?>"
-    />
-</div>
+<input
+    type="radio"
+    name="delivery"
+    x-data-json="timeframe.value"
+    @change="saveTimeframe"
+    :disabled="timeframe.disabled"
+    :checked="isCurrentValue(timeframe.value)"
+    class="<?= $escaper->escapeHtml($css('mr-2', 'input')) ?>"
+/>

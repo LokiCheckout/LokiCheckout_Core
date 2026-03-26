@@ -2,13 +2,12 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.3.15 */
+/** @var Escaper $escaper */
 /** @var Template $block */
 /** @var CssClass $css */
 ?>
-<div class="float-right cursor-pointer w-8 pl-2">
-    <img :src="timeframe.carrierImage" :title="timeframe.carrier"/>
+<div class="<?= $escaper->escapeHtml($css('inline-block text-sm')) ?>" x-html="timeframe.label">
 </div>
-

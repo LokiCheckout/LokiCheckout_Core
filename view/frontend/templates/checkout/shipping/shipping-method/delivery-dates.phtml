@@ -1,33 +1,49 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
 use Loki\CssUtils\Util\CssClass;
+use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\Escaper;
-
-/** @var Template $block */
-/** @var CssClass $css */
-/** @var Escaper $escaper */
 use Magento\Framework\View\Element\Template;
-use LokiCheckout\Core\Shipment\DeliveryDate;
 use Loki\Components\Util\Block\ChildRenderer;
 
 /** @version 2.3.15 */
-/**
- * @var Template $block
- * @var ChildRenderer $childRenderer
- * @var CssClass $css
- * @var DeliveryDate[] $deliveryDates
- */
-$deliveryDates = $block->getDeliveryDates();
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+/** @var BlockRenderer $blockRenderer */
+/** @var ImageRenderer $imageRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+
+$tabId = $block->getTabId();
 ?>
-<div class="<?= $escaper->escapeHtml($css('py-4')) ?>">
-    <?php if (empty($deliveryDates)): ?>
-        <div class="<?= $escaper->escapeHtml($css('', 'empty')) ?>"><?= $escaper->escapeHtml(__('No delivery dates found')) ?></div>
-    <?php else: ?>
-        <?php foreach ($deliveryDates as $deliveryDate): ?>
-            <?= /* @noEscape */ $childRenderer->html($block, 'delivery-date', [
-                'delivery_date' => $deliveryDate,
-            ]) ?>
-        <?php endforeach; ?>
-    <?php endif; ?>
+<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtml($css('hidden', 'timeframes-container')) ?>">
+    <div x-cloak x-show="showLoader" :aria-busy="showLoader"
+         class="<?= $escaper->escapeHtml($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
+        <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
+    </div>
+
+    <div>
+        <template x-if="isInvalidShippingAddress">
+            <div class="<?= $escaper->escapeHtml($css('', 'invalid-address')) ?>"><?= $escaper->escapeHtml(__('Please enter your address details first')) ?></div>
+        </template>
+
+        <div x-cloak x-show="showLoadingDeliveryDates" class="<?= $escaper->escapeHtml($css('', 'loading')) ?>">
+            <?= $escaper->escapeHtml(__('Loading delivery options')) ?>
+        </div>
+
+        <div x-cloak x-show="showNoDeliveryDates" class="<?= $escaper->escapeHtml($css('', 'empty')) ?>">
+            <?= $escaper->escapeHtml(__('No delivery options found')) ?>
+        </div>
+
+        <template x-for="deliveryDate in getVisibleDeliveryDates" :key="deliveryDate.id">
+            <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date') ?>
+        </template>
+
+        <?= /* @noEscape */ $block->getChildHtml('expand-button') ?>
+        <?= /* @noEscape */ $block->getChildHtml('expand-all-button') ?>
+    </div>
 </div>

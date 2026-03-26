@@ -5,9 +5,11 @@ use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
-/** @version 2.3.15 */
 /** @var Template $block */
-/** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var CssClass $css */
 ?>
-<address class="<?= $escaper->escapeHtml($css('mb-4')) ?>" x-html="location.addressHtml"></address>
+<div class="inline-block cursor-pointer">
+    <span x-time="timeframe.fromTime"></span> -
+    <span x-time="timeframe.toTime"></span>
+</div>

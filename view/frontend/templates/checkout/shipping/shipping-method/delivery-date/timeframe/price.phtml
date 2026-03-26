@@ -7,9 +7,14 @@ use Magento\Framework\View\Element\Template;
 /** @version 2.3.15 */
 /** @var Template $block */
 /** @var CssClass $css */
+
+$marker = $block->getMarker();
+if (empty($marker)) {
+    $marker = '+';
+}
 ?>
 <template x-if="timeframe.price.amount">
     <div class="float-right cursor-pointer text-sm pl-2">
-        + <span x-money="timeframe.price.amount"></span>
+        <?= /** @noEscape */ $marker ?> <span x-money="timeframe.price.amount"></span>
     </div>
 </template>

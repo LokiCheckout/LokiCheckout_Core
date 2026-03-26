@@ -1,0 +1,15 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+?>
+
+<div x-show="location.pickupFrom">
+    <?= $escaper->escapeHtml(__('From date')) ?> <span x-date="location.pickupFrom"></span>
+</div>

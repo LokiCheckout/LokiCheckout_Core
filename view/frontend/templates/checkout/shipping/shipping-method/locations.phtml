@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-use Loki\CssUtils\Util\CssClass;
-use Magento\Framework\View\Element\Template;
-use Magento\Framework\Escaper;
-use Loki\Components\Location\Location;
 use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
 use Loki\Components\Util\Block\ChildRenderer;
 use Loki\Components\Util\Block\ImageRenderer;
 
@@ -14,32 +14,37 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var CssClass $css */
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
+/** @var BlockRenderer $blockRenderer */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var Location[] $locations */
 /** @var ImageRenderer $imageRenderer */
 
 
-$locations = $block->getLocations();
+$tabId = $block->getTabId();
 ?>
-<div>
-    <?php if (empty($locations)): ?>
-        <div class="<?= $escaper->escapeHtml($css('p-2', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
-    <?php else: ?>
-        <?php $i = 1; ?>
-        <?php foreach ($locations as $location): ?>
-            <div data-location-index="<?= $escaper->escapeHtml($i) ?>" class="hidden">
-                <?= /* @noEscape */ $childRenderer->html($block, 'location', [
-                    'location' => $location,
-                ]) ?>
-            </div>
-            <?php $i++; ?>
-        <?php endforeach; ?>
+<div data-tab-content="<?= $escaper->escapeHtml($tabId) ?>" class="<?= $escaper->escapeHtml($css('hidden relative', 'locations-container')) ?>">
+    <div x-cloak x-show="showLoader" :aria-busy="showLoader"
+         class="<?= $escaper->escapeHtml($css('absolute top-0 left-0 right-0 bottom-0', 'loader')) ?>">
+        <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
+    </div>
 
-        <div @click.prevent="expandLocations">
-            <div class="inline-block">
-                <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
-            </div>
-            <span class="text-sm"><?= $escaper->escapeHtml(__('Show more options')) ?></span>
-        </div>
-    <?php endif; ?>
+    <div>
+        <template x-if="isInvalidShippingAddress">
+            <div class="<?= $escaper->escapeHtml($css('', 'invalid-address')) ?>"><?= $escaper->escapeHtml(__('Please enter your address details first')) ?></div>
+        </template>
+
+        <template x-if="showLoadingLocations">
+            <div class="<?= $escaper->escapeHtml($css('', 'loading')) ?>"><?= $escaper->escapeHtml(__('Loading locations')) ?></div>
+        </template>
+
+        <template x-if="showNoLocations">
+            <div class="<?= $escaper->escapeHtml($css('', 'empty')) ?>"><?= $escaper->escapeHtml(__('No locations found')) ?></div>
+        </template>
+
+        <template x-for="location in getVisibleLocations" :key="location.id">
+            <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.location') ?>
+        </template>
+
+        <?= /* @noEscape */ $block->getChildHtml('expand-button') ?>
+        <?= /* @noEscape */ $block->getChildHtml('expand-all-button') ?>
+    </div>
 </div>
