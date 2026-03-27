@@ -13,7 +13,7 @@ use Loki\Components\Location\Location;
 
 ?>
 <template x-if="location.data.additional">
-    <details>
+    <details class="<?= $escaper->escapeHtml($css('', 'details')) ?>">
         <summary class="<?= $escaper->escapeHtml($css('', 'summary')) ?>">
             <?= $escaper->escapeHtml(__('Additional information')) ?>
         </summary>

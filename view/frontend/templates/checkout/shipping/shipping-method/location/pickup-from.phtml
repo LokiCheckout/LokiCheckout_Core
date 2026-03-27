@@ -10,6 +10,7 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 ?>
 
-<div x-show="location.pickupFrom">
-    <?= $escaper->escapeHtml(__('From date')) ?> <span x-date="location.pickupFrom"></span>
+<div x-show="location.pickupFrom" class="<?= $escaper->escapeHtml($css('')) ?>">
+    <?= $escaper->escapeHtml(__('From date')) ?>
+    <span class="<?= $escaper->escapeHtml($css('', 'value')) ?>" x-date="location.pickupFrom"></span>
 </div>

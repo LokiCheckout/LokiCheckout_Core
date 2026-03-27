@@ -13,7 +13,7 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 ?>
 <label
-    class="loki-checkout-shipping-shipping-methods-item block mb-2 p-2 hover:bg-black/5"
+    class="<?= $escaper->escapeHtml($css('block mb-2 p-2 hover:bg-black/5')) ?>"
     :class="timeframe.cssClass">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date.timeframe.image') ?>
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date.timeframe.price') ?>

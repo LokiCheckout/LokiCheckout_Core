@@ -21,14 +21,14 @@ use Loki\Components\Util\Block\ImageRenderer;
 
 $label = $block->getLabel();
 ?>
-<div class="<?= $escaper->escapeHtml($css('', 'loading')) ?>" aria-live="polite" aria-atomic="true">
-    <div class="<?= $escaper->escapeHtml($css('sr-only', 'loading-text')) ?>">
+<div class="<?= $escaper->escapeHtml($css('')) ?>" aria-live="polite" aria-atomic="true">
+    <div class="<?= $escaper->escapeHtml($css('sr-only', 'loading-label')) ?>">
         <?= $escaper->escapeHtml(__($label)) ?>
     </div>
     <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-bricks')) ?>">
-        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>"></div>
-        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>"></div>
-        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>"></div>
-        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>'"></div>
+        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>">&nbsp;</div>
+        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>">&nbsp;</div>
+        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>">&nbsp;</div>
+        <div class="<?= $escaper->escapeHtml($css('bg-gray-400 h-8 my-4 rounded-sm', 'loading-brick')) ?>'">&nbsp;</div>
     </div>
 </div>

@@ -11,19 +11,21 @@ use Magento\Framework\View\Element\Template;
 /** @var Escaper $escaper */
 
 ?>
-<details x-show="location.businessHours">
-    <summary><?= $escaper->escapeHtml(__('Show opening hours')) ?></summary>
-    <div class="py-8">
+<details x-show="location.businessHours" class="<?= $escaper->escapeHtml($css('')) ?>">
+    <summary class="<?= $escaper->escapeHtml($css('', 'summary')) ?>">
+        <?= $escaper->escapeHtml(__('Show opening hours')) ?>
+    </summary>
+    <div class="<?= $escaper->escapeHtml($css('py-8', 'inner')) ?>">
         <template x-for="day in location.businessHours.days" :key="day.id">
-            <div class="grid grid-cols-2 gap-2">
-                <div x-text="day.label" class="day capitalize"></div>
+            <div class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-2', 'day')) ?>">
+                <div x-text="day.label" class="<?= $escaper->escapeHtml($css('day capitalize', 'label')) ?>'"></div>
                 <template x-for="dayPart in day.dayParts" :key="dayPart.id">
-                    <div>
+                    <div class="<?= $escaper->escapeHtml($css('', 'hours')) ?>">
                         <span x-text="dayPart.openingHour"></span> - <span x-text="dayPart.closingHour"></span>
                     </div>
                 </template>
                 <template x-if="day.comment">
-                    <div x-text="day.comment"></div>
+                    <div class="<?= $escaper->escapeHtml($css('','comment')) ?>" x-text="day.comment"></div>
                 </template>
             </div>
         </template>

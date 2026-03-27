@@ -2,11 +2,13 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @version 2.3.15 */
 /** @var Template $block */
 /** @var CssClass $css */
+/** @var Escaper $escaper */
 
 $marker = $block->getMarker();
 if (empty($marker)) {
@@ -14,7 +16,7 @@ if (empty($marker)) {
 }
 ?>
 <template x-if="timeframe.price.amount">
-    <div class="float-right cursor-pointer text-sm pl-2">
+    <div class="<?= $escaper->escapeHtml($css('float-right cursor-pointer text-sm pl-2', 'inner')) ?>">
         <?= /** @noEscape */ $marker ?> <span x-money="timeframe.price.amount"></span>
     </div>
 </template>

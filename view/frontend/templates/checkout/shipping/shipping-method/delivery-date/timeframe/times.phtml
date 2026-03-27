@@ -9,7 +9,7 @@ use Magento\Framework\View\Element\Template;
 /** @var Escaper $escaper */
 /** @var CssClass $css */
 ?>
-<div class="inline-block cursor-pointer">
-    <span x-time="timeframe.fromTime"></span> -
-    <span x-time="timeframe.toTime"></span>
+<div class="<?= $escaper->escapeHtml($css('inline-block cursor-pointer')) ?>">
+    <span class="<?= $escaper->escapeHtml($css('', 'from')) ?>" x-time="timeframe.fromTime"></span> -
+    <span class="<?= $escaper->escapeHtml($css('', 'to')) ?>" x-time="timeframe.toTime"></span>
 </div>

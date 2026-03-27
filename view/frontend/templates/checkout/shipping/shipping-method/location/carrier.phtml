@@ -12,7 +12,11 @@ use Loki\Components\Location\Location;
 
 ?>
 <template x-if="location.carrier">
-    <div class="pb-2 w-16">
-        <img :src="location.carrierImage" :title="location.carrier"/>
+    <div class="<?= $escaper->escapeHtml($css('pb-2 w-16', 'inner')) ?>">
+        <img
+            class="<?= $escaper->escapeHtml($css('', 'image')) ?>"
+            :src="location.carrierImage"
+            :title="location.carrier"
+        />
     </div>
 </template>

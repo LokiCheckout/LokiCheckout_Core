@@ -11,4 +11,6 @@ use Loki\Components\Location\Location;
 /** @var Escaper $escaper */
 
 ?>
-<div class="sm"><span x-text="location.distance"></span></div>
+<div class="<?= $escaper->escapeHtml($css('sm')) ?>">
+    <span class="<?= $escaper->escapeHtml($css('', 'inner')) ?>" x-text="location.distance"></span>
+</div>
