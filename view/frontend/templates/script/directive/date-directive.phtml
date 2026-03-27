@@ -1,10 +1,12 @@
 <?php
 declare(strict_types=1);
 
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 
 /** @version 2.3.16 */
 /** @var Template $block */
+/** @var Escaper $escaper */
 
 $options = (array)$block->getOptions();
 if (!isset($options['weekday'])) {
@@ -71,11 +73,11 @@ $options['timeZone'] = 'Europe/Amsterdam'; // @todo: Make this dynamic
                 }
 
                 const date = new Date(getLokiCheckoutDateFromValue(value, modifiers));
-                el.textContent = new Intl.DateTimeFormat('<?= $options['locale'] ?>', {
+                el.textContent = new Intl.DateTimeFormat('<?= $escaper->escapeHtml($options['locale']) ?>', {
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: false,
-                    timeZone: '<?= $options['timeZone'] ?>'
+                    timeZone: '<?= $escaper->escapeHtml($options['timeZone']) ?>'
                 }).format(date);
             }
         });
