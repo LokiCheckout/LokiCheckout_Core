@@ -61,6 +61,12 @@
                 as="expand-all-button"
                 template="LokiCheckout_Core::checkout/shipping/shipping-method/delivery-dates/expand-all-button.phtml"
             />
+
+            <block
+                name="loki-checkout.shipping.delivery-dates.loading-bricks"
+                as="loading-bricks"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method/loading-bricks.phtml"
+            />
         </block>
 
         <block name="loki-checkout.shipping.delivery-date" template="LokiCheckout_Core::checkout/shipping/shipping-method/delivery-date.phtml"/>
@@ -94,6 +100,12 @@
                 name="loki-checkout.shipping.locations.expand-all-button"
                 as="expand-all-button"
                 template="LokiCheckout_Core::checkout/shipping/shipping-method/locations/expand-all-button.phtml"
+            />
+
+            <block
+                name="loki-checkout.shipping.locations.loading-bricks"
+                as="loading-bricks"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method/loading-bricks.phtml"
             />
         </block>
 
