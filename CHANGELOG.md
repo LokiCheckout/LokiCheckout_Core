@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.16] - 27 March 2026
+### Fixed
+- Add skeleton loaders for delivery dates and locations
+- Allow shipping method to react to changes to shipping address
+- Dutch translations
+- Huge refactoring of Alpine templates for locations and delivery dates
+- Remove obsolete CartTotals class
+- Invoke totals calculation right after making changes to the quote
+
 ## [2.3.15] - 17 March 2026
 ### Fixed
 - `ENTER` with customer login form submitted wrong method
