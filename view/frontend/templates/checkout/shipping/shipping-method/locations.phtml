@@ -33,7 +33,15 @@ $tabId = $block->getTabId();
         </template>
 
         <template x-if="showLoadingLocations">
-            <div class="<?= $escaper->escapeHtml($css('', 'loading')) ?>"><?= $escaper->escapeHtml(__('Loading locations')) ?></div>
+            <div class="<?= $escaper->escapeHtml($css('', 'loading')) ?>" aria-live="polite" aria-atomic="true">
+                <div class="<?= $escaper->escapeHtml($css('sr-only', 'loading-text')) ?>">
+                    <?= $escaper->escapeHtml(__('Loading locations')) ?>
+                </div>
+                <div class="bg-gray-400 h-8 my-4 rounded-sm"></div>
+                <div class="bg-gray-400 h-8 my-4 rounded-sm"></div>
+                <div class="bg-gray-400 h-8 my-4 rounded-sm"></div>
+                <div class="bg-gray-400 h-8 my-4 rounded-sm"></div>
+            </div>
         </template>
 
         <template x-if="showNoLocations">
