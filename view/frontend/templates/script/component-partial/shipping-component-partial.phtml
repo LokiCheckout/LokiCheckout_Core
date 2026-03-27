@@ -16,11 +16,16 @@ use Magento\Framework\View\Element\Template;
         expandDeliveryCount: 3,
         visibleLocationCount: 3,
         expandLocationCount: 3,
-        isValidShippingAddress: true,
+        isShippingAddressValid: true,
+        isShippingAddressChanged: false,
+        shippingAddressHash: null,
         showLoader: false,
         locations: [],
         deliveryEnabled: false,
         deliveryDates: [],
+        initCheckShippingAddressChanged() {
+
+        },
         initActiveTab() {
             if (this.deliveryEnabled && this.activeTabId !== 'locations') {
                 this.activeTabId = 'delivery-dates';
@@ -35,7 +40,7 @@ use Magento\Framework\View\Element\Template;
             return this.deliveryEnabled;
         },
         isInvalidShippingAddress() {
-            return !this.isValidShippingAddress;
+            return !this.isShippingAddressValid;
         },
         getVisibleDeliveryDates() {
             if (!this.hasDeliveryDates()) {
@@ -48,7 +53,7 @@ use Magento\Framework\View\Element\Template;
             return this.deliveryDates.length > 0;
         },
         showNoDeliveryDates() {
-            return !this.hasDeliveryDates() && !this.showLoader && this.isValidShippingAddress;
+            return !this.hasDeliveryDates() && !this.showLoader && this.isShippingAddressValid;
         },
         showLoadingDeliveryDates() {
             return !this.hasDeliveryDates() && this.showLoader;
@@ -72,7 +77,7 @@ use Magento\Framework\View\Element\Template;
             return !this.hasLocations();
         },
         showNoLocations() {
-            return !this.hasLocations() && !this.showLoader && this.isValidShippingAddress;
+            return !this.hasLocations() && !this.showLoader && this.isShippingAddressValid;
         },
         showLoadingLocations() {
             return !this.hasLocations() && this.showLoader;
