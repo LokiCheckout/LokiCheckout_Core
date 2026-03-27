@@ -15,28 +15,21 @@ use Magento\Framework\View\Element\Template;
 <label class="<?= $escaper->escapeHtml($css('loki-checkout-shipping-shipping-methods-item flex mb-4 p-4 hover:bg-black/5')) ?>"
        :class="location.cssClass">
 
-    <?= /* @noEscape */
-    $blockRenderer->html($block, 'loki-checkout.shipping.location.input') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.input') ?>
 
     <div class="<?= $escaper->escapeHtml($css('cursor-pointer flex-1', 'inner')) ?>">
         <div class="<?= $escaper->escapeHtml($css('mb-4')) ?>">
             <div class="<?= $escaper->escapeHtml($css('float-right', 'inner-right')) ?>">
-                <?= /* @noEscape */
-                $blockRenderer->html($block, 'loki-checkout.shipping.location.carrier') ?>
-                <?= /* @noEscape */
-                $blockRenderer->html($block, 'loki-checkout.shipping.location.distance') ?>
+                <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.carrier') ?>
+                <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.distance') ?>
             </div>
 
-            <?= /* @noEscape */
-            $blockRenderer->html($block, 'loki-checkout.shipping.location.label') ?>
+            <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.label') ?>
         </div>
 
-        <?= /* @noEscape */
-        $blockRenderer->html($block, 'loki-checkout.shipping.location.pickup-from') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.pickup-from') ?>
 
-        <?= /* @noEscape */
-        $blockRenderer->html($block, 'loki-checkout.shipping.location.address') ?>
-        <?= /* @noEscape */
-        $blockRenderer->html($block, 'loki-checkout.shipping.location.business-hours') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.address') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.business-hours') ?>
     </div>
 </label>
