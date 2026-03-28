@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.17] - 28 March 2026
+### Fixed
+- Add ReturnTypeWillChange to jsonSerialize to fix 2.4.5 compile issue
+
 ## [2.3.16] - 27 March 2026
 ### Fixed
 - Add skeleton loaders for delivery dates and locations
