@@ -65,6 +65,7 @@ class DeliveryDate implements JsonSerializable
         );
     }
 
+    #[\ReturnTypeWillChange]
     public function jsonSerialize(): mixed
     {
         return [
