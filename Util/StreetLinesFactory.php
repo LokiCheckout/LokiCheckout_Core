@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Util;
 use LokiCheckout\Core\Util\StreetLinesParser\StreetLinesParser;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Quote\Api\Data\AddressInterface;
 
 class StreetLinesFactory
 {
@@ -51,6 +52,14 @@ class StreetLinesFactory
             $streetParts[3] ?? '',
             $countryId,
             $maximumNumber
+        );
+    }
+
+    public function createFromAddress(AddressInterface $address): StreetLines
+    {
+        return $this->createFromStreetParts(
+            $address->getStreet(),
+            $address->getCountryId()
         );
     }
 
