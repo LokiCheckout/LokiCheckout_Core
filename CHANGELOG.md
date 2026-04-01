@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.18] - 01 April 2026
+### Fixed
+- Allow calling StepNavigator::isFirstStep() and StepNavigator::isLastStep() without step argument
+- Add new method StepNavigator::hasPreviousStep()
+- Add StreetLinesFactory::createFromAddress method
+
 ## [2.3.17] - 28 March 2026
 ### Fixed
 - Add ReturnTypeWillChange to jsonSerialize to fix 2.4.5 compile issue
