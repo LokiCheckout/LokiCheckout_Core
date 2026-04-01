@@ -177,13 +177,21 @@ class StepNavigator implements ArgumentInterface
         return $step->getCode() === $this->getCurrentStep()->getCode();
     }
 
-    public function isFirstStep(StepViewModelInterface $step): bool
+    public function isFirstStep(?StepViewModelInterface $step = null): bool
     {
+        if (false === $step instanceof StepViewModelInterface) {
+            $step = $this->getCurrentStep();
+        }
+
         return $step->getCode() === $this->getFirstStep()->getCode();
     }
 
-    public function isLastStep(StepViewModelInterface $step): bool
+    public function isLastStep(?StepViewModelInterface $step = null): bool
     {
+        if (false === $step instanceof StepViewModelInterface) {
+            $step = $this->getCurrentStep();
+        }
+
         return $step->getCode() === $this->getLastStep()->getCode();
     }
 
@@ -315,6 +323,12 @@ class StepNavigator implements ArgumentInterface
         }
 
         return $previousSteps;
+    }
+
+    public function hasPreviousStep(?StepViewModelInterface $currentStep = null): bool
+    {
+        $previousSteps = $this->getPreviousSteps($currentStep);
+        return count($previousSteps) > 0;
     }
 
     public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
