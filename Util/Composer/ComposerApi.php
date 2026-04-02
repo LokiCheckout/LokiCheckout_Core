@@ -152,21 +152,12 @@ class ComposerApi
 
     public function getLatestCommit(string $composerName): string
     {
-        try {
-            $packages = $this->getPackages();
-        } catch (GuzzleException $e) {
-            return '';
-        }
-
-        if (false === array_key_exists($composerName, $packages)) {
-            return '';
-        }
-
-        foreach ($packages[$composerName] as $package) {
-            if (preg_match('/^dev-([a-zA-Z0-9]+)#(.*)/', $package['version'], $match)) {
-                // @todo: Bug: Any dev versions are removed from the composer API
-                return $match[2];
+        foreach ($this->getProjects() as $project) {
+            if ($project['composer_name'] !== $composerName) {
+                continue;
             }
+
+            return $project['last_commit'];
         }
 
         return '';
