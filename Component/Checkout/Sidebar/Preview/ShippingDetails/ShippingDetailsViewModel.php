@@ -70,7 +70,12 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return '';
         }
 
-        list($carrierCode, $carrierMethod) = explode('_', $shippingMethod, 2);
+        if (strpos($shippingMethod, '_') === false) {
+            $carrierCode = $shippingMethod;
+            $carrierMethod = '';
+        } else {
+            list($carrierCode, $carrierMethod) = explode('_', $shippingMethod, 2);
+        }
 
         $parts = [];
 
