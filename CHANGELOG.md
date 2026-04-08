@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.19] - 08 April 2026
+### Fixed
+- Allow step buttons to be moved anywhere (including sidebar)
+- Hard-configure step with XML layout `stepCode` for all step buttons
+- Refresh all buttons if components in stepButtons are refreshed
+- Workaround when shipping method only contains 1 part without underscore
+
 ## [2.3.18] - 01 April 2026
 ### Fixed
 - Allow calling StepNavigator::isFirstStep() and StepNavigator::isLastStep() without step argument

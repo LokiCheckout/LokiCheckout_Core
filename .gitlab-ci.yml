@@ -53,7 +53,7 @@ magento-phpcs:
     - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p4']
 
 magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
@@ -81,7 +81,7 @@ magento-phpstan:
     - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL $CI_PROJECT_DIR
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p4']
 
 magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
@@ -107,16 +107,11 @@ magento-unit-tests:
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p4']
 
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
-  #rules:
-  #  - if: '$CI_PROJECT_NAME == "LokiCheckout_Core" && $CI_PIPELINE_SOURCE != "schedule"'
-  #    when: manual
-  #    allow_failure: true
-  #  - when: on_success
   script:
     - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
     - test -d Test/Integration/ || exit 0
@@ -153,7 +148,7 @@ magento-integration-tests:
       alias: opensearch
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.8-p4']
         PHP_VERSION: ['8.4']
 
 magento-compile:
@@ -179,13 +174,15 @@ magento-compile:
     - php -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p3']
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p4']
       #- MAGENTO_VERSION: ['2.4.9-alpha3']
 
 magento-playwright:
-  image: yireo/magento2installed:2.4.8-p3
+  image: yireo/magento2installed:2.4.8-p4
   stage: advanced
   rules:
+    - if: '$CI_PIPELINE_SOURCE != "schedule"'
+      allow_failure: true
     - when: manual
       allow_failure: true
   script:
@@ -205,6 +202,7 @@ magento-playwright:
     - bin/magento module:sequence LokiCheckout_FunctionalTests
     - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
     - bin/magento setup:upgrade
+    #- bin/magento deploy:mode:set production
     - magerun2 config:store:set loki_functional_tests/general/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
