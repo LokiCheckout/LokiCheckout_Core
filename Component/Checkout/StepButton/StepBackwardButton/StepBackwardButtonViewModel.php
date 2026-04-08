@@ -20,6 +20,15 @@ class StepBackwardButtonViewModel extends CheckoutViewModel implements ButtonInt
             return false;
         }
 
+        $stepCode = $this->getBlock()->getStepCode();
+
+        if (!empty($stepCode)) {
+            $step = $this->getContext()->getStepNavigator()->getStepByCode($stepCode);
+            if (false === $this->getContext()->getStepNavigator()->isCurrentStep($step)) {
+                return false;
+            }
+        }
+
         return $this->getStepNavigator()->hasPreviousStep();
     }
 

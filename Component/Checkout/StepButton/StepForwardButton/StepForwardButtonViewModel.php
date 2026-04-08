@@ -12,6 +12,20 @@ use Loki\Field\Util\ButtonInterface;
  */
 class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInterface
 {
+    public function isAllowRendering(): bool
+    {
+        $stepCode = $this->getBlock()->getStepCode();
+
+        if (!empty($stepCode)) {
+            $step = $this->getContext()->getStepNavigator()->getStepByCode($stepCode);
+            if (false === $this->getContext()->getStepNavigator()->isCurrentStep($step)) {
+                return false;
+            }
+        }
+
+        return $this->allowRendering;
+    }
+
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutStepForwardButton';

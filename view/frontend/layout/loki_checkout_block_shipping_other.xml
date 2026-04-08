@@ -6,6 +6,7 @@
             name="loki-checkout.steps.shipping.backward-button"
             template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
+                <argument name="step_code" xsi:type="string">shipping</argument>
                 <argument name="button_label" xsi:type="string" translate="true">Back to previous step</argument>
             </arguments>
         </block>
@@ -14,6 +15,7 @@
             name="loki-checkout.steps.shipping.forward-button"
             template="Loki_FieldComponents::form/button/button.phtml">
             <arguments>
+                <argument name="step_code" xsi:type="string">shipping</argument>
                 <argument name="button_label" xsi:type="string" translate="true">Proceed to Review &amp;amp; Payments</argument>
                 <argument name="button_hint" xsi:type="string" translate="true">Please fill in all required fields before proceeding</argument>
                 <argument name="css_classes" xsi:type="array">
