@@ -2,30 +2,15 @@
 
 namespace LokiCheckout\Core\Component\Checkout\StepButton\StepForwardButton;
 
+use LokiCheckout\Core\Component\Checkout\StepButton\AbstractStepButtonViewModel;
 use Magento\Quote\Model\Quote;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
-use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
-use Loki\Field\Util\ButtonInterface;
 
 /**
  * @method CheckoutContext getContext()
  */
-class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInterface
+class StepForwardButtonViewModel extends AbstractStepButtonViewModel
 {
-    public function isAllowRendering(): bool
-    {
-        $stepCode = $this->getBlock()->getStepCode();
-
-        if (!empty($stepCode)) {
-            $step = $this->getContext()->getStepNavigator()->getStepByCode($stepCode);
-            if (false === $this->getContext()->getStepNavigator()->isCurrentStep($step)) {
-                return false;
-            }
-        }
-
-        return $this->allowRendering;
-    }
-
     public function getJsComponentName(): ?string
     {
         return 'LokiCheckoutStepForwardButton';
@@ -39,11 +24,6 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
         ];
     }
 
-    public function getStep(): string
-    {
-        return 'none';
-    }
-
     public function getButtonLabel(): string
     {
         $buttonLabelWithoutPayment = trim((string)$this->getBlock()->getButtonLabelWithoutPayment());
@@ -55,6 +35,6 @@ class StepForwardButtonViewModel extends CheckoutViewModel implements ButtonInte
             return $buttonLabelWithoutPayment;
         }
 
-        return $this->getBlock()->getButtonLabel();
+        return parent::getButtonLabel();
     }
 }
