@@ -7,5 +7,4 @@ use LokiCheckout\Core\Component\Base\QuoteField\QuoteFieldRepository;
 
 class EmailRepository extends QuoteFieldRepository
 {
-
 }
