@@ -64,6 +64,10 @@
         context="LokiCheckout\Core\Component\Base\Generic\CheckoutContext">
         <target name="loki-checkout.steps"/>
         <target name="loki-checkout.progressbar"/>
+        <target name="loki-checkout.steps.shipping.backward-button" />
+        <target name="loki-checkout.steps.shipping.forward-button" />
+        <target name="loki-checkout.steps.billing.backward-button" />
+        <target name="loki-checkout.steps.billing.forward-button" />
     </group>
 
     <component
