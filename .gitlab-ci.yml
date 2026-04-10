@@ -35,7 +35,8 @@ php-linting:
   image: yireo/php-testbox:$PHP_VERSION
   stage: basic
   script:
-    - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
+    - cd $CI_PROJECT_DIR
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[] == $v' MODULE.json || exit 0
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
   parallel:
     matrix:
@@ -45,9 +46,8 @@ magento-phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: basic
   script:
-    - source .module.ini
-    - export PHPCS_LEVEL=$(jq -r '.phpcs_severity // 10' MODULE.json)
-    - test -z "$PHPCS_LEVEL" && PHPCS_LEVEL=10
+    - cd $CI_PROJECT_DIR
+    - PHPCS_LEVEL=`jq -e '.phpcs_severity // 10' MODULE.json -r`
     - echo "Testing for PHPCS severity $PHPCS_LEVEL"
     - cd /tmp/magento
     - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
@@ -59,11 +59,11 @@ magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: basic
   script:
-    - source .module.ini
-    - export PHPSTAN_LEVEL=$(jq -r '.phpstan_level // 1' MODULE.json)
-    - test -z "$PHPSTAN_LEVEL" && PHPSTAN_LEVEL=1
+    - cd $CI_PROJECT_DIR
+    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
+    - PHPSTAN_LEVEL=`jq -e '.phpstan_level // 1' MODULE.json -r`
     - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
@@ -76,7 +76,7 @@ magento-phpstan:
     - composer remove --dev magento/magento-coding-standard
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --dev --prefer-source -- phpstan/phpstan:^2.0 bitexpert/phpstan-magento:^0.42 phpstan/extension-installer
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev 
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
     - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
     - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL $CI_PROJECT_DIR
   parallel:
@@ -87,10 +87,12 @@ magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
-    - test -d $CI_PROJECT_DIR/Test/Unit/ || exit 0
-    - source .module.ini
-    - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - cd $CI_PROJECT_DIR
+    - test -d Test/Unit/ || exit 0
+    - jq -e --arg v "$MAGENTO_VERSION" '.skip_magento_versions[] == $v' MODULE.json && exit 0
+    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
@@ -101,7 +103,6 @@ magento-unit-tests:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
-    - export MAGENTO_MODULE=${EXTENSION_VENDOR}_${EXTENSION_NAME}
     - cd /tmp/magento/dev/tests/unit/
     - cp $CI_PROJECT_DIR/.gitlab-ci/unit-tests/phpunit.xml phpunit.xml
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
@@ -113,13 +114,15 @@ magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
-    - cat .module.ini | grep PHP_VERSIONS | grep -q $PHP_VERSION || exit 0
+    - cd $CI_PROJECT_DIR
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[] == $v' MODULE.json && exit 0
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[] == $v' MODULE.json || exit 0
     - test -d Test/Integration/ || exit 0
-    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
-    - source .module.ini
-    - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
@@ -156,9 +159,10 @@ magento-compile:
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
-    - source .module.ini
-    - grep -q SKIP_MAGENTO_VERSIONS .module.ini && [[ " ${SKIP_MAGENTO_VERSIONS[*]} " == *" $MAGENTO_VERSION "* ]] && exit 0
-    - export COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[] == $v' MODULE.json && exit 0
+    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
@@ -175,7 +179,7 @@ magento-compile:
   parallel:
     matrix:
       - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p4']
-      #- MAGENTO_VERSION: ['2.4.9-alpha3']
+      #- MAGENTO_VERSION: ['2.4.9-beta1']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p4
@@ -187,7 +191,9 @@ magento-playwright:
       allow_failure: true
   script:
     - cd $CI_PROJECT_DIR
-    - source .module.ini
+    - test -d Test/Playwright/ || exit 0
+    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
@@ -200,7 +206,7 @@ magento-playwright:
     - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests
-    - bin/magento module:sequence ${EXTENSION_VENDOR}_${EXTENSION_NAME} 
+    - bin/magento module:sequence "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
     #- bin/magento deploy:mode:set production
     - magerun2 config:store:set loki_functional_tests/general/token loki -n
@@ -210,7 +216,7 @@ magento-playwright:
     - touch .env
     - echo "TEST_URL=$MAGENTO_BASE_URL" >> .env
     - echo "TEST_TOKEN=loki" >> .env
-    - npx playwright test --project=${EXTENSION_VENDOR}_${EXTENSION_NAME}
+    - npx playwright test --project=${MAGENTO_MODULE}
   services:
     - name: yireo/mariadb:10
       alias: mysql
