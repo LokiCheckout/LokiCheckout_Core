@@ -36,7 +36,7 @@ php-linting:
   stage: basic
   script:
     - cd $CI_PROJECT_DIR
-    - jq -e --arg v "${PHP_VERSION}" '.php_versions[] == $v' MODULE.json || exit 0
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
     - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
   parallel:
     matrix:
@@ -89,7 +89,7 @@ magento-unit-tests:
   script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Unit/ || exit 0
-    - jq -e --arg v "$MAGENTO_VERSION" '.skip_magento_versions[] == $v' MODULE.json && exit 0
+    - jq -e --arg v "$MAGENTO_VERSION" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
     - COMPOSER_NAME=`jq -e '.name' composer.json -r`
     - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
@@ -115,8 +115,8 @@ magento-integration-tests:
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
-    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[] == $v' MODULE.json && exit 0
-    - jq -e --arg v "${PHP_VERSION}" '.php_versions[] == $v' MODULE.json || exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
     - test -d Test/Integration/ || exit 0
     - COMPOSER_NAME=`jq -e '.name' composer.json -r`
     - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
@@ -159,7 +159,7 @@ magento-compile:
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
-    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[] == $v' MODULE.json && exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
     - COMPOSER_NAME=`jq -e '.name' composer.json -r`
     - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
