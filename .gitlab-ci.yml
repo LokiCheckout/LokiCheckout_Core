@@ -47,7 +47,7 @@ magento-phpcs:
   stage: basic
   script:
     - cd $CI_PROJECT_DIR
-    - PHPCS_LEVEL=`jq -e '.phpcs_severity // 10' MODULE.json -r`
+    - PHPCS_LEVEL=`jq '.phpcs_severity // 10' MODULE.json -r`
     - echo "Testing for PHPCS severity $PHPCS_LEVEL"
     - cd /tmp/magento
     - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
@@ -60,8 +60,8 @@ magento-phpstan:
   stage: basic
   script:
     - cd $CI_PROJECT_DIR
-    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
-    - PHPSTAN_LEVEL=`jq -e '.phpstan_level // 1' MODULE.json -r`
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - PHPSTAN_LEVEL=`jq '.phpstan_level // 1' MODULE.json -r`
     - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
@@ -90,8 +90,8 @@ magento-unit-tests:
     - cd $CI_PROJECT_DIR
     - test -d Test/Unit/ || exit 0
     - jq -e --arg v "$MAGENTO_VERSION" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
-    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
-    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
@@ -118,8 +118,8 @@ magento-integration-tests:
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
     - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
     - test -d Test/Integration/ || exit 0
-    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
-    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -160,8 +160,8 @@ magento-compile:
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
-    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
-    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
@@ -192,8 +192,8 @@ magento-playwright:
   script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Playwright/ || exit 0
-    - COMPOSER_NAME=`jq -e '.name' composer.json -r`
-    - MAGENTO_MODULE=`jq -e '.module_name' MODULE.json -r`
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
