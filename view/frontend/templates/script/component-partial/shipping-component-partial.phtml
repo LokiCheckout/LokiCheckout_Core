@@ -33,10 +33,17 @@ use Magento\Framework\View\Element\Template;
                 this.activeTabId = 'delivery-dates';
             }
 
+            if (!this.deliveryEnabled) {
+                this.activeTabId = 'locations';
+            }
+
             this.showActiveTab();
         },
         initLocations() {
             this.showLocations();
+        },
+        showLocations() {
+
         },
         isDeliveryEnabled() {
             return this.deliveryEnabled;
