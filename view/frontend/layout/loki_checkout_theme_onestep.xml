@@ -25,5 +25,11 @@
         <!-- Sidebar -->
         <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
         <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.sidebar" as="submit-button"/>
+
+        <referenceBlock name="loki-checkout.steps.billing.forward-button">
+            <arguments>
+            <argument name="step_code" xsi:type="string">one</argument>
+            </arguments>
+        </referenceBlock>
     </body>
 </page>
