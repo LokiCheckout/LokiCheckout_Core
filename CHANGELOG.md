@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.21] - 14 April 2026
+### Fixed
+- Remove static cache for payment method
+- Make sure quote ID is not 1 by accident
+
 ## [2.3.20] - 14 April 2026
 ### Fixed
 - In shipping component, fall back to location-button if deliveryEnabled is false
