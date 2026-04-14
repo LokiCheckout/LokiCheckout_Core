@@ -55,7 +55,7 @@ class CheckoutState implements ArgumentInterface
 
     public function hasQuote(): bool
     {
-        if($this->getQuoteId() <= 1) {
+        if($this->getQuoteId() === 0) {
             return false;
         }
 
