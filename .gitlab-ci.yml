@@ -89,7 +89,7 @@ magento-unit-tests:
   script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Unit/ || exit 0
-    - jq -e --arg v "$MAGENTO_VERSION" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
@@ -115,7 +115,7 @@ magento-integration-tests:
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
-    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
     - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
     - test -d Test/Integration/ || exit 0
     - COMPOSER_NAME=`jq '.name' composer.json -r`
@@ -159,7 +159,7 @@ magento-compile:
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
-    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? == $v' MODULE.json && exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`

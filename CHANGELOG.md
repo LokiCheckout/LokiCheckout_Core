@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.20] - 14 April 2026
+### Fixed
+- In shipping component, fall back to location-button if deliveryEnabled is false
+- Fix missing place order button in OneStep theme
+
 ## [2.3.19] - 08 April 2026
 ### Fixed
 - Allow step buttons to be moved anywhere (including sidebar)
