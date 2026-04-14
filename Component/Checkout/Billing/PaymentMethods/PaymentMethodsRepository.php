@@ -48,11 +48,6 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function getValue(): mixed
     {
-        static $paymentMethod = false;
-        if (is_string($paymentMethod)) {
-            return $paymentMethod;
-        }
-
         $quote = $this->getQuote();
         $currentPaymentMethod = (string)$quote->getPayment()->getMethod();
 
@@ -61,7 +56,6 @@ class PaymentMethodsRepository extends ComponentRepository
             $this->saveValue($sanitizedPaymentMethod);
         }
 
-        $paymentMethod = $sanitizedPaymentMethod;
         return $sanitizedPaymentMethod;
     }
 
