@@ -6,6 +6,7 @@ namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Customer\Model\Session;
 use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
@@ -27,6 +28,10 @@ final class ToggleSelectPageTest extends LokiCheckoutTestCase
 
     final public function testComponentOnPage(): void
     {
+        $customerSession = $this->getObjectManager()->get(Session::class);
+        $this->assertTrue($customerSession->isLoggedIn());
+        $this->assertSame('info@example.com', $customerSession->getCustomer()->getEmail());
+
         $this->dispatchToCheckout();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
