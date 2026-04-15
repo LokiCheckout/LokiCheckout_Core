@@ -26,7 +26,7 @@
             </arguments>
 
             <block
-                name="loki-checkout.steps.shipping.forward-button-icon" as="icon"
+                name="loki-checkout.steps.shipping.forward-button.icon" as="icon"
                 template="LokiCheckout_Core::form/button/step-forward-button-icon.phtml"/>
         </block>
     </body>
