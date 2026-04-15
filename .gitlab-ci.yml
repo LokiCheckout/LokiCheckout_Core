@@ -1,7 +1,9 @@
 stages:
-  - basic
-  - testing
-  - advanced
+  - static
+  - unit
+  - compile
+  - integration
+  - e2e
 
 variables:
   GIT_DEPTH: 1
@@ -33,7 +35,7 @@ variables:
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
-  stage: basic
+  stage: static
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
@@ -44,7 +46,7 @@ php-linting:
 
 magento-phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: basic
+  stage: static
   script:
     - cd $CI_PROJECT_DIR
     - PHPCS_LEVEL=`jq '.phpcs_severity // 10' MODULE.json -r`
@@ -57,7 +59,7 @@ magento-phpcs:
 
 magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: basic
+  stage: static
   script:
     - cd $CI_PROJECT_DIR
     - COMPOSER_NAME=`jq '.name' composer.json -r`
@@ -85,7 +87,7 @@ magento-phpstan:
 
 magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: testing
+  stage: unit
   script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Unit/ || exit 0
@@ -108,11 +110,11 @@ magento-unit-tests:
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p4']
+      - MAGENTO_VERSION: ['2.4.8-p3', '2.4.8-p4']
 
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: testing
+  stage: integration
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
@@ -156,7 +158,7 @@ magento-integration-tests:
 
 magento-compile:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: testing
+  stage: compile
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
@@ -183,7 +185,7 @@ magento-compile:
 
 magento-playwright:
   image: yireo/magento2playwright:2.4.8-p3
-  stage: advanced
+  stage: e2e
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       allow_failure: true
@@ -227,7 +229,15 @@ magento-playwright:
     - npm install
     - npx playwright install chromium
     - printf "TEST_URL=$MAGENTO_BASE_URL\nTEST_TOKEN=loki\n" > .env
-    - MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
+    - CI=true MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
+  artifacts:
+    when: always
+    expire_in: 14 days
+    paths:
+      - playwright-report/
+      - test-results/
+    reports:
+      junit: test-results/junit.xml
   services:
     - name: yireo/mariadb:10
       alias: mysql
