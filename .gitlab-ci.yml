@@ -175,6 +175,7 @@ magento-compile:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
+    - test -d app/code/Magento && rm -rf app/code/Magento
     - composer dump-autoload -o
     - bin/magento module:enable --all
     - php -dmemory_limit=-1 bin/magento setup:di:compile
@@ -227,7 +228,7 @@ magento-playwright:
     - magerun2 config:store:set loki_functional_tests/general/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
-    - npx playwright install chromium
+    - PLAYWRIGHT_DOWNLOAD_PROGRESS=0 npx playwright install chromium
     - printf "TEST_URL=$MAGENTO_BASE_URL\nTEST_TOKEN=loki\n" > .env
     - CI=true MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
   artifacts:
