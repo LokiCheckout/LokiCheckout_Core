@@ -14,8 +14,8 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 use LokiCheckout\Core\Test\Fixture\CustomerAddressFixture;
 use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
-#[DbIsolation(true)]
 
+#[DbIsolation(true)]
 #[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
 #[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]
 #[DataFixture(CustomerAddressFixture::class, ['customer_id' => '$customer.id$'])]
