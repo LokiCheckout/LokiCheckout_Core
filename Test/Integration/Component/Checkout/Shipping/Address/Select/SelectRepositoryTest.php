@@ -10,8 +10,10 @@ use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
+use Magento\TestFramework\Fixture\DbIsolation;
 use LokiCheckout\Core\Component\Checkout\Address\Select\SelectRepository;
 use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
+#[DbIsolation(true)]
 
 #[
     DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),
