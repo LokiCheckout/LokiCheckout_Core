@@ -7,11 +7,12 @@ use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Api\Data\CartItemInterface;
 use Loki\Components\Factory\ViewModelFactory;
+use Magento\Quote\Model\Quote\Item as CartItem;
 
 /** @version 2.3.21 */
 /** @var Escaper $escaper */
 /** @var Template $block */
-/** @var CartItemInterface $item */
+/** @var CartItem $item */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CssClass $css */
 /** @var PriceFormatter $priceFormatterViewModel */
@@ -23,5 +24,15 @@ $priceFormatterViewModel = $viewModelFactory->create(PriceFormatter::class);
     <?= $escaper->escapeHtml(__('Price')) ?>:
 </dt>
 <dd class="<?= $escaper->escapeHtml($css('', 'price-value')) ?>">
-    <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPriceInclTax()) ?>
+    <?php if ($priceFormatterViewModel->displayCartPricesExclTax()): ?>
+    <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPrice()) ?>
+    <?php endif; ?>
+    <?php if ($priceFormatterViewModel->displayCartPricesInclTax()): ?>
+        <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPriceInclTax()) ?>
+    <?php endif; ?>
+
+    <?php if ($priceFormatterViewModel->displayCartPricesBoth()): ?>
+        <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPrice()) ?> /
+        <?= /* @noEscape */ $priceFormatterViewModel->format($item->getPriceInclTax()) ?>
+    <?php endif; ?>
 </dd>
