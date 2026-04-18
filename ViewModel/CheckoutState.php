@@ -161,6 +161,7 @@ class CheckoutState implements ArgumentInterface
         }
 
         $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
+
         return $totals;
     }
 
