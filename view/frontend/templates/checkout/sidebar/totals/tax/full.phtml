@@ -1,0 +1,64 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Util\Block\ImageRenderer;
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\TaxTotal;
+use Magento\Framework\Escaper;
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+use LokiCheckout\Core\ViewModel\ShippingAmount;
+
+/** @version 2.3.21 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var DataObject $total */
+/** @var CssClass $css */
+/** @var TaxTotal $taxTotalViewModel */
+/** @var ImageRenderer $imageRenderer */
+
+$total = $block->getTotal();
+$totals = $block->getTotals();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
+
+?>
+<div class="col-span-2 grid grid-cols-2" x-data="LokiToggle">
+    <dt class="<?= $escaper->escapeHtml($css('font-medium')) ?>">
+        <summary @click="toggle" class="block">
+            <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+            <span class="<?= $escaper->escapeHtml($css('', 'icon-open')) ?>" x-show="hidden">
+                <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-down', ['class' => 'inline-block']) ?>
+            </span>
+            <span class="<?= $escaper->escapeHtml($css('', 'icon-close')) ?>" x-cloak x-show="shown">
+                <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-up', ['class' => 'inline-block']) ?>
+            </span>
+        </summary>
+    </dt>
+    <dd
+        class="<?= $escaper->escapeHtml($css('text-right')) ?>"
+        data-code="<?= $escaper->escapeHtml($total->getCode()) ?>"
+    >
+    <span x-show="hidden">
+        <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
+        </span>
+    </dd>
+
+    <?php foreach ($taxTotalViewModel->getRatesFromTotal($total) as $rate): ?>
+        <dt x-show="shown" x-cloak @click="toggle"
+            class="<?= $escaper->escapeHtml($css('')) ?>"
+        >
+            <?= $rate['title'] ?>
+            (<?= $rate['percentage'] ?>%)
+        </dt>
+        <dd x-show="shown" x-cloak
+            class="<?= $escaper->escapeHtml($css('text-right')) ?>"
+        >
+            <?= /* @noEscape */
+            $priceFormatter->format($rate['amount']) ?>
+        </dd>
+    <?php endforeach; ?>
+</div>

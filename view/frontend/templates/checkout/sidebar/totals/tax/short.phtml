@@ -1,0 +1,33 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\TaxTotal;
+use Magento\Framework\Escaper;
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+
+/** @version 2.3.21 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var DataObject $total */
+/** @var CssClass $css */
+/** @var TaxTotal $taxTotalViewModel */
+
+$total = $block->getTotal();
+$totals = $block->getTotals();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
+?>
+<dt class="<?= $escaper->escapeHtml($css('font-medium')) ?>">
+    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+</dt>
+<dd
+    class="<?= $escaper->escapeHtml($css('text-right')) ?>"
+    data-code="<?= $escaper->escapeHtml($total->getCode()) ?>"
+>
+    <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>
+</dd>

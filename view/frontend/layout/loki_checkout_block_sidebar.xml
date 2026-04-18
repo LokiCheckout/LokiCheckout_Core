@@ -37,6 +37,10 @@
                     </arguments>
 
                     <block name="loki-checkout.sidebar.totals.shipping" as="shipping" template="LokiCheckout_Core::checkout/sidebar/totals/shipping.phtml"/>
+                    <block name="loki-checkout.sidebar.totals.tax" as="tax" template="LokiCheckout_Core::checkout/sidebar/totals/tax.phtml">
+                        <block name="loki-checkout.sidebar.totals.tax.short" as="short" template="LokiCheckout_Core::checkout/sidebar/totals/tax/short.phtml"/>
+                        <block name="loki-checkout.sidebar.totals.tax.full" as="full" template="LokiCheckout_Core::checkout/sidebar/totals/tax/full.phtml"/>
+                    </block>
                     <block name="loki-checkout.sidebar.totals.grand_total" as="grand_total" template="LokiCheckout_Core::checkout/sidebar/totals/grand_total.phtml"/>
                 </block>
             </block>

@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\TaxTotal;
+use Magento\Framework\Escaper;
+use Magento\Framework\DataObject;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+use LokiCheckout\Core\ViewModel\ShippingAmount;
+
+/** @version 2.3.21 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var DataObject $total */
+/** @var CssClass $css */
+/** @var TaxTotal $taxTotalViewModel */
+
+$total = $block->getTotal();
+$totals = $block->getTotals();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+$taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
+?>
+<?php if ($taxTotalViewModel->showFullSummary()): ?>
+    <?= $block->getChildBlock('full')->setData([
+        'total' => $total, 'totals' => $totals
+    ])->toHtml(); ?>
+<?php else: ?>
+    <?= $block->getChildBlock('short')->setData([
+        'total' => $total, 'totals' => $totals
+    ])->toHtml(); ?>
+<?php endif; ?>
