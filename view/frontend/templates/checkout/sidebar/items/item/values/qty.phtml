@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Quote\Api\Data\CartItemInterface;
+
+/** @version 2.3.21 */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CartItemInterface $item */
+/** @var CssClass $css */
+
+$item = $block->getItem();
+?>
+<dt class="<?= $escaper->escapeHtml($css('font-medium', 'qty-label')) ?>">
+    <?= $escaper->escapeHtml(__('Quantity')) ?>:
+</dt>
+<dd class="<?= $escaper->escapeHtml($css('', 'qty-value')) ?>">
+    <?= (float) $item->getQty() ?>
+</dd>
