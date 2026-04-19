@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Util\Checkout;
 
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Util\CurrentTheme;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\View\LayoutInterface;
 
 class AddLayoutHandles
@@ -11,7 +12,8 @@ class AddLayoutHandles
     public function __construct(
         private readonly Config $config,
         private readonly LayoutInterface $layout,
-        private readonly CurrentTheme $currentTheme
+        private readonly CurrentTheme $currentTheme,
+        private readonly CheckoutState $checkoutState,
     ) {
     }
 
@@ -19,13 +21,14 @@ class AddLayoutHandles
     {
         $this->addGenericHandles();
         $this->addThemeHandles();
+        $this->addAddressGridHandles();
     }
 
     private function addGenericHandles(): void
     {
         $theme = $this->config->getTheme();
-        $this->layout->getUpdate()->addHandle('loki_checkout');
-        $this->layout->getUpdate()->addHandle('loki_checkout_theme_' . $theme);
+        $this->addHandle('loki_checkout');
+        $this->addHandle('loki_checkout_theme_'.$theme);
     }
 
     private function addThemeHandles(): void
@@ -46,11 +49,27 @@ class AddLayoutHandles
     private function addHandlesByTheme(string $theme): void
     {
         foreach ($this->layout->getUpdate()->getHandles() as $handle) {
-            if (str_starts_with($handle, $theme . '_')) {
+            if (str_starts_with($handle, $theme.'_')) {
                 continue;
             }
 
-            $this->layout->getUpdate()->addHandle($theme . '_' . $handle);
+            $this->addHandle($theme.'_'.$handle);
         }
+    }
+
+    private function addAddressGridHandles(): void
+    {
+        $gridLayout = $this->config->getGridLayoutName();
+        $this->addHandle('loki_checkout_address_'.$gridLayout);
+
+        $countryId = strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
+        if (!empty($countryId)) {
+            $this->addHandle('loki_checkout_address_'.$gridLayout.'_country_'.$countryId);
+        }
+    }
+
+    private function addHandle(string $handle): void
+    {
+        $this->layout->getUpdate()->addHandle($handle);
     }
 }
