@@ -57,8 +57,7 @@ $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
         <dd x-show="shown" x-cloak
             class="<?= $escaper->escapeHtml($css('text-right')) ?>"
         >
-            <?= /* @noEscape */
-            $priceFormatter->format($rate['amount']) ?>
+            <?= /* @noEscape */ $priceFormatter->format($rate['amount']) ?>
         </dd>
     <?php endforeach; ?>
 </div>
