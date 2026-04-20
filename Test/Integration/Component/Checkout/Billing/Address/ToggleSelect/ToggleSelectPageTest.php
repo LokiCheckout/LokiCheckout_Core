@@ -33,6 +33,8 @@ final class ToggleSelectPageTest extends LokiCheckoutTestCase
     public function testComponentOnPage(): void
     {
         $this->dispatchToCheckout();
+        $this->assertCustomerLoggedIn();
+        $this->assertCustomerHasAddresses();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

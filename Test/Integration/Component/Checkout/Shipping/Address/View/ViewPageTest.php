@@ -31,6 +31,8 @@ final class ViewPageTest extends LokiCheckoutTestCase
     {
         $this->markTestSkipped('Not implemented.');
         $this->dispatchToCheckout();
+        $this->assertCustomerLoggedIn();
+        $this->assertCustomerHasAddresses();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

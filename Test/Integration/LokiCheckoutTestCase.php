@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Test\Integration;
 
 use Magento\Checkout\Model\Session as CheckoutSession;
+use Magento\Customer\Model\Session;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http;
 use Magento\Quote\Api\CartRepositoryInterface;
@@ -133,5 +134,28 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $scopeConfig = $this->getObjectManager()->get(ScopeConfigInterface::class);
         $value = $scopeConfig->isSetFlag($path, $scopeType, $scopeValue);
         $this->assertSame($expectedValue, $value);
+    }
+
+    protected function assertCustomerLoggedIn(string $email = 'info@example.com'): void
+    {
+        $customerSession = $this->getObjectManager()->get(Session::class);
+        $this->assertTrue($customerSession->isLoggedIn());
+        $this->assertSame($email, $customerSession->getCustomer()->getEmail());
+    }
+
+    protected function assertCustomerHasAddresses(): void
+    {
+        $customerSession = $this->getObjectManager()->get(Session::class);
+        $customer = $customerSession->getCustomer();
+        $addresses = $customer->getAddresses();
+        $this->assertNotEmpty($addresses);
+    }
+
+    protected function assertCustomerHasNoAddresses(): void
+    {
+        $customerSession = $this->getObjectManager()->get(Session::class);
+        $customer = $customerSession->getCustomer();
+        $addresses = $customer->getAddresses();
+        $this->assertEmpty($addresses);
     }
 }

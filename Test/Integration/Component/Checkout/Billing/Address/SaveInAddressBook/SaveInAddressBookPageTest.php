@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Billing\Address\SaveInAddressBook;
 
+use LokiCheckout\Core\Test\Fixture\CustomerAddressFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use LokiCheckout\Core\Test\Fixture\CustomerFixture;
@@ -31,6 +32,8 @@ final class SaveInAddressBookPageTest extends LokiCheckoutTestCase
     final public function testComponentOnPage(): void
     {
         $this->dispatchToCheckout();
+        $this->assertCustomerLoggedIn();
+        $this->assertCustomerHasNoAddresses();
         $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
     }
 }

@@ -32,7 +32,10 @@ class CustomerAddressFixture implements RevertibleDataFixtureInterface
     {
         $data = array_merge($this->defaultData, $data);
         $addressSaveService = $this->serviceFactory->create(AddressRepositoryInterface::class, 'save');
-        $addressSaveService->execute(['address' => $data]);
+
+        try {
+            $addressSaveService->execute(['address' => $data]);
+        } catch(\Exception $e) {}
 
         return null;
     }

@@ -102,7 +102,9 @@ class ConfigTest extends TestCase
         $config = $this->getObjectManager()->create(Config::class, [
             'checkoutState' => $checkoutState,
         ]);
-        $this->assertEquals($expectedGridName, $config->getGrid()->getName());
+
+        $block = $this->createMock(\Magento\Framework\View\Element\Template::class);
+        $this->assertEquals($expectedGridName, $config->getGrid($block)->getName());
     }
 
     public function getTestGetGridArguments(): array
