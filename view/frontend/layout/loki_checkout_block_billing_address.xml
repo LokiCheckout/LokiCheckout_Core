@@ -250,7 +250,8 @@
                 </block>
 
                 <block
-                    name="loki-checkout.billing.address.save_in_address_book" as="save_in_address_book"
+                    name="loki-checkout.billing.address.save_in_address_book"
+                    as="save_in_address_book"
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_type" xsi:type="string">checkbox</argument>
