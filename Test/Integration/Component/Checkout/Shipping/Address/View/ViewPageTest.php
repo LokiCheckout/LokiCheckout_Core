@@ -6,7 +6,7 @@ namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
-use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
+use LokiCheckout\Core\Test\Fixture\CustomerFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;

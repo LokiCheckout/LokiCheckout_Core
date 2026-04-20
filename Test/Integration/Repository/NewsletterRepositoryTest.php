@@ -11,7 +11,7 @@ use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use PHPUnit\Framework\TestCase;
-use Magento\Customer\Test\Fixture\Customer as CustomerFixture;
+use LokiCheckout\Core\Test\Fixture\CustomerFixture;
 
 #[
     ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default'),
