@@ -18,7 +18,6 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var ImageRenderer $imageRenderer */
 /** @var TemplateRenderer $templateRenderer */
 
-
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
 $isLoggedIn = $customerSession->isLoggedIn();

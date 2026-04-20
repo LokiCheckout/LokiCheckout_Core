@@ -12,7 +12,6 @@ use LokiCheckout\Core\ViewModel\CheckoutState;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 
-
 $templateRenderer = $viewModelFactory->create(TemplateRenderer::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 if ($checkoutState->getQuote()->isVirtual()) {
