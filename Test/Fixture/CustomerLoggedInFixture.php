@@ -16,8 +16,7 @@ class CustomerLoggedInFixture implements DataFixtureInterface, RevertibleDataFix
 
         /** @var Session $customerSession */
         $customerSession = ObjectManager::getInstance()->get(Session::class);
-        $customerSession->isLoggedIn();
-        $customerSession->setCustomerId($customerId);
+        $customerSession->loginById($customerId);
 
         return null;
     }
