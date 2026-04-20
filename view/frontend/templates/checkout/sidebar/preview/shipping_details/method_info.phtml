@@ -10,4 +10,5 @@ use Magento\Framework\View\Element\Template;
 /** @var ShippingDetailsViewModel $viewModel */
 
 $viewModel = $block->getViewModel();
-echo $viewModel->getMethodHtml();
+echo /* @noEscape */
+$viewModel->getMethodHtml();

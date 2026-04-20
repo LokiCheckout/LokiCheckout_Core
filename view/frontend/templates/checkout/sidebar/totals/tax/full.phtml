@@ -51,8 +51,8 @@ $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
         <dt x-show="shown" x-cloak @click="toggle"
             class="<?= $escaper->escapeHtml($css('')) ?>"
         >
-            <?= $rate['title'] ?>
-            (<?= $rate['percentage'] ?>%)
+            <?= $escaper->escapeHtml($rate['title']) ?>
+            (<?= $escaper->escapeHtml($rate['percentage']) ?>%)
         </dt>
         <dd x-show="shown" x-cloak
             class="<?= $escaper->escapeHtml($css('text-right')) ?>"

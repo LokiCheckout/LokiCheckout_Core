@@ -12,5 +12,7 @@ use Magento\Quote\Api\Data\CartItemInterface;
 
 $item = $block->getItem();
 ?>
-<?= $block->getChildBlock('price')->setData('item', $item)->toHtml() ?>
-<?= $block->getChildBlock('qty')->setData('item', $item)->toHtml() ?>
+<?= /* @noEscape */
+$block->getChildBlock('price')->setData('item', $item)->toHtml() ?>
+<?= /* @noEscape */
+$block->getChildBlock('qty')->setData('item', $item)->toHtml() ?>

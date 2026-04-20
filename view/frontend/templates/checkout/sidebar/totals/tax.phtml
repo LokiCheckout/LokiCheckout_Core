@@ -24,11 +24,13 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
 ?>
 <?php if ($taxTotalViewModel->showFullSummary()): ?>
-    <?= $block->getChildBlock('full')->setData([
+    <?= /* @noEscape */
+$block->getChildBlock('full')->setData([
         'total' => $total, 'totals' => $totals
     ])->toHtml(); ?>
 <?php else: ?>
-    <?= $block->getChildBlock('short')->setData([
+    <?= /* @noEscape */
+    $block->getChildBlock('short')->setData([
         'total' => $total, 'totals' => $totals
     ])->toHtml(); ?>
 <?php endif; ?>
