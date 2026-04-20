@@ -16,8 +16,12 @@ class TaxTotal implements ArgumentInterface
     ) {
     }
 
-    public function showFullSummary(): bool
+    public function showFullSummary(TotalSegment $total): bool
     {
+        if (false === $total->getValue() > 0) {
+            return false;
+        }
+
         return $this->scopeConfig->isSetFlag('tax/cart_display/full_summary', ScopeInterface::SCOPE_STORE);
     }
 

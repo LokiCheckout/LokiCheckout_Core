@@ -23,7 +23,7 @@ $totals = $block->getTotals();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
 ?>
-<?php if ($taxTotalViewModel->showFullSummary()): ?>
+<?php if ($taxTotalViewModel->showFullSummary($total)): ?>
     <?= /* @noEscape */ $block->getChildBlock('full')->setData([
         'total' => $total, 'totals' => $totals
     ])->toHtml(); ?>
