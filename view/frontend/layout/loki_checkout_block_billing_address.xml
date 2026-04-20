@@ -66,6 +66,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="autocomplete" xsi:type="string">billing given-name</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -76,6 +79,9 @@
                     <arguments>
                         <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing additional-name</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -84,6 +90,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="autocomplete" xsi:type="string">billing family-name</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -94,6 +103,7 @@
                     <arguments>
                         <argument name="lazy_update" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing honorific-suffix</argument>
+                        <argument name="max_length" xsi:type="number">20</argument>
                     </arguments>
                 </block>
 
@@ -103,6 +113,9 @@
                     <arguments>
                         <argument name="field_label" xsi:type="string">Street</argument>
                         <argument name="autocomplete" xsi:type="string">billing address-line1</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -112,6 +125,9 @@
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
                         <argument name="autocomplete" xsi:type="string">billing address-line2</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -121,6 +137,9 @@
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
                         <argument name="autocomplete" xsi:type="string">billing address-line3</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -130,6 +149,9 @@
                     <arguments>
                         <argument name="field_label" xsi:type="string">-</argument>
                         <argument name="autocomplete" xsi:type="string">billing address-line4</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -139,6 +161,9 @@
                     <arguments>
                         <argument name="is_required" xsi:type="boolean">true</argument>
                         <argument name="autocomplete" xsi:type="string">billing postal-code</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">20</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -147,6 +172,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="autocomplete" xsi:type="string">billing address-level2</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -180,6 +208,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="autocomplete" xsi:type="string">billing organization</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">255</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -189,6 +220,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="autocomplete" xsi:type="string">billing tel</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">30</item>
+                        </argument>
                     </arguments>
                 </block>
 
@@ -198,13 +232,22 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="lazy_update" xsi:type="boolean">true</argument>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">30</item>
+                        </argument>
                     </arguments>
                 </block>
 
                 <block
                     name="loki-checkout.billing.address.vat_id" as="vat_id"
                     ifconfig="customer/address/taxvat_show"
-                    template="Loki_FieldComponents::form/field.phtml"/>
+                    template="Loki_FieldComponents::form/field.phtml">
+                    <arguments>
+                        <argument name="field_attributes" xsi:type="array">
+                            <item name="max" xsi:type="number">30</item>
+                        </argument>
+                    </arguments>
+                </block>
 
                 <block
                     name="loki-checkout.billing.address.save_in_address_book" as="save_in_address_book"

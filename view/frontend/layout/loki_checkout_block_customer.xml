@@ -16,6 +16,10 @@
                 <arguments>
                     <argument name="placeholder" xsi:type="string" translate="true">Enter your emailaddress</argument>
                     <argument name="autocomplete" xsi:type="string">email</argument>
+                    <argument name="field_attributes" xsi:type="array">
+                        <item name="min" xsi:type="number">5</item>
+                        <item name="max" xsi:type="number">255</item>
+                    </argument>
                 </arguments>
             </block>
 
