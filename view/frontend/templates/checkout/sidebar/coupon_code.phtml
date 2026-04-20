@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\ChildRenderer;
@@ -11,6 +12,7 @@ use LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel;
 use Loki\Components\Util\Block\BlockRenderer;
 
 /** @version 2.3.21 */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var Template $block */
 /** @var CouponCodeViewModel $viewModel */
 /** @var CssClass $css */

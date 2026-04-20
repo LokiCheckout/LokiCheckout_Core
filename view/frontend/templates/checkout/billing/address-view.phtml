@@ -1,12 +1,14 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel;
 
 /** @version 2.3.21 */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var Template $block */
 /** @var AddressFormViewModel $viewModel */
 /** @var CssClass $css */

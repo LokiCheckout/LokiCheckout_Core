@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Factory\ViewModelFactory;
 use Magento\Framework\Escaper;
@@ -10,6 +11,7 @@ use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Util\Block\ImageRenderer;
 
 /** @version 2.3.21 */
+/** @var ComponentViewModelInterface $viewModel */
 /** @var ViewModelFactory $viewModelFactory */
 /** @var Escaper $escaper */
 /** @var Template $block */
