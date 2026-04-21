@@ -37,6 +37,6 @@ final class SelectPageTest extends LokiCheckoutTestCase
         $this->dispatchToCheckout();
         $this->assertCustomerLoggedIn();
         $this->assertCustomerHasAddresses();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 }

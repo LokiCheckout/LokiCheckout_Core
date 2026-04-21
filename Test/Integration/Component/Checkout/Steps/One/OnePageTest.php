@@ -25,6 +25,6 @@ final class OnePageTest extends LokiCheckoutTestCase
     {
         $this->markTestIncomplete('WIP');
         $this->dispatchToCheckout();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 }

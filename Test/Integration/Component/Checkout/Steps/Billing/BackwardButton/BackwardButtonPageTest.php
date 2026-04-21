@@ -29,6 +29,6 @@ final class BackwardButtonPageTest extends LokiCheckoutTestCase
     {
         $this->markTestSkipped();
         $this->dispatchToCheckout();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 }

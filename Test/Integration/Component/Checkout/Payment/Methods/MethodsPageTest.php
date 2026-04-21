@@ -27,6 +27,6 @@ final class MethodsPageTest extends LokiCheckoutTestCase
     final public function testComponentOnPage(): void
     {
         $this->dispatchToCheckout();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 }

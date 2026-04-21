@@ -26,7 +26,7 @@ final class CompanyPageTest extends LokiCheckoutTestCase
     public function testComponentOnPageIfOptional(): void
     {
         $this->dispatchToCheckout();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 
     #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]

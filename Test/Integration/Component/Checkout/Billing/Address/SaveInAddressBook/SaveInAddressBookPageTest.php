@@ -34,6 +34,6 @@ final class SaveInAddressBookPageTest extends LokiCheckoutTestCase
         $this->dispatchToCheckout();
         $this->assertCustomerLoggedIn();
         $this->assertCustomerHasNoAddresses();
-        $this->assertComponentExistsOnPage(self::BLOCK_NAME, true);
+        $this->assertComponentExistsOnPage(self::BLOCK_NAME, false);
     }
 }
