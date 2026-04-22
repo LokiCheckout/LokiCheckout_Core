@@ -33,7 +33,7 @@ if [ "${ready:-0}" -ne 1 ]; then
   echo "OpenSearch NOT OK, exiting"
   exit 1
 fi
-
+    
 cd /tmp/magento
 php -dmemory_limit=-1 bin/magento setup:install \
   --base-url="${MAGENTO_BASE_URL}" \
@@ -73,4 +73,3 @@ for i in {1..60}; do
   sleep 1
 done
 test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
-exit 0

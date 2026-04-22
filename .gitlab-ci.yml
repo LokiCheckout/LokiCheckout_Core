@@ -1,9 +1,7 @@
 stages:
-  - static
-  - unit
-  - compile
-  - integration
-  - e2e
+  - basic
+  - testing
+  - advanced
 
 variables:
   GIT_DEPTH: 1
@@ -35,7 +33,7 @@ variables:
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
-  stage: static
+  stage: basic
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
@@ -46,7 +44,7 @@ php-linting:
 
 magento-phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: static
+  stage: basic
   script:
     - cd $CI_PROJECT_DIR
     - PHPCS_LEVEL=`jq '.phpcs_severity // 10' MODULE.json -r`
@@ -59,7 +57,7 @@ magento-phpcs:
 
 magento-phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: static
+  stage: basic
   script:
     - cd $CI_PROJECT_DIR
     - COMPOSER_NAME=`jq '.name' composer.json -r`
@@ -87,7 +85,7 @@ magento-phpstan:
 
 magento-unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: unit
+  stage: testing
   script:
     - cd $CI_PROJECT_DIR
     - test -d Test/Unit/ || exit 0
@@ -110,11 +108,11 @@ magento-unit-tests:
     - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.8-p3', '2.4.8-p4']
+      - MAGENTO_VERSION: ['2.4.8-p4']
 
 magento-integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: integration
+  stage: testing
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
@@ -158,7 +156,7 @@ magento-integration-tests:
 
 magento-compile:
   image: yireo/magento2installed:$MAGENTO_VERSION
-  stage: compile
+  stage: testing
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
@@ -175,7 +173,6 @@ magento-compile:
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
-    - test -d app/code/Magento && rm -rf app/code/Magento
     - composer dump-autoload -o
     - bin/magento module:enable --all
     - php -dmemory_limit=-1 bin/magento setup:di:compile
@@ -185,8 +182,8 @@ magento-compile:
       #- MAGENTO_VERSION: ['2.4.9-beta1']
 
 magento-playwright:
-  image: yireo/magento2playwright:2.4.8-p3
-  stage: e2e
+  image: yireo/magento2installed:2.4.8-p4
+  stage: advanced
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
       allow_failure: true
@@ -198,47 +195,28 @@ magento-playwright:
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - cd /tmp/magento
-    - $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
-    - magerun2 sys:info
-    - magerun2 sys:check
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
-    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
-    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
-    - >
-      mkdir -p /tmp/magento/module-source
-      composer config repositories.local-source
-      "{\"type\": \"path\", \"url\": \"/tmp/magento/module-source\", \"options\": {\"symlink\": false}}"
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-functional-tests:@dev loki-checkout/magento2-sample-data:@dev yireo/magento2-enable-module-sequence
-    - bin/magento deploy:mode:set developer
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
+    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests
-    - bin/magento module:sequence LokiCheckout_CoreCli
-    - bin/magento module:sequence LokiCheckout_SampleData
-    - cp -R $CI_PROJECT_DIR/* /tmp/magento/module-source/
     - bin/magento module:sequence "${MAGENTO_MODULE}"
-    - composer config --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
-    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-01 --name=sample-product-01
-    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-02 --name=sample-product-02
-    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-03 --name=sample-product-03
-    - bin/magento indexer:reindex
-    - bin/magento loki-checkout:modules:dump
+    - bin/magento setup:upgrade
+    #- bin/magento deploy:mode:set production
     - magerun2 config:store:set loki_functional_tests/general/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
-    - PLAYWRIGHT_DOWNLOAD_PROGRESS=0 npx playwright install chromium
-    - printf "TEST_URL=$MAGENTO_BASE_URL\nTEST_TOKEN=loki\n" > .env
-    - CI=true MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
-  artifacts:
-    when: always
-    expire_in: 14 days
-    paths:
-      - playwright-report/
-      - test-results/
-    reports:
-      junit: test-results/junit.xml
+    - npx playwright install
+    - touch .env
+    - echo "TEST_URL=$MAGENTO_BASE_URL" >> .env
+    - echo "TEST_TOKEN=loki" >> .env
+    - npx playwright test --project=${MAGENTO_MODULE}
   services:
     - name: yireo/mariadb:10
       alias: mysql

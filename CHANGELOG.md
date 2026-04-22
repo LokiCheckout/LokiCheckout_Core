@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.22] - 22 April 2026
+### Fixed
+- When regenerating checkout session ID at login, make sure CheckoutState is updated
+- Add message to RedirectException
+- Do not show full tax summary if tax is zero
+- Add min / max to various field values
+- Add layout handles for address grids (like `loki_checkout_address_default_grid_country_nl`)
+- Support for tax-config settings for cart item prices (incl tax, excl tax or both)
+- Split up sidebar cart item values into separate templates for qty and price
+- Support option to display full tax details
+- Add country flag images (wip)
+- Rename `loki-checkout.steps.shipping.forward-button-icon` to `loki-checkout.steps.shipping.forward-button.icon`
+- Rename `loki-checkout.steps.billing.forward-button-icon` to `loki-checkout.steps.billing.forward-button.icon`
+
 ## [2.3.21] - 14 April 2026
 ### Fixed
 - Remove static cache for payment method
