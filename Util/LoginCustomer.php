@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Util;
 
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Url as CustomerUrl;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Exception\EmailNotConfirmedException;
@@ -22,6 +24,8 @@ class LoginCustomer
         private readonly MessageManager $messageManager,
         private readonly CustomerUrl $customerUrl,
         private readonly CustomerSession $customerSession,
+        private readonly CheckoutSession $checkoutSession,
+        private readonly CheckoutState $checkoutState
     ) {
     }
 
@@ -38,6 +42,9 @@ class LoginCustomer
                 $metadata->setPath('/');
                 $this->cookieManager->deleteCookie('mage-cache-sessid', $metadata);
             }
+
+            $this->checkoutState->setQuoteId((int)$this->checkoutSession->getQuoteId());
+
         } catch (EmailNotConfirmedException $e) {
             $this->messageManager->addComplexErrorMessage(
                 'confirmAccountErrorMessage',
