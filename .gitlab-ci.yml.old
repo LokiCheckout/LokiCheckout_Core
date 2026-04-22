@@ -1,0 +1,255 @@
+stages:
+  - static
+  - unit
+  - compile
+  - integration
+  - e2e
+
+variables:
+  GIT_DEPTH: 1
+  GIT_STRATEGY: fetch
+  MAGENTO_BASE_URL: "http://127.0.0.1:8888/"
+  MAGENTO_BACKEND_FRONTNAME: "admin"
+  MAGENTO_ADMIN_FIRSTNAME: "CI"
+  MAGENTO_ADMIN_LASTNAME: "User"
+  MAGENTO_ADMIN_EMAIL: "admin@example.com"
+  MAGENTO_ADMIN_USER: "admin"
+  MAGENTO_ADMIN_PASSWORD: "Admin123!@#"
+  MAGENTO_LANGUAGE: "en_US"
+  MAGENTO_CURRENCY: "USD"
+  MAGENTO_TIMEZONE: "UTC"
+  MAGENTO_USE_REWRITES: "1"
+  MAGENTO_SEARCH_ENGINE: "opensearch"
+  COMPOSER_ALLOW_SUPERUSER: "1"
+  COMPOSER_MEMORY_LIMIT: "-1"
+  MYSQL_HOST: "mysql"
+  MYSQL_USER: magento2
+  MYSQL_PASSWORD: magento2
+  MYSQL_DATABASE: magento2
+  MYSQL_ROOT_PASSWORD: root
+  MYSQL_PORT: "3306"
+  OPENSEARCH_HOST: "opensearch"
+  OPENSEARCH_PORT: "9200"
+  OPENSEARCH_JAVA_OPTS: "-Xms128m -Xmx128m"
+  OPENSEARCH_INITIAL_ADMIN_PASSWORD: "admin"
+
+php-linting:
+  image: yireo/php-testbox:$PHP_VERSION
+  stage: static
+  script:
+    - cd $CI_PROJECT_DIR
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
+    - sh -c 'if find . -name "*.php" -exec php -l {} 2>&1 \; | grep -v "^No syntax errors detected"; then exit 1; fi'
+  parallel:
+    matrix:
+      - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4', '8.5']
+
+magento-phpcs:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: static
+  script:
+    - cd $CI_PROJECT_DIR
+    - PHPCS_LEVEL=`jq '.phpcs_severity // 10' MODULE.json -r`
+    - echo "Testing for PHPCS severity $PHPCS_LEVEL"
+    - cd /tmp/magento
+    - php vendor/bin/phpcs --standard=Magento2 --ignore=Test/,node_modules/ --colors --extensions=php,phtml --severity=$PHPCS_LEVEL $CI_PROJECT_DIR
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p4']
+
+magento-phpstan:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: static
+  script:
+    - cd $CI_PROJECT_DIR
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - PHPSTAN_LEVEL=`jq '.phpstan_level // 1' MODULE.json -r`
+    - echo "Testing for PHPStan level $PHPSTAN_LEVEL"
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - cd /tmp/magento
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - composer config --no-plugins allow-plugins true
+    - composer remove --dev magento/magento-coding-standard
+    - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
+    - composer require --dev --prefer-source -- phpstan/phpstan:^2.0 bitexpert/phpstan-magento:^0.42 phpstan/extension-installer
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - test -f /tmp/magento/phpstan.neon || echo 'parameters:' > /tmp/magento/phpstan.neon
+    - php -d memory_limit=4G vendor/bin/phpstan analyse --level $PHPSTAN_LEVEL $CI_PROJECT_DIR
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p4']
+
+magento-unit-tests:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: unit
+  script:
+    - cd $CI_PROJECT_DIR
+    - test -d Test/Unit/ || exit 0
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - cd /tmp/magento
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - cd /tmp/magento/dev/tests/unit/
+    - cp $CI_PROJECT_DIR/.gitlab-ci/unit-tests/phpunit.xml phpunit.xml
+    - php ../../../vendor/bin/phpunit -c phpunit.xml --colors=never ../../../vendor/$COMPOSER_NAME/Test/Unit
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p3', '2.4.8-p4']
+
+magento-integration-tests:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: integration
+  script:
+    - cd $CI_PROJECT_DIR
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
+    - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
+    - test -d Test/Integration/ || exit 0
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - cd /tmp/magento
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path /tmp/magento/local-source
+    - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev
+    - composer dump-autoload -o
+    - cd /tmp/magento && curl -fsSL https://patch-diff.githubusercontent.com/raw/magento/magento2/pull/39216.diff | git apply
+    - cd /tmp/magento && curl -fsSL https://patch-diff.githubusercontent.com/raw/magento/magento2/pull/40410.diff | git apply
+    - curl -sf -o /dev/null http://opensearch:9200  || (echo "ElasticSearch not alive" && exit 1)
+    - cd /tmp/magento/dev/tests/integration/
+    - cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/etc/* etc/
+    - php /tmp/magento/vendor/bin/phpunit --atleast-version 9 && cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit9.xml phpunit.xml
+    - php /tmp/magento/vendor/bin/phpunit --atleast-version 10 && cp $CI_PROJECT_DIR/.gitlab-ci/integration-tests/phpunit10.xml phpunit.xml
+    - MAGENTO_MODULE_FOLDER=vendor/$COMPOSER_NAME php -d display_errors=1 -d memory_limit=4G ../../../vendor/bin/phpunit ../../../vendor/$COMPOSER_NAME/Test/Integration/
+  services:
+    - name: yireo/mariadb:10
+      alias: mysql
+    - name: redis:latest
+      alias: redis
+    - name: yireo/opensearch
+      alias: opensearch
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.8-p4']
+        PHP_VERSION: ['8.4']
+
+magento-compile:
+  image: yireo/magento2installed:$MAGENTO_VERSION
+  stage: compile
+  script:
+    - cd $CI_PROJECT_DIR
+    - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
+    - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
+    - cd /tmp/magento
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - composer config repositories.local-source path $CI_PROJECT_DIR
+    - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
+    - test -d app/code/Magento && rm -rf app/code/Magento
+    - composer dump-autoload -o
+    - bin/magento module:enable --all
+    - php -dmemory_limit=-1 bin/magento setup:di:compile
+  parallel:
+    matrix:
+      - MAGENTO_VERSION: ['2.4.5-p14', '2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p4']
+      #- MAGENTO_VERSION: ['2.4.9-beta1']
+
+magento-playwright:
+  image: yireo/magento2playwright:2.4.8-p3
+  stage: e2e
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "schedule"'
+      allow_failure: true
+    - when: manual
+      allow_failure: true
+  script:
+    - cd $CI_PROJECT_DIR
+    - test -d Test/Playwright/ || exit 0
+    - COMPOSER_NAME=`jq '.name' composer.json -r`
+    - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
+    - cd /tmp/magento
+    - $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
+    - magerun2 sys:info
+    - magerun2 sys:check
+    - composer config gitlab-domains gitlab.yireo.com
+    - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
+    - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - >
+      mkdir -p /tmp/magento/module-source
+      composer config repositories.local-source
+      "{\"type\": \"path\", \"url\": \"/tmp/magento/module-source\", \"options\": {\"symlink\": false}}"
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-functional-tests:@dev loki-checkout/magento2-sample-data:@dev yireo/magento2-enable-module-sequence
+    - bin/magento deploy:mode:set developer
+    - bin/magento module:enable Yireo_EnableModuleSequence
+    - bin/magento module:sequence LokiCheckout_FunctionalTests
+    - bin/magento module:sequence LokiCheckout_CoreCli
+    - bin/magento module:sequence LokiCheckout_SampleData
+    - cp -R $CI_PROJECT_DIR/* /tmp/magento/module-source/
+    - bin/magento module:sequence "${MAGENTO_MODULE}"
+    - composer config --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
+    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-01 --name=sample-product-01
+    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-02 --name=sample-product-02
+    - bin/magento loki-checkout:sample-data:add-product --sku=sample-product-03 --name=sample-product-03
+    - bin/magento indexer:reindex
+    - bin/magento loki-checkout:modules:dump
+    - magerun2 config:store:set loki_functional_tests/general/token loki -n
+    - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
+    - npm install
+    - PLAYWRIGHT_DOWNLOAD_PROGRESS=0 npx playwright install chromium
+    - printf "TEST_URL=$MAGENTO_BASE_URL\nTEST_TOKEN=loki\n" > .env
+    - CI=true MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
+  artifacts:
+    when: always
+    expire_in: 14 days
+    paths:
+      - playwright-report/
+      - test-results/
+    reports:
+      junit: test-results/junit.xml
+  services:
+    - name: yireo/mariadb:10
+      alias: mysql
+    - name: redis:latest
+      alias: redis
+    - name: yireo/opensearch
+      alias: opensearch
+
+cache:
+  key: "$CI_JOB_NAME"
+  paths:
+    - /build/cache/
+    - vendor/
+
