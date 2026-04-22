@@ -33,6 +33,9 @@ test.describe('logged-in customer', function()  {
     await expect(button).toBeEnabled();
     await button.click();
 
-    await expect(page.locator('#loki-checkout-login')).toContainText('You are logged in as');
+    await page.waitForSelector('#loki-checkout-login-form-inner-button', { state: 'detached' });
+    await expect(modal).toHaveCount(0);
+
+    await expect(page.locator('#loki-checkout-login')).toContainText(/You are logged in as/);
   });
 });

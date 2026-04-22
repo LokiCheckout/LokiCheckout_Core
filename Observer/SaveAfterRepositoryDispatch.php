@@ -11,7 +11,7 @@ use Magento\Framework\View\LayoutInterface;
 class SaveAfterRepositoryDispatch implements ObserverInterface
 {
     public function __construct(
-        protected SameAddressService $sameAddressService,
+        private readonly SameAddressService $sameAddressService,
         private readonly CheckoutState $checkoutState,
     ) {
     }

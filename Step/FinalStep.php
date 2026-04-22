@@ -93,9 +93,7 @@ class FinalStep
         $this->dispatchSaveOrderEvent();
 
         if (true === $redirect) {
-            $redirectUrl = $this->redirect->get();
-
-            throw new RedirectException($redirectUrl);
+            throw (new RedirectException())->setUrl($this->redirect->get());
         }
 
         return true;

@@ -38,9 +38,9 @@ class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
             throw $e;
         }
 
-        $this->messageManager->addErrorMessage(get_class($e) . ': ' . $e->getMessage());
+        $msg = get_class($e) . ': ' . $e->getMessage();
         $url = $this->urlFactory->create()->getUrl('checkout/cart');
-        throw new RedirectException($url);
+        throw (new RedirectException($msg))->setUrl($url);
     }
 
     private function isExceptionAllowed(Exception $e): bool

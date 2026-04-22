@@ -97,7 +97,7 @@ class CheckoutState implements ArgumentInterface
     public function getQuote(): Quote
     {
         if (false === $this->getQuoteId() > 0) {
-            $this->handleQuoteNotFoundException();
+            $this->handleQuoteNotFoundException('No quote found');
         }
 
         $quoteId = $this->getQuoteId();
@@ -114,7 +114,7 @@ class CheckoutState implements ArgumentInterface
         try {
             $this->quotes[$quoteId] = $this->getPersistedQuote();
         } catch (NoSuchEntityException $e) {
-            $this->handleQuoteNotFoundException();
+            $this->handleQuoteNotFoundException($e->getMessage());
         }
 
         return $this->quotes[$quoteId];
@@ -135,7 +135,7 @@ class CheckoutState implements ArgumentInterface
             $this->saveCart->execute($quote, $useRepository);
             $this->calculateTotals();
         } catch (NoSuchEntityException $e) {
-            $this->handleQuoteNotFoundException();
+            $this->handleQuoteNotFoundException($e->getMessage());
         }
     }
 
@@ -175,12 +175,12 @@ class CheckoutState implements ArgumentInterface
         return $this->customerSession;
     }
 
-    private function handleQuoteNotFoundException(): void
+    private function handleQuoteNotFoundException(string $message): void
     {
         $redirectUrl = $this->urlFactory->create()->getUrl('checkout/cart');
 
         if ($this->ajax->isAjax()) {
-            throw new RedirectException($redirectUrl);
+            throw (new RedirectException($message))->setUrl($redirectUrl);
         }
 
         /** @var HttpResponse $response */
