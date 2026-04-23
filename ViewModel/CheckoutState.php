@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\ViewModel;
 use LokiCheckout\Core\Util\Checkout\SaveCart;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Model\Session as CustomerSession;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Response\Http as HttpResponse;
 use Magento\Framework\App\ResponseFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -35,6 +36,7 @@ class CheckoutState implements ArgumentInterface
         private readonly SaveCart $saveCart,
         private readonly TotalsInformationManagementInterface $totalsInformationManagement,
         private readonly TotalsInformationInterfaceFactory $totalsInformationFactory,
+        private readonly ScopeConfigInterface $scopeConfig
     ) {
     }
 
@@ -91,7 +93,7 @@ class CheckoutState implements ArgumentInterface
     {
         /** @var Quote $quote */
         $quote = $this->cartRepository->get($this->getQuoteId());
-        return $quote;
+        return $this->parseQuote($quote);
     }
 
     public function getQuote(): Quote
@@ -102,13 +104,13 @@ class CheckoutState implements ArgumentInterface
 
         $quoteId = $this->getQuoteId();
         if (isset($this->quotes[$quoteId]) && $this->quotes[$quoteId] instanceof Quote) {
-            return $this->quotes[$quoteId];
+            return $this->parseQuote($this->quotes[$quoteId]);
         }
 
         $quoteFromSession = $this->checkoutSession->getQuote();
         if ($quoteFromSession instanceof Quote) {
             $this->quotes[$quoteId] = $quoteFromSession;
-            return $this->quotes[$quoteId];
+            return $this->parseQuote($this->quotes[$quoteId]);
         }
 
         try {
@@ -117,7 +119,7 @@ class CheckoutState implements ArgumentInterface
             $this->handleQuoteNotFoundException($e->getMessage());
         }
 
-        return $this->quotes[$quoteId];
+        return $this->parseQuote($this->quotes[$quoteId]);
     }
 
     public function setQuote(Quote $quote): void
@@ -188,5 +190,24 @@ class CheckoutState implements ArgumentInterface
         $response->setRedirect($redirectUrl);
         $response->sendResponse();
         exit; // phpcs:ignore
+    }
+
+    private function parseQuote(Quote $quote): Quote
+    {
+        $shippingAddress = $quote->getShippingAddress();
+
+        if (!$shippingAddress->getCountryId()) {
+            $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
+            $shippingAddress->setCountryId($defaultCountryId);
+        }
+
+        $billingAddress = $quote->getBillingAddress();
+
+        if (!$billingAddress->getCountryId()) {
+            $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
+            $billingAddress->setCountryId($defaultCountryId);
+        }
+
+        return $quote;
     }
 }
