@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.23] - 23 April 2026
+### Fixed
+- Guarantee that country ID is set right after first loading of the quote
+
 ## [2.3.22] - 22 April 2026
 ### Fixed
 - When regenerating checkout session ID at login, make sure CheckoutState is updated
