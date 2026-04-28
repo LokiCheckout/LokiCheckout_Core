@@ -1,0 +1,26 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Loki\Components\Util\Block\ImageRenderer;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.3.23 */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var Escaper $escaper */
+/** @var ImageRenderer $imageRenderer */
+
+?>
+<button
+    @click="collapseDeliveryDates"
+    x-cloak x-show="showCollapseDeliveryDates"
+    class="<?= $escaper->escapeHtml($css('cursor-pointer')) ?>">
+    <div class="<?= $escaper->escapeHtml($css('inline-block', 'icon')) ?>">
+        <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-up') ?>
+    </div>
+    <span class="<?= $escaper->escapeHtml($css('text-sm', 'span')) ?>">
+        <?= $escaper->escapeHtml(__('Show less options')) ?>
+    </span>
+</button>

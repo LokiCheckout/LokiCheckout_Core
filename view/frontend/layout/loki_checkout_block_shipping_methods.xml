@@ -51,6 +51,12 @@
             </arguments>
 
             <block
+                name="loki-checkout.shipping.delivery-dates.collapse-button"
+                as="collapse-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method/delivery-dates/collapse-button.phtml"
+            />
+
+            <block
                 name="loki-checkout.shipping.delivery-dates.expand-button"
                 as="expand-button"
                 template="LokiCheckout_Core::checkout/shipping/shipping-method/delivery-dates/expand-button.phtml"
@@ -89,6 +95,12 @@
             <arguments>
                 <argument name="tab_id" xsi:type="string">locations</argument>
             </arguments>
+
+            <block
+                name="loki-checkout.shipping.locations.collapse-button"
+                as="collapse-button"
+                template="LokiCheckout_Core::checkout/shipping/shipping-method/locations/collapse-button.phtml"
+            />
 
             <block
                 name="loki-checkout.shipping.locations.expand-button"

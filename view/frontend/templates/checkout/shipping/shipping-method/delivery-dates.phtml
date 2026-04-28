@@ -43,6 +43,7 @@ $tabId = $block->getTabId();
             <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.shipping.delivery-date') ?>
         </template>
 
+        <?= /* @noEscape */ $block->getChildHtml('collapse-button') ?>
         <?= /* @noEscape */ $block->getChildHtml('expand-button') ?>
         <?= /* @noEscape */ $block->getChildHtml('expand-all-button') ?>
     </div>

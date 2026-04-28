@@ -13,8 +13,10 @@ use Magento\Framework\View\Element\Template;
         valid: false,
         required: true,
         activeTabId: 'delivery-dates',
+        defaultDeliveryCount: 3,
         visibleDeliveryCount: 3,
         expandDeliveryCount: 3,
+        defaultLocationCount: 3,
         visibleLocationCount: 3,
         expandLocationCount: 3,
         isShippingAddressValid: true,
@@ -42,7 +44,6 @@ use Magento\Framework\View\Element\Template;
             this.showLocations();
         },
         showLocations() {
-
         },
         isDeliveryEnabled() {
             return this.deliveryEnabled;
@@ -66,11 +67,14 @@ use Magento\Framework\View\Element\Template;
         showLoadingDeliveryDates() {
             return !this.hasDeliveryDates() && this.showLoader;
         },
-        expandAllTimeframes() {
+        expandAllDeliveryDates() {
             this.visibleDeliveryCount = this.deliveryDates.length;
         },
-        expandTimeframes() {
+        expandDeliveryDates() {
             this.visibleDeliveryCount += this.expandDeliveryCount;
+        },
+        collapseDeliveryDates() {
+            this.visibleDeliveryCount = this.defaultDeliveryCount;
         },
         isCurrentValue(value) {
             return JSON.stringify(value) === JSON.stringify(this.value);
@@ -95,6 +99,10 @@ use Magento\Framework\View\Element\Template;
         },
         expandLocations() {
             this.visibleLocationCount += this.expandLocationCount;
+            this.showLocations();
+        },
+        collapseLocations() {
+            this.visibleLocationCount = this.defaultLocationCount;
             this.showLocations();
         },
         getSortedLocations() {
@@ -128,8 +136,6 @@ use Magento\Framework\View\Element\Template;
             return this.isCurrentLocationValue(id);
         },
         isCurrentLocationValue(locationId) {
-            //console.log('isCurrentLocationValue', locationId, this.value);
-
             if (!locationId || !this.value || this.value.deliveryType !== 'pickup') {
                 return false;
             }
@@ -139,8 +145,14 @@ use Magento\Framework\View\Element\Template;
         showExpandDeliveryDates() {
             return this.deliveryDates.length > this.visibleDeliveryCount;
         },
+        showCollapseDeliveryDates() {
+            return this.visibleDeliveryCount > this.defaultDeliveryCount;
+        },
         showExpandLocations() {
             return this.locations.length > this.visibleLocationCount;
+        },
+        showCollapseLocations() {
+            return this.visibleLocationCount > this.defaultLocationCount;
         },
         toggleMaps() {
             this.activeTabId = 'locations';

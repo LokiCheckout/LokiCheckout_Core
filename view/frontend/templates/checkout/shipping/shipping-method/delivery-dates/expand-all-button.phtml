@@ -14,11 +14,11 @@ use Magento\Framework\View\Element\Template;
 
 ?>
 <button
-    @click="expandAllTimeframes"
+    @click="expandAllDeliveryDates"
     x-cloak x-show="showExpandDeliveryDates"
     class="<?= $escaper->escapeHtml($css('cursor-pointer')) ?>">
     <div class="<?= $escaper->escapeHtml($css('inline-block', 'icon')) ?>">
-        <?= /* @noEscape */ $imageRenderer->icon($block, 'angle-down') ?>
+        <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-down') ?>
     </div>
     <span class="<?= $escaper->escapeHtml($css('text-sm', 'span')) ?>">
         <?= $escaper->escapeHtml(__('Show all options')) ?>
