@@ -11,7 +11,9 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 ?>
 
-<div x-show="location.pickupFrom" class="<?= $escaper->escapeHtml($css('')) ?>">
-    <?= $escaper->escapeHtml(__('From date')) ?>
+<div x-show="location.pickupFrom" class="<?= $escaper->escapeHtml($css('text-zinc-800')) ?>">
+    <span class="<?= $escaper->escapeHtml($css('font-bold', 'label')) ?>">
+        <?= $escaper->escapeHtml(__('Pick up from')) ?>:
+    </span>
     <span class="<?= $escaper->escapeHtml($css('', 'value')) ?>" x-date="location.pickupFrom"></span>
 </div>

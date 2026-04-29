@@ -12,7 +12,7 @@ use Magento\Framework\View\Element\Template;
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
 ?>
-<label class="<?= $escaper->escapeHtml($css('loki-checkout-shipping-shipping-methods-item flex mb-4 p-4 hover:bg-black/5')) ?>"
+<label class="<?= $escaper->escapeHtml($css('loki-checkout-shipping-shipping-methods-item flex mb-4 hover:bg-black/5')) ?>"
        :class="location.cssClass">
 
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.location.input') ?>
