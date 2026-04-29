@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.24] - 29 April 2026
+### Fixed
+- Add Dutch translations
+- Styling changes to shipping locations
+- Add HTML attributes to shipping method icons
+- Change input elements of shipping methods to be inline with payment methods
+- Collapse button for shipping method details
+- Fix tab buttons to occupy full width under mobile
+
 ## [2.3.23] - 23 April 2026
 ### Fixed
 - Guarantee that country ID is set right after first loading of the quote
