@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Shipment\Icon;
 use Loki\Components\Util\Block\ImageRenderer;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Component\ComponentRegistrar;
+use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Filesystem;
 use Magento\Framework\Filesystem\DriverInterface;
 use Magento\Framework\View\Asset\Repository as AssetRepository;
@@ -18,7 +19,8 @@ class IconResolverContext
         private readonly ImageRenderer $imageRenderer,
         Filesystem $filesystem,
         private readonly AssetRepository $assetRepository,
-        private readonly string $shipmentMethodCode
+        private readonly string $shipmentMethodCode,
+        private readonly array $attributes = [],
     ) {
         $this->fileDriver = $filesystem->getDirectoryWrite(DirectoryList::PUB)->getDriver();
     }
@@ -32,9 +34,11 @@ class IconResolverContext
     {
         $modulePath = $this->componentRegistrar->getPath(ComponentRegistrar::MODULE, $moduleName);
         $iconPath = $modulePath . DIRECTORY_SEPARATOR . $path;
-        if ($this->fileDriver->isFile($iconPath)) {
-            return $iconPath;
-        }
+        try {
+            if ($this->fileDriver->isFile($iconPath)) {
+                return $iconPath;
+            }
+        } catch (FileSystemException $e) {}
 
         return false;
     }
@@ -45,12 +49,16 @@ class IconResolverContext
             return '';
         }
 
-        if (false === $this->fileDriver->isFile($iconPath)) {
+        try {
+            if (false === $this->fileDriver->isFile($iconPath)) {
+                return '';
+            }
+        } catch (FileSystemException $e) {
             return '';
         }
 
         if ($iconType === 'svg') {
-            return $this->imageRenderer->getIconOutput($iconPath);
+            return $this->imageRenderer->getIconOutput($iconPath, $this->getAttributes());
         }
 
         return '';
@@ -59,5 +67,10 @@ class IconResolverContext
     public function getViewFileUrl(string $imageId): string
     {
         return $this->assetRepository->getUrl($imageId);
+    }
+
+    public function getAttributes(): array
+    {
+        return $this->attributes;
     }
 }

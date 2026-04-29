@@ -18,9 +18,9 @@ class ShipmentMethodIcon implements ArgumentInterface
     ) {
     }
 
-    public function getIcon(string $paymentMethodCode): string
+    public function getIcon(string $paymentMethodCode, array $attributes = []): string
     {
-        $context = $this->getIconResolverContext($paymentMethodCode);
+        $context = $this->getIconResolverContext($paymentMethodCode, $attributes);
         foreach ($this->iconResolverListing->getIconResolvers() as $iconResolver) {
             $icon = $iconResolver->resolve($context);
             if (is_string($icon)) {
@@ -31,8 +31,11 @@ class ShipmentMethodIcon implements ArgumentInterface
         return '';
     }
 
-    private function getIconResolverContext(string $shipmentMethodCode): IconResolverContext
+    private function getIconResolverContext(string $shipmentMethodCode, array $attributes = []): IconResolverContext
     {
-        return $this->iconResolverContextFactory->create(['shipmentMethodCode' => $shipmentMethodCode]);
+        return $this->iconResolverContextFactory->create([
+            'shipmentMethodCode' => $shipmentMethodCode,
+            'attributes' => $attributes,
+        ]);
     }
 }

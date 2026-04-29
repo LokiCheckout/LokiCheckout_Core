@@ -37,7 +37,7 @@ class PaymentMethodIcon implements ArgumentInterface
     ): IconResolverContext {
         return $this->iconResolverContextFactory->create([
             'paymentMethodCode' => $paymentMethodCode,
-            'attributes'        => $attributes,
+            'attributes' => $attributes,
         ]);
     }
 }
