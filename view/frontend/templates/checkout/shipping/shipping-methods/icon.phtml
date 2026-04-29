@@ -13,15 +13,21 @@ use LokiCheckout\Core\ViewModel\ShipmentMethodIcon;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ShipmentMethodIcon $shipmentMethodIcon */
 /** @var CssClass $css */
-// @doc: Show how to change CSS here
 
 $shipmentMethodCode = $block->getCode();
 $shipmentMethodIcon = $viewModelFactory->create(ShipmentMethodIcon::class);
-$icon = $shipmentMethodIcon->getIcon($shipmentMethodCode);
+
+$size = $block->getSize() ?? 25;
+$width = $block->getWidth() ?? $size;
+$height = $block->getHeight() ?? $size;
+$attributes = [
+    'width'  => $width,
+    'height' => $height,
+];
+
+$icon = $shipmentMethodIcon->getIcon($shipmentMethodCode, $attributes);
 if (empty($icon)) {
     return;
 }
 ?>
-<div class="<?= $escaper->escapeHtml($css('inline-block mr-4 w-8 drop-shadow-2xl')) ?>">
-    <?= /* @noEscape */ $shipmentMethodIcon->getIcon($shipmentMethodCode) ?>
-</div>
+<?= /* @noEscape */ $icon ?>

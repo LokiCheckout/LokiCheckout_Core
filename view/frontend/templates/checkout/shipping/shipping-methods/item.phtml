@@ -2,16 +2,16 @@
 declare(strict_types=1);
 
 use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\Components\Util\Block\TemplateRenderer;
 use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
 use LokiCheckout\Core\ViewModel\ApplicationMode;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Magento\Quote\Model\Cart\ShippingMethod;
-use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel;
-use Loki\Components\Factory\ViewModelFactory;
-use Loki\Components\Util\Block\BlockRenderer;
-use LokiCheckout\Core\ViewModel\PriceFormatter;
-use Loki\Components\Util\Block\TemplateRenderer;
 
 /** @version 2.3.23 */
 /** @var ComponentViewModelInterface $viewModel */
@@ -43,9 +43,27 @@ $applicationMode = $viewModelFactory->create(ApplicationMode::class);
 if ($applicationMode->isDeveloperMode()) {
     $htmlAttributes = 'title="' . $escaper->escapeHtml($code) . '"';
 }
+
+$shipmentIcon = $templateRenderer->html(
+    $block,
+    'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
+    [
+        'alias' => $code.'.icon',
+        'code'  => $code,
+    ]
+);
+
+$inputCss = $css('', 'input');
+if ($shipmentIcon) {
+    $inputCss = $css('', 'input-with-icon'); // @doc: sr-only
+}
 ?>
-<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative flex gap-4 my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
-    <div class="<?= $escaper->escapeHtml($css('', 'input-container')) ?>">
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
+    <label
+        data-code="<?= $escaper->escapeHtml($shippingMethod->getMethodCode()) ?>"
+        class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'label')) ?>"
+    >
+        <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
                 type="radio"
@@ -60,58 +78,44 @@ if ($applicationMode->isDeveloperMode()) {
                 <?= $isCurrent ? 'checked' : '' ?>
                 <?= $viewModel->isDisabled() ? 'disabled="disabled"' : '' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                class="<?= $escaper->escapeHtml($css('mr-4', 'input')) ?>"
+                class="<?= $escaper->escapeHtml($inputCss) ?>"
             >
         <?php else: ?>
             <input type="radio" id="shipping-<?= $escaper->escapeHtml($code) ?>" disabled/>
         <?php endif; ?>
-    </div>
-    <div class="<?= $escaper->escapeHtml($css('flex-1', 'details-container')) ?>">
-        <div class="<?= $escaper->escapeHtml($css('md:flex', 'details')) ?>">
-            <?= /* @noEscape */ $templateRenderer->html(
+            <?= /* @noEscape */ $shipmentIcon ?>
+        </span>
+
+        <span
+            class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
+                        <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
+
+            <?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?>
+            <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?>
+
+            <?php if (false === $shippingMethod->getAvailable()) : ?>
+                <?php if ($shippingMethod->getErrorMessage()): ?>
+                    (<?= $escaper->escapeHtml($shippingMethod->getErrorMessage()) ?>)
+                <?php else: ?>
+                    (Not available)
+                <?php endif; ?>
+            <?php endif; ?>
+        </span>
+    </label>
+
+    <?php if ($isCurrent || $showHidden) : ?>
+        <div class="<?= $escaper->escapeHtml($css('', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
+            <?= /* @noEscape */ $blockRenderer->html(
                 $block,
-                'LokiCheckout_Core::checkout/shipping/shipping-methods/icon.phtml',
-                [
-                    'alias' => $code,
-                    'code' => $code,
-                ]
+                'loki-checkout.shipping.methods.'.$code.'.form',
+                ['method' => $code]
             ) ?>
 
-            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtml($css('pr-2 font-bold cursor-pointer', 'amount-label')) ?>">
-                <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
-            </label>
-
-            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
-                   class="<?= $escaper->escapeHtml($css('cursor-pointer pr-2 ', 'method-label')) ?>"><?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?></label>
-
-            <label for="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>" class="<?= $escaper->escapeHtml($css('cursor-pointer pr-2 ', 'carrier-label')) ?>">
-                <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?>
-
-                <?php if (false === $shippingMethod->getAvailable()) : ?>
-                    <?php if ($shippingMethod->getErrorMessage()): ?>
-                        (<?= $escaper->escapeHtml($shippingMethod->getErrorMessage()) ?>)
-                    <?php else: ?>
-                        (Not available)
-                    <?php endif; ?>
-                <?php endif; ?>
-            </label>
+            <?= /* @noEscape */ $blockRenderer->html(
+                $block,
+                'loki-checkout.shipping.methods.'.$code.'.additional',
+                ['method' => $code]
+            ) ?>
         </div>
-
-        <?php if ($isCurrent || $showHidden) : ?>
-            <div class="<?= $escaper->escapeHtml($css('', 'other')) ?> <?php if (!$isCurrent) : ?>hidden<?php endif ?>">
-                <?= /* @noEscape */ $blockRenderer->html(
-                    $block,
-                    'loki-checkout.shipping.methods.'.$code.'.form',
-                    ['method' => $code]
-                ) ?>
-
-                <?= /* @noEscape */ $blockRenderer->html(
-                    $block,
-                    'loki-checkout.shipping.methods.'.$code.'.additional',
-                    ['method' => $code]
-                )
-                ?>
-            </div>
-        <?php endif; ?>
-    </div>
+    <?php endif; ?>
 </li>
