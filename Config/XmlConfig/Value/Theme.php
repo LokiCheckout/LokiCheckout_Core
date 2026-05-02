@@ -11,7 +11,8 @@ class Theme
     public function __construct(
         private readonly string $name,
         private readonly string $label,
-        private readonly array $steps = []
+        private readonly array $steps = [],
+        private readonly string $parent = ''
     ) {
     }
 
@@ -47,5 +48,10 @@ class Theme
         }
 
         throw new StepNotFoundException((string)__('Step with name "%1" not found', $stepName));
+    }
+
+    public function getParent(): string
+    {
+        return $this->parent;
     }
 }

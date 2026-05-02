@@ -21,6 +21,7 @@
     </xs:sequence>
     <xs:attribute name="name" type="xs:string" use="required"/>
     <xs:attribute name="label" type="xs:string"/>
+    <xs:attribute name="parent" type="xs:string"/>
   </xs:complexType>
 
   <xs:complexType name="lokiCheckoutStepsType">

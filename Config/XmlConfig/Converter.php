@@ -42,11 +42,13 @@ class Converter implements ConverterInterface
 
             $themeName = (string)$themeElement->getAttribute('name');
             $themeLabel = (string)$themeElement->getAttribute('label');
+            $themeParent = (string)$themeElement->getAttribute('parent');
 
             $themes[$themeName] = [
                 'name' => $themeName,
                 'label' => $themeLabel,
                 'steps' => $steps,
+                'parent' => $themeParent,
             ];
         }
 

@@ -27,10 +27,32 @@ class XmlConfig extends DataConfig
             }
 
             $themeName = $themeData['name'];
+            if (!empty($themeData['parent'])) {
+                $parentThemeData = $this->getThemeData($themeData['parent']);
+                if (!empty($parentThemeData)) {
+                    $themeData['steps'] = array_merge(
+                        $parentThemeData['steps'],
+                        $themeData['steps']
+                    );
+                }
+            }
+
             $themes[$themeName] = $this->createTheme($themeData);
         }
 
         return $themes;
+    }
+
+    private function getThemeData(string $themeName = null): array
+    {
+        $themesData = (array)$this->get('themes');
+        foreach ($themesData as $themeData) {
+            if ($themeData['name'] === $themeName) {
+                return $themeData;
+            }
+        }
+
+        return [];
     }
 
     /**
@@ -64,11 +86,13 @@ class XmlConfig extends DataConfig
 
         $themeName = $themeData['name'];
         $themeLabel = $themeData['label'];
+        $themeParent = $themeData['parent'] ?? '';
 
         return new Theme(
             $themeName,
             $themeLabel,
-            $steps
+            $steps,
+            $themeParent
         );
     }
 
