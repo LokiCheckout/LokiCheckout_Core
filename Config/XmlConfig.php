@@ -43,7 +43,7 @@ class XmlConfig extends DataConfig
         return $themes;
     }
 
-    private function getThemeData(string $themeName = null): array
+    private function getThemeData(?string $themeName = null): array
     {
         $themesData = (array)$this->get('themes');
         foreach ($themesData as $themeData) {
