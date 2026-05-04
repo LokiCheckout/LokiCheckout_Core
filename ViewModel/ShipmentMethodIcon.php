@@ -18,9 +18,9 @@ class ShipmentMethodIcon implements ArgumentInterface
     ) {
     }
 
-    public function getIcon(string $paymentMethodCode, array $attributes = []): string
+    public function getIcon(string $shipmentMethodCode, array $attributes = []): string
     {
-        $context = $this->getIconResolverContext($paymentMethodCode, $attributes);
+        $context = $this->getIconResolverContext($shipmentMethodCode, $attributes);
         foreach ($this->iconResolverListing->getIconResolvers() as $iconResolver) {
             $icon = $iconResolver->resolve($context);
             if (is_string($icon)) {

@@ -6,7 +6,8 @@ namespace LokiCheckout\Core\Shipment\Icon;
 class IconResolverListing
 {
     public function __construct(
-        private readonly array $iconResolvers = []
+        private readonly LayoutIconResolver $layoutIconResolver,
+        private readonly array $iconResolvers = [],
     ) {
     }
 
@@ -15,6 +16,9 @@ class IconResolverListing
      */
     public function getIconResolvers(): array
     {
-        return $this->iconResolvers;
+        return [
+            $this->layoutIconResolver,
+            ...$this->iconResolvers,
+        ];
     }
 }
