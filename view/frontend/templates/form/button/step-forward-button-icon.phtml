@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\Step\StepNavigator;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
@@ -13,10 +14,17 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var ImageRenderer $imageRenderer */
 /** @var Escaper $escaper */
+/** @var StepNavigator $stepNavigator */
+
+$regularIconId = $block->getRegularIcon() ?? 'LokiCheckout_Core::images/chevron-right.svg';
+$finalIconId = $block->getFinalIcon() ?? 'LokiCheckout_Core::images/lock.svg';
+
+$stepNavigator = $viewModelFactory->create(StepNavigator::class);
+$iconId = ($stepNavigator->isLastStep()) ? $finalIconId : $regularIconId;
 
 ?>
 <div x-show="notLoading" class="<?= $escaper->escapeHtml($css('inline-block mr-3', 'icon')) ?>">
-    <?= /* @noEscape */ $imageRenderer->icon($block, 'arrow-right') ?>
+    <?= /* @noEscape */ $imageRenderer->icon($block, $iconId) ?>
 </div>
 
 <div x-cloak x-show="loading" class="<?= $escaper->escapeHtml($css('inline-block mr-3 animate-spin', 'icon')) ?>">
