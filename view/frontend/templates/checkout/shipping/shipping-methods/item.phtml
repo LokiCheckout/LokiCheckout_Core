@@ -50,6 +50,7 @@ $shipmentIcon = $templateRenderer->html(
     [
         'alias' => $code.'.icon',
         'code'  => $code,
+        'class' => 'order-1'
     ]
 );
 
@@ -87,10 +88,10 @@ if ($shipmentIcon) {
 
         <?= /* @noEscape */ $shipmentIcon ?>
 
-        <span
-            class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
-                        <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
+        <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
 
+        <span
+            class="<?= $escaper->escapeHtml($css('grow', 'label')) ?>">
             <?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?>
             <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?>
 
