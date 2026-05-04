@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.25] - 04 May 2026
+### Fixed
+- Allow for shipment icon to be configured via XML layout
+- Remove unneeded `scope` from template
+- Allow `theme` to extend from `parent`
+
 ## [2.3.24] - 29 April 2026
 ### Fixed
 - Add Dutch translations

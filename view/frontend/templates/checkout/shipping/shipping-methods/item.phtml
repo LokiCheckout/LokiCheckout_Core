@@ -63,7 +63,7 @@ if ($shipmentIcon) {
         data-code="<?= $escaper->escapeHtml($shippingMethod->getMethodCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:gap-6 items-center', 'label')) ?>"
     >
-        <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
+        <span class="<?= $escaper->escapeHtml($css('', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
                 type="radio"
@@ -83,8 +83,9 @@ if ($shipmentIcon) {
         <?php else: ?>
             <input type="radio" id="shipping-<?= $escaper->escapeHtml($code) ?>" disabled/>
         <?php endif; ?>
-            <?= /* @noEscape */ $shipmentIcon ?>
         </span>
+
+        <?= /* @noEscape */ $shipmentIcon ?>
 
         <span
             class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
