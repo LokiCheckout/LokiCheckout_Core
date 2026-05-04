@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\Components\Factory\ViewModelFactory;
 use Loki\Components\Util\Block\BlockRenderer;
@@ -21,12 +22,11 @@ use Magento\Quote\Model\Cart\ShippingMethod;
 /** @var BlockRenderer $blockRenderer */
 /** @var TemplateRenderer $templateRenderer */
 /** @var ViewModelFactory $viewModelFactory */
-/** @var PriceFormatter $priceFormatter */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var ShippingMethod $shippingMethod */
 /** @var ApplicationMode $applicationMode */
+/** @var ChildRenderer $childRenderer */
 
-$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $viewModel = $block->getViewModel();
 
 $code = $block->getCode();
@@ -50,7 +50,7 @@ $shipmentIcon = $templateRenderer->html(
     [
         'alias' => $code.'.icon',
         'code'  => $code,
-        'class' => 'order-1'
+        'cssClass2' => 'order-2'
     ]
 );
 
@@ -86,23 +86,27 @@ if ($shipmentIcon) {
         <?php endif; ?>
         </span>
 
-        <?= /* @noEscape */ $shipmentIcon ?>
+        <?php if ($shipmentIcon): ?>
+            <div class="<?= $escaper->escapeHtml($css('', 'icon')) ?>">
+            <?= /* @noEscape */ $shipmentIcon ?>
+            </div>
+        <?php endif; ?>
 
-        <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
+        <?= /* @noEscape */ $childRenderer->html(
+            $block,
+            'amount',
+            [
+                'method' => $shippingMethod
+            ]
+        ); ?>
 
-        <span
-            class="<?= $escaper->escapeHtml($css('grow', 'label')) ?>">
-            <?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?>
-            <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?>
-
-            <?php if (false === $shippingMethod->getAvailable()) : ?>
-                <?php if ($shippingMethod->getErrorMessage()): ?>
-                    (<?= $escaper->escapeHtml($shippingMethod->getErrorMessage()) ?>)
-                <?php else: ?>
-                    (Not available)
-                <?php endif; ?>
-            <?php endif; ?>
-        </span>
+        <?= /* @noEscape */ $childRenderer->html(
+            $block,
+            'label',
+            [
+                'method' => $shippingMethod
+            ]
+        ); ?>
     </label>
 
     <?php if ($isCurrent || $showHidden) : ?>

@@ -1,0 +1,29 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Quote\Model\Cart\ShippingMethod;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+/** @var ShippingMethod $shippingMethod */
+/** @var ViewModelFactory $viewModelFactory */
+
+$shippingMethod = $block->getMethod();
+?>
+<span class="<?= $escaper->escapeHtml($css('grow')) ?>">
+    <?= $escaper->escapeHtml($shippingMethod->getCarrierTitle()) ?> -
+    <?= $escaper->escapeHtml($shippingMethod->getMethodTitle()) ?>
+
+    <?php if (false === $shippingMethod->getAvailable()) : ?>
+        <?php if ($shippingMethod->getErrorMessage()): ?>
+            (<?= $escaper->escapeHtml($shippingMethod->getErrorMessage()) ?>)
+        <?php else: ?>
+            (<?= $escaper->escapeHtml(__('Not available')) ?>)
+        <?php endif; ?>
+    <?php endif; ?>
+</span>

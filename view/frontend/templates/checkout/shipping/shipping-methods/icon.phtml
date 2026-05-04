@@ -23,6 +23,7 @@ $height = $block->getHeight() ?? $size;
 $attributes = [
     'width'  => $width,
     'height' => $height,
+    'class' => $block->getCssClass2()
 ];
 
 $icon = $shipmentMethodIcon->getIcon($shipmentMethodCode, $attributes);

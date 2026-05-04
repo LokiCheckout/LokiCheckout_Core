@@ -26,7 +26,14 @@
 
                 <block
                     name="loki-checkout.shipping.methods.item" as="item"
-                    template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml"/>
+                    template="LokiCheckout_Core::checkout/shipping/shipping-methods/item.phtml">
+                    <block
+                        name="loki-checkout.shipping.methods.item.amount" as="amount"
+                        template="LokiCheckout_Core::checkout/shipping/shipping-methods/item/amount.phtml"/>
+                    <block
+                        name="loki-checkout.shipping.methods.item.label" as="label"
+                        template="LokiCheckout_Core::checkout/shipping/shipping-methods/item/label.phtml"/>
+                </block>
 
                 <block
                     name="loki-checkout.shipping.methods.empty" as="empty"

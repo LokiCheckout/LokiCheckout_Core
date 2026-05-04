@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\ViewModel\PriceFormatter;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Magento\Quote\Model\Cart\ShippingMethod;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+/** @var ShippingMethod $shippingMethod */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var PriceFormatter $priceFormatter */
+
+$shippingMethod = $block->getMethod();
+$priceFormatter = $viewModelFactory->create(PriceFormatter::class);
+?>
+<span class="<?= $escaper->escapeHtml($css('')) ?>">
+      <?php if ($shippingMethod->getAmount() > 0): ?>
+          <?= /* @noEscape */ $priceFormatter->format($shippingMethod->getAmount()) ?>
+      <?php else: ?>
+          <?= $escaper->escapeHtml(__('Free')) ?>
+      <?php endif; ?>
+</span>
