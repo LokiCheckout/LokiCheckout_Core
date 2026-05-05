@@ -32,6 +32,7 @@
         context="LokiCheckout\Core\Component\Base\AddressField\AddressFieldContext"
         viewModel="LokiCheckout\Core\Component\Base\AddressField\AddressFieldViewModel"
         repository="LokiCheckout\Core\Component\Base\AddressField\AddressFieldRepository">
+        <target name="loki-checkout.sidebar.totals"/>
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
         <target name="loki-checkout.sidebar.preview.billing_address"/>
         <target name="loki-checkout.shipping.address.view"/>
@@ -82,6 +83,7 @@
         viewModel="LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarViewModel"
         repository="LokiCheckout\Core\Component\Checkout\ProgressBar\ProgressBarRepository">
         <target name="loki-checkout.steps"/>
+        <target name="loki-checkout.sidebar"/>
     </component>
 
     <component
