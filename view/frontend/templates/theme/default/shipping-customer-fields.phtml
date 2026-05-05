@@ -16,5 +16,7 @@ $checkoutState = $viewModelFactory->create(CheckoutState::class);
 if ($checkoutState->getQuote()->isVirtual()) {
     return;
 }
-
-echo /* @noEscape */ $block->getBlockHtml('loki-checkout.customer');
+?>
+<div class="<?= /* @noEscape */ $css('') ?>">
+    <?= $block->getBlockHtml('loki-checkout.customer') ?>
+</div>
