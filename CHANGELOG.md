@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.26] - 05 May 2026
+### Fixed
+- When update the progressbar, refresh the sidebar. When updating the billing VAT ID, refresh the totals
+- Add div around customer-fields to allow CSS styling
+
 ## [2.3.25] - 05 May 2026
 ### Fixed
 - Only show coupon code when there are active rules
