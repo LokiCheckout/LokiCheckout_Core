@@ -5,6 +5,8 @@ namespace LokiCheckout\Core\Component\Checkout\GridLayout;
 
 use LokiCheckout\Core\Config\Config;
 use Loki\Components\Component\ComponentViewModel;
+use LokiCheckout\Core\Exception\BlockNotFoundException;
+use Magento\Framework\View\Element\AbstractBlock;
 
 class GridLayoutViewModel extends ComponentViewModel
 {
@@ -30,15 +32,36 @@ class GridLayoutViewModel extends ComponentViewModel
 
     private function getGridLayoutData(): array
     {
+        $parentBlock = $this->getBlock()->getParentBlock();
+        $layout = $parentBlock->getLayout();
+        $childNames = $parentBlock->getChildNames();
         $grid = $this->config->getGrid($this->getBlock()->getParentBlock());
 
         $gridLayoutData = [];
-        foreach ($grid->getBlocks() as $block) {
+        foreach ($childNames as $childName) {
+            $childBlock = $layout->getBlock($childName);
+            if (false === $childBlock instanceof AbstractBlock) {
+                continue;
+            }
+
+            try {
+                $gridLayoutBlock = $grid->getBlock($childName);
+            } catch (BlockNotFoundException $blockNotFoundException) {
+                $gridLayoutData[] = [
+                    'alias' => $childName,
+                    'colSpan' => $childBlock->getColSpan() ?? 12, // @todo: Read from grid
+                    'mdColSpan' => $childBlock->getMdColSpan() ?? 12, // @todo: Read from grid
+                    'sortOrder' => $childBlock->getSortOrder() ?? 0,
+                ];
+
+                continue;
+            }
+
             $gridLayoutData[] = [
-                'alias' => $block->getAlias(),
-                'colSpan' => $block->getColSpan(),
-                'mdColSpan' => $block->getMdColSpan(),
-                'sortOrder' => $block->getSortOrder(),
+                'alias' => $gridLayoutBlock->getAlias(),
+                'colSpan' => $gridLayoutBlock->getColSpan(),
+                'mdColSpan' => $gridLayoutBlock->getMdColSpan(),
+                'sortOrder' => $gridLayoutBlock->getSortOrder(),
             ];
         }
 
