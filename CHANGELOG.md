@@ -6,6 +6,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.25] - 05 May 2026
+### Fixed
+- Only show coupon code when there are active rules
+- Add lock-icon to final step button but also allow overriding via XML layout
+- Bump `Loki_Components` to 2.2.54
+- Chop shipping method item.phtml into smaller pieces
+- Better align shipment method parts
+- Fix nullable type
+- Allow for shipment icon to be configured via XML layout
+- Remove unneeded `scope` from template
+- Allow `theme` to extend from `parent`
+
 ## [2.3.25] - 04 May 2026
 ### Fixed
 - Allow for shipment icon to be configured via XML layout
