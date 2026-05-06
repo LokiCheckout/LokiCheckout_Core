@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\CssUtils\Util\CssStyle;
 use Magento\Framework\View\Element\Template;
 use Loki\Components\Factory\ViewModelFactory;
 use LokiCheckout\Core\ViewModel\CheckoutState;
@@ -11,12 +12,13 @@ use Loki\CssUtils\Util\CssClass;
 /** @var ViewModelFactory $viewModelFactory */
 /** @var CheckoutState $checkoutState */
 /** @var CssClass $css */
+/** @var CssStyle $style */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 if ($checkoutState->getQuote()->isVirtual()) {
     return;
 }
 ?>
-<div class="<?= /* @noEscape */ $css('') ?>">
+<div class="<?= /* @noEscape */ $css('') ?>" style="<?= /* @noEscape */ $style('') ?>">
     <?= $block->getBlockHtml('loki-checkout.customer') ?>
 </div>

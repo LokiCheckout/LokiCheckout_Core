@@ -44,11 +44,13 @@ class GridLayoutViewModel extends ComponentViewModel
                 continue;
             }
 
+            $childAlias = $layout->getElementAlias($childBlock->getNameInLayout());
+
             try {
-                $gridLayoutBlock = $grid->getBlock($childName);
+                $gridLayoutBlock = $grid->getBlock($childAlias);
             } catch (BlockNotFoundException $blockNotFoundException) {
                 $gridLayoutData[] = [
-                    'alias' => $childName,
+                    'alias' => $childAlias,
                     'colSpan' => $childBlock->getColSpan() ?? $grid->getDefaultColSpan(),
                     'mdColSpan' => $childBlock->getMdColSpan() ?? $grid->getDefaultMdColSpan(),
                     'sortOrder' => $childBlock->getSortOrder() ?? $grid->getDefaultSortOrder(),

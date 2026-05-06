@@ -20,12 +20,17 @@ use Magento\Framework\View\Element\Template;
                     return;
                 }
 
+                console.log('gridLayout', JSON.parse(JSON.stringify(this.gridLayout)));
+
                 const positionedElements = [];
 
                 this.gridLayout.forEach(block => {
-                    const blockElement = grid.getElementsByClassName(block.alias)[0];
+                    const blockElement = grid.querySelector(
+                        '[data-child-name="'+block.alias+'"]'
+                    );
 
                     if (!blockElement) {
+                        console.log('Block element not found:', block.alias);
                         return;
                     }
 

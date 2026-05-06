@@ -63,6 +63,14 @@ class GridStyleParser implements CssStyleParserInterface
             $cssStyles['--loki-sort-order'] = $block->getSortOrder();
         }
 
+        if ($block->getColSpan()) {
+            $cssStyles['--loki-col-span'] = $block->getColSpan();
+        }
+
+        if ($block->getMdColSpan()) {
+            $cssStyles['--loki-md-col-span'] = $block->getMdColSpan();
+        }
+
         return $cssStyles;
     }
 
