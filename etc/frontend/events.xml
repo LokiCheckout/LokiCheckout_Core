@@ -12,7 +12,16 @@
     </event>
 
     <event name="view_block_abstract_to_html_after">
-        <observer name="LokiCheckout_Core::addHtmlAttributes" instance="LokiCheckout\Core\Observer\AddHtmlAttributes"/>
+        <observer
+            name="LokiCheckout_Core::AppendChildNameToBlockHtml"
+            instance="LokiCheckout\Core\Observer\AppendChildNameToBlockHtmlObserver"
+        />
+
+        <observer
+            name="LokiCheckout_Core::addHtmlAttributes"
+            instance="LokiCheckout\Core\Observer\AddHtmlAttributes"
+        />
+
         <observer name="LokiCheckout_Core::addDebuggingInfo" instance="LokiCheckout\Core\Observer\AddDebuggingInfo"/>
     </event>
 
