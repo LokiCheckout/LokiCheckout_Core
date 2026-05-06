@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.27] - 06 May 2026
+### Fixed
+- Allow repositioning of non-grid blocks via grid-layout-component as well
+- Allow `Grid` to retrieve default `colSpan`, `mdColSpan` and `sortOrder`
+- Cleanup default span-sizes in XML converter
+- Fix sorting issues with non-grid blocks added to parent-grid
+
 ## [2.3.26] - 05 May 2026
 ### Fixed
 - When update the progressbar, refresh the sidebar. When updating the billing VAT ID, refresh the totals
