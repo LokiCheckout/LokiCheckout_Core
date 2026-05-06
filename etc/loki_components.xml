@@ -396,7 +396,9 @@
         group="shippingAddressFields"
         viewModel="LokiCheckout\Core\Component\Checkout\Address\VatId\VatIdViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Address\VatId\VatIdRepository"
-    />
+    >
+        <filter name="remove_spaces" />
+    </component>
 
     <component
         name="loki-checkout.shipping.address.save_in_address_book"
