@@ -22,17 +22,21 @@ class CleanAfterAddressChange implements ObserverInterface
         $fieldName = $observer->getFieldName();
 
         if ($fieldName === 'country_id') {
-            $address->setStreet('');
-            $address->setPostcode('');
-            $address->setCity('');
-            $address->setRegion('');
-            $address->setRegionId('');
-
-            if ($addressType === 'shipping') {
-                $address->setShippingMethod('');
-            }
-
+            $this->resetAddress($address, $addressType);
             $this->httpRequest->setParam('skip_validation', true); // @todo: Set this flag in an internal place only
+        }
+    }
+
+    public function resetAddress(Address $address, string $addressType)
+    {
+        $address->setStreet('');
+        $address->setPostcode('');
+        $address->setCity('');
+        $address->setRegion('');
+        $address->setRegionId(0);
+
+        if ($addressType === 'shipping') {
+            $address->setShippingMethod('');
         }
     }
 }
