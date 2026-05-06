@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.28] - 06 May 2026
+### Fixed
+- Move data-child-name attribute to LokiCheckout_Core observer
+- Allow DI plugins to hook into after address reset
+- Add `remove_spaces` filter to VAT ID
+
 ## [2.3.27] - 06 May 2026
 ### Fixed
 - Allow repositioning of non-grid blocks via grid-layout-component as well
