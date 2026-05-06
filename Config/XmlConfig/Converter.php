@@ -129,9 +129,9 @@ class Converter implements ConverterInterface
             $gridLayouts[$gridName] = [
                 'label' => $label,
                 'countryId' => $countryId,
-                'defaultSortOrder' => $defaultSortOrder === 0 ? $this->defaults->getSortOrder() : $defaultSortOrder,
+                'defaultSortOrder' => $defaultSortOrder,
                 'defaultColSpan' => $defaultColSpan,
-                'defaultMdColSpan' => $defaultMdColSpan === 0 ? $this->defaults->getMdColSpan() : $defaultMdColSpan,
+                'defaultMdColSpan' => $defaultMdColSpan,
                 'grids' => $grids,
             ];
         }
