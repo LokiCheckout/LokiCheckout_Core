@@ -11,6 +11,9 @@ class Grid
         private readonly string $name,
         private readonly string $countryId,
         private readonly string $parent,
+        private readonly int $defaultSortOrder,
+        private readonly int $defaultColSpan,
+        private readonly int $defaultMdColSpan,
         private readonly array $blocks = []
     ) {
     }
@@ -52,5 +55,20 @@ class Grid
         }
 
         throw new BlockNotFoundException((string)__('Block with name "%1" not found in grid layout', $blockAlias));
+    }
+
+    public function getDefaultSortOrder(): int
+    {
+        return $this->defaultSortOrder;
+    }
+
+    public function getDefaultColSpan(): int
+    {
+        return $this->defaultColSpan;
+    }
+
+    public function getDefaultMdColSpan(): int
+    {
+        return $this->defaultMdColSpan;
     }
 }

@@ -49,9 +49,9 @@ class GridLayoutViewModel extends ComponentViewModel
             } catch (BlockNotFoundException $blockNotFoundException) {
                 $gridLayoutData[] = [
                     'alias' => $childName,
-                    'colSpan' => $childBlock->getColSpan() ?? 12, // @todo: Read from grid
-                    'mdColSpan' => $childBlock->getMdColSpan() ?? 12, // @todo: Read from grid
-                    'sortOrder' => $childBlock->getSortOrder() ?? 0,
+                    'colSpan' => $childBlock->getColSpan() ?? $grid->getDefaultColSpan(),
+                    'mdColSpan' => $childBlock->getMdColSpan() ?? $grid->getDefaultMdColSpan(),
+                    'sortOrder' => $childBlock->getSortOrder() ?? $grid->getDefaultSortOrder(),
                 ];
 
                 continue;

@@ -140,7 +140,7 @@ class XmlConfig extends DataConfig
     {
         $grids = [];
         foreach ($gridLayoutData['grids'] as $gridData) {
-            $grids[] = $this->createGrid($gridData);
+            $grids[] = $this->createGrid($gridData, $gridLayoutData);
         }
 
         return new GridLayout(
@@ -157,7 +157,7 @@ class XmlConfig extends DataConfig
      * @param array $gridData
      * @return Grid
      */
-    private function createGrid(array $gridData): Grid
+    private function createGrid(array $gridData, array $gridLayoutData): Grid
     {
         $blocks = [];
         foreach ($gridData['blocks'] as $blockData) {
@@ -168,6 +168,9 @@ class XmlConfig extends DataConfig
             (string)$gridData['name'],
             (string)$gridData['countryId'],
             (string)$gridData['parent'],
+            (int)$gridLayoutData['defaultSortOrder'],
+            (int)$gridLayoutData['defaultColSpan'],
+            (int)$gridLayoutData['defaultMdColSpan'],
             $blocks
         );
     }
