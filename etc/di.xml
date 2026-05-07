@@ -265,4 +265,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="LokiCheckout\Core\ViewModel\OptionModel\CountryOptionModel">
+        <arguments>
+            <argument name="skipCountries" xsi:type="array">
+                <item name="AN" xsi:type="string">AN</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
