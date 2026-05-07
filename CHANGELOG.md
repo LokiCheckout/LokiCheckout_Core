@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.29] - 07 May 2026
+### Fixed
+- Make sure input[type] of phone is `tel`
+- Support for "Top Destinations" within country select
+- Skip country AN because it is no longer present
+
 ## [2.3.28] - 06 May 2026
 ### Fixed
 - Move data-child-name attribute to LokiCheckout_Core observer
