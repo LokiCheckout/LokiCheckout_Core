@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.30] - 08 May 2026
+### Fixed
+- Fix possible issue with shipping costs being collected too early
+- Refactor payment save to use core `PaymentMethodManagement`
+- Implement optional payment rate limiter
+- When `AbstractBlock::getParentBlock()` causes any error, exit gently
+- Redirect to wrong URL based on `message`, after refactoring of RedirectException
+
 ## [2.3.29] - 07 May 2026
 ### Fixed
 - Make sure input[type] of phone is `tel`
@@ -14,7 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.3.28] - 06 May 2026
 ### Fixed
-- Move data-child-name attribute to LokiCheckout_Core observer
+- Move data-child-name attribute to `LokiCheckout_Core` observer
 - Allow DI plugins to hook into after address reset
 - Add `remove_spaces` filter to VAT ID
 
