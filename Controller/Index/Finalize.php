@@ -37,7 +37,7 @@ class Finalize implements HttpGetActionInterface
         try {
             $this->finalStep->submit();
         } catch (RedirectException $e) {
-            $redirectUrl = $e->getMessage();
+            $redirectUrl = $e->getUrl();
         }
 
         $result = $this->resultRedirectFactory->create();
