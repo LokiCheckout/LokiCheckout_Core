@@ -2,8 +2,11 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
-use Magento\Framework\Event\ManagerInterface;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Checkout\Api\Exception\PaymentProcessingRateLimitExceededException;
+use Magento\Checkout\Api\PaymentProcessingRateLimiterInterface;
+use Magento\Framework\Exception\InvalidArgumentException;
+use Magento\Quote\Api\Data\PaymentInterfaceFactory;
+use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magento\Quote\Model\Quote;
 use Loki\Components\Component\ComponentRepository;
 
@@ -13,7 +16,9 @@ use Loki\Components\Component\ComponentRepository;
 class PaymentMethodsRepository extends ComponentRepository
 {
     public function __construct(
-        private ManagerInterface $eventManager,
+        private PaymentMethodManagementInterface $paymentMethodManagement,
+        private PaymentInterfaceFactory $paymentFactory,
+        private ?PaymentProcessingRateLimiterInterface $paymentRateLimiter = null,
     ) {
     }
 
@@ -61,7 +66,22 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
+        if ($this->paymentRateLimiter instanceof PaymentProcessingRateLimiterInterface) {
+            try {
+                $this->paymentRateLimiter->limit();
+            } catch (PaymentProcessingRateLimitExceededException $exception) {
+                $this->getContext()->getCoreMessageManager()->addErrorMessage($exception->getMessage());
+                return;
+            }
+        }
+
         $value = $this->sanitizePaymentMethod((string)$value);
+
+        if (false === $this->isPaymentMethodAvailable($value)) {
+            $this->getContext()->getCoreMessageManager()->addErrorMessage(__('Payment method "%1" is not available.', $value));
+            return;
+        }
+
         $quote = $this->getQuote();
 
         if ($value === '' || $value === '0') {
@@ -76,24 +96,20 @@ class PaymentMethodsRepository extends ComponentRepository
             $quote->getPayment()->setAdditionalInformation([]);
         }
 
-        $quote->setPaymentMethod($value);
-        $quote->setInventoryProcessed(false);
+        $payment = $this->paymentFactory->create();
+        $payment->setMethod($value);
+        $this->paymentMethodManagement->set($quote->getId(), $payment);
+    }
 
-        try {
-            $quote->getPayment()->importData(['method' => $value]);
-        } catch (LocalizedException $e) {
-
-            $this->getGlobalMessageRegistry()->addError($e->getMessage());
-            return;
+    protected function getPaymentMethodByCode(string $code): \Magento\Payment\Model\MethodInterface
+    {
+        foreach ($this->getPaymentMethods() as $paymentMethod) {
+            if ($paymentMethod->getCode() === $code) {
+                return $paymentMethod;
+            }
         }
 
-        $this->eventManager->dispatch('loki_checkout_payment_before_save_quote', [
-            'quote' => $quote,
-        ]);
-
-        $quote->setTotalsCollectedFlag(false);
-        $quote->collectTotals();
-        $this->getContext()->getCheckoutState()->saveQuote($quote);
+        throw new InvalidArgumentException(__('Payment method "%1" does not exist.', $code));
     }
 
     protected function getQuote(): Quote
