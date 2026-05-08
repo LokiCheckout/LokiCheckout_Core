@@ -6,6 +6,7 @@ use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Framework\View\LayoutInterface;
+use Throwable;
 
 class AppendChildNameToBlockHtmlObserver implements ObserverInterface
 {
@@ -29,7 +30,12 @@ class AppendChildNameToBlockHtmlObserver implements ObserverInterface
             return;
         }
 
-        $parentBlock = $block->getParentBlock();
+        try {
+            $parentBlock = $block->getParentBlock();
+        } catch (Throwable $e) {
+            return;
+        }
+
         if (false === $parentBlock instanceof AbstractBlock) {
             return;
         }
