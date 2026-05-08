@@ -40,8 +40,8 @@ class ShippingMethodsRepository extends ComponentRepository
             return [];
         }
 
-        $quote->collectTotals();
         $shippingAddress->setCollectShippingRates(true);
+        $quote->collectTotals();
 
         try {
             $availableMethods = $this->getContext()->getShippingMethodManagement()->getList($quote->getId());
