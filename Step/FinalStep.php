@@ -57,14 +57,27 @@ class FinalStep
      */
     public function submit(bool $redirect = true): bool
     {
-        $quote = $this->checkoutState->getQuote();
+        $this->checkoutState->reset();
+        $quote = $this->checkoutState->getPersistedQuote();
+        $this->checkoutState->setQuote($quote);
 
         if (!$quote->isVirtual()) {
             $shippingAddress = $quote->getShippingAddress();
-            $shippingAddress
-                ->setCollectShippingRates(true)
-                ->collectShippingRates()
-                ->setShippingMethod($shippingAddress->getShippingMethod());
+            $shippingMethod = $shippingAddress->getShippingMethod();
+
+            if (empty($shippingMethod)) {
+                $rates = $shippingAddress->getAllShippingRates();
+                if (!empty($rates)) {
+                    $firstRate = reset($rates);
+                    $shippingMethod = $firstRate->getCode();
+                }
+            }
+
+            if (!empty($shippingMethod)) {
+                $shippingAddress->setShippingMethod($shippingMethod);
+                $shippingAddress->save();
+            }
+
             $quote->setInventoryProcessed(false);
         }
 
