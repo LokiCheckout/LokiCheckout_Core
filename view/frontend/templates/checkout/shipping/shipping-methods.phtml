@@ -20,7 +20,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var ChildRenderer $childRenderer */
 
 ?>
-<div class="<?= $escaper->escapeHtml($css('relative w-full mb-8')) ?>" role="group">
+<div class="<?= $escaper->escapeHtml($css('relative w-full')) ?>" role="group">
     <?php if ($viewModel->isDisabled()) : ?>
         <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-checkout.utils.disabled-overlay') ?>
     <?php endif; ?>

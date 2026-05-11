@@ -5,7 +5,7 @@
             <arguments>
                 <argument name="css_classes" xsi:type="array">
                     <item name="block" xsi:type="array">
-                        <item name="default" xsi:type="string">grid gap-4 mb-8</item>
+                        <item name="default" xsi:type="string">grid gap-4</item>
                     </item>
                 </argument>
             </arguments>

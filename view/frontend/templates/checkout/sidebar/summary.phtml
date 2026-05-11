@@ -14,7 +14,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
 ?>
-<div class="<?= $escaper->escapeHtml($css('loki-checkout-sidebar-summary card p-8 mb-8')) ?>">
+<div class="<?= $escaper->escapeHtml($css('loki-checkout-sidebar-summary card p-8')) ?>">
     <div class="<?= $escaper->escapeHtml($css('space-y-8', 'inner')) ?>">
         <?= /* @noEscape */ $childRenderer->all($block); ?>
     </div>

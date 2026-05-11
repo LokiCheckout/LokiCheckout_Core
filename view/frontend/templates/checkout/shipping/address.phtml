@@ -18,7 +18,7 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 ?>
-<div class="<?= $escaper->escapeHtml($css('flex flex-col gap-8 relative')) ?>">
+<div class="<?= $escaper->escapeHtml($css('flex flex-col gap-4 relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('billing-as-shipping') ?>
