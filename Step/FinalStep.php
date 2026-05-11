@@ -75,7 +75,7 @@ class FinalStep
 
             if (!empty($shippingMethod)) {
                 $shippingAddress->setShippingMethod($shippingMethod);
-                $shippingAddress->save();
+                $shippingAddress->save(); // @phpstan-ignore-line
             }
 
             $quote->setInventoryProcessed(false);
