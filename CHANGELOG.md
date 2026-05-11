@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.31] - 11 May 2026
+### Fixed
+- Improve handling of async rates like SHQ
+- Set quote in payment method as well
+- Add payment::importData() call to support PSP events
+- Simplify gaps
+
 ## [2.3.30] - 08 May 2026
 ### Fixed
 - Fix possible issue with shipping costs being collected too early
