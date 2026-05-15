@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.32] - 15 May 2026
+### Fixed
+- Allow modules to observe `loki_checkout_add_layout_handles`
+
 ## [2.3.31] - 11 May 2026
 ### Fixed
 - Improve handling of async rates like SHQ
