@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.33] - 19 May 2026
+### Fixed
+- Add the current theme to the LokiCheckout Alpine store
+
 ## [2.3.32] - 15 May 2026
 ### Fixed
 - Allow modules to observe `loki_checkout_add_layout_handles`
