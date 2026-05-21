@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.34] - 21 May 2026
+### Fixed
+- Never sanitize `multicarrier_multicarrier` shipping method
+- Add alt to payment images
+
 ## [2.3.33] - 19 May 2026
 ### Fixed
 - Add the current theme to the LokiCheckout Alpine store
