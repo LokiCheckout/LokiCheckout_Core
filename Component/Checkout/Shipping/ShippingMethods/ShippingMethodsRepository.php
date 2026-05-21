@@ -88,6 +88,11 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
+        // @todo: Move this to ShipperHQ only?
+        if ($shippingMethodCode === 'multicarrier_multicarrier') {
+            return $shippingMethodCode;
+        }
+
         if (strlen($shippingMethodCode) === 0) {
             return $this->getDefaultShippingMethod();
         }
