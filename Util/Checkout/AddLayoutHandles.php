@@ -32,6 +32,11 @@ class AddLayoutHandles
         $theme = $this->config->getTheme();
         $this->addHandle('loki_checkout');
         $this->addHandle('loki_checkout_theme_'.$theme);
+
+        $countryId = $this->getCountryId();
+        if (!empty($countryId)) {
+            $this->addHandle('loki_checkout_theme_'.$theme.'_country_'.$countryId);
+        }
     }
 
     private function addThemeHandles(): void
@@ -65,7 +70,7 @@ class AddLayoutHandles
         $gridLayout = $this->config->getGridLayoutName();
         $this->addHandle('loki_checkout_address_'.$gridLayout);
 
-        $countryId = strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
+        $countryId = $this->getCountryId();
         if (!empty($countryId)) {
             $this->addHandle('loki_checkout_address_'.$gridLayout.'_country_'.$countryId);
         }
@@ -79,5 +84,10 @@ class AddLayoutHandles
     private function addHandle(string $handle): void
     {
         $this->layout->getUpdate()->addHandle($handle);
+    }
+
+    private function getCountryId(): string
+    {
+        return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
     }
 }
