@@ -263,7 +263,11 @@
 
                 <block
                     name="loki-checkout.billing.address.form.grid-layout" as="grid_layout"
-                    template="LokiCheckout_Core::checkout/address/grid-layout.phtml"/>
+                    template="LokiCheckout_Core::checkout/address/grid-layout.phtml">
+                    <arguments>
+                        <argument name="render_order" xsi:type="number">10</argument>
+                    </arguments>
+                </block>
             </block>
 
         </block>

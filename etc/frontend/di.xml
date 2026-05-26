@@ -87,4 +87,13 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Loki\Components\Layout\LayoutHandlerComposite">
+        <arguments>
+            <argument name="layoutHandlers" xsi:type="array">
+                <item name="LokiCheckout_Core::layoutHandler" xsi:type="object">LokiCheckout\Core\Layout\LayoutHandler</item>
+                <item name="LokiCheckout_Core::countrySpecificLayoutHandler" xsi:type="object">LokiCheckout\Core\Layout\CountrySpecificLayoutHandler</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
