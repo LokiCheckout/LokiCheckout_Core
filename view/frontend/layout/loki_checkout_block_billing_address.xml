@@ -222,6 +222,7 @@
                         <argument name="input_type" xsi:type="string">tel</argument>
                         <argument name="autocomplete" xsi:type="string">billing tel</argument>
                         <argument name="field_attributes" xsi:type="array">
+                            <item name="inputmode" xsi:type="string">tel</item>
                             <item name="max" xsi:type="number">30</item>
                         </argument>
                     </arguments>
