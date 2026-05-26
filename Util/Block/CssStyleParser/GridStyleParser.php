@@ -33,9 +33,7 @@ class GridStyleParser implements CssStyleParserInterface
             $cssStyles = array_merge($cssStyles, $this->getCssStylesFromBlockDefinition($blockDefinition));
         }
 
-        $cssStyles = array_merge($cssStyles, $this->getCssStylesFromBlock($block));
-
-        return $cssStyles;
+        return array_merge($cssStyles, $this->getCssStylesFromBlock($block));
     }
 
     private function getDefaultCssStyles(): array
@@ -59,6 +57,7 @@ class GridStyleParser implements CssStyleParserInterface
     private function getCssStylesFromBlock(AbstractBlock $block): array
     {
         $cssStyles = [];
+
         if ($block->getSortOrder()) {
             $cssStyles['--loki-sort-order'] = $block->getSortOrder();
         }
