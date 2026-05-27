@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="loki-checkout" template="LokiCheckout_Core::theme/default/checkout.phtml"/>
+
+        <referenceBlock name="loki-checkout.steps" template="LokiCheckout_Core::theme/default/steps.phtml">
+            <block
+                name="loki-checkout.steps.shipping"
+                as="shipping"
+                template="LokiCheckout_Core::theme/default/shipping-step.phtml"
+            >
+                <block
+                    name="loki-checkout.steps.shipping.title" as="title"
+                    template="LokiCheckout_Core::generic/title.phtml">
+                    <arguments>
+                        <argument name="title" xsi:type="string" translate="true">Shipping</argument>
+                    </arguments>
+                </block>
+
+                <block name="loki-checkout.steps.shipping.customer-fields" as="customer-fields" template="LokiCheckout_Core::theme/default/shipping-customer-fields.phtml"/>
+
+                <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Loki_FieldComponents::form/button/buttons.phtml" after="-"/>
+            </block>
+
+            <block name="loki-checkout.steps.billing" as="billing" template="LokiCheckout_Core::theme/default/billing-step.phtml">
+                <block
+                    name="loki-checkout.steps.billing.title" as="title"
+                    template="LokiCheckout_Core::theme/default/billing-step-title.phtml"/>
+
+                <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="LokiCheckout_Core::theme/default/billing-customer-fields.phtml"/>
+
+                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Loki_FieldComponents::form/button/buttons.phtml" after="-"/>
+            </block>
+        </referenceBlock>
+
+        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.billing" before="-"/>
+
+        <!-- Shipping step -->
+        <move element="loki-checkout.customer" destination="loki-checkout.steps.steps.shipping" />
+        <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.shipping" as="shipping-address" before="buttons"/>
+        <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.shipping" as="shipping-methods" before="buttons"/>
+
+        <move element="loki-checkout.steps.shipping.backward-button" destination="loki-checkout.steps.shipping.buttons" as="backward-button"/>
+        <move element="loki-checkout.steps.shipping.forward-button" destination="loki-checkout.steps.shipping.buttons" as="forward-button"/>
+
+        <!-- Billing step -->
+        <move element="loki-checkout.billing.address" destination="loki-checkout.steps.billing" as="billing-address" before="buttons"/>
+        <move element="loki-checkout.payment.methods" destination="loki-checkout.steps.billing" as="payment-methods" before="buttons"/>
+
+        <move element="loki-checkout.steps.billing.backward-button" destination="loki-checkout.steps.billing.buttons" as="backward-button"/>
+        <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.steps.billing.buttons" as="forward-button"/>
+
+        <!-- Sidebar -->
+        <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
+    </body>
+</page>
