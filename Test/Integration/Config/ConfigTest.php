@@ -38,24 +38,24 @@ class ConfigTest extends TestCase
     }
 
     #[ConfigFixture('loki_checkout/general/theme', 'default', 'store', 'default')]
-    public function testGetDefaultTheme()
+    public function testGetDefaultSkin()
     {
         $config = $this->getConfig();
-        $this->assertEquals('default', $config->getTheme());
+        $this->assertEquals('default', $config->getSkin());
     }
 
     #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
-    public function testGetOneStepTheme()
+    public function testGetOneStepSkin()
     {
         $config = $this->getConfig();
-        $this->assertEquals('onestep', $config->getTheme());
+        $this->assertEquals('onestep', $config->getSkin());
     }
 
     #[ConfigFixture('loki_checkout/general/theme', 'nonexisting', 'store', 'default')]
-    public function testGetNonExistingTheme()
+    public function testGetNonExistingSkin()
     {
         $config = $this->getConfig();
-        $this->assertEquals('default', $config->getTheme());
+        $this->assertEquals('default', $config->getSkin());
     }
 
     #[ConfigFixture('loki_checkout/general/grid_layout', 'default_grid', 'store', 'default')]

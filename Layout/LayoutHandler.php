@@ -29,10 +29,11 @@ class LayoutHandler implements LayoutHandlerInterface
 
     private function getGenericHandles(): array
     {
-        $theme = $this->config->getTheme();
+        $skin = $this->config->getSkin();
         $handles = [
             'loki_checkout',
-            'loki_checkout_theme_'.$theme
+            'loki_checkout_skin_'.$skin,
+            'loki_checkout_theme_'.$skin
         ];
 
         return $handles;
@@ -57,7 +58,6 @@ class LayoutHandler implements LayoutHandlerInterface
 
     private function getHandlesByTheme(array $handles, string $theme): array
     {
-        $handles = [];
         foreach ($handles as $handle) {
             if (str_starts_with($handle, $theme.'_')) {
                 continue;

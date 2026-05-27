@@ -1,35 +1,4 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
-    <body>
-        <referenceBlock name="loki-checkout.progressbar" remove="true"/>
-
-        <!-- Theme layout -->
-        <referenceBlock name="loki-checkout" template="LokiCheckout_Core::theme/onestep/checkout.phtml"/>
-        <referenceBlock name="loki-checkout.steps" template="LokiCheckout_Core::theme/onestep/steps.phtml">
-            <block name="loki-checkout.steps.one" as="one" template="LokiCheckout_Core::theme/onestep/one-step.phtml">
-                <container name="loki-checkout.steps.one.col1" as="col1" htmlTag="div" htmlClass="col1 flex flex-col gap-4"/>
-                <container name="loki-checkout.steps.one.col2" as="col2" htmlTag="div" htmlClass="col2 flex flex-col gap-4"/>
-            </block>
-        </referenceBlock>
-
-        <!-- Column 1 -->
-        <move element="loki-checkout.fast_checkout" destination="loki-checkout.steps.one.col1" before="-"/>
-        <move element="loki-checkout.customer" destination="loki-checkout.steps.one.col1" />
-        <move element="loki-checkout.shipping.address" destination="loki-checkout.steps.one.col1" as="shipping-address"/>
-        <move element="loki-checkout.billing.address" destination="loki-checkout.steps.one.col1" as="billing-address"/>
-
-        <!-- Column 2 -->
-        <move element="loki-checkout.shipping.methods" destination="loki-checkout.steps.one.col2" as="shipping-methods"/>
-        <move element="loki-checkout.payment.methods" destination="loki-checkout.steps.one.col2" as="payment-methods"/>
-
-        <!-- Sidebar -->
-        <move element="loki-checkout.sidebar" destination="loki-checkout" as="sidebar"/>
-        <move element="loki-checkout.steps.billing.forward-button" destination="loki-checkout.sidebar" as="submit-button"/>
-
-        <referenceBlock name="loki-checkout.steps.billing.forward-button">
-            <arguments>
-            <argument name="step_code" xsi:type="string">one</argument>
-            </arguments>
-        </referenceBlock>
-    </body>
+    <update handle="loki_checkout_skin_onestep"/>
 </page>

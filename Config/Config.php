@@ -53,18 +53,29 @@ class Config implements ArgumentInterface
         );
     }
 
-    public function getTheme(): string
+    public function getSkin(): string
     {
-        $theme = (string)$this->scopeConfig->getValue(
-            'loki_checkout/general/theme',
+        /* this path will be renamed to `loki_checkout/general/skin` in 3.0 */
+        $path = 'loki_checkout/general/theme';
+
+        $skin = (string)$this->scopeConfig->getValue(
+            $path,
             ScopeInterface::SCOPE_STORE
         );
 
-        if (false === array_key_exists($theme, $this->xmlConfig->getThemes())) {
+        if (false === array_key_exists($skin, $this->xmlConfig->getSkins())) {
             return 'default';
         }
 
-        return $theme;
+        return $skin;
+    }
+
+    /**
+     * @deprecated Use getSkin() instead
+     */
+    public function getTheme(): string
+    {
+        return $this->getSkin();
     }
 
     public function getGridLayoutName(): string

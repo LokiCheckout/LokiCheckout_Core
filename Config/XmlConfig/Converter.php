@@ -20,9 +20,39 @@ class Converter implements ConverterInterface
     public function convert($source)
     {
         return [
-            'themes' => $this->getThemes($source),
+            'skins' => array_merge($this->getThemes($source), $this->getSkins($source)),
             'gridLayouts' => $this->getGridLayouts($source),
         ];
+    }
+
+    private function getSkins(DOMDocument $source): array
+    {
+        $skins = [];
+        $skinElements = $source->getElementsByTagName('skin');
+
+        foreach ($skinElements as $skinElement) {
+            $steps = [];
+            foreach ($skinElement->getElementsByTagName('step') as $stepElement) {
+                $steps[] = [
+                    'name' => (string)$stepElement->getAttribute('name'),
+                    'blockName' => (string)$stepElement->getAttribute('blockName'),
+                    'sortOrder' => (int)$stepElement->getAttribute('sortOrder'),
+                ];
+            }
+
+            $skinName = (string)$skinElement->getAttribute('name');
+            $skinLabel = (string)$skinElement->getAttribute('label');
+            $skinParent = (string)$skinElement->getAttribute('parent');
+
+            $skins[$skinName] = [
+                'name' => $skinName,
+                'label' => $skinLabel,
+                'steps' => $steps,
+                'parent' => $skinParent,
+            ];
+        }
+
+        return $skins;
     }
 
     private function getThemes(DOMDocument $source): array

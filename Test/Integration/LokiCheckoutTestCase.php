@@ -43,14 +43,14 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
     protected function getCheckoutComponent(string $blockName): ComponentInterface
     {
         $config = $this->getObjectManager()->get(Config::class);
-        $themeName = $config->getTheme();
+        $skinName = $config->getSkin();
 
         $handles = [
             'default',
             'loki_components',
             'loki_field_components',
             'loki_checkout',
-            'loki_checkout_theme_' . $themeName,
+            'loki_checkout_skin_' . $skinName,
         ];
 
         return $this->getComponentWithBlock($blockName, $handles);

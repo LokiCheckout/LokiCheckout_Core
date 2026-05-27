@@ -8,47 +8,47 @@ use RuntimeException;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid;
 use LokiCheckout\Core\Config\XmlConfig\Value\GridLayout\Grid\Block;
-use LokiCheckout\Core\Config\XmlConfig\Value\Theme;
-use LokiCheckout\Core\Config\XmlConfig\Value\Theme\Step;
-use LokiCheckout\Core\Exception\UnknownThemeException;
+use LokiCheckout\Core\Config\XmlConfig\Value\Skin;
+use LokiCheckout\Core\Config\XmlConfig\Value\Skin\Step;
+use LokiCheckout\Core\Exception\UnknownSkinException;
 
 class XmlConfig extends DataConfig
 {
     /**
-     * @return Theme[]
+     * @return Skin[]
      */
-    public function getThemes(): array
+    public function getSkins(): array
     {
-        $themes = [];
-        $themesData = (array)$this->get('themes');
-        foreach ($themesData as $themeData) {
-            if (empty($themeData)) {
+        $skins = [];
+        $skinsData = (array)$this->get('skins');
+        foreach ($skinsData as $skinData) {
+            if (empty($skinData)) {
                 continue;
             }
 
-            $themeName = $themeData['name'];
-            if (!empty($themeData['parent'])) {
-                $parentThemeData = $this->getThemeData($themeData['parent']);
-                if (!empty($parentThemeData)) {
-                    $themeData['steps'] = array_merge(
-                        $parentThemeData['steps'],
-                        $themeData['steps']
+            $skinName = $skinData['name'];
+            if (!empty($skinData['parent'])) {
+                $parentSkinData = $this->getSkinData($skinData['parent']);
+                if (!empty($parentSkinData)) {
+                    $skinData['steps'] = array_merge(
+                        $parentSkinData['steps'],
+                        $skinData['steps']
                     );
                 }
             }
 
-            $themes[$themeName] = $this->createTheme($themeData);
+            $skins[$skinName] = $this->createSkin($skinData);
         }
 
-        return $themes;
+        return $skins;
     }
 
-    private function getThemeData(?string $themeName = null): array
+    private function getSkinData(?string $skinName = null): array
     {
-        $themesData = (array)$this->get('themes');
-        foreach ($themesData as $themeData) {
-            if ($themeData['name'] === $themeName) {
-                return $themeData;
+        $skinsData = (array)$this->get('skins');
+        foreach ($skinsData as $skinData) {
+            if ($skinData['name'] === $skinName) {
+                return $skinData;
             }
         }
 
@@ -57,26 +57,26 @@ class XmlConfig extends DataConfig
 
     /**
      * @param string $name
-     * @return Theme
+     * @return Skin
      */
-    public function getTheme(string $name): Theme
+    public function getSkin(string $name): Skin
     {
-        $themes = $this->getThemes();
-        if (isset($themes[$name])) {
-            return $themes[$name];
+        $skins = $this->getSkins();
+        if (isset($skins[$name])) {
+            return $skins[$name];
         }
 
-        throw new UnknownThemeException((string)__('Unknown theme "%1"', $name));
+        throw new UnknownSkinException((string)__('Unknown skin "%1"', $name));
     }
 
     /**
-     * @param array $themeData
-     * @return Theme
+     * @param array $skinData
+     * @return Skin
      */
-    private function createTheme(array $themeData): Theme
+    private function createSkin(array $skinData): Skin
     {
         $steps = [];
-        foreach ($themeData['steps'] as $stepData) {
+        foreach ($skinData['steps'] as $stepData) {
             $steps[] = new Step(
                 $stepData['name'],
                 $stepData['blockName'],
@@ -84,15 +84,15 @@ class XmlConfig extends DataConfig
             );
         }
 
-        $themeName = $themeData['name'];
-        $themeLabel = $themeData['label'];
-        $themeParent = $themeData['parent'] ?? '';
+        $skinName = $skinData['name'];
+        $skinLabel = $skinData['label'];
+        $skinParent = $skinData['parent'] ?? '';
 
-        return new Theme(
-            $themeName,
-            $themeLabel,
+        return new Skin(
+            $skinName,
+            $skinLabel,
             $steps,
-            $themeParent
+            $skinParent
         );
     }
 

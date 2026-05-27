@@ -27,7 +27,7 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
         }
 
         foreach ($handles as $handle) {
-            if (str_starts_with($handle, 'loki_checkout_theme_')) {
+            if (str_starts_with($handle, 'loki_checkout_skin_')) {
                 $handles[] = $handle.'_country_'.$countryId;
             }
 

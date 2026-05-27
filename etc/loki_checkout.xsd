@@ -3,19 +3,53 @@
   <xs:element name="config">
     <xs:complexType>
       <xs:sequence minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="themes" type="lokiCheckoutThemesType" minOccurs="0" />
+        <!-- start deprecated -->
+        <xs:element name="themes" type="lokiCheckoutThemesType" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>
+              Deprecated since 2.4.0. Use skins instead. This element will be removed in 3.0.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <!-- end deprecated -->
+        <xs:element name="skins" type="lokiCheckoutSkinsType" minOccurs="0" />
         <xs:element name="grid_layouts" type="lokiCheckoutGridLayoutsType" minOccurs="0" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
 
+  <!-- start deprecated -->
   <xs:complexType name="lokiCheckoutThemesType">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
-      <xs:element name="theme" type="lokiCheckoutThemeType"/>
+      <xs:element name="theme" type="lokiCheckoutThemeType">
+        <xs:annotation>
+          <xs:documentation>
+            Deprecated since 2.4.0. Use skins instead. This element will be removed in 3.0.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- end deprecated -->
+
+  <xs:complexType name="lokiCheckoutSkinsType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="skin" type="lokiCheckoutSkinType"/>
     </xs:sequence>
   </xs:complexType>
 
+  <!-- start deprecated -->
   <xs:complexType name="lokiCheckoutThemeType">
+    <xs:sequence minOccurs="0" maxOccurs="unbounded">
+      <xs:element name="steps" type="lokiCheckoutStepsType"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="label" type="xs:string"/>
+    <xs:attribute name="parent" type="xs:string"/>
+  </xs:complexType>
+  <!-- end deprecated -->
+
+  <xs:complexType name="lokiCheckoutSkinType">
     <xs:sequence minOccurs="0" maxOccurs="unbounded">
       <xs:element name="steps" type="lokiCheckoutStepsType"/>
     </xs:sequence>

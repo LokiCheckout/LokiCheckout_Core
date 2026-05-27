@@ -29,9 +29,9 @@
                        showInDefault="1"
                        showInWebsite="1"
                        showInStore="1">
-                    <label>Theme</label>
-                    <tooltip>Change the complete layout of the checkout by using a specific theme.</tooltip>
-                    <source_model>LokiCheckout\Core\Config\Source\ThemeOptions</source_model>
+                    <label>Skin</label>
+                    <tooltip>Change the complete layout of the checkout by using a specific skin.</tooltip>
+                    <source_model>LokiCheckout\Core\Config\Source\SkinOptions</source_model>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>

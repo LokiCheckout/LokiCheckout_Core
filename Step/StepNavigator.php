@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Step;
 
+use LokiCheckout\Core\Config\XmlConfig\Value\Skin\Step;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Message\ManagerInterface as MessageManager;
@@ -11,7 +12,7 @@ use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Config\XmlConfig;
 use LokiCheckout\Core\Exception\StepNotFoundException;
 use LokiCheckout\Core\Exception\UnknownStepException;
-use LokiCheckout\Core\Exception\UnknownThemeException;
+use LokiCheckout\Core\Exception\UnknownSkinException;
 use Loki\Components\Component\ComponentRegistry;
 
 class StepNavigator implements ArgumentInterface
@@ -232,15 +233,15 @@ class StepNavigator implements ArgumentInterface
             return $this->unsortedSteps;
         }
 
-        $currentThemeName = $this->config->getTheme();
+        $currentSkinName = $this->config->getSkin();
 
         try {
-            $theme = $this->xmlConfig->getTheme($currentThemeName);
-        } catch (UnknownThemeException $e) {
-            $theme = $this->xmlConfig->getTheme('default');
+            $skin = $this->xmlConfig->getSkin($currentSkinName);
+        } catch (UnknownSkinException $e) {
+            $skin = $this->xmlConfig->getSkin('default');
         }
 
-        $stepDefinitions = $theme->getSteps();
+        $stepDefinitions = $skin->getSteps();
         foreach ($stepDefinitions as $stepDefinition) {
             $this->stepDefinitions[$stepDefinition->getBlockName()] = $stepDefinition;
 
@@ -352,7 +353,7 @@ class StepNavigator implements ArgumentInterface
         $this->currentStep = false;
     }
 
-    private function getStepDefinition(string $blockName): XmlConfig\Value\Theme\Step
+    private function getStepDefinition(string $blockName): Step
     {
         if (isset($this->stepDefinitions[$blockName])) {
             return $this->stepDefinitions[$blockName];

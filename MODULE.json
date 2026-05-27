@@ -144,8 +144,8 @@
         },
         {
             "path": "loki_checkout/general/theme",
-            "label": "General > Theme",
-            "description": "Change the complete layout of the checkout by using a specific theme."
+            "label": "General > Skin",
+            "description": "Change the complete layout of the checkout by using a specific skin."
         },
         {
             "path": "loki_checkout/general/grid_layout",

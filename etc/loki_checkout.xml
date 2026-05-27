@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:LokiCheckout_Core:etc/loki_checkout.xsd">
-    <themes>
-        <theme name="default" label="Multi Step Checkout (default)">
+    <skins>
+        <skin name="default" label="Multi Step Checkout (default)">
             <steps>
                 <step name="shipping" blockName="loki-checkout.steps.shipping" sortOrder="10" />
                 <step name="billing" blockName="loki-checkout.steps.billing" sortOrder="20" />
             </steps>
-        </theme>
+        </skin>
 
-        <theme name="onestep" label="One Step Checkout">
+        <skin name="onestep" label="One Step Checkout">
             <steps>
                 <step name="one" blockName="loki-checkout.steps.one"/>
             </steps>
-        </theme>
-    </themes>
+        </skin>
+    </skins>
 
     <grid_layouts>
         <grid_layout name="default_grid" label="Default grid" defaultColSpan="12" defaultMdColSpan="6">
