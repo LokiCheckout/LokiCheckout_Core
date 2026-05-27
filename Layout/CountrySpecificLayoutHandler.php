@@ -26,6 +26,8 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
             }
         }
 
+        $handles[] = 'loki_checkout_country_'.$countryId;
+
         foreach ($handles as $handle) {
             if (str_starts_with($handle, 'loki_checkout_skin_')) {
                 $handles[] = $handle.'_country_'.$countryId;
@@ -41,6 +43,6 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
 
     private function getCountryId(): string
     {
-        return strtolower((string)$this->checkoutState->getPersistedQuote()->getShippingAddress()->getCountryId());
+        return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
     }
 }
