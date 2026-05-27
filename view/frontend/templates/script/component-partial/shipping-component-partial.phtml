@@ -124,17 +124,19 @@ use Magento\Framework\View\Element\Template;
         },
         saveLocation(event) {
             const data = JSON.parse(event.target.getAttribute('data-json'));
+            this.value = data;
             this.post(data);
         },
         saveTimeframe(event) {
             const data = JSON.parse(event.target.getAttribute('data-json'));
+            this.value = data;
             this.post(data);
         },
-        isCurrentLocation() {
+        /*isCurrentLocation() {
             const id = this.$el.getAttribute('value');
 
             return this.isCurrentLocationValue(id);
-        },
+        },*/
         isCurrentLocationValue(locationId) {
             if (!locationId || !this.value || this.value.deliveryType !== 'pickup') {
                 return false;
