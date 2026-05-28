@@ -33,7 +33,7 @@ class LayoutHandler implements LayoutHandlerInterface
         $handles = [
             'loki_checkout',
             'loki_checkout_skin_'.$skin,
-            'loki_checkout_theme_'.$skin
+            'loki_checkout_theme_'.$skin // deprecated
         ];
 
         return $handles;
