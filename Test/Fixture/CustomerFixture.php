@@ -22,7 +22,7 @@ class CustomerFixture implements RevertibleDataFixtureInterface
         if (isset($data['email'])) {
             try {
                 return $this->customerRegistry->retrieveByEmail($data['email']);
-            } catch(Exception $e) {
+            } catch (Exception $e) {
             }
 
         }
