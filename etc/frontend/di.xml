@@ -96,4 +96,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="LokiCheckout\Core\Observer\SaveAfterRepositoryDispatch">
+        <arguments>
+            <argument name="postDispatchHandlers" xsi:type="array">
+                <item name="same-address-copy" xsi:type="object">LokiCheckout\Core\Component\PostDispatchHandler\SameAddressCopy</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
