@@ -23,7 +23,8 @@ class RegionViewModel extends AddressFieldViewModel
             return true;
         }
 
-        $countriesWithStateRequired = (string)$this->getContext()->getScopeConfig()->getValue('general/region/state_required');
+        $scopeConfig = $this->getContext()->getScopeConfig();
+        $countriesWithStateRequired = (string)$scopeConfig->getValue('general/region/state_required');
         if (empty($countriesWithStateRequired)) {
             return false;
         }
