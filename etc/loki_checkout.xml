@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:LokiCheckout_Core:etc/loki_checkout.xsd">
     <skins>
-        <skin name="default" label="Multi Step Checkout (default)">
+        <skin name="default" label="Default Skin (Multi Step)">
             <steps>
                 <step name="shipping" blockName="loki-checkout.steps.shipping" sortOrder="10" />
                 <step name="billing" blockName="loki-checkout.steps.billing" sortOrder="20" />
             </steps>
         </skin>
 
-        <skin name="onestep" label="One Step Checkout">
+        <skin name="onestep" label="One Step Skin">
             <steps>
                 <step name="one" blockName="loki-checkout.steps.one"/>
             </steps>
