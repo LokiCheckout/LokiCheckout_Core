@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods;
 
 use LokiCheckout\Core\Util\Checkout\UpdateShippingMethod;
+use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\StateException;
 use Magento\Quote\Api\Data\ShippingMethodInterface;
@@ -18,6 +19,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     public function __construct(
         private readonly UpdateShippingMethod $updateShippingMethod,
+        private readonly ManagerInterface $eventManager,
     ) {
     }
 
@@ -84,6 +86,10 @@ class ShippingMethodsRepository extends ComponentRepository
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         $this->updateShippingMethod->execute($shippingMethodCode);
         $this->currentShippingMethod = $quote->getShippingAddress()->getShippingMethod();
+
+        $this->eventManager->dispatch('loki_checkout_shipping_method_update', [
+            'method' => $this->currentShippingMethod
+        ]);
     }
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
