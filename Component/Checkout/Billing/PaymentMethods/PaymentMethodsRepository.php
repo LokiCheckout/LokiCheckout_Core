@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Checkout\Api\Exception\PaymentProcessingRateLimitExceededException;
 use Magento\Checkout\Api\PaymentProcessingRateLimiterInterface;
+use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\InvalidArgumentException;
 use Magento\Quote\Api\Data\PaymentInterfaceFactory;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
@@ -18,6 +19,7 @@ class PaymentMethodsRepository extends ComponentRepository
     public function __construct(
         private PaymentMethodManagementInterface $paymentMethodManagement,
         private PaymentInterfaceFactory $paymentFactory,
+        private readonly ManagerInterface $eventManager,
         private ?PaymentProcessingRateLimiterInterface $paymentRateLimiter = null,
     ) {
     }
@@ -104,6 +106,10 @@ class PaymentMethodsRepository extends ComponentRepository
         ]);
 
         $this->paymentMethodManagement->set($quote->getId(), $payment);
+
+        $this->eventManager->dispatch('loki_checkout_payment_method_update', [
+            'method' => $value
+        ]);
     }
 
     protected function getPaymentMethodByCode(string $code): \Magento\Payment\Model\MethodInterface
