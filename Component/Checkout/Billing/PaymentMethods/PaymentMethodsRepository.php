@@ -16,6 +16,8 @@ use Loki\Components\Component\ComponentRepository;
  */
 class PaymentMethodsRepository extends ComponentRepository
 {
+    private string $defaultPaymentMethod = '';
+
     public function __construct(
         private PaymentMethodManagementInterface $paymentMethodManagement,
         private PaymentInterfaceFactory $paymentFactory,
@@ -31,26 +33,25 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function getDefaultPayment(): string
     {
-        static $defaultPayment = false;
-        if (is_string($defaultPayment)) {
-            return $defaultPayment;
+        if (!empty($this->defaultPaymentMethod)) {
+            return $this->defaultPaymentMethod;
         }
 
         $paymentMethods = $this->getPaymentMethods();
         if ($paymentMethods === []) {
-            $defaultPayment = '';
-            return $defaultPayment;
+            $this->defaultPaymentMethod = '';
+            return $this->defaultPaymentMethod;
         }
 
         if (false === $this->getContext()->getModuleConfig()->selectDefaultPaymentMethod()) {
-            $defaultPayment = '';
-            return $defaultPayment;
+            $this->defaultPaymentMethod = '';
+            return $this->defaultPaymentMethod;
         }
 
         $firstPaymentMethod = array_shift($paymentMethods);
 
-        $defaultPayment = (string)$firstPaymentMethod->getCode();
-        return $defaultPayment;
+        $this->defaultPaymentMethod = (string)$firstPaymentMethod->getCode();
+        return $this->defaultPaymentMethod;
     }
 
     public function getValue(): mixed
