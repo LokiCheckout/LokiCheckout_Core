@@ -188,6 +188,11 @@
             "description": "With this option enabled, the VAT ID field is hidden if there is no value for the company given."
         },
         {
+            "path": "loki_checkout/fields/capitalize_country_in_preview",
+            "label": "Field settings > Capitalize Country In Address Preview",
+            "description": "When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento."
+        },
+        {
             "path": "loki_checkout/shipping/select_default_shipping_method",
             "label": "Shipping settings > Select Default Shipping Method",
             "description": "With this option enabled, the first shipping method is automatically selected."
@@ -210,7 +215,7 @@
     ],
     "tests": {
         "unit": 18,
-        "integration": 146,
+        "integration": 154,
         "functional": 12
     },
     "phpcs_severity": "9",
