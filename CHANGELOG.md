@@ -6,6 +6,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 02 June 2026
+
+### Added
+- Implement new option to uppercase the country
+- Trigger event `loki_checkout_payment_method_update`
+- Trigger event `loki_checkout_shipping_method_update`
+- Add layout handle `loki_checkout_country_XX`
+- Allow for `loki_checkout_theme_THEME_country_COUNTRY` handle
+- Allow for DI type extensibility when dealing with post-dispatch tasks
+- Add CSS classes `skin-X` and `grid-layout-Y` to `loki-checkout` block
+- Add `inputmode` to various fields
+
+### Fixed
+- If current step is obsolete, make sure to set first found step as current
+- Remove `static` singleton from PaymentMethodsRepository
+- Adjust step ViewModels to make block optional
+- Clean up duplicate `<br>` tags with newlines in between within address views
+- When pickup location is set, reset delivery date and vice versa
+- Rename `theme` to `skin` everywhere
+- Add layout handles dynamically via new Loki Component architecture
+- Make sure GridLayout block uses exact same values as Grid CSS parser
+- Enable autocomplete on customer login form
+
 ## [2.3.34] - 21 May 2026
 ### Fixed
 - Never sanitize `multicarrier_multicarrier` shipping method
