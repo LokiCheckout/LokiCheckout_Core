@@ -1,3 +1,5 @@
 "Pay faster with","Pay faster with"
 "Billing and Shipping Address","Billing and Shipping Address"
 "You have logged in","You have logged in"
+"Capitalize Country In Address Preview","Capitalize Country In Address Preview"
+"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento."

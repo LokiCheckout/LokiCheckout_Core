@@ -104,4 +104,10 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Magento\Framework\Filter\Template">
+        <plugin
+            name="LokiCheckout_Core::modifyAddressTemplateVariables"
+            type="LokiCheckout\Core\Plugin\ModifyAddressTemplateVariablesPlugin"/>
+    </type>
 </config>
