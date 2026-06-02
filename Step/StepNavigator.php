@@ -54,7 +54,8 @@ class StepNavigator implements ArgumentInterface
         foreach ($this->getSteps() as $step) {
             $availableSteps[] = $step->getCode();
             if ($step->isEnabled() && $step->isAccessable()) {
-                return $step;
+                $this->currentStep = $step;
+                return $this->currentStep;
             }
         }
 

@@ -26,6 +26,7 @@ class StepForwardButtonRepository extends ComponentRepository
         try {
             $this->getStepNavigator()->setNextStep();
             $this->getContext()->getRequest()->setParam('skip_validation', true); // @todo: Set this flag in an internal place only
+
         } catch (UnknownStepException $e) {
             $this->getContext()->getGlobalMessageRegistry()->addError('UnknownStepException: ' . $e->getMessage());
         }
