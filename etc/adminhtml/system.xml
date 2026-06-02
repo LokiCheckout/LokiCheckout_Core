@@ -155,6 +155,20 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                         <field id="*/general/enable">1</field>
                     </depends>
                 </field>
+                <field id="capitalize_country_in_preview"
+                       translate="label"
+                       type="select"
+                       sortOrder="10"
+                       showInDefault="1"
+                       showInWebsite="1"
+                       showInStore="1">
+                    <label>Capitalize Country In Address Preview</label>
+                    <tooltip>When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.</tooltip>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="*/general/enable">1</field>
+                    </depends>
+                </field>
             </group>
             <group id="shipping" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Shipping settings</label>

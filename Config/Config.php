@@ -200,6 +200,14 @@ class Config implements ArgumentInterface
         );
     }
 
+    public function capitalizeCountryInPreview(): bool
+    {
+        return (bool)$this->scopeConfig->getValue(
+            'loki_checkout/fields/capitalize_country_in_preview',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
     public function selectDefaultShippingMethod(): bool
     {
         return (bool)$this->scopeConfig->getValue(
