@@ -19,7 +19,7 @@ use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
 #[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
 #[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]
 #[DataFixture(CustomerAddressFixture::class, ['customer_id' => '$customer.id$'])]
-#[DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product')]
+#[DataFixture(ProductFixture::class, as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]

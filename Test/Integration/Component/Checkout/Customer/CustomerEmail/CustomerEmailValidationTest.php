@@ -10,7 +10,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
@@ -21,6 +21,7 @@ class CustomerEmailValidationTest extends LokiCheckoutTestCase
 
     public function testComponentValidators(): void
     {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
     }
@@ -33,11 +34,12 @@ class CustomerEmailValidationTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],

@@ -11,7 +11,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
@@ -24,6 +24,7 @@ class CustomerDobValidationTest extends LokiCheckoutTestCase
     #[ConfigFixture('customer/address/dob_show', 'req')]
     public function testComponentValidators(): void
     {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required', 'date', 'past_date'], $component);
     }
@@ -32,6 +33,7 @@ class CustomerDobValidationTest extends LokiCheckoutTestCase
     #[ConfigFixture('customer/address/dob_show', 'opt')]
     public function testComponentNoValidators(): void
     {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['date', 'past_date'], $component);
         $this->assertComponentNoValidators(['required'], $component);
@@ -47,18 +49,19 @@ class CustomerDobValidationTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],
             ['foobar', false, ['Invalid date format']],
             ['1978-01-02', true, []],
-            [((int)date('Y') - 1) . '-01-02', false, ['You need to be at least 10 years old']],
-            [((int)date('Y') + 12) . '-01-02', false, ['Date needs to be in the past']],
+            [((int)date('Y') - 1).'-01-02', false, ['You need to be at least 10 years old']],
+            [((int)date('Y') + 12).'-01-02', false, ['Date needs to be in the past']],
         ];
     }
 }

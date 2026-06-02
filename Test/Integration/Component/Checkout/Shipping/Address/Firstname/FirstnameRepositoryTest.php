@@ -11,7 +11,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Loki\Components\Component\ComponentRegistry;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
@@ -31,7 +31,7 @@ class FirstnameRepositoryTest extends LokiCheckoutTestCase
         $this->assertSame('John', $this->getQuote()->getShippingAddress()->getFirstname());
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],

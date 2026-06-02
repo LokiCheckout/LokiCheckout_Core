@@ -11,7 +11,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
@@ -23,6 +23,7 @@ class CompanyValidationTest extends LokiCheckoutTestCase
     #[ConfigFixture('customer/address/company_show', 'req')]
     public function testComponentValidators(): void
     {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
     }
@@ -30,6 +31,7 @@ class CompanyValidationTest extends LokiCheckoutTestCase
     #[ConfigFixture('customer/address/company_show', 'opt')]
     public function testComponentNoValidators(): void
     {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentNoValidators(['required'], $component);
     }
@@ -43,11 +45,12 @@ class CompanyValidationTest extends LokiCheckoutTestCase
         bool $expectedResult,
         array $expectedErrors
     ): void {
+        $this->dispatchToCheckout();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],

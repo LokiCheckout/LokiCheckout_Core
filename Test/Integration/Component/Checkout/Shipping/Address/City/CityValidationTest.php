@@ -12,7 +12,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
@@ -35,17 +35,17 @@ class CityValidationTest extends LokiCheckoutTestCase
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],
             ['Sin City', true, []],
-            ['Sin City #', $this->hasCityValidationFix(), ['Invalid City']],
-            ['Sin City 2', $this->hasCityValidationFix(), ['Invalid City']],
+            ['Sin City #', self::hasCityValidationFix(), ['Invalid City']],
+            ['Sin City 2', self::hasCityValidationFix(), ['Invalid City']],
         ];
     }
 
-    private function hasCityValidationFix(): bool
+    public static function hasCityValidationFix(): bool
     {
         return false;
         $magentoVersion = ObjectManager::getInstance()->get(MagentoVersion::class);

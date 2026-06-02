@@ -11,7 +11,7 @@ use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Fixture\ShippingAddressFixture;
 
 #[
-    DataFixture(ProductFixture::class, ['sku' => 'simple-product-001'], as: 'product'),
+    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     DataFixture(ShippingAddressFixture::class, ['cart_id' => '$cart.id$', 'country_id' => 'NL']),
@@ -35,7 +35,7 @@ class PostcodeValidationTest extends LokiCheckoutTestCase
         $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
     }
 
-    public function getTestData(): array
+    public static function getTestData(): array
     {
         return [
             ['', false, ['Value is required']],
