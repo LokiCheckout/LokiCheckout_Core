@@ -2,7 +2,7 @@
 
 namespace LokiCheckout\Core\Observer;
 
-use Magento\Framework\App\Request\Http as HttpRequest;
+use Loki\Components\Util\SkipValidation;
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Quote\Model\Quote\Address;
@@ -10,7 +10,7 @@ use Magento\Quote\Model\Quote\Address;
 class CleanAfterAddressChange implements ObserverInterface
 {
     public function __construct(
-        private HttpRequest $httpRequest
+        private SkipValidation $skipValidation,
     ) {
     }
 
@@ -23,7 +23,7 @@ class CleanAfterAddressChange implements ObserverInterface
 
         if ($fieldName === 'country_id') {
             $this->resetAddress($address, $addressType);
-            $this->httpRequest->setParam('skip_validation', true); // @todo: Set this flag in an internal place only
+            $this->skipValidation->setSkipValidation(true);
         }
     }
 

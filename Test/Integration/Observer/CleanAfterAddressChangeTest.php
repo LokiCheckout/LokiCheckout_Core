@@ -2,8 +2,8 @@
 
 namespace LokiCheckout\Core\Test\Integration\Observer;
 
+use Loki\Components\Util\SkipValidation;
 use LokiCheckout\Core\Observer\CleanAfterAddressChange;
-use Magento\Framework\App\Request\Http as HttpRequest;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Event\Observer;
 use Magento\Quote\Model\Quote\AddressFactory;
@@ -34,8 +34,8 @@ class CleanAfterAddressChangeTest extends TestCase
         $this->assertSame('', (string)$address->getPostcode());
         $this->assertSame('', (string)$address->getShippingMethod());
 
-        $request = ObjectManager::getInstance()->get(HttpRequest::class);
-        $this->assertTrue((bool)$request->getParam('skip_validation'));
+        $skipValidation = ObjectManager::getInstance()->get(SkipValidation::class);
+        $this->assertTrue((bool)$skipValidation->getSkipValidation());
     }
 
     public function testNonCountryFieldDoesNothing(): void

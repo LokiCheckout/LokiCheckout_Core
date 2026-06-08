@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Component\Base\Generic;
 
 use Loki\Components\Component\AbstractComponentContext;
 use Loki\Components\Exception\RedirectException;
+use Loki\Components\Util\SkipValidation;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Config\XmlConfig;
 use LokiCheckout\Core\Step\StepNavigator;
@@ -41,6 +42,7 @@ use Magento\Store\Model\StoreManagerInterface;
  * @method ResolverInterface getLocaleResolver()
  * @method StoreManagerInterface getStoreManager()
  * @method Http getRequest()
+ * @method SkipValidation getSkipValidation()
  */
 class CheckoutContext extends AbstractComponentContext
 {

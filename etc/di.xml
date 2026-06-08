@@ -202,6 +202,7 @@
                 <item name="localeResolver" xsi:type="object">Magento\Framework\Locale\ResolverInterface\Proxy</item>
                 <item name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface\Proxy</item>
                 <item name="request" xsi:type="object">Magento\Framework\App\Request\Http\Proxy</item>
+                <item name="skipValidation" xsi:type="object">Loki\Components\Util\SkipValidation</item>
             </argument>
         </arguments>
     </type>
