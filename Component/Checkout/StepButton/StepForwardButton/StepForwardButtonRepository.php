@@ -28,7 +28,8 @@ class StepForwardButtonRepository extends ComponentRepository
             $this->getContext()->getSkipValidation()->setSkipValidation(true);
 
         } catch (UnknownStepException $e) {
-            $this->getContext()->getGlobalMessageRegistry()->addError('UnknownStepException: ' . $e->getMessage());
+            $msg = 'UnknownStepException: ' . $e->getMessage();
+            $this->getContext()->getMessageManager()->addErrorMessage($msg);
         }
     }
 
