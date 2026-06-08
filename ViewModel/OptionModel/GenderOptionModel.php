@@ -9,9 +9,13 @@ use Loki\Field\Util\OptionModelInterface;
 
 class GenderOptionModel implements ArgumentInterface, OptionModelInterface
 {
-    // @todo: Is there really no code in Magento for this?
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
+        $options = $viewModel->getBlock()->getOptions();
+        if (!empty($options)) {
+            return (array)$options;
+        }
+
         return [
             'male' => __('Male'),
             'female' => __('Female'),
