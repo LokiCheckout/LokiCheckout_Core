@@ -1,0 +1,63 @@
+<?php declare(strict_types=1);
+
+namespace LokiCheckout\Core\Test\Integration\Validator\Component;
+
+use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
+use LokiCheckout\Core\Validator\Component\OptionsValidator;
+use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
+use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
+use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\Config as ConfigFixture;
+use Magento\TestFramework\Fixture\DataFixture;
+
+#[
+    DataFixture(ProductFixture::class, as: 'product'),
+    DataFixture(GuestCartFixture::class, as: 'cart'),
+    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
+    AppArea('frontend'),
+]
+class OptionsValidatorTest extends LokiCheckoutTestCase
+{
+    const BLOCK_NAME = 'loki-checkout.customer.customer_gender';
+
+    #[
+        ConfigFixture('customer/address/gender_show', 'req', 'store', 'default'),
+        ConfigFixture('customer/address/gender_show', 'req'),
+    ]
+    public function testEmptyValueIsValid(): void
+    {
+        $this->dispatchToCheckout();
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $subject = $this->getObjectManager()->get(OptionsValidator::class);
+
+        $this->assertTrue($subject->validate('', $component));
+    }
+
+    #[
+        ConfigFixture('customer/address/gender_show', 'req', 'store', 'default'),
+        ConfigFixture('customer/address/gender_show', 'req'),
+    ]
+    public function testValidOptionKeyIsValid(): void
+    {
+        $this->dispatchToCheckout();
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $subject = $this->getObjectManager()->get(OptionsValidator::class);
+
+        $this->assertTrue($subject->validate('male', $component));
+    }
+
+    #[
+        ConfigFixture('customer/address/gender_show', 'req', 'store', 'default'),
+        ConfigFixture('customer/address/gender_show', 'req'),
+    ]
+    public function testInvalidOptionIsRejected(): void
+    {
+        $this->dispatchToCheckout();
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $subject = $this->getObjectManager()->get(OptionsValidator::class);
+
+        $result = $subject->validate('not-a-valid-option', $component);
+        $this->assertSame(['Not a valid option'], $result);
+    }
+}
