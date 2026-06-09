@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.1] - 09 June 2026
+### Fixed
+- Move skip validation in dedicated class for security
+- Allow gender options to be added via XML layout
+
 ## [2.4.0] - 02 June 2026
 
 ### Added
