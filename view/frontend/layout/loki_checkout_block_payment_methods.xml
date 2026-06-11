@@ -4,6 +4,10 @@
         <block
             name="loki-checkout.payment.methods"
             template="LokiCheckout_Core::checkout/payment/payment-methods.phtml">
+            <arguments>
+                <argument name="lazy_load" xsi:type="boolean">false</argument>
+                <argument name="lazy_load_template" xsi:type="string">LokiCheckout_Core::checkout/payment/payment-methods-lazy-load.phtml</argument>
+            </arguments>
 
             <block
                 name="loki-checkout.payment.methods.title" as="title"
