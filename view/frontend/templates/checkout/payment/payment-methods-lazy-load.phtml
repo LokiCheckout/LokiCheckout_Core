@@ -1,0 +1,54 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\Components\Util\Block\BlockRenderer;
+
+/** @var ComponentViewModelInterface $viewModel */
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var BlockRenderer $blockRenderer */
+/** @var CssClass $css */
+
+$dummyItemCount = (int)$block->getLazyLoadItemCount();
+if (!$dummyItemCount) {
+    $dummyItemCount = 3;
+}
+
+$dummyTextCss = $css('inline-block h-6 rounded bg-gray-300', 'dummy-text');
+?>
+<div class="<?= $escaper->escapeHtml($css('relative')) ?>" role="group">
+    <?= /* @noEscape */
+    $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
+    <?= /* @noEscape */
+    $block->getChildHtml('title') ?>
+
+    <form class="<?= $escaper->escapeHtml($css('border border-transparent', 'container')) ?>">
+        <ul class="<?= $escaper->escapeHtml($css('', 'list')) ?>">
+            <?php for ($i = 0; $i < $dummyItemCount; $i++): ?>
+            <li class="<?= $escaper->escapeHtml($css('loki-checkout-payment-methods-item inactive enabled cursor-pointer relative my-2 p-3 md:px-6', 'item')) ?>">
+                <label class="<?= $escaper->escapeHtml($css('flex gap-4 md:ga-6 items-center', 'label')) ?>">
+                    <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
+                    <input
+                        type="radio"
+                        disabled="disabled"
+                        class="<?= $escaper->escapeHtml($css('', 'input')) ?>"
+                    >
+                    </span>
+
+                    <span class="<?= $escaper->escapeHtml($css('grow flex items-center gap-2 ml-2', 'label')) ?>">
+                        <span class="<?= $escaper->escapeHtml($dummyTextCss) ?> w-4"></span>
+                        <span class="<?= $escaper->escapeHtml($dummyTextCss) ?> w-32"></span>
+                        <span class="<?= $escaper->escapeHtml($dummyTextCss) ?> w-12"></span>
+                    </span>
+                </label>
+            </li>
+            <?php endfor ?>
+        </ul>
+    </form>
+</div>
