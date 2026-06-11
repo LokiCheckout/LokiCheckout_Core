@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.2] - 11 June 2026
+### Fixed
+- Add XML layout arguments for lazy loading payment methods
+- Add lazy loading template for payment methods
+
 ## [2.4.1] - 09 June 2026
 ### Fixed
 - Move skip validation in dedicated class for security
