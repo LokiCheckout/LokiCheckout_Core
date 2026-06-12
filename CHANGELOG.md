@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.3] - 12 June 2026
+### Fixed
+- Properly translate gender IDs to labels
+- Fix core bug where automatically subscribed newsletter didn't register logged-in customer ID
+- Do not re-subscribe if already subscribed to newsletter
+
 ## [2.4.2] - 11 June 2026
 ### Fixed
 - Add XML layout arguments for lazy loading payment methods
