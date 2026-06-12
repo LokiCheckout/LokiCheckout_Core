@@ -16,10 +16,15 @@ class GenderOptionModel implements ArgumentInterface, OptionModelInterface
             return (array)$options;
         }
 
+        return $this->getOptionsArray();
+    }
+
+    public function getOptionsArray(): array
+    {
         return [
-            'male' => __('Male'),
-            'female' => __('Female'),
-            'other' => __('Other'),
+            1 => __('Male'),
+            2 => __('Female'),
+            3 => __('Not Specified'),
         ];
     }
 }

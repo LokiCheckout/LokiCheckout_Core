@@ -13,9 +13,9 @@ class GenderViewModel extends QuoteFieldViewModel
 
     public function isRequired(): bool
     {
-        $showCompany = (string)$this->getContext()->getScopeConfig()->getValue('customer/address/gender_show');
+        $showGender = (string)$this->getContext()->getScopeConfig()->getValue('customer/address/gender_show');
 
-        if ($showCompany === 'req') {
+        if ($showGender === 'req') {
             return true;
         }
 
