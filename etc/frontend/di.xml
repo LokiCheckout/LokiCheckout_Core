@@ -110,4 +110,10 @@
             name="LokiCheckout_Core::modifyAddressTemplateVariables"
             type="LokiCheckout\Core\Plugin\ModifyAddressTemplateVariablesPlugin"/>
     </type>
+
+    <type name="Magento\Quote\Model\Quote">
+        <plugin
+            name="LokiCheckout_Core::skipCustomerCopying"
+            type="LokiCheckout\Core\Plugin\SkipCustomerCopyingPlugin"/>
+    </type>
 </config>

@@ -97,6 +97,10 @@ class Index implements HttpGetActionInterface
         }
 
         $quote = $this->checkoutState->getQuote();
+        if ((int)$quote->getCustomerId() === (int)$customer->getId()) {
+            return;
+        }
+
         $quote->assignCustomerWithAddressChange(
             $customer,
             $quote->getBillingAddress(),
