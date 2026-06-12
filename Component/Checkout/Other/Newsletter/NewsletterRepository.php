@@ -37,8 +37,18 @@ class NewsletterRepository extends FieldRepository
 
     public function saveValue(mixed $value): void
     {
+        $value = (bool)$value;
         $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        if ((bool)$value) {
+        $isSubscribed = $this->isSubscribed($email);
+        if (true === $isSubscribed && true === $value) {
+            return;
+        }
+
+        if (false === $isSubscribed && false === $value) {
+            return;
+        }
+
+        if (true === $value) {
             $this->subscribeEmail($email);
             if ($this->showNotifications()) {
                 $message = __('You have been subscribed to the newsletter');
@@ -48,19 +58,13 @@ class NewsletterRepository extends FieldRepository
             return;
         }
 
-        $subscriber = $this->getContext()->getSubscriberFactory()->create();
-        $subscriber->load($email, 'subscriber_email'); // @phpstan-ignore-line
-        if (!$subscriber->getId() > 0) {
-            return;
-        }
-
         if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
-            $this->unsubscriberCustomer();
+            $this->unsubscribeCustomer();
 
             return;
         }
 
-        $this->unsubscribeEmail($email, $subscriber);
+        $this->unsubscribeEmail($email);
 
         if ($this->showNotifications()) {
             $message = __('You have been unsubscribed from the newsletter');
@@ -82,13 +86,15 @@ class NewsletterRepository extends FieldRepository
         $this->getContext()->getSubscriptionManager()->subscribe($email, $this->getStoreId());
     }
 
-    private function unsubscribeEmail(string $email, Subscriber $subscriber): void
+    private function unsubscribeEmail(string $email): void
     {
+        $subscriber = $this->getContext()->getSubscriberFactory()->create();
+        $subscriber->load($email, 'subscriber_email'); // @phpstan-ignore-line
         $confirmCode = $subscriber->getSubscriberConfirmCode();
         $this->getContext()->getSubscriptionManager()->unsubscribe($email, $this->getStoreId(), $confirmCode);
     }
 
-    private function unsubscriberCustomer()
+    private function unsubscribeCustomer()
     {
         $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
         $this->getContext()->getSubscriptionManager()->unsubscribeCustomer($customerId, $this->getStoreId());
