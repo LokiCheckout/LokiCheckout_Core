@@ -181,7 +181,7 @@ magento-compile:
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     #- test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
-    - composer require --no-dev --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
     - composer dump-autoload -o
     - bin/magento module:enable --all
     - php -dzend.enable_gc=0 -drealpath_cache_size=64M -drealpath_cache_ttl=7200 -dopcache.enable_cli=1 -dopcache.memory_consumption=512 -dopcache.interned_strings_buffer=64 -dopcache.max_accelerated_files=100000 -dmemory_limit=-1 bin/magento setup:di:compile
