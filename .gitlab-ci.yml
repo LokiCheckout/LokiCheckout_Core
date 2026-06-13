@@ -161,6 +161,7 @@ magento-integration-tests:
         PHP_VERSION: ['8.4']
 
 magento-compile:
+  resource_group: magento-compile
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
@@ -179,14 +180,14 @@ magento-compile:
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
-    - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
+    #- test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
+    - composer require --no-dev --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
     - composer dump-autoload -o
     - bin/magento module:enable --all
-    - php -dmemory_limit=-1 bin/magento setup:di:compile
+    - php -dzend.enable_gc=0 -drealpath_cache_size=64M -drealpath_cache_ttl=7200 -dopcache.enable_cli=1 -dopcache.memory_consumption=512 -dopcache.interned_strings_buffer=64 -dopcache.max_accelerated_files=100000 -dmemory_limit=-1 bin/magento setup:di:compile
   parallel:
     matrix:
-      - MAGENTO_VERSION: ['2.4.7-p4', '2.4.7-p7', '2.4.8', '2.4.8-p1', '2.4.8-p2', '2.4.8-p4', '2.4.9']
+      - MAGENTO_VERSION: ['2.4.7-p7', '2.4.8-p1', '2.4.8-p4', '2.4.9']
 
 magento-playwright:
   image: yireo/magento2installed:2.4.8-p4
@@ -217,7 +218,6 @@ magento-playwright:
     - bin/magento module:sequence LokiCheckout_FunctionalTests
     - bin/magento module:sequence "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
-    #- bin/magento deploy:mode:set production
     - magerun2 config:store:set loki_functional_tests/general/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
