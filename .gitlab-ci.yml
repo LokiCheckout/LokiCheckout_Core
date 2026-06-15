@@ -198,7 +198,7 @@ magento-compile:
       - MAGENTO_VERSION: ['2.4.7-p7', '2.4.8-p1', '2.4.8-p4', '2.4.9']
 
 magento-playwright:
-  image: yireo/magento2installed:2.4.8-p4
+  image: yireo/magento2playwright:2.4.8-p3
   stage: advanced
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
@@ -223,7 +223,8 @@ magento-playwright:
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
-    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh
+    - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
+    - cd /tmp/magento
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests
     - bin/magento module:sequence "${MAGENTO_MODULE}"

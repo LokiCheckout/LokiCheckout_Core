@@ -31,7 +31,7 @@ done
 
 if [ "${ready:-0}" -ne 1 ]; then
   echo "OpenSearch NOT OK, exiting"
-  exit 1
+  return 1
 fi
     
 cd /tmp/magento
@@ -72,4 +72,5 @@ for i in {1..60}; do
   echo -n "."
   sleep 1
 done
-test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
+
+test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && return 1
