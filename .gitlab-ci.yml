@@ -226,9 +226,9 @@ magento-playwright:
     - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
     - cd /tmp/magento
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence LokiCheckout_FunctionalTests
-    - bin/magento module:sequence "${MAGENTO_MODULE}"
+    - bin/magento module:sequence LokiCheckout_FunctionalTests ${MAGENTO_MODULE}
     - bin/magento setup:upgrade
+    - bin/magento loki-checkout:modules:dump
     - magerun2 config:store:set loki_checkout/functional_tests/token loki -n
     - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
     - npm install
