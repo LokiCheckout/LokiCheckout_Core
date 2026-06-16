@@ -233,7 +233,7 @@ playwright:
     - echo "Add module source"
     - cp -R $CI_PROJECT_DIR /tmp/magento/package-source
     - composer config repositories.local-source path /tmp/magento/package-source
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence:@dev
+    - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence:@dev
     - echo "Setup Magento"
     - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
     - bin/magento module:enable Yireo_EnableModuleSequence
