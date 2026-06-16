@@ -1,4 +1,6 @@
 <?php
+// phpcs:ignoreFile
+
 require 'vendor/autoload.php';
 use Magento\Framework\Component\ComponentRegistrar;
 $moduleNames = array_keys((new ComponentRegistrar)->getPaths('module'));
