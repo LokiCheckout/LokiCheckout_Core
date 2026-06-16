@@ -31,9 +31,11 @@ done
 
 if [ "${ready:-0}" -ne 1 ]; then
   echo "OpenSearch NOT OK, exiting"
-  return 1
+  exit 1
 fi
-    
+
+DISABLE_MODULES=`php $GITHUB_WORKSPACE/.github/workflows/get-modules.php disable-graphql=$DISABLE_GRAPHQL disable-inventory=$DISABLE_INVENTORY disable-adobe=$DISABLE_ADOBE`
+ 
 cd /tmp/magento
 php -dmemory_limit=-1 bin/magento setup:install \
   --base-url="${MAGENTO_BASE_URL}" \
@@ -58,12 +60,16 @@ php -dmemory_limit=-1 bin/magento setup:install \
   --session-save-redis-host=redis \
   --session-save-redis-port=6379 \
   --cache-backend-redis-server=redis \
-  --cache-backend-redis-port=6379
+  --cache-backend-redis-port=6379 \
+  --disable-modules="$DISABLE_MODULES"
+
+bin/magento deploy:mode:set developer
+bin/magento cache:disable full_page
 
 cd /tmp/magento/pub/
 nohup php -S 0.0.0.0:8888 >/tmp/php-server.log 2>&1 &
 
-echo "Waiting for Magento front to become reachable"
+echo "Waiting for Magento front to become reachable on ${MAGENTO_BASE_URL}"
 result=0
 for i in {1..60}; do
   if curl -s "${MAGENTO_BASE_URL}" 2>1 >/dev/null; then
@@ -72,5 +78,5 @@ for i in {1..60}; do
   echo -n "."
   sleep 1
 done
-
-test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && return 1
+test $result -eq 0 && echo "Not available" && cat /tmp/php-server.log && exit 1
+exit 0

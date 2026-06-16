@@ -30,6 +30,10 @@ variables:
   OPENSEARCH_PORT: "9200"
   OPENSEARCH_JAVA_OPTS: "-Xms128m -Xmx128m"
   OPENSEARCH_INITIAL_ADMIN_PASSWORD: "admin"
+  MAGENTO_VERSION: "2.4.8-p3"
+  DISABLE_INVENTORY: true
+  DISABLE_GRAPHQL: true
+  DISABLE_ADOBE: true
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
@@ -42,7 +46,7 @@ php-linting:
     matrix:
       - PHP_VERSION: ['8.1', '8.2', '8.3', '8.4', '8.5']
 
-magento-phpcs:
+phpcs:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: basic
   script:
@@ -55,7 +59,7 @@ magento-phpcs:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p4']
 
-magento-phpstan:
+phpstan:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: basic
   script:
@@ -87,7 +91,7 @@ magento-phpstan:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p4']
 
-magento-unit-tests:
+unit-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
@@ -118,7 +122,7 @@ magento-unit-tests:
     matrix:
       - MAGENTO_VERSION: ['2.4.8-p4']
 
-magento-integration-tests:
+integration-tests:
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
@@ -126,12 +130,11 @@ magento-integration-tests:
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
     - jq -e --arg v "${PHP_VERSION}" '.php_versions[]? == $v' MODULE.json || exit 0
     - test -d Test/Integration/ || exit 0
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
-    - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cd /tmp/magento
-    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
@@ -166,17 +169,17 @@ magento-integration-tests:
       - MAGENTO_VERSION: ['2.4.8-p4']
         PHP_VERSION: ['8.4']
 
-magento-compile:
+compile:
   resource_group: magento-compile
   image: yireo/magento2installed:$MAGENTO_VERSION
   stage: testing
   script:
     - cd $CI_PROJECT_DIR
     - jq -e --arg v "${MAGENTO_VERSION}" '.skip_magento_versions[]? | select(. == $v)' MODULE.json && exit 0
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini || true
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
-    - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cd /tmp/magento
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
@@ -197,7 +200,7 @@ magento-compile:
     matrix:
       - MAGENTO_VERSION: ['2.4.7-p7', '2.4.8-p1', '2.4.8-p4', '2.4.9']
 
-magento-playwright:
+playwright:
   image: yireo/magento2playwright:2.4.8-p3
   stage: advanced
   rules:
@@ -207,36 +210,49 @@ magento-playwright:
       allow_failure: true
   script:
     - cd $CI_PROJECT_DIR
+    - echo "Detecting Playwright tests"
     - test -d Test/Playwright/ || exit 0
+    - echo "Cleanup PHP"
+    - test -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini && rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini || true
+    - echo "Setting up module variables"
     - COMPOSER_NAME=`jq '.name' composer.json -r`
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
-    - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cd /tmp/magento
-    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
-    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
-    - composer config gitlab-domains gitlab.yireo.com
+    - echo "Configure GitLab"
     - composer config --global --auth http-basic.gitlab.yireo.com yireo "${PERSONAL_TOKEN}"
-    - composer config --global --auth github-oauth.github.com "${GITHUB_TOKEN}"
-    - composer config --global --auth http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_PUBLIC_KEY}" "${MAGENTO_MARKETPLACE_PRIVATE_KEY}"
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
-    - composer config repositories.local-source path $CI_PROJECT_DIR
-    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence
+    - echo "Configure Magento Marketplace"
+    - composer config --global --auth http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_PUBLIC_KEY}" "${MAGENTO_MARKETPLACE_PRIVATE_KEY}"
+    - echo "Configure composer"
+    - composer config --global --auth github-oauth.github.com "${GITHUB_TOKEN}"
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
+    - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
+    - composer config gitlab-domains gitlab.yireo.com
+    - echo "Add module source"
+    - cp -R $CI_PROJECT_DIR /tmp/magento/package-source
+    - composer config repositories.local-source path /tmp/magento/package-source
+    - composer require --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence:@dev
+    - echo "Setup Magento"
     - source $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
-    - cd /tmp/magento
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence LokiCheckout_FunctionalTests ${MAGENTO_MODULE}
+    - bin/magento module:sequence LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
+    - bin/magento loki-checkout:sample-data:add-product
     - bin/magento loki-checkout:modules:dump
     - magerun2 config:store:set loki_checkout/functional_tests/token loki -n
-    - cd vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
+    - echo "Verify Magento installation"
+    - test -f /tmp/magento/bin/magento || exit 1
+    - echo "Run Playwright tests"
+    - cd /tmp/magento/vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
+    - echo "Installing npm dependencies..."
     - npm install
-    - npx playwright install
-    - touch .env
-    - echo "TEST_URL=$MAGENTO_BASE_URL" >> .env
-    - echo "TEST_TOKEN=loki" >> .env
-    - npx playwright test --project=${MAGENTO_MODULE}
+    - npx playwright install chromium
+    - echo "Creating .env file..."
+    - printf "TEST_URL=http://127.0.0.1:8888\nTEST_TOKEN=loki\n" > .env
+    - echo "Running Playwright tests for project $MAGENTO_MODULE"
+    - CI=true TEST_TOKEN=loki MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE}
   services:
     - name: yireo/mariadb:10
       alias: mysql
