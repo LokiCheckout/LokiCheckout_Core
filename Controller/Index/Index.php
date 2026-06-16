@@ -40,7 +40,7 @@ class Index implements HttpGetActionInterface
             return $this->redirectResultFactory->create()->setPath('checkout/cart');
         }
 
-        $this->getCustomerSession()->regenerateId();
+        //$this->getCustomerSession()->regenerateId(); // @todo: Only call this when doing component updates
         $this->getCheckoutSession()->setCartWasUpdated(false);
         $this->getCheckoutSession()->setLokiRedirectUrl('');
         $this->getCustomerSession()->setBeforeAuthUrl(
