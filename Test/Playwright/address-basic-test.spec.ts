@@ -2,18 +2,20 @@ import {Field} from '@loki/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
 import coreConfig from '@loki/config';
+import merge from '@loki/util/merge';
 
 test.describe('basic address', function () {
+  const currentConfig = merge(coreConfig, {
+    profile: false,
+    config: {
+      'customer/address/middlename_show': 1,
+      'customer/address/fax_show': 'opt',
+      'customer/address/taxvat_show': 'opt',
+    }
+  });
+
   test('should allow me to fill all fields', async function ({page,context}) {
-    await setupCheckout(page, context, {
-      ...coreConfig,
-      config: {
-        ...coreConfig.config,
-        'customer/address/middlename_show': 1,
-        'customer/address/fax_show': 'opt',
-        'customer/address/taxvat_show': 'opt',
-      }
-    });
+    await setupCheckout(page, context, currentConfig);
 
     const fields = {
       'customer.email': 'jane@example.com',
