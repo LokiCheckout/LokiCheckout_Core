@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.4] - 17 June 2026
+### Fixed
+- Remove regenateId on every page load for performance
+- Prevent copying customer data to quote when already assigned
+
 ## [2.4.3] - 12 June 2026
 ### Fixed
 - Properly translate gender IDs to labels
