@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.5] - 19 June 2026
+### Fixed
+- When checking if guest is subscribed to newsletter, also check non-guest records
+- Explicitly add checkout/options/enable_guest_checkout_login=1 to email test
+- Pending changes
+
 ## [2.4.4] - 17 June 2026
 ### Fixed
 - Remove regenateId on every page load for performance
