@@ -15,11 +15,16 @@ class ShipmentMethodIcon implements ArgumentInterface
     public function __construct(
         private readonly IconResolverListing $iconResolverListing,
         private readonly IconResolverContextFactory $iconResolverContextFactory,
+        private readonly bool $enabled = true,
     ) {
     }
 
     public function getIcon(string $shipmentMethodCode, array $attributes = []): string
     {
+        if (false === $this->enabled) {
+            return '';
+        }
+
         $context = $this->getIconResolverContext($shipmentMethodCode, $attributes);
         foreach ($this->iconResolverListing->getIconResolvers() as $iconResolver) {
             $icon = $iconResolver->resolve($context);
