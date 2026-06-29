@@ -116,4 +116,20 @@
             name="LokiCheckout_Core::skipCustomerCopying"
             type="LokiCheckout\Core\Plugin\SkipCustomerCopyingPlugin"/>
     </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Address\AddressFormViewModel">
+        <plugin name="LokiCheckout_Core::disableAddressFormWhenLocation" type="LokiCheckout\Core\Plugin\DisableAddressFormWhenLocationPlugin" />
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Sidebar\Preview\ShippingDetails\ShippingDetailsViewModel">
+        <plugin name="LokiCheckout_Core::replaceAddressLabelWhenLocation" type="LokiCheckout\Core\Plugin\ReplaceAddressLabelWhenLocationPlugin" />
+    </type>
+
+    <type name="LokiCheckout\Core\Util\SameAddressService">
+        <plugin name="LokiCheckout_Core::disableSameAsBillingForLocation" type="LokiCheckout\Core\Plugin\DisableSameAsBillingForLocationPlugin" />
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Billing\ShippingAsBilling\ShippingAsBillingViewModel">
+        <plugin name="LokiCheckout_Core::hideSameAsBillingForLocation" type="LokiCheckout\Core\Plugin\HideSameAsBillingForLocationPlugin" />
+    </type>
 </config>

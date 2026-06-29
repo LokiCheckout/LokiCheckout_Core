@@ -70,18 +70,18 @@ class AddressFormViewModel extends CheckoutViewModel
         return $this->getContext()->getAddressRenderer()->getHtml($address);
     }
 
-    private function getQuote(): Quote
-    {
-        return $this->getContext()->getCheckoutState()->getQuote();
-    }
-
-    private function isBillingAddressComponent(): bool
+    public function isBillingAddressComponent(): bool
     {
         return $this->getContext()->isBillingAddressComponent($this->getComponent());
     }
 
-    private function isShippingAddressComponent(): bool
+    public function isShippingAddressComponent(): bool
     {
         return $this->getContext()->isShippingAddressComponent($this->getComponent());
+    }
+
+    private function getQuote(): Quote
+    {
+        return $this->getContext()->getCheckoutState()->getQuote();
     }
 }

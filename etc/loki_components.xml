@@ -137,6 +137,7 @@
         viewModel="LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
         <target name="loki-checkout.sidebar.totals"/>
+        <target name="loki-checkout.shipping.address"/>
         <target name="loki-checkout.sidebar.preview.shipping_details"/>
     </component>
 
