@@ -1,0 +1,27 @@
+<?php
+declare(strict_types=1);
+
+use LokiCheckout\Core\ViewModel\BillingAddressTitle;
+use Magento\Framework\View\Element\Template;
+use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Components\Factory\ViewModelFactory;
+use Loki\CssUtils\Util\CssClass;
+use Loki\Components\Util\Block\TemplateRenderer;
+
+/** @version 2.4.5 */
+/** @var Template $block */
+/** @var CssClass $css */
+/** @var TemplateRenderer $templateRenderer */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var CheckoutState $checkoutState */
+/** @var BillingAddressTitle $billingAddressTitle */
+
+$billingAddressTitle = $viewModelFactory->create(BillingAddressTitle::class);
+$title = $billingAddressTitle->getTitle($block);
+
+echo /* @noEscape */ $templateRenderer->html(
+    $block,
+    'LokiCheckout_Core::generic/title.phtml',
+    ['title' => $title]
+);
+

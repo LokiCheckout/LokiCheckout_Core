@@ -22,6 +22,7 @@ use Loki\Components\Util\Block\BlockRenderer;
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <?= /* @noEscape */ $block->getChildHtml('billing-as-shipping') ?>
+    <?= /* @noEscape */ $block->getChildHtml('form-title') ?>
 
     <?php if ($viewModel->showView()): ?>
         <?= /* @noEscape */ $block->getChildHtml('view') ?>
@@ -32,7 +33,6 @@ use Loki\Components\Util\Block\BlockRenderer;
         <?php endif; ?>
 
         <?php if ($viewModel->isNewAddress()): ?>
-            <?= /* @noEscape */ $block->getChildHtml('form-title') ?>
             <?= /* @noEscape */ $block->getChildHtml('form') ?>
         <?php endif; ?>
     <?php endif; ?>
