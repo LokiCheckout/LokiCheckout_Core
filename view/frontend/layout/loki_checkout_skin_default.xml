@@ -17,19 +17,28 @@
                     </arguments>
                 </block>
 
-                <block name="loki-checkout.steps.shipping.customer-fields" as="customer-fields" template="LokiCheckout_Core::theme/default/shipping-customer-fields.phtml"/>
+                <block
+                    name="loki-checkout.steps.shipping.customer-fields" as="customer-fields"
+                    template="LokiCheckout_Core::theme/default/shipping-customer-fields.phtml"
+                />
 
-                <block name="loki-checkout.steps.shipping.buttons" as="buttons" template="Loki_FieldComponents::form/button/buttons.phtml" after="-"/>
+                <block
+                    name="loki-checkout.steps.shipping.buttons" as="buttons"
+                    template="Loki_FieldComponents::form/button/buttons.phtml"
+                    after="-"
+                />
             </block>
 
             <block name="loki-checkout.steps.billing" as="billing" template="LokiCheckout_Core::theme/default/billing-step.phtml">
                 <block
-                    name="loki-checkout.steps.billing.title" as="title"
-                    template="LokiCheckout_Core::theme/default/billing-step-title.phtml"/>
+                    name="loki-checkout.steps.billing.customer-fields" as="customer-fields"
+                    template="LokiCheckout_Core::theme/default/billing-customer-fields.phtml"
+                />
 
-                <block name="loki-checkout.steps.billing.customer-fields" as="customer-fields" template="LokiCheckout_Core::theme/default/billing-customer-fields.phtml"/>
-
-                <block name="loki-checkout.steps.billing.buttons" as="buttons" template="Loki_FieldComponents::form/button/buttons.phtml" after="-"/>
+                <block
+                    name="loki-checkout.steps.billing.buttons" as="buttons"
+                    template="Loki_FieldComponents::form/button/buttons.phtml" after="-"
+                />
             </block>
         </referenceBlock>
 
