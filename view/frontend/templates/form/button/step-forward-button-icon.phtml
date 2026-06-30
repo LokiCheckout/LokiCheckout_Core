@@ -23,10 +23,10 @@ $stepNavigator = $viewModelFactory->create(StepNavigator::class);
 $iconId = ($stepNavigator->isLastStep()) ? $finalIconId : $regularIconId;
 
 ?>
-<div x-show="notLoading" class="<?= $escaper->escapeHtml($css('inline-block mr-3', 'icon')) ?>">
+<span x-show="notLoading" class="<?= $escaper->escapeHtml($css('inline-block mr-3', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, $iconId) ?>
-</div>
+</span>
 
-<div x-cloak x-show="loading" class="<?= $escaper->escapeHtml($css('inline-block mr-3 animate-spin', 'icon')) ?>">
+<span x-cloak x-show="loading" class="<?= $escaper->escapeHtml($css('inline-block mr-3 animate-spin', 'icon')) ?>">
     <?= /* @noEscape */ $imageRenderer->icon($block, 'spinner') ?>
-</div>
+</span>
