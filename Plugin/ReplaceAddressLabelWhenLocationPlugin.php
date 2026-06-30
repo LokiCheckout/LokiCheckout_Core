@@ -10,7 +10,7 @@ class ReplaceAddressLabelWhenLocationPlugin
 {
     public function __construct(
         private readonly ShippingAddressResolverListing $shippingAddressResolverListing,
-        private readonly string $addressLabel = 'Pickup Location',
+        private readonly string $addressLabel = 'Pickup Address',
     ) {
     }
 
