@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Component\Checkout\GridLayout;
 
+use Loki\Components\Attribute\JsProperty;
 use Loki\Components\Component\ComponentViewModel;
 use LokiCheckout\Core\Util\Block\CssStyleParser\GridStyleParser;
 use Magento\Framework\View\Element\AbstractBlock;
@@ -21,14 +22,7 @@ class GridLayoutViewModel extends ComponentViewModel
         return 'LokiCheckoutGridLayout';
     }
 
-    public function getJsData(): array
-    {
-        return [
-            ...parent::getJsData(),
-            'gridLayout' => $this->getGridLayoutData(),
-        ];
-    }
-
+    #[JsProperty(name: 'gridLayout')]
     private function getGridLayoutData(): array
     {
         $parentBlock = $this->getBlock()->getParentBlock();

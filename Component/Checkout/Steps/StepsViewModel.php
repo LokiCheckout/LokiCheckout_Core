@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Steps;
 
+use Loki\Components\Attribute\JsProperty;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use Loki\Components\Component\ComponentViewModel;
 
@@ -10,11 +11,10 @@ use Loki\Components\Component\ComponentViewModel;
  */
 class StepsViewModel extends ComponentViewModel
 {
-    public function getJsData(): array
+    #[JsProperty('currentStep')]
+    public function getCurrentStep(): string
     {
-        return [
-            'currentStep' => $this->getContext()->getStepNavigator()->getCurrentStep()->getCode()
-        ];
+        return $this->getContext()->getStepNavigator()->getCurrentStep()->getCode();
     }
 
     public function getJsComponentName(): ?string

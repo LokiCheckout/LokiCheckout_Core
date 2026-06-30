@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Address\ToggleSelect;
 
+use Loki\Components\Attribute\JsProperty;
 use LokiCheckout\Core\Component\Checkout\Address\AddressFormContext;
 use Loki\Components\Component\ComponentViewModel;
 
@@ -11,15 +12,7 @@ use Loki\Components\Component\ComponentViewModel;
  */
 class ToggleSelectViewModel extends ComponentViewModel
 {
-    public function getJsData(): array
-    {
-        return [
-            'value' => $this->getValue(),
-            'buttonLabelSelectAddress' => $this->getButtonLabelSelectAddress(),
-            'buttonLabelNewAddress' => $this->getButtonLabelNewAddress(),
-        ];
-    }
-
+    #[JsProperty(name: 'buttonLabelNewAddress')]
     public function getButtonLabelNewAddress(): string
     {
         if (str_contains($this->getComponentName(), 'billing')) {
@@ -29,6 +22,7 @@ class ToggleSelectViewModel extends ComponentViewModel
         return (string)__('Add new shipping address');
     }
 
+    #[JsProperty(name: 'buttonLabelSelectAddress')]
     public function getButtonLabelSelectAddress(): string
     {
         return (string)__('Select existing address from list');

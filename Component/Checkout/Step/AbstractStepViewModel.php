@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Step;
 
+use Loki\Components\Attribute\JsProperty;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use Loki\Components\Component\ComponentViewModel;
 use LokiCheckout\Core\Step\StepNavigator;
@@ -37,6 +38,7 @@ abstract class AbstractStepViewModel extends ComponentViewModel implements StepV
         return true;
     }
 
+    #[JsProperty(name: 'visible')]
     public function isVisible(): bool
     {
         return $this->stepNavigator->isCurrentStep($this);
@@ -57,14 +59,7 @@ abstract class AbstractStepViewModel extends ComponentViewModel implements StepV
         return 'LokiCheckoutStep';
     }
 
-    public function getJsData(): array
-    {
-        return [
-            'visible' => $this->isVisible(),
-            'step'    => $this->getStep(),
-        ];
-    }
-
+    #[JsProperty(name: 'step')]
     public function getStep(): string
     {
         return 'none';

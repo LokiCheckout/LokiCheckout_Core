@@ -2,6 +2,8 @@
 
 namespace LokiCheckout\Core\Component\Base\Behaviour;
 
+use Loki\Components\Attribute\JsProperty;
+
 trait StepViewModelBehaviour
 {
     protected string $step = '';
@@ -11,6 +13,7 @@ trait StepViewModelBehaviour
         $this->step = $step;
     }
 
+    #[JsProperty(name: 'step')]
     public function getStep(): string
     {
         if (!empty($this->step)) {
