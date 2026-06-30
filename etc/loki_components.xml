@@ -138,7 +138,8 @@
         repository="LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository">
         <target name="loki-checkout.sidebar.totals"/>
         <target name="loki-checkout.shipping.address"/>
-        <target name="loki-checkout.sidebar.preview.shipping_details"/>
+        <target name="loki-checkout.billing.address"/>
+        <target name="loki-checkout.sidebar.preview"/>
     </component>
 
     <component
