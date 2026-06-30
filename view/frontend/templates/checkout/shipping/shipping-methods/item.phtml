@@ -123,5 +123,11 @@ if ($shipmentIcon) {
                 ['method' => $code]
             ) ?>
         </div>
+    <?php else: ?>
+        <?= /* @noEscape */ $blockRenderer->html(
+            $block,
+            'loki-checkout.shipping.methods.'.$code.'.placeholder',
+            ['method' => $code]
+        ) ?>
     <?php endif; ?>
 </li>
