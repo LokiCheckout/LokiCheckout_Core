@@ -2,7 +2,6 @@
 
 namespace LokiCheckout\Core\ViewModel\State;
 
-use LokiCheckout\Core\Shipment\ShippingAddressResolverListing;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Quote\Model\Quote\Address;
 use LokiCheckout\Core\Util\SameAddressService;
@@ -14,7 +13,6 @@ class ShippingAddressState implements AddressStateInterface
         private readonly CheckoutState $checkoutState,
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly SameAddressService $sameAddressService,
-        private readonly ShippingAddressResolverListing $addressResolverListing,
     ) {
     }
 
@@ -59,7 +57,7 @@ class ShippingAddressState implements AddressStateInterface
     {
         $shippingAddress = $this->getShippingAddress();
 
-        if (!$shippingAddress->getCountryId()) {
+        if (false === strlen((string)$shippingAddress->getCountryId()) > 0) {
             $defaultCountryId = $this->scopeConfig->getValue('general/country/default');
             $shippingAddress->setCountryId($defaultCountryId);
         }
@@ -76,14 +74,6 @@ class ShippingAddressState implements AddressStateInterface
 
     private function getShippingAddress(): Address
     {
-        foreach ($this->addressResolverListing->getResolvers() as $resolver) {
-            $address = $resolver->resolve();
-            if ($address instanceof Address) {
-                $address->setSameAsBilling(0);
-                return $address;
-            }
-        }
-
         return $this->checkoutState->getQuote()->getShippingAddress();
     }
 }

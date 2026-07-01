@@ -67,7 +67,6 @@ class ShippingMethodsRepository extends ComponentRepository
         }
 
         $shippingAddress = $this->getContext()->getShippingAddressState()->getAddress();
-
         $currentShippingMethod = (string)$shippingAddress->getShippingMethod();
         $sanitizedShippingMethod = $this->sanitizeShippingMethod($currentShippingMethod);
 
@@ -94,6 +93,7 @@ class ShippingMethodsRepository extends ComponentRepository
 
     protected function sanitizeShippingMethod(string $shippingMethodCode): string
     {
+        // @todo: Move this in a separate utility class
         // @todo: Move this to ShipperHQ only?
         if ($shippingMethodCode === 'multicarrier_multicarrier') {
             return $shippingMethodCode;
