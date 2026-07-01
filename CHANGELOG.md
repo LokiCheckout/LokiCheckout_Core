@@ -6,11 +6,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.0] - 01 July 2026
+### Added
+- Add dedicated ViewModel for billing address title
+- Make shipping address title dynamic via dedicated ViewModel
+- Add option for placeholder content for shipping method forms
+- Allow shipping method with pickup location to override shipping address
+- Allow disabling shipment icons via DI type of ShipmentMethodIcon class
+- Allow disabling payment icons via DI type of PaymentMethodIcon class
+
+### Fixed
+- Simplify shipping method resolving again, without shipping address resolvers
+- Rename `div` within `button` to `span` for browser compat
+- Remove obsolete `billing-step-title.phtml` template
+- When switching shipping method, refresh all addresses
+- Allow resetting shipping address after toggle away from pickup address
+- Implement `#[JsProperty]` attribute
+- Move Required-logic of ComponentViewModels into trait
+- Bump `loki/magento2-components` to 2.6
+
 ## [2.4.5] - 19 June 2026
 ### Fixed
 - When checking if guest is subscribed to newsletter, also check non-guest records
-- Explicitly add checkout/options/enable_guest_checkout_login=1 to email test
-- Pending changes
 
 ## [2.4.4] - 17 June 2026
 ### Fixed
