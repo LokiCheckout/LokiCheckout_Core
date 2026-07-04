@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace LokiCheckout\Core\Layout;
 
+use Loki\Components\Exception\RedirectException;
 use Loki\Components\Layout\LayoutHandlerInterface;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 
@@ -43,6 +44,10 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
 
     private function getCountryId(): string
     {
-        return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
+        try {
+            return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
+        }catch(RedirectException $redirectException){
+            return '';
+        }
     }
 }
