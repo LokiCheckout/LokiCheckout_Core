@@ -46,7 +46,7 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
     {
         try {
             return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
-        }catch(RedirectException $redirectException){
+        } catch (RedirectException $redirectException) {
             return '';
         }
     }
