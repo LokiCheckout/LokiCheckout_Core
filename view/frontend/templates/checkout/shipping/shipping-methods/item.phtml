@@ -59,12 +59,12 @@ if ($shipmentIcon) {
     $inputCss = $css('', 'input-with-icon'); // @doc: sr-only
 }
 ?>
-<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2 p-3 md:p-6')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
+<li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
     <label
         data-code="<?= $escaper->escapeHtml($shippingMethod->getMethodCode()) ?>"
-        class="<?= $escaper->escapeHtml($css('flex gap-4 md:gap-6 items-center', 'label')) ?>"
+        class="<?= $escaper->escapeHtml($css('flex gap-4 md:gap-6 items-center p-3 md:p-6', 'label')) ?>"
     >
-        <span class="<?= $escaper->escapeHtml($css('', 'input-container')) ?>">
+        <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
                 type="radio"
@@ -84,13 +84,9 @@ if ($shipmentIcon) {
         <?php else: ?>
             <input type="radio" id="shipping-<?= $escaper->escapeHtml($code) ?>" disabled/>
         <?php endif; ?>
-        </span>
 
-        <?php if ($shipmentIcon): ?>
-            <div class="<?= $escaper->escapeHtml($css('', 'icon')) ?>">
             <?= /* @noEscape */ $shipmentIcon ?>
-            </div>
-        <?php endif; ?>
+        </span>
 
         <?= /* @noEscape */ $childRenderer->html(
             $block,
