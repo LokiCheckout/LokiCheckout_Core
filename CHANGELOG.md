@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.1] - 14 July 2026
+### Fixed
+- Make sure label expands entire li-item for payment and shipping methods
+- Fix PHP notice when totals title is empty
+- Prevent layout handler error when used outside of checkout without quote
+
 ## [2.5.0] - 01 July 2026
 ### Added
 - Add dedicated ViewModel for billing address title
