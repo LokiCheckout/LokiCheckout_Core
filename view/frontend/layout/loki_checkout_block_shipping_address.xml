@@ -27,7 +27,13 @@
 
             <block
                 name="loki-checkout.shipping.address.form-title" as="form-title"
-                template="LokiCheckout_Core::checkout/shipping/address-form-title.phtml"/>
+                template="LokiCheckout_Core::checkout/shipping/address-form-title.phtml">
+                <arguments>
+                    <argument name="css_class_groups" xsi:type="array">
+                        <item name="title" xsi:type="string">title</item>
+                    </argument>
+                </arguments>
+            </block>
 
             <block
                 name="loki-checkout.shipping.address.form" as="form"

@@ -11,6 +11,9 @@
                     name="loki-checkout.sidebar.title" as="title"
                     template="LokiCheckout_Core::generic/title.phtml" before="-">
                     <arguments>
+                        <argument name="css_class_groups" xsi:type="array">
+                            <item name="title" xsi:type="string">title</item>
+                        </argument>
                         <argument name="title" xsi:type="string" translate="true">Order Summary</argument>
                     </arguments>
                 </block>
@@ -53,6 +56,9 @@
                     name="loki-checkout.sidebar.preview.title" as="title"
                     template="LokiCheckout_Core::generic/title.phtml" before="-">
                     <arguments>
+                        <argument name="css_class_groups" xsi:type="array">
+                            <item name="title" xsi:type="string">title</item>
+                        </argument>
                         <argument name="title" xsi:type="string" translate="true">Order Preview</argument>
                     </arguments>
                 </block>

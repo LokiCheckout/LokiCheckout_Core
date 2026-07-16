@@ -46,7 +46,13 @@
 
         <block
             name="loki-checkout.generic.title"
-            template="LokiCheckout_Core::generic/title.phtml"/>
+            template="LokiCheckout_Core::generic/title.phtml">
+            <arguments>
+                <argument name="css_class_groups" xsi:type="array">
+                    <item name="title" xsi:type="string">title</item>
+                </argument>
+            </arguments>
+        </block>
 
         <block
             name="loki-checkout.utils.separator"

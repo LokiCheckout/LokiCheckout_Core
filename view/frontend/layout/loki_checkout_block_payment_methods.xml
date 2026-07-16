@@ -13,6 +13,9 @@
                 name="loki-checkout.payment.methods.title" as="title"
                 template="LokiCheckout_Core::generic/title.phtml">
                 <arguments>
+                    <argument name="css_class_groups" xsi:type="array">
+                        <item name="title" xsi:type="string">title</item>
+                    </argument>
                     <argument name="title" xsi:type="string" translate="true">Payment Methods</argument>
                 </arguments>
             </block>
