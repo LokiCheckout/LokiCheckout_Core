@@ -51,11 +51,6 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
         return $fieldLabel;
     }
 
-    public function getStep(): string
-    {
-        return $this->getContext()->getStepProvider()->getStep($this->getBlock());
-    }
-
     public function isRequired(): bool
     {
         $required = $this->getBlock()->getData('is_required');
