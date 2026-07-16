@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.5.2] - 16 July 2026
+### Fixed
+- Fix issue with all address fields loosing their `step` value
+- Add CSS class group `title` to all title instances
+
 ## [2.5.1] - 14 July 2026
 ### Fixed
 - Make sure label expands entire li-item for payment and shipping methods
