@@ -61,6 +61,25 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
         return (bool)$this->getContext()->getAttributeProvider()->getAttribute($this->getFieldName())->getIsRequired();
     }
 
+    public function isDisabled(): bool
+    {
+        if ($this->isShippingAddressComponent() && $this->getContext()->getShippingAddressResolverListing()->resolves()) {
+            return true;
+        }
+
+        return parent::isDisabled();
+    }
+
+    protected function isBillingAddressComponent(): bool
+    {
+        return (bool)stristr($this->getComponent()->getName(), '.billing.');
+    }
+
+    protected function isShippingAddressComponent(): bool
+    {
+        return (bool)stristr($this->getComponent()->getName(), '.shipping.');
+    }
+
     protected function getAddressState(): AddressStateInterface
     {
         return $this->getContext()->getAddressStateProvider()->getAddressState($this->getBLock());

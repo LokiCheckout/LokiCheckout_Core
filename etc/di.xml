@@ -203,6 +203,7 @@
                 <item name="storeManager" xsi:type="object">Magento\Store\Model\StoreManagerInterface\Proxy</item>
                 <item name="request" xsi:type="object">Magento\Framework\App\Request\Http\Proxy</item>
                 <item name="skipValidation" xsi:type="object">Loki\Components\Util\SkipValidation</item>
+                <item name="shippingAddressResolverListing" xsi:type="object">LokiCheckout\Core\Shipment\ShippingAddressResolverListing</item>
             </argument>
         </arguments>
     </type>
@@ -211,6 +212,28 @@
         <arguments>
             <argument name="parentContexts" xsi:type="array">
                 <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Address\Postcode\PostcodeContext">
+        <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
+            <argument name="dependencies" xsi:type="array">
+                <item name="directoryData" xsi:type="object">Magento\Directory\Helper\Data</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Address\StreetLine\StreetLineContext">
+        <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
+            <argument name="dependencies" xsi:type="array">
+                <item name="streetLinesFactory" xsi:type="object">LokiCheckout\Core\Util\StreetLinesFactory</item>
             </argument>
         </arguments>
     </type>

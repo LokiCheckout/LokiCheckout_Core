@@ -7,6 +7,7 @@ use Loki\Components\Exception\RedirectException;
 use Loki\Components\Util\SkipValidation;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Config\XmlConfig;
+use LokiCheckout\Core\Shipment\ShippingAddressResolverListing;
 use LokiCheckout\Core\Step\StepNavigator;
 use LokiCheckout\Core\Util\Component\AttributeProvider;
 use LokiCheckout\Core\Util\Component\StepProvider;
@@ -43,6 +44,7 @@ use Magento\Store\Model\StoreManagerInterface;
  * @method StoreManagerInterface getStoreManager()
  * @method Http getRequest()
  * @method SkipValidation getSkipValidation()
+ * @method ShippingAddressResolverListing getShippingAddressResolverListing()
  */
 class CheckoutContext extends AbstractComponentContext
 {
