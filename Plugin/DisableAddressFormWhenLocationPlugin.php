@@ -15,10 +15,18 @@ class DisableAddressFormWhenLocationPlugin
 
     public function afterShowView(AddressFormViewModel $subject, bool $result): bool
     {
-        if ($subject->isShippingAddressComponent() && $this->shippingAddressResolverListing->resolves()) {
-            return true;
+        if (false === $subject->isShippingAddressComponent()) {
+            return $result;
         }
 
-        return $result;
+        if (false === $this->shippingAddressResolverListing->resolves()) {
+            return $result;
+        }
+
+        if (false === (bool)$subject->getBlock()->getCardLayout()) {
+            return $result;
+        }
+
+        return true;
     }
 }
