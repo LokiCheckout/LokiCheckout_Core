@@ -24,7 +24,7 @@ if (!$dummyItemCount) {
 
 $dummyTextCss = $css('inline-block h-6 rounded bg-gray-300', 'dummy-text');
 ?>
-<div class="<?= $escaper->escapeHtml($css('relative')) ?>" role="group">
+<div class="<?= $escaper->escapeHtml($css('relative')) ?>" role="group" aria-busy="true">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
     <?= /* @noEscape */ $block->getChildHtml('title') ?>
 
@@ -39,6 +39,10 @@ $dummyTextCss = $css('inline-block h-6 rounded bg-gray-300', 'dummy-text');
                         disabled="disabled"
                         class="<?= $escaper->escapeHtml($css('', 'input')) ?>"
                     >
+                    </span>
+
+                    <span class="sr-only">
+                        <?= __('Loading payment methods') ?>
                     </span>
 
                     <span class="<?= $escaper->escapeHtml($css('grow flex items-center gap-2 ml-2', 'label')) ?>">
