@@ -63,11 +63,13 @@ class CountryOptionModel implements ArgumentInterface, OptionGroupModelInterface
                 return false === in_array($option->getValue(), $topCountryCodes);
             });
 
-            $optionGroups[] = $this->optionGroupFactory->create('Top Countries', $topCountries);
-            $optionGroups[] = $this->optionGroupFactory->create('Other Countries', $otherCountries);
+            if (!empty($topCountries) && !empty($otherCountries)) {
+                $optionGroups[] = $this->optionGroupFactory->create('Top Countries', $topCountries);
+                $optionGroups[] = $this->optionGroupFactory->create('Other Countries', $otherCountries);
 
-            $options = $optionGroups;
-            return $options;
+                $options = $optionGroups;
+                return $options;
+            }
         }
 
         return $options;
