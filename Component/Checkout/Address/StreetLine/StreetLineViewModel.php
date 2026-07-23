@@ -38,6 +38,10 @@ class StreetLineViewModel extends AddressFieldViewModel
     public function getFieldLabel(): string
     {
         $fieldLabel = $this->getFieldLabelFromLayout();
+        if ($fieldLabel === '-') {
+            return '';
+        }
+
         if (strlen($fieldLabel) > 0) {
             return $fieldLabel;
         }

@@ -44,10 +44,6 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
             return '';
         }
 
-        if ($fieldLabel === '-') {
-            return '';
-        }
-
         return $fieldLabel;
     }
 
