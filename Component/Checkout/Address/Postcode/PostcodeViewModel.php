@@ -23,14 +23,4 @@ class PostcodeViewModel extends AddressFieldViewModel
 
         return false === in_array($countryId, $countries);
     }
-
-    #[Override]
-    public function getFieldLabel(): string
-    {
-        if ($this->getAddressState()->get('country_id') === 'US') {
-            return (string)__('Zipcode');
-        }
-
-        return parent::getFieldLabel();
-    }
 }
