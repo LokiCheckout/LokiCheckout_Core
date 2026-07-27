@@ -1,0 +1,22 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Escaper $escaper */
+/** @var Template $block */
+/** @var CssClass $css */
+
+$addressHtml = $block->getAddressHtml();
+?>
+<?= /** @noEscape */ $addressHtml ?>
+<p class="<?= $css('pt-4') ?>">
+    <span class="<?= $escaper->escapeHtml($css('block font-bold', 'label')) ?>">
+        <?= __('To be picked up by:'); ?>
+    </span>
+    <span class="<?= $escaper->escapeHtml($css('block', 'value')) ?>">
+        <?= $block->getCustomerName(); ?>
+    </span>
+</p>

@@ -55,6 +55,10 @@
         </block>
 
         <block
+            name="loki-checkout.utils.address"
+            template="LokiCheckout_Core::utils/address.phtml"/>
+
+        <block
             name="loki-checkout.utils.separator"
             template="LokiCheckout_Core::utils/separator.phtml"/>
 
