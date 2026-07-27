@@ -59,7 +59,9 @@ class AddressFieldViewModel extends CheckoutViewModel implements AddressFieldVie
 
     public function isDisabled(): bool
     {
-        if ($this->isShippingAddressComponent() && $this->getContext()->getShippingAddressResolverListing()->resolves()) {
+        if ($this->isShippingAddressComponent()
+            && false === in_array($this->getFieldName(), ['firstname', 'middlename', 'lastname'])
+            && $this->getContext()->getShippingAddressResolverListing()->resolves()) {
             return true;
         }
 
