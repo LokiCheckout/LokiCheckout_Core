@@ -19,7 +19,11 @@
             </block>
             <block
                 name="loki-checkout.script.checkout-store"
-                template="LokiCheckout_Core::script/checkout-store.phtml"/>
+                template="LokiCheckout_Core::script/checkout-store.phtml">
+                <arguments>
+                    <argument name="sort_order" xsi:type="number">10</argument>
+                </arguments>
+            </block>
 
             <block
                 name="loki-checkout.script.aria-invalid"
