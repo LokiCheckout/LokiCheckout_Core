@@ -17,7 +17,7 @@ use Loki\Components\Location\Location;
         <summary class="<?= $escaper->escapeHtml($css('', 'summary')) ?>">
             <?= $escaper->escapeHtml(__('Additional information')) ?>
         </summary>
-        <div class="<?= $escaper->escapeHtml($css('my-4 text-sm', 'content')) ?>" x-html="location.data.additional">
+        <div class="<?= $escaper->escapeHtml($css('my-4 text-sm', 'content')) ?>" x-text="location.data.additional">
         </div>
     </details>
 </template>

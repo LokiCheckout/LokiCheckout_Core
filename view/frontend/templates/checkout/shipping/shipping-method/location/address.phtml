@@ -15,6 +15,6 @@ use Magento\Framework\View\Element\Template;
         <span class="<?= $escaper->escapeHtml($css('font-bold', 'label')) ?>">
             <?= $escaper->escapeHtml(__('Address')) ?>:
         </span>
-        <address class="<?= $escaper->escapeHtml($css('inline-block mb-4')) ?>" x-html="location.addressLine"></address>
+        <address class="<?= $escaper->escapeHtml($css('inline-block mb-4')) ?>" x-text="location.addressLine"></address>
     </div>
 </template>
