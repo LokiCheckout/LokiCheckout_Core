@@ -18,7 +18,8 @@ $buttons = (array)$block->getButtons();
 ?>
 <div
     role="tablist"
-    class="<?= $escaper->escapeHtml($css('tab-buttons grid md:grid-cols-2 gap-2 md:gap-4 mt-6 mb-8')) ?>"
+    class="<?= $escaper->escapeHtml($css('tab-buttons grid md:grid-cols-[repeat(var(--loki-grid-cols),minmax(0,1fr))] gap-2 md:gap-4 mt-6 mb-8')) ?>"
+    style="--loki-grid-cols: <?= /** @noEscape */count($buttons) ?>"
 >
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
         <button
