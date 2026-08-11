@@ -11,25 +11,29 @@ use Magento\Framework\View\Element\Template;
 /** @var CssClass $css */
 
 $buttons = (array)$block->getButtons();
-
-/*
- * @todo this should be a Radio Group for better A11Y. Visually it still can be a styled as a button
- */
+$groupName = (string)preg_replace('/[^a-z0-9-]+/', '-', strtolower($block->getNameInLayout()));
+$groupLabel = $block->getGroupLabel() ?: __('Shipping methods');
 ?>
 <div
-    role="tablist"
+    role="radiogroup"
+    aria-label="<?= $escaper->escapeHtmlAttr($groupLabel) ?>"
     class="<?= $escaper->escapeHtml($css('tab-buttons grid md:grid-cols-[repeat(var(--loki-grid-cols),minmax(0,1fr))] gap-2 md:gap-4 mt-6 mb-8')) ?>"
     style="--loki-grid-cols: <?= /** @noEscape */count($buttons) ?>"
 >
     <?php foreach ($buttons as $buttonId => $buttonLabel): ?>
-        <button
-            role="tab"
+        <label
+            data-tab-id="<?= $escaper->escapeHtmlAttr($buttonId) ?>"
             @click="toggleTabs"
-            data-tab-id="<?= $escaper->escapeHtml($buttonId) ?>"
-            class="<?= $escaper->escapeHtml($css('tab-inactive btn p-4', 'button')) ?>"
+            @change="toggleTabs"
+            class="<?= $escaper->escapeHtml($css('tab-inactive btn p-4 cursor-pointer text-center', 'button')) ?>"
         >
+            <input
+                type="radio"
+                name="<?= $escaper->escapeHtmlAttr($groupName) ?>"
+                value="<?= $escaper->escapeHtmlAttr($buttonId) ?>"
+                class="<?= $escaper->escapeHtml($css('sr-only', 'radio-input')) ?>"
+            />
             <?= $escaper->escapeHtml(__($buttonLabel)); ?>
-        </button>
+        </label>
     <?php endforeach; ?>
 </div>
-

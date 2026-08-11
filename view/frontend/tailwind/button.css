@@ -29,6 +29,10 @@
                 @apply border-zinc-400 bg-zinc-200 hover:bg-zinc-400 text-inherit;
             }
 
+            label.btn:has(input[type="radio"]:focus-visible) {
+                @apply ring-2 ring-blue-800 ring-offset-1;
+            }
+
             .btn-group {
                 .tab:first-child {
                     border-right: 0;

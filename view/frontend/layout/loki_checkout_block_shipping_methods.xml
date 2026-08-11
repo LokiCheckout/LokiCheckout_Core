@@ -50,6 +50,7 @@
                     <item name="delivery-dates" xsi:type="string">Delivery</item>
                     <item name="locations" xsi:type="string">Pickup</item>
                 </argument>
+                <argument name="group_label" xsi:type="string" translate="true">Shipping methods</argument>
             </arguments>
         </block>
 
