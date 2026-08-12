@@ -22,17 +22,20 @@ class LokiCheckoutRouter implements RouterInterface
     {
         /** @var HttpRequest $request */
         $identifier = trim($request->getPathInfo(), '/');
-        if (false === str_starts_with($identifier, 'checkout')) {
-            return null;
-        }
-
         $parts = explode('/', $identifier);
 
-        if (count($parts) === 2 && $parts[1] !== 'index') {
+        if ($parts[0] !== 'checkout') {
             return null;
         }
 
-        if (count($parts) > 2 && $parts[2] !== 'index') {
+        $matches = match (count($parts)) {
+            1 => true,
+            2 => $parts[1] === 'index',
+            3 => $parts[1] === 'index' && $parts[2] === 'index',
+            default => false,
+        };
+
+        if (false === $matches) {
             return null;
         }
 

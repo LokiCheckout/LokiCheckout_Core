@@ -40,9 +40,51 @@ class LokiCheckoutRouterTest extends TestCase
     }
 
     #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testMatchesCheckoutIndex(): void
+    {
+        $request = $this->createRequest('/checkout/index');
+        $this->assertInstanceOf(Index::class, $this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testMatchesCheckoutIndexIndex(): void
+    {
+        $request = $this->createRequest('/checkout/index/index');
+        $this->assertInstanceOf(Index::class, $this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
     public function testDoesNotMatchCheckoutCart(): void
     {
         $request = $this->createRequest('/checkout/cart');
+        $this->assertNull($this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testDoesNotMatchCheckoutCartIndex(): void
+    {
+        $request = $this->createRequest('/checkout/cart/index');
+        $this->assertNull($this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testDoesNotMatchCheckoutPrefixedFrontname(): void
+    {
+        $request = $this->createRequest('/checkoutaddons/index/index');
+        $this->assertNull($this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testDoesNotMatchCheckoutOnepageSuccess(): void
+    {
+        $request = $this->createRequest('/checkout/onepage/success');
+        $this->assertNull($this->getRouter()->match($request));
+    }
+
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    public function testDoesNotMatchDeepPath(): void
+    {
+        $request = $this->createRequest('/checkout/index/index/extra');
         $this->assertNull($this->getRouter()->match($request));
     }
 
