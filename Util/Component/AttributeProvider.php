@@ -10,6 +10,11 @@ use RuntimeException;
 
 class AttributeProvider
 {
+    public function __construct(
+        private readonly EavConfig $eavConfig,
+    ) {
+    }
+
     public function getAttributeLabel(string $fieldName): string
     {
         return (string)$this->getAttribute($fieldName)->getFrontendLabel();
@@ -21,8 +26,7 @@ class AttributeProvider
             throw new RuntimeException('No field name defined for class "' . get_class($this) . '"');
         }
 
-        $eavConfig = ObjectManager::getInstance()->get(EavConfig::class);
-        $attribute = $eavConfig->getAttribute('customer_address', $fieldName);
+        $attribute = $this->eavConfig->getAttribute('customer_address', $fieldName);
         if ($attribute instanceof AbstractAttribute) {
             return $attribute;
         }
