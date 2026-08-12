@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Plugin;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use LokiCheckout\Core\Component\Checkout\Shipping\ShippingMethods\ShippingMethodsRepository;
 use LokiCheckout\Core\ViewModel\CheckoutState;
+use Magento\Sales\Model\Order\Total;
 
 class FixFreeShippingSubtotalPlugin
 {
@@ -16,7 +17,7 @@ class FixFreeShippingSubtotalPlugin
 
     public function afterGetShippingMethods(ShippingMethodsRepository $subject, array $shippingMethods): array
     {
-        $freeShippingSubtotal = $this->scopeConfig->getValue('carriers/freeshipping/free_shipping_subtotal');
+        $freeShippingSubtotal = $this->scopeConfig->getValue('carriers/freeshipping/free_shipping_subtotal', );
         $taxIncluding = (bool)$this->scopeConfig->getValue('carriers/freeshipping/tax_including');
 
         if (false === is_numeric($freeShippingSubtotal) && false === is_float($freeShippingSubtotal)) {
@@ -33,7 +34,12 @@ class FixFreeShippingSubtotalPlugin
 
             $subtotal = $quote->getSubtotal();
             if ($taxIncluding && isset($totals['tax'])) {
-                $subtotal += $totals['tax'];
+                $taxTotals = $totals['tax'];
+                if ($taxTotals instanceof Total) {
+                    $subtotal += (float)$taxTotals->getValue();
+                } else {
+                    $subtotal += (float)$totals['tax'];
+                }
             }
 
             if ($subtotal > $freeShippingSubtotal) {
