@@ -7,9 +7,7 @@
             template="LokiCheckout_Core::checkout/other/agreements.phtml">
             <arguments>
                 <!--<argument name="message_area" xsi:type="string">global</argument>-->
-                <argument name="error_text" xsi:type="string" translate="true">
-                    Please agree to all the terms and conditions before placing the order.
-                </argument>
+                <argument name="error_text" xsi:type="string" translate="true">Please agree to all the terms and conditions before placing the order.</argument>
             </arguments>
 
             <block
