@@ -1,0 +1,150 @@
+"No items in cart",カートに商品はありません
+"Add new billing address",新しい請求先住所を追加する
+"Add new shipping address",新しい配送先住所を追加する
+"Select existing address from list",リストから既存の住所を選択する
+"Payment method ""%1"" is not available.",お支払い方法「%1」はご利用いただけません。
+"Payment method ""%1"" does not exist.",お支払い方法「%1」は存在しません。
+"Date of Birth",生年月日
+Gender,性別
+"You have been subscribed automatically to the newsletter",ニュースレターへの登録が自動的に行われました
+"You have been subscribed to the newsletter",ニュースレターの購読登録が完了しました
+"You have been unsubscribed from the newsletter",ニュースレターの購読が解除されました
+"Failed to apply coupon code",クーポンコードの適用に失敗しました
+"Applied coupon code",クーポンコードを適用しました
+"Removed coupon code",クーポンコードを削除しました
+"Billing and Shipping Address",請求先および配送先住所
+"Shipping Address",配送先住所
+"Unknown skin ""%1""",不明なスキン「%1」
+"Unknown grid layout ""%1""",不明なグリッドレイアウト「%1」
+"Block with name ""%1"" not found in grid layout",グリッドレイアウト内に「%1」という名前のブロックが見つかりません
+"Step with name ""%1"" not found",「%1」という名前のステップが見つかりません
+"Guest checkout is disabled.",ゲストでのチェックアウトは無効になっています。
+Checkout,お会計
+"No payment token for guests",ゲスト向けの支払用トークンはありません
+"No step found with request ""%1""",リクエスト「%1」に対応するステップが見つかりませんでした
+"Quote is empty",引用文が空です
+"You have logged in",ログインしました
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.",アカウントのログイン情報が正しくないか、アカウントが一時的に利用停止になっています。しばらく待ってから、再度お試しください。
+"An unspecified error occurred. Please contact us for assistance.",不明なエラーが発生しました。サポートが必要な場合は、弊社までお問い合わせください。
+"Please enter a valid date",有効な日付を入力してください
+"Please enter a valid date of birth",有効な生年月日を入力してください
+"You need to be at least %1 years old",1％歳以上である必要があります
+"You need to be younger than %1 years old",%1歳未満である必要があります
+"The email address %1 is not available","メールアドレス %1 は利用できません"
+"The email address is not available",そのメールアドレスは利用できません
+"Your IBAN number needs to start with a country prefix",IBAN番号は、国コードで始まる必要があります。
+"Your IBAN number does not have the right format",お客様のIBAN番号は正しい形式ではありません
+"Your IBAN number is incorrect",IBAN番号が間違っています
+"Postcode ""%1"" has invalid format",郵便番号「%1」の形式が不正です
+"Postcode ""%1"" needs to be in the format ""%2""",郵便番号「%1」は「%2」の形式である必要があります。
+"Postcode ""%1"" needs to be in one of the following formats: %2",郵便番号「%1」は、以下のいずれかの形式である必要があります：%2
+"Email address is invalid",メールアドレスが無効です
+"Not specified",未指定
+Male,男性
+Female,女性
+"Not Specified",未指定
+"My billing and shipping address are the same",請求先住所と配送先住所は同じです
+"Pay faster with",以下の方法で、より早くお支払いいただけます
+"You are logged in as %1",%1としてログインしています
+"Sign Out",ログアウト
+"View terms",利用規約を表示
+Instructions,手順
+"Make Check Payable to",小切手の受取人は以下に指定してください
+"Send Check to",小切手を以下の宛先へお送りください
+"Loading payment methods",お支払い方法を読み込み中
+"No payment methods available",利用可能な決済方法がありません
+Pagination,ページネーション
+Home,ホーム
+"Please enter your address details first",まず、ご住所の詳細を入力してください
+"No delivery options found",該当する配送オプションが見つかりませんでした
+"Show less options",オプションを少なく表示
+"Show all options",すべてのオプションを表示
+"Show more options",その他のオプションを表示
+"Additional information",補足情報
+Address,住所
+"Show opening hours",営業時間を見る
+"Pick up from",お受け取り場所：
+"No locations found",該当する場所が見つかりませんでした
+"Shipping methods",配送方法
+"No shipping methods available",利用可能な配送方法はありません
+Free,無料
+"Not available",利用不可
+"Discount Code",割引コード
+Apply,応募する
+"Apply Discount Code",割引コードを適用する
+"Coupon code",クーポンコード
+"Remove coupon code",クーポンコードを削除する
+"Show all items",すべてのアイテムを表示
+"Do not show all items",すべての項目を表示しない
+label,ラベル
+Price,価格
+Quantity,数量
+"Billing Address",請求先住所
+"Payment Method",お支払い方法
+Details,詳細
+Email,電子メール
+"Shipping Method",配送方法
+Password,パスワード
+"Sign In",ログイン
+"Create an Account",アカウントを作成する
+"Forgot Your Password?",パスワードをお忘れですか？
+"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","保存されている住所のうち1つが無効なため、スキップされました。<a href=""%1"">アドレス帳</a>で修正してください。"
+"Hide password",パスワードを非表示にする
+"Show password",パスワードを表示
+"Please enter a valid email first",まず、有効なメールアドレスを入力してください
+"Invalid email",メールアドレスが無効です
+"Value must contain numbers only",「value」には数字のみを含める必要があります
+"Not a valid postcode",有効な郵便番号ではありません
+"To be picked up by:",受け取り先：
+Save,保存
+Trash,ゴミ
+"Loki Checkout","Loki チェックアウト"
+General,概要
+Enable,有効にする
+Skin,肌
+"Address Grid Layout",アドレスグリッドレイアウト
+"License Key",ライセンスキー
+Debugging,デバッグ
+"Enable Debugging",デバッグを有効にする
+"Add Hints to HTML Output",HTML出力にヒントを追加する
+"Add Debug Block",デバッグブロックを追加
+"Field settings",フィールド設定
+"Enable Same As Billing Checkbox",「請求先と同じ」チェックボックスを有効にする
+"Hide Region When Optional",「オプション」の場合、その領域を非表示にする
+"Enable Vat ID Only For Companies","VAT IDは法人のみに有効にする"
+"Capitalize Country In Address Preview",住所のプレビューで国名を大文字にする
+"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.",この設定を有効にすると、表示される住所のプレビュー（配送先・請求先概要）における国名が大文字で表示されます。無効にした場合は、Magentoが提供する形式のまま国名が表示されます。
+"Shipping settings",配送設定
+"Select Default Shipping Method",「デフォルトの配送方法」を選択してください
+"Billing settings",請求設定
+"Select Default Payment Method",「デフォルトの支払い方法」を選択してください
+"Cart settings",カートの設定
+"Maximum items visible",表示されるアイテムの最大数
+"Newsletter settings",ニュースレターの設定
+"Subscribe by default",デフォルトで購読する
+"Back to shipping",配送に戻る
+"Pay &amp; Place Order",お支払い・ご注文
+"Place Order",注文する
+"Enter your emailaddress",メールアドレスを入力してください
+"Please agree to all the terms and conditions before placing the order.",ご注文の前に、すべての利用規約にご同意ください。
+"Payment Methods",お支払い方法
+"Shipping Methods",配送方法
+"Back to previous step",前の手順に戻る
+"Proceed to Review &amp; Payments",「確認と支払い」に進む
+"Please fill in all required fields before proceeding",次の手順に進む前に、すべての必須項目を入力してください
+"Order Summary",注文概要
+"Order Preview",注文のプレビュー
+Shipping,配送
+"Adds an HTML comment in each LokiComponent for reviewing via your browser.",各LokiComponentにHTMLコメントを追加し、ブラウザから確認できるようにします。
+"All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","住所ブロック（配送先住所、請求先住所）内のすべてのHTML要素は、グリッド
+レイアウト（<code>etc/loki_checkout.xml</code> ファイルによって作成される）に従って配置されます。この設定では、デフォルトのグリッドを構成します。"
+"Change the complete layout of the checkout by using a specific skin.",特定のスキンを使用して、チェックアウト画面のレイアウト全体を変更します。
+"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.",Yireoショップの「マイライセンス」に記載されているLokiCheckoutのライセンスキーを入力してください。このライセンスキーは、パッケージをダウンロードするためのコンポーザーキーとしても使用されます。
+"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.",Magentoのオリジナルのテンプレートヒントの動作と同様に、これは各LokiComponentについてメタ情報を表示するポップアップを追加します。これを気に入る人もいれば、非常に煩わしいと感じる人もいるでしょう。
+"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.",顧客が配送先住所を請求先住所として（またはその逆として）再利用できるようにするチェックボックスは、ここでオン／オフを切り替えることができます。
+"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.",この設定を切り替えることで、LokiCheckoutをその場で有効または無効にできます。おそらく、この設定は常に有効にしておくことになるでしょう。
+"With debugging enabled, further details are added through the checkout, ideal for development.",デバッグ機能を有効にすると、チェックアウトの過程でさらに詳細な情報が表示されるため、開発に最適です。
+"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.",国によっては、地域の入力が必須となります。また、国によっては任意となります。このオプションを有効にすると、選択した国で地域の入力が任意の場合、地域入力欄は表示されなくなります。
+"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","このオプションを有効にすると、会社名の値が指定されていない場合、VAT ID フィールドは非表示になります。"
+"With this option enabled, the first shipping method is automatically selected.",このオプションを有効にすると、最初の配送方法が自動的に選択されます。

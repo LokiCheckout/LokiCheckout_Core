@@ -135,3 +135,16 @@ Debugging,Debugging
 "Order Summary","Order Summary"
 "Order Preview","Order Preview"
 Shipping,Shipping
+"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Adds an HTML comment in each LokiComponent for reviewing via your browser."
+"All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
+"Change the complete layout of the checkout by using a specific skin.","Change the complete layout of the checkout by using a specific skin."
+"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages."
+"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
+"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
+"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
+"With debugging enabled, further details are added through the checkout, ideal for development.","With debugging enabled, further details are added through the checkout, ideal for development."
+"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country."
+"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","With this option enabled, the VAT ID field is hidden if there is no value for the company given."
+"With this option enabled, the first shipping method is automatically selected.","With this option enabled, the first shipping method is automatically selected."
