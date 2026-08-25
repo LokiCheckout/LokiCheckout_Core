@@ -32,10 +32,10 @@ class ShippingDetailsViewModel extends CheckoutViewModel
     public function getAddressLabel(): string
     {
         if ($this->sameAddressService->isSame()) {
-            return 'Billing and Shipping Address';
+            return (string)__('Billing and Shipping Address');
         }
 
-        return 'Shipping Address';
+        return (string)__('Shipping Address');
     }
 
     public function getAddressHtml(): string

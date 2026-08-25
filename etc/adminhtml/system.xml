@@ -152,7 +152,7 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                     </depends>
                 </field>
                 <field id="capitalize_country_in_preview"
-                       translate="label"
+                       translate="label tooltip"
                        type="select"
                        sortOrder="10"
                        showInDefault="1"
