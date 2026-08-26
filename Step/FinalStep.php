@@ -9,6 +9,8 @@ use Magento\Framework\Event\Manager as EventManager;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Message\Manager;
+use Magento\Framework\UrlFactory;
 use Magento\Framework\Validator\Exception;
 use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
@@ -22,6 +24,7 @@ use LokiCheckout\Core\Step\FinalStep\Redirect;
 use LokiCheckout\Core\Validator\QuoteValidator;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Loki\Components\Exception\RedirectException;
+use Throwable;
 
 class FinalStep
 {
@@ -30,11 +33,13 @@ class FinalStep
         private readonly CheckoutState $checkoutState,
         private readonly Redirect $redirect,
         private readonly EventManager $eventManager,
+        private readonly Manager $messageManager,
         private readonly CartManagementInterface $cartManagement,
         private readonly OrderRepositoryInterface $orderRepository,
         private readonly OrderSender $orderSender,
         private readonly CartRepositoryInterface $cartRepository,
         private readonly TaskListing $taskListing,
+        private readonly UrlFactory $urlFactory
     ) {
     }
 
@@ -88,7 +93,15 @@ class FinalStep
         }
 
         $this->cartRepository->save($quote);
-        $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
+
+        try {
+            $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
+        } catch(Throwable $e) {
+            $msg = __('An error occurred while placing the order.') .' '. $e->getMessage();
+            $this->messageManager->addErrorMessage($msg);
+            $checkoutUrl = $this->urlFactory->create()->getUrl('checkout');
+            throw (new RedirectException())->setUrl($checkoutUrl);
+        }
 
         foreach ($this->taskListing->getTasks() as $task) {
             $task->afterPlaceOrder($orderId);
