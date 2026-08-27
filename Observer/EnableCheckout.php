@@ -32,7 +32,7 @@ class EnableCheckout implements ObserverInterface
         if (false === in_array('checkout_index_index', $layout->getUpdate()->getHandles())) {
             return;
         }
-        
+
         $this->layoutHandlerComposite->execute($layout->getUpdate()->getHandles());
     }
 }
