@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Util\Block\TemplateRenderer;
 use Magento\Framework\Escaper;
@@ -17,12 +18,13 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var CssClass $css */
 /** @var ImageRenderer $imageRenderer */
 /** @var TemplateRenderer $templateRenderer */
+/** @var ChildRenderer $childRenderer */
 
 $blockName = str_replace('.', '-', $block->getNameInLayout());
 $tooltipElement = $block->getTooltipElement();
 ?>
 <div class="<?= $escaper->escapeHtml($css()) ?>">
-    <?= /* @noEscape */ $block->getChildHtml('before') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
 
     <button
         @click.prevent="toggleModal"
@@ -44,9 +46,9 @@ $tooltipElement = $block->getTooltipElement();
         <?= /* @noEscape */ $templateRenderer->html($block, 'Loki_Components::component/modal/close.phtml'); ?>
 
         <div class="<?= $escaper->escapeHtml($css('p-8', 'dialog-inner')) ?>">
-            <?= /* @noEscape */ $block->getChildHtml('form') ?>
+            <?= /* @noEscape */ $childRenderer->any($block, 'form') ?>
         </div>
     </dialog>
 
-    <?= /* @noEscape */ $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
 </div>

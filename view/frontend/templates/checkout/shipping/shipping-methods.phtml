@@ -26,7 +26,14 @@ use Loki\Components\Util\Block\BlockRenderer;
     <?php endif; ?>
 
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $block->getChildHtml('title') ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'before-title') ?>
+    <?= /* @noEscape */ $childRenderer->html($block, 'title') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after-title') ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'before-list') ?>
     <?= /* @noEscape */ $childRenderer->html($block, 'list') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after-list') ?>
+
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-components.utils.local-messages') ?>
 </div>

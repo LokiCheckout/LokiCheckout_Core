@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -15,19 +16,21 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+
 ?>
 <div
     class="<?= $escaper->escapeHtml($css('loki space-y-6 relative')) ?>"
     x-data="LokiLoader"
     x-title="LokiCheckout">
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $block->getChildHtml('progressbar') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'progressbar') ?>
 
     <div class="<?= $escaper->escapeHtml($css('grid grid-cols-1 lg:grid-cols-3 md:gap-8', 'grid')) ?>">
         <div class="<?= $escaper->escapeHtml($css('col-span-2', 'column-steps')) ?> relative">
             <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
-            <?= /* @noEscape */ $block->getChildHtml('steps'); ?>
+            <?= /* @noEscape */ $childRenderer->any($block, 'steps'); ?>
         </div>
-        <?= /* @noEscape */ $block->getChildHtml('sidebar'); ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'sidebar'); ?>
     </div>
 </div>

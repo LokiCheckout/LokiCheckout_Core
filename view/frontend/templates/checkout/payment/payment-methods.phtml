@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 use Loki\Components\Component\ComponentViewModelInterface;
+use Loki\Components\Util\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -17,12 +18,16 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var PaymentMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
 /** @var CssClass $css */
+/** @var ChildRenderer $childRenderer */
 
 $paymentMethods = $viewModel->getPaymentMethods();
 ?>
 <div class="<?= $escaper->escapeHtml($css('relative')) ?>" role="group">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $block->getChildHtml('title') ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'before-title') ?>
+    <?= /* @noEscape */ $childRenderer->html($block, 'title') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after-title') ?>
 
     <form
         data-type="field"
@@ -30,8 +35,11 @@ $paymentMethods = $viewModel->getPaymentMethods();
         :aria-invalid="isAriaInvalid"
         :data-valid="isValid"
         class="<?= $escaper->escapeHtml($css('border border-transparent', 'container')) ?>">
+
+        <?= /* @noEscape */ $childRenderer->any($block, 'before-methods') ?>
+
         <?php if (!empty($paymentMethods)): ?>
-	    <ul class="<?= $escaper->escapeHtml($css('', 'list')) ?>">
+	        <ul class="<?= $escaper->escapeHtml($css('', 'list')) ?>">
                 <?php foreach ($paymentMethods as $paymentMethod): ?>
                     <?= /* @noEscape */ $blockRenderer->html(
                         $block,
@@ -44,10 +52,13 @@ $paymentMethods = $viewModel->getPaymentMethods();
                 <?php endforeach; ?>
             </ul>
         <?php else: ?>
+            <?= /* @noEscape */ $childRenderer->any($block, 'empty') ?>
             <div class="<?= $escaper->escapeHtml($css('p-4', 'no-items')) ?>">
                 <?= $escaper->escapeHtml(__('No payment methods available')) ?>
             </div>
         <?php endif; ?>
+
+        <?= /* @noEscape */ $childRenderer->any($block, 'after-methods') ?>
     </form>
 
     <?= /* @noEscape */ $blockRenderer->html($block,  'loki-components.utils.local-messages') ?>

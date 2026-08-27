@@ -19,7 +19,7 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 /** @var BlockRenderer $blockRenderer */
 ?>
 <div class="<?= $escaper->escapeHtml($css('field required')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml('before') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
 
     <?php foreach ($viewModel->getCheckoutAgreements() as $agreement): ?>
         <?= /* @noEscape */ $childRenderer->html($block, 'agreement', [
@@ -28,5 +28,5 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
     <?php endforeach; ?>
 
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-components.utils.local-messages') ?>
-    <?= /* @noEscape */ $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
 </div>

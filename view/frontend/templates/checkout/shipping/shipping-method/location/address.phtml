@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -9,12 +10,17 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+
 ?>
 <template x-if="location.addressLine">
     <div>
+        <?= $childRenderer->any($block, 'before') ?>
         <span class="<?= $escaper->escapeHtml($css('font-bold', 'label')) ?>">
             <?= $escaper->escapeHtml(__('Address')) ?>:
         </span>
+        <?= $childRenderer->any($block, 'between') ?>
         <address class="<?= $escaper->escapeHtml($css('inline-block mb-4')) ?>" x-text="location.addressLine"></address>
+        <?= $childRenderer->any($block, 'after') ?>
     </div>
 </template>

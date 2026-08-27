@@ -20,8 +20,8 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @var BlockRenderer $blockRenderer */
 /** @var ChildRenderer $childRenderer */
 
-$addressHtml = $childRenderer->html($block, 'address_info');
-$methodHtml = $childRenderer->html($block, 'method_info');
+$addressHtml = $childRenderer->any($block, 'address_info');
+$methodHtml = $childRenderer->any($block, 'method_info');
 
 if (empty($addressHtml)) {
     echo '<div></div>';
@@ -39,7 +39,7 @@ if (empty($addressHtml)) {
         </span><br>
         <address>
             <?= /* @noEscape */ $addressHtml ?>
-            <?= /* @noEscape */ $block->getChildHtml('additional_address_info') ?>
+            <?= /* @noEscape */ $childRenderer->any($block, 'additional_address_info') ?>
         </address>
     </div>
 
@@ -50,7 +50,7 @@ if (empty($addressHtml)) {
         >
             <span class="<?= $escaper->escapeHtml($css('text-xl font-bold', 'title')) ?>"><?= $escaper->escapeHtml(__('Shipping Method')) ?></span><br>
             <?= /* @noEscape */ $methodHtml ?>
-            <?= /* @noEscape */ $block->getChildHtml('additional_method_info') ?>
+            <?= /* @noEscape */ $childRenderer->any($block, 'additional_method_info') ?>
         </div>
     <?php endif; ?>
 </div>

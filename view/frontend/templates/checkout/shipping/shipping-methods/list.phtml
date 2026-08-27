@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\Components\Component\ComponentViewModelInterface;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
@@ -15,17 +16,20 @@ use Loki\Components\Util\Block\BlockRenderer;
 /** @var CssClass $css */
 /** @var ShippingMethodsViewModel $viewModel */
 /** @var BlockRenderer $blockRenderer */
+/** @var ChildRenderer $childRenderer */
 
 $viewModel = $block->getViewModel();
 $shippingMethods = $viewModel->getShippingMethods();
 ?>
-<div
+<form
     data-type="field"
     x-ref="field"
     :aria-invalid="isAriaInvalid"
     :data-valid="isValid"
     class="<?= $escaper->escapeHtml($css('border border-transparent', 'container')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml('before-methods') ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'before-methods') ?>
+
     <?php if (!empty($shippingMethods)): ?>
         <ul>
             <?php foreach ($shippingMethods as $shippingMethod): ?>
@@ -41,8 +45,8 @@ $shippingMethods = $viewModel->getShippingMethods();
             <?php endforeach; ?>
         </ul>
     <?php else: ?>
-        <?= /* @noEscape */ $block->getChildHtml('empty') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'empty') ?>
     <?php endif; ?>
 
-    <?= /* @noEscape */ $block->getChildHtml('after-methods') ?>
-</div>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after-methods') ?>
+</form>

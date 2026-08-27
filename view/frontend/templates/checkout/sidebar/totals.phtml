@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\Escaper;
@@ -17,6 +18,7 @@ use LokiCheckout\Core\ViewModel\PriceFormatter;
 /** @var CssClass $css */
 /** @var BlockRenderer $blockRenderer */
 /** @var CheckoutState $checkoutState */
+/** @var ChildRenderer $childRenderer */
 
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
@@ -27,7 +29,7 @@ $totalSegments = $totals->getTotalSegments();
     <?= /* @noEscape */ $blockRenderer->html($block, 'loki-field-components.utils.loader-overlay') ?>
 
     <dl class="<?= $escaper->escapeHtml($css('grid grid-cols-2 gap-y-1', 'grid')) ?>">
-        <?= /* @noEscape */ $block->getChildHtml('before') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
 
         <?php foreach ($totalSegments as $total) : ?>
             <?php $childBlock = $block->getChildBlock($total->getCode()); ?>
@@ -47,6 +49,6 @@ $totalSegments = $totals->getTotalSegments();
                 </dd>
             <?php endif; ?>
         <?php endforeach; ?>
-        <?= /* @noEscape */ $block->getChildHtml('after') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
     </dl>
 </div>

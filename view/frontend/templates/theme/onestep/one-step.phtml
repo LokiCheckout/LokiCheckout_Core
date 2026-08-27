@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
@@ -9,8 +10,10 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var CssClass $css */
 /** @var Escaper $escaper */
+/** @var ChildRenderer $childRenderer */
+
 ?>
 <div class="<?= $escaper->escapeHtml($css(' grid grid-cols-1 lg:grid-cols-2 md:gap-8')) ?>">
-    <?= /* @noEscape */ $block->getChildHtml('col1') ?>
-    <?= /* @noEscape */ $block->getChildHtml('col2') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'col1') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'col2') ?>
 </div>

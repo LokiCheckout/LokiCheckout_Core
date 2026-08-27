@@ -1,6 +1,7 @@
 <?php
 declare(strict_types=1);
 
+use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Loki\Components\Util\Block\TemplateRenderer;
 use Magento\Framework\Escaper;
@@ -17,6 +18,7 @@ use Loki\Components\Util\Block\ImageRenderer;
 /** @var CssClass $css */
 /** @var ImageRenderer $imageRenderer */
 /** @var TemplateRenderer $templateRenderer */
+/** @var ChildRenderer $childRenderer */
 
 $checkoutState = $viewModelFactory->create(CheckoutState::class);
 $customerSession = $checkoutState->getCustomerSession();
@@ -26,8 +28,12 @@ $logoutUrl = $block->getUrl('customer/account/logout');
 ?>
 <div class="<?= $escaper->escapeHtml($css('card')) ?>" x-data="LokiModal">
     <?php if ($isLoggedIn): ?>
-        <?= /* @noEscape */ $block->getChildHtml('logged-in') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'before-logged-in') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'logged-in') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'after-logged-in') ?>
     <?php else: ?>
-        <?= /* @noEscape */ $block->getChildHtml('form') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'before-form') ?>
+        <?= /* @noEscape */ $childRenderer->html($block, 'form') ?>
+        <?= /* @noEscape */ $childRenderer->any($block, 'after-form') ?>
     <?php endif; ?>
 </div>

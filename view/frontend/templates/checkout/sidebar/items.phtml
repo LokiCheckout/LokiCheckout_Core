@@ -28,7 +28,7 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
 ?>
 <div class="<?= $escaper->escapeHtml($css('relative')) ?>">
     <?= /* @noEscape */ $blockRenderer->html( $block, 'loki-field-components.utils.loader-overlay') ?>
-    <?= /* @noEscape */ $block->getChildHtml('before') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
 
     <div x-data="LokiToggle" class="<?= $escaper->escapeHtml($css('', 'inner')) ?>">
         <ul role="list">
@@ -71,5 +71,5 @@ $hiddenItems = array_slice($allItems, $viewModel->getVisibleCount());
         <?php endif; ?>
     </div>
 
-    <?= /* @noEscape */ $block->getChildHtml('after') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
 </div>
