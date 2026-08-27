@@ -9,6 +9,7 @@
 
     <!-- Block definition -->
     <update handle="loki_checkout_block_sidebar"/>
+    <update handle="checkout_cart_item_renderers"/>
     <update handle="loki_checkout_block_progressbar"/>
     <update handle="loki_checkout_block_login"/>
 

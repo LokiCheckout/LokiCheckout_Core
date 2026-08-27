@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:View/Layout:etc/page_configuration.xsd">
-    <update handle="checkout_cart_item_renderers"/>
 
     <body>
         <block class="Magento\Framework\View\Element\RendererList" name="checkout.cart.item.renderers" />

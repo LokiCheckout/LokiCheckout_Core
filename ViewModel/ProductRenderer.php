@@ -9,6 +9,7 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Magento\Framework\View\Element\RendererList;
 use Magento\Framework\View\LayoutInterface;
 use Magento\Quote\Api\Data\CartItemInterface;
+use Throwable;
 
 class ProductRenderer implements ArgumentInterface
 {
@@ -27,7 +28,17 @@ class ProductRenderer implements ArgumentInterface
             return null;
         }
 
-        $renderer = $rendererList->getRenderer($item->getProductType());
+        $childNames = $rendererList->getChildNames();
+        if (empty($childNames)) {
+            throw new \RuntimeException('Block "checkout.cart.item.renderers" does not have any child renderers');
+        }
+
+        try {
+            $renderer = $rendererList->getRenderer($item->getProductType(), 'default');
+        } catch (Throwable $e) {
+            return null;
+        }
+
         $renderer->setItem($item);
         return $renderer;
     }
