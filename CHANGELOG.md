@@ -6,6 +6,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.6.0] - 28 August 2026
+### Added
+- Add multiple `before`/`after` child calls in various templates
+- Add language packs
+
+### Fixed
+- Catch fatal exception in `FinalStep` when calling `placeOrder`
+- Product renderer block was not finding child (and prevent Fatal Errors in unforeseeable futures)
+- Make sure system.xml tooltips and comments are translatable
+- Remove whitespaces from language string in XML (Please agree to...)
+- Fix potential issues with checkout-router intercepting `checkout*` URLs as well
+- Rewrite AttributeProvider to inject EavConfig
+- Add `ScopeInterface::SCOPE_STORE` to freeshipping config values
+- When fixing free shipping substotal, allow for totals to be `Total` object
+- Typo when checking for `carriers/freeshipping/tax_including`
+- Remove duplicate Loki tab in store config
+- Rewrite tab-buttons to radio fields for a11y
+- Allow tab-buttons to stretch depending upon how many buttons there are
+- Fix for "To be picked up" line in address preview
+- Add proper sorting of Alpine store definitions
+- With pickup address, separate customer name from pickup address
+- Add a block `loki-checkout.utils.address` for rendering addresses
+- Remove hard-coded "Zipcode" label in favor of `LokiCheckout_Us` module
+- Make sure a dash `-` as label returns empty label and is not ignored
+- Add a11y fixes for lazy-load template of payment methods
+- When there are no "Other Countries", do not add option groups to country select
+- Rewrite legacy contexts to DI-based variation
+- Only switch shipping address to view-only card, when `card_layout` is set in view
+- Remove opiniated border from titles
+
+### Security
+- Rewrite `x-html` to `x-text` because of CSP
+
 ## [2.5.2] - 16 July 2026
 ### Fixed
 - Fix issue with all address fields loosing their `step` value

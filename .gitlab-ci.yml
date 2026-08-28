@@ -239,6 +239,8 @@ playwright:
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
+    - bin/magento config:set dev/static/sign 0
+    - bin/magento setup:static-content:deploy -f --area frontend en_US
     - bin/magento loki-checkout:sample-data:add-product
     - bin/magento loki-checkout:modules:dump
     - magerun2 config:store:set loki_checkout/functional_tests/token loki -n
