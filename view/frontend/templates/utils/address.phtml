@@ -17,9 +17,9 @@ $customerName = $block->getCustomerName();
 ?>
 <?= /** @noEscape */ $addressHtml ?>
 <?php if ($customerName): ?>
-<p class="<?= $css('pt-4') ?>">
+<p class="<?= $escaper->escapeHtml($css('pt-4')) ?>">
     <span class="<?= $escaper->escapeHtml($css('block font-bold', 'label')) ?>">
-        <?= __('To be picked up by:'); ?>
+        <?= $escaper->escapeHtml(__('To be picked up by:')); ?>
     </span>
     <span class="<?= $escaper->escapeHtml($css('block', 'value')) ?>">
         <?= $escaper->escapeHtml($customerName); ?>

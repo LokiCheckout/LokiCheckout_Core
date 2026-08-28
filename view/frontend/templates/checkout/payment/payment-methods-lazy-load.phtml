@@ -42,7 +42,7 @@ $dummyTextCss = $css('inline-block h-6 rounded bg-gray-300', 'dummy-text');
                     </span>
 
                     <span class="sr-only">
-                        <?= __('Loading payment methods') ?>
+                        <?= $escaper->escapeHtml(__('Loading payment methods')) ?>
                     </span>
 
                     <span class="<?= $escaper->escapeHtml($css('grow flex items-center gap-2 ml-2', 'label')) ?>">

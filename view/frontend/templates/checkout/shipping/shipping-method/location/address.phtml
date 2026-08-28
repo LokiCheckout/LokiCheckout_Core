@@ -15,12 +15,12 @@ use Magento\Framework\View\Element\Template;
 ?>
 <template x-if="location.addressLine">
     <div>
-        <?= $childRenderer->any($block, 'before') ?>
+        <?= $escaper->escapeHtml($childRenderer->any($block, 'before')) ?>
         <span class="<?= $escaper->escapeHtml($css('font-bold', 'label')) ?>">
             <?= $escaper->escapeHtml(__('Address')) ?>:
         </span>
-        <?= $childRenderer->any($block, 'between') ?>
+        <?= $escaper->escapeHtml($childRenderer->any($block, 'between')) ?>
         <address class="<?= $escaper->escapeHtml($css('inline-block mb-4')) ?>" x-text="location.addressLine"></address>
-        <?= $childRenderer->any($block, 'after') ?>
+        <?= $escaper->escapeHtml($childRenderer->any($block, 'after')) ?>
     </div>
 </template>
