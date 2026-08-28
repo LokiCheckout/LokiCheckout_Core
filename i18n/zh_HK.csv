@@ -1,150 +1,151 @@
-"Add Debug Block","Add Debug Block"
-"Add Hints to HTML Output","Add Hints to HTML Output"
-"Add new billing address","Add new billing address"
-"Add new shipping address","Add new shipping address"
-"Additional information","Additional information"
-Address,Address
-"Address Grid Layout","Address Grid Layout"
-"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Adds an HTML comment in each LokiComponent for reviewing via your browser."
+"Add Debug Block",添加调试代码块
+"Add Hints to HTML Output","在 HTML 输出中添加提示"
+"Add new billing address",添加新的账单地址
+"Add new shipping address",添加新收货地址
+"Additional information",补充信息
+Address,地址
+"Address Grid Layout",地址网格布局
+"Adds an HTML comment in each LokiComponent for reviewing via your browser.","在每个 LokiComponent 中添加一个 HTML 注释，以便通过浏览器进行审查。"
 "All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
-"An unspecified error occurred. Please contact us for assistance.","An unspecified error occurred. Please contact us for assistance."
-"Applied coupon code","Applied coupon code"
-Apply,Apply
-"Apply Discount Code","Apply Discount Code"
-"Back to previous step","Back to previous step"
-"Back to shipping","Back to shipping"
-"Billing Address","Billing Address"
-"Billing and Shipping Address","Billing and Shipping Address"
-"Billing settings","Billing settings"
-"Block with name ""%1"" not found in grid layout","Block with name ""%1"" not found in grid layout"
-"Capitalize Country In Address Preview","Capitalize Country In Address Preview"
-"Cart settings","Cart settings"
-"Change the complete layout of the checkout by using a specific skin.","Change the complete layout of the checkout by using a specific skin."
-Checkout,Checkout
-"Coupon code","Coupon code"
-"Create an Account","Create an Account"
-"Date of Birth","Date of Birth"
-Debugging,Debugging
-Details,Details
-"Discount Code","Discount Code"
-"Do not show all items","Do not show all items"
-Email,Email
-"Email address is invalid","Email address is invalid"
-Enable,Enable
-"Enable Debugging","Enable Debugging"
-"Enable Same As Billing Checkbox","Enable Same As Billing Checkbox"
-"Enable Vat ID Only For Companies","Enable Vat ID Only For Companies"
-"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages."
-"Enter your emailaddress","Enter your emailaddress"
-"Failed to apply coupon code","Failed to apply coupon code"
-Female,Female
-"Field settings","Field settings"
-"Forgot Your Password?","Forgot Your Password?"
-Free,Free
-Gender,Gender
-General,General
-"Guest checkout is disabled.","Guest checkout is disabled."
-"Hide Region When Optional","Hide Region When Optional"
-"Hide password","Hide password"
-Home,Home
-Instructions,Instructions
-"Invalid email","Invalid email"
-"License Key","License Key"
-"Loading payment methods","Loading payment methods"
-"Loki Checkout","Loki Checkout"
-"Make Check Payable to","Make Check Payable to"
-Male,Male
-"Maximum items visible","Maximum items visible"
-"My billing and shipping address are the same","My billing and shipping address are the same"
-"Newsletter settings","Newsletter settings"
-"No delivery options found","No delivery options found"
-"No items in cart","No items in cart"
-"No locations found","No locations found"
-"No payment methods available","No payment methods available"
-"No payment token for guests","No payment token for guests"
-"No shipping methods available","No shipping methods available"
-"No step found with request ""%1""","No step found with request ""%1"""
-"Not Specified","Not Specified"
-"Not a valid postcode","Not a valid postcode"
-"Not available","Not available"
-"Not specified","Not specified"
-"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>."
-"Order Preview","Order Preview"
-"Order Summary","Order Summary"
-Pagination,Pagination
-Password,Password
-"Pay &amp; Place Order","Pay &amp; Place Order"
-"Pay faster with","Pay faster with"
-"Payment Method","Payment Method"
-"Payment Methods","Payment Methods"
-"Payment method ""%1"" does not exist.","Payment method ""%1"" does not exist."
-"Payment method ""%1"" is not available.","Payment method ""%1"" is not available."
-"Pick up from","Pick up from"
-"Place Order","Place Order"
-"Please agree to all the terms and conditions before placing the order.","Please agree to all the terms and conditions before placing the order."
-"Please enter a valid date","Please enter a valid date"
-"Please enter a valid date of birth","Please enter a valid date of birth"
-"Please enter a valid email first","Please enter a valid email first"
-"Please enter your address details first","Please enter your address details first"
-"Please fill in all required fields before proceeding","Please fill in all required fields before proceeding"
-"Postcode ""%1"" has invalid format","Postcode ""%1"" has invalid format"
-"Postcode ""%1"" needs to be in one of the following formats: %2","Postcode ""%1"" needs to be in one of the following formats: %2"
-"Postcode ""%1"" needs to be in the format ""%2""","Postcode ""%1"" needs to be in the format ""%2"""
-Price,Price
-"Proceed to Review &amp; Payments","Proceed to Review &amp; Payments"
-Quantity,Quantity
-"Quote is empty","Quote is empty"
-"Remove coupon code","Remove coupon code"
-"Removed coupon code","Removed coupon code"
-Save,Save
-"Select Default Payment Method","Select Default Payment Method"
-"Select Default Shipping Method","Select Default Shipping Method"
-"Select existing address from list","Select existing address from list"
-"Send Check to","Send Check to"
-Shipping,Shipping
-"Shipping Address","Shipping Address"
-"Shipping Method","Shipping Method"
-"Shipping Methods","Shipping Methods"
-"Shipping methods","Shipping methods"
-"Shipping settings","Shipping settings"
-"Show all items","Show all items"
-"Show all options","Show all options"
-"Show less options","Show less options"
-"Show more options","Show more options"
-"Show opening hours","Show opening hours"
-"Show password","Show password"
-"Sign In","Sign In"
-"Sign Out","Sign Out"
-"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
-Skin,Skin
-"Step with name ""%1"" not found","Step with name ""%1"" not found"
-"Subscribe by default","Subscribe by default"
-"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
-"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
-"The email address %1 is not available","The email address %1 is not available"
-"The email address is not available","The email address is not available"
-"To be picked up by:","To be picked up by:"
-"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
-Trash,Trash
-"Unknown grid layout ""%1""","Unknown grid layout ""%1"""
-"Unknown skin ""%1""","Unknown skin ""%1"""
-"Value must contain numbers only","Value must contain numbers only"
-"View terms","View terms"
-"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento."
-"With debugging enabled, further details are added through the checkout, ideal for development.","With debugging enabled, further details are added through the checkout, ideal for development."
-"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country."
-"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","With this option enabled, the VAT ID field is hidden if there is no value for the company given."
-"With this option enabled, the first shipping method is automatically selected.","With this option enabled, the first shipping method is automatically selected."
-"You are logged in as %1","You are logged in as %1"
-"You have been subscribed automatically to the newsletter","You have been subscribed automatically to the newsletter"
-"You have been subscribed to the newsletter","You have been subscribed to the newsletter"
-"You have been unsubscribed from the newsletter","You have been unsubscribed from the newsletter"
-"You have logged in","You have logged in"
-"You need to be at least %1 years old","You need to be at least %1 years old"
-"You need to be younger than %1 years old","You need to be younger than %1 years old"
-"Your IBAN number does not have the right format","Your IBAN number does not have the right format"
-"Your IBAN number is incorrect","Your IBAN number is incorrect"
-"Your IBAN number needs to start with a country prefix","Your IBAN number needs to start with a country prefix"
-label,label
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","地址区块（收货地址、账单地址）中的所有 HTML 元素均按照网格
+布局（通过文件 <code>etc/loki_checkout.xml</code> 创建）进行排列。此设置用于配置默认网格。"
+"An error occurred while placing the order.",下单时发生错误。
+"An unspecified error occurred. Please contact us for assistance.",发生了一个未指定的错误。请联系我们以获取帮助。
+"Applied coupon code",已应用优惠码
+Apply,申请
+"Apply Discount Code",使用优惠码
+"Back to previous step",返回上一步
+"Back to shipping",返回“运输”页面
+"Billing Address",账单地址
+"Billing and Shipping Address",账单地址和送货地址
+"Billing settings",计费设置
+"Block with name ""%1"" not found in grid layout",在网格布局中未找到名为“%1”的块
+"Capitalize Country In Address Preview",在地址预览中将国家名称首字母大写
+"Cart settings",购物车设置
+"Change the complete layout of the checkout by using a specific skin.",使用特定的皮肤来更改结账页面的整体布局。
+Checkout,结账
+"Coupon code",优惠码
+"Create an Account",创建账户
+"Date of Birth",出生日期
+Debugging,调试
+Details,详情
+"Discount Code",优惠码
+"Do not show all items",不显示所有项目
+Email,电子邮件
+"Email address is invalid",该电子邮件地址无效
+Enable,启用
+"Enable Debugging",启用调试
+"Enable Same As Billing Checkbox",启用“与账单信息一致”复选框
+"Enable Vat ID Only For Companies",仅对公司启用增值税号
+"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","请输入您在 Yireo 商店“我的许可证”下找到的 LokiCheckout 许可证密钥。该许可证密钥也可用作 Composer 密钥，用于下载软件包。"
+"Enter your emailaddress",请输入您的电子邮箱地址
+"Failed to apply coupon code",无法使用优惠码
+Female,女性
+"Field settings",字段设置
+"Forgot Your Password?",忘记密码了吗？
+Free,免费
+Gender,性别
+General,概述
+"Guest checkout is disabled.",访客结账功能已禁用。
+"Hide Region When Optional",当为可选时隐藏区域
+"Hide password",隐藏密码
+Home,首页
+Instructions,说明
+"Invalid email",电子邮件地址无效
+"License Key",许可证密钥
+"Loading payment methods",正在加载支付方式
+"Loki Checkout",洛基结账
+"Make Check Payable to",支票收款人请填写为
+Male,男性
+"Maximum items visible",最多显示的项目数
+"My billing and shipping address are the same",我的账单地址和送货地址相同
+"Newsletter settings",通讯设置
+"No delivery options found",未找到配送选项
+"No items in cart",购物车中没有商品
+"No locations found",未找到地点
+"No payment methods available",没有可用的支付方式
+"No payment token for guests",访客无支付凭证
+"No shipping methods available",没有可用的配送方式
+"No step found with request ""%1""",未找到与请求“%1”对应的步骤
+"Not Specified",未指定
+"Not a valid postcode",邮政编码无效
+"Not available",暂无
+"Not specified",未指定
+"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","您保存的地址之一无效，因此被跳过。请在<a href=""%1"">您的通讯录中</a>进行修正。"
+"Order Preview",订单预览
+"Order Summary",订单摘要
+Pagination,分页
+Password,密码
+"Pay &amp; Place Order",支付并下单
+"Pay faster with",使用以下方式更快完成支付
+"Payment Method",付款方式
+"Payment Methods",支付方式
+"Payment method ""%1"" does not exist.",不存在“%1”这种支付方式。
+"Payment method ""%1"" is not available.",付款方式“%1”不可用。
+"Pick up from",接送地点：
+"Place Order",下单
+"Please agree to all the terms and conditions before placing the order.",下单前，请同意所有条款和条件。
+"Please enter a valid date",请输入一个有效的日期
+"Please enter a valid date of birth",请输入有效的出生日期
+"Please enter a valid email first",请先输入一个有效的电子邮件地址
+"Please enter your address details first",请先输入您的地址信息
+"Please fill in all required fields before proceeding",请先填写所有必填项，然后再继续
+"Postcode ""%1"" has invalid format",邮政编码“%1”的格式不正确
+"Postcode ""%1"" needs to be in one of the following formats: %2",邮政编码“%1”必须符合以下格式之一：%2
+"Postcode ""%1"" needs to be in the format ""%2""",邮政编码“%1”必须符合“%2”的格式
+Price,价格
+"Proceed to Review &amp; Payments",进入“审核与付款”环节
+Quantity,数量
+"Quote is empty",引用内容为空
+"Remove coupon code",删除优惠码
+"Removed coupon code",已删除优惠券代码
+Save,保存
+"Select Default Payment Method",选择默认支付方式
+"Select Default Shipping Method",选择默认配送方式
+"Select existing address from list",从列表中选择现有地址
+"Send Check to",请将支票寄至
+Shipping,运输
+"Shipping Address",收货地址
+"Shipping Method",运输方式
+"Shipping Methods",配送方式
+"Shipping methods",配送方式
+"Shipping settings",配送设置
+"Show all items",显示所有项目
+"Show all options",显示所有选项
+"Show less options",显示更少的选项
+"Show more options",显示更多选项
+"Show opening hours",显示营业时间
+"Show password",显示密码
+"Sign In",登录
+"Sign Out",退出
+"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","与原版 Magento 模板提示功能类似，此功能会在每个 LokiComponent 上显示一个包含元信息的气泡提示。要么你喜欢它，要么你会觉得它非常烦人。"
+Skin,皮肤
+"Step with name ""%1"" not found",未找到名称为“%1”的步骤
+"Subscribe by default",默认订阅
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.",账户登录信息有误，或者您的账户已被暂时停用。请稍后重试。
+"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.",在此处可以切换该复选框，以便客户将收货地址作为账单地址（或反之）重复使用。
+"The email address %1 is not available","电子邮件地址 %1 无法使用"
+"The email address is not available",该电子邮件地址不存在
+"To be picked up by:",由以下人员领取：
+"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","切换此设置可随时启用或禁用 LokiCheckout。您可能需要始终保持此功能开启。"
+Trash,垃圾
+"Unknown grid layout ""%1""",未知网格布局“%1”
+"Unknown skin ""%1""",未知皮肤“%1”
+"Value must contain numbers only","“value” 字段必须仅包含数字"
+"View terms",查看条款
+"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","启用此选项后，在渲染的地址预览（发货/账单摘要）中，国家名称将以大写形式显示。禁用此选项后，国家名称将按 Magento 提供的原样显示。"
+"With debugging enabled, further details are added through the checkout, ideal for development.",启用调试模式后，在结账过程中会显示更多详细信息，非常适合开发使用。
+"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.",对于某些国家，必须填写“地区”字段；对于另一些国家，该字段则是可选的。当启用此选项时，如果所选国家中“地区”字段为可选，则该字段将消失。
+"With this option enabled, the VAT ID field is hidden if there is no value for the company given.",启用此选项后，如果未填写公司信息，则“增值税号”字段将被隐藏。
+"With this option enabled, the first shipping method is automatically selected.",启用此选项后，系统将自动选择第一种配送方式。
+"You are logged in as %1","您当前以 %1 的身份登录"
+"You have been subscribed automatically to the newsletter",您已自动订阅了新闻通讯
+"You have been subscribed to the newsletter",您已订阅该通讯
+"You have been unsubscribed from the newsletter",您已取消订阅该通讯
+"You have logged in",您已登录
+"You need to be at least %1 years old","你的年龄必须至少为 %1 岁"
+"You need to be younger than %1 years old","你的年龄必须小于 %1 岁"
+"Your IBAN number does not have the right format",您的IBAN号码格式不正确
+"Your IBAN number is incorrect",您的IBAN号码有误
+"Your IBAN number needs to start with a country prefix",您的IBAN号码必须以国家代码开头
+label,标签

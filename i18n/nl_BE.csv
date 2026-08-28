@@ -1,150 +1,151 @@
-"Add Debug Block","Add Debug Block"
-"Add Hints to HTML Output","Add Hints to HTML Output"
-"Add new billing address","Add new billing address"
-"Add new shipping address","Add new shipping address"
-"Additional information","Additional information"
-Address,Address
-"Address Grid Layout","Address Grid Layout"
-"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Adds an HTML comment in each LokiComponent for reviewing via your browser."
+"Add Debug Block","Debug-blok toevoegen"
+"Add Hints to HTML Output","Tips toevoegen aan HTML-uitvoer"
+"Add new billing address","Nieuw factuuradres toevoegen"
+"Add new shipping address","Nieuw afleveradres toevoegen"
+"Additional information","Aanvullende informatie"
+Address,Adres
+"Address Grid Layout",Adresrasterindeling
+"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Voegt in elke LokiComponent een HTML-opmerking toe, zodat je deze via je browser kunt bekijken."
 "All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
-"An unspecified error occurred. Please contact us for assistance.","An unspecified error occurred. Please contact us for assistance."
-"Applied coupon code","Applied coupon code"
-Apply,Apply
-"Apply Discount Code","Apply Discount Code"
-"Back to previous step","Back to previous step"
-"Back to shipping","Back to shipping"
-"Billing Address","Billing Address"
-"Billing and Shipping Address","Billing and Shipping Address"
-"Billing settings","Billing settings"
-"Block with name ""%1"" not found in grid layout","Block with name ""%1"" not found in grid layout"
-"Capitalize Country In Address Preview","Capitalize Country In Address Preview"
-"Cart settings","Cart settings"
-"Change the complete layout of the checkout by using a specific skin.","Change the complete layout of the checkout by using a specific skin."
-Checkout,Checkout
-"Coupon code","Coupon code"
-"Create an Account","Create an Account"
-"Date of Birth","Date of Birth"
-Debugging,Debugging
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","Alle HTML-elementen in een adresblok (verzendadres, factuuradres) worden gerangschikt volgens een rasterindeling
+(aangemaakt via het bestand <code>etc/loki_checkout.xml</code>). Met deze instelling wordt het standaardraster geconfigureerd."
+"An error occurred while placing the order.","Er is een fout opgetreden bij het plaatsen van de bestelling."
+"An unspecified error occurred. Please contact us for assistance.","Er is een niet nader gespecificeerde fout opgetreden. Neem contact met ons op voor hulp."
+"Applied coupon code","Kortingscode toegepast"
+Apply,Solliciteren
+"Apply Discount Code","Kortingscode toepassen"
+"Back to previous step","Terug naar de vorige stap"
+"Back to shipping","Terug naar verzending"
+"Billing Address",Factuuradres
+"Billing and Shipping Address","Factuur- en verzendadres"
+"Billing settings",Factureringsinstellingen
+"Block with name ""%1"" not found in grid layout","Blok met de naam ""%1"" niet gevonden in de rasterindeling"
+"Capitalize Country In Address Preview","Land in adresvoorbeeld met hoofdletters weergeven"
+"Cart settings","Instellingen winkelwagen"
+"Change the complete layout of the checkout by using a specific skin.","Pas de volledige lay-out van het afrekenproces aan door een specifieke skin te gebruiken."
+Checkout,Afrekenen
+"Coupon code",Kortingscode
+"Create an Account","Een account aanmaken"
+"Date of Birth",Geboortedatum
+Debugging,Foutopsporing
 Details,Details
-"Discount Code","Discount Code"
-"Do not show all items","Do not show all items"
-Email,Email
-"Email address is invalid","Email address is invalid"
-Enable,Enable
-"Enable Debugging","Enable Debugging"
-"Enable Same As Billing Checkbox","Enable Same As Billing Checkbox"
-"Enable Vat ID Only For Companies","Enable Vat ID Only For Companies"
-"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages."
-"Enter your emailaddress","Enter your emailaddress"
-"Failed to apply coupon code","Failed to apply coupon code"
-Female,Female
-"Field settings","Field settings"
-"Forgot Your Password?","Forgot Your Password?"
-Free,Free
-Gender,Gender
-General,General
-"Guest checkout is disabled.","Guest checkout is disabled."
-"Hide Region When Optional","Hide Region When Optional"
-"Hide password","Hide password"
+"Discount Code",Kortingscode
+"Do not show all items","Niet alle items weergeven"
+Email,E-mail
+"Email address is invalid","Het e-mailadres is ongeldig"
+Enable,Inschakelen
+"Enable Debugging","Foutopsporing inschakelen"
+"Enable Same As Billing Checkbox","Het selectievakje ‘Hetzelfde als factuuradres’ inschakelen"
+"Enable Vat ID Only For Companies","BTW-nummer alleen inschakelen voor bedrijven"
+"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Voer je LokiCheckout-licentiesleutel in, die je in onze Yireo-winkel onder „Mijn licenties“ kunt vinden. De licentiesleutel wordt ook gebruikt als composer-sleutel om pakketten te downloaden."
+"Enter your emailaddress","Voer je e-mailadres in"
+"Failed to apply coupon code","De kortingscode kon niet worden toegepast"
+Female,Vrouw
+"Field settings",Veldinstellingen
+"Forgot Your Password?","Wachtwoord vergeten?"
+Free,Gratis
+Gender,Geslacht
+General,Algemeen
+"Guest checkout is disabled.","Het afrekenen als gast is uitgeschakeld."
+"Hide Region When Optional","Regio verbergen wanneer optioneel"
+"Hide password","Wachtwoord verbergen"
 Home,Home
-Instructions,Instructions
-"Invalid email","Invalid email"
-"License Key","License Key"
-"Loading payment methods","Loading payment methods"
-"Loki Checkout","Loki Checkout"
-"Make Check Payable to","Make Check Payable to"
-Male,Male
-"Maximum items visible","Maximum items visible"
-"My billing and shipping address are the same","My billing and shipping address are the same"
-"Newsletter settings","Newsletter settings"
-"No delivery options found","No delivery options found"
-"No items in cart","No items in cart"
-"No locations found","No locations found"
-"No payment methods available","No payment methods available"
-"No payment token for guests","No payment token for guests"
-"No shipping methods available","No shipping methods available"
-"No step found with request ""%1""","No step found with request ""%1"""
-"Not Specified","Not Specified"
-"Not a valid postcode","Not a valid postcode"
-"Not available","Not available"
-"Not specified","Not specified"
-"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>."
-"Order Preview","Order Preview"
-"Order Summary","Order Summary"
-Pagination,Pagination
-Password,Password
-"Pay &amp; Place Order","Pay &amp; Place Order"
-"Pay faster with","Pay faster with"
-"Payment Method","Payment Method"
-"Payment Methods","Payment Methods"
-"Payment method ""%1"" does not exist.","Payment method ""%1"" does not exist."
-"Payment method ""%1"" is not available.","Payment method ""%1"" is not available."
-"Pick up from","Pick up from"
-"Place Order","Place Order"
-"Please agree to all the terms and conditions before placing the order.","Please agree to all the terms and conditions before placing the order."
-"Please enter a valid date","Please enter a valid date"
-"Please enter a valid date of birth","Please enter a valid date of birth"
-"Please enter a valid email first","Please enter a valid email first"
-"Please enter your address details first","Please enter your address details first"
-"Please fill in all required fields before proceeding","Please fill in all required fields before proceeding"
-"Postcode ""%1"" has invalid format","Postcode ""%1"" has invalid format"
-"Postcode ""%1"" needs to be in one of the following formats: %2","Postcode ""%1"" needs to be in one of the following formats: %2"
-"Postcode ""%1"" needs to be in the format ""%2""","Postcode ""%1"" needs to be in the format ""%2"""
-Price,Price
-"Proceed to Review &amp; Payments","Proceed to Review &amp; Payments"
-Quantity,Quantity
-"Quote is empty","Quote is empty"
-"Remove coupon code","Remove coupon code"
-"Removed coupon code","Removed coupon code"
-Save,Save
-"Select Default Payment Method","Select Default Payment Method"
-"Select Default Shipping Method","Select Default Shipping Method"
-"Select existing address from list","Select existing address from list"
-"Send Check to","Send Check to"
-Shipping,Shipping
-"Shipping Address","Shipping Address"
-"Shipping Method","Shipping Method"
-"Shipping Methods","Shipping Methods"
-"Shipping methods","Shipping methods"
-"Shipping settings","Shipping settings"
-"Show all items","Show all items"
-"Show all options","Show all options"
-"Show less options","Show less options"
-"Show more options","Show more options"
-"Show opening hours","Show opening hours"
-"Show password","Show password"
-"Sign In","Sign In"
-"Sign Out","Sign Out"
-"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
-Skin,Skin
-"Step with name ""%1"" not found","Step with name ""%1"" not found"
-"Subscribe by default","Subscribe by default"
-"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
-"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
-"The email address %1 is not available","The email address %1 is not available"
-"The email address is not available","The email address is not available"
-"To be picked up by:","To be picked up by:"
-"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
-Trash,Trash
-"Unknown grid layout ""%1""","Unknown grid layout ""%1"""
-"Unknown skin ""%1""","Unknown skin ""%1"""
-"Value must contain numbers only","Value must contain numbers only"
-"View terms","View terms"
-"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento."
-"With debugging enabled, further details are added through the checkout, ideal for development.","With debugging enabled, further details are added through the checkout, ideal for development."
-"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country."
-"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","With this option enabled, the VAT ID field is hidden if there is no value for the company given."
-"With this option enabled, the first shipping method is automatically selected.","With this option enabled, the first shipping method is automatically selected."
-"You are logged in as %1","You are logged in as %1"
-"You have been subscribed automatically to the newsletter","You have been subscribed automatically to the newsletter"
-"You have been subscribed to the newsletter","You have been subscribed to the newsletter"
-"You have been unsubscribed from the newsletter","You have been unsubscribed from the newsletter"
-"You have logged in","You have logged in"
-"You need to be at least %1 years old","You need to be at least %1 years old"
-"You need to be younger than %1 years old","You need to be younger than %1 years old"
-"Your IBAN number does not have the right format","Your IBAN number does not have the right format"
-"Your IBAN number is incorrect","Your IBAN number is incorrect"
-"Your IBAN number needs to start with a country prefix","Your IBAN number needs to start with a country prefix"
+Instructions,Instructies
+"Invalid email","Ongeldig e-mailadres"
+"License Key",Licentiesleutel
+"Loading payment methods","Betaalmethoden worden geladen"
+"Loki Checkout","Loki Afrekenen"
+"Make Check Payable to","Maak de cheque betaalbaar aan"
+Male,Man
+"Maximum items visible","Maximaal aantal zichtbare items"
+"My billing and shipping address are the same","Mijn factuur- en verzendadres zijn hetzelfde"
+"Newsletter settings",Nieuwsbriefinstellingen
+"No delivery options found","Er zijn geen bezorgopties gevonden"
+"No items in cart","Geen artikelen in het winkelmandje"
+"No locations found","Er zijn geen locaties gevonden"
+"No payment methods available","Er zijn geen betaalmethoden beschikbaar"
+"No payment token for guests","Geen betaaltoken voor gasten"
+"No shipping methods available","Er zijn geen verzendmethoden beschikbaar"
+"No step found with request ""%1""","Er is geen stap gevonden voor het verzoek ""%1"""
+"Not Specified","Niet gespecificeerd"
+"Not a valid postcode","Geen geldige postcode"
+"Not available","Niet beschikbaar"
+"Not specified","Niet gespecificeerd"
+"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","Een van je opgeslagen adressen is ongeldig en wordt overgeslagen. Corrigeer dit in <a href=""%1"">je adresboek</a>."
+"Order Preview",Besteloverzicht
+"Order Summary",Besteloverzicht
+Pagination,Paginering
+Password,Wachtwoord
+"Pay &amp; Place Order","Betalen en bestellen"
+"Pay faster with","Betaal sneller met"
+"Payment Method",Betaalmethode
+"Payment Methods",Betaalmethoden
+"Payment method ""%1"" does not exist.","De betaalmethode ""%1"" bestaat niet."
+"Payment method ""%1"" is not available.","De betaalmethode ""%1"" is niet beschikbaar."
+"Pick up from","Ophalen bij"
+"Place Order","Bestelling plaatsen"
+"Please agree to all the terms and conditions before placing the order.","Ga alstublieft akkoord met alle algemene voorwaarden voordat u de bestelling plaatst."
+"Please enter a valid date","Voer een geldige datum in"
+"Please enter a valid date of birth","Voer een geldige geboortedatum in"
+"Please enter a valid email first","Voer eerst een geldig e-mailadres in"
+"Please enter your address details first","Voer eerst uw adresgegevens in"
+"Please fill in all required fields before proceeding","Vul alstublieft alle verplichte velden in voordat u verdergaat"
+"Postcode ""%1"" has invalid format","De postcode ""%1"" heeft een ongeldige indeling"
+"Postcode ""%1"" needs to be in one of the following formats: %2","Postcode ""%1"" moet in een van de volgende formaten zijn: %2"
+"Postcode ""%1"" needs to be in the format ""%2""","De postcode ""%1"" moet de indeling ""%2"" hebben"
+Price,Prijs
+"Proceed to Review &amp; Payments","Ga verder naar ‘Beoordeling en betalingen’"
+Quantity,Aantal
+"Quote is empty","Het citaat is leeg"
+"Remove coupon code","Couponcode verwijderen"
+"Removed coupon code","Couponcode verwijderd"
+Save,Opslaan
+"Select Default Payment Method","Standaardbetaalmethode selecteren"
+"Select Default Shipping Method","Standaard verzendmethode selecteren"
+"Select existing address from list","Kies een bestaand adres uit de lijst"
+"Send Check to","Stuur de cheque naar"
+Shipping,Verzending
+"Shipping Address",Verzendadres
+"Shipping Method",Verzendmethode
+"Shipping Methods",Verzendmethoden
+"Shipping methods",Verzendmethoden
+"Shipping settings",Verzendinstellingen
+"Show all items","Alle items weergeven"
+"Show all options","Alle opties weergeven"
+"Show less options","Minder opties weergeven"
+"Show more options","Meer opties weergeven"
+"Show opening hours","Openingstijden weergeven"
+"Show password","Wachtwoord weergeven"
+"Sign In",Inloggen
+"Sign Out",Uitloggen
+"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Net als bij de standaard ‘hints’-functie van de Magento-sjabloon verschijnt er voor elke LokiComponent een pop-up met meta-informatie. Je vindt het ofwel handig, ofwel enorm irritant."
+Skin,Huid
+"Step with name ""%1"" not found","Stap met de naam ""%1"" niet gevonden"
+"Subscribe by default","Standaard abonneren"
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","De inloggegevens waren onjuist of je account is tijdelijk geblokkeerd. Wacht even en probeer het later nog eens."
+"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","Het selectievakje waarmee klanten hun verzendadres als factuuradres kunnen gebruiken (of omgekeerd) kan hier worden ingeschakeld of uitgeschakeld."
+"The email address %1 is not available","Het e-mailadres %1 is niet beschikbaar"
+"The email address is not available","Het e-mailadres is niet beschikbaar"
+"To be picked up by:","Af te halen bij:"
+"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Schakel deze instelling in of uit om LokiCheckout direct in of uit te schakelen. Waarschijnlijk laat je deze instelling altijd ingeschakeld."
+Trash,Afval
+"Unknown grid layout ""%1""","Onbekende rasterindeling ""%1"""
+"Unknown skin ""%1""","Onbekende skin ""%1"""
+"Value must contain numbers only","De waarde mag alleen uit cijfers bestaan"
+"View terms","Voorwaarden bekijken"
+"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","Als deze optie is ingeschakeld, wordt de naam van het land in de weergegeven adresvoorbeelden (overzicht verzend- en factuurgegevens) in hoofdletters weergegeven. Als deze optie is uitgeschakeld, wordt het land weergegeven zoals het door Magento wordt aangeleverd."
+"With debugging enabled, further details are added through the checkout, ideal for development.","Als foutopsporing is ingeschakeld, worden tijdens het afrekenen extra details weergegeven, wat ideaal is voor ontwikkeling."
+"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","Bij sommige landen is het veld ‘regio’ verplicht. Bij andere is het optioneel. Wanneer deze optie is ingeschakeld, verdwijnt het veld ‘regio’ als het voor het gekozen land optioneel is."
+"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","Als deze optie is ingeschakeld, wordt het veld ‘BTW-nummer’ verborgen als er geen waarde voor het bedrijf is opgegeven."
+"With this option enabled, the first shipping method is automatically selected.","Als deze optie is ingeschakeld, wordt automatisch de eerste verzendmethode geselecteerd."
+"You are logged in as %1","Je bent aangemeld als %1"
+"You have been subscribed automatically to the newsletter","U bent automatisch aangemeld voor de nieuwsbrief"
+"You have been subscribed to the newsletter","U bent aangemeld voor de nieuwsbrief"
+"You have been unsubscribed from the newsletter","U bent uitgeschreven voor de nieuwsbrief"
+"You have logged in","Je bent ingelogd"
+"You need to be at least %1 years old","Je moet minstens %1 jaar oud zijn"
+"You need to be younger than %1 years old","Je moet jonger zijn dan %1 jaar"
+"Your IBAN number does not have the right format","Uw IBAN-nummer heeft niet de juiste indeling"
+"Your IBAN number is incorrect","Uw IBAN-nummer is onjuist"
+"Your IBAN number needs to start with a country prefix","Je IBAN-nummer moet beginnen met een landcode"
 label,label

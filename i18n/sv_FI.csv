@@ -1,150 +1,151 @@
-"Add Debug Block","Add Debug Block"
-"Add Hints to HTML Output","Add Hints to HTML Output"
-"Add new billing address","Add new billing address"
-"Add new shipping address","Add new shipping address"
-"Additional information","Additional information"
-Address,Address
-"Address Grid Layout","Address Grid Layout"
-"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Adds an HTML comment in each LokiComponent for reviewing via your browser."
+"Add Debug Block","Lisää virheenkorjauslohko"
+"Add Hints to HTML Output","Lisää vihjeitä HTML-tulosteeseen"
+"Add new billing address","Lisää uusi laskutusosoite"
+"Add new shipping address","Lisää uusi toimitusosoite"
+"Additional information",Lisätietoja
+Address,Osoite
+"Address Grid Layout","Osoiteverkoston asettelu"
+"Adds an HTML comment in each LokiComponent for reviewing via your browser.","Lisää jokaiseen LokiComponent-komponenttiin HTML-kommentin, jota voi tarkastella selaimella."
 "All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","All HTML elements in an address block (shipping address, billing address) are ordered according to a Grid
-Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid."
-"An unspecified error occurred. Please contact us for assistance.","An unspecified error occurred. Please contact us for assistance."
-"Applied coupon code","Applied coupon code"
-Apply,Apply
-"Apply Discount Code","Apply Discount Code"
-"Back to previous step","Back to previous step"
-"Back to shipping","Back to shipping"
-"Billing Address","Billing Address"
-"Billing and Shipping Address","Billing and Shipping Address"
-"Billing settings","Billing settings"
-"Block with name ""%1"" not found in grid layout","Block with name ""%1"" not found in grid layout"
-"Capitalize Country In Address Preview","Capitalize Country In Address Preview"
-"Cart settings","Cart settings"
-"Change the complete layout of the checkout by using a specific skin.","Change the complete layout of the checkout by using a specific skin."
-Checkout,Checkout
-"Coupon code","Coupon code"
-"Create an Account","Create an Account"
-"Date of Birth","Date of Birth"
-Debugging,Debugging
-Details,Details
-"Discount Code","Discount Code"
-"Do not show all items","Do not show all items"
-Email,Email
-"Email address is invalid","Email address is invalid"
-Enable,Enable
-"Enable Debugging","Enable Debugging"
-"Enable Same As Billing Checkbox","Enable Same As Billing Checkbox"
-"Enable Vat ID Only For Companies","Enable Vat ID Only For Companies"
-"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages."
-"Enter your emailaddress","Enter your emailaddress"
-"Failed to apply coupon code","Failed to apply coupon code"
-Female,Female
-"Field settings","Field settings"
-"Forgot Your Password?","Forgot Your Password?"
-Free,Free
-Gender,Gender
-General,General
-"Guest checkout is disabled.","Guest checkout is disabled."
-"Hide Region When Optional","Hide Region When Optional"
-"Hide password","Hide password"
-Home,Home
-Instructions,Instructions
-"Invalid email","Invalid email"
-"License Key","License Key"
-"Loading payment methods","Loading payment methods"
-"Loki Checkout","Loki Checkout"
-"Make Check Payable to","Make Check Payable to"
-Male,Male
-"Maximum items visible","Maximum items visible"
-"My billing and shipping address are the same","My billing and shipping address are the same"
-"Newsletter settings","Newsletter settings"
-"No delivery options found","No delivery options found"
-"No items in cart","No items in cart"
-"No locations found","No locations found"
-"No payment methods available","No payment methods available"
-"No payment token for guests","No payment token for guests"
-"No shipping methods available","No shipping methods available"
-"No step found with request ""%1""","No step found with request ""%1"""
-"Not Specified","Not Specified"
-"Not a valid postcode","Not a valid postcode"
-"Not available","Not available"
-"Not specified","Not specified"
-"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>."
-"Order Preview","Order Preview"
-"Order Summary","Order Summary"
-Pagination,Pagination
-Password,Password
-"Pay &amp; Place Order","Pay &amp; Place Order"
-"Pay faster with","Pay faster with"
-"Payment Method","Payment Method"
-"Payment Methods","Payment Methods"
-"Payment method ""%1"" does not exist.","Payment method ""%1"" does not exist."
-"Payment method ""%1"" is not available.","Payment method ""%1"" is not available."
-"Pick up from","Pick up from"
-"Place Order","Place Order"
-"Please agree to all the terms and conditions before placing the order.","Please agree to all the terms and conditions before placing the order."
-"Please enter a valid date","Please enter a valid date"
-"Please enter a valid date of birth","Please enter a valid date of birth"
-"Please enter a valid email first","Please enter a valid email first"
-"Please enter your address details first","Please enter your address details first"
-"Please fill in all required fields before proceeding","Please fill in all required fields before proceeding"
-"Postcode ""%1"" has invalid format","Postcode ""%1"" has invalid format"
-"Postcode ""%1"" needs to be in one of the following formats: %2","Postcode ""%1"" needs to be in one of the following formats: %2"
-"Postcode ""%1"" needs to be in the format ""%2""","Postcode ""%1"" needs to be in the format ""%2"""
-Price,Price
-"Proceed to Review &amp; Payments","Proceed to Review &amp; Payments"
-Quantity,Quantity
-"Quote is empty","Quote is empty"
-"Remove coupon code","Remove coupon code"
-"Removed coupon code","Removed coupon code"
-Save,Save
-"Select Default Payment Method","Select Default Payment Method"
-"Select Default Shipping Method","Select Default Shipping Method"
-"Select existing address from list","Select existing address from list"
-"Send Check to","Send Check to"
-Shipping,Shipping
-"Shipping Address","Shipping Address"
-"Shipping Method","Shipping Method"
-"Shipping Methods","Shipping Methods"
-"Shipping methods","Shipping methods"
-"Shipping settings","Shipping settings"
-"Show all items","Show all items"
-"Show all options","Show all options"
-"Show less options","Show less options"
-"Show more options","Show more options"
-"Show opening hours","Show opening hours"
-"Show password","Show password"
-"Sign In","Sign In"
-"Sign Out","Sign Out"
-"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
-Skin,Skin
-"Step with name ""%1"" not found","Step with name ""%1"" not found"
-"Subscribe by default","Subscribe by default"
-"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
-"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
-"The email address %1 is not available","The email address %1 is not available"
-"The email address is not available","The email address is not available"
-"To be picked up by:","To be picked up by:"
-"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
-Trash,Trash
-"Unknown grid layout ""%1""","Unknown grid layout ""%1"""
-"Unknown skin ""%1""","Unknown skin ""%1"""
-"Value must contain numbers only","Value must contain numbers only"
-"View terms","View terms"
-"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento."
-"With debugging enabled, further details are added through the checkout, ideal for development.","With debugging enabled, further details are added through the checkout, ideal for development."
-"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country."
-"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","With this option enabled, the VAT ID field is hidden if there is no value for the company given."
-"With this option enabled, the first shipping method is automatically selected.","With this option enabled, the first shipping method is automatically selected."
-"You are logged in as %1","You are logged in as %1"
-"You have been subscribed automatically to the newsletter","You have been subscribed automatically to the newsletter"
-"You have been subscribed to the newsletter","You have been subscribed to the newsletter"
-"You have been unsubscribed from the newsletter","You have been unsubscribed from the newsletter"
-"You have logged in","You have logged in"
-"You need to be at least %1 years old","You need to be at least %1 years old"
-"You need to be younger than %1 years old","You need to be younger than %1 years old"
-"Your IBAN number does not have the right format","Your IBAN number does not have the right format"
-"Your IBAN number is incorrect","Your IBAN number is incorrect"
-"Your IBAN number needs to start with a country prefix","Your IBAN number needs to start with a country prefix"
-label,label
+Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting configures the default grid.","Kaikki osoitelohkon HTML-elementit (toimitusosoite, laskutusosoite) järjestetään ruudukon
+mukaisesti (luodaan tiedoston <code>etc/loki_checkout.xml</code> avulla). Tällä asetuksella määritetään oletusruudukko."
+"An error occurred while placing the order.","Tilauksen tekemisessä tapahtui virhe."
+"An unspecified error occurred. Please contact us for assistance.","Tapahtui määrittelemätön virhe. Ota meihin yhteyttä, jos tarvitset apua."
+"Applied coupon code","Käytetty alennuskoodi"
+Apply,Hae
+"Apply Discount Code","Käytä alennuskoodia"
+"Back to previous step","Takaisin edelliseen vaiheeseen"
+"Back to shipping","Takaisin toimitustietoihin"
+"Billing Address",Laskutusosoite
+"Billing and Shipping Address","Laskutus- ja toimitusosoite"
+"Billing settings",Laskutusasetukset
+"Block with name ""%1"" not found in grid layout","Ruudukon asettelusta ei löytynyt lohkoa nimeltä ""%1"""
+"Capitalize Country In Address Preview","Kirjoita osoitteen esikatselussa maan nimi isolla alkukirjaimella"
+"Cart settings","Ostoskorin asetukset"
+"Change the complete layout of the checkout by using a specific skin.","Muuta kassaprosessin ulkoasua kokonaan käyttämällä tiettyä ulkoasumallia."
+Checkout,Kassalle
+"Coupon code",Alennuskoodi
+"Create an Account","Luo tili"
+"Date of Birth",Syntymäaika
+Debugging,"Virheiden etsiminen"
+Details,Tiedot
+"Discount Code",Alennuskoodi
+"Do not show all items","Älä näytä kaikkia kohteita"
+Email,Sähköposti
+"Email address is invalid","Sähköpostiosoite on virheellinen"
+Enable,"Ota käyttöön"
+"Enable Debugging","Ota virheenkorjaus käyttöön"
+"Enable Same As Billing Checkbox","Ota käyttöön ”Sama kuin laskutus” -valintaruutu"
+"Enable Vat ID Only For Companies","Ota arvonlisäverotunnus käyttöön vain yrityksille"
+"Enter your LokiCheckout license key as found in our Yireo shop under ""My Licenses"". The license key is also used as composer key to download packages.","Syötä LokiCheckout-lisenssiavain, jonka löydät Yireo-kaupastamme kohdasta ”Omat lisenssit”. Lisenssiavainta käytetään myös säveltäjäavaimena pakettien lataamiseen."
+"Enter your emailaddress","Kirjoita sähköpostiosoitteesi"
+"Failed to apply coupon code","Kuponkikoodia ei voitu käyttää"
+Female,Nainen
+"Field settings",Kenttäasetukset
+"Forgot Your Password?","Unohditko salasanasi?"
+Free,Ilmainen
+Gender,Sukupuoli
+General,Yleistä
+"Guest checkout is disabled.","Vieraskassatoiminto on poistettu käytöstä."
+"Hide Region When Optional","Piilota alue, kun se on valinnainen"
+"Hide password","Piilota salasana"
+Home,Etusivu
+Instructions,Ohjeet
+"Invalid email","Virheellinen sähköpostiosoite"
+"License Key",Lisenssiavain
+"Loading payment methods","Maksutapoja ladataan"
+"Loki Checkout",Loki-kassalle
+"Make Check Payable to","Maksun saaja"
+Male,Mies
+"Maximum items visible","Näkyvien kohteiden enimmäismäärä"
+"My billing and shipping address are the same","Laskutus- ja toimitusosoitteeni ovat samat"
+"Newsletter settings","Uutiskirjeen asetukset"
+"No delivery options found","Toimitusvaihtoehtoja ei löytynyt"
+"No items in cart","Ostoskorissa ei ole tuotteita"
+"No locations found","Paikkoja ei löytynyt"
+"No payment methods available","Maksutapoja ei ole saatavilla"
+"No payment token for guests","Vieraille ei ole maksutunnusta"
+"No shipping methods available","Toimitustapoja ei ole saatavilla"
+"No step found with request ""%1""","Pyynnöllä ”%1” ei löytynyt yhtään vaihetta"
+"Not Specified","Ei määritelty"
+"Not a valid postcode","Postinumero ei ole kelvollinen"
+"Not available","Ei saatavilla"
+"Not specified","Ei määritelty"
+"One of your saved addresses is invalid and is skipped. Fix it in <a href=""%1"">your address book</a>.","Yksi tallennetuista osoitteistasi on virheellinen, joten se ohitetaan. Korjaa se <a href=""%1"">osoitekirjassasi</a>."
+"Order Preview","Tilauksen esikatselu"
+"Order Summary",Tilausyhteenveto
+Pagination,Sivunumerointi
+Password,Salasana
+"Pay &amp; Place Order","Maksu ja tilauksen tekeminen"
+"Pay faster with","Maksa nopeammin"
+"Payment Method",Maksutapa
+"Payment Methods",Maksutavat
+"Payment method ""%1"" does not exist.","Maksutapaa ”%1” ei ole olemassa."
+"Payment method ""%1"" is not available.","Maksutapaa ”%1” ei ole käytettävissä."
+"Pick up from","Nouto paikasta"
+"Place Order","Tee tilaus"
+"Please agree to all the terms and conditions before placing the order.","Hyväksy kaikki käyttöehdot ennen tilauksen tekemistä."
+"Please enter a valid date","Syötä kelvollinen päivämäärä"
+"Please enter a valid date of birth","Syötä kelvollinen syntymäaika"
+"Please enter a valid email first","Syötä ensin kelvollinen sähköpostiosoite"
+"Please enter your address details first","Syötä ensin osoitetietosi"
+"Please fill in all required fields before proceeding","Täytä kaikki pakolliset kentät ennen kuin jatkat"
+"Postcode ""%1"" has invalid format","Postinumero ”%1” on virheellisessä muodossa"
+"Postcode ""%1"" needs to be in one of the following formats: %2","Postinumero ”%1” on oltava jossakin seuraavista muodoista: %2"
+"Postcode ""%1"" needs to be in the format ""%2""","Postinumero ”%1” on oltava muodossa ”%2”"
+Price,Hinta
+"Proceed to Review &amp; Payments","Siirry kohtaan ”Tarkistus ja maksut”"
+Quantity,Määrä
+"Quote is empty","Lainaus on tyhjä"
+"Remove coupon code","Poista kuponkikoodi"
+"Removed coupon code","Kuponkikoodi poistettu"
+Save,Tallenna
+"Select Default Payment Method","Valitse oletusmaksutapa"
+"Select Default Shipping Method","Valitse oletusarvoinen toimitustapa"
+"Select existing address from list","Valitse olemassa oleva osoite luettelosta"
+"Send Check to","Lähetä sekki osoitteeseen"
+Shipping,Toimitus
+"Shipping Address",Toimitusosoite
+"Shipping Method",Toimitustapa
+"Shipping Methods",Toimitustavat
+"Shipping methods",Toimitustavat
+"Shipping settings",Toimitusasetukset
+"Show all items","Näytä kaikki tuotteet"
+"Show all options","Näytä kaikki vaihtoehdot"
+"Show less options","Näytä vähemmän vaihtoehtoja"
+"Show more options","Näytä lisää vaihtoehtoja"
+"Show opening hours","Näytä aukioloajat"
+"Show password","Näytä salasana"
+"Sign In","Kirjaudu sisään"
+"Sign Out","Kirjaudu ulos"
+"Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Aivan kuten alkuperäisen Magento-mallin vihjeiden toiminta, tämäkin avaa ponnahdusikkunan, jossa näkyy metatietoja kustakin LokiComponent-komponentista. Joko pidät siitä tai sitten koet sen äärimmäisen ärsyttäväksi."
+Skin,Iho
+"Step with name ""%1"" not found","Nimellä ""%1"" olevaa vaihetta ei löytynyt"
+"Subscribe by default","Tilaa oletuksena"
+"The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","Tilin kirjautumistiedot olivat virheelliset tai tilisi on väliaikaisesti poistettu käytöstä. Odota hetki ja yritä myöhemmin uudelleen."
+"The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","Täältä voidaan valita valintaruutu, jonka avulla asiakkaat voivat käyttää toimitusosoitettaan myös laskutusosoitteena (tai päinvastoin)."
+"The email address %1 is not available","Sähköpostiosoitetta %1 ei ole käytettävissä"
+"The email address is not available","Sähköpostiosoitetta ei ole käytettävissä"
+"To be picked up by:",Nouto:
+"Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Kytke tämä asetus päälle tai pois päältä, jotta voit ottaa LokiCheckoutin käyttöön tai poistaa sen käytöstä lennossa. Todennäköisesti pidät tämän asetuksen päällä koko ajan."
+Trash,Roskakori
+"Unknown grid layout ""%1""","Tuntematon ruudukon asettelu ""%1"""
+"Unknown skin ""%1""","Tuntematon ulkoasu ""%1"""
+"Value must contain numbers only","Arvo saa sisältää vain numeroita"
+"View terms","Katso ehdot"
+"When enabled, the country name in rendered address previews (shipping/billing summary) is displayed in uppercase. When disabled, the country is shown as provided by Magento.","Kun tämä asetus on käytössä, osoitteen esikatselussa (toimitus- ja laskutusyhteenveto) näkyvä maan nimi näkyy isoilla kirjaimilla. Kun asetus on pois käytöstä, maa näkyy sellaisena kuin Magento sen ilmoittaa."
+"With debugging enabled, further details are added through the checkout, ideal for development.","Kun virheenkorjaus on käytössä, kassalle siirryttäessä näkyy lisätietoja, mikä on ihanteellista kehitystyöhön."
+"With some countries, the region is required. With some, it is optional. When this option is enabled, the region field disappears if it is optional for the choosen country.","Joissakin maissa alueen ilmoittaminen on pakollista. Joissakin maissa se on vapaaehtoista. Kun tämä asetus on käytössä, alue-kenttä katoaa, jos se on valitun maan osalta vapaaehtoinen."
+"With this option enabled, the VAT ID field is hidden if there is no value for the company given.","Kun tämä asetus on käytössä, ALV-tunnus-kenttä piilotetaan, jos yritykselle ei ole annettu arvoa."
+"With this option enabled, the first shipping method is automatically selected.","Kun tämä vaihtoehto on käytössä, ensimmäinen toimitustapa valitaan automaattisesti."
+"You are logged in as %1","Olet kirjautunut sisään nimellä %1"
+"You have been subscribed automatically to the newsletter","Sinut on lisätty automaattisesti uutiskirjeen tilaajiksi"
+"You have been subscribed to the newsletter","Olet tilannut uutiskirjeen"
+"You have been unsubscribed from the newsletter","Uutiskirjeen tilauksesi on peruutettu"
+"You have logged in","Olet kirjautunut sisään"
+"You need to be at least %1 years old","Sinun on oltava vähintään %1-vuotias"
+"You need to be younger than %1 years old","Sinun on oltava alle %1-vuotias"
+"Your IBAN number does not have the right format","IBAN-numerosi ei ole oikeassa muodossa"
+"Your IBAN number is incorrect","IBAN-numerosi on virheellinen"
+"Your IBAN number needs to start with a country prefix","IBAN-numerosi on aloitettava maakohtaisella etuliitteellä"
+label,etiketti
