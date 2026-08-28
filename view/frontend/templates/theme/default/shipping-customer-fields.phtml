@@ -20,6 +20,5 @@ if ($checkoutState->getQuote()->isVirtual()) {
 }
 ?>
 <div class="<?= /* @noEscape */ $css('') ?>" style="<?= /* @noEscape */ $style('') ?>">
-    <?= /* @noEscape */
-$block->getBlockHtml('loki-checkout.customer') ?>
+    <?= /* @noEscape */ $block->getBlockHtml('loki-checkout.customer') ?>
 </div>
