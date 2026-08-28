@@ -30,6 +30,7 @@
         "Loki_CssUtils",
         "Loki_FieldComponents",
         "Loki_MapComponents",
+        "Magento_AdminNotification",
         "Magento_Backend",
         "Magento_Catalog",
         "Magento_CatalogInventory",
@@ -56,6 +57,7 @@
         "Magento_Theme",
         "Magento_Ui",
         "Magento_User",
+        "Magento_Variable",
         "Magento_Vault",
         "Magento_Widget",
         "Yireo_CspUtilities"
@@ -215,7 +217,7 @@
     ],
     "tests": {
         "unit": 15,
-        "integration": 318,
+        "integration": 324,
         "functional": 12
     },
     "phpcs_severity": "9",
