@@ -14,9 +14,11 @@ use Magento\Framework\View\Element\Template;
         required: true,
         activeTabId: 'delivery-dates',
         defaultDeliveryCount: 3,
+        visibleDeliveryOffset: 0,
         visibleDeliveryCount: 3,
         expandDeliveryCount: 3,
         defaultLocationCount: 3,
+        visibleLocationOffset: 0,
         visibleLocationCount: 3,
         expandLocationCount: 3,
         isShippingAddressValid: true,
@@ -56,7 +58,7 @@ use Magento\Framework\View\Element\Template;
                 return [];
             }
 
-            return this.deliveryDates.slice(0, this.visibleDeliveryCount);
+            return this.deliveryDates.slice(this.visibleDeliveryOffset, this.visibleDeliveryCount);
         },
         hasDeliveryDates() {
             return this.deliveryDates.length > 0;
@@ -80,7 +82,7 @@ use Magento\Framework\View\Element\Template;
             return JSON.stringify(value) === JSON.stringify(this.value);
         },
         getVisibleLocations() {
-            return this.getSortedLocations().slice(0, this.visibleLocationCount);
+            return this.getSortedLocations().slice(this.visibleLocationOffset, this.visibleLocationCount);
         },
         hasLocations() {
             return this.locations.length > 0;
