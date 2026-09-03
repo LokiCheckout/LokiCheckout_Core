@@ -4,7 +4,7 @@
 ![Magento version](https://img.shields.io/badge/Magento-2.4.6%20%7C%202.4.9-orange)
 ![PHP version](https://img.shields.io/badge/PHP-8.2%E2%80%938.5-777BB4)
 ![License](https://img.shields.io/badge/License-OSL--3.0-blue)
-![Packagist](https://img.shields.io/packagist/v/loki-checkout/magento2-core)
+![Latest Version](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/badges/release.svg)
 <!-- badges.specs.end -->
 
 
