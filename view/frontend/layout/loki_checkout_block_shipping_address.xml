@@ -193,6 +193,9 @@
                     template="Loki_FieldComponents::form/field.phtml">
                     <arguments>
                         <argument name="field_type" xsi:type="string">select</argument>
+                        <!--
+                        <argument name="field_type" xsi:type="string">combobox</argument>
+                        -->
                         <argument name="option_model" xsi:type="object">
                             LokiCheckout\Core\ViewModel\OptionModel\CountryOptionModel
                         </argument>
