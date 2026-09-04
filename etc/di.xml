@@ -292,7 +292,25 @@
     <type name="LokiCheckout\Core\Step\FinalStep\TaskListing">
         <arguments>
             <argument name="tasks" xsi:type="array">
+                <item name="recaptcha" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\RecaptchaTask</item>
                 <item name="saveInAddressBook" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\SaveInAddressBookTask</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <preference
+        for="LokiCheckout\Core\Recaptcha\TokenValidatorInterface"
+        type="LokiCheckout\Core\Recaptcha\TokenValidator"/>
+
+    <type name="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaContext">
+        <arguments>
+            <argument name="parentContexts" xsi:type="array">
+                <item name="checkout" xsi:type="object">LokiCheckout\Core\Component\Base\Generic\CheckoutContext</item>
+            </argument>
+            <argument name="dependencies" xsi:type="array">
+                <item name="recaptchaConfig" xsi:type="object">LokiCheckout\Core\Recaptcha\Config\Proxy</item>
+                <item name="recaptchaGuard" xsi:type="object">LokiCheckout\Core\Recaptcha\Guard\Proxy</item>
+                <item name="tokenValidator" xsi:type="object">LokiCheckout\Core\Recaptcha\TokenValidatorInterface\Proxy</item>
             </argument>
         </arguments>
     </type>

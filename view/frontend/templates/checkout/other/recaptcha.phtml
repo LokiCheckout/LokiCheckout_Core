@@ -1,0 +1,30 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Base\ViewModel\Block\ChildRenderer;
+use Loki\Components\Util\Block\BlockRenderer;
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.6.0 */
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+/** @var RecaptchaViewModel $viewModel */
+/** @var ChildRenderer $childRenderer */
+/** @var BlockRenderer $blockRenderer */
+?>
+<div class="<?= $escaper->escapeHtml($css('field')) ?>">
+    <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
+
+    <?php if ($viewModel->needsWidgetElement()): ?>
+        <div x-ignore x-ref="widget"></div>
+    <?php endif; ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'legal-notice') ?>
+
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
+    <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
+</div>

@@ -30,6 +30,10 @@
                 template="LokiCheckout_Core::script/aria-invalid.phtml"/>
 
             <block
+                name="loki-checkout.script.recaptcha-loader"
+                template="LokiCheckout_Core::script/recaptcha-loader.phtml"/>
+
+            <block
                 name="loki-checkout.script.validators.email"
                 template="LokiCheckout_Core::script/validator/email.phtml"/>
             <block
@@ -47,6 +51,10 @@
                 <block
                     name="loki-checkout.script.component-partial.shipping"
                     template="LokiCheckout_Core::script/component-partial/shipping-component-partial.phtml"/>
+
+                <block
+                    name="loki-checkout.script.component-partial.recaptcha-guard"
+                    template="LokiCheckout_Core::script/component-partial/recaptcha-guard-component-partial.phtml"/>
             </referenceBlock>
 
             <referenceBlock name="loki.script.component-type">
@@ -110,6 +118,9 @@
                 <block
                     name="loki-checkout.script.components.newsletter"
                     template="LokiCheckout_Core::script/component/newsletter-component.phtml"/>
+                <block
+                    name="loki-checkout.script.components.recaptcha"
+                    template="LokiCheckout_Core::script/component/recaptcha-component.phtml"/>
                 <block
                     name="loki-checkout.script.components.grid-layout-component"
                     template="LokiCheckout_Core::script/component/grid-layout-component.phtml"/>

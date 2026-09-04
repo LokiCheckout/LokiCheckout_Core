@@ -39,6 +39,18 @@
                     name="loki-checkout.login.form.inner" as="form"
                     template="LokiCheckout_Core::customer/login.phtml">
                     <container name="form.additional.info" as="form_additional_info"/>
+
+                    <block
+                        name="loki-checkout.login.form.recaptcha" as="recaptcha"
+                        template="LokiCheckout_Core::checkout/other/recaptcha.phtml">
+                        <arguments>
+                            <argument name="form_id" xsi:type="string">customer_login</argument>
+                        </arguments>
+
+                        <block
+                            name="loki-checkout.login.form.recaptcha.legal-notice" as="legal-notice"
+                            template="LokiCheckout_Core::checkout/other/recaptcha/legal-notice.phtml"/>
+                    </block>
                 </block>
 
                 <container

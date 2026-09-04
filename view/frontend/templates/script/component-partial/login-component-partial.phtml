@@ -27,7 +27,11 @@ use Magento\Framework\View\Element\Template;
 
             return !this.email || !this.password;
         },
-        submitLogin() {
+        async submitLogin() {
+            if (false === await this.awaitRecaptcha()) {
+                return;
+            }
+
             this.post({
                 email: this.email,
                 password: this.password,

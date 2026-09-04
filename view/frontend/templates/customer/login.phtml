@@ -81,6 +81,8 @@ use Magento\Framework\View\Element\Template;
         <?= /* @noEscape */ $block->getChildHtml('form_additional_info') ?>
     </div>
 
+    <?= /* @noEscape */ $block->getChildHtml('recaptcha') ?>
+
     <div class="<?= $escaper->escapeHtml($css('flex flex-wrap gap-2', 'toolbar')) ?>">
         <button
             type="button"

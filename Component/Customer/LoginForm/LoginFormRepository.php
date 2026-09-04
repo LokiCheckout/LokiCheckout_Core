@@ -4,6 +4,9 @@ namespace LokiCheckout\Core\Component\Customer\LoginForm;
 
 use Loki\Components\Component\ComponentRepository;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
+use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
+use LokiCheckout\Core\Recaptcha\FormId;
+use LokiCheckout\Core\Recaptcha\Guard;
 use LokiCheckout\Core\Util\LoginCustomer;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Customer\Model\Session as CustomerSession;
@@ -16,6 +19,8 @@ class LoginFormRepository extends ComponentRepository
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly LoginCustomer $loginCustomer,
+        private readonly Guard $recaptchaGuard,
+        private readonly RecaptchaConfig $recaptchaConfig,
     ) {
     }
 
@@ -31,6 +36,12 @@ class LoginFormRepository extends ComponentRepository
         }
 
         if (!isset($value['email']) || !isset($value['password'])) {
+            return;
+        }
+
+        if (false === $this->recaptchaGuard->assertPassed(FormId::CUSTOMER_LOGIN)) {
+            $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
+
             return;
         }
 

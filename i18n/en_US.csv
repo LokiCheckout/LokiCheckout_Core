@@ -93,10 +93,12 @@ Password,Password
 "Postcode ""%1"" has invalid format","Postcode ""%1"" has invalid format"
 "Postcode ""%1"" needs to be in one of the following formats: %2","Postcode ""%1"" needs to be in one of the following formats: %2"
 "Postcode ""%1"" needs to be in the format ""%2""","Postcode ""%1"" needs to be in the format ""%2"""
+"Privacy Policy","Privacy Policy"
 Price,Price
 "Proceed to Review &amp; Payments","Proceed to Review &amp; Payments"
 Quantity,Quantity
 "Quote is empty","Quote is empty"
+"reCAPTCHA verification failed.","reCAPTCHA verification failed."
 "Remove coupon code","Remove coupon code"
 "Removed coupon code","Removed coupon code"
 Save,Save
@@ -120,12 +122,15 @@ Shipping,Shipping
 "Sign Out","Sign Out"
 "Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying."
 Skin,Skin
+"Something went wrong with reCAPTCHA. Please contact the store owner.","Something went wrong with reCAPTCHA. Please contact the store owner."
 "Step with name ""%1"" not found","Step with name ""%1"" not found"
 "Subscribe by default","Subscribe by default"
 "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
 "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."
 "The email address %1 is not available","The email address %1 is not available"
 "The email address is not available","The email address is not available"
+"Terms of Service","Terms of Service"
+"This site is protected by reCAPTCHA and the Google %1 and %2 apply.","This site is protected by reCAPTCHA and the Google %1 and %2 apply."
 "To be picked up by:","To be picked up by:"
 "Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times.","Toggle this setting to enable or disable the LokiCheckout on the fly. Probably you will keep this on at all times."
 Trash,Trash

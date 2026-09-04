@@ -4,6 +4,8 @@
         <move element="loki-checkout.login" destination="loki-checkout.sidebar" as="login" before="-"/>
         <move element="loki-checkout.agreements" destination="loki-checkout.sidebar.other" as="agreements"/>
         <move element="loki-checkout.newsletter" destination="loki-checkout.sidebar.other" as="newsletter"/>
+        <move element="loki-checkout.newsletter.recaptcha" destination="loki-checkout.sidebar.other" as="newsletter-recaptcha"/>
+        <move element="loki-checkout.recaptcha.place-order" destination="loki-checkout.sidebar.other" as="recaptcha"/>
         <move element="loki-checkout.progressbar" destination="loki-checkout" as="progressbar" />
     </body>
 </page>

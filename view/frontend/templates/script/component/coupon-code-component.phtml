@@ -10,6 +10,8 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutCouponCodeComponent', () => ({
             ...LokiCheckoutComponentType,
+            ...LokiCheckoutRecaptchaGuardComponentPartial,
+            recaptchaFormId: 'coupon_code',
             detailOpen: false,
             initCouponCode() {
                 if (this.$refs.details) {
@@ -37,7 +39,11 @@ use Magento\Framework\View\Element\Template;
                     task: 'remove'
                 });
             },
-            applyCouponCode() {
+            async applyCouponCode() {
+                if (false === await this.awaitRecaptcha()) {
+                    return;
+                }
+
                 this.post({
                     code: this.value,
                     task: 'apply'

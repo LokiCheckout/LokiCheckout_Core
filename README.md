@@ -24,6 +24,15 @@ bin/magento module:enable LokiCheckout_Core
 ## Settings
 In the Magento Admin Panel, you can navigate to **Store > Configuration > Loki > LokiCheckout** for various settings.
 
+## Google reCAPTCHA
+The checkout picks up the regular Magento reCAPTCHA configuration under **Stores > Configuration > Security >
+Google reCAPTCHA Storefront**. There is no additional Loki setting involved: as soon as a type is selected for
+one of the storefront forms below, and the matching Website Key and Secret Key are filled in, the challenge is
+rendered and verified inside the checkout.
+
+Supported form ids: `place_order`, `customer_login`, `newsletter` and `coupon_code`. Supported types: reCAPTCHA
+v2 ("I am not a robot"), reCAPTCHA v2 Invisible and reCAPTCHA v3 Invisible.
+
 ## Current status
 
 <!-- badges.test.start -->

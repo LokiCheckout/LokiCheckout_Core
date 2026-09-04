@@ -33,6 +33,8 @@ $fieldId = $block->getFieldId();
         aria-label="<?= $escaper->escapeHtml(__('Discount Code')) ?>"
         class="<?= $escaper->escapeHtml($css('form-input w-full mb-3', 'input')) ?>">
 
+    <?= /* @noEscape */ $block->getChildHtml('recaptcha') ?>
+
     <button
         type="button"
         class="<?= $escaper->escapeHtml($css('btn btn-secondary w-full justify-center text-center', 'button-apply')) ?>"

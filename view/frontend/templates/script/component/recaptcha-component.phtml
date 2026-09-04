@@ -1,0 +1,142 @@
+<?php
+declare(strict_types=1);
+
+use LokiCheckout\Core\Recaptcha\Type;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.6.0 */
+/** @var Template $block */
+/** @var Escaper $escaper */
+?>
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('LokiCheckoutRecaptchaComponent', () => ({
+            ...LokiCheckoutComponentType,
+            formId: '',
+            captchaType: '',
+            invisible: true,
+            settings: {},
+            errorText: '',
+            postResolver: null,
+            isCheckbox() {
+                return this.captchaType === '<?= $escaper->escapeJs(Type::CHECKBOX) ?>';
+            },
+            hasErrorMessage() {
+                return this.messages.some(message => message.type === 'error');
+            },
+            /**
+             * The step forward button recalculates its own state on this event only.
+             */
+            setValid(valid) {
+                this.valid = valid;
+                this.notifyComponentUpdate();
+            },
+            notifyComponentUpdate() {
+                document.dispatchEvent(new CustomEvent('loki-components.component.update', {
+                    detail: {component: this}
+                }));
+            },
+            initRecaptcha() {
+                if (typeof LokiCheckoutRecaptcha === 'undefined') {
+                    return;
+                }
+
+                LokiCheckoutRecaptcha.setHandler(this.formId, {
+                    onToken: () => {
+                        this.messages = [];
+                        this.setValid(true);
+                    },
+                    onExpired: () => this.setValid(false),
+                    onError: () => this.setValid(false),
+                });
+
+                if (this.isCheckbox()) {
+                    // A rejected token is spent, so start over instead of resubmitting the same one.
+                    if (this.hasErrorMessage()) {
+                        LokiCheckoutRecaptcha.reset(this.formId);
+                    }
+
+                    this.valid = LokiCheckoutRecaptcha.getResponse(this.formId) !== '';
+                } else {
+                    // The invisible types are only verified on submit, so a previous failure must
+                    // not keep the submit button disabled. Their verdict is read from the messages.
+                    this.valid = true;
+                }
+
+                if (!this.$refs.widget) {
+                    return;
+                }
+
+                LokiCheckoutRecaptcha.render(this.formId, this.$refs.widget, this.settings)
+                    .catch(error => {
+                        LokiCheckoutLogger.debug('Failed to render reCAPTCHA', error);
+                    });
+            },
+            /**
+             * Obtain a token and hand it to the server, which verifies it and records the pass for
+             * the action that follows. Resolves to whether the server accepted the token.
+             */
+            executeAndPost() {
+                if (typeof LokiCheckoutRecaptcha === 'undefined') {
+                    return Promise.resolve(false);
+                }
+
+                return LokiCheckoutRecaptcha.execute(this.formId, this.captchaType, this.settings)
+                    .then(token => {
+                        if (!token) {
+                            throw new Error('No reCAPTCHA token');
+                        }
+
+                        this.messages = [];
+
+                        return new Promise(resolve => {
+                            this.postResolver = resolve;
+                            this.post(token);
+                        });
+                    })
+                    .catch(error => {
+                        LokiCheckoutLogger.debug('Failed to execute reCAPTCHA', error);
+                        LokiCheckoutRecaptcha.reset(this.formId);
+                        this.addError(this.errorText);
+
+                        // The invisible types are verified on submit, so stay usable for a retry.
+                        this.setValid(false === this.isCheckbox());
+
+                        return false;
+                    });
+            },
+            beforePostNextStep() {
+                return this.executeAndPost().then(accepted => {
+                    if (false === accepted) {
+                        // Rejecting stops the step forward button from placing the order.
+                        throw new Error('reCAPTCHA verification failed');
+                    }
+                });
+            },
+            /**
+             * This component re-renders itself after a post, which replaces the Alpine instance.
+             * The verdict therefore has to be read from the instance that is currently registered.
+             */
+            isAccepted() {
+                const current = Alpine.store('LokiCheckout').getComponentArray().find(component => {
+                    return component.formId === this.formId && !!component.captchaType;
+                }) || this;
+
+                return current.valid && !current.messages.some(message => message.type === 'error');
+            },
+            afterPostFinally() {
+                LokiCheckoutComponentType.afterPostFinally.call(this);
+
+                if (this.postResolver) {
+                    const resolve = this.postResolver;
+                    this.postResolver = null;
+                    resolve(this.isAccepted());
+
+                    // Let the step forward button recalculate after it handled the verdict.
+                    setTimeout(() => this.notifyComponentUpdate(), 0);
+                }
+            },
+        }));
+    });
+</script>

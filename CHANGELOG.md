@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Add Google reCAPTCHA support, driven by the Magento core configuration (`recaptcha_frontend`), for
+  placing the order, the checkout login form, the newsletter subscription and the coupon code form
 
 ## [2.6.0] - 28 August 2026
 ### Added

@@ -1,0 +1,34 @@
+<?php
+declare(strict_types=1);
+
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.6.0 */
+/** @var Template $block */
+?>
+<script>
+    const LokiCheckoutRecaptchaGuardComponentPartial = {
+        recaptchaFormId: '',
+        getRecaptchaComponent() {
+            if (!this.recaptchaFormId) {
+                return null;
+            }
+
+            return Alpine.store('LokiCheckout').getComponentArray().find(component => {
+                return component.formId === this.recaptchaFormId && !!component.captchaType;
+            });
+        },
+        /**
+         * Resolves to false when reCAPTCHA is configured for this form but the challenge was not
+         * passed. Resolves to true when there is nothing to verify.
+         */
+        async awaitRecaptcha() {
+            const component = this.getRecaptchaComponent();
+            if (!component) {
+                return true;
+            }
+
+            return await component.executeAndPost();
+        },
+    };
+</script>

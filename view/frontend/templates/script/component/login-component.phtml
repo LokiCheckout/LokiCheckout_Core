@@ -10,7 +10,9 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutLoginComponent', () => ({
             ...LokiComponentType,
+            ...LokiCheckoutRecaptchaGuardComponentPartial,
             ...LokiCheckoutLoginComponentPartial,
+            recaptchaFormId: 'customer_login',
         }));
     });
 </script>

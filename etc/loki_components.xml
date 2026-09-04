@@ -245,6 +245,38 @@
     </component>
 
     <component
+        name="loki-checkout.recaptcha.place-order"
+        context="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaContext"
+        viewModel="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel"
+        repository="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaRepository">
+        <target name="loki-checkout.recaptcha.place-order"/>
+    </component>
+
+    <component
+        name="loki-checkout.login.form.recaptcha"
+        context="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaContext"
+        viewModel="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel"
+        repository="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaRepository">
+        <target name="loki-checkout.login.form.recaptcha"/>
+    </component>
+
+    <component
+        name="loki-checkout.newsletter.recaptcha"
+        context="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaContext"
+        viewModel="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel"
+        repository="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaRepository">
+        <target name="loki-checkout.newsletter.recaptcha"/>
+    </component>
+
+    <component
+        name="loki-checkout.sidebar.coupon_code.recaptcha"
+        context="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaContext"
+        viewModel="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel"
+        repository="LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaRepository">
+        <target name="loki-checkout.sidebar.coupon_code.recaptcha"/>
+    </component>
+
+    <component
         name="loki-checkout.steps.shipping"
         context="LokiCheckout\Core\Component\Checkout\Step\ShippingStep\ShippingStepContext"
         viewModel="LokiCheckout\Core\Component\Checkout\Step\ShippingStep\ShippingStepViewModel">

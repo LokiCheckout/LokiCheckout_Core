@@ -12,6 +12,15 @@ use Magento\Framework\View\Element\Template;
     document.addEventListener('alpine:init', () => {
         Alpine.data('LokiCheckoutNewsletterComponent', () => ({
             ...LokiCheckoutComponentType,
+            ...LokiCheckoutRecaptchaGuardComponentPartial,
+            recaptchaFormId: 'newsletter',
+            async post(value) {
+                if (false === await this.awaitRecaptcha()) {
+                    return;
+                }
+
+                return LokiCheckoutComponentType.post.call(this, value);
+            },
             initListenToDisabledClicks() {
                 this.$el.addEventListener('click', (e) => {
                     if (this.disabled) {

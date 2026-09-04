@@ -4,6 +4,9 @@ namespace LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode;
 
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use Loki\Field\Component\Base\Field\FieldRepository;
+use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
+use LokiCheckout\Core\Recaptcha\FormId;
+use LokiCheckout\Core\Recaptcha\Guard;
 
 /**
  * @method CheckoutContext getContext()
@@ -11,6 +14,8 @@ use Loki\Field\Component\Base\Field\FieldRepository;
 class CouponCodeRepository extends FieldRepository
 {
     public function __construct(
+        private readonly Guard $recaptchaGuard,
+        private readonly RecaptchaConfig $recaptchaConfig,
         private string $regex = '([^a-zA-Z0-9\-_]+)'
     ) {
     }
@@ -29,6 +34,12 @@ class CouponCodeRepository extends FieldRepository
         $messageManager = $this->getContext()->getMessageManager();
         $quote = $this->getContext()->getCheckoutState()->getQuote();
         if ($value['task'] === 'apply') {
+            if (false === $this->recaptchaGuard->assertPassed(FormId::COUPON_CODE)) {
+                $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
+
+                return;
+            }
+
             $couponCode = $this->filter($value['code']);
             $quote->setCouponCode($couponCode);
             $quote->getShippingAddress()->setCollectShippingRates(true);

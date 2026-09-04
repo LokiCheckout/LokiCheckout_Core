@@ -3,12 +3,21 @@
 namespace LokiCheckout\Core\Component\Checkout\Other\Newsletter;
 
 use Loki\Field\Component\Base\Field\FieldRepository;
+use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
+use LokiCheckout\Core\Recaptcha\FormId;
+use LokiCheckout\Core\Recaptcha\Guard;
 
 /**
  * @method NewsletterContext getContext()
  */
 class NewsletterRepository extends FieldRepository
 {
+    public function __construct(
+        private readonly Guard $recaptchaGuard,
+        private readonly RecaptchaConfig $recaptchaConfig,
+    ) {
+    }
+
     public function getValue(): mixed
     {
         $email = $this->getCustomerEmail();
@@ -47,6 +56,12 @@ class NewsletterRepository extends FieldRepository
         }
 
         if (false === $isSubscribed && false === $value) {
+            return;
+        }
+
+        if (false === $this->recaptchaGuard->assertPassed(FormId::NEWSLETTER)) {
+            $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
+
             return;
         }
 

@@ -41,5 +41,30 @@
                 <argument name="show_field_label" xsi:type="boolean">false</argument>
             </arguments>
         </block>
+
+        <block
+            name="loki-checkout.recaptcha.place-order"
+            template="LokiCheckout_Core::checkout/other/recaptcha.phtml">
+            <arguments>
+                <argument name="form_id" xsi:type="string">place_order</argument>
+            </arguments>
+
+            <block
+                name="loki-checkout.recaptcha.place-order.legal-notice" as="legal-notice"
+                template="LokiCheckout_Core::checkout/other/recaptcha/legal-notice.phtml"/>
+        </block>
+
+        <block
+            name="loki-checkout.newsletter.recaptcha"
+            ifconfig="newsletter/general/active"
+            template="LokiCheckout_Core::checkout/other/recaptcha.phtml">
+            <arguments>
+                <argument name="form_id" xsi:type="string">newsletter</argument>
+            </arguments>
+
+            <block
+                name="loki-checkout.newsletter.recaptcha.legal-notice" as="legal-notice"
+                template="LokiCheckout_Core::checkout/other/recaptcha/legal-notice.phtml"/>
+        </block>
     </body>
 </page>

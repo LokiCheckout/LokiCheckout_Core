@@ -1,0 +1,176 @@
+<?php
+declare(strict_types=1);
+
+use Loki\Components\Factory\ViewModelFactory;
+use LokiCheckout\Core\Recaptcha\Config;
+use LokiCheckout\Core\Recaptcha\Type;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.6.0 */
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelFactory $viewModelFactory */
+/** @var Config $recaptchaConfig */
+
+$recaptchaConfig = $viewModelFactory->create(Config::class);
+$activeTypes = $recaptchaConfig->getActiveTypes();
+
+if ($activeTypes === []) {
+    return;
+}
+
+$renderParameter = in_array(Type::V3, $activeTypes, true)
+    ? $recaptchaConfig->getSiteKey(Type::V3)
+    : 'explicit';
+?>
+<script>
+    const LokiCheckoutRecaptcha = {
+        scriptUrl: 'https://www.google.com/recaptcha/api.js',
+        renderParameter: '<?= $escaper->escapeJs($renderParameter) ?>',
+        executeTimeout: 120000,
+        readyPromise: null,
+        widgets: {},
+        handlers: {},
+        pending: {},
+
+        ready() {
+            if (this.readyPromise) {
+                return this.readyPromise;
+            }
+
+            this.readyPromise = new Promise((resolve, reject) => {
+                if (window.grecaptcha && window.grecaptcha.render) {
+                    resolve(window.grecaptcha);
+                    return;
+                }
+
+                window.lokiCheckoutRecaptchaOnLoad = () => resolve(window.grecaptcha);
+
+                const script = document.createElement('script');
+                script.src = this.scriptUrl
+                    + '?onload=lokiCheckoutRecaptchaOnLoad&render='
+                    + encodeURIComponent(this.renderParameter);
+                script.async = true;
+                script.defer = true;
+                script.addEventListener('error', () => reject(new Error('Failed to load reCAPTCHA')));
+                document.head.appendChild(script);
+            });
+
+            return this.readyPromise;
+        },
+
+        /**
+         * The widget outlives the Alpine component instance (the container is marked x-ignore), so
+         * the current instance registers itself here to receive the reCAPTCHA callbacks.
+         */
+        setHandler(formId, handler) {
+            this.handlers[formId] = handler;
+        },
+
+        emit(formId, event, token) {
+            const handler = this.handlers[formId];
+            if (handler && typeof handler[event] === 'function') {
+                handler[event](token);
+            }
+        },
+
+        hasWidget(formId) {
+            return this.widgets[formId] !== undefined;
+        },
+
+        render(formId, element, settings) {
+            return this.ready().then(grecaptcha => {
+                if (this.hasWidget(formId)) {
+                    return this.widgets[formId];
+                }
+
+                this.widgets[formId] = grecaptcha.render(element, {
+                    ...settings,
+                    'callback': (token) => {
+                        this.resolvePending(formId, token);
+                        this.emit(formId, 'onToken', token);
+                    },
+                    'expired-callback': () => this.emit(formId, 'onExpired'),
+                    'error-callback': () => {
+                        this.rejectPending(formId, new Error('reCAPTCHA error'));
+                        this.emit(formId, 'onError');
+                    },
+                });
+
+                return this.widgets[formId];
+            });
+        },
+
+        getResponse(formId) {
+            if (!window.grecaptcha || !this.hasWidget(formId)) {
+                return '';
+            }
+
+            return window.grecaptcha.getResponse(this.widgets[formId]) || '';
+        },
+
+        reset(formId) {
+            if (window.grecaptcha && this.hasWidget(formId)) {
+                window.grecaptcha.reset(this.widgets[formId]);
+            }
+        },
+
+        execute(formId, captchaType, settings) {
+            return this.ready().then(grecaptcha => {
+                if (captchaType === '<?= $escaper->escapeJs(Type::V3) ?>') {
+                    return grecaptcha.execute(settings.sitekey, {action: formId});
+                }
+
+                if (false === this.hasWidget(formId)) {
+                    return '';
+                }
+
+                if (captchaType === '<?= $escaper->escapeJs(Type::CHECKBOX) ?>') {
+                    return this.getResponse(formId);
+                }
+
+                return new Promise((resolve, reject) => {
+                    this.clearPending(formId);
+                    this.pending[formId] = {
+                        resolve,
+                        reject,
+                        timer: setTimeout(() => {
+                            this.rejectPending(formId, new Error('reCAPTCHA timed out'));
+                        }, this.executeTimeout),
+                    };
+
+                    grecaptcha.reset(this.widgets[formId]);
+                    grecaptcha.execute(this.widgets[formId]);
+                });
+            });
+        },
+
+        resolvePending(formId, token) {
+            const pending = this.pending[formId];
+            if (!pending) {
+                return;
+            }
+
+            this.clearPending(formId);
+            pending.resolve(token);
+        },
+
+        rejectPending(formId, error) {
+            const pending = this.pending[formId];
+            if (!pending) {
+                return;
+            }
+
+            this.clearPending(formId);
+            pending.reject(error);
+        },
+
+        clearPending(formId) {
+            if (this.pending[formId]) {
+                clearTimeout(this.pending[formId].timer);
+                delete this.pending[formId];
+            }
+        },
+    };
+</script>

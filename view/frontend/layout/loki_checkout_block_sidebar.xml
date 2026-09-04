@@ -20,7 +20,19 @@
                 <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="LokiCheckout_Core::checkout/sidebar/coupon_code.phtml">
                     <block name="loki-checkout.sidebar.coupon_code.value" as="value" template="LokiCheckout_Core::checkout/sidebar/coupon_code/value.phtml"/>
                     <block name="loki-checkout.sidebar.coupon_code.summary" as="summary" template="LokiCheckout_Core::checkout/sidebar/coupon_code/summary.phtml"/>
-                    <block name="loki-checkout.sidebar.coupon_code.form" as="form" template="LokiCheckout_Core::checkout/sidebar/coupon_code/form.phtml"/>
+                    <block name="loki-checkout.sidebar.coupon_code.form" as="form" template="LokiCheckout_Core::checkout/sidebar/coupon_code/form.phtml">
+                        <block
+                            name="loki-checkout.sidebar.coupon_code.recaptcha" as="recaptcha"
+                            template="LokiCheckout_Core::checkout/other/recaptcha.phtml">
+                            <arguments>
+                                <argument name="form_id" xsi:type="string">coupon_code</argument>
+                            </arguments>
+
+                            <block
+                                name="loki-checkout.sidebar.coupon_code.recaptcha.legal-notice" as="legal-notice"
+                                template="LokiCheckout_Core::checkout/other/recaptcha/legal-notice.phtml"/>
+                        </block>
+                    </block>
                 </block>
 
                 <block name="loki-checkout.sidebar.items" as="items" template="LokiCheckout_Core::checkout/sidebar/items.phtml">

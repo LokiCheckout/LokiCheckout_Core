@@ -1,0 +1,32 @@
+<?php
+declare(strict_types=1);
+
+use Loki\CssUtils\Util\CssClass;
+use LokiCheckout\Core\Component\Checkout\Other\Recaptcha\RecaptchaViewModel;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @version 2.6.0 */
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var CssClass $css */
+/** @var RecaptchaViewModel $viewModel */
+
+if (false === $viewModel->showLegalNotice()) {
+    return;
+}
+?>
+<div class="<?= $escaper->escapeHtml($css('text-xs')) ?>">
+    <?= $escaper->escapeHtml(
+        __(
+            'This site is protected by reCAPTCHA and the Google %1 and %2 apply.',
+            [
+                '<a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">'
+                . $escaper->escapeHtml(__('Privacy Policy')) . '</a>',
+                '<a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">'
+                . $escaper->escapeHtml(__('Terms of Service')) . '</a>',
+            ]
+        ),
+        ['a']
+    ) ?>
+</div>
