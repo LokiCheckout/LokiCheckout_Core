@@ -59,10 +59,14 @@ if ($shipmentIcon) {
 }
 ?>
 <li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
+    <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
+
     <label
         data-code="<?= $escaper->escapeHtml($shippingMethod->getMethodCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:gap-6 items-center p-3 md:p-6', 'label')) ?>"
     >
+        <?= /* @noEscape */ $childRenderer->any($block, 'label-before') ?>
+
         <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
             <input
@@ -95,6 +99,8 @@ if ($shipmentIcon) {
             ]
         ); ?>
 
+        <?= /* @noEscape */ $childRenderer->any($block, 'label-middle') ?>
+
         <?= /* @noEscape */ $childRenderer->html(
             $block,
             'label',
@@ -102,6 +108,8 @@ if ($shipmentIcon) {
                 'method' => $shippingMethod
             ]
         ); ?>
+
+        <?= /* @noEscape */ $childRenderer->any($block, 'label-after') ?>
     </label>
 
     <?php if ($isCurrent || $showHidden) : ?>
@@ -125,4 +133,6 @@ if ($shipmentIcon) {
             ['method' => $code]
         ) ?>
     <?php endif; ?>
+
+    <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
 </li>

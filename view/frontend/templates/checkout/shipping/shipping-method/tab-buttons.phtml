@@ -12,7 +12,7 @@ use Magento\Framework\View\Element\Template;
 
 $buttons = (array)$block->getButtons();
 $groupName = (string)preg_replace('/[^a-z0-9-]+/', '-', strtolower($block->getNameInLayout()));
-$groupLabel = $block->getGroupLabel() ?: __('Shipping methods');
+$groupLabel = __($block->getGroupLabel()) ?: __('Shipping methods');
 ?>
 <div
     role="radiogroup"
