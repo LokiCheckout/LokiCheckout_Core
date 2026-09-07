@@ -60,12 +60,14 @@ if ($shipmentIcon) {
 ?>
 <li class="<?= $escaper->escapeHtml($css('cursor-pointer relative my-2')) ?> <?= $escaper->escapeHtml(implode(' ', $blockClasses)) ?>" <?= /** @noEscape */ $htmlAttributes ?>>
     <?= /* @noEscape */ $childRenderer->any($block, 'before') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.methods.'.$code.'.before') ?>
 
     <label
         data-code="<?= $escaper->escapeHtml($shippingMethod->getMethodCode()) ?>"
         class="<?= $escaper->escapeHtml($css('flex gap-4 md:gap-6 items-center p-3 md:p-6', 'label')) ?>"
     >
         <?= /* @noEscape */ $childRenderer->any($block, 'label-before') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.methods.'.$code.'.label-before') ?>
 
         <span class="<?= $escaper->escapeHtml($css('shrink-0 flex gap-4', 'input-container')) ?>">
         <?php if ($shippingMethod->getAvailable()) : ?>
@@ -100,6 +102,7 @@ if ($shipmentIcon) {
         ); ?>
 
         <?= /* @noEscape */ $childRenderer->any($block, 'label-middle') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.methods.'.$code.'.label-middle') ?>
 
         <?= /* @noEscape */ $childRenderer->html(
             $block,
@@ -110,6 +113,7 @@ if ($shipmentIcon) {
         ); ?>
 
         <?= /* @noEscape */ $childRenderer->any($block, 'label-after') ?>
+        <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.methods.'.$code.'.label-after') ?>
     </label>
 
     <?php if ($isCurrent || $showHidden) : ?>
@@ -135,4 +139,5 @@ if ($shipmentIcon) {
     <?php endif; ?>
 
     <?= /* @noEscape */ $childRenderer->any($block, 'after') ?>
+    <?= /* @noEscape */ $blockRenderer->html($block, 'loki-checkout.shipping.methods.'.$code.'.after') ?>
 </li>
