@@ -16,36 +16,60 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
 
     public function get(array $handles): array
     {
-        $countryId = $this->getCountryId();
-        if (empty($countryId)) {
+        $shippingCountryId = $this->getShippingCountryId();
+        if (empty($shippingCountryId)) {
             return $handles;
         }
 
-        foreach ($handles as $handleId => $handle) {
-            if (preg_match('/country_([a-z]{2})/', $handle)) {
-                unset($handles[$handleId]);
-            }
+        $billingCountryId = $this->getBillingCountryId();
+        if (empty($billingCountryId)) {
+            $billingCountryId = $shippingCountryId;
         }
 
-        $handles[] = 'loki_checkout_country_'.$countryId;
+        $handles = $this->removeCurrentCountryHandles($handles);
 
+        $handles[] = 'loki_checkout_country_'.$shippingCountryId;
         foreach ($handles as $handle) {
             if (str_starts_with($handle, 'loki_checkout_skin_')) {
-                $handles[] = $handle.'_country_'.$countryId;
+                $handles[] = $handle.'_country_'.$shippingCountryId;
+                $handles[] = $handle.'_shipping_address_country_'.$shippingCountryId;
+                $handles[] = $handle.'_billing_address_country_'.$billingCountryId;
             }
 
             if (str_starts_with($handle, 'loki_checkout_address_')) {
-                $handles[] = $handle.'_country_'.$countryId;
+                $handles[] = $handle.'_country_'.$shippingCountryId;
+                $handles[] = $handle.'_shipping_address_country_'.$shippingCountryId;
+                $handles[] = $handle.'_billing_address_country_'.$billingCountryId;
             }
         }
 
         return $handles;
     }
 
-    private function getCountryId(): string
+    private function removeCurrentCountryHandles(array $handles): array
+    {
+        foreach ($handles as $handleId => $handle) {
+            if (preg_match('/country_([a-z]{2})/', $handle)) {
+                unset($handles[$handleId]);
+            }
+        }
+
+        return $handles;
+    }
+
+    private function getShippingCountryId(): string
     {
         try {
             return strtolower((string)$this->checkoutState->getQuote()->getShippingAddress()->getCountryId());
+        } catch (RedirectException $redirectException) {
+            return '';
+        }
+    }
+
+    private function getBillingCountryId(): string
+    {
+        try {
+            return strtolower((string)$this->checkoutState->getQuote()->getBillingAddress()->getCountryId());
         } catch (RedirectException $redirectException) {
             return '';
         }
