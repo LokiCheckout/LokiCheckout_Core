@@ -52,7 +52,7 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
     private function removeCurrentCountryHandles(array $handles): array
     {
         foreach ($handles as $handleId => $handle) {
-            if (preg_match('/country_([a-z]{2})(\_\.)/', $handle)) {
+            if (preg_match('/country_([a-z]{2})(?![a-z])/', $handle)) {
                 unset($handles[$handleId]);
             }
         }
