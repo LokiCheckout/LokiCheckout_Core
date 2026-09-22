@@ -1,4 +1,4 @@
-import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki/checkout-objects';
+import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
 import coreConfig from '@loki/config';
