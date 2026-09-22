@@ -29,6 +29,9 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
         $handles = $this->removeCurrentCountryHandles($handles);
 
         $handles[] = 'loki_checkout_country_'.$shippingCountryId;
+        $handles[] = 'loki_checkout_shipping_address_country_'.$shippingCountryId;
+        $handles[] = 'loki_checkout_billing_address_country_'.$billingCountryId;
+
         foreach ($handles as $handle) {
             if (str_starts_with($handle, 'loki_checkout_skin_')) {
                 $handles[] = $handle.'_country_'.$shippingCountryId;
@@ -49,7 +52,7 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
     private function removeCurrentCountryHandles(array $handles): array
     {
         foreach ($handles as $handleId => $handle) {
-            if (preg_match('/country_([a-z]{2})/', $handle)) {
+            if (preg_match('/country_([a-z]{2})(\_\.)/', $handle)) {
                 unset($handles[$handleId]);
             }
         }
