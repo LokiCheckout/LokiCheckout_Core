@@ -1,7 +1,7 @@
 import {Field, ShippingMethod, PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
-import coreConfig from '@loki/config';
+import coreConfig from '@loki-checkout/config';
 
 test.describe('complete one-step checkout', function () {
   test('should allow to me checkout completely', async function ({page,context}) {

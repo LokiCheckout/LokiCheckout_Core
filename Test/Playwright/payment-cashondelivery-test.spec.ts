@@ -1,7 +1,7 @@
 import {PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test} from '@loki/test';
-import coreConfig from '@loki/config';
+import coreConfig from '@loki-checkout/config';
 
 test.describe('cashondelivery payment test', () => {
   test('should allow me to go to the success page', async ({page, context}) => {

@@ -1,7 +1,7 @@
 import {Field, PaymentMethod, PlaceOrderButton, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@loki/test';
-import coreConfig from '@loki/config';
+import coreConfig from '@loki-checkout/config';
 
 test.describe('logged-in customer', function()  {
   test('login via AJAX', async function({page, context})  {

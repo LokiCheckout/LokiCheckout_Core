@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'; // 1
 import {test, expect} from '@loki/test';
 import {setupCheckout} from "@loki/setup-checkout";
-import coreConfig from "@loki/config";
+import coreConfig from '@loki-checkout/config';
 
 test.describe('checkout', () => {
     test('should not have any automatically detectable accessibility issues', async ({ page, context }) => {
