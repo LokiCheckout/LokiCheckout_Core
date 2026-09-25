@@ -9,6 +9,9 @@ test.describe('Postcode uppercase test', function()  {
       ...coreConfig
     });
 
+    const countryField = new Field(page, 'shipping.country_id');
+    await countryField.fill('NL');
+
     const postcodeField = new Field(page, 'shipping.postcode');
     await postcodeField.fill('1111aa');
     await expect(postcodeField.getLocator()).toHaveValue('1111AA');
