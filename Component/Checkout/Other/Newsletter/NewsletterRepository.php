@@ -6,6 +6,7 @@ use Loki\Field\Component\Base\Field\FieldRepository;
 use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
 use LokiCheckout\Core\Recaptcha\FormId;
 use LokiCheckout\Core\Recaptcha\Guard;
+use Magento\Newsletter\Model\Subscriber;
 
 /**
  * @method NewsletterContext getContext()
@@ -55,12 +56,23 @@ class NewsletterRepository extends FieldRepository
             return;
         }
 
+        $needsOptOut = false;
         if (false === $isSubscribed && false === $value) {
-            return;
+            if (false === $this->isNewsletterCheckedByDefault() || $this->hasSubscriberRecord()) {
+                return;
+            }
+
+            $needsOptOut = true;
         }
 
         if (false === $this->recaptchaGuard->assertPassed(FormId::NEWSLETTER)) {
             $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
+
+            return;
+        }
+
+        if ($needsOptOut) {
+            $this->saveOptOut();
 
             return;
         }
@@ -131,6 +143,22 @@ class NewsletterRepository extends FieldRepository
             $this->getCustomerEmail(),
             $this->getStoreId()
         );
+    }
+
+    private function saveOptOut(): void
+    {
+        if ($this->getCustomerId() > 0) {
+            $this->unsubscribeCustomer();
+
+            return;
+        }
+
+        $subscriber = $this->getContext()->getSubscriberFactory()->create();
+        $subscriber->setSubscriberEmail($this->getCustomerEmail());
+        $subscriber->setStoreId($this->getStoreId());
+        $subscriber->setSubscriberConfirmCode($subscriber->randomSequence());
+        $subscriber->setStatus(Subscriber::STATUS_UNSUBSCRIBED);
+        $subscriber->save(); // @phpstan-ignore-line
     }
 
     private function unsubscribeEmail(): void
