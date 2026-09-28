@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Component\Checkout\Other\Agreements;
 
+use Loki\Components\Attribute\JsProperty;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 use Magento\CheckoutAgreements\Model\Agreement;
 
@@ -15,6 +16,7 @@ class AgreementsViewModel extends CheckoutViewModel
         return $this->getCheckoutAgreements() !== [];
     }
 
+    #[JsProperty(name: 'step')]
     public function getStep(): string
     {
         $step = parent::getStep();

@@ -1,52 +1,90 @@
-import {Field} from '@loki-checkout/checkout-objects';
+import {PaymentMethod, PlaceOrderButton, ShippingMethod, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@loki/test';
 import coreConfig from '@loki-checkout/config';
 import merge from '@loki/util/merge';
+import type {Locator, Page} from '@playwright/test';
+
+const agreementTitle = 'Agree to terms and conditions';
+
+const agreementConfig = merge(coreConfig, {
+  profile: 'netherlands',
+  agreement: {
+    title: agreementTitle,
+    text: 'Actual terms and conditions',
+  },
+  config: {
+    'checkout/options/enable_agreements': 1,
+  }
+});
+
+function getAgreementCheckbox(page: Page): Locator {
+  return page
+    .locator('[x-data="LokiCheckoutAgreementComponent"]')
+    .filter({hasText: agreementTitle})
+    .locator('input[type="checkbox"]');
+}
+
+async function waitForLokiAjax(page: Page, action: () => Promise<void>) {
+  const response = page.waitForResponse(/loki_components\/index\/html/);
+  await action();
+  await response;
+  await expect((new PlaceOrderButton(page)).getLocator()).not.toHaveAttribute('disabled');
+}
+
+async function prepareCheckout(page: Page) {
+  await (new ShippingMethod(page, 'flatrate_flatrate')).select();
+  await waitForLokiAjax(page, () => (new PaymentMethod(page, 'checkmo')).select());
+}
 
 test.describe('Terms and conditions', function () {
-  test('should allow me to finalize the checkout when agreeing to nothing without valid data', async function ({page, context}) {
-    const currentConfig = merge(coreConfig, {
-      profile: 'netherlands',
-      agreement: false,
-      config: {
-        'checkout/options/enable_agreements': 1,
-      }
-    });
+  test('should render the terms and conditions checkbox unchecked', async function ({page, context}) {
+    await setupCheckout(page, context, agreementConfig);
 
-    await setupCheckout(page, context, currentConfig);
-
-    await (new ShippingMethod(page, 'flatrate_flatrate')).select();
-    await (new PaymentMethod(page, 'checkmo')).select();
-
-    const agreementField = new Field(page, 'agreement');
-    await agreementField.check();
-
-    const placeOrderButton = new PlaceOrderButton(page);
-    await placeOrderButton.click();
+    const agreementCheckbox = getAgreementCheckbox(page);
+    await expect(agreementCheckbox).toBeVisible();
+    await expect(agreementCheckbox).not.toBeChecked();
   });
 
-  test('should not allow me to finalize the checkout when agreeing to nothing', async function ({page, context}) {
-    const currentConfig = merge(coreConfig, {
-      profile: 'netherlands',
-      agreement: {
-        title: "Agree to terms conditions",
-        text: "Actual terms conditions",
-      },
-      config: {
-        'checkout/options/enable_agreements': 1,
-      }
-    });
+  test('should not allow me to finalize the checkout without agreeing to the terms', async function ({page, context}) {
+    await setupCheckout(page, context, agreementConfig);
+    await prepareCheckout(page);
 
-    await setupCheckout(page, context, currentConfig);
+    const agreementCheckbox = getAgreementCheckbox(page);
+    await expect(agreementCheckbox).toBeVisible();
+    if (await agreementCheckbox.isChecked()) {
+      await waitForLokiAjax(page, () => agreementCheckbox.uncheck());
+    }
 
-    await (new ShippingMethod(page, 'flatrate_flatrate')).select();
-    await (new PaymentMethod(page, 'checkmo')).select();
+    await expect(agreementCheckbox).not.toBeChecked();
 
-    const agreementField = new Field(page, 'agreement');
-    await agreementField.check();
+    const placeOrderButton = (new PlaceOrderButton(page)).getLocator();
+    await placeOrderButton.click({force: true});
+
+    const reachedSuccessPage = await page
+      .waitForURL(/checkout\/onepage\/success/, {timeout: 10000})
+      .then(() => true)
+      .catch(() => false);
+
+    expect(reachedSuccessPage, 'Order was placed without agreeing to the terms').toBe(false);
+    await expect(placeOrderButton).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  test('should allow me to finalize the checkout when agreeing to the terms', async function ({page, context}) {
+    await setupCheckout(page, context, agreementConfig);
+    await prepareCheckout(page);
+
+    const agreementCheckbox = getAgreementCheckbox(page);
+    await expect(agreementCheckbox).toBeVisible();
+    if (!(await agreementCheckbox.isChecked())) {
+      await waitForLokiAjax(page, () => agreementCheckbox.check());
+    }
+
+    await expect(agreementCheckbox).toBeChecked();
 
     const placeOrderButton = new PlaceOrderButton(page);
     await placeOrderButton.click();
+
+    await new SuccessPage(page).expectToBeLoaded();
   });
 });
