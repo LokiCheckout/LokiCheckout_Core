@@ -5,6 +5,7 @@ namespace LokiCheckout\Core\Component\Base\QuoteField;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 use LokiCheckout\Core\ViewModel\CheckoutState;
+use Loki\Components\Attribute\JsProperty;
 
 /**
  * @method CheckoutContext getContext()
@@ -32,6 +33,7 @@ class QuoteFieldViewModel extends CheckoutViewModel implements QuoteFieldViewMod
         return (bool)$this->getContext()->getAttributeProvider()->getAttribute($this->getFieldName())->getIsRequired();
     }
 
+    #[JsProperty(name: 'step')]
     public function getStep(): string
     {
         $step = parent::getStep();

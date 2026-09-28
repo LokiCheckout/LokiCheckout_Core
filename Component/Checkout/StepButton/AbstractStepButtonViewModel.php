@@ -6,6 +6,7 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
 use LokiCheckout\Core\Exception\UnknownStepException;
 use LokiCheckout\Core\Step\StepNavigator;
+use Loki\Components\Attribute\JsProperty;
 use Loki\Field\Util\ButtonInterface;
 
 /**
@@ -36,6 +37,7 @@ class AbstractStepButtonViewModel extends CheckoutViewModel implements ButtonInt
         return $this->getContext()->getStepNavigator();
     }
 
+    #[JsProperty(name: 'step')]
     public function getStep(): string
     {
         return 'none';
