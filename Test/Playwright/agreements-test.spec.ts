@@ -70,6 +70,22 @@ test.describe('Terms and conditions', function () {
     await expect(placeOrderButton).toHaveAttribute('aria-disabled', 'true');
   });
 
+  test('should reject the order server-side without agreeing to the terms', async function ({page, context}) {
+    await setupCheckout(page, context, agreementConfig);
+    await prepareCheckout(page);
+
+    await expect(getAgreementCheckbox(page)).not.toBeChecked();
+
+    const formKey = (await context.cookies()).find(cookie => cookie.name === 'form_key')?.value;
+    expect(formKey, 'form_key cookie').toBeTruthy();
+
+    await page.goto('/loki_checkout/index/finalize/?form_key=' + encodeURIComponent(formKey as string));
+
+    await new SuccessPage(page).expectNotToBeLoaded();
+    await expect(page).toHaveURL(/\/checkout\/?(#.*)?$/);
+    await expect(page.getByRole('alert').filter({hasText: 'agree to the terms and conditions'})).toBeVisible();
+  });
+
   test('should allow me to finalize the checkout when agreeing to the terms', async function ({page, context}) {
     await setupCheckout(page, context, agreementConfig);
     await prepareCheckout(page);
