@@ -41,7 +41,7 @@ class AgreementsRepository extends ComponentRepository
 
         $savedAgreements = [];
         foreach ($value as $agreementId => $agreed) {
-            if ($agreed === false) {
+            if ($agreed !== true) {
                 continue;
             }
 
