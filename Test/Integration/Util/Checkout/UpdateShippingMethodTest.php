@@ -16,7 +16,6 @@ use Magento\TestFramework\Fixture\DataFixture;
     DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
-    ConfigFixture('carriers/flatrate/active', 1, 'store', 'default'),
     AppArea('frontend'),
 ]
 class UpdateShippingMethodTest extends LokiCheckoutTestCase
@@ -28,6 +27,7 @@ class UpdateShippingMethodTest extends LokiCheckoutTestCase
         return $this->getObjectManager()->get(UpdateShippingMethod::class);
     }
 
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
     public function testExecuteSetsShippingMethod(): void
     {
         $this->dispatchToCheckout();
@@ -39,6 +39,7 @@ class UpdateShippingMethodTest extends LokiCheckoutTestCase
         $this->assertSame('flatrate_flatrate', $shippingAddress->getShippingMethod());
     }
 
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
     public function testExecuteWithEmptyCodeClearsShippingMethod(): void
     {
         $this->dispatchToCheckout();

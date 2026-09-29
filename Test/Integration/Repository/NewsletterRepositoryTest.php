@@ -14,12 +14,12 @@ use PHPUnit\Framework\TestCase;
 use LokiCheckout\Core\Test\Fixture\CustomerFixture;
 
 #[
-    ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default'),
     DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer'),
     AppArea('frontend')
 ]
 class NewsletterRepositoryTest extends TestCase
 {
+    #[ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default')]
     public function testsWithCustomerId()
     {
         $customerRepository = ObjectManager::getInstance()->get(CustomerRepositoryInterface::class);
@@ -41,6 +41,7 @@ class NewsletterRepositoryTest extends TestCase
         $this->assertFalse($newsletterRepository->isCustomerIdSubscribed($customerId));
     }
 
+    #[ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default')]
     public function testsWithGuestEmail()
     {
         $email = 'info@example.com';

@@ -14,11 +14,11 @@ use Magento\TestFramework\Fixture\DataFixture;
     DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
-    ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default'),
     AppArea('frontend'),
 ]
 class IndexTest extends LokiCheckoutTestCase
 {
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
     public function testCheckoutPageRendersWithQuote(): void
     {
         $this->dispatchToCheckout();
@@ -27,6 +27,7 @@ class IndexTest extends LokiCheckoutTestCase
         $this->assertNotEmpty($this->getResponse()->getBody());
     }
 
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
     public function testRedirectsToCartWhenNoQuote(): void
     {
         $this->dispatch('checkout/index/index');

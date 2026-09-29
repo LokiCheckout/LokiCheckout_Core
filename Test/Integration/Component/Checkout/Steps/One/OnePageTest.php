@@ -15,12 +15,12 @@ use Magento\TestFramework\Fixture\DataFixture;
 #[DataFixture(ProductFixture::class, as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
-#[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
 #[AppArea('frontend')]
 final class OnePageTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.steps.one';
 
+    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->markTestIncomplete('WIP');

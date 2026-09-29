@@ -12,7 +12,6 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 
-#[ConfigFixture('loki_checkout/general/theme', 'default', 'store', 'default')]
 #[DataFixture(ProductFixture::class, as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
@@ -21,6 +20,7 @@ final class ForwardButtonPageTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.steps.shipping.forward-button';
 
+    #[ConfigFixture('loki_checkout/general/theme', 'default', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->dispatchToCheckout();

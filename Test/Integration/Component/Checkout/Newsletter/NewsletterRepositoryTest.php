@@ -16,8 +16,6 @@ use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DbIsolation;
 
 #[DbIsolation(true)]
-#[ConfigFixture('newsletter/general/active', 1, 'store', 'default')]
-#[ConfigFixture('newsletter/subscription/confirm', 0, 'store', 'default')]
 #[DataFixture(ProductFixture::class, as: 'product')]
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
 #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
@@ -27,6 +25,8 @@ final class NewsletterRepositoryTest extends LokiCheckoutTestCase
     private const BLOCK_NAME = 'loki-checkout.newsletter';
     private const EMAIL = 'newsletter-guest@example.com';
 
+    #[ConfigFixture('newsletter/general/active', 1, 'store', 'default')]
+    #[ConfigFixture('newsletter/subscription/confirm', 0, 'store', 'default')]
     #[ConfigFixture('loki_checkout/newsletter/default_value', 1, 'store', 'default')]
     public function testGuestIsSubscribedAutomaticallyWhenCheckedByDefault(): void
     {
@@ -36,6 +36,8 @@ final class NewsletterRepositoryTest extends LokiCheckoutTestCase
         $this->assertTrue($this->getSubscriberRepository()->isGuestEmailSubscribed(self::EMAIL));
     }
 
+    #[ConfigFixture('newsletter/general/active', 1, 'store', 'default')]
+    #[ConfigFixture('newsletter/subscription/confirm', 0, 'store', 'default')]
     #[ConfigFixture('loki_checkout/newsletter/default_value', 1, 'store', 'default')]
     public function testUncheckingAfterAutomaticSubscriptionUnsubscribesGuest(): void
     {
@@ -48,6 +50,8 @@ final class NewsletterRepositoryTest extends LokiCheckoutTestCase
         $this->assertFalse($repository->getValue());
     }
 
+    #[ConfigFixture('newsletter/general/active', 1, 'store', 'default')]
+    #[ConfigFixture('newsletter/subscription/confirm', 0, 'store', 'default')]
     #[ConfigFixture('loki_checkout/newsletter/default_value', 1, 'store', 'default')]
     public function testUncheckingWithoutSubscriberRecordSavesOptOut(): void
     {
@@ -62,6 +66,8 @@ final class NewsletterRepositoryTest extends LokiCheckoutTestCase
         $this->assertFalse($this->getSubscriberRepository()->isGuestEmailSubscribed(self::EMAIL));
     }
 
+    #[ConfigFixture('newsletter/general/active', 1, 'store', 'default')]
+    #[ConfigFixture('newsletter/subscription/confirm', 0, 'store', 'default')]
     #[ConfigFixture('loki_checkout/newsletter/default_value', 0, 'store', 'default')]
     public function testUncheckingWithoutSubscriberRecordDoesNothingWhenNotCheckedByDefault(): void
     {

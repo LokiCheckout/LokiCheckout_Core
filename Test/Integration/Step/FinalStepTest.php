@@ -19,8 +19,6 @@ use Magento\TestFramework\Fixture\DataFixture;
     DataFixture(ProductFixture::class, ['price' => 10], as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
     DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
-    ConfigFixture('carriers/flatrate/active', 1, 'store', 'default'),
-    ConfigFixture('payment/checkmo/active', 1, 'store', 'default'),
     AppArea('frontend'),
 ]
 class FinalStepTest extends LokiCheckoutTestCase
@@ -32,6 +30,8 @@ class FinalStepTest extends LokiCheckoutTestCase
         return $this->getObjectManager()->get(FinalStep::class);
     }
 
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
     public function testValidateThrowsForIncompleteQuote(): void
     {
         $this->getCart();
@@ -40,6 +40,8 @@ class FinalStepTest extends LokiCheckoutTestCase
         $this->getSubject()->validate();
     }
 
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
     public function testValidatePassesForCompleteQuote(): void
     {
         $this->dispatchToCheckout();
