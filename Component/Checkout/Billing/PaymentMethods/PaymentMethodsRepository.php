@@ -101,10 +101,6 @@ class PaymentMethodsRepository extends ComponentRepository
 
         $payment = $this->paymentFactory->create();
         $payment->setMethod($value);
-        $payment->setQuote($quote);
-        $payment->importData([
-            'method' => $value
-        ]);
 
         $this->paymentMethodManagement->set($quote->getId(), $payment);
 
