@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Make `GridLayoutViewModel::getGridLayoutData()` public, because `#[JsProperty]` is only allowed on public methods
 - Do not pass payment transfer data (`quote_id`, `method_instance`) into the payment `additional_data` when selecting a
   payment method, which made selecting PayPal Express fail with "The payment disallows storing objects"
+- Clear a stored payment method that is no longer available instead of adding an error `Payment method "" is not
+  available.` on every render, which blocked placing the order (e.g. for logged-in customers with an old quote)
+- Fix integration test run silently aborting halfway (tests rendering checkout blocks without a quote hit `exit()`)
+- Speed up integration tests (about 45% faster): No products or checkout dispatch where a guest cart suffices, one
+  checkout dispatch per configuration for component-on-page tests, no fixtures for skipped tests
 
 ## [2.6.0] - 28 August 2026
 ### Added

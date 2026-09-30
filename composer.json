@@ -1,6 +1,6 @@
 {
     "name": "loki-checkout/magento2-core",
-    "version": "2.6.0",
+    "version": "2.7.0",
     "description": "Loki Checkout core module",
     "keywords": [
         "loki-checkout",
@@ -21,7 +21,7 @@
         "ext-json": "*",
         "ext-pcre": "*",
         "guzzlehttp/guzzle": "^7.0",
-        "loki/magento2-components": "^2.6",
+        "loki/magento2-components": "^2.8",
         "loki/magento2-css-utils": "^1.0",
         "loki/magento2-field-components": "^2.0",
         "loki/magento2-map-components": "~0.1 | ^1.0",
