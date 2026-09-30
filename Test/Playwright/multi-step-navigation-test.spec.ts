@@ -50,7 +50,7 @@ test.describe('Multi-step navigation', function () {
     const forwardButton = getShippingForwardButton(page);
     await expect(forwardButton).toHaveAttribute('aria-disabled', 'true');
 
-    await forwardButton.click();
+    await forwardButton.click({force: true});
 
     await expect(page).not.toHaveURL(/#billing$/);
     await expectShippingStep(page);
