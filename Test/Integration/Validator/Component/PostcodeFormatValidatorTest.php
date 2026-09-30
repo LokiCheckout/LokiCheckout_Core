@@ -6,19 +6,18 @@ use Magento\Directory\Model\Country\Postcode\ConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\TestFramework\Fixture\AppArea;
-use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Util\Component\AddressStateProvider;
 use LokiCheckout\Core\Validator\Component\PostcodeFormatValidator;
 use LokiCheckout\Core\ViewModel\State\AddressStateInterface;
 use Loki\Components\Component\ComponentInterface;
-use Loki\Components\Test\Integration\Traits\CreateComponent;
+use PHPUnit\Framework\TestCase;
 
+/**
+ * Only mocks and a plain DI object are needed, so there is no need for the (more expensive) controller test case
+ */
 #[AppArea('frontend')]
-class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
+class PostcodeFormatValidatorTest extends TestCase
 {
-    use CreateComponent;
-
-    #[AppArea('frontend')]
     public function testValidateWithEmptyValues(): void
     {
         $component = $this->getPostcodeComponent();
@@ -46,7 +45,7 @@ class PostcodeFormatValidatorTest extends LokiCheckoutTestCase
         }
     }
 
-    public function getValues(): array
+    public static function getValues(): array
     {
         return [
             ['1111 AA', 'NL', true],

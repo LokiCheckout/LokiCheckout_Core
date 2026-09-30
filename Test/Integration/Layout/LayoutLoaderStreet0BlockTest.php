@@ -4,22 +4,20 @@ namespace LokiCheckout\Core\Test\Integration\Layout;
 
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Loki\Components\Util\Controller\LayoutLoader;
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Quote\Api\CartRepositoryInterface;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Helper\Bootstrap;
 use PHPUnit\Framework\TestCase;
-
-#[DataFixture(ProductFixture::class, as: 'product')]
+/**
+ * The cart does not need any products for these tests, so no product fixtures are used (saving time)
+ */
 #[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
 class LayoutLoaderStreet0BlockTest extends AbstractLayoutTestCase
 {

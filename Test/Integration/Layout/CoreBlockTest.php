@@ -3,9 +3,15 @@
 namespace LokiCheckout\Core\Test\Integration\Layout;
 
 use Magento\Framework\View\Element\AbstractBlock;
+use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\DataFixture;
 
+/**
+ * AbstractLayoutTestCase::setUp() requires a cart fixture, but the cart does not need any products
+ */
 #[AppArea('frontend')]
+#[DataFixture(GuestCartFixture::class, as: 'cart')]
 class CoreBlockTest extends AbstractLayoutTestCase
 {
     private const BLOCK_NAME = 'loki-checkout';

@@ -15,13 +15,15 @@ use Magento\TestFramework\Fixture\DbIsolation;
 use LokiCheckout\Core\Test\Fixture\CustomerAddressFixture;
 use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
 
-#[DbIsolation(true)]
-#[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
-#[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]
-#[DataFixture(CustomerAddressFixture::class, ['customer_id' => '$customer.id$'])]
-#[DataFixture(ProductFixture::class, as: 'product')]
-#[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
+// Fixtures are disabled while this test is skipped, because Magento applies them before the test body runs (which
+// is costly). Their imports are kept on purpose, so that re-enabling this test only requires uncommenting.
+// #[DbIsolation(true)]
+// #[DataFixture(CustomerFixture::class, ['email' => 'info@example.com'], as: 'customer')]
+// #[DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$'])]
+// #[DataFixture(CustomerAddressFixture::class, ['customer_id' => '$customer.id$'])]
+// #[DataFixture(ProductFixture::class, as: 'product')]
+// #[DataFixture(GuestCartFixture::class, as: 'cart')]
+// #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
 final class ViewPageTest extends LokiCheckoutTestCase
 {

@@ -107,7 +107,7 @@ class ConfigTest extends TestCase
         $this->assertEquals($expectedGridName, $config->getGrid($block)->getName());
     }
 
-    public function getTestGetGridArguments(): array
+    public static function getTestGetGridArguments(): array
     {
         return [
             ['US', 'default'],

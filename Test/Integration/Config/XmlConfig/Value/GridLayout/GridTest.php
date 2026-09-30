@@ -28,7 +28,7 @@ class GridTest extends TestCase
         $this->assertEquals($mdColspan, $block->getMdColSpan());
     }
 
-    public function getTestGridBlockArguments(): array
+    public static function getTestGridBlockArguments(): array
     {
         return [
             ['default', 'city', 12, 6],

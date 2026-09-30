@@ -10,14 +10,15 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 
-#[
-    DataFixture(ProductFixture::class, as: 'product'),
-    DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
-    AppArea('frontend'),
-]
+/**
+ * Only the test that renders the checkout requires a cart with products, so fixtures are added at method level
+ */
+#[AppArea('frontend')]
 class IndexTest extends LokiCheckoutTestCase
 {
+    #[DataFixture(ProductFixture::class, as: 'product')]
+    #[DataFixture(GuestCartFixture::class, as: 'cart')]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
     #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
     public function testCheckoutPageRendersWithQuote(): void
     {

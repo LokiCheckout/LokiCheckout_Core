@@ -3,17 +3,15 @@
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Firstname;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
-use Loki\Components\Component\ComponentRegistry;
 
+/**
+ * The cart does not need any products for these tests, so no product fixtures are used (saving time)
+ */
 #[
-    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class FirstnameRepositoryTest extends LokiCheckoutTestCase
@@ -22,10 +20,9 @@ class FirstnameRepositoryTest extends LokiCheckoutTestCase
 
     public function testSaveToQuote(): void
     {
-        $this->dispatchToCheckout();
+        $this->getCart();
 
-        $componentRegistry = $this->getObjectManager()->get(ComponentRegistry::class);
-        $component = $componentRegistry->getComponentByName(self::BLOCK_NAME);
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertRepositorySave($component, 'John');
 
         $this->assertSame('John', $this->getQuote()->getShippingAddress()->getFirstname());

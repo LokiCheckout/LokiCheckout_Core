@@ -12,15 +12,17 @@ use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 
-#[DataFixture(ProductFixture::class, as: 'product')]
-#[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
+// Fixtures are disabled while this test is skipped, because Magento applies them before the test body runs (which
+// is costly). Their imports are kept on purpose, so that re-enabling this test only requires uncommenting.
+// #[DataFixture(ProductFixture::class, as: 'product')]
+// #[DataFixture(GuestCartFixture::class, as: 'cart')]
+// #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
 final class OnePageTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.steps.one';
 
-    #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
+    // #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
     final public function testComponentOnPage(): void
     {
         $this->markTestIncomplete('WIP');

@@ -38,7 +38,7 @@ class ResetStepAfterCartSaveTest extends LokiCheckoutTestCase
     #[ConfigFixture('loki_checkout/general/enable', 0, 'store', 'default')]
     public function testNoOpWhenDisabled(): void
     {
-        $this->dispatchToCheckout();
+        $this->getCart();
 
         $subject = $this->getObjectManager()->get(ResetStepAfterCartSave::class);
         $subject->execute(new Observer());

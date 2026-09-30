@@ -3,7 +3,9 @@
 namespace LokiCheckout\Core\Test\Integration\Validator\Component;
 
 use Magento\Framework\App\ObjectManager;
+use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Validator\Component\CustomerAddressValidator;
 
@@ -19,11 +21,15 @@ class CustomerAddressValidatorTest extends LokiCheckoutTestCase
     }
 
     /**
+     * Building a checkout component requires a quote (otherwise CheckoutState calls exit()), but an empty cart is enough
+     *
      * @return void
      * @dataProvider getTestWithCityValues
      */
+    #[DataFixture(GuestCartFixture::class, as: 'cart')]
     public function testWithCity(string $city, bool $expectedResult, string $errorMessage): void
     {
+        $this->getCart();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $validator = ObjectManager::getInstance()->get(CustomerAddressValidator::class);
         $result = $validator->validate($city, $component);

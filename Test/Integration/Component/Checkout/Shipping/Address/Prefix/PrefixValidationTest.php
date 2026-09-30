@@ -2,38 +2,32 @@
 
 namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Shipping\Address\Prefix;
 
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 
+/**
+ * Validation only requires the component, not a rendered checkout page nor a cart with products. All values are
+ * validated within a single test, because every single test (with its fixtures) carries significant overhead.
+ */
 #[
-    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class PrefixValidationTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.shipping.address.prefix';
 
-    /**
-     * @dataProvider getTestData
-     */
     #[ConfigFixture('customer/address/prefix_show', 'req')]
     #[ConfigFixture('customer/address/prefix_show', 'req', 'store', 'default')]
-    public function testComponentValidation(
-        string $value,
-        bool $expectedResult,
-        array $expectedErrors
-    ): void {
-        $this->dispatchToCheckout();
+    public function testComponentValidation(): void
+    {
+        $this->getCart();
         $component = $this->getCheckoutComponent(self::BLOCK_NAME);
         $this->assertComponentValidators(['required'], $component);
-        $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
+        $this->assertComponentValidationCases($component, self::getTestData());
     }
 
     public static function getTestData(): array

@@ -4,18 +4,17 @@ namespace LokiCheckout\Core\Test\Integration\Util;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Util\SameAddressService;
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Model\Quote;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
 
+/**
+ * The cart does not need any products for these tests, so no product fixtures are used (saving time)
+ */
 #[
-    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class SameAddressServiceTest extends LokiCheckoutTestCase

@@ -6,12 +6,25 @@ use Loki\CssUtils\Util\CssClass;
 use Loki\CssUtils\Util\CssClassFactory;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\LayoutInterface;
+use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
+use Magento\TestFramework\Fixture\DataFixture;
 
+/**
+ * The template uses the StepNavigator, which needs a quote: Without a quote, CheckoutState calls exit() and silently
+ * aborts the entire test run. An empty guest cart is sufficient.
+ */
 #[AppArea('frontend')]
+#[DataFixture(GuestCartFixture::class, as: 'cart')]
 final class CssUtilsTest extends LokiCheckoutTestCase
 {
     private const TEMPLATE = 'LokiCheckout_Core::form/button/step-forward-button-icon.phtml';
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->getCart();
+    }
 
     public function testIconScopeCssClassesAreRenderedAndOrdered(): void
     {

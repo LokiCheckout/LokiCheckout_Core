@@ -3,11 +3,9 @@
 namespace LokiCheckout\Core\Test\Integration\Util\Checkout;
 
 use LokiCheckout\Core\Util\Checkout\SaveCart;
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\App\ObjectManager;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -15,12 +13,13 @@ use Magento\TestFramework\Fixture\DataFixtureStorageManager;
 use Magento\TestFramework\Fixture\DbIsolation;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * The cart does not need any products for these tests, so no product fixtures are used (saving time)
+ */
 #[
     DbIsolation(true),
     AppArea('frontend'),
-    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
 ]
 class SaveCartTest extends TestCase
 {

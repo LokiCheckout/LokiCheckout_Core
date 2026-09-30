@@ -11,9 +11,11 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 
-#[DataFixture(ProductFixture::class, as: 'product')]
-#[DataFixture(GuestCartFixture::class, as: 'cart')]
-#[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
+// Fixtures are disabled while this test is skipped, because Magento applies them before the test body runs (which
+// is costly). Their imports are kept on purpose, so that re-enabling this test only requires uncommenting.
+// #[DataFixture(ProductFixture::class, as: 'product')]
+// #[DataFixture(GuestCartFixture::class, as: 'cart')]
+// #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
 #[AppArea('frontend')]
 final class BillingAsShippingPageTest extends LokiCheckoutTestCase
 {

@@ -20,12 +20,7 @@ final class RecaptchaPageTest extends LokiCheckoutTestCase
 {
     const BLOCK_NAME = 'loki-checkout.recaptcha.place-order';
 
-    final public function testComponentNotOnPageWithoutConfiguration(): void
-    {
-        $this->dispatchToCheckout();
-        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME, true);
-    }
-
+    // The state without any configuration is covered by Component\Checkout\Page\DefaultPageTest
     #[ConfigFixture('recaptcha_frontend/type_for/place_order', 'recaptcha', 'store', 'default')]
     final public function testComponentNotOnPageWithoutKeys(): void
     {

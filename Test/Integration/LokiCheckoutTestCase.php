@@ -15,6 +15,7 @@ use Loki\Components\Component\ComponentRegistry;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Loki\Components\Test\Integration\LokiComponentsTestCase;
 use Magento\TestFramework\Fixture\DataFixtureStorageManager;
+use PHPUnit\Framework\ExpectationFailedException;
 
 class LokiCheckoutTestCase extends LokiComponentsTestCase
 {
@@ -100,6 +101,61 @@ class LokiCheckoutTestCase extends LokiComponentsTestCase
         $checkoutSession->replaceQuote($cart);
 
         return $cart;
+    }
+
+    /**
+     * Check multiple components against the same (already dispatched) page, because dispatching the checkout is
+     * expensive. All mismatches are reported at once, instead of stopping at the first.
+     *
+     * @param string[] $expectedComponents Names of components that should be on the page
+     * @param string[] $unexpectedComponents Names of components that should not be on the page
+     */
+    protected function assertComponentsOnPage(array $expectedComponents, array $unexpectedComponents = []): void
+    {
+        $failures = [];
+        foreach ($expectedComponents as $componentName) {
+            if (false === $this->existsComponentOnPage($this->getComponent($componentName))) {
+                $failures[] = 'Component "' . $componentName . '" not found';
+            }
+        }
+
+        foreach ($unexpectedComponents as $componentName) {
+            if ($this->existsComponentOnPage($this->getComponent($componentName))) {
+                $failures[] = 'Component "' . $componentName . '" found anyway';
+            }
+        }
+
+        $this->addToAssertionCount(count($expectedComponents) + count($unexpectedComponents));
+        if (!empty($failures)) {
+            $this->fail(implode("\n", $failures));
+        }
+    }
+
+    /**
+     * Validate multiple values against the same component within a single test, because every single test (with its
+     * fixtures) carries significant overhead. All failing cases are reported at once, instead of stopping at the first.
+     *
+     * @param array<int|string, array{0: mixed, 1: bool, 2: string[]}> $cases List of [value, expectedResult, errors]
+     */
+    protected function assertComponentValidationCases(ComponentInterface $component, array $cases): void
+    {
+        $this->assertNotEmpty($cases, 'No validation cases given');
+
+        $failures = [];
+        foreach ($cases as $index => [$value, $expectedResult, $expectedErrors]) {
+            $component->getLocalMessageRegistry()->clearMessages();
+
+            try {
+                $this->assertComponentValidation($expectedResult, $expectedErrors, $component, $value);
+            } catch (ExpectationFailedException $expectationFailedException) {
+                $failures[] = 'Case #' . $index . ' (' . var_export($value, true) . '): '
+                    . $expectationFailedException->getMessage();
+            }
+        }
+
+        if (!empty($failures)) {
+            $this->fail(implode("\n\n", $failures));
+        }
     }
 
     // @todo: Move into trait

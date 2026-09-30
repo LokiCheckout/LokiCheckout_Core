@@ -24,16 +24,7 @@ class ShippingAsBillingPageTest extends LokiCheckoutTestCase
 
     use AssertStoreConfigValueEquals;
 
-    #[
-        ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default'),
-        ConfigFixture('loki_checkout/fields/enable_same_as_billing', 0, 'store', 'default')
-    ]
-    public function testDisabled()
-    {
-        $this->dispatchToCheckout();
-        $this->assertComponentNotExistsOnPage(self::BLOCK_NAME);
-    }
-
+    // The disabled state (enable_same_as_billing=0) is covered by Component\Checkout\Page\BillingPageTest
     #[
         ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default'),
         ConfigFixture('loki_checkout/fields/enable_same_as_billing', 1, 'store', 'default')

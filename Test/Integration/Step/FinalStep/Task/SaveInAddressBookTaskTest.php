@@ -6,19 +6,18 @@ use LokiCheckout\Core\Step\FinalStep\Task\SaveInAddressBookTask;
 use LokiCheckout\Core\Test\Fixture\CustomerFixture;
 use LokiCheckout\Core\Test\Fixture\CustomerLoggedInFixture;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
-use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Customer\Api\CustomerRepositoryInterface;
-use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\DataFixture;
 
+/**
+ * The cart does not need any products for these tests, so no product fixtures are used (saving time)
+ */
 #[
     DataFixture(CustomerFixture::class, ['email' => 'savetask@example.com'], as: 'customer'),
     DataFixture(CustomerLoggedInFixture::class, ['customer_id' => '$customer.id$']),
-    DataFixture(ProductFixture::class, as: 'product'),
     DataFixture(GuestCartFixture::class, as: 'cart'),
-    DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$']),
     AppArea('frontend'),
 ]
 class SaveInAddressBookTaskTest extends LokiCheckoutTestCase

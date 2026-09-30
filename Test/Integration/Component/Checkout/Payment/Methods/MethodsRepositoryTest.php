@@ -6,8 +6,10 @@ namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Payment\Methods;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
+use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Framework\Message\ManagerInterface as MessageManager;
 use Magento\Framework\Module\Manager as ModuleManager;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Model\Quote\Payment;
@@ -58,15 +60,76 @@ class MethodsRepositoryTest extends LokiCheckoutTestCase
         $this->assertArrayNotHasKey('quote_id', (array)$payment->getAdditionalInformation());
     }
 
-    private function getMethodsRepository(): ComponentRepositoryInterface
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/banktransfer/active', 0, 'store', 'default')]
+    #[ConfigFixture('loki_checkout/billing/select_default_payment_method', 0, 'store', 'default')]
+    public function testUnavailableStoredMethodIsClearedWithoutErrors(): void
+    {
+        $component = $this->getMethodsComponent();
+        $component->getRepository()->saveValue('checkmo');
+        $this->assertSame('checkmo', $this->getPersistedPayment()->getMethod());
+
+        $this->getQuote()->getPayment()->setMethod('banktransfer');
+
+        $this->assertSame('', $component->getRepository()->getValue());
+        $this->assertEmpty($this->getPersistedPayment()->getMethod());
+        $this->assertSame('', $component->getRepository()->getValue());
+        $this->assertNoErrors($component);
+    }
+
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/banktransfer/active', 0, 'store', 'default')]
+    #[ConfigFixture('loki_checkout/billing/select_default_payment_method', 1, 'store', 'default')]
+    public function testUnavailableStoredMethodIsReplacedByDefaultWithoutErrors(): void
+    {
+        $component = $this->getMethodsComponent();
+        $this->getQuote()->getPayment()->setMethod('banktransfer');
+
+        $value = $component->getRepository()->getValue();
+        $this->assertNotSame('', $value);
+        $this->assertNotSame('banktransfer', $value);
+        $this->assertSame($value, $this->getPersistedPayment()->getMethod());
+        $this->assertNoErrors($component);
+    }
+
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/banktransfer/active', 0, 'store', 'default')]
+    #[ConfigFixture('loki_checkout/billing/select_default_payment_method', 0, 'store', 'default')]
+    public function testSavingUnavailableMethodAddsLocalError(): void
+    {
+        $component = $this->getMethodsComponent();
+        $component->getRepository()->saveValue('banktransfer');
+
+        $this->assertNotSame('banktransfer', $this->getPersistedPayment()->getMethod());
+        $this->assertNotEmpty($component->getLocalMessageRegistry()->getMessages());
+    }
+
+    private function assertNoErrors(ComponentInterface $component): void
+    {
+        $messageManager = $this->getObjectManager()->get(MessageManager::class);
+        $errors = array_map(
+            fn($message) => $message->getText(),
+            $messageManager->getMessages()->getErrors()
+        );
+
+        $this->assertSame([], $errors);
+        $this->assertSame([], $component->getLocalMessageRegistry()->getMessages());
+    }
+
+    private function getMethodsComponent(): ComponentInterface
     {
         $this->saveShippingAddressValues(['country_id' => 'US', 'region' => 'Texas', 'postcode' => '78701']);
         $this->getCart();
 
-        $repository = $this->getCheckoutComponent(self::BLOCK_NAME)->getRepository();
-        $this->assertInstanceOf(ComponentRepositoryInterface::class, $repository);
+        $component = $this->getCheckoutComponent(self::BLOCK_NAME);
+        $this->assertInstanceOf(ComponentRepositoryInterface::class, $component->getRepository());
 
-        return $repository;
+        return $component;
+    }
+
+    private function getMethodsRepository(): ComponentRepositoryInterface
+    {
+        return $this->getMethodsComponent()->getRepository();
     }
 
     private function getPersistedPayment(): Payment
