@@ -78,16 +78,16 @@ class PaymentMethodsRepository extends ComponentRepository
             }
         }
 
-        $value = $this->sanitizePaymentMethod((string)$value);
-
-        if (false === $this->isPaymentMethodAvailable($value)) {
-            $this->getContext()->getCoreMessageManager()->addErrorMessage(__('Payment method "%1" is not available.', $value));
+        $value = (string)$value;
+        if (!$this->isEmptyPaymentMethod($value) && false === $this->isPaymentMethodAvailable($value)) {
+            $this->component->getLocalMessageRegistry()->addError('Method is not available');
             return;
         }
 
+        $value = $this->sanitizePaymentMethod($value);
         $quote = $this->getQuote();
 
-        if ($value === '' || $value === '0') {
+        if ($this->isEmptyPaymentMethod($value)) {
             $quote->setPaymentMethod($value);
             $quote->getPayment()->setMethod('');
             $quote->getPayment()->setAdditionalInformation([]);
@@ -127,7 +127,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
     protected function sanitizePaymentMethod(string $paymentMethod): string
     {
-        if ($paymentMethod === '' || $paymentMethod === '0') {
+        if ($this->isEmptyPaymentMethod($paymentMethod)) {
             return $this->getDefaultPayment();
         }
 
@@ -146,7 +146,11 @@ class PaymentMethodsRepository extends ComponentRepository
             }
         }
 
-        $this->component->getLocalMessageRegistry()->addError('Method is not available');
         return false;
+    }
+
+    private function isEmptyPaymentMethod(string $paymentMethod): bool
+    {
+        return $paymentMethod === '' || $paymentMethod === '0';
     }
 }
