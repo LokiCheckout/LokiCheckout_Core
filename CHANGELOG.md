@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   placing the order, the checkout login form, the newsletter subscription and the coupon code form
 
 ### Fixed
+- Make `GridLayoutViewModel::getGridLayoutData()` public, because `#[JsProperty]` is only allowed on public methods
 - Do not pass payment transfer data (`quote_id`, `method_instance`) into the payment `additional_data` when selecting a
   payment method, which made selecting PayPal Express fail with "The payment disallows storing objects"
 

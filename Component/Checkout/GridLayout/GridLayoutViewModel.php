@@ -23,7 +23,7 @@ class GridLayoutViewModel extends ComponentViewModel
     }
 
     #[JsProperty(name: 'gridLayout')]
-    private function getGridLayoutData(): array
+    public function getGridLayoutData(): array
     {
         $parentBlock = $this->getBlock()->getParentBlock();
         $layout = $parentBlock->getLayout();
