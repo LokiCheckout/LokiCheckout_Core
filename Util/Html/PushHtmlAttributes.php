@@ -10,6 +10,7 @@ class PushHtmlAttributes
             return $html;
         }
 
+        $html = ltrim($html);
         if (!preg_match('/^<([a-z]{2,})/', $html, $match)) {
             return $html;
         }
