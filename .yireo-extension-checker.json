@@ -2,6 +2,8 @@
   "ignore": [
     "Loki_Base",
     "Loki_MapComponents",
-    "loki/magento2-map-components"
+    "loki/magento2-map-components",
+    "loki/magento2-functional-tests",
+    "loki-checkout/magento2-functional-tests"
   ]
 }
