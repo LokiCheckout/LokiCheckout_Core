@@ -4,3 +4,6 @@
 .playwright
 .opencode
 .gitlab-ci-local
+.playwright
+.opencode
+.gitlab-ci-local
