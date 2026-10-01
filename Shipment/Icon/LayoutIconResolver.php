@@ -22,7 +22,7 @@ class LayoutIconResolver implements IconResolverInterface
 
         $block = $this->layout->getBlock($blockName);
         if ($block instanceof AbstractBlock) {
-            $icon = trim((string)$block->getIcon());
+            $icon = trim((string)$block->getIcon(), " \f\n\r\t\v\x00");
             if (!empty($icon)) {
                 $attributes = array_merge(
                     $iconResolverContext->getAttributes(),

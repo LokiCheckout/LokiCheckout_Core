@@ -85,7 +85,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return (string)__($carrierMethod) . $this->separator . __($carrierCode);
         }
 
-        $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod));
+        $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod), " \f\n\r\t\v\x00");
 
         if ($methodTitle !== '' && $methodTitle !== '0') {
             $parts[] = $methodTitle;
@@ -94,7 +94,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         $carrierTitle = trim(
             $this->scopeConfig->getValue(
                 'carriers/' . $carrierCode . '/title',
-            )
+            ), " \f\n\r\t\v\x00"
         );
 
         if ($carrierTitle !== '' && $carrierTitle !== '0') {

@@ -41,7 +41,7 @@ class StreetLinesParser
                 continue;
             }
 
-            $newStreetParts[] = trim($streetPart);
+            $newStreetParts[] = trim($streetPart, " \f\n\r\t\v\x00");
         }
 
         return $newStreetParts;
@@ -52,7 +52,7 @@ class StreetLinesParser
      */
     private function parseSingleStreetLine(string $streetLine): array
     {
-        $trimmedLine = trim($streetLine);
+        $trimmedLine = trim($streetLine, " \f\n\r\t\v\x00");
         if (is_numeric($trimmedLine)) {
             return ['', $trimmedLine];
         }
@@ -65,9 +65,9 @@ class StreetLinesParser
             return [$trimmedLine];
         }
 
-        $streetName = trim($matches[1]);
+        $streetName = trim($matches[1], " \f\n\r\t\v\x00");
         $houseNumber = $matches[2];
-        $addition = trim($matches[3]);
+        $addition = trim($matches[3], " \f\n\r\t\v\x00");
 
         $result = [];
         if ($streetName !== '') {

@@ -65,12 +65,12 @@ class AddressRenderer
         $isEmpty = true;
         foreach ($addressData as $fieldName => $fieldValue) {
             if (is_string($fieldValue)) {
-                $fieldValue = trim($fieldValue);
+                $fieldValue = trim($fieldValue, " \f\n\r\t\v\x00");
             }
 
             if (is_array($fieldValue)
                 && count($fieldValue) === 1
-                && in_array(trim((string)$fieldValue[0]), ['', '0'], true)) {
+                && in_array(trim((string)$fieldValue[0], " \f\n\r\t\v\x00"), ['', '0'], true)) {
                 continue;
             }
 

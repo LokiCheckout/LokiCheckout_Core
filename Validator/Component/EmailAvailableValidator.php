@@ -16,7 +16,7 @@ class EmailAvailableValidator implements ValidatorInterface
 
     public function validate(mixed $value, ?ComponentInterface $component = null): bool|array
     {
-        $email = trim((string)$value);
+        $email = trim((string)$value, " \f\n\r\t\v\x00");
 
         if ($email === '' || $email === '0') {
             return true;

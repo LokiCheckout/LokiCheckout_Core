@@ -25,7 +25,7 @@ class StreetLines
             case 4:
             case 3:
             case 2:
-                return trim($this->streetName);
+                return trim($this->streetName, " \f\n\r\t\v\x00");
             case 1:
                 return $this->concatenate([
                     $this->streetName,
@@ -48,7 +48,7 @@ class StreetLines
         switch ($this->maximumNumber) {
             case 4:
             case 3:
-                return trim($this->houseNumber);
+                return trim($this->houseNumber, " \f\n\r\t\v\x00");
             case 2:
                 return $this->concatenate([$this->houseNumber, $this->houseNumberAddition, $this->street4]);
         }
@@ -65,7 +65,7 @@ class StreetLines
     {
         switch ($this->maximumNumber) {
             case 4:
-                return trim($this->houseNumberAddition);
+                return trim($this->houseNumberAddition, " \f\n\r\t\v\x00");
             case 3:
                 return $this->concatenate([$this->houseNumberAddition, $this->street4]);
         }
@@ -84,7 +84,7 @@ class StreetLines
 
     public function toString(): string
     {
-        return trim(implode("\n", $this->getLines()));
+        return trim(implode("\n", $this->getLines()), " \f\n\r\t\v\x00");
     }
 
     public function getLines(): array
@@ -128,10 +128,10 @@ class StreetLines
     {
         $string = '';
         foreach ($lines as $line) {
-            $string .= ' ' . trim($line);
+            $string .= ' ' . trim($line, " \f\n\r\t\v\x00");
         }
 
-        return trim($string);
+        return trim($string, " \f\n\r\t\v\x00");
     }
 
     public function getCountryId(): string

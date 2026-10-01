@@ -49,7 +49,7 @@ class AppendChildNameToBlockHtmlObserver implements ObserverInterface
     }
     private function appendBlockAliasToBlockHtml(string $blockHtml, string $blockAlias): string
     {
-        if (trim($blockHtml) === '') {
+        if (trim($blockHtml, " \f\n\r\t\v\x00") === '') {
             return $blockHtml;
         }
 

@@ -26,7 +26,7 @@ class StepForwardButtonViewModel extends AbstractStepButtonViewModel
 
     public function getButtonLabel(): string
     {
-        $buttonLabelWithoutPayment = trim((string)$this->getBlock()->getButtonLabelWithoutPayment());
+        $buttonLabelWithoutPayment = trim((string)$this->getBlock()->getButtonLabelWithoutPayment(), " \f\n\r\t\v\x00");
 
         /** @var Quote $quote */
         $quote = $this->getContext()->getQuote();

@@ -12,13 +12,13 @@ abstract class AdditionalInformationRepository extends FieldRepository
 {
     public function getValue(): mixed
     {
-        $value = trim((string)$this->getPropertyValue());
+        $value = trim((string)$this->getPropertyValue(), " \f\n\r\t\v\x00");
         if (!empty($value)) {
             $this->saveValue($value);
             return $value;
         }
 
-        $defaultValue = trim((string)$this->getDefaultValue());
+        $defaultValue = trim((string)$this->getDefaultValue(), " \f\n\r\t\v\x00");
         $this->saveValue($defaultValue);
 
         return $defaultValue;

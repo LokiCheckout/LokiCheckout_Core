@@ -15,7 +15,7 @@ class GenderValidator implements ValidatorInterface
 
     public function validate(mixed $value, ?ComponentInterface $component = null): bool|array
     {
-        $gender = trim((string)$value);
+        $gender = trim((string)$value, " \f\n\r\t\v\x00");
 
         if ($gender === '' || $gender === '0') {
             return true;
