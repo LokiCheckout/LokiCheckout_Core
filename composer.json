@@ -48,7 +48,9 @@
         "yireo/magento2-csp-utilities": "^1.0"
     },
     "require-dev": {
-        "yireo/magento2-integration-test-helper": "~0.0"
+        "yireo/magento2-integration-test-helper": "~0.0",
+        "loki/magento2-functional-tests": "@dev",
+        "loki-checkout/magento2-functional-tests": "@dev"
     },
     "suggest": {
         "loki-checkout/magento2-luma": "Luma compatibility for Loki Checkout",
