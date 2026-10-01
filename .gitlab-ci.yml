@@ -31,9 +31,9 @@ variables:
   OPENSEARCH_JAVA_OPTS: "-Xms128m -Xmx128m"
   OPENSEARCH_INITIAL_ADMIN_PASSWORD: "admin"
   MAGENTO_VERSION: "2.4.8-p3"
-  DISABLE_INVENTORY: true
-  DISABLE_GRAPHQL: true
-  DISABLE_ADOBE: true
+  DISABLE_INVENTORY: false
+  DISABLE_GRAPHQL: false
+  DISABLE_ADOBE: false
 
 php-linting:
   image: yireo/php-testbox:$PHP_VERSION
@@ -79,6 +79,7 @@ phpstan:
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
+    - composer config repositories.loki-extensions composer https://gitlab.yireo.com/api/v4/group/loki-extensions/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - composer config --no-plugins allow-plugins true
     - composer remove --dev magento/magento-coding-standard
@@ -112,6 +113,7 @@ unit-tests:
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
+    - composer config repositories.loki-extensions composer https://gitlab.yireo.com/api/v4/group/loki-extensions/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
@@ -145,6 +147,7 @@ integration-tests:
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
+    - composer config repositories.loki-extensions composer https://gitlab.yireo.com/api/v4/group/loki-extensions/-/packages/composer/packages.json
     - composer config repositories.local-source path /tmp/magento/local-source
     - test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev
@@ -190,6 +193,7 @@ compile:
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
+    - composer config repositories.loki-extensions composer https://gitlab.yireo.com/api/v4/group/loki-extensions/-/packages/composer/packages.json
     - composer config repositories.local-source path $CI_PROJECT_DIR
     #- test -z "$COMPOSER_DEV_REQUIREMENTS" || composer require --dev $COMPOSER_DEV_REQUIREMENTS
     - composer require --prefer-source -- $COMPOSER_NAME:@dev yireo/magento2-enable-module-sequence
@@ -203,11 +207,6 @@ compile:
 playwright:
   image: yireo/magento2playwright:2.4.8-p3
   stage: advanced
-  rules:
-    - if: '$CI_PIPELINE_SOURCE != "schedule"'
-      allow_failure: true
-    - when: manual
-      allow_failure: true
   script:
     - cd $CI_PROJECT_DIR
     - echo "Detecting Playwright tests"
@@ -223,6 +222,7 @@ playwright:
     - composer config repositories.loki-third-party composer https://gitlab.yireo.com/api/v4/group/loki-third-party/-/packages/composer/packages.json
     - composer config repositories.loki-checkout composer https://gitlab.yireo.com/api/v4/group/loki-checkout/-/packages/composer/packages.json
     - composer config repositories.loki-checkout-dev composer https://gitlab.yireo.com/api/v4/group/loki-checkout-dev/-/packages/composer/packages.json
+    - composer config repositories.loki-extensions composer https://gitlab.yireo.com/api/v4/group/loki-extensions/-/packages/composer/packages.json
     - echo "Configure Magento Marketplace"
     - composer config --global --auth http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_PUBLIC_KEY}" "${MAGENTO_MARKETPLACE_PRIVATE_KEY}"
     - echo "Configure composer"
@@ -233,30 +233,30 @@ playwright:
     - echo "Add module source"
     - cp -R $CI_PROJECT_DIR /tmp/magento/package-source
     - composer config repositories.local-source path /tmp/magento/package-source
-    - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence:@dev
+    - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki/magento2-functional-tests:@dev loki-checkout/magento2-functional-tests:@dev yireo/magento2-enable-module-sequence:@dev
     - echo "Setup Magento"
     - $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli "${MAGENTO_MODULE}"
+    - bin/magento module:sequence Loki_FunctionalTests LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
     - bin/magento config:set dev/static/sign 0
     - bin/magento setup:static-content:deploy -f --area frontend en_US
     - bin/magento loki-checkout:sample-data:add-product
-    - bin/magento loki-checkout:modules:dump
-    - magerun2 config:store:set loki_checkout/functional_tests/token loki -n
+    - bin/magento loki:functional-tests:modules:dump
+    - magerun2 config:store:set loki/functional_tests/token loki -n
     - bin/magento cache:flush config
     - echo "Verify Magento installation"
     - test -f /tmp/magento/bin/magento || exit 1
     - echo "Run Playwright tests"
-    - cd /tmp/magento/vendor/loki-checkout/magento2-functional-tests/Test/Playwright/
+    - cd /tmp/magento/vendor/loki/magento2-functional-tests/Test/Playwright/
     - echo "Installing npm dependencies..."
     - npm install
-    - npx playwright install chromium
-    - echo "Creating .env file..."
-    - printf "TEST_URL=http://127.0.0.1:8888\nTEST_TOKEN=loki\n" > .env
+    #- npx playwright install chromium
+    - echo "Creating /tmp/magento/.env.playwright..."
+    - printf "TEST_URL=${MAGENTO_BASE_URL}\nTEST_TOKEN=loki\nMODULE_NAME=${MAGENTO_MODULE}\n" > /tmp/magento/.env.playwright
     - echo "Running Playwright tests for project $MAGENTO_MODULE"
     - tail -F /tmp/magento/var/log/*.log 2>/dev/null &
-    - CI=true TEST_TOKEN=loki MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE} --reporter=list --trace=retain-on-failure
+    - CI=true TEST_URL="${MAGENTO_BASE_URL}" TEST_TOKEN=loki MAGENTO_ROOT=/tmp/magento npx playwright test --project=${MAGENTO_MODULE} --reporter=list --trace=retain-on-failure
   services:
     - name: yireo/mariadb:10
       alias: mysql

@@ -5,19 +5,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.7.0] - 01 October 2026
+
 ### Added
 - Add Google reCAPTCHA support, driven by the Magento core configuration (`recaptcha_frontend`), for
   placing the order, the checkout login form, the newsletter subscription and the coupon code form
+- Add `*_billing_address_country_*` and `*_shipping_address_country_*` handles
+- Add more child positions to `checkout/shipping/shipping-methods/item.phtml`
+- Add XML comment for using `combobox` for country field
 
 ### Fixed
+- Clear a stored payment method that is no longer available
 - Make `GridLayoutViewModel::getGridLayoutData()` public, because `#[JsProperty]` is only allowed on public methods
 - Do not pass payment transfer data (`quote_id`, `method_instance`) into the payment `additional_data` when selecting a
   payment method, which made selecting PayPal Express fail with "The payment disallows storing objects"
-- Clear a stored payment method that is no longer available instead of adding an error `Payment method "" is not
-  available.` on every render, which blocked placing the order (e.g. for logged-in customers with an old quote)
-- Fix integration test run silently aborting halfway (tests rendering checkout blocks without a quote hit `exit()`)
-- Speed up integration tests (about 45% faster): No products or checkout dispatch where a guest cart suffices, one
-  checkout dispatch per configuration for component-on-page tests, no fixtures for skipped tests
+- Make sure to `trim()` blocks before adding HTML attributes
+- For agreements, only allow `true` as a proper value
+- Save explicit newsletter opt-out for emails without subscriber record
+- Validate checkout agreements server-side in FinalStep
+- Add JsProperty step to QuoteFieldViewModel and AbstractStepButtonViewModel
+- Fix agreements not being required
+- Regex for matching `country_XX` handles wrongly also matched `country_format`
+- Allow for method-specific child blocks in `checkout/shipping/shipping-methods/item.phtml`
+- Add `visibleDeliveryOffset` and `visibleLocationOffset` to `shipping-component-partial.phtml`
 
 ## [2.6.0] - 28 August 2026
 ### Added
