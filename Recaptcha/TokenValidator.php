@@ -27,7 +27,7 @@ class TokenValidator implements TokenValidatorInterface
             return new ValidationResult(true);
         }
 
-        $token = trim($token);
+        $token = trim($token, " \f\n\r\t\v\x00");
         if ($token === '') {
             return new ValidationResult(false, $this->config->getValidationFailureMessage());
         }

@@ -22,7 +22,7 @@ class PrefixOptionModel implements ArgumentInterface, OptionModelInterface
 
         $options = [];
         foreach ($prefixOptions as $prefixOption) {
-            $prefixOption = trim($prefixOption);
+            $prefixOption = trim($prefixOption, " \f\n\r\t\v\x00");
             if ($prefixOption === '' || $prefixOption === '0') {
                 continue;
             }

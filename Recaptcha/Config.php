@@ -70,12 +70,12 @@ class Config implements ArgumentInterface
 
     public function getSiteKey(string $type): string
     {
-        return trim((string)$this->getTypeSetting($type, 'public_key', ScopeInterface::SCOPE_WEBSITE));
+        return trim((string)$this->getTypeSetting($type, 'public_key', ScopeInterface::SCOPE_WEBSITE), " \f\n\r\t\v\x00");
     }
 
     public function getSecretKey(string $type): string
     {
-        return trim((string)$this->getTypeSetting($type, 'private_key', ScopeInterface::SCOPE_WEBSITE));
+        return trim((string)$this->getTypeSetting($type, 'private_key', ScopeInterface::SCOPE_WEBSITE), " \f\n\r\t\v\x00");
     }
 
     /**
@@ -118,7 +118,7 @@ class Config implements ArgumentInterface
         $message = trim((string)$this->scopeConfig->getValue(
             self::XML_PATH_VALIDATION_FAILURE,
             ScopeInterface::SCOPE_STORE
-        ));
+        ), " \f\n\r\t\v\x00");
 
         if ($message !== '') {
             return $message;
@@ -132,7 +132,7 @@ class Config implements ArgumentInterface
         $message = trim((string)$this->scopeConfig->getValue(
             self::XML_PATH_TECHNICAL_FAILURE,
             ScopeInterface::SCOPE_STORE
-        ));
+        ), " \f\n\r\t\v\x00");
 
         if ($message !== '') {
             return $message;
