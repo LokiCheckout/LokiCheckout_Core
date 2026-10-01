@@ -20,7 +20,7 @@ $total = $block->getTotal();
 $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 ?>
 <dt class="total label <?= $escaper->escapeHtml($css('font-bold', $total->getCode() . '-label')) ?>">
-    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+    <?= $escaper->escapeHtml(__(trim($total->getTitle(), " \f\n\r\t\v\x00"))) ?>
 </dt>
 <dd class="total value <?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>">
     <?= /* @noEscape */ $priceFormatter->format($total->getValue()) ?>

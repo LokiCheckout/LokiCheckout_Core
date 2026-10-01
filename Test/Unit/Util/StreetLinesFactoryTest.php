@@ -51,7 +51,7 @@ class StreetLinesFactoryTest extends TestCase
 
         if ($numberOfStreetlines == 1) {
             $this->assertSame(
-                trim(implode(' ', [$expectedStreetName, $expectedHouseNumber, $expectedHouseNumberAddition, $street4])),
+                trim(implode(' ', [$expectedStreetName, $expectedHouseNumber, $expectedHouseNumberAddition, $street4]), " \f\n\r\t\v\x00"),
                 $streetLines->getStreetName()
             );
             $this->assertEmpty($streetLines->getHouseNumber());
@@ -62,7 +62,7 @@ class StreetLinesFactoryTest extends TestCase
         if ($numberOfStreetlines == 2) {
             $this->assertSame($expectedStreetName, $streetLines->getStreetName());
             $this->assertSame(
-                trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4])),
+                trim(implode(' ', [$expectedHouseNumber, $expectedHouseNumberAddition, $street4]), " \f\n\r\t\v\x00"),
                 $streetLines->getHouseNumber()
             );
 
@@ -74,7 +74,7 @@ class StreetLinesFactoryTest extends TestCase
             $this->assertSame($expectedStreetName, $streetLines->getStreetName());
             $this->assertSame($expectedHouseNumber, $streetLines->getHouseNumber());
             $this->assertSame(
-                trim(implode(' ', [$expectedHouseNumberAddition, $street4])),
+                trim(implode(' ', [$expectedHouseNumberAddition, $street4]), " \f\n\r\t\v\x00"),
                 $streetLines->getHouseNumberAddition()
             );
             $this->assertEmpty($streetLines->getStreet4());

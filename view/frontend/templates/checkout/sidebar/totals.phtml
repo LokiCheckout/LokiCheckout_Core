@@ -39,7 +39,7 @@ $totalSegments = $totals->getTotalSegments();
                 <dt
                     class="<?= $escaper->escapeHtml($css('font-medium', $total->getCode() . '-label')) ?>"
                 >
-                    <?= $escaper->escapeHtml(__(trim((string)$total->getTitle()))) ?>
+                    <?= $escaper->escapeHtml(__(trim((string)$total->getTitle(), " \f\n\r\t\v\x00"))) ?>
                 </dt>
                 <dd
                     class="<?= $escaper->escapeHtml($css('text-right', $total->getCode() . '-value')) ?>"

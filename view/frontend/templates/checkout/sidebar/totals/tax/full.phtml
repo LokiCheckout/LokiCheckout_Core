@@ -29,7 +29,7 @@ $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
 <div class="col-span-2 grid grid-cols-2" x-data="LokiToggle">
     <dt class="<?= $escaper->escapeHtml($css('font-medium')) ?>">
         <summary @click="toggle" class="block">
-            <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+            <?= $escaper->escapeHtml(__(trim($total->getTitle(), " \f\n\r\t\v\x00"))) ?>
             <span class="<?= $escaper->escapeHtml($css('', 'icon-open')) ?>" x-show="hidden">
                 <?= /* @noEscape */ $imageRenderer->icon($block, 'chevron-down', ['class' => 'inline-block']) ?>
             </span>

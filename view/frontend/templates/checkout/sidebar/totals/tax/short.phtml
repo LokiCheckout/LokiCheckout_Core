@@ -23,7 +23,7 @@ $priceFormatter = $viewModelFactory->create(PriceFormatter::class);
 $taxTotalViewModel = $viewModelFactory->create(TaxTotal::class);
 ?>
 <dt class="<?= $escaper->escapeHtml($css('font-medium')) ?>">
-    <?= $escaper->escapeHtml(__(trim($total->getTitle()))) ?>
+    <?= $escaper->escapeHtml(__(trim($total->getTitle(), " \f\n\r\t\v\x00"))) ?>
 </dt>
 <dd
     class="<?= $escaper->escapeHtml($css('text-right')) ?>"
