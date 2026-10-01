@@ -21,6 +21,7 @@
         "ext-json": "*",
         "ext-pcre": "*",
         "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/psr7": "^2.0",
         "loki/magento2-components": "^2.8",
         "loki/magento2-css-utils": "^1.0",
         "loki/magento2-field-components": "^2.0",
@@ -48,8 +49,7 @@
         "yireo/magento2-csp-utilities": "^1.0"
     },
     "require-dev": {
-        "loki-checkout/magento2-functional-tests": "@dev",
-        "loki/magento2-functional-tests": "@dev",
+        "phpunit/phpunit": "^9.0 | ^10.0",
         "yireo/magento2-integration-test-helper": "~0.0"
     },
     "suggest": {
