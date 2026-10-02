@@ -46,6 +46,10 @@ use Magento\Framework\View\Element\Template;
             },
             initDisableAllWhenLoading() {
                 const container = document.getElementById('loki-checkout');
+                if (!container) {
+                    return;
+                }
+
                 container.removeAttribute('aria-busy');
 
                 this.$watch('loading', () => {
