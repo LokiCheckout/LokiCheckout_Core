@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Detect billing address type for sidebar blocks named `billing_address` in `AddressStateProvider` (LokiCheckout_Coc#7)
+
 ## [2.7.0] - 01 October 2026
 
 ### Added

@@ -22,7 +22,7 @@ class AddressStateProvider
             $block = $block->getNameInLayout();
         }
 
-        if (strstr($block, 'billing.address')) {
+        if (str_contains($block, 'billing.address') || str_contains($block, 'billing_address')) {
             return 'billing';
         }
 

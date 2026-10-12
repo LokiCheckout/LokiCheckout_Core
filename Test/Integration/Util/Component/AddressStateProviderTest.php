@@ -38,4 +38,24 @@ class AddressStateProviderTest extends TestCase
         $this->assertFalse($this->subject->isBillingAddressType($name));
         $this->assertInstanceOf(ShippingAddressState::class, $this->subject->getAddressState($name));
     }
+
+    public function testSidebarBillingAddressType(): void
+    {
+        $name = 'loki-checkout.sidebar.preview.billing_address.additional_address_info.coc';
+
+        $this->assertSame('billing', $this->subject->getAddressType($name));
+        $this->assertTrue($this->subject->isBillingAddressType($name));
+        $this->assertFalse($this->subject->isShippingAddressType($name));
+        $this->assertInstanceOf(BillingAddressState::class, $this->subject->getAddressState($name));
+    }
+
+    public function testSidebarShippingAddressType(): void
+    {
+        $name = 'loki-checkout.sidebar.preview.shipping_details.additional_address_info.coc';
+
+        $this->assertSame('shipping', $this->subject->getAddressType($name));
+        $this->assertTrue($this->subject->isShippingAddressType($name));
+        $this->assertFalse($this->subject->isBillingAddressType($name));
+        $this->assertInstanceOf(ShippingAddressState::class, $this->subject->getAddressState($name));
+    }
 }
