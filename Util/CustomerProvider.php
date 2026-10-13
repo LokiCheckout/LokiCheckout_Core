@@ -19,6 +19,12 @@ use Magento\Framework\UrlFactory;
 
 class CustomerProvider
 {
+    /** @var AddressInterface[][] */
+    private array $addresses = [];
+
+    /** @var Option[][] */
+    private array $addressLines = [];
+
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly CustomerRepositoryInterface $customerRepository,
@@ -48,17 +54,17 @@ class CustomerProvider
             return [];
         }
 
-        static $addresses = null;
-        if ($addresses !== null) {
-            return $addresses;
+        $customer = $this->getCustomer();
+        $customerId = (int)$customer->getId();
+        if (isset($this->addresses[$customerId])) {
+            return $this->addresses[$customerId];
         }
 
-        $customer = $this->getCustomer();
-        $this->searchCriteriaBuilder->addFilter('parent_id', $customer->getId());
+        $this->searchCriteriaBuilder->addFilter('parent_id', $customerId);
         $searchResults = $this->customerAddressRepository->getList($this->searchCriteriaBuilder->create());
 
-        $addresses = $searchResults->getItems();
-        return $addresses;
+        $this->addresses[$customerId] = $searchResults->getItems();
+        return $this->addresses[$customerId];
     }
 
     /**
@@ -67,9 +73,9 @@ class CustomerProvider
      */
     public function getAddressLines(): array
     {
-        static $addressLines = null;
-        if ($addressLines !== null) {
-            return $addressLines;
+        $customerId = (int)$this->checkoutState->getCustomerSession()->getCustomerId();
+        if (isset($this->addressLines[$customerId])) {
+            return $this->addressLines[$customerId];
         }
 
         $addressLines = [];
@@ -93,6 +99,7 @@ class CustomerProvider
             }
         }
 
+        $this->addressLines[$customerId] = $addressLines;
         return $addressLines;
     }
 
