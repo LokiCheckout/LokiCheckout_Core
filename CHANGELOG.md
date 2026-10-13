@@ -6,7 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.1] - 13 October 2026
 ### Fixed
+- Align outdated integration tests with current behaviour
+- Keep free shipping when subtotal equals the free shipping threshold
+- Cache customer addresses per instance and customer instead of in static variables
+- Get reCAPTCHA legal notice view model from ancestor block
+- Check server-side agreements error via Loki messages instead of role=alert
+- Prevent JS error under Luma when `#loki-checkout` does not exist
+- Add `trim()` its second argument for PHP 8.6 compatibility
 - Detect billing address type for sidebar blocks named `billing_address` in `AddressStateProvider` (LokiCheckout_Coc#7)
 
 ## [2.7.0] - 01 October 2026
