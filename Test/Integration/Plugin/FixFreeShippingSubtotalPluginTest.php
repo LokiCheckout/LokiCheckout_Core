@@ -38,7 +38,7 @@ class FixFreeShippingSubtotalPluginTest extends LokiCheckoutTestCase
         return $method;
     }
 
-    #[ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 100)]
+    #[ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 100, 'store', 'default')]
     public function testFreeShippingRemovedWhenSubtotalBelowThreshold(): void
     {
         $this->getCart();
@@ -49,7 +49,18 @@ class FixFreeShippingSubtotalPluginTest extends LokiCheckoutTestCase
         $this->assertArrayNotHasKey('freeshipping_freeshipping', $result);
     }
 
-    #[ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 10)]
+    #[ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 50, 'store', 'default')]
+    public function testFreeShippingKeptWhenSubtotalEqualsThreshold(): void
+    {
+        $this->getCart();
+        $methods = ['freeshipping_freeshipping' => $this->freeShippingMethod()];
+
+        $result = $this->getSubject()->afterGetShippingMethods($this->getRepository(), $methods);
+
+        $this->assertArrayHasKey('freeshipping_freeshipping', $result);
+    }
+
+    #[ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 10, 'store', 'default')]
     public function testFreeShippingKeptWhenSubtotalAboveThreshold(): void
     {
         $this->getCart();

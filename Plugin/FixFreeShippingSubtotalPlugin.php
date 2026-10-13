@@ -43,7 +43,7 @@ class FixFreeShippingSubtotalPlugin
                 }
             }
 
-            if ($subtotal > $freeShippingSubtotal) {
+            if ($subtotal >= $freeShippingSubtotal) {
                 continue;
             }
 
