@@ -252,7 +252,6 @@ playwright:
     - cd /tmp/magento/vendor/loki/magento2-functional-tests/Test/Playwright/
     - echo "Installing npm dependencies..."
     - npm install
-    #- npx playwright install chromium
     - echo "Creating /tmp/magento/.env.playwright..."
     - printf "TEST_URL=${MAGENTO_BASE_URL}\nTEST_TOKEN=loki\nMODULE_NAME=${MAGENTO_MODULE}\n" > /tmp/magento/.env.playwright
     - echo "Running Playwright tests for project $MAGENTO_MODULE"
