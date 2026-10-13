@@ -1,4 +1,4 @@
-import {PaymentMethod, PlaceOrderButton, ShippingMethod, SuccessPage} from '@loki-checkout/checkout-objects';
+import {Messages, PaymentMethod, PlaceOrderButton, ShippingMethod, SuccessPage} from '@loki-checkout/checkout-objects';
 import {setupCheckout} from '@loki/setup-checkout';
 import {test, expect} from '@loki/test';
 import coreConfig from '@loki-checkout/config';
@@ -83,7 +83,7 @@ test.describe('Terms and conditions', function () {
 
     await new SuccessPage(page).expectNotToBeLoaded();
     await expect(page).toHaveURL(/\/checkout\/?(#.*)?$/);
-    await expect(page.getByRole('alert').filter({hasText: 'agree to the terms and conditions'})).toBeVisible();
+    await expect((new Messages(page)).getLocator()).toContainText('agree to the terms and conditions');
   });
 
   test('should allow me to finalize the checkout when agreeing to the terms', async function ({page, context}) {
