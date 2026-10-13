@@ -10,9 +10,9 @@ use Magento\Framework\View\Element\Template;
 /** @var Template $block */
 /** @var Escaper $escaper */
 /** @var CssClass $css */
-/** @var RecaptchaViewModel $viewModel */
 
-if (false === $viewModel->showLegalNotice()) {
+$viewModel = $block->getAncestorViewModel();
+if (false === $viewModel instanceof RecaptchaViewModel || false === $viewModel->showLegalNotice()) {
     return;
 }
 ?>
