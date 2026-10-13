@@ -6,6 +6,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
+use Magento\SalesRule\Test\Fixture\Rule as SalesRuleFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
@@ -50,7 +51,6 @@ final class DefaultPageTest extends LokiCheckoutTestCase
                 'loki-checkout.sidebar',
                 'loki-checkout.sidebar.items',
                 'loki-checkout.sidebar.totals',
-                'loki-checkout.sidebar.coupon_code',
                 'loki-checkout.sidebar.preview.billing_address',
                 'loki-checkout.sidebar.preview.payment_details',
                 'loki-checkout.sidebar.preview.quote_details',
@@ -60,11 +60,24 @@ final class DefaultPageTest extends LokiCheckoutTestCase
                 'loki-checkout.steps.shipping.backward-button',
                 'loki-checkout.agreements',
                 'loki-checkout.recaptcha.place-order',
+                // Only rendered when an active coupon-based cart price rule exists
+                'loki-checkout.sidebar.coupon_code',
             ]
         );
 
         // Prevent duplicate DOM IDs
         $idAttribute = 'id="loki-checkout-steps-shipping"';
         $this->assertEquals(1, substr_count($this->getResponse()->getBody(), $idAttribute), 'Duplicate DOM ID');
+    }
+
+    #[ConfigFixture('loki_checkout/general/theme', 'default', 'store', 'default')]
+    #[DataFixture(ProductFixture::class, as: 'product')]
+    #[DataFixture(GuestCartFixture::class, as: 'cart')]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
+    #[DataFixture(SalesRuleFixture::class, ['coupon_code' => 'loki-test-coupon', 'website_ids' => [1], 'customer_group_ids' => [0, 1]])]
+    public function testCouponCodeOnPageWithActiveCouponRule(): void
+    {
+        $this->dispatchToCheckout();
+        $this->assertComponentsOnPage(['loki-checkout.sidebar.coupon_code']);
     }
 }

@@ -35,7 +35,7 @@ class CleanAfterAddressChangeTest extends TestCase
         $this->assertSame('', (string)$address->getShippingMethod());
 
         $skipValidation = ObjectManager::getInstance()->get(SkipValidation::class);
-        $this->assertTrue((bool)$skipValidation->getSkipValidation());
+        $this->assertTrue($skipValidation->isSkipValidation());
     }
 
     public function testNonCountryFieldDoesNothing(): void

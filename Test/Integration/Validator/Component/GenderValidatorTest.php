@@ -33,7 +33,8 @@ class GenderValidatorTest extends LokiCheckoutTestCase
 
         $expectedResults = [
             '' => true,
-            'male' => true,
+            '1' => true,
+            '2' => true,
             'not-a-gender' => ['Invalid gender'],
         ];
 

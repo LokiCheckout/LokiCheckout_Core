@@ -33,7 +33,8 @@ class OptionsValidatorTest extends LokiCheckoutTestCase
 
         $expectedResults = [
             '' => true,
-            'male' => true,
+            '1' => true,
+            '2' => true,
             'not-a-valid-option' => ['Not a valid option'],
         ];
 

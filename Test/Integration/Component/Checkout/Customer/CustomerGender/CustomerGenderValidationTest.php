@@ -44,8 +44,10 @@ class CustomerGenderValidationTest extends LokiCheckoutTestCase
         return [
             ['', false, ['Value is required']],
             ['John', false, ['Not a valid option']],
-            ['male', true, []],
-            ['female', true, []],
+            ['male', false, ['Not a valid option']],
+            ['1', true, []],
+            ['2', true, []],
+            ['3', true, []],
         ];
     }
 }
