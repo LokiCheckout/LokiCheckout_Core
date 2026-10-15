@@ -6,12 +6,18 @@ use LokiCheckout\Core\Component\Base\Generic\CheckoutContext;
 use LokiCheckout\Core\Exception\UnknownStepException;
 use LokiCheckout\Core\Step\StepNavigator;
 use Loki\Components\Component\ComponentRepository;
+use Psr\Log\LoggerInterface;
 
 /**
  * @method CheckoutContext getContext()
  */
 class StepForwardButtonRepository extends ComponentRepository
 {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+    ) {
+    }
+
     public function getValue(): mixed
     {
         try {
@@ -28,8 +34,8 @@ class StepForwardButtonRepository extends ComponentRepository
             $this->getContext()->getSkipValidation()->setSkipValidation(true);
 
         } catch (UnknownStepException $e) {
-            $msg = 'UnknownStepException: ' . $e->getMessage();
-            $this->getContext()->getMessageManager()->addErrorMessage($msg);
+            $this->logger->error($e);
+            $this->getContext()->getMessageManager()->addErrorMessage(__('Unable to continue to the next step'));
         }
     }
 

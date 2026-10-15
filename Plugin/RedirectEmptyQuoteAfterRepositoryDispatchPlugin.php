@@ -9,12 +9,14 @@ use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Element\AbstractBlock;
 use Loki\Components\Exception\RedirectException;
 use Loki\Components\Util\Controller\RepositoryDispatcher;
+use Psr\Log\LoggerInterface;
 
 class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
 {
     public function __construct(
         private readonly UrlFactory $urlFactory,
         private readonly ManagerInterface $messageManager,
+        private readonly LoggerInterface $logger,
         private readonly array $allowedExceptionClasses = []
     ) {
     }
@@ -38,9 +40,9 @@ class RedirectEmptyQuoteAfterRepositoryDispatchPlugin
             throw $e;
         }
 
-        $msg = get_class($e) . ': ' . $e->getMessage();
+        $this->logger->error($e);
         $url = $this->urlFactory->create()->getUrl('checkout/cart');
-        throw (new RedirectException($msg))->setUrl($url);
+        throw (new RedirectException())->setUrl($url);
     }
 
     private function isExceptionAllowed(Exception $e): bool

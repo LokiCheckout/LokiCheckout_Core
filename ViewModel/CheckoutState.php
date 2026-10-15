@@ -116,7 +116,7 @@ class CheckoutState implements ArgumentInterface
         try {
             $this->quotes[$quoteId] = $this->getPersistedQuote();
         } catch (NoSuchEntityException $e) {
-            $this->handleQuoteNotFoundException($e->getMessage());
+            $this->handleQuoteNotFoundException('No quote found');
         }
 
         return $this->parseQuote($this->quotes[$quoteId]);
@@ -137,7 +137,7 @@ class CheckoutState implements ArgumentInterface
             $this->saveCart->execute($quote, $useRepository);
             $this->calculateTotals();
         } catch (NoSuchEntityException $e) {
-            $this->handleQuoteNotFoundException($e->getMessage());
+            $this->handleQuoteNotFoundException('No quote found');
         }
     }
 

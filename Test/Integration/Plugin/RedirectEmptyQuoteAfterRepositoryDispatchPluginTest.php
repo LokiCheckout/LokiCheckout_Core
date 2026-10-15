@@ -12,6 +12,7 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\UrlFactory;
 use Magento\TestFramework\Fixture\AppArea;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 use RuntimeException;
 
 #[AppArea('frontend')]
@@ -68,6 +69,7 @@ class RedirectEmptyQuoteAfterRepositoryDispatchPluginTest extends TestCase
         return new RedirectEmptyQuoteAfterRepositoryDispatchPlugin(
             ObjectManager::getInstance()->get(UrlFactory::class),
             ObjectManager::getInstance()->get(ManagerInterface::class),
+            ObjectManager::getInstance()->get(LoggerInterface::class),
             $allowedExceptionClasses
         );
     }

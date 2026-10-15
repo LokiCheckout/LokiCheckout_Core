@@ -4,7 +4,7 @@ namespace LokiCheckout\Core\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
-use Magento\Framework\Message\Manager as MessageManager;
+use Psr\Log\LoggerInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Step\StepNavigator;
 
@@ -12,7 +12,7 @@ class ResetStepAfterCartSave implements ObserverInterface
 {
     public function __construct(
         private readonly StepNavigator $stepNavigator,
-        private readonly MessageManager $messageManager,
+        private readonly LoggerInterface $logger,
         private readonly Config $config
     ) {
     }
@@ -26,7 +26,7 @@ class ResetStepAfterCartSave implements ObserverInterface
         try {
             $this->stepNavigator->setCurrentStepByCode($this->stepNavigator->getFirstStep()->getCode());
         } catch (\Exception $e) {
-            $this->messageManager->addWarningMessage($e->getMessage());
+            $this->logger->warning($e);
         }
     }
 }
