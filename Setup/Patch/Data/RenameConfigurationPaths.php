@@ -26,7 +26,7 @@ class RenameConfigurationPaths implements DataPatchInterface
     {
         $connection = $this->resourceConnection->getConnection();
         $table = $this->resourceConnection->getTableName('core_config_data');
-        $select = $connection->select()->from($table)->where('path LIKE "yireo_loki_checkout/%"');
+        $select = $connection->select()->from($table)->where('path LIKE ?', 'yireo\_loki\_checkout/%');
         $rows = $connection->fetchAll($select);
         if (empty($rows)) {
             return $this;
@@ -35,7 +35,7 @@ class RenameConfigurationPaths implements DataPatchInterface
         foreach ($rows as $row) {
             $oldPath = $row['path'];
             $newPath = str_replace('yireo_loki_checkout/', 'loki_checkout/', $oldPath);
-            $connection->update($table, ['path' => $newPath], 'path = "' . $oldPath . '"');
+            $connection->update($table, ['path' => $newPath], ['config_id = ?' => (int)$row['config_id']]);
         }
 
         return $this;

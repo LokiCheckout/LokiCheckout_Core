@@ -56,7 +56,7 @@ class NewsletterRepository
             ->select()
             ->from($this->resourceConnection->getTableName('newsletter_subscriber'))
             ->where('store_id IN (?)', $this->getStoreIds())
-            ->where('customer_id = '.$customerId)
+            ->where('customer_id = ?', $customerId)
             ->limit(1);
     }
 
