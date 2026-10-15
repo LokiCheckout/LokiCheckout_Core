@@ -301,6 +301,7 @@
                 <item name="agreements" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\AgreementsTask</item>
                 <item name="recaptcha" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\RecaptchaTask</item>
                 <item name="saveInAddressBook" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\SaveInAddressBookTask</item>
+                <item name="newsletter" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\NewsletterTask</item>
             </argument>
         </arguments>
     </type>

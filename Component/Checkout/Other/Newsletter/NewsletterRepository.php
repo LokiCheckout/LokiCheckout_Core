@@ -6,9 +6,13 @@ use Loki\Field\Component\Base\Field\FieldRepository;
 use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
 use LokiCheckout\Core\Recaptcha\FormId;
 use LokiCheckout\Core\Recaptcha\Guard;
-use Magento\Newsletter\Model\Subscriber;
+use LokiCheckout\Core\Util\NewsletterChoice;
 
 /**
+ * Guests are only able to change subscriptions that were created by their own checkout session.
+ * The subscription state of other email addresses is never disclosed. When the newsletter is
+ * checked by default, the subscription itself is only created when placing the order.
+ *
  * @method NewsletterContext getContext()
  */
 class NewsletterRepository extends FieldRepository
@@ -26,19 +30,103 @@ class NewsletterRepository extends FieldRepository
             return false;
         }
 
-        if (true === $this->isSubscribed()) {
+        if ($this->getCustomerId() > 0 && $this->isCustomerSubscribed()) {
             return true;
         }
 
-        if ($this->isNewsletterCheckedByDefault() && false === $this->hasSubscriberRecord()) {
-            $this->subscribe();
-            if ($this->showNotifications()) {
-                $message = __('You have been subscribed automatically to the newsletter');
-                $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
-            }
+        $choice = $this->getNewsletterChoice()->getChoice();
+        if ($choice !== null) {
+            return $choice;
+        }
 
+        if ($this->getCustomerId() === 0 && $this->getNewsletterChoice()->hasSubscribedEmail($email)) {
             return true;
         }
+
+        return $this->isNewsletterCheckedByDefault() && false === $this->hasCustomerRecord();
+    }
+
+    public function saveValue(mixed $value): void
+    {
+        $value = (bool)$value;
+        $this->getNewsletterChoice()->setChoice($value);
+
+        if ($this->getCustomerId() > 0) {
+            $this->saveCustomerValue($value);
+
+            return;
+        }
+
+        $this->saveGuestValue($value);
+    }
+
+    private function saveCustomerValue(bool $value): void
+    {
+        if ($this->isCustomerSubscribed() === $value) {
+            return;
+        }
+
+        if (false === $this->assertRecaptcha()) {
+            return;
+        }
+
+        if ($value) {
+            $this->getContext()->getSubscriptionManager()->subscribeCustomer($this->getCustomerId(), $this->getStoreId());
+            $this->addNotification((string)__('You have been subscribed to the newsletter'));
+
+            return;
+        }
+
+        $this->getContext()->getSubscriptionManager()->unsubscribeCustomer($this->getCustomerId(), $this->getStoreId());
+        $this->addNotification((string)__('You have been unsubscribed from the newsletter'));
+    }
+
+    private function saveGuestValue(bool $value): void
+    {
+        $email = $this->getCustomerEmail();
+        if (strlen($email) < 1) {
+            return;
+        }
+
+        $newsletterChoice = $this->getNewsletterChoice();
+        if ($value === $newsletterChoice->hasSubscribedEmail($email)) {
+            return;
+        }
+
+        if (false === $value) {
+            $this->unsubscribeOwnGuestSubscription($email);
+
+            return;
+        }
+
+        if (false === $this->assertRecaptcha()) {
+            return;
+        }
+
+        if ($this->getContext()->getNewsletterRepository()->isGuestEmailSubscribed($email)) {
+            return;
+        }
+
+        $this->getContext()->getSubscriptionManager()->subscribe($email, $this->getStoreId());
+        $newsletterChoice->addSubscribedEmail($email);
+        $this->addNotification((string)__('You have been subscribed to the newsletter'));
+    }
+
+    private function unsubscribeOwnGuestSubscription(string $email): void
+    {
+        $confirmCode = $this->getContext()->getNewsletterRepository()->getConfirmationCode($email);
+        $this->getContext()->getSubscriptionManager()->unsubscribe($email, $this->getStoreId(), $confirmCode);
+        $this->getNewsletterChoice()->removeSubscribedEmail($email);
+        $this->addNotification((string)__('You have been unsubscribed from the newsletter'));
+    }
+
+    private function assertRecaptcha(): bool
+    {
+        if ($this->recaptchaGuard->assertPassed(FormId::NEWSLETTER)) {
+            return true;
+        }
+
+        $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
 
         return false;
     }
@@ -48,138 +136,23 @@ class NewsletterRepository extends FieldRepository
         return $this->getContext()->getModuleConfig()->isNewsletterCheckedByDefault();
     }
 
-    public function saveValue(mixed $value): void
+    private function hasCustomerRecord(): bool
     {
-        $value = (bool)$value;
-        $isSubscribed = $this->isSubscribed();
-        if (true === $isSubscribed && true === $value) {
-            return;
+        if ($this->getCustomerId() === 0) {
+            return false;
         }
 
-        $needsOptOut = false;
-        if (false === $isSubscribed && false === $value) {
-            if (false === $this->isNewsletterCheckedByDefault() || $this->hasSubscriberRecord()) {
-                return;
-            }
-
-            $needsOptOut = true;
-        }
-
-        if (false === $this->recaptchaGuard->assertPassed(FormId::NEWSLETTER)) {
-            $this->getLocalMessageRegistry()->addError($this->recaptchaConfig->getValidationFailureMessage());
-
-            return;
-        }
-
-        if ($needsOptOut) {
-            $this->saveOptOut();
-
-            return;
-        }
-
-        if (true === $value) {
-            $this->subscribeEmail();
-            if ($this->showNotifications()) {
-                $message = __('You have been subscribed to the newsletter');
-                $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
-            }
-
-            return;
-        }
-
-        if ($this->getContext()->getCustomerSession()->isLoggedIn()) {
-            $this->unsubscribeCustomer();
-
-            return;
-        }
-
-        $this->unsubscribeEmail();
-
-        if ($this->showNotifications()) {
-            $message = __('You have been unsubscribed from the newsletter');
-            $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
-        }
+        return $this->getContext()->getNewsletterRepository()->hasCustomerIdRecord($this->getCustomerId());
     }
 
-    private function isSubscribed(): bool
+    private function isCustomerSubscribed(): bool
     {
-        $customerId = $this->getCustomerId();
-        if ($customerId > 0) {
-            return $this->isCustomerSubscribed();
-        }
-
-        return $this->isGuestSubscribed();
+        return $this->getContext()->getNewsletterRepository()->isCustomerIdSubscribed($this->getCustomerId());
     }
 
-    private function hasSubscriberRecord(): bool
+    private function getNewsletterChoice(): NewsletterChoice
     {
-        $customerSession = $this->getContext()->getCustomerSession();
-        if ($customerSession->isLoggedIn()) {
-            return $this->getContext()->getNewsletterRepository()->hasCustomerIdRecord(
-                (int)$customerSession->getCustomerId()
-            );
-        }
-
-        $email = (string)$this->getContext()->getCheckoutState()->getQuote()->getCustomerEmail();
-        return $this->getContext()->getNewsletterRepository()->hasGuestEmailRecord(
-            $email
-        );
-    }
-
-    private function subscribe(): void
-    {
-        $customerId = $this->getCustomerId();
-        if ($customerId > 0) {
-            $this->subscribeCustomer();
-            return;
-        }
-
-        $this->subscribeEmail();
-    }
-
-    private function subscribeEmail()
-    {
-        $this->getContext()->getSubscriptionManager()->subscribe(
-            $this->getCustomerEmail(),
-            $this->getStoreId()
-        );
-    }
-
-    private function saveOptOut(): void
-    {
-        if ($this->getCustomerId() > 0) {
-            $this->unsubscribeCustomer();
-
-            return;
-        }
-
-        $subscriber = $this->getContext()->getSubscriberFactory()->create();
-        $subscriber->setSubscriberEmail($this->getCustomerEmail());
-        $subscriber->setStoreId($this->getStoreId());
-        $subscriber->setSubscriberConfirmCode($subscriber->randomSequence());
-        $subscriber->setStatus(Subscriber::STATUS_UNSUBSCRIBED);
-        $subscriber->save(); // @phpstan-ignore-line
-    }
-
-    private function unsubscribeEmail(): void
-    {
-        $email = $this->getCustomerEmail();
-        $subscriber = $this->getContext()->getSubscriberFactory()->create();
-        $subscriber->load($email, 'subscriber_email'); // @phpstan-ignore-line
-        $confirmCode = $subscriber->getSubscriberConfirmCode();
-        $this->getContext()->getSubscriptionManager()->unsubscribe($email, $this->getStoreId(), $confirmCode);
-    }
-
-    private function subscribeCustomer()
-    {
-        $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
-        $this->getContext()->getSubscriptionManager()->subscribeCustomer($customerId, $this->getStoreId());
-    }
-
-    private function unsubscribeCustomer()
-    {
-        $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
-        $this->getContext()->getSubscriptionManager()->unsubscribeCustomer($customerId, $this->getStoreId());
+        return $this->getContext()->getNewsletterChoice();
     }
 
     private function getStoreId(): int
@@ -201,16 +174,13 @@ class NewsletterRepository extends FieldRepository
         return (int)$this->getContext()->getCustomerSession()->getCustomerId();
     }
 
-    private function isCustomerSubscribed(): bool
+    private function addNotification(string $message): void
     {
-        $customerId = (int)$this->getContext()->getCustomerSession()->getCustomerId();
-        return $this->getContext()->getNewsletterRepository()->isCustomerIdSubscribed($customerId);
-    }
+        if (false === $this->showNotifications()) {
+            return;
+        }
 
-    private function isGuestSubscribed(): bool
-    {
-        $email = $this->getCustomerEmail();
-        return $this->getContext()->getNewsletterRepository()->isGuestEmailSubscribed($email);
+        $this->getContext()->getCoreMessageManager()->addNoticeMessage($message);
     }
 
     private function showNotifications(): bool

@@ -16,6 +16,7 @@ use LokiCheckout\Core\Util\Component\AddressStateProvider;
 use LokiCheckout\Core\Util\Component\AttributeProvider;
 use LokiCheckout\Core\Util\Component\StepProvider;
 use LokiCheckout\Core\Util\CustomerProvider;
+use LokiCheckout\Core\Util\NewsletterChoice;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use LokiCheckout\Core\ViewModel\State\BillingAddressState;
 use LokiCheckout\Core\ViewModel\State\ShippingAddressState;
@@ -44,6 +45,7 @@ class NewsletterContext implements ComponentContextInterface
         private readonly UrlFactory $urlFactory,
         private readonly ResourceConnection $resourceConnection,
         private readonly NewsletterRepository $newsletterRepository,
+        private readonly NewsletterChoice $newsletterChoice,
     ) {
     }
 
@@ -140,5 +142,10 @@ class NewsletterContext implements ComponentContextInterface
     public function getNewsletterRepository(): NewsletterRepository
     {
         return $this->newsletterRepository;
+    }
+
+    public function getNewsletterChoice(): NewsletterChoice
+    {
+        return $this->newsletterChoice;
     }
 }
