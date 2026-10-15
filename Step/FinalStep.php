@@ -3,6 +3,9 @@
 namespace LokiCheckout\Core\Step;
 
 use LokiCheckout\Core\Step\FinalStep\TaskListing;
+use Magento\Checkout\Api\Exception\PaymentProcessingRateLimitExceededException;
+use Magento\Checkout\Api\PaymentProcessingRateLimiterInterface;
+use Magento\Checkout\Helper\Data as CheckoutHelper;
 use Magento\Customer\Api\Data\GroupInterface;
 use Magento\Framework\DataObject;
 use Magento\Framework\Event\Manager as EventManager;
@@ -20,6 +23,7 @@ use Magento\Sales\Api\Data\OrderInterface;
 use Magento\Sales\Api\OrderRepositoryInterface;
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Email\Sender\OrderSender;
+use Psr\Log\LoggerInterface;
 use LokiCheckout\Core\Step\FinalStep\Redirect;
 use LokiCheckout\Core\Validator\QuoteValidator;
 use LokiCheckout\Core\ViewModel\CheckoutState;
@@ -39,7 +43,10 @@ class FinalStep
         private readonly OrderSender $orderSender,
         private readonly CartRepositoryInterface $cartRepository,
         private readonly TaskListing $taskListing,
-        private readonly UrlFactory $urlFactory
+        private readonly UrlFactory $urlFactory,
+        private readonly CheckoutHelper $checkoutHelper,
+        private readonly LoggerInterface $logger,
+        private readonly PaymentProcessingRateLimiterInterface $paymentRateLimiter,
     ) {
     }
 
@@ -65,6 +72,9 @@ class FinalStep
         $this->checkoutState->reset();
         $quote = $this->checkoutState->getPersistedQuote();
         $this->checkoutState->setQuote($quote);
+
+        $this->assertGuestCheckoutAllowed($quote);
+        $this->limitPaymentProcessing();
 
         if (!$quote->isVirtual()) {
             $shippingAddress = $quote->getShippingAddress();
@@ -96,11 +106,14 @@ class FinalStep
 
         try {
             $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
-        } catch(Throwable $e) {
+        } catch (LocalizedException $e) {
             $msg = __('An error occurred while placing the order.') .' '. $e->getMessage();
             $this->messageManager->addErrorMessage($msg);
-            $checkoutUrl = $this->urlFactory->create()->getUrl('checkout');
-            throw (new RedirectException())->setUrl($checkoutUrl);
+            throw $this->getCheckoutRedirect();
+        } catch (Throwable $e) {
+            $this->logger->critical($e);
+            $this->messageManager->addErrorMessage(__('An error occurred while placing the order.'));
+            throw $this->getCheckoutRedirect();
         }
 
         foreach ($this->taskListing->getTasks() as $task) {
@@ -123,6 +136,43 @@ class FinalStep
         }
 
         return true;
+    }
+
+    /**
+     * @throws RedirectException
+     */
+    private function assertGuestCheckoutAllowed(Quote $quote): void
+    {
+        if ($this->checkoutState->getCustomerSession()->isLoggedIn()) {
+            return;
+        }
+
+        if ($this->checkoutHelper->isAllowedGuestCheckout($quote)) {
+            return;
+        }
+
+        $this->messageManager->addErrorMessage(__('Guest checkout is disabled.'));
+        throw (new RedirectException())->setUrl($this->urlFactory->create()->getUrl('checkout/cart'));
+    }
+
+    /**
+     * @throws RedirectException
+     */
+    private function limitPaymentProcessing(): void
+    {
+        try {
+            $this->paymentRateLimiter->limit();
+        } catch (PaymentProcessingRateLimitExceededException $exception) {
+            $this->messageManager->addErrorMessage($exception->getMessage());
+            throw $this->getCheckoutRedirect();
+        }
+    }
+
+    private function getCheckoutRedirect(): RedirectException
+    {
+        $checkoutUrl = $this->urlFactory->create()->getUrl('checkout');
+
+        return (new RedirectException())->setUrl($checkoutUrl);
     }
 
     private function dispatchCheckoutTypeOnepageSaveOrderAfter(OrderInterface $order): void

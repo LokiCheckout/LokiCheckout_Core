@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Test\Integration\Step;
 
+use Loki\Components\Exception\RedirectException;
 use LokiCheckout\Core\Step\FinalStep;
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
@@ -49,6 +50,26 @@ class FinalStepTest extends LokiCheckoutTestCase
         $this->prepareQuoteForSubmit();
 
         $this->assertTrue($this->getSubject()->validate());
+    }
+
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    #[ConfigFixture('checkout/options/guest_checkout', 0, 'store', 'default')]
+    public function testGuestCanNotPlaceOrderWhenGuestCheckoutIsDisabled(): void
+    {
+        $this->getCart();
+        $this->prepareQuoteForSubmit();
+
+        try {
+            $this->getSubject()->submit();
+            $this->fail('Expected a redirect');
+        } catch (RedirectException $redirectException) {
+            $this->assertStringContainsString('checkout/cart', $redirectException->getUrl());
+        }
+
+        $quote = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($this->getQuote()->getId());
+        $this->assertTrue((bool)$quote->getIsActive());
+        $this->assertEmpty($quote->getReservedOrderId());
     }
 
     private function prepareQuoteForSubmit(): Quote
