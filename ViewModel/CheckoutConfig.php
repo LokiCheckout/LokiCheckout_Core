@@ -15,6 +15,9 @@ class CheckoutConfig implements ArgumentInterface
 
     public function getJsonConfig(): string
     {
-        return json_encode($this->configProvider->getConfig());
+        return (string)json_encode(
+            $this->configProvider->getConfig(),
+            JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT
+        );
     }
 }

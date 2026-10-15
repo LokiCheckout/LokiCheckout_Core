@@ -7,10 +7,10 @@ use Loki\Components\Factory\ViewModelFactory;
 /** @version 2.7.1 */
 /** @var Template $block */
 
-$translations = json_encode((array)$block->getTranslations());
+$translations = json_encode((array)$block->getTranslations(), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
 ?>
 <script>
-    const LokiCheckoutTranslations = JSON.parse('<?= /* @noEscape */ $translations ?>');
+    const LokiCheckoutTranslations = <?= /* @noEscape */ $translations ?>;
     const LokiTranslate = {
         __(text) {
             if (LokiCheckoutTranslations.hasOwnProperty(text)) {

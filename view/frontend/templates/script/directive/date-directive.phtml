@@ -25,7 +25,7 @@ $options['locale'] = 'nl-NL'; // @todo: Make this dynamic
 $options['timeZone'] = 'Europe/Amsterdam'; // @todo: Make this dynamic
 ?>
 <script>
-    const LokiCheckoutDateOptions = JSON.parse('<?= /* @noEscape */ json_encode($options) ?>');
+    const LokiCheckoutDateOptions = <?= /* @noEscape */ json_encode($options, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?>;
     const getLokiCheckoutDateFromValue = (value, modifiers = []) => {
         if (modifiers.includes('timestamp') || typeof value === Number) {
             value = Number(value);
@@ -73,11 +73,11 @@ $options['timeZone'] = 'Europe/Amsterdam'; // @todo: Make this dynamic
                 }
 
                 const date = new Date(getLokiCheckoutDateFromValue(value, modifiers));
-                el.textContent = new Intl.DateTimeFormat('<?= $escaper->escapeHtml($options['locale']) ?>', {
+                el.textContent = new Intl.DateTimeFormat('<?= $escaper->escapeJs($options['locale']) ?>', {
                     hour: '2-digit',
                     minute: '2-digit',
                     hour12: false,
-                    timeZone: '<?= $escaper->escapeHtml($options['timeZone']) ?>'
+                    timeZone: '<?= $escaper->escapeJs($options['timeZone']) ?>'
                 }).format(date);
             }
         });
