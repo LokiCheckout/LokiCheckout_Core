@@ -14,8 +14,6 @@ class QuoteDataCollector
             'customer_middlename' => $quote->getCustomerMiddlename(),
             'customer_lastname'   => $quote->getCustomerLastname(),
             'customer_email'      => $quote->getCustomerEmail(),
-            'customer_dob'        => $quote->getCustomerDob(),
-            'customer_gender'     => $quote->getCustomerGender(),
             'currency_code'       => $quote->getQuoteCurrencyCode(),
             'grand_total'         => $quote->getGrandTotal(),
             'sub_total'           => $quote->getSubtotal(),
