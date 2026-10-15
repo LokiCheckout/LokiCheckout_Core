@@ -22,14 +22,6 @@ class AppendChildNameToBlockHtmlObserver implements ObserverInterface
             return;
         }
 
-        $transport = $observer->getEvent()->getTransport();
-        $html = (string) $transport->getHtml();
-
-        $blockAlias = $this->layout->getElementAlias($block->getNameInLayout());
-        if (false === $blockAlias) {
-            return;
-        }
-
         try {
             $parentBlock = $block->getParentBlock();
         } catch (Throwable $e) {
@@ -43,6 +35,14 @@ class AppendChildNameToBlockHtmlObserver implements ObserverInterface
         if (true !== $parentBlock->getGrid()) {
             return;
         }
+
+        $blockAlias = $this->layout->getElementAlias($block->getNameInLayout());
+        if (false === $blockAlias) {
+            return;
+        }
+
+        $transport = $observer->getEvent()->getTransport();
+        $html = (string) $transport->getHtml();
 
         $html = $this->appendBlockAliasToBlockHtml($html, $blockAlias);
         $transport->setHtml($html);
@@ -64,7 +64,7 @@ class AppendChildNameToBlockHtmlObserver implements ObserverInterface
                     '<%s%s data-child-name="%s">',
                     $matches[1],
                     $matches[2],
-                    $blockAlias
+                    htmlspecialchars((string)$blockAlias, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5)
                 );
             },
             $blockHtml,

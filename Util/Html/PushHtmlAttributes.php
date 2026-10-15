@@ -33,11 +33,23 @@ class PushHtmlAttributes
 
         $replaceAttributes = ['id'];
         foreach ($attributes as $attributeName => $attributeValue) {
+            $attributeName = (string)$attributeName;
+            if (false === $this->isValidAttributeName($attributeName)) {
+                continue;
+            }
+
+            if (is_array($attributeValue) || is_object($attributeValue)) {
+                continue;
+            }
+
+            $attributeValue = htmlspecialchars((string)$attributeValue, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
+            $htmlAttribute = $attributeName . '="' . $attributeValue . '"';
+
             if (str_contains($newFirstTagHtml, ' ' . $attributeName . '=')) {
                 if (in_array($attributeName, $replaceAttributes)) {
-                    $newFirstTagHtml = preg_replace(
-                        '#\s' . $attributeName . '=(["\'])([^\'"]+)(["\'])#',
-                        ' '.$attributeName . '="' . $attributeValue . '"',
+                    $newFirstTagHtml = preg_replace_callback(
+                        '#\s' . preg_quote($attributeName, '#') . '=(["\'])([^\'"]+)(["\'])#',
+                        static fn () => ' ' . $htmlAttribute,
                         $newFirstTagHtml
                     );
                 }
@@ -45,12 +57,20 @@ class PushHtmlAttributes
                 continue;
             }
 
-            $htmlAttribute = $attributeName . '="' . $attributeValue . '"';
-            $newFirstTagHtml = preg_replace('/^<([a-z]{2,})/', '<\1 ' . $htmlAttribute, $newFirstTagHtml);
+            $newFirstTagHtml = preg_replace_callback(
+                '/^<([a-z]{2,})/',
+                static fn (array $tagMatch) => '<' . $tagMatch[1] . ' ' . $htmlAttribute,
+                $newFirstTagHtml
+            );
         }
 
         $html = substr_replace($html, $newFirstTagHtml, 0, strlen($firstTagHtml));
 
         return $html;
+    }
+
+    private function isValidAttributeName(string $attributeName): bool
+    {
+        return (bool)preg_match('/^[a-zA-Z_:@][a-zA-Z0-9_:.@-]*$/', $attributeName);
     }
 }

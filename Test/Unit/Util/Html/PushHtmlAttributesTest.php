@@ -26,6 +26,11 @@ class PushHtmlAttributesTest extends TestCase
             ['<script>TEST', '<script>TEST', ['id' => 'foobar']],
             ['<div><div></div>TEST', '<div id="foobar"><div></div>TEST', ['id' => 'foobar']],
             ['<div id="old"><div></div>TEST', '<div id="new"><div></div>TEST', ['id' => 'new']],
+            ['<div>TEST', '<div data-foo="&quot;&gt;&lt;script&gt;">TEST', ['data-foo' => '"><script>']],
+            ['<div>TEST', '<div data-foo="$1 \\1">TEST', ['data-foo' => '$1 \\1']],
+            ['<div id="old">TEST', '<div id="a&quot;b">TEST', ['id' => 'a"b']],
+            ['<div>TEST', '<div>TEST', ['onclick="alert(1)" x' => 'foo']],
+            ['<div>TEST', '<div @input="1">TEST', ['@input' => true]],
         ];
     }
 }
