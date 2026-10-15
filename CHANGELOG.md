@@ -5,6 +5,18 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.7.2] - 15 October 2026
+### Fixed
+- Render checked and disabled attributes of payment method items
+- Redirect to cart when one-page checkout is disabled
+- Ignore non-scalar values and non-rendered fields in QuoteFieldRepository
+- Do not reveal account state in login error
+- Do not disclose or modify foreign newsletter subscriptions
+- Protect finalize URL with a single-use token
+- Harden order placement in FinalStep
+- Always inject payment processing rate limiter into PaymentMethodsRepository
+
 ### Security
 - Block guest orders when guest checkout is disabled, also when calling the finalize URL or step buttons directly
 - Protect the finalize URL with a single-use token (`FinalizeToken`) instead of the form key, and disable it when LokiCheckout is disabled

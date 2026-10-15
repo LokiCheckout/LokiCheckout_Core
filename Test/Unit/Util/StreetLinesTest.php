@@ -89,7 +89,9 @@ class StreetLinesTest extends TestCase
             ["Example Street\n1\nA", 'Example Street', '1', 'A', 'NL'],
             ["Example  Street\n1\nA", 'Example  Street', '1', 'A', 'NL'],
             ["Example\n\nA", 'Example', '', 'A', 'NL'],
-            ["A", '', '', 'A', 'NL'],
+            ["\n\nA", '', '', 'A', 'NL'],
+            ["\n1\nA", '', '1', 'A', 'NL'],
+            ["Example\n1", 'Example', '1', '', 'NL'],
             ["200 Example\nApartment 1", '200 Example', 'Apartment 1', '', 'US'],
         ];
     }

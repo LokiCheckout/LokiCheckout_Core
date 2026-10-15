@@ -70,6 +70,7 @@ phpstan:
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cd /tmp/magento
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
@@ -104,6 +105,7 @@ unit-tests:
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - rm -f /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     - cd /tmp/magento
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
@@ -137,6 +139,7 @@ integration-tests:
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - cp -R $CI_PROJECT_DIR /tmp/magento/local-source
@@ -184,6 +187,7 @@ compile:
     - MAGENTO_MODULE=`jq '.module_name' MODULE.json -r`
     - COMPOSER_DEV_REQUIREMENTS=`jq -r '.["require-dev"] // {} | to_entries | map("\(.key):\(.value|gsub("[[:space:]]+"; ""))") | join(" ")' composer.json`
     - cd /tmp/magento
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
@@ -228,17 +232,18 @@ playwright:
     - composer config --global --auth http-basic.repo.magento.com "${MAGENTO_MARKETPLACE_PUBLIC_KEY}" "${MAGENTO_MARKETPLACE_PRIVATE_KEY}"
     - echo "Configure composer"
     - composer config --global --auth github-oauth.github.com "${GITHUB_TOKEN}"
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-additional.sh
     - test -f $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh && source $CI_PROJECT_DIR/.gitlab-ci/composer-${MAGENTO_VERSION}.sh
     - composer config gitlab-domains gitlab.yireo.com
     - echo "Add module source"
     - cp -R $CI_PROJECT_DIR /tmp/magento/package-source
     - composer config repositories.local-source path /tmp/magento/package-source
-    - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki/magento2-functional-tests:dev-main loki-checkout/magento2-functional-tests:dev-main yireo/magento2-enable-module-sequence:@dev
+    - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-luma:@dev loki/magento2-functional-tests:dev-main loki-checkout/magento2-functional-tests:dev-main yireo/magento2-enable-module-sequence:@dev
     - echo "Setup Magento"
     - $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
     - bin/magento module:enable Yireo_EnableModuleSequence
-    - bin/magento module:sequence Loki_FunctionalTests LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli "${MAGENTO_MODULE}"
+    - bin/magento module:sequence Loki_FunctionalTests LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli LokiCheckout_Luma "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
     - bin/magento config:set dev/static/sign 0
     - bin/magento setup:static-content:deploy -f --area frontend en_US
@@ -248,6 +253,23 @@ playwright:
     - bin/magento cache:flush config
     - echo "Verify Magento installation"
     - test -f /tmp/magento/bin/magento || exit 1
+    - echo "Load integration details"
+    - |
+      rest="${INTEGRATION_DETAILS:-}"
+      while [ -n "$rest" ]; do
+        case "$rest" in
+          *'||'*) line="${rest%%"||"*}"; rest="${rest#*"||"}" ;;
+          *) line="$rest"; rest="" ;;
+        esac
+        line="${line#"${line%%[![:space:]]*}"}"
+        line="${line%"${line##*[![:space:]]}"}"
+        case "$line" in ''|'#'*) continue ;; *=*) ;; *) echo "Skipping invalid line"; continue ;; esac
+        key="${line%%=*}"
+        value="${line#*=}"
+        echo "$key" | grep -qE '^[A-Za-z_][A-Za-z0-9_]*$' || { echo "Skipping invalid line"; continue; }
+        export "$key=$value"
+      done
+      unset rest line key value
     - echo "Run Playwright tests"
     - cd /tmp/magento/vendor/loki/magento2-functional-tests/Test/Playwright/
     - echo "Installing npm dependencies..."

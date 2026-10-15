@@ -84,7 +84,7 @@ class StreetLines
 
     public function toString(): string
     {
-        return trim(implode("\n", $this->getLines()), " \f\n\r\t\v\x00");
+        return rtrim(implode("\n", $this->getLines()), " \f\n\r\t\v\x00");
     }
 
     public function getLines(): array

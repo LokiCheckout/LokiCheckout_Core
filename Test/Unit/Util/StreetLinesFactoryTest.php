@@ -140,7 +140,31 @@ class StreetLinesFactoryTest extends TestCase
             ["Example\n42\nA", ['Example 42A', '', ''], 'NL', 3],
             ["22 Example\nApartment 1", ['22 Example', 'Apartment 1', ''], 'US', 2],
             ["22 Example Apartment 1", ['22 Example', 'Apartment 1', ''], 'US', 1],
+            ["\n\nZ", ['', '', 'Z'], 'NL', 3],
+            ["\n12", ['', '12', ''], 'NL', 3],
         ];
+    }
+
+    public function testSetAdditionBeforeHouseNumberKeepsPosition()
+    {
+        $objectManager = new SimpleObjectManager();
+        $scopeConfig = $this->getScopeConfig(3);
+        $streetLinesParser = new StreetLinesParser();
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
+
+        $streetLines = $streetLinesFactory->createFromStreet('', 'NL');
+        $street = $streetLines->setLineByIndex(2, 'Z')->toString();
+
+        $streetLines = $streetLinesFactory->createFromStreet($street, 'NL');
+        $this->assertSame('', $streetLines->getStreetName());
+        $this->assertSame('', $streetLines->getHouseNumber());
+        $this->assertSame('Z', $streetLines->getHouseNumberAddition());
+
+        $street = $streetLines->setLineByIndex(1, '126')->toString();
+        $streetLines = $streetLinesFactory->createFromStreet($street, 'NL');
+        $this->assertSame('', $streetLines->getStreetName());
+        $this->assertSame('126', $streetLines->getHouseNumber());
+        $this->assertSame('Z', $streetLines->getHouseNumberAddition());
     }
 
     private function getScopeConfig(int $numberOfStreetlines = 2): ScopeConfigInterface
