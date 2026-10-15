@@ -17,7 +17,7 @@ class AddCspInlineScriptsPlugin
 
     public function afterToHtml(Template $block, $html): string
     {
-        if (false === strstr((string)$block->getNameInLayout(), 'loki')) {
+        if (false === str_starts_with((string)$block->getNameInLayout(), 'loki')) {
             return (string)$html;
         }
 

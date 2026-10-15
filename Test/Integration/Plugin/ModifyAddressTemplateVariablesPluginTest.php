@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Test\Integration\Plugin;
 
 use LokiCheckout\Core\Plugin\ModifyAddressTemplateVariablesPlugin;
+use LokiCheckout\Core\Util\AddressPreviewFlag;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Filter\Template;
 use Magento\TestFramework\Fixture\AppArea;
@@ -25,9 +26,24 @@ class ModifyAddressTemplateVariablesPluginTest extends TestCase
     #[ConfigFixture('loki_checkout/fields/capitalize_country_in_preview', 1, 'store', 'default')]
     public function testCountryIsCapitalizedWhenEnabled(): void
     {
-        $result = $this->getSubject()->beforeSetVariables($this->getTemplate(), ['country' => 'Netherlands']);
+        $addressPreviewFlag = ObjectManager::getInstance()->get(AddressPreviewFlag::class);
+        $addressPreviewFlag->start();
+
+        try {
+            $result = $this->getSubject()->beforeSetVariables($this->getTemplate(), ['country' => 'Netherlands']);
+        } finally {
+            $addressPreviewFlag->stop();
+        }
 
         $this->assertSame('NETHERLANDS', $result[0]['country']);
+    }
+
+    #[ConfigFixture('loki_checkout/fields/capitalize_country_in_preview', 1, 'store', 'default')]
+    public function testCountryUnchangedOutsideOfAddressPreview(): void
+    {
+        $result = $this->getSubject()->beforeSetVariables($this->getTemplate(), ['country' => 'Netherlands']);
+
+        $this->assertSame('Netherlands', $result[0]['country']);
     }
 
     #[ConfigFixture('loki_checkout/fields/capitalize_country_in_preview', 0, 'store', 'default')]

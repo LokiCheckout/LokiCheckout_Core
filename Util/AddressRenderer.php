@@ -17,6 +17,7 @@ class AddressRenderer
         private readonly AddressMapper $addressMapper,
         private readonly ShippingAddressResolverListing $shippingAddressResolverListing,
         private readonly LayoutInterface $layout,
+        private readonly AddressPreviewFlag $addressPreviewFlag,
     ) {
     }
 
@@ -43,7 +44,12 @@ class AddressRenderer
 
         /** @var RendererInterface $renderer */
         $renderer = $this->addressConfig->getFormatByCode('html')->getRenderer();
-        $html = $renderer->renderArray($addressData);
+        $this->addressPreviewFlag->start();
+        try {
+            $html = (string)$renderer->renderArray($addressData);
+        } finally {
+            $this->addressPreviewFlag->stop();
+        }
 
         $html = preg_replace("#<br([ /]+)>#", '<br>', $html);
         $html = preg_replace('#(?:\s*<br>\s*)+#i', '<br>', $html);

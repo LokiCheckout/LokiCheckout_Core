@@ -12,12 +12,20 @@ class SkipCustomerCopyingPlugin
         callable $proceed,
         ?CustomerInterface $customer = null
     ): Quote {
-        if ($customer instanceof CustomerInterface &&
-            $quote->getCustomerId() > 0 &&
-            $quote->getCustomerId() === $customer->getId()) {
-            return $quote;
+        if (false === $customer instanceof CustomerInterface) {
+            return $proceed($customer);
         }
 
-        return $proceed($customer);
+        $quoteCustomerId = (int)$quote->getCustomerId();
+        if ($quoteCustomerId === 0 || $quoteCustomerId !== (int)$customer->getId()) {
+            return $proceed($customer);
+        }
+
+        // Copy the customer data anyway when the customer group changed, so that pricing is not based on a stale group
+        if ((int)$quote->getCustomerGroupId() !== (int)$customer->getGroupId()) {
+            return $proceed($customer);
+        }
+
+        return $quote;
     }
 }
