@@ -18,8 +18,17 @@ class QuoteFieldRepository extends FieldRepository
 
     public function saveValue(mixed $value): void
     {
+        if ($value !== null && false === is_scalar($value)) {
+            return;
+        }
+
+        // Fields that are not rendered (like the email of a logged-in customer) can not be modified either
+        if (false === $this->getViewModel()->isAllowRendering()) {
+            return;
+        }
+
         $quote = $this->getQuote();
-        $quote->setData($this->getFieldName(), $value);
+        $quote->setData($this->getFieldName(), $value === null ? null : (string)$value);
     }
 
     public function getFieldName(): string
