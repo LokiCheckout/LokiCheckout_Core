@@ -22,7 +22,7 @@ class PaymentMethodsRepository extends ComponentRepository
         private PaymentMethodManagementInterface $paymentMethodManagement,
         private PaymentInterfaceFactory $paymentFactory,
         private readonly ManagerInterface $eventManager,
-        private ?PaymentProcessingRateLimiterInterface $paymentRateLimiter = null,
+        private PaymentProcessingRateLimiterInterface $paymentRateLimiter,
     ) {
     }
 
@@ -69,13 +69,11 @@ class PaymentMethodsRepository extends ComponentRepository
 
     public function saveValue(mixed $value): void
     {
-        if ($this->paymentRateLimiter instanceof PaymentProcessingRateLimiterInterface) {
-            try {
-                $this->paymentRateLimiter->limit();
-            } catch (PaymentProcessingRateLimitExceededException $exception) {
-                $this->getContext()->getCoreMessageManager()->addErrorMessage($exception->getMessage());
-                return;
-            }
+        try {
+            $this->paymentRateLimiter->limit();
+        } catch (PaymentProcessingRateLimitExceededException $exception) {
+            $this->getContext()->getCoreMessageManager()->addErrorMessage($exception->getMessage());
+            return;
         }
 
         $value = (string)$value;
