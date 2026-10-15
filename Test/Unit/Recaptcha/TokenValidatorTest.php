@@ -13,6 +13,8 @@ use LokiCheckout\Core\Recaptcha\FormId;
 use LokiCheckout\Core\Recaptcha\TokenValidator;
 use LokiCheckout\Core\Recaptcha\Type;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Store\Model\Store;
+use Magento\Store\Model\StoreManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
@@ -91,6 +93,42 @@ class TokenValidatorTest extends TestCase
         $this->assertTrue($validator->validate('token', FormId::PLACE_ORDER)->isValid());
     }
 
+    public function testAV3TokenForAnotherActionIsInvalid(): void
+    {
+        $validator = $this->createValidator(Type::V3, [
+            new Response(200, [], '{"success":true,"score":0.9,"action":"customer_login"}'),
+        ]);
+
+        $this->assertFalse($validator->validate('token', FormId::PLACE_ORDER)->isValid());
+    }
+
+    public function testAV3TokenForTheSameActionIsValid(): void
+    {
+        $validator = $this->createValidator(Type::V3, [
+            new Response(200, [], '{"success":true,"score":0.9,"action":"place_order"}'),
+        ]);
+
+        $this->assertTrue($validator->validate('token', FormId::PLACE_ORDER)->isValid());
+    }
+
+    public function testATokenForTheStoreHostnameIsValid(): void
+    {
+        $validator = $this->createValidator(Type::CHECKBOX, [
+            new Response(200, [], '{"success":true,"hostname":"shop.example.com"}'),
+        ], 'https://shop.example.com/');
+
+        $this->assertTrue($validator->validate('token', FormId::PLACE_ORDER)->isValid());
+    }
+
+    public function testATokenForAnotherHostnameIsInvalid(): void
+    {
+        $validator = $this->createValidator(Type::CHECKBOX, [
+            new Response(200, [], '{"success":true,"hostname":"evil.example"}'),
+        ], 'https://shop.example.com/');
+
+        $this->assertFalse($validator->validate('token', FormId::PLACE_ORDER)->isValid());
+    }
+
     public function testATransportErrorIsATechnicalFailure(): void
     {
         $validator = $this->createValidator(Type::CHECKBOX, [
@@ -115,7 +153,7 @@ class TokenValidatorTest extends TestCase
         $this->assertSame(self::TECHNICAL_MESSAGE, $result->getMessage());
     }
 
-    private function createValidator(?string $type, array $queue): TokenValidator
+    private function createValidator(?string $type, array $queue, ?string $baseUrl = null): TokenValidator
     {
         $config = $this->createMock(Config::class);
         $config->method('getTypeFor')->willReturn($type);
@@ -129,6 +167,22 @@ class TokenValidatorTest extends TestCase
 
         $client = new Client(['handler' => HandlerStack::create(new MockHandler($queue))]);
 
-        return new TokenValidator($client, $config, $remoteAddress, $this->createMock(LoggerInterface::class));
+        $stores = [];
+        if ($baseUrl !== null) {
+            $store = $this->createMock(Store::class);
+            $store->method('getBaseUrl')->willReturn($baseUrl);
+            $stores[] = $store;
+        }
+
+        $storeManager = $this->createMock(StoreManagerInterface::class);
+        $storeManager->method('getStores')->willReturn($stores);
+
+        return new TokenValidator(
+            $client,
+            $config,
+            $remoteAddress,
+            $this->createMock(LoggerInterface::class),
+            $storeManager
+        );
     }
 }

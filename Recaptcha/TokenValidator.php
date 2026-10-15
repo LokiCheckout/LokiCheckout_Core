@@ -4,6 +4,8 @@ namespace LokiCheckout\Core\Recaptcha;
 
 use GuzzleHttp\Client;
 use Magento\Framework\HTTP\PhpEnvironment\RemoteAddress;
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -11,12 +13,14 @@ class TokenValidator implements TokenValidatorInterface
 {
     private const SITE_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
     private const TIMEOUT = 10;
+    private const TEST_KEY_HOSTNAME = 'testkey.google.com';
 
     public function __construct(
         private readonly Client $client,
         private readonly Config $config,
         private readonly RemoteAddress $remoteAddress,
         private readonly LoggerInterface $logger,
+        private readonly StoreManagerInterface $storeManager,
     ) {
     }
 
@@ -63,6 +67,16 @@ class TokenValidator implements TokenValidatorInterface
             return new ValidationResult(false, $this->config->getValidationFailureMessage());
         }
 
+        if ($type === Type::V3 && isset($data['action']) && $data['action'] !== $formId) {
+            return new ValidationResult(false, $this->config->getValidationFailureMessage());
+        }
+
+        if (isset($data['hostname']) && false === $this->isAllowedHostname((string)$data['hostname'])) {
+            $this->logger->warning('LokiCheckout reCAPTCHA token was issued for another hostname: ' . $data['hostname']);
+
+            return new ValidationResult(false, $this->config->getValidationFailureMessage());
+        }
+
         return new ValidationResult(true);
     }
 
@@ -85,5 +99,26 @@ class TokenValidator implements TokenValidatorInterface
         }
 
         return $this->config->getValidationFailureMessage();
+    }
+
+    private function isAllowedHostname(string $hostname): bool
+    {
+        $hostname = strtolower($hostname);
+        if ($hostname === self::TEST_KEY_HOSTNAME) {
+            return true;
+        }
+
+        foreach ($this->storeManager->getStores() as $store) {
+            foreach ([UrlInterface::URL_TYPE_LINK, UrlInterface::URL_TYPE_WEB] as $urlType) {
+                foreach ([false, true] as $secure) {
+                    $host = parse_url((string)$store->getBaseUrl($urlType, $secure), PHP_URL_HOST);
+                    if (is_string($host) && strtolower($host) === $hostname) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
