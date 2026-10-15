@@ -74,8 +74,8 @@ if ($applicationMode->isDeveloperMode()) {
             <?php if ($viewModel->getValue() === $code): ?>
                 checked
             <?php endif; ?>
-                <?= /* @noEscape */ $isCurrent && 'checked' ?>
-                <?= /* @noEscape */ $viewModel->isDisabled() && 'disabled="disabled"' ?>
+                <?= $isCurrent ? 'checked' : '' ?>
+                <?= $viewModel->isDisabled() ? 'disabled="disabled"' : '' ?>
                 id="<?= $escaper->escapeHtml($viewModel->getFieldIdFromCode($code)) ?>"
                 class="<?= $escaper->escapeHtml($inputCss) ?>"
             >
