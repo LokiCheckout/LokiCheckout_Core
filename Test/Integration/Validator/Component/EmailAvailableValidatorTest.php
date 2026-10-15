@@ -37,6 +37,15 @@ class EmailAvailableValidatorTest extends TestCase
         $this->assertStringContainsString('is not available', $result[0]);
     }
 
+    #[ConfigFixture(AccountManagement::GUEST_CHECKOUT_LOGIN_OPTION_SYS_CONFIG, 0, 'website')]
+    public function testExistingEmailIsNotDisclosedWhenGuestCheckoutLoginIsDisabled(): void
+    {
+        $this->createCustomer('john@example.com');
+
+        $validator = ObjectManager::getInstance()->get(EmailAvailableValidator::class);
+        $this->assertTrue($validator->validate('john@example.com'));
+    }
+
     private function createCustomer(string $email)
     {
         $customerRepository = ObjectManager::getInstance()->get(CustomerRepositoryInterface::class);

@@ -5,11 +5,16 @@ namespace LokiCheckout\Core\Validator\Component;
 use Magento\Customer\Api\AccountManagementInterface;
 use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Validator\ValidatorInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\ScopeInterface;
 
 class EmailAvailableValidator implements ValidatorInterface
 {
+    private const XML_PATH_ENABLE_GUEST_CHECKOUT_LOGIN = 'checkout/options/enable_guest_checkout_login';
+
     public function __construct(
         private readonly AccountManagementInterface $accountManagement,
+        private readonly ScopeConfigInterface $scopeConfig,
         private readonly bool $showEmailInMessage = false
     ) {
     }
@@ -26,12 +31,24 @@ class EmailAvailableValidator implements ValidatorInterface
             return ['Invalid email address'];
         }
 
-        // Mental note, this only triggers if `checkout/options/enable_guest_checkout_login` is enabled
+        // Prevent customer account enumeration, also on Magento versions before 2.4.7
+        if (false === $this->isGuestCheckoutLoginEnabled()) {
+            return true;
+        }
+
         if (false === $this->accountManagement->isEmailAvailable($email)) {
             return [$this->getErrorMessage($email)];
         }
 
         return true;
+    }
+
+    private function isGuestCheckoutLoginEnabled(): bool
+    {
+        return (bool)$this->scopeConfig->getValue(
+            self::XML_PATH_ENABLE_GUEST_CHECKOUT_LOGIN,
+            ScopeInterface::SCOPE_WEBSITE
+        );
     }
 
     private function getErrorMessage(string $email): string
