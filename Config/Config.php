@@ -173,6 +173,7 @@ class Config implements ArgumentInterface
 
         return (bool)$this->scopeConfig->getValue(
             'loki_checkout/debug/html_hints',
+            ScopeInterface::SCOPE_STORE
         );
     }
 

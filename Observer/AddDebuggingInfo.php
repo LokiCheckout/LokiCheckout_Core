@@ -8,6 +8,7 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\View\Element\Template;
 
 use LokiCheckout\Core\Config\Config;
+use LokiCheckout\Core\ViewModel\ApplicationMode;
 use Loki\Components\Component\ComponentRegistry;
 use Loki\Components\Exception\NoComponentFoundException;
 
@@ -18,12 +19,18 @@ class AddDebuggingInfo implements ObserverInterface
     public function __construct(
         private readonly ComponentRegistry $componentRegistry,
         private readonly Config $config,
+        private readonly ApplicationMode $applicationMode,
         private readonly array $blockPrefixes = [],
     ) {
     }
 
     public function execute(Observer $observer)
     {
+        // Debugging details reveal internals (like file paths), so they are never shown outside developer mode
+        if (false === $this->applicationMode->isDeveloperMode()) {
+            return;
+        }
+
         $block = $observer->getEvent()->getBlock();
         if (false === $block instanceof Template) {
             return;
@@ -31,7 +38,7 @@ class AddDebuggingInfo implements ObserverInterface
 
         $prefixMatch = false;
         foreach ($this->blockPrefixes as $prefix) {
-            if (preg_match('/^' . $prefix . '/', (string)$block->getNameInLayout())) {
+            if (preg_match('/^' . preg_quote((string)$prefix, '/') . '/', (string)$block->getNameInLayout())) {
                 $prefixMatch = true;
             }
         }
@@ -68,7 +75,7 @@ class AddDebuggingInfo implements ObserverInterface
             $debugHtml = '<!-- LOKI_DEBUG ';
             $debugLines = $this->getDebugLines($block);
             foreach ($debugLines as $debugLineName => $debugLineValue) {
-                $debugHtml .= $debugLineName . ' = ' . $debugLineValue . ', ';
+                $debugHtml .= $debugLineName . ' = ' . str_replace(['--', '>'], '', (string)$debugLineValue) . ', ';
             }
             $debugHtml .= ' -->';
 
