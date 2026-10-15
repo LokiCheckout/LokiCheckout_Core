@@ -38,4 +38,19 @@ class IndexTest extends LokiCheckoutTestCase
         $this->assertNotFalse($location);
         $this->assertStringContainsString('checkout/cart', $location->getFieldValue());
     }
+
+    #[DataFixture(ProductFixture::class, as: 'product')]
+    #[DataFixture(GuestCartFixture::class, as: 'cart')]
+    #[DataFixture(AddProductToCartFixture::class, ['cart_id' => '$cart.id$', 'product_id' => '$product.id$'])]
+    #[ConfigFixture('loki_checkout/general/enable', 1, 'store', 'default')]
+    #[ConfigFixture('checkout/options/onepage_checkout_enabled', 0, 'store', 'default')]
+    public function testRedirectsToCartWhenOnepageCheckoutIsDisabled(): void
+    {
+        $this->dispatchToCheckout();
+
+        $this->assertSame(302, $this->getResponse()->getHttpResponseCode());
+        $location = $this->getResponse()->getHeader('Location');
+        $this->assertNotFalse($location);
+        $this->assertStringContainsString('checkout/cart', $location->getFieldValue());
+    }
 }

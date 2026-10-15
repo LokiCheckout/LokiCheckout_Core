@@ -29,6 +29,11 @@ class Index implements HttpGetActionInterface
 
     public function execute()
     {
+        if (false === $this->checkoutHelper->canOnepageCheckout()) {
+            $this->messageManager->addErrorMessage(__('One-page checkout is turned off.'));
+            return $this->redirectResultFactory->create()->setPath('checkout/cart');
+        }
+
         if (false === $this->checkoutState->hasQuote()) {
             return $this->redirectResultFactory->create()->setPath('checkout/cart');
         }
