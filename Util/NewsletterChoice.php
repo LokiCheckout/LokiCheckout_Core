@@ -70,6 +70,6 @@ class NewsletterChoice
 
     private function normalize(string $email): string
     {
-        return strtolower(trim($email));
+        return strtolower(trim($email, " \f\n\r\t\v\x00"));
     }
 }
