@@ -49,13 +49,14 @@ Layout (created via a file <code>etc/loki_checkout.xml</code>). This setting con
                 </field>
                 <field id="license_key"
                        translate="label tooltip"
-                       type="text"
+                       type="obscure"
                        sortOrder="2"
                        showInDefault="1"
                        showInWebsite="0"
                        showInStore="0">
                     <label>License Key</label>
                     <tooltip>Enter your LokiCheckout license key as found in our Yireo shop under "My Licenses". The license key is also used as composer key to download packages.</tooltip>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
                     <depends>
                         <field id="*/*/enable">1</field>
                     </depends>

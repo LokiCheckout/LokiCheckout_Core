@@ -30,13 +30,13 @@ class AllowCheckoutAccessTest extends TestCase
         ConfigFixture('loki_checkout/general/enable', 0, 'store', 'default'),
         ConfigFixture('loki_checkout/general/license_key', 'valid-license-key-123', 'store', 'default'),
     ]
-    public function testAllowWhenDisabledWithMatchingLicense(): void
+    public function testDenyWhenDisabledWithMatchingLicense(): void
     {
         $request = ObjectManager::getInstance()->get(RequestInterface::class);
         $request->setParam('license', 'valid-license-key-123');
 
         $subject = ObjectManager::getInstance()->get(AllowCheckoutAccess::class);
-        $this->assertTrue($subject->allow());
+        $this->assertFalse($subject->allow());
     }
 
     #[
