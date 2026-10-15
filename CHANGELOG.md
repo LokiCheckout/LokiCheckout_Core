@@ -5,6 +5,29 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Security
+- Block guest orders when guest checkout is disabled, also when calling the finalize URL or step buttons directly
+- Protect the finalize URL with a single-use token (`FinalizeToken`) instead of the form key, and disable it when LokiCheckout is disabled
+- Apply the Magento payment processing rate limiter when placing the order (and actually inject it into `PaymentMethodsRepository`)
+- Only show messages of `LocalizedException` when placing the order fails; log other exceptions
+- Guests can no longer unsubscribe, or check the subscription state of, email addresses not subscribed in their own session
+- Only subscribe to the newsletter by default when placing the order, not when rendering the checkout
+- Skip the `email_available` validator unless `checkout/options/enable_guest_checkout_login` is enabled
+- Do not reveal whether an account exists or is locked when logging in
+- Store the license key encrypted and remove the `?license=` checkout bypass
+- Escape plain-text agreements, agreement checkbox texts, shipping method titles and payment method titles
+- Encode JSON in inline scripts with `JSON_HEX_*` flags
+- Escape HTML attributes in `PushHtmlAttributes` and `AppendChildNameToBlockHtmlObserver`
+- Only add debugging info in developer mode
+- Do not show internal exception messages to customers
+- Ignore non-scalar values and non-rendered fields in `QuoteFieldRepository`
+- Only accept Apple Pay validation URLs on Apple domains
+- Verify the hostname and (for v3) the action of reCAPTCHA tokens
+- Honour `checkout/options/onepage_checkout_enabled`
+- Remove date of birth and gender from the `loki-checkout` customer section
+- Limit `ModifyAddressTemplateVariablesPlugin` to address previews, `AddCspInlineScriptsPlugin` to `loki*` blocks
+- Do not skip copying customer data in `SkipCustomerCopyingPlugin` when the customer group changed
+- Use bound parameters in `NewsletterRepository` and `RenameConfigurationPaths`
 
 ## [2.7.1] - 13 October 2026
 ### Fixed
