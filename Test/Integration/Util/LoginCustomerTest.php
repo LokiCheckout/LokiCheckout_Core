@@ -50,6 +50,11 @@ class LoginCustomerTest extends TestCase
         $this->assertFalse($session->isLoggedIn());
 
         $this->assertHasMessageOfType(MessageInterface::TYPE_ERROR);
+
+        $messageManager = ObjectManager::getInstance()->get(ManagerInterface::class);
+        foreach ($messageManager->getMessages()->getItemsByType(MessageInterface::TYPE_ERROR) as $message) {
+            $this->assertStringNotContainsString('Invalid login or password', (string)$message->getText());
+        }
     }
 
     private function assertHasMessageOfType(string $type): void

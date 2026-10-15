@@ -52,14 +52,11 @@ class LoginCustomer
             );
 
         } catch (AuthenticationException $e) {
-            $message = __(
+            // Never show the exception message itself, because it reveals whether an account exists or is locked
+            $this->messageManager->addErrorMessage(__(
                 'The account sign-in was incorrect or your account is disabled temporarily. '
                 . 'Please wait and try again later.'
-            );
-
-            $message .= ' '.$e->getMessage();
-
-            $this->messageManager->addErrorMessage($message);
+            ));
 
         } catch (LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
