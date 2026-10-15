@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use LokiCheckout\Core\Util\SameAddressService;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\DataObject;
+use Magento\Framework\Escaper;
 use Magento\Quote\Model\Quote\Address\Rate;
 use Magento\Shipping\Model\Carrier\AbstractCarrierInterface;
 use Magento\Shipping\Model\Config as ShippingConfig;
@@ -25,6 +26,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         private readonly ShippingAddressState $shippingAddressState,
         private readonly AddressRenderer $addressRenderer,
         private readonly SameAddressService $sameAddressService,
+        private readonly Escaper $escaper,
         private string $separator = ' - '
     ) {
     }
@@ -56,6 +58,11 @@ class ShippingDetailsViewModel extends CheckoutViewModel
 
     public function getMethodHtml(): string
     {
+        return $this->escaper->escapeHtml($this->getMethodLabel());
+    }
+
+    public function getMethodLabel(): string
+    {
         if ($this->checkoutState->getQuote()->isVirtual()) {
             return '';
         }
@@ -85,14 +92,14 @@ class ShippingDetailsViewModel extends CheckoutViewModel
             return (string)__($carrierMethod) . $this->separator . __($carrierCode);
         }
 
-        $methodTitle = trim($this->getMethodLabel($carrier, $carrierMethod), " \f\n\r\t\v\x00");
+        $methodTitle = trim($this->getCarrierMethodLabel($carrier, $carrierMethod), " \f\n\r\t\v\x00");
 
         if ($methodTitle !== '' && $methodTitle !== '0') {
             $parts[] = $methodTitle;
         }
 
         $carrierTitle = trim(
-            $this->scopeConfig->getValue(
+            (string)$this->scopeConfig->getValue(
                 'carriers/' . $carrierCode . '/title',
             ), " \f\n\r\t\v\x00"
         );
@@ -115,7 +122,7 @@ class ShippingDetailsViewModel extends CheckoutViewModel
         throw new InvalidArgumentException('Carrier not found: ' . $carrierCode);
     }
 
-    private function getMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string
+    private function getCarrierMethodLabel(AbstractCarrierInterface $carrier, string $carrierMethod): string
     {
         if (false === $carrier instanceof DataObject) {
             return (string)__($carrierMethod);

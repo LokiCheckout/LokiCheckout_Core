@@ -3,6 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Sidebar\Preview\PaymentDetails;
 
 use Exception;
+use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 
@@ -11,6 +12,7 @@ class PaymentDetailsViewModel implements ArgumentInterface
     protected bool $skipValidation = true;
     public function __construct(
         private readonly CheckoutState $checkoutState,
+        private readonly Escaper $escaper,
     ) {
     }
 
@@ -18,7 +20,7 @@ class PaymentDetailsViewModel implements ArgumentInterface
     {
         $payment = $this->checkoutState->getQuote()->getPayment();
         try {
-            return (string)$payment->getMethodInstance()->getTitle();
+            return $this->escaper->escapeHtml((string)$payment->getMethodInstance()->getTitle());
         } catch (Exception $e) {
             return '';
         }

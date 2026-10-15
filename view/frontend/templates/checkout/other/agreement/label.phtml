@@ -14,22 +14,28 @@ use LokiCheckout\Core\Component\Checkout\Other\Agreements\AgreementsViewModel;
 
 $viewModel = $block->getViewModel();
 $agreement = $block->getAgreement();
-$labelText = $agreement->getCheckboxText();
+$labelText = $escaper->escapeHtml(
+    (string)__((string)$agreement->getCheckboxText()),
+    ['a', 'b', 'strong', 'i', 'em', 'u', 'span', 'br']
+);
 
 $hasLink = str_contains($labelText, '<a>');
 $linkClasses = $block->getLinkClasses() ?? 'underline cursor-pointer';
 
 if ($hasLink) {
-    $labelText = str_replace('<a>', '<a @click="toggleModal" class="'.$linkClasses.'">', $labelText);
+    $labelText = str_replace(
+        '<a>',
+        '<a @click="toggleModal" class="' . $escaper->escapeHtmlAttr($linkClasses) . '">',
+        $labelText
+    );
 }
 ?>
 <div class="<?= $escaper->escapeHtml($css('inline-block pl-4', 'label-block')) ?>">
     <div
         class="<?= $escaper->escapeHtml($css('', 'label')) ?>">
 
-        <span class="<?= $escaper->escapeHtml('cursor-pointer', 'label-span') ?>">
-            <?= /* @noEscape */
-            __($labelText) ?>
+        <span class="<?= $escaper->escapeHtml($css('cursor-pointer', 'label-span')) ?>">
+            <?= /* @noEscape */ $labelText ?>
         </span>
 
         <?php if (!$hasLink): ?>

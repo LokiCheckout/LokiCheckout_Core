@@ -15,8 +15,8 @@ use Magento\Framework\View\Element\Template;
 $agreement = $block->getAgreement();
 ?>
 <span class="<?= $escaper->escapeHtml($css('italic', 'content')) ?>">
-    <?php if (false === $agreement->getIsHtml()): ?>
-        <?= $escaper->escapeHtml($agreement->getContent()) ?>
+    <?php if (false === (bool)$agreement->getIsHtml()): ?>
+        <?= /* @noEscape */ nl2br($escaper->escapeHtml($agreement->getContent())) ?>
     <?php else: ?>
         <pre class="<?= $escaper->escapeHtml($css('text-wrap whitespace-pre-line', '')) ?>">
             <?= /* @noEscape */ $agreement->getContent() ?>
