@@ -220,8 +220,8 @@
         }
     ],
     "tests": {
-        "unit": 47,
-        "integration": 260,
+        "unit": 54,
+        "integration": 277,
         "functional": 40
     },
     "phpcs_severity": "9",
