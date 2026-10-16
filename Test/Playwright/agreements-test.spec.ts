@@ -76,10 +76,15 @@ test.describe('Terms and conditions', function () {
 
     await expect(getAgreementCheckbox(page)).not.toBeChecked();
 
-    const formKey = (await context.cookies()).find(cookie => cookie.name === 'form_key')?.value;
-    expect(formKey, 'form_key cookie').toBeTruthy();
-
-    await page.goto('/loki_checkout/index/finalize/?form_key=' + encodeURIComponent(formKey as string));
+    // Bypass the client-side validation by posting the place order component directly
+    const navigation = page.waitForEvent('framenavigated', {timeout: 15000});
+    await page.evaluate(() => {
+      const button = document.querySelector('#loki-checkout-steps-billing-forward-button');
+      const component = (window as any).Alpine.$data(button!.closest('[x-data]'));
+      component.post();
+    });
+    await navigation;
+    await page.waitForLoadState();
 
     await new SuccessPage(page).expectNotToBeLoaded();
     await expect(page).toHaveURL(/\/checkout\/?(#.*)?$/);
