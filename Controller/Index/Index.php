@@ -23,7 +23,7 @@ class Index implements HttpGetActionInterface
      * generated (because some block depends on it), the layout is built twice, removing child blocks of redeclared
      * elements (like the Hyvä scripts in "head.additional"). Injecting it here makes sure it is instantiated first.
      */
-    public function __construct(
+    public function __construct( // @phpstan-ignore constructor.unusedParameter
         private readonly CheckoutState $checkoutState,
         private readonly PageResultFactory $pageResultFactory,
         private readonly RedirectResultFactory $redirectResultFactory,
