@@ -242,11 +242,12 @@ playwright:
     - composer require -n --prefer-source -- $COMPOSER_NAME:@dev loki-checkout/magento2-core-cli:@dev loki-checkout/magento2-sample-data:@dev loki-checkout/magento2-luma:@dev loki/magento2-functional-tests:dev-main loki-checkout/magento2-functional-tests:dev-main yireo/magento2-enable-module-sequence:@dev
     - echo "Setup Magento"
     - $CI_PROJECT_DIR/.gitlab-ci/magento-install.sh || true
+    - bin/magento module:disable Magento_AdminAdobeImsTwoFactorAuth Magento_TwoFactorAuth
     - bin/magento module:enable Yireo_EnableModuleSequence
     - bin/magento module:sequence Loki_FunctionalTests LokiCheckout_FunctionalTests LokiCheckout_SampleData LokiCheckout_CoreCli LokiCheckout_Luma "${MAGENTO_MODULE}"
     - bin/magento setup:upgrade
     - bin/magento config:set dev/static/sign 0
-    - bin/magento setup:static-content:deploy -f --area frontend en_US
+    - bin/magento setup:static-content:deploy -f --area frontend --area adminhtml en_US
     - bin/magento loki-checkout:sample-data:add-product
     - bin/magento loki:functional-tests:modules:dump
     - magerun2 config:store:set loki/functional_tests/token loki -n

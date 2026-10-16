@@ -6,8 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.7.2] - 15 October 2026
+## [2.7.2] - 16 October 2026
 ### Fixed
+- Verify server-side agreements check without finalize form key
+- Remember newsletter choice per email address
+- Expect redirect without 200 assertion when onepage checkout is disabled
 - Render checked and disabled attributes of payment method items
 - Redirect to cart when one-page checkout is disabled
 - Ignore non-scalar values and non-rendered fields in QuoteFieldRepository
