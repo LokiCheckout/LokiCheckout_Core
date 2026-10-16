@@ -6,6 +6,7 @@ namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Payment\Methods;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
+use LokiCheckout\Core\ViewModel\CheckoutState;
 use Loki\Components\Component\ComponentInterface;
 use Loki\Components\Component\ComponentRepositoryInterface;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
@@ -102,6 +103,23 @@ class MethodsRepositoryTest extends LokiCheckoutTestCase
 
         $this->assertNotSame('banktransfer', $this->getPersistedPayment()->getMethod());
         $this->assertNotEmpty($component->getLocalMessageRegistry()->getMessages());
+    }
+
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/banktransfer/active', 1, 'store', 'default')]
+    public function testSavingSameMethodKeepsAdditionalInformation(): void
+    {
+        $repository = $this->getMethodsRepository();
+        $repository->saveValue('checkmo');
+
+        $payment = $this->getObjectManager()->get(CheckoutState::class)->getQuote()->getPayment();
+        $payment->setAdditionalInformation('foo', 'bar');
+
+        $repository->saveValue('checkmo');
+        $this->assertSame('bar', $payment->getAdditionalInformation('foo'));
+
+        $repository->saveValue('banktransfer');
+        $this->assertNull($payment->getAdditionalInformation('foo'));
     }
 
     private function assertNoErrors(ComponentInterface $component): void

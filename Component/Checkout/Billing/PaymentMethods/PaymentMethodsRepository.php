@@ -93,7 +93,7 @@ class PaymentMethodsRepository extends ComponentRepository
             return;
         }
 
-        if ($quote->getPaymentMethod() !== $value) {
+        if ($quote->getPayment()->getMethod() !== $value) {
             $quote->getPayment()->setAdditionalInformation([]);
         }
 
