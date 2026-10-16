@@ -49,67 +49,71 @@ class NewsletterRepository extends FieldRepository
     public function saveValue(mixed $value): void
     {
         $value = (bool)$value;
-        $this->getNewsletterChoice()->setChoice($this->getCustomerEmail(), $value);
+        $accepted = $this->getCustomerId() > 0
+            ? $this->saveCustomerValue($value)
+            : $this->saveGuestValue($value);
 
-        if ($this->getCustomerId() > 0) {
-            $this->saveCustomerValue($value);
-
-            return;
+        // Only remember the choice when it was actually processed, otherwise a failed reCAPTCHA would
+        // show the box as checked while nobody was subscribed
+        if ($accepted) {
+            $this->getNewsletterChoice()->setChoice($this->getCustomerEmail(), $value);
         }
-
-        $this->saveGuestValue($value);
     }
 
-    private function saveCustomerValue(bool $value): void
+    private function saveCustomerValue(bool $value): bool
     {
         if ($this->isCustomerSubscribed() === $value) {
-            return;
+            return true;
         }
 
         if (false === $this->assertRecaptcha()) {
-            return;
+            return false;
         }
 
         if ($value) {
             $this->getContext()->getSubscriptionManager()->subscribeCustomer($this->getCustomerId(), $this->getStoreId());
             $this->addNotification((string)__('You have been subscribed to the newsletter'));
 
-            return;
+            return true;
         }
 
         $this->getContext()->getSubscriptionManager()->unsubscribeCustomer($this->getCustomerId(), $this->getStoreId());
         $this->addNotification((string)__('You have been unsubscribed from the newsletter'));
+
+        return true;
     }
 
-    private function saveGuestValue(bool $value): void
+    private function saveGuestValue(bool $value): bool
     {
         $email = $this->getCustomerEmail();
         if (strlen($email) < 1) {
-            return;
+            return true;
         }
 
         $newsletterChoice = $this->getNewsletterChoice();
         if ($value === $newsletterChoice->hasSubscribedEmail($email)) {
-            return;
+            return true;
         }
 
         if (false === $value) {
             $this->unsubscribeOwnGuestSubscription($email);
 
-            return;
+            return true;
         }
 
         if (false === $this->assertRecaptcha()) {
-            return;
+            return false;
         }
 
         if ($this->getContext()->getNewsletterRepository()->isGuestEmailSubscribed($email)) {
-            return;
+            return true;
         }
 
         $this->getContext()->getSubscriptionManager()->subscribe($email, $this->getStoreId());
         $newsletterChoice->addSubscribedEmail($email);
         $this->addNotification((string)__('You have been subscribed to the newsletter'));
+
+        return true;
     }
 
     private function unsubscribeOwnGuestSubscription(string $email): void
@@ -185,9 +189,9 @@ class NewsletterRepository extends FieldRepository
 
     private function showNotifications(): bool
     {
-        $showModifications = $this->getViewModel()->getBlock()->getDisableNotifications();
-        if (is_bool($showModifications)) {
-            return $showModifications;
+        $disableNotifications = $this->getViewModel()->getBlock()->getDisableNotifications();
+        if (is_bool($disableNotifications)) {
+            return false === $disableNotifications;
         }
 
         return true;
