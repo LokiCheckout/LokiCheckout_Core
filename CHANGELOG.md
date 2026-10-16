@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Prevent checkout layout from being built twice (removing Hyvä scripts from `head.additional`) by instantiating `App\View` before the page result and adding handles before setting the title
 
 ## [2.7.2] - 16 October 2026
 ### Fixed

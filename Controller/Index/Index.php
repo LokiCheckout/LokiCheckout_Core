@@ -8,6 +8,7 @@ use Magento\Checkout\Model\Session as CheckoutSession;
 use Magento\Customer\Api\AccountManagementInterface;
 use Magento\Customer\Model\Session as CustomerSession;
 use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\ViewInterface;
 use Magento\Framework\Message\Manager;
 use Magento\Framework\UrlFactory;
 use Magento\Framework\View\Result\PageFactory as PageResultFactory;
@@ -16,6 +17,12 @@ use Magento\Framework\Controller\Result\Redirect as RedirectResult;
 
 class Index implements HttpGetActionInterface
 {
+    /**
+     * The ViewInterface argument is not used directly. App\View creates its own page result when it is instantiated,
+     * which replaces the builder of the shared page config. If this happens while the checkout layout is being
+     * generated (because some block depends on it), the layout is built twice, removing child blocks of redeclared
+     * elements (like the Hyvä scripts in "head.additional"). Injecting it here makes sure it is instantiated first.
+     */
     public function __construct(
         private readonly CheckoutState $checkoutState,
         private readonly PageResultFactory $pageResultFactory,
@@ -24,6 +31,7 @@ class Index implements HttpGetActionInterface
         private readonly Manager $messageManager,
         private readonly AccountManagementInterface $accountManagement,
         private readonly UrlFactory $urlFactory,
+        ViewInterface $view,
     ) {
     }
 
@@ -60,9 +68,9 @@ class Index implements HttpGetActionInterface
         $this->assignCustomerToQuote();
 
         $pageResult = $this->pageResultFactory->create();
-        $pageResult->getConfig()->getTitle()->set(__('Checkout'));
         $pageResult->addHandle('checkout_index_index');
         $pageResult->addHandle('loki_checkout');
+        $pageResult->getConfig()->getTitle()->set(__('Checkout'));
 
         return $pageResult;
     }
