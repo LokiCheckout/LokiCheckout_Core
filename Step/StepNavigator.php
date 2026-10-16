@@ -335,6 +335,10 @@ class StepNavigator implements ArgumentInterface
 
     public function getPreviousStep(?StepViewModelInterface $currentStep = null): StepViewModelInterface
     {
+        if (false === $currentStep instanceof StepViewModelInterface) {
+            $currentStep = $this->getCurrentStep();
+        }
+
         $previousSteps = $this->getPreviousSteps($currentStep);
         if (count($previousSteps) > 0) {
             return array_pop($previousSteps);

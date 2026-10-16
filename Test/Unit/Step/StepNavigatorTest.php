@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use LokiCheckout\Core\Component\Checkout\Step\StepViewModelInterface;
 use LokiCheckout\Core\Config\Config;
 use LokiCheckout\Core\Config\XmlConfig;
+use LokiCheckout\Core\Exception\UnknownStepException;
 use LokiCheckout\Core\Step\FinalStep;
 use LokiCheckout\Core\Step\StepNavigator;
 use Loki\Components\Component\ComponentRegistry;
@@ -74,6 +75,28 @@ class StepNavigatorTest extends TestCase
         $this->assertInstanceOf($step2::class, $stepNavigator->getNextStep($step1));
     }
 
+    public function testGetPreviousStepWithoutArgumentOnFirstStepThrowsUnknownStepException()
+    {
+        $stepNavigator = $this->getStepNavigator();
+        $stepNavigator->addStep($this->getStep('step1'));
+        $stepNavigator->addStep($this->getStep('step2'));
+
+        $this->expectException(UnknownStepException::class);
+        $this->expectExceptionMessage('No previous step to "step1"');
+        $stepNavigator->getPreviousStep();
+    }
+
+    public function testGetPreviousStepWithoutArgumentUsesCurrentStep()
+    {
+        $stepNavigator = $this->getStepNavigator();
+        $step1 = $this->getStep('step1');
+        $stepNavigator->addStep($step1);
+        $stepNavigator->addStep($this->getStep('step2'));
+        $stepNavigator->setCurrentStepByCode('step2');
+
+        $this->assertSame('step1', $stepNavigator->getPreviousStep()->getCode());
+    }
+
     private function getStepNavigator():StepNavigator
     {
         return new StepNavigator(
@@ -91,6 +114,8 @@ class StepNavigatorTest extends TestCase
     {
         $step = $this->createMock(StepViewModelInterface::class);
         $step->method('getCode')->willReturn($stepCode);
+        $step->method('isEnabled')->willReturn(true);
+        $step->method('isAccessable')->willReturn(true);
         return $step;
     }
 }
