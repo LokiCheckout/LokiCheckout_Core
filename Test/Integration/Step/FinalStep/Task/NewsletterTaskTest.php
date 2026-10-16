@@ -39,7 +39,7 @@ class NewsletterTaskTest extends TestCase
     #[ConfigFixture('loki_checkout/newsletter/default_value', 1, 'store', 'default')]
     public function testGuestIsNotSubscribedAfterUnchecking(): void
     {
-        ObjectManager::getInstance()->get(NewsletterChoice::class)->setChoice(false);
+        ObjectManager::getInstance()->get(NewsletterChoice::class)->setChoice(self::EMAIL, false);
 
         $this->runTask();
 

@@ -5,8 +5,8 @@ namespace LokiCheckout\Core\Util;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
 /**
- * Keeps track of the newsletter choice of the current checkout session, so that the subscription
- * state of email addresses not owned by this session is never disclosed or modified.
+ * Keeps track of the newsletter choices of the current checkout session per email address, so that
+ * the subscription state of email addresses not owned by this session is never disclosed or modified.
  */
 class NewsletterChoice
 {
@@ -18,19 +18,27 @@ class NewsletterChoice
     ) {
     }
 
-    public function getChoice(): ?bool
+    public function getChoice(string $email): ?bool
     {
-        $choice = $this->checkoutSession->getData(self::CHOICE_SESSION_KEY);
-        if ($choice === null) {
+        $choices = $this->getChoices();
+        $email = $this->normalize($email);
+        if (false === array_key_exists($email, $choices)) {
             return null;
         }
 
-        return (bool)$choice;
+        return (bool)$choices[$email];
     }
 
-    public function setChoice(bool $choice): void
+    public function setChoice(string $email, bool $choice): void
     {
-        $this->checkoutSession->setData(self::CHOICE_SESSION_KEY, $choice);
+        $email = $this->normalize($email);
+        if ($email === '') {
+            return;
+        }
+
+        $choices = $this->getChoices();
+        $choices[$email] = $choice;
+        $this->checkoutSession->setData(self::CHOICE_SESSION_KEY, $choices);
     }
 
     public function hasSubscribedEmail(string $email): bool
@@ -56,6 +64,16 @@ class NewsletterChoice
     {
         $this->checkoutSession->unsetData(self::CHOICE_SESSION_KEY);
         $this->checkoutSession->unsetData(self::SUBSCRIBED_EMAILS_SESSION_KEY);
+    }
+
+    /**
+     * @return array<string, bool>
+     */
+    private function getChoices(): array
+    {
+        $choices = $this->checkoutSession->getData(self::CHOICE_SESSION_KEY);
+
+        return is_array($choices) ? $choices : [];
     }
 
     /**

@@ -2,7 +2,6 @@
 
 namespace LokiCheckout\Core\Plugin;
 
-use LokiCheckout\Core\Util\NewsletterChoice;
 use Magento\Checkout\Model\Session as CheckoutSession;
 
 class ClearHelperDataPlugin
@@ -41,6 +40,5 @@ class ClearHelperDataPlugin
         $checkoutSession->setCurrentStep(null);
         $checkoutSession->setCustomerAccountType(null);
         $checkoutSession->setAgreementIds(null);
-        $checkoutSession->unsetData(NewsletterChoice::CHOICE_SESSION_KEY);
     }
 }

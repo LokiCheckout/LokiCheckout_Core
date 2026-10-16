@@ -40,11 +40,12 @@ class NewsletterTask implements TaskInterface
             return;
         }
 
-        if ($this->newsletterChoice->getChoice() !== null) {
+        $email = (string)$quote->getCustomerEmail();
+        if ($this->newsletterChoice->getChoice($email) !== null) {
             return;
         }
 
-        $this->email = (string)$quote->getCustomerEmail();
+        $this->email = $email;
         $this->customerId = $this->customerSession->isLoggedIn() ? (int)$this->customerSession->getCustomerId() : 0;
         $this->storeId = (int)$quote->getStoreId();
     }
@@ -53,7 +54,6 @@ class NewsletterTask implements TaskInterface
     {
         $email = $this->email;
         $this->email = null;
-        $this->newsletterChoice->reset();
 
         if ($email === null || ($email === '' && $this->customerId === 0)) {
             return;

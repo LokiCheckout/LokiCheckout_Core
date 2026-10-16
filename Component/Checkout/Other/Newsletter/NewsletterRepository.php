@@ -34,7 +34,7 @@ class NewsletterRepository extends FieldRepository
             return true;
         }
 
-        $choice = $this->getNewsletterChoice()->getChoice();
+        $choice = $this->getNewsletterChoice()->getChoice($email);
         if ($choice !== null) {
             return $choice;
         }
@@ -49,7 +49,7 @@ class NewsletterRepository extends FieldRepository
     public function saveValue(mixed $value): void
     {
         $value = (bool)$value;
-        $this->getNewsletterChoice()->setChoice($value);
+        $this->getNewsletterChoice()->setChoice($this->getCustomerEmail(), $value);
 
         if ($this->getCustomerId() > 0) {
             $this->saveCustomerValue($value);
