@@ -30,8 +30,9 @@ class StepForwardButtonRepository extends ComponentRepository
     public function saveValue(mixed $value): void
     {
         try {
-            $this->getStepNavigator()->setNextStep();
-            $this->getContext()->getSkipValidation()->setSkipValidation(true);
+            if ($this->getStepNavigator()->setNextStep()) {
+                $this->getContext()->getSkipValidation()->setSkipValidation(true);
+            }
 
         } catch (UnknownStepException $e) {
             $this->logger->error($e);
