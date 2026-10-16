@@ -24,6 +24,7 @@ class CheckoutState implements ArgumentInterface
 {
     private int $quoteId = 0;
     private array $quotes = [];
+    private ?TotalsInterface $totals = null;
 
     public function __construct(
         private readonly CheckoutSession $checkoutSession,
@@ -43,6 +44,7 @@ class CheckoutState implements ArgumentInterface
     public function reset(): void
     {
         $this->quotes = [];
+        $this->totals = null;
     }
 
     public function setQuoteId(int $quoteId): void
@@ -135,6 +137,7 @@ class CheckoutState implements ArgumentInterface
 
         try {
             $this->saveCart->execute($quote, $useRepository);
+            $this->totals = null;
             $this->calculateTotals();
         } catch (NoSuchEntityException $e) {
             $this->handleQuoteNotFoundException('No quote found');
@@ -143,9 +146,8 @@ class CheckoutState implements ArgumentInterface
 
     public function calculateTotals(): TotalsInterface
     {
-        static $totals = false;
-        if ($totals instanceof TotalsInterface) {
-            return $totals;
+        if ($this->totals instanceof TotalsInterface) {
+            return $this->totals;
         }
 
         $quote = $this->getQuote();
@@ -162,9 +164,9 @@ class CheckoutState implements ArgumentInterface
             $totalsInformation->setShippingCarrierCode($carrierCode);
         }
 
-        $totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
+        $this->totals = $this->totalsInformationManagement->calculate($quote->getId(), $totalsInformation);
 
-        return $totals;
+        return $this->totals;
     }
 
     public function getCheckoutSession(): CheckoutSession
