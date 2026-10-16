@@ -20,7 +20,7 @@ class SortedBlocks implements ArgumentInterface
     public function getChildren(
         AbstractBlock $parentBlock
     ): array {
-        $grid = $this->config->getGrid();
+        $grid = $this->config->getGrid($parentBlock);
         $gridLayout = $this->config->getGridLayout();
 
         $childNames = $parentBlock->getChildNames();
