@@ -36,7 +36,7 @@ class BillingStepViewModel extends AbstractStepViewModel
     public function isAccessable(): bool
     {
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        if ($quote->hasVirtualItems()) {
+        if ($quote->isVirtual()) {
             return true;
         }
 
