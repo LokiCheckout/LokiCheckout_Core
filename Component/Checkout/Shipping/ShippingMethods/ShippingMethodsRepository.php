@@ -110,7 +110,7 @@ class ShippingMethodsRepository extends ComponentRepository
             return '';
         }
 
-        if (false === array_key_exists($shippingMethodCode, $shippingMethods)) {
+        if (false === array_key_exists($shippingMethodCode, $this->getAvailableShippingMethods())) {
             $this->component->getLocalMessageRegistry()->addError('Chosen shipping method is not available');
 
             return $this->getDefaultShippingMethod();
@@ -119,13 +119,26 @@ class ShippingMethodsRepository extends ComponentRepository
         return $shippingMethodCode;
     }
 
+    /**
+     * Rates with an error (like carriers with "Show Method if Not Applicable") are listed, but not selectable
+     *
+     * @return ShippingMethodInterface[]
+     */
+    private function getAvailableShippingMethods(): array
+    {
+        return array_filter(
+            $this->getShippingMethods(),
+            fn (ShippingMethodInterface $shippingMethod) => false !== $shippingMethod->getAvailable()
+        );
+    }
+
     private function getDefaultShippingMethod(): string
     {
         if (false === $this->getContext()->getModuleConfig()->selectDefaultShippingMethod()) {
             return '';
         }
 
-        $shippingMethods = $this->getShippingMethods();
+        $shippingMethods = $this->getAvailableShippingMethods();
         if ($shippingMethods === []) {
             return '';
         }

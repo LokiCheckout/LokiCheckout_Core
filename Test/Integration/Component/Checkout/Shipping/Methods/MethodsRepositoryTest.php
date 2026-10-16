@@ -131,6 +131,37 @@ class MethodsRepositoryTest extends LokiCheckoutTestCase
         $this->assertAddressHasShippingMethod('flatrate_flatrate', $quote->getShippingAddress());
     }
 
+    #[
+        ConfigFixture('carriers/flatrate/active', 1, 'store', 'default'),
+        ConfigFixture('carriers/flatrate/sort_order', 20, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/active', 1, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/sort_order', 10, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/showmethod', 1, 'store', 'default'),
+        ConfigFixture('carriers/freeshipping/free_shipping_subtotal', 100000, 'store', 'default'),
+        ConfigFixture('loki_checkout/shipping/select_default_shipping_method', 1, 'store', 'default'),
+    ]
+    public function testUnavailableShippingMethodIsNeverSelected()
+    {
+        $this->saveShippingAddressValues();
+        $this->dispatchToCheckout();
+
+        $repository = $this->getRepository();
+        $unavailableCodes = [];
+        foreach ($repository->getShippingMethods() as $code => $shippingMethod) {
+            if (false === $shippingMethod->getAvailable()) {
+                $unavailableCodes[] = $code;
+            }
+        }
+
+        $this->assertNotEmpty($unavailableCodes, 'Expected an unavailable (error) rate for this test');
+
+        $repository->saveValue('');
+        $this->assertAddressHasShippingMethod('flatrate_flatrate', $this->getQuote()->getShippingAddress());
+
+        $repository->saveValue($unavailableCodes[0]);
+        $this->assertAddressHasShippingMethod('flatrate_flatrate', $this->getQuote()->getShippingAddress());
+    }
+
     private function getRepository(): ShippingMethodsRepository
     {
         /** @var ShippingMethodsRepository $repository */
