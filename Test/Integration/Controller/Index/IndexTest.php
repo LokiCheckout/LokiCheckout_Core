@@ -46,7 +46,9 @@ class IndexTest extends LokiCheckoutTestCase
     #[ConfigFixture('checkout/options/onepage_checkout_enabled', 0, 'store', 'default')]
     public function testRedirectsToCartWhenOnepageCheckoutIsDisabled(): void
     {
-        $this->dispatchToCheckout();
+        $this->assertLokiCheckoutIsEnabled();
+        $this->getCart();
+        $this->dispatch('checkout/index/index');
 
         $this->assertSame(302, $this->getResponse()->getHttpResponseCode());
         $location = $this->getResponse()->getHeader('Location');
