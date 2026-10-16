@@ -32,6 +32,15 @@ class StreetLinesParserTest extends TestCase
             ['NL', ['3 van der Zwaanlaan 42 HS'], ['3 van der Zwaanlaan', '42', 'HS']],
             ['NL', ['3 van der Zwaanlaan 42HS'], ['3 van der Zwaanlaan', '42', 'HS']],
             ['NL', ['3 van der Zwaanlaan'], ['3 van der Zwaanlaan']],
+            ['NL', ['3 van der Zwaanlaan', '42'], ['3 van der Zwaanlaan', '42']],
+            ['NL', ['1e Jan Steenstraat 12'], ['1e Jan Steenstraat', '12']],
+            ['NL', ['1e Jan Steenstraat 12 HS'], ['1e Jan Steenstraat', '12', 'HS']],
+            ['NL', ['1e Jan Steenstraat'], ['1e Jan Steenstraat']],
+            ['NL', ['1e Jan Steenstraat', '12'], ['1e Jan Steenstraat', '12']],
+            ['NL', ['1e Jan Steenstraat', '12A'], ['1e Jan Steenstraat', '12', 'A']],
+            ['NL', ['Kerkstraat', '12 bis'], ['Kerkstraat', '12', 'bis']],
+            ['NL', ['126D'], ['', '126', 'D']],
+            ['NL', ['126', 'D'], ['', '126', 'D']],
         ];
     }
 }

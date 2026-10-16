@@ -167,6 +167,26 @@ class StreetLinesFactoryTest extends TestCase
         $this->assertSame('Z', $streetLines->getHouseNumberAddition());
     }
 
+    public function testStreetNameStartingWithDigitSurvivesEnteringHouseNumber()
+    {
+        $objectManager = new SimpleObjectManager();
+        $scopeConfig = $this->getScopeConfig(3);
+        $streetLinesParser = new StreetLinesParser();
+        $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
+
+        $streetLines = $streetLinesFactory->createFromStreet('', 'NL');
+        $street = $streetLines->setLineByIndex(0, '1e Jan Steenstraat')->toString();
+
+        $streetLines = $streetLinesFactory->createFromStreet($street, 'NL');
+        $this->assertSame('1e Jan Steenstraat', $streetLines->getStreetName());
+
+        $street = $streetLines->setLineByIndex(1, '12')->toString();
+        $streetLines = $streetLinesFactory->createFromStreet($street, 'NL');
+        $this->assertSame('1e Jan Steenstraat', $streetLines->getStreetName());
+        $this->assertSame('12', $streetLines->getHouseNumber());
+        $this->assertSame('', $streetLines->getHouseNumberAddition());
+    }
+
     private function getScopeConfig(int $numberOfStreetlines = 2): ScopeConfigInterface
     {
         $mockup = $this->createMock(ScopeConfigInterface::class);

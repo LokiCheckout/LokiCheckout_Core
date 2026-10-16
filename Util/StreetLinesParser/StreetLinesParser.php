@@ -28,15 +28,24 @@ class StreetLinesParser
 
         $newStreetParts = [];
         foreach ($streetParts as $streetIndex => $streetPart) {
+            $streetPart = trim((string)$streetPart, " \f\n\r\t\v\x00");
 
-            if ($streetIndex === 0 && preg_match('/^(\d+)/', $streetPart)) {
+            // A first line is only a house number when it contains nothing else (like "126D"),
+            // otherwise it is a street name starting with a digit (like "1e Jan Steenstraat")
+            if ($streetIndex === 0) {
+                if (false === (bool)preg_match('/^\d+\s*[a-zA-Z]{0,4}$/', $streetPart)) {
+                    $newStreetParts[] = $streetPart;
+                    continue;
+                }
+
                 $newStreetParts[] = '';
             }
 
             if (preg_match('/^(\d+)(.*)$/', $streetPart, $match)) {
                 $newStreetParts[] = $match[1];
-                if (isset($match[2]) && ($match[2] !== '' && $match[2] !== '0')) {
-                    $newStreetParts[] = $match[2];
+                $addition = trim($match[2], " \f\n\r\t\v\x00");
+                if ($addition !== '' && $addition !== '0') {
+                    $newStreetParts[] = $addition;
                 }
                 continue;
             }
@@ -57,7 +66,7 @@ class StreetLinesParser
             return ['', $trimmedLine];
         }
 
-        if (preg_match('/^(\d+)([a-zA-Z]{1,4})(.*)$/', $trimmedLine, $matches)) {
+        if (preg_match('/^(\d+)([a-zA-Z]{1,4})$/', $trimmedLine, $matches)) {
             throw new StreetLineParserException();
         }
 
