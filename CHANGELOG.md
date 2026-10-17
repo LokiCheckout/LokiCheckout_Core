@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- Add `*_billing_address_country_*` layout handles for virtual quotes (or when the shipping country is empty), based on the billing country
 
 ## [2.7.3] - 16 October 2026
 ### Fixed

@@ -16,33 +16,36 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
 
     public function get(array $handles): array
     {
-        $shippingCountryId = $this->getShippingCountryId();
-        if (empty($shippingCountryId)) {
+        $shippingCountryId = $this->isVirtual() ? '' : $this->getShippingCountryId();
+        $billingCountryId = $this->getBillingCountryId();
+        if (empty($shippingCountryId) && empty($billingCountryId)) {
             return $handles;
         }
 
-        $billingCountryId = $this->getBillingCountryId();
         if (empty($billingCountryId)) {
             $billingCountryId = $shippingCountryId;
         }
 
+        $countryId = empty($shippingCountryId) ? $billingCountryId : $shippingCountryId;
+
         $handles = $this->removeCurrentCountryHandles($handles);
 
-        $handles[] = 'loki_checkout_country_'.$shippingCountryId;
-        $handles[] = 'loki_checkout_shipping_address_country_'.$shippingCountryId;
-        $handles[] = 'loki_checkout_billing_address_country_'.$billingCountryId;
+        $suffixes = ['_country_'.$countryId];
+        if (!empty($shippingCountryId)) {
+            $suffixes[] = '_shipping_address_country_'.$shippingCountryId;
+        }
+
+        $suffixes[] = '_billing_address_country_'.$billingCountryId;
+
+        foreach ($suffixes as $suffix) {
+            $handles[] = 'loki_checkout'.$suffix;
+        }
 
         foreach ($handles as $handle) {
-            if (str_starts_with($handle, 'loki_checkout_skin_')) {
-                $handles[] = $handle.'_country_'.$shippingCountryId;
-                $handles[] = $handle.'_shipping_address_country_'.$shippingCountryId;
-                $handles[] = $handle.'_billing_address_country_'.$billingCountryId;
-            }
-
-            if (str_starts_with($handle, 'loki_checkout_address_')) {
-                $handles[] = $handle.'_country_'.$shippingCountryId;
-                $handles[] = $handle.'_shipping_address_country_'.$shippingCountryId;
-                $handles[] = $handle.'_billing_address_country_'.$billingCountryId;
+            if (str_starts_with($handle, 'loki_checkout_skin_') || str_starts_with($handle, 'loki_checkout_address_')) {
+                foreach ($suffixes as $suffix) {
+                    $handles[] = $handle.$suffix;
+                }
             }
         }
 
@@ -58,6 +61,15 @@ class CountrySpecificLayoutHandler implements LayoutHandlerInterface
         }
 
         return $handles;
+    }
+
+    private function isVirtual(): bool
+    {
+        try {
+            return (bool)$this->checkoutState->getQuote()->isVirtual();
+        } catch (RedirectException $redirectException) {
+            return false;
+        }
     }
 
     private function getShippingCountryId(): string
