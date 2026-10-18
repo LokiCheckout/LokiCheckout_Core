@@ -40,6 +40,7 @@
                 template="LokiCheckout_Core::checkout/shipping/address-form.phtml">
                 <arguments>
                     <argument name="grid" xsi:type="boolean">true</argument>
+                    <argument name="grid_address_type" xsi:type="string">shipping</argument>
                 </arguments>
 
                 <block

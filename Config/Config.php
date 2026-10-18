@@ -106,7 +106,7 @@ class Config implements ArgumentInterface
         }
 
         $gridLayout = $this->xmlConfig->getGridLayout($gridLayoutName);
-        $countryId = $this->getCurrentCountryId();
+        $countryId = $this->getCurrentCountryId((string)$block->getGridAddressType());
 
         try {
             return $gridLayout->getGridByCountryId($countryId);
@@ -123,7 +123,7 @@ class Config implements ArgumentInterface
         return array_shift($grids);
     }
 
-    private function getCurrentCountryId(): string
+    private function getCurrentCountryId(string $addressType = ''): string
     {
         if (false === $this->checkoutState->getCheckoutSession()->getQuoteId() > 0) {
             return '';
@@ -134,7 +134,17 @@ class Config implements ArgumentInterface
             return (string)$quote->getBillingAddress()->getCountryId();
         }
 
-        return (string)$quote->getShippingAddress()->getCountryId();
+        $shippingCountryId = (string)$quote->getShippingAddress()->getCountryId();
+        if ($addressType !== 'billing') {
+            return $shippingCountryId;
+        }
+
+        $billingCountryId = (string)$quote->getBillingAddress()->getCountryId();
+        if (empty($billingCountryId)) {
+            return $shippingCountryId;
+        }
+
+        return $billingCountryId;
     }
 
     public function getDefaultGridClasses(): string

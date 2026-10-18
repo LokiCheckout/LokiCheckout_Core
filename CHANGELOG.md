@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Fixed
 - Add `*_billing_address_country_*` layout handles for virtual quotes (or when the shipping country is empty), based on the billing country
+- Select the grid of the billing address form by the billing country instead of the shipping country (new block argument `grid_address_type`)
 
 ## [2.7.3] - 16 October 2026
 ### Fixed

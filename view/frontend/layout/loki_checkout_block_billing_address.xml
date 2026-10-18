@@ -47,6 +47,7 @@
                 template="LokiCheckout_Core::checkout/billing/address-form.phtml">
                 <arguments>
                     <argument name="grid" xsi:type="boolean">true</argument>
+                    <argument name="grid_address_type" xsi:type="string">billing</argument>
                 </arguments>
 
                 <block
