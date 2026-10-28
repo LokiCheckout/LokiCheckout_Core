@@ -53,6 +53,9 @@
         "phpunit/phpunit": "^9.0 | ^10.0",
         "yireo/magento2-integration-test-helper": "~0.0"
     },
+    "conflict": {
+        "loki-checkout/magento2-shipping-maps": "<1.0.12"
+    },
     "suggest": {
         "loki/magento2-map-components": "Maps for locations",
         "loki-checkout/magento2-luma": "Luma compatibility for Loki Checkout",
