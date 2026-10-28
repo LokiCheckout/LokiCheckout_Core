@@ -1,10 +1,14 @@
 # LokiCheckout_Core
 
 <!-- badges.specs.start -->
+<div class="github-specs-badges">
+
 ![Magento version](https://img.shields.io/badge/Magento-2.4.6%20%7C%202.4.9-orange)
 ![PHP version](https://img.shields.io/badge/PHP-8.2%E2%80%938.5-777BB4)
 ![License](https://img.shields.io/badge/License-OSL--3.0-blue)
-![Latest Version](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/badges/release.svg)
+![Latest Version](https://img.shields.io/packagist/v/loki-checkout/magento2-core)
+
+</div>
 <!-- badges.specs.end -->
 
 
@@ -36,9 +40,13 @@ v2 ("I am not a robot"), reCAPTCHA v2 Invisible and reCAPTCHA v3 Invisible.
 ## Current status
 
 <!-- badges.test.start -->
-[![Static Tests](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/badges/main/pipeline.svg?job=static-tests)](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/pipelines)
-[![Unit Tests](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/badges/main/pipeline.svg?job=unit-tests)](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/pipelines)
-[![Integration Tests](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/badges/main/pipeline.svg?job=integration-tests)](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/pipelines)
-[![Playwright](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/badges/main/pipeline.svg?job=playwright)](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/pipelines)
-[![DI Compilation](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/badges/main/pipeline.svg?job=compile)](https://gitlab.yireo.com/loki-checkout/LokiCheckout_Core/-/pipelines)
+<div class="github-pipeline-badges">
+
+![Static Tests](https://img.shields.io/github/actions/workflow/status/LokiCheckout/LokiCheckout_Core/static-tests.yml?label=static-tests)
+![Unit Tests](https://img.shields.io/github/actions/workflow/status/LokiCheckout/LokiCheckout_Core/unit-tests.yml?label=unit-tests)
+![Integration Tests](https://img.shields.io/github/actions/workflow/status/LokiCheckout/LokiCheckout_Core/integration-tests.yml?label=integration-tests)
+![Playwright](https://img.shields.io/github/actions/workflow/status/LokiCheckout/LokiCheckout_Core/playwright.yml?label=playwright)
+![DI Compilation](https://img.shields.io/github/actions/workflow/status/LokiCheckout/LokiCheckout_Core/compile.yml?label=compile)
+
+</div>
 <!-- badges.test.end -->

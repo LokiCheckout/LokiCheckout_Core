@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.5] - 28 October 2026
+### Fixed
+- Remove required dep with optional Loki_MapComponents
+
 ## [2.7.4] - 18 October 2026
 ### Fixed
 - Add `*_billing_address_country_*` layout handles for virtual quotes (or when the shipping country is empty), based on the billing country
