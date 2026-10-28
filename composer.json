@@ -69,8 +69,5 @@
         "psr-4": {
             "LokiCheckout\\Core\\": ""
         }
-    },
-    "extra": {
-        "label": "Loki Checkout Core"
     }
 }
