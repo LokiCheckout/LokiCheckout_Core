@@ -6,7 +6,6 @@
             <module name="Loki_Components"/>
             <module name="Loki_CssUtils"/>
             <module name="Loki_FieldComponents"/>
-            <module name="Loki_MapComponents"/>
             <module name="Magento_Backend"/>
             <module name="Magento_Catalog"/>
             <module name="Magento_Checkout"/>

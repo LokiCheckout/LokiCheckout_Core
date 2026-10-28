@@ -25,7 +25,6 @@
         "loki/magento2-components": "^2.8",
         "loki/magento2-css-utils": "^1.0",
         "loki/magento2-field-components": "^2.0",
-        "loki/magento2-map-components": "~0.1 | ^1.0",
         "magento/framework": "^103.0",
         "magento/module-backend": "^102.0",
         "magento/module-catalog": "^103.0 | ^104.0",
@@ -55,6 +54,7 @@
         "yireo/magento2-integration-test-helper": "~0.0"
     },
     "suggest": {
+        "loki/magento2-map-components": "Maps for locations",
         "loki-checkout/magento2-luma": "Luma compatibility for Loki Checkout",
         "loki-checkout/magento2-hyva": "Hyv\u00e4 compatibility for Loki Checkout"
     },
