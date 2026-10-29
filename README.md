@@ -12,7 +12,7 @@
 <!-- badges.specs.end -->
 
 
-**This is the main core package of the LokiCheckout. It replaces the regular checkout with its own, based on Loki Components, Loki Field Components and much more. All other Loki Checkout module are extending this core module. With only this core module, you already have a working checkout.**
+**This is the main core package of the LokiCheckout. It replaces the regular checkout with its own, based on Loki Components, Loki Field Components and much more. All other Loki Checkout modules are extending this core module. With purely this core module, you already have a working checkout.**
 
 ## Installation
 Install this package via composer:
