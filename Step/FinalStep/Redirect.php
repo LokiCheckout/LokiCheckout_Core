@@ -2,6 +2,7 @@
 
 namespace LokiCheckout\Core\Step\FinalStep;
 
+use LokiCheckout\Core\Payment\Redirect\SessionRedirectResolver;
 use Magento\Framework\UrlFactory;
 use LokiCheckout\Core\Payment\Redirect\RedirectResolverListing;
 
@@ -11,6 +12,7 @@ class Redirect
         private readonly RedirectResolverListing $redirectResolverListing,
         private readonly UrlFactory $urlFactory,
         private readonly RedirectContext $redirectContext,
+        private readonly SessionRedirectResolver $sessionRedirectResolver,
     ) {
     }
 
@@ -29,6 +31,11 @@ class Redirect
             if (strlen($redirectUrl) > 0) {
                 return $redirectUrl;
             }
+        }
+
+        $redirectUrl = $this->sessionRedirectResolver->resolve($this->redirectContext);
+        if (is_string($redirectUrl) && $redirectUrl !== '') {
+            return $redirectUrl;
         }
 
         return (string)$this->getSuccessUrl();

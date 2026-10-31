@@ -6,6 +6,7 @@ use LokiCheckout\Core\Payment\Redirect\SessionRedirectResolver;
 use LokiCheckout\Core\Step\FinalStep\RedirectContext;
 use LokiCheckout\Core\ViewModel\CheckoutState;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\UrlInterface;
 use Magento\TestFramework\Fixture\AppArea;
 use PHPUnit\Framework\TestCase;
 
@@ -32,6 +33,25 @@ class SessionRedirectResolverTest extends TestCase
 
         $result = $this->subject->resolve($this->getContext());
         $this->assertSame('https://example.com/pay', $result);
+    }
+
+    public function testTurnsRootRelativePathIntoStoreUrl(): void
+    {
+        $this->checkoutState->getCheckoutSession()->setRedirectUrl('/cvb/order/redirect?foo=bar');
+
+        $result = $this->subject->resolve($this->getContext());
+        $expectedUrl = ObjectManager::getInstance()->get(UrlInterface::class)
+            ->getDirectUrl('cvb/order/redirect?foo=bar');
+
+        $this->assertSame($expectedUrl, $result);
+        $this->assertMatchesRegularExpression('#^https?://[^/]+/(index\.php/)?cvb/order/redirect\?foo=bar$#', (string)$result);
+    }
+
+    public function testKeepsProtocolRelativeUrl(): void
+    {
+        $this->checkoutState->getCheckoutSession()->setRedirectUrl('//example.com/pay');
+
+        $this->assertSame('//example.com/pay', $this->subject->resolve($this->getContext()));
     }
 
     public function testReturnsFalseWhenEmpty(): void
