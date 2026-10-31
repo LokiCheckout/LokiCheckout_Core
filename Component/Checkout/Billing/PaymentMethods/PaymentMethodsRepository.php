@@ -3,7 +3,7 @@
 namespace LokiCheckout\Core\Component\Checkout\Billing\PaymentMethods;
 
 use Magento\Checkout\Api\Exception\PaymentProcessingRateLimitExceededException;
-use Magento\Checkout\Api\PaymentProcessingRateLimiterInterface;
+use Magento\Checkout\Api\PaymentSavingRateLimiterInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\InvalidArgumentException;
 use Magento\Quote\Api\Data\PaymentInterfaceFactory;
@@ -22,7 +22,7 @@ class PaymentMethodsRepository extends ComponentRepository
         private PaymentMethodManagementInterface $paymentMethodManagement,
         private PaymentInterfaceFactory $paymentFactory,
         private readonly ManagerInterface $eventManager,
-        private PaymentProcessingRateLimiterInterface $paymentRateLimiter,
+        private PaymentSavingRateLimiterInterface $paymentRateLimiter,
     ) {
     }
 
@@ -61,7 +61,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
         $sanitizedPaymentMethod = $this->sanitizePaymentMethod($currentPaymentMethod);
         if ($currentPaymentMethod !== $sanitizedPaymentMethod) {
-            $this->saveValue($sanitizedPaymentMethod);
+            $this->persistPaymentMethod($sanitizedPaymentMethod);
         }
 
         return $sanitizedPaymentMethod;
@@ -76,7 +76,11 @@ class PaymentMethodsRepository extends ComponentRepository
             return;
         }
 
-        $value = (string)$value;
+        $this->persistPaymentMethod((string)$value);
+    }
+
+    private function persistPaymentMethod(string $value): void
+    {
         if (!$this->isEmptyPaymentMethod($value) && false === $this->isPaymentMethodAvailable($value)) {
             $this->component->getLocalMessageRegistry()->addError('Method is not available');
             return;
