@@ -38,6 +38,12 @@
                 <block
                     name="loki-checkout.login.form.inner" as="form"
                     template="LokiCheckout_Core::customer/login.phtml">
+                    <arguments>
+                        <argument name="unfiltered_properties" xsi:type="array">
+                            <item name="password" xsi:type="string">password</item>
+                        </argument>
+                    </arguments>
+
                     <container name="form.additional.info" as="form_additional_info"/>
 
                     <block
