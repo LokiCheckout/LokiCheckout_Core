@@ -7,30 +7,39 @@ use Loki\Field\Util\OptionFactory;
 use Loki\Field\Util\OptionGroupFactory;
 use Loki\Field\Util\OptionGroupModelInterface;
 use Magento\Directory\Helper\Data as DirectoryHelper;
+use Magento\Directory\Model\ResourceModel\Country\CollectionFactory as CountryCollectionFactory;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Magento\Store\Model\StoreManagerInterface;
 use Loki\Components\Component\ComponentViewModelInterface;
 
 class CountryOptionModel implements ArgumentInterface, OptionGroupModelInterface
 {
+    private array $options = [];
+
     public function __construct(
         private readonly DirectoryHelper $directoryHelper,
         private OptionGroupFactory $optionGroupFactory,
         private OptionFactory $optionFactory,
+        private readonly CountryCollectionFactory $countryCollectionFactory,
+        private readonly StoreManagerInterface $storeManager,
         private readonly array $skipCountries = []
     ) {
     }
 
     public function getOptions(ComponentViewModelInterface $viewModel): array
     {
-        $topCountryCodes = $this->directoryHelper->getTopCountryCodes();
-
-        static $options = false;
-        if (is_array($options)) {
-            return $options;
+        $storeId = (int)$this->storeManager->getStore()->getId();
+        if (!isset($this->options[$storeId])) {
+            $this->options[$storeId] = $this->buildOptions($storeId);
         }
 
+        return $this->options[$storeId];
+    }
+
+    private function buildOptions(int $storeId): array
+    {
         $options = [];
-        foreach ($this->directoryHelper->getCountryCollection() as $country) {
+        foreach ($this->countryCollectionFactory->create()->loadByStore($storeId) as $country) {
             if (empty($country->getCountryId())) {
                 continue;
             }
@@ -53,25 +62,26 @@ class CountryOptionModel implements ArgumentInterface, OptionGroupModelInterface
             return strcmp($a->getLabel(), $b->getLabel());
         });
 
-        if (!empty($topCountryCodes)) {
-            $optionGroups = [];
-            $topCountries = array_filter($options, function(Option $option) use ($topCountryCodes) {
-                return in_array($option->getValue(), $topCountryCodes);
-            });
-
-            $otherCountries = array_filter($options, function(Option $option) use ($topCountryCodes) {
-                return false === in_array($option->getValue(), $topCountryCodes);
-            });
-
-            if (!empty($topCountries) && !empty($otherCountries)) {
-                $optionGroups[] = $this->optionGroupFactory->create('Top Countries', $topCountries);
-                $optionGroups[] = $this->optionGroupFactory->create('Other Countries', $otherCountries);
-
-                $options = $optionGroups;
-                return $options;
-            }
+        $topCountryCodes = $this->directoryHelper->getTopCountryCodes();
+        if (empty($topCountryCodes)) {
+            return $options;
         }
 
-        return $options;
+        $topCountries = array_filter($options, function(Option $option) use ($topCountryCodes) {
+            return in_array($option->getValue(), $topCountryCodes);
+        });
+
+        $otherCountries = array_filter($options, function(Option $option) use ($topCountryCodes) {
+            return false === in_array($option->getValue(), $topCountryCodes);
+        });
+
+        if (empty($topCountries) || empty($otherCountries)) {
+            return $options;
+        }
+
+        return [
+            $this->optionGroupFactory->create('Top Countries', $topCountries),
+            $this->optionGroupFactory->create('Other Countries', $otherCountries),
+        ];
     }
 }
