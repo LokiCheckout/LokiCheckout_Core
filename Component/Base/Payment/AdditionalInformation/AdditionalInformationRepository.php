@@ -56,8 +56,15 @@ abstract class AdditionalInformationRepository extends FieldRepository
             $propertyName = $this->getPropertyName();
         }
 
+        $propertyValue = (string)$propertyValue;
+        $additionalInformation = $this->getAdditionalPaymentInformation();
+        if (array_key_exists($propertyName, $additionalInformation)
+            && (string)$additionalInformation[$propertyName] === $propertyValue) {
+            return;
+        }
+
         $quote = $this->getContext()->getCheckoutState()->getQuote();
-        $quote->getPayment()->setAdditionalInformation($propertyName, (string)$propertyValue);
+        $quote->getPayment()->setAdditionalInformation($propertyName, $propertyValue);
         $this->getContext()->getCheckoutState()->saveQuote($quote, true);
     }
 
