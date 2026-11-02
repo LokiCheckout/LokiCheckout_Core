@@ -298,6 +298,7 @@
     <type name="LokiCheckout\Core\Step\FinalStep">
         <arguments>
             <argument name="singleUsePaymentKeys" xsi:type="array">
+                <item name="payment_method_nonce" xsi:type="string">payment_method_nonce</item>
             </argument>
         </arguments>
     </type>
