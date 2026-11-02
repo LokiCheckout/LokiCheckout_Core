@@ -6,9 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.6] - 03 November 2026
+### Fixed
+- Clear `payment_method_nonce` by default after a failed order
+- Configure `singleUsePaymentKeys` in FinalStepTest
+- Scope country options per store and per instance
+- Clear single-use payment data after a failed order placement
+- Only save additional information when the value changed
+- Require `Loki_Components` 2.10 for `unfiltered_properties` support
+- Add timeouts and caching to the Composer API client
+- Redirect to the order place redirect URL of the payment method
+- Cover the rate limit redirect when placing the order
+- Use the payment saving rate limiter when selecting a payment method
+- Do not filter the password of the login form
+
 ## [2.7.5] - 28 October 2026
 ### Fixed
-- Remove required dep with optional Loki_MapComponents
+- Remove required dep with optional `Loki_MapComponents`
 
 ## [2.7.4] - 18 October 2026
 ### Fixed
