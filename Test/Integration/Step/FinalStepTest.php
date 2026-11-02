@@ -8,6 +8,7 @@ use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use LokiCheckout\Core\Test\Integration\Trait\SaveShippingAddressValues;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Quote\Api\CartManagementInterface;
 use Magento\Quote\Api\CartRepositoryInterface;
 use Magento\Quote\Model\Quote;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
@@ -15,6 +16,8 @@ use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
 use Magento\TestFramework\Fixture\Config as ConfigFixture;
 use Magento\TestFramework\Fixture\DataFixture;
+use RuntimeException;
+use Throwable;
 
 #[
     DataFixture(ProductFixture::class, ['price' => 10], as: 'product'),
@@ -70,6 +73,46 @@ class FinalStepTest extends LokiCheckoutTestCase
         $quote = $this->getObjectManager()->get(CartRepositoryInterface::class)->get($this->getQuote()->getId());
         $this->assertTrue((bool)$quote->getIsActive());
         $this->assertEmpty($quote->getReservedOrderId());
+    }
+
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    public function testSingleUsePaymentDataIsClearedAfterLocalizedPlaceOrderFailure(): void
+    {
+        $this->assertSingleUsePaymentDataIsClearedAfterFailure(new LocalizedException(__('Declined')));
+    }
+
+    #[ConfigFixture('carriers/flatrate/active', 1, 'store', 'default')]
+    #[ConfigFixture('payment/checkmo/active', 1, 'store', 'default')]
+    public function testSingleUsePaymentDataIsClearedAfterUnexpectedPlaceOrderFailure(): void
+    {
+        $this->assertSingleUsePaymentDataIsClearedAfterFailure(new RuntimeException('Gateway down'));
+    }
+
+    private function assertSingleUsePaymentDataIsClearedAfterFailure(Throwable $exception): void
+    {
+        $this->getCart();
+        $quote = $this->prepareQuoteForSubmit();
+        $quote->getPayment()->setAdditionalInformation('payment_method_nonce', 'used-nonce');
+        $quote->getPayment()->setAdditionalInformation('foo', 'bar');
+        $this->getObjectManager()->get(CartRepositoryInterface::class)->save($quote);
+
+        $cartManagement = $this->createMock(CartManagementInterface::class);
+        $cartManagement->method('placeOrder')->willThrowException($exception);
+
+        try {
+            $this->getObjectManager()->create(FinalStep::class, [
+                'cartManagement' => $cartManagement,
+            ])->submit(false);
+            $this->fail('Expected a redirect');
+        } catch (RedirectException $redirectException) {
+            $this->assertStringEndsWith('/checkout/', $redirectException->getUrl());
+        }
+
+        $quote = $this->getObjectManager()->create(CartRepositoryInterface::class)->get($quote->getId());
+        $payment = $quote->getPayment();
+        $this->assertNull($payment->getAdditionalInformation('payment_method_nonce'));
+        $this->assertSame('bar', $payment->getAdditionalInformation('foo'));
     }
 
     private function prepareQuoteForSubmit(): Quote

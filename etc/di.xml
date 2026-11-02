@@ -295,6 +295,13 @@
         </arguments>
     </type>
 
+    <type name="LokiCheckout\Core\Step\FinalStep">
+        <arguments>
+            <argument name="singleUsePaymentKeys" xsi:type="array">
+            </argument>
+        </arguments>
+    </type>
+
     <type name="LokiCheckout\Core\Step\FinalStep\TaskListing">
         <arguments>
             <argument name="tasks" xsi:type="array">

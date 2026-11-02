@@ -47,6 +47,7 @@ class FinalStep
         private readonly CheckoutHelper $checkoutHelper,
         private readonly LoggerInterface $logger,
         private readonly PaymentProcessingRateLimiterInterface $paymentRateLimiter,
+        private readonly array $singleUsePaymentKeys = [],
     ) {
     }
 
@@ -107,11 +108,13 @@ class FinalStep
         try {
             $orderId = (int)$this->cartManagement->placeOrder($quote->getId(), $quote->getPayment());
         } catch (LocalizedException $e) {
+            $this->clearSingleUsePaymentData($quote);
             $msg = __('An error occurred while placing the order.') .' '. $e->getMessage();
             $this->messageManager->addErrorMessage($msg);
             throw $this->getCheckoutRedirect();
         } catch (Throwable $e) {
             $this->logger->critical($e);
+            $this->clearSingleUsePaymentData($quote);
             $this->messageManager->addErrorMessage(__('An error occurred while placing the order.'));
             throw $this->getCheckoutRedirect();
         }
@@ -165,6 +168,30 @@ class FinalStep
         } catch (PaymentProcessingRateLimitExceededException $exception) {
             $this->messageManager->addErrorMessage($exception->getMessage());
             throw $this->getCheckoutRedirect();
+        }
+    }
+
+    private function clearSingleUsePaymentData(Quote $quote): void
+    {
+        $payment = $quote->getPayment();
+        $cleared = false;
+        foreach ($this->singleUsePaymentKeys as $key) {
+            if (!$payment->hasAdditionalInformation($key)) {
+                continue;
+            }
+
+            $payment->unsAdditionalInformation($key);
+            $cleared = true;
+        }
+
+        if (false === $cleared) {
+            return;
+        }
+
+        try {
+            $this->cartRepository->save($quote);
+        } catch (Throwable $e) {
+            $this->logger->critical($e);
         }
     }
 
