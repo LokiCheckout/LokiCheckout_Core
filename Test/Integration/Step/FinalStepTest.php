@@ -103,6 +103,7 @@ class FinalStepTest extends LokiCheckoutTestCase
         try {
             $this->getObjectManager()->create(FinalStep::class, [
                 'cartManagement' => $cartManagement,
+                'singleUsePaymentKeys' => ['payment_method_nonce'],
             ])->submit(false);
             $this->fail('Expected a redirect');
         } catch (RedirectException $redirectException) {
