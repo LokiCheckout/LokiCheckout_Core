@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.7] - 06 November 2026
+### Fixed
+- Add x-cloak rule to global Tailwind CSS
+
 ## [2.7.6] - 03 November 2026
 ### Fixed
 - Clear `payment_method_nonce` by default after a failed order
