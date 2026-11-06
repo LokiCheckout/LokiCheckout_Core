@@ -81,14 +81,6 @@ if [ "$USE_HTTPS" -eq 1 ]; then
   HTTPS_PORT="${HTTPS_HOST_PORT##*:}"
   test "$HTTPS_PORT" = "$HTTPS_HOST_PORT" && HTTPS_PORT=443
 
-  if ! command -v socat >/dev/null 2>&1; then
-    if command -v apk >/dev/null 2>&1; then
-      apk add --no-cache socat
-    else
-      apt-get update && apt-get install -y socat
-    fi
-  fi
-
   openssl req -x509 -nodes -newkey rsa:2048 -days 7 \
     -keyout /tmp/magento-tls.key -out /tmp/magento-tls.crt \
     -subj "/CN=localhost" \
