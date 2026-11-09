@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.7.8] - 09 November 2026
+### Fixed
+- Make sure empty coupon does not show message that coupon is applied
+- Validate coupon code client-side before submitting
+
 ## [2.7.7] - 06 November 2026
 ### Fixed
 - Add x-cloak rule to global Tailwind CSS
