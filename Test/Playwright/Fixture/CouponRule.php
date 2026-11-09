@@ -31,7 +31,7 @@ class CouponRule implements ConfigureActionInterface
             return [];
         }
 
-        $couponCode = trim((string)($requestData[self::REQUEST_KEY]['code'] ?? ''));
+        $couponCode = trim((string)($requestData[self::REQUEST_KEY]['code'] ?? ''), " \f\n\r\t\v\x00");
         if ($couponCode === '') {
             return [self::REQUEST_KEY => ['errors' => ['Coupon rule requires a "code"']]];
         }
