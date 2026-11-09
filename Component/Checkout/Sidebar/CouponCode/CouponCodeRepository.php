@@ -41,6 +41,10 @@ class CouponCodeRepository extends FieldRepository
             }
 
             $couponCode = $this->filter($value['code']);
+            if (empty($couponCode)) {
+		return;
+	    }
+
             $quote->setCouponCode($couponCode);
             $quote->getShippingAddress()->setCollectShippingRates(true);
             $quote->collectTotals();
