@@ -37,6 +37,7 @@ $couponCode = $viewModel->getValue();
             <?= /* @noEscape */ $childRenderer->html($block, 'form', [
                 'field_id' => $viewModel->getFieldId(),
             ]) ?>
+            <?= /* @noEscape */ $blockRenderer->html($block, 'loki-components.utils.local-messages') ?>
         </details>
     <?php endif; ?>
 </div>

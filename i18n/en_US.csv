@@ -154,3 +154,4 @@ Trash,Trash
 "Your IBAN number is incorrect","Your IBAN number is incorrect"
 "Your IBAN number needs to start with a country prefix","Your IBAN number needs to start with a country prefix"
 label,label
+"Please enter a valid coupon code","Please enter a valid coupon code"

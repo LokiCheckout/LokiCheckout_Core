@@ -13,6 +13,8 @@ use Magento\Framework\View\Element\Template;
             ...LokiCheckoutRecaptchaGuardComponentPartial,
             recaptchaFormId: 'coupon_code',
             detailOpen: false,
+            couponCodePattern: '^[a-zA-Z0-9_-]+$',
+            couponCodeInvalidMessage: '',
             initCouponCode() {
                 if (this.$refs.details) {
                     this.$refs.details.addEventListener('toggle', () => {
@@ -39,13 +41,38 @@ use Magento\Framework\View\Element\Template;
                     task: 'remove'
                 });
             },
+            clearCouponCodeErrors() {
+                this.messages = this.messages.filter(message => message.type !== 'error');
+            },
+            isValidCouponCode(code) {
+                if (code === '') {
+                    return false;
+                }
+
+                try {
+                    return new RegExp(this.couponCodePattern).test(code);
+                } catch (error) {
+                    return false;
+                }
+            },
             async applyCouponCode() {
+                const input = this.$refs.input;
+                const code = String(input ? input.value : (this.value ?? '')).trim();
+                this.value = code;
+                this.clearCouponCodeErrors();
+
+                if (false === this.isValidCouponCode(code)) {
+                    this.addLocalError(this.couponCodeInvalidMessage);
+                    input && input.focus();
+                    return;
+                }
+
                 if (false === await this.awaitRecaptcha()) {
                     return;
                 }
 
                 this.post({
-                    code: this.value,
+                    code: code,
                     task: 'apply'
                 });
             }

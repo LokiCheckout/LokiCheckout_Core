@@ -338,4 +338,12 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="Loki\FunctionalTests\Service\ConfigureAction\ConfigureActionListing">
+        <arguments>
+            <argument name="configureActions" xsi:type="array">
+                <item name="loki_checkout_core_coupon_rule" xsi:type="object">LokiCheckout\Core\Test\Playwright\Fixture\CouponRule</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
