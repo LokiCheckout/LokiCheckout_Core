@@ -41,6 +41,12 @@
             </block>
         </referenceContainer>
 
+        <block name="loki-checkout.config" class="Magento\Framework\View\Element\Text">
+            <arguments>
+                <argument name="config" xsi:type="array"/>
+            </arguments>
+        </block>
+
         <block
             name="loki-checkout.fast_checkout"
             template="LokiCheckout_Core::checkout/fast-checkout.phtml"/>

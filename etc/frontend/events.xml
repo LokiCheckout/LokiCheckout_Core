@@ -6,6 +6,10 @@
         <observer name="LokiCheckout_Core::enableCheckout" instance="LokiCheckout\Core\Observer\EnableCheckout"/>
     </event>
 
+    <event name="layout_generate_blocks_after">
+        <observer name="LokiCheckout_Core::loadLayoutConfig" instance="LokiCheckout\Core\Observer\LoadLayoutConfig"/>
+    </event>
+
     <event name="view_block_abstract_to_html_before">
         <observer name="LokiCheckout_Core::assignAdditionalBlockVariables" instance="LokiCheckout\Core\Observer\AssignAdditionalBlockVariables"/>
         <observer name="LokiCheckout_Core::setSortOrder" instance="LokiCheckout\Core\Observer\SetSortOrder"/>

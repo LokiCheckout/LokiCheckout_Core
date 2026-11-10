@@ -19,6 +19,7 @@ class Config implements ArgumentInterface
         private readonly ScopeConfigInterface $scopeConfig,
         private readonly ModuleManager $moduleManager,
         private readonly XmlConfig $xmlConfig,
+        private readonly LayoutConfig $layoutConfig,
     ) {
     }
 
@@ -149,18 +150,12 @@ class Config implements ArgumentInterface
 
     public function getDefaultGridClasses(): string
     {
-        return (string)$this->scopeConfig->getValue(
-            'loki_checkout/general/default_grid_class',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (string)$this->getValue('loki_checkout/general/default_grid_class');
     }
 
     public function isDebug(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/debug/enable',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/debug/enable');
     }
 
     public function addDebugBlock(): bool
@@ -169,10 +164,7 @@ class Config implements ArgumentInterface
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/debug/debug_block',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/debug/debug_block');
     }
 
     public function addHtmlHints(): bool
@@ -181,74 +173,47 @@ class Config implements ArgumentInterface
             return false;
         }
 
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/debug/html_hints',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/debug/html_hints');
     }
 
     public function enableSameAsBilling(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/fields/enable_same_as_billing',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/fields/enable_same_as_billing');
     }
 
     public function enableVatIdOnlyForCompany(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/fields/enable_vat_id_only_for_company',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/fields/enable_vat_id_only_for_company');
     }
 
     public function hideRegionWhenOptional(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/fields/hide_region_when_optional',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/fields/hide_region_when_optional');
     }
 
     public function capitalizeCountryInPreview(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/fields/capitalize_country_in_preview',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/fields/capitalize_country_in_preview');
     }
 
     public function selectDefaultShippingMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/shipping/select_default_shipping_method',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/shipping/select_default_shipping_method');
     }
 
     public function selectDefaultPaymentMethod(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/billing/select_default_payment_method',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/billing/select_default_payment_method');
     }
 
     public function isNewsletterCheckedByDefault(): bool
     {
-        return (bool)$this->scopeConfig->getValue(
-            'loki_checkout/newsletter/default_value',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (bool)$this->getValue('loki_checkout/newsletter/default_value');
     }
 
     public function getMaxCartItemsToShowByDefault(): int
     {
-        $value = (int)$this->scopeConfig->getValue(
-            'loki_checkout/cart/max_items_visible_count',
-            ScopeInterface::SCOPE_STORE
-        );
+        $value = (int)$this->getValue('loki_checkout/cart/max_items_visible_count');
 
         if ($value > 0) {
             return $value;
@@ -259,9 +224,15 @@ class Config implements ArgumentInterface
 
     public function getMaxCartItemsToDisplay(): int
     {
-        return (int)$this->scopeConfig->getValue(
-            'checkout/options/max_items_display_count',
-            ScopeInterface::SCOPE_STORE
-        );
+        return (int)$this->getValue('checkout/options/max_items_display_count');
+    }
+
+    private function getValue(string $path): mixed
+    {
+        if ($this->layoutConfig->has($path)) {
+            return $this->layoutConfig->getValue($path);
+        }
+
+        return $this->scopeConfig->getValue($path, ScopeInterface::SCOPE_STORE);
     }
 }

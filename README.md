@@ -28,6 +28,25 @@ bin/magento module:enable LokiCheckout_Core
 ## Settings
 In the Magento Admin Panel, you can navigate to **Store > Configuration > Loki > LokiCheckout** for various settings.
 
+### Overriding settings via the XML layout
+Most settings can also be overridden via the XML layout, by adding items (with the configuration path as name) to the
+`config` argument of the block `loki-checkout.config`:
+
+```xml
+<referenceBlock name="loki-checkout.config">
+    <arguments>
+        <argument name="config" xsi:type="array">
+            <item name="loki_checkout/fields/enable_same_as_billing" xsi:type="boolean">false</item>
+            <item name="loki_checkout/cart/max_items_visible_count" xsi:type="number">5</item>
+        </argument>
+    </arguments>
+</referenceBlock>
+```
+
+The settings `loki_checkout/general/enable`, `loki_checkout/general/license_key`, `loki_checkout/general/theme`
+(skin) and `loki_checkout/general/grid_layout` can not be overridden this way, because they are needed before the layout
+is loaded. Overrides only apply once the layout has been generated.
+
 ## Google reCAPTCHA
 The checkout picks up the regular Magento reCAPTCHA configuration under **Stores > Configuration > Security >
 Google reCAPTCHA Storefront**. There is no additional Loki setting involved: as soon as a type is selected for
