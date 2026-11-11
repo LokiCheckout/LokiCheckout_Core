@@ -3,7 +3,11 @@
 namespace LokiCheckout\Core\Component\Checkout\Billing\ShippingAsBilling;
 
 use LokiCheckout\Core\Component\Base\Generic\CheckoutViewModel;
+use LokiCheckout\Core\Component\Checkout\Address\AddressFormContext;
 
+/**
+ * @method AddressFormContext getContext()
+ */
 class ShippingAsBillingViewModel extends CheckoutViewModel
 {
     protected bool $skipValidation = true;
@@ -15,6 +19,10 @@ class ShippingAsBillingViewModel extends CheckoutViewModel
 
     public function isAllowRendering(): bool
     {
+        if (false === $this->getContext()->getSameAddressService()->isEnabled()) {
+            return false;
+        }
+
         if ($this->getContext()->getCheckoutState()->getQuote()->isVirtual()) {
             return false;
         }
