@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace LokiCheckout\Core\Test\Integration\Config;
 
 use Magento\Checkout\Model\Session;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Quote\Api\Data\AddressInterface;
@@ -105,6 +106,17 @@ class ConfigTest extends TestCase
 
         $block = $this->createMock(\Magento\Framework\View\Element\Template::class);
         $this->assertEquals($expectedGridName, $config->getGrid($block)->getName());
+    }
+
+    public function testDefaultConfigValuesFromConfigXml()
+    {
+        $scopeConfig = ObjectManager::getInstance()->get(ScopeConfigInterface::class);
+        $this->assertSame('default', (string)$scopeConfig->getValue('loki_checkout/general/theme'));
+        $this->assertSame('0', (string)$scopeConfig->getValue('loki_checkout/debug/enable'));
+
+        $config = $this->getConfig();
+        $this->assertEquals('default', $config->getSkin());
+        $this->assertFalse($config->isDebug());
     }
 
     public static function getTestGetGridArguments(): array
