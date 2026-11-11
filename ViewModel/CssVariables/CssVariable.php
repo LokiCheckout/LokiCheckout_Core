@@ -15,7 +15,7 @@ class CssVariable
 
     public function getName(): string
     {
-        return $this->name;
+        return '--' . ltrim(trim($this->name, " \n\r\t\v\0"), '-');
     }
 
     public function getValue(): string
