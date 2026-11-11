@@ -148,11 +148,6 @@ class Config implements ArgumentInterface
         return $billingCountryId;
     }
 
-    public function getDefaultGridClasses(): string
-    {
-        return (string)$this->getValue('loki_checkout/general/default_grid_class');
-    }
-
     public function isDebug(): bool
     {
         return (bool)$this->getValue('loki_checkout/debug/enable');

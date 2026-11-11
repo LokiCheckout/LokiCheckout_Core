@@ -8,7 +8,6 @@
                 <skin>default</skin>
                 <grid_layout>default_grid</grid_layout>
                 <debug>0</debug>
-                <default_grid_class>col-span-12 md:col-span-6</default_grid_class>
             </general>
             <fields>
                 <enable_same_as_billing>1</enable_same_as_billing>
