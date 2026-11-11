@@ -84,7 +84,7 @@ jobs:
           test -n "${{ secrets.LOKI_REPO_PASSWORD }}" || exit 0
           cd /tmp/magento
           composer config --global --auth http-basic.private-packages.loki-extensions.com "${{ secrets.LOKI_REPO_USERNAME }}" "${{ secrets.LOKI_REPO_PASSWORD }}"
-          composer config repositories.mirror '{"type":"composer","url":"https://private-packages.loki-extensions.com/","canonical":false}'
+          composer config repositories.mirror "{\"type\":\"composer\",\"url\":\"https://private-packages.loki-extensions.com/\",\"canonical\":false}"
 
       - name: Configure composer
         if: env.SKIP_JOB != 'true'
