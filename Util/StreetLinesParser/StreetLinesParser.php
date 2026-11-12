@@ -41,7 +41,7 @@ class StreetLinesParser
                 $newStreetParts[] = '';
             }
 
-            if (preg_match('/^(\d+)(.*)$/', $streetPart, $match)) {
+            if (preg_match('/^(\d+)\s*(\S*)$/', $streetPart, $match)) {
                 $newStreetParts[] = $match[1];
                 $addition = trim($match[2], " \f\n\r\t\v\x00");
                 if ($addition !== '' && $addition !== '0') {

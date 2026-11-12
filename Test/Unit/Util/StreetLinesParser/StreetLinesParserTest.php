@@ -41,6 +41,11 @@ class StreetLinesParserTest extends TestCase
             ['NL', ['Kerkstraat', '12 bis'], ['Kerkstraat', '12', 'bis']],
             ['NL', ['126D'], ['', '126', 'D']],
             ['NL', ['126', 'D'], ['', '126', 'D']],
+            [
+                'BE',
+                ['Voorbeeldplein 1 bus 6', '1ste verdieping', 'Zottegem, 9620'],
+                ['Voorbeeldplein 1 bus 6', '1ste verdieping', 'Zottegem, 9620'],
+            ],
         ];
     }
 }

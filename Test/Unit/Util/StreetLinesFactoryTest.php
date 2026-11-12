@@ -142,6 +142,12 @@ class StreetLinesFactoryTest extends TestCase
             ["22 Example Apartment 1", ['22 Example', 'Apartment 1', ''], 'US', 1],
             ["\n\nZ", ['', '', 'Z'], 'NL', 3],
             ["\n12", ['', '12', ''], 'NL', 3],
+            [
+                "Voorbeeldplein 1 bus 6\n1ste verdieping\nZottegem, 9620",
+                ['Voorbeeldplein 1 bus 6', '1ste verdieping', 'Zottegem, 9620'],
+                'BE',
+                3
+            ],
         ];
     }
 
