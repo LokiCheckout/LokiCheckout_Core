@@ -17,7 +17,7 @@ $fastCheckoutViewModel = $block->getFastCheckoutViewModel();
 $children = $fastCheckoutViewModel instanceof FastCheckout
     ? $fastCheckoutViewModel->renderChildren($block)
     : ['html' => $childRenderer->all($block), 'visible' => true];
-$html = trim($children['html']);
+$html = trim($children['html'], " \f\n\r\t\v\x00");
 if (empty($html)) {
     return;
 }

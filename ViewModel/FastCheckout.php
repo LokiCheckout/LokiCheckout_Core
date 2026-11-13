@@ -63,6 +63,6 @@ class FastCheckout implements ArgumentInterface
             return false;
         }
 
-        return trim((string)preg_replace('/<!--.*?-->/s', '', $html)) !== '';
+        return trim((string)preg_replace('/<!--.*?-->/s', '', $html), " \f\n\r\t\v\x00") !== '';
     }
 }

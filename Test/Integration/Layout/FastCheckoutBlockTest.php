@@ -30,7 +30,7 @@ class FastCheckoutBlockTest extends AbstractLayoutTestCase
         $block = $this->getFastCheckoutBlock($layout);
         $this->removeChildren($layout, $block);
 
-        $this->assertSame('', trim((string)$block->toHtml()));
+        $this->assertSame('', trim((string)$block->toHtml(), " \f\n\r\t\v\x00"));
     }
 
     public function testNoHeadingWithOnlyNotRenderedOrEmptyChildren(): void
@@ -45,7 +45,7 @@ class FastCheckoutBlockTest extends AbstractLayoutTestCase
 
         $this->assertStringNotContainsString('Pay faster with', $html);
         $this->assertStringContainsString('Not rendered: loki-checkout.fast_checkout.test_not_rendered', $html);
-        $this->assertMatchesRegularExpression('/^<div[^>]*\shidden[\s>]/', trim($html));
+        $this->assertMatchesRegularExpression('/^<div[^>]*\shidden[\s>]/', trim($html, " \f\n\r\t\v\x00"));
     }
 
     public function testHeadingWithOneVisibleChild(): void
