@@ -5,22 +5,30 @@ use Loki\Base\ViewModel\Block\ChildRenderer;
 use Loki\CssUtils\Util\CssClass;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
-use Loki\Components\Util\Block\BlockRenderer;
+use LokiCheckout\Core\ViewModel\FastCheckout;
 
 /** @version 2.7.8 */
 /** @var Template $block */
 /** @var CssClass $css */
-/** @var BlockRenderer $blockRenderer */
 /** @var Escaper $escaper */
 /** @var ChildRenderer $childRenderer */
 
-$html = $childRenderer->all($block);
+$fastCheckoutViewModel = $block->getFastCheckoutViewModel();
+$children = $fastCheckoutViewModel instanceof FastCheckout
+    ? $fastCheckoutViewModel->renderChildren($block)
+    : ['html' => $childRenderer->all($block), 'visible' => true];
+$html = trim($children['html']);
 if (empty($html)) {
     return;
 }
 
 $title = $block->getTitle() ?: __('Pay faster with');
 ?>
+<?php if (false === $children['visible']): ?>
+<div hidden>
+    <?= /* @noEscape */ $html ?>
+</div>
+<?php else: ?>
 <div class="<?= $escaper->escapeHtml($css('card text-center')) ?>">
     <p class="<?= $escaper->escapeHtml($css('mb-4', 'title')) ?>">
         <strong><?= $escaper->escapeHtml($title) ?></strong>:
@@ -29,3 +37,4 @@ $title = $block->getTitle() ?: __('Pay faster with');
         <?= /* @noEscape */ $html ?>
     </div>
 </div>
+<?php endif; ?>

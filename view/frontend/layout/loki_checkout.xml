@@ -49,7 +49,11 @@
 
         <block
             name="loki-checkout.fast_checkout"
-            template="LokiCheckout_Core::checkout/fast-checkout.phtml"/>
+            template="LokiCheckout_Core::checkout/fast-checkout.phtml">
+            <arguments>
+                <argument name="fast_checkout_view_model" xsi:type="object">LokiCheckout\Core\ViewModel\FastCheckout</argument>
+            </arguments>
+        </block>
 
         <block
             name="loki-checkout.generic.title"
