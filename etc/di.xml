@@ -311,6 +311,7 @@
                 <item name="saveInAddressBook" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\SaveInAddressBookTask</item>
                 <item name="newsletter" xsi:type="object">LokiCheckout\Core\Step\FinalStep\Task\NewsletterTask</item>
             </argument>
+            <argument name="logger" xsi:type="object">Psr\Log\LoggerInterface</argument>
         </arguments>
     </type>
 
