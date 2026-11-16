@@ -6,6 +6,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.0] - 16 November 2026
+### Fixed
+- Pass explicit characters to `trim()` for PHP 8.6 compatibility
+- Hide the "Pay faster with" heading without visible buttons
+- Keep Core checkout tasks in the frontend area and log missing ones
+- Keep multi-word street lines starting with a digit intact
+- Align config.xml defaults with paths read by Config
+- Prefix CSS variable names with `--` in CssVariable::getName()
+- Remove unused `default_grid_class` setting and getter
+- Hide same-as-billing checkbox when SameAddressService is disabled
+- Fix invalid CSS variable names in css-variables template
+
+### Added
+- Allow config values to be overridden via layout XML
+
 ## [2.7.8] - 09 November 2026
 ### Fixed
 - Make sure empty coupon does not show message that coupon is applied
