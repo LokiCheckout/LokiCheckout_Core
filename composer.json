@@ -9,12 +9,6 @@
     ],
     "type": "magento2-module",
     "homepage": "https://loki-checkout.com/",
-    "authors": [
-        {
-            "name": "Jisse Reitsma (Yireo)",
-            "email": "jisse@yireo.com"
-        }
-    ],
     "require": {
         "ext-dom": "*",
         "ext-intl": "*",
