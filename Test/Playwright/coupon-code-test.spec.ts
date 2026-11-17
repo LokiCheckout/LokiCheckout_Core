@@ -101,7 +101,12 @@ test.describe('Coupon code updates the rest of the checkout', function () {
     const freeShippingCode = 'LOKI-PLAYWRIGHT-FREESHIP';
     await setupCheckout(page, context, merge(coreConfig, {
       profile: 'netherlands',
-      config: {'carriers/flatrate/active': '1', 'carriers/flatrate/price': '5'},
+      config: {
+        'carriers/flatrate/active': '1',
+        'carriers/flatrate/price': '5',
+        'currency/options/default': 'EUR',
+        'currency/options/allow': 'EUR',
+      },
       coupon_rule: {code: freeShippingCode, discount: 0, free_shipping: 1},
     }));
 
@@ -124,7 +129,13 @@ test.describe('Coupon code updates the rest of the checkout', function () {
     const freeOrderCode = 'LOKI-PLAYWRIGHT-FREEORDER';
     await setupCheckout(page, context, merge(coreConfig, {
       profile: 'netherlands',
-      config: {'carriers/flatrate/active': '1', 'payment/checkmo/active': '1', 'payment/free/active': '1'},
+      config: {
+        'carriers/flatrate/active': '1',
+        'payment/checkmo/active': '1',
+        'payment/free/active': '1',
+        'currency/options/default': 'EUR',
+        'currency/options/allow': 'EUR',
+      },
       coupon_rule: {code: freeOrderCode, discount: 100, apply_to_shipping: 1},
     }));
 
