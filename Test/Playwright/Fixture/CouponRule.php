@@ -49,6 +49,8 @@ class CouponRule implements ConfigureActionInterface
         $rule->setCouponCode($couponCode);
         $rule->setSimpleAction(Rule::BY_PERCENT_ACTION);
         $rule->setDiscountAmount((float)($requestData[self::REQUEST_KEY]['discount'] ?? 10));
+        $rule->setData('apply_to_shipping', (int)($requestData[self::REQUEST_KEY]['apply_to_shipping'] ?? 0));
+        $rule->setData('simple_free_shipping', (int)($requestData[self::REQUEST_KEY]['free_shipping'] ?? 0));
         $rule->setStopRulesProcessing(0);
         $rule->setWebsiteIds($this->getWebsiteIds());
         $rule->setCustomerGroupIds($this->getCustomerGroupIds());

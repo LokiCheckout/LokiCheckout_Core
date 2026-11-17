@@ -6,6 +6,8 @@ use Magento\Checkout\Api\Exception\PaymentProcessingRateLimitExceededException;
 use Magento\Checkout\Api\PaymentSavingRateLimiterInterface;
 use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Exception\InvalidArgumentException;
+use Magento\Payment\Model\Checks\ZeroTotal;
+use Magento\Payment\Model\Method\Free;
 use Magento\Quote\Api\Data\PaymentInterfaceFactory;
 use Magento\Quote\Api\PaymentMethodManagementInterface;
 use Magento\Quote\Model\Quote;
@@ -23,12 +25,21 @@ class PaymentMethodsRepository extends ComponentRepository
         private PaymentInterfaceFactory $paymentFactory,
         private readonly ManagerInterface $eventManager,
         private PaymentSavingRateLimiterInterface $paymentRateLimiter,
+        private readonly ZeroTotal $zeroTotal,
     ) {
     }
 
     public function getPaymentMethods(): array
     {
-        return $this->getContext()->getPaymentMethodManagement()->getList($this->getQuote()->getId());
+        $quote = $this->getQuote();
+        $paymentMethods = $this->getContext()->getPaymentMethodManagement()->getList($quote->getId());
+
+        $applicablePaymentMethods = array_values(array_filter(
+            $paymentMethods,
+            fn ($paymentMethod) => $this->zeroTotal->isApplicable($paymentMethod, $quote)
+        ));
+
+        return $applicablePaymentMethods !== [] ? $applicablePaymentMethods : $paymentMethods;
     }
 
     public function getDefaultPayment(): string
@@ -40,6 +51,11 @@ class PaymentMethodsRepository extends ComponentRepository
         $paymentMethods = $this->getPaymentMethods();
         if ($paymentMethods === []) {
             $this->defaultPaymentMethod = '';
+            return $this->defaultPaymentMethod;
+        }
+
+        if (count($paymentMethods) === 1 && $paymentMethods[0]->getCode() === Free::PAYMENT_METHOD_FREE_CODE) {
+            $this->defaultPaymentMethod = Free::PAYMENT_METHOD_FREE_CODE;
             return $this->defaultPaymentMethod;
         }
 
@@ -99,6 +115,7 @@ class PaymentMethodsRepository extends ComponentRepository
 
         if ($quote->getPayment()->getMethod() !== $value) {
             $quote->getPayment()->setAdditionalInformation([]);
+            $quote->getPayment()->unsMethodInstance();
         }
 
         $payment = $this->paymentFactory->create();

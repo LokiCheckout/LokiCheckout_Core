@@ -203,6 +203,11 @@
         viewModel="LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeViewModel"
         repository="LokiCheckout\Core\Component\Checkout\Sidebar\CouponCode\CouponCodeRepository">
         <target name="loki-checkout.sidebar.totals"/>
+        <target name="loki-checkout.sidebar.items"/>
+        <target name="loki-checkout.sidebar.preview"/>
+        <target name="loki-checkout.shipping.methods"/>
+        <target name="loki-checkout.payment.methods"/>
+        <target name="loki-checkout.steps.billing.forward-button"/>
     </component>
 
     <component

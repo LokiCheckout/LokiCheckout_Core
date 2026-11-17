@@ -7,6 +7,7 @@ use Loki\Field\Component\Base\Field\FieldRepository;
 use LokiCheckout\Core\Recaptcha\Config as RecaptchaConfig;
 use LokiCheckout\Core\Recaptcha\FormId;
 use LokiCheckout\Core\Recaptcha\Guard;
+use Magento\Quote\Model\Quote;
 
 /**
  * @method CheckoutContext getContext()
@@ -42,12 +43,11 @@ class CouponCodeRepository extends FieldRepository
 
             $couponCode = $this->filter($value['code']);
             if (empty($couponCode)) {
-		return;
-	    }
+                return;
+            }
 
             $quote->setCouponCode($couponCode);
-            $quote->getShippingAddress()->setCollectShippingRates(true);
-            $quote->collectTotals();
+            $this->recollectTotals($quote);
 
             $actualCouponCode = $this->getValue();
             if ($couponCode !== $actualCouponCode) {
@@ -61,8 +61,16 @@ class CouponCodeRepository extends FieldRepository
 
         if ($value['task'] === 'remove') {
             $quote->setCouponCode('');
+            $this->recollectTotals($quote);
             $messageManager->addSuccessMessage((string)__('Removed coupon code'));
         }
+    }
+
+    private function recollectTotals(Quote $quote): void
+    {
+        $quote->getShippingAddress()->setCollectShippingRates(true);
+        $quote->setTotalsCollectedFlag(false);
+        $quote->collectTotals();
     }
 
     private function filter(string $couponCode): string
