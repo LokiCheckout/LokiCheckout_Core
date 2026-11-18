@@ -75,6 +75,36 @@ test.describe('Multi-step navigation', function () {
     await expect(new Field(page, 'shipping.firstname').getLocator()).toHaveValue('Jane');
   });
 
+  test('should reload the checkout section only after the step has been saved', async function ({page, context}) {
+    await setupCheckout(page, context, multiStepConfig);
+
+    // Like other section consumers, reload the section as soon as it is missing from the local storage
+    await page.evaluate(() => {
+      const Alpine = (window as any).Alpine;
+      Alpine.effect(() => Alpine.store('LocalStorage').get('loki-checkout'));
+    });
+    await page.waitForLoadState('networkidle');
+
+    // Magento may regenerate the session ID while saving the step, so a section request started earlier
+    // would set the old session cookie again afterwards
+    const events: string[] = [];
+    page.on('request', request => {
+      if (request.url().includes('customer/section/load') && request.url().includes('loki-checkout')) {
+        events.push('section-reload');
+      }
+    });
+    page.on('response', response => {
+      if ((response.request().postData() || '').includes('loki-checkout.steps.shipping.forward-button')) {
+        events.push('step-saved');
+      }
+    });
+
+    await goToBillingStep(page);
+
+    await expect.poll(() => events).toContain('section-reload');
+    expect(events[0]).toBe('step-saved');
+  });
+
   test('should allow me to go back to the shipping step via the progress bar', async function ({page, context}) {
     await setupCheckout(page, context, multiStepConfig);
 
