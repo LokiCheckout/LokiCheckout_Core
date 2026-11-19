@@ -14,7 +14,7 @@ class StreetLinesFactoryTest extends TestCase
     public function testCreate()
     {
         $objectManager = new SimpleObjectManager();
-        $streetLinesParser = new StreetLinesParser();
+        $streetLinesParser = new StreetLinesParser(['nl' => 'NL', 'be' => 'BE']);
         $scopeConfig = $this->getScopeConfig(4);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
@@ -44,7 +44,7 @@ class StreetLinesFactoryTest extends TestCase
     ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
-        $streetLinesParser = new StreetLinesParser();
+        $streetLinesParser = new StreetLinesParser(['nl' => 'NL', 'be' => 'BE']);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreet($street, $countryId);
@@ -126,7 +126,7 @@ class StreetLinesFactoryTest extends TestCase
     ) {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig($numberOfStreetlines);
-        $streetLinesParser = new StreetLinesParser();
+        $streetLinesParser = new StreetLinesParser(['nl' => 'NL', 'be' => 'BE']);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreetParts($streetParts, $countryId);
@@ -155,7 +155,7 @@ class StreetLinesFactoryTest extends TestCase
     {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig(3);
-        $streetLinesParser = new StreetLinesParser();
+        $streetLinesParser = new StreetLinesParser(['nl' => 'NL', 'be' => 'BE']);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreet('', 'NL');
@@ -177,7 +177,7 @@ class StreetLinesFactoryTest extends TestCase
     {
         $objectManager = new SimpleObjectManager();
         $scopeConfig = $this->getScopeConfig(3);
-        $streetLinesParser = new StreetLinesParser();
+        $streetLinesParser = new StreetLinesParser(['nl' => 'NL', 'be' => 'BE']);
         $streetLinesFactory = new StreetLinesFactory($objectManager, $scopeConfig, $streetLinesParser);
 
         $streetLines = $streetLinesFactory->createFromStreet('', 'NL');

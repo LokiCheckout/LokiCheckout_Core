@@ -347,4 +347,13 @@
             </argument>
         </arguments>
     </type>
+
+    <type name="LokiCheckout\Core\Util\StreetLinesParser\StreetLinesParser">
+        <arguments>
+            <argument name="supportedCountries" xsi:type="array">
+                <item name="nl" xsi:type="string">NL</item>
+                <item name="be" xsi:type="string">BE</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

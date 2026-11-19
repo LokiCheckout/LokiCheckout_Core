@@ -7,13 +7,13 @@ use LokiCheckout\Core\Exception\StreetLineParserException;
 class StreetLinesParser
 {
     public function __construct(
-        private $supportedCountries = ['NL', 'BE']
+        private readonly array $supportedCountries = []
     ) {
     }
 
     public function parseStreetParts(array $streetParts, string $countryId): array
     {
-        if (false === in_array($countryId, $this->supportedCountries)) {
+        if (false === in_array($countryId, $this->getSupportedCountries(), true)) {
             return $streetParts;
         }
 
@@ -54,6 +54,14 @@ class StreetLinesParser
         }
 
         return $newStreetParts;
+    }
+
+    private function getSupportedCountries(): array
+    {
+        return array_values(array_filter(
+            $this->supportedCountries,
+            fn ($countryId) => is_string($countryId) && $countryId !== ''
+        ));
     }
 
     /**
