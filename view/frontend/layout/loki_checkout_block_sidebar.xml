@@ -19,6 +19,7 @@
 
                 <block name="loki-checkout.sidebar.coupon_code" as="coupon_code" template="LokiCheckout_Core::checkout/sidebar/coupon_code.phtml">
                     <arguments>
+                        <argument name="allow_array_value" xsi:type="boolean">true</argument>
                         <argument name="js_data" xsi:type="array">
                             <item name="couponCodePattern" xsi:type="string">^[a-zA-Z0-9_-]+$</item>
                             <item name="couponCodeInvalidMessage" xsi:type="string" translate="true">Please enter a valid coupon code</item>
