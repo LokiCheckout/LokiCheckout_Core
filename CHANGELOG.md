@@ -6,6 +6,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.1] - 21 November 2026
+### Fixed
+- Add BE two-line and DI configuration cases to StreetLinesParserTest
+- Move StreetLinesParser supported countries from PHP to DI
+- Reset the local storage only after the step has been saved
+- Pin display currency to EUR in coupon code Playwright tests
+- Refresh shipping, payment and totals after applying or removing a coupon
+
 ## [2.8.0] - 16 November 2026
 ### Fixed
 - Pass explicit characters to `trim()` for PHP 8.6 compatibility
