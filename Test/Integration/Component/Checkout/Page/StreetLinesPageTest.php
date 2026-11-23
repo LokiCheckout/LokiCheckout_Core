@@ -4,6 +4,7 @@ namespace LokiCheckout\Core\Test\Integration\Component\Checkout\Page;
 
 use LokiCheckout\Core\Test\Integration\LokiCheckoutTestCase;
 use Magento\Catalog\Test\Fixture\Product as ProductFixture;
+use Magento\Framework\App\Response\Http;
 use Magento\Quote\Test\Fixture\AddProductToCart as AddProductToCartFixture;
 use Magento\Quote\Test\Fixture\GuestCart as GuestCartFixture;
 use Magento\TestFramework\Fixture\AppArea;
@@ -33,6 +34,7 @@ final class StreetLinesPageTest extends LokiCheckoutTestCase
             ['loki-checkout.shipping.address.street1'],
             ['loki-checkout.shipping.address.street2']
         );
+        $this->assertStreetLineHasAccessibleName('shipping', 1);
     }
 
     #[ConfigFixture('customer/address/street_lines', '3')]
@@ -55,6 +57,7 @@ final class StreetLinesPageTest extends LokiCheckoutTestCase
             ['loki-checkout.billing.address.street1'],
             ['loki-checkout.billing.address.street2']
         );
+        $this->assertStreetLineHasAccessibleName('billing', 1);
     }
 
     #[ConfigFixture('loki_checkout/general/theme', 'onestep', 'store', 'default')]
@@ -66,6 +69,32 @@ final class StreetLinesPageTest extends LokiCheckoutTestCase
         $this->assertComponentsOnPage(
             ['loki-checkout.billing.address.street2'],
             ['loki-checkout.billing.address.street3']
+        );
+    }
+
+    private function assertStreetLineHasAccessibleName(string $addressType, int $index): void
+    {
+        /** @var Http $response */
+        $response = $this->getResponse();
+        $body = (string)$response->getBody();
+        $fieldId = 'loki-checkout-' . $addressType . '-address-street' . $index . '-field';
+
+        $this->assertMatchesRegularExpression(
+            '/<input[^>]*\bid="' . preg_quote($fieldId, '/') . '"[^>]*>/',
+            $body,
+            'Input "' . $fieldId . '" not found'
+        );
+        preg_match('/<input[^>]*\bid="' . preg_quote($fieldId, '/') . '"[^>]*>/', $body, $matches);
+
+        $this->assertStringContainsString(
+            'aria-label="Street Address Line ' . ($index + 1) . '"',
+            html_entity_decode($matches[0], ENT_QUOTES | ENT_HTML5),
+            'Input "' . $fieldId . '" has no accessible name'
+        );
+        $this->assertStringNotContainsString(
+            'for="' . $fieldId . '"',
+            $body,
+            'Street line ' . ($index + 1) . ' should not have a visible label'
         );
     }
 }

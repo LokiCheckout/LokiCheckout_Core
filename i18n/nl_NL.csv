@@ -121,6 +121,7 @@ Shipping,Verzending
 "Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","Net als bij de standaard ‘hints’-functie van de Magento-sjabloon verschijnt er voor elke LokiComponent een pop-up met meta-informatie. Je vindt het ofwel handig, ofwel enorm irritant."
 Skin,Huid
 "Step with name ""%1"" not found","Stap met de naam ""%1"" niet gevonden"
+"Street Address Line %1","Adresregel %1"
 "Subscribe by default","Standaard abonneren"
 "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","De inloggegevens waren onjuist of je account is tijdelijk geblokkeerd. Wacht even en probeer het later nog eens."
 "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","Het selectievakje waarmee klanten hun verzendadres als factuuradres kunnen gebruiken (of omgekeerd) kan hier worden ingeschakeld of uitgeschakeld."

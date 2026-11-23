@@ -124,6 +124,7 @@ Shipping,Shipping
 Skin,Skin
 "Something went wrong with reCAPTCHA. Please contact the store owner.","Something went wrong with reCAPTCHA. Please contact the store owner."
 "Step with name ""%1"" not found","Step with name ""%1"" not found"
+"Street Address Line %1","Street Address Line %1"
 "Subscribe by default","Subscribe by default"
 "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
 "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here."

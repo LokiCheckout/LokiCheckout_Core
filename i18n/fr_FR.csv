@@ -121,6 +121,7 @@ Shipping,Livraison
 "Similar to the original Magento template hints behaviour, this adds a popup with meta-information for each LokiComponent. Either you like it or you find it hugely annoying.","À l'instar du comportement par défaut des « hints » du modèle Magento d'origine, cette fonctionnalité affiche une fenêtre contextuelle contenant des méta-informations pour chaque LokiComponent. Soit vous l'appréciez, soit vous la trouvez extrêmement agaçante."
 Skin,Peau
 "Step with name ""%1"" not found","Étape nommée « %1 » introuvable"
+"Street Address Line %1","Ligne d'adresse %1"
 "Subscribe by default","S'abonner par défaut"
 "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later.","Les identifiants de connexion étaient incorrects ou votre compte est temporairement désactivé. Veuillez patienter et réessayer plus tard."
 "The checkbox that let's customers reuse their shipping address as billing address (or vice versa) could be toggled here.","La case à cocher permettant aux clients de réutiliser leur adresse de livraison comme adresse de facturation (ou inversement) pourrait être activée ou désactivée ici."
