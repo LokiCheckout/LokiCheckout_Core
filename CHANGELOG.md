@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.8.2] - 23 November 2026
+### Fixed
+- Run WCAG 2.0/2.1/2.2 A and AA axe rules in accessibility test
+- Add accessible name to street lines without a visible label
+
 ## [2.8.1] - 21 November 2026
 ### Fixed
 - Add BE two-line and DI configuration cases to StreetLinesParserTest
